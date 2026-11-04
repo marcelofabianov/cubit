@@ -100,7 +100,7 @@ O significado de cada pilar, os checklists e a matriz de decisão estão em [`_d
 
 ### Forma do código
 
-25. **Idioma:** arquivos de programação (como `.java` e `.sh`) ficam em inglês, incluindo comentários, logs e testes. Arquivos de conteúdo (como `.md`) ficam em português, inclusive o nome do arquivo e da pasta, assim como issues, PRs e mensagens de commit. `README.md`, `AGENTS.md`, `CLAUDE.md` e `LICENSE` mantêm o nome, porque as ferramentas dependem dele.
+25. **Idioma:** arquivos de programação (como `.java` e `.sh`) ficam em inglês, incluindo comentários, logs e testes. Arquivos de conteúdo (como `.md`) ficam em português, inclusive o nome do arquivo e da pasta, assim como issues, PRs e mensagens de commit. `README.md`, `AGENTS.md`, `CLAUDE.md`, `LICENSE` e `pull_request_template.md` mantêm o nome, porque as ferramentas dependem dele.
 26. **Constantes em vez de literais:** nada de número mágico nem string literal solta, inclusive nos testes. Balanceamento vai no config, e o resto vira constante nomeada. O Checkstyle reprova a violação.
 27. **Funções** têm no máximo 30 linhas e uma responsabilidade. Prefira classes pequenas e composição em vez de herança profunda.
 28. **Nomes:** classes em `PascalCase`; JSONs e IDs em `snake_case`, no singular; scripts `.sh` e arquivos `.md` em `kebab-case`. Adapters levam o que adaptam como prefixo (`NeoForgeTierCatalog`).
@@ -210,6 +210,7 @@ Os testes ficam em `src/test` (JUnit) e os GameTests em um pacote `gametest`.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 19:14 | Inclui o template de pull request nas exceções de nome. |
 | Marcelo Fabiano | 2026-11-04 18:24 | Estende a regra de constantes aos testes. |
 | Marcelo Fabiano | 2026-11-04 18:20 | Amplia a regra 26 para string literal. |
 | Marcelo Fabiano | 2026-11-04 18:02 | Adiciona a regra do Makefile. |
