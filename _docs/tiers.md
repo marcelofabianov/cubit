@@ -42,6 +42,7 @@ Valem para todos os tiers e ficam no config.
 | Consumo parado | 0 FE/t |
 | Carga do Cubit ao sair do craft | 25% |
 | Carga da Power Bank ao sair do craft | 0% |
+| Distância para parar perto do player | 3 blocos |
 | Distância para teleportar até o player | ~20 blocos |
 | Religar | 5% de bateria |
 | Bateria crítica, com expressão de sono | 10% |
@@ -104,6 +105,7 @@ A fornalha gasta cerca de 20 FE por tick enquanto funde.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 18:50 | Adiciona a distância para parar perto do player. |
 | Marcelo Fabiano | 2026-11-04 17:28 | Atualiza o upgrade de tier e adiciona o alcance do controle. |
 | Marcelo Fabiano | 2026-11-04 17:26 | Atualiza os nomes das linhas de recarga e de raio. |
 | Marcelo Fabiano | 2026-11-04 17:16 | Indica que os números valem para o robô de uso geral. |
