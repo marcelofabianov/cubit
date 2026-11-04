@@ -10,7 +10,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Repositório:** `marcelofabianov/cubit`.
 - **Licença:** MIT.
 - **Primeira versão:** `0.1.0`, com a `1.0.0` só com o mod completo.
-- **Etapa atual:** a Fase 1 é o conceito, feito em arquivos `.md`, sem código.
+- **Etapa atual:** Fase 2, versão mínima. A Fase 1, de conceito, foi encerrada.
 - **Iron Meridian:** o Cubit entra como exceção à regra do pack contra funções repetidas, por causa do Robit do Mekanism. O registro está na issue `marcelofabianov/iron-meridian#2`.
 
 ## Idioma
@@ -26,6 +26,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Regras de desenvolvimento:** no [`AGENTS.md`](../AGENTS.md#regras-de-desenvolvimento). Os gates de commit estão ativos, e os de Java e Gradle entram na Fase 2.
 - **Proteção de branches:** o plano atual do GitHub não permite em repositório privado, então valem só os gates locais.
 - **Fonte da verdade:** as respostas em `perguntas/` prevalecem sobre os outros documentos.
+- **Validação:** toda entrega é conferida contra os documentos `.md`, e artefatos complementam essa conferência.
 
 ## Mod
 
@@ -45,6 +46,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 17:44 | Encerra a Fase 1 e registra a regra de validação. |
 | Marcelo Fabiano | 2026-11-04 17:26 | Atualiza a exceção no pack e o estado do robô como item. |
 | Marcelo Fabiano | 2026-11-04 17:16 | Registra a flexibilidade para robôs especializados. |
 | Marcelo Fabiano | 2026-11-04 17:16 | Registra a ideia futura de robôs especializados. |

@@ -6,7 +6,7 @@
 
 Um robô companheiro fofo, movido a bateria, para Minecraft 1.21.1 com NeoForge, feito para o modpack [Iron Meridian](https://github.com/marcelofabianov/iron-meridian). Sem magia: o Cubit é pura tecnologia, craftado com recursos do jogo puro.
 
-> **Status: fase de conceito.** Ainda não há código nem versão publicada. Tudo abaixo está planejado, e os números são o ponto de partida para o balanceamento.
+> **Status: Fase 2, versão mínima.** O mod ainda não tem funcionalidades nem versão publicada. Tudo abaixo está planejado, e os números são o ponto de partida para o balanceamento.
 
 ## O que o Cubit faz
 
@@ -69,8 +69,8 @@ As receitas usarão só itens do jogo puro e virão em datapack JSON, para os mo
 
 ## Roadmap
 
-1. **Conceito (atual):** persona, features e demais definições, em documentos.
-2. **Versão mínima:** crafting, seguir o player, inventário, bateria, vários Cubits com um seguindo, Induction Dock com hibernação, recarga com redstone e virar item.
+1. **Conceito (encerrada):** persona, features e demais definições, em documentos.
+2. **Versão mínima (atual):** crafting, seguir o player, inventário, bateria, vários Cubits com um seguindo, Induction Dock com hibernação, recarga com redstone e virar item.
 3. **Sentidos:** painel solar, lanterna, scanners, bipes e textos curtos, expressões na tela, nome, cor e Jade.
 4. **Upgrades e autonomia:** tiers, Power Bank, ímã, filtros, demais slots exclusivos, choque, modos de defesa, Cubit Remote, modo área, descarga em baú, retorno automático e local de morte.
 
@@ -95,6 +95,7 @@ As receitas usarão só itens do jogo puro e virão em datapack JSON, para os mo
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 17:44 | Marca a Fase 2 como atual. |
 | Marcelo Fabiano | 2026-11-04 17:26 | Atualiza o roadmap e padroniza o termo colar. |
 | Marcelo Fabiano | 2026-11-04 17:15 | Traduz o README para português, conforme a regra de idioma. |
 | Marcelo Fabiano | 2026-11-04 17:11 | Adiciona a função de localizar ao Cubit Remote. |

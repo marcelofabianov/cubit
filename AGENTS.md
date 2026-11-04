@@ -6,8 +6,8 @@ Mod de Minecraft que adiciona um robô companheiro fofo, movido a bateria, feito
 
 ## Estado atual
 
-- **Etapa atual:** Fase 1, conceito. O trabalho é definir persona, features e demais informações em arquivos `.md`. Não crie código do mod nem projeto Gradle nesta etapa.
-- **Próximo passo:** a Fase 2 (versão mínima), que só começa quando o desenvolvedor encerrar o conceito e não houver [perguntas](_docs/perguntas/README.md) pendentes para ela.
+- **Etapa atual:** Fase 2, versão mínima. O projeto Gradle existe, e as funcionalidades entram por issue, na ordem combinada com o desenvolvedor.
+- **Comandos:** estão em [`_docs/desenvolvimento/ferramentas-de-build.md`](_docs/desenvolvimento/ferramentas-de-build.md).
 - **Limite:** não avance para as fases seguintes sem pedido explícito.
 
 ## Documentação
@@ -44,7 +44,7 @@ Mod de Minecraft que adiciona um robô companheiro fofo, movido a bateria, feito
 | GeckoLib | 4.9.3 (versão do pack) |
 | LambDynamicLights | 4.8.11+1.21.1 (versão do pack, opcional) |
 
-Versões conferidas em 2026-11-04. Confira de novo no `mods/` do Iron Meridian antes de fixar ou atualizar uma dependência. O Gradle não está instalado na máquina: use o wrapper do MDK.
+Versões conferidas em 2026-11-04. Confira de novo no `mods/` do Iron Meridian antes de fixar ou atualizar uma dependência. O Gradle não está instalado na máquina: use o wrapper. O JDK 21 é baixado pelo próprio projeto.
 
 ## Como trabalhar
 
@@ -116,7 +116,7 @@ Design > Clareza > Simplicidade > Sem repetição
 ### Gates
 
 36. **Commit:** branch, histórico de modificações, mensagem e gitleaks já estão ativos. A formatação entra na Fase 2. Veja [`_docs/desenvolvimento/hooks-do-git.md`](_docs/desenvolvimento/hooks-do-git.md).
-37. **Push (a partir da Fase 2):** build, testes, ArchUnit, datagen, cobertura e `runServer`, para detectar classe de cliente carregada no servidor.
+37. **Push:** build, testes, ArchUnit e cobertura já estão ativos. Datagen e `runServer`, para detectar classe de cliente carregada no servidor, entram quando houver conteúdo para eles.
 38. **Ferramentas:** toda ferramenta ou hook entra com um documento em `_docs/desenvolvimento/`: o que faz, por que foi escolhido, a versão e o que fazer quando reprova.
 
 ### Flexibilidade para novos robôs
@@ -128,6 +128,11 @@ O robô atual é o primeiro, de uso geral. O mod pode ter robôs especializados 
 41. **Config, IDs e dados por tipo:** chaves de config, IDs e data components já nascem com o tipo do robô, porque mudá-los depois exige migração (regra 18).
 42. **Itens compartilhados:** Induction Dock, Cubit Remote e Power Bank reconhecem os robôs por tag ou interface, nunca por uma classe concreta.
 43. **Sem antecipar robôs:** essa flexibilidade vale nas fronteiras acima. Nada de implementar tipos, telas ou capacidades de robôs que ainda não existem (regra 15).
+
+### Validação
+
+44. **Os documentos validam a entrega:** toda entrega é conferida contra os documentos `.md`, e as respostas em `_docs/perguntas/` prevalecem sobre os demais. Artefatos, como testes, logs, relatórios e capturas de tela, são bem-vindos na validação, mas não substituem os documentos.
+45. **Validação no PR:** a descrição do PR informa os documentos conferidos e a evidência de cada um.
 
 ## Git
 
@@ -199,6 +204,7 @@ Os testes ficam em `src/test` (JUnit) e os GameTests em um pacote `gametest`.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 17:44 | Inicia a Fase 2 e adiciona as regras de validação e o gate de push. |
 | Marcelo Fabiano | 2026-11-04 17:28 | Reordena as regras de flexibilidade e ajusta a Fase 1, os nomes de arquivos e a regra dos números. |
 | Marcelo Fabiano | 2026-11-04 17:16 | Adiciona as regras de flexibilidade para novos robôs. |
 | Marcelo Fabiano | 2026-11-04 17:15 | Define a regra de idioma e atualiza os caminhos. |
