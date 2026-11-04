@@ -15,11 +15,14 @@ Não há perguntas pendentes nesta fase.
 | 57 | Qual é a expressão em hibernação? | Sempre carregando |
 | 66 | A partir de quanta bateria o Cubit mostra a expressão de sono? | 10%, igual à bateria crítica |
 | 67 | O texto `Ore found` vale para qual minério? | Para minério do filtro do scanner. Bipe e surpresa, só para os raros |
+| 92 | Qual é a expressão ao recarregar pelo slot, fora da base? | Inativo, tela apagada. Ativo, a expressão normal. A expressão carregando fica só para a base |
 
 ## Histórico de modificações
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 17:28 | Registra a resposta 92. |
+| Marcelo Fabiano | 2026-11-04 17:26 | Adiciona a pergunta 92. |
 | Marcelo Fabiano | 2026-11-04 17:15 | Renomeia para português e atualiza os caminhos. |
 | Marcelo Fabiano | 2026-11-04 17:08 | Registra as respostas 66 e 67. |
 | Marcelo Fabiano | 2026-11-04 16:57 | Cria o arquivo com as perguntas e respostas da fase. |

@@ -31,7 +31,8 @@ Só em algumas situações ele mostra um texto simples e direto, na barra acima 
 | Recebe um upgrade | Feliz | — |
 | Bateria crítica | Sono | — |
 | Em hibernação na base | Carregando | — |
-| Sem bateria, desligado | Tela apagada | — |
+| Recarregando pelo slot, ligado | Normal | — |
+| Desligado, mesmo recarregando pelo slot | Tela apagada | — |
 | Inimigo por perto | Alerta | Bipe de alerta de inimigo |
 | Minério raro encontrado | Surpreso | Bipe de alerta de minério |
 
@@ -45,6 +46,7 @@ O Cubit **nunca ataca o próprio dono nem mobs pacíficos**, em nenhum modo de d
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 17:28 | Define a expressão ao recarregar pelo slot. |
 | Marcelo Fabiano | 2026-11-04 17:15 | Atualiza os caminhos após a renomeação para português. |
 | Marcelo Fabiano | 2026-11-04 17:08 | Define o sono na bateria crítica e encerra as perguntas abertas. |
 | Marcelo Fabiano | 2026-11-04 16:57 | Atualiza a comunicação, as reações e os limites conforme as respostas. |

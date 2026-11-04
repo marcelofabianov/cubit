@@ -4,7 +4,7 @@ Números por tier: [`tiers.md`](../tiers.md#coleta-e-inventário) e [slots exclu
 
 ## Interação
 
-- **Clique direito:** abre o inventário.
+- **Clique direito:** abre o inventário, no estado ativo ou em hibernação. Desligado, valem as regras de [`energia.md`](energia.md#estados-do-cubit).
 - **Shift + clique direito:** recolhe o robô. O acesso em cada estado está em [`energia.md`](energia.md#estados-do-cubit).
 
 ## Coleta
@@ -30,6 +30,7 @@ São quatro: tochas, fornalha, carregador de ferramentas e energia. O controle r
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 17:26 | Limita a abertura do inventário aos estados ativo e hibernação. |
 | Marcelo Fabiano | 2026-11-04 17:15 | Renomeia para português e atualiza os caminhos. |
 | Marcelo Fabiano | 2026-11-04 17:08 | Define as funções que o controle remoto desativa. |
 | Marcelo Fabiano | 2026-11-04 16:57 | Adiciona as interações e o slot de energia. |

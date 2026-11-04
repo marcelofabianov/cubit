@@ -6,13 +6,13 @@ Mod de Minecraft que adiciona um robô companheiro fofo, movido a bateria, feito
 
 ## Estado atual
 
-- **Etapa atual:** Fase 1, conceito. O trabalho é definir persona, features e demais informações em arquivos `.md`. Não crie código nem projeto Gradle nesta etapa.
+- **Etapa atual:** Fase 1, conceito. O trabalho é definir persona, features e demais informações em arquivos `.md`. Não crie código do mod nem projeto Gradle nesta etapa.
 - **Próximo passo:** a Fase 2 (versão mínima), que só começa quando o desenvolvedor encerrar o conceito e não houver [perguntas](_docs/perguntas/README.md) pendentes para ela.
 - **Limite:** não avance para as fases seguintes sem pedido explícito.
 
 ## Documentação
 
-- **Números:** ficam só em `_docs/tiers.md`. As outras páginas apontam para lá.
+- **Números:** ficam em `_docs/tiers.md`. As outras páginas apontam para lá, e o `README.md` traz só um resumo.
 - **Perguntas:** ficam em `_docs/perguntas/`, com um arquivo por fase. Recomendação de pergunta pendente não vale como decidida.
 - **Decisões:** o resumo do que foi decidido fica em `_docs/decisoes.md`.
 - **Histórico:** todo `.md` termina com uma tabela de histórico de modificações, e quem altera o arquivo adiciona uma linha no topo dela.
@@ -96,22 +96,12 @@ Design > Clareza > Simplicidade > Sem repetição
 23. **Separação do cliente:** código comum nunca referencia classes de `client/`.
 24. **Dependências opcionais:** o mod precisa abrir sem elas. LambDynamicLights e Jade ficam isolados.
 
-### Flexibilidade para novos robôs
-
-O robô atual é o primeiro, de uso geral. O mod pode ter robôs especializados no futuro, então nada pode prender o projeto a um único tipo de robô.
-
-39. **Tipo de robô é dado:** regras, números e capacidades vêm do tipo e do tier do robô, nunca de um `if` ou de uma constante do robô geral.
-40. **Capacidades por composição:** ímã, choque, scanner, inventário e demais recursos são peças que um tipo de robô combina, sem herança entre robôs.
-41. **Config, IDs e dados por tipo:** chaves de config, IDs e data components já nascem com o tipo do robô, porque mudá-los depois exige migração (regra 18).
-42. **Itens compartilhados:** Induction Dock, Cubit Remote e Power Bank reconhecem os robôs por tag ou interface, nunca por uma classe concreta.
-43. **Sem antecipar robôs:** essa flexibilidade vale nas fronteiras acima. Nada de implementar tipos, telas ou capacidades de robôs que ainda não existem (regra 15).
-
 ### Forma do código
 
 25. **Idioma:** arquivos de programação (como `.java` e `.sh`) ficam em inglês, incluindo comentários, logs e testes. Arquivos de conteúdo (como `.md`) ficam em português, inclusive o nome do arquivo e da pasta, assim como issues, PRs e mensagens de commit. `README.md`, `AGENTS.md`, `CLAUDE.md` e `LICENSE` mantêm o nome, porque as ferramentas dependem dele.
 26. **Sem número mágico:** balanceamento vai no config, e constantes técnicas ficam nomeadas.
 27. **Funções** têm no máximo 30 linhas e uma responsabilidade. Prefira classes pequenas e composição em vez de herança profunda.
-28. **Nomes:** classes em `PascalCase`; JSONs e IDs em `snake_case`, no singular; scripts `.sh` em `kebab-case`. Adapters levam o que adaptam como prefixo (`NeoForgeTierCatalog`).
+28. **Nomes:** classes em `PascalCase`; JSONs e IDs em `snake_case`, no singular; scripts `.sh` e arquivos `.md` em `kebab-case`. Adapters levam o que adaptam como prefixo (`NeoForgeTierCatalog`).
 29. **Comentários** são exceção e explicam o porquê. Sem código comentado e sem `TODO` sem issue.
 30. **Gerados:** `src/generated/` nunca é editado à mão. Um gate reprova se o `runData` gerar diferença.
 31. **Versões** ficam em `gradle.properties`, alinhadas às do Iron Meridian.
@@ -128,6 +118,16 @@ O robô atual é o primeiro, de uso geral. O mod pode ter robôs especializados 
 36. **Commit:** branch, histórico de modificações, mensagem e gitleaks já estão ativos. A formatação entra na Fase 2. Veja [`_docs/desenvolvimento/hooks-do-git.md`](_docs/desenvolvimento/hooks-do-git.md).
 37. **Push (a partir da Fase 2):** build, testes, ArchUnit, datagen, cobertura e `runServer`, para detectar classe de cliente carregada no servidor.
 38. **Ferramentas:** toda ferramenta ou hook entra com um documento em `_docs/desenvolvimento/`: o que faz, por que foi escolhido, a versão e o que fazer quando reprova.
+
+### Flexibilidade para novos robôs
+
+O robô atual é o primeiro, de uso geral. O mod pode ter robôs especializados no futuro, então nada pode prender o projeto a um único tipo de robô.
+
+39. **Tipo de robô é dado:** regras, números e capacidades vêm do tipo e do tier do robô, nunca de um `if` ou de uma constante do robô geral.
+40. **Capacidades por composição:** ímã, choque, scanner, inventário e demais recursos são peças que um tipo de robô combina, sem herança entre robôs.
+41. **Config, IDs e dados por tipo:** chaves de config, IDs e data components já nascem com o tipo do robô, porque mudá-los depois exige migração (regra 18).
+42. **Itens compartilhados:** Induction Dock, Cubit Remote e Power Bank reconhecem os robôs por tag ou interface, nunca por uma classe concreta.
+43. **Sem antecipar robôs:** essa flexibilidade vale nas fronteiras acima. Nada de implementar tipos, telas ou capacidades de robôs que ainda não existem (regra 15).
 
 ## Git
 
@@ -199,6 +199,7 @@ Os testes ficam em `src/test` (JUnit) e os GameTests em um pacote `gametest`.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 17:28 | Reordena as regras de flexibilidade e ajusta a Fase 1, os nomes de arquivos e a regra dos números. |
 | Marcelo Fabiano | 2026-11-04 17:16 | Adiciona as regras de flexibilidade para novos robôs. |
 | Marcelo Fabiano | 2026-11-04 17:15 | Define a regra de idioma e atualiza os caminhos. |
 | Marcelo Fabiano | 2026-11-04 17:08 | Define as respostas como fonte da verdade e atualiza os pacotes e a regra do histórico. |

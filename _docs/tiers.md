@@ -8,7 +8,7 @@ Os tiers são Base, Avançado, Elite e Ultimate (no jogo: Base, Advanced, Elite 
 
 - Os **upgrades são os próprios tiers**. A cada tier, o robô mantém as features do anterior, só que melhoradas.
 - O robô Base já tem os recursos com capacidade menor, e os que ele não usa ficam **bloqueados** até o tier certo.
-- O **upgrade de tier** é um item aplicado no robô e não pode pular etapas: Base → Avançado → Elite → Ultimate. Inventário, bateria, nome e cor se mantêm.
+- O **upgrade de tier** é um item aplicado no robô e não pode pular etapas: Base → Avançado → Elite → Ultimate. Inventário, bateria, vida, nome, cor e configurações se mantêm, e a vida máxima sobe para a do novo tier.
 
 ## Identidade
 
@@ -30,8 +30,8 @@ Os tiers são Base, Avançado, Elite e Ultimate (no jogo: Base, Advanced, Elite 
 | Autonomia aproximada, sem o painel | ~25 min | ~42 min | ~2,8 h | ~5,6 h |
 | Painel solar (de dia) | 5 FE/t | 10 FE/t | 12 FE/t | 16 FE/t |
 | Painel solar (à noite) | — | — | 3 FE/t | 4 FE/t |
-| Recarga na estação | 500 FE/t | 1.000 FE/t | 2.500 FE/t | 5.000 FE/t |
-| Retorno automático | 15 blocos, 10% | 24 blocos, 10% | 32 blocos, 10% | 48 blocos, 10% |
+| Recarga na base e pelo slot de energia | 500 FE/t | 1.000 FE/t | 2.500 FE/t | 5.000 FE/t |
+| Raio do retorno automático e da chamada pelo Dock, e bateria do retorno | 15 blocos, 10% | 24 blocos, 10% | 32 blocos, 10% | 48 blocos, 10% |
 
 ## Valores gerais
 
@@ -48,6 +48,7 @@ Valem para todos os tiers e ficam no config.
 | Estoque do Induction Dock | 100 mil FE |
 | Entrada do Induction Dock | 5.000 FE/t |
 | Tempo para recuperar toda a vida na base | ~1 min |
+| Alcance do controle remoto ao mirar num Cubit | 32 blocos |
 | Energia de 1 pó de redstone | 5.000 FE |
 | Energia de 1 bloco de redstone | 45.000 FE |
 
@@ -103,6 +104,8 @@ A fornalha gasta cerca de 20 FE por tick enquanto funde.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 17:28 | Atualiza o upgrade de tier e adiciona o alcance do controle. |
+| Marcelo Fabiano | 2026-11-04 17:26 | Atualiza os nomes das linhas de recarga e de raio. |
 | Marcelo Fabiano | 2026-11-04 17:16 | Indica que os números valem para o robô de uso geral. |
 | Marcelo Fabiano | 2026-11-04 17:15 | Atualiza os caminhos após a renomeação para português. |
 | Marcelo Fabiano | 2026-11-04 17:08 | Atualiza a entrada do Dock, a expressão de sono e o tempo de recuperar a vida. |

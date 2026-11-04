@@ -41,7 +41,7 @@ git switch -c feature/{issue}-{slug} --no-track develop
 
 ### 3. Trabalho
 
-- **Fase 1, conceito:** só arquivos `.md`. Sem código nem projeto Gradle.
+- **Fase 1, conceito:** só arquivos `.md` e ferramentas de desenvolvimento. Sem código do mod nem projeto Gradle.
 - **Fase 2 em diante:** a feature precisa estar documentada em `_docs/funcionalidades/`, com as decisões fechadas. O teste vem antes ou junto do código.
 - **Decisão bloqueante:** pare e siga o [fluxo do `AGENTS.md`](../../AGENTS.md#decisões-bloqueantes). Registre a resposta em [`perguntas/`](../perguntas/README.md), no arquivo da fase.
 - **Rascunhos:** ficam em `tmp/`.
@@ -173,6 +173,7 @@ O primeiro passo, separando o que está decidido do que está pendente.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 17:26 | Esclarece o que é permitido na Fase 1. |
 | Marcelo Fabiano | 2026-11-04 17:15 | Renomeia para português e atualiza os caminhos. |
 | Marcelo Fabiano | 2026-11-04 16:57 | Aponta as decisões para as perguntas por fase e adiciona o milestone e o histórico. |
 | Marcelo Fabiano | 2026-11-04 16:07 | Documenta o fluxo de trabalho. |

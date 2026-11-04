@@ -6,7 +6,7 @@ Tudo que aparece no mod fica em inglês. Os documentos podem usar o termo em por
 
 | Termo nos documentos | Nome no jogo |
 |---|---|
-| Mod e robô | Cubit |
+| Mod, família de robôs e robô de uso geral | Cubit |
 | Controle remoto | Cubit Remote |
 | Base ou estação de carga | Induction Dock |
 | Tiers | Base, Advanced, Elite e Ultimate |
@@ -24,6 +24,7 @@ Os IDs estão em [`itens.md`](itens.md).
 - **FE/t:** FE por tick. O jogo roda a 20 ticks por segundo.
 - **Tier:** nível de evolução do robô.
 - **Base:** o Induction Dock, bloco fixo de recarga.
+- **Robô que segue:** o único Cubit do player que o acompanha naquele momento.
 - **Ativo:** Cubit ligado, fora da base.
 - **Inativo:** Cubit desligado.
 - **Hibernação:** estado do Cubit na base, carregando e com o inventário acessível.
@@ -33,6 +34,7 @@ Os IDs estão em [`itens.md`](itens.md).
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 17:26 | Adiciona o robô que segue e a família de robôs. |
 | Marcelo Fabiano | 2026-11-04 17:15 | Renomeia para português e atualiza os caminhos. |
 | Marcelo Fabiano | 2026-11-04 16:57 | Define os nomes aprovados e os estados do Cubit. |
 | Marcelo Fabiano | 2026-11-04 15:23 | Registra as decisões e o glossário. |
