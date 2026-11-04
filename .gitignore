@@ -1,2 +1,5 @@
 # Rascunhos locais: conversas, ideias e arquivos temporários
 tmp/
+
+# Ferramentas de desenvolvimento baixadas por scripts/development/setup-dev.sh
+.tools/

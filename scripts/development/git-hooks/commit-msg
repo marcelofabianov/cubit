@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+# Gates for every commit message: Conventional Commits and no AI attribution.
+set -euo pipefail
+
+readonly SUBJECT_PATTERN='^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)(\([a-z0-9-]+\))?!?: [^ ].*$'
+readonly GENERATED_SUBJECT_PATTERN='^(Merge |Revert ")'
+# Naming an AI tool as the subject of a change is allowed; crediting one as an author is not.
+readonly ATTRIBUTION_PATTERN='co-authored-by:|generated (with|by) |gerado (por|com) |feito com (a ajuda d[ea] )?(ia|claude)|🤖'
+
+message="$(sed '/^#/d' "$1")"
+subject="$(head -n 1 <<<"${message}")"
+
+if [[ ! "${subject}" =~ ${SUBJECT_PATTERN} ]] && [[ ! "${subject}" =~ ${GENERATED_SUBJECT_PATTERN} ]]; then
+  cat >&2 <<EOF
+commit-msg: the subject does not follow Conventional Commits:
+  ${subject}
+Expected: type(optional-scope): description
+EOF
+  exit 1
+fi
+
+if LC_ALL=C.UTF-8 grep -qiE "${ATTRIBUTION_PATTERN}" <<<"${message}"; then
+  echo "commit-msg: AI attribution or co-authorship is not allowed." >&2
+  exit 1
+fi
