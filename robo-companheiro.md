@@ -2,7 +2,7 @@
 
 Mod próprio do **Iron Meridian** (Minecraft 1.21.1, NeoForge). Adiciona o **Cubit**, um robô companheiro craftado com recursos do jogo puro, que ajuda o player em tarefas simples. Ele evolui por tiers, de Base a Ultimate.
 
-**Idioma:** tudo que aparece no mod (nome, itens, legendas, telas, mensagens, IDs e comandos) fica só em inglês, com um único arquivo de idioma, o `en_us.json`. Os documentos seguem em português.
+**Idioma:** o que entra no jar, aparece no jogo ou acompanha o download do mod fica em inglês, com um único arquivo de idioma, o `en_us.json`. Arquivos de programação também ficam em inglês. Arquivos de conteúdo, como os `.md`, ficam em português.
 
 > Status: **Fase 1, conceito**. Os números são o ponto de partida para balancear nos testes.
 
@@ -10,34 +10,51 @@ Mod próprio do **Iron Meridian** (Minecraft 1.21.1, NeoForge). Adiciona o **Cub
 
 - Companheiro **tecnológico, sem magia**, alinhado à proposta do pack.
 - Tarefas simples: seguir, carregar itens, iluminar, avisar sobre perigos e minérios, coletar, organizar.
-- Tem **personalidade**: a tela do rosto muda de expressão, ele faz barulho de esteira e emite sons de alerta.
+- Tem **personalidade**: a tela do rosto muda de expressão, ele faz barulho de esteira e se comunica com bipes e poucos textos curtos.
 - A **bateria** é um recurso a gerenciar: o robô precisa voltar para carregar.
 
 ## Onde está cada coisa
 
 | Assunto | Arquivo |
 |---|---|
-| Personalidade | [`_docs/concept/persona.md`](_docs/concept/persona.md) |
-| Visual, expressões e sons | [`_docs/concept/visual.md`](_docs/concept/visual.md) |
-| Imagens de conceito | [`_docs/assets/concept/`](_docs/assets/concept/) |
-| Bateria, solar, Power Bank, estação e retorno automático | [`_docs/features/energy.md`](_docs/features/energy.md) |
-| Movimento, robô ativo e local de morte | [`_docs/features/following.md`](_docs/features/following.md) |
-| Inventário, ímã, filtros, baús e slots exclusivos | [`_docs/features/inventory.md`](_docs/features/inventory.md) |
-| Scanners, alertas e lanterna | [`_docs/features/sensors.md`](_docs/features/sensors.md) |
-| Choque e modos de defesa | [`_docs/features/combat.md`](_docs/features/combat.md) |
-| Controle remoto e modo área | [`_docs/features/remote.md`](_docs/features/remote.md) |
-| Itens, blocos, nomes e receitas | [`_docs/items.md`](_docs/items.md) |
+| Personalidade | [`_docs/conceito/persona.md`](_docs/conceito/persona.md) |
+| Visual, expressões e sons | [`_docs/conceito/visual.md`](_docs/conceito/visual.md) |
+| Imagens de conceito | [`_docs/imagens/conceito/`](_docs/imagens/conceito/) |
+| Bateria, Induction Dock, Power Bank, redstone, painel solar e retorno automático | [`_docs/funcionalidades/energia.md`](_docs/funcionalidades/energia.md) |
+| Movimento, robô que segue, vida, morte e local de morte | [`_docs/funcionalidades/movimento.md`](_docs/funcionalidades/movimento.md) |
+| Inventário, ímã, filtros, baús e slots exclusivos | [`_docs/funcionalidades/inventario.md`](_docs/funcionalidades/inventario.md) |
+| Scanners, alertas e lanterna | [`_docs/funcionalidades/sensores.md`](_docs/funcionalidades/sensores.md) |
+| Choque e modos de defesa | [`_docs/funcionalidades/combate.md`](_docs/funcionalidades/combate.md) |
+| Controle remoto e modo área | [`_docs/funcionalidades/controle-remoto.md`](_docs/funcionalidades/controle-remoto.md) |
+| Itens, blocos, nomes e receitas | [`_docs/itens.md`](_docs/itens.md) |
 | Números por tier | [`_docs/tiers.md`](_docs/tiers.md) |
-| Decisões tomadas e em aberto | [`_docs/decisions.md`](_docs/decisions.md) |
-| Termos e nomes oficiais | [`_docs/glossary.md`](_docs/glossary.md) |
-| Fluxo de trabalho | [`_docs/development/workflow.md`](_docs/development/workflow.md) |
-| Git hooks | [`_docs/development/git_hooks.md`](_docs/development/git_hooks.md) |
+| Resumo das decisões | [`_docs/decisoes.md`](_docs/decisoes.md) |
+| Perguntas e respostas por fase | [`_docs/perguntas/`](_docs/perguntas/README.md) |
+| Termos e nomes oficiais | [`_docs/glossario.md`](_docs/glossario.md) |
+| Fluxo de trabalho | [`_docs/desenvolvimento/fluxo-de-trabalho.md`](_docs/desenvolvimento/fluxo-de-trabalho.md) |
+| Git hooks | [`_docs/desenvolvimento/hooks-do-git.md`](_docs/desenvolvimento/hooks-do-git.md) |
 
 Os números ficam só em `_docs/tiers.md`. As outras páginas apontam para lá.
 
 ## Fases
 
 1. **Conceito** (atual): definir persona, features e demais informações em arquivos `.md`.
-2. **Versão mínima**: crafting com itens do jogo puro, seguir o player, inventário, bateria, estação de carga e virar item.
-3. **Sentidos**: lanterna, sons de inimigos e minérios, e expressões na tela.
-4. **Upgrades e autonomia**: tiers, ímã, filtros, slots exclusivos, choque, modos de defesa, modo área, descarregar em baú, retorno automático e local de morte.
+2. **Versão mínima**: crafting com itens do jogo puro, seguir o player, inventário, bateria, Induction Dock com hibernação, recarga com redstone e virar item.
+3. **Sentidos**: painel solar, lanterna, scanners, bipes e textos curtos, expressões na tela, nome, cor e Jade.
+4. **Upgrades e autonomia**: tiers, Power Bank, ímã, filtros, demais slots exclusivos, choque, modos de defesa, controle remoto, modo área, descarregar em baú, retorno automático e local de morte.
+
+## Futuro
+
+O robô atual é de uso geral e o primeiro do mod. No futuro, o mod pode ter vários robôs especializados, para atividades diversas. Essa ideia está fora das fases atuais e ainda não tem definição, mas nada no projeto pode ficar fixo de forma que comprometa essa flexibilidade.
+
+## Histórico de modificações
+
+| Pessoa | Data e hora | Modificação |
+|---|---|---|
+| Marcelo Fabiano | 2026-11-04 17:16 | Registra a flexibilidade para robôs especializados. |
+| Marcelo Fabiano | 2026-11-04 17:16 | Registra a ideia futura de robôs especializados. |
+| Marcelo Fabiano | 2026-11-04 17:15 | Define a regra de idioma e atualiza os caminhos. |
+| Marcelo Fabiano | 2026-11-04 17:08 | Atualiza a fase 2 e a regra do robô que segue. |
+| Marcelo Fabiano | 2026-11-04 16:57 | Atualiza o mapa dos documentos e as fases. |
+| Marcelo Fabiano | 2026-11-04 16:07 | Documenta o fluxo de trabalho. |
+| Marcelo Fabiano | 2026-11-04 15:23 | Adiciona a visão geral, o README e as regras do projeto. |

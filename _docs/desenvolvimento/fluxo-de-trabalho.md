@@ -10,7 +10,7 @@ Rode uma vez em cada clone:
 scripts/development/setup-dev.sh
 ```
 
-O script ativa os gates de commit, descritos em [`git_hooks.md`](git_hooks.md).
+O script ativa os gates de commit, descritos em [`hooks-do-git.md`](hooks-do-git.md).
 
 O `gh` precisa usar a conta pessoal:
 
@@ -28,7 +28,7 @@ Issue → Branch → Trabalho → Plano de commits → Commits → PR → Merge 
 
 ### 1. Issue
 
-Toda tarefa começa por uma issue, atribuída ao desenvolvedor, com o que entra e o que fica fora do escopo. Issues e PRs dividem a mesma numeração, então confirme o número antes de nomear a branch.
+Toda tarefa começa por uma issue, atribuída ao desenvolvedor e no milestone da fase, com o que entra e o que fica fora do escopo. Issues e PRs dividem a mesma numeração, então confirme o número antes de nomear a branch.
 
 ### 2. Branch
 
@@ -42,9 +42,10 @@ git switch -c feature/{issue}-{slug} --no-track develop
 ### 3. Trabalho
 
 - **Fase 1, conceito:** só arquivos `.md`. Sem código nem projeto Gradle.
-- **Fase 2 em diante:** a feature precisa estar documentada em `_docs/features/`, com as decisões fechadas. O teste vem antes ou junto do código.
-- **Decisão bloqueante:** pare e siga o [fluxo do `AGENTS.md`](../../AGENTS.md#decisões-bloqueantes). Registre o resultado em [`decisions.md`](../decisions.md).
+- **Fase 2 em diante:** a feature precisa estar documentada em `_docs/funcionalidades/`, com as decisões fechadas. O teste vem antes ou junto do código.
+- **Decisão bloqueante:** pare e siga o [fluxo do `AGENTS.md`](../../AGENTS.md#decisões-bloqueantes). Registre a resposta em [`perguntas/`](../perguntas/README.md), no arquivo da fase.
 - **Rascunhos:** ficam em `tmp/`.
+- **Histórico de modificações:** todo `.md` termina com uma tabela de histórico. Quem altera o arquivo adiciona uma linha no topo da tabela, com o nome da pessoa, a data e a hora e uma frase direta do que foi feito.
 
 ### 4. Plano de commits
 
@@ -52,7 +53,7 @@ O plano de commits é a relação dos commits a fazer, com os arquivos e a mensa
 
 | # | Branch | Mensagem | Arquivos |
 |---|---|---|---|
-| 1 | `feature/12-power-bank` | `docs: descreve a Power Bank` | `_docs/features/energy.md` |
+| 1 | `feature/12-power-bank` | `docs: descreve a Power Bank` | `_docs/funcionalidades/energia.md` |
 
 Cada commit trata de uma mudança lógica e deixa o projeto num estado válido, sem link quebrado nem teste falhando.
 
@@ -63,7 +64,7 @@ git add {arquivos do commit}
 git commit -m "tipo(escopo opcional): descrição em português"
 ```
 
-Use `git add` com os arquivos do plano, nunca `git add .`. Se um gate reprovar, corrija a causa conforme [`git_hooks.md`](git_hooks.md).
+Use `git add` com os arquivos do plano, nunca `git add .`. Se um gate reprovar, corrija a causa conforme [`hooks-do-git.md`](hooks-do-git.md).
 
 ### 6. Pull request
 
@@ -167,3 +168,11 @@ O primeiro passo, separando o que está decidido do que está pendente.
 - **Conteúdo público do projeto:** não cite projetos privados em arquivos, commits, issues ou PRs.
 - **Autoria:** nada de coautoria ou atribuição a uma IA.
 - **Saves:** antes de mudar um ID, um data component ou uma chave de config, leia a regra 18 do `AGENTS.md`.
+
+## Histórico de modificações
+
+| Pessoa | Data e hora | Modificação |
+|---|---|---|
+| Marcelo Fabiano | 2026-11-04 17:15 | Renomeia para português e atualiza os caminhos. |
+| Marcelo Fabiano | 2026-11-04 16:57 | Aponta as decisões para as perguntas por fase e adiciona o milestone e o histórico. |
+| Marcelo Fabiano | 2026-11-04 16:07 | Documenta o fluxo de trabalho. |

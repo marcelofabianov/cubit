@@ -1,6 +1,6 @@
 # Tiers
 
-Esta é a única página com os números de balanceamento. Eles são o ponto de partida para os testes.
+Esta é a única página com os números de balanceamento. Eles são o ponto de partida para os testes e valem para o robô de uso geral.
 
 Os tiers são Base, Avançado, Elite e Ultimate (no jogo: Base, Advanced, Elite e Ultimate).
 
@@ -27,11 +27,29 @@ Os tiers são Base, Avançado, Elite e Ultimate (no jogo: Base, Advanced, Elite 
 | Bateria | 300 mil FE | 600 mil FE | 3 mi FE | 8 mi FE |
 | Power Bank (70% da bateria) | 210 mil FE | 420 mil FE | 2,1 mi FE | 5,6 mi FE |
 | Consumo em movimento | 10 FE/t | 12 FE/t | 15 FE/t | 20 FE/t |
-| Autonomia aproximada | ~25 min | ~42 min | ~2,8 h | ~5,6 h |
-| Carregador solar (de dia) | 5 FE/t | 10 FE/t | 20 FE/t | 40 FE/t |
-| Solar à noite | — | — | — | 10 FE/t (25%) |
+| Autonomia aproximada, sem o painel | ~25 min | ~42 min | ~2,8 h | ~5,6 h |
+| Painel solar (de dia) | 5 FE/t | 10 FE/t | 12 FE/t | 16 FE/t |
+| Painel solar (à noite) | — | — | 3 FE/t | 4 FE/t |
 | Recarga na estação | 500 FE/t | 1.000 FE/t | 2.500 FE/t | 5.000 FE/t |
 | Retorno automático | 15 blocos, 10% | 24 blocos, 10% | 32 blocos, 10% | 48 blocos, 10% |
+
+## Valores gerais
+
+Valem para todos os tiers e ficam no config.
+
+| Recurso | Valor |
+|---|---|
+| Consumo parado | 0 FE/t |
+| Carga do Cubit ao sair do craft | 25% |
+| Carga da Power Bank ao sair do craft | 0% |
+| Distância para teleportar até o player | ~20 blocos |
+| Religar | 5% de bateria |
+| Bateria crítica, com expressão de sono | 10% |
+| Estoque do Induction Dock | 100 mil FE |
+| Entrada do Induction Dock | 5.000 FE/t |
+| Tempo para recuperar toda a vida na base | ~1 min |
+| Energia de 1 pó de redstone | 5.000 FE |
+| Energia de 1 bloco de redstone | 45.000 FE |
 
 ## Coleta e inventário
 
@@ -77,5 +95,16 @@ Os tiers são Base, Avançado, Elite e Ultimate (no jogo: Base, Advanced, Elite 
 | Tochas (coloca sozinho) | Bloqueado | 1 slot, luz < 7 | 1 slot, luz < 7 | 2 slots, nível configurável |
 | Carregador de ferramentas elétricas | Bloqueado | 1 slot, 250 FE/t | 2 slots, 500 FE/t | 4 slots, 1.000 FE/t |
 | Fornalha de minérios | Bloqueado | 1 slot, 0,5× | 1 slot, 1× | 1 slot, 2× |
+| Energia (Power Bank ou redstone) | 1 slot | 1 slot | 1 slot | 1 slot |
 
 A fornalha gasta cerca de 20 FE por tick enquanto funde.
+
+## Histórico de modificações
+
+| Pessoa | Data e hora | Modificação |
+|---|---|---|
+| Marcelo Fabiano | 2026-11-04 17:16 | Indica que os números valem para o robô de uso geral. |
+| Marcelo Fabiano | 2026-11-04 17:15 | Atualiza os caminhos após a renomeação para português. |
+| Marcelo Fabiano | 2026-11-04 17:08 | Atualiza a entrada do Dock, a expressão de sono e o tempo de recuperar a vida. |
+| Marcelo Fabiano | 2026-11-04 16:57 | Adiciona o painel solar, os valores gerais e o slot de energia. |
+| Marcelo Fabiano | 2026-11-04 15:23 | Adiciona os números de balanceamento por tier. |
