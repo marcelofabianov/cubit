@@ -5,11 +5,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 class PowerRulesTest {
-  private static final Energy CAPACITY = new Energy(300_000);
-  private static final PowerRules RULES = new PowerRules(new Percentage(5));
+  private static final long CAPACITY_AMOUNT = 300_000;
+  private static final int WAKE_PERCENT = 5;
+  private static final long BELOW_WAKE_AMOUNT = 14_999;
+  private static final long AT_WAKE_AMOUNT = 15_000;
+  private static final Energy CAPACITY = new Energy(CAPACITY_AMOUNT);
+  private static final PowerRules RULES = new PowerRules(new Percentage(WAKE_PERCENT));
   private static final Battery EMPTY = new Battery(CAPACITY, Energy.ZERO);
-  private static final Battery BELOW_WAKE = new Battery(CAPACITY, new Energy(14_999));
-  private static final Battery AT_WAKE = new Battery(CAPACITY, new Energy(15_000));
+  private static final Battery BELOW_WAKE = new Battery(CAPACITY, new Energy(BELOW_WAKE_AMOUNT));
+  private static final Battery AT_WAKE = new Battery(CAPACITY, new Energy(AT_WAKE_AMOUNT));
 
   @Test
   void activeRobotShutsDownWhenBatteryEmpties() {
