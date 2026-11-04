@@ -1,6 +1,6 @@
 # Git hooks
 
-Os hooks ficam em `scripts/development/git-hooks/` e rodam em todo commit.
+Os hooks ficam em `scripts/development/git-hooks/` e rodam em todo commit e todo push.
 
 ## Como ativar
 
@@ -21,6 +21,7 @@ O script baixa o gitleaks para `.tools/`, confere o checksum e aponta o `core.ho
 | `pre-commit` | gitleaks | Segredo nas alterações preparadas para o commit |
 | `commit-msg` | Mensagem | Título fora do Conventional Commits |
 | `commit-msg` | Autoria | Coautoria ou atribuição a uma IA. Citar uma ferramenta de IA como assunto da mudança é permitido |
+| `pre-push` | Build | Compilação, testes, arquitetura ou cobertura reprovados, por meio de `./gradlew check` |
 
 Os hooks rodam só na máquina local. Eles não bloqueiam merges feitos pelo GitHub nem um push direto de outra máquina, e o plano atual do GitHub não permite proteger branches em repositório privado.
 
@@ -38,20 +39,20 @@ Os hooks rodam só na máquina local. Eles não bloqueiam merges feitos pelo Git
 - **Mensagem:** reescreva o título no formato `tipo(escopo opcional): descrição`, em português.
 - **Autoria:** remova a atribuição.
 - **gitleaks não encontrado:** rode `scripts/development/setup-dev.sh`.
+- **Build:** veja [`ferramentas-de-build.md`](ferramentas-de-build.md#quando-algo-reprova).
 
 Nunca use `--no-verify`.
 
 ## Gates previstos
 
-Os gates de Java e Gradle entram na Fase 2, junto do código:
-
-- **Commit:** formatação.
-- **Push:** build, testes, ArchUnit, datagen, cobertura e `runServer`.
+- **Commit:** formatação, com o Spotless e o google-java-format.
+- **Push:** datagen e `runServer`, quando houver conteúdo para eles.
 
 ## Histórico de modificações
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 17:44 | Adiciona o gate de push. |
 | Marcelo Fabiano | 2026-11-04 17:15 | Renomeia para português e atualiza os caminhos. |
 | Marcelo Fabiano | 2026-11-04 17:08 | Adiciona o gate do histórico de modificações. |
 | Marcelo Fabiano | 2026-11-04 16:57 | Registra o limite da proteção de branches. |
