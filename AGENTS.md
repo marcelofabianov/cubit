@@ -118,7 +118,7 @@ O significado de cada pilar, os checklists e a matriz de decisão estão em [`_d
 ### Gates
 
 36. **Commit:** branch, histórico de modificações, formatação, mensagem e gitleaks já estão ativos. Veja [`_docs/desenvolvimento/hooks-do-git.md`](_docs/desenvolvimento/hooks-do-git.md).
-37. **Push:** build, testes, ArchUnit, cobertura, formatação e Checkstyle já estão ativos. Datagen e `runServer`, para detectar classe de cliente carregada no servidor, entram quando houver conteúdo para eles.
+37. **Push:** build, testes, ArchUnit, cobertura, formatação, Checkstyle, GameTests e datagen já estão ativos. As GameTests carregam o mod como servidor dedicado, o que também detecta classe de cliente carregada no servidor.
 38. **Ferramentas:** toda ferramenta ou hook entra com um documento em `_docs/desenvolvimento/`: o que faz, por que foi escolhido, a versão e o que fazer quando reprova.
 
 ### Flexibilidade para novos robôs
@@ -210,6 +210,7 @@ Os testes ficam em `src/test` (JUnit) e os GameTests em um pacote `gametest`.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 19:56 | Ativa os gates de GameTests e datagen no push. |
 | Marcelo Fabiano | 2026-11-04 19:14 | Inclui o template de pull request nas exceções de nome. |
 | Marcelo Fabiano | 2026-11-04 18:24 | Estende a regra de constantes aos testes. |
 | Marcelo Fabiano | 2026-11-04 18:20 | Amplia a regra 26 para string literal. |

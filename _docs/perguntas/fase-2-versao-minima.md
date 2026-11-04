@@ -59,6 +59,8 @@ Não há perguntas pendentes nesta fase.
 | 108 | Como salvar o estado do Cubit como item? | Num componente único, `cubit:robot_state`, com tier, energia e vida. Os próximos dados entram como campos opcionais. O tipo do robô vem do próprio item |
 | 109 | Quem é o dono de um Cubit? | Quem o coloca. O item não guarda o dono, e o robô ganha um UUID novo a cada colocação |
 | 110 | Em que aba do criativo o Cubit aparece, e colocar no criativo gasta o item? | Numa aba própria, `cubit:main`. Colocar sempre gasta o item, porque ele carrega o estado do robô |
+| 111 | Qual gate detecta classe de cliente carregada no servidor, já que o `runServer` exige aceitar o EULA? | As GameTests no `pre-push`. Elas carregam o mod com o mesmo alvo de servidor dedicado, sem EULA, e a regra 37 do `AGENTS.md` foi ajustada |
+| 112 | Quando roda a conferência do datagen? | No `pre-push`, por meio de `scripts/development/check-generated.sh` |
 
 ### Premissas aprovadas
 
@@ -74,6 +76,7 @@ Não há perguntas pendentes nesta fase.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 19:56 | Registra as respostas 111 e 112. |
 | Marcelo Fabiano | 2026-11-04 19:24 | Registra as respostas 108, 109 e 110. |
 | Marcelo Fabiano | 2026-11-04 19:05 | Registra as respostas 103, 104, 105 e 106. |
 | Marcelo Fabiano | 2026-11-04 18:50 | Registra as respostas 100, 101 e 102. |
