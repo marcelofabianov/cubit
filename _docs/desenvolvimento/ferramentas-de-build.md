@@ -4,13 +4,27 @@ Todas as versões ficam em `gradle.properties`, exceto o Gradle, fixado em `grad
 
 ## Comandos
 
+Os comandos ficam no `Makefile`. Rode `make` para ver a lista.
+
 | Comando | O que faz |
 |---|---|
-| `./gradlew check` | Compila, roda os testes e confere a arquitetura, a cobertura, a formatação e a análise estática |
-| `./gradlew spotlessApply` | Formata o código Java |
-| `./gradlew build` | Faz o mesmo que `check` e gera o jar em `build/libs/` |
-| `./gradlew runClient` | Abre o jogo com o mod |
-| `./gradlew runData` | Roda a geração de dados e confirma que o mod carrega |
+| `make setup` | Instala as ferramentas de desenvolvimento e ativa os hooks |
+| `make check` | Roda todos os gates: build, testes, arquitetura, cobertura, formatação e análise estática |
+| `make test` | Roda os testes |
+| `make coverage` | Confere a cobertura de `domain/` e mostra onde está o relatório |
+| `make format` | Formata o código Java |
+| `make format-check` | Confere a formatação sem alterar arquivos |
+| `make build` | Roda os gates e gera o jar em `build/libs/` |
+| `make clean` | Remove a saída do build |
+| `make client` | Abre o jogo com o mod |
+| `make server` | Inicia um servidor dedicado com o mod |
+| `make data` | Roda a geração de dados e confirma que o mod carrega |
+| `make gametest` | Roda os GameTests num servidor sem interface |
+| `make stop` | Para os daemons do Gradle |
+
+**Limite do `make gametest`:** sem GameTests, o servidor falha ao iniciar com `No test functions were given!`, mas o comando termina com sucesso. Ainda não foi provado que uma GameTest reprovada faz o comando falhar. Isso precisa ser conferido quando a primeira GameTest existir.
+
+Receita com mais de 3 linhas vira um script `.sh` em `scripts/`, e o `Makefile` só o chama (regra 46 do `AGENTS.md`).
 
 O primeiro build leva alguns minutos, porque baixa o JDK e prepara o Minecraft.
 
@@ -46,15 +60,17 @@ As bibliotecas de teste vêm só do Maven Central, para o build não depender do
 
 - **`DomainBoundaryTest`:** uma classe de `domain/` importou o jogo. Mova a regra para fora do domínio ou inverta a dependência com uma interface.
 - **`jacocoTestCoverageVerification`:** faltam testes no domínio. Abra `build/reports/jacoco/test/html/index.html` para ver o que falta.
-- **`spotlessJavaCheck`:** o código não está formatado. Rode `./gradlew spotlessApply`.
+- **`spotlessJavaCheck`:** o código não está formatado. Rode `make format`.
 - **`checkstyleMain` ou `checkstyleTest`:** uma regra de forma do código foi violada. Corrija a causa, sem suprimir a regra.
 - **`createMinecraftArtifacts`:** a preparação do Minecraft falhou. Rode com `--info` para ler o erro.
-- **`release version 21 not supported`:** o Gradle usou um Java sem o pacote de desenvolvimento. Confira se `gradle/gradle-daemon-jvm.properties` existe e rode `./gradlew --stop`.
+- **`release version 21 not supported`:** o Gradle usou um Java sem o pacote de desenvolvimento. Confira se `gradle/gradle-daemon-jvm.properties` existe e rode `make stop`.
 
 ## Histórico de modificações
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 18:12 | Registra o limite do comando de GameTests. |
+| Marcelo Fabiano | 2026-11-04 18:02 | Passa os comandos para o Makefile. |
 | Marcelo Fabiano | 2026-11-04 18:00 | Registra a exceção de número mágico nos testes. |
 | Marcelo Fabiano | 2026-11-04 17:57 | Documenta o Spotless, o Checkstyle e as regras de forma do código. |
 | Marcelo Fabiano | 2026-11-04 17:48 | Sobe a cobertura mínima para 85%. |

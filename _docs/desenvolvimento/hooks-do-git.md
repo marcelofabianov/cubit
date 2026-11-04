@@ -35,7 +35,7 @@ Os hooks rodam só na máquina local. Eles não bloqueiam merges feitos pelo Git
 ## Quando um gate reprova
 
 - **Branch:** crie a issue e a branch dela, e faça o commit lá. As alterações não commitadas acompanham a troca de branch.
-- **Formatação:** rode `./gradlew spotlessApply` e adicione os arquivos ao commit de novo.
+- **Formatação:** rode `make format` e adicione os arquivos ao commit de novo.
 - **Histórico:** adicione uma linha no topo da tabela do arquivo, com o nome da pessoa, a data e a hora (`AAAA-MM-DD HH:MM`) e uma frase direta do que foi feito.
 - **gitleaks:** remova o segredo do arquivo e troque-o, se ele já tiver sido exposto. O relatório oculta o valor. Em caso de falso positivo, consulte o desenvolvedor antes de criar qualquer exceção.
 - **Mensagem:** reescreva o título no formato `tipo(escopo opcional): descrição`, em português.
@@ -53,6 +53,7 @@ Nunca use `--no-verify`.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 18:02 | Usa o Makefile na correção da formatação. |
 | Marcelo Fabiano | 2026-11-04 17:57 | Adiciona o gate de formatação. |
 | Marcelo Fabiano | 2026-11-04 17:44 | Adiciona o gate de push. |
 | Marcelo Fabiano | 2026-11-04 17:15 | Renomeia para português e atualiza os caminhos. |

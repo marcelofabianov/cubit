@@ -136,6 +136,10 @@ O robô atual é o primeiro, de uso geral. O mod pode ter robôs especializados 
 44. **Os documentos validam a entrega:** toda entrega é conferida contra os documentos `.md`, e as respostas em `_docs/perguntas/` prevalecem sobre os demais. Artefatos, como testes, logs, relatórios e capturas de tela, são bem-vindos na validação, mas não substituem os documentos.
 45. **Validação no PR:** a descrição do PR informa os documentos conferidos e a evidência de cada um, incluindo os checklists dos pilares que se aplicam.
 
+### Comandos do projeto
+
+46. **Makefile:** os comandos do projeto ficam no `Makefile`. Receita com mais de 3 linhas vira um script `.sh` em `scripts/`, e o `Makefile` só o chama.
+
 ## Git
 
 - **Autorização:** nunca faça commit, push, merge, tag, release ou PR sem autorização explícita para aquela ação. Antes, mostre os arquivos, o resumo e a mensagem proposta.
@@ -206,6 +210,7 @@ Os testes ficam em `src/test` (JUnit) e os GameTests em um pacote `gametest`.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 18:02 | Adiciona a regra do Makefile. |
 | Marcelo Fabiano | 2026-11-04 17:57 | Atualiza os gates ativos. |
 | Marcelo Fabiano | 2026-11-04 17:51 | Adota a hierarquia dos pilares de desenvolvimento. |
 | Marcelo Fabiano | 2026-11-04 17:48 | Sobe a cobertura mínima para 85%. |
