@@ -117,8 +117,8 @@ O significado de cada pilar, os checklists e a matriz de decisão estão em [`_d
 
 ### Gates
 
-36. **Commit:** branch, histórico de modificações, mensagem e gitleaks já estão ativos. A formatação entra na Fase 2. Veja [`_docs/desenvolvimento/hooks-do-git.md`](_docs/desenvolvimento/hooks-do-git.md).
-37. **Push:** build, testes, ArchUnit e cobertura já estão ativos. Datagen e `runServer`, para detectar classe de cliente carregada no servidor, entram quando houver conteúdo para eles.
+36. **Commit:** branch, histórico de modificações, formatação, mensagem e gitleaks já estão ativos. Veja [`_docs/desenvolvimento/hooks-do-git.md`](_docs/desenvolvimento/hooks-do-git.md).
+37. **Push:** build, testes, ArchUnit, cobertura, formatação e Checkstyle já estão ativos. Datagen e `runServer`, para detectar classe de cliente carregada no servidor, entram quando houver conteúdo para eles.
 38. **Ferramentas:** toda ferramenta ou hook entra com um documento em `_docs/desenvolvimento/`: o que faz, por que foi escolhido, a versão e o que fazer quando reprova.
 
 ### Flexibilidade para novos robôs
@@ -206,6 +206,7 @@ Os testes ficam em `src/test` (JUnit) e os GameTests em um pacote `gametest`.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 17:57 | Atualiza os gates ativos. |
 | Marcelo Fabiano | 2026-11-04 17:51 | Adota a hierarquia dos pilares de desenvolvimento. |
 | Marcelo Fabiano | 2026-11-04 17:48 | Sobe a cobertura mínima para 85%. |
 | Marcelo Fabiano | 2026-11-04 17:44 | Inicia a Fase 2 e adiciona as regras de validação e o gate de push. |

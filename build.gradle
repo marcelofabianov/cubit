@@ -1,6 +1,8 @@
 plugins {
     id 'java-library'
     id 'jacoco'
+    id 'checkstyle'
+    id 'com.diffplug.spotless'
     id 'net.neoforged.moddev'
     id 'idea'
 }
@@ -39,6 +41,8 @@ repositories {
             includeGroupAndSubgroups('org.junit')
         }
     }
+
+    mavenCentral()
 }
 
 base {
@@ -170,6 +174,19 @@ tasks.named('jacocoTestCoverageVerification', JacocoCoverageVerification) {
 
 tasks.named('check') {
     dependsOn 'jacocoTestCoverageVerification'
+}
+
+spotless {
+    java {
+        target 'src/*/java/**/*.java'
+        googleJavaFormat(project.google_java_format_version)
+        removeUnusedImports()
+    }
+}
+
+checkstyle {
+    toolVersion = project.checkstyle_version
+    maxWarnings = 0
 }
 
 idea {

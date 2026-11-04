@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Gates for every commit: allowed branch, change history and secret scan of the staged changes.
+# Gates for every commit: allowed branch, change history, Java formatting and secret scan.
 set -euo pipefail
 
 readonly BRANCH_PATTERN='^((feature|hotfix)/[0-9]+-[a-z0-9]+(-[a-z0-9]+)*|release/[0-9]+\.[0-9]+\.[0-9]+)$'
@@ -52,6 +52,10 @@ if ((${#missing_history[@]} > 0)); then
     printf '  %s\n' "${missing_history[@]}"
   } >&2
   exit 1
+fi
+
+if [[ -n "$(git diff --cached --name-only --diff-filter=ACMR -- '*.java')" ]]; then
+  "${root}/gradlew" --project-dir "${root}" spotlessCheck --quiet
 fi
 
 "${gitleaks_bin}" git --pre-commit --staged --redact --no-banner --log-level warn "${root}"

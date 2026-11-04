@@ -134,6 +134,7 @@ As regras numeradas citadas aqui são as do [`AGENTS.md`](../../AGENTS.md).
 - Entidades e blocos adaptam e delegam. Regra de negócio neles é violação.
 - Prefira retorno antecipado a `else` aninhado.
 - Sem número mágico (regra 26), sem código morto e com comentários só para o porquê (regra 29).
+- O Checkstyle e o Spotless reprovam o que puderem verificar sozinhos. O restante fica para a revisão.
 
 ### Checklist
 
@@ -221,4 +222,5 @@ Isso não autoriza refatorar um arquivo inteiro nem mudar o comportamento de out
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 17:57 | Cita os gates de formatação e análise estática. |
 | Marcelo Fabiano | 2026-11-04 17:51 | Adota os pilares de desenvolvimento, adaptados ao mod. |
