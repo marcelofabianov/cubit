@@ -136,6 +136,10 @@ O robô atual é o primeiro, de uso geral. O mod pode ter robôs especializados 
 44. **Os documentos validam a entrega:** toda entrega é conferida contra os documentos `.md`, e as respostas em `_docs/perguntas/` prevalecem sobre os demais. Artefatos, como testes, logs, relatórios e capturas de tela, são bem-vindos na validação, mas não substituem os documentos.
 45. **Validação no PR:** a descrição do PR informa os documentos conferidos e a evidência de cada um, incluindo os checklists dos pilares que se aplicam.
 
+### Perguntas
+
+47. **Toda pergunta respondida fica registrada:** qualquer pergunta feita ao desenvolvedor e respondida por ele entra em `_docs/perguntas/`, no arquivo da fase e com o próximo número livre, antes de seguir para o próximo passo. Vale também para pergunta não bloqueante e para resposta que só confirma a recomendação. Resposta que muda outra aponta para ela. A exceção é a autorização de uma ação pontual, como commit, push, merge ou apagar uma branch, que vale só para aquela vez.
+
 ### Comandos do projeto
 
 46. **Makefile:** os comandos do projeto ficam no `Makefile`. Receita com mais de 3 linhas vira um script `.sh` em `scripts/`, e o `Makefile` só o chama.
@@ -210,6 +214,7 @@ Os testes ficam em `src/test` (JUnit) e os GameTests em um pacote `gametest`.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 20:41 | Adiciona a regra de registrar toda pergunta respondida. |
 | Marcelo Fabiano | 2026-11-04 19:56 | Ativa os gates de GameTests e datagen no push. |
 | Marcelo Fabiano | 2026-11-04 19:14 | Inclui o template de pull request nas exceções de nome. |
 | Marcelo Fabiano | 2026-11-04 18:24 | Estende a regra de constantes aos testes. |
