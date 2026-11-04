@@ -50,7 +50,8 @@ Ficam em `config/checkstyle/checkstyle.xml`.
 | Tamanho de função | 30 linhas | Regra 27 do `AGENTS.md` |
 | Complexidade ciclomática | 10 | Pilar Clareza |
 | Tamanho de arquivo | 400 linhas | Pilar Clareza |
-| Número mágico | Só -1, 0, 1 e 2 são livres. Testes ficam de fora, porque os valores esperados vêm dos documentos | Regra 26 do `AGENTS.md` |
+| Número mágico | Só -1, 0, 1 e 2 são livres, inclusive nos testes | Regra 26 do `AGENTS.md` |
+| String literal | Só em constante `static final`, inclusive nos testes | Regra 26 do `AGENTS.md` |
 | `TODO` | Só com issue: `TODO(#12)` | Regra 29 do `AGENTS.md` |
 | Imports | Sem `*` e sem import não usado | Pilar Clareza |
 
@@ -69,6 +70,8 @@ As bibliotecas de teste vêm só do Maven Central, para o build não depender do
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 18:24 | Estende as regras de literais aos testes. |
+| Marcelo Fabiano | 2026-11-04 18:20 | Adiciona a regra de string literal. |
 | Marcelo Fabiano | 2026-11-04 18:12 | Registra o limite do comando de GameTests. |
 | Marcelo Fabiano | 2026-11-04 18:02 | Passa os comandos para o Makefile. |
 | Marcelo Fabiano | 2026-11-04 18:00 | Registra a exceção de número mágico nos testes. |

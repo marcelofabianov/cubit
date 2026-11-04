@@ -47,6 +47,8 @@ Não há perguntas pendentes nesta fase.
 | 95 | Qual ferramenta faz a formatação no commit? | Spotless com o google-java-format |
 | 96 | Qual é a cobertura mínima de testes? | 85% |
 | 97 | Um gate automático confere complexidade e tamanho de função e de classe? | Sim, com o Checkstyle no `check`, junto com o Spotless |
+| 98 | Literais no código? | Sempre constantes em vez de string literal e número mágico |
+| 99 | A regra de constantes também vale para os testes? | Sim. As constantes do teste ficam no próprio teste, com os valores dos documentos, sem compartilhar com o código de produção |
 
 ### Premissas aprovadas
 
@@ -62,6 +64,8 @@ Não há perguntas pendentes nesta fase.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 18:24 | Registra a resposta 99. |
+| Marcelo Fabiano | 2026-11-04 18:20 | Registra a resposta 98 e a pergunta 99. |
 | Marcelo Fabiano | 2026-11-04 17:52 | Registra a resposta 97. |
 | Marcelo Fabiano | 2026-11-04 17:48 | Registra a resposta 96. |
 | Marcelo Fabiano | 2026-11-04 17:48 | Registra a resposta 95. |
