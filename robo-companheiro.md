@@ -30,6 +30,8 @@ Mod próprio do **Iron Meridian** (Minecraft 1.21.1, NeoForge). Adiciona o **Cub
 | Números por tier | [`_docs/tiers.md`](_docs/tiers.md) |
 | Decisões tomadas e em aberto | [`_docs/decisions.md`](_docs/decisions.md) |
 | Termos e nomes oficiais | [`_docs/glossary.md`](_docs/glossary.md) |
+| Fluxo de trabalho | [`_docs/development/workflow.md`](_docs/development/workflow.md) |
+| Git hooks | [`_docs/development/git_hooks.md`](_docs/development/git_hooks.md) |
 
 Os números ficam só em `_docs/tiers.md`. As outras páginas apontam para lá.
 
