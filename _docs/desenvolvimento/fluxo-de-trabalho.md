@@ -77,16 +77,20 @@ Antes do push, atualize a branch com a de origem. Depois, abra o PR para a `deve
 
 ```bash
 git push -u origin feature/{issue}-{slug}
+cp .github/pull_request_template.md tmp/pr.md
+# Preencha tmp/pr.md antes de abrir o PR.
 gh pr create --base develop --title "tipo: descrição" --body-file tmp/pr.md
 ```
 
-A descrição do PR tem:
+A descrição do PR segue o template [`.github/pull_request_template.md`](../../.github/pull_request_template.md), que o GitHub também aplica aos PRs abertos pelo site. Ele tem:
 
 - `Closes #n` na primeira linha;
 - o que muda;
-- a validação: os documentos conferidos e a evidência de cada um;
+- a validação: os documentos conferidos e a evidência de cada um, os comandos, o teste no Iron Meridian e os checklists dos pilares;
 - como revisar ou testar;
 - o que ficou fora do escopo, quando houver.
+
+O histórico de modificações do template fica num comentário HTML, para não aparecer nos PRs.
 
 ### 8. Merge
 
@@ -179,6 +183,7 @@ O primeiro passo, separando o que está decidido do que está pendente.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 19:12 | Adota o template de pull request. |
 | Marcelo Fabiano | 2026-11-04 18:02 | Usa o Makefile na preparação do ambiente. |
 | Marcelo Fabiano | 2026-11-04 17:51 | Inclui os pilares na validação. |
 | Marcelo Fabiano | 2026-11-04 17:44 | Adiciona a etapa de validação contra os documentos. |
