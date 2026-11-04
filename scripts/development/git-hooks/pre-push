@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Gates for every push: build, unit tests, architecture rules and domain coverage.
+set -euo pipefail
+
+root="$(git rev-parse --show-toplevel)"
+readonly root
+
+"${root}/gradlew" --project-dir "${root}" check

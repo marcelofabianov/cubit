@@ -1,0 +1,41 @@
+# Ferramentas de build
+
+Todas as versões ficam em `gradle.properties`, exceto o Gradle, fixado em `gradle/wrapper/gradle-wrapper.properties`.
+
+## Comandos
+
+| Comando | O que faz |
+|---|---|
+| `./gradlew check` | Compila, roda os testes e confere a arquitetura e a cobertura |
+| `./gradlew build` | Faz o mesmo que `check` e gera o jar em `build/libs/` |
+| `./gradlew runClient` | Abre o jogo com o mod |
+| `./gradlew runData` | Roda a geração de dados e confirma que o mod carrega |
+
+O primeiro build leva alguns minutos, porque baixa o JDK e prepara o Minecraft.
+
+## Ferramentas
+
+| Ferramenta | O que faz | Por que foi escolhida |
+|---|---|---|
+| Gradle (wrapper) | Executa o build, sem precisar instalar nada | Vem no MDK oficial do NeoForge |
+| ModDevGradle | Integra o Gradle ao NeoForge | É o plugin do MDK oficial |
+| JDK 21 Adoptium | Compila o mod e o Minecraft | O projeto o baixa sozinho, porque o Java do sistema pode não ter o pacote de desenvolvimento |
+| JUnit | Roda os testes do domínio sem subir o jogo | É o padrão em Java e está na regra 32 do `AGENTS.md` |
+| ArchUnit | Impede que `domain/` dependa do jogo | Garante a regra 12 do `AGENTS.md` no build |
+| JaCoCo | Mede a cobertura de `domain/`, com mínimo de 85% | Garante a regra 34 do `AGENTS.md` |
+
+As bibliotecas de teste vêm só do Maven Central, para o build não depender do Maven da NeoForge para elas.
+
+## Quando algo reprova
+
+- **`DomainBoundaryTest`:** uma classe de `domain/` importou o jogo. Mova a regra para fora do domínio ou inverta a dependência com uma interface.
+- **`jacocoTestCoverageVerification`:** faltam testes no domínio. Abra `build/reports/jacoco/test/html/index.html` para ver o que falta.
+- **`createMinecraftArtifacts`:** a preparação do Minecraft falhou. Rode com `--info` para ler o erro.
+- **`release version 21 not supported`:** o Gradle usou um Java sem o pacote de desenvolvimento. Confira se `gradle/gradle-daemon-jvm.properties` existe e rode `./gradlew --stop`.
+
+## Histórico de modificações
+
+| Pessoa | Data e hora | Modificação |
+|---|---|---|
+| Marcelo Fabiano | 2026-11-04 17:48 | Sobe a cobertura mínima para 85%. |
+| Marcelo Fabiano | 2026-11-04 17:45 | Documenta as ferramentas de build e os comandos. |

@@ -23,7 +23,7 @@ Se mostrar outra conta, prefixe os comandos com `GH_TOKEN=$(gh auth token --user
 ## Caminho de uma tarefa
 
 ```text
-Issue → Branch → Trabalho → Plano de commits → Commits → PR → Merge → Encerramento
+Issue → Branch → Trabalho → Validação → Plano de commits → Commits → PR → Merge → Encerramento
 ```
 
 ### 1. Issue
@@ -41,13 +41,18 @@ git switch -c feature/{issue}-{slug} --no-track develop
 
 ### 3. Trabalho
 
-- **Fase 1, conceito:** só arquivos `.md` e ferramentas de desenvolvimento. Sem código do mod nem projeto Gradle.
-- **Fase 2 em diante:** a feature precisa estar documentada em `_docs/funcionalidades/`, com as decisões fechadas. O teste vem antes ou junto do código.
+- **A partir da Fase 2:** a feature precisa estar documentada em `_docs/funcionalidades/`, com as decisões fechadas. O teste vem antes ou junto do código.
 - **Decisão bloqueante:** pare e siga o [fluxo do `AGENTS.md`](../../AGENTS.md#decisões-bloqueantes). Registre a resposta em [`perguntas/`](../perguntas/README.md), no arquivo da fase.
 - **Rascunhos:** ficam em `tmp/`.
 - **Histórico de modificações:** todo `.md` termina com uma tabela de histórico. Quem altera o arquivo adiciona uma linha no topo da tabela, com o nome da pessoa, a data e a hora e uma frase direta do que foi feito.
 
-### 4. Plano de commits
+### 4. Validação
+
+Compare a entrega com os documentos `.md`, que são os validadores. As respostas em [`perguntas/`](../perguntas/README.md) prevalecem sobre os demais. Artefatos, como testes, logs, relatórios e capturas de tela, complementam essa conferência, mas não a substituem.
+
+Se a entrega e um documento divergirem, corrija a entrega. Se o documento estiver errado, pergunte ao desenvolvedor antes de mudá-lo.
+
+### 5. Plano de commits
 
 O plano de commits é a relação dos commits a fazer, com os arquivos e a mensagem de cada um. O agente o apresenta e espera a autorização.
 
@@ -57,7 +62,7 @@ O plano de commits é a relação dos commits a fazer, com os arquivos e a mensa
 
 Cada commit trata de uma mudança lógica e deixa o projeto num estado válido, sem link quebrado nem teste falhando.
 
-### 5. Commits
+### 6. Commits
 
 ```bash
 git add {arquivos do commit}
@@ -66,7 +71,7 @@ git commit -m "tipo(escopo opcional): descrição em português"
 
 Use `git add` com os arquivos do plano, nunca `git add .`. Se um gate reprovar, corrija a causa conforme [`hooks-do-git.md`](hooks-do-git.md).
 
-### 6. Pull request
+### 7. Pull request
 
 Antes do push, atualize a branch com a de origem. Depois, abra o PR para a `develop`:
 
@@ -79,14 +84,15 @@ A descrição do PR tem:
 
 - `Closes #n` na primeira linha;
 - o que muda;
+- a validação: os documentos conferidos e a evidência de cada um;
 - como revisar ou testar;
 - o que ficou fora do escopo, quando houver.
 
-### 7. Merge
+### 8. Merge
 
 O merge é feito no GitHub, pelo desenvolvedor ou pelo agente, se ele pedir para aquele PR.
 
-### 8. Encerramento
+### 9. Encerramento
 
 1. Confira se a issue fechou. Se continuar aberta, feche-a à mão.
 2. Atualize a `develop` local.
@@ -173,6 +179,7 @@ O primeiro passo, separando o que está decidido do que está pendente.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 17:44 | Adiciona a etapa de validação contra os documentos. |
 | Marcelo Fabiano | 2026-11-04 17:26 | Esclarece o que é permitido na Fase 1. |
 | Marcelo Fabiano | 2026-11-04 17:15 | Renomeia para português e atualiza os caminhos. |
 | Marcelo Fabiano | 2026-11-04 16:57 | Aponta as decisões para as perguntas por fase e adiciona o milestone e o histórico. |

@@ -1,0 +1,15 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+    }
+    plugins {
+        id 'net.neoforged.moddev' version settings.moddev_version
+        id 'org.gradle.toolchains.foojay-resolver-convention' version settings.foojay_resolver_version
+    }
+}
+
+plugins {
+    id 'org.gradle.toolchains.foojay-resolver-convention'
+}
+
+rootProject.name = 'cubit'
