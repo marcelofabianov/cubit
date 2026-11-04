@@ -7,7 +7,7 @@ Este documento mostra, passo a passo, como uma tarefa vai da issue ao merge e co
 Rode uma vez em cada clone:
 
 ```bash
-scripts/development/setup-dev.sh
+make setup
 ```
 
 O script ativa os gates de commit, descritos em [`hooks-do-git.md`](hooks-do-git.md).
@@ -179,6 +179,7 @@ O primeiro passo, separando o que está decidido do que está pendente.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 18:02 | Usa o Makefile na preparação do ambiente. |
 | Marcelo Fabiano | 2026-11-04 17:51 | Inclui os pilares na validação. |
 | Marcelo Fabiano | 2026-11-04 17:44 | Adiciona a etapa de validação contra os documentos. |
 | Marcelo Fabiano | 2026-11-04 17:26 | Esclarece o que é permitido na Fase 1. |
