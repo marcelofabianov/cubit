@@ -72,9 +72,11 @@ Autorização para começar um trabalho não resolve os bloqueios dele, mesmo qu
 Quando duas regras puxarem para lados opostos, vence a que vem antes:
 
 ```text
-Mundo do player > Fronteira do domínio > Contrato com pack e saves > Comportamento testado >
-Design > Clareza > Simplicidade > Sem repetição
+Segurança > Defesa > Fronteira de módulo > Contrato externo > Comportamento testado >
+Design sólido > Clareza > Simplicidade > Sem repetição > Sem excesso > Domínio > Regra do Escoteiro
 ```
+
+O significado de cada pilar, os checklists e a matriz de decisão estão em [`_docs/desenvolvimento/pilares.md`](_docs/desenvolvimento/pilares.md). Segurança, aqui, é a proteção do mundo do player e da máquina dele.
 
 ### Domínio
 
@@ -132,7 +134,7 @@ O robô atual é o primeiro, de uso geral. O mod pode ter robôs especializados 
 ### Validação
 
 44. **Os documentos validam a entrega:** toda entrega é conferida contra os documentos `.md`, e as respostas em `_docs/perguntas/` prevalecem sobre os demais. Artefatos, como testes, logs, relatórios e capturas de tela, são bem-vindos na validação, mas não substituem os documentos.
-45. **Validação no PR:** a descrição do PR informa os documentos conferidos e a evidência de cada um.
+45. **Validação no PR:** a descrição do PR informa os documentos conferidos e a evidência de cada um, incluindo os checklists dos pilares que se aplicam.
 
 ## Git
 
@@ -204,6 +206,7 @@ Os testes ficam em `src/test` (JUnit) e os GameTests em um pacote `gametest`.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 17:51 | Adota a hierarquia dos pilares de desenvolvimento. |
 | Marcelo Fabiano | 2026-11-04 17:48 | Sobe a cobertura mínima para 85%. |
 | Marcelo Fabiano | 2026-11-04 17:44 | Inicia a Fase 2 e adiciona as regras de validação e o gate de push. |
 | Marcelo Fabiano | 2026-11-04 17:28 | Reordena as regras de flexibilidade e ajusta a Fase 1, os nomes de arquivos e a regra dos números. |
