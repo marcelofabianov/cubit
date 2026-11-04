@@ -29,9 +29,10 @@ class TierSpecTest {
   private static final Energy ULTIMATE_AFTER_MOVING = new Energy(3_999_980);
   private static final Energy ULTIMATE_AFTER_RECHARGE = new Energy(4_005_000);
   private static final Energy ONE = new Energy(1);
+  private static final double ULTIMATE_SPEED = 2.0;
 
   private static TierSpec spec(Energy capacity, Energy moving, Energy recharge) {
-    return new TierSpec(capacity, moving, recharge, ANY_SLOTS, ANY_HEALTH, ANY_RADIUS);
+    return new TierSpec(capacity, moving, recharge, ANY_SLOTS, ANY_HEALTH, ANY_RADIUS, 1);
   }
 
   @Test
@@ -66,12 +67,27 @@ class TierSpecTest {
   @Test
   void rejectsZeroValuesThatWouldBreakTheRobot() {
     assertThrows(
-        IllegalArgumentException.class, () -> new TierSpec(Energy.ZERO, ONE, ONE, 1, 1, 1));
+        IllegalArgumentException.class, () -> new TierSpec(Energy.ZERO, ONE, ONE, 1, 1, 1, 1));
     assertThrows(
-        IllegalArgumentException.class, () -> new TierSpec(ONE, ONE, Energy.ZERO, 1, 1, 1));
-    assertThrows(IllegalArgumentException.class, () -> new TierSpec(ONE, ONE, ONE, 0, 1, 1));
-    assertThrows(IllegalArgumentException.class, () -> new TierSpec(ONE, ONE, ONE, 1, 0, 1));
-    assertThrows(IllegalArgumentException.class, () -> new TierSpec(ONE, ONE, ONE, 1, 1, 0));
+        IllegalArgumentException.class, () -> new TierSpec(ONE, ONE, Energy.ZERO, 1, 1, 1, 1));
+    assertThrows(IllegalArgumentException.class, () -> new TierSpec(ONE, ONE, ONE, 0, 1, 1, 1));
+    assertThrows(IllegalArgumentException.class, () -> new TierSpec(ONE, ONE, ONE, 1, 0, 1, 1));
+    assertThrows(IllegalArgumentException.class, () -> new TierSpec(ONE, ONE, ONE, 1, 1, 0, 1));
+  }
+
+  @Test
+  void rejectsSpeedThatWouldStopTheRobot() {
+    assertThrows(IllegalArgumentException.class, () -> speedOf(0));
+    assertThrows(IllegalArgumentException.class, () -> speedOf(Double.NaN));
+  }
+
+  @Test
+  void keepsTheSpeedMultiplierOfTheTier() {
+    assertEquals(ULTIMATE_SPEED, speedOf(ULTIMATE_SPEED).speedMultiplier());
+  }
+
+  private static TierSpec speedOf(double multiplier) {
+    return new TierSpec(ONE, ONE, ONE, 1, 1, 1, multiplier);
   }
 
   @Test

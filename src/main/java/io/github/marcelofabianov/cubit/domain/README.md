@@ -36,6 +36,7 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 - **Colocar e sair da base são a mesma regra:** o robô segue se nenhum outro estiver seguindo. Se houver outro, fica desligado, porque o clique direito só liga um robô desligado, e assim o player consegue fazê-lo seguir (perguntas 72, 75 e 102).
 - **Sem bateria, o vínculo continua:** o robô para e, ao religar, volta a seguir. Ligar outro robô o desliga, e ele deixa de religar sozinho (pergunta 101).
 - **Quem guarda o vínculo é quem chama:** a política recebe quem segue e devolve o resultado, sem ler os dados do player.
+- **Outro robô assumiu o lugar:** um robô ativo que descobre isso se desliga. É o caso de quem estava em chunk descarregado na troca.
 - **Vínculo apontando para o próprio robô:** não conta como outro robô seguindo. Assim, um vínculo antigo não deixa o robô desligado.
 
 ## Estados
@@ -55,6 +56,7 @@ O desligamento pelo controle remoto (pergunta 56) entra na Fase 4, junto do cont
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 20:09 | Documenta o robô que descobre que outro assumiu o lugar. |
 | Marcelo Fabiano | 2026-11-04 19:31 | Documenta o estado do robô e a chave do tier. |
 | Marcelo Fabiano | 2026-11-04 19:12 | Documenta o catálogo de tiers. |
 | Marcelo Fabiano | 2026-11-04 18:58 | Documenta o movimento e o robô que segue. |

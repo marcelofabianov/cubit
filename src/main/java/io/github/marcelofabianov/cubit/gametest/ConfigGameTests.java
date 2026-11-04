@@ -40,10 +40,25 @@ public final class ConfigGameTests {
   private static final int MAX_SLOTS = 54;
   private static final int TOO_MANY_SLOTS = 55;
   private static final String NOT_A_NUMBER = "many";
-  private static final Map<String, Integer> DEFAULTS =
+  private static final String REPATH_KEY = "general.follow_repath_ticks";
+  private static final int REPATH = 10;
+  private static final String STOP_KEY = "general.stop_distance_blocks";
+  private static final int STOP = 3;
+  private static final String TELEPORT_KEY = "general.teleport_distance_blocks";
+  private static final int TELEPORT = 20;
+  private static final String BASE_SPEED_KEY = "general.base_movement_speed";
+  private static final double BASE_SPEED = 0.3;
+  private static final String SPEED_KEY = "general_robot.base.speed_multiplier";
+  private static final double SPEED = 1;
+  private static final Map<String, Integer> GENERAL_DEFAULTS =
       Map.of(
           INITIAL_CHARGE_KEY, INITIAL_CHARGE,
           WAKE_CHARGE_KEY, WAKE_CHARGE,
+          REPATH_KEY, REPATH,
+          STOP_KEY, STOP,
+          TELEPORT_KEY, TELEPORT);
+  private static final Map<String, Integer> TIER_DEFAULTS =
+      Map.of(
           BATTERY_KEY, BATTERY,
           CONSUMPTION_KEY, CONSUMPTION,
           RECHARGE_KEY, RECHARGE,
@@ -57,7 +72,8 @@ public final class ConfigGameTests {
           new Energy(RECHARGE),
           SLOTS,
           HEALTH,
-          RADIUS);
+          RADIUS,
+          SPEED);
   private static final String WRONG_SPEC = "Wrong tier numbers";
   private static final String WRONG_CHARGE = "Wrong initial charge";
   private static final String WRONG_KEY = "Wrong value for a config key";
@@ -97,8 +113,12 @@ public final class ConfigGameTests {
   public static void keysAreTheContractWithThePack(GameTestHelper helper) {
     CommentedConfig file = correctedFile();
 
-    DEFAULTS.forEach(
+    GENERAL_DEFAULTS.forEach(
         (key, value) -> helper.assertValueEqual(file.<Integer>get(key), value, WRONG_KEY));
+    TIER_DEFAULTS.forEach(
+        (key, value) -> helper.assertValueEqual(file.<Integer>get(key), value, WRONG_KEY));
+    helper.assertValueEqual(file.<Double>get(BASE_SPEED_KEY), BASE_SPEED, WRONG_KEY);
+    helper.assertValueEqual(file.<Double>get(SPEED_KEY), SPEED, WRONG_KEY);
     helper.succeed();
   }
 

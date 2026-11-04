@@ -12,6 +12,9 @@ final class TierSection {
   private static final String INVENTORY_SLOTS = "inventory_slots";
   private static final String MAX_HEALTH = "max_health";
   private static final String CALL_RADIUS = "call_radius_blocks";
+  private static final String SPEED_MULTIPLIER = "speed_multiplier";
+  private static final double MIN_SPEED_MULTIPLIER = 0.1;
+  private static final double MAX_SPEED_MULTIPLIER = 4;
   private static final int MIN_POSITIVE = 1;
   private static final int MIN_CONSUMPTION = 0;
   private static final int MAX_ENERGY = Integer.MAX_VALUE;
@@ -25,6 +28,7 @@ final class TierSection {
   private final ModConfigSpec.IntValue inventorySlots;
   private final ModConfigSpec.IntValue maxHealth;
   private final ModConfigSpec.IntValue callRadius;
+  private final ModConfigSpec.DoubleValue speedMultiplier;
 
   TierSection(ModConfigSpec.Builder builder, TierSpec defaults) {
     batteryCapacity = energy(builder, BATTERY_CAPACITY, defaults.batteryCapacity(), MIN_POSITIVE);
@@ -39,6 +43,12 @@ final class TierSection {
     callRadius =
         builder.defineInRange(
             CALL_RADIUS, defaults.callRadiusBlocks(), MIN_POSITIVE, MAX_CALL_RADIUS);
+    speedMultiplier =
+        builder.defineInRange(
+            SPEED_MULTIPLIER,
+            defaults.speedMultiplier(),
+            MIN_SPEED_MULTIPLIER,
+            MAX_SPEED_MULTIPLIER);
   }
 
   TierSpec read() {
@@ -48,7 +58,8 @@ final class TierSection {
         new Energy(recharge.get()),
         inventorySlots.get(),
         maxHealth.get(),
-        callRadius.get());
+        callRadius.get(),
+        speedMultiplier.get());
   }
 
   private static ModConfigSpec.IntValue energy(
