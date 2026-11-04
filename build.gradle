@@ -73,6 +73,8 @@ neoForge {
 
         gameTestServer {
             type = 'gameTestServer'
+            // Keeps a config edited by hand in run/ from changing the test results.
+            gameDirectory = project.file('run/gametest')
             systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
         }
 
