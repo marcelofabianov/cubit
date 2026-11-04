@@ -48,7 +48,7 @@ git switch -c feature/{issue}-{slug} --no-track develop
 
 ### 4. Validação
 
-Compare a entrega com os documentos `.md`, que são os validadores. As respostas em [`perguntas/`](../perguntas/README.md) prevalecem sobre os demais. Artefatos, como testes, logs, relatórios e capturas de tela, complementam essa conferência, mas não a substituem.
+Compare a entrega com os documentos `.md`, que são os validadores. As respostas em [`perguntas/`](../perguntas/README.md) prevalecem sobre os demais. Passe também pelos checklists de [`pilares.md`](pilares.md) que se aplicam. Artefatos, como testes, logs, relatórios e capturas de tela, complementam essa conferência, mas não a substituem.
 
 Se a entrega e um documento divergirem, corrija a entrega. Se o documento estiver errado, pergunte ao desenvolvedor antes de mudá-lo.
 
@@ -179,6 +179,7 @@ O primeiro passo, separando o que está decidido do que está pendente.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 17:51 | Inclui os pilares na validação. |
 | Marcelo Fabiano | 2026-11-04 17:44 | Adiciona a etapa de validação contra os documentos. |
 | Marcelo Fabiano | 2026-11-04 17:26 | Esclarece o que é permitido na Fase 1. |
 | Marcelo Fabiano | 2026-11-04 17:15 | Renomeia para português e atualiza os caminhos. |
