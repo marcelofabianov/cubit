@@ -11,13 +11,15 @@ public record TierSpec(
     Energy rechargePerTick,
     int inventorySlots,
     int maxHealth,
-    int callRadiusBlocks) {
+    int callRadiusBlocks,
+    double speedMultiplier) {
 
   private static final String BATTERY_CAPACITY = "batteryCapacity";
   private static final String RECHARGE_PER_TICK = "rechargePerTick";
   private static final String INVENTORY_SLOTS = "inventorySlots";
   private static final String MAX_HEALTH = "maxHealth";
   private static final String CALL_RADIUS_BLOCKS = "callRadiusBlocks";
+  private static final String SPEED_MULTIPLIER = "speedMultiplier";
   private static final String NOT_POSITIVE_MESSAGE = " must be positive: ";
 
   public TierSpec {
@@ -26,6 +28,9 @@ public record TierSpec(
     requirePositive(inventorySlots, INVENTORY_SLOTS);
     requirePositive(maxHealth, MAX_HEALTH);
     requirePositive(callRadiusBlocks, CALL_RADIUS_BLOCKS);
+    if (!(speedMultiplier > 0)) {
+      throw new IllegalArgumentException(SPEED_MULTIPLIER + NOT_POSITIVE_MESSAGE + speedMultiplier);
+    }
   }
 
   public Battery newBattery(Percentage initialCharge) {

@@ -30,6 +30,23 @@ Para conferir o estado, use `/data get entity @e[type=cubit:general_robot,limit=
 | 3 | Botão direito no segundo robô e confira os dois | O segundo fica `ACTIVE`, e o primeiro, `INACTIVE_SWITCHED_OFF` |
 | 4 | Saia e entre de novo no mundo, e confira os dois | Os estados continuam os mesmos |
 
+## Movimento
+
+Coloque um robô, que segue você, e use blocos para montar o terreno.
+
+| # | Faça | Espere |
+|---|---|---|
+| 1 | Ande em linha reta | O robô vem atrás e para a cerca de 3 blocos, sem empurrar você |
+| 2 | Corra para longe, em modo sobrevivência, ou voe para longe | A cerca de 20 blocos, ele aparece perto de você |
+| 3 | Suba um degrau de um bloco | O robô sobe sem pular |
+| 4 | Fique atrás de um muro de dois blocos, a menos de 20 blocos | O robô não passa e não pula, mas contorna se houver caminho |
+| 5 | Fique do outro lado de uma poça, com um caminho em volta | O robô contorna a água |
+| 6 | Coloque o robô dentro de uma piscina funda e fique por perto | Ele afunda, anda no fundo e não perde vida |
+| 7 | Deixe o robô num penhasco e pule, para ele cair ao seguir | Ele não perde vida |
+| 7a | Fique do outro lado de uma vala de lava, sem caminho em volta | Ele não entra na lava |
+| 8 | Vá para o Nether e volte | Ele não vai junto. Ao voltar, retoma quando o chunk dele estiver carregado |
+| 9 | Coloque um segundo robô, longe do primeiro, e ande | O segundo fica parado |
+
 ## Servidor dedicado
 
 1. Rode `make server` e aceite o EULA em `run/eula.txt`, se ainda não tiver aceitado.
@@ -39,4 +56,6 @@ Para conferir o estado, use `/data get entity @e[type=cubit:general_robot,limit=
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 20:31 | Adiciona a lava ao movimento. |
+| Marcelo Fabiano | 2026-11-04 20:09 | Adiciona o movimento. |
 | Marcelo Fabiano | 2026-11-04 19:31 | Cria o roteiro de colocar e recolher o Cubit. |

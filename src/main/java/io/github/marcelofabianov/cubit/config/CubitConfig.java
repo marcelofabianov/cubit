@@ -1,5 +1,6 @@
 package io.github.marcelofabianov.cubit.config;
 
+import io.github.marcelofabianov.cubit.domain.behavior.FollowDecision;
 import io.github.marcelofabianov.cubit.domain.energy.Energy;
 import io.github.marcelofabianov.cubit.domain.energy.Percentage;
 import io.github.marcelofabianov.cubit.domain.energy.PowerRules;
@@ -15,12 +16,6 @@ import net.neoforged.neoforge.common.ModConfigSpec;
 public final class CubitConfig {
   public static final RobotType GENERAL_ROBOT = new RobotType("general_robot");
   private static final String GENERAL_SECTION = "general";
-  private static final String INITIAL_CHARGE = "initial_charge_percent";
-  private static final int INITIAL_CHARGE_DEFAULT = 25;
-  private static final String WAKE_CHARGE = "wake_charge_percent";
-  private static final int WAKE_CHARGE_DEFAULT = 5;
-  private static final int PERCENT_MIN = 0;
-  private static final int PERCENT_MAX = 100;
   private static final int TIER_SECTION_DEPTH = 2;
   private static final long BASE_BATTERY = 300_000;
   private static final long BASE_CONSUMPTION = 10;
@@ -28,6 +23,7 @@ public final class CubitConfig {
   private static final int BASE_SLOTS = 27;
   private static final int BASE_HEALTH = 25;
   private static final int BASE_CALL_RADIUS = 15;
+  private static final double BASE_SPEED_MULTIPLIER = 1;
   private static final TierSpec GENERAL_ROBOT_BASE =
       new TierSpec(
           new Energy(BASE_BATTERY),
@@ -35,20 +31,18 @@ public final class CubitConfig {
           new Energy(BASE_RECHARGE),
           BASE_SLOTS,
           BASE_HEALTH,
-          BASE_CALL_RADIUS);
+          BASE_CALL_RADIUS,
+          BASE_SPEED_MULTIPLIER);
 
   private final ModConfigSpec spec;
-  private final ModConfigSpec.IntValue initialCharge;
-  private final ModConfigSpec.IntValue wakeCharge;
+  private final GeneralSection general;
   private final TierCatalog tierCatalog;
 
   public CubitConfig() {
     ModConfigSpec.Builder builder = new ModConfigSpec.Builder();
 
     builder.push(GENERAL_SECTION);
-    initialCharge =
-        builder.defineInRange(INITIAL_CHARGE, INITIAL_CHARGE_DEFAULT, PERCENT_MIN, PERCENT_MAX);
-    wakeCharge = builder.defineInRange(WAKE_CHARGE, WAKE_CHARGE_DEFAULT, PERCENT_MIN, PERCENT_MAX);
+    general = new GeneralSection(builder);
     builder.pop();
 
     builder.push(List.of(GENERAL_ROBOT.id(), RobotTier.BASE.key()));
@@ -69,10 +63,23 @@ public final class CubitConfig {
   }
 
   public Percentage initialCharge() {
-    return new Percentage(initialCharge.get());
+    return new Percentage(general.initialCharge.get());
   }
 
   public PowerRules powerRules() {
-    return new PowerRules(new Percentage(wakeCharge.get()));
+    return new PowerRules(new Percentage(general.wakeCharge.get()));
+  }
+
+  /** The limits of the two keys do not overlap, so this is always a valid decision. */
+  public FollowDecision followDecision() {
+    return new FollowDecision(general.stopDistance.get(), general.teleportDistance.get());
+  }
+
+  public double baseMovementSpeed() {
+    return general.baseSpeed.get();
+  }
+
+  public int followRepathTicks() {
+    return general.repathTicks.get();
   }
 }

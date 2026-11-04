@@ -25,7 +25,7 @@ class RobotStateTest {
   private static final Energy CONSUMPTION = new Energy(10);
   private static final Energy RECHARGE = new Energy(500);
   private static final TierSpec SPEC =
-      new TierSpec(CAPACITY, CONSUMPTION, RECHARGE, SLOTS, MAX_HEALTH, RADIUS);
+      new TierSpec(CAPACITY, CONSUMPTION, RECHARGE, SLOTS, MAX_HEALTH, RADIUS, 1);
 
   @Test
   void newRobotHasTheInitialChargeAndFullHealth() {

@@ -10,7 +10,7 @@ import java.util.UUID;
 public record FollowingRobotPolicy(PowerRules powerRules) {
   /** Placing a robot and leaving the base follow the same rule. */
   public FollowingOutcome onArrival(UUID robot, Optional<UUID> follower, Battery battery) {
-    if (release(robot, follower).isPresent()) {
+    if (otherRobotFollows(robot, follower)) {
       return new FollowingOutcome(PowerState.INACTIVE_SWITCHED_OFF, follower, Optional.empty());
     }
     return new FollowingOutcome(
@@ -24,6 +24,10 @@ public record FollowingRobotPolicy(PowerRules powerRules) {
       return new FollowingOutcome(state, follower, Optional.empty());
     }
     return new FollowingOutcome(newState, Optional.of(robot), release(robot, follower));
+  }
+
+  public boolean otherRobotFollows(UUID robot, Optional<UUID> follower) {
+    return release(robot, follower).isPresent();
   }
 
   /**

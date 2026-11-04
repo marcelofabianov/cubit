@@ -20,5 +20,8 @@ public final class CubitDataGenerators {
     ExistingFileHelper existingFiles = event.getExistingFileHelper();
     generator.addProvider(event.includeClient(), new CubitLanguageProvider(output));
     generator.addProvider(event.includeClient(), new CubitItemModelProvider(output, existingFiles));
+    generator.addProvider(
+        event.includeServer(),
+        new CubitEntityTagsProvider(output, event.getLookupProvider(), existingFiles));
   }
 }

@@ -14,7 +14,7 @@ Não há perguntas pendentes nesta fase.
 | 31 | Quando ele religa? | Sozinho, com 5% de bateria |
 | 32 | Ele consome energia parado? | 0 FE/t, configurável |
 | 33 | Com quanta carga sai do craft? | 25%, configurável |
-| 34 | O que acontece na morte, e como repara? | Vira item com inventário preservado e bateria zerada. A vida fica no item e se recupera na estação. O dono não o fere |
+| 34 | O que acontece na morte, e como repara? | Vira item com inventário preservado e bateria zerada. A vida fica no item e se recupera na estação. O dono não o fere. As perguntas 118 e 119 detalham o item e o dano |
 | 35 | O que conta como robô ativo? | Substituída pela pergunta 65 |
 | 36 | Qual é o buffer e a entrada da estação? | 100 mil FE, configurável. A entrada foi alterada pela pergunta 61 |
 | 37 | Qual é a fonte de FE no ambiente de dev? | Powah só em runtime local, com as dependências a confirmar, ou um comando de debug |
@@ -61,6 +61,16 @@ Não há perguntas pendentes nesta fase.
 | 110 | Em que aba do criativo o Cubit aparece, e colocar no criativo gasta o item? | Numa aba própria, `cubit:main`. Colocar sempre gasta o item, porque ele carrega o estado do robô |
 | 111 | Qual gate detecta classe de cliente carregada no servidor, já que o `runServer` exige aceitar o EULA? | As GameTests no `pre-push`. Elas carregam o mod com o mesmo alvo de servidor dedicado, sem EULA, e a regra 37 do `AGENTS.md` foi ajustada |
 | 112 | Quando roda a conferência do datagen? | No `pre-push`, por meio de `scripts/development/check-generated.sh` |
+| 113 | Quanto vale a velocidade 1,0× no jogo? | 0,3 no atributo de movimento, como o lobo. O valor e o multiplicador de cada tier ficam no config |
+| 114 | O que acontece quando o Cubit cai na água? | Afunda e anda no fundo, sem nadar e sem se afogar, e o teleporte o resgata |
+| 115 | Quando entra o som de esteira? | Na Fase 3, com os bipes. A Fase 2 fica sem esse som |
+| 116 | O Cubit leva dano na lava? | Sim, igual ao player sem armadura, e continua pegando fogo ao sair. Na etapa de morte, o item resultante não queima, para cumprir a pergunta 34 |
+| 117 | Como o Cubit se comporta pegando fogo? | Ativo, para de seguir e de teleportar, anda ao acaso evitando caminhos perigosos e busca água por perto para se apagar. É uma exceção à regra de a rota evitar água, só enquanto queima. Inativo ou na base, fica parado |
+| 118 | Como proteger o item que cai quando o Cubit morre? | Ele não queima nem some com o tempo. Cair no vazio ainda o perde, e isso não foi decidido |
+| 119 | O que a proteção do dono cobre, na pergunta 34? | Qualquer dano que o jogo atribua ao dono. O fogo de um isqueiro continua ferindo, porque o jogo não guarda quem o acendeu |
+| 120 | Em que ordem seguem o movimento, o fogo e a morte? | Primeiro o PR do movimento. Depois, um PR para o fogo e outro para a morte, antes do inventário |
+| 122 | Como foi o roteiro manual do movimento? | Ok, executado pelo desenvolvedor |
+| 123 | Os commits das decisões de movimento e das decisões de fogo e morte ficam separados? | Sim, separados |
 
 ### Premissas aprovadas
 
@@ -76,6 +86,10 @@ Não há perguntas pendentes nesta fase.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 20:54 | Registra as respostas 122 e 123. |
+| Marcelo Fabiano | 2026-11-04 20:41 | Registra as respostas 117, 118, 119 e 120. |
+| Marcelo Fabiano | 2026-11-04 20:31 | Registra a resposta 116 e tira a lava da resposta 114. |
+| Marcelo Fabiano | 2026-11-04 20:09 | Registra as respostas 113, 114 e 115. |
 | Marcelo Fabiano | 2026-11-04 19:56 | Registra as respostas 111 e 112. |
 | Marcelo Fabiano | 2026-11-04 19:24 | Registra as respostas 108, 109 e 110. |
 | Marcelo Fabiano | 2026-11-04 19:05 | Registra as respostas 103, 104, 105 e 106. |
