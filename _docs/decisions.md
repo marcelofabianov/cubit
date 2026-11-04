@@ -9,6 +9,8 @@
 - **Repositório:** `marcelofabianov/cubit`.
 - **Etapa atual:** a Fase 1 é o conceito, feito em arquivos `.md`, sem código.
 - **Idioma dos commits:** português, em Conventional Commits.
+- **Fluxo de Git:** Gitflow, Semantic Versioning e Conventional Commits, com `homolog` para a release em teste e `release/X.Y.Z` para a release fechada. O fluxo completo está no [`AGENTS.md`](../AGENTS.md#fluxo-de-branches).
+- **Regras de desenvolvimento:** no [`AGENTS.md`](../AGENTS.md#regras-de-desenvolvimento). Os gates de commit estão ativos, e os de Java e Gradle entram na Fase 2.
 
 ## Em aberto
 
@@ -22,6 +24,8 @@
 - **Persona:** perguntas em [`persona.md`](concept/persona.md).
 - **Sobreposição com o Mekanism:** até onde sei, o Robit do Mekanism também segue o player, carrega itens e recarrega numa estação. A regra 3 do pack proíbe mod que repete a função de outro, então é preciso confirmar se o Cubit entra como exceção.
 - **Licença:** ainda não definida.
+- **Primeira versão:** recomendação ainda não aprovada de começar em `0.1.0` e só lançar a `1.0.0` com o mod completo.
+- **Proteção de branches:** recomendação ainda não aprovada de proteger `main`, `homolog` e `develop` no GitHub, se o plano da conta permitir em repositório privado.
 
 ## Power Bank
 

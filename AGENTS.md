@@ -47,12 +47,74 @@ Versões conferidas em 2026-11-04. Confira de novo no `mods/` do Iron Meridian a
 
 O desenvolvedor é sênior em TypeScript, Go e PHP, e Java é secundário para ele. Valoriza SOLID, DRY, KISS, Clean Code, TDD e DDD.
 
-- **Decisão em aberto:** pergunte em vez de decidir sozinho.
 - **Modding:** explique as decisões específicas de Minecraft quando não forem óbvias.
-- **Domínio:** regras de tier, bateria, consumo, filtros e decisão de comportamento ficam separadas das classes do Minecraft e são testadas com JUnit, sem subir o jogo.
-- **Mundo:** use GameTests do NeoForge para os comportamentos que dependem do mundo, quando fizer sentido.
-- **Código:** prefira classes pequenas, nomes claros e composição em vez de herança profunda.
-- **Idioma:** converse e documente em português. O que aparece no mod fica em inglês.
+- **Mudança neste arquivo:** justifique por que é necessária e espere a autorização do desenvolvedor.
+- **Encerramento:** sessão que termina com trabalho pendente deixa um prompt de continuidade em `tmp/prompt/{AAAA-MM-DD_HHhMM}_continuidade_{assunto}.md`, com a leitura obrigatória, o que foi feito e o que se espera da próxima sessão.
+
+### Decisões bloqueantes
+
+É bloqueante qualquer ponto com mais de um caminho defensável em que a escolha altere arquitetura, dependências, processo, contrato, saves ou o comportamento entregue.
+
+1. Identifique a decisão e pare antes de implementá-la.
+2. Apresente as alternativas, com a sua recomendação e a opção de recusar todas.
+3. Espere a confirmação explícita.
+4. Implemente e registre o caminho escolhido em `_docs/decisions.md`.
+
+Autorização para começar um trabalho não resolve os bloqueios dele, mesmo que a decisão pareça pequena ou reversível.
+
+## Regras de desenvolvimento
+
+### Prioridade
+
+Quando duas regras puxarem para lados opostos, vence a que vem antes:
+
+```text
+Mundo do player > Fronteira do domínio > Contrato com pack e saves > Comportamento testado >
+Design > Clareza > Simplicidade > Sem repetição
+```
+
+### Domínio
+
+11. **Conceito antes do código:** uma feature só é implementada depois de documentada em `_docs/features/` e com as decisões dela fechadas.
+12. **Fronteira:** `domain/` não importa `net.minecraft` nem `net.neoforged`. Um teste com ArchUnit reprova a violação no build. Regras de tier, bateria, consumo, filtros e decisão de comportamento ficam nessa camada.
+13. **Energia é sempre inteira**, num value object. Transferir nunca cria nem perde FE, seja na bateria, na Power Bank ou na estação.
+14. **Value objects** são `record` que validam no construtor. Sem `get*`: `capacity()`, não `getCapacity()`.
+15. **Interfaces:** só existem com um consumidor real e são curtas. Se um consumidor não usa todos os métodos, separe.
+16. **README do domínio:** `domain/` tem um `README.md` com a linguagem do domínio, as regras e os porquês. Atualizá-lo faz parte da tarefa que muda o modelo.
+
+### Minecraft
+
+17. **O mod não derruba o jogo por dado inválido:** usa um valor seguro e registra no log. Só falha ao iniciar, em caso de erro de programação.
+18. **Saves são contrato:** IDs, data components, NBT, chaves de config e tags não mudam sem migração.
+19. **Autoridade do servidor:** toda regra roda no servidor. O cliente só exibe e pede ações.
+20. **Dono do robô:** toda ação confere o dono. O servidor valida dono e distância de todo pacote recebido do cliente.
+21. **Orçamento de tick:** nada pesado a cada tick. Varreduras rodam em intervalos e sem alocação desnecessária.
+22. **Chunks:** nunca carregue um chunk à força nem leia um bloco sem confirmar que ele está carregado.
+23. **Separação do cliente:** código comum nunca referencia classes de `client/`.
+24. **Dependências opcionais:** o mod precisa abrir sem elas. LambDynamicLights e Jade ficam isolados.
+
+### Forma do código
+
+25. **Idioma:** código em inglês, em todo arquivo que não seja `.md`, incluindo comentários, logs e testes. Português só em `.md`, issues, PRs e mensagens de commit.
+26. **Sem número mágico:** balanceamento vai no config, e constantes técnicas ficam nomeadas.
+27. **Funções** têm no máximo 30 linhas e uma responsabilidade. Prefira classes pequenas e composição em vez de herança profunda.
+28. **Nomes:** classes em `PascalCase`; JSONs e IDs em `snake_case`, no singular; scripts `.sh` em `kebab-case`. Adapters levam o que adaptam como prefixo (`NeoForgeTierCatalog`).
+29. **Comentários** são exceção e explicam o porquê. Sem código comentado e sem `TODO` sem issue.
+30. **Gerados:** `src/generated/` nunca é editado à mão. Um gate reprova se o `runData` gerar diferença.
+31. **Versões** ficam em `gradle.properties`, alinhadas às do Iron Meridian.
+
+### Testes
+
+32. **TDD:** o teste vem antes ou junto do código. Use JUnit 5 no domínio e GameTests no que depende do mundo.
+33. **Sem mock do jogo:** nunca faça mock de `Level` ou `Entity`. Comportamento de mundo se testa no mundo.
+34. **Cobertura:** mínimo de 80% em `domain/`, medido com JaCoCo. O restante se cobre com GameTests e um roteiro manual.
+35. **Teste no pack:** antes de ir para a `main`, teste numa instância do Iron Meridian.
+
+### Gates
+
+36. **Commit:** branch, mensagem e gitleaks já estão ativos. A formatação entra na Fase 2. Veja [`_docs/development/git_hooks.md`](_docs/development/git_hooks.md).
+37. **Push (a partir da Fase 2):** build, testes, ArchUnit, datagen, cobertura e `runServer`, para detectar classe de cliente carregada no servidor.
+38. **Ferramentas:** toda ferramenta ou hook entra com um documento em `_docs/development/`: o que faz, por que foi escolhido, a versão e o que fazer quando reprova.
 
 ## Git
 
@@ -61,6 +123,28 @@ O desenvolvedor é sênior em TypeScript, Go e PHP, e Java é secundário para e
 - **Assinatura:** os commits são assinados com SSH. Não desligue a assinatura.
 - **Remote:** `git@github.com-personal:marcelofabianov/cubit.git`. Não troque por HTTPS nem por `git@github.com:`, que caem na conta profissional.
 - **Conta do `gh`:** esta é a conta pessoal. Se o `gh api user --jq .login` mostrar outra, prefixe o comando com `GH_TOKEN=$(gh auth token --user marcelofabianov)`.
+
+### Fluxo de branches
+
+O projeto segue o Gitflow, com Semantic Versioning e Conventional Commits.
+
+| Branch | Sai de | Volta para | Papel |
+|---|---|---|---|
+| `main` | — | — | Versões publicadas; cada merge vira uma tag |
+| `release/X.Y.Z` | `homolog` | `main` e `develop` | Release fechada |
+| `homolog` | `develop` | `release/X.Y.Z` | Release em teste |
+| `develop` | `main` | `homolog` | Integração do trabalho em andamento |
+| `feature/{issue}-{slug}` | `develop` | `develop` | Funcionalidade, melhoria, correção não urgente ou tarefa técnica |
+| `hotfix/{issue}-{slug}` | `main` | `main`, `homolog` e `develop` | Correção urgente do que já foi publicado |
+
+### Regras de Git
+
+- **Proibido:** commit direto em `main`, `homolog` ou `develop`; usar `--no-verify`; misturar várias mudanças lógicas num commit.
+- **Issue:** toda tarefa começa por uma issue, e a branch leva o número dela. O nome da branch fica em inglês e em `kebab-case`: `feature/12-power-bank`.
+- **PR:** todo merge é feito por PR, com `Closes #n` na descrição. A branch padrão no GitHub é a `develop`.
+- **Commits:** em Conventional Commits, em português, e atômicos: `feat: adiciona a Power Bank`.
+- **Versão:** Semantic Versioning, com tag anotada `vX.Y.Z` na `main`. Na fase `0.x`, mudança incompatível sobe o MINOR, e o resto sobe o PATCH.
+- **Backlog:** um milestone do GitHub por fase do projeto.
 
 ## Estrutura de pacotes proposta
 
