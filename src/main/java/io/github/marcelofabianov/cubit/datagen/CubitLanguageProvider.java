@@ -1,0 +1,25 @@
+package io.github.marcelofabianov.cubit.datagen;
+
+import io.github.marcelofabianov.cubit.CubitMod;
+import io.github.marcelofabianov.cubit.registry.CubitCreativeTabs;
+import io.github.marcelofabianov.cubit.registry.CubitEntities;
+import io.github.marcelofabianov.cubit.registry.CubitItems;
+import net.minecraft.data.PackOutput;
+import net.neoforged.neoforge.common.data.LanguageProvider;
+
+/** The only language file of the mod: everything the player reads is in English. */
+final class CubitLanguageProvider extends LanguageProvider {
+  private static final String LOCALE = "en_us";
+  private static final String ROBOT_NAME = "Cubit";
+
+  CubitLanguageProvider(PackOutput output) {
+    super(output, CubitMod.MOD_ID, LOCALE);
+  }
+
+  @Override
+  protected void addTranslations() {
+    add(CubitItems.GENERAL_ROBOT.get(), ROBOT_NAME);
+    add(CubitEntities.GENERAL_ROBOT.get(), ROBOT_NAME);
+    add(CubitCreativeTabs.MAIN_TITLE_KEY, ROBOT_NAME);
+  }
+}
