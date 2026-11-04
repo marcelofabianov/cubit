@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
-# Gates for every commit: allowed branch and secret scan of the staged changes.
+# Gates for every commit: allowed branch, change history and secret scan of the staged changes.
 set -euo pipefail
 
 readonly BRANCH_PATTERN='^((feature|hotfix)/[0-9]+-[a-z0-9]+(-[a-z0-9]+)*|release/[0-9]+\.[0-9]+\.[0-9]+)$'
+readonly HISTORY_ROW_PATTERN='^\+\| .+ \| [0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2} \| .+ \|$'
 
 root="$(git rev-parse --show-toplevel)"
 readonly root
@@ -33,6 +34,23 @@ fi
 
 if [[ ! -x "${gitleaks_bin}" ]]; then
   echo "pre-commit: gitleaks not found. Run scripts/development/setup-dev.sh" >&2
+  exit 1
+fi
+
+# Every staged Markdown file must record the change in its history table.
+missing_history=()
+while IFS= read -r file; do
+  # grep -q would close the pipe early and fail the pipeline under pipefail on large diffs.
+  if ! git diff --cached --unified=0 -- "${file}" | grep -E "${HISTORY_ROW_PATTERN}" >/dev/null; then
+    missing_history+=("${file}")
+  fi
+done < <(git diff --cached --name-only --diff-filter=ACMR -- '*.md')
+
+if ((${#missing_history[@]} > 0)); then
+  {
+    echo "pre-commit: add a new row to the change history table of:"
+    printf '  %s\n' "${missing_history[@]}"
+  } >&2
   exit 1
 fi
 

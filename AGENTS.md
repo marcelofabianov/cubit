@@ -2,25 +2,27 @@
 
 Mod de Minecraft que adiciona um robô companheiro fofo, movido a bateria, feito para o modpack [Iron Meridian](https://github.com/marcelofabianov/iron-meridian): singleplayer, de tecnologia e construção, sem magia.
 
-**Comece por:** [`robo-companheiro.md`](robo-companheiro.md), a visão geral com as fases e o mapa da documentação em `_docs/`. Os documentos são a fonte da verdade do projeto.
+**Comece por:** [`robo-companheiro.md`](robo-companheiro.md), a visão geral com as fases e o mapa da documentação em `_docs/`. As respostas em `_docs/perguntas/` são a fonte da verdade e prevalecem sobre os outros documentos.
 
 ## Estado atual
 
 - **Etapa atual:** Fase 1, conceito. O trabalho é definir persona, features e demais informações em arquivos `.md`. Não crie código nem projeto Gradle nesta etapa.
-- **Próximo passo:** a Fase 2 (versão mínima), que só começa quando o desenvolvedor encerrar o conceito e aprovar as [decisões](_docs/decisions.md) e a [estrutura de pacotes](#estrutura-de-pacotes-proposta).
+- **Próximo passo:** a Fase 2 (versão mínima), que só começa quando o desenvolvedor encerrar o conceito e não houver [perguntas](_docs/perguntas/README.md) pendentes para ela.
 - **Limite:** não avance para as fases seguintes sem pedido explícito.
 
 ## Documentação
 
 - **Números:** ficam só em `_docs/tiers.md`. As outras páginas apontam para lá.
-- **Decisões:** ficam em `_docs/decisions.md`. Recomendações marcadas como não aprovadas não valem como decididas.
-- **Imagens:** ficam em `_docs/assets/`.
+- **Perguntas:** ficam em `_docs/perguntas/`, com um arquivo por fase. Recomendação de pergunta pendente não vale como decidida.
+- **Decisões:** o resumo do que foi decidido fica em `_docs/decisoes.md`.
+- **Histórico:** todo `.md` termina com uma tabela de histórico de modificações, e quem altera o arquivo adiciona uma linha no topo dela.
+- **Imagens:** ficam em `_docs/imagens/`.
 - **Rascunhos:** conversas e ideias vão para `tmp/`, que o Git ignora.
-- **Fluxo de trabalho:** o passo a passo de uma tarefa, de uma versão e de um hotfix está em [`_docs/development/workflow.md`](_docs/development/workflow.md).
+- **Fluxo de trabalho:** o passo a passo de uma tarefa, de uma versão e de um hotfix está em [`_docs/desenvolvimento/fluxo-de-trabalho.md`](_docs/desenvolvimento/fluxo-de-trabalho.md).
 
 ## Regras do mod
 
-1. **Só inglês no mod:** nome, itens, legendas, telas, mensagens, IDs, comandos e config. Existe só o `en_us.json`, sem `pt_br.json`.
+1. **Idioma:** o que entra no jar, aparece no jogo ou acompanha o download do mod fica em inglês: nome, itens, legendas, telas, mensagens, IDs, comandos, config e licença. Existe só o `en_us.json`, sem `pt_br.json`.
 2. **Sem magia:** nem nos nomes, nem nas mecânicas.
 3. **Números em config:** bateria, consumo, raios, intervalos, dano e slots por tier nunca ficam fixos na lógica.
 4. **Receitas:** só com itens do jogo puro, em datapack JSON, para o pack poder sobrescrever com KubeJS.
@@ -59,7 +61,7 @@ O desenvolvedor é sênior em TypeScript, Go e PHP, e Java é secundário para e
 1. Identifique a decisão e pare antes de implementá-la.
 2. Apresente as alternativas, com a sua recomendação e a opção de recusar todas.
 3. Espere a confirmação explícita.
-4. Implemente e registre o caminho escolhido em `_docs/decisions.md`.
+4. Implemente e registre a resposta em `_docs/perguntas/`, no arquivo da fase, e o resumo em `_docs/decisoes.md`.
 
 Autorização para começar um trabalho não resolve os bloqueios dele, mesmo que a decisão pareça pequena ou reversível.
 
@@ -76,7 +78,7 @@ Design > Clareza > Simplicidade > Sem repetição
 
 ### Domínio
 
-11. **Conceito antes do código:** uma feature só é implementada depois de documentada em `_docs/features/` e com as decisões dela fechadas.
+11. **Conceito antes do código:** uma feature só é implementada depois de documentada em `_docs/funcionalidades/` e com as decisões dela fechadas.
 12. **Fronteira:** `domain/` não importa `net.minecraft` nem `net.neoforged`. Um teste com ArchUnit reprova a violação no build. Regras de tier, bateria, consumo, filtros e decisão de comportamento ficam nessa camada.
 13. **Energia é sempre inteira**, num value object. Transferir nunca cria nem perde FE, seja na bateria, na Power Bank ou na estação.
 14. **Value objects** são `record` que validam no construtor. Sem `get*`: `capacity()`, não `getCapacity()`.
@@ -94,9 +96,19 @@ Design > Clareza > Simplicidade > Sem repetição
 23. **Separação do cliente:** código comum nunca referencia classes de `client/`.
 24. **Dependências opcionais:** o mod precisa abrir sem elas. LambDynamicLights e Jade ficam isolados.
 
+### Flexibilidade para novos robôs
+
+O robô atual é o primeiro, de uso geral. O mod pode ter robôs especializados no futuro, então nada pode prender o projeto a um único tipo de robô.
+
+39. **Tipo de robô é dado:** regras, números e capacidades vêm do tipo e do tier do robô, nunca de um `if` ou de uma constante do robô geral.
+40. **Capacidades por composição:** ímã, choque, scanner, inventário e demais recursos são peças que um tipo de robô combina, sem herança entre robôs.
+41. **Config, IDs e dados por tipo:** chaves de config, IDs e data components já nascem com o tipo do robô, porque mudá-los depois exige migração (regra 18).
+42. **Itens compartilhados:** Induction Dock, Cubit Remote e Power Bank reconhecem os robôs por tag ou interface, nunca por uma classe concreta.
+43. **Sem antecipar robôs:** essa flexibilidade vale nas fronteiras acima. Nada de implementar tipos, telas ou capacidades de robôs que ainda não existem (regra 15).
+
 ### Forma do código
 
-25. **Idioma:** código em inglês, em todo arquivo que não seja `.md`, incluindo comentários, logs e testes. Português só em `.md`, issues, PRs e mensagens de commit.
+25. **Idioma:** arquivos de programação (como `.java` e `.sh`) ficam em inglês, incluindo comentários, logs e testes. Arquivos de conteúdo (como `.md`) ficam em português, inclusive o nome do arquivo e da pasta, assim como issues, PRs e mensagens de commit. `README.md`, `AGENTS.md`, `CLAUDE.md` e `LICENSE` mantêm o nome, porque as ferramentas dependem dele.
 26. **Sem número mágico:** balanceamento vai no config, e constantes técnicas ficam nomeadas.
 27. **Funções** têm no máximo 30 linhas e uma responsabilidade. Prefira classes pequenas e composição em vez de herança profunda.
 28. **Nomes:** classes em `PascalCase`; JSONs e IDs em `snake_case`, no singular; scripts `.sh` em `kebab-case`. Adapters levam o que adaptam como prefixo (`NeoForgeTierCatalog`).
@@ -113,9 +125,9 @@ Design > Clareza > Simplicidade > Sem repetição
 
 ### Gates
 
-36. **Commit:** branch, mensagem e gitleaks já estão ativos. A formatação entra na Fase 2. Veja [`_docs/development/git_hooks.md`](_docs/development/git_hooks.md).
+36. **Commit:** branch, histórico de modificações, mensagem e gitleaks já estão ativos. A formatação entra na Fase 2. Veja [`_docs/desenvolvimento/hooks-do-git.md`](_docs/desenvolvimento/hooks-do-git.md).
 37. **Push (a partir da Fase 2):** build, testes, ArchUnit, datagen, cobertura e `runServer`, para detectar classe de cliente carregada no servidor.
-38. **Ferramentas:** toda ferramenta ou hook entra com um documento em `_docs/development/`: o que faz, por que foi escolhido, a versão e o que fazer quando reprova.
+38. **Ferramentas:** toda ferramenta ou hook entra com um documento em `_docs/desenvolvimento/`: o que faz, por que foi escolhido, a versão e o que fazer quando reprova.
 
 ## Git
 
@@ -147,25 +159,26 @@ O projeto segue o Gitflow, com Semantic Versioning e Conventional Commits.
 - **Versão:** Semantic Versioning, com tag anotada `vX.Y.Z` na `main`. Na fase `0.x`, mudança incompatível sobe o MINOR, e o resto sobe o PATCH.
 - **Backlog:** um milestone do GitHub por fase do projeto.
 
-## Estrutura de pacotes proposta
+## Estrutura de pacotes
 
-**Aguardando aprovação.** Vale para a Fase 2.
+Aprovada. Vale a partir da Fase 2.
 
 ```text
 io.github.marcelofabianov.cubit
 ├── CubitMod                // ponto de entrada: só conecta os registros
 ├── domain/                 // Java puro, testado com JUnit
+│   ├── robot/              // RobotType, capacidades que cada tipo combina
 │   ├── tier/               // RobotTier, TierSpec, TierCatalog (interface)
-│   ├── energy/             // Battery, PowerState, regras de consumo e religamento
+│   ├── energy/             // Battery, PowerState (ativo, inativo, hibernação), regras de consumo e religamento
 │   ├── behavior/           // FollowDecision: seguir, parar ou teleportar
-│   └── ownership/          // ActiveRobotPolicy
+│   └── ownership/          // FollowingRobotPolicy
 ├── config/                 // ModConfigSpec → implementa TierCatalog
 ├── registry/               // DeferredRegisters
 ├── entity/                 // RobotEntity, goals de IA
-├── item/                   // RobotItem, RobotStateComponent
-├── block/                  // ChargingStationBlock, BlockEntity
-├── menu/                   // RobotMenu
-├── player/                 // attachment com o UUID do robô ativo
+├── item/                   // RobotItem, PowerBankItem, RobotStateComponent
+├── block/                  // InductionDockBlock, BlockEntity
+├── menu/                   // RobotMenu, InductionDockMenu
+├── player/                 // attachment com o UUID do robô que segue
 ├── client/                 // renderer, modelo GeckoLib, tela
 └── datagen/                // receitas, loot, traduções
 ```
@@ -181,3 +194,15 @@ Os testes ficam em `src/test` (JUnit) e os GameTests em um pacote `gametest`.
 - **Atributos:** são registrados antes de o config carregar, então vida e velocidade são aplicadas quando a entidade nasce.
 - **Receitas com datagen:** geram JSONs normais em `data/`, que o KubeJS pode sobrescrever.
 - **Distribuição:** o pack usa packwiz e não guarda `.jar`, então o mod precisa ser publicado no Modrinth ou no CurseForge para entrar nele.
+
+## Histórico de modificações
+
+| Pessoa | Data e hora | Modificação |
+|---|---|---|
+| Marcelo Fabiano | 2026-11-04 17:16 | Adiciona as regras de flexibilidade para novos robôs. |
+| Marcelo Fabiano | 2026-11-04 17:15 | Define a regra de idioma e atualiza os caminhos. |
+| Marcelo Fabiano | 2026-11-04 17:08 | Define as respostas como fonte da verdade e atualiza os pacotes e a regra do histórico. |
+| Marcelo Fabiano | 2026-11-04 16:57 | Aponta para o diretório de perguntas, aprova a estrutura de pacotes e renomeia o bloco do Dock. |
+| Marcelo Fabiano | 2026-11-04 16:08 | Aponta o AGENTS para o fluxo de trabalho. |
+| Marcelo Fabiano | 2026-11-04 15:58 | Adota as regras de desenvolvimento e o fluxo de branches. |
+| Marcelo Fabiano | 2026-11-04 15:23 | Adiciona a visão geral, o README e as regras do projeto. |
