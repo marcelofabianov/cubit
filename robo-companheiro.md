@@ -44,7 +44,7 @@ Os números ficam em `_docs/tiers.md`. As outras páginas apontam para lá, e o 
 
 1. **Conceito** (encerrada): definir persona, features e demais informações em arquivos `.md`.
 2. **Versão mínima** (atual): crafting com itens do jogo puro, seguir o player, inventário, bateria, vários Cubits com um seguindo, Induction Dock com hibernação, recarga com redstone e virar item.
-3. **Sentidos**: painel solar, lanterna, scanners, bipes e textos curtos, expressões na tela, nome, cor e Jade.
+3. **Sentidos**: painel solar, lanterna, scanners, bipes, som de esteira e textos curtos, expressões na tela, nome, cor e Jade.
 4. **Upgrades e autonomia**: tiers, Power Bank, ímã, filtros, demais slots exclusivos, choque, modos de defesa, controle remoto, modo área, descarregar em baú, retorno automático e local de morte.
 
 ## Futuro
@@ -55,6 +55,7 @@ O robô atual é de uso geral e o primeiro do mod. No futuro, o mod pode ter vá
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 20:09 | Adiciona o som de esteira à fase Sentidos. |
 | Marcelo Fabiano | 2026-11-04 19:31 | Adiciona o roteiro manual ao mapa dos documentos. |
 | Marcelo Fabiano | 2026-11-04 19:08 | Adiciona o config ao mapa dos documentos. |
 | Marcelo Fabiano | 2026-11-04 17:51 | Adiciona os pilares ao mapa dos documentos. |

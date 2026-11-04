@@ -42,6 +42,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Entidade:** a `RobotEntity` herda de `PathfinderMob`, com o dono num UUID próprio.
 - **Estado como item:** um único componente, `cubit:robot_state`.
 - **Dono:** quem coloca o robô. O item não guarda o dono.
+- **Movimento:** velocidade de referência de 0,3. Na água, o robô afunda e anda no fundo, sem se afogar. Na lava, leva dano igual ao do player. Não há dano de queda. O som de esteira entra na Fase 3.
 - **Criativo:** aba própria, `cubit:main`, e colocar sempre gasta o item.
 - **Estados:** ativo (ligado), inativo (desligado) e hibernação (na base, com o inventário e os slots acessíveis).
 - **Painel solar:** só funciona com o Cubit ativo, de dia em todos os tiers e à noite só em Elite e Ultimate. Coberto por um bloco, não carrega. O clima não tem efeito, e no Nether e no End não funciona. Fica abaixo do consumo.
@@ -56,6 +57,8 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 20:31 | Registra o dano na lava. |
+| Marcelo Fabiano | 2026-11-04 20:09 | Registra as decisões de movimento. |
 | Marcelo Fabiano | 2026-11-04 19:56 | Registra os gates de GameTests e datagen no push. |
 | Marcelo Fabiano | 2026-11-04 19:24 | Registra o estado como item, o dono e o criativo. |
 | Marcelo Fabiano | 2026-11-04 19:05 | Registra o config, a entidade e o momento das GameTests. |

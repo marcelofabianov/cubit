@@ -14,12 +14,17 @@ As chaves ficam em `snake_case`. As de um robô ficam em `[{tipo}.{tier}]`, como
 |---|---|---|---|
 | `general` | `initial_charge_percent` | Carga do Cubit ao sair do craft | 0 a 100 |
 | `general` | `wake_charge_percent` | Religar | 0 a 100 |
+| `general` | `base_movement_speed` | Velocidade 1,0× | 0,01 a 1 |
+| `general` | `follow_repath_ticks` | Intervalo para recalcular a rota | 1 a 200 |
+| `general` | `stop_distance_blocks` | Distância para parar perto do player | 1 a 16 |
+| `general` | `teleport_distance_blocks` | Distância para teleportar até o player | 17 a 128 |
 | `general_robot.base` | `battery_capacity` | Bateria | 1 a 2147483647 |
 | `general_robot.base` | `moving_consumption_per_tick` | Consumo em movimento | 0 a 2147483647 |
 | `general_robot.base` | `recharge_per_tick` | Recarga na base e pelo slot de energia | 1 a 2147483647 |
 | `general_robot.base` | `inventory_slots` | Inventário | 1 a 54 |
 | `general_robot.base` | `max_health` | Vida | 1 a 1024 |
 | `general_robot.base` | `call_radius_blocks` | Raio do retorno automático e da chamada pelo Dock | 1 a 128 |
+| `general_robot.base` | `speed_multiplier` | Velocidade | 0,1 a 4 |
 
 ## Por que esses limites
 
@@ -27,6 +32,7 @@ As chaves ficam em `snake_case`. As de um robô ficam em `[{tipo}.{tier}]`, como
 - **Inventário até 54:** é o tamanho do baú duplo, o maior que a tela padrão do jogo mostra.
 - **Vida até 1024:** é o máximo do atributo de vida do jogo.
 - **Raio até 128:** mantém a busca limitada (regra 21 do `AGENTS.md`).
+- **Parada e teleporte sem sobreposição:** os limites não se cruzam, então o config nunca faz o robô parar além da distância em que teleportaria.
 
 ## Valor inválido
 
@@ -43,5 +49,6 @@ O mod não cai por causa do config (regra 17 do `AGENTS.md`):
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 20:09 | Adiciona as chaves de movimento. |
 | Marcelo Fabiano | 2026-11-04 19:24 | Adiciona a carga para religar. |
 | Marcelo Fabiano | 2026-11-04 19:08 | Documenta as chaves, os limites e o tratamento de valor inválido. |

@@ -71,7 +71,7 @@ As receitas usarão só itens do jogo puro e virão em datapack JSON, para os mo
 
 1. **Conceito (encerrada):** persona, features e demais definições, em documentos.
 2. **Versão mínima (atual):** crafting, seguir o player, inventário, bateria, vários Cubits com um seguindo, Induction Dock com hibernação, recarga com redstone e virar item.
-3. **Sentidos:** painel solar, lanterna, scanners, bipes e textos curtos, expressões na tela, nome, cor e Jade.
+3. **Sentidos:** painel solar, lanterna, scanners, bipes, som de esteira e textos curtos, expressões na tela, nome, cor e Jade.
 4. **Upgrades e autonomia:** tiers, Power Bank, ímã, filtros, demais slots exclusivos, choque, modos de defesa, Cubit Remote, modo área, descarga em baú, retorno automático e local de morte.
 
 ## Stack
@@ -95,6 +95,7 @@ As receitas usarão só itens do jogo puro e virão em datapack JSON, para os mo
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 20:10 | Adiciona o som de esteira à fase Sentidos. |
 | Marcelo Fabiano | 2026-11-04 17:44 | Marca a Fase 2 como atual. |
 | Marcelo Fabiano | 2026-11-04 17:26 | Atualiza o roadmap e padroniza o termo colar. |
 | Marcelo Fabiano | 2026-11-04 17:15 | Traduz o README para português, conforme a regra de idioma. |
