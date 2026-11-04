@@ -28,6 +28,8 @@ public final class ConfigGameTests {
   private static final String SLOTS_KEY = "general_robot.base.inventory_slots";
   private static final String HEALTH_KEY = "general_robot.base.max_health";
   private static final String RADIUS_KEY = "general_robot.base.call_radius_blocks";
+  private static final String WAKE_CHARGE_KEY = "general.wake_charge_percent";
+  private static final int WAKE_CHARGE = 5;
   private static final int INITIAL_CHARGE = 25;
   private static final int BATTERY = 300_000;
   private static final int CONSUMPTION = 10;
@@ -41,6 +43,7 @@ public final class ConfigGameTests {
   private static final Map<String, Integer> DEFAULTS =
       Map.of(
           INITIAL_CHARGE_KEY, INITIAL_CHARGE,
+          WAKE_CHARGE_KEY, WAKE_CHARGE,
           BATTERY_KEY, BATTERY,
           CONSUMPTION_KEY, CONSUMPTION,
           RECHARGE_KEY, RECHARGE,

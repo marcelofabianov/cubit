@@ -1,0 +1,224 @@
+package io.github.marcelofabianov.cubit.entity;
+
+import com.mojang.logging.LogUtils;
+import io.github.marcelofabianov.cubit.CubitMod;
+import io.github.marcelofabianov.cubit.domain.energy.Battery;
+import io.github.marcelofabianov.cubit.domain.energy.Energy;
+import io.github.marcelofabianov.cubit.domain.energy.PowerState;
+import io.github.marcelofabianov.cubit.domain.ownership.FollowingOutcome;
+import io.github.marcelofabianov.cubit.domain.ownership.FollowingRobotPolicy;
+import io.github.marcelofabianov.cubit.domain.robot.RobotState;
+import io.github.marcelofabianov.cubit.domain.robot.RobotType;
+import io.github.marcelofabianov.cubit.domain.tier.RobotTier;
+import io.github.marcelofabianov.cubit.domain.tier.TierSpec;
+import io.github.marcelofabianov.cubit.player.FollowingRobotLink;
+import io.github.marcelofabianov.cubit.registry.CubitAttachments;
+import io.github.marcelofabianov.cubit.registry.CubitDataComponents;
+import java.util.Arrays;
+import java.util.Optional;
+import java.util.UUID;
+import java.util.function.Supplier;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.PathfinderMob;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import org.slf4j.Logger;
+import software.bernie.geckolib.animatable.GeoEntity;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animation.AnimatableManager;
+import software.bernie.geckolib.util.GeckoLibUtil;
+
+/** A robot in the world. It adapts the game to the domain, where the rules live. */
+public final class RobotEntity extends PathfinderMob implements GeoEntity {
+  private static final Logger LOGGER = LogUtils.getLogger();
+  private static final String OWNER_KEY = "Owner";
+  private static final String TIER_KEY = "Tier";
+  private static final String ENERGY_KEY = "Energy";
+  private static final String POWER_STATE_KEY = "PowerState";
+  private static final String INVALID_DATA_MESSAGE = "Robot {} has an invalid {}: {}";
+  private static final String NO_OWNER_MESSAGE = "Robot {} has no owner. Nobody can interact.";
+
+  private final RobotType robotType;
+  private final Supplier<Item> item;
+  private final AnimatableInstanceCache animationCache = GeckoLibUtil.createInstanceCache(this);
+
+  private UUID ownerId;
+  private RobotTier tier = RobotTier.BASE;
+  private Battery battery;
+  private PowerState powerState = PowerState.INACTIVE_SWITCHED_OFF;
+
+  public RobotEntity(
+      EntityType<? extends RobotEntity> type,
+      Level level,
+      RobotType robotType,
+      Supplier<Item> item) {
+    super(type, level);
+    this.robotType = robotType;
+    this.item = item;
+    this.battery = spec().newBattery(CubitMod.CONFIG.initialCharge());
+    setCanPickUpLoot(false);
+  }
+
+  /** Built without the tier numbers, because attributes are registered before the config loads. */
+  public static AttributeSupplier.Builder createAttributes() {
+    return Mob.createMobAttributes();
+  }
+
+  public void placedBy(Player player, RobotState state) {
+    ownerId = player.getUUID();
+    tier = state.tier();
+    TierSpec spec = spec();
+    battery = state.batteryFor(spec);
+    getAttribute(Attributes.MAX_HEALTH).setBaseValue(spec.maxHealth());
+    setHealth(state.healthFor(spec));
+    setPersistenceRequired();
+
+    FollowingOutcome outcome = policy().onArrival(getUUID(), follower(player), battery);
+    powerState = outcome.state();
+    player.setData(CubitAttachments.FOLLOWING_ROBOT, new FollowingRobotLink(outcome.follower()));
+  }
+
+  public RobotState state() {
+    return new RobotState(tier, battery.charge(), getHealth());
+  }
+
+  public PowerState powerState() {
+    return powerState;
+  }
+
+  public Optional<UUID> ownerId() {
+    return Optional.ofNullable(ownerId);
+  }
+
+  @Override
+  protected InteractionResult mobInteract(Player player, InteractionHand hand) {
+    if (hand != InteractionHand.MAIN_HAND) {
+      return InteractionResult.PASS;
+    }
+    if (level().isClientSide()) {
+      return InteractionResult.SUCCESS;
+    }
+    if (!player.getUUID().equals(ownerId)) {
+      return InteractionResult.PASS;
+    }
+    return player.isShiftKeyDown() ? collectBy(player) : turnOnBy(player);
+  }
+
+  private InteractionResult collectBy(Player player) {
+    ItemStack stack = new ItemStack(item.get());
+    stack.set(CubitDataComponents.ROBOT_STATE.get(), state());
+    player.setData(
+        CubitAttachments.FOLLOWING_ROBOT,
+        new FollowingRobotLink(policy().release(getUUID(), follower(player))));
+    discard();
+    // Drops the item at the player's feet when the inventory is full, so the robot is never lost.
+    player.getInventory().placeItemBackInInventory(stack);
+    return InteractionResult.CONSUME;
+  }
+
+  private InteractionResult turnOnBy(Player player) {
+    FollowingOutcome outcome = policy().onTurnOn(getUUID(), follower(player), powerState, battery);
+    if (outcome.state() == powerState) {
+      return InteractionResult.PASS;
+    }
+    powerState = outcome.state();
+    player.setData(CubitAttachments.FOLLOWING_ROBOT, new FollowingRobotLink(outcome.follower()));
+    outcome.robotToSwitchOff().ifPresent(this::switchOff);
+    return InteractionResult.CONSUME;
+  }
+
+  private void switchOff(UUID robotId) {
+    MinecraftServer server = getServer();
+    if (server == null) {
+      return;
+    }
+    for (ServerLevel loadedLevel : server.getAllLevels()) {
+      if (loadedLevel.getEntity(robotId) instanceof RobotEntity robot) {
+        robot.powerState = PowerState.INACTIVE_SWITCHED_OFF;
+        return;
+      }
+    }
+  }
+
+  @Override
+  public void addAdditionalSaveData(CompoundTag tag) {
+    super.addAdditionalSaveData(tag);
+    if (ownerId != null) {
+      tag.putUUID(OWNER_KEY, ownerId);
+    }
+    tag.putString(TIER_KEY, tier.key());
+    tag.putLong(ENERGY_KEY, battery.charge().amount());
+    tag.putString(POWER_STATE_KEY, powerState.name());
+  }
+
+  @Override
+  public void readAdditionalSaveData(CompoundTag tag) {
+    super.readAdditionalSaveData(tag);
+    ownerId = tag.hasUUID(OWNER_KEY) ? tag.getUUID(OWNER_KEY) : null;
+    if (ownerId == null) {
+      LOGGER.warn(NO_OWNER_MESSAGE, getUUID());
+    }
+    tier = readTier(tag.getString(TIER_KEY));
+    Energy energy = new Energy(Math.max(tag.getLong(ENERGY_KEY), 0));
+    battery = new RobotState(tier, energy, getHealth()).batteryFor(spec());
+    powerState = readPowerState(tag.getString(POWER_STATE_KEY));
+  }
+
+  private RobotTier readTier(String key) {
+    return RobotTier.fromKey(key)
+        .orElseGet(() -> {
+          LOGGER.warn(INVALID_DATA_MESSAGE, getUUID(), TIER_KEY, key);
+          return RobotTier.BASE;
+        });
+  }
+
+  private PowerState readPowerState(String name) {
+    return Arrays.stream(PowerState.values())
+        .filter(state -> state.name().equals(name))
+        .findFirst()
+        .orElseGet(() -> {
+          LOGGER.warn(INVALID_DATA_MESSAGE, getUUID(), POWER_STATE_KEY, name);
+          return PowerState.INACTIVE_SWITCHED_OFF;
+        });
+  }
+
+  @Override
+  public boolean removeWhenFarAway(double distanceToClosestPlayer) {
+    return false;
+  }
+
+  @Override
+  public boolean canBeLeashed() {
+    return false;
+  }
+
+  @Override
+  public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {}
+
+  @Override
+  public AnimatableInstanceCache getAnimatableInstanceCache() {
+    return animationCache;
+  }
+
+  private TierSpec spec() {
+    return CubitMod.CONFIG.tierCatalog().spec(robotType, tier);
+  }
+
+  private static FollowingRobotPolicy policy() {
+    return new FollowingRobotPolicy(CubitMod.CONFIG.powerRules());
+  }
+
+  private static Optional<UUID> follower(Player player) {
+    return player.getData(CubitAttachments.FOLLOWING_ROBOT).robot();
+  }
+}

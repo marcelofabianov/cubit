@@ -13,6 +13,7 @@ As chaves ficam em `snake_case`. As de um robô ficam em `[{tipo}.{tier}]`, como
 | Seção | Chave | Linha em `tiers.md` | Limites |
 |---|---|---|---|
 | `general` | `initial_charge_percent` | Carga do Cubit ao sair do craft | 0 a 100 |
+| `general` | `wake_charge_percent` | Religar | 0 a 100 |
 | `general_robot.base` | `battery_capacity` | Bateria | 1 a 2147483647 |
 | `general_robot.base` | `moving_consumption_per_tick` | Consumo em movimento | 0 a 2147483647 |
 | `general_robot.base` | `recharge_per_tick` | Recarga na base e pelo slot de energia | 1 a 2147483647 |
@@ -42,4 +43,5 @@ O mod não cai por causa do config (regra 17 do `AGENTS.md`):
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 19:24 | Adiciona a carga para religar. |
 | Marcelo Fabiano | 2026-11-04 19:08 | Documenta as chaves, os limites e o tratamento de valor inválido. |

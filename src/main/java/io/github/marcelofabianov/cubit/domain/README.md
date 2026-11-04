@@ -12,7 +12,8 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 | `PowerState` | Estado do robô |
 | `PowerRules` | Regras que mudam o estado por causa da energia |
 | `RobotType` | Tipo de robô, como o de uso geral. É um dado, identificado por um ID |
-| `RobotTier` | Nível de evolução: Base, Advanced, Elite e Ultimate |
+| `RobotTier` | Nível de evolução: Base, Advanced, Elite e Ultimate. A `key` é o nome usado no config e nos saves |
+| `RobotState` | O que o robô guarda ao virar item: tier, energia e vida |
 | `TierSpec` | Números de um tipo de robô num tier |
 | `TierCatalog` | Entrega o `TierSpec` de um tipo de robô num tier. O domínio define a interface, e o config a implementa |
 | `FollowAction` | O que o robô que segue faz: seguir, parar ou teleportar |
@@ -28,6 +29,7 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 
 - **Tipo de robô é dado:** as regras recebem os números de um `TierSpec`, sem saber qual é o robô. Assim, um robô novo não muda as regras (regra 39 do `AGENTS.md`).
 - **Upgrade:** as regras de evolução entre tiers entram na Fase 4, junto dos módulos.
+- **Estado guardado se ajusta ao config:** o config pode mudar enquanto o robô está no item, então `batteryFor` e `healthFor` limitam os valores ao `TierSpec` atual. A vida nunca fica abaixo de 1, porque um robô colocado sem vida morreria na hora.
 
 - **Só o ativo se move:** inativo ou em hibernação, o robô para e não teleporta. Em outra dimensão também para, porque o teleporte só vale na mesma dimensão.
 - **Distância inválida:** o robô para. É o estado mais restritivo, e o jogo não cai por isso (regra 17 do `AGENTS.md`).
@@ -53,6 +55,7 @@ O desligamento pelo controle remoto (pergunta 56) entra na Fase 4, junto do cont
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 19:31 | Documenta o estado do robô e a chave do tier. |
 | Marcelo Fabiano | 2026-11-04 19:12 | Documenta o catálogo de tiers. |
 | Marcelo Fabiano | 2026-11-04 18:58 | Documenta o movimento e o robô que segue. |
 | Marcelo Fabiano | 2026-11-04 18:18 | Documenta o tipo de robô e o tier. |

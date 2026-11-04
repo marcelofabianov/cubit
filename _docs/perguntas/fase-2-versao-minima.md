@@ -56,6 +56,9 @@ Não há perguntas pendentes nesta fase.
 | 104 | Qual é o formato das chaves do config? | Por tipo e tier, em `snake_case`: `[general_robot.base]`, com os valores gerais em `[general]`. Os detalhes estão em [`config.md`](../desenvolvimento/config.md) |
 | 105 | De qual classe do Minecraft a `RobotEntity` herda? | `PathfinderMob`, com o dono num UUID próprio |
 | 106 | Quando entram as GameTests e os gates de datagen e `runServer`? | Já na etapa "Cubit no mundo", e a primeira GameTest prova que uma reprovação faz o `make gametest` falhar |
+| 108 | Como salvar o estado do Cubit como item? | Num componente único, `cubit:robot_state`, com tier, energia e vida. Os próximos dados entram como campos opcionais. O tipo do robô vem do próprio item |
+| 109 | Quem é o dono de um Cubit? | Quem o coloca. O item não guarda o dono, e o robô ganha um UUID novo a cada colocação |
+| 110 | Em que aba do criativo o Cubit aparece, e colocar no criativo gasta o item? | Numa aba própria, `cubit:main`. Colocar sempre gasta o item, porque ele carrega o estado do robô |
 
 ### Premissas aprovadas
 
@@ -71,6 +74,7 @@ Não há perguntas pendentes nesta fase.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 19:24 | Registra as respostas 108, 109 e 110. |
 | Marcelo Fabiano | 2026-11-04 19:05 | Registra as respostas 103, 104, 105 e 106. |
 | Marcelo Fabiano | 2026-11-04 18:50 | Registra as respostas 100, 101 e 102. |
 | Marcelo Fabiano | 2026-11-04 18:24 | Registra a resposta 99. |
