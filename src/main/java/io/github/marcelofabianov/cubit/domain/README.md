@@ -14,6 +14,7 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 | `RobotType` | Tipo de robô, como o de uso geral. É um dado, identificado por um ID |
 | `RobotTier` | Nível de evolução: Base, Advanced, Elite e Ultimate |
 | `TierSpec` | Números de um tipo de robô num tier |
+| `TierCatalog` | Entrega o `TierSpec` de um tipo de robô num tier. O domínio define a interface, e o config a implementa |
 | `FollowAction` | O que o robô que segue faz: seguir, parar ou teleportar |
 | `FollowDecision` | Escolhe a `FollowAction` conforme o estado, a dimensão e a distância |
 | `FollowingRobotPolicy` | Garante que só um robô siga o player |
@@ -52,6 +53,7 @@ O desligamento pelo controle remoto (pergunta 56) entra na Fase 4, junto do cont
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 19:12 | Documenta o catálogo de tiers. |
 | Marcelo Fabiano | 2026-11-04 18:58 | Documenta o movimento e o robô que segue. |
 | Marcelo Fabiano | 2026-11-04 18:18 | Documenta o tipo de robô e o tier. |
 | Marcelo Fabiano | 2026-11-04 18:00 | Documenta a energia e os estados do domínio. |

@@ -1,0 +1,45 @@
+# Config
+
+O config do Cubit é um contrato com o pack (pilar Contrato externo): as chaves abaixo não mudam sem migração (regra 18 do `AGENTS.md`).
+
+- **Arquivo:** `config/cubit-common.toml`, do tipo `COMMON`, para o packwiz poder distribuí-lo.
+- **Valores padrão:** são os de [`tiers.md`](../tiers.md), a única página com os números de balanceamento.
+- **Crescimento:** uma chave entra junto com o código que a lê. Por enquanto, só existem os valores do tier Base (pergunta 39).
+
+## Chaves
+
+As chaves ficam em `snake_case`. As de um robô ficam em `[{tipo}.{tier}]`, como `[general_robot.base]`, porque um robô novo não pode exigir migração (regra 41 do `AGENTS.md`).
+
+| Seção | Chave | Linha em `tiers.md` | Limites |
+|---|---|---|---|
+| `general` | `initial_charge_percent` | Carga do Cubit ao sair do craft | 0 a 100 |
+| `general_robot.base` | `battery_capacity` | Bateria | 1 a 2147483647 |
+| `general_robot.base` | `moving_consumption_per_tick` | Consumo em movimento | 0 a 2147483647 |
+| `general_robot.base` | `recharge_per_tick` | Recarga na base e pelo slot de energia | 1 a 2147483647 |
+| `general_robot.base` | `inventory_slots` | Inventário | 1 a 54 |
+| `general_robot.base` | `max_health` | Vida | 1 a 1024 |
+| `general_robot.base` | `call_radius_blocks` | Raio do retorno automático e da chamada pelo Dock | 1 a 128 |
+
+## Por que esses limites
+
+- **Energia até 2147483647:** é o maior valor de um `int`, o tipo usado pelas capabilities de FE do NeoForge.
+- **Inventário até 54:** é o tamanho do baú duplo, o maior que a tela padrão do jogo mostra.
+- **Vida até 1024:** é o máximo do atributo de vida do jogo.
+- **Raio até 128:** mantém a busca limitada (regra 21 do `AGENTS.md`).
+
+## Valor inválido
+
+O mod não cai por causa do config (regra 17 do `AGENTS.md`):
+
+| Situação | O que acontece |
+|---|---|
+| Número fora dos limites | O NeoForge usa o limite mais próximo e registra no log |
+| Chave ausente ou valor que não é número | O NeoForge volta ao padrão da chave e registra no log |
+| Tier sem seção no config | O `TierCatalog` usa o tier Base do robô e registra no log uma vez |
+| Tipo de robô sem seção | Erro de programação, então o `TierCatalog` lança uma exceção |
+
+## Histórico de modificações
+
+| Pessoa | Data e hora | Modificação |
+|---|---|---|
+| Marcelo Fabiano | 2026-11-04 19:08 | Documenta as chaves, os limites e o tratamento de valor inválido. |

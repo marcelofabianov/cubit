@@ -34,6 +34,7 @@ Mod próprio do **Iron Meridian** (Minecraft 1.21.1, NeoForge). Adiciona o **Cub
 | Pilares de desenvolvimento | [`_docs/desenvolvimento/pilares.md`](_docs/desenvolvimento/pilares.md) |
 | Fluxo de trabalho | [`_docs/desenvolvimento/fluxo-de-trabalho.md`](_docs/desenvolvimento/fluxo-de-trabalho.md) |
 | Ferramentas de build e comandos | [`_docs/desenvolvimento/ferramentas-de-build.md`](_docs/desenvolvimento/ferramentas-de-build.md) |
+| Chaves e limites do config | [`_docs/desenvolvimento/config.md`](_docs/desenvolvimento/config.md) |
 | Git hooks | [`_docs/desenvolvimento/hooks-do-git.md`](_docs/desenvolvimento/hooks-do-git.md) |
 
 Os números ficam em `_docs/tiers.md`. As outras páginas apontam para lá, e o `README.md` traz só um resumo.
@@ -53,6 +54,7 @@ O robô atual é de uso geral e o primeiro do mod. No futuro, o mod pode ter vá
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 19:08 | Adiciona o config ao mapa dos documentos. |
 | Marcelo Fabiano | 2026-11-04 17:51 | Adiciona os pilares ao mapa dos documentos. |
 | Marcelo Fabiano | 2026-11-04 17:44 | Marca a Fase 2 como atual. |
 | Marcelo Fabiano | 2026-11-04 17:26 | Atualiza a fase 2 e a regra dos números. |
