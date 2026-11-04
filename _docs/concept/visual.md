@@ -21,13 +21,13 @@ As imagens individuais estão em [`_docs/assets/concept/`](../assets/concept/), 
 
 ## Expressões
 
-- **Definidas nas features:** feliz, com sono (bateria baixa), alerta (inimigo) e surpreso (minério raro).
+- **Definidas nas features:** feliz (interação do player), com sono (bateria baixa), alerta (inimigo) e surpreso (minério raro).
 - **Só no conceito, a confirmar:** normal, carregando e desligado.
 
 ## Sons
 
 - Um som em loop para as **esteiras**, acompanhando a velocidade.
-- Sons curtos de alerta para **inimigos** e **minérios raros** (de ferro para cima), com intervalo mínimo entre repetições.
+- Bipes curtos de alerta para **inimigos** e **minérios raros** (de ferro para cima), com intervalo mínimo entre repetições.
 
 ## Identificação
 

@@ -21,11 +21,24 @@
 - **Raio da estação de carga:** confirmar se o raio do retorno automático deve mesmo crescer por tier.
 - **Modelo próprio:** criar o design final a partir das referências, sem copiar um robô existente.
 - **Expressões:** confirmar normal, carregando e desligado, que só aparecem no conceito.
-- **Persona:** perguntas em [`persona.md`](concept/persona.md).
 - **Sobreposição com o Mekanism:** até onde sei, o Robit do Mekanism também segue o player, carrega itens e recarrega numa estação. A regra 3 do pack proíbe mod que repete a função de outro, então é preciso confirmar se o Cubit entra como exceção.
 - **Licença:** ainda não definida.
 - **Primeira versão:** recomendação ainda não aprovada de começar em `0.1.0` e só lançar a `1.0.0` com o mod completo.
 - **Proteção de branches:** recomendação ainda não aprovada de proteger `main`, `homolog` e `develop` no GitHub, se o plano da conta permitir em repositório privado.
+
+## Persona
+
+Definido em [`persona.md`](concept/persona.md): leal e protetor, comunicação só com bipes, feliz quando o player interage, e nunca ataca o dono nem mobs pacíficos.
+
+Recomendações **ainda não aprovadas**:
+
+| Tema | Lacuna | Recomendação |
+|---|---|---|
+| Ficar sem bateria | A resposta foi "feliz" para as reações, mas ficar sem bateria não é uma interação, e já existem as expressões de sono e desligado | Manter sono com a bateria baixa e tela apagada ao desligar; a expressão feliz vale para renomear, pintar e receber upgrade |
+| Mensagens do sistema | "Só bipes" impede o Cubit de falar, mas telas, tooltips e avisos, como recusar um segundo robô, usam texto | A regra vale para o Cubit como personagem. Interface e avisos do mod continuam com texto em inglês |
+| Bipe nas reações | Não está definido se feliz e sono têm bipe próprio. A tabela assume bipe no feliz | Bipe curto no feliz, e nenhum no sono, para não incomodar |
+| Mobs neutros | Lobos, abelhas e golens não são pacíficos nem sempre hostis | Só atacar mob neutro quando ele estiver hostil ao dono ou ao Cubit |
+| Animais de outros players | Não está definido se contam como pacíficos | Tratar como pacíficos |
 
 ## Power Bank
 
