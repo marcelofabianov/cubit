@@ -56,12 +56,14 @@ Não há perguntas pendentes nesta fase.
 | 89 | Os scripts e hooks ficam em inglês? | Arquivos de programação, como `.sh`, ficam em inglês. Ficam em português os arquivos de conteúdo |
 | 90 | Com robôs especializados no futuro, qual é o ID do robô atual? | `cubit:general_robot`. Cubit continua como nome do mod e da família |
 | 91 | Como preparar o projeto para outros robôs? | Nada pode ficar fixo de forma que comprometa a flexibilidade do projeto. As regras 39 a 43 do `AGENTS.md` detalham isso |
+| 121 | Quais perguntas ficam registradas em `.md`? | Todas as que o desenvolvedor responder, conforme a regra 47 do `AGENTS.md` |
 | 107 | O template de pull request segue a regra de nome em português? | Não. `pull_request_template.md` mantém o nome, porque o GitHub só reconhece esse nome. O histórico dele fica num comentário HTML, para não aparecer nos PRs |
 
 ## Histórico de modificações
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 20:41 | Registra a resposta 121. |
 | Marcelo Fabiano | 2026-11-04 19:14 | Registra a resposta 107. |
 | Marcelo Fabiano | 2026-11-04 17:26 | Reordena a resposta 89. |
 | Marcelo Fabiano | 2026-11-04 17:16 | Registra as respostas 90 e 91. |
