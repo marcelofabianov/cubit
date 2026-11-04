@@ -1,5 +1,9 @@
 # Cubit
 
+<p align="center">
+  <img src="_docs/assets/concept/png/expressao-feliz.png" alt="Cubit with a happy expression" width="240">
+</p>
+
 A cute, battery-powered robot companion for Minecraft 1.21.1 on NeoForge, built for the [Iron Meridian](https://github.com/marcelofabianov/iron-meridian) modpack. No magic: Cubit is pure technology, crafted from vanilla resources.
 
 > **Status: design stage.** There is no code or release yet. All features and numbers below are planned, and the numbers are starting points for balancing.

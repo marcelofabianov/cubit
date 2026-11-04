@@ -1,29 +1,35 @@
 # Persona do Cubit
 
-> **Rascunho.** Este arquivo só reúne o que já foi definido. A personalidade em si ainda precisa ser escrita.
+O Cubit é um companheiro **tecnológico, sem magia**, moderno, fofo e doce, que ajuda o player em tarefas simples.
 
-## O que já está definido
+## Temperamento
 
-- O Cubit é um companheiro **tecnológico, sem magia**, moderno, fofo e doce.
-- Ele demonstra personalidade pela **tela do rosto**, que muda de expressão, e pelos **sons**.
-- Ele ajuda o player em tarefas simples.
+**Leal e protetor.** O Cubit acompanha o dono e cuida dele. No tier Base, que não tem choque, ele protege avisando sobre o perigo.
 
-## Reações definidas
+## Comunicação
+
+**Somente com bipes.** O Cubit não fala nem escreve, e demonstra o que sente pela expressão na tela do rosto e pelos bipes.
+
+## Reações
 
 | Situação | Expressão | Som |
 |---|---|---|
+| Player interage com o Cubit, de qualquer forma | Feliz | Bipe |
+| Renomeado | Feliz | Bipe |
+| Pintado | Feliz | Bipe |
+| Recebe um upgrade | Feliz | Bipe |
 | Bateria baixa | Sono | — |
-| Inimigo por perto | Alerta | Alerta de inimigo |
-| Minério raro encontrado | Surpreso | Alerta de minério |
-| Andando | — | Esteiras |
+| Inimigo por perto | Alerta | Bipe de alerta de inimigo |
+| Minério raro encontrado | Surpreso | Bipe de alerta de minério |
 
-A expressão feliz existe, mas ainda não tem um gatilho definido.
+O barulho das esteiras ao andar é um efeito do movimento, não uma forma de comunicação.
 
-## Perguntas em aberto
+## Limites
 
-1. **Temperamento:** ele é mais curioso, tímido, animado ou leal e protetor?
-2. **Comunicação:** só bipes e expressões, ou também texto curto na tela e no chat?
-3. **Reações:** como ele reage a ser renomeado, ser pintado, ganhar um upgrade ou ficar sem bateria?
-4. **Limites:** o que ele nunca faz?
+O Cubit **nunca ataca o próprio dono nem mobs pacíficos**, em nenhum modo de defesa. As consequências para o combate estão em [`combat.md`](../features/combat.md#quem-o-cubit-nunca-ataca).
 
-Qualquer texto que apareça no jogo fica em inglês.
+## Em aberto
+
+- **Ficar sem bateria:** em [`decisions.md`](../decisions.md#persona).
+- **Mensagens do sistema:** em [`decisions.md`](../decisions.md#persona).
+- **Bipe nas reações felizes e de sono:** em [`decisions.md`](../decisions.md#persona).
