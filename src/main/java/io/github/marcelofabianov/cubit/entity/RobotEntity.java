@@ -23,15 +23,18 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.control.JumpControl;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.pathfinder.PathType;
 import org.slf4j.Logger;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
@@ -47,6 +50,10 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity {
   private static final String POWER_STATE_KEY = "PowerState";
   private static final String INVALID_DATA_MESSAGE = "Robot {} has an invalid {}: {}";
   private static final String NO_OWNER_MESSAGE = "Robot {} has no owner. Nobody can interact.";
+  private static final double ONE_BLOCK_STEP = 1;
+  private static final int FOLLOW_GOAL_PRIORITY = 1;
+  private static final float BLOCKED_ROUTE = -1f;
+  private static final float OPEN_ROUTE = 0f;
 
   private final RobotType robotType;
   private final Supplier<Item> item;
@@ -66,12 +73,27 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity {
     this.robotType = robotType;
     this.item = item;
     this.battery = spec().newBattery(CubitMod.CONFIG.initialCharge());
+    this.jumpControl =
+        new JumpControl(this) {
+          // Tracks do not jump: the robot only climbs one block at a time, by its step height.
+          @Override
+          public void jump() {}
+        };
     setCanPickUpLoot(false);
+    setPathfindingMalus(PathType.WATER, BLOCKED_ROUTE);
+  }
+
+  @Override
+  protected void registerGoals() {
+    goalSelector.addGoal(
+        FOLLOW_GOAL_PRIORITY,
+        new FollowOwnerGoal(
+            this, CubitMod.CONFIG.followDecision(), CubitMod.CONFIG.followRepathTicks()));
   }
 
   /** Built without the tier numbers, because attributes are registered before the config loads. */
   public static AttributeSupplier.Builder createAttributes() {
-    return Mob.createMobAttributes();
+    return Mob.createMobAttributes().add(Attributes.STEP_HEIGHT, ONE_BLOCK_STEP);
   }
 
   public void placedBy(Player player, RobotState state) {
@@ -79,13 +101,22 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity {
     tier = state.tier();
     TierSpec spec = spec();
     battery = state.batteryFor(spec);
-    getAttribute(Attributes.MAX_HEALTH).setBaseValue(spec.maxHealth());
+    applyConfigAttributes();
     setHealth(state.healthFor(spec));
     setPersistenceRequired();
 
     FollowingOutcome outcome = policy().onArrival(getUUID(), follower(player), battery);
     powerState = outcome.state();
     player.setData(CubitAttachments.FOLLOWING_ROBOT, new FollowingRobotLink(outcome.follower()));
+  }
+
+  /** The player this robot follows right now, when that player is online. */
+  Player followedPlayer() {
+    Player owner = onlineOwner();
+    if (owner == null || !follower(owner).filter(getUUID()::equals).isPresent()) {
+      return null;
+    }
+    return owner;
   }
 
   public RobotState state() {
@@ -151,6 +182,47 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity {
   }
 
   @Override
+  protected void customServerAiStep() {
+    super.customServerAiStep();
+    // Only a robot already in the water may route through it, so it can walk on the bottom.
+    setPathfindingMalus(PathType.WATER, isInWater() ? OPEN_ROUTE : BLOCKED_ROUTE);
+    if (tickCount % CubitMod.CONFIG.followRepathTicks() == 0) {
+      switchOffIfReplaced();
+    }
+  }
+
+  /** A robot in an unloaded chunk misses the swap, so it finds out when it loads again. */
+  private void switchOffIfReplaced() {
+    Player owner = onlineOwner();
+    if (powerState == PowerState.ACTIVE
+        && owner != null
+        && policy().otherRobotFollows(getUUID(), follower(owner))) {
+      powerState = PowerState.INACTIVE_SWITCHED_OFF;
+      getNavigation().stop();
+    }
+  }
+
+  private Player onlineOwner() {
+    MinecraftServer server = getServer();
+    return server == null || ownerId == null ? null : server.getPlayerList().getPlayer(ownerId);
+  }
+
+  /** Applied again on load, so a config change reaches the robots already in the world. */
+  private void applyConfigAttributes() {
+    TierSpec spec = spec();
+    getAttribute(Attributes.MAX_HEALTH).setBaseValue(spec.maxHealth());
+    getAttribute(Attributes.MOVEMENT_SPEED)
+        .setBaseValue(CubitMod.CONFIG.baseMovementSpeed() * spec.speedMultiplier());
+    getAttribute(Attributes.FOLLOW_RANGE)
+        .setBaseValue(CubitMod.CONFIG.followDecision().teleportDistanceBlocks());
+  }
+
+  @Override
+  public boolean causeFallDamage(float distance, float multiplier, DamageSource source) {
+    return false;
+  }
+
+  @Override
   public void addAdditionalSaveData(CompoundTag tag) {
     super.addAdditionalSaveData(tag);
     if (ownerId != null) {
@@ -172,6 +244,7 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity {
     Energy energy = new Energy(Math.max(tag.getLong(ENERGY_KEY), 0));
     battery = new RobotState(tier, energy, getHealth()).batteryFor(spec());
     powerState = readPowerState(tag.getString(POWER_STATE_KEY));
+    applyConfigAttributes();
   }
 
   private RobotTier readTier(String key) {
