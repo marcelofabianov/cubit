@@ -27,6 +27,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Proteção de branches:** o plano atual do GitHub não permite em repositório privado, então valem só os gates locais.
 - **Fonte da verdade:** as respostas em `perguntas/` prevalecem sobre os outros documentos.
 - **Pilares:** as decisões técnicas seguem a hierarquia de [`pilares.md`](desenvolvimento/pilares.md).
+- **Registro de perguntas:** toda pergunta respondida pelo desenvolvedor entra em `perguntas/` antes do próximo passo.
 - **Validação:** toda entrega é conferida contra os documentos `.md`, e artefatos complementam essa conferência.
 - **Config e testes na Fase 2:** o config entra antes da entidade e cresce a cada etapa. As GameTests e o gate de datagen entram na etapa "Cubit no mundo".
 - **Gates de push:** as GameTests também detectam classe de cliente carregada no servidor, sem exigir o EULA, então o `runServer` não é um gate. O datagen reprova se `src/generated` ficar diferente do Git.
@@ -41,7 +42,9 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Config:** `COMMON`, com chaves em `snake_case` por tipo de robô e tier, como `[general_robot.base]`.
 - **Entidade:** a `RobotEntity` herda de `PathfinderMob`, com o dono num UUID próprio.
 - **Estado como item:** um único componente, `cubit:robot_state`.
-- **Dono:** quem coloca o robô. O item não guarda o dono.
+- **Dono:** quem coloca o robô. O item não guarda o dono. Nenhum dano atribuído a ele fere o robô.
+- **Fogo:** o robô ativo em chamas anda ao acaso, evita perigos e busca água.
+- **Morte:** o item que cai não queima nem some com o tempo.
 - **Movimento:** velocidade de referência de 0,3. Na água, o robô afunda e anda no fundo, sem se afogar. Na lava, leva dano igual ao do player. Não há dano de queda. O som de esteira entra na Fase 3.
 - **Criativo:** aba própria, `cubit:main`, e colocar sempre gasta o item.
 - **Estados:** ativo (ligado), inativo (desligado) e hibernação (na base, com o inventário e os slots acessíveis).
@@ -57,6 +60,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 20:41 | Registra o fogo, a morte e o registro de perguntas. |
 | Marcelo Fabiano | 2026-11-04 20:31 | Registra o dano na lava. |
 | Marcelo Fabiano | 2026-11-04 20:09 | Registra as decisões de movimento. |
 | Marcelo Fabiano | 2026-11-04 19:56 | Registra os gates de GameTests e datagen no push. |
