@@ -19,10 +19,11 @@ Os comandos ficam no `Makefile`. Rode `make` para ver a lista.
 | `make client` | Abre o jogo com o mod |
 | `make server` | Inicia um servidor dedicado com o mod |
 | `make data` | Roda a geração de dados e confirma que o mod carrega |
+| `make check-generated` | Roda a geração de dados e reprova se `src/generated` mudar |
 | `make gametest` | Roda os GameTests num servidor sem interface |
 | `make stop` | Para os daemons do Gradle |
 
-**`make gametest`:** uma GameTest reprovada faz o comando falhar, como foi conferido com a primeira delas. O servidor roda em `run/gametest/`, separado do `run/` do `make client`, para um config editado à mão não mudar o resultado. Num diretório novo, o log mostra um erro por falta do `server.properties`, que o jogo cria em seguida.
+**`make gametest`:** o jogo termina com sucesso mesmo quando o mod falha ao carregar, então `scripts/development/run-gametests.sh` só aprova se o log trouxer `All N required tests passed`. Foi conferido que o comando falha com uma GameTest reprovada e com uma classe de cliente no código comum. O `pre-push` também o roda, e o log fica em `build/gametest.log`. O servidor roda em `run/gametest/`, separado do `run/` do `make client`, para um config editado à mão não mudar o resultado. Num diretório novo, o log mostra um erro por falta do `server.properties`, que o jogo cria em seguida.
 
 **GameTests:** ficam no pacote `gametest`, e cobrem o que está fora de `domain/` (regra 34 do `AGENTS.md`). O teste usa a estrutura vazia `data/cubit/structure/empty.nbt`.
 
@@ -65,7 +66,7 @@ As bibliotecas de teste vêm só do Maven Central, para o build não depender do
 - **`jacocoTestCoverageVerification`:** faltam testes no domínio. Abra `build/reports/jacoco/test/html/index.html` para ver o que falta.
 - **`spotlessJavaCheck`:** o código não está formatado. Rode `make format`.
 - **`checkstyleMain` ou `checkstyleTest`:** uma regra de forma do código foi violada. Corrija a causa, sem suprimir a regra.
-- **`runGameTestServer`:** uma GameTest reprovou. O nome dela e o motivo aparecem no fim do log, depois de `GAME TESTS COMPLETE`.
+- **`make gametest`:** uma GameTest reprovou, e o nome dela e o motivo aparecem em `build/gametest.log`, depois de `GAME TESTS COMPLETE`. Se esse trecho não existir, o mod não carregou. Com `invalid dist` no log, código comum referenciou uma classe de cliente.
 - **`createMinecraftArtifacts`:** a preparação do Minecraft falhou. Rode com `--info` para ler o erro.
 - **`release version 21 not supported`:** o Gradle usou um Java sem o pacote de desenvolvimento. Confira se `gradle/gradle-daemon-jvm.properties` existe e rode `make stop`.
 
@@ -73,6 +74,7 @@ As bibliotecas de teste vêm só do Maven Central, para o build não depender do
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 19:56 | Adiciona o comando que confere os arquivos gerados. |
 | Marcelo Fabiano | 2026-11-04 19:12 | Registra que uma GameTest reprovada faz o comando falhar e como as GameTests rodam. |
 | Marcelo Fabiano | 2026-11-04 18:24 | Estende as regras de literais aos testes. |
 | Marcelo Fabiano | 2026-11-04 18:20 | Adiciona a regra de string literal. |

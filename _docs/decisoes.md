@@ -28,7 +28,8 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Fonte da verdade:** as respostas em `perguntas/` prevalecem sobre os outros documentos.
 - **Pilares:** as decisões técnicas seguem a hierarquia de [`pilares.md`](desenvolvimento/pilares.md).
 - **Validação:** toda entrega é conferida contra os documentos `.md`, e artefatos complementam essa conferência.
-- **Config e testes na Fase 2:** o config entra antes da entidade e cresce a cada etapa. As GameTests e os gates de datagen e `runServer` entram na etapa "Cubit no mundo".
+- **Config e testes na Fase 2:** o config entra antes da entidade e cresce a cada etapa. As GameTests e o gate de datagen entram na etapa "Cubit no mundo".
+- **Gates de push:** as GameTests também detectam classe de cliente carregada no servidor, sem exigir o EULA, então o `runServer` não é um gate. O datagen reprova se `src/generated` ficar diferente do Git.
 
 ## Mod
 
@@ -55,6 +56,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 19:56 | Registra os gates de GameTests e datagen no push. |
 | Marcelo Fabiano | 2026-11-04 19:24 | Registra o estado como item, o dono e o criativo. |
 | Marcelo Fabiano | 2026-11-04 19:05 | Registra o config, a entidade e o momento das GameTests. |
 | Marcelo Fabiano | 2026-11-04 18:50 | Registra as regras do robô que segue sem bateria e ao sair da base. |

@@ -23,6 +23,8 @@ O script baixa o gitleaks para `.tools/`, confere o checksum e aponta o `core.ho
 | `commit-msg` | Mensagem | Título fora do Conventional Commits |
 | `commit-msg` | Autoria | Coautoria ou atribuição a uma IA. Citar uma ferramenta de IA como assunto da mudança é permitido |
 | `pre-push` | Build | Compilação, testes, arquitetura, cobertura, formatação ou análise estática reprovados, por meio de `./gradlew check` |
+| `pre-push` | GameTests | GameTest reprovada, ou mod que não carrega no servidor, como com uma classe de cliente, por meio de `scripts/development/run-gametests.sh` |
+| `pre-push` | Datagen | `src/generated` diferente do que a geração produz, por meio de `scripts/development/check-generated.sh` |
 
 Os hooks rodam só na máquina local. Eles não bloqueiam merges feitos pelo GitHub nem um push direto de outra máquina, e o plano atual do GitHub não permite proteger branches em repositório privado.
 
@@ -42,17 +44,20 @@ Os hooks rodam só na máquina local. Eles não bloqueiam merges feitos pelo Git
 - **Autoria:** remova a atribuição.
 - **gitleaks não encontrado:** rode `scripts/development/setup-dev.sh`.
 - **Build:** veja [`ferramentas-de-build.md`](ferramentas-de-build.md#quando-algo-reprova).
+- **GameTests:** veja [`ferramentas-de-build.md`](ferramentas-de-build.md#quando-algo-reprova). Se o log citar `invalid dist`, código comum referenciou uma classe de cliente: mova a referência para `client/`.
+- **Datagen:** se o `datagen/` mudou, rode `make data` e adicione `src/generated` ao commit. Se um arquivo gerado foi editado à mão, desfaça com `git restore src/generated` e leve a mudança para o `datagen/`, porque o cache da geração não sobrescreve a edição.
 
 Nunca use `--no-verify`.
 
-## Gates previstos
+## Por que o `runServer` não é um gate
 
-- **Push:** datagen e `runServer`, quando houver conteúdo para eles.
+Ele exigiria aceitar o EULA em cada clone. As GameTests usam o mesmo alvo de servidor dedicado (`forgeserverdev`) e reprovam igualmente uma classe de cliente carregada no servidor (pergunta 111).
 
 ## Histórico de modificações
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 19:56 | Ativa os gates de GameTests e datagen no push. |
 | Marcelo Fabiano | 2026-11-04 18:02 | Usa o Makefile na correção da formatação. |
 | Marcelo Fabiano | 2026-11-04 17:57 | Adiciona o gate de formatação. |
 | Marcelo Fabiano | 2026-11-04 17:44 | Adiciona o gate de push. |
