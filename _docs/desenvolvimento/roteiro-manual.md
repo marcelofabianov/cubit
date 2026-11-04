@@ -1,0 +1,42 @@
+# Roteiro manual
+
+O que está fora de `domain/` se cobre com GameTests e com este roteiro (regra 34 do `AGENTS.md`). Ele fica com o que uma GameTest não enxerga, como o visual e os cliques de verdade.
+
+## Preparar
+
+1. Rode `make client`.
+2. Crie um mundo novo, no modo criativo e com comandos ativos.
+
+## Colocar e recolher
+
+| # | Faça | Espere |
+|---|---|---|
+| 1 | Abra a aba **Cubit** do inventário criativo | A aba aparece com o ícone do robô, e o item se chama `Cubit` |
+| 2 | Olhe o item na hotbar | Barra verde com cerca de um quarto do tamanho (carga de 25%) |
+| 3 | Clique com o botão direito num bloco | O robô aparece em cima do bloco, de frente para você, e o item some da mão |
+| 4 | Olhe o robô | Carcaça clara, tela escura com dois olhos ciano na frente, colar cinza, duas antenas com ponta laranja, dois braços e duas esteiras |
+| 5 | Clique com o botão direito num bloco sem espaço acima, com outro item do Cubit | Nada acontece, e o item continua na mão |
+| 6 | Shift + botão direito no robô | O robô some, e o item volta com a mesma barra |
+| 7 | Coloque esse item de novo | O robô volta |
+
+## Vários robôs
+
+Para conferir o estado, use `/data get entity @e[type=cubit:general_robot,limit=1,sort=nearest] PowerState`.
+
+| # | Faça | Espere |
+|---|---|---|
+| 1 | Coloque um primeiro robô | `PowerState` é `ACTIVE` |
+| 2 | Coloque um segundo robô e confira perto dele | `PowerState` é `INACTIVE_SWITCHED_OFF` |
+| 3 | Botão direito no segundo robô e confira os dois | O segundo fica `ACTIVE`, e o primeiro, `INACTIVE_SWITCHED_OFF` |
+| 4 | Saia e entre de novo no mundo, e confira os dois | Os estados continuam os mesmos |
+
+## Servidor dedicado
+
+1. Rode `make server` e aceite o EULA em `run/eula.txt`, se ainda não tiver aceitado.
+2. Espere a mensagem `Done`, e confirme que o servidor abriu sem erro de classe de cliente.
+
+## Histórico de modificações
+
+| Pessoa | Data e hora | Modificação |
+|---|---|---|
+| Marcelo Fabiano | 2026-11-04 19:31 | Cria o roteiro de colocar e recolher o Cubit. |
