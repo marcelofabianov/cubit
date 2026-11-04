@@ -14,6 +14,10 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 | `RobotType` | Tipo de robô, como o de uso geral. É um dado, identificado por um ID |
 | `RobotTier` | Nível de evolução: Base, Advanced, Elite e Ultimate |
 | `TierSpec` | Números de um tipo de robô num tier |
+| `FollowAction` | O que o robô que segue faz: seguir, parar ou teleportar |
+| `FollowDecision` | Escolhe a `FollowAction` conforme o estado, a dimensão e a distância |
+| `FollowingRobotPolicy` | Garante que só um robô siga o player |
+| `FollowingOutcome` | Resultado da política: estado do robô, quem segue e quem desligar |
 
 ## Regras e porquês
 
@@ -23,6 +27,13 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 
 - **Tipo de robô é dado:** as regras recebem os números de um `TierSpec`, sem saber qual é o robô. Assim, um robô novo não muda as regras (regra 39 do `AGENTS.md`).
 - **Upgrade:** as regras de evolução entre tiers entram na Fase 4, junto dos módulos.
+
+- **Só o ativo se move:** inativo ou em hibernação, o robô para e não teleporta. Em outra dimensão também para, porque o teleporte só vale na mesma dimensão.
+- **Distância inválida:** o robô para. É o estado mais restritivo, e o jogo não cai por isso (regra 17 do `AGENTS.md`).
+- **Colocar e sair da base são a mesma regra:** o robô segue se nenhum outro estiver seguindo. Se houver outro, fica desligado, porque o clique direito só liga um robô desligado, e assim o player consegue fazê-lo seguir (perguntas 72, 75 e 102).
+- **Sem bateria, o vínculo continua:** o robô para e, ao religar, volta a seguir. Ligar outro robô o desliga, e ele deixa de religar sozinho (pergunta 101).
+- **Quem guarda o vínculo é quem chama:** a política recebe quem segue e devolve o resultado, sem ler os dados do player.
+- **Vínculo apontando para o próprio robô:** não conta como outro robô seguindo. Assim, um vínculo antigo não deixa o robô desligado.
 
 ## Estados
 
@@ -41,5 +52,6 @@ O desligamento pelo controle remoto (pergunta 56) entra na Fase 4, junto do cont
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 18:58 | Documenta o movimento e o robô que segue. |
 | Marcelo Fabiano | 2026-11-04 18:18 | Documenta o tipo de robô e o tier. |
 | Marcelo Fabiano | 2026-11-04 18:00 | Documenta a energia e os estados do domínio. |
