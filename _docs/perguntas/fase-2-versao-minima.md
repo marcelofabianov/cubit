@@ -52,6 +52,10 @@ Não há perguntas pendentes nesta fase.
 | 100 | A que distância do player o Cubit que segue para de andar? | 3 blocos, configurável, valor geral. Acima disso anda, e até 3 blocos para |
 | 101 | O Cubit que segue, sem bateria, continua sendo o robô que segue? E um Cubit colocado sem bateria, sem outro seguindo, assume o lugar? | Sim, nos dois casos. Ele fica parado, com o vínculo, e com 5% religa e volta a seguir. Se o player ligar outro, o sem bateria vira desligado e deixa de religar sozinho |
 | 102 | Um Cubit sai da base quando outro já assumiu o lugar de seguir. Em que estado ele fica? | Parado e desligado, igual à pergunta 71. O clique direito o liga, e ele passa a seguir, conforme a pergunta 75 |
+| 103 | Quando entram o config e o `TierCatalog`, já que colocar o Cubit no mundo exige números da regra 3? | Agora, num PR próprio, antes da entidade e só com os valores do Base. Cada etapa seguinte acrescenta as chaves que passar a ler |
+| 104 | Qual é o formato das chaves do config? | Por tipo e tier, em `snake_case`: `[general_robot.base]`, com os valores gerais em `[general]`. Os detalhes estão em [`config.md`](../desenvolvimento/config.md) |
+| 105 | De qual classe do Minecraft a `RobotEntity` herda? | `PathfinderMob`, com o dono num UUID próprio |
+| 106 | Quando entram as GameTests e os gates de datagen e `runServer`? | Já na etapa "Cubit no mundo", e a primeira GameTest prova que uma reprovação faz o `make gametest` falhar |
 
 ### Premissas aprovadas
 
@@ -67,6 +71,7 @@ Não há perguntas pendentes nesta fase.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 19:05 | Registra as respostas 103, 104, 105 e 106. |
 | Marcelo Fabiano | 2026-11-04 18:50 | Registra as respostas 100, 101 e 102. |
 | Marcelo Fabiano | 2026-11-04 18:24 | Registra a resposta 99. |
 | Marcelo Fabiano | 2026-11-04 18:20 | Registra a resposta 98 e a pergunta 99. |

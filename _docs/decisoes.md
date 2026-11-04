@@ -28,6 +28,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Fonte da verdade:** as respostas em `perguntas/` prevalecem sobre os outros documentos.
 - **Pilares:** as decisões técnicas seguem a hierarquia de [`pilares.md`](desenvolvimento/pilares.md).
 - **Validação:** toda entrega é conferida contra os documentos `.md`, e artefatos complementam essa conferência.
+- **Config e testes na Fase 2:** o config entra antes da entidade e cresce a cada etapa. As GameTests e os gates de datagen e `runServer` entram na etapa "Cubit no mundo".
 
 ## Mod
 
@@ -36,6 +37,8 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Quantidade:** o player pode ter quantos robôs preferir, mas só um o segue. Os outros podem trabalhar em áreas. O controle remoto e a base atendem todos os robôs ligados.
 - **Robô que segue sem bateria:** mantém o vínculo e volta a seguir ao religar. Se o player ligar outro, ele vira desligado.
 - **Saída da base com outro seguindo:** o robô fica parado e desligado, como ao ser colocado.
+- **Config:** `COMMON`, com chaves em `snake_case` por tipo de robô e tier, como `[general_robot.base]`.
+- **Entidade:** a `RobotEntity` herda de `PathfinderMob`, com o dono num UUID próprio.
 - **Estados:** ativo (ligado), inativo (desligado) e hibernação (na base, com o inventário e os slots acessíveis).
 - **Painel solar:** só funciona com o Cubit ativo, de dia em todos os tiers e à noite só em Elite e Ultimate. Coberto por um bloco, não carrega. O clima não tem efeito, e no Nether e no End não funciona. Fica abaixo do consumo.
 - **Induction Dock:** é a base de recarga, recebe energia por cabos ou redstone e tem um único slot, que também recarrega a Power Bank.
@@ -49,6 +52,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 19:05 | Registra o config, a entidade e o momento das GameTests. |
 | Marcelo Fabiano | 2026-11-04 18:50 | Registra as regras do robô que segue sem bateria e ao sair da base. |
 | Marcelo Fabiano | 2026-11-04 17:51 | Registra a adoção dos pilares. |
 | Marcelo Fabiano | 2026-11-04 17:44 | Encerra a Fase 1 e registra a regra de validação. |
