@@ -36,7 +36,7 @@ Ficam em `config/checkstyle/checkstyle.xml`.
 | Tamanho de função | 30 linhas | Regra 27 do `AGENTS.md` |
 | Complexidade ciclomática | 10 | Pilar Clareza |
 | Tamanho de arquivo | 400 linhas | Pilar Clareza |
-| Número mágico | Só -1, 0, 1 e 2 são livres | Regra 26 do `AGENTS.md` |
+| Número mágico | Só -1, 0, 1 e 2 são livres. Testes ficam de fora, porque os valores esperados vêm dos documentos | Regra 26 do `AGENTS.md` |
 | `TODO` | Só com issue: `TODO(#12)` | Regra 29 do `AGENTS.md` |
 | Imports | Sem `*` e sem import não usado | Pilar Clareza |
 
@@ -55,6 +55,7 @@ As bibliotecas de teste vêm só do Maven Central, para o build não depender do
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 18:00 | Registra a exceção de número mágico nos testes. |
 | Marcelo Fabiano | 2026-11-04 17:57 | Documenta o Spotless, o Checkstyle e as regras de forma do código. |
 | Marcelo Fabiano | 2026-11-04 17:48 | Sobe a cobertura mínima para 85%. |
 | Marcelo Fabiano | 2026-11-04 17:45 | Documenta as ferramentas de build e os comandos. |
