@@ -11,7 +11,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Licença:** MIT.
 - **Primeira versão:** `0.1.0`, com a `1.0.0` só com o mod completo.
 - **Etapa atual:** a Fase 1 é o conceito, feito em arquivos `.md`, sem código.
-- **Iron Meridian:** o Cubit entra como exceção à regra do pack contra funções repetidas, por causa do Robit do Mekanism. O registro no repositório do pack ainda não foi feito.
+- **Iron Meridian:** o Cubit entra como exceção à regra do pack contra funções repetidas, por causa do Robit do Mekanism. O registro está na issue `marcelofabianov/iron-meridian#2`.
 
 ## Idioma
 
@@ -39,12 +39,13 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Comunicação:** bipes e expressões, com poucos textos simples e diretos.
 - **Limites:** nunca ataca o dono nem mobs pacíficos. Só ataca mobs neutros para defender o player.
 - **Scanner:** `c:ores/*` significa a tag-mãe `c:ores` e suas subtags, porque tags não aceitam curinga.
-- **Estado do robô como item:** inclui as configurações, além de bateria, inventário, tier, nome e cor.
+- **Estado do robô como item:** inclui as configurações, além de bateria, vida, inventário, tier, nome e cor.
 
 ## Histórico de modificações
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 17:26 | Atualiza a exceção no pack e o estado do robô como item. |
 | Marcelo Fabiano | 2026-11-04 17:16 | Registra a flexibilidade para robôs especializados. |
 | Marcelo Fabiano | 2026-11-04 17:16 | Registra a ideia futura de robôs especializados. |
 | Marcelo Fabiano | 2026-11-04 17:15 | Renomeia para português e registra a regra de idioma. |

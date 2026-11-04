@@ -2,8 +2,7 @@
 
 ## Pendentes
 
-| # | Pergunta | Recomendação |
-|---|---|---|
+Não há perguntas pendentes nesta fase.
 
 ## Respondidas
 
@@ -26,8 +25,8 @@
 | 45 | Com o Cubit desligado, clicar com redstone na mão funciona como com a Power Bank? | Sim. A pilha entra no slot, a recarga começa e, com 5%, o Cubit liga |
 | 47 | Como o Cubit carrega no Dock? | "Base" é o Induction Dock, o bloco fixo, inspirado nas bases de robôs aspiradores. Na base, o Cubit fica em hibernação: diferente de desligado, com o painel solar desligado e o inventário e os slots exclusivos acessíveis. Ativo é ligado, e inativo é desligado, com o painel também desligado |
 | 50 | Em que fase entram a redstone no Dock e no slot de energia do Cubit? | Fase 2. Assim, o carregamento já funciona sem gerador de outro mod |
-| 54 | Sem o retorno automático da Fase 4, como o Cubit chega à base na versão mínima? | O player clica com o botão direito no Dock, e o Cubit por perto vai até ele. Colocar o item do Cubit em cima do Dock também funciona |
-| 55 | Como o Cubit sai da hibernação, já que interagir com ele abre o inventário? | Sai sozinho com a bateria cheia e volta a seguir. Antes disso, clicar no Dock o libera |
+| 54 | Sem o retorno automático da Fase 4, como o Cubit chega à base na versão mínima? | O player clica com o botão direito no Dock, e o Cubit por perto vai até ele. Colocar o item do Cubit em cima do Dock também funciona. A distância e o Cubit chamado foram definidos nas perguntas 59 e 81 |
+| 55 | Como o Cubit sai da hibernação, já que interagir com ele abre o inventário? | Sai sozinho com a bateria cheia e volta a seguir. Antes disso, clicar no Dock o libera. O que ele faz ao sair foi ampliado pela pergunta 83 |
 | 59 | A que distância clicar no Dock chama o Cubit "por perto"? | O raio do retorno automático do tier |
 | 60 | O modelo final entra na Fase 2 ou é provisório nessa fase? | Geometria provisória na Fase 2 e modelo final na Fase 3, junto das expressões |
 | 61 | O Dock recebe até 1.000 FE/t, mas recarrega Elite a 2.500 e Ultimate a 5.000 FE/t. Como resolver? | Entrada de 5.000 FE/t, com o estoque de 100 mil FE |
@@ -35,7 +34,7 @@
 | 63 | Em que velocidade a vida se recupera na base? | Proporcional ao tier: todos levam o mesmo tempo para encher, cerca de 1 minuto, configurável |
 | 64 | Como o Cubit extrai a redstone do slot? | Na velocidade de recarga do tier, consumindo um item por vez e só quando a energia couber |
 | 65 | Como funciona o limite de robôs por player? | O player pode ter quantos robôs preferir, mas só um o segue. Pode haver um ou mais robôs configurados em áreas e ativos, e seguindo o player somente um |
-| 71 | Já existe um Cubit seguindo o player. O que acontece ao colocar outro no mundo? | O novo fica parado e desligado. Ao ligá-lo, ele desliga o que estava ligado |
+| 71 | Já existe um Cubit seguindo o player. O que acontece ao colocar outro no mundo? | O novo fica parado e desligado. Ao ligá-lo, ele desliga o que estava ligado. A pergunta 76 limita isso ao que estava seguindo |
 | 72 | Como o player escolhe qual Cubit o segue, na versão mínima, sem o controle remoto? | Ao ser colocado ou sair da hibernação, o Cubit segue se nenhum outro estiver seguindo. Para trocar, o player recolhe o atual ou o coloca na base |
 | 73 | Clicar no Dock chama qual Cubit, se houver vários? E cabe mais de um na base? | Cada Dock recebe um Cubit por vez. Quem o clique chama foi alterado pela pergunta 81 |
 | 74 | Com vários Cubits, o `/cubit reset` ainda é necessário, e há limite de quantidade? | O comando continua, para limpar o vínculo de quem segue, se ele se perder. Não há limite de quantidade |
@@ -60,6 +59,7 @@
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 17:26 | Corrige a seção de pendentes e aponta as respostas refinadas por outras. |
 | Marcelo Fabiano | 2026-11-04 17:16 | Ajusta a premissa do config para tipo de robô e tier. |
 | Marcelo Fabiano | 2026-11-04 17:15 | Renomeia para português e atualiza os caminhos. |
 | Marcelo Fabiano | 2026-11-04 17:12 | Registra as respostas 84, 85 e 86. |

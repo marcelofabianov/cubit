@@ -53,14 +53,15 @@ Não há perguntas pendentes nesta fase.
 | 78 | Um gate garante a atualização do histórico de modificações? | Sim, no `pre-commit` |
 | 87 | Os nomes dos arquivos e pastas de documentação ficam em português? | Sim. `README.md`, `AGENTS.md`, `CLAUDE.md` e `LICENSE` mantêm o nome |
 | 88 | As legendas da prancha de conceito ficam em português? | Sim, porque ela não entra no jar |
+| 89 | Os scripts e hooks ficam em inglês? | Arquivos de programação, como `.sh`, ficam em inglês. Ficam em português os arquivos de conteúdo |
 | 90 | Com robôs especializados no futuro, qual é o ID do robô atual? | `cubit:general_robot`. Cubit continua como nome do mod e da família |
 | 91 | Como preparar o projeto para outros robôs? | Nada pode ficar fixo de forma que comprometa a flexibilidade do projeto. As regras 39 a 43 do `AGENTS.md` detalham isso |
-| 89 | Os scripts e hooks ficam em inglês? | Arquivos de programação, como `.sh`, ficam em inglês. Ficam em português os arquivos de conteúdo |
 
 ## Histórico de modificações
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 17:26 | Reordena a resposta 89. |
 | Marcelo Fabiano | 2026-11-04 17:16 | Registra as respostas 90 e 91. |
 | Marcelo Fabiano | 2026-11-04 17:15 | Renomeia para português e registra as respostas 87, 88 e 89. |
 | Marcelo Fabiano | 2026-11-04 17:08 | Adiciona as respostas 77 e 78 e atualiza a 19. |

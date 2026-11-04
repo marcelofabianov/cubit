@@ -34,12 +34,12 @@ Mod próprio do **Iron Meridian** (Minecraft 1.21.1, NeoForge). Adiciona o **Cub
 | Fluxo de trabalho | [`_docs/desenvolvimento/fluxo-de-trabalho.md`](_docs/desenvolvimento/fluxo-de-trabalho.md) |
 | Git hooks | [`_docs/desenvolvimento/hooks-do-git.md`](_docs/desenvolvimento/hooks-do-git.md) |
 
-Os números ficam só em `_docs/tiers.md`. As outras páginas apontam para lá.
+Os números ficam em `_docs/tiers.md`. As outras páginas apontam para lá, e o `README.md` traz só um resumo.
 
 ## Fases
 
 1. **Conceito** (atual): definir persona, features e demais informações em arquivos `.md`.
-2. **Versão mínima**: crafting com itens do jogo puro, seguir o player, inventário, bateria, Induction Dock com hibernação, recarga com redstone e virar item.
+2. **Versão mínima**: crafting com itens do jogo puro, seguir o player, inventário, bateria, vários Cubits com um seguindo, Induction Dock com hibernação, recarga com redstone e virar item.
 3. **Sentidos**: painel solar, lanterna, scanners, bipes e textos curtos, expressões na tela, nome, cor e Jade.
 4. **Upgrades e autonomia**: tiers, Power Bank, ímã, filtros, demais slots exclusivos, choque, modos de defesa, controle remoto, modo área, descarregar em baú, retorno automático e local de morte.
 
@@ -51,6 +51,7 @@ O robô atual é de uso geral e o primeiro do mod. No futuro, o mod pode ter vá
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 17:26 | Atualiza a fase 2 e a regra dos números. |
 | Marcelo Fabiano | 2026-11-04 17:16 | Registra a flexibilidade para robôs especializados. |
 | Marcelo Fabiano | 2026-11-04 17:16 | Registra a ideia futura de robôs especializados. |
 | Marcelo Fabiano | 2026-11-04 17:15 | Define a regra de idioma e atualiza os caminhos. |

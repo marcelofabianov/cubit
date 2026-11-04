@@ -26,7 +26,7 @@ Você pode ter quantos Cubits quiser trabalhando em áreas marcadas, mas só um 
 
 ## Visual
 
-Um corpo branco e arredondado, com uma tela no rosto e olhos que brilham, duas antenas, braços com garras e esteiras no lugar dos pés. Tem um painel solar em cima, um indicador de bateria nas costas e uma bobina de indução embaixo. A faixa no pescoço mostra o tier, e a cor da carcaça muda com corantes.
+Um corpo branco e arredondado, com uma tela no rosto e olhos que brilham, duas antenas, braços com garras e esteiras no lugar dos pés. Tem um painel solar em cima, um indicador de bateria nas costas e uma bobina de indução embaixo. O colar no pescoço mostra o tier, e a cor da carcaça muda com corantes.
 
 ![Prancha de conceito do Cubit](_docs/imagens/conceito/robo-conceito-prancha.png)
 
@@ -36,7 +36,7 @@ O Cubit mantém os recursos ao evoluir, e cada tier os melhora. Os recursos avan
 
 | | Base | Avançado | Elite | Ultimate |
 |---|---|---|---|---|
-| Cor da faixa | Cinza | Azul | Roxo | Dourado |
+| Cor do colar | Cinza | Azul | Roxo | Dourado |
 | Vida | 25 | 50 | 100 | 200 |
 | Velocidade | 1,0× | 1,25× | 1,5× | 2,0× |
 | Bateria | 300 mil FE | 600 mil FE | 3 mi FE | 8 mi FE |
@@ -70,7 +70,7 @@ As receitas usarão só itens do jogo puro e virão em datapack JSON, para os mo
 ## Roadmap
 
 1. **Conceito (atual):** persona, features e demais definições, em documentos.
-2. **Versão mínima:** crafting, seguir o player, inventário, bateria, Induction Dock com hibernação, recarga com redstone e virar item.
+2. **Versão mínima:** crafting, seguir o player, inventário, bateria, vários Cubits com um seguindo, Induction Dock com hibernação, recarga com redstone e virar item.
 3. **Sentidos:** painel solar, lanterna, scanners, bipes e textos curtos, expressões na tela, nome, cor e Jade.
 4. **Upgrades e autonomia:** tiers, Power Bank, ímã, filtros, demais slots exclusivos, choque, modos de defesa, Cubit Remote, modo área, descarga em baú, retorno automático e local de morte.
 
@@ -95,6 +95,7 @@ As receitas usarão só itens do jogo puro e virão em datapack JSON, para os mo
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 17:26 | Atualiza o roadmap e padroniza o termo colar. |
 | Marcelo Fabiano | 2026-11-04 17:15 | Traduz o README para português, conforme a regra de idioma. |
 | Marcelo Fabiano | 2026-11-04 17:11 | Adiciona a função de localizar ao Cubit Remote. |
 | Marcelo Fabiano | 2026-11-04 17:08 | Permite vários Cubits com um seguindo e atualiza o texto da Power Bank e do Dock. |

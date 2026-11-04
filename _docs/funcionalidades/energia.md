@@ -12,7 +12,7 @@ Números: [`tiers.md`](../tiers.md#energia) e [valores gerais](../tiers.md#valor
 | Estado | Quando acontece | Painel solar | O que o player pode fazer |
 |---|---|---|---|
 | **Ativo** | Ligado, fora da base | Funciona | Todas as interações |
-| **Inativo** | Desligado, por exemplo sem bateria | Desligado | Só recolher, colocar energia no slot exclusivo ou, com bateria, ligar com o clique direito |
+| **Inativo** | Desligado, por exemplo sem bateria | Desligado | Só recolher, colocar energia no slot exclusivo ou, com bateria, ligar com o clique direito, exceto se tiver sido desligado pelo controle |
 | **Hibernação** | Na base (Induction Dock) | Desligado | Usar o inventário e os slots exclusivos, ou recolher |
 
 - **Hibernação não é o mesmo que desligado:** o Cubit carrega e continua acessível.
@@ -91,6 +91,7 @@ Se o robô estiver dentro do raio da base e com a bateria baixa, mostra o texto 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 17:26 | Esclarece a exceção do robô desligado pelo controle. |
 | Marcelo Fabiano | 2026-11-04 17:15 | Renomeia para português e atualiza os caminhos. |
 | Marcelo Fabiano | 2026-11-04 17:12 | Adiciona a espera na frente da base ocupada. |
 | Marcelo Fabiano | 2026-11-04 17:11 | Atualiza a chamada ao Dock e o comportamento ao sair da base. |

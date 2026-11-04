@@ -1,6 +1,6 @@
 # Controle remoto e modo área
 
-Números por tier: [`tiers.md`](../tiers.md#autonomia).
+Números: [`tiers.md`](../tiers.md#autonomia) e [valores gerais](../tiers.md#valores-gerais).
 
 ## Comandos
 
@@ -17,7 +17,7 @@ Desligado pelo controle, o Cubit segue as regras do estado inativo, mesmo com ba
 
 ## Localizar
 
-O controle lista todos os Cubits do player, com nome, coordenadas, dimensão e estado. Em chunk descarregado, mostra a última posição conhecida, inclusive dos desligados.
+O controle lista todos os Cubits do player, sem limite de distância, com nome, coordenadas, dimensão e estado. Em chunk descarregado, mostra a última posição conhecida, inclusive dos desligados.
 
 ## Modo área
 
@@ -27,6 +27,7 @@ A área é marcada com o controle, clicando com o botão direito nos blocos para
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 17:28 | Define o alcance do controle e da função de localizar. |
 | Marcelo Fabiano | 2026-11-04 17:15 | Renomeia para português e atualiza os caminhos. |
 | Marcelo Fabiano | 2026-11-04 17:11 | Adiciona a função de localizar e o alcance do controle. |
 | Marcelo Fabiano | 2026-11-04 17:08 | Define as funções que o controle remoto desativa. |
