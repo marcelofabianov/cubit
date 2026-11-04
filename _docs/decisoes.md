@@ -39,6 +39,9 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Saída da base com outro seguindo:** o robô fica parado e desligado, como ao ser colocado.
 - **Config:** `COMMON`, com chaves em `snake_case` por tipo de robô e tier, como `[general_robot.base]`.
 - **Entidade:** a `RobotEntity` herda de `PathfinderMob`, com o dono num UUID próprio.
+- **Estado como item:** um único componente, `cubit:robot_state`.
+- **Dono:** quem coloca o robô. O item não guarda o dono.
+- **Criativo:** aba própria, `cubit:main`, e colocar sempre gasta o item.
 - **Estados:** ativo (ligado), inativo (desligado) e hibernação (na base, com o inventário e os slots acessíveis).
 - **Painel solar:** só funciona com o Cubit ativo, de dia em todos os tiers e à noite só em Elite e Ultimate. Coberto por um bloco, não carrega. O clima não tem efeito, e no Nether e no End não funciona. Fica abaixo do consumo.
 - **Induction Dock:** é a base de recarga, recebe energia por cabos ou redstone e tem um único slot, que também recarrega a Power Bank.
@@ -52,6 +55,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 19:24 | Registra o estado como item, o dono e o criativo. |
 | Marcelo Fabiano | 2026-11-04 19:05 | Registra o config, a entidade e o momento das GameTests. |
 | Marcelo Fabiano | 2026-11-04 18:50 | Registra as regras do robô que segue sem bateria e ao sair da base. |
 | Marcelo Fabiano | 2026-11-04 17:51 | Registra a adoção dos pilares. |
