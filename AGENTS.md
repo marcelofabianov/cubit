@@ -16,6 +16,7 @@ Mod de Minecraft que adiciona um robô companheiro fofo, movido a bateria, feito
 - **Decisões:** ficam em `_docs/decisions.md`. Recomendações marcadas como não aprovadas não valem como decididas.
 - **Imagens:** ficam em `_docs/assets/`.
 - **Rascunhos:** conversas e ideias vão para `tmp/`, que o Git ignora.
+- **Fluxo de trabalho:** o passo a passo de uma tarefa, de uma versão e de um hotfix está em [`_docs/development/workflow.md`](_docs/development/workflow.md).
 
 ## Regras do mod
 
