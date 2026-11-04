@@ -6,10 +6,6 @@
     <property name="severity" value="error"/>
     <property name="fileExtensions" value="java"/>
 
-    <module name="SuppressionFilter">
-        <property name="file" value="${config_loc}/suppressions.xml"/>
-    </module>
-
     <module name="FileLength">
         <property name="max" value="400"/>
     </module>
@@ -26,6 +22,12 @@
             <property name="ignoreNumbers" value="-1, 0, 1, 2"/>
             <property name="ignoreAnnotation" value="true"/>
             <property name="ignoreHashCodeMethod" value="true"/>
+        </module>
+        <module name="RegexpSinglelineJava">
+            <property name="id" value="StringLiteralOutsideConstant"/>
+            <property name="format" value="^(?!.*static final).*&quot;[^&quot;]*&quot;"/>
+            <property name="ignoreComments" value="true"/>
+            <property name="message" value="Use a constant instead of a string literal"/>
         </module>
         <module name="TodoComment">
             <property name="format" value="TODO(?!\(#[0-9]+\))"/>

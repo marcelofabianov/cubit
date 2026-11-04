@@ -8,18 +8,21 @@ import com.tngtech.archunit.junit.ArchTest;
 import com.tngtech.archunit.lang.ArchRule;
 
 @AnalyzeClasses(
-    packages = "io.github.marcelofabianov.cubit",
+    packages = DomainBoundaryTest.ROOT_PACKAGE,
     importOptions = ImportOption.DoNotIncludeTests.class)
 class DomainBoundaryTest {
+  static final String ROOT_PACKAGE = "io.github.marcelofabianov.cubit";
+  private static final String DOMAIN = "..domain..";
+  private static final String MINECRAFT = "net.minecraft..";
+  private static final String NEOFORGE = "net.neoforged..";
+  private static final String MOJANG = "com.mojang..";
 
-  // allowEmptyShould: the domain package has no classes until the first domain issue.
   @ArchTest
   static final ArchRule domainDoesNotDependOnTheGame =
       noClasses()
           .that()
-          .resideInAPackage("..domain..")
+          .resideInAPackage(DOMAIN)
           .should()
           .dependOnClassesThat()
-          .resideInAnyPackage("net.minecraft..", "net.neoforged..", "com.mojang..")
-          .allowEmptyShould(true);
+          .resideInAnyPackage(MINECRAFT, NEOFORGE, MOJANG);
 }

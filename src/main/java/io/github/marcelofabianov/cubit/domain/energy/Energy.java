@@ -3,10 +3,11 @@ package io.github.marcelofabianov.cubit.domain.energy;
 /** A whole amount of Forge Energy. Never negative, so a transfer cannot create or lose FE. */
 public record Energy(long amount) {
   public static final Energy ZERO = new Energy(0);
+  private static final String NEGATIVE_MESSAGE = "Energy cannot be negative: ";
 
   public Energy {
     if (amount < 0) {
-      throw new IllegalArgumentException("Energy cannot be negative: " + amount);
+      throw new IllegalArgumentException(NEGATIVE_MESSAGE + amount);
     }
   }
 

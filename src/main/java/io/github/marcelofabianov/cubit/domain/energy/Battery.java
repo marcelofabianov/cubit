@@ -6,12 +6,15 @@ public record Battery(Energy capacity, Energy charge) {
 
   public record Consumed(Battery battery, Energy consumed) {}
 
+  private static final String NO_CAPACITY_MESSAGE = "Battery capacity must be positive";
+  private static final String OVERCHARGE_MESSAGE = "Charge above capacity: ";
+
   public Battery {
     if (capacity.isZero()) {
-      throw new IllegalArgumentException("Battery capacity must be positive");
+      throw new IllegalArgumentException(NO_CAPACITY_MESSAGE);
     }
     if (charge.amount() > capacity.amount()) {
-      throw new IllegalArgumentException("Charge above capacity: " + charge.amount());
+      throw new IllegalArgumentException(OVERCHARGE_MESSAGE + charge.amount());
     }
   }
 
