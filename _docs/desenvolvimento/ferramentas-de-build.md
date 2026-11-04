@@ -22,7 +22,7 @@ O primeiro build leva alguns minutos, porque baixa o JDK e prepara o Minecraft.
 | JDK 21 Adoptium | Compila o mod e o Minecraft | O projeto o baixa sozinho, porque o Java do sistema pode não ter o pacote de desenvolvimento |
 | JUnit | Roda os testes do domínio sem subir o jogo | É o padrão em Java e está na regra 32 do `AGENTS.md` |
 | ArchUnit | Impede que `domain/` dependa do jogo | Garante a regra 12 do `AGENTS.md` no build |
-| JaCoCo | Mede a cobertura de `domain/`, com mínimo de 80% | Garante a regra 34 do `AGENTS.md` |
+| JaCoCo | Mede a cobertura de `domain/`, com mínimo de 85% | Garante a regra 34 do `AGENTS.md` |
 
 As bibliotecas de teste vêm só do Maven Central, para o build não depender do Maven da NeoForge para elas.
 
@@ -37,4 +37,5 @@ As bibliotecas de teste vêm só do Maven Central, para o build não depender do
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 17:48 | Sobe a cobertura mínima para 85%. |
 | Marcelo Fabiano | 2026-11-04 17:45 | Documenta as ferramentas de build e os comandos. |

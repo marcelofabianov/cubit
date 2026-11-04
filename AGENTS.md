@@ -110,7 +110,7 @@ Design > Clareza > Simplicidade > Sem repetição
 
 32. **TDD:** o teste vem antes ou junto do código. Use JUnit 5 no domínio e GameTests no que depende do mundo.
 33. **Sem mock do jogo:** nunca faça mock de `Level` ou `Entity`. Comportamento de mundo se testa no mundo.
-34. **Cobertura:** mínimo de 80% em `domain/`, medido com JaCoCo. O restante se cobre com GameTests e um roteiro manual.
+34. **Cobertura:** mínimo de 85% em `domain/`, medido com JaCoCo. O restante se cobre com GameTests e um roteiro manual.
 35. **Teste no pack:** antes de ir para a `main`, teste numa instância do Iron Meridian.
 
 ### Gates
@@ -204,6 +204,7 @@ Os testes ficam em `src/test` (JUnit) e os GameTests em um pacote `gametest`.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 17:48 | Sobe a cobertura mínima para 85%. |
 | Marcelo Fabiano | 2026-11-04 17:44 | Inicia a Fase 2 e adiciona as regras de validação e o gate de push. |
 | Marcelo Fabiano | 2026-11-04 17:28 | Reordena as regras de flexibilidade e ajusta a Fase 1, os nomes de arquivos e a regra dos números. |
 | Marcelo Fabiano | 2026-11-04 17:16 | Adiciona as regras de flexibilidade para novos robôs. |

@@ -45,6 +45,7 @@ Não há perguntas pendentes nesta fase.
 | 85 | Dois ou mais Cubits aguardam a mesma base. Quem entra quando ela libera? | O que chegou primeiro |
 | 86 | A base está ocupada, mas há outra livre dentro do raio do Cubit. O que ele faz? | Vai para a base livre mais próxima, e só aguarda se todas no raio estiverem ocupadas |
 | 95 | Qual ferramenta faz a formatação no commit? | Spotless com o google-java-format |
+| 96 | Qual é a cobertura mínima de testes? | 85% |
 
 ### Premissas aprovadas
 
@@ -60,6 +61,7 @@ Não há perguntas pendentes nesta fase.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 17:48 | Registra a resposta 96. |
 | Marcelo Fabiano | 2026-11-04 17:48 | Registra a resposta 95. |
 | Marcelo Fabiano | 2026-11-04 17:26 | Corrige a seção de pendentes e aponta as respostas refinadas por outras. |
 | Marcelo Fabiano | 2026-11-04 17:16 | Ajusta a premissa do config para tipo de robô e tier. |
