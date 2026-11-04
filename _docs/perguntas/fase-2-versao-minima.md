@@ -49,6 +49,9 @@ Não há perguntas pendentes nesta fase.
 | 97 | Um gate automático confere complexidade e tamanho de função e de classe? | Sim, com o Checkstyle no `check`, junto com o Spotless |
 | 98 | Literais no código? | Sempre constantes em vez de string literal e número mágico |
 | 99 | A regra de constantes também vale para os testes? | Sim. As constantes do teste ficam no próprio teste, com os valores dos documentos, sem compartilhar com o código de produção |
+| 100 | A que distância do player o Cubit que segue para de andar? | 3 blocos, configurável, valor geral. Acima disso anda, e até 3 blocos para |
+| 101 | O Cubit que segue, sem bateria, continua sendo o robô que segue? E um Cubit colocado sem bateria, sem outro seguindo, assume o lugar? | Sim, nos dois casos. Ele fica parado, com o vínculo, e com 5% religa e volta a seguir. Se o player ligar outro, o sem bateria vira desligado e deixa de religar sozinho |
+| 102 | Um Cubit sai da base quando outro já assumiu o lugar de seguir. Em que estado ele fica? | Parado e desligado, igual à pergunta 71. O clique direito o liga, e ele passa a seguir, conforme a pergunta 75 |
 
 ### Premissas aprovadas
 
@@ -64,6 +67,7 @@ Não há perguntas pendentes nesta fase.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 18:50 | Registra as respostas 100, 101 e 102. |
 | Marcelo Fabiano | 2026-11-04 18:24 | Registra a resposta 99. |
 | Marcelo Fabiano | 2026-11-04 18:20 | Registra a resposta 98 e a pergunta 99. |
 | Marcelo Fabiano | 2026-11-04 17:52 | Registra a resposta 97. |

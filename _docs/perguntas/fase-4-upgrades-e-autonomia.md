@@ -24,7 +24,7 @@ Não há perguntas pendentes nesta fase.
 | 79 | Quais Cubits o controle remoto atende? | Todos os Cubits do player, desde que estejam ligados. O controle também localiza os Cubits e mostra as coordenadas |
 | 80 | Como religar um Cubit desligado pelo controle, se o controle só age em ligados? | O controle também liga, como exceção |
 | 82 | O que a função de localizar mostra? | Todos os Cubits do player, com nome, coordenadas, dimensão e estado. Em chunk descarregado, mostra a última posição conhecida, inclusive dos desligados |
-| 83 | Um Cubit que trabalhava em área vai à base. O que ele faz ao sair dela? | Volta ao que fazia. Quem estava seguindo volta a seguir, se nenhum outro assumiu; se outro assumiu, fica parado |
+| 83 | Um Cubit que trabalhava em área vai à base. O que ele faz ao sair dela? | Volta ao que fazia. Quem estava seguindo volta a seguir, se nenhum outro assumiu; se outro assumiu, fica parado. O estado foi definido na [pergunta 102](fase-2-versao-minima.md) |
 | 93 | O upgrade de tier mantém a vida e as configurações? | Sim. A vida atual se mantém, e o máximo sobe para o do novo tier |
 | 94 | Qual é o alcance do controle remoto ao mirar num Cubit? | 32 blocos, configurável. Localizar não tem limite de distância |
 
@@ -32,6 +32,7 @@ Não há perguntas pendentes nesta fase.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 18:50 | Aponta a resposta 83 para a pergunta 102. |
 | Marcelo Fabiano | 2026-11-04 17:28 | Registra as respostas 93 e 94. |
 | Marcelo Fabiano | 2026-11-04 17:26 | Adiciona as perguntas 93 e 94. |
 | Marcelo Fabiano | 2026-11-04 17:15 | Renomeia para português e atualiza os caminhos. |
