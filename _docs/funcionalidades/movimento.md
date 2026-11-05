@@ -11,7 +11,7 @@ O player escolhe entre o robô seguir ou atuar numa área. A marcação da área
 - Por causa das esteiras, ele não pula; só sobe um bloco por vez.
 - A rota evita água e lava, e ele não leva dano de queda.
 - **Na água:** se cair nela, afunda e anda no fundo, sem nadar e sem se afogar. O teleporte o resgata quando o player se afasta.
-- **Na lava:** leva dano igual ao player sem armadura e continua pegando fogo ao sair.
+- **Na lava:** leva dano igual ao player sem armadura e continua pegando fogo ao sair. Ativo, se colocarem lava no bloco dele, tenta ir para o bloco seguro mais próximo, mas a lava o deixa muito lento, e no tier Base ele costuma morrer antes de sair. Inativo, fica parado.
 - O robô que segue anda até o player e para quando chega perto.
 - O robô que segue, se ficar longe demais do player, teleporta para perto, só na mesma dimensão.
 - Só se move no estado ativo. Inativo ou em hibernação, fica parado e não teleporta.
@@ -57,6 +57,7 @@ Marca onde o player morreu e o leva até lá, se o tier permitir.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 23:27 | Define a saída da lava. |
 | Marcelo Fabiano | 2026-11-04 22:01 | Define que o robô em chamas nunca fica parado. |
 | Marcelo Fabiano | 2026-11-04 21:29 | Define a busca de água em qualquer altura e o caso sem rota. |
 | Marcelo Fabiano | 2026-11-04 21:02 | Adiciona o comportamento em chamas. |

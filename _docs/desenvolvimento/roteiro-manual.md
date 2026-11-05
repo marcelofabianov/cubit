@@ -61,6 +61,15 @@ Use um isqueiro no robô, com `/give @s minecraft:flint_and_steel`. O fogo dura 
 | 4 | Ponha fogo perto de uma vala de lava | Ele não entra na lava |
 | 5 | Ponha fogo num segundo robô, desligado | Ele queima parado |
 
+## Lava
+
+Use um balde de lava, com `/give @s minecraft:lava_bucket`. Ele tem 25 de vida e morre em cerca de 3 s na lava. Se morrer, some sem virar item, até a etapa de morte.
+
+| # | Faça | Espere |
+|---|---|---|
+| 1 | Coloque lava no bloco do robô ativo | Ele se move devagar rumo à borda, e pode morrer antes de sair |
+| 2 | Coloque lava no bloco de um robô desligado | Ele fica parado e morre |
+
 ## Servidor dedicado
 
 1. Rode `make server` e aceite o EULA em `run/eula.txt`, se ainda não tiver aceitado.
@@ -70,6 +79,7 @@ Use um isqueiro no robô, com `/give @s minecraft:flint_and_steel`. O fogo dura 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 23:27 | Adiciona a saída da lava. |
 | Marcelo Fabiano | 2026-11-04 21:29 | Adiciona a água em outra altura e sem rota. |
 | Marcelo Fabiano | 2026-11-04 21:02 | Adiciona o comportamento em chamas. |
 | Marcelo Fabiano | 2026-11-04 20:31 | Adiciona a lava ao movimento. |
