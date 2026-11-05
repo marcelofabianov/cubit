@@ -50,21 +50,3 @@ Os números ficam em `_docs/tiers.md`. As outras páginas apontam para lá, e o 
 ## Futuro
 
 O robô atual é de uso geral e o primeiro do mod. No futuro, o mod pode ter vários robôs especializados, para atividades diversas. Essa ideia está fora das fases atuais e ainda não tem definição, mas nada no projeto pode ficar fixo de forma que comprometa essa flexibilidade.
-
-## Histórico de modificações
-
-| Pessoa | Data e hora | Modificação |
-|---|---|---|
-| Marcelo Fabiano | 2026-11-04 20:09 | Adiciona o som de esteira à fase Sentidos. |
-| Marcelo Fabiano | 2026-11-04 19:31 | Adiciona o roteiro manual ao mapa dos documentos. |
-| Marcelo Fabiano | 2026-11-04 19:08 | Adiciona o config ao mapa dos documentos. |
-| Marcelo Fabiano | 2026-11-04 17:51 | Adiciona os pilares ao mapa dos documentos. |
-| Marcelo Fabiano | 2026-11-04 17:44 | Marca a Fase 2 como atual. |
-| Marcelo Fabiano | 2026-11-04 17:26 | Atualiza a fase 2 e a regra dos números. |
-| Marcelo Fabiano | 2026-11-04 17:16 | Registra a flexibilidade para robôs especializados. |
-| Marcelo Fabiano | 2026-11-04 17:16 | Registra a ideia futura de robôs especializados. |
-| Marcelo Fabiano | 2026-11-04 17:15 | Define a regra de idioma e atualiza os caminhos. |
-| Marcelo Fabiano | 2026-11-04 17:08 | Atualiza a fase 2 e a regra do robô que segue. |
-| Marcelo Fabiano | 2026-11-04 16:57 | Atualiza o mapa dos documentos e as fases. |
-| Marcelo Fabiano | 2026-11-04 16:07 | Documenta o fluxo de trabalho. |
-| Marcelo Fabiano | 2026-11-04 15:23 | Adiciona a visão geral, o README e as regras do projeto. |

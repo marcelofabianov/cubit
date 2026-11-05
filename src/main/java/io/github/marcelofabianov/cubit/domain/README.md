@@ -54,16 +54,3 @@ Os documentos definem três estados: ativo, inativo e hibernação. No código, 
 | `HIBERNATING` | Hibernação, na base | Sim | Ao sair da base |
 
 O desligamento pelo controle remoto (pergunta 56) entra na Fase 4, junto do controle.
-
-## Histórico de modificações
-
-| Pessoa | Data e hora | Modificação |
-|---|---|---|
-| Marcelo Fabiano | 2026-11-04 23:27 | Documenta a saída da lava. |
-| Marcelo Fabiano | 2026-11-04 21:02 | Documenta a reação do robô em chamas. |
-| Marcelo Fabiano | 2026-11-04 20:09 | Documenta o robô que descobre que outro assumiu o lugar. |
-| Marcelo Fabiano | 2026-11-04 19:31 | Documenta o estado do robô e a chave do tier. |
-| Marcelo Fabiano | 2026-11-04 19:12 | Documenta o catálogo de tiers. |
-| Marcelo Fabiano | 2026-11-04 18:58 | Documenta o movimento e o robô que segue. |
-| Marcelo Fabiano | 2026-11-04 18:18 | Documenta o tipo de robô e o tier. |
-| Marcelo Fabiano | 2026-11-04 18:00 | Documenta a energia e os estados do domínio. |

@@ -90,17 +90,3 @@ As receitas usarão só itens do jogo puro e virão em datapack JSON, para os mo
 ## Licença
 
 [MIT](LICENSE)
-
-## Histórico de modificações
-
-| Pessoa | Data e hora | Modificação |
-|---|---|---|
-| Marcelo Fabiano | 2026-11-04 20:10 | Adiciona o som de esteira à fase Sentidos. |
-| Marcelo Fabiano | 2026-11-04 17:44 | Marca a Fase 2 como atual. |
-| Marcelo Fabiano | 2026-11-04 17:26 | Atualiza o roadmap e padroniza o termo colar. |
-| Marcelo Fabiano | 2026-11-04 17:15 | Traduz o README para português, conforme a regra de idioma. |
-| Marcelo Fabiano | 2026-11-04 17:11 | Adiciona a função de localizar ao Cubit Remote. |
-| Marcelo Fabiano | 2026-11-04 17:08 | Permite vários Cubits com um seguindo e atualiza o texto da Power Bank e do Dock. |
-| Marcelo Fabiano | 2026-11-04 16:57 | Atualiza a recarga, o painel solar, a hibernação, a Power Bank, o roadmap e a licença. |
-| Marcelo Fabiano | 2026-11-04 16:02 | Adiciona a imagem do Cubit feliz ao README. |
-| Marcelo Fabiano | 2026-11-04 15:23 | Adiciona a visão geral, o README e as regras do projeto. |
