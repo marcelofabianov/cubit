@@ -44,7 +44,7 @@ git switch -c feature/{issue}-{slug} --no-track develop
 - **A partir da Fase 2:** a feature precisa estar documentada em `_docs/funcionalidades/`, com as decisões fechadas. O teste vem antes ou junto do código.
 - **Decisão bloqueante:** pare e siga o [fluxo do `AGENTS.md`](../../AGENTS.md#decisões-bloqueantes). Registre a resposta em [`perguntas/`](../perguntas/README.md), no arquivo da fase.
 - **Rascunhos:** ficam em `tmp/`.
-- **Histórico de modificações:** todo `.md` termina com uma tabela de histórico. Quem altera o arquivo adiciona uma linha no topo da tabela, com o nome da pessoa, a data e a hora e uma frase direta do que foi feito.
+- **Histórico de modificações:** todo `.md` em `_docs/` termina com uma tabela de histórico. Quem altera o arquivo adiciona uma linha no topo da tabela, com o nome da pessoa, a data e a hora e uma frase direta do que foi feito.
 
 ### 4. Validação
 
@@ -89,8 +89,6 @@ A descrição do PR segue o template [`.github/pull_request_template.md`](../../
 - a validação: os documentos conferidos e a evidência de cada um, os comandos, o teste no Iron Meridian e os checklists dos pilares;
 - como revisar ou testar;
 - o que ficou fora do escopo, quando houver.
-
-O histórico de modificações do template fica num comentário HTML, para não aparecer nos PRs.
 
 ### 8. Merge
 
@@ -183,6 +181,7 @@ O primeiro passo, separando o que está decidido do que está pendente.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 23:45 | Limita o histórico aos arquivos de `_docs/`. |
 | Marcelo Fabiano | 2026-11-04 19:12 | Adota o template de pull request. |
 | Marcelo Fabiano | 2026-11-04 18:02 | Usa o Makefile na preparação do ambiente. |
 | Marcelo Fabiano | 2026-11-04 17:51 | Inclui os pilares na validação. |

@@ -50,11 +50,3 @@ Não se aplicam:
 <!-- Apague esta seção se não houver nada a registrar. -->
 
 -
-
-<!--
-## Histórico de modificações
-
-| Pessoa | Data e hora | Modificação |
-|---|---|---|
-| Marcelo Fabiano | 2026-11-04 19:12 | Cria o template de pull request. |
--->

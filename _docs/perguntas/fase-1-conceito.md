@@ -50,19 +50,20 @@ Não há perguntas pendentes nesta fase.
 | 40 | Em que fase entram os itens sem fase? | Solar, scanners, nome, cor e Jade na Fase 3; controle remoto na Fase 4 |
 | 41 | Como definir "minério raro, de ferro para cima"? | Uma lista configurável de tags, começando em ferro |
 | 77 | Onde fica a lista de itens, com nome e uma linha de descrição? | Na tabela principal de `itens.md`, e ID e receita numa segunda tabela do mesmo arquivo |
-| 78 | Um gate garante a atualização do histórico de modificações? | Sim, no `pre-commit` |
+| 78 | Um gate garante a atualização do histórico de modificações? | Sim, no `pre-commit`, para os arquivos de `_docs/`, conforme a [pergunta 132](fase-2-versao-minima.md) |
 | 87 | Os nomes dos arquivos e pastas de documentação ficam em português? | Sim. `README.md`, `AGENTS.md`, `CLAUDE.md` e `LICENSE` mantêm o nome |
 | 88 | As legendas da prancha de conceito ficam em português? | Sim, porque ela não entra no jar |
 | 89 | Os scripts e hooks ficam em inglês? | Arquivos de programação, como `.sh`, ficam em inglês. Ficam em português os arquivos de conteúdo |
 | 90 | Com robôs especializados no futuro, qual é o ID do robô atual? | `cubit:general_robot`. Cubit continua como nome do mod e da família |
 | 91 | Como preparar o projeto para outros robôs? | Nada pode ficar fixo de forma que comprometa a flexibilidade do projeto. As regras 39 a 43 do `AGENTS.md` detalham isso |
 | 121 | Quais perguntas ficam registradas em `.md`? | Todas as que o desenvolvedor responder, conforme a regra 47 do `AGENTS.md` |
-| 107 | O template de pull request segue a regra de nome em português? | Não. `pull_request_template.md` mantém o nome, porque o GitHub só reconhece esse nome. O histórico dele fica num comentário HTML, para não aparecer nos PRs |
+| 107 | O template de pull request segue a regra de nome em português? | Não. `pull_request_template.md` mantém o nome, porque o GitHub só reconhece esse nome. O histórico dele foi removido pela [pergunta 132](fase-2-versao-minima.md) |
 
 ## Histórico de modificações
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 23:45 | Aponta as respostas 78 e 107 para a pergunta 132. |
 | Marcelo Fabiano | 2026-11-04 22:56 | Aponta a resposta 12 para a pergunta 136. |
 | Marcelo Fabiano | 2026-11-04 20:41 | Registra a resposta 121. |
 | Marcelo Fabiano | 2026-11-04 19:14 | Registra a resposta 107. |
