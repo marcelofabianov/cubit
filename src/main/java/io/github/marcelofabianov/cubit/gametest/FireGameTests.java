@@ -46,10 +46,11 @@ public final class FireGameTests {
   private static final double WALK_X = 13.5;
   private static final double FAR_X = 22.5;
   private static final double NEAR_DISTANCE = 3.6;
+  private static final double TELEPORT_JUMP = 3;
   private static final double SMALL_MOVE = 0.1;
   private static final BlockPos FLOOR = new BlockPos(START_X, FLOOR_Y, MIDDLE_Z);
   private static final BlockPos SECOND_FLOOR = new BlockPos(START_X, FLOOR_Y, LAST_Z);
-  private static final String TELEPORTED = "Robot teleported: fire=%s, wet=%s, tick=%d";
+  private static final String TELEPORTED = "The burning robot teleported";
   private static final String DID_NOT_WANDER = "The burning robot did not wander";
   private static final String STILL_BURNING = "The robot did not reach the water";
   private static final String STOPPED = "The burning robot stood still";
@@ -91,11 +92,12 @@ public final class FireGameTests {
     Vec3 start = robot.position();
     robot.igniteForSeconds(LONG_FIRE_SECONDS);
 
-    helper.onEachTick(() ->
-        helper.assertTrue(
-            robot.distanceTo(owner) > NEAR_DISTANCE,
-            TELEPORTED.formatted(
-                robot.isOnFire(), robot.isInWaterRainOrBubble(), robot.tickCount)));
+    // A jump, not the distance: wandering can bring the robot close to its owner by chance.
+    Vec3[] lastPosition = {start};
+    helper.onEachTick(() -> {
+      helper.assertTrue(robot.position().distanceTo(lastPosition[0]) < TELEPORT_JUMP, TELEPORTED);
+      lastPosition[0] = robot.position();
+    });
     helper.runAfterDelay(
         WANDER_TICKS,
         () -> {
