@@ -47,6 +47,20 @@ Coloque um robô, que segue você, e use blocos para montar o terreno.
 | 8 | Vá para o Nether e volte | Ele não vai junto. Ao voltar, retoma quando o chunk dele estiver carregado |
 | 9 | Coloque um segundo robô, longe do primeiro, e ande | O segundo fica parado |
 
+## Em chamas
+
+Use um isqueiro no robô, com `/give @s minecraft:flint_and_steel`. O fogo dura poucos segundos, então repita se precisar.
+
+| # | Faça | Espere |
+|---|---|---|
+| 1 | Ponha fogo no robô, sem água por perto, e afaste-se | Ele anda ao acaso, sem seguir você e sem teleportar |
+| 2 | Ponha fogo no robô com uma poça a menos de 8 blocos | Ele vai até a água e se apaga |
+| 2a | Ponha fogo no robô com água a menos de 8 blocos, subindo ou descendo degraus | Ele sobe ou desce os degraus até a água e se apaga |
+| 2b | Ponha fogo no robô com água atrás de uma parede, sem caminho até ela | Ele anda ao acaso, em vez de ficar parado |
+| 3 | Espere o fogo apagar | Ele volta a seguir você na hora |
+| 4 | Ponha fogo perto de uma vala de lava | Ele não entra na lava |
+| 5 | Ponha fogo num segundo robô, desligado | Ele queima parado |
+
 ## Servidor dedicado
 
 1. Rode `make server` e aceite o EULA em `run/eula.txt`, se ainda não tiver aceitado.
@@ -56,6 +70,8 @@ Coloque um robô, que segue você, e use blocos para montar o terreno.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 21:29 | Adiciona a água em outra altura e sem rota. |
+| Marcelo Fabiano | 2026-11-04 21:02 | Adiciona o comportamento em chamas. |
 | Marcelo Fabiano | 2026-11-04 20:31 | Adiciona a lava ao movimento. |
 | Marcelo Fabiano | 2026-11-04 20:09 | Adiciona o movimento. |
 | Marcelo Fabiano | 2026-11-04 19:31 | Cria o roteiro de colocar e recolher o Cubit. |
