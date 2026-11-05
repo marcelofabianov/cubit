@@ -20,7 +20,7 @@ Closes #
 - `make gametest`:
 - `make check-generated`:
 
-**Teste no Iron Meridian:**
+**Teste numa instância só com o mod e no Iron Meridian:**
 
 <!-- Obrigatório antes de ir para a main (regra 35 do AGENTS.md). Para a develop, informe se foi feito ou por que ainda não se aplica. -->
 

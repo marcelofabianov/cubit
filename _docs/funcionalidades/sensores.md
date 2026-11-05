@@ -25,13 +25,14 @@ Os detalhes dos sons estão em [`visual.md`](../conceito/visual.md#sons), e os t
 ## Lanterna
 
 - Ilumina o ambiente ao redor.
-- Usa a API do **LambDynamicLights** (já no pack) para o robô emitir luz, em vez de colocar blocos de luz invisíveis.
+- Usa a API do **LambDynamicLights**, dependência obrigatória, para o robô emitir luz, em vez de colocar blocos de luz invisíveis.
 - O nível de luz do Minecraft vai de 0 a 15, por isso os tiers mais altos evoluem com um feixe à frente.
 
 ## Histórico de modificações
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 12:21 | Marca o LambDynamicLights como dependência obrigatória. |
 | Marcelo Fabiano | 2026-11-05 00:12 | Usa o termo mobs hostis. |
 | Marcelo Fabiano | 2026-11-04 17:15 | Renomeia para português e atualiza os caminhos. |
 | Marcelo Fabiano | 2026-11-04 17:08 | Define o texto de minério para o filtro do scanner. |
