@@ -84,6 +84,17 @@ O Cubit extrai a energia da Power Bank ou da redstone colocada no slot para a ba
 3. Com a carga mínima, o Cubit liga.
 4. A partir daí, o player pode acessá-lo, remover o item e fazer as outras interações.
 
+### Recarregar o item pela grade de craft
+
+Entra na Fase 4, junto da Power Bank.
+
+O item com a bateria abaixo da carga de religar, como zerada, e com vida pode ser colocado no mundo, mas o robô fica desligado, com a interação limitada. Depois de recolhê-lo, o player pode usar esta receita.
+
+- **Como:** combine o item do Cubit com uma Power Bank, em qualquer posição da grade do inventário ou da mesa de craft.
+- **Quando:** só com a bateria do Cubit abaixo da carga de religar, e a Power Bank precisa ter o que falta. Sem isso, a receita não aparece. O `Damaged Cubit` não vale.
+- **Quanto:** só o que falta para a carga de religar, sobre a bateria do Cubit. Assim, ele volta a funcionar ao ser colocado. A Power Bank perde exatamente essa quantidade, sem criar nem perder FE.
+- **O que se mantém:** o Cubit não perde mais nada do estado, e a Power Bank continua na grade, com a carga restante.
+
 ## Retorno automático
 
 Se o robô estiver dentro do raio da base e com a bateria baixa, mostra o texto `I need to recharge`, volta sozinho para ela e entra em hibernação.
@@ -92,6 +103,9 @@ Se o robô estiver dentro do raio da base e com a bateria baixa, mostra o texto 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 02:00 | Amplia a recarga pela grade de craft para a bateria abaixo da carga de religar. |
+| Marcelo Fabiano | 2026-11-05 01:58 | Detalha o uso da recarga pela grade de craft. |
+| Marcelo Fabiano | 2026-11-05 01:57 | Adiciona a recarga do item pela grade de craft. |
 | Marcelo Fabiano | 2026-11-05 00:12 | Cita os sons de ligar, desligar e recarregar. |
 | Marcelo Fabiano | 2026-11-04 18:50 | Define o estado ao sair da base com outro seguindo. |
 | Marcelo Fabiano | 2026-11-04 17:26 | Esclarece a exceção do robô desligado pelo controle. |

@@ -58,6 +58,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Estados:** ativo (ligado), inativo (desligado) e hibernação (na base, com o inventário e os slots acessíveis).
 - **Painel solar:** só funciona com o Cubit ativo, de dia em todos os tiers e à noite só em Elite e Ultimate. Coberto por um bloco, não carrega. O clima não tem efeito, e no Nether e no End não funciona. Fica abaixo do consumo.
 - **Induction Dock:** é a base de recarga, recebe energia por cabos ou redstone e tem um único slot, que também recarrega a Power Bank.
+- **Recarga pela grade de craft:** o item do Cubit abaixo da carga de religar, combinado com uma Power Bank, recebe só o que falta para religar, na Fase 4.
 - **Slot de energia do Cubit:** existe em todos os tiers e aceita uma Power Bank ou redstone por vez. A redstone entra na Fase 2, e a Power Bank na Fase 4.
 - **Comunicação:** bipes e expressões, com poucos textos simples e diretos.
 - **Sons:** oito sons, que entram na Fase 3. O bipe padrão toca nas trocas de expressão sem som exclusivo. O intervalo mínimo entre repetições será definido na Fase 3, e os sons são do desenvolvedor.
@@ -70,6 +71,8 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 02:00 | Amplia a recarga pela grade de craft. |
+| Marcelo Fabiano | 2026-11-05 01:57 | Registra a recarga pela grade de craft. |
 | Marcelo Fabiano | 2026-11-05 01:15 | Detalha a morte, o resgate no vazio e a receita do conserto. |
 | Marcelo Fabiano | 2026-11-05 00:35 | Registra o ícone do mod. |
 | Marcelo Fabiano | 2026-11-05 00:31 | Detalha o modelo da Fase 2. |
