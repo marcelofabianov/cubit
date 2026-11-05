@@ -17,7 +17,7 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 | `TierSpec` | Números de um tipo de robô num tier |
 | `TierCatalog` | Entrega o `TierSpec` de um tipo de robô num tier. O domínio define a interface, e o config a implementa |
 | `FollowAction` | O que o robô que segue faz: seguir, parar ou teleportar |
-| `BurningAction` | O que o robô faz em chamas: nada, buscar água ou andar ao acaso |
+| `BurningAction` | O que o robô faz em chamas: nada, sair da lava, buscar água ou andar ao acaso |
 | `FollowDecision` | Escolhe a `FollowAction` conforme o estado, a dimensão e a distância |
 | `FollowingRobotPolicy` | Garante que só um robô siga o player |
 | `FollowingOutcome` | Resultado da política: estado do robô, quem segue e quem desligar |
@@ -33,6 +33,7 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 - **Estado guardado se ajusta ao config:** o config pode mudar enquanto o robô está no item, então `batteryFor` e `healthFor` limitam os valores ao `TierSpec` atual. A vida nunca fica abaixo de 1, porque um robô colocado sem vida morreria na hora.
 
 - **Só o ativo se move:** inativo ou em hibernação, o robô para e não teleporta. Em outra dimensão também para, porque o teleporte só vale na mesma dimensão.
+- **Sair da lava vem antes de buscar água:** é o que mais fere. A rota nunca entra em lava, então a saída é direta, até o bloco seguro mais próximo (pergunta 139).
 - **Em chamas, a reação vem antes de seguir:** só o robô ativo reage, porque é o único que se move. Parado, ele continua queimando (pergunta 117).
 - **Distância inválida:** o robô para. É o estado mais restritivo, e o jogo não cai por isso (regra 17 do `AGENTS.md`).
 - **Colocar e sair da base são a mesma regra:** o robô segue se nenhum outro estiver seguindo. Se houver outro, fica desligado, porque o clique direito só liga um robô desligado, e assim o player consegue fazê-lo seguir (perguntas 72, 75 e 102).
@@ -58,6 +59,7 @@ O desligamento pelo controle remoto (pergunta 56) entra na Fase 4, junto do cont
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 23:27 | Documenta a saída da lava. |
 | Marcelo Fabiano | 2026-11-04 21:02 | Documenta a reação do robô em chamas. |
 | Marcelo Fabiano | 2026-11-04 20:09 | Documenta o robô que descobre que outro assumiu o lugar. |
 | Marcelo Fabiano | 2026-11-04 19:31 | Documenta o estado do robô e a chave do tier. |
