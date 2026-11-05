@@ -7,8 +7,8 @@ Mod de Minecraft que adiciona um robô companheiro fofo, movido a bateria, de te
 ## Estado atual
 
 - **Etapa atual:** Fase 2, versão mínima. O projeto Gradle existe, e as funcionalidades entram por issue, na ordem combinada com o desenvolvedor.
-- **Já entrou:** colocar e recolher, seguir o player, vários robôs, fogo, lava, os arquivos de som, a revisão dos `.md`, o novo modelo, a morte com o item danificado, o inventário, a energia em uso, o consumo por situação, a reação a blocos que ferem e o Induction Dock.
-- **Próximos:** `/cubit reset` e o fechamento da fase, com receitas e teste no Iron Meridian.
+- **Já entrou:** colocar e recolher, seguir o player, vários robôs, fogo, lava, os arquivos de som, a revisão dos `.md`, o novo modelo, a morte com o item danificado, o inventário, a energia em uso, o consumo por situação, a reação a blocos que ferem, o Induction Dock e o `/cubit reset`.
+- **Próximos:** o fechamento da fase, com receitas e teste no Iron Meridian.
 - **Comandos:** estão em [`_docs/desenvolvimento/ferramentas-de-build.md`](_docs/desenvolvimento/ferramentas-de-build.md).
 - **Limite:** não avance para as fases seguintes sem pedido explícito.
 
