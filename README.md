@@ -83,8 +83,7 @@ As receitas usarão só itens do jogo puro e virão em datapack JSON, para os mo
 
 ## Documentação
 
-- [`robo-companheiro.md`](robo-companheiro.md): visão geral, fases e mapa dos documentos
-- [`_docs/`](_docs/): persona, visual, funcionalidades, itens, tiers, decisões, perguntas por fase e glossário
+- [`_docs/README.md`](_docs/README.md): mapa dos documentos, com persona, visual, funcionalidades, itens, tiers, decisões, perguntas por fase e glossário
 - [`AGENTS.md`](AGENTS.md): regras e contexto do projeto para desenvolvedores e agentes
 
 ## Licença

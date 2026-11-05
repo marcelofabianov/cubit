@@ -2,7 +2,7 @@
 
 Mod de Minecraft que adiciona um robô companheiro fofo, movido a bateria, feito para o modpack [Iron Meridian](https://github.com/marcelofabianov/iron-meridian): singleplayer, de tecnologia e construção, sem magia.
 
-**Comece por:** [`robo-companheiro.md`](robo-companheiro.md), a visão geral com as fases e o mapa da documentação em `_docs/`. As respostas em `_docs/perguntas/` são a fonte da verdade e prevalecem sobre os outros documentos.
+**Comece por:** [`README.md`](README.md), a visão geral com as fases, e [`_docs/README.md`](_docs/README.md), o mapa da documentação. As respostas em `_docs/perguntas/` são a fonte da verdade e prevalecem sobre os outros documentos.
 
 ## Estado atual
 
