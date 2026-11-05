@@ -4,12 +4,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import io.github.marcelofabianov.cubit.domain.energy.Battery;
+import io.github.marcelofabianov.cubit.domain.energy.ConsumptionExtras;
 import io.github.marcelofabianov.cubit.domain.energy.Energy;
 import io.github.marcelofabianov.cubit.domain.energy.Percentage;
+import io.github.marcelofabianov.cubit.domain.energy.PowerState;
+import io.github.marcelofabianov.cubit.domain.energy.RobotActivity;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 
 class TierSpecTest {
+  private static final ConsumptionExtras NO_EXTRAS =
+      new ConsumptionExtras(Energy.ZERO, Energy.ZERO, Energy.ZERO, Energy.ZERO);
+  private static final RobotActivity WALKING = new RobotActivity(true, false, false, false, 0);
   private static final int ANY_SLOTS = 27;
   private static final int ANY_HEALTH = 25;
   private static final int ANY_RADIUS = 15;
@@ -32,7 +38,8 @@ class TierSpecTest {
   private static final double ULTIMATE_SPEED = 2.0;
 
   private static TierSpec spec(Energy capacity, Energy moving, Energy recharge) {
-    return new TierSpec(capacity, moving, recharge, ANY_SLOTS, ANY_HEALTH, ANY_RADIUS, 1);
+    return new TierSpec(
+        capacity, moving, recharge, ANY_SLOTS, ANY_HEALTH, ANY_RADIUS, 1, NO_EXTRAS);
   }
 
   @Test
@@ -43,13 +50,15 @@ class TierSpecTest {
 
   @Test
   void movingForOneTickSpendsTheTierConsumption() {
-    assertEquals(BASE_AFTER_MOVING, BASE.moveOneTick(BASE.newBattery(FULL)).charge());
+    assertEquals(
+        BASE_AFTER_MOVING,
+        BASE.spendOneTick(BASE.newBattery(FULL), PowerState.ACTIVE, WALKING).charge());
   }
 
   @Test
   void movingWithLessThanTheConsumptionEmptiesTheBattery() {
     Battery battery = new Battery(BASE_CAPACITY, LESS_THAN_MOVING);
-    assertEquals(Energy.ZERO, BASE.moveOneTick(battery).charge());
+    assertEquals(Energy.ZERO, BASE.spendOneTick(battery, PowerState.ACTIVE, WALKING).charge());
   }
 
   @Test
@@ -60,19 +69,25 @@ class TierSpecTest {
   @Test
   void differentTiersApplyTheirOwnNumbers() {
     Battery battery = ULTIMATE.newBattery(HALF);
-    assertEquals(ULTIMATE_AFTER_MOVING, ULTIMATE.moveOneTick(battery).charge());
+    assertEquals(
+        ULTIMATE_AFTER_MOVING, ULTIMATE.spendOneTick(battery, PowerState.ACTIVE, WALKING).charge());
     assertEquals(ULTIMATE_AFTER_RECHARGE, ULTIMATE.rechargeOneTick(battery).charge());
   }
 
   @Test
   void rejectsZeroValuesThatWouldBreakTheRobot() {
     assertThrows(
-        IllegalArgumentException.class, () -> new TierSpec(Energy.ZERO, ONE, ONE, 1, 1, 1, 1));
+        IllegalArgumentException.class,
+        () -> new TierSpec(Energy.ZERO, ONE, ONE, 1, 1, 1, 1, NO_EXTRAS));
     assertThrows(
-        IllegalArgumentException.class, () -> new TierSpec(ONE, ONE, Energy.ZERO, 1, 1, 1, 1));
-    assertThrows(IllegalArgumentException.class, () -> new TierSpec(ONE, ONE, ONE, 0, 1, 1, 1));
-    assertThrows(IllegalArgumentException.class, () -> new TierSpec(ONE, ONE, ONE, 1, 0, 1, 1));
-    assertThrows(IllegalArgumentException.class, () -> new TierSpec(ONE, ONE, ONE, 1, 1, 0, 1));
+        IllegalArgumentException.class,
+        () -> new TierSpec(ONE, ONE, Energy.ZERO, 1, 1, 1, 1, NO_EXTRAS));
+    assertThrows(
+        IllegalArgumentException.class, () -> new TierSpec(ONE, ONE, ONE, 0, 1, 1, 1, NO_EXTRAS));
+    assertThrows(
+        IllegalArgumentException.class, () -> new TierSpec(ONE, ONE, ONE, 1, 0, 1, 1, NO_EXTRAS));
+    assertThrows(
+        IllegalArgumentException.class, () -> new TierSpec(ONE, ONE, ONE, 1, 1, 0, 1, NO_EXTRAS));
   }
 
   @Test
@@ -87,7 +102,7 @@ class TierSpecTest {
   }
 
   private static TierSpec speedOf(double multiplier) {
-    return new TierSpec(ONE, ONE, ONE, 1, 1, 1, multiplier);
+    return new TierSpec(ONE, ONE, ONE, 1, 1, 1, multiplier, NO_EXTRAS);
   }
 
   @Test

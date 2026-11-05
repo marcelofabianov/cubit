@@ -38,6 +38,16 @@ final class RobotInventory {
     return container;
   }
 
+  /** Every slot counts as taken, even with an incomplete stack. */
+  boolean isFull() {
+    for (int slot = 0; slot < container.getContainerSize(); slot++) {
+      if (container.getItem(slot).isEmpty()) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   void fill(List<ItemStack> saved, int slots) {
     container = new SimpleContainer(slots);
     surplus.clear();

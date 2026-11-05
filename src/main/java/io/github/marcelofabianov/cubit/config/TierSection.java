@@ -1,5 +1,6 @@
 package io.github.marcelofabianov.cubit.config;
 
+import io.github.marcelofabianov.cubit.domain.energy.ConsumptionExtras;
 import io.github.marcelofabianov.cubit.domain.energy.Energy;
 import io.github.marcelofabianov.cubit.domain.tier.TierSpec;
 import net.neoforged.neoforge.common.ModConfigSpec;
@@ -8,6 +9,10 @@ import net.neoforged.neoforge.common.ModConfigSpec;
 final class TierSection {
   private static final String BATTERY_CAPACITY = "battery_capacity";
   private static final String MOVING_CONSUMPTION = "moving_consumption_per_tick";
+  private static final String FULL_INVENTORY_EXTRA = "full_inventory_extra_per_tick";
+  private static final String WATER_EXTRA = "water_extra_per_tick";
+  private static final String NEGATIVE_CONDITION_EXTRA = "negative_condition_extra_per_tick";
+  private static final String CLIMB_EXTRA = "climb_extra_per_block";
   private static final String RECHARGE = "recharge_per_tick";
   private static final String INVENTORY_SLOTS = "inventory_slots";
   private static final String MAX_HEALTH = "max_health";
@@ -24,6 +29,10 @@ final class TierSection {
 
   private final ModConfigSpec.IntValue batteryCapacity;
   private final ModConfigSpec.IntValue movingConsumption;
+  private final ModConfigSpec.IntValue fullInventoryExtra;
+  private final ModConfigSpec.IntValue waterExtra;
+  private final ModConfigSpec.IntValue negativeConditionExtra;
+  private final ModConfigSpec.IntValue climbExtra;
   private final ModConfigSpec.IntValue recharge;
   private final ModConfigSpec.IntValue inventorySlots;
   private final ModConfigSpec.IntValue maxHealth;
@@ -34,6 +43,14 @@ final class TierSection {
     batteryCapacity = energy(builder, BATTERY_CAPACITY, defaults.batteryCapacity(), MIN_POSITIVE);
     movingConsumption =
         energy(builder, MOVING_CONSUMPTION, defaults.movingConsumptionPerTick(), MIN_CONSUMPTION);
+    ConsumptionExtras extras = defaults.extras();
+    fullInventoryExtra =
+        energy(builder, FULL_INVENTORY_EXTRA, extras.fullInventoryPerTick(), MIN_CONSUMPTION);
+    waterExtra = energy(builder, WATER_EXTRA, extras.waterPerTick(), MIN_CONSUMPTION);
+    negativeConditionExtra =
+        energy(
+            builder, NEGATIVE_CONDITION_EXTRA, extras.negativeConditionPerTick(), MIN_CONSUMPTION);
+    climbExtra = energy(builder, CLIMB_EXTRA, extras.climbPerBlock(), MIN_CONSUMPTION);
     recharge = energy(builder, RECHARGE, defaults.rechargePerTick(), MIN_POSITIVE);
     inventorySlots =
         builder.defineInRange(
@@ -59,7 +76,12 @@ final class TierSection {
         inventorySlots.get(),
         maxHealth.get(),
         callRadius.get(),
-        speedMultiplier.get());
+        speedMultiplier.get(),
+        new ConsumptionExtras(
+            new Energy(fullInventoryExtra.get()),
+            new Energy(waterExtra.get()),
+            new Energy(negativeConditionExtra.get()),
+            new Energy(climbExtra.get())));
   }
 
   private static ModConfigSpec.IntValue energy(

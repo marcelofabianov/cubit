@@ -211,13 +211,9 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity {
     return battery.level(Percentage.MAX);
   }
 
-  /** Spends only on the robot's own steps: being pushed, or a stuck route, costs nothing. */
+  /** Being pushed, or a stuck route, is not walking, so it costs nothing. */
   private void updateEnergy() {
-    boolean moved = stepMeter.moved(position());
-    boolean ownRoute = !getNavigation().isDone() || getMoveControl().hasWanted();
-    if (powerState == PowerState.ACTIVE && ownRoute && moved) {
-      battery = spec().moveOneTick(battery);
-    }
+    battery = spec().spendOneTick(battery, powerState, stepMeter.measure(this, inventory.isFull()));
     battery = inventory.energySlot().charge(battery, spec().rechargePerTick());
     PowerState next = CubitMod.CONFIG.powerRules().afterEnergyChange(powerState, battery);
     if (next != powerState) {
@@ -272,6 +268,7 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity {
     super.customServerAiStep();
     rememberSafePosition();
     updateEnergy();
+    RobotLoadSpeed.update(this, inventory.isFull());
     inventory.dropSurplus(
         stack -> Containers.dropItemStack(level(), getX(), getY(), getZ(), stack));
     if (tickCount % CubitMod.CONFIG.followRepathTicks() == 0) {

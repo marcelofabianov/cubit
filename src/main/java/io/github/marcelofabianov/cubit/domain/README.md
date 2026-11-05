@@ -20,6 +20,8 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 | `BurningAction` | O que o robô faz em chamas: nada, sair da lava, buscar água ou andar ao acaso |
 | `FollowDecision` | Escolhe a `FollowAction` conforme o estado, a dimensão e a distância |
 | `FollowingRobotPolicy` | Garante que só um robô siga o player |
+| `RobotActivity` | O que o robô faz no tick: andar, peso, água, altura subida e condição negativa. Quem chama informa, e o domínio decide o gasto |
+| `ConsumptionExtras` | Extras de energia de um `TierSpec`, por situação |
 | `SlotRecharge` | Reserva de FE do slot de energia e sua passagem para a bateria |
 | `InventoryFit` | Separa os itens que cabem nos slots do config dos que sobram |
 | `OwnerProtection` | Diz se um dano é do dono e, por isso, não fere o robô |
@@ -49,6 +51,8 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 - **Dano do dono:** só conta o que o jogo atribui a ele. O fogo de um isqueiro não tem autor, então fere (pergunta 119).
 - **Resgate no vazio:** a ordem é a posição segura, o dono online e o spawn do mundo. Sem destino possível, o item espera, porque nunca é destruído nem força um chunk a carregar (perguntas 147, 172 e 174).
 - **Consumo por deslocamento:** quem chama informa se o robô andou, e o domínio só gasta nesse caso (pergunta 257).
+- **Consumo por situação:** peso, água e subida só somam ao andar. A condição negativa soma mesmo parado, e só uma vez, ainda que haja várias. O robô inativo não gasta (perguntas 271 a 278).
+- **Subida em FE inteiro:** o extra é arredondado, porque energia é inteira (regra 13). Descer não devolve nada, porque criaria FE.
 - **Reserva do slot:** um item só é consumido quando a energia dele cabe, e a reserva nunca some, para a transferência não criar nem perder FE (regra 13 e pergunta 64).
 - **Excedente:** se o config reduzir os slots, o que não couber sobra, e quem chama o larga no chão. Nada é apagado (pergunta 187).
 - **Vínculo apontando para o próprio robô:** não conta como outro robô seguindo. Assim, um vínculo antigo não deixa o robô desligado.

@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import io.github.marcelofabianov.cubit.domain.energy.Battery;
+import io.github.marcelofabianov.cubit.domain.energy.ConsumptionExtras;
 import io.github.marcelofabianov.cubit.domain.energy.Energy;
 import io.github.marcelofabianov.cubit.domain.energy.Percentage;
 import io.github.marcelofabianov.cubit.domain.tier.RobotTier;
@@ -27,7 +28,15 @@ class RobotStateTest {
   private static final Energy CONSUMPTION = new Energy(10);
   private static final Energy RECHARGE = new Energy(500);
   private static final TierSpec SPEC =
-      new TierSpec(CAPACITY, CONSUMPTION, RECHARGE, SLOTS, MAX_HEALTH, RADIUS, 1);
+      new TierSpec(
+          CAPACITY,
+          CONSUMPTION,
+          RECHARGE,
+          SLOTS,
+          MAX_HEALTH,
+          RADIUS,
+          1,
+          new ConsumptionExtras(Energy.ZERO, Energy.ZERO, Energy.ZERO, Energy.ZERO));
 
   @Test
   void newRobotHasTheInitialChargeAndFullHealth() {
