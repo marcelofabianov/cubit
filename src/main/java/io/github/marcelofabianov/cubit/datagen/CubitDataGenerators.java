@@ -9,7 +9,7 @@ import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 
 /** Generates the files in src/generated, which are never edited by hand. */
-@EventBusSubscriber(modid = CubitMod.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = CubitMod.MOD_ID)
 public final class CubitDataGenerators {
   private CubitDataGenerators() {}
 

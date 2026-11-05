@@ -7,6 +7,7 @@ import java.util.List;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.gametest.framework.GameTestHelper;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -17,6 +18,8 @@ import net.minecraft.world.phys.Vec3;
 
 /** Places robots the way a player does: by using the item on a block. */
 final class GameTestRobots {
+  private static final String REMOVAL = "removal";
+
   private GameTestRobots() {}
 
   static RobotEntity placeNewRobot(GameTestHelper helper, Player player, BlockPos floor) {
@@ -40,6 +43,15 @@ final class GameTestRobots {
         new BlockHitResult(Vec3.atCenterOf(absolute), Direction.UP, absolute, false);
     player.setItemInHand(InteractionHand.MAIN_HAND, stack);
     stack.useOn(new UseOnContext(player, InteractionHand.MAIN_HAND, hit));
+  }
+
+  /**
+   * A player the server sees as online. The only way in 1.21.1 is marked for removal and has no
+   * replacement, so it stays here, the one place to change when the game is updated.
+   */
+  @SuppressWarnings(REMOVAL)
+  static ServerPlayer onlinePlayer(GameTestHelper helper) {
+    return helper.makeMockServerPlayerInLevel();
   }
 
   static List<RobotEntity> robots(GameTestHelper helper) {
