@@ -96,7 +96,7 @@ O significado de cada pilar, os checklists e a matriz de decisão estão em [`_d
 19. **Autoridade do servidor:** toda regra roda no servidor. O cliente só exibe e pede ações.
 20. **Dono do robô:** toda ação confere o dono. O servidor valida dono e distância de todo pacote recebido do cliente.
 21. **Orçamento de tick:** nada pesado a cada tick. Varreduras rodam em intervalos e sem alocação desnecessária.
-22. **Chunks:** nunca carregue um chunk à força nem leia um bloco sem confirmar que ele está carregado.
+22. **Chunks:** nunca carregue um chunk à força nem leia um bloco sem confirmar que ele está carregado. A exceção é o Servidor e as antenas da Fase 5, por ação do player, com limites no config.
 23. **Separação do cliente:** código comum nunca referencia classes de `client/`.
 24. **Dependências opcionais:** o mod precisa abrir sem elas. LambDynamicLights e Jade ficam isolados.
 

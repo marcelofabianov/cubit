@@ -15,6 +15,7 @@ Este é o mapa dos documentos do projeto. A apresentação do mod e o roadmap fi
 | Scanners, alertas e lanterna | [`funcionalidades/sensores.md`](funcionalidades/sensores.md) |
 | Choque e modos de defesa | [`funcionalidades/combate.md`](funcionalidades/combate.md) |
 | Controle remoto e modo área | [`funcionalidades/controle-remoto.md`](funcionalidades/controle-remoto.md) |
+| Robôs especializados, antena, Servidor e storage wireless (Fase 5, planejada) | [`funcionalidades/robos-especializados.md`](funcionalidades/robos-especializados.md) |
 | Itens, blocos, nomes e receitas | [`itens.md`](itens.md) |
 | Números por tier | [`tiers.md`](tiers.md) |
 | Resumo das decisões | [`decisoes.md`](decisoes.md) |
@@ -33,4 +34,5 @@ Os números ficam em [`tiers.md`](tiers.md). As outras páginas apontam para lá
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 12:08 | Adiciona os robôs especializados. |
 | Marcelo Fabiano | 2026-11-05 00:15 | Cria o mapa dos documentos, vindo do `robo-companheiro.md`. |

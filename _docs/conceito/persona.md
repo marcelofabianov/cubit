@@ -44,12 +44,13 @@ O barulho das esteiras ao andar é um efeito do movimento, não uma forma de com
 
 ## Limites
 
-O Cubit **nunca ataca o próprio dono nem mobs pacíficos**, em nenhum modo de defesa, e só ataca mobs neutros para defender o player. As consequências para o combate estão em [`combate.md`](../funcionalidades/combate.md#quem-o-cubit-nunca-ataca).
+O Cubit **nunca ataca o próprio dono nem mobs pacíficos**, em nenhum modo de defesa, e só ataca mobs neutros para defender o player. Na Fase 5, o card de Pecuarista tem uma exceção, só na área de trabalho (pergunta 205), e o Defensor também protege quem está na área. As consequências para o combate estão em [`combate.md`](../funcionalidades/combate.md#quem-o-cubit-nunca-ataca).
 
 ## Histórico de modificações
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 12:08 | Cita as exceções dos cards da Fase 5. |
 | Marcelo Fabiano | 2026-11-05 00:56 | Tira a menção a magia da descrição. |
 | Marcelo Fabiano | 2026-11-05 00:17 | Define a expressão ao ligar e ao pegar fogo. |
 | Marcelo Fabiano | 2026-11-05 00:12 | Preenche os sons das reações e cita o intervalo mínimo dos textos. |

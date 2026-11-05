@@ -108,10 +108,39 @@ Valem para todos os tiers e ficam no config.
 
 A fornalha gasta cerca de 20 FE por tick enquanto funde.
 
+## Robôs especializados
+
+Planejado para a Fase 5. O tier Base não aceita cards.
+
+| Recurso | Base | Avançado | Elite | Ultimate |
+|---|---|---|---|---|
+| Card de especialidade | Bloqueado | ✔ | ✔ | ✔ |
+| Minerador equivale a picareta de | — | Ferro | Diamante | Diamante |
+| Minerador: Eficiência | — | — | III | V |
+| Minerador: Fortuna | — | — | II | III |
+| Minerador: Toque Suave | — | — | — | ✔ |
+| Minerador: Inquebrável e Remendo | — | — | — | ✔ |
+| Defensor: modos | — | Contra-atacar | + Agressivo | Todos, sem Pacífico |
+| Storage wireless | — | — | — | ✔ |
+
+| Valor geral | Valor |
+|---|---|
+| Cubits por área | Até 3 |
+| Teste antes de fechar um card | 20 a 30 robôs |
+
+**A definir:**
+
+- antenas e chunks por tier do Servidor, área e consumo por tier da antena e teto de chunks no mundo;
+- consumo do Servidor e da antena com o carregamento desligado;
+- custo por ação de cada card, percentuais de Inquebrável e Remendo e dano do Defensor;
+- altura máxima da área, limites por tick e distância do Dock ao Servidor ou à antena;
+- limite de animais do Pecuarista, intervalo do Pescador e custo do storage e tamanho dos canais.
+
 ## Histórico de modificações
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 12:08 | Adiciona os números previstos para os robôs especializados. |
 | Marcelo Fabiano | 2026-11-05 01:15 | Adiciona o intervalo do resgate no vazio. |
 | Marcelo Fabiano | 2026-11-05 00:12 | Adiciona a vida após o conserto e cita a exceção do roteiro. |
 | Marcelo Fabiano | 2026-11-04 21:29 | Indica que a busca de água vale em qualquer direção. |
