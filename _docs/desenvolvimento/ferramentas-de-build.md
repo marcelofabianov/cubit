@@ -25,7 +25,7 @@ Os comandos ficam no `Makefile`. Rode `make` para ver a lista.
 
 **`make gametest`:** o jogo termina com sucesso mesmo quando o mod falha ao carregar, então `scripts/development/run-gametests.sh` só aprova se o log trouxer `All N required tests passed`. Foi conferido que o comando falha com uma GameTest reprovada e com uma classe de cliente no código comum. O `pre-push` também o roda, e o log fica em `build/gametest.log`. O servidor roda em `run/gametest/`, separado do `run/` do `make client`, para um config editado à mão não mudar o resultado. Num diretório novo, o log mostra um erro por falta do `server.properties`, que o jogo cria em seguida.
 
-**GameTests:** ficam no pacote `gametest`, e cobrem o que está fora de `domain/` (regra 34 do `AGENTS.md`). Os testes usam as estruturas `empty.nbt` e `arena.nbt`, de `data/cubit/structure/`. Na `arena`, com 24 blocos de comprimento, o piso de pedra fica em `y=1`, porque o `y=0` relativo está uma camada abaixo da estrutura, e `helper.getEntities` não enxerga nada fora dela. Não compare posições com `helper.relativePos`, que devolve X e Z negativos: use `helper.absolutePos`.
+**GameTests:** ficam no pacote `gametest`, e cobrem o que está fora de `domain/` (regra 34 do `AGENTS.md`). Os testes usam as estruturas `empty.nbt` e `arena.nbt`, de `data/cubit/structure/`. O framework cerca cada estrutura com paredes e teto de barreira invisível, então a `arena`, com 24 blocos de comprimento e 8 de altura, limita o robô. Nela, o piso de pedra fica em `y=1`, porque o `y=0` relativo está uma camada abaixo da estrutura, e `helper.getEntities` não enxerga nada fora dela. Não compare posições com `helper.relativePos`, que devolve X e Z negativos: use `helper.absolutePos`.
 
 Receita com mais de 3 linhas vira um script `.sh` em `scripts/`, e o `Makefile` só o chama (regra 46 do `AGENTS.md`).
 
@@ -74,6 +74,7 @@ As bibliotecas de teste vêm só do Maven Central, para o build não depender do
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 21:49 | Registra as barreiras das GameTests. |
 | Marcelo Fabiano | 2026-11-04 20:21 | Documenta a arena e as coordenadas das GameTests. |
 | Marcelo Fabiano | 2026-11-04 19:56 | Adiciona o comando que confere os arquivos gerados. |
 | Marcelo Fabiano | 2026-11-04 19:12 | Registra que uma GameTest reprovada faz o comando falhar e como as GameTests rodam. |

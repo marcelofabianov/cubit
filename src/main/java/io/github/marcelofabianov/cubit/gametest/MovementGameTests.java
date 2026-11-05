@@ -255,7 +255,7 @@ public final class MovementGameTests {
     helper.succeed();
   }
 
-  private static ServerPlayer ownerAt(GameTestHelper helper, double x) {
+  static ServerPlayer ownerAt(GameTestHelper helper, double x) {
     ServerPlayer owner = helper.makeMockServerPlayerInLevel();
     Vec3 position = helper.absoluteVec(new Vec3(x, OWNER_Y, OWNER_Z));
     owner.moveTo(position.x, position.y, position.z);

@@ -51,6 +51,7 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity {
   private static final String INVALID_DATA_MESSAGE = "Robot {} has an invalid {}: {}";
   private static final String NO_OWNER_MESSAGE = "Robot {} has no owner. Nobody can interact.";
   private static final double ONE_BLOCK_STEP = 1;
+  private static final int BURNING_GOAL_PRIORITY = 0;
   private static final int FOLLOW_GOAL_PRIORITY = 1;
   private static final float BLOCKED_ROUTE = -1f;
   private static final float OPEN_ROUTE = 0f;
@@ -85,6 +86,7 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity {
 
   @Override
   protected void registerGoals() {
+    goalSelector.addGoal(BURNING_GOAL_PRIORITY, new BurningReactionGoal(this));
     goalSelector.addGoal(
         FOLLOW_GOAL_PRIORITY,
         new FollowOwnerGoal(
@@ -183,9 +185,10 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity {
 
   @Override
   protected void customServerAiStep() {
+    // Only a robot in the water or on fire may route through water: to walk out or to put itself
+    // out.
+    setPathfindingMalus(PathType.WATER, isInWater() || isOnFire() ? OPEN_ROUTE : BLOCKED_ROUTE);
     super.customServerAiStep();
-    // Only a robot already in the water may route through it, so it can walk on the bottom.
-    setPathfindingMalus(PathType.WATER, isInWater() ? OPEN_ROUTE : BLOCKED_ROUTE);
     if (tickCount % CubitMod.CONFIG.followRepathTicks() == 0) {
       switchOffIfReplaced();
     }
