@@ -146,6 +146,10 @@ O robô atual é o primeiro, de uso geral. O mod pode ter robôs especializados 
 
 47. **Toda pergunta respondida fica registrada:** qualquer pergunta feita ao desenvolvedor e respondida por ele entra em `_docs/perguntas/`, no arquivo da fase e com o próximo número livre, antes de seguir para o próximo passo. Vale também para pergunta não bloqueante e para resposta que só confirma a recomendação. Resposta que muda outra aponta para ela. A exceção é a autorização de uma ação pontual, como commit, push, merge ou apagar uma branch, que vale só para aquela vez.
 
+### Mudança no que está documentado
+
+48. **O documentado pode mudar:** se um impedimento técnico aparecer ao avançar, a decisão pode ser alterada ou desfeita. O impedimento é mostrado com evidência, o desenvolvedor decide, e a nova resposta aponta para a antiga. O que já foi publicado continua seguindo a regra 18.
+
 ## Git
 
 - **Autorização:** nunca faça commit, push, merge, tag, release ou PR sem autorização explícita para aquela ação. Antes, mostre os arquivos, o resumo e a mensagem proposta.
