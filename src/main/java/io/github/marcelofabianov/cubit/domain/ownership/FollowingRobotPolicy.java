@@ -31,6 +31,13 @@ public record FollowingRobotPolicy(PowerRules powerRules) {
   }
 
   /**
+   * An active robot without the place cannot follow, and only a click on a switched-off one can.
+   */
+  public boolean holdsThePlace(UUID robot, Optional<UUID> follower) {
+    return follower.filter(robot::equals).isPresent();
+  }
+
+  /**
    * Collecting a robot, its death and entering the base free the place only if it was following.
    */
   public Optional<UUID> release(UUID robot, Optional<UUID> follower) {

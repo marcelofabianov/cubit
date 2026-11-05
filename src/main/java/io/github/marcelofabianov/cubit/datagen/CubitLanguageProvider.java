@@ -1,6 +1,7 @@
 package io.github.marcelofabianov.cubit.datagen;
 
 import io.github.marcelofabianov.cubit.CubitMod;
+import io.github.marcelofabianov.cubit.player.ResetCommand;
 import io.github.marcelofabianov.cubit.registry.CubitBlocks;
 import io.github.marcelofabianov.cubit.registry.CubitCreativeTabs;
 import io.github.marcelofabianov.cubit.registry.CubitEntities;
@@ -15,6 +16,8 @@ final class CubitLanguageProvider extends LanguageProvider {
   private static final String DAMAGED_ROBOT_NAME = "Damaged Cubit";
   private static final String TOOLBOX_NAME = "Toolbox";
   private static final String DOCK_NAME = "Induction Dock";
+  private static final String RESET_CLEARED = "Follow link cleared.";
+  private static final String RESET_NOBODY = "No Cubit is following you.";
 
   CubitLanguageProvider(PackOutput output) {
     super(output, CubitMod.MOD_ID, LOCALE);
@@ -28,5 +31,7 @@ final class CubitLanguageProvider extends LanguageProvider {
     add(CubitItems.DAMAGED_GENERAL_ROBOT.get(), DAMAGED_ROBOT_NAME);
     add(CubitItems.TOOLBOX.get(), TOOLBOX_NAME);
     add(CubitBlocks.INDUCTION_DOCK.get(), DOCK_NAME);
+    add(ResetCommand.CLEARED_KEY, RESET_CLEARED);
+    add(ResetCommand.NOBODY_KEY, RESET_NOBODY);
   }
 }

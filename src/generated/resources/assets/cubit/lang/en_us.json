@@ -1,5 +1,7 @@
 {
   "block.cubit.induction_dock": "Induction Dock",
+  "command.cubit.reset.cleared": "Follow link cleared.",
+  "command.cubit.reset.nobody": "No Cubit is following you.",
   "entity.cubit.general_robot": "Cubit",
   "item.cubit.damaged_general_robot": "Damaged Cubit",
   "item.cubit.general_robot": "Cubit",

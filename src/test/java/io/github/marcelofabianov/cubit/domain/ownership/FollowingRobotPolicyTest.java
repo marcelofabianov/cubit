@@ -108,6 +108,13 @@ class FollowingRobotPolicyTest {
   }
 
   @Test
+  void aRobotHoldsThePlaceOnlyWhenTheLinkPointsToItself() {
+    assertEquals(true, POLICY.holdsThePlace(ROBOT, Optional.of(ROBOT)));
+    assertEquals(false, POLICY.holdsThePlace(ROBOT, Optional.of(OTHER_ROBOT)));
+    assertEquals(false, POLICY.holdsThePlace(ROBOT, NOBODY));
+  }
+
+  @Test
   void anotherRobotFollowsOnlyWhenTheLinkPointsToIt() {
     assertEquals(true, POLICY.otherRobotFollows(ROBOT, Optional.of(OTHER_ROBOT)));
     assertEquals(false, POLICY.otherRobotFollows(ROBOT, Optional.of(ROBOT)));
