@@ -17,7 +17,7 @@ Não há perguntas pendentes nesta fase.
 | 34 | O que acontece na morte, e como repara? | Vira item com inventário preservado e bateria zerada. A vida fica no item e se recupera na estação. O dono não o fere. As perguntas 118 e 119 detalham o item e o dano, e as perguntas 127 a 130, o item danificado e o conserto |
 | 35 | O que conta como robô ativo? | Substituída pela pergunta 65 |
 | 36 | Qual é o buffer e a entrada da estação? | 100 mil FE, configurável. A entrada foi alterada pela pergunta 61 |
-| 37 | Qual é a fonte de FE no ambiente de dev? | Powah só em runtime local, com as dependências a confirmar, ou um comando de debug |
+| 37 | Qual é a fonte de FE no ambiente de dev? | Substituída pela pergunta 294 |
 | 38 | Aprova a estrutura de pacotes do `AGENTS.md`? | Sim |
 | 39 | Aprova as premissas da versão mínima? | Sim. Estão listadas abaixo |
 | 43 | Quanta energia a redstone fornece, e quais itens valem? | 1 pó = 5.000 FE e 1 bloco = 45.000 FE, configuráveis |
@@ -94,7 +94,7 @@ Não há perguntas pendentes nesta fase.
 | 152 | Quem corrige documento desatualizado? | O agente sempre pergunta antes, mesmo quando a correção parece clara. Com a resposta, atualiza no mesmo PR |
 | 153 | Como foi o teste de lava com balde do roteiro manual? | Saiu como esperado, executado pelo desenvolvedor, e o caso está resolvido |
 | 154 | O template de PR deve pedir também `make check-generated`? | Sim, porque o `pre-push` já roda esse gate |
-| 155 | Onde documentar a fonte de FE no ambiente de dev, da pergunta 37? | Na etapa de energia, porque as dependências do Powah ainda não foram conferidas |
+| 155 | Onde documentar a fonte de FE no ambiente de dev, da pergunta 37? | Na etapa de energia, porque as dependências do Powah ainda não foram conferidas. A pergunta 294 dispensou o Powah |
 | 156 | O `robo-companheiro.md` continua? | Não. O mapa dos documentos vai para `_docs/README.md`, as fases ficam no Roadmap do `README.md`, e o arquivo é removido, porque o resto já existia em outros documentos |
 | 159 | O `Damaged Cubit` empilha? | Empilha em 1, como o item normal |
 | 160 | Como produzir o novo modelo do Cubit, sem Blockbench na máquina? | O agente gera o `geo.json` e o PNG com um script temporário em `tmp/`. Só os arquivos finais entram no Git |
@@ -158,6 +158,31 @@ Não há perguntas pendentes nesta fase.
 | 291 | Qual é o alcance para achar o bloco seguro? | Reusa `burning_wander_radius_blocks`, o mesmo da saída da lava, sem chave nova. Sem bloco seguro no alcance, ele fica e tenta de novo |
 | 292 | Em que pontos ficam os testes da reação aos blocos que ferem? | JUnit: quem reage, só o ativo, com fogo e lava primeiro. GameTests: sair de magma, de cacto encostado e da rosa, não reagir a bloco vizinho, desligado parado, extra sem acumular e voltar a seguir. Roteiro manual: ver no jogo |
 | 293 | Como foi o roteiro manual dos blocos que ferem? | Ok, executado pelo desenvolvedor, sem detalhar cada passo |
+| 294 | Qual é a fonte de FE no ambiente de dev para testar o Dock? | Nenhuma dependência nova. A redstone cobre o jogo, e a GameTest insere FE direto pela capability do bloco. O teste com cabos fica para o Iron Meridian. Substitui a pergunta 37 |
+| 295 | Como separar as funções do clique direito no Dock? | Clique: chama o Cubit ou, com um na base, libera. Shift + clique: abre a tela do Dock, com slot e energia. Clique com redstone na mão: a pilha entra no slot, como no Cubit |
+| 296 | Onde o Cubit fica na base, e qual é o formato do Dock? | Em cima de uma placa baixa, de cerca de meio bloco, com modelo próprio provisório. O Cubit sobe nela e fica centralizado |
+| 297 | O Dock tem dono? | Sim, quem o coloca. Só o dono usa o Dock e abre a tela |
+| 298 | O que acontece ao quebrar o Dock? | O item mantém a energia num data component, sem perder FE, e empilha em 1. O slot cai no chão, e o Cubit sai como numa liberação. O dono do bloco novo é quem o coloca |
+| 299 | Quem pode quebrar um Dock com dono? | Só o dono |
+| 300 | E ao colocar o item do Cubit num Dock ocupado ou de outro player? | Nada acontece: o item continua na mão, e nada é gasto |
+| 301 | O que faz o Cubit chamado que não chega ao Dock? | Sem rota ou preso, ele teleporta para o Dock. Complementa a pergunta 54 |
+| 302 | Como ficam explosões, pistões e administradores, com só o dono quebrando o Dock? | Explosões e pistões não afetam o Dock. Quem não é dono não o quebra, exceto um player no modo criativo com permissão de operador, que pode remover um Dock abandonado, e aí valem as regras de quebrar. Detalha a pergunta 299 |
+| 303 | E se o teleporte para o Dock não puder acontecer, com chunk descarregado ou bloqueio em cima? | O Cubit desiste e volta ao que fazia, sem perder nada. Detalha a pergunta 301 |
+| 304 | A recuperação de vida na base gasta FE do estoque? | Não. A vida sobe sempre que o robô está na base, mesmo com estoque zerado, para um Cubit consertado não ficar preso. Detalha a pergunta 63 |
+| 305 | Como o Dock troca energia e itens com outros blocos? | Só entrada: FE pela capability, em qualquer face, e redstone no slot por funil. Nada sai por funil nem por cabo. Um item só vira energia quando couber inteiro no estoque. Sem FE, o Cubit fica hibernando |
+| 306 | Quais são os nomes e valores novos do Dock? | Em `[general]`: `dock_energy_capacity` (100.000), `dock_input_per_tick` (5.000), `dock_full_heal_ticks` (1.200) e `dock_stuck_ticks` (100). No item: `cubit:dock_energy`. Na entidade: `DockPosition`. No bloco: `Owner`, `Energy` e `Slot` |
+| 307 | O que é salvo com o Cubit a caminho ou aguardando a base? | Só a hibernação. A caminho ou aguardando, ele volta ao que fazia ao carregar de novo. Se o Dock sumiu, ele acorda como numa liberação |
+| 308 | Como fica a tela do Dock? | Simples: um slot de redstone, uma barra de energia e o inventário do player, como o painel do Cubit. A tela melhor e os tooltips ficam para a Fase 3 |
+| 309 | Em que pontos ficam os testes do Dock? | JUnit: estoque e transferência sem criar nem perder FE, entrada por tick, ordem de chegada, sair com bateria cheia e vida proporcional. GameTests: colocar e quebrar com dono, capability de FE, funil e redstone, chamar, teleporte, ocupado e fila, hibernar, recarga, sair e religar, e salvar. Roteiro manual: modelo, tela e cliques |
+| 310 | Como foi o roteiro manual do Dock como máquina, passos 1 a 8? | Ok, executado pelo desenvolvedor, sem detalhar cada passo. O desenvolvedor quer outra aparência e outro formato para o bloco, e vai apresentar o desenho. A pergunta 311 muda a 296 |
+| 311 | Qual é o formato do Dock, seguindo a prancha de conceito? | O da prancha `induction-dock-prancha.png`, o mais fiel possível: torre atrás, com tela, e placa em U na frente, sobre 1 bloco de base. Ocupa 2 blocos de altura, como uma porta: uma parte invisível reserva o bloco de cima, e quebrar uma parte quebra as duas. Muda a pergunta 296 |
+| 312 | O Cubit fica na base com a carga completa? | Fica cerca de 3 s, configurável, com a tela no estado completa, e sai. Detalha a pergunta 55 |
+| 313 | Quando aparece cada estado da tela do Dock? | Desligada: sem energia e sem Cubit. Ociosa: com energia e sem Cubit. Carregando: Cubit na base recebendo. Completa: Cubit com a bateria cheia. Sem energia: Cubit na base, com o estoque zerado. Nome de contrato: `status` |
+| 314 | Como fazer o modelo do Dock? | Modelo JSON do jogo, com texturas por estado e LEDs acesos no escuro, sem GeckoLib |
+| 315 | Como ficou a aparência do Dock no jogo? | Aprovada pelo desenvolvedor. Os estados com o Cubit na base ainda não foram vistos |
+| 317 | Como fica a indicação de carga na placa do Dock? | Só com a fita verde na frente da placa, sem a mancha verde sob o Cubit. É uma diferença em relação à prancha, escolhida pelo desenvolvedor no teste. Detalha a pergunta 311 |
+| 318 | Como foi o roteiro manual do Cubit na base? | Concluído pelo desenvolvedor, que achou ótimo, sem detalhar cada passo |
+| 319 | Como se chama a chave do tempo com a tela completa? | `dock_complete_hold_ticks`, em `[general]`, com 60 de padrão. Detalha a pergunta 312 |
 
 ### Premissas aprovadas
 
@@ -173,6 +198,16 @@ Não há perguntas pendentes nesta fase.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 17:39 | Registra a resposta 319. |
+| Marcelo Fabiano | 2026-11-05 17:37 | Registra a resposta 318. |
+| Marcelo Fabiano | 2026-11-05 17:35 | Registra a resposta 317. |
+| Marcelo Fabiano | 2026-11-05 17:11 | Registra a resposta 315. |
+| Marcelo Fabiano | 2026-11-05 16:57 | Registra as respostas 311, 312, 313 e 314 e aponta a 310 para elas. |
+| Marcelo Fabiano | 2026-11-05 16:47 | Registra a resposta 310. |
+| Marcelo Fabiano | 2026-11-05 16:09 | Registra as respostas 306, 307, 308 e 309. |
+| Marcelo Fabiano | 2026-11-05 16:07 | Registra as respostas 302, 303, 304 e 305. |
+| Marcelo Fabiano | 2026-11-05 16:02 | Registra as respostas 298, 299, 300 e 301. |
+| Marcelo Fabiano | 2026-11-05 15:59 | Registra as respostas 294, 295, 296 e 297 e aponta as 37 e 155 para a 294. |
 | Marcelo Fabiano | 2026-11-05 15:46 | Registra a resposta 293. |
 | Marcelo Fabiano | 2026-11-05 15:32 | Registra as respostas 289, 290, 291 e 292. |
 | Marcelo Fabiano | 2026-11-05 15:09 | Registra a resposta 288. |

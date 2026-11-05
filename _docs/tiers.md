@@ -74,6 +74,8 @@ Valem para todos os tiers e ficam no config.
 | Bateria crítica, com expressão de sono | 10% |
 | Estoque do Induction Dock | 100 mil FE |
 | Entrada do Induction Dock | 5.000 FE/t |
+| Tempo sem avançar antes de teleportar ao Dock | 5 s |
+| Tempo com a tela completa antes de sair da base | 3 s |
 | Tempo para recuperar toda a vida na base | ~1 min |
 | Vida ao sair do conserto | 25% |
 | Intervalo para tentar de novo o resgate no vazio | 20 ticks |
@@ -161,6 +163,8 @@ Planejado para a Fase 5. O tier Base não aceita cards.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 17:15 | Adiciona o tempo com a tela completa. |
+| Marcelo Fabiano | 2026-11-05 16:09 | Adiciona o tempo sem avançar até o Dock. |
 | Marcelo Fabiano | 2026-11-05 14:40 | Adiciona o consumo por atividade e os novos valores de autonomia. |
 | Marcelo Fabiano | 2026-11-05 12:08 | Adiciona os números previstos para os robôs especializados. |
 | Marcelo Fabiano | 2026-11-05 01:15 | Adiciona o intervalo do resgate no vazio. |

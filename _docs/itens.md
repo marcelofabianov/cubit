@@ -26,7 +26,7 @@
 | Advanced Module | `cubit:advanced_module` | A definir |
 | Elite Module | `cubit:elite_module` | A definir |
 | Ultimate Module | `cubit:ultimate_module` | A definir |
-| Induction Dock | `cubit:induction_dock` | A definir |
+| Induction Dock | `cubit:induction_dock` | A definir no fechamento da fase |
 | Base Power Bank | `cubit:base_power_bank` | A definir |
 | Advanced Power Bank | `cubit:advanced_power_bank` | A definir |
 | Elite Power Bank | `cubit:elite_power_bank` | A definir |
@@ -97,12 +97,16 @@ Estes nomes não mudam sem migração (regra 18 do `AGENTS.md`).
 |---|---|---|
 | Componente do item | `cubit:robot_state` | `tier`, `energy` e `health` |
 | Componente do item | `cubit:energy_slot` | Item do slot de energia e reserva de FE, também no item danificado |
+| Componente do item do Dock | `cubit:dock_energy` | Energia do estoque |
 | Componente do item | `cubit:robot_inventory` | Conteúdo do inventário, também no item danificado |
 | Componente do item danificado | `cubit:last_safe_position` | Dimensão e posição seguras do robô |
 | Componente do item danificado | `cubit:robot_owner` | UUID do dono |
 | Tipo de receita | `cubit:robot_repair` | Campos `damaged_robot`, `toolbox` e `result` |
 | Dados do mundo | `cubit_dead_robots` | Robôs mortos com o dono offline |
 | NBT da entidade | `Owner`, `Tier`, `Energy`, `PowerState`, `LastSafePosition`, `Inventory` e `EnergySlot` | Dono, tier, carga da bateria, estado, última posição segura, inventário, com `Slot` em cada item, e slot de energia |
+| NBT do bloco do Dock | `Owner`, `Energy` e `Slot` | Dono, estoque e item do slot |
+| Estado do bloco do Dock | `facing`, `half` e `status` | Direção, parte de baixo ou de cima e estado da tela: `off`, `idle`, `charging`, `complete` ou `no_energy` |
+| NBT da entidade na base | `DockPosition` | Posição do Dock em que hiberna |
 | Dados do player | `cubit:following_robot` | `robot`: o UUID do robô que segue, ou nada |
 
 O estado salvo é validado ao entrar no jogo, sem derrubá-lo (regra 17 do `AGENTS.md`):
@@ -119,6 +123,8 @@ O estado salvo é validado ao entrar no jogo, sem derrubá-lo (regra 17 do `AGEN
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 16:57 | Adiciona os estados do bloco do Dock. |
+| Marcelo Fabiano | 2026-11-05 16:09 | Adiciona os contratos do Induction Dock. |
 | Marcelo Fabiano | 2026-11-05 12:52 | Adiciona os contratos do slot de energia. |
 | Marcelo Fabiano | 2026-11-05 12:08 | Adiciona os itens previstos na Fase 5. |
 | Marcelo Fabiano | 2026-11-05 02:11 | Adiciona os contratos do inventário. |

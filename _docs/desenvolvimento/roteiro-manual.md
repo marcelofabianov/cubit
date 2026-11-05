@@ -131,6 +131,40 @@ Para conferir a carga, use `/data get entity @e[type=cubit:general_robot,limit=1
 | 7 | Ponha fogo nele, com o inventário cheio | Ele foge na velocidade normal de chamas, e a carga cai mais rápido |
 | 8 | Avalie o peso, a água e a subida | Os efeitos são sentidos. Se não forem, ajuste os números |
 
+## Induction Dock
+
+| # | Faça | Espere |
+|---|---|---|
+| 1 | Abra a aba **Cubit** e coloque um `Induction Dock`. Compare com a prancha `induction-dock-prancha.png`, nos seis lados | Torre com tela, com a frente virada para você, e placa em U na frente. Com o bloco de cima ocupado, ele não é colocado |
+| 1a | Olhe a tela sem energia, depois dê redstone | Tela apagada. Com energia, círculo ciano e LEDs ciano. No escuro, os LEDs continuam acesos |
+| 2 | Clique com redstone e com bloco de redstone na mão | A pilha entra no slot e vira energia, um item por vez |
+| 3 | Shift + botão direito, com a mão vazia | Abre a tela com o nome do bloco, o slot, a barra de energia e o inventário |
+| 4 | Guarde outro item no slot, com clique e Shift + clique | Só a redstone entra |
+| 5 | Encha o estoque com redstone | A barra enche, e o item que não couber inteiro fica no slot |
+| 6 | Coloque um funil em cima, apontando para o Dock, com redstone | A redstone entra no Dock |
+| 7 | Em modo sobrevivência, quebre o Dock com energia, com outro item no slot | Cai o item do Dock, que devolve a energia ao ser colocado, e o item do slot |
+| 8 | Explode um TNT ao lado | O Dock continua lá |
+| 9 | Num servidor com outro player, tente usar e quebrar o Dock | Ele não abre a tela e não quebra. No modo criativo com permissão de operador, quebra |
+
+## Cubit na base
+
+Use `/data get entity @e[type=cubit:general_robot,limit=1,sort=nearest] PowerState` para conferir o estado.
+
+| # | Faça | Espere |
+|---|---|---|
+| 1 | Com um Cubit sem carga na mão, clique no Dock | Ele aparece em cima da placa, de costas para a torre, com `HIBERNATING`. Na tela do Dock, carregando. Sem energia no estoque, sem energia |
+| 2 | Dê redstone ao Dock | O Cubit carrega, e a tela mostra as barras verdes, e a fita da frente da placa fica verde |
+| 3 | Clique no Cubit na base, depois Shift + clique | Abre o inventário. Depois, ele é recolhido |
+| 4 | Coloque de novo, com vida baixa (`/data merge entity ... {Health:5f}`) | A vida sobe, cerca de 1 min até encher, mesmo sem energia |
+| 5 | Com ele cheio | A tela mostra completa por cerca de 3 s, e ele sai e volta a seguir |
+| 6 | Com um Cubit seguindo a até 15 blocos, clique no Dock | Ele anda até o Dock, sobe na placa e hiberna |
+| 7 | Clique no Dock com o Cubit na base | Ele é liberado e volta a seguir |
+| 8 | Coloque-o atrás de uma parede, sem rota, e clique no Dock | Depois de cerca de 5 s preso, ele aparece no Dock |
+| 9 | Chame com o Dock ocupado | Ele para perto e aguarda. Quando o Dock libera, entra. Com outro Dock livre no raio, vai até ele |
+| 10 | Com outro Cubit seguindo, deixe o da base sair | O que sai fica parado e desligado, na frente do Dock |
+| 11 | Quebre o Dock com o Cubit na base | Ele é liberado, sem perder nada |
+| 12 | Saia e entre no mundo com o Cubit na base | Ele continua hibernando |
+
 ## Morte e conserto
 
 Use `/kill @e[type=cubit:general_robot,limit=1,sort=nearest]` para matar o robô.
@@ -160,6 +194,10 @@ Use `/kill @e[type=cubit:general_robot,limit=1,sort=nearest]` para matar o robô
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 17:35 | Tira o brilho verde do roteiro do Dock. |
+| Marcelo Fabiano | 2026-11-05 17:15 | Adiciona o Cubit na base. |
+| Marcelo Fabiano | 2026-11-05 16:57 | Adota a aparência da prancha no roteiro do Dock. |
+| Marcelo Fabiano | 2026-11-05 16:22 | Adiciona o Induction Dock como máquina. |
 | Marcelo Fabiano | 2026-11-05 15:32 | Adiciona os blocos que ferem. |
 | Marcelo Fabiano | 2026-11-05 14:40 | Adiciona o consumo por situação. |
 | Marcelo Fabiano | 2026-11-05 13:54 | Zera a bateria por comando, com o slot vazio, e adiciona o mínimo visível das barras. |
