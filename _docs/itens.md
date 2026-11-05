@@ -58,8 +58,15 @@ Receitas provisórias, só com recursos do jogo puro, a ajustar nos testes:
 ## Morrer e consertar
 
 - **Item por tipo:** cada tipo de robô tem o próprio item danificado. O do robô de uso geral é o `Damaged Cubit`.
-- **Regras do item:** guarda o estado do robô, com o inventário preservado e a bateria zerada. Empilha em 1. Não pode ser colocado no mundo, não queima, não some com o tempo e não entra no inventário do robô nem em shulker boxes.
-- **Vazio:** cair no vazio não destrói o item, que reaparece na última posição segura do robô.
+- **Regras do item:** guarda o estado do robô, com o inventário preservado e a bateria zerada, e o dono, só para o resgate no vazio. Empilha em 1. Não pode ser colocado no mundo, não some com o tempo e não entra no inventário do robô nem em shulker boxes.
+- **Dano:** nenhum dano o destrói, como fogo, explosão ou cacto. Só o comando `/kill` o remove.
+- **Vazio:** cair no vazio não destrói o item, que volta para o primeiro destino possível:
+  1. a última posição segura do robô, no chão e fora de fogo, lava e água, se estiver na mesma dimensão e num chunk carregado;
+  2. o inventário do dono online, ou os pés dele, com o inventário cheio;
+  3. o spawn do mundo, se o chunk estiver carregado;
+  4. nenhum destino possível: fica parado logo abaixo do mundo e tenta de novo depois de um intervalo, sem carregar chunk à força.
+- **Vínculo:** a morte libera o vínculo de quem segue. Com o dono offline, o mundo anota o robô morto, e o vínculo é limpo quando o dono entra.
+- **Criativo:** o `Damaged Cubit` e a `Toolbox` ficam na aba `cubit:main`.
 - **Conserto:** combine o `Damaged Cubit` com a `Toolbox`, na grade do inventário ou na mesa de craft. O robô sai com parte da vida, conforme [`tiers.md`](tiers.md#valores-gerais), e a bateria zerada. O Induction Dock recupera o resto.
 - **Toolbox:** um só item para todos os tipos de robô, consumido a cada conserto. Empilha até 16.
 
@@ -77,7 +84,11 @@ Estes nomes não mudam sem migração (regra 18 do `AGENTS.md`).
 | Onde | Nome | Conteúdo |
 |---|---|---|
 | Componente do item | `cubit:robot_state` | `tier`, `energy` e `health` |
-| NBT da entidade | `Owner`, `Tier`, `Energy` e `PowerState` | Dono, tier, carga da bateria e estado |
+| Componente do item danificado | `cubit:last_safe_position` | Dimensão e posição seguras do robô |
+| Componente do item danificado | `cubit:robot_owner` | UUID do dono |
+| Tipo de receita | `cubit:robot_repair` | Campos `damaged_robot`, `toolbox` e `result` |
+| Dados do mundo | `cubit_dead_robots` | Robôs mortos com o dono offline |
+| NBT da entidade | `Owner`, `Tier`, `Energy`, `PowerState` e `LastSafePosition` | Dono, tier, carga da bateria, estado e última posição segura |
 | Dados do player | `cubit:following_robot` | `robot`: o UUID do robô que segue, ou nada |
 
 O estado salvo é validado ao entrar no jogo, sem derrubá-lo (regra 17 do `AGENTS.md`):
@@ -94,6 +105,7 @@ O estado salvo é validado ao entrar no jogo, sem derrubá-lo (regra 17 do `AGEN
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 01:15 | Detalha a proteção do item danificado, o resgate no vazio e os contratos novos. |
 | Marcelo Fabiano | 2026-11-05 00:17 | Define que o item danificado empilha em 1. |
 | Marcelo Fabiano | 2026-11-05 00:12 | Adiciona o item danificado, a Toolbox e o conserto. |
 | Marcelo Fabiano | 2026-11-04 19:24 | Define como colocar o robô e os contratos de save. |

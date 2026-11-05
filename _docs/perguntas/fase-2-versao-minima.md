@@ -57,7 +57,7 @@ Não há perguntas pendentes nesta fase.
 | 105 | De qual classe do Minecraft a `RobotEntity` herda? | `PathfinderMob`, com o dono num UUID próprio |
 | 106 | Quando entram as GameTests e os gates de datagen e `runServer`? | Já na etapa "Cubit no mundo", e a primeira GameTest prova que uma reprovação faz o `make gametest` falhar |
 | 108 | Como salvar o estado do Cubit como item? | Num componente único, `cubit:robot_state`, com tier, energia e vida. Os próximos dados entram como campos opcionais. O tipo do robô vem do próprio item |
-| 109 | Quem é o dono de um Cubit? | Quem o coloca. O item não guarda o dono, e o robô ganha um UUID novo a cada colocação |
+| 109 | Quem é o dono de um Cubit? | Quem o coloca. O item não guarda o dono, e o robô ganha um UUID novo a cada colocação. A pergunta 172 abre uma exceção para o item danificado |
 | 110 | Em que aba do criativo o Cubit aparece, e colocar no criativo gasta o item? | Numa aba própria, `cubit:main`. Colocar sempre gasta o item, porque ele carrega o estado do robô |
 | 111 | Qual gate detecta classe de cliente carregada no servidor, já que o `runServer` exige aceitar o EULA? | As GameTests no `pre-push`. Elas carregam o mod com o mesmo alvo de servidor dedicado, sem EULA, e a regra 37 do `AGENTS.md` foi ajustada |
 | 112 | Quando roda a conferência do datagen? | No `pre-push`, por meio de `scripts/development/check-generated.sh` |
@@ -66,7 +66,7 @@ Não há perguntas pendentes nesta fase.
 | 115 | Quando entra o som de esteira? | Na Fase 3, com os bipes. A Fase 2 fica sem esse som |
 | 116 | O Cubit leva dano na lava? | Sim, igual ao player sem armadura, e continua pegando fogo ao sair. Na etapa de morte, o item resultante não queima, para cumprir a pergunta 34 |
 | 117 | Como o Cubit se comporta pegando fogo? | Ativo, para de seguir e de teleportar, anda ao acaso evitando caminhos perigosos e busca água por perto para se apagar. É uma exceção à regra de a rota evitar água, só enquanto queima. Inativo ou na base, fica parado |
-| 118 | Como proteger o item que cai quando o Cubit morre? | Ele não queima nem some com o tempo. O caso de cair no vazio foi decidido na pergunta 147 |
+| 118 | Como proteger o item que cai quando o Cubit morre? | Ele não queima nem some com o tempo. O caso de cair no vazio foi decidido nas perguntas 147 e 172, e a pergunta 173 amplia a proteção |
 | 119 | O que a proteção do dono cobre, na pergunta 34? | Qualquer dano que o jogo atribua ao dono. O fogo de um isqueiro continua ferindo, porque o jogo não guarda quem o acendeu |
 | 120 | Em que ordem seguem o movimento, o fogo e a morte? | Primeiro o PR do movimento. Depois, um PR para o fogo e outro para a morte, antes do inventário |
 | 122 | Como foi o roteiro manual do movimento? | Ok, executado pelo desenvolvedor |
@@ -88,7 +88,7 @@ Não há perguntas pendentes nesta fase.
 | 144 | Em que ordem seguem as próximas tarefas? | Histórico só em `_docs/`, revisão dos `.md`, modelo e morte com o item danificado |
 | 145 | Qual é o nome no jogo e o ID da caixa de ferramentas? | `Toolbox` e `cubit:toolbox`, um só item para todos os tipos de robô (regra 42) |
 | 146 | O `Damaged Cubit` pode entrar no inventário do robô? | Não, como o item normal |
-| 147 | O `Damaged Cubit` que cai no vazio se perde? | Não. O item não é destruído e reaparece na última posição segura do robô. Decide o caso deixado em aberto na pergunta 118 |
+| 147 | O `Damaged Cubit` que cai no vazio se perde? | Não. O item não é destruído e reaparece na última posição segura do robô. Decide o caso deixado em aberto na pergunta 118, e a pergunta 172 detalha quando a posição não pode ser usada |
 | 150 | O roteiro manual pode citar números como resultado esperado? | Sim, como exceção, com o aviso de que os valores são os padrões de `tiers.md`, que prevalece |
 | 151 | A seção de lava do roteiro manual, com o teste de balde, continua pendente? | O desenvolvedor vai testar agora, e o resultado entra como uma nova resposta, a pergunta 153. Complementa a pergunta 143 |
 | 152 | Quem corrige documento desatualizado? | O agente sempre pergunta antes, mesmo quando a correção parece clara. Com a resposta, atualiza no mesmo PR |
@@ -107,6 +107,16 @@ Não há perguntas pendentes nesta fase.
 | 167 | Onde o projeto cita que o mod não tem magia? | Só na regra 2 do `AGENTS.md`, que continua valendo. A menção sai da descrição do mod, do `README.md`, do `persona.md` e da abertura do `AGENTS.md` |
 | 168 | O texto mais completo da descrição do mod está bom? | Sim. Ele descreve a versão mínima como ficará na `0.1.0` |
 | 169 | Como ficou o ícone menor na tela de Mods? | Ok, conferido pelo desenvolvedor |
+| 170 | A regra 4 vale para o conserto, que combina itens do mod? | Tem exceção: os materiais continuam só do jogo puro, e uma receita pode combinar itens do próprio mod. A regra 4 do `AGENTS.md` foi ajustada |
+| 171 | Como fica o JSON do conserto? | Num tipo de receita do mod, `cubit:robot_repair`, com campos para o item danificado, a `Toolbox` e o resultado, porque o 1.21.1 não tem receita que copie os dados do item |
+| 172 | O que acontece se a posição segura da pergunta 147 não puder ser usada? | O item vai para o inventário do dono. Por isso, o item danificado guarda o dono, o que refina a pergunta 109 só para ele |
+| 173 | O `Damaged Cubit` resiste a quais danos? | A todos, como explosão e cacto, além do fogo. Amplia as perguntas 118 e 127 |
+| 174 | E se o dono estiver offline, ou o item danificado não tiver dono salvo, no resgate do vazio? | O item vai ao spawn do mundo. Complementa a pergunta 172 |
+| 175 | Como liberar o vínculo de quem segue, se o robô morre com o dono offline? | O mundo anota o robô morto num `SavedData`, e o vínculo é limpo quando o dono entra |
+| 176 | Onde aparecem o `Damaged Cubit` e a `Toolbox`, e como ficam as texturas? | Os dois entram na aba `cubit:main`, com ícones de 16×16 desenhados pelo agente, para avaliação no jogo |
+| 177 | Em que pontos ficam os testes da morte? | JUnit no domínio: estado danificado, estado consertado e proteção do dono. GameTests: morte, vínculo, dono, dano, vazio e receita. Roteiro manual: grade, mesa e ícones |
+| 178 | Como foi o roteiro manual da morte e do conserto, e os ícones? | Ok, executado pelo desenvolvedor, conforme idealizado. O resultado de cada passo não foi detalhado |
+| 179 | O que conta como posição segura, na pergunta 147? | A última posição do robô no chão, fora de fogo, lava e água. A definição foi usada no roteiro aprovado na pergunta 178, sem resposta separada |
 
 ### Premissas aprovadas
 
@@ -122,6 +132,9 @@ Não há perguntas pendentes nesta fase.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 01:41 | Registra as respostas 178 e 179. |
+| Marcelo Fabiano | 2026-11-05 01:14 | Registra as respostas 174, 175, 176 e 177. |
+| Marcelo Fabiano | 2026-11-05 01:12 | Registra as respostas 170, 171, 172 e 173 e aponta as 109, 118 e 147 para elas. |
 | Marcelo Fabiano | 2026-11-05 01:01 | Registra as respostas 168 e 169. |
 | Marcelo Fabiano | 2026-11-05 00:56 | Registra a resposta 167. |
 | Marcelo Fabiano | 2026-11-05 00:55 | Registra a resposta 166 e aponta a 165 para ela. |
