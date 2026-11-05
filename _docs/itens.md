@@ -3,6 +3,8 @@
 | Nome | Descrição |
 |---|---|
 | Cubit | Robô companheiro, colocado no mundo como item |
+| Damaged Cubit | O que cai quando o Cubit morre. Guarda o estado dele e não pode ser colocado no mundo |
+| Toolbox | Conserta o Damaged Cubit e é consumida a cada conserto |
 | Cubit Remote | Envia comandos aos Cubits, marca áreas de trabalho e localiza os Cubits |
 | Advanced Module | Leva o Cubit do tier Base para o Advanced |
 | Elite Module | Leva o Cubit do tier Advanced para o Elite |
@@ -18,6 +20,8 @@
 | Nome | ID | Receita |
 |---|---|---|
 | Cubit | `cubit:general_robot` | A definir |
+| Damaged Cubit | `cubit:damaged_general_robot` | Não tem: cai quando o Cubit morre |
+| Toolbox | `cubit:toolbox` | Provisória, abaixo |
 | Cubit Remote | `cubit:remote` | A definir |
 | Advanced Module | `cubit:advanced_module` | A definir |
 | Elite Module | `cubit:elite_module` | A definir |
@@ -39,6 +43,10 @@ Receitas provisórias, só com recursos do jogo puro, a ajustar nos testes:
 | Elite | Diamante e ametista |
 | Ultimate | Netherite e estrela do Nether |
 
+### Toolbox
+
+7 ferros, 1 redstone e 1 obsidiana, na mesa de craft: colunas laterais com 3 ferros cada, e coluna central com ferro em cima, redstone no meio e obsidiana embaixo.
+
 ## Virar item
 
 - O player pode recolher o robô a qualquer momento, em qualquer estado.
@@ -46,6 +54,14 @@ Receitas provisórias, só com recursos do jogo puro, a ajustar nos testes:
 - O item empilha em 1 e mostra a bateria numa barra.
 - O item não entra no inventário do robô nem em shulker boxes.
 - O tipo do robô vem do próprio item, e o dono é quem o coloca. O robô ganha um UUID novo a cada colocação.
+
+## Morrer e consertar
+
+- **Item por tipo:** cada tipo de robô tem o próprio item danificado. O do robô de uso geral é o `Damaged Cubit`.
+- **Regras do item:** guarda o estado do robô, com o inventário preservado e a bateria zerada. Empilha em 1. Não pode ser colocado no mundo, não queima, não some com o tempo e não entra no inventário do robô nem em shulker boxes.
+- **Vazio:** cair no vazio não destrói o item, que reaparece na última posição segura do robô.
+- **Conserto:** combine o `Damaged Cubit` com a `Toolbox`, na grade do inventário ou na mesa de craft. O robô sai com parte da vida, conforme [`tiers.md`](tiers.md#valores-gerais), e a bateria zerada. O Induction Dock recupera o resto.
+- **Toolbox:** um só item para todos os tipos de robô, consumido a cada conserto. Empilha até 16.
 
 ## Colocar
 
@@ -78,6 +94,8 @@ O estado salvo é validado ao entrar no jogo, sem derrubá-lo (regra 17 do `AGEN
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 00:17 | Define que o item danificado empilha em 1. |
+| Marcelo Fabiano | 2026-11-05 00:12 | Adiciona o item danificado, a Toolbox e o conserto. |
 | Marcelo Fabiano | 2026-11-04 19:24 | Define como colocar o robô e os contratos de save. |
 | Marcelo Fabiano | 2026-11-04 17:16 | Troca o ID do robô para cubit:general_robot. |
 | Marcelo Fabiano | 2026-11-04 17:15 | Renomeia para português e atualiza os caminhos. |

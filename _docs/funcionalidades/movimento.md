@@ -11,7 +11,7 @@ O player escolhe entre o robô seguir ou atuar numa área. A marcação da área
 - Por causa das esteiras, ele não pula; só sobe um bloco por vez.
 - A rota evita água e lava, e ele não leva dano de queda.
 - **Na água:** se cair nela, afunda e anda no fundo, sem nadar e sem se afogar. O teleporte o resgata quando o player se afasta.
-- **Na lava:** leva dano igual ao player sem armadura e continua pegando fogo ao sair. Ativo, se colocarem lava no bloco dele, tenta ir para o bloco seguro mais próximo, mas a lava o deixa muito lento, e no tier Base ele costuma morrer antes de sair. Inativo, fica parado.
+- **Na lava:** leva dano igual ao player sem armadura e continua pegando fogo ao sair. Ativo, se colocarem lava no bloco dele, tenta ir para o bloco seguro mais próximo, mas a lava o deixa muito lento. Quanto menor o tier, maior a chance de morrer antes de sair, e no Base isso costuma acontecer. Inativo, fica parado.
 - O robô que segue anda até o player e para quando chega perto.
 - O robô que segue, se ficar longe demais do player, teleporta para perto, só na mesma dimensão.
 - Só se move no estado ativo. Inativo ou em hibernação, fica parado e não teleporta.
@@ -22,11 +22,12 @@ O player escolhe entre o robô seguir ou atuar numa área. A marcação da área
 Números: [valores gerais](../tiers.md#valores-gerais).
 
 - **Ativo:** para de seguir e de teleportar, e anda mais rápido. Nunca fica parado enquanto houver para onde ir.
-- **Com água por perto:** vai até ela para se apagar, em qualquer direção, inclusive acima ou abaixo por degraus. A rota só passa pela água nesse caso, ou se o robô já estiver nela.
+- **Com água por perto:** vai até ela para se apagar, em qualquer direção, inclusive acima ou abaixo por degraus. A busca vale só em chunks carregados. A rota só passa pela água nesse caso, ou se o robô já estiver nela.
 - **Água sem rota:** água coberta por um bloco, ou sem caminho até ela, como atrás de uma parede, não serve. Ele tenta outra água ou anda ao acaso.
 - **Sem água por perto:** anda ao acaso, evitando lava e fogo.
 - **Inativo ou em hibernação:** fica parado, porque só o robô ativo se move.
 - **Ao apagar:** volta a seguir na hora, pelas regras normais de movimento.
+- **Som:** faz um curto elétrico enquanto pega fogo. O som entra na Fase 3.
 
 ## Vários robôs, um seguindo
 
@@ -45,9 +46,10 @@ Números: [valores gerais](../tiers.md#valores-gerais).
 
 ## Vida e morte
 
-- Ao morrer, o robô vira item, com o inventário preservado e a bateria zerada. O item não queima, mesmo que o robô morra na lava.
-- A vida fica guardada no item e se recupera na base.
-- O dono não consegue ferir o próprio robô.
+- Ao morrer, o robô vira um `Damaged Cubit`, com o inventário preservado e a bateria zerada. O item não queima, mesmo que o robô morra na lava, e não some com o tempo. Se cair no vazio, reaparece na última posição segura do robô. As regras do item estão em [`itens.md`](../itens.md#morrer-e-consertar).
+- **Conserto:** com a `Toolbox`, na grade do inventário ou na mesa de craft. O robô sai com parte da vida, conforme [`tiers.md`](../tiers.md#valores-gerais), e a bateria zerada.
+- **Vida:** se recupera na base, que também recupera o resto depois do conserto.
+- **Dono:** nenhum dano que o jogo atribua ao dono fere o robô. O fogo de um isqueiro continua ferindo, porque o jogo não guarda quem o acendeu.
 
 ## Local de morte
 
@@ -57,6 +59,7 @@ Marca onde o player morreu e o leva até lá, se o tier permitir.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 00:12 | Detalha a morte, o conserto, a proteção do dono e a busca de água. |
 | Marcelo Fabiano | 2026-11-04 23:27 | Define a saída da lava. |
 | Marcelo Fabiano | 2026-11-04 22:01 | Define que o robô em chamas nunca fica parado. |
 | Marcelo Fabiano | 2026-11-04 21:29 | Define a busca de água em qualquer altura e o caso sem rota. |

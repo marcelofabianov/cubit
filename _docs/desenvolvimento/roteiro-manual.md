@@ -2,6 +2,8 @@
 
 O que está fora de `domain/` se cobre com GameTests e com este roteiro (regra 34 do `AGENTS.md`). Ele fica com o que uma GameTest não enxerga, como o visual e os cliques de verdade.
 
+Os números citados são os valores padrão de [`tiers.md`](../tiers.md), que prevalece (pergunta 150).
+
 ## Preparar
 
 1. Rode `make client`.
@@ -79,6 +81,7 @@ Use um balde de lava, com `/give @s minecraft:lava_bucket`. Ele tem 25 de vida e
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 00:12 | Avisa que os números citados são os padrões de tiers.md. |
 | Marcelo Fabiano | 2026-11-04 23:27 | Adiciona a saída da lava. |
 | Marcelo Fabiano | 2026-11-04 21:29 | Adiciona a água em outra altura e sem rota. |
 | Marcelo Fabiano | 2026-11-04 21:02 | Adiciona o comportamento em chamas. |

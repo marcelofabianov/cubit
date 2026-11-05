@@ -23,13 +23,18 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 ## Processo
 
 - **Fluxo de Git:** Gitflow, Semantic Versioning e Conventional Commits, com `homolog` para a release em teste e `release/X.Y.Z` para a release fechada. O fluxo completo está no [`AGENTS.md`](../AGENTS.md#fluxo-de-branches).
-- **Regras de desenvolvimento:** no [`AGENTS.md`](../AGENTS.md#regras-de-desenvolvimento). Os gates de commit estão ativos, e os de Java e Gradle entram na Fase 2.
+- **Regras de desenvolvimento:** no [`AGENTS.md`](../AGENTS.md#regras-de-desenvolvimento). Os gates de commit e de push estão ativos, inclusive os de Java e Gradle.
 - **Proteção de branches:** o plano atual do GitHub não permite em repositório privado, então valem só os gates locais.
 - **Fonte da verdade:** as respostas em `perguntas/` prevalecem sobre os outros documentos.
+- **Mapa dos documentos:** fica em [`README.md`](README.md), e as fases, no Roadmap do `README.md` da raiz.
 - **Pilares:** as decisões técnicas seguem a hierarquia de [`pilares.md`](desenvolvimento/pilares.md).
 - **Registro de perguntas:** toda pergunta respondida pelo desenvolvedor entra em `perguntas/` antes do próximo passo.
 - **Validação:** toda entrega é conferida contra os documentos `.md`, e artefatos complementam essa conferência.
 - **Config e testes na Fase 2:** o config entra antes da entidade e cresce a cada etapa. As GameTests e o gate de datagen entram na etapa "Cubit no mundo".
+- **Histórico de modificações:** só os `.md` de `_docs/` têm a tabela.
+- **Ordem da Fase 2:** movimento, fogo, lava e arquivos de som já entraram. Seguem a revisão dos `.md`, o modelo e a morte com o item danificado, antes do inventário.
+- **Documento desatualizado:** o agente sempre pergunta antes de corrigir, mesmo quando a correção parece clara.
+- **Números no roteiro manual:** ele pode citar os valores padrão como resultado esperado, e `tiers.md` prevalece.
 - **Gates de push:** as GameTests também detectam classe de cliente carregada no servidor, sem exigir o EULA, então o `runServer` não é um gate. O datagen reprova se `src/generated` ficar diferente do Git.
 
 ## Mod
@@ -42,17 +47,20 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Config:** `COMMON`, com chaves em `snake_case` por tipo de robô e tier, como `[general_robot.base]`.
 - **Entidade:** a `RobotEntity` herda de `PathfinderMob`, com o dono num UUID próprio.
 - **Estado como item:** um único componente, `cubit:robot_state`.
-- **Dono:** quem coloca o robô. O item não guarda o dono. Nenhum dano atribuído a ele fere o robô.
+- **Dono:** quem coloca o robô. O item não guarda o dono. Nenhum dano atribuído a ele fere o robô. O fogo de um isqueiro continua ferindo, porque o jogo não guarda quem o acendeu.
 - **Lava:** o robô ativo que está na lava vai para o bloco seguro mais próximo. A rota continua sem entrar em lava.
-- **Fogo:** o robô ativo em chamas anda ao acaso a 1,25× da velocidade, evita perigos e busca água em até 8 blocos. Ao apagar, volta a seguir.
-- **Morte:** o robô vira um item danificado, próprio por tipo, que não queima, não some com o tempo e não pode ser colocado no mundo. Conserta com uma caixa de ferramentas, consumida no craft, e sai com 25% da vida e a bateria zerada.
-- **Movimento:** velocidade de referência de 0,3. Na água, o robô afunda e anda no fundo, sem se afogar. Na lava, leva dano igual ao do player. Não há dano de queda. O som de esteira entra na Fase 3.
+- **Fogo:** o robô ativo em chamas anda ao acaso, mais rápido, evita perigos e nunca para enquanto houver para onde ir. Busca água só em chunks carregados, e ela precisa ter o topo livre e rota até ela. Inativo, fica parado. Ao apagar, volta a seguir. Os números estão em [`tiers.md`](tiers.md#valores-gerais).
+- **Morte:** o robô vira um item danificado, próprio por tipo, que não queima, não some com o tempo, não entra em shulker box nem no inventário do robô e não pode ser colocado no mundo. Se cair no vazio, reaparece na última posição segura do robô.
+- **Conserto:** usa a `Toolbox` (`cubit:toolbox`), na grade do inventário ou na mesa de craft. Ela é consumida a cada conserto e empilha até 16. O robô sai com parte da vida, conforme [`tiers.md`](tiers.md#valores-gerais), e a bateria zerada.
+- **Movimento:** a velocidade de referência está em [`tiers.md`](tiers.md#valores-gerais). Na água, o robô afunda e anda no fundo, sem se afogar. Na lava, leva dano igual ao do player. Não há dano de queda. O som de esteira entra na Fase 3.
 - **Criativo:** aba própria, `cubit:main`, e colocar sempre gasta o item.
 - **Estados:** ativo (ligado), inativo (desligado) e hibernação (na base, com o inventário e os slots acessíveis).
 - **Painel solar:** só funciona com o Cubit ativo, de dia em todos os tiers e à noite só em Elite e Ultimate. Coberto por um bloco, não carrega. O clima não tem efeito, e no Nether e no End não funciona. Fica abaixo do consumo.
 - **Induction Dock:** é a base de recarga, recebe energia por cabos ou redstone e tem um único slot, que também recarrega a Power Bank.
 - **Slot de energia do Cubit:** existe em todos os tiers e aceita uma Power Bank ou redstone por vez. A redstone entra na Fase 2, e a Power Bank na Fase 4.
 - **Comunicação:** bipes e expressões, com poucos textos simples e diretos.
+- **Sons:** oito sons, que entram na Fase 3. O bipe padrão toca nas trocas de expressão sem som exclusivo. O intervalo mínimo entre repetições será definido na Fase 3, e os sons são do desenvolvedor.
+- **Modelo:** a geometria melhora já na Fase 2, e as animações e as expressões seguem na Fase 3.
 - **Limites:** nunca ataca o dono nem mobs pacíficos. Só ataca mobs neutros para defender o player.
 - **Scanner:** `c:ores/*` significa a tag-mãe `c:ores` e suas subtags, porque tags não aceitam curinga.
 - **Estado do robô como item:** inclui as configurações, além de bateria, vida, inventário, tier, nome e cor.
@@ -61,6 +69,8 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 00:15 | Registra o novo lugar do mapa dos documentos. |
+| Marcelo Fabiano | 2026-11-05 00:12 | Atualiza os gates e aponta os números para tiers.md, e completa os resumos de fogo, morte, sons, modelo e processo. |
 | Marcelo Fabiano | 2026-11-04 23:27 | Registra a saída da lava. |
 | Marcelo Fabiano | 2026-11-04 21:19 | Registra o item danificado e o conserto. |
 | Marcelo Fabiano | 2026-11-04 21:02 | Detalha o comportamento em chamas. |

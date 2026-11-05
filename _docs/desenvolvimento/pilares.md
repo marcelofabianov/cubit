@@ -204,7 +204,7 @@ As regras numeradas citadas aqui são as do [`AGENTS.md`](../../AGENTS.md).
 |---|---|
 | Um gate reprova em arquivo que você não alterou | Corrigir no mesmo PR |
 | Um teste de outra área quebra | Investigar e corrigir; um bug real ganha issue própria |
-| Documento desatualizado em arquivo que você leu | Atualizar no mesmo PR |
+| Documento desatualizado em arquivo que você leu | Perguntar ao desenvolvedor e, com a resposta, atualizar no mesmo PR |
 
 Isso não autoriza refatorar um arquivo inteiro nem mudar o comportamento de outra funcionalidade. Comportamento novo é uma issue nova.
 
@@ -222,6 +222,7 @@ Isso não autoriza refatorar um arquivo inteiro nem mudar o comportamento de out
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 00:05 | Exige perguntar antes de atualizar documento desatualizado. |
 | Marcelo Fabiano | 2026-11-04 18:20 | Cita a regra de constantes. |
 | Marcelo Fabiano | 2026-11-04 17:57 | Cita os gates de formatação e análise estática. |
 | Marcelo Fabiano | 2026-11-04 17:51 | Adota os pilares de desenvolvimento, adaptados ao mod. |
