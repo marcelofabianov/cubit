@@ -7,12 +7,14 @@ Mod de Minecraft que adiciona um robô companheiro fofo, movido a bateria, feito
 ## Estado atual
 
 - **Etapa atual:** Fase 2, versão mínima. O projeto Gradle existe, e as funcionalidades entram por issue, na ordem combinada com o desenvolvedor.
+- **Já entrou:** colocar e recolher, seguir o player, vários robôs, fogo, lava e os arquivos de som.
+- **Próximos:** revisão dos `.md`, modelo e morte com o item danificado, antes do inventário.
 - **Comandos:** estão em [`_docs/desenvolvimento/ferramentas-de-build.md`](_docs/desenvolvimento/ferramentas-de-build.md).
 - **Limite:** não avance para as fases seguintes sem pedido explícito.
 
 ## Documentação
 
-- **Números:** ficam em `_docs/tiers.md`. As outras páginas apontam para lá, e o `README.md` traz só um resumo.
+- **Números:** ficam em `_docs/tiers.md`. As outras páginas apontam para lá. O `README.md` traz só um resumo, e o roteiro manual cita os valores padrão como resultado esperado.
 - **Perguntas:** ficam em `_docs/perguntas/`, com um arquivo por fase. Recomendação de pergunta pendente não vale como decidida.
 - **Decisões:** o resumo do que foi decidido fica em `_docs/decisoes.md`.
 - **Histórico:** todo `.md` em `_docs/` termina com uma tabela de histórico de modificações, e quem altera o arquivo adiciona uma linha no topo dela. Fora de `_docs/`, os `.md` não têm essa tabela.
@@ -136,13 +138,13 @@ O robô atual é o primeiro, de uso geral. O mod pode ter robôs especializados 
 44. **Os documentos validam a entrega:** toda entrega é conferida contra os documentos `.md`, e as respostas em `_docs/perguntas/` prevalecem sobre os demais. Artefatos, como testes, logs, relatórios e capturas de tela, são bem-vindos na validação, mas não substituem os documentos.
 45. **Validação no PR:** a descrição do PR informa os documentos conferidos e a evidência de cada um, incluindo os checklists dos pilares que se aplicam.
 
-### Perguntas
-
-47. **Toda pergunta respondida fica registrada:** qualquer pergunta feita ao desenvolvedor e respondida por ele entra em `_docs/perguntas/`, no arquivo da fase e com o próximo número livre, antes de seguir para o próximo passo. Vale também para pergunta não bloqueante e para resposta que só confirma a recomendação. Resposta que muda outra aponta para ela. A exceção é a autorização de uma ação pontual, como commit, push, merge ou apagar uma branch, que vale só para aquela vez.
-
 ### Comandos do projeto
 
 46. **Makefile:** os comandos do projeto ficam no `Makefile`. Receita com mais de 3 linhas vira um script `.sh` em `scripts/`, e o `Makefile` só o chama.
+
+### Perguntas
+
+47. **Toda pergunta respondida fica registrada:** qualquer pergunta feita ao desenvolvedor e respondida por ele entra em `_docs/perguntas/`, no arquivo da fase e com o próximo número livre, antes de seguir para o próximo passo. Vale também para pergunta não bloqueante e para resposta que só confirma a recomendação. Resposta que muda outra aponta para ela. A exceção é a autorização de uma ação pontual, como commit, push, merge ou apagar uma branch, que vale só para aquela vez.
 
 ## Git
 
@@ -185,7 +187,7 @@ io.github.marcelofabianov.cubit
 │   ├── robot/              // RobotType, capacidades que cada tipo combina
 │   ├── tier/               // RobotTier, TierSpec, TierCatalog (interface)
 │   ├── energy/             // Battery, PowerState (ativo, inativo, hibernação), regras de consumo e religamento
-│   ├── behavior/           // FollowDecision: seguir, parar ou teleportar
+│   ├── behavior/           // FollowDecision: seguir, parar ou teleportar; BurningAction: reagir a fogo e lava
 │   └── ownership/          // FollowingRobotPolicy
 ├── config/                 // ModConfigSpec → implementa TierCatalog
 ├── registry/               // DeferredRegisters
