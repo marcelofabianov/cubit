@@ -10,7 +10,7 @@ Rode uma vez em cada clone:
 make setup
 ```
 
-O script ativa os gates de commit, descritos em [`hooks-do-git.md`](hooks-do-git.md).
+O script ativa os gates de commit e de push, descritos em [`hooks-do-git.md`](hooks-do-git.md).
 
 O `gh` precisa usar a conta pessoal:
 
@@ -181,6 +181,7 @@ O primeiro passo, separando o que está decidido do que está pendente.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 00:12 | Cita os gates de push na preparação do ambiente. |
 | Marcelo Fabiano | 2026-11-04 23:45 | Limita o histórico aos arquivos de `_docs/`. |
 | Marcelo Fabiano | 2026-11-04 19:12 | Adota o template de pull request. |
 | Marcelo Fabiano | 2026-11-04 18:02 | Usa o Makefile na preparação do ambiente. |

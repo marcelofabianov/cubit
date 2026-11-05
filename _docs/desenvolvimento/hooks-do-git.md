@@ -31,7 +31,7 @@ Os hooks rodam só na máquina local. Eles não bloqueiam merges feitos pelo Git
 ## gitleaks
 
 - **O que faz:** procura senhas, tokens e chaves nas alterações antes do commit.
-- **Por que foi escolhido:** funciona como um único binário, sem depender de Java ou Gradle, que ainda não existem no projeto.
+- **Por que foi escolhido:** funciona como um único binário, sem depender de Java ou Gradle, que ainda não existiam no projeto quando ele foi adotado.
 - **Versão:** fixada em `scripts/development/setup-dev.sh`, com o checksum oficial.
 
 ## Quando um gate reprova
@@ -57,6 +57,7 @@ Ele exigiria aceitar o EULA em cada clone. As GameTests usam o mesmo alvo de ser
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 00:12 | Corrige o motivo da escolha do gitleaks. |
 | Marcelo Fabiano | 2026-11-04 23:45 | Limita o gate do histórico aos arquivos de `_docs/`. |
 | Marcelo Fabiano | 2026-11-04 19:56 | Ativa os gates de GameTests e datagen no push. |
 | Marcelo Fabiano | 2026-11-04 18:02 | Usa o Makefile na correção da formatação. |

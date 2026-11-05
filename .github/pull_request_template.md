@@ -18,6 +18,7 @@ Closes #
 
 - `./gradlew check --rerun-tasks`:
 - `make gametest`:
+- `make check-generated`:
 
 **Teste no Iron Meridian:**
 
