@@ -153,6 +153,11 @@ Não há perguntas pendentes nesta fase.
 | 286 | Estar sobre um bloco que fere gasta o extra de condição negativa? | Sim. Amplia a pergunta 275, e continua cobrando um extra só |
 | 287 | Onde entra essa reação? | Numa issue própria, a #60, depois da #59 e antes do Induction Dock |
 | 288 | Como foi o roteiro manual do consumo por situação? | Tudo passou conforme o roteiro, executado pelo desenvolvedor, sem detalhar cada passo. O único ponto encontrado foi o dos blocos que ferem (pergunta 284). Os números ficam como estão |
+| 289 | A rosa do wither e a estalactite, que têm a mesma classificação no jogo, contam como blocos que ferem? | Sim, as duas, sem lista fixa. Detalha a pergunta 284 |
+| 290 | Como detectar o bloco que fere, como um cacto encostado de lado? | Usa como referência como o player recebe dano, e o mesmo se aplica ao robô: blocos dentro da caixa de colisão dele e o bloco em que pisa. Um bloco só vizinho não conta |
+| 291 | Qual é o alcance para achar o bloco seguro? | Reusa `burning_wander_radius_blocks`, o mesmo da saída da lava, sem chave nova. Sem bloco seguro no alcance, ele fica e tenta de novo |
+| 292 | Em que pontos ficam os testes da reação aos blocos que ferem? | JUnit: quem reage, só o ativo, com fogo e lava primeiro. GameTests: sair de magma, de cacto encostado e da rosa, não reagir a bloco vizinho, desligado parado, extra sem acumular e voltar a seguir. Roteiro manual: ver no jogo |
+| 293 | Como foi o roteiro manual dos blocos que ferem? | Ok, executado pelo desenvolvedor, sem detalhar cada passo |
 
 ### Premissas aprovadas
 
@@ -168,6 +173,8 @@ Não há perguntas pendentes nesta fase.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 15:46 | Registra a resposta 293. |
+| Marcelo Fabiano | 2026-11-05 15:32 | Registra as respostas 289, 290, 291 e 292. |
 | Marcelo Fabiano | 2026-11-05 15:09 | Registra a resposta 288. |
 | Marcelo Fabiano | 2026-11-05 15:07 | Registra as respostas 284, 285, 286 e 287 e aponta a 275 para a 286. |
 | Marcelo Fabiano | 2026-11-05 14:40 | Registra a resposta 282. |

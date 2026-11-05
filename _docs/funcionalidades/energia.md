@@ -31,7 +31,7 @@ Os números estão em [`tiers.md`](../tiers.md#consumo-por-atividade), e o consu
 - **Inventário cheio:** com todos os slots ocupados, mesmo com pilhas incompletas, andar custa um extra, e a velocidade cai. Em chamas ou na lava, a velocidade não cai, porque fugir vem primeiro.
 - **Água:** andar em contato com a água custa um extra, inclusive numa poça rasa e ao fugir do fogo.
 - **Subir:** cada bloco de altura subido na própria rota custa um extra, proporcional à altura. Descer não devolve energia.
-- **Condição negativa:** fogo, lava e efeitos nocivos do jogo ou de outros mods custam um extra a cada tick, mesmo parado. Várias juntas cobram um extra só, e um golpe não conta. O extra pode zerar a bateria. Aí o robô desliga e, em chamas, queima parado.
+- **Condição negativa:** fogo, lava, [blocos que ferem](movimento.md#sobre-um-bloco-que-fere) e efeitos nocivos do jogo ou de outros mods custam um extra a cada tick, mesmo parado. Várias juntas cobram um extra só, e um golpe não conta. O extra pode zerar a bateria. Aí o robô desliga e, em chamas, queima parado.
 
 ## Como o Cubit carrega
 
@@ -114,6 +114,7 @@ Se o robô estiver dentro do raio da base e com a bateria baixa, mostra o texto 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 15:32 | Inclui os blocos que ferem na condição negativa. |
 | Marcelo Fabiano | 2026-11-05 14:40 | Define o consumo por situação. |
 | Marcelo Fabiano | 2026-11-05 13:57 | Define que as barras só ficam vazias com 0 FE. |
 | Marcelo Fabiano | 2026-11-05 12:52 | Define o consumo e a reserva do slot de energia. |

@@ -29,6 +29,16 @@ Números: [valores gerais](../tiers.md#valores-gerais).
 - **Ao apagar:** volta a seguir na hora, pelas regras normais de movimento.
 - **Som:** faz um curto elétrico enquanto pega fogo. O som entra na Fase 3.
 
+## Sobre um bloco que fere
+
+Vale para magma, fogueira acesa, cacto, arbusto de frutas, rosa do wither, estalactite e blocos de outros mods com a mesma classificação de rota no jogo.
+
+- **Quando reage:** nas mesmas condições em que o jogo fere o player, com o bloco dentro da caixa de colisão do robô ou sendo pisado por ele. Um bloco só vizinho não conta.
+- **Ativo:** para de seguir e vai ao bloco seguro mais próximo, na velocidade normal do tier, dentro do [alcance ao andar em chamas](../tiers.md#valores-gerais). Ao sair, volta a seguir. Sem bloco seguro no alcance, fica e tenta de novo.
+- **Em chamas ou na lava:** essas reações vêm primeiro.
+- **Inativo ou em hibernação:** fica parado e leva dano.
+- **Energia:** custa o extra de [condição negativa](energia.md#consumo).
+
 ## Vários robôs, um seguindo
 
 - O player pode ter quantos robôs preferir.
@@ -59,6 +69,7 @@ Marca onde o player morreu e o leva até lá, se o tier permitir.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 15:32 | Adiciona a reação aos blocos que ferem. |
 | Marcelo Fabiano | 2026-11-05 01:15 | Aponta a proteção e o resgate do item para itens.md. |
 | Marcelo Fabiano | 2026-11-05 00:12 | Detalha a morte, o conserto, a proteção do dono e a busca de água. |
 | Marcelo Fabiano | 2026-11-04 23:27 | Define a saída da lava. |
