@@ -52,7 +52,16 @@ Vale para magma, fogueira acesa, cacto, arbusto de frutas, rosa do wither, estal
 - **Chunk descarregado:** se o robô que seguia não estiver carregado na troca, ele se desliga quando voltar a carregar, ao ver que outro assumiu o lugar.
 - **Trocar:** ao ligar um robô, ele desliga o que estava seguindo, mesmo que esteja sem bateria. Os que trabalham em áreas continuam ativos. Também dá para recolher o atual ou colocá-lo na base.
 - **Base:** todos os robôs ligados podem usar a base, e cada Dock recebe um por vez. A chamada está em [`energia.md`](energia.md#ir-para-a-base-e-sair-dela).
-- **Sem limite:** não há limite de quantidade, e o comando `/cubit reset` limpa o vínculo de quem segue, se ele se perder.
+- **Sem limite:** não há limite de quantidade.
+- **Sem vínculo:** um robô ativo que não é o que segue, nem trabalha em área, fica parado e desligado. O clique direito o liga, e ele passa a seguir o player.
+
+### Comando `/cubit reset`
+
+Limpa o vínculo de quem segue, se ele se perder.
+
+- **Quem usa:** qualquer player, sem permissão de operador, e só no próprio vínculo.
+- **Robô que seguia:** vale a regra de ficar sem vínculo, logo depois do comando ou quando o chunk dele carregar. A carga é mantida.
+- **Resposta:** `Follow link cleared.` ou, sem vínculo para limpar, `No Cubit is following you.`
 
 ## Vida e morte
 
@@ -69,6 +78,7 @@ Marca onde o player morreu e o leva até lá, se o tier permitir.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 20:42 | Detalha o comando `/cubit reset` e o robô ativo sem vínculo. |
 | Marcelo Fabiano | 2026-11-05 15:32 | Adiciona a reação aos blocos que ferem. |
 | Marcelo Fabiano | 2026-11-05 01:15 | Aponta a proteção e o resgate do item para itens.md. |
 | Marcelo Fabiano | 2026-11-05 00:12 | Detalha a morte, o conserto, a proteção do dono e a busca de água. |
