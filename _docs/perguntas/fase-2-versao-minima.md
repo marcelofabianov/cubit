@@ -97,6 +97,16 @@ Não há perguntas pendentes nesta fase.
 | 155 | Onde documentar a fonte de FE no ambiente de dev, da pergunta 37? | Na etapa de energia, porque as dependências do Powah ainda não foram conferidas |
 | 156 | O `robo-companheiro.md` continua? | Não. O mapa dos documentos vai para `_docs/README.md`, as fases ficam no Roadmap do `README.md`, e o arquivo é removido, porque o resto já existia em outros documentos |
 | 159 | O `Damaged Cubit` empilha? | Empilha em 1, como o item normal |
+| 160 | Como produzir o novo modelo do Cubit, sem Blockbench na máquina? | O agente gera o `geo.json` e o PNG com um script temporário em `tmp/`. Só os arquivos finais entram no Git |
+| 161 | O modelo novo muda a hitbox do Cubit? | Não. Braços e antenas passam um pouco da hitbox, só no visual |
+| 162 | Qual é a resolução da textura do corpo? | 128×128, com 2 pixels por unidade do modelo |
+| 163 | O que entra no modelo na Fase 2? | Os detalhes das seis vistas e o ícone do item, tudo fixo: colar cinza, olhos normais e bateria sem variação. Detalha a pergunta 134 |
+| 164 | Como ficou o novo modelo do Cubit? | Aprovado pelo desenvolvedor, que gostou da modelagem. O resultado de cada passo do roteiro não foi detalhado |
+| 165 | Qual é o ícone oficial do mod? | O ícone do item do Cubit. A pergunta 166 ajusta o tamanho na tela de Mods |
+| 166 | Como ficou o ícone na tela de Mods? | Bom, mas um pouco grande, e pode ser menor. Fica em arquivo próprio, com o mesmo desenho e margem transparente |
+| 167 | Onde o projeto cita que o mod não tem magia? | Só na regra 2 do `AGENTS.md`, que continua valendo. A menção sai da descrição do mod, do `README.md`, do `persona.md` e da abertura do `AGENTS.md` |
+| 168 | O texto mais completo da descrição do mod está bom? | Sim. Ele descreve a versão mínima como ficará na `0.1.0` |
+| 169 | Como ficou o ícone menor na tela de Mods? | Ok, conferido pelo desenvolvedor |
 
 ### Premissas aprovadas
 
@@ -112,6 +122,12 @@ Não há perguntas pendentes nesta fase.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 01:01 | Registra as respostas 168 e 169. |
+| Marcelo Fabiano | 2026-11-05 00:56 | Registra a resposta 167. |
+| Marcelo Fabiano | 2026-11-05 00:55 | Registra a resposta 166 e aponta a 165 para ela. |
+| Marcelo Fabiano | 2026-11-05 00:35 | Registra a resposta 165. |
+| Marcelo Fabiano | 2026-11-05 00:34 | Registra a resposta 164. |
+| Marcelo Fabiano | 2026-11-05 00:31 | Registra as respostas 160, 161, 162 e 163. |
 | Marcelo Fabiano | 2026-11-05 00:17 | Registra a resposta 159. |
 | Marcelo Fabiano | 2026-11-05 00:15 | Registra a resposta 156. |
 | Marcelo Fabiano | 2026-11-05 00:09 | Registra as respostas 154 e 155. |

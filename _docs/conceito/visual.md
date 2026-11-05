@@ -11,6 +11,7 @@ As imagens individuais estão em [`_docs/imagens/conceito/`](../imagens/conceito
 - **Carcaça** com cor trocável por corantes.
 - O conceito atual é a base. O modelo final tem **design próprio**, para o mod poder ser publicado. A geometria melhora já na Fase 2, mais próxima das imagens de conceito, e as animações e as expressões seguem na Fase 3.
 - Modelo e animações com **GeckoLib** (já presente no pack): andar, virar a cabeça, mover os braços e trocar a expressão da tela.
+- **Modelo na Fase 2:** traz os detalhes das seis vistas e o ícone do item, com tudo fixo: colar cinza, olhos normais e bateria sem variação. A textura tem 128×128, com 2 pixels por unidade, e a hitbox não muda, então braços e antenas passam um pouco dela.
 
 ## O que o conceito mostra
 
@@ -42,6 +43,7 @@ Os arquivos ficam em `assets/cubit/sounds/general_robot/`, em Ogg Vorbis, mono e
 
 ## Identificação
 
+- **Ícone do mod:** tem o mesmo desenho do ícone do item, em `textures/gui/mod_logo.png`, sem borrar os pixels. O arquivo é separado porque a tela de Mods sempre encaixa o logo numa altura de 50 pixels, então o tamanho vem da margem transparente, e 25×25 dá a escala exata de 2×. Ao mudar o ícone do item, atualize também este arquivo.
 - **Nome personalizado** com bigorna ou etiqueta, aparecendo no Jade.
 - **Jade:** mostrar nome, tier, bateria e modo atual.
 
@@ -49,6 +51,9 @@ Os arquivos ficam em `assets/cubit/sounds/general_robot/`, em Ogg Vorbis, mono e
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 00:55 | Reduz o ícone do mod na tela de Mods. |
+| Marcelo Fabiano | 2026-11-05 00:35 | Define o ícone do mod. |
+| Marcelo Fabiano | 2026-11-05 00:31 | Define o modelo da Fase 2. |
 | Marcelo Fabiano | 2026-11-05 00:12 | Limita o bipe padrão, antecipa a geometria e cita o intervalo mínimo. |
 | Marcelo Fabiano | 2026-11-04 22:51 | Adiciona os arquivos dos sons. |
 | Marcelo Fabiano | 2026-11-04 22:12 | Define os oito sons do Cubit. |
