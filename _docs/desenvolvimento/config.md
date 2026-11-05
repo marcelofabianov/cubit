@@ -21,6 +21,8 @@ As chaves ficam em `snake_case`. As de um robô ficam em `[{tipo}.{tier}]`, como
 | `general` | `burning_speed_multiplier` | Velocidade em chamas, sobre a do tier | 1 a 4 |
 | `general` | `water_search_radius_blocks` | Busca de água em chamas | 1 a 16 |
 | `general` | `burning_wander_radius_blocks` | Alcance ao andar ao acaso em chamas | 1 a 16 |
+| `general` | `redstone_dust_energy` | Energia de 1 pó de redstone | 1 a 2147483647 |
+| `general` | `redstone_block_energy` | Energia de 1 bloco de redstone | 1 a 2147483647 |
 | `general` | `repair_health_percent` | Vida ao sair do conserto | 1 a 100 |
 | `general` | `void_rescue_retry_ticks` | Intervalo para tentar de novo o resgate no vazio | 1 a 1200 |
 | `general_robot.base` | `battery_capacity` | Bateria | 1 a 2147483647 |
@@ -54,6 +56,7 @@ O mod não cai por causa do config (regra 17 do `AGENTS.md`):
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 12:52 | Adiciona as chaves da redstone. |
 | Marcelo Fabiano | 2026-11-05 01:15 | Adiciona as chaves do conserto e do resgate no vazio. |
 | Marcelo Fabiano | 2026-11-04 21:02 | Adiciona as chaves do comportamento em chamas. |
 | Marcelo Fabiano | 2026-11-04 20:09 | Adiciona as chaves de movimento. |

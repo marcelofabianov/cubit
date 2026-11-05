@@ -6,6 +6,7 @@ Números: [`tiers.md`](../tiers.md#energia) e [valores gerais](../tiers.md#valor
 
 - Uma bateria interna alimenta o sistema.
 - É um recurso a gerenciar: o robô precisa voltar para carregar.
+- As barras do item e da tela mostram ao menos um risco enquanto houver carga, e só ficam vazias com 0 FE.
 
 ## Estados do Cubit
 
@@ -21,6 +22,10 @@ Números: [`tiers.md`](../tiers.md#energia) e [valores gerais](../tiers.md#valor
 - **Sem bateria na base:** entra em hibernação logo, sem esperar a carga mínima.
 - **Desligado pelo controle remoto:** segue as regras do inativo, mesmo com bateria, e só volta a ficar ativo pelo controle.
 - **Sons:** o Cubit tem um som ao ligar, um ao desligar e um enquanto é recarregado. Eles entram na Fase 3, e os detalhes estão em [`visual.md`](../conceito/visual.md#sons).
+
+## Consumo
+
+Gasta o valor do tier a cada tick em que anda: com a rota em andamento e deslocamento real, inclusive ao fugir do fogo e da lava. Ser empurrado não gasta, e rota sem avanço também não.
 
 ## Como o Cubit carrega
 
@@ -66,7 +71,7 @@ Cada Dock recebe um Cubit por vez. Se a base estiver ocupada:
 
 ## Slot exclusivo de energia
 
-O Cubit extrai a energia da Power Bank ou da redstone colocada no slot para a bateria interna. O slot existe em todos os tiers e aceita um dos dois por vez. A redstone é consumida um item por vez, e só quando a energia couber na bateria.
+O slot fica num painel ao lado da tela do inventário. O Cubit extrai a energia da Power Bank ou da redstone colocada no slot para a bateria interna, na velocidade de recarga do tier. Cada item extraído vira uma reserva, salva com o slot, para nada se perder se o robô for recolhido no meio da recarga. O slot existe em todos os tiers e aceita um dos dois por vez. A redstone é consumida um item por vez, e só quando a energia couber na bateria.
 
 ### Power Bank
 
@@ -103,6 +108,8 @@ Se o robô estiver dentro do raio da base e com a bateria baixa, mostra o texto 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 13:57 | Define que as barras só ficam vazias com 0 FE. |
+| Marcelo Fabiano | 2026-11-05 12:52 | Define o consumo e a reserva do slot de energia. |
 | Marcelo Fabiano | 2026-11-05 12:08 | Aponta a hibernação fora da base para a Fase 5. |
 | Marcelo Fabiano | 2026-11-05 02:00 | Amplia a recarga pela grade de craft para a bateria abaixo da carga de religar. |
 | Marcelo Fabiano | 2026-11-05 01:58 | Detalha o uso da recarga pela grade de craft. |

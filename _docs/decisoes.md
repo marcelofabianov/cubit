@@ -60,6 +60,11 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Painel solar:** só funciona com o Cubit ativo, de dia em todos os tiers e à noite só em Elite e Ultimate. Coberto por um bloco, não carrega. O clima não tem efeito, e no Nether e no End não funciona. Fica abaixo do consumo.
 - **Induction Dock:** é a base de recarga, recebe energia por cabos ou redstone e tem um único slot, que também recarrega a Power Bank.
 - **Recarga pela grade de craft:** o item do Cubit abaixo da carga de religar, combinado com uma Power Bank, recebe só o que falta para religar, na Fase 4.
+- **Consumo:** gasta ao andar de verdade, sem gastar parado nem empurrado.
+- **Parada do robô:** uma navegação própria cancela o recálculo de rota pendente, para o robô parado não voltar a andar.
+- **Painel do slot de energia:** visual melhor e tooltips ficam para a tela própria da Fase 3.
+- **Barras de bateria:** mostram ao menos um risco enquanto houver carga e só ficam vazias com 0 FE.
+- **Consumo por situação (decidido, ainda não implementado):** andar custa mais, e inventário cheio, água, subida e condições negativas somam um extra. Com o inventário cheio, a velocidade cai. Os números entram em `tiers.md` junto do código.
 - **Slot de energia do Cubit:** existe em todos os tiers e aceita uma Power Bank ou redstone por vez. A redstone entra na Fase 2, e a Power Bank na Fase 4.
 - **Comunicação:** bipes e expressões, com poucos textos simples e diretos.
 - **Sons:** oito sons, que entram na Fase 3. O bipe padrão toca nas trocas de expressão sem som exclusivo. O intervalo mínimo entre repetições será definido na Fase 3, e os sons são do desenvolvedor.
@@ -73,6 +78,10 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 14:13 | Registra o consumo por situação. |
+| Marcelo Fabiano | 2026-11-05 13:54 | Registra o mínimo visível das barras de bateria. |
+| Marcelo Fabiano | 2026-11-05 13:30 | Registra a parada do robô e o painel do slot de energia. |
+| Marcelo Fabiano | 2026-11-05 12:52 | Registra o consumo ao andar. |
 | Marcelo Fabiano | 2026-11-05 12:08 | Registra os robôs especializados. |
 | Marcelo Fabiano | 2026-11-05 02:11 | Registra o inventário. |
 | Marcelo Fabiano | 2026-11-05 02:00 | Amplia a recarga pela grade de craft. |

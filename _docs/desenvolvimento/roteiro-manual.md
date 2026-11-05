@@ -87,10 +87,23 @@ Use um balde de lava, com `/give @s minecraft:lava_bucket`. Ele tem 25 de vida e
 | 2 | Guarde itens em slots variados e feche | Os itens continuam nos mesmos slots ao abrir de novo |
 | 3 | Tente guardar um Cubit, um `Damaged Cubit` e uma shulker box, com clique e Shift + clique | Nenhum deles entra |
 | 4 | Shift + botão direito para recolher, e coloque de novo | Os itens estão nos mesmos slots |
-| 5 | Mate o robô, conserte e coloque. Ele fica sem carga, então rode `/data merge entity @e[type=cubit:general_robot,limit=1,sort=nearest] {Energy:75000L,PowerState:"ACTIVE"}` até a recarga entrar | Os itens continuam lá |
+| 5 | Mate o robô, conserte e coloque. Ele fica sem carga: botão direito com redstone na mão para ele religar | Os itens continuam lá |
 | 6 | Saia e entre no mundo | Os itens continuam lá |
 | 7 | Com a tela aberta, afaste-se com comando ou mate o robô com outro comando | A tela fecha, e nenhum item é duplicado |
 | 8 | Botão direito num robô desligado com carga | Ele liga, sem abrir a tela |
+
+## Energia
+
+| # | Faça | Espere |
+|---|---|---|
+| 1 | Coloque um robô e abra a tela | Painel à esquerda, com o slot de energia e uma barra verde de cerca de um quarto |
+| 2 | Ande por um tempo com o robô seguindo | A barra da tela cai devagar e a do item, ao recolher, também |
+| 3 | Guarde redstone e bloco de redstone no slot, com clique e Shift + clique, e tente outro item | Só a redstone entra, e o item some aos poucos, com a barra subindo |
+| 4 | Clique no painel com um item na mão, fora do slot | O item não cai no chão |
+| 5 | Tire tudo do slot e aguarde a barra parar de subir. Rode `/data merge entity @e[type=cubit:general_robot,limit=1,sort=nearest] {Energy:0L}` e afaste-se | Ele para, sem abrir a tela nem ligar com um clique |
+| 5a | Com carga baixa, olhe as barras da tela e do item | As duas mostram ao menos um risco enquanto houver carga, e só ficam vazias com 0 FE |
+| 6 | Clique com redstone na mão no robô sem bateria | A pilha entra no slot e, com 5%, ele volta a seguir você |
+| 7 | Com a recarga em andamento, recolha e coloque de novo | O slot e a carga continuam, sem perder redstone |
 
 ## Morte e conserto
 
@@ -121,6 +134,8 @@ Use `/kill @e[type=cubit:general_robot,limit=1,sort=nearest]` para matar o robô
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 13:54 | Zera a bateria por comando, com o slot vazio, e adiciona o mínimo visível das barras. |
+| Marcelo Fabiano | 2026-11-05 12:56 | Adiciona a energia e troca o comando temporário pela redstone. |
 | Marcelo Fabiano | 2026-11-05 02:31 | Adiciona o comando para dar carga ao robô consertado. |
 | Marcelo Fabiano | 2026-11-05 02:11 | Adiciona o inventário. |
 | Marcelo Fabiano | 2026-11-05 01:23 | Adiciona a morte e o conserto. |
