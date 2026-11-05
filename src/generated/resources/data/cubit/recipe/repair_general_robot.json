@@ -1,0 +1,10 @@
+{
+  "type": "cubit:robot_repair",
+  "damaged_robot": {
+    "item": "cubit:damaged_general_robot"
+  },
+  "result": "cubit:general_robot",
+  "toolbox": {
+    "item": "cubit:toolbox"
+  }
+}

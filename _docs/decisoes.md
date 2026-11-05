@@ -51,8 +51,8 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Dono:** quem coloca o robô. O item não guarda o dono. Nenhum dano atribuído a ele fere o robô. O fogo de um isqueiro continua ferindo, porque o jogo não guarda quem o acendeu.
 - **Lava:** o robô ativo que está na lava vai para o bloco seguro mais próximo. A rota continua sem entrar em lava.
 - **Fogo:** o robô ativo em chamas anda ao acaso, mais rápido, evita perigos e nunca para enquanto houver para onde ir. Busca água só em chunks carregados, e ela precisa ter o topo livre e rota até ela. Inativo, fica parado. Ao apagar, volta a seguir. Os números estão em [`tiers.md`](tiers.md#valores-gerais).
-- **Morte:** o robô vira um item danificado, próprio por tipo, que não queima, não some com o tempo, não entra em shulker box nem no inventário do robô e não pode ser colocado no mundo. Se cair no vazio, reaparece na última posição segura do robô.
-- **Conserto:** usa a `Toolbox` (`cubit:toolbox`), na grade do inventário ou na mesa de craft. Ela é consumida a cada conserto e empilha até 16. O robô sai com parte da vida, conforme [`tiers.md`](tiers.md#valores-gerais), e a bateria zerada.
+- **Morte:** o robô vira um item danificado, próprio por tipo, que nenhum dano destrói, não some com o tempo, não entra em shulker box nem no inventário do robô e não pode ser colocado no mundo. Se cair no vazio, volta à última posição segura, ao dono online ou ao spawn do mundo, sem carregar chunk à força. A morte libera o vínculo, e com o dono offline isso acontece quando ele entra.
+- **Conserto:** usa a `Toolbox` (`cubit:toolbox`), na grade do inventário ou na mesa de craft, num tipo de receita do mod, `cubit:robot_repair`, com os itens no JSON. Ela é consumida a cada conserto e empilha até 16. O robô sai com parte da vida, conforme [`tiers.md`](tiers.md#valores-gerais), e a bateria zerada.
 - **Movimento:** a velocidade de referência está em [`tiers.md`](tiers.md#valores-gerais). Na água, o robô afunda e anda no fundo, sem se afogar. Na lava, leva dano igual ao do player. Não há dano de queda. O som de esteira entra na Fase 3.
 - **Criativo:** aba própria, `cubit:main`, e colocar sempre gasta o item.
 - **Estados:** ativo (ligado), inativo (desligado) e hibernação (na base, com o inventário e os slots acessíveis).
@@ -70,6 +70,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 01:15 | Detalha a morte, o resgate no vazio e a receita do conserto. |
 | Marcelo Fabiano | 2026-11-05 00:35 | Registra o ícone do mod. |
 | Marcelo Fabiano | 2026-11-05 00:31 | Detalha o modelo da Fase 2. |
 | Marcelo Fabiano | 2026-11-05 00:15 | Registra o novo lugar do mapa dos documentos. |

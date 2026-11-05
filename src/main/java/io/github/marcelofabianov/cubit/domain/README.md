@@ -13,13 +13,15 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 | `PowerRules` | Regras que mudam o estado por causa da energia |
 | `RobotType` | Tipo de robô, como o de uso geral. É um dado, identificado por um ID |
 | `RobotTier` | Nível de evolução: Base, Advanced, Elite e Ultimate. A `key` é o nome usado no config e nos saves |
-| `RobotState` | O que o robô guarda ao virar item: tier, energia e vida |
+| `RobotState` | O que o robô guarda ao virar item: tier, energia e vida. `damaged` e `repaired` dão o estado ao morrer e ao consertar |
 | `TierSpec` | Números de um tipo de robô num tier |
 | `TierCatalog` | Entrega o `TierSpec` de um tipo de robô num tier. O domínio define a interface, e o config a implementa |
 | `FollowAction` | O que o robô que segue faz: seguir, parar ou teleportar |
 | `BurningAction` | O que o robô faz em chamas: nada, sair da lava, buscar água ou andar ao acaso |
 | `FollowDecision` | Escolhe a `FollowAction` conforme o estado, a dimensão e a distância |
 | `FollowingRobotPolicy` | Garante que só um robô siga o player |
+| `OwnerProtection` | Diz se um dano é do dono e, por isso, não fere o robô |
+| `VoidRescueTarget` | Para onde vai o robô danificado que caiu no vazio |
 | `FollowingOutcome` | Resultado da política: estado do robô, quem segue e quem desligar |
 
 ## Regras e porquês
@@ -40,6 +42,9 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 - **Sem bateria, o vínculo continua:** o robô para e, ao religar, volta a seguir. Ligar outro robô o desliga, e ele deixa de religar sozinho (pergunta 101).
 - **Quem guarda o vínculo é quem chama:** a política recebe quem segue e devolve o resultado, sem ler os dados do player.
 - **Outro robô assumiu o lugar:** um robô ativo que descobre isso se desliga. É o caso de quem estava em chunk descarregado na troca.
+- **Morte e conserto zeram a bateria:** ao morrer, o robô fica sem vida e sem energia. O conserto devolve parte da vida, e o Induction Dock recupera o resto (perguntas 34 e 129).
+- **Dano do dono:** só conta o que o jogo atribui a ele. O fogo de um isqueiro não tem autor, então fere (pergunta 119).
+- **Resgate no vazio:** a ordem é a posição segura, o dono online e o spawn do mundo. Sem destino possível, o item espera, porque nunca é destruído nem força um chunk a carregar (perguntas 147, 172 e 174).
 - **Vínculo apontando para o próprio robô:** não conta como outro robô seguindo. Assim, um vínculo antigo não deixa o robô desligado.
 
 ## Estados

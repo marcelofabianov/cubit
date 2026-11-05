@@ -57,6 +57,14 @@ public final class RobotItem extends Item {
     return InteractionResult.CONSUME;
   }
 
+  /** The robot leaves the repair with part of its health and an empty battery. */
+  ItemStack repaired(RobotState damaged) {
+    ItemStack stack = new ItemStack(this);
+    RobotState repaired = damaged.repaired(specOf(damaged.tier()), CubitMod.CONFIG.repairHealth());
+    stack.set(CubitDataComponents.ROBOT_STATE.get(), repaired);
+    return stack;
+  }
+
   @Override
   public boolean canFitInsideContainerItems() {
     return false;

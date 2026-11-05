@@ -26,7 +26,11 @@ public final class CubitEntities {
               EntityType.Builder.<RobotEntity>of(
                       (type, level) ->
                           new RobotEntity(
-                              type, level, CubitConfig.GENERAL_ROBOT, CubitItems.GENERAL_ROBOT),
+                              type,
+                              level,
+                              CubitConfig.GENERAL_ROBOT,
+                              CubitItems.GENERAL_ROBOT,
+                              CubitItems.DAMAGED_GENERAL_ROBOT),
                       MobCategory.MISC)
                   .sized(ROBOT_WIDTH, ROBOT_HEIGHT)
                   .build(CubitConfig.GENERAL_ROBOT.id()));

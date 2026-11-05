@@ -72,12 +72,32 @@ Use um isqueiro no robô, com `/give @s minecraft:flint_and_steel`. O fogo dura 
 
 ## Lava
 
-Use um balde de lava, com `/give @s minecraft:lava_bucket`. Ele tem 25 de vida e morre em cerca de 3 s na lava. Se morrer, some sem virar item, até a etapa de morte.
+Use um balde de lava, com `/give @s minecraft:lava_bucket`. Ele tem 25 de vida e morre em cerca de 3 s na lava. Se morrer, vira um `Damaged Cubit`, que não queima.
 
 | # | Faça | Espere |
 |---|---|---|
 | 1 | Coloque lava no bloco do robô ativo | Ele se move devagar rumo à borda, e pode morrer antes de sair |
 | 2 | Coloque lava no bloco de um robô desligado | Ele fica parado e morre |
+
+## Morte e conserto
+
+Use `/kill @e[type=cubit:general_robot,limit=1,sort=nearest]` para matar o robô.
+
+| # | Faça | Espere |
+|---|---|---|
+| 1 | Abra a aba **Cubit** do inventário criativo | Aparecem o `Damaged Cubit` e a `Toolbox`, cada um com o seu ícone |
+| 2 | Mate um robô com o comando | Cai um `Damaged Cubit` no lugar dele, e um robô novo colocado depois passa a seguir você |
+| 3 | Em modo sobrevivência, bata no próprio robô | Ele não perde vida nem recua |
+| 4 | Clique com o `Damaged Cubit` num bloco | Nada é colocado, e o item continua na mão |
+| 5 | Tente guardar o `Damaged Cubit` numa shulker box | Ele não entra |
+| 6 | Jogue o `Damaged Cubit` na lava e no fogo | Ele não queima |
+| 7 | Solte o `Damaged Cubit` e explode um TNT ao lado | Ele continua no chão |
+| 8 | Faça a `Toolbox` na mesa de craft: colunas laterais com 3 ferros, e coluna central com ferro, redstone e obsidiana | Sai uma `Toolbox`, que empilha até 16 |
+| 9 | Combine `Damaged Cubit` e `Toolbox` na grade do inventário, nas duas posições | Sai um `Cubit`, e a `Toolbox` é consumida |
+| 10 | Repita na mesa de craft, em posições afastadas | Sai um `Cubit` da mesma forma |
+| 11 | Coloque o `Cubit` consertado | Barra sem carga, com o robô desligado e com 25% da vida (`/data get entity @e[type=cubit:general_robot,limit=1,sort=nearest] Health`) |
+| 12 | Mate um robô sobre um buraco até o vazio, para o item cair | O item volta para onde o robô esteve por último no chão |
+| 13 | Saia e entre no mundo com um robô morto antes, e coloque outro | O novo segue você normalmente |
 
 ## Servidor dedicado
 
@@ -88,6 +108,7 @@ Use um balde de lava, com `/give @s minecraft:lava_bucket`. Ele tem 25 de vida e
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 01:23 | Adiciona a morte e o conserto. |
 | Marcelo Fabiano | 2026-11-05 00:55 | Ajusta a conferência do ícone do mod. |
 | Marcelo Fabiano | 2026-11-05 00:35 | Adiciona a conferência do ícone do mod. |
 | Marcelo Fabiano | 2026-11-05 00:32 | Atualiza o visual esperado do robô com o novo modelo. |

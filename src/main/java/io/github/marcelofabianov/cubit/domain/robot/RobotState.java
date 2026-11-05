@@ -24,6 +24,16 @@ public record RobotState(RobotTier tier, Energy energy, float health) {
     return new RobotState(tier, spec.newBattery(initialCharge).charge(), spec.maxHealth());
   }
 
+  /** What a robot keeps when it dies: the tier, without energy or health. */
+  public RobotState damaged() {
+    return new RobotState(tier, Energy.ZERO, 0f);
+  }
+
+  public RobotState repaired(TierSpec spec, Percentage health) {
+    return new RobotState(
+        tier, Energy.ZERO, (float) spec.maxHealth() * health.value() / Percentage.MAX);
+  }
+
   public Battery batteryFor(TierSpec spec) {
     return new Battery(spec.batteryCapacity(), energy.min(spec.batteryCapacity()));
   }

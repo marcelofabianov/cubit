@@ -7,8 +7,8 @@ Mod de Minecraft que adiciona um robô companheiro fofo, movido a bateria, feito
 ## Estado atual
 
 - **Etapa atual:** Fase 2, versão mínima. O projeto Gradle existe, e as funcionalidades entram por issue, na ordem combinada com o desenvolvedor.
-- **Já entrou:** colocar e recolher, seguir o player, vários robôs, fogo, lava, os arquivos de som, a revisão dos `.md` e o novo modelo.
-- **Próximos:** morte com o item danificado, antes do inventário.
+- **Já entrou:** colocar e recolher, seguir o player, vários robôs, fogo, lava, os arquivos de som, a revisão dos `.md`, o novo modelo e a morte com o item danificado.
+- **Próximos:** inventário, energia em uso, Induction Dock e o fechamento da fase, com receitas e teste no Iron Meridian.
 - **Comandos:** estão em [`_docs/desenvolvimento/ferramentas-de-build.md`](_docs/desenvolvimento/ferramentas-de-build.md).
 - **Limite:** não avance para as fases seguintes sem pedido explícito.
 
@@ -27,7 +27,7 @@ Mod de Minecraft que adiciona um robô companheiro fofo, movido a bateria, feito
 1. **Idioma:** o que entra no jar, aparece no jogo ou acompanha o download do mod fica em inglês: nome, itens, legendas, telas, mensagens, IDs, comandos, config e licença. Existe só o `en_us.json`, sem `pt_br.json`.
 2. **Sem magia:** nem nos nomes, nem nas mecânicas.
 3. **Números em config:** bateria, consumo, raios, intervalos, dano e slots por tier nunca ficam fixos na lógica.
-4. **Receitas:** só com itens do jogo puro, em datapack JSON, para o pack poder sobrescrever com KubeJS.
+4. **Receitas:** os materiais são só do jogo puro, e uma receita pode combinar itens do próprio mod, como no conserto. Ficam em datapack JSON, para o pack poder sobrescrever com KubeJS.
 5. **Energia:** FE, pelas capabilities do NeoForge, para aceitar energia de qualquer mod do pack (Mekanism, Powah, Solar Flux).
 6. **Luz:** API do LambDynamicLights, como dependência opcional. Nada de blocos de luz invisíveis no mundo.
 7. **Scanner de minérios:** baseado nas tags `c:ores`, nunca numa lista fixa de blocos.

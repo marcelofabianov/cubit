@@ -11,6 +11,8 @@ import net.neoforged.neoforge.common.data.LanguageProvider;
 final class CubitLanguageProvider extends LanguageProvider {
   private static final String LOCALE = "en_us";
   private static final String ROBOT_NAME = "Cubit";
+  private static final String DAMAGED_ROBOT_NAME = "Damaged Cubit";
+  private static final String TOOLBOX_NAME = "Toolbox";
 
   CubitLanguageProvider(PackOutput output) {
     super(output, CubitMod.MOD_ID, LOCALE);
@@ -21,5 +23,7 @@ final class CubitLanguageProvider extends LanguageProvider {
     add(CubitItems.GENERAL_ROBOT.get(), ROBOT_NAME);
     add(CubitEntities.GENERAL_ROBOT.get(), ROBOT_NAME);
     add(CubitCreativeTabs.MAIN_TITLE_KEY, ROBOT_NAME);
+    add(CubitItems.DAMAGED_GENERAL_ROBOT.get(), DAMAGED_ROBOT_NAME);
+    add(CubitItems.TOOLBOX.get(), TOOLBOX_NAME);
   }
 }

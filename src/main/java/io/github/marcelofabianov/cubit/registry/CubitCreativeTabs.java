@@ -23,8 +23,11 @@ public final class CubitCreativeTabs {
               CreativeModeTab.builder()
                   .title(Component.translatable(MAIN_TITLE_KEY))
                   .icon(() -> new ItemStack(CubitItems.GENERAL_ROBOT.get()))
-                  .displayItems(
-                      (parameters, output) -> output.accept(CubitItems.GENERAL_ROBOT.get()))
+                  .displayItems((parameters, output) -> {
+                    output.accept(CubitItems.GENERAL_ROBOT.get());
+                    output.accept(CubitItems.DAMAGED_GENERAL_ROBOT.get());
+                    output.accept(CubitItems.TOOLBOX.get());
+                  })
                   .build());
 
   private CubitCreativeTabs() {}

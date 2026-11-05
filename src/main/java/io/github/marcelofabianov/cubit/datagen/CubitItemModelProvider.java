@@ -14,5 +14,7 @@ final class CubitItemModelProvider extends ItemModelProvider {
   @Override
   protected void registerModels() {
     basicItem(CubitItems.GENERAL_ROBOT.get());
+    basicItem(CubitItems.DAMAGED_GENERAL_ROBOT.get());
+    basicItem(CubitItems.TOOLBOX.get());
   }
 }

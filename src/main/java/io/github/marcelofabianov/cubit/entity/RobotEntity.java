@@ -7,10 +7,12 @@ import io.github.marcelofabianov.cubit.domain.energy.Energy;
 import io.github.marcelofabianov.cubit.domain.energy.PowerState;
 import io.github.marcelofabianov.cubit.domain.ownership.FollowingOutcome;
 import io.github.marcelofabianov.cubit.domain.ownership.FollowingRobotPolicy;
+import io.github.marcelofabianov.cubit.domain.ownership.OwnerProtection;
 import io.github.marcelofabianov.cubit.domain.robot.RobotState;
 import io.github.marcelofabianov.cubit.domain.robot.RobotType;
 import io.github.marcelofabianov.cubit.domain.tier.RobotTier;
 import io.github.marcelofabianov.cubit.domain.tier.TierSpec;
+import io.github.marcelofabianov.cubit.player.DeadRobotLinks;
 import io.github.marcelofabianov.cubit.player.FollowingRobotLink;
 import io.github.marcelofabianov.cubit.registry.CubitAttachments;
 import io.github.marcelofabianov.cubit.registry.CubitDataComponents;
@@ -18,18 +20,22 @@ import java.util.Arrays;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.function.Supplier;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.GlobalPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.JumpControl;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -48,6 +54,7 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity {
   private static final String TIER_KEY = "Tier";
   private static final String ENERGY_KEY = "Energy";
   private static final String POWER_STATE_KEY = "PowerState";
+  private static final String LAST_SAFE_POSITION_KEY = "LastSafePosition";
   private static final String INVALID_DATA_MESSAGE = "Robot {} has an invalid {}: {}";
   private static final String NO_OWNER_MESSAGE = "Robot {} has no owner. Nobody can interact.";
   private static final double ONE_BLOCK_STEP = 1;
@@ -58,21 +65,25 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity {
 
   private final RobotType robotType;
   private final Supplier<Item> item;
+  private final Supplier<Item> damagedItem;
   private final AnimatableInstanceCache animationCache = GeckoLibUtil.createInstanceCache(this);
 
   private UUID ownerId;
   private RobotTier tier = RobotTier.BASE;
   private Battery battery;
   private PowerState powerState = PowerState.INACTIVE_SWITCHED_OFF;
+  private BlockPos lastSafePosition;
 
   public RobotEntity(
       EntityType<? extends RobotEntity> type,
       Level level,
       RobotType robotType,
-      Supplier<Item> item) {
+      Supplier<Item> item,
+      Supplier<Item> damagedItem) {
     super(type, level);
     this.robotType = robotType;
     this.item = item;
+    this.damagedItem = damagedItem;
     this.battery = spec().newBattery(CubitMod.CONFIG.initialCharge());
     this.jumpControl =
         new JumpControl(this) {
@@ -106,6 +117,7 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity {
     applyConfigAttributes();
     setHealth(state.healthFor(spec));
     setPersistenceRequired();
+    lastSafePosition = blockPosition();
 
     FollowingOutcome outcome = policy().onArrival(getUUID(), follower(player), battery);
     powerState = outcome.state();
@@ -127,6 +139,10 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity {
 
   public PowerState powerState() {
     return powerState;
+  }
+
+  public Optional<BlockPos> lastSafePosition() {
+    return Optional.ofNullable(lastSafePosition);
   }
 
   public Optional<UUID> ownerId() {
@@ -189,8 +205,15 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity {
     // out.
     setPathfindingMalus(PathType.WATER, isInWater() || isOnFire() ? OPEN_ROUTE : BLOCKED_ROUTE);
     super.customServerAiStep();
+    rememberSafePosition();
     if (tickCount % CubitMod.CONFIG.followRepathTicks() == 0) {
       switchOffIfReplaced();
+    }
+  }
+
+  private void rememberSafePosition() {
+    if (onGround() && !isOnFire() && !isInLava() && !isInWater()) {
+      lastSafePosition = blockPosition();
     }
   }
 
@@ -221,6 +244,39 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity {
   }
 
   @Override
+  public boolean isInvulnerableTo(DamageSource source) {
+    Optional<UUID> attacker = Optional.ofNullable(source.getEntity()).map(Entity::getUUID);
+    return OwnerProtection.blocksDamage(ownerId(), attacker) || super.isInvulnerableTo(source);
+  }
+
+  @Override
+  public void die(DamageSource source) {
+    boolean alreadyDead = dead;
+    super.die(source);
+    if (dead && !alreadyDead && level() instanceof ServerLevel serverLevel) {
+      leaveDamagedItem(serverLevel);
+      if (ownerId != null) {
+        DeadRobotLinks.onRobotDied(serverLevel.getServer(), ownerId, getUUID());
+      }
+    }
+  }
+
+  /** Added directly, because the loot rules could remove a drop and lose the robot. */
+  private void leaveDamagedItem(ServerLevel serverLevel) {
+    ItemStack stack = new ItemStack(damagedItem.get());
+    stack.set(CubitDataComponents.ROBOT_STATE.get(), state().damaged());
+    stack.set(CubitDataComponents.ROBOT_OWNER.get(), ownerId);
+    if (lastSafePosition != null) {
+      stack.set(
+          CubitDataComponents.LAST_SAFE_POSITION.get(),
+          GlobalPos.of(serverLevel.dimension(), lastSafePosition));
+    }
+    ItemEntity drop = new ItemEntity(serverLevel, getX(), getY(), getZ(), stack);
+    drop.setDefaultPickUpDelay();
+    serverLevel.addFreshEntity(drop);
+  }
+
+  @Override
   public boolean causeFallDamage(float distance, float multiplier, DamageSource source) {
     return false;
   }
@@ -234,6 +290,9 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity {
     tag.putString(TIER_KEY, tier.key());
     tag.putLong(ENERGY_KEY, battery.charge().amount());
     tag.putString(POWER_STATE_KEY, powerState.name());
+    if (lastSafePosition != null) {
+      tag.putLong(LAST_SAFE_POSITION_KEY, lastSafePosition.asLong());
+    }
   }
 
   @Override
@@ -247,6 +306,10 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity {
     Energy energy = new Energy(Math.max(tag.getLong(ENERGY_KEY), 0));
     battery = new RobotState(tier, energy, getHealth()).batteryFor(spec());
     powerState = readPowerState(tag.getString(POWER_STATE_KEY));
+    lastSafePosition =
+        tag.contains(LAST_SAFE_POSITION_KEY)
+            ? BlockPos.of(tag.getLong(LAST_SAFE_POSITION_KEY))
+            : null;
     applyConfigAttributes();
   }
 
