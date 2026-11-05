@@ -16,7 +16,14 @@ Os números citados são os valores padrão de [`tiers.md`](../tiers.md), que pr
 | 1 | Abra a aba **Cubit** do inventário criativo | A aba aparece com o ícone do robô, e o item se chama `Cubit` |
 | 2 | Olhe o item na hotbar | Barra verde com cerca de um quarto do tamanho (carga de 25%) |
 | 3 | Clique com o botão direito num bloco | O robô aparece em cima do bloco, de frente para você, e o item some da mão |
-| 4 | Olhe o robô | Carcaça clara, tela escura com dois olhos ciano na frente, colar cinza, duas antenas com ponta laranja, dois braços e duas esteiras |
+| 4 | Olhe o robô, de frente | Carcaça clara e arredondada, tela escura com moldura e dois olhos ciano separados, barra e botão laranja embaixo, à direita de quem olha, colar cinza, dois braços com garras e duas esteiras |
+| 4a | Olhe a lateral direita do robô | Bobina de cobre em cima, atrás do ombro, e esteira com três rodas |
+| 4b | Olhe a lateral esquerda do robô | Painel de ventilação em cima, atrás do ombro, e esteira com três rodas |
+| 4c | Olhe o robô, por trás | Painel com a bateria verde e duas linhas de ventilação abaixo |
+| 4d | Olhe de cima, voando | Painel solar azul e duas antenas com ponta laranja, inclinadas para fora e para a frente |
+| 4e | Olhe por baixo | Bobina de cobre entre as duas esteiras |
+| 4f | Olhe o item na hotbar | Ícone do Cubit de frente, com a tela e os olhos |
+| 4g | Abra a tela de Mods e selecione o Cubit | O mesmo desenho do ícone do item aparece menor que a área do logo, sem borrão |
 | 5 | Clique com o botão direito num bloco sem espaço acima, com outro item do Cubit | Nada acontece, e o item continua na mão |
 | 6 | Shift + botão direito no robô | O robô some, e o item volta com a mesma barra |
 | 7 | Coloque esse item de novo | O robô volta |
@@ -81,6 +88,9 @@ Use um balde de lava, com `/give @s minecraft:lava_bucket`. Ele tem 25 de vida e
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 00:55 | Ajusta a conferência do ícone do mod. |
+| Marcelo Fabiano | 2026-11-05 00:35 | Adiciona a conferência do ícone do mod. |
+| Marcelo Fabiano | 2026-11-05 00:32 | Atualiza o visual esperado do robô com o novo modelo. |
 | Marcelo Fabiano | 2026-11-05 00:12 | Avisa que os números citados são os padrões de tiers.md. |
 | Marcelo Fabiano | 2026-11-04 23:27 | Adiciona a saída da lava. |
 | Marcelo Fabiano | 2026-11-04 21:29 | Adiciona a água em outra altura e sem rota. |
