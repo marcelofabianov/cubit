@@ -45,6 +45,9 @@ Valem para todos os tiers e ficam no config.
 | Velocidade 1,0× (atributo de movimento) | 0,3 |
 | Intervalo para recalcular a rota | 10 ticks |
 | Distância para parar perto do player | 3 blocos |
+| Velocidade em chamas, sobre a do tier | 1,25× |
+| Busca de água em chamas, em qualquer direção | 8 blocos |
+| Alcance ao andar ao acaso em chamas | 5 blocos |
 | Distância para teleportar até o player | ~20 blocos |
 | Religar | 5% de bateria |
 | Bateria crítica, com expressão de sono | 10% |
@@ -107,6 +110,8 @@ A fornalha gasta cerca de 20 FE por tick enquanto funde.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 21:29 | Indica que a busca de água vale em qualquer direção. |
+| Marcelo Fabiano | 2026-11-04 21:02 | Adiciona os valores do comportamento em chamas. |
 | Marcelo Fabiano | 2026-11-04 20:09 | Adiciona a velocidade de referência e o intervalo da rota. |
 | Marcelo Fabiano | 2026-11-04 18:50 | Adiciona a distância para parar perto do player. |
 | Marcelo Fabiano | 2026-11-04 17:28 | Atualiza o upgrade de tier e adiciona o alcance do controle. |

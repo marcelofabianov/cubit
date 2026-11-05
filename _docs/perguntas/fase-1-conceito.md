@@ -26,7 +26,7 @@ Não há perguntas pendentes nesta fase.
 |---|---|---|
 | 10 | Como o Cubit reage a ficar sem bateria? | Sono com a bateria baixa e tela apagada ao desligar |
 | 11 | "Só bipes" vale também para telas e avisos? | Só bipes, mas o Cubit pode mostrar textos simples e diretos em algumas situações: bateria crítica (10%), inimigo próximo, minério encontrado, tenho que ir carregar e itens descarregados |
-| 12 | As expressões feliz e sono têm bipe? | Não, nenhuma das duas tem som |
+| 12 | As expressões feliz e sono têm bipe? | Substituída pela [pergunta 136](fase-3-sentidos.md): o bipe padrão vale ao trocar para qualquer expressão |
 | 13 | Como o Cubit trata mobs neutros? | Só ataca para defender o player, quando os neutros ficam agressivos contra o player |
 | 14 | Animais de outros players contam como mobs pacíficos? | Sim |
 | 15 | As expressões normal, carregando e desligado entram no mod? | Sim |
@@ -63,6 +63,7 @@ Não há perguntas pendentes nesta fase.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 22:56 | Aponta a resposta 12 para a pergunta 136. |
 | Marcelo Fabiano | 2026-11-04 20:41 | Registra a resposta 121. |
 | Marcelo Fabiano | 2026-11-04 19:14 | Registra a resposta 107. |
 | Marcelo Fabiano | 2026-11-04 17:26 | Reordena a resposta 89. |

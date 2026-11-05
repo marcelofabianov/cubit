@@ -18,6 +18,9 @@ As chaves ficam em `snake_case`. As de um robô ficam em `[{tipo}.{tier}]`, como
 | `general` | `follow_repath_ticks` | Intervalo para recalcular a rota | 1 a 200 |
 | `general` | `stop_distance_blocks` | Distância para parar perto do player | 1 a 16 |
 | `general` | `teleport_distance_blocks` | Distância para teleportar até o player | 17 a 128 |
+| `general` | `burning_speed_multiplier` | Velocidade em chamas, sobre a do tier | 1 a 4 |
+| `general` | `water_search_radius_blocks` | Busca de água em chamas | 1 a 16 |
+| `general` | `burning_wander_radius_blocks` | Alcance ao andar ao acaso em chamas | 1 a 16 |
 | `general_robot.base` | `battery_capacity` | Bateria | 1 a 2147483647 |
 | `general_robot.base` | `moving_consumption_per_tick` | Consumo em movimento | 0 a 2147483647 |
 | `general_robot.base` | `recharge_per_tick` | Recarga na base e pelo slot de energia | 1 a 2147483647 |
@@ -49,6 +52,7 @@ O mod não cai por causa do config (regra 17 do `AGENTS.md`):
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 21:02 | Adiciona as chaves do comportamento em chamas. |
 | Marcelo Fabiano | 2026-11-04 20:09 | Adiciona as chaves de movimento. |
 | Marcelo Fabiano | 2026-11-04 19:24 | Adiciona a carga para religar. |
 | Marcelo Fabiano | 2026-11-04 19:08 | Documenta as chaves, os limites e o tratamento de valor inválido. |

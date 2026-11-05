@@ -16,11 +16,16 @@ Não há perguntas pendentes nesta fase.
 | 66 | A partir de quanta bateria o Cubit mostra a expressão de sono? | 10%, igual à bateria crítica |
 | 67 | O texto `Ore found` vale para qual minério? | Para minério do filtro do scanner. Bipe e surpresa, só para os raros |
 | 92 | Qual é a expressão ao recarregar pelo slot, fora da base? | Inativo, tela apagada. Ativo, a expressão normal. A expressão carregando fica só para a base |
+| 135 | Quais sons o Cubit tem? | Oito sons diferentes: esteiras ao andar, como as de um tanque de guerra; mob hostil encontrado; minério raro encontrado; bipe padrão ao trocar de expressão; curto elétrico enquanto pega fogo; ao ligar; ao desligar; e enquanto é recarregado. O detalhe está em [`visual.md`](../conceito/visual.md#sons) |
+| 136 | O bipe padrão vale para a troca de quais expressões? | Todas. Substitui a pergunta 12 |
+| 137 | Os sons são do desenvolvedor e podem ser publicados? | São dele, gerados com ferramentas de IA de estúdio. Os originais ficam em `tmp/wav/`, fora do repositório |
 
 ## Histórico de modificações
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 22:56 | Registra as respostas 136 e 137. |
+| Marcelo Fabiano | 2026-11-04 22:12 | Registra a resposta 135. |
 | Marcelo Fabiano | 2026-11-04 17:28 | Registra a resposta 92. |
 | Marcelo Fabiano | 2026-11-04 17:26 | Adiciona a pergunta 92. |
 | Marcelo Fabiano | 2026-11-04 17:15 | Renomeia para português e atualiza os caminhos. |

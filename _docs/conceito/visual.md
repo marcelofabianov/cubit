@@ -25,8 +25,18 @@ São sete: normal, feliz, sono, alerta, surpreso, carregando e desligado. Os gat
 
 ## Sons
 
-- Um som em loop para as **esteiras**, acompanhando a velocidade.
-- Bipes curtos de alerta para **inimigos** e **minérios raros**, com intervalo mínimo entre repetições. As demais expressões não têm som.
+São oito sons diferentes, que entram na Fase 3 (pergunta 135):
+
+| # | Quando toca | Som |
+|---|---|---|
+| 1 | Ao andar | Esteiras, como as de um tanque de guerra, em loop e acompanhando a velocidade |
+| 2 | Ao encontrar um mob hostil | Alerta, com intervalo mínimo entre repetições |
+| 3 | Ao encontrar um minério raro | Alerta, com intervalo mínimo entre repetições |
+| 4 | Ao trocar para qualquer expressão | Bipe padrão |
+| 5 | Enquanto pega fogo | Curto elétrico |
+| 6 | Ao ligar | Próprio |
+| 7 | Ao desligar | Próprio |
+| 8 | Enquanto é recarregado | Próprio |
 
 ## Identificação
 
@@ -37,6 +47,7 @@ São sete: normal, feliz, sono, alerta, surpreso, carregando e desligado. Os gat
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 22:12 | Define os oito sons do Cubit. |
 | Marcelo Fabiano | 2026-11-04 17:15 | Atualiza os caminhos após a renomeação para português. |
 | Marcelo Fabiano | 2026-11-04 17:08 | Define o modelo final na Fase 3. |
 | Marcelo Fabiano | 2026-11-04 16:57 | Atualiza as expressões, os sons e o painel solar. |
