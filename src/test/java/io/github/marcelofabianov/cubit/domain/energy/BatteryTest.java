@@ -25,6 +25,9 @@ class BatteryTest {
   private static final Percentage CRAFT_CHARGE = new Percentage(25);
   private static final Energy CHARGE_AFTER_CRAFT = new Energy(75_000);
   private static final int ABOVE_MAX_PERCENTAGE = 101;
+  private static final int BAR_STEPS = 13;
+  private static final int BAR_AT_CRAFT_CHARGE = 3;
+  private static final long ONE_FE = 1;
 
   private static Battery charged(long amount) {
     return new Battery(BASE_CAPACITY, new Energy(amount));
@@ -91,5 +94,30 @@ class BatteryTest {
   void percentageMustBeBetweenZeroAndOneHundred() {
     assertThrows(IllegalArgumentException.class, () -> new Percentage(-1));
     assertThrows(IllegalArgumentException.class, () -> new Percentage(ABOVE_MAX_PERCENTAGE));
+  }
+
+  @Test
+  void anEmptyBatteryHasLevelZero() {
+    assertEquals(0, charged(0).level(BAR_STEPS));
+  }
+
+  @Test
+  void anyChargeShowsAtLeastOneStep() {
+    assertEquals(1, charged(ONE_FE).level(BAR_STEPS));
+  }
+
+  @Test
+  void aFullBatteryFillsEveryStep() {
+    assertEquals(BAR_STEPS, charged(CAPACITY_AMOUNT).level(BAR_STEPS));
+  }
+
+  @Test
+  void theLevelIsProportionalToTheCharge() {
+    assertEquals(BAR_AT_CRAFT_CHARGE, charged(CHARGE_AFTER_CRAFT.amount()).level(BAR_STEPS));
+  }
+
+  @Test
+  void rejectsALevelWithoutSteps() {
+    assertThrows(IllegalArgumentException.class, () -> charged(PARTIAL).level(0));
   }
 }
