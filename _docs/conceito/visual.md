@@ -27,16 +27,18 @@ São sete: normal, feliz, sono, alerta, surpreso, carregando e desligado. Os gat
 
 São oito sons diferentes, que entram na Fase 3 (pergunta 135):
 
-| # | Quando toca | Som |
-|---|---|---|
-| 1 | Ao andar | Esteiras, como as de um tanque de guerra, em loop e acompanhando a velocidade |
-| 2 | Ao encontrar um mob hostil | Alerta, com intervalo mínimo entre repetições |
-| 3 | Ao encontrar um minério raro | Alerta, com intervalo mínimo entre repetições |
-| 4 | Ao trocar para qualquer expressão | Bipe padrão |
-| 5 | Enquanto pega fogo | Curto elétrico |
-| 6 | Ao ligar | Próprio |
-| 7 | Ao desligar | Próprio |
-| 8 | Enquanto é recarregado | Próprio |
+| # | Quando toca | Som | Arquivo |
+|---|---|---|---|
+| 1 | Ao andar | Esteiras, como as de um tanque de guerra, em loop e acompanhando a velocidade | `tracks.ogg` |
+| 2 | Ao encontrar um mob hostil | Alerta, com intervalo mínimo entre repetições | `hostile_mob_alert.ogg` |
+| 3 | Ao encontrar um minério raro | Alerta, com intervalo mínimo entre repetições | `rare_ore_alert.ogg` |
+| 4 | Ao trocar para qualquer expressão | Bipe padrão | `expression_beep.ogg` |
+| 5 | Enquanto pega fogo | Curto elétrico | `short_circuit.ogg` |
+| 6 | Ao ligar | Próprio | `power_on.ogg` |
+| 7 | Ao desligar | Próprio | `power_off.ogg` |
+| 8 | Enquanto é recarregado | Próprio | `recharging.ogg` |
+
+Os arquivos ficam em `assets/cubit/sounds/general_robot/`, em Ogg Vorbis, mono e 48 kHz, porque o jogo só aceita esse formato e só reduz o volume com a distância em sons mono. Ainda não tocam no jogo.
 
 ## Identificação
 
@@ -47,6 +49,7 @@ São oito sons diferentes, que entram na Fase 3 (pergunta 135):
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 22:51 | Adiciona os arquivos dos sons. |
 | Marcelo Fabiano | 2026-11-04 22:12 | Define os oito sons do Cubit. |
 | Marcelo Fabiano | 2026-11-04 17:15 | Atualiza os caminhos após a renomeação para português. |
 | Marcelo Fabiano | 2026-11-04 17:08 | Define o modelo final na Fase 3. |

@@ -19,11 +19,17 @@ Não há perguntas pendentes nesta fase.
 | 135 | Quais sons o Cubit tem? | Oito sons diferentes: esteiras ao andar, como as de um tanque de guerra; mob hostil encontrado; minério raro encontrado; bipe padrão ao trocar de expressão; curto elétrico enquanto pega fogo; ao ligar; ao desligar; e enquanto é recarregado. O detalhe está em [`visual.md`](../conceito/visual.md#sons) |
 | 136 | O bipe padrão vale para a troca de quais expressões? | Todas. Substitui a pergunta 12 |
 | 137 | Os sons são do desenvolvedor e podem ser publicados? | São dele, gerados com ferramentas de IA de estúdio. Os originais ficam em `tmp/wav/`, fora do repositório |
+| 140 | Os sons convertidos estão bons? | Não, o desenvolvedor ouviu cortes e sensação de congelamento ou perda. A conversão precisa ser revista |
+| 141 | Quais versões dos sons ficaram boas no VLC? | Os sons 3, 4 e 6 estão normais. Os sons 1, 2, 5, 7 e 8 têm cortes na reprodução |
+| 142 | Os cortes nos sons vêm dos arquivos ou do reprodutor? | Do reprodutor: no VLC havia cortes, e no `pw-play` os sons tocaram sem problema. A conversão está certa |
 
 ## Histórico de modificações
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 23:20 | Registra a resposta 142. |
+| Marcelo Fabiano | 2026-11-04 23:16 | Registra a resposta 141. |
+| Marcelo Fabiano | 2026-11-04 23:11 | Registra a resposta 140. |
 | Marcelo Fabiano | 2026-11-04 22:56 | Registra as respostas 136 e 137. |
 | Marcelo Fabiano | 2026-11-04 22:12 | Registra a resposta 135. |
 | Marcelo Fabiano | 2026-11-04 17:28 | Registra a resposta 92. |
