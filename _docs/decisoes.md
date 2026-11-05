@@ -35,6 +35,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Histórico de modificações:** só os `.md` de `_docs/` têm a tabela.
 - **Ordem da Fase 2:** movimento, fogo, lava e arquivos de som já entraram. Seguem a revisão dos `.md`, o modelo e a morte com o item danificado, antes do inventário.
 - **Documento desatualizado:** o agente sempre pergunta antes de corrigir, mesmo quando a correção parece clara.
+- **Merge:** é feito somente pelo desenvolvedor.
 - **Números no roteiro manual:** ele pode citar os valores padrão como resultado esperado, e `tiers.md` prevalece.
 - **Gates de push:** as GameTests também detectam classe de cliente carregada no servidor, sem exigir o EULA, então o `runServer` não é um gate. O datagen reprova se `src/generated` ficar diferente do Git.
 
@@ -78,6 +79,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 14:35 | Registra que o merge é somente do desenvolvedor. |
 | Marcelo Fabiano | 2026-11-05 14:13 | Registra o consumo por situação. |
 | Marcelo Fabiano | 2026-11-05 13:54 | Registra o mínimo visível das barras de bateria. |
 | Marcelo Fabiano | 2026-11-05 13:30 | Registra a parada do robô e o painel do slot de energia. |

@@ -144,7 +144,7 @@ O robô atual é o primeiro, de uso geral. O mod pode ter robôs especializados 
 
 ### Perguntas
 
-47. **Toda pergunta respondida fica registrada:** qualquer pergunta feita ao desenvolvedor e respondida por ele entra em `_docs/perguntas/`, no arquivo da fase e com o próximo número livre, antes de seguir para o próximo passo. Vale também para pergunta não bloqueante e para resposta que só confirma a recomendação. Resposta que muda outra aponta para ela. A exceção é a autorização de uma ação pontual, como commit, push, merge ou apagar uma branch, que vale só para aquela vez.
+47. **Toda pergunta respondida fica registrada:** qualquer pergunta feita ao desenvolvedor e respondida por ele entra em `_docs/perguntas/`, no arquivo da fase e com o próximo número livre, antes de seguir para o próximo passo. Vale também para pergunta não bloqueante e para resposta que só confirma a recomendação. Resposta que muda outra aponta para ela. A exceção é a autorização de uma ação pontual, como commit, push ou apagar uma branch, que vale só para aquela vez.
 
 ### Mudança no que está documentado
 
@@ -156,7 +156,8 @@ O robô atual é o primeiro, de uso geral. O mod pode ter robôs especializados 
 
 ## Git
 
-- **Autorização:** nunca faça commit, push, merge, tag, release ou PR sem autorização explícita para aquela ação. Antes, mostre os arquivos, o resumo e a mensagem proposta.
+- **Autorização:** nunca faça commit, push, tag, release ou PR sem autorização explícita para aquela ação. Antes, mostre os arquivos, o resumo e a mensagem proposta.
+- **Merge:** somente o desenvolvedor faz.
 - **Autoria:** nunca atribua autoria ou coautoria a uma IA, nem em commits, PRs, tags, releases ou comentários.
 - **Assinatura:** os commits são assinados com SSH. Não desligue a assinatura.
 - **Remote:** `git@github.com-personal:marcelofabianov/cubit.git`. Não troque por HTTPS nem por `git@github.com:`, que caem na conta profissional.

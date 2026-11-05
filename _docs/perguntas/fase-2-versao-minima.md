@@ -145,6 +145,7 @@ Não há perguntas pendentes nesta fase.
 | 277 | Quanto FE extra por tick custa uma condição negativa ativa? | Base 25, Avançado 50, Elite 125 e Ultimate 250 FE/t, também com o robô parado, e somados ao andar. Exceção à pergunta 32 |
 | 278 | Quanto custa subir? | 1,2× o custo do plano, ou seja, +20% sobre andar um bloco: Base 15, Avançado 18, Elite 22 e Ultimate 30 FE por bloco subido. É proporcional à altura, vale só na própria rota, e descer não devolve energia. Entra na issue da pergunta 271 |
 | 279 | Como foi o passo 5a do roteiro manual, das barras de bateria? | Ok, como esperado, executado pelo desenvolvedor: a barra agora está precisa. O resultado de cada passo não foi detalhado |
+| 280 | O agente pode fazer o merge de um PR, se o desenvolvedor pedir? | Não. O merge é feito somente pelo desenvolvedor |
 
 ### Premissas aprovadas
 
@@ -160,6 +161,7 @@ Não há perguntas pendentes nesta fase.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 14:32 | Registra a resposta 280. |
 | Marcelo Fabiano | 2026-11-05 14:23 | Registra a resposta 279. |
 | Marcelo Fabiano | 2026-11-05 14:13 | Registra a resposta 278. |
 | Marcelo Fabiano | 2026-11-05 14:12 | Registra as respostas 275, 276 e 277 e aponta as 32 e 133 para elas. |
