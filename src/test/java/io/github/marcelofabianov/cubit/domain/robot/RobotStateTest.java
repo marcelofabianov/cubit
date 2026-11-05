@@ -22,6 +22,8 @@ class RobotStateTest {
   private static final float SOME_HEALTH = 7.5f;
   private static final float TOO_MUCH_HEALTH = 99f;
   private static final float MIN_PLACED_HEALTH = 1f;
+  private static final int REPAIR_PERCENT = 25;
+  private static final float REPAIRED_HEALTH = 6.25f;
   private static final Energy CONSUMPTION = new Energy(10);
   private static final Energy RECHARGE = new Energy(500);
   private static final TierSpec SPEC =
@@ -56,6 +58,22 @@ class RobotStateTest {
         new RobotState(RobotTier.BASE, SOME_ENERGY, TOO_MUCH_HEALTH).healthFor(SPEC));
     assertEquals(
         MIN_PLACED_HEALTH, new RobotState(RobotTier.BASE, SOME_ENERGY, 0f).healthFor(SPEC));
+  }
+
+  @Test
+  void damagedRobotKeepsTheTierWithoutEnergyOrHealth() {
+    assertEquals(
+        new RobotState(RobotTier.BASE, Energy.ZERO, 0f),
+        new RobotState(RobotTier.BASE, SOME_ENERGY, SOME_HEALTH).damaged());
+  }
+
+  @Test
+  void repairedRobotHasPartOfTheHealthAndAnEmptyBattery() {
+    RobotState damaged = new RobotState(RobotTier.BASE, SOME_ENERGY, 0f);
+
+    assertEquals(
+        new RobotState(RobotTier.BASE, Energy.ZERO, REPAIRED_HEALTH),
+        damaged.repaired(SPEC, new Percentage(REPAIR_PERCENT)));
   }
 
   @Test
