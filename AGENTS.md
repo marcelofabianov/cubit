@@ -1,6 +1,6 @@
 # Cubit
 
-Mod de Minecraft que adiciona um robô companheiro fofo, movido a bateria, feito para o modpack [Iron Meridian](https://github.com/marcelofabianov/iron-meridian): singleplayer, de tecnologia e construção, sem magia.
+Mod de Minecraft que adiciona um robô companheiro fofo, movido a bateria, feito para o modpack [Iron Meridian](https://github.com/marcelofabianov/iron-meridian): singleplayer, de tecnologia e construção.
 
 **Comece por:** [`README.md`](README.md), a visão geral com as fases, e [`_docs/README.md`](_docs/README.md), o mapa da documentação. As respostas em `_docs/perguntas/` são a fonte da verdade e prevalecem sobre os outros documentos.
 

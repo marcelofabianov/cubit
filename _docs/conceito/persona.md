@@ -1,6 +1,6 @@
 # Persona do Cubit
 
-O Cubit é um companheiro **tecnológico, sem magia**, moderno, fofo e doce, que ajuda o player em tarefas simples.
+O Cubit é um companheiro **tecnológico**, moderno, fofo e doce, que ajuda o player em tarefas simples.
 
 ## Temperamento
 
@@ -50,6 +50,7 @@ O Cubit **nunca ataca o próprio dono nem mobs pacíficos**, em nenhum modo de d
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 00:56 | Tira a menção a magia da descrição. |
 | Marcelo Fabiano | 2026-11-05 00:17 | Define a expressão ao ligar e ao pegar fogo. |
 | Marcelo Fabiano | 2026-11-05 00:12 | Preenche os sons das reações e cita o intervalo mínimo dos textos. |
 | Marcelo Fabiano | 2026-11-04 17:28 | Define a expressão ao recarregar pelo slot. |

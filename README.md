@@ -4,7 +4,7 @@
   <img src="_docs/imagens/conceito/png/expressao-feliz.png" alt="Cubit com a expressão feliz" width="240">
 </p>
 
-Um robô companheiro fofo, movido a bateria, para Minecraft 1.21.1 com NeoForge, feito para o modpack [Iron Meridian](https://github.com/marcelofabianov/iron-meridian). Sem magia: o Cubit é pura tecnologia, craftado com recursos do jogo puro.
+Um robô companheiro fofo, movido a bateria, para Minecraft 1.21.1 com NeoForge, feito para o modpack [Iron Meridian](https://github.com/marcelofabianov/iron-meridian). O Cubit é craftado com recursos do jogo puro.
 
 > **Status: Fase 2, versão mínima.** O mod ainda não tem versão publicada. Já funcionam colocar e recolher o Cubit, seguir o player, vários Cubits com um seguindo e as reações a fogo e lava. O resto abaixo está planejado, e os números são o ponto de partida para o balanceamento.
 
