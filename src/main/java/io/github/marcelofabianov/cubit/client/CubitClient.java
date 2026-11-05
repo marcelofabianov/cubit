@@ -25,5 +25,6 @@ public final class CubitClient {
   @SubscribeEvent
   public static void registerScreens(RegisterMenuScreensEvent event) {
     event.register(CubitMenus.ROBOT.get(), RobotScreen::new);
+    event.register(CubitMenus.INDUCTION_DOCK.get(), InductionDockScreen::new);
   }
 }

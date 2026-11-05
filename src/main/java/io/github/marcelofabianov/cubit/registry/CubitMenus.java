@@ -1,6 +1,7 @@
 package io.github.marcelofabianov.cubit.registry;
 
 import io.github.marcelofabianov.cubit.CubitMod;
+import io.github.marcelofabianov.cubit.menu.InductionDockMenu;
 import io.github.marcelofabianov.cubit.menu.RobotMenu;
 import java.util.function.Supplier;
 import net.minecraft.core.registries.Registries;
@@ -17,6 +18,11 @@ public final class CubitMenus {
 
   public static final Supplier<MenuType<RobotMenu>> ROBOT =
       MENUS.register(ROBOT_ID, () -> IMenuTypeExtension.create(RobotMenu::onClient));
+
+  public static final Supplier<MenuType<InductionDockMenu>> INDUCTION_DOCK =
+      MENUS.register(
+          CubitBlocks.INDUCTION_DOCK_ID,
+          () -> IMenuTypeExtension.create(InductionDockMenu::onClient));
 
   private CubitMenus() {}
 

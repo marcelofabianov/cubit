@@ -25,6 +25,16 @@ public final class ConfigGameTests {
   private static final String INITIAL_CHARGE_KEY = "general.initial_charge_percent";
   private static final String BATTERY_KEY = "general_robot.base.battery_capacity";
   private static final String CONSUMPTION_KEY = "general_robot.base.moving_consumption_per_tick";
+  private static final String DOCK_CAPACITY_KEY = "general.dock_energy_capacity";
+  private static final String DOCK_INPUT_KEY = "general.dock_input_per_tick";
+  private static final String DOCK_HEAL_KEY = "general.dock_full_heal_ticks";
+  private static final String DOCK_STUCK_KEY = "general.dock_stuck_ticks";
+  private static final String DOCK_HOLD_KEY = "general.dock_complete_hold_ticks";
+  private static final int DOCK_HOLD = 60;
+  private static final int DOCK_CAPACITY = 100_000;
+  private static final int DOCK_INPUT = 5_000;
+  private static final int DOCK_HEAL = 1_200;
+  private static final int DOCK_STUCK = 100;
   private static final String FULL_KEY = "general_robot.base.full_inventory_extra_per_tick";
   private static final String WATER_KEY = "general_robot.base.water_extra_per_tick";
   private static final String NEGATIVE_KEY = "general_robot.base.negative_condition_extra_per_tick";
@@ -150,6 +160,11 @@ public final class ConfigGameTests {
     helper.assertValueEqual(file.<Double>get(BASE_SPEED_KEY), BASE_SPEED, WRONG_KEY);
     helper.assertValueEqual(file.<Double>get(BURNING_SPEED_KEY), BURNING_SPEED, WRONG_KEY);
     helper.assertValueEqual(file.<Double>get(SPEED_KEY), SPEED, WRONG_KEY);
+    helper.assertValueEqual(file.<Integer>get(DOCK_CAPACITY_KEY), DOCK_CAPACITY, WRONG_KEY);
+    helper.assertValueEqual(file.<Integer>get(DOCK_INPUT_KEY), DOCK_INPUT, WRONG_KEY);
+    helper.assertValueEqual(file.<Integer>get(DOCK_HEAL_KEY), DOCK_HEAL, WRONG_KEY);
+    helper.assertValueEqual(file.<Integer>get(DOCK_STUCK_KEY), DOCK_STUCK, WRONG_KEY);
+    helper.assertValueEqual(file.<Integer>get(DOCK_HOLD_KEY), DOCK_HOLD, WRONG_KEY);
     helper.assertValueEqual(file.<Double>get(FULL_SPEED_KEY), FULL_INVENTORY_SPEED, WRONG_KEY);
     helper.succeed();
   }

@@ -1,5 +1,6 @@
 package io.github.marcelofabianov.cubit.registry;
 
+import com.mojang.serialization.Codec;
 import io.github.marcelofabianov.cubit.CubitMod;
 import io.github.marcelofabianov.cubit.domain.robot.RobotState;
 import io.github.marcelofabianov.cubit.item.EnergySlotContents;
@@ -10,6 +11,7 @@ import net.minecraft.core.GlobalPos;
 import net.minecraft.core.UUIDUtil;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.world.item.component.ItemContainerContents;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -21,6 +23,7 @@ public final class CubitDataComponents {
   private static final String ROBOT_OWNER_ID = "robot_owner";
   private static final String ROBOT_INVENTORY_ID = "robot_inventory";
   private static final String ENERGY_SLOT_ID = "energy_slot";
+  private static final String DOCK_ENERGY_ID = "dock_energy";
   private static final DeferredRegister.DataComponents COMPONENTS =
       DeferredRegister.createDataComponents(Registries.DATA_COMPONENT_TYPE, CubitMod.MOD_ID);
 
@@ -58,6 +61,11 @@ public final class CubitDataComponents {
               builder
                   .persistent(EnergySlotContents.CODEC)
                   .networkSynchronized(EnergySlotContents.STREAM_CODEC));
+
+  public static final Supplier<DataComponentType<Long>> DOCK_ENERGY =
+      COMPONENTS.registerComponentType(
+          DOCK_ENERGY_ID,
+          builder -> builder.persistent(Codec.LONG).networkSynchronized(ByteBufCodecs.VAR_LONG));
 
   private CubitDataComponents() {}
 

@@ -6,6 +6,7 @@ import io.github.marcelofabianov.cubit.item.DamagedRobotItem;
 import io.github.marcelofabianov.cubit.item.RobotItem;
 import java.util.function.Supplier;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -14,6 +15,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public final class CubitItems {
   private static final int ROBOT_STACK_SIZE = 1;
   private static final int TOOLBOX_STACK_SIZE = 16;
+  private static final int DOCK_STACK_SIZE = 1;
   private static final String DAMAGED_PREFIX = "damaged_";
   private static final String TOOLBOX_ID = "toolbox";
   private static final DeferredRegister<Item> ITEMS =
@@ -38,6 +40,14 @@ public final class CubitItems {
   public static final Supplier<Item> TOOLBOX =
       ITEMS.register(
           TOOLBOX_ID, () -> new Item(new Item.Properties().stacksTo(TOOLBOX_STACK_SIZE)));
+
+  public static final Supplier<Item> INDUCTION_DOCK =
+      ITEMS.register(
+          CubitBlocks.INDUCTION_DOCK_ID,
+          () ->
+              new BlockItem(
+                  CubitBlocks.INDUCTION_DOCK.get(),
+                  new Item.Properties().stacksTo(DOCK_STACK_SIZE)));
 
   private CubitItems() {}
 

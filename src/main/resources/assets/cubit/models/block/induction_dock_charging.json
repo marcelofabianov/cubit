@@ -1,0 +1,6 @@
+{
+  "parent": "cubit:block/induction_dock_base",
+  "textures": {
+    "status": "cubit:block/induction_dock_status_charging"
+  }
+}
