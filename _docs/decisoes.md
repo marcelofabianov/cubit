@@ -9,6 +9,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Pacote Java:** `io.github.marcelofabianov.cubit`.
 - **Repositório:** `marcelofabianov/cubit`.
 - **Licença:** MIT.
+- **Ícone do mod:** o mesmo do item do Cubit.
 - **Primeira versão:** `0.1.0`, com a `1.0.0` só com o mod completo.
 - **Etapa atual:** Fase 2, versão mínima. A Fase 1, de conceito, foi encerrada.
 - **Iron Meridian:** o Cubit entra como exceção à regra do pack contra funções repetidas, por causa do Robit do Mekanism. O registro está na issue `marcelofabianov/iron-meridian#2`.
@@ -60,7 +61,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Slot de energia do Cubit:** existe em todos os tiers e aceita uma Power Bank ou redstone por vez. A redstone entra na Fase 2, e a Power Bank na Fase 4.
 - **Comunicação:** bipes e expressões, com poucos textos simples e diretos.
 - **Sons:** oito sons, que entram na Fase 3. O bipe padrão toca nas trocas de expressão sem som exclusivo. O intervalo mínimo entre repetições será definido na Fase 3, e os sons são do desenvolvedor.
-- **Modelo:** a geometria melhora já na Fase 2, e as animações e as expressões seguem na Fase 3.
+- **Modelo:** a geometria melhora já na Fase 2, com os detalhes das seis vistas, tudo fixo e sem mudar a hitbox. As animações e as expressões seguem na Fase 3.
 - **Limites:** nunca ataca o dono nem mobs pacíficos. Só ataca mobs neutros para defender o player.
 - **Scanner:** `c:ores/*` significa a tag-mãe `c:ores` e suas subtags, porque tags não aceitam curinga.
 - **Estado do robô como item:** inclui as configurações, além de bateria, vida, inventário, tier, nome e cor.
@@ -69,6 +70,8 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 00:35 | Registra o ícone do mod. |
+| Marcelo Fabiano | 2026-11-05 00:31 | Detalha o modelo da Fase 2. |
 | Marcelo Fabiano | 2026-11-05 00:15 | Registra o novo lugar do mapa dos documentos. |
 | Marcelo Fabiano | 2026-11-05 00:12 | Atualiza os gates e aponta os números para tiers.md, e completa os resumos de fogo, morte, sons, modelo e processo. |
 | Marcelo Fabiano | 2026-11-04 23:27 | Registra a saída da lava. |
