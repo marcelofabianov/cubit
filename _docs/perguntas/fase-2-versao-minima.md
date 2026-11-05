@@ -140,11 +140,19 @@ Não há perguntas pendentes nesta fase.
 | 272 | O que conta como inventário cheio, para o consumo extra? | Todos os slots ocupados, mesmo com pilhas incompletas |
 | 273 | A velocidade muda com o inventário cheio? | Sim, para 0,75×, configurável. Em chamas, a velocidade do fogo continua valendo |
 | 274 | O que conta como na água, para o consumo extra? | O robô em contato com a água, pelo `isInWater` do jogo, inclusive numa poça rasa e ao fugir do fogo |
-| 275 | Quais condições negativas fazem o Cubit perder FE extra? | Fogo, lava e os efeitos que o jogo marca como nocivos (`HARMFUL`), inclusive de outros mods, sem lista fixa. Vale só com o robô ativo. Várias juntas cobram um extra só, e um golpe não conta. Entra na issue da pergunta 271 |
+| 275 | Quais condições negativas fazem o Cubit perder FE extra? | Fogo, lava e os efeitos que o jogo marca como nocivos (`HARMFUL`), inclusive de outros mods, sem lista fixa. Vale só com o robô ativo. Várias juntas cobram um extra só, e um golpe não conta. Entra na issue da pergunta 271. A pergunta 286 acrescenta os blocos que ferem |
 | 276 | O dreno por condição negativa pode zerar a bateria? | Sim. Ao zerar, o robô desliga e, em chamas, queima parado. Limita a pergunta 133, que passa a valer enquanto houver bateria |
 | 277 | Quanto FE extra por tick custa uma condição negativa ativa? | Base 25, Avançado 50, Elite 125 e Ultimate 250 FE/t, também com o robô parado, e somados ao andar. Exceção à pergunta 32 |
 | 278 | Quanto custa subir? | 1,2× o custo do plano, ou seja, +20% sobre andar um bloco: Base 15, Avançado 18, Elite 22 e Ultimate 30 FE por bloco subido. É proporcional à altura, vale só na própria rota, e descer não devolve energia. Entra na issue da pergunta 271 |
 | 279 | Como foi o passo 5a do roteiro manual, das barras de bateria? | Ok, como esperado, executado pelo desenvolvedor: a barra agora está precisa. O resultado de cada passo não foi detalhado |
+| 280 | O agente pode fazer o merge de um PR, se o desenvolvedor pedir? | Não. O merge é feito somente pelo desenvolvedor |
+| 281 | Em que pontos ficam os testes do consumo por situação? | JUnit no domínio: soma de cada combinação, subida proporcional com FE inteiro, dreno até zerar e inativo sem gastar. GameTests: gastar mais cheio e na água, velocidade cheio e em chamas, dreno com fogo e efeito nocivo, sem acumular, e subir e descer. Roteiro manual: sentir o peso, a água e a subida, e ajustar os números |
+| 282 | Como se chamam as chaves novas do consumo no config? | Em `[general_robot.base]`: `full_inventory_extra_per_tick`, `water_extra_per_tick`, `negative_condition_extra_per_tick` e `climb_extra_per_block`. Em `[general]`: `full_inventory_speed_multiplier`. `moving_consumption_per_tick` continua, com o padrão de 15 |
+| 284 | Quais blocos fazem o Cubit ativo sair de onde está? | Todo bloco que fere, pela classificação de rota do jogo, sem lista fixa: magma, fogueira acesa, cacto, arbusto de frutas e blocos de outros mods que usem essa classificação. Conferir a rosa do wither. Visto no jogo: o Cubit ficou parado sobre magma, levando dano |
+| 285 | Como o Cubit reage sobre um bloco que fere? | Vai ao bloco seguro mais próximo e volta a seguir, na velocidade normal do tier. Só o ativo reage, antes de seguir. Desligado, fica parado e leva dano, como nas perguntas 117 e 139 |
+| 286 | Estar sobre um bloco que fere gasta o extra de condição negativa? | Sim. Amplia a pergunta 275, e continua cobrando um extra só |
+| 287 | Onde entra essa reação? | Numa issue própria, a #60, depois da #59 e antes do Induction Dock |
+| 288 | Como foi o roteiro manual do consumo por situação? | Tudo passou conforme o roteiro, executado pelo desenvolvedor, sem detalhar cada passo. O único ponto encontrado foi o dos blocos que ferem (pergunta 284). Os números ficam como estão |
 
 ### Premissas aprovadas
 
@@ -160,6 +168,11 @@ Não há perguntas pendentes nesta fase.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 15:09 | Registra a resposta 288. |
+| Marcelo Fabiano | 2026-11-05 15:07 | Registra as respostas 284, 285, 286 e 287 e aponta a 275 para a 286. |
+| Marcelo Fabiano | 2026-11-05 14:40 | Registra a resposta 282. |
+| Marcelo Fabiano | 2026-11-05 14:38 | Registra a resposta 281. |
+| Marcelo Fabiano | 2026-11-05 14:32 | Registra a resposta 280. |
 | Marcelo Fabiano | 2026-11-05 14:23 | Registra a resposta 279. |
 | Marcelo Fabiano | 2026-11-05 14:13 | Registra a resposta 278. |
 | Marcelo Fabiano | 2026-11-05 14:12 | Registra as respostas 275, 276 e 277 e aponta as 32 e 133 para elas. |

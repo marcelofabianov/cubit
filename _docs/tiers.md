@@ -26,12 +26,32 @@ Os tiers são Base, Avançado, Elite e Ultimate (no jogo: Base, Advanced, Elite 
 |---|---|---|---|---|
 | Bateria | 300 mil FE | 600 mil FE | 3 mi FE | 8 mi FE |
 | Power Bank (70% da bateria) | 210 mil FE | 420 mil FE | 2,1 mi FE | 5,6 mi FE |
-| Consumo em movimento | 10 FE/t | 12 FE/t | 15 FE/t | 20 FE/t |
-| Autonomia aproximada, sem o painel | ~25 min | ~42 min | ~2,8 h | ~5,6 h |
+| Autonomia aproximada, andando no plano, sem o painel | ~16,7 min | ~27,8 min | ~1,9 h | ~3,7 h |
+| Autonomia com inventário cheio ou na água | ~12,5 min | ~20,8 min | ~1,4 h | ~2,8 h |
+| Autonomia na água e com inventário cheio | ~10 min | ~16,7 min | ~1,2 h | ~2,2 h |
 | Painel solar (de dia) | 5 FE/t | 10 FE/t | 12 FE/t | 16 FE/t |
 | Painel solar (à noite) | — | — | 3 FE/t | 4 FE/t |
 | Recarga na base e pelo slot de energia | 500 FE/t | 1.000 FE/t | 2.500 FE/t | 5.000 FE/t |
 | Raio do retorno automático e da chamada pelo Dock, e bateria do retorno | 15 blocos, 10% | 24 blocos, 10% | 32 blocos, 10% | 48 blocos, 10% |
+
+## Consumo por atividade
+
+Os extras somam ao andar. O consumo só vale com o robô ativo.
+
+| Atividade | Base | Avançado | Elite | Ultimate |
+|---|---|---|---|---|
+| Parado | 0 FE/t | 0 FE/t | 0 FE/t | 0 FE/t |
+| Andar | 15 FE/t | 18 FE/t | 22 FE/t | 30 FE/t |
+| Extra ao andar com o inventário cheio | +5 FE/t | +6 FE/t | +7 FE/t | +10 FE/t |
+| Extra ao andar na água | +5 FE/t | +6 FE/t | +7 FE/t | +10 FE/t |
+| Extra ao subir, por bloco de altura | +15 FE | +18 FE | +22 FE | +30 FE |
+| Extra com condição negativa, mesmo parado | +25 FE/t | +50 FE/t | +125 FE/t | +250 FE/t |
+| Fundir na fornalha | Bloqueado | ~20 FE/t | ~20 FE/t | ~20 FE/t |
+| Choque, por uso | Bloqueado | 2 mil FE | 2 mil FE | 1,5 mil FE |
+| Lanterna, ímã, scanners e colocar tochas | A definir | A definir | A definir | A definir |
+
+- **Carregador de ferramentas:** transfere energia para outro item, então não conta como gasto. A velocidade está em [slots exclusivos](#slots-exclusivos).
+- **Cards:** o custo por ação está em [robôs especializados](#robôs-especializados).
 
 ## Valores gerais
 
@@ -46,6 +66,7 @@ Valem para todos os tiers e ficam no config.
 | Intervalo para recalcular a rota | 10 ticks |
 | Distância para parar perto do player | 3 blocos |
 | Velocidade em chamas, sobre a do tier | 1,25× |
+| Velocidade com o inventário cheio, sobre a do tier | 0,75× |
 | Busca de água em chamas, em qualquer direção | 8 blocos |
 | Alcance ao andar ao acaso em chamas | 5 blocos |
 | Distância para teleportar até o player | ~20 blocos |
@@ -140,6 +161,7 @@ Planejado para a Fase 5. O tier Base não aceita cards.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 14:40 | Adiciona o consumo por atividade e os novos valores de autonomia. |
 | Marcelo Fabiano | 2026-11-05 12:08 | Adiciona os números previstos para os robôs especializados. |
 | Marcelo Fabiano | 2026-11-05 01:15 | Adiciona o intervalo do resgate no vazio. |
 | Marcelo Fabiano | 2026-11-05 00:12 | Adiciona a vida após o conserto e cita a exceção do roteiro. |

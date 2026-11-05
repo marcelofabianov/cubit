@@ -92,7 +92,7 @@ A descrição do PR segue o template [`.github/pull_request_template.md`](../../
 
 ### 8. Merge
 
-O merge é feito no GitHub, pelo desenvolvedor ou pelo agente, se ele pedir para aquele PR.
+O merge é feito no GitHub, somente pelo desenvolvedor.
 
 ### 9. Encerramento
 
@@ -106,11 +106,13 @@ A autorização vale só para aquela ação e não se estende às seguintes.
 
 | O agente faz sem pedir | O agente só faz com autorização |
 |---|---|
-| Ler, investigar e apresentar opções | Commit, push, merge, tag, release e PR |
+| Ler, investigar e apresentar opções | Commit, push, tag, release e PR |
 | Editar arquivos da tarefa aprovada, sem commit | Push forçado e qualquer reescrita de histórico |
 | Rodar testes e gates | Apagar branches e arquivos |
 | Criar a issue exigida por uma tarefa pedida | Mudar o `AGENTS.md` |
 | Corrigir o que quebra um gate, sem mudar comportamento | Decisão bloqueante, mesmo com recomendação clara |
+
+O merge fica fora da tabela porque o agente não o faz, nem com autorização.
 
 Todo item criado no GitHub é informado com o link, na mesma resposta.
 
@@ -181,6 +183,7 @@ O primeiro passo, separando o que está decidido do que está pendente.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 14:35 | Deixa o merge somente com o desenvolvedor. |
 | Marcelo Fabiano | 2026-11-05 12:21 | Inclui o teste numa instância só com o mod. |
 | Marcelo Fabiano | 2026-11-05 00:12 | Cita os gates de push na preparação do ambiente. |
 | Marcelo Fabiano | 2026-11-04 23:45 | Limita o histórico aos arquivos de `_docs/`. |

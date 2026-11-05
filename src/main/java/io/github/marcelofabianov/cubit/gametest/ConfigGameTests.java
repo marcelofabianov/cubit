@@ -3,6 +3,7 @@ package io.github.marcelofabianov.cubit.gametest;
 import com.electronwill.nightconfig.core.CommentedConfig;
 import io.github.marcelofabianov.cubit.CubitMod;
 import io.github.marcelofabianov.cubit.config.CubitConfig;
+import io.github.marcelofabianov.cubit.domain.energy.ConsumptionExtras;
 import io.github.marcelofabianov.cubit.domain.energy.Energy;
 import io.github.marcelofabianov.cubit.domain.energy.Percentage;
 import io.github.marcelofabianov.cubit.domain.robot.RobotType;
@@ -24,6 +25,11 @@ public final class ConfigGameTests {
   private static final String INITIAL_CHARGE_KEY = "general.initial_charge_percent";
   private static final String BATTERY_KEY = "general_robot.base.battery_capacity";
   private static final String CONSUMPTION_KEY = "general_robot.base.moving_consumption_per_tick";
+  private static final String FULL_KEY = "general_robot.base.full_inventory_extra_per_tick";
+  private static final String WATER_KEY = "general_robot.base.water_extra_per_tick";
+  private static final String NEGATIVE_KEY = "general_robot.base.negative_condition_extra_per_tick";
+  private static final String CLIMB_KEY = "general_robot.base.climb_extra_per_block";
+  private static final String FULL_SPEED_KEY = "general.full_inventory_speed_multiplier";
   private static final String RECHARGE_KEY = "general_robot.base.recharge_per_tick";
   private static final String SLOTS_KEY = "general_robot.base.inventory_slots";
   private static final String HEALTH_KEY = "general_robot.base.max_health";
@@ -32,7 +38,12 @@ public final class ConfigGameTests {
   private static final int WAKE_CHARGE = 5;
   private static final int INITIAL_CHARGE = 25;
   private static final int BATTERY = 300_000;
-  private static final int CONSUMPTION = 10;
+  private static final int CONSUMPTION = 15;
+  private static final int FULL_INVENTORY_EXTRA = 5;
+  private static final int WATER_EXTRA = 5;
+  private static final int NEGATIVE_CONDITION_EXTRA = 25;
+  private static final int CLIMB_EXTRA = 15;
+  private static final double FULL_INVENTORY_SPEED = 0.75;
   private static final int RECHARGE = 500;
   private static final int SLOTS = 27;
   private static final int HEALTH = 25;
@@ -69,6 +80,10 @@ public final class ConfigGameTests {
       Map.of(
           BATTERY_KEY, BATTERY,
           CONSUMPTION_KEY, CONSUMPTION,
+          FULL_KEY, FULL_INVENTORY_EXTRA,
+          WATER_KEY, WATER_EXTRA,
+          NEGATIVE_KEY, NEGATIVE_CONDITION_EXTRA,
+          CLIMB_KEY, CLIMB_EXTRA,
           RECHARGE_KEY, RECHARGE,
           SLOTS_KEY, SLOTS,
           HEALTH_KEY, HEALTH,
@@ -81,7 +96,12 @@ public final class ConfigGameTests {
           SLOTS,
           HEALTH,
           RADIUS,
-          SPEED);
+          SPEED,
+          new ConsumptionExtras(
+              new Energy(FULL_INVENTORY_EXTRA),
+              new Energy(WATER_EXTRA),
+              new Energy(NEGATIVE_CONDITION_EXTRA),
+              new Energy(CLIMB_EXTRA)));
   private static final String WRONG_SPEC = "Wrong tier numbers";
   private static final String WRONG_CHARGE = "Wrong initial charge";
   private static final String WRONG_KEY = "Wrong value for a config key";
@@ -96,6 +116,8 @@ public final class ConfigGameTests {
     helper.assertValueEqual(spec, BASE_SPEC, WRONG_SPEC);
     helper.assertValueEqual(
         CubitMod.CONFIG.initialCharge(), new Percentage(INITIAL_CHARGE), WRONG_CHARGE);
+    helper.assertValueEqual(
+        CubitMod.CONFIG.fullInventorySpeedMultiplier(), FULL_INVENTORY_SPEED, WRONG_SPEC);
     helper.succeed();
   }
 
@@ -128,6 +150,7 @@ public final class ConfigGameTests {
     helper.assertValueEqual(file.<Double>get(BASE_SPEED_KEY), BASE_SPEED, WRONG_KEY);
     helper.assertValueEqual(file.<Double>get(BURNING_SPEED_KEY), BURNING_SPEED, WRONG_KEY);
     helper.assertValueEqual(file.<Double>get(SPEED_KEY), SPEED, WRONG_KEY);
+    helper.assertValueEqual(file.<Double>get(FULL_SPEED_KEY), FULL_INVENTORY_SPEED, WRONG_KEY);
     helper.succeed();
   }
 

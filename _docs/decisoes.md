@@ -35,6 +35,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Histórico de modificações:** só os `.md` de `_docs/` têm a tabela.
 - **Ordem da Fase 2:** movimento, fogo, lava e arquivos de som já entraram. Seguem a revisão dos `.md`, o modelo e a morte com o item danificado, antes do inventário.
 - **Documento desatualizado:** o agente sempre pergunta antes de corrigir, mesmo quando a correção parece clara.
+- **Merge:** é feito somente pelo desenvolvedor.
 - **Números no roteiro manual:** ele pode citar os valores padrão como resultado esperado, e `tiers.md` prevalece.
 - **Gates de push:** as GameTests também detectam classe de cliente carregada no servidor, sem exigir o EULA, então o `runServer` não é um gate. O datagen reprova se `src/generated` ficar diferente do Git.
 
@@ -64,7 +65,8 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Parada do robô:** uma navegação própria cancela o recálculo de rota pendente, para o robô parado não voltar a andar.
 - **Painel do slot de energia:** visual melhor e tooltips ficam para a tela própria da Fase 3.
 - **Barras de bateria:** mostram ao menos um risco enquanto houver carga e só ficam vazias com 0 FE.
-- **Consumo por situação (decidido, ainda não implementado):** andar custa mais, e inventário cheio, água, subida e condições negativas somam um extra. Com o inventário cheio, a velocidade cai. Os números entram em `tiers.md` junto do código.
+- **Documentação para o player (fase a definir):** uma wiki em site estático no GitHub e um livro entregue ao criar o mundo, que aponta para ela.
+- **Consumo por situação:** inventário cheio, água, subida e condições negativas somam um extra ao gasto. Com o inventário cheio, a velocidade cai. Os números estão em [`tiers.md`](tiers.md#consumo-por-atividade).
 - **Slot de energia do Cubit:** existe em todos os tiers e aceita uma Power Bank ou redstone por vez. A redstone entra na Fase 2, e a Power Bank na Fase 4.
 - **Comunicação:** bipes e expressões, com poucos textos simples e diretos.
 - **Sons:** oito sons, que entram na Fase 3. O bipe padrão toca nas trocas de expressão sem som exclusivo. O intervalo mínimo entre repetições será definido na Fase 3, e os sons são do desenvolvedor.
@@ -78,6 +80,9 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 14:55 | Anota a wiki e o livro para o player. |
+| Marcelo Fabiano | 2026-11-05 14:40 | Aponta o consumo por situação para `tiers.md`. |
+| Marcelo Fabiano | 2026-11-05 14:35 | Registra que o merge é somente do desenvolvedor. |
 | Marcelo Fabiano | 2026-11-05 14:13 | Registra o consumo por situação. |
 | Marcelo Fabiano | 2026-11-05 13:54 | Registra o mínimo visível das barras de bateria. |
 | Marcelo Fabiano | 2026-11-05 13:30 | Registra a parada do robô e o painel do slot de energia. |

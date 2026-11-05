@@ -1,6 +1,7 @@
 package io.github.marcelofabianov.cubit.config;
 
 import io.github.marcelofabianov.cubit.domain.behavior.FollowDecision;
+import io.github.marcelofabianov.cubit.domain.energy.ConsumptionExtras;
 import io.github.marcelofabianov.cubit.domain.energy.Energy;
 import io.github.marcelofabianov.cubit.domain.energy.Percentage;
 import io.github.marcelofabianov.cubit.domain.energy.PowerRules;
@@ -18,7 +19,11 @@ public final class CubitConfig {
   private static final String GENERAL_SECTION = "general";
   private static final int TIER_SECTION_DEPTH = 2;
   private static final long BASE_BATTERY = 300_000;
-  private static final long BASE_CONSUMPTION = 10;
+  private static final long BASE_CONSUMPTION = 15;
+  private static final long BASE_FULL_INVENTORY_EXTRA = 5;
+  private static final long BASE_WATER_EXTRA = 5;
+  private static final long BASE_NEGATIVE_CONDITION_EXTRA = 25;
+  private static final long BASE_CLIMB_EXTRA = 15;
   private static final long BASE_RECHARGE = 500;
   private static final int BASE_SLOTS = 27;
   private static final int BASE_HEALTH = 25;
@@ -32,12 +37,18 @@ public final class CubitConfig {
           BASE_SLOTS,
           BASE_HEALTH,
           BASE_CALL_RADIUS,
-          BASE_SPEED_MULTIPLIER);
+          BASE_SPEED_MULTIPLIER,
+          new ConsumptionExtras(
+              new Energy(BASE_FULL_INVENTORY_EXTRA),
+              new Energy(BASE_WATER_EXTRA),
+              new Energy(BASE_NEGATIVE_CONDITION_EXTRA),
+              new Energy(BASE_CLIMB_EXTRA)));
 
   private final ModConfigSpec spec;
   private final GeneralSection general;
   private final DamagedRobotSection damagedRobot;
   private final EnergySlotSection energySlot;
+  private final LoadSection load;
   private final TierCatalog tierCatalog;
 
   public CubitConfig() {
@@ -47,6 +58,7 @@ public final class CubitConfig {
     general = new GeneralSection(builder);
     damagedRobot = new DamagedRobotSection(builder);
     energySlot = new EnergySlotSection(builder);
+    load = new LoadSection(builder);
     builder.pop();
 
     builder.push(List.of(GENERAL_ROBOT.id(), RobotTier.BASE.key()));
@@ -89,6 +101,10 @@ public final class CubitConfig {
 
   public double burningSpeedMultiplier() {
     return general.burningSpeed.get();
+  }
+
+  public double fullInventorySpeedMultiplier() {
+    return load.fullInventorySpeed.get();
   }
 
   public int waterSearchRadiusBlocks() {

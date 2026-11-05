@@ -41,7 +41,7 @@ O Cubit mantém os recursos ao evoluir, e cada tier os melhora. Os recursos avan
 | Vida | 25 | 50 | 100 | 200 |
 | Velocidade | 1,0× | 1,25× | 1,5× | 2,0× |
 | Bateria | 300 mil FE | 600 mil FE | 3 mi FE | 8 mi FE |
-| Autonomia em movimento, sem o painel | ~25 min | ~42 min | ~2,8 h | ~5,6 h |
+| Autonomia em movimento, sem o painel | ~16,7 min | ~27,8 min | ~1,9 h | ~3,7 h |
 | Capacidade da Power Bank | 210 mil FE | 420 mil FE | 2,1 mi FE | 5,6 mi FE |
 | Inventário | 27 slots | 36 slots | 45 slots | 54 slots |
 | Raio do ímã | 1 bloco | 3 blocos | 5 blocos | 8 blocos |
