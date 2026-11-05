@@ -82,4 +82,16 @@ public final class CubitConfig {
   public int followRepathTicks() {
     return general.repathTicks.get();
   }
+
+  public double burningSpeedMultiplier() {
+    return general.burningSpeed.get();
+  }
+
+  public int waterSearchRadiusBlocks() {
+    return general.waterSearchRadius.get();
+  }
+
+  public int burningWanderRadiusBlocks() {
+    return general.burningWanderRadius.get();
+  }
 }

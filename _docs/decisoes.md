@@ -43,8 +43,8 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Entidade:** a `RobotEntity` herda de `PathfinderMob`, com o dono num UUID próprio.
 - **Estado como item:** um único componente, `cubit:robot_state`.
 - **Dono:** quem coloca o robô. O item não guarda o dono. Nenhum dano atribuído a ele fere o robô.
-- **Fogo:** o robô ativo em chamas anda ao acaso, evita perigos e busca água.
-- **Morte:** o item que cai não queima nem some com o tempo.
+- **Fogo:** o robô ativo em chamas anda ao acaso a 1,25× da velocidade, evita perigos e busca água em até 8 blocos. Ao apagar, volta a seguir.
+- **Morte:** o robô vira um item danificado, próprio por tipo, que não queima, não some com o tempo e não pode ser colocado no mundo. Conserta com uma caixa de ferramentas, consumida no craft, e sai com 25% da vida e a bateria zerada.
 - **Movimento:** velocidade de referência de 0,3. Na água, o robô afunda e anda no fundo, sem se afogar. Na lava, leva dano igual ao do player. Não há dano de queda. O som de esteira entra na Fase 3.
 - **Criativo:** aba própria, `cubit:main`, e colocar sempre gasta o item.
 - **Estados:** ativo (ligado), inativo (desligado) e hibernação (na base, com o inventário e os slots acessíveis).
@@ -60,6 +60,8 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 21:19 | Registra o item danificado e o conserto. |
+| Marcelo Fabiano | 2026-11-04 21:02 | Detalha o comportamento em chamas. |
 | Marcelo Fabiano | 2026-11-04 20:41 | Registra o fogo, a morte e o registro de perguntas. |
 | Marcelo Fabiano | 2026-11-04 20:31 | Registra o dano na lava. |
 | Marcelo Fabiano | 2026-11-04 20:09 | Registra as decisões de movimento. |

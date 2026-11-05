@@ -1,5 +1,6 @@
 package io.github.marcelofabianov.cubit.entity;
 
+import io.github.marcelofabianov.cubit.domain.behavior.BurningAction;
 import io.github.marcelofabianov.cubit.domain.behavior.FollowAction;
 import io.github.marcelofabianov.cubit.domain.behavior.FollowDecision;
 import java.util.EnumSet;
@@ -71,7 +72,9 @@ final class FollowOwnerGoal extends Goal {
   }
 
   private FollowAction nextAction(Player owner) {
-    if (owner == null) {
+    boolean reactingToFire =
+        BurningAction.decide(robot.powerState(), robot.isOnFire(), false) != BurningAction.NONE;
+    if (owner == null || reactingToFire) {
       return FollowAction.STOP;
     }
     boolean sameDimension = owner.level() == robot.level();

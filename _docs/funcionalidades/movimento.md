@@ -17,6 +17,17 @@ O player escolhe entre o robô seguir ou atuar numa área. A marcação da área
 - Só se move no estado ativo. Inativo ou em hibernação, fica parado e não teleporta.
 - Faz barulho de esteira ao andar. O som entra na Fase 3.
 
+## Em chamas
+
+Números: [valores gerais](../tiers.md#valores-gerais).
+
+- **Ativo:** para de seguir e de teleportar, e anda mais rápido. Nunca fica parado enquanto houver para onde ir.
+- **Com água por perto:** vai até ela para se apagar, em qualquer direção, inclusive acima ou abaixo por degraus. A rota só passa pela água nesse caso, ou se o robô já estiver nela.
+- **Água sem rota:** água coberta por um bloco, ou sem caminho até ela, como atrás de uma parede, não serve. Ele tenta outra água ou anda ao acaso.
+- **Sem água por perto:** anda ao acaso, evitando lava e fogo.
+- **Inativo ou em hibernação:** fica parado, porque só o robô ativo se move.
+- **Ao apagar:** volta a seguir na hora, pelas regras normais de movimento.
+
 ## Vários robôs, um seguindo
 
 - O player pode ter quantos robôs preferir.
@@ -46,6 +57,9 @@ Marca onde o player morreu e o leva até lá, se o tier permitir.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 22:01 | Define que o robô em chamas nunca fica parado. |
+| Marcelo Fabiano | 2026-11-04 21:29 | Define a busca de água em qualquer altura e o caso sem rota. |
+| Marcelo Fabiano | 2026-11-04 21:02 | Adiciona o comportamento em chamas. |
 | Marcelo Fabiano | 2026-11-04 20:31 | Define o dano na lava e que o item do robô não queima. |
 | Marcelo Fabiano | 2026-11-04 20:09 | Define o comportamento na água, o som e o robô em chunk descarregado. |
 | Marcelo Fabiano | 2026-11-04 18:50 | Define a parada perto do player, a saída da base e o robô que segue sem bateria. |

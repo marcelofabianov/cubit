@@ -14,7 +14,7 @@ Não há perguntas pendentes nesta fase.
 | 31 | Quando ele religa? | Sozinho, com 5% de bateria |
 | 32 | Ele consome energia parado? | 0 FE/t, configurável |
 | 33 | Com quanta carga sai do craft? | 25%, configurável |
-| 34 | O que acontece na morte, e como repara? | Vira item com inventário preservado e bateria zerada. A vida fica no item e se recupera na estação. O dono não o fere. As perguntas 118 e 119 detalham o item e o dano |
+| 34 | O que acontece na morte, e como repara? | Vira item com inventário preservado e bateria zerada. A vida fica no item e se recupera na estação. O dono não o fere. As perguntas 118 e 119 detalham o item e o dano, e as perguntas 127 a 130, o item danificado e o conserto |
 | 35 | O que conta como robô ativo? | Substituída pela pergunta 65 |
 | 36 | Qual é o buffer e a entrada da estação? | 100 mil FE, configurável. A entrada foi alterada pela pergunta 61 |
 | 37 | Qual é a fonte de FE no ambiente de dev? | Powah só em runtime local, com as dependências a confirmar, ou um comando de debug |
@@ -28,7 +28,7 @@ Não há perguntas pendentes nesta fase.
 | 54 | Sem o retorno automático da Fase 4, como o Cubit chega à base na versão mínima? | O player clica com o botão direito no Dock, e o Cubit por perto vai até ele. Colocar o item do Cubit em cima do Dock também funciona. A distância e o Cubit chamado foram definidos nas perguntas 59 e 81 |
 | 55 | Como o Cubit sai da hibernação, já que interagir com ele abre o inventário? | Sai sozinho com a bateria cheia e volta a seguir. Antes disso, clicar no Dock o libera. O que ele faz ao sair foi ampliado pela pergunta 83 |
 | 59 | A que distância clicar no Dock chama o Cubit "por perto"? | O raio do retorno automático do tier |
-| 60 | O modelo final entra na Fase 2 ou é provisório nessa fase? | Geometria provisória na Fase 2 e modelo final na Fase 3, junto das expressões |
+| 60 | O modelo final entra na Fase 2 ou é provisório nessa fase? | Geometria provisória na Fase 2 e modelo final na Fase 3, junto das expressões. A pergunta 134 antecipa parte disso |
 | 61 | O Dock recebe até 1.000 FE/t, mas recarrega Elite a 2.500 e Ultimate a 5.000 FE/t. Como resolver? | Entrada de 5.000 FE/t, com o estoque de 100 mil FE |
 | 62 | Um Cubit sem bateria colocado no Dock entra em hibernação logo ou só com 5%? | Logo |
 | 63 | Em que velocidade a vida se recupera na base? | Proporcional ao tier: todos levam o mesmo tempo para encher, cerca de 1 minuto, configurável |
@@ -71,6 +71,18 @@ Não há perguntas pendentes nesta fase.
 | 120 | Em que ordem seguem o movimento, o fogo e a morte? | Primeiro o PR do movimento. Depois, um PR para o fogo e outro para a morte, antes do inventário |
 | 122 | Como foi o roteiro manual do movimento? | Ok, executado pelo desenvolvedor |
 | 123 | Os commits das decisões de movimento e das decisões de fogo e morte ficam separados? | Sim, separados |
+| 124 | Em que velocidade o Cubit anda enquanto queima? | 1,25× a velocidade do tier, configurável |
+| 125 | Até que distância o Cubit em chamas procura água? | 8 blocos, configurável, só em chunks carregados. A pergunta 131 detalha a altura |
+| 126 | O que o Cubit faz quando o fogo apaga? | Volta a seguir na hora, pelas regras normais de movimento |
+| 127 | Como existe o Cubit danificado, o item que cai quando ele morre? | Um item próprio por tipo de robô: `cubit:damaged_general_robot`, chamado `Damaged Cubit`. Guarda o estado, não pode ser colocado no mundo, não queima, não some com o tempo e não entra em shulker box. Conserta com a caixa de ferramentas, na grade do inventário ou na mesa de craft |
+| 128 | O que acontece com a caixa de ferramentas ao consertar? | É consumida a cada conserto. Empilha até 16 |
+| 129 | Com quanta vida o Cubit sai do conserto? | 25% da vida, configurável, com a bateria zerada. O Induction Dock recupera o resto |
+| 130 | Qual é a receita provisória da caixa de ferramentas? | 7 ferros, 1 redstone e 1 obsidiana, na mesa de craft. Colunas laterais com 3 ferros cada, e coluna central com ferro em cima, redstone no meio e obsidiana embaixo |
+| 131 | A busca de água do Cubit em chamas considera blocos de alturas variadas, como degraus? | Sim. Vale em qualquer direção dentro do raio da pergunta 125. A água precisa ter o topo livre e rota até ela. Sem isso, ele tenta outra água ou anda ao acaso |
+| 132 | Quais arquivos `.md` têm histórico de modificações? | Só os que estão em `_docs/`. Os outros, como o `README.md`, não têm |
+| 133 | O Cubit em chamas pode ficar parado? | Não. Ativo e em chamas, ele nunca para enquanto houver para onde ir |
+| 134 | Dá para melhorar o modelo do Cubit agora, mais próximo das imagens de conceito? | Sim, depois de terminar o tema do fogo. Antecipa parte da pergunta 60: a geometria melhora já na Fase 2, e animações e expressões seguem na Fase 3 |
+| 138 | Como foi o roteiro manual do Cubit em chamas? | Ok, executado pelo desenvolvedor |
 
 ### Premissas aprovadas
 
@@ -86,6 +98,13 @@ Não há perguntas pendentes nesta fase.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 22:56 | Registra a resposta 138. |
+| Marcelo Fabiano | 2026-11-04 22:05 | Registra a resposta 134. |
+| Marcelo Fabiano | 2026-11-04 22:01 | Registra a resposta 133. |
+| Marcelo Fabiano | 2026-11-04 21:51 | Registra a resposta 132. |
+| Marcelo Fabiano | 2026-11-04 21:49 | Registra a resposta 131. |
+| Marcelo Fabiano | 2026-11-04 21:19 | Registra as respostas 127, 128, 129 e 130. |
+| Marcelo Fabiano | 2026-11-04 21:02 | Registra as respostas 124, 125 e 126. |
 | Marcelo Fabiano | 2026-11-04 20:54 | Registra as respostas 122 e 123. |
 | Marcelo Fabiano | 2026-11-04 20:41 | Registra as respostas 117, 118, 119 e 120. |
 | Marcelo Fabiano | 2026-11-04 20:31 | Registra a resposta 116 e tira a lava da resposta 114. |
