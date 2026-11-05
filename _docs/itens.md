@@ -84,11 +84,12 @@ Estes nomes não mudam sem migração (regra 18 do `AGENTS.md`).
 | Onde | Nome | Conteúdo |
 |---|---|---|
 | Componente do item | `cubit:robot_state` | `tier`, `energy` e `health` |
+| Componente do item | `cubit:robot_inventory` | Conteúdo do inventário, também no item danificado |
 | Componente do item danificado | `cubit:last_safe_position` | Dimensão e posição seguras do robô |
 | Componente do item danificado | `cubit:robot_owner` | UUID do dono |
 | Tipo de receita | `cubit:robot_repair` | Campos `damaged_robot`, `toolbox` e `result` |
 | Dados do mundo | `cubit_dead_robots` | Robôs mortos com o dono offline |
-| NBT da entidade | `Owner`, `Tier`, `Energy`, `PowerState` e `LastSafePosition` | Dono, tier, carga da bateria, estado e última posição segura |
+| NBT da entidade | `Owner`, `Tier`, `Energy`, `PowerState`, `LastSafePosition` e `Inventory` | Dono, tier, carga da bateria, estado, última posição segura e inventário, com `Slot` em cada item |
 | Dados do player | `cubit:following_robot` | `robot`: o UUID do robô que segue, ou nada |
 
 O estado salvo é validado ao entrar no jogo, sem derrubá-lo (regra 17 do `AGENTS.md`):
@@ -105,6 +106,7 @@ O estado salvo é validado ao entrar no jogo, sem derrubá-lo (regra 17 do `AGEN
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 02:11 | Adiciona os contratos do inventário. |
 | Marcelo Fabiano | 2026-11-05 01:15 | Detalha a proteção do item danificado, o resgate no vazio e os contratos novos. |
 | Marcelo Fabiano | 2026-11-05 00:17 | Define que o item danificado empilha em 1. |
 | Marcelo Fabiano | 2026-11-05 00:12 | Adiciona o item danificado, a Toolbox e o conserto. |

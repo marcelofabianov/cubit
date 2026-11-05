@@ -56,7 +56,7 @@ Não há perguntas pendentes nesta fase.
 | 104 | Qual é o formato das chaves do config? | Por tipo e tier, em `snake_case`: `[general_robot.base]`, com os valores gerais em `[general]`. Os detalhes estão em [`config.md`](../desenvolvimento/config.md) |
 | 105 | De qual classe do Minecraft a `RobotEntity` herda? | `PathfinderMob`, com o dono num UUID próprio |
 | 106 | Quando entram as GameTests e os gates de datagen e `runServer`? | Já na etapa "Cubit no mundo", e a primeira GameTest prova que uma reprovação faz o `make gametest` falhar |
-| 108 | Como salvar o estado do Cubit como item? | Num componente único, `cubit:robot_state`, com tier, energia e vida. Os próximos dados entram como campos opcionais. O tipo do robô vem do próprio item |
+| 108 | Como salvar o estado do Cubit como item? | Num componente único, `cubit:robot_state`, com tier, energia e vida. Os próximos dados entram como campos opcionais, exceto o inventário, pela pergunta 185. O tipo do robô vem do próprio item |
 | 109 | Quem é o dono de um Cubit? | Quem o coloca. O item não guarda o dono, e o robô ganha um UUID novo a cada colocação. A pergunta 172 abre uma exceção para o item danificado |
 | 110 | Em que aba do criativo o Cubit aparece, e colocar no criativo gasta o item? | Numa aba própria, `cubit:main`. Colocar sempre gasta o item, porque ele carrega o estado do robô |
 | 111 | Qual gate detecta classe de cliente carregada no servidor, já que o `runServer` exige aceitar o EULA? | As GameTests no `pre-push`. Elas carregam o mod com o mesmo alvo de servidor dedicado, sem EULA, e a regra 37 do `AGENTS.md` foi ajustada |
@@ -117,6 +117,12 @@ Não há perguntas pendentes nesta fase.
 | 177 | Em que pontos ficam os testes da morte? | JUnit no domínio: estado danificado, estado consertado e proteção do dono. GameTests: morte, vínculo, dono, dano, vazio e receita. Roteiro manual: grade, mesa e ícones |
 | 178 | Como foi o roteiro manual da morte e do conserto, e os ícones? | Ok, executado pelo desenvolvedor, conforme idealizado. O resultado de cada passo não foi detalhado |
 | 179 | O que conta como posição segura, na pergunta 147? | A última posição do robô no chão, fora de fogo, lava e água. A definição foi usada no roteiro aprovado na pergunta 178, sem resposta separada |
+| 184 | Em que ordem segue o que falta na Fase 2? | Inventário, energia em uso, Induction Dock, `/cubit reset` e fechamento, com receitas e teste no Iron Meridian |
+| 185 | Onde o conteúdo do inventário fica guardado no item? | Num componente novo, `cubit:robot_inventory`, no formato `ItemContainerContents` do jogo, fora do domínio. Refina a pergunta 108 |
+| 186 | Como fica a tela do inventário nesta etapa? | Um menu próprio, `RobotMenu`, com o visual do baú do jogo e sem slot extra. O slot de energia entra na etapa de energia em uso, e a tela própria, na Fase 3 |
+| 187 | O que acontece com o excedente, se o config reduzir os slots do inventário? | Ao colocar ou carregar o robô, o que não couber cai no chão, ao lado dele. Nada é apagado |
+| 188 | Em que pontos ficam os testes do inventário? | JUnit no domínio: regra do excedente. GameTests: quem abre, o que não entra, preservar sem perder nem duplicar, e excedente. Roteiro manual: tela e cliques |
+| 189 | Como foi o roteiro manual do inventário? | Ok, executado pelo desenvolvedor, conforme esperado. O resultado de cada passo não foi detalhado. O robô consertado precisou de um comando para ter carga, porque a recarga entra na etapa seguinte |
 
 ### Premissas aprovadas
 
@@ -132,6 +138,9 @@ Não há perguntas pendentes nesta fase.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 02:29 | Registra a resposta 189. |
+| Marcelo Fabiano | 2026-11-05 02:11 | Registra as respostas 185, 186, 187 e 188 e aponta a 108 para a 185. |
+| Marcelo Fabiano | 2026-11-05 02:07 | Registra a resposta 184. |
 | Marcelo Fabiano | 2026-11-05 01:41 | Registra as respostas 178 e 179. |
 | Marcelo Fabiano | 2026-11-05 01:14 | Registra as respostas 174, 175, 176 e 177. |
 | Marcelo Fabiano | 2026-11-05 01:12 | Registra as respostas 170, 171, 172 e 173 e aponta as 109, 118 e 147 para elas. |

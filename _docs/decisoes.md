@@ -47,7 +47,8 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Saída da base com outro seguindo:** o robô fica parado e desligado, como ao ser colocado.
 - **Config:** `COMMON`, com chaves em `snake_case` por tipo de robô e tier, como `[general_robot.base]`.
 - **Entidade:** a `RobotEntity` herda de `PathfinderMob`, com o dono num UUID próprio.
-- **Estado como item:** um único componente, `cubit:robot_state`.
+- **Estado como item:** o componente `cubit:robot_state`, e o inventário em `cubit:robot_inventory`, fora do domínio.
+- **Inventário:** menu próprio, com o visual do baú do jogo. Com o config reduzido, o que não couber cai no chão.
 - **Dono:** quem coloca o robô. O item não guarda o dono. Nenhum dano atribuído a ele fere o robô. O fogo de um isqueiro continua ferindo, porque o jogo não guarda quem o acendeu.
 - **Lava:** o robô ativo que está na lava vai para o bloco seguro mais próximo. A rota continua sem entrar em lava.
 - **Fogo:** o robô ativo em chamas anda ao acaso, mais rápido, evita perigos e nunca para enquanto houver para onde ir. Busca água só em chunks carregados, e ela precisa ter o topo livre e rota até ela. Inativo, fica parado. Ao apagar, volta a seguir. Os números estão em [`tiers.md`](tiers.md#valores-gerais).
@@ -71,6 +72,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 02:11 | Registra o inventário. |
 | Marcelo Fabiano | 2026-11-05 02:00 | Amplia a recarga pela grade de craft. |
 | Marcelo Fabiano | 2026-11-05 01:57 | Registra a recarga pela grade de craft. |
 | Marcelo Fabiano | 2026-11-05 01:15 | Detalha a morte, o resgate no vazio e a receita do conserto. |

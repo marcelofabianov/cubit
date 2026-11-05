@@ -7,6 +7,17 @@ Números por tier: [`tiers.md`](../tiers.md#coleta-e-inventário) e [slots exclu
 - **Clique direito:** abre o inventário, no estado ativo ou em hibernação. Desligado, valem as regras de [`energia.md`](energia.md#estados-do-cubit).
 - **Shift + clique direito:** recolhe o robô. O acesso em cada estado está em [`energia.md`](energia.md#estados-do-cubit).
 
+## Tela
+
+- **Quem abre:** só o dono, com o robô ativo e por perto. O servidor confere os três, ao abrir e enquanto a tela estiver aberta.
+- **Visual:** o do baú do jogo, com as linhas que o número de slots pedir. O slot de energia entra junto da energia em uso, e a tela própria, na Fase 3.
+- **O que não entra:** o Cubit, o `Damaged Cubit` e os itens que o jogo não deixa entrar em containers, como shulker boxes.
+
+## Conteúdo preservado
+
+- Recolher, colocar, morrer, consertar e salvar o mundo nunca apagam nem duplicam itens, nem com a tela aberta.
+- **Config reduzido:** ao colocar ou carregar o robô, o que não couber nos slots do config cai no chão, ao lado dele, com um aviso no log.
+
 ## Coleta
 
 - **Inventário:** armazena itens.
@@ -30,6 +41,7 @@ São quatro: tochas, fornalha, carregador de ferramentas e energia. O controle r
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 02:11 | Define a tela e a preservação do conteúdo do inventário. |
 | Marcelo Fabiano | 2026-11-04 17:26 | Limita a abertura do inventário aos estados ativo e hibernação. |
 | Marcelo Fabiano | 2026-11-04 17:15 | Renomeia para português e atualiza os caminhos. |
 | Marcelo Fabiano | 2026-11-04 17:08 | Define as funções que o controle remoto desativa. |
