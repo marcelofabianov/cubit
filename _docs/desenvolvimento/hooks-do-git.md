@@ -17,7 +17,7 @@ O script baixa o gitleaks para `.tools/`, confere o checksum e aponta o `core.ho
 | Hook | Gate | O que reprova |
 |---|---|---|
 | `pre-commit` | Branch | Commit fora de `feature/{issue}-{slug}`, `hotfix/{issue}-{slug}` ou `release/X.Y.Z` |
-| `pre-commit` | Histórico | Arquivo `.md` alterado sem linha nova na tabela de histórico de modificações |
+| `pre-commit` | Histórico | Arquivo `.md` em `_docs/` alterado sem linha nova na tabela de histórico de modificações. Os `.md` fora de `_docs/` não têm essa tabela |
 | `pre-commit` | Formatação | Arquivo `.java` fora do padrão, com um `.java` no commit |
 | `pre-commit` | gitleaks | Segredo nas alterações preparadas para o commit |
 | `commit-msg` | Mensagem | Título fora do Conventional Commits |
@@ -57,6 +57,7 @@ Ele exigiria aceitar o EULA em cada clone. As GameTests usam o mesmo alvo de ser
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 23:45 | Limita o gate do histórico aos arquivos de `_docs/`. |
 | Marcelo Fabiano | 2026-11-04 19:56 | Ativa os gates de GameTests e datagen no push. |
 | Marcelo Fabiano | 2026-11-04 18:02 | Usa o Makefile na correção da formatação. |
 | Marcelo Fabiano | 2026-11-04 17:57 | Adiciona o gate de formatação. |

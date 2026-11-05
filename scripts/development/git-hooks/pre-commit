@@ -37,14 +37,14 @@ if [[ ! -x "${gitleaks_bin}" ]]; then
   exit 1
 fi
 
-# Every staged Markdown file must record the change in its history table.
+# Every staged Markdown file in _docs/ must record the change in its history table.
 missing_history=()
 while IFS= read -r file; do
   # grep -q would close the pipe early and fail the pipeline under pipefail on large diffs.
   if ! git diff --cached --unified=0 -- "${file}" | grep -E "${HISTORY_ROW_PATTERN}" >/dev/null; then
     missing_history+=("${file}")
   fi
-done < <(git diff --cached --name-only --diff-filter=ACMR -- '*.md')
+done < <(git diff --cached --name-only --diff-filter=ACMR -- '_docs/*.md')
 
 if ((${#missing_history[@]} > 0)); then
   {
