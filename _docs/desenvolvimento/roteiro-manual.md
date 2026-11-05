@@ -70,6 +70,17 @@ Use um isqueiro no robô, com `/give @s minecraft:flint_and_steel`. O fogo dura 
 | 4 | Ponha fogo perto de uma vala de lava | Ele não entra na lava |
 | 5 | Ponha fogo num segundo robô, desligado | Ele queima parado |
 
+## Blocos que ferem
+
+| # | Faça | Espere |
+|---|---|---|
+| 1 | Coloque um bloco de magma embaixo do robô ativo | Ele sai para o bloco seguro mais próximo, sem pegar fogo, e volta a seguir |
+| 2 | Pare perto de uma área de magma, com o robô seguindo | Ele não fica parado em cima do magma |
+| 3 | Encoste um cacto no robô, com areia embaixo do cacto | Ele se afasta, e a vida para de cair |
+| 4 | Plante uma rosa do wither no bloco do robô | Ele sai de cima da rosa |
+| 5 | Coloque um magma ao lado do robô, sem encostar | Ele não reage |
+| 6 | Coloque um magma embaixo de um robô desligado | Ele fica parado e leva dano |
+
 ## Lava
 
 Use um balde de lava, com `/give @s minecraft:lava_bucket`. Ele tem 25 de vida e morre em cerca de 3 s na lava. Se morrer, vira um `Damaged Cubit`, que não queima.
@@ -149,6 +160,7 @@ Use `/kill @e[type=cubit:general_robot,limit=1,sort=nearest]` para matar o robô
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 15:32 | Adiciona os blocos que ferem. |
 | Marcelo Fabiano | 2026-11-05 14:40 | Adiciona o consumo por situação. |
 | Marcelo Fabiano | 2026-11-05 13:54 | Zera a bateria por comando, com o slot vazio, e adiciona o mínimo visível das barras. |
 | Marcelo Fabiano | 2026-11-05 12:56 | Adiciona a energia e troca o comando temporário pela redstone. |
