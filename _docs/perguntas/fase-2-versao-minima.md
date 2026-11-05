@@ -183,6 +183,8 @@ Não há perguntas pendentes nesta fase.
 | 317 | Como fica a indicação de carga na placa do Dock? | Só com a fita verde na frente da placa, sem a mancha verde sob o Cubit. É uma diferença em relação à prancha, escolhida pelo desenvolvedor no teste. Detalha a pergunta 311 |
 | 318 | Como foi o roteiro manual do Cubit na base? | Concluído pelo desenvolvedor, que achou ótimo, sem detalhar cada passo |
 | 319 | Como se chama a chave do tempo com a tela completa? | `dock_complete_hold_ticks`, em `[general]`, com 60 de padrão. Detalha a pergunta 312 |
+| 323 | O `/cubit reset` pode começar depois do merge do PR #66? | Sim. É o próximo item da ordem da pergunta 184 |
+| 324 | O agente corrige o status da Fase 2 no `README.md`, que não cita o inventário, a energia em uso e o Induction Dock? | Sim, no PR do `/cubit reset`, conforme a pergunta 152 |
 
 ### Premissas aprovadas
 
@@ -198,6 +200,7 @@ Não há perguntas pendentes nesta fase.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 20:36 | Registra as respostas 323 e 324. |
 | Marcelo Fabiano | 2026-11-05 17:39 | Registra a resposta 319. |
 | Marcelo Fabiano | 2026-11-05 17:37 | Registra a resposta 318. |
 | Marcelo Fabiano | 2026-11-05 17:35 | Registra a resposta 317. |
