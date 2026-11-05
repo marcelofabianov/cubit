@@ -8,8 +8,10 @@ Tudo que aparece no mod fica em inglês. Os documentos podem usar o termo em por
 |---|---|
 | Mod, família de robôs e robô de uso geral | Cubit |
 | Controle remoto | Cubit Remote |
-| Base ou estação de carga | Induction Dock |
-| Tiers | Base, Advanced, Elite e Ultimate |
+| Cubit danificado | Damaged Cubit |
+| Caixa de ferramentas | Toolbox |
+| Base, Dock ou estação de carga | Induction Dock |
+| Tiers: Base, Avançado, Elite e Ultimate | Base, Advanced, Elite e Ultimate |
 | Upgrades | Advanced, Elite e Ultimate Module |
 | Power Bank | Base, Advanced, Elite e Ultimate Power Bank |
 | Pacífico | Peaceful |
@@ -34,6 +36,7 @@ Os IDs estão em [`itens.md`](itens.md).
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 00:12 | Adiciona o Cubit danificado, a caixa de ferramentas, o Dock e o Avançado. |
 | Marcelo Fabiano | 2026-11-04 17:26 | Adiciona o robô que segue e a família de robôs. |
 | Marcelo Fabiano | 2026-11-04 17:15 | Renomeia para português e atualiza os caminhos. |
 | Marcelo Fabiano | 2026-11-04 16:57 | Define os nomes aprovados e os estados do Cubit. |

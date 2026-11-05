@@ -1,6 +1,6 @@
 # Tiers
 
-Esta é a única página com os números de balanceamento. Eles são o ponto de partida para os testes e valem para o robô de uso geral.
+Esta é a página dos números de balanceamento. O `README.md` traz só um resumo, e o roteiro manual cita os valores padrão como resultado esperado. Os números são o ponto de partida para os testes e valem para o robô de uso geral.
 
 Os tiers são Base, Avançado, Elite e Ultimate (no jogo: Base, Advanced, Elite e Ultimate).
 
@@ -54,6 +54,7 @@ Valem para todos os tiers e ficam no config.
 | Estoque do Induction Dock | 100 mil FE |
 | Entrada do Induction Dock | 5.000 FE/t |
 | Tempo para recuperar toda a vida na base | ~1 min |
+| Vida ao sair do conserto | 25% |
 | Alcance do controle remoto ao mirar num Cubit | 32 blocos |
 | Energia de 1 pó de redstone | 5.000 FE |
 | Energia de 1 bloco de redstone | 45.000 FE |
@@ -110,6 +111,7 @@ A fornalha gasta cerca de 20 FE por tick enquanto funde.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 00:12 | Adiciona a vida após o conserto e cita a exceção do roteiro. |
 | Marcelo Fabiano | 2026-11-04 21:29 | Indica que a busca de água vale em qualquer direção. |
 | Marcelo Fabiano | 2026-11-04 21:02 | Adiciona os valores do comportamento em chamas. |
 | Marcelo Fabiano | 2026-11-04 20:09 | Adiciona a velocidade de referência e o intervalo da rota. |

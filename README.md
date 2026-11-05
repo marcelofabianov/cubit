@@ -6,7 +6,7 @@
 
 Um robô companheiro fofo, movido a bateria, para Minecraft 1.21.1 com NeoForge, feito para o modpack [Iron Meridian](https://github.com/marcelofabianov/iron-meridian). Sem magia: o Cubit é pura tecnologia, craftado com recursos do jogo puro.
 
-> **Status: Fase 2, versão mínima.** O mod ainda não tem funcionalidades nem versão publicada. Tudo abaixo está planejado, e os números são o ponto de partida para o balanceamento.
+> **Status: Fase 2, versão mínima.** O mod ainda não tem versão publicada. Já funcionam colocar e recolher o Cubit, seguir o player, vários Cubits com um seguindo e as reações a fogo e lava. O resto abaixo está planejado, e os números são o ponto de partida para o balanceamento.
 
 ## O que o Cubit faz
 
@@ -15,7 +15,8 @@ O Cubit segue você e ajuda em tarefas simples:
 - **Carrega itens** no próprio inventário e coleta o que está no chão, com um filtro de coleta.
 - **Funciona com bateria**, que você precisa gerenciar. Sem carga, ele desliga, e só dá para recolhê-lo ou colocar energia nele.
 - **Recarrega** no Induction Dock, uma base fixa alimentada por FE de qualquer mod ou por redstone, onde ele hiberna com o inventário acessível. Também recarrega com uma Power Bank ou redstone no slot exclusivo, ou pelo painel solar, com o céu aberto.
-- **Vira item**, mantendo bateria, vida, inventário, nome, cor, tier e configurações.
+- **Vira item**, mantendo bateria, vida, inventário, nome, cor, tier e configurações. Ao morrer, vira um Damaged Cubit, que não queima nem some com o tempo e se conserta com uma Toolbox.
+- **Reage ao perigo**: em chamas, procura água para se apagar; na lava, tenta sair. O dono não consegue feri-lo, exceto com o fogo de um isqueiro.
 - **Ilumina o caminho** e coloca tochas sozinho.
 - **Avisa você** sobre mobs hostis e procura os minérios que você escolher.
 - **Protege você** com um choque leve, nos modos pacífico, contra-atacar e agressivo. Nunca ataca o dono nem mobs pacíficos.
@@ -55,6 +56,8 @@ Os nomes estão em inglês porque são os que aparecem no jogo.
 | Nome | Descrição |
 |---|---|
 | Cubit | Robô companheiro, colocado no mundo como item |
+| Damaged Cubit | O que cai quando o Cubit morre. Guarda o estado dele e não pode ser colocado no mundo |
+| Toolbox | Conserta o Damaged Cubit e é consumida a cada conserto |
 | Cubit Remote | Envia comandos aos Cubits, marca áreas de trabalho e localiza os Cubits |
 | Advanced Module | Leva o Cubit do tier Base para o Advanced |
 | Elite Module | Leva o Cubit do tier Advanced para o Elite |
@@ -70,8 +73,8 @@ As receitas usarão só itens do jogo puro e virão em datapack JSON, para os mo
 ## Roadmap
 
 1. **Conceito (encerrada):** persona, features e demais definições, em documentos.
-2. **Versão mínima (atual):** crafting, seguir o player, inventário, bateria, vários Cubits com um seguindo, Induction Dock com hibernação, recarga com redstone e virar item.
-3. **Sentidos:** painel solar, lanterna, scanners, bipes, som de esteira e textos curtos, expressões na tela, nome, cor e Jade.
+2. **Versão mínima (atual):** crafting, seguir o player, inventário, bateria, vários Cubits com um seguindo, reações a fogo e lava, Induction Dock com hibernação, recarga com redstone, virar item, morte com item danificado e conserto, e geometria mais próxima do conceito.
+3. **Sentidos:** painel solar, lanterna, scanners, os oito sons, textos curtos, animações, expressões na tela, nome, cor e Jade.
 4. **Upgrades e autonomia:** tiers, Power Bank, ímã, filtros, demais slots exclusivos, choque, modos de defesa, Cubit Remote, modo área, descarga em baú, retorno automático e local de morte.
 
 ## Stack
@@ -83,8 +86,7 @@ As receitas usarão só itens do jogo puro e virão em datapack JSON, para os mo
 
 ## Documentação
 
-- [`robo-companheiro.md`](robo-companheiro.md): visão geral, fases e mapa dos documentos
-- [`_docs/`](_docs/): persona, visual, funcionalidades, itens, tiers, decisões, perguntas por fase e glossário
+- [`_docs/README.md`](_docs/README.md): mapa dos documentos, com persona, visual, funcionalidades, itens, tiers, decisões, perguntas por fase e glossário
 - [`AGENTS.md`](AGENTS.md): regras e contexto do projeto para desenvolvedores e agentes
 
 ## Licença

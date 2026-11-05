@@ -18,7 +18,7 @@ Os comandos ficam no `Makefile`. Rode `make` para ver a lista.
 | `make clean` | Remove a saída do build |
 | `make client` | Abre o jogo com o mod |
 | `make server` | Inicia um servidor dedicado com o mod |
-| `make data` | Roda a geração de dados e confirma que o mod carrega |
+| `make data` | Roda a geração de dados |
 | `make check-generated` | Roda a geração de dados e reprova se `src/generated` mudar |
 | `make gametest` | Roda os GameTests num servidor sem interface |
 | `make stop` | Para os daemons do Gradle |
@@ -74,6 +74,7 @@ As bibliotecas de teste vêm só do Maven Central, para o build não depender do
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 00:12 | Corrige o que o make data faz. |
 | Marcelo Fabiano | 2026-11-04 21:49 | Registra as barreiras das GameTests. |
 | Marcelo Fabiano | 2026-11-04 20:21 | Documenta a arena e as coordenadas das GameTests. |
 | Marcelo Fabiano | 2026-11-04 19:56 | Adiciona o comando que confere os arquivos gerados. |

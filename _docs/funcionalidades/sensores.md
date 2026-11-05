@@ -11,7 +11,7 @@ Números por tier: [`tiers.md`](../tiers.md#sensores) e [lanterna](../tiers.md#i
 
 ## Scanner de mobs
 
-Localiza a posição de mobs agressivos.
+Localiza a posição de mobs hostis.
 
 ## Alertas
 
@@ -32,6 +32,7 @@ Os detalhes dos sons estão em [`visual.md`](../conceito/visual.md#sons), e os t
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 00:12 | Usa o termo mobs hostis. |
 | Marcelo Fabiano | 2026-11-04 17:15 | Renomeia para português e atualiza os caminhos. |
 | Marcelo Fabiano | 2026-11-04 17:08 | Define o texto de minério para o filtro do scanner. |
 | Marcelo Fabiano | 2026-11-04 16:57 | Atualiza as tags, o minério raro e os alertas. |

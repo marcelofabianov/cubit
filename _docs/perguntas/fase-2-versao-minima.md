@@ -66,7 +66,7 @@ Não há perguntas pendentes nesta fase.
 | 115 | Quando entra o som de esteira? | Na Fase 3, com os bipes. A Fase 2 fica sem esse som |
 | 116 | O Cubit leva dano na lava? | Sim, igual ao player sem armadura, e continua pegando fogo ao sair. Na etapa de morte, o item resultante não queima, para cumprir a pergunta 34 |
 | 117 | Como o Cubit se comporta pegando fogo? | Ativo, para de seguir e de teleportar, anda ao acaso evitando caminhos perigosos e busca água por perto para se apagar. É uma exceção à regra de a rota evitar água, só enquanto queima. Inativo ou na base, fica parado |
-| 118 | Como proteger o item que cai quando o Cubit morre? | Ele não queima nem some com o tempo. Cair no vazio ainda o perde, e isso não foi decidido |
+| 118 | Como proteger o item que cai quando o Cubit morre? | Ele não queima nem some com o tempo. O caso de cair no vazio foi decidido na pergunta 147 |
 | 119 | O que a proteção do dono cobre, na pergunta 34? | Qualquer dano que o jogo atribua ao dono. O fogo de um isqueiro continua ferindo, porque o jogo não guarda quem o acendeu |
 | 120 | Em que ordem seguem o movimento, o fogo e a morte? | Primeiro o PR do movimento. Depois, um PR para o fogo e outro para a morte, antes do inventário |
 | 122 | Como foi o roteiro manual do movimento? | Ok, executado pelo desenvolvedor |
@@ -84,8 +84,19 @@ Não há perguntas pendentes nesta fase.
 | 134 | Dá para melhorar o modelo do Cubit agora, mais próximo das imagens de conceito? | Sim, depois de terminar o tema do fogo. Antecipa parte da pergunta 60: a geometria melhora já na Fase 2, e animações e expressões seguem na Fase 3 |
 | 138 | Como foi o roteiro manual do Cubit em chamas? | Ok, executado pelo desenvolvedor |
 | 139 | O que o Cubit faz quando colocam lava no bloco dele? | Ativo, tenta sair pela saída mais próxima, conforme a pergunta 133, mesmo que ainda possa morrer |
-| 143 | Como ficou o comportamento na lava, que costuma matar o tier Base antes de sair? | Aprovado. Quanto menor o tier, maior a chance de morrer. O teste no jogo com balde ficou de fora, e a etapa seguiu |
+| 143 | Como ficou o comportamento na lava, que costuma matar o tier Base antes de sair? | Aprovado. Quanto menor o tier, maior a chance de morrer. O teste no jogo com balde ficou de fora, e a etapa seguiu. Ele foi feito depois, conforme a pergunta 153 |
 | 144 | Em que ordem seguem as próximas tarefas? | Histórico só em `_docs/`, revisão dos `.md`, modelo e morte com o item danificado |
+| 145 | Qual é o nome no jogo e o ID da caixa de ferramentas? | `Toolbox` e `cubit:toolbox`, um só item para todos os tipos de robô (regra 42) |
+| 146 | O `Damaged Cubit` pode entrar no inventário do robô? | Não, como o item normal |
+| 147 | O `Damaged Cubit` que cai no vazio se perde? | Não. O item não é destruído e reaparece na última posição segura do robô. Decide o caso deixado em aberto na pergunta 118 |
+| 150 | O roteiro manual pode citar números como resultado esperado? | Sim, como exceção, com o aviso de que os valores são os padrões de `tiers.md`, que prevalece |
+| 151 | A seção de lava do roteiro manual, com o teste de balde, continua pendente? | O desenvolvedor vai testar agora, e o resultado entra como uma nova resposta, a pergunta 153. Complementa a pergunta 143 |
+| 152 | Quem corrige documento desatualizado? | O agente sempre pergunta antes, mesmo quando a correção parece clara. Com a resposta, atualiza no mesmo PR |
+| 153 | Como foi o teste de lava com balde do roteiro manual? | Saiu como esperado, executado pelo desenvolvedor, e o caso está resolvido |
+| 154 | O template de PR deve pedir também `make check-generated`? | Sim, porque o `pre-push` já roda esse gate |
+| 155 | Onde documentar a fonte de FE no ambiente de dev, da pergunta 37? | Na etapa de energia, porque as dependências do Powah ainda não foram conferidas |
+| 156 | O `robo-companheiro.md` continua? | Não. O mapa dos documentos vai para `_docs/README.md`, as fases ficam no Roadmap do `README.md`, e o arquivo é removido, porque o resto já existia em outros documentos |
+| 159 | O `Damaged Cubit` empilha? | Empilha em 1, como o item normal |
 
 ### Premissas aprovadas
 
@@ -101,6 +112,12 @@ Não há perguntas pendentes nesta fase.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 00:17 | Registra a resposta 159. |
+| Marcelo Fabiano | 2026-11-05 00:15 | Registra a resposta 156. |
+| Marcelo Fabiano | 2026-11-05 00:09 | Registra as respostas 154 e 155. |
+| Marcelo Fabiano | 2026-11-05 00:07 | Registra a resposta 153 e aponta a 143 e a 151 para ela. |
+| Marcelo Fabiano | 2026-11-05 00:05 | Registra as respostas 150, 151 e 152. |
+| Marcelo Fabiano | 2026-11-05 00:02 | Registra as respostas 145, 146 e 147 e aponta a 118 para a 147. |
 | Marcelo Fabiano | 2026-11-04 23:40 | Registra as respostas 143 e 144. |
 | Marcelo Fabiano | 2026-11-04 23:11 | Registra a resposta 139. |
 | Marcelo Fabiano | 2026-11-04 22:56 | Registra a resposta 138. |
