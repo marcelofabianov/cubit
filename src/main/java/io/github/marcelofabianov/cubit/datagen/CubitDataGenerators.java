@@ -23,5 +23,7 @@ public final class CubitDataGenerators {
     generator.addProvider(
         event.includeServer(),
         new CubitEntityTagsProvider(output, event.getLookupProvider(), existingFiles));
+    generator.addProvider(
+        event.includeServer(), new CubitRecipeProvider(output, event.getLookupProvider()));
   }
 }

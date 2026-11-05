@@ -1,5 +1,7 @@
 {
   "entity.cubit.general_robot": "Cubit",
+  "item.cubit.damaged_general_robot": "Damaged Cubit",
   "item.cubit.general_robot": "Cubit",
+  "item.cubit.toolbox": "Toolbox",
   "itemGroup.cubit.main": "Cubit"
 }
