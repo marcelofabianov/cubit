@@ -12,21 +12,25 @@ import io.github.marcelofabianov.cubit.domain.robot.RobotState;
 import io.github.marcelofabianov.cubit.domain.robot.RobotType;
 import io.github.marcelofabianov.cubit.domain.tier.RobotTier;
 import io.github.marcelofabianov.cubit.domain.tier.TierSpec;
+import io.github.marcelofabianov.cubit.menu.RobotMenu;
 import io.github.marcelofabianov.cubit.player.DeadRobotLinks;
 import io.github.marcelofabianov.cubit.player.FollowingRobotLink;
 import io.github.marcelofabianov.cubit.registry.CubitAttachments;
 import io.github.marcelofabianov.cubit.registry.CubitDataComponents;
-import java.util.Arrays;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.function.Supplier;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.GlobalPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.Container;
+import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -39,6 +43,7 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.pathfinder.PathType;
 import org.slf4j.Logger;
@@ -55,7 +60,8 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity {
   private static final String ENERGY_KEY = "Energy";
   private static final String POWER_STATE_KEY = "PowerState";
   private static final String LAST_SAFE_POSITION_KEY = "LastSafePosition";
-  private static final String INVALID_DATA_MESSAGE = "Robot {} has an invalid {}: {}";
+  private static final String INVENTORY_KEY = "Inventory";
+  private static final double INVENTORY_REACH_MARGIN = 4;
   private static final String NO_OWNER_MESSAGE = "Robot {} has no owner. Nobody can interact.";
   private static final double ONE_BLOCK_STEP = 1;
   private static final int BURNING_GOAL_PRIORITY = 0;
@@ -73,6 +79,7 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity {
   private Battery battery;
   private PowerState powerState = PowerState.INACTIVE_SWITCHED_OFF;
   private BlockPos lastSafePosition;
+  private final RobotInventory inventory;
 
   public RobotEntity(
       EntityType<? extends RobotEntity> type,
@@ -85,6 +92,7 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity {
     this.item = item;
     this.damagedItem = damagedItem;
     this.battery = spec().newBattery(CubitMod.CONFIG.initialCharge());
+    this.inventory = new RobotInventory(spec().inventorySlots());
     this.jumpControl =
         new JumpControl(this) {
           // Tracks do not jump: the robot only climbs one block at a time, by its step height.
@@ -109,7 +117,7 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity {
     return Mob.createMobAttributes().add(Attributes.STEP_HEIGHT, ONE_BLOCK_STEP);
   }
 
-  public void placedBy(Player player, RobotState state) {
+  public void placedBy(Player player, RobotState state, ItemContainerContents contents) {
     ownerId = player.getUUID();
     tier = state.tier();
     TierSpec spec = spec();
@@ -118,6 +126,7 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity {
     setHealth(state.healthFor(spec));
     setPersistenceRequired();
     lastSafePosition = blockPosition();
+    inventory.fill(contents.stream().toList(), spec.inventorySlots());
 
     FollowingOutcome outcome = policy().onArrival(getUUID(), follower(player), battery);
     powerState = outcome.state();
@@ -160,12 +169,39 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity {
     if (!player.getUUID().equals(ownerId)) {
       return InteractionResult.PASS;
     }
-    return player.isShiftKeyDown() ? collectBy(player) : turnOnBy(player);
+    if (player.isShiftKeyDown()) {
+      return collectBy(player);
+    }
+    return powerState == PowerState.ACTIVE ? openInventoryFor(player) : turnOnBy(player);
+  }
+
+  private InteractionResult openInventoryFor(Player player) {
+    player.openMenu(
+        new SimpleMenuProvider(
+            (containerId, playerInventory, opener) ->
+                new RobotMenu(containerId, playerInventory, inventory(), this::canUseInventory),
+            getDisplayName()),
+        data -> RobotMenu.writeSize(data, inventory()));
+    return InteractionResult.CONSUME;
+  }
+
+  /** Checked on the server while the screen is open, because the robot can die or switch off. */
+  public boolean canUseInventory(Player player) {
+    return isAlive()
+        && powerState == PowerState.ACTIVE
+        && player.getUUID().equals(ownerId)
+        && player.canInteractWithEntity(this, INVENTORY_REACH_MARGIN);
+  }
+
+  public Container inventory() {
+    return inventory.container();
   }
 
   private InteractionResult collectBy(Player player) {
     ItemStack stack = new ItemStack(item.get());
     stack.set(CubitDataComponents.ROBOT_STATE.get(), state());
+    stack.set(CubitDataComponents.ROBOT_INVENTORY.get(), inventory.contents());
+    inventory.clear();
     player.setData(
         CubitAttachments.FOLLOWING_ROBOT,
         new FollowingRobotLink(policy().release(getUUID(), follower(player))));
@@ -206,6 +242,8 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity {
     setPathfindingMalus(PathType.WATER, isInWater() || isOnFire() ? OPEN_ROUTE : BLOCKED_ROUTE);
     super.customServerAiStep();
     rememberSafePosition();
+    inventory.dropSurplus(
+        stack -> Containers.dropItemStack(level(), getX(), getY(), getZ(), stack));
     if (tickCount % CubitMod.CONFIG.followRepathTicks() == 0) {
       switchOffIfReplaced();
     }
@@ -266,6 +304,8 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity {
     ItemStack stack = new ItemStack(damagedItem.get());
     stack.set(CubitDataComponents.ROBOT_STATE.get(), state().damaged());
     stack.set(CubitDataComponents.ROBOT_OWNER.get(), ownerId);
+    stack.set(CubitDataComponents.ROBOT_INVENTORY.get(), inventory.contents());
+    inventory.clear();
     if (lastSafePosition != null) {
       stack.set(
           CubitDataComponents.LAST_SAFE_POSITION.get(),
@@ -290,6 +330,7 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity {
     tag.putString(TIER_KEY, tier.key());
     tag.putLong(ENERGY_KEY, battery.charge().amount());
     tag.putString(POWER_STATE_KEY, powerState.name());
+    tag.put(INVENTORY_KEY, inventory.save(registryAccess()));
     if (lastSafePosition != null) {
       tag.putLong(LAST_SAFE_POSITION_KEY, lastSafePosition.asLong());
     }
@@ -302,33 +343,17 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity {
     if (ownerId == null) {
       LOGGER.warn(NO_OWNER_MESSAGE, getUUID());
     }
-    tier = readTier(tag.getString(TIER_KEY));
+    tier = SavedRobotValues.tier(tag.getString(TIER_KEY), getUUID());
     Energy energy = new Energy(Math.max(tag.getLong(ENERGY_KEY), 0));
     battery = new RobotState(tier, energy, getHealth()).batteryFor(spec());
-    powerState = readPowerState(tag.getString(POWER_STATE_KEY));
+    powerState = SavedRobotValues.powerState(tag.getString(POWER_STATE_KEY), getUUID());
+    inventory.load(
+        tag.getList(INVENTORY_KEY, Tag.TAG_COMPOUND), registryAccess(), spec().inventorySlots());
     lastSafePosition =
         tag.contains(LAST_SAFE_POSITION_KEY)
             ? BlockPos.of(tag.getLong(LAST_SAFE_POSITION_KEY))
             : null;
     applyConfigAttributes();
-  }
-
-  private RobotTier readTier(String key) {
-    return RobotTier.fromKey(key)
-        .orElseGet(() -> {
-          LOGGER.warn(INVALID_DATA_MESSAGE, getUUID(), TIER_KEY, key);
-          return RobotTier.BASE;
-        });
-  }
-
-  private PowerState readPowerState(String name) {
-    return Arrays.stream(PowerState.values())
-        .filter(state -> state.name().equals(name))
-        .findFirst()
-        .orElseGet(() -> {
-          LOGGER.warn(INVALID_DATA_MESSAGE, getUUID(), POWER_STATE_KEY, name);
-          return PowerState.INACTIVE_SWITCHED_OFF;
-        });
   }
 
   @Override

@@ -79,6 +79,19 @@ Use um balde de lava, com `/give @s minecraft:lava_bucket`. Ele tem 25 de vida e
 | 1 | Coloque lava no bloco do robô ativo | Ele se move devagar rumo à borda, e pode morrer antes de sair |
 | 2 | Coloque lava no bloco de um robô desligado | Ele fica parado e morre |
 
+## Inventário
+
+| # | Faça | Espere |
+|---|---|---|
+| 1 | Botão direito no robô ativo | Abre uma tela de baú com o nome do robô e 27 slots |
+| 2 | Guarde itens em slots variados e feche | Os itens continuam nos mesmos slots ao abrir de novo |
+| 3 | Tente guardar um Cubit, um `Damaged Cubit` e uma shulker box, com clique e Shift + clique | Nenhum deles entra |
+| 4 | Shift + botão direito para recolher, e coloque de novo | Os itens estão nos mesmos slots |
+| 5 | Mate o robô, conserte e coloque. Ele fica sem carga, então rode `/data merge entity @e[type=cubit:general_robot,limit=1,sort=nearest] {Energy:75000L,PowerState:"ACTIVE"}` até a recarga entrar | Os itens continuam lá |
+| 6 | Saia e entre no mundo | Os itens continuam lá |
+| 7 | Com a tela aberta, afaste-se com comando ou mate o robô com outro comando | A tela fecha, e nenhum item é duplicado |
+| 8 | Botão direito num robô desligado com carga | Ele liga, sem abrir a tela |
+
 ## Morte e conserto
 
 Use `/kill @e[type=cubit:general_robot,limit=1,sort=nearest]` para matar o robô.
@@ -108,6 +121,8 @@ Use `/kill @e[type=cubit:general_robot,limit=1,sort=nearest]` para matar o robô
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 02:31 | Adiciona o comando para dar carga ao robô consertado. |
+| Marcelo Fabiano | 2026-11-05 02:11 | Adiciona o inventário. |
 | Marcelo Fabiano | 2026-11-05 01:23 | Adiciona a morte e o conserto. |
 | Marcelo Fabiano | 2026-11-05 00:55 | Ajusta a conferência do ícone do mod. |
 | Marcelo Fabiano | 2026-11-05 00:35 | Adiciona a conferência do ícone do mod. |
