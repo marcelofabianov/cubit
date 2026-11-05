@@ -105,6 +105,21 @@ Use um balde de lava, com `/give @s minecraft:lava_bucket`. Ele tem 25 de vida e
 | 6 | Clique com redstone na mão no robô sem bateria | A pilha entra no slot e, com 5%, ele volta a seguir você |
 | 7 | Com a recarga em andamento, recolha e coloque de novo | O slot e a carga continuam, sem perder redstone |
 
+## Consumo por situação
+
+Para conferir a carga, use `/data get entity @e[type=cubit:general_robot,limit=1,sort=nearest] Energy`. Os valores são os do tier Base, com o slot de energia vazio.
+
+| # | Faça | Espere |
+|---|---|---|
+| 1 | Ande em terreno plano por 10 s e compare a carga | Cai cerca de 3.000 FE (15 FE/t) |
+| 2 | Ocupe todos os slots do inventário e repita | Cai mais rápido, cerca de 20 FE/t, e o robô anda visivelmente mais devagar |
+| 3 | Ponha o robô numa piscina e ande por perto | Cai cerca de 20 FE/t, ou 25 FE/t com o inventário cheio |
+| 4 | Suba uma escada de 10 degraus com ele | Cai cerca de 150 FE a mais que no plano |
+| 5 | Desça a mesma escada | Só o gasto de andar, sem devolver energia |
+| 6 | Use `/effect give @e[type=cubit:general_robot,limit=1,sort=nearest] minecraft:poison 10` com ele parado | Cai cerca de 25 FE/t, mesmo parado |
+| 7 | Ponha fogo nele, com o inventário cheio | Ele foge na velocidade normal de chamas, e a carga cai mais rápido |
+| 8 | Avalie o peso, a água e a subida | Os efeitos são sentidos. Se não forem, ajuste os números |
+
 ## Morte e conserto
 
 Use `/kill @e[type=cubit:general_robot,limit=1,sort=nearest]` para matar o robô.
@@ -134,6 +149,7 @@ Use `/kill @e[type=cubit:general_robot,limit=1,sort=nearest]` para matar o robô
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 14:40 | Adiciona o consumo por situação. |
 | Marcelo Fabiano | 2026-11-05 13:54 | Zera a bateria por comando, com o slot vazio, e adiciona o mínimo visível das barras. |
 | Marcelo Fabiano | 2026-11-05 12:56 | Adiciona a energia e troca o comando temporário pela redstone. |
 | Marcelo Fabiano | 2026-11-05 02:31 | Adiciona o comando para dar carga ao robô consertado. |

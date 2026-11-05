@@ -19,6 +19,7 @@ As chaves ficam em `snake_case`. As de um robô ficam em `[{tipo}.{tier}]`, como
 | `general` | `stop_distance_blocks` | Distância para parar perto do player | 1 a 16 |
 | `general` | `teleport_distance_blocks` | Distância para teleportar até o player | 17 a 128 |
 | `general` | `burning_speed_multiplier` | Velocidade em chamas, sobre a do tier | 1 a 4 |
+| `general` | `full_inventory_speed_multiplier` | Velocidade com o inventário cheio, sobre a do tier | 0,1 a 1 |
 | `general` | `water_search_radius_blocks` | Busca de água em chamas | 1 a 16 |
 | `general` | `burning_wander_radius_blocks` | Alcance ao andar ao acaso em chamas | 1 a 16 |
 | `general` | `redstone_dust_energy` | Energia de 1 pó de redstone | 1 a 2147483647 |
@@ -26,7 +27,11 @@ As chaves ficam em `snake_case`. As de um robô ficam em `[{tipo}.{tier}]`, como
 | `general` | `repair_health_percent` | Vida ao sair do conserto | 1 a 100 |
 | `general` | `void_rescue_retry_ticks` | Intervalo para tentar de novo o resgate no vazio | 1 a 1200 |
 | `general_robot.base` | `battery_capacity` | Bateria | 1 a 2147483647 |
-| `general_robot.base` | `moving_consumption_per_tick` | Consumo em movimento | 0 a 2147483647 |
+| `general_robot.base` | `moving_consumption_per_tick` | Andar | 0 a 2147483647 |
+| `general_robot.base` | `full_inventory_extra_per_tick` | Extra ao andar com o inventário cheio | 0 a 2147483647 |
+| `general_robot.base` | `water_extra_per_tick` | Extra ao andar na água | 0 a 2147483647 |
+| `general_robot.base` | `negative_condition_extra_per_tick` | Extra com condição negativa | 0 a 2147483647 |
+| `general_robot.base` | `climb_extra_per_block` | Extra ao subir, por bloco de altura | 0 a 2147483647 |
 | `general_robot.base` | `recharge_per_tick` | Recarga na base e pelo slot de energia | 1 a 2147483647 |
 | `general_robot.base` | `inventory_slots` | Inventário | 1 a 54 |
 | `general_robot.base` | `max_health` | Vida | 1 a 1024 |
@@ -56,6 +61,7 @@ O mod não cai por causa do config (regra 17 do `AGENTS.md`):
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 14:40 | Adiciona as chaves do consumo por situação. |
 | Marcelo Fabiano | 2026-11-05 12:52 | Adiciona as chaves da redstone. |
 | Marcelo Fabiano | 2026-11-05 01:15 | Adiciona as chaves do conserto e do resgate no vazio. |
 | Marcelo Fabiano | 2026-11-04 21:02 | Adiciona as chaves do comportamento em chamas. |
