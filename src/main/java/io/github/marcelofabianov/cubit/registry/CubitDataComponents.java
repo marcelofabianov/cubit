@@ -2,6 +2,7 @@ package io.github.marcelofabianov.cubit.registry;
 
 import io.github.marcelofabianov.cubit.CubitMod;
 import io.github.marcelofabianov.cubit.domain.robot.RobotState;
+import io.github.marcelofabianov.cubit.item.EnergySlotContents;
 import io.github.marcelofabianov.cubit.item.RobotStateComponent;
 import java.util.UUID;
 import java.util.function.Supplier;
@@ -19,6 +20,7 @@ public final class CubitDataComponents {
   private static final String LAST_SAFE_POSITION_ID = "last_safe_position";
   private static final String ROBOT_OWNER_ID = "robot_owner";
   private static final String ROBOT_INVENTORY_ID = "robot_inventory";
+  private static final String ENERGY_SLOT_ID = "energy_slot";
   private static final DeferredRegister.DataComponents COMPONENTS =
       DeferredRegister.createDataComponents(Registries.DATA_COMPONENT_TYPE, CubitMod.MOD_ID);
 
@@ -48,6 +50,14 @@ public final class CubitDataComponents {
               builder
                   .persistent(ItemContainerContents.CODEC)
                   .networkSynchronized(ItemContainerContents.STREAM_CODEC));
+
+  public static final Supplier<DataComponentType<EnergySlotContents>> ENERGY_SLOT =
+      COMPONENTS.registerComponentType(
+          ENERGY_SLOT_ID,
+          builder ->
+              builder
+                  .persistent(EnergySlotContents.CODEC)
+                  .networkSynchronized(EnergySlotContents.STREAM_CODEC));
 
   private CubitDataComponents() {}
 

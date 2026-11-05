@@ -37,6 +37,7 @@ public final class CubitConfig {
   private final ModConfigSpec spec;
   private final GeneralSection general;
   private final DamagedRobotSection damagedRobot;
+  private final EnergySlotSection energySlot;
   private final TierCatalog tierCatalog;
 
   public CubitConfig() {
@@ -45,6 +46,7 @@ public final class CubitConfig {
     builder.push(GENERAL_SECTION);
     general = new GeneralSection(builder);
     damagedRobot = new DamagedRobotSection(builder);
+    energySlot = new EnergySlotSection(builder);
     builder.pop();
 
     builder.push(List.of(GENERAL_ROBOT.id(), RobotTier.BASE.key()));
@@ -95,6 +97,14 @@ public final class CubitConfig {
 
   public int burningWanderRadiusBlocks() {
     return general.burningWanderRadius.get();
+  }
+
+  public int redstoneDustEnergy() {
+    return energySlot.dustEnergy.get();
+  }
+
+  public int redstoneBlockEnergy() {
+    return energySlot.blockEnergy.get();
   }
 
   public Percentage repairHealth() {

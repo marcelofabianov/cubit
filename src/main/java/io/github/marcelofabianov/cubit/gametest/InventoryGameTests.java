@@ -45,6 +45,7 @@ public final class InventoryGameTests {
   private static final int SOME_COUNT = 5;
   private static final int BASE_SLOTS = 27;
   private static final int PLAYER_SLOTS = 36;
+  private static final int ENERGY_SLOTS = 1;
   private static final int ABOVE_THE_SLOTS = 30;
   private static final int SURPLUS_ITEMS = 3;
   private static final int SETTLE_TICKS = 5;
@@ -70,7 +71,7 @@ public final class InventoryGameTests {
     helper.assertValueEqual(
         robot.interact(owner, InteractionHand.MAIN_HAND), InteractionResult.CONSUME, NOT_OPENED);
     helper.assertValueEqual(
-        menuOf(robot, owner).slots.size(), BASE_SLOTS + PLAYER_SLOTS, NOT_OPENED);
+        menuOf(robot, owner).slots.size(), BASE_SLOTS + ENERGY_SLOTS + PLAYER_SLOTS, NOT_OPENED);
     helper.succeed();
   }
 
@@ -244,7 +245,13 @@ public final class InventoryGameTests {
   }
 
   private static RobotMenu menuOf(RobotEntity robot, Player player) {
-    return new RobotMenu(0, player.getInventory(), robot.inventory(), robot::canUseInventory);
+    return new RobotMenu(
+        0,
+        player.getInventory(),
+        robot.inventory(),
+        robot.energySlot(),
+        () -> 0,
+        robot::canUseInventory);
   }
 
   private static ServerPlayer playerNear(GameTestHelper helper) {

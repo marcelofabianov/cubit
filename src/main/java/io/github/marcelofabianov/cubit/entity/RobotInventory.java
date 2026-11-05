@@ -2,6 +2,8 @@ package io.github.marcelofabianov.cubit.entity;
 
 import com.mojang.logging.LogUtils;
 import io.github.marcelofabianov.cubit.domain.robot.InventoryFit;
+import io.github.marcelofabianov.cubit.item.EnergySlotContents;
+import io.github.marcelofabianov.cubit.registry.CubitDataComponents;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
@@ -25,6 +27,7 @@ final class RobotInventory {
   private static final String INVALID_ITEM_MESSAGE = "Skipping an invalid robot item: {}";
 
   private final List<ItemStack> surplus = new ArrayList<>();
+  private final RobotEnergySlot energySlot = new RobotEnergySlot();
   private SimpleContainer container;
 
   RobotInventory(int slots) {
@@ -60,6 +63,27 @@ final class RobotInventory {
     }
   }
 
+  RobotEnergySlot energySlot() {
+    return energySlot;
+  }
+
+  /** Writes everything the robot carries to its item, in any path that turns it into an item. */
+  void writeTo(ItemStack stack) {
+    stack.set(CubitDataComponents.ROBOT_INVENTORY.get(), contents());
+    stack.set(CubitDataComponents.ENERGY_SLOT.get(), energySlot.contents());
+  }
+
+  void readFrom(ItemStack stack, int slots) {
+    fill(
+        stack
+            .getOrDefault(CubitDataComponents.ROBOT_INVENTORY.get(), ItemContainerContents.EMPTY)
+            .stream()
+            .toList(),
+        slots);
+    energySlot.fill(
+        stack.getOrDefault(CubitDataComponents.ENERGY_SLOT.get(), EnergySlotContents.EMPTY));
+  }
+
   void dropSurplus(Consumer<ItemStack> drop) {
     surplus.forEach(drop);
     surplus.clear();
@@ -73,6 +97,7 @@ final class RobotInventory {
   void clear() {
     container.clearContent();
     surplus.clear();
+    energySlot.clear();
   }
 
   ListTag save(HolderLookup.Provider registries) {
