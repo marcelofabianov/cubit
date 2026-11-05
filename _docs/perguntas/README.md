@@ -8,6 +8,7 @@ Este diretório concentra as perguntas do projeto, com um arquivo por fase. A pe
 | 2. Versão mínima | [`fase-2-versao-minima.md`](fase-2-versao-minima.md) |
 | 3. Sentidos | [`fase-3-sentidos.md`](fase-3-sentidos.md) |
 | 4. Upgrades e autonomia | [`fase-4-upgrades-e-autonomia.md`](fase-4-upgrades-e-autonomia.md) |
+| 5. Robôs especializados | [`fase-5-robos-especializados.md`](fase-5-robos-especializados.md) |
 
 ## Como usar
 
@@ -16,12 +17,29 @@ Este diretório concentra as perguntas do projeto, com um arquivo por fase. A pe
 - **Pendentes:** têm uma recomendação, que só vale depois da resposta do desenvolvedor.
 - **Respondidas:** a resposta é registrada aqui, e o documento do assunto é atualizado junto.
 - **Fonte da verdade:** as respostas prevalecem sobre os outros documentos.
-- **Próximo número livre:** 190.
+- **Próximo número livre:** 257.
 
 ## Histórico de modificações
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 12:07 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 12:03 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 11:57 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 11:52 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 11:47 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 11:41 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 11:36 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 11:31 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 11:25 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 11:14 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 11:06 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 11:02 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 10:55 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 10:46 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 10:44 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 10:38 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 10:28 | Adiciona a Fase 5 e atualiza o próximo número livre. |
 | Marcelo Fabiano | 2026-11-05 02:29 | Atualiza o próximo número livre. |
 | Marcelo Fabiano | 2026-11-05 02:11 | Atualiza o próximo número livre. |
 | Marcelo Fabiano | 2026-11-05 02:07 | Atualiza o próximo número livre. |

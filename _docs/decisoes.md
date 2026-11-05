@@ -64,6 +64,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Comunicação:** bipes e expressões, com poucos textos simples e diretos.
 - **Sons:** oito sons, que entram na Fase 3. O bipe padrão toca nas trocas de expressão sem som exclusivo. O intervalo mínimo entre repetições será definido na Fase 3, e os sons são do desenvolvedor.
 - **Modelo:** a geometria melhora já na Fase 2, com os detalhes das seis vistas, tudo fixo e sem mudar a hitbox. As animações e as expressões seguem na Fase 3.
+- **Robôs especializados (Fase 5, planejada):** um único Cubit, com um card por vez, age só em área marcada e nunca sai dela. Antena e Servidor mantêm os chunks carregados, de forma opcional. Sem chunk de destino, ele espera. O detalhe está em [`robos-especializados.md`](funcionalidades/robos-especializados.md).
 - **Limites:** nunca ataca o dono nem mobs pacíficos. Só ataca mobs neutros para defender o player.
 - **Scanner:** `c:ores/*` significa a tag-mãe `c:ores` e suas subtags, porque tags não aceitam curinga.
 - **Estado do robô como item:** inclui as configurações, além de bateria, vida, inventário, tier, nome e cor.
@@ -72,6 +73,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 12:08 | Registra os robôs especializados. |
 | Marcelo Fabiano | 2026-11-05 02:11 | Registra o inventário. |
 | Marcelo Fabiano | 2026-11-05 02:00 | Amplia a recarga pela grade de craft. |
 | Marcelo Fabiano | 2026-11-05 01:57 | Registra a recarga pela grade de craft. |

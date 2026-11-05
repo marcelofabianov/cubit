@@ -23,7 +23,7 @@ Não há perguntas pendentes nesta fase.
 | 43 | Quanta energia a redstone fornece, e quais itens valem? | 1 pó = 5.000 FE e 1 bloco = 45.000 FE, configuráveis |
 | 44 | A Power Bank e a redstone usam o mesmo slot do Cubit? | Sim, um único slot de energia, que aceita um dos dois por vez |
 | 45 | Com o Cubit desligado, clicar com redstone na mão funciona como com a Power Bank? | Sim. A pilha entra no slot, a recarga começa e, com 5%, o Cubit liga |
-| 47 | Como o Cubit carrega no Dock? | "Base" é o Induction Dock, o bloco fixo, inspirado nas bases de robôs aspiradores. Na base, o Cubit fica em hibernação: diferente de desligado, com o painel solar desligado e o inventário e os slots exclusivos acessíveis. Ativo é ligado, e inativo é desligado, com o painel também desligado |
+| 47 | Como o Cubit carrega no Dock? | "Base" é o Induction Dock, o bloco fixo, inspirado nas bases de robôs aspiradores. Na base, o Cubit fica em hibernação: diferente de desligado, com o painel solar desligado e o inventário e os slots exclusivos acessíveis. Ativo é ligado, e inativo é desligado, com o painel também desligado. A [pergunta 198](fase-5-robos-especializados.md) amplia a hibernação para fora da base, na Fase 5 |
 | 50 | Em que fase entram a redstone no Dock e no slot de energia do Cubit? | Fase 2. Assim, o carregamento já funciona sem gerador de outro mod |
 | 54 | Sem o retorno automático da Fase 4, como o Cubit chega à base na versão mínima? | O player clica com o botão direito no Dock, e o Cubit por perto vai até ele. Colocar o item do Cubit em cima do Dock também funciona. A distância e o Cubit chamado foram definidos nas perguntas 59 e 81 |
 | 55 | Como o Cubit sai da hibernação, já que interagir com ele abre o inventário? | Sai sozinho com a bateria cheia e volta a seguir. Antes disso, clicar no Dock o libera. O que ele faz ao sair foi ampliado pela pergunta 83 |
@@ -138,6 +138,7 @@ Não há perguntas pendentes nesta fase.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 10:44 | Aponta a resposta 47 para a pergunta 198. |
 | Marcelo Fabiano | 2026-11-05 02:29 | Registra a resposta 189. |
 | Marcelo Fabiano | 2026-11-05 02:11 | Registra as respostas 185, 186, 187 e 188 e aponta a 108 para a 185. |
 | Marcelo Fabiano | 2026-11-05 02:07 | Registra a resposta 184. |

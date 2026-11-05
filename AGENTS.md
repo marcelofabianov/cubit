@@ -1,6 +1,6 @@
 # Cubit
 
-Mod de Minecraft que adiciona um robô companheiro fofo, movido a bateria, feito para o modpack [Iron Meridian](https://github.com/marcelofabianov/iron-meridian): singleplayer, de tecnologia e construção.
+Mod de Minecraft que adiciona um robô companheiro fofo, movido a bateria, de tecnologia e construção. É feito para o player e funciona numa instância só com ele e suas dependências. O modpack [Iron Meridian](https://github.com/marcelofabianov/iron-meridian) é um dos lugares onde ele é testado.
 
 **Comece por:** [`README.md`](README.md), a visão geral com as fases, e [`_docs/README.md`](_docs/README.md), o mapa da documentação. As respostas em `_docs/perguntas/` são a fonte da verdade e prevalecem sobre os outros documentos.
 
@@ -28,12 +28,12 @@ Mod de Minecraft que adiciona um robô companheiro fofo, movido a bateria, feito
 2. **Sem magia:** nem nos nomes, nem nas mecânicas.
 3. **Números em config:** bateria, consumo, raios, intervalos, dano e slots por tier nunca ficam fixos na lógica.
 4. **Receitas:** os materiais são só do jogo puro, e uma receita pode combinar itens do próprio mod, como no conserto. Ficam em datapack JSON, para o pack poder sobrescrever com KubeJS.
-5. **Energia:** FE, pelas capabilities do NeoForge, para aceitar energia de qualquer mod do pack (Mekanism, Powah, Solar Flux).
-6. **Luz:** API do LambDynamicLights, como dependência opcional. Nada de blocos de luz invisíveis no mundo.
+5. **Energia:** FE, pelas capabilities do NeoForge, para aceitar energia de outros mods, quando houver. Tudo também aceita redstone, para funcionar sem outros mods.
+6. **Luz:** API do LambDynamicLights, dependência obrigatória. Nada de blocos de luz invisíveis no mundo.
 7. **Scanner de minérios:** baseado nas tags `c:ores`, nunca numa lista fixa de blocos.
 8. **Estado do robô como item:** em data components do 1.21.1.
 9. **Design próprio:** o modelo final não pode copiar um robô existente, para o mod poder ser publicado.
-10. **Nome a evitar:** "Robit", que é o robô companheiro do Mekanism, presente no pack.
+10. **Nome a evitar:** "Robit", que é o robô companheiro do Mekanism.
 
 ## Stack
 
@@ -44,7 +44,7 @@ Mod de Minecraft que adiciona um robô companheiro fofo, movido a bateria, feito
 | Java | 21 |
 | Build | MDK oficial do NeoForge para 1.21.1 (ModDevGradle) |
 | GeckoLib | 4.9.3 (versão do pack) |
-| LambDynamicLights | 4.8.11+1.21.1 (versão do pack, opcional) |
+| LambDynamicLights | 4.8.11+1.21.1 (versão do pack, obrigatória, no cliente) |
 
 Versões conferidas em 2026-11-04. Confira de novo no `mods/` do Iron Meridian antes de fixar ou atualizar uma dependência. O Gradle não está instalado na máquina: use o wrapper. O JDK 21 é baixado pelo próprio projeto.
 
@@ -96,9 +96,9 @@ O significado de cada pilar, os checklists e a matriz de decisão estão em [`_d
 19. **Autoridade do servidor:** toda regra roda no servidor. O cliente só exibe e pede ações.
 20. **Dono do robô:** toda ação confere o dono. O servidor valida dono e distância de todo pacote recebido do cliente.
 21. **Orçamento de tick:** nada pesado a cada tick. Varreduras rodam em intervalos e sem alocação desnecessária.
-22. **Chunks:** nunca carregue um chunk à força nem leia um bloco sem confirmar que ele está carregado.
+22. **Chunks:** nunca carregue um chunk à força nem leia um bloco sem confirmar que ele está carregado. A exceção é o Servidor e as antenas da Fase 5, por ação do player, com limites no config.
 23. **Separação do cliente:** código comum nunca referencia classes de `client/`.
-24. **Dependências opcionais:** o mod precisa abrir sem elas. LambDynamicLights e Jade ficam isolados.
+24. **Dependências:** GeckoLib e LambDynamicLights são obrigatórias, e o mod precisa abrir sem Jade, que fica isolado. Dependência só de cliente não pode impedir um servidor dedicado de abrir.
 
 ### Forma do código
 
@@ -108,14 +108,14 @@ O significado de cada pilar, os checklists e a matriz de decisão estão em [`_d
 28. **Nomes:** classes em `PascalCase`; JSONs e IDs em `snake_case`, no singular; scripts `.sh` e arquivos `.md` em `kebab-case`. Adapters levam o que adaptam como prefixo (`NeoForgeTierCatalog`).
 29. **Comentários** são exceção e explicam o porquê. Sem código comentado e sem `TODO` sem issue.
 30. **Gerados:** `src/generated/` nunca é editado à mão. Um gate reprova se o `runData` gerar diferença.
-31. **Versões** ficam em `gradle.properties`, alinhadas às do Iron Meridian.
+31. **Versões** ficam em `gradle.properties`, compatíveis com as do Iron Meridian.
 
 ### Testes
 
 32. **TDD:** o teste vem antes ou junto do código. Use JUnit 5 no domínio e GameTests no que depende do mundo.
 33. **Sem mock do jogo:** nunca faça mock de `Level` ou `Entity`. Comportamento de mundo se testa no mundo.
 34. **Cobertura:** mínimo de 85% em `domain/`, medido com JaCoCo. O restante se cobre com GameTests e um roteiro manual.
-35. **Teste no pack:** antes de ir para a `main`, teste numa instância do Iron Meridian.
+35. **Teste antes da `main`:** teste numa instância só com o mod e suas dependências e, depois, numa do Iron Meridian.
 
 ### Gates
 
@@ -145,6 +145,14 @@ O robô atual é o primeiro, de uso geral. O mod pode ter robôs especializados 
 ### Perguntas
 
 47. **Toda pergunta respondida fica registrada:** qualquer pergunta feita ao desenvolvedor e respondida por ele entra em `_docs/perguntas/`, no arquivo da fase e com o próximo número livre, antes de seguir para o próximo passo. Vale também para pergunta não bloqueante e para resposta que só confirma a recomendação. Resposta que muda outra aponta para ela. A exceção é a autorização de uma ação pontual, como commit, push, merge ou apagar uma branch, que vale só para aquela vez.
+
+### Mudança no que está documentado
+
+48. **O documentado pode mudar:** se um impedimento técnico aparecer ao avançar, a decisão pode ser alterada ou desfeita. O impedimento é mostrado com evidência, o desenvolvedor decide, e a nova resposta aponta para a antiga. O que já foi publicado continua seguindo a regra 18.
+
+### Independência
+
+49. **Independência:** o mod prioriza funcionar numa instância de Minecraft só com ele e suas dependências. Nenhum recurso pode exigir outro mod ou modpack, e todo cenário é pensado primeiro assim. As exceções são GeckoLib e LambDynamicLights, obrigatórias, e Jade, opcional.
 
 ## Git
 

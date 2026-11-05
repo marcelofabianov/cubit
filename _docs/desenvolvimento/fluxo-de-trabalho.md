@@ -86,7 +86,7 @@ A descrição do PR segue o template [`.github/pull_request_template.md`](../../
 
 - `Closes #n` na primeira linha;
 - o que muda;
-- a validação: os documentos conferidos e a evidência de cada um, os comandos, o teste no Iron Meridian e os checklists dos pilares;
+- a validação: os documentos conferidos e a evidência de cada um, os comandos, o teste numa instância limpa e no Iron Meridian e os checklists dos pilares;
 - como revisar ou testar;
 - o que ficou fora do escopo, quando houver.
 
@@ -122,7 +122,7 @@ develop → homolog → release/X.Y.Z → main (tag vX.Y.Z)
 ```
 
 1. **Homologação:** abra um PR da `develop` para a `homolog`.
-2. **Teste:** teste a `homolog` numa instância do Iron Meridian.
+2. **Teste:** teste a `homolog` numa instância só com o mod e suas dependências e, depois, numa do Iron Meridian.
 3. **Correções:** o que aparecer no teste passa pelo caminho normal, de `feature/*` para a `develop`, e volta à `homolog` por PR.
 4. **Release fechada:** com o teste aprovado, crie a `release/X.Y.Z` a partir da `homolog` e ajuste a versão. Só entram ajustes da própria release.
 5. **Publicação:** abra um PR da `release/X.Y.Z` para a `main`.
@@ -142,7 +142,7 @@ Na fase `0.x`, mudança incompatível sobe o MINOR, e o resto sobe o PATCH.
 Use só para um problema no que já foi publicado.
 
 1. Crie a issue e a `hotfix/{issue}-{slug}` a partir da `main`.
-2. Faça a correção e teste numa instância do Iron Meridian.
+2. Faça a correção e teste numa instância só com o mod e suas dependências e, depois, numa do Iron Meridian.
 3. Abra um PR para a `main` e crie a tag do novo PATCH depois do merge.
 4. Leve a correção para a `homolog` e para a `develop`, por PR.
 
@@ -181,6 +181,7 @@ O primeiro passo, separando o que está decidido do que está pendente.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 12:21 | Inclui o teste numa instância só com o mod. |
 | Marcelo Fabiano | 2026-11-05 00:12 | Cita os gates de push na preparação do ambiente. |
 | Marcelo Fabiano | 2026-11-04 23:45 | Limita o histórico aos arquivos de `_docs/`. |
 | Marcelo Fabiano | 2026-11-04 19:12 | Adota o template de pull request. |

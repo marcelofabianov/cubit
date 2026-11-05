@@ -77,6 +77,18 @@ Receitas provisórias, só com recursos do jogo puro, a ajustar nos testes:
 - O item sem estado salvo, como o da aba do criativo, vale como um robô novo: tier Base, carga inicial e vida cheia.
 - A aba do criativo do mod é `cubit:main`.
 
+## Previstos na Fase 5
+
+Nomes aprovados na pergunta 256. Viram contrato só quando implementados.
+
+| Nome | ID | Descrição |
+|---|---|---|
+| Robot Server | `cubit:robot_server` | Bloco fixo na base, com tiers, que gerencia antenas |
+| Signal Antenna | `cubit:signal_antenna` | Bloco com bateria, levado ao local de trabalho, que carrega chunks |
+| Wireless Chest | `cubit:wireless_chest` | Acessa um canal do storage wireless |
+| Wireless Storage Upgrade | A definir | Liga o Cubit Ultimate a um canal |
+| Miner, Farmer, Rancher, Defender, Organizer, Builder, Cook e Fisher Card | `cubit:miner_card` e `cubit:farmer_card`, no mesmo padrão | Cards de especialidade |
+
 ## Contratos de save
 
 Estes nomes não mudam sem migração (regra 18 do `AGENTS.md`).
@@ -106,6 +118,7 @@ O estado salvo é validado ao entrar no jogo, sem derrubá-lo (regra 17 do `AGEN
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 12:08 | Adiciona os itens previstos na Fase 5. |
 | Marcelo Fabiano | 2026-11-05 02:11 | Adiciona os contratos do inventário. |
 | Marcelo Fabiano | 2026-11-05 01:15 | Detalha a proteção do item danificado, o resgate no vazio e os contratos novos. |
 | Marcelo Fabiano | 2026-11-05 00:17 | Define que o item danificado empilha em 1. |
