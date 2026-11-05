@@ -19,6 +19,7 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 | `FollowAction` | O que o robô que segue faz: seguir, parar ou teleportar |
 | `BurningAction` | O que o robô faz em chamas: nada, sair da lava, buscar água ou andar ao acaso |
 | `FollowDecision` | Escolhe a `FollowAction` conforme o estado, a dimensão e a distância |
+| `DamagingBlockReaction` | Diz se o robô sai de cima de um bloco que fere |
 | `FollowingRobotPolicy` | Garante que só um robô siga o player |
 | `RobotActivity` | O que o robô faz no tick: andar, peso, água, altura subida e condição negativa. Quem chama informa, e o domínio decide o gasto |
 | `ConsumptionExtras` | Extras de energia de um `TierSpec`, por situação |
@@ -41,6 +42,7 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 
 - **Só o ativo se move:** inativo ou em hibernação, o robô para e não teleporta. Em outra dimensão também para, porque o teleporte só vale na mesma dimensão.
 - **Sair da lava vem antes de buscar água:** é o que mais fere. A rota nunca entra em lava, então a saída é direta, até o bloco seguro mais próximo (pergunta 139).
+- **Bloco que fere:** só o ativo sai de cima, porque é o único que se move, e fogo e lava vêm antes, porque ferem mais (perguntas 284 e 285).
 - **Em chamas, a reação vem antes de seguir:** só o robô ativo reage, porque é o único que se move. Parado, ele continua queimando (pergunta 117).
 - **Distância inválida:** o robô para. É o estado mais restritivo, e o jogo não cai por isso (regra 17 do `AGENTS.md`).
 - **Colocar e sair da base são a mesma regra:** o robô segue se nenhum outro estiver seguindo. Se houver outro, fica desligado, porque o clique direito só liga um robô desligado, e assim o player consegue fazê-lo seguir (perguntas 72, 75 e 102).

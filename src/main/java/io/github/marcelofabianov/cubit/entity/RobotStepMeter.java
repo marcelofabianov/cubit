@@ -25,7 +25,7 @@ final class RobotStepMeter {
 
   /** Goes by the category of the effect, so the effects of other mods count without a list. */
   private static boolean hasNegativeCondition(RobotEntity robot) {
-    if (robot.isOnFire() || robot.isInLava()) {
+    if (robot.isOnFire() || robot.isInLava() || DamagingBlocks.hurt(robot)) {
       return true;
     }
     for (MobEffectInstance effect : robot.getActiveEffects()) {

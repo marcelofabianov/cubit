@@ -62,7 +62,8 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity {
   private static final String NO_OWNER_MESSAGE = "Robot {} has no owner. Nobody can interact.";
   private static final double ONE_BLOCK_STEP = 1;
   private static final int BURNING_GOAL_PRIORITY = 0;
-  private static final int FOLLOW_GOAL_PRIORITY = 1;
+  private static final int DAMAGING_BLOCK_GOAL_PRIORITY = 1;
+  private static final int FOLLOW_GOAL_PRIORITY = 2;
   private static final float BLOCKED_ROUTE = -1f;
   private static final float OPEN_ROUTE = 0f;
 
@@ -105,6 +106,7 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity {
   @Override
   protected void registerGoals() {
     goalSelector.addGoal(BURNING_GOAL_PRIORITY, new BurningReactionGoal(this));
+    goalSelector.addGoal(DAMAGING_BLOCK_GOAL_PRIORITY, new LeaveDamagingBlockGoal(this));
     goalSelector.addGoal(
         FOLLOW_GOAL_PRIORITY,
         new FollowOwnerGoal(
