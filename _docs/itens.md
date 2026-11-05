@@ -96,12 +96,13 @@ Estes nomes não mudam sem migração (regra 18 do `AGENTS.md`).
 | Onde | Nome | Conteúdo |
 |---|---|---|
 | Componente do item | `cubit:robot_state` | `tier`, `energy` e `health` |
+| Componente do item | `cubit:energy_slot` | Item do slot de energia e reserva de FE, também no item danificado |
 | Componente do item | `cubit:robot_inventory` | Conteúdo do inventário, também no item danificado |
 | Componente do item danificado | `cubit:last_safe_position` | Dimensão e posição seguras do robô |
 | Componente do item danificado | `cubit:robot_owner` | UUID do dono |
 | Tipo de receita | `cubit:robot_repair` | Campos `damaged_robot`, `toolbox` e `result` |
 | Dados do mundo | `cubit_dead_robots` | Robôs mortos com o dono offline |
-| NBT da entidade | `Owner`, `Tier`, `Energy`, `PowerState`, `LastSafePosition` e `Inventory` | Dono, tier, carga da bateria, estado, última posição segura e inventário, com `Slot` em cada item |
+| NBT da entidade | `Owner`, `Tier`, `Energy`, `PowerState`, `LastSafePosition`, `Inventory` e `EnergySlot` | Dono, tier, carga da bateria, estado, última posição segura, inventário, com `Slot` em cada item, e slot de energia |
 | Dados do player | `cubit:following_robot` | `robot`: o UUID do robô que segue, ou nada |
 
 O estado salvo é validado ao entrar no jogo, sem derrubá-lo (regra 17 do `AGENTS.md`):
@@ -118,6 +119,7 @@ O estado salvo é validado ao entrar no jogo, sem derrubá-lo (regra 17 do `AGEN
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 12:52 | Adiciona os contratos do slot de energia. |
 | Marcelo Fabiano | 2026-11-05 12:08 | Adiciona os itens previstos na Fase 5. |
 | Marcelo Fabiano | 2026-11-05 02:11 | Adiciona os contratos do inventário. |
 | Marcelo Fabiano | 2026-11-05 01:15 | Detalha a proteção do item danificado, o resgate no vazio e os contratos novos. |

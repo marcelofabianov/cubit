@@ -12,7 +12,7 @@ Não há perguntas pendentes nesta fase.
 | 29 | Quando dá para recolher o robô? | Sempre. Desligado, é a única ação, além de receber energia pelo slot (perguntas 21 e 45) |
 | 30 | Como ele carrega, se sempre segue o player? | Substituída pela pergunta 47 |
 | 31 | Quando ele religa? | Sozinho, com 5% de bateria |
-| 32 | Ele consome energia parado? | 0 FE/t, configurável |
+| 32 | Ele consome energia parado? | 0 FE/t, configurável. A pergunta 277 abre uma exceção para condições negativas |
 | 33 | Com quanta carga sai do craft? | 25%, configurável |
 | 34 | O que acontece na morte, e como repara? | Vira item com inventário preservado e bateria zerada. A vida fica no item e se recupera na estação. O dono não o fere. As perguntas 118 e 119 detalham o item e o dano, e as perguntas 127 a 130, o item danificado e o conserto |
 | 35 | O que conta como robô ativo? | Substituída pela pergunta 65 |
@@ -80,7 +80,7 @@ Não há perguntas pendentes nesta fase.
 | 130 | Qual é a receita provisória da caixa de ferramentas? | 7 ferros, 1 redstone e 1 obsidiana, na mesa de craft. Colunas laterais com 3 ferros cada, e coluna central com ferro em cima, redstone no meio e obsidiana embaixo |
 | 131 | A busca de água do Cubit em chamas considera blocos de alturas variadas, como degraus? | Sim. Vale em qualquer direção dentro do raio da pergunta 125. A água precisa ter o topo livre e rota até ela. Sem isso, ele tenta outra água ou anda ao acaso |
 | 132 | Quais arquivos `.md` têm histórico de modificações? | Só os que estão em `_docs/`. Os outros, como o `README.md`, não têm |
-| 133 | O Cubit em chamas pode ficar parado? | Não. Ativo e em chamas, ele nunca para enquanto houver para onde ir |
+| 133 | O Cubit em chamas pode ficar parado? | Não. Ativo e em chamas, ele nunca para enquanto houver para onde ir. A pergunta 276 limita isso a enquanto houver bateria |
 | 134 | Dá para melhorar o modelo do Cubit agora, mais próximo das imagens de conceito? | Sim, depois de terminar o tema do fogo. Antecipa parte da pergunta 60: a geometria melhora já na Fase 2, e animações e expressões seguem na Fase 3 |
 | 138 | Como foi o roteiro manual do Cubit em chamas? | Ok, executado pelo desenvolvedor |
 | 139 | O que o Cubit faz quando colocam lava no bloco dele? | Ativo, tenta sair pela saída mais próxima, conforme a pergunta 133, mesmo que ainda possa morrer |
@@ -123,6 +123,28 @@ Não há perguntas pendentes nesta fase.
 | 187 | O que acontece com o excedente, se o config reduzir os slots do inventário? | Ao colocar ou carregar o robô, o que não couber cai no chão, ao lado dele. Nada é apagado |
 | 188 | Em que pontos ficam os testes do inventário? | JUnit no domínio: regra do excedente. GameTests: quem abre, o que não entra, preservar sem perder nem duplicar, e excedente. Roteiro manual: tela e cliques |
 | 189 | Como foi o roteiro manual do inventário? | Ok, executado pelo desenvolvedor, conforme esperado. O resultado de cada passo não foi detalhado. O robô consertado precisou de um comando para ter carga, porque a recarga entra na etapa seguinte |
+| 257 | O que conta como andando, para gastar bateria? | Rota em andamento e deslocamento real no tick, inclusive ao fugir do fogo e da lava. Ser empurrado não gasta, e rota sem avanço também não |
+| 258 | Onde fica o slot de energia na tela? | Num pequeno painel desenhado pelo mod ao lado da tela do baú, com espaço para os próximos slots exclusivos e a barra de bateria. Não muda os slots do inventário nem a textura do jogo. Complementa a pergunta 186. Em avaliação, sem decisão: o slot de fornalha ficar só para o card de Minerador |
+| 259 | Onde salvar o conteúdo do slot de energia? | Em `cubit:energy_slot` no item e `EnergySlot` na entidade, separado do inventário. Atravessa recolher, morrer e consertar. O comportamento automático de esvaziar o inventário não coloca nem tira itens dos slots exclusivos. Automatizar isso, por exemplo pela base ou pelo Servidor, é uma ideia para o futuro |
+| 260 | Em que pontos ficam os testes da energia? | JUnit: consumo, extração de redstone sem perder energia e religar. GameTests: gastar andando, não gastar parado ou empurrado, desligar ao zerar mantendo o vínculo, religar sozinho, slot com redstone, clique com redstone desligado e preservar no recolher, morrer, consertar e salvar. Roteiro manual: tela e barra |
+| 261 | Como foi o roteiro manual da energia? | O robô sem energia ainda seguiu o player, e os demais passos ficaram ok, executado pelo desenvolvedor, sem detalhar cada passo. O erro está em investigação e bloqueia os commits da etapa. A pergunta 262 corrige a causa provada, e a 263 traz o que falta conferir |
+| 262 | Como corrigir o robô parado que volta a andar, porque o `stop()` do jogo não cancela um recálculo de rota pendente? | Com uma navegação própria, `RobotNavigation`, cujo `stop()` também cancela o recálculo. Corrige a causa em todas as paradas, em vez de parar a navegação a cada tick |
+| 263 | Como a bateria foi zerada no teste da pergunta 261? | Com um comando. O comando exato não foi informado |
+| 265 | Com redstone na mão, o clique em qualquer robô desligado coloca a pilha no slot em vez de ligá-lo, mesmo com carga. Está certo? | Sim, como na pergunta 45. Para ligar um robô desligado com carga, basta clicar sem redstone na mão |
+| 266 | O robô para ao zerar a bateria andando, sem nada no slot? | Sim, o robô parou, conforme visto pelo desenvolvedor, depois de seguir com a barra parecendo zerada. O save mostrou 4.500 FE e estado `ACTIVE` antes da parada, numa gravação de hora incerta. Os 0 FE e o estado ao parar não foram conferidos. Complementa a pergunta 261 |
+| 267 | Como foi o restante do teste no jogo? | "Acho que está ok", executado pelo desenvolvedor, sem detalhar cada passo. Ao fechar, o save mostrou 299.810 FE, `ACTIVE`, slot vazio e reserva 0, e o log não trouxe erro |
+| 268 | O erro da pergunta 261 fica fechado, sem os 0 FE medidos no jogo? | Sim. A GameTest cobre a parada com 0 FE, e a confusão no jogo vinha da barra |
+| 269 | As barras de bateria podem mostrar zero com carga restante? | Não. As duas mostram ao menos um risco enquanto houver carga, e só ficam vazias com 0 FE |
+| 270 | Como fica o passo 5 da seção Energia do roteiro manual? | Com o slot vazio e o comando que zera a bateria, porque andar até zerar leva minutos, e a recarga pelo slot impede o robô de parar |
+| 271 | Quanto o Cubit gasta ao andar, com peso e na água? | Andar: Base 15, Avançado 18, Elite 22 e Ultimate 30 FE/t. Inventário cheio e água somam, cada um: +5, +6, +7 e +10 FE/t. No Base, cheio dá 20, na água dá 20, e os dois juntos dão 25. Entra em issue própria, depois da #57. Muda o consumo de `tiers.md` |
+| 272 | O que conta como inventário cheio, para o consumo extra? | Todos os slots ocupados, mesmo com pilhas incompletas |
+| 273 | A velocidade muda com o inventário cheio? | Sim, para 0,75×, configurável. Em chamas, a velocidade do fogo continua valendo |
+| 274 | O que conta como na água, para o consumo extra? | O robô em contato com a água, pelo `isInWater` do jogo, inclusive numa poça rasa e ao fugir do fogo |
+| 275 | Quais condições negativas fazem o Cubit perder FE extra? | Fogo, lava e os efeitos que o jogo marca como nocivos (`HARMFUL`), inclusive de outros mods, sem lista fixa. Vale só com o robô ativo. Várias juntas cobram um extra só, e um golpe não conta. Entra na issue da pergunta 271 |
+| 276 | O dreno por condição negativa pode zerar a bateria? | Sim. Ao zerar, o robô desliga e, em chamas, queima parado. Limita a pergunta 133, que passa a valer enquanto houver bateria |
+| 277 | Quanto FE extra por tick custa uma condição negativa ativa? | Base 25, Avançado 50, Elite 125 e Ultimate 250 FE/t, também com o robô parado, e somados ao andar. Exceção à pergunta 32 |
+| 278 | Quanto custa subir? | 1,2× o custo do plano, ou seja, +20% sobre andar um bloco: Base 15, Avançado 18, Elite 22 e Ultimate 30 FE por bloco subido. É proporcional à altura, vale só na própria rota, e descer não devolve energia. Entra na issue da pergunta 271 |
+| 279 | Como foi o passo 5a do roteiro manual, das barras de bateria? | Ok, como esperado, executado pelo desenvolvedor: a barra agora está precisa. O resultado de cada passo não foi detalhado |
 
 ### Premissas aprovadas
 
@@ -138,6 +160,16 @@ Não há perguntas pendentes nesta fase.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 14:23 | Registra a resposta 279. |
+| Marcelo Fabiano | 2026-11-05 14:13 | Registra a resposta 278. |
+| Marcelo Fabiano | 2026-11-05 14:12 | Registra as respostas 275, 276 e 277 e aponta as 32 e 133 para elas. |
+| Marcelo Fabiano | 2026-11-05 14:10 | Registra as respostas 271, 272, 273 e 274. |
+| Marcelo Fabiano | 2026-11-05 13:54 | Registra as respostas 268, 269 e 270. |
+| Marcelo Fabiano | 2026-11-05 13:53 | Registra a resposta 267. |
+| Marcelo Fabiano | 2026-11-05 13:51 | Registra a resposta 266. |
+| Marcelo Fabiano | 2026-11-05 13:30 | Registra as respostas 262, 263 e 265 e aponta a 261 para elas. |
+| Marcelo Fabiano | 2026-11-05 13:13 | Registra a resposta 261. |
+| Marcelo Fabiano | 2026-11-05 12:52 | Registra as respostas 257, 258, 259 e 260. |
 | Marcelo Fabiano | 2026-11-05 10:44 | Aponta a resposta 47 para a pergunta 198. |
 | Marcelo Fabiano | 2026-11-05 02:29 | Registra a resposta 189. |
 | Marcelo Fabiano | 2026-11-05 02:11 | Registra as respostas 185, 186, 187 e 188 e aponta a 108 para a 185. |

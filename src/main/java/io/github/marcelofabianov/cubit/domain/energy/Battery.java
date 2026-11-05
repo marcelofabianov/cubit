@@ -8,6 +8,7 @@ public record Battery(Energy capacity, Energy charge) {
 
   private static final String NO_CAPACITY_MESSAGE = "Battery capacity must be positive";
   private static final String OVERCHARGE_MESSAGE = "Charge above capacity: ";
+  private static final String NO_STEPS_MESSAGE = "A level needs positive steps: ";
 
   public Battery {
     if (capacity.isZero()) {
@@ -35,6 +36,18 @@ public record Battery(Energy capacity, Energy charge) {
 
   public boolean isEmpty() {
     return charge.isZero();
+  }
+
+  /** How many of the steps of a bar to fill. Only an empty battery shows none. */
+  public int level(int steps) {
+    if (steps <= 0) {
+      throw new IllegalArgumentException(NO_STEPS_MESSAGE + steps);
+    }
+    if (isEmpty()) {
+      return 0;
+    }
+    long rounded = (charge.amount() * steps + capacity.amount() / 2) / capacity.amount();
+    return (int) Math.max(rounded, 1);
   }
 
   public boolean isFull() {

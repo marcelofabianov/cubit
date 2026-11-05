@@ -4,6 +4,7 @@ import com.mojang.logging.LogUtils;
 import io.github.marcelofabianov.cubit.CubitMod;
 import io.github.marcelofabianov.cubit.domain.energy.Battery;
 import io.github.marcelofabianov.cubit.domain.energy.Energy;
+import io.github.marcelofabianov.cubit.domain.energy.Percentage;
 import io.github.marcelofabianov.cubit.domain.energy.PowerState;
 import io.github.marcelofabianov.cubit.domain.ownership.FollowingOutcome;
 import io.github.marcelofabianov.cubit.domain.ownership.FollowingRobotPolicy;
@@ -21,7 +22,6 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.function.Supplier;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.GlobalPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.server.MinecraftServer;
@@ -30,7 +30,6 @@ import net.minecraft.world.Container;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -39,11 +38,9 @@ import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.JumpControl;
-import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.pathfinder.PathType;
 import org.slf4j.Logger;
@@ -59,8 +56,8 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity {
   private static final String TIER_KEY = "Tier";
   private static final String ENERGY_KEY = "Energy";
   private static final String POWER_STATE_KEY = "PowerState";
-  private static final String LAST_SAFE_POSITION_KEY = "LastSafePosition";
   private static final String INVENTORY_KEY = "Inventory";
+  private static final String ENERGY_SLOT_KEY = "EnergySlot";
   private static final double INVENTORY_REACH_MARGIN = 4;
   private static final String NO_OWNER_MESSAGE = "Robot {} has no owner. Nobody can interact.";
   private static final double ONE_BLOCK_STEP = 1;
@@ -79,6 +76,7 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity {
   private Battery battery;
   private PowerState powerState = PowerState.INACTIVE_SWITCHED_OFF;
   private BlockPos lastSafePosition;
+  private final RobotStepMeter stepMeter = new RobotStepMeter();
   private final RobotInventory inventory;
 
   public RobotEntity(
@@ -93,6 +91,7 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity {
     this.damagedItem = damagedItem;
     this.battery = spec().newBattery(CubitMod.CONFIG.initialCharge());
     this.inventory = new RobotInventory(spec().inventorySlots());
+    this.navigation = new RobotNavigation(this, level);
     this.jumpControl =
         new JumpControl(this) {
           // Tracks do not jump: the robot only climbs one block at a time, by its step height.
@@ -117,7 +116,7 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity {
     return Mob.createMobAttributes().add(Attributes.STEP_HEIGHT, ONE_BLOCK_STEP);
   }
 
-  public void placedBy(Player player, RobotState state, ItemContainerContents contents) {
+  public void placedBy(Player player, RobotState state, ItemStack item) {
     ownerId = player.getUUID();
     tier = state.tier();
     TierSpec spec = spec();
@@ -126,7 +125,7 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity {
     setHealth(state.healthFor(spec));
     setPersistenceRequired();
     lastSafePosition = blockPosition();
-    inventory.fill(contents.stream().toList(), spec.inventorySlots());
+    inventory.readFrom(item, spec.inventorySlots());
 
     FollowingOutcome outcome = policy().onArrival(getUUID(), follower(player), battery);
     powerState = outcome.state();
@@ -172,16 +171,23 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity {
     if (player.isShiftKeyDown()) {
       return collectBy(player);
     }
-    return powerState == PowerState.ACTIVE ? openInventoryFor(player) : turnOnBy(player);
+    if (powerState == PowerState.ACTIVE) {
+      return openInventoryFor(player);
+    }
+    if (inventory.energySlot().insert(player.getItemInHand(hand))) {
+      return InteractionResult.CONSUME;
+    }
+    return turnOnBy(player);
   }
 
   private InteractionResult openInventoryFor(Player player) {
-    player.openMenu(
-        new SimpleMenuProvider(
-            (containerId, playerInventory, opener) ->
-                new RobotMenu(containerId, playerInventory, inventory(), this::canUseInventory),
-            getDisplayName()),
-        data -> RobotMenu.writeSize(data, inventory()));
+    RobotMenu.open(
+        player,
+        getDisplayName(),
+        inventory(),
+        energySlot(),
+        this::batteryPercent,
+        this::canUseInventory);
     return InteractionResult.CONSUME;
   }
 
@@ -197,10 +203,33 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity {
     return inventory.container();
   }
 
+  public Container energySlot() {
+    return inventory.energySlot().container();
+  }
+
+  private int batteryPercent() {
+    return battery.level(Percentage.MAX);
+  }
+
+  /** Spends only on the robot's own steps: being pushed, or a stuck route, costs nothing. */
+  private void updateEnergy() {
+    boolean moved = stepMeter.moved(position());
+    boolean ownRoute = !getNavigation().isDone() || getMoveControl().hasWanted();
+    if (powerState == PowerState.ACTIVE && ownRoute && moved) {
+      battery = spec().moveOneTick(battery);
+    }
+    battery = inventory.energySlot().charge(battery, spec().rechargePerTick());
+    PowerState next = CubitMod.CONFIG.powerRules().afterEnergyChange(powerState, battery);
+    if (next != powerState) {
+      powerState = next;
+      getNavigation().stop();
+    }
+  }
+
   private InteractionResult collectBy(Player player) {
     ItemStack stack = new ItemStack(item.get());
     stack.set(CubitDataComponents.ROBOT_STATE.get(), state());
-    stack.set(CubitDataComponents.ROBOT_INVENTORY.get(), inventory.contents());
+    inventory.writeTo(stack);
     inventory.clear();
     player.setData(
         CubitAttachments.FOLLOWING_ROBOT,
@@ -224,14 +253,14 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity {
 
   private void switchOff(UUID robotId) {
     MinecraftServer server = getServer();
-    if (server == null) {
-      return;
-    }
-    for (ServerLevel loadedLevel : server.getAllLevels()) {
-      if (loadedLevel.getEntity(robotId) instanceof RobotEntity robot) {
-        robot.powerState = PowerState.INACTIVE_SWITCHED_OFF;
-        return;
-      }
+    if (server != null) {
+      server
+          .getAllLevels()
+          .forEach(loaded -> {
+            if (loaded.getEntity(robotId) instanceof RobotEntity robot) {
+              robot.powerState = PowerState.INACTIVE_SWITCHED_OFF;
+            }
+          });
     }
   }
 
@@ -242,6 +271,7 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity {
     setPathfindingMalus(PathType.WATER, isInWater() || isOnFire() ? OPEN_ROUTE : BLOCKED_ROUTE);
     super.customServerAiStep();
     rememberSafePosition();
+    updateEnergy();
     inventory.dropSurplus(
         stack -> Containers.dropItemStack(level(), getX(), getY(), getZ(), stack));
     if (tickCount % CubitMod.CONFIG.followRepathTicks() == 0) {
@@ -292,28 +322,11 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity {
     boolean alreadyDead = dead;
     super.die(source);
     if (dead && !alreadyDead && level() instanceof ServerLevel serverLevel) {
-      leaveDamagedItem(serverLevel);
+      DamagedRobotDrop.leave(serverLevel, this, damagedItem.get(), lastSafePosition, inventory);
       if (ownerId != null) {
         DeadRobotLinks.onRobotDied(serverLevel.getServer(), ownerId, getUUID());
       }
     }
-  }
-
-  /** Added directly, because the loot rules could remove a drop and lose the robot. */
-  private void leaveDamagedItem(ServerLevel serverLevel) {
-    ItemStack stack = new ItemStack(damagedItem.get());
-    stack.set(CubitDataComponents.ROBOT_STATE.get(), state().damaged());
-    stack.set(CubitDataComponents.ROBOT_OWNER.get(), ownerId);
-    stack.set(CubitDataComponents.ROBOT_INVENTORY.get(), inventory.contents());
-    inventory.clear();
-    if (lastSafePosition != null) {
-      stack.set(
-          CubitDataComponents.LAST_SAFE_POSITION.get(),
-          GlobalPos.of(serverLevel.dimension(), lastSafePosition));
-    }
-    ItemEntity drop = new ItemEntity(serverLevel, getX(), getY(), getZ(), stack);
-    drop.setDefaultPickUpDelay();
-    serverLevel.addFreshEntity(drop);
   }
 
   @Override
@@ -331,9 +344,8 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity {
     tag.putLong(ENERGY_KEY, battery.charge().amount());
     tag.putString(POWER_STATE_KEY, powerState.name());
     tag.put(INVENTORY_KEY, inventory.save(registryAccess()));
-    if (lastSafePosition != null) {
-      tag.putLong(LAST_SAFE_POSITION_KEY, lastSafePosition.asLong());
-    }
+    tag.put(ENERGY_SLOT_KEY, inventory.energySlot().save(registryAccess()));
+    SavedRobotValues.writeLastSafePosition(tag, lastSafePosition);
   }
 
   @Override
@@ -349,10 +361,8 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity {
     powerState = SavedRobotValues.powerState(tag.getString(POWER_STATE_KEY), getUUID());
     inventory.load(
         tag.getList(INVENTORY_KEY, Tag.TAG_COMPOUND), registryAccess(), spec().inventorySlots());
-    lastSafePosition =
-        tag.contains(LAST_SAFE_POSITION_KEY)
-            ? BlockPos.of(tag.getLong(LAST_SAFE_POSITION_KEY))
-            : null;
+    inventory.energySlot().load(tag.getCompound(ENERGY_SLOT_KEY), registryAccess());
+    lastSafePosition = SavedRobotValues.lastSafePosition(tag);
     applyConfigAttributes();
   }
 
