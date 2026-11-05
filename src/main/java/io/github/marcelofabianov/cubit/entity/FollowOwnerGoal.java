@@ -73,7 +73,8 @@ final class FollowOwnerGoal extends Goal {
 
   private FollowAction nextAction(Player owner) {
     boolean reactingToFire =
-        BurningAction.decide(robot.powerState(), robot.isOnFire(), false) != BurningAction.NONE;
+        BurningAction.decide(robot.powerState(), robot.isOnFire(), robot.isInLava(), false)
+            != BurningAction.NONE;
     if (owner == null || reactingToFire) {
       return FollowAction.STOP;
     }

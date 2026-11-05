@@ -35,6 +35,9 @@ public final class FireGameTests {
   private static final int COVERED_WATER_X = 2;
   private static final double AWAY_FROM_COVERED_WATER = 3;
   private static final int MAX_STILL_TICKS = 30;
+  private static final int LEAVE_LAVA_TIMEOUT = 60;
+  private static final int LAVA_SETTLE_TICKS = 40;
+  private static final double LEFT_THE_CENTER_OF_LAVA = 0.3;
   private static final int NEVER_STOPS_TICKS = 200;
   private static final double TINY_MOVE = 0.05;
   private static final int WALL_X = 5;
@@ -53,6 +56,7 @@ public final class FireGameTests {
   private static final String TELEPORTED = "The burning robot teleported";
   private static final String DID_NOT_WANDER = "The burning robot did not wander";
   private static final String STILL_BURNING = "The robot did not reach the water";
+  private static final String STILL_IN_LAVA = "The robot did not leave the lava";
   private static final String STOPPED = "The burning robot stood still";
   private static final String STUCK = "The robot stayed stuck on water under the floor";
   private static final String PUT_OUT = "The robot found water beyond the search radius";
@@ -150,12 +154,8 @@ public final class FireGameTests {
         WANDER_TICKS,
         () -> {
           Vec3 later = robot.position();
-          helper.runAfterDelay(
-              WANDER_TICKS,
-              () -> {
-                helper.assertTrue(robot.position().distanceTo(later) > SMALL_MOVE, DID_NOT_WANDER);
-                helper.succeed();
-              });
+          helper.succeedWhen(() ->
+              helper.assertTrue(robot.position().distanceTo(later) > SMALL_MOVE, DID_NOT_WANDER));
         });
   }
 
@@ -218,6 +218,35 @@ public final class FireGameTests {
       helper.assertTrue(stillTicks[0] < MAX_STILL_TICKS, STOPPED);
     });
     helper.runAfterDelay(NEVER_STOPS_TICKS, helper::succeed);
+  }
+
+  /** Lava slows the robot so much that it may die on the way, but it must always try to leave. */
+  @GameTest(template = ARENA, timeoutTicks = LEAVE_LAVA_TIMEOUT)
+  public static void activeRobotTriesToLeaveLavaPlacedOnIt(GameTestHelper helper) {
+    ServerPlayer owner = MovementGameTests.ownerAt(helper, FAR_X);
+    RobotEntity robot = GameTestRobots.placeNewRobot(helper, owner, FLOOR);
+    helper.getLevel().setBlockAndUpdate(robot.blockPosition(), Blocks.LAVA.defaultBlockState());
+    Vec3 start = robot.position();
+
+    helper.succeedWhen(() ->
+        helper.assertTrue(
+            robot.position().distanceTo(start) > LEFT_THE_CENTER_OF_LAVA, STILL_IN_LAVA));
+  }
+
+  @GameTest(template = ARENA, timeoutTicks = TIMEOUT)
+  public static void switchedOffRobotStaysInLava(GameTestHelper helper) {
+    ServerPlayer owner = MovementGameTests.ownerAt(helper, WALK_X);
+    GameTestRobots.placeNewRobot(helper, owner, FLOOR);
+    RobotEntity second = GameTestRobots.placeNewRobot(helper, owner, SECOND_FLOOR);
+    Vec3 start = second.position();
+    helper.getLevel().setBlockAndUpdate(second.blockPosition(), Blocks.LAVA.defaultBlockState());
+
+    helper.runAfterDelay(
+        LAVA_SETTLE_TICKS,
+        () -> {
+          helper.assertTrue(second.position().distanceTo(start) < SMALL_MOVE, MOVED);
+          helper.succeed();
+        });
   }
 
   /** Stuck trying to reach the water, the robot would never get this far from it. */

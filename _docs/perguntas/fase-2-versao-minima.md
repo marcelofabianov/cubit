@@ -83,6 +83,9 @@ Não há perguntas pendentes nesta fase.
 | 133 | O Cubit em chamas pode ficar parado? | Não. Ativo e em chamas, ele nunca para enquanto houver para onde ir |
 | 134 | Dá para melhorar o modelo do Cubit agora, mais próximo das imagens de conceito? | Sim, depois de terminar o tema do fogo. Antecipa parte da pergunta 60: a geometria melhora já na Fase 2, e animações e expressões seguem na Fase 3 |
 | 138 | Como foi o roteiro manual do Cubit em chamas? | Ok, executado pelo desenvolvedor |
+| 139 | O que o Cubit faz quando colocam lava no bloco dele? | Ativo, tenta sair pela saída mais próxima, conforme a pergunta 133, mesmo que ainda possa morrer |
+| 143 | Como ficou o comportamento na lava, que costuma matar o tier Base antes de sair? | Aprovado. Quanto menor o tier, maior a chance de morrer. O teste no jogo com balde ficou de fora, e a etapa seguiu |
+| 144 | Em que ordem seguem as próximas tarefas? | Histórico só em `_docs/`, revisão dos `.md`, modelo e morte com o item danificado |
 
 ### Premissas aprovadas
 
@@ -98,6 +101,8 @@ Não há perguntas pendentes nesta fase.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-04 23:40 | Registra as respostas 143 e 144. |
+| Marcelo Fabiano | 2026-11-04 23:11 | Registra a resposta 139. |
 | Marcelo Fabiano | 2026-11-04 22:56 | Registra a resposta 138. |
 | Marcelo Fabiano | 2026-11-04 22:05 | Registra a resposta 134. |
 | Marcelo Fabiano | 2026-11-04 22:01 | Registra a resposta 133. |

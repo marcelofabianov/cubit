@@ -12,6 +12,8 @@ import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.pathfinder.Node;
 import net.minecraft.world.level.pathfinder.Path;
+import net.minecraft.world.level.pathfinder.PathType;
+import net.minecraft.world.level.pathfinder.WalkNodeEvaluator;
 import net.minecraft.world.phys.Vec3;
 
 /** Carries out what {@link BurningAction} decides. The rule itself lives in the domain. */
@@ -26,11 +28,13 @@ final class BurningReactionGoal extends Goal {
   private static final int STEP_INTO_WATER_ROUTE_UPDATES = 2;
 
   private static final int WANDER_HEIGHT = 1;
+  private static final int LAVA_EXIT_HEIGHT = 1;
   private static final int WANDER_ATTEMPTS = 8;
 
   private final RobotEntity robot;
   private Path path;
   private BlockPos water;
+  private BlockPos lavaExit;
   private final Set<BlockPos> rejectedWater = new HashSet<>();
   private int searchCountdown;
   private int stepCountdown;
@@ -47,6 +51,10 @@ final class BurningReactionGoal extends Goal {
     if (!isReacting()) {
       rejectedWater.clear();
       return false;
+    }
+    if (isLeavingLava()) {
+      lavaExit = findLavaExit().orElse(null);
+      return lavaExit != null;
     }
     if (!canPlanRoute) {
       return false;
@@ -66,12 +74,19 @@ final class BurningReactionGoal extends Goal {
 
   @Override
   public boolean canContinueToUse() {
+    if (lavaExit != null) {
+      return isLeavingLava();
+    }
     boolean steppingIntoWater = water != null && stepCountdown > 0;
     return isReacting() && (steppingIntoWater || !robot.getNavigation().isDone());
   }
 
   @Override
   public void start() {
+    if (lavaExit != null) {
+      robot.getNavigation().stop();
+      return;
+    }
     robot.getNavigation().moveTo(path, CubitMod.CONFIG.burningSpeedMultiplier());
     stepCountdown =
         STEP_INTO_WATER_ROUTE_UPDATES * reducedTickDelay(CubitMod.CONFIG.followRepathTicks());
@@ -80,12 +95,12 @@ final class BurningReactionGoal extends Goal {
   /** A route stops next to the water, so the last step into it is taken directly. */
   @Override
   public void tick() {
+    if (lavaExit != null) {
+      walkDirectlyTo(lavaExit);
+      return;
+    }
     if (water != null && robot.getNavigation().isDone()) {
-      Vec3 center = Vec3.atBottomCenterOf(water);
-      robot
-          .getMoveControl()
-          .setWantedPosition(
-              center.x, center.y, center.z, CubitMod.CONFIG.burningSpeedMultiplier());
+      walkDirectlyTo(water);
       stepCountdown--;
     }
   }
@@ -98,10 +113,39 @@ final class BurningReactionGoal extends Goal {
       rejectedWater.add(water);
     }
     water = null;
+    lavaExit = null;
+  }
+
+  private void walkDirectlyTo(BlockPos target) {
+    Vec3 center = Vec3.atBottomCenterOf(target);
+    robot
+        .getMoveControl()
+        .setWantedPosition(center.x, center.y, center.z, CubitMod.CONFIG.burningSpeedMultiplier());
+  }
+
+  private boolean isLeavingLava() {
+    return BurningAction.decide(robot.powerState(), robot.isOnFire(), robot.isInLava(), false)
+        == BurningAction.LEAVE_LAVA;
+  }
+
+  /** A route never enters lava, so it cannot start inside it either: the exit is a direct walk. */
+  private Optional<BlockPos> findLavaExit() {
+    Level level = robot.level();
+    return BlockPos.findClosestMatch(
+        robot.blockPosition(),
+        CubitMod.CONFIG.burningWanderRadiusBlocks(),
+        LAVA_EXIT_HEIGHT,
+        position -> level.hasChunkAt(position) && isSafeToStand(position));
+  }
+
+  private boolean isSafeToStand(BlockPos position) {
+    PathType type = WalkNodeEvaluator.getPathTypeStatic(robot, position);
+    return type == PathType.WALKABLE || type == PathType.DANGER_FIRE;
   }
 
   private boolean isReacting() {
-    return BurningAction.decide(robot.powerState(), robot.isOnFire(), false) != BurningAction.NONE;
+    return BurningAction.decide(robot.powerState(), robot.isOnFire(), robot.isInLava(), false)
+        != BurningAction.NONE;
   }
 
   /**
