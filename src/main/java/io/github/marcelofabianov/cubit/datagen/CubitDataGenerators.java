@@ -1,8 +1,12 @@
 package io.github.marcelofabianov.cubit.datagen;
 
 import io.github.marcelofabianov.cubit.CubitMod;
+import java.util.List;
+import java.util.Set;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
+import net.minecraft.data.loot.LootTableProvider;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
@@ -25,5 +29,19 @@ public final class CubitDataGenerators {
         new CubitEntityTagsProvider(output, event.getLookupProvider(), existingFiles));
     generator.addProvider(
         event.includeServer(), new CubitRecipeProvider(output, event.getLookupProvider()));
+    generator.addProvider(
+        event.includeClient(), new CubitBlockStateProvider(output, existingFiles));
+    generator.addProvider(
+        event.includeServer(),
+        new CubitBlockTagsProvider(output, event.getLookupProvider(), existingFiles));
+    generator.addProvider(
+        event.includeServer(),
+        new LootTableProvider(
+            output,
+            Set.of(),
+            List.of(
+                new LootTableProvider.SubProviderEntry(
+                    CubitBlockLootProvider::new, LootContextParamSets.BLOCK)),
+            event.getLookupProvider()));
   }
 }

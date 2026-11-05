@@ -49,6 +49,7 @@ public final class CubitConfig {
   private final DamagedRobotSection damagedRobot;
   private final EnergySlotSection energySlot;
   private final LoadSection load;
+  private final DockSection dock;
   private final TierCatalog tierCatalog;
 
   public CubitConfig() {
@@ -59,6 +60,7 @@ public final class CubitConfig {
     damagedRobot = new DamagedRobotSection(builder);
     energySlot = new EnergySlotSection(builder);
     load = new LoadSection(builder);
+    dock = new DockSection(builder);
     builder.pop();
 
     builder.push(List.of(GENERAL_ROBOT.id(), RobotTier.BASE.key()));
@@ -121,6 +123,26 @@ public final class CubitConfig {
 
   public int redstoneBlockEnergy() {
     return energySlot.blockEnergy.get();
+  }
+
+  public int dockEnergyCapacity() {
+    return dock.capacity.get();
+  }
+
+  public int dockInputPerTick() {
+    return dock.input.get();
+  }
+
+  public int dockFullHealTicks() {
+    return dock.fullHealTicks.get();
+  }
+
+  public int dockCompleteHoldTicks() {
+    return dock.completeHoldTicks.get();
+  }
+
+  public int dockStuckTicks() {
+    return dock.stuckTicks.get();
   }
 
   public Percentage repairHealth() {

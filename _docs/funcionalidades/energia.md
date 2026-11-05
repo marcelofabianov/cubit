@@ -55,16 +55,26 @@ Funciona como um carregador solar real.
 ## Induction Dock
 
 - É a base de recarga do Cubit, inspirada nas bases de robôs aspiradores. Na base, o Cubit fica em hibernação.
-- Recebe energia de duas formas: por cabos de diversos mods, em **FE**, ou com redstone em um slot próprio.
-- Aceita energia de qualquer gerador do pack (Mekanism, Powah, Solar Flux e outros).
-- Tem um pequeno estoque de energia.
-- Tem um único slot, que aceita redstone, que vira energia para o Dock, ou uma Power Bank, que recebe energia do Dock.
-- Recupera a vida do Cubit durante a hibernação.
-- Serve de base para o retorno automático.
+- **Formato:** o da [prancha de conceito](../imagens/conceito/induction-dock-prancha.png): torre atrás, com tela, e placa em U na frente, virada para o player que coloca. O Cubit sobe na placa, de costas para a torre. Ocupa 2 blocos de altura, como uma porta, e precisa do bloco de cima livre para ser colocado. Quebrar uma parte quebra as duas.
+- **Tela:** desligada, sem energia e sem Cubit; ociosa, com energia e sem Cubit; carregando, com o Cubit recebendo; completa, com a bateria dele cheia; sem energia, com o Cubit na base e o estoque zerado.
+- **Energia:** recebe por cabos de outros mods, em **FE**, em qualquer face, ou com redstone em um slot próprio, também por funil. Nada sai por cabo nem por funil.
+- **Estoque:** tem um pequeno estoque de energia. Um item de redstone só vira energia quando couber inteiro no estoque. Sem FE, o Cubit fica hibernando.
+- **Slot:** tem um único slot, que aceita redstone ou, na Fase 4, uma Power Bank, que recebe energia do Dock.
+- **Vida:** recupera a vida do Cubit durante a hibernação, sem gastar FE, mesmo com o estoque zerado.
+- **Retorno automático:** serve de base para ele, na Fase 4.
+
+### Dono e tela
+
+- **Dono:** quem coloca o Dock. Só o dono usa o Dock e abre a tela, e só os Cubits dele entram.
+- **Clique direito:** chama o Cubit ou, com um na base, o libera. Com redstone na mão, a pilha entra no slot.
+- **Shift + clique direito:** abre a tela, com o slot e uma barra de energia.
+- **Quebrar:** só o dono, ou um player no modo criativo com permissão de operador, para remover um Dock abandonado. Explosões e pistões não o afetam. O item guarda a energia e empilha em 1, o slot cai no chão, e o Cubit sai como numa liberação. O dono do bloco novo é quem o coloca.
 
 ### Ir para a base e sair dela
 
-- **Ir:** o player clica com o botão direito no Dock, e o Cubit ligado mais próximo, dentro do raio do retorno automático, vai até ele, esteja seguindo ou em área. Colocar o item do Cubit em cima do Dock também funciona.
+- **Ir:** o player clica com o botão direito no Dock, e o Cubit ligado mais próximo, dentro do raio do retorno automático, vai até ele, esteja seguindo ou em área. Colocar o item do Cubit em cima do Dock também funciona. Num Dock ocupado ou de outro player, nada acontece, e o item continua na mão.
+- **Sem conseguir chegar:** sem rota ou preso, teleporta para o Dock. Se o chunk estiver descarregado ou houver um bloqueio em cima, desiste e volta ao que fazia.
+- **Fechar o jogo:** só a hibernação é salva. A caminho ou aguardando, o Cubit volta ao que fazia ao carregar de novo. Se o Dock sumiu, ele acorda como numa liberação.
 - **Sair:** o Cubit sai sozinho com a bateria cheia. Antes disso, clicar no Dock o libera. Ao sair, volta ao que fazia: a área ou seguir o player. Se outro assumiu o lugar de seguir, fica parado e desligado.
 
 ### Base ocupada
@@ -114,6 +124,8 @@ Se o robô estiver dentro do raio da base e com a bateria baixa, mostra o texto 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 16:57 | Adota o formato e os estados da prancha de conceito. |
+| Marcelo Fabiano | 2026-11-05 16:09 | Detalha o Dock: formato, dono, tela, quebra, teleporte e o que é salvo. |
 | Marcelo Fabiano | 2026-11-05 15:32 | Inclui os blocos que ferem na condição negativa. |
 | Marcelo Fabiano | 2026-11-05 14:40 | Define o consumo por situação. |
 | Marcelo Fabiano | 2026-11-05 13:57 | Define que as barras só ficam vazias com 0 FE. |

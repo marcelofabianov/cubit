@@ -24,6 +24,10 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 | `RobotActivity` | O que o robô faz no tick: andar, peso, água, altura subida e condição negativa. Quem chama informa, e o domínio decide o gasto |
 | `ConsumptionExtras` | Extras de energia de um `TierSpec`, por situação |
 | `SlotRecharge` | Reserva de FE do slot de energia e sua passagem para a bateria |
+| `DockStock` | Estoque de energia de um Induction Dock e as transferências dele, sem criar nem perder FE |
+| `DockStatus` | O que a tela de um Dock mostra |
+| `DockStay` | Vida recuperada por tick e quando o robô sai da base |
+| `DockQueue` | Robôs aguardando um Dock ocupado, por ordem de chegada |
 | `InventoryFit` | Separa os itens que cabem nos slots do config dos que sobram |
 | `OwnerProtection` | Diz se um dano é do dono e, por isso, não fere o robô |
 | `VoidRescueTarget` | Para onde vai o robô danificado que caiu no vazio |
@@ -55,6 +59,9 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 - **Consumo por deslocamento:** quem chama informa se o robô andou, e o domínio só gasta nesse caso (pergunta 257).
 - **Consumo por situação:** peso, água e subida só somam ao andar. A condição negativa soma mesmo parado, e só uma vez, ainda que haja várias. O robô inativo não gasta (perguntas 271 a 278).
 - **Subida em FE inteiro:** o extra é arredondado, porque energia é inteira (regra 13). Descer não devolve nada, porque criaria FE.
+- **Fila sem remoção:** um robô se informa a cada tick, então o que saiu do mundo perde o lugar sem ninguém precisar tirá-lo (perguntas 85 e 86).
+- **Cheio espera um momento:** o robô cheio fica cerca de 3 s antes de sair, para o player ver a tela completa (pergunta 312).
+- **Vida igual em todos os tiers:** a vida por tick segue a vida máxima, então todos levam o mesmo tempo para encher (pergunta 63).
 - **Reserva do slot:** um item só é consumido quando a energia dele cabe, e a reserva nunca some, para a transferência não criar nem perder FE (regra 13 e pergunta 64).
 - **Excedente:** se o config reduzir os slots, o que não couber sobra, e quem chama o larga no chão. Nada é apagado (pergunta 187).
 - **Vínculo apontando para o próprio robô:** não conta como outro robô seguindo. Assim, um vínculo antigo não deixa o robô desligado.

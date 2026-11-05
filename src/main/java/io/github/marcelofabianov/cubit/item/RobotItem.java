@@ -1,6 +1,9 @@
 package io.github.marcelofabianov.cubit.item;
 
 import io.github.marcelofabianov.cubit.CubitMod;
+import io.github.marcelofabianov.cubit.block.DockableRobotItem;
+import io.github.marcelofabianov.cubit.block.InductionDockBlock;
+import io.github.marcelofabianov.cubit.block.InductionDockBlockEntity;
 import io.github.marcelofabianov.cubit.domain.robot.RobotState;
 import io.github.marcelofabianov.cubit.domain.robot.RobotType;
 import io.github.marcelofabianov.cubit.domain.tier.RobotTier;
@@ -16,10 +19,11 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
 /** A robot stored as an item. It keeps the whole state, so collecting and placing lose nothing. */
-public final class RobotItem extends Item {
+public final class RobotItem extends Item implements DockableRobotItem {
   private static final int BAR_FULL_WIDTH = 13;
   private static final int BAR_COLOR = 0x55FF55;
   private static final float FACE_THE_PLAYER_DEGREES = 180f;
@@ -44,14 +48,39 @@ public final class RobotItem extends Item {
     if (player == null) {
       return InteractionResult.PASS;
     }
+    BlockState clicked = level.getBlockState(context.getClickedPos());
+    if (clicked.getBlock() instanceof InductionDockBlock) {
+      return placeOnDock(context, player, clicked);
+    }
     BlockPos target = context.getClickedPos().relative(context.getClickedFace());
-    RobotEntity robot = spawnRobot(level, target, player.getYRot() + FACE_THE_PLAYER_DEGREES);
+    RobotEntity robot =
+        spawnRobot(
+            level, Vec3.atBottomCenterOf(target), player.getYRot() + FACE_THE_PLAYER_DEGREES);
     if (robot == null) {
       return InteractionResult.FAIL;
     }
     ItemStack stack = context.getItemInHand();
     robot.placedBy(player, stateOf(stack), stack);
     // Always spent, even in creative: the item carries the state, and a copy would duplicate it.
+    stack.shrink(1);
+    return InteractionResult.CONSUME;
+  }
+
+  /** On a busy dock or on the dock of someone else, nothing happens and nothing is spent. */
+  private InteractionResult placeOnDock(UseOnContext context, Player player, BlockState clicked) {
+    Level level = context.getLevel();
+    InductionDockBlockEntity dock =
+        InductionDockBlock.dockAt(level, context.getClickedPos(), clicked);
+    if (dock == null || !dock.isOwner(player) || dock.isOccupied()) {
+      return InteractionResult.FAIL;
+    }
+    RobotEntity robot = spawnRobot(level, dock.robotSpot(), player.getYRot());
+    if (robot == null) {
+      return InteractionResult.FAIL;
+    }
+    ItemStack stack = context.getItemInHand();
+    robot.placedBy(player, stateOf(stack), stack);
+    robot.enterDock(dock);
     stack.shrink(1);
     return InteractionResult.CONSUME;
   }
@@ -85,8 +114,7 @@ public final class RobotItem extends Item {
     return BAR_COLOR;
   }
 
-  private RobotEntity spawnRobot(Level level, BlockPos target, float yaw) {
-    Vec3 position = Vec3.atBottomCenterOf(target);
+  private RobotEntity spawnRobot(Level level, Vec3 position, float yaw) {
     EntityType<RobotEntity> type = entityType.get();
     if (!level.noCollision(type.getSpawnAABB(position.x, position.y, position.z))) {
       return null;

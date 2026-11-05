@@ -2,6 +2,8 @@ package io.github.marcelofabianov.cubit.entity;
 
 import com.mojang.logging.LogUtils;
 import io.github.marcelofabianov.cubit.CubitMod;
+import io.github.marcelofabianov.cubit.block.DockableRobot;
+import io.github.marcelofabianov.cubit.block.InductionDockBlockEntity;
 import io.github.marcelofabianov.cubit.domain.energy.Battery;
 import io.github.marcelofabianov.cubit.domain.energy.Energy;
 import io.github.marcelofabianov.cubit.domain.energy.Percentage;
@@ -13,11 +15,9 @@ import io.github.marcelofabianov.cubit.domain.robot.RobotState;
 import io.github.marcelofabianov.cubit.domain.robot.RobotType;
 import io.github.marcelofabianov.cubit.domain.tier.RobotTier;
 import io.github.marcelofabianov.cubit.domain.tier.TierSpec;
-import io.github.marcelofabianov.cubit.menu.RobotMenu;
 import io.github.marcelofabianov.cubit.player.DeadRobotLinks;
 import io.github.marcelofabianov.cubit.player.FollowingRobotLink;
 import io.github.marcelofabianov.cubit.registry.CubitAttachments;
-import io.github.marcelofabianov.cubit.registry.CubitDataComponents;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.function.Supplier;
@@ -50,7 +50,7 @@ import software.bernie.geckolib.animation.AnimatableManager;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 /** A robot in the world. It adapts the game to the domain, where the rules live. */
-public final class RobotEntity extends PathfinderMob implements GeoEntity {
+public final class RobotEntity extends PathfinderMob implements GeoEntity, DockableRobot {
   private static final Logger LOGGER = LogUtils.getLogger();
   private static final String OWNER_KEY = "Owner";
   private static final String TIER_KEY = "Tier";
@@ -63,7 +63,8 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity {
   private static final double ONE_BLOCK_STEP = 1;
   private static final int BURNING_GOAL_PRIORITY = 0;
   private static final int DAMAGING_BLOCK_GOAL_PRIORITY = 1;
-  private static final int FOLLOW_GOAL_PRIORITY = 2;
+  private static final int DOCK_GOAL_PRIORITY = 2;
+  private static final int FOLLOW_GOAL_PRIORITY = 3;
   private static final float BLOCKED_ROUTE = -1f;
   private static final float OPEN_ROUTE = 0f;
 
@@ -79,6 +80,7 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity {
   private BlockPos lastSafePosition;
   private final RobotStepMeter stepMeter = new RobotStepMeter();
   private final RobotInventory inventory;
+  private final RobotDocking docking = new RobotDocking(this);
 
   public RobotEntity(
       EntityType<? extends RobotEntity> type,
@@ -107,6 +109,7 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity {
   protected void registerGoals() {
     goalSelector.addGoal(BURNING_GOAL_PRIORITY, new BurningReactionGoal(this));
     goalSelector.addGoal(DAMAGING_BLOCK_GOAL_PRIORITY, new LeaveDamagingBlockGoal(this));
+    goalSelector.addGoal(DOCK_GOAL_PRIORITY, new GoToDockGoal(this));
     goalSelector.addGoal(
         FOLLOW_GOAL_PRIORITY,
         new FollowOwnerGoal(
@@ -123,7 +126,7 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity {
     tier = state.tier();
     TierSpec spec = spec();
     battery = state.batteryFor(spec);
-    applyConfigAttributes();
+    RobotInteractions.applyAttributes(this);
     setHealth(state.healthFor(spec));
     setPersistenceRequired();
     lastSafePosition = blockPosition();
@@ -151,10 +154,64 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity {
     return powerState;
   }
 
+  RobotDocking docking() {
+    return docking;
+  }
+
+  Battery battery() {
+    return battery;
+  }
+
+  void setBattery(Battery battery) {
+    this.battery = battery;
+  }
+
+  void setPowerState(PowerState state) {
+    powerState = state;
+  }
+
+  Item itemType() {
+    return item.get();
+  }
+
+  RobotInventory robotInventory() {
+    return inventory;
+  }
+
+  /** For the item placed on a dock: the robot enters right away. */
+  public void enterDock(InductionDockBlockEntity dock) {
+    docking.enterNow(dock);
+  }
+
+  @Override
+  public boolean answersDockCall() {
+    return powerState == PowerState.ACTIVE && !docking.hasTrip();
+  }
+
+  @Override
+  public int dockCallRadius() {
+    return spec().callRadiusBlocks();
+  }
+
+  @Override
+  public void callToDock(BlockPos dock) {
+    docking.callTo(dock);
+  }
+
+  @Override
+  public void releaseFromDock() {
+    docking.release();
+  }
+
+  public boolean isDockedAt(BlockPos dock) {
+    return docking.isDockedAt(dock);
+  }
+
   public Optional<BlockPos> lastSafePosition() {
     return Optional.ofNullable(lastSafePosition);
   }
 
+  @Override
   public Optional<UUID> ownerId() {
     return Optional.ofNullable(ownerId);
   }
@@ -171,32 +228,21 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity {
       return InteractionResult.PASS;
     }
     if (player.isShiftKeyDown()) {
-      return collectBy(player);
+      return RobotInteractions.collect(this, player);
     }
-    if (powerState == PowerState.ACTIVE) {
-      return openInventoryFor(player);
+    if (powerState.isInteractive()) {
+      return RobotInteractions.openInventory(this, player);
     }
     if (inventory.energySlot().insert(player.getItemInHand(hand))) {
       return InteractionResult.CONSUME;
     }
-    return turnOnBy(player);
-  }
-
-  private InteractionResult openInventoryFor(Player player) {
-    RobotMenu.open(
-        player,
-        getDisplayName(),
-        inventory(),
-        energySlot(),
-        this::batteryPercent,
-        this::canUseInventory);
-    return InteractionResult.CONSUME;
+    return RobotInteractions.turnOn(this, player);
   }
 
   /** Checked on the server while the screen is open, because the robot can die or switch off. */
   public boolean canUseInventory(Player player) {
     return isAlive()
-        && powerState == PowerState.ACTIVE
+        && powerState.isInteractive()
         && player.getUUID().equals(ownerId)
         && player.canInteractWithEntity(this, INVENTORY_REACH_MARGIN);
   }
@@ -209,7 +255,7 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity {
     return inventory.energySlot().container();
   }
 
-  private int batteryPercent() {
+  int batteryPercent() {
     return battery.level(Percentage.MAX);
   }
 
@@ -224,44 +270,6 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity {
     }
   }
 
-  private InteractionResult collectBy(Player player) {
-    ItemStack stack = new ItemStack(item.get());
-    stack.set(CubitDataComponents.ROBOT_STATE.get(), state());
-    inventory.writeTo(stack);
-    inventory.clear();
-    player.setData(
-        CubitAttachments.FOLLOWING_ROBOT,
-        new FollowingRobotLink(policy().release(getUUID(), follower(player))));
-    discard();
-    // Drops the item at the player's feet when the inventory is full, so the robot is never lost.
-    player.getInventory().placeItemBackInInventory(stack);
-    return InteractionResult.CONSUME;
-  }
-
-  private InteractionResult turnOnBy(Player player) {
-    FollowingOutcome outcome = policy().onTurnOn(getUUID(), follower(player), powerState, battery);
-    if (outcome.state() == powerState) {
-      return InteractionResult.PASS;
-    }
-    powerState = outcome.state();
-    player.setData(CubitAttachments.FOLLOWING_ROBOT, new FollowingRobotLink(outcome.follower()));
-    outcome.robotToSwitchOff().ifPresent(this::switchOff);
-    return InteractionResult.CONSUME;
-  }
-
-  private void switchOff(UUID robotId) {
-    MinecraftServer server = getServer();
-    if (server != null) {
-      server
-          .getAllLevels()
-          .forEach(loaded -> {
-            if (loaded.getEntity(robotId) instanceof RobotEntity robot) {
-              robot.powerState = PowerState.INACTIVE_SWITCHED_OFF;
-            }
-          });
-    }
-  }
-
   @Override
   protected void customServerAiStep() {
     // Only a robot in the water or on fire may route through water: to walk out or to put itself
@@ -269,12 +277,13 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity {
     setPathfindingMalus(PathType.WATER, isInWater() || isOnFire() ? OPEN_ROUTE : BLOCKED_ROUTE);
     super.customServerAiStep();
     rememberSafePosition();
+    docking.tick();
     updateEnergy();
     RobotLoadSpeed.update(this, inventory.isFull());
     inventory.dropSurplus(
         stack -> Containers.dropItemStack(level(), getX(), getY(), getZ(), stack));
     if (tickCount % CubitMod.CONFIG.followRepathTicks() == 0) {
-      switchOffIfReplaced();
+      RobotInteractions.switchOffIfReplaced(this);
     }
   }
 
@@ -284,30 +293,9 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity {
     }
   }
 
-  /** A robot in an unloaded chunk misses the swap, so it finds out when it loads again. */
-  private void switchOffIfReplaced() {
-    Player owner = onlineOwner();
-    if (powerState == PowerState.ACTIVE
-        && owner != null
-        && policy().otherRobotFollows(getUUID(), follower(owner))) {
-      powerState = PowerState.INACTIVE_SWITCHED_OFF;
-      getNavigation().stop();
-    }
-  }
-
-  private Player onlineOwner() {
+  Player onlineOwner() {
     MinecraftServer server = getServer();
     return server == null || ownerId == null ? null : server.getPlayerList().getPlayer(ownerId);
-  }
-
-  /** Applied again on load, so a config change reaches the robots already in the world. */
-  private void applyConfigAttributes() {
-    TierSpec spec = spec();
-    getAttribute(Attributes.MAX_HEALTH).setBaseValue(spec.maxHealth());
-    getAttribute(Attributes.MOVEMENT_SPEED)
-        .setBaseValue(CubitMod.CONFIG.baseMovementSpeed() * spec.speedMultiplier());
-    getAttribute(Attributes.FOLLOW_RANGE)
-        .setBaseValue(CubitMod.CONFIG.followDecision().teleportDistanceBlocks());
   }
 
   @Override
@@ -344,6 +332,7 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity {
     tag.putString(POWER_STATE_KEY, powerState.name());
     tag.put(INVENTORY_KEY, inventory.save(registryAccess()));
     tag.put(ENERGY_SLOT_KEY, inventory.energySlot().save(registryAccess()));
+    docking.save(tag);
     SavedRobotValues.writeLastSafePosition(tag, lastSafePosition);
   }
 
@@ -361,8 +350,15 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity {
     inventory.load(
         tag.getList(INVENTORY_KEY, Tag.TAG_COMPOUND), registryAccess(), spec().inventorySlots());
     inventory.energySlot().load(tag.getCompound(ENERGY_SLOT_KEY), registryAccess());
+    docking.load(tag);
     lastSafePosition = SavedRobotValues.lastSafePosition(tag);
-    applyConfigAttributes();
+    RobotInteractions.applyAttributes(this);
+  }
+
+  /** Hibernating robots stay in place, or the plate would no longer hold them. */
+  @Override
+  public boolean isPushable() {
+    return powerState != PowerState.HIBERNATING && super.isPushable();
   }
 
   @Override
@@ -383,15 +379,15 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity {
     return animationCache;
   }
 
-  private TierSpec spec() {
+  TierSpec spec() {
     return CubitMod.CONFIG.tierCatalog().spec(robotType, tier);
   }
 
-  private static FollowingRobotPolicy policy() {
+  static FollowingRobotPolicy policy() {
     return new FollowingRobotPolicy(CubitMod.CONFIG.powerRules());
   }
 
-  private static Optional<UUID> follower(Player player) {
+  static Optional<UUID> follower(Player player) {
     return player.getData(CubitAttachments.FOLLOWING_ROBOT).robot();
   }
 }

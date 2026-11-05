@@ -22,6 +22,11 @@ As chaves ficam em `snake_case`. As de um robô ficam em `[{tipo}.{tier}]`, como
 | `general` | `full_inventory_speed_multiplier` | Velocidade com o inventário cheio, sobre a do tier | 0,1 a 1 |
 | `general` | `water_search_radius_blocks` | Busca de água em chamas | 1 a 16 |
 | `general` | `burning_wander_radius_blocks` | Alcance ao andar ao acaso em chamas | 1 a 16 |
+| `general` | `dock_energy_capacity` | Estoque do Induction Dock | 1 a 2147483647 |
+| `general` | `dock_input_per_tick` | Entrada do Induction Dock | 1 a 2147483647 |
+| `general` | `dock_full_heal_ticks` | Tempo para recuperar toda a vida na base | 1 a 72000 |
+| `general` | `dock_stuck_ticks` | Tempo sem avançar antes de teleportar ao Dock | 1 a 1200 |
+| `general` | `dock_complete_hold_ticks` | Tempo com a tela completa antes de sair da base | 1 a 1200 |
 | `general` | `redstone_dust_energy` | Energia de 1 pó de redstone | 1 a 2147483647 |
 | `general` | `redstone_block_energy` | Energia de 1 bloco de redstone | 1 a 2147483647 |
 | `general` | `repair_health_percent` | Vida ao sair do conserto | 1 a 100 |
@@ -61,6 +66,8 @@ O mod não cai por causa do config (regra 17 do `AGENTS.md`):
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 17:15 | Adiciona o tempo com a tela completa. |
+| Marcelo Fabiano | 2026-11-05 16:09 | Adiciona as chaves do Induction Dock. |
 | Marcelo Fabiano | 2026-11-05 14:40 | Adiciona as chaves do consumo por situação. |
 | Marcelo Fabiano | 2026-11-05 12:52 | Adiciona as chaves da redstone. |
 | Marcelo Fabiano | 2026-11-05 01:15 | Adiciona as chaves do conserto e do resgate no vazio. |

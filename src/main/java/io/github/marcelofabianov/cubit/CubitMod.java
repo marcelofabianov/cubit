@@ -2,6 +2,8 @@ package io.github.marcelofabianov.cubit;
 
 import io.github.marcelofabianov.cubit.config.CubitConfig;
 import io.github.marcelofabianov.cubit.registry.CubitAttachments;
+import io.github.marcelofabianov.cubit.registry.CubitBlockEntities;
+import io.github.marcelofabianov.cubit.registry.CubitBlocks;
 import io.github.marcelofabianov.cubit.registry.CubitCreativeTabs;
 import io.github.marcelofabianov.cubit.registry.CubitDataComponents;
 import io.github.marcelofabianov.cubit.registry.CubitEntities;
@@ -22,6 +24,8 @@ public final class CubitMod {
     container.registerConfig(ModConfig.Type.COMMON, CONFIG.spec());
     CubitDataComponents.register(modBus);
     CubitAttachments.register(modBus);
+    CubitBlocks.register(modBus);
+    CubitBlockEntities.register(modBus);
     CubitEntities.register(modBus);
     CubitItems.register(modBus);
     CubitMenus.register(modBus);
