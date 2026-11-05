@@ -74,7 +74,7 @@ As receitas usarão só itens do jogo puro e virão em datapack JSON, para os mo
 
 1. **Conceito (encerrada):** persona, features e demais definições, em documentos.
 2. **Versão mínima (atual):** crafting, seguir o player, inventário, bateria, vários Cubits com um seguindo, reações a fogo e lava, Induction Dock com hibernação, recarga com redstone, virar item, morte com item danificado e conserto, e geometria mais próxima do conceito.
-3. **Sentidos:** painel solar, lanterna, scanners, os oito sons, textos curtos, animações, expressões na tela, nome, cor e Jade.
+3. **Sentidos:** painel solar, lanterna, scanners, os nove sons, textos curtos, animações, expressões na tela, nome, cor e Jade.
 4. **Upgrades e autonomia:** tiers, Power Bank, ímã, filtros, demais slots exclusivos, choque, modos de defesa, Cubit Remote, modo área, descarga em baú, retorno automático e local de morte.
 5. **Robôs especializados (planejada):** cards de especialidade, antenas, Servidor, carregamento de chunks e storage wireless.
 

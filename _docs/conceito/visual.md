@@ -26,7 +26,7 @@ São sete: normal, feliz, sono, alerta, surpreso, carregando e desligado. Os gat
 
 ## Sons
 
-São nove sons diferentes (perguntas 135, 148 e 316). Oito entram na Fase 3, e o do ataque, junto do choque:
+São dez sons diferentes (perguntas 135, 148, 316, 320 e 322). Nove entram na Fase 3, e o do ataque, junto do choque:
 
 | # | Quando toca | Som | Arquivo |
 |---|---|---|---|
@@ -39,6 +39,7 @@ São nove sons diferentes (perguntas 135, 148 e 316). Oito entram na Fase 3, e o
 | 7 | Ao desligar | Próprio | `power_off.ogg` |
 | 8 | Enquanto é recarregado | Próprio | `recharging.ogg` |
 | 9 | Ao atacar | Choque | `shock_attack.ogg` |
+| 10 | Ao ser colocado no mundo | Próprio | `placed.ogg` |
 
 Os arquivos ficam em `assets/cubit/sounds/general_robot/`, em Ogg Vorbis, mono e 48 kHz, porque o jogo só aceita esse formato e só reduz o volume com a distância em sons mono. Ainda não tocam no jogo. O valor do intervalo mínimo será definido na Fase 3, num teste no jogo, e ficará no config.
 
@@ -52,6 +53,8 @@ Os arquivos ficam em `assets/cubit/sounds/general_robot/`, em Ogg Vorbis, mono e
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 20:36 | Define a fase do som de colocar no mundo. |
+| Marcelo Fabiano | 2026-11-05 20:26 | Adiciona o som de colocar no mundo. |
 | Marcelo Fabiano | 2026-11-05 17:27 | Adiciona o som do ataque. |
 | Marcelo Fabiano | 2026-11-05 00:55 | Reduz o ícone do mod na tela de Mods. |
 | Marcelo Fabiano | 2026-11-05 00:35 | Define o ícone do mod. |
