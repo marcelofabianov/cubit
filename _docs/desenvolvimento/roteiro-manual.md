@@ -39,6 +39,17 @@ Para conferir o estado, use `/data get entity @e[type=cubit:general_robot,limit=
 | 3 | Botão direito no segundo robô e confira os dois | O segundo fica `ACTIVE`, e o primeiro, `INACTIVE_SWITCHED_OFF` |
 | 4 | Saia e entre de novo no mundo, e confira os dois | Os estados continuam os mesmos |
 
+## Comando `/cubit reset`
+
+| # | Faça | Espere |
+|---|---|---|
+| 1 | Digite `/cubit ` no chat | O jogo sugere `reset` |
+| 2 | Coloque um robô, que segue você, e rode `/cubit reset` | A mensagem `Follow link cleared.` aparece, e o robô para. `PowerState` é `INACTIVE_SWITCHED_OFF`, e `Energy` não muda |
+| 3 | Rode `/cubit reset` de novo | A mensagem `No Cubit is following you.` aparece |
+| 4 | Botão direito no robô | Ele liga e volta a seguir você |
+| 5 | Deixe o robô seguindo, afaste-se com comando até o chunk dele descarregar, por exemplo com `/tp @s ~2000 ~ ~`, e rode `/cubit reset`. Volte com `/tp @s ~-2000 ~ ~` | Ao carregar de novo, ele fica parado, com `INACTIVE_SWITCHED_OFF`. Um clique o liga |
+| 6 | Rode o comando num servidor, com um player que não é operador | Funciona da mesma forma, só no vínculo dele |
+
 ## Movimento
 
 Coloque um robô, que segue você, e use blocos para montar o terreno.
@@ -194,6 +205,7 @@ Use `/kill @e[type=cubit:general_robot,limit=1,sort=nearest]` para matar o robô
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 20:42 | Adiciona o comando `/cubit reset`. |
 | Marcelo Fabiano | 2026-11-05 17:35 | Tira o brilho verde do roteiro do Dock. |
 | Marcelo Fabiano | 2026-11-05 17:15 | Adiciona o Cubit na base. |
 | Marcelo Fabiano | 2026-11-05 16:57 | Adota a aparência da prancha no roteiro do Dock. |

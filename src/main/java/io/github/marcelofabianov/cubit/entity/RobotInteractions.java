@@ -30,12 +30,15 @@ final class RobotInteractions {
     return InteractionResult.CONSUME;
   }
 
-  /** A robot in an unloaded chunk misses the swap, so it finds out when it loads again. */
-  static void switchOffIfReplaced(RobotEntity robot) {
+  /**
+   * A robot in an unloaded chunk misses a swap or a reset, so it finds out when it loads again.
+   * Without this, it would stay active and still, and a click only turns on a switched-off robot.
+   */
+  static void switchOffWithoutThePlace(RobotEntity robot) {
     Player owner = robot.onlineOwner();
     if (robot.powerState() == PowerState.ACTIVE
         && owner != null
-        && RobotEntity.policy().otherRobotFollows(robot.getUUID(), RobotEntity.follower(owner))) {
+        && !RobotEntity.policy().holdsThePlace(robot.getUUID(), RobotEntity.follower(owner))) {
       robot.setPowerState(PowerState.INACTIVE_SWITCHED_OFF);
       robot.getNavigation().stop();
     }

@@ -283,7 +283,7 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
     inventory.dropSurplus(
         stack -> Containers.dropItemStack(level(), getX(), getY(), getZ(), stack));
     if (tickCount % CubitMod.CONFIG.followRepathTicks() == 0) {
-      RobotInteractions.switchOffIfReplaced(this);
+      RobotInteractions.switchOffWithoutThePlace(this);
     }
   }
 

@@ -46,6 +46,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Quantidade:** o player pode ter quantos robôs preferir, mas só um o segue. Os outros podem trabalhar em áreas. O controle remoto e a base atendem todos os robôs ligados.
 - **Robô que segue sem bateria:** mantém o vínculo e volta a seguir ao religar. Se o player ligar outro, ele vira desligado.
 - **Saída da base com outro seguindo:** o robô fica parado e desligado, como ao ser colocado.
+- **Comando `/cubit reset`:** limpa o vínculo de quem segue, só do próprio player e sem permissão. Um robô ativo sem vínculo fica parado e desligado, com a carga mantida, e um clique o liga de novo.
 - **Config:** `COMMON`, com chaves em `snake_case` por tipo de robô e tier, como `[general_robot.base]`.
 - **Entidade:** a `RobotEntity` herda de `PathfinderMob`, com o dono num UUID próprio.
 - **Estado como item:** o componente `cubit:robot_state`, e o inventário em `cubit:robot_inventory`, fora do domínio.
@@ -81,6 +82,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 20:48 | Registra o comando `/cubit reset`. |
 | Marcelo Fabiano | 2026-11-05 20:36 | Define a fase do som de colocar no mundo. |
 | Marcelo Fabiano | 2026-11-05 20:26 | Registra o som de colocar no mundo. |
 | Marcelo Fabiano | 2026-11-05 17:27 | Registra o som do ataque. |

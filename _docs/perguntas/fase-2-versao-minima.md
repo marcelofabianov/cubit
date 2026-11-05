@@ -185,6 +185,11 @@ Não há perguntas pendentes nesta fase.
 | 319 | Como se chama a chave do tempo com a tela completa? | `dock_complete_hold_ticks`, em `[general]`, com 60 de padrão. Detalha a pergunta 312 |
 | 323 | O `/cubit reset` pode começar depois do merge do PR #66? | Sim. É o próximo item da ordem da pergunta 184 |
 | 324 | O agente corrige o status da Fase 2 no `README.md`, que não cita o inventário, a energia em uso e o Induction Dock? | Sim, no PR do `/cubit reset`, conforme a pergunta 152 |
+| 325 | Quem pode usar o `/cubit reset`? | Qualquer player, só no próprio vínculo, sem permissão. Detalha a pergunta 74 |
+| 326 | O que acontece com um robô ativo que perde o vínculo pelo comando? | Fica parado e desligado, com a carga mantida, e um clique o liga de novo para seguir. Vale na hora, se ele estiver carregado, ou quando o chunk dele carregar. O modo área, da Fase 4, fica fora dessa regra |
+| 327 | O que o comando responde? | `Follow link cleared.` e, sem vínculo para limpar, `No Cubit is following you.`, no `en_us.json` |
+| 328 | Em que pontos ficam os testes do `/cubit reset`? | JUnit: a regra de desligar o robô sem vínculo, na `FollowingRobotPolicy`. GameTests: limpar um vínculo perdido e o próximo robô seguir, desligar o robô ativo e um clique religá-lo, não mexer no vínculo de outro player e rodar sem permissão. Roteiro manual: digitar o comando, ver as mensagens e o caso do chunk descarregado |
+| 329 | Como foi o roteiro manual do `/cubit reset`? | Tudo certo, executado pelo desenvolvedor, sem detalhar cada passo |
 
 ### Premissas aprovadas
 
@@ -200,6 +205,8 @@ Não há perguntas pendentes nesta fase.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 20:52 | Registra a resposta 329. |
+| Marcelo Fabiano | 2026-11-05 20:42 | Registra as respostas 325, 326, 327 e 328. |
 | Marcelo Fabiano | 2026-11-05 20:36 | Registra as respostas 323 e 324. |
 | Marcelo Fabiano | 2026-11-05 17:39 | Registra a resposta 319. |
 | Marcelo Fabiano | 2026-11-05 17:37 | Registra a resposta 318. |
