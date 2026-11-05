@@ -70,7 +70,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Consumo por situação:** inventário cheio, água, subida e condições negativas somam um extra ao gasto. Com o inventário cheio, a velocidade cai. Os números estão em [`tiers.md`](tiers.md#consumo-por-atividade).
 - **Slot de energia do Cubit:** existe em todos os tiers e aceita uma Power Bank ou redstone por vez. A redstone entra na Fase 2, e a Power Bank na Fase 4.
 - **Comunicação:** bipes e expressões, com poucos textos simples e diretos.
-- **Sons:** dez sons. Oito entram na Fase 3, e o do ataque, junto do choque. A fase do som de colocar no mundo ainda não foi definida. O bipe padrão toca nas trocas de expressão sem som exclusivo. O intervalo mínimo entre repetições será definido na Fase 3, e os sons são do desenvolvedor.
+- **Sons:** dez sons. Nove entram na Fase 3, e o do ataque, junto do choque. O bipe padrão toca nas trocas de expressão sem som exclusivo. O intervalo mínimo entre repetições será definido na Fase 3, e os sons são do desenvolvedor.
 - **Modelo:** a geometria melhora já na Fase 2, com os detalhes das seis vistas, tudo fixo e sem mudar a hitbox. As animações e as expressões seguem na Fase 3.
 - **Robôs especializados (Fase 5, planejada):** um único Cubit, com um card por vez, age só em área marcada e nunca sai dela. Antena e Servidor mantêm os chunks carregados, de forma opcional. Sem chunk de destino, ele espera. O detalhe está em [`robos-especializados.md`](funcionalidades/robos-especializados.md).
 - **Limites:** nunca ataca o dono nem mobs pacíficos. Só ataca mobs neutros para defender o player.
@@ -81,6 +81,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 20:36 | Define a fase do som de colocar no mundo. |
 | Marcelo Fabiano | 2026-11-05 20:26 | Registra o som de colocar no mundo. |
 | Marcelo Fabiano | 2026-11-05 17:27 | Registra o som do ataque. |
 | Marcelo Fabiano | 2026-11-05 16:09 | Detalha o Induction Dock. |

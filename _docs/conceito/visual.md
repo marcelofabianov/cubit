@@ -26,7 +26,7 @@ São sete: normal, feliz, sono, alerta, surpreso, carregando e desligado. Os gat
 
 ## Sons
 
-São dez sons diferentes (perguntas 135, 148, 316 e 320). Oito entram na Fase 3, e o do ataque, junto do choque. A fase do som de colocar no mundo ainda não foi definida:
+São dez sons diferentes (perguntas 135, 148, 316, 320 e 322). Nove entram na Fase 3, e o do ataque, junto do choque:
 
 | # | Quando toca | Som | Arquivo |
 |---|---|---|---|
@@ -53,6 +53,7 @@ Os arquivos ficam em `assets/cubit/sounds/general_robot/`, em Ogg Vorbis, mono e
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 20:36 | Define a fase do som de colocar no mundo. |
 | Marcelo Fabiano | 2026-11-05 20:26 | Adiciona o som de colocar no mundo. |
 | Marcelo Fabiano | 2026-11-05 17:27 | Adiciona o som do ataque. |
 | Marcelo Fabiano | 2026-11-05 00:55 | Reduz o ícone do mod na tela de Mods. |
