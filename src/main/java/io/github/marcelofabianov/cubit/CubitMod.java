@@ -6,6 +6,7 @@ import io.github.marcelofabianov.cubit.registry.CubitCreativeTabs;
 import io.github.marcelofabianov.cubit.registry.CubitDataComponents;
 import io.github.marcelofabianov.cubit.registry.CubitEntities;
 import io.github.marcelofabianov.cubit.registry.CubitItems;
+import io.github.marcelofabianov.cubit.registry.CubitMenus;
 import io.github.marcelofabianov.cubit.registry.CubitRecipes;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
@@ -23,6 +24,7 @@ public final class CubitMod {
     CubitAttachments.register(modBus);
     CubitEntities.register(modBus);
     CubitItems.register(modBus);
+    CubitMenus.register(modBus);
     CubitRecipes.register(modBus);
     CubitCreativeTabs.register(modBus);
   }

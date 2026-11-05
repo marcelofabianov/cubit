@@ -91,8 +91,7 @@ public final class RobotRepairRecipe extends CustomRecipe {
     return stacksIn(input).stream()
         .filter(damagedRobot)
         .findFirst()
-        .map(stack -> stack.getOrDefault(CubitDataComponents.ROBOT_STATE.get(), UNSAVED_STATE))
-        .map(robotItem::repaired)
+        .map(damaged -> repair(robotItem, damaged))
         .orElseGet(() -> new ItemStack(result));
   }
 
@@ -109,6 +108,16 @@ public final class RobotRepairRecipe extends CustomRecipe {
   @Override
   public RecipeSerializer<RobotRepairRecipe> getSerializer() {
     return CubitRecipes.ROBOT_REPAIR.get();
+  }
+
+  private static ItemStack repair(RobotItem robotItem, ItemStack damaged) {
+    ItemStack repaired =
+        robotItem.repaired(
+            damaged.getOrDefault(CubitDataComponents.ROBOT_STATE.get(), UNSAVED_STATE));
+    repaired.set(
+        CubitDataComponents.ROBOT_INVENTORY.get(),
+        damaged.get(CubitDataComponents.ROBOT_INVENTORY.get()));
+    return repaired;
   }
 
   private static List<ItemStack> stacksIn(CraftingInput input) {
