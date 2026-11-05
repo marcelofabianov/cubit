@@ -46,6 +46,12 @@ public final class ConfigGameTests {
   private static final int STOP = 3;
   private static final String TELEPORT_KEY = "general.teleport_distance_blocks";
   private static final int TELEPORT = 20;
+  private static final String WATER_SEARCH_KEY = "general.water_search_radius_blocks";
+  private static final int WATER_SEARCH = 8;
+  private static final String WANDER_KEY = "general.burning_wander_radius_blocks";
+  private static final int WANDER = 5;
+  private static final String BURNING_SPEED_KEY = "general.burning_speed_multiplier";
+  private static final double BURNING_SPEED = 1.25;
   private static final String BASE_SPEED_KEY = "general.base_movement_speed";
   private static final double BASE_SPEED = 0.3;
   private static final String SPEED_KEY = "general_robot.base.speed_multiplier";
@@ -56,7 +62,9 @@ public final class ConfigGameTests {
           WAKE_CHARGE_KEY, WAKE_CHARGE,
           REPATH_KEY, REPATH,
           STOP_KEY, STOP,
-          TELEPORT_KEY, TELEPORT);
+          TELEPORT_KEY, TELEPORT,
+          WATER_SEARCH_KEY, WATER_SEARCH,
+          WANDER_KEY, WANDER);
   private static final Map<String, Integer> TIER_DEFAULTS =
       Map.of(
           BATTERY_KEY, BATTERY,
@@ -118,6 +126,7 @@ public final class ConfigGameTests {
     TIER_DEFAULTS.forEach(
         (key, value) -> helper.assertValueEqual(file.<Integer>get(key), value, WRONG_KEY));
     helper.assertValueEqual(file.<Double>get(BASE_SPEED_KEY), BASE_SPEED, WRONG_KEY);
+    helper.assertValueEqual(file.<Double>get(BURNING_SPEED_KEY), BURNING_SPEED, WRONG_KEY);
     helper.assertValueEqual(file.<Double>get(SPEED_KEY), SPEED, WRONG_KEY);
     helper.succeed();
   }

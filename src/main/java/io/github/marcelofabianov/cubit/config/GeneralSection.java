@@ -27,12 +27,26 @@ final class GeneralSection {
   private static final int TELEPORT_DISTANCE_MIN = STOP_DISTANCE_MAX + 1;
   private static final int TELEPORT_DISTANCE_MAX = 128;
 
+  private static final String BURNING_SPEED = "burning_speed_multiplier";
+  private static final double BURNING_SPEED_DEFAULT = 1.25;
+  private static final double BURNING_SPEED_MIN = 1;
+  private static final double BURNING_SPEED_MAX = 4;
+  private static final String WATER_SEARCH = "water_search_radius_blocks";
+  private static final int WATER_SEARCH_DEFAULT = 8;
+  private static final String BURNING_WANDER = "burning_wander_radius_blocks";
+  private static final int BURNING_WANDER_DEFAULT = 5;
+  private static final int BURNING_RADIUS_MIN = 1;
+  private static final int BURNING_RADIUS_MAX = 16;
+
   final ModConfigSpec.IntValue initialCharge;
   final ModConfigSpec.IntValue wakeCharge;
   final ModConfigSpec.DoubleValue baseSpeed;
   final ModConfigSpec.IntValue repathTicks;
   final ModConfigSpec.IntValue stopDistance;
   final ModConfigSpec.IntValue teleportDistance;
+  final ModConfigSpec.DoubleValue burningSpeed;
+  final ModConfigSpec.IntValue waterSearchRadius;
+  final ModConfigSpec.IntValue burningWanderRadius;
 
   GeneralSection(ModConfigSpec.Builder builder) {
     initialCharge =
@@ -52,5 +66,14 @@ final class GeneralSection {
             TELEPORT_DISTANCE_DEFAULT,
             TELEPORT_DISTANCE_MIN,
             TELEPORT_DISTANCE_MAX);
+    burningSpeed =
+        builder.defineInRange(
+            BURNING_SPEED, BURNING_SPEED_DEFAULT, BURNING_SPEED_MIN, BURNING_SPEED_MAX);
+    waterSearchRadius =
+        builder.defineInRange(
+            WATER_SEARCH, WATER_SEARCH_DEFAULT, BURNING_RADIUS_MIN, BURNING_RADIUS_MAX);
+    burningWanderRadius =
+        builder.defineInRange(
+            BURNING_WANDER, BURNING_WANDER_DEFAULT, BURNING_RADIUS_MIN, BURNING_RADIUS_MAX);
   }
 }
