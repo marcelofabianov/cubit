@@ -268,7 +268,9 @@ public final class ConsumptionGameTests {
 
   private static RobotEntity placeWith(GameTestHelper helper, Player owner, BlockPos floor) {
     ItemStack item = new ItemStack(CubitItems.GENERAL_ROBOT.get());
-    item.set(CubitDataComponents.ROBOT_STATE.get(), new RobotState(RobotTier.BASE, PLENTY, HEALTH));
+    item.set(
+        CubitDataComponents.ROBOT_STATE.get(),
+        new RobotState(RobotTier.BASE, PLENTY, HEALTH, false));
     return GameTestRobots.placeRobot(helper, owner, item, floor);
   }
 }

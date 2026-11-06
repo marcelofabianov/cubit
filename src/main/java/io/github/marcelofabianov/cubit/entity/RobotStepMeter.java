@@ -11,7 +11,7 @@ final class RobotStepMeter {
 
   private Vec3 last;
 
-  RobotActivity measure(RobotEntity robot, boolean fullInventory) {
+  RobotActivity measure(RobotEntity robot, boolean fullInventory, boolean lampLit) {
     Vec3 position = robot.position();
     boolean moved = last != null && last.distanceToSqr(position) > MIN_STEP_SQUARED;
     double rose = last == null ? 0 : position.y - last.y;
@@ -20,7 +20,7 @@ final class RobotStepMeter {
     boolean walking = ownRoute && moved;
     double climbed = walking && robot.onGround() ? Math.max(rose, 0) : 0;
     return new RobotActivity(
-        walking, fullInventory, robot.isInWater(), hasNegativeCondition(robot), climbed);
+        walking, fullInventory, robot.isInWater(), hasNegativeCondition(robot), climbed, lampLit);
   }
 
   /** Goes by the category of the effect, so the effects of other mods count without a list. */

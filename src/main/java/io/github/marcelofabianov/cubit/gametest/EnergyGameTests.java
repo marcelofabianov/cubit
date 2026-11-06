@@ -309,7 +309,9 @@ public final class EnergyGameTests {
 
   private static ItemStack itemWith(Energy energy) {
     ItemStack item = new ItemStack(CubitItems.GENERAL_ROBOT.get());
-    item.set(CubitDataComponents.ROBOT_STATE.get(), new RobotState(RobotTier.BASE, energy, HEALTH));
+    item.set(
+        CubitDataComponents.ROBOT_STATE.get(),
+        new RobotState(RobotTier.BASE, energy, HEALTH, false));
     return item;
   }
 

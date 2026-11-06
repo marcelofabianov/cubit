@@ -6,7 +6,8 @@ public record RobotActivity(
     boolean fullInventory,
     boolean inWater,
     boolean negativeCondition,
-    double climbedBlocks) {
+    double climbedBlocks,
+    boolean lampLit) {
   private static final String INVALID_HEIGHT_MESSAGE = "Climbed height must not be negative: ";
 
   public RobotActivity {

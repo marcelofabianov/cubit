@@ -13,7 +13,7 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 | `PowerRules` | Regras que mudam o estado por causa da energia |
 | `RobotType` | Identifica o Cubit nos IDs e no config. O robô é único, e é um dado, identificado por um ID |
 | `RobotTier` | Nível de evolução: Base, Advanced, Elite e Ultimate. A `key` é o nome usado no config e nos saves |
-| `RobotState` | O que o robô guarda ao virar item: tier, energia e vida. `damaged` e `repaired` dão o estado ao morrer e ao consertar |
+| `RobotState` | O que o robô guarda ao virar item: tier, energia, vida e a chave da lanterna. `damaged` e `repaired` dão o estado ao morrer e ao consertar |
 | `TierSpec` | Números de um tipo de robô num tier |
 | `TierCatalog` | Entrega o `TierSpec` de um tipo de robô num tier. O domínio define a interface, e o config a implementa |
 | `FollowAction` | O que o robô que segue faz: seguir, parar ou teleportar |
@@ -21,7 +21,7 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 | `FollowDecision` | Escolhe a `FollowAction` conforme o estado, a dimensão e a distância |
 | `DamagingBlockReaction` | Diz se o robô sai de cima de um bloco que fere |
 | `FollowingRobotPolicy` | Garante que só um robô siga o player |
-| `RobotActivity` | O que o robô faz no tick: andar, peso, água, altura subida e condição negativa. Quem chama informa, e o domínio decide o gasto |
+| `RobotActivity` | O que o robô faz no tick: andar, peso, água, altura subida, condição negativa e lanterna acesa. Quem chama informa, e o domínio decide o gasto |
 | `ConsumptionExtras` | Extras de energia de um `TierSpec`, por situação |
 | `RobotExpression` | O que a tela do rosto mostra |
 | `ExpressionRules` | Qual expressão vence e quando a troca toca o bipe |
@@ -39,6 +39,10 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 | `NoticeRules` | Em que estado o robô fala |
 | `NoticeRepeat` | Quanto um aviso ainda espera para poder se repetir |
 | `BatteryIndicator` | O que o indicador nas costas mostra: vazio, ou de 1 a 4 níveis, normal ou crítico |
+| `LightLevel` | Nível de luz do jogo, de 0 a 15 |
+| `LampPolicy` | Quando a lanterna acende e apaga, conforme a chave, o estado e a luz do ambiente |
+| `RobotLight` | A luz final que o robô dá ao mundo: a tela e a lanterna |
+| `LampPulse` | A força do halo das antenas em cada momento |
 | `PowerSound` | Som tocado uma vez, ao ligar ou desligar |
 | `ContinuousSound` | Som em loop enquanto a condição valer: esteira, curto elétrico e recarga |
 | `RobotSoundRules` | Diz qual som cada situação toca |
@@ -88,7 +92,11 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 - **Dano do dono:** só conta o que o jogo atribui a ele. O fogo de um isqueiro não tem autor, então fere (pergunta 119).
 - **Resgate no vazio:** a ordem é a posição segura, o dono online e o spawn do mundo. Sem destino possível, o item espera, porque nunca é destruído nem força um chunk a carregar (perguntas 147, 172 e 174).
 - **Consumo por deslocamento:** quem chama informa se o robô andou, e o domínio só gasta nesse caso (pergunta 257).
-- **Consumo por situação:** peso, água e subida só somam ao andar. A condição negativa soma mesmo parado, e só uma vez, ainda que haja várias. O robô inativo não gasta (perguntas 271 a 278).
+- **Consumo por situação:** peso, água e subida só somam ao andar. A condição negativa soma mesmo parado, e só uma vez, ainda que haja várias. A lanterna acesa também soma parado (pergunta 469). O robô inativo não gasta (perguntas 271 a 278).
+- **Dois limites na lanterna:** ela acende abaixo de um e apaga a partir do outro, para não piscar perto do limite (pergunta 470). `fitting` existe porque o config pode trazer os dois invertidos, e o construtor rejeita isso.
+- **Só a luz espera:** a chave e o estado valem na hora, e só a leitura do mundo roda em intervalos, para a lanterna nunca ficar acesa num robô desligado (pergunta 474).
+- **Luz junto da tela:** `RobotLight` dá zero com a tela apagada, pela mesma regra do brilho, `RobotExpression.glows` (perguntas 378 e 465).
+- **Lanterna na hibernação:** apagada e sem consumo, porque o robô está imóvel e carregando. A tela continua dando a claridade (perguntas 465 e 466).
 - **Subida em FE inteiro:** o extra é arredondado, porque energia é inteira (regra 13). Descer não devolve nada, porque criaria FE.
 - **Fila sem remoção:** um robô se informa a cada tick, então o que saiu do mundo perde o lugar sem ninguém precisar tirá-lo (perguntas 85 e 86).
 - **Cheio espera um momento:** o robô cheio fica cerca de 3 s antes de sair, para o player ver a tela completa (pergunta 312).

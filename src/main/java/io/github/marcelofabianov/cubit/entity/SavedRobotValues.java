@@ -24,6 +24,7 @@ final class SavedRobotValues {
   private static final String POWER_STATE_KEY = "PowerState";
   private static final String INVENTORY_KEY = "Inventory";
   private static final String ENERGY_SLOT_KEY = "EnergySlot";
+  private static final String LAMP_KEY = "LampEnabled";
   private static final String LAST_SAFE_POSITION_KEY = "LastSafePosition";
   private static final String NO_OWNER_MESSAGE = "Robot {} has no owner. Nobody can interact.";
   private static final String INVALID_TIER_MESSAGE = "Robot {} has an invalid tier: {}";
@@ -40,6 +41,7 @@ final class SavedRobotValues {
     tag.put(INVENTORY_KEY, inventory.save(robot.registryAccess()));
     tag.put(ENERGY_SLOT_KEY, inventory.energySlot().save(robot.registryAccess()));
     robot.docking().save(tag);
+    tag.putBoolean(LAMP_KEY, robot.state().lampOn());
     robot
         .lastSafePosition()
         .ifPresent(position -> tag.putLong(LAST_SAFE_POSITION_KEY, position.asLong()));
@@ -61,6 +63,11 @@ final class SavedRobotValues {
       CompoundTag tag, RobotInventory inventory, HolderLookup.Provider registries, int slots) {
     inventory.load(tag.getList(INVENTORY_KEY, Tag.TAG_COMPOUND), registries, slots);
     inventory.energySlot().load(tag.getCompound(ENERGY_SLOT_KEY), registries);
+  }
+
+  /** Without the key, the robot was saved before the lamp existed, so the lamp stays on. */
+  static boolean lampOn(CompoundTag tag) {
+    return !tag.contains(LAMP_KEY) || tag.getBoolean(LAMP_KEY);
   }
 
   static BlockPos lastSafePosition(CompoundTag tag) {

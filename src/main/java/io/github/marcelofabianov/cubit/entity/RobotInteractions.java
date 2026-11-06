@@ -31,6 +31,7 @@ final class RobotInteractions {
         robot.energySlot(),
         robot::batteryPercent,
         () -> HealthLevel.percent(robot.getHealth(), robot.getMaxHealth()),
+        robot.lampSwitch(),
         robot::canUseInventory);
     return InteractionResult.CONSUME;
   }

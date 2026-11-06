@@ -3,6 +3,7 @@ package io.github.marcelofabianov.cubit.datagen;
 import io.github.marcelofabianov.cubit.CubitMod;
 import io.github.marcelofabianov.cubit.domain.behavior.RobotNotice;
 import io.github.marcelofabianov.cubit.entity.RobotNotices;
+import io.github.marcelofabianov.cubit.menu.RobotMenu;
 import io.github.marcelofabianov.cubit.player.ResetCommand;
 import io.github.marcelofabianov.cubit.registry.CubitBlocks;
 import io.github.marcelofabianov.cubit.registry.CubitCreativeTabs;
@@ -28,6 +29,8 @@ final class CubitLanguageProvider extends LanguageProvider {
   private static final String POWER_OFF_SUBTITLE = "Cubit powers off";
   private static final String RECHARGING_SUBTITLE = "Cubit recharges";
   private static final String PLACED_SUBTITLE = "Cubit placed";
+  private static final String LAMP_ON = "Lamp: On";
+  private static final String LAMP_OFF = "Lamp: Off";
   private static final String RESET_CLEARED = "Follow link cleared.";
   private static final String RESET_NOBODY = "No Cubit is following you.";
   private static final String NOTICE_FORMAT = "Cubit: %s";
@@ -47,6 +50,8 @@ final class CubitLanguageProvider extends LanguageProvider {
     add(CubitItems.DAMAGED_GENERAL_ROBOT.get(), DAMAGED_ROBOT_NAME);
     add(CubitItems.TOOLBOX.get(), TOOLBOX_NAME);
     add(CubitBlocks.INDUCTION_DOCK.get(), DOCK_NAME);
+    add(RobotMenu.LAMP_ON_KEY, LAMP_ON);
+    add(RobotMenu.LAMP_OFF_KEY, LAMP_OFF);
     add(ResetCommand.CLEARED_KEY, RESET_CLEARED);
     add(ResetCommand.NOBODY_KEY, RESET_NOBODY);
     add(RobotNotices.FORMAT_KEY, NOTICE_FORMAT);

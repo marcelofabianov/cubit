@@ -3,6 +3,7 @@ package io.github.marcelofabianov.cubit.domain.tier;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import io.github.marcelofabianov.cubit.domain.behavior.LightLevel;
 import io.github.marcelofabianov.cubit.domain.energy.Battery;
 import io.github.marcelofabianov.cubit.domain.energy.ConsumptionExtras;
 import io.github.marcelofabianov.cubit.domain.energy.Energy;
@@ -15,8 +16,8 @@ class TierSpecConsumptionTest {
   private static final int ANY_SLOTS = 27;
   private static final int ANY_HEALTH = 25;
   private static final int ANY_RADIUS = 15;
-  private static final TierSpec BASE = spec(15, 5, 5, 25, 15);
-  private static final TierSpec ULTIMATE = spec(30, 10, 10, 250, 30);
+  private static final TierSpec BASE = spec(15, 5, 5, 25, 15, 1);
+  private static final TierSpec ULTIMATE = spec(30, 10, 10, 250, 30, 2);
   private static final double NONE = 0;
   private static final double ONE_BLOCK = 1;
   private static final double SLAB = 0.5;
@@ -31,8 +32,12 @@ class TierSpecConsumptionTest {
   private static final long ULTIMATE_EVERYTHING = 330;
   private static final long LESS_THAN_DRAIN = 10;
   private static final double BELOW_ZERO = -0.5;
+  private static final long BASE_LAMP = 1;
+  private static final long ULTIMATE_LAMP = 2;
+  private static final long WALK_WITH_LAMP = 16;
 
-  private static TierSpec spec(long walk, long full, long water, long negative, long climb) {
+  private static TierSpec spec(
+      long walk, long full, long water, long negative, long climb, long lamp) {
     return new TierSpec(
         new Energy(CAPACITY),
         new Energy(walk),
@@ -42,15 +47,20 @@ class TierSpecConsumptionTest {
         ANY_RADIUS,
         1,
         new ConsumptionExtras(
-            new Energy(full), new Energy(water), new Energy(negative), new Energy(climb)));
+            new Energy(full),
+            new Energy(water),
+            new Energy(negative),
+            new Energy(climb),
+            new Energy(lamp)),
+        new LightLevel(0));
   }
 
   private static RobotActivity walking(boolean full, boolean water, boolean negative, double up) {
-    return new RobotActivity(true, full, water, negative, up);
+    return new RobotActivity(true, full, water, negative, up, false);
   }
 
   private static RobotActivity still(boolean full, boolean water, boolean negative) {
-    return new RobotActivity(false, full, water, negative, NONE);
+    return new RobotActivity(false, full, water, negative, NONE, false);
   }
 
   private static void assertSpends(long expected, TierSpec spec, RobotActivity activity) {
@@ -111,7 +121,7 @@ class TierSpecConsumptionTest {
 
   @Test
   void climbingOnlyCostsWhenWalking() {
-    assertSpends(0, BASE, new RobotActivity(false, false, false, false, ONE_BLOCK));
+    assertSpends(0, BASE, new RobotActivity(false, false, false, false, ONE_BLOCK, false));
   }
 
   @Test
@@ -122,6 +132,33 @@ class TierSpecConsumptionTest {
   @Test
   void eachTierAppliesItsOwnNumbers() {
     assertSpends(ULTIMATE_EVERYTHING, ULTIMATE, walking(true, true, true, ONE_BLOCK));
+  }
+
+  @Test
+  void aLitLampCostsEvenStandingStill() {
+    assertSpends(BASE_LAMP, BASE, new RobotActivity(false, false, false, false, NONE, true));
+  }
+
+  @Test
+  void aLitLampAddsToWalking() {
+    assertSpends(WALK_WITH_LAMP, BASE, new RobotActivity(true, false, false, false, NONE, true));
+  }
+
+  @Test
+  void eachTierPaysItsOwnLamp() {
+    assertSpends(
+        ULTIMATE_LAMP, ULTIMATE, new RobotActivity(false, false, false, false, NONE, true));
+  }
+
+  @Test
+  void onlyAnActiveRobotPaysForTheLamp() {
+    Battery full = new Battery(new Energy(CAPACITY), new Energy(CAPACITY));
+    RobotActivity lit = new RobotActivity(false, false, false, false, NONE, true);
+    for (PowerState state : PowerState.values()) {
+      if (state != PowerState.ACTIVE) {
+        assertEquals(full, BASE.spendOneTick(full, state, lit));
+      }
+    }
   }
 
   @Test

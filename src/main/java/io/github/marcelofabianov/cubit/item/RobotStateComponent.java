@@ -20,6 +20,8 @@ public final class RobotStateComponent {
   private static final String TIER_FIELD = "tier";
   private static final String ENERGY_FIELD = "energy";
   private static final String HEALTH_FIELD = "health";
+  private static final String LAMP_FIELD = "lamp_enabled";
+  private static final boolean LAMP_DEFAULT = true;
   private static final String UNKNOWN_TIER_MESSAGE = "Unknown robot tier {}. Using the base tier.";
 
   private static final Codec<RobotTier> TIER_CODEC =
@@ -35,7 +37,10 @@ public final class RobotStateComponent {
               .group(
                   TIER_CODEC.fieldOf(TIER_FIELD).forGetter(RobotState::tier),
                   ENERGY_CODEC.fieldOf(ENERGY_FIELD).forGetter(RobotState::energy),
-                  HEALTH_CODEC.fieldOf(HEALTH_FIELD).forGetter(RobotState::health))
+                  HEALTH_CODEC.fieldOf(HEALTH_FIELD).forGetter(RobotState::health),
+                  Codec.BOOL
+                      .optionalFieldOf(LAMP_FIELD, LAMP_DEFAULT)
+                      .forGetter(RobotState::lampOn))
               .apply(instance, RobotState::new));
 
   public static final StreamCodec<ByteBuf, RobotState> STREAM_CODEC =

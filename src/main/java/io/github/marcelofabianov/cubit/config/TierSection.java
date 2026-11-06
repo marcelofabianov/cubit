@@ -1,5 +1,6 @@
 package io.github.marcelofabianov.cubit.config;
 
+import io.github.marcelofabianov.cubit.domain.behavior.LightLevel;
 import io.github.marcelofabianov.cubit.domain.energy.ConsumptionExtras;
 import io.github.marcelofabianov.cubit.domain.energy.Energy;
 import io.github.marcelofabianov.cubit.domain.tier.TierSpec;
@@ -13,6 +14,9 @@ final class TierSection {
   private static final String WATER_EXTRA = "water_extra_per_tick";
   private static final String NEGATIVE_CONDITION_EXTRA = "negative_condition_extra_per_tick";
   private static final String CLIMB_EXTRA = "climb_extra_per_block";
+  private static final String LAMP_CONSUMPTION = "lamp_consumption_per_tick";
+  private static final String LAMP_LIGHT = "lamp_light_level";
+  private static final int MIN_LIGHT = 0;
   private static final String RECHARGE = "recharge_per_tick";
   private static final String INVENTORY_SLOTS = "inventory_slots";
   private static final String MAX_HEALTH = "max_health";
@@ -33,6 +37,8 @@ final class TierSection {
   private final ModConfigSpec.IntValue waterExtra;
   private final ModConfigSpec.IntValue negativeConditionExtra;
   private final ModConfigSpec.IntValue climbExtra;
+  private final ModConfigSpec.IntValue lampConsumption;
+  private final ModConfigSpec.IntValue lampLight;
   private final ModConfigSpec.IntValue recharge;
   private final ModConfigSpec.IntValue inventorySlots;
   private final ModConfigSpec.IntValue maxHealth;
@@ -51,6 +57,8 @@ final class TierSection {
         energy(
             builder, NEGATIVE_CONDITION_EXTRA, extras.negativeConditionPerTick(), MIN_CONSUMPTION);
     climbExtra = energy(builder, CLIMB_EXTRA, extras.climbPerBlock(), MIN_CONSUMPTION);
+    lampConsumption = energy(builder, LAMP_CONSUMPTION, extras.lampPerTick(), MIN_CONSUMPTION);
+    lampLight = light(builder, LAMP_LIGHT, defaults.lampLight());
     recharge = energy(builder, RECHARGE, defaults.rechargePerTick(), MIN_POSITIVE);
     inventorySlots =
         builder.defineInRange(
@@ -81,7 +89,14 @@ final class TierSection {
             new Energy(fullInventoryExtra.get()),
             new Energy(waterExtra.get()),
             new Energy(negativeConditionExtra.get()),
-            new Energy(climbExtra.get())));
+            new Energy(climbExtra.get()),
+            new Energy(lampConsumption.get())),
+        new LightLevel(lampLight.get()));
+  }
+
+  private static ModConfigSpec.IntValue light(
+      ModConfigSpec.Builder builder, String key, LightLevel defaultValue) {
+    return builder.defineInRange(key, defaultValue.value(), MIN_LIGHT, LightLevel.MAX);
   }
 
   private static ModConfigSpec.IntValue energy(
