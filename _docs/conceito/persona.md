@@ -38,6 +38,9 @@ Só em algumas situações ele mostra um texto simples e direto, na barra acima 
 | Colocado no mundo, desligado | Tela apagada | Som de colocar |
 | Enquanto pega fogo | Mantém a atual | Curto elétrico |
 | Ao atacar | Mantém a atual | Som de ataque |
+| Ao levar dano | Triste, com lágrima, por cerca de 5 s | Curto elétrico |
+| Ao levar dano com pouca vida | Olhos em X, por cerca de 3 s, e depois a lágrima | Curto elétrico |
+| O dono leva dano, por perto, no robô que segue | Preocupado, por cerca de 3 s | Nenhum |
 | Inimigo por perto | Alerta | Bipe de alerta de inimigo |
 | Minério raro encontrado | Surpreso | Bipe de alerta de minério |
 
@@ -53,6 +56,11 @@ O Cubit **nunca ataca o próprio dono nem mobs pacíficos**, em nenhum modo de d
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 00:28 | Define o tempo dos olhos em X. |
+| Marcelo Fabiano | 2026-11-06 00:22 | Adiciona a reação ao dano do dono. |
+| Marcelo Fabiano | 2026-11-06 00:17 | Aumenta o tempo da expressão triste. |
+| Marcelo Fabiano | 2026-11-06 00:12 | Define o som ao levar dano. |
+| Marcelo Fabiano | 2026-11-06 00:10 | Adiciona as reações ao dano e à vida baixa. |
 | Marcelo Fabiano | 2026-11-05 21:36 | Define a expressão ao atacar. |
 | Marcelo Fabiano | 2026-11-05 21:30 | Define a reação ao ser colocado no mundo. |
 | Marcelo Fabiano | 2026-11-05 21:02 | Cita os sons de colocar no mundo e de atacar. |

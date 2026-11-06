@@ -10,7 +10,7 @@ Números por tier: [`tiers.md`](../tiers.md#coleta-e-inventário) e [slots exclu
 ## Tela
 
 - **Quem abre:** só o dono, com o robô ativo ou em hibernação e por perto. O servidor confere os três, ao abrir e enquanto a tela estiver aberta. Por perto é o alcance do player mais uma margem de 4 blocos, a mesma dos baús do jogo.
-- **Visual:** o do baú do jogo, com as linhas que o número de slots pedir. O slot de energia e a barra de bateria ficam num painel ao lado. A tela própria, com visual melhor e tooltips no painel, entra na Fase 3.
+- **Visual:** o do baú do jogo, com as linhas que o número de slots pedir. O slot de energia, a barra de bateria, verde, e a barra de vida, vermelha, ficam num painel ao lado. A tela própria entra na Fase 3, com janela personalizada, textura de metal de robô e tooltips no painel, sem o padrão do Minecraft (pergunta 371).
 - **O que não entra:** o Cubit, o `Damaged Cubit` e os itens que o jogo não deixa entrar em containers, como shulker boxes.
 
 ## Conteúdo preservado
@@ -42,6 +42,8 @@ São quatro: tochas, fornalha, carregador de ferramentas e energia. Na Fase 5, o
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 00:20 | Adiciona a barra de vida. |
+| Marcelo Fabiano | 2026-11-05 23:49 | Detalha a tela própria. |
 | Marcelo Fabiano | 2026-11-05 21:30 | Define a margem para abrir a tela. |
 | Marcelo Fabiano | 2026-11-05 21:02 | Corrige quem abre a tela e o lugar do slot de energia, e cita o slot do card. |
 | Marcelo Fabiano | 2026-11-05 13:30 | Deixa o visual e os tooltips do painel para a Fase 3. |

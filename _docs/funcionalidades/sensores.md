@@ -26,12 +26,14 @@ Os detalhes dos sons estão em [`visual.md`](../conceito/visual.md#sons), e os t
 
 - Ilumina o ambiente ao redor.
 - Usa a API do **LambDynamicLights**, dependência obrigatória, para o robô emitir luz, em vez de colocar blocos de luz invisíveis.
+- **Claridade da tela:** com a tela acesa, o robô emite uma luz fraca, sem gastar energia, que apaga com ela (pergunta 378).
 - O nível de luz do Minecraft vai de 0 a 15, por isso os tiers mais altos evoluem com um feixe à frente. A viabilidade do feixe será confirmada na Fase 3 (pergunta 17).
 
 ## Histórico de modificações
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 00:00 | Adiciona a claridade da tela. |
 | Marcelo Fabiano | 2026-11-05 21:02 | Avisa que o feixe depende da Fase 3 e tira a citação de um mod específico. |
 | Marcelo Fabiano | 2026-11-05 12:21 | Marca o LambDynamicLights como dependência obrigatória. |
 | Marcelo Fabiano | 2026-11-05 00:12 | Usa o termo mobs hostis. |

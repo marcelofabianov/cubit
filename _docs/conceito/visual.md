@@ -22,7 +22,17 @@ As imagens individuais estão em [`_docs/imagens/conceito/`](../imagens/conceito
 
 ## Expressões
 
-São sete: normal, feliz, sono, alerta, surpreso, carregando e desligado. Os gatilhos estão em [`persona.md`](persona.md#reações).
+São dez: normal, feliz, sono, alerta, surpreso, carregando, desligado, triste, quase morto e preocupado. Os gatilhos estão em [`persona.md`](persona.md#reações), e a lista, com as imagens, em [`expressoes.md`](expressoes.md).
+
+- **Desenho:** cada uma é uma camada só para a tela, em `textures/entity/general_robot_screen/`, com 8× a resolução do corpo, ou 144×88 pixels na tela, recortada das imagens de conceito. O corpo não muda.
+- **Brilho:** a tela brilha no escuro. Desligada, não brilha, e as pontas das antenas ficam cinza.
+- **Qual vence:** tela apagada, carregando, quase morto, triste, preocupado, alerta, surpreso, sono, feliz e normal.
+- **Triste e quase morto:** triste dura o tempo de [`tiers.md`](../tiers.md#valores-gerais) depois de um dano, e quase morto, com a vida no limite da mesma tabela, dura menos, e a lágrima segue até o fim do tempo dela. Ao levar dano, toca o curto elétrico, no lugar do som padrão do jogo e sem bipe. Em chamas, o loop já toca, e os golpes do fogo não o repetem.
+- **Feliz:** dura o tempo de [`tiers.md`](../tiers.md#valores-gerais), depois de colocar o robô ou abrir o inventário.
+- **Bipe:** toca ao trocar para normal, feliz ou sono, exceto ao ligar, ao ser colocado e ao carregar o mundo.
+- **Piscada:** na expressão normal, fica 5 s de olhos abertos e pisca em cerca de 0,25 s, sem bipe. Cada robô começa num momento diferente.
+- **Olhar:** na expressão normal, os olhos sobem cerca de 1/6 da tela ao subir e descem ao descer, um ou mais blocos, e ficam assim por cerca de 0,5 s depois do movimento.
+- **Em uso:** normal, feliz, sono, carregando, desligado, triste, quase morto e preocupado. Alerta e surpreso entram com os scanners.
 
 ## Sons
 
@@ -51,6 +61,13 @@ Tocam todos, menos o bipe padrão, que entra com as expressões, os alertas, que
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 00:28 | Define o tempo dos olhos em X. |
+| Marcelo Fabiano | 2026-11-06 00:22 | Adiciona a expressão de preocupado. |
+| Marcelo Fabiano | 2026-11-06 00:12 | Define o som ao levar dano. |
+| Marcelo Fabiano | 2026-11-06 00:10 | Adiciona as expressões triste e quase morto. |
+| Marcelo Fabiano | 2026-11-05 23:56 | Adiciona a piscada e o olhar. |
+| Marcelo Fabiano | 2026-11-05 23:41 | Aponta para a lista das expressões. |
+| Marcelo Fabiano | 2026-11-05 23:36 | Define como as expressões são desenhadas e qual vence. |
 | Marcelo Fabiano | 2026-11-05 23:16 | Adiciona o som de modo agressivo. |
 | Marcelo Fabiano | 2026-11-05 22:47 | Passa a lista dos sons para `sons.md`. |
 | Marcelo Fabiano | 2026-11-05 22:39 | Define quando cada som toca e quem ouve. |

@@ -36,7 +36,7 @@ O que está pronto e o que falta em cada fase do projeto. As fases estão no [`R
 
 ## Fase 3: Sentidos (próxima)
 
-A ordem é a da numeração (pergunta 356). Sons, intervalo, expressões, colar, textos e feixe entram em partes, e um item só é marcado quando estiver completo na Fase 3.
+A ordem é a da numeração (perguntas 356 e 365). Sons, intervalo, expressões, colar, textos e feixe entram em partes, e um item só é marcado quando estiver completo na Fase 3.
 
 ### Já existe
 
@@ -46,18 +46,18 @@ A ordem é a da numeração (pergunta 356). Sons, intervalo, expressões, colar,
 ### Falta
 
 3. [ ] `sounds.json` e os nove sons tocando (o de ataque fica para o choque)
-4. [ ] Definir o intervalo mínimo entre repetições (pergunta 149)
-5. [ ] Sete expressões na tela e as reações da persona
-6. [ ] Animações e modelo final
-7. [ ] Cor do colar e indicador de bateria variando
+4. [ ] Dez expressões na tela e as reações da persona
+5. [ ] Animações e modelo final
+6. [ ] Cor do colar e indicador de bateria variando
+7. [ ] Definir o intervalo mínimo entre repetições (pergunta 149), junto dos textos
 8. [ ] Textos curtos na barra acima da hotbar
 9. [ ] Painel solar
-10. [ ] Lanterna, com o LambDynamicLights entrando no build
+10. [ ] Lanterna, com o LambDynamicLights entrando no build, e a claridade fraca da tela (pergunta 378)
 11. [ ] Confirmar a viabilidade do feixe (pergunta 17)
 12. [ ] Scanner de minérios e scanner de mobs, com os alertas
 13. [ ] Nome personalizado e cor da carcaça
 14. [ ] Jade
-15. [ ] Tela própria do inventário, com visual melhor e tooltips
+15. [ ] Telas próprias do Cubit e do Induction Dock, com janelas personalizadas, textura de metal de robô e tooltips, sem o padrão do Minecraft (pergunta 371)
 
 ## Primeira versão: `0.1.0`
 

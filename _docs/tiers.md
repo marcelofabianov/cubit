@@ -74,6 +74,12 @@ Valem para todos os tiers e ficam no config.
 | Distância para teleportar até o player | ~20 blocos |
 | Religar | 5% de bateria |
 | Bateria crítica, com expressão de sono | 10% |
+| Tempo com a expressão feliz | ~3 s |
+| Tempo com a expressão triste, depois de um dano | ~5 s |
+| Vida para a expressão de quase morto | 10% |
+| Tempo com a expressão de quase morto, depois de um dano | ~3 s |
+| Tempo com a expressão de preocupado | ~3 s |
+| Distância para ficar preocupado com o dono | 16 blocos |
 | Estoque do Induction Dock | 100 mil FE |
 | Entrada do Induction Dock | 5.000 FE/t |
 | Tempo sem avançar antes de teleportar ao Dock | 5 s |
@@ -167,6 +173,11 @@ Planejado para a Fase 5. O tier Base não aceita cards.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 00:28 | Adiciona o tempo dos olhos em X. |
+| Marcelo Fabiano | 2026-11-06 00:22 | Adiciona os valores da expressão de preocupado. |
+| Marcelo Fabiano | 2026-11-06 00:17 | Aumenta o tempo da expressão triste. |
+| Marcelo Fabiano | 2026-11-06 00:10 | Adiciona os valores das expressões triste e quase morto. |
+| Marcelo Fabiano | 2026-11-05 23:36 | Adiciona o tempo com a expressão feliz. |
 | Marcelo Fabiano | 2026-11-05 21:34 | Adiciona a altura máxima da área, antecipada para a Fase 4. |
 | Marcelo Fabiano | 2026-11-05 21:02 | Avisa da viabilidade do feixe, adiciona o intervalo dos alertas e amplia o nome do alcance. |
 | Marcelo Fabiano | 2026-11-05 17:15 | Adiciona o tempo com a tela completa. |
