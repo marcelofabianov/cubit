@@ -36,7 +36,7 @@ O que está pronto e o que falta em cada fase do projeto. As fases estão no [`R
 
 ## Fase 3: Sentidos (atual)
 
-A ordem é a da numeração (perguntas 356 e 365). Sons, intervalo, expressões, colar, textos e feixe entram em partes, e um item só é marcado quando estiver completo na Fase 3.
+A ordem é a da numeração (perguntas 356 e 365). Sons, intervalo, expressões, colar e textos entram em partes, e um item só é marcado quando estiver completo na Fase 3.
 
 ### Já existe
 
@@ -57,7 +57,7 @@ A ordem é a da numeração (perguntas 356 e 365). Sons, intervalo, expressões,
 12. [ ] Textos curtos na barra acima da hotbar
 13. [ ] Painel solar, com a chave dele e a chave geral (perguntas 424 e 425)
 14. [ ] Lanterna, com a chave dela, o LambDynamicLights entrando no build e a claridade fraca da tela (perguntas 378 e 424)
-15. [ ] Confirmar a viabilidade do feixe (pergunta 17)
+15. [x] Feixe: saiu da Fase 3 e foi para o Minerador, na Fase 5 (pergunta 463)
 16. [ ] Scanner de minérios e scanner de mobs, com a chave deles e os alertas
 17. [ ] Nome personalizado e cor da carcaça
 18. [ ] Jade
@@ -91,7 +91,7 @@ Sai só ao terminar todos os itens da Fase 3 (pergunta 337).
 6. [ ] Power Bank, inclusive no Dock e na grade de craft (issue #51)
 7. [ ] Ímã e coleta, com as chaves deles e o filtro em lista branca e lista negra (perguntas 422 a 424)
 8. [ ] Slots de tochas, fornalha e carregador de ferramentas
-9. [ ] Definir o custo de lanterna, ímã, scanners e tochas
+9. [ ] Definir o custo de ímã, scanners e tochas
 10. [ ] Choque e modos de defesa
 11. [ ] Cubit Remote: comandos, localizar e marcar área
 12. [ ] Modo área, com a altura máxima a definir
@@ -112,7 +112,7 @@ Sai só ao terminar todos os itens da Fase 3 (pergunta 337).
 4. [ ] Organizador, com o modo de abastecer, e fechar os detalhes dele (pergunta 208)
 5. [ ] Cozinheiro
 6. [ ] Defensor
-7. [ ] Minerador, com os modos definidos na entrega
+7. [ ] Minerador, com os modos definidos na entrega e a lanterna de cabeça com feixe (pergunta 463)
 8. [ ] Construtor
 9. [ ] Pecuarista
 10. [ ] Antena e carregamento de chunks

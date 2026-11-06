@@ -23,6 +23,7 @@ Tudo que aparece no mod fica em inglês. Os documentos podem usar o termo em por
 | Card de Aprendizado de Máquina | Machine Learning card |
 | Aprendizado de Máquina: Minerador, Fazendeiro, Pescador, Pecuarista, Defensor, Organizador, Cozinheiro e Construtor | Machine Learning: Miner, Farmer, Fisher, Rancher, Defender, Organizer, Cook e Builder |
 | Generalista | Generalist |
+| Lanterna | Lamp |
 | Pacífico | Peaceful |
 | Contra-atacar | Retaliate |
 | Agressivo | Aggressive |
@@ -38,6 +39,9 @@ Os IDs estão em [`itens.md`](itens.md).
 - **Robô que segue:** o único Cubit do player que o acompanha naquele momento.
 - **Vínculo:** o registro, nos dados do player, de qual Cubit o segue.
 - **Condição negativa:** fogo, lava, bloco que fere ou efeito nocivo, que custam energia extra.
+- **Lanterna:** a luz do Cubit no escuro, que gasta energia enquanto acesa e acende as pontas das antenas.
+- **Claridade da tela:** a luz fraca que a tela acesa emite, sem gastar energia.
+- **Chave:** o que o player liga ou desliga para um recurso do Cubit.
 - **Bloco que fere:** bloco que o jogo classifica como perigoso na rota, como magma e cacto.
 - **Ativo:** Cubit ligado, fora da base.
 - **Inativo:** Cubit desligado.
@@ -51,6 +55,7 @@ Os IDs estão em [`itens.md`](itens.md).
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 13:34 | Adiciona a lanterna, a claridade da tela e a chave. |
 | Marcelo Fabiano | 2026-11-06 11:10 | Adiciona trabalho, aba Trabalho e o robô único. |
 | Marcelo Fabiano | 2026-11-06 11:10 | Troca 'especialidade' por 'trabalho' e 'card de especialidade' por 'card de Aprendizado de Máquina'. |
 | Marcelo Fabiano | 2026-11-05 21:02 | Adiciona vínculo, condição negativa, bloco que fere e o upgrade do storage, e cita o slot do card. |

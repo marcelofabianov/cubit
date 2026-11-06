@@ -12,7 +12,7 @@ As imagens individuais estão em [`_docs/imagens/conceito/`](../imagens/conceito
 - O conceito atual é a base. O modelo final tem **design próprio**, para o mod poder ser publicado. A geometria melhora já na Fase 2, mais próxima das imagens de conceito, e as animações e as expressões seguem na Fase 3.
 - Modelo e animações com **GeckoLib**, dependência obrigatória: andar, virar o corpo, mover os braços e trocar a expressão da tela.
 - **Modelo na Fase 2:** traz os detalhes das seis vistas e o ícone do item, com tudo fixo: colar cinza, olhos normais e bateria sem variação. A textura tem 128×128, com 2 pixels por unidade, e a hitbox não muda, então braços e antenas passam um pouco dela.
-- **Modelo final:** mantém a geometria e a textura do corpo, e acrescenta só os ossos que as animações precisarem. A exceção é o tronco central, a coluna entre as esteiras e a carcaça, com 2 unidades de altura, em vez de 1,5. A carcaça sobe junto, sem mudar de tamanho.
+- **Modelo final:** mantém a geometria e a textura do corpo, e acrescenta só os ossos que as animações precisarem. As exceções são o tronco central, a coluna entre as esteiras e a carcaça, com 2 unidades de altura, em vez de 1,5, e a haste das antenas, com 2 unidades, em vez de 2,5. A carcaça sobe junto, sem mudar de tamanho, e a ponta da antena desce junto com a haste. Os braços ficam abertos cerca de 5°, a partir do ombro, para não parecerem colados na carcaça.
 - **Animações:** andar, olhar para o dono, parado, e desligado e hibernando. Como o modelo não tem cabeça separada, olhar gira o corpo sobre o pescoço, com as esteiras paradas. O robô olha só para o dono, ligado e com ele por perto, inclusive parado. Tempos e poses ficam no arquivo de animação, e o resto em constantes.
 - **Esteiras:** textura por quadros, escolhidos pela distância andada, sem mudar a geometria.
 - **Braços ao levar dano:** ficam erguidos por cerca de 2 s depois do último dano, com a expressão triste ou de olhos em X, numa constante, e o corpo e as antenas continuam balançando. A lágrima segue até o fim do tempo dela.
@@ -28,6 +28,10 @@ As imagens individuais estão em [`_docs/imagens/conceito/`](../imagens/conceito
 - **Corpo:** tela escura no rosto, olhos ciano e antenas com ponta laranja.
 - **Detalhes:** painel solar em cima, indicador de bateria nas costas e bobina de indução embaixo. O painel carrega a bateria, conforme [`energia.md`](../funcionalidades/energia.md#painel-solar).
 - **Desligado:** a tela apaga e as pontas das antenas ficam cinza.
+- **Lanterna acesa:** as pontas das antenas acendem em branco quente, numa camada transparente, em `textures/entity/general_robot_antenna/`, e a luz real ilumina os blocos em volta.
+- **Halo:** com a lanterna acesa, cada ponta tem um halo suave, sempre virado para a câmera e sem borda definida, que cresce e diminui devagar. O disco rígido da prancha não entra no modelo, porque pareceria um objeto sólido (perguntas 464 e 477).
+- **Brilho dos olhos:** com a lanterna acesa, um brilho suave aparece em volta do que acende na tela, com a cor de cada expressão, em `textures/entity/general_robot_screen_glow/`. Ele não cobre os olhos, para não estourar a cor deles, e acompanha a piscada e o olhar. A luz real no chão não muda de cor (perguntas 478 e 479).
+- **Fora da lanterna:** a luz âmbar no alerta e a luz fraca com bateria baixa, também da prancha, não foram decididas.
 
 ## Expressões
 
@@ -71,6 +75,10 @@ Tocam todos, menos os alertas, que entram com os scanners, e o ataque e o modo a
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 14:15 | Abre os braços. |
+| Marcelo Fabiano | 2026-11-06 14:05 | Encurta a haste das antenas. |
+| Marcelo Fabiano | 2026-11-06 13:57 | Adiciona o halo e o brilho dos olhos. |
+| Marcelo Fabiano | 2026-11-06 13:34 | Adiciona as pontas acesas com a lanterna. |
 | Marcelo Fabiano | 2026-11-06 11:13 | Corrige a cabeça, que o modelo não tem separada. |
 | Marcelo Fabiano | 2026-11-06 10:36 | Reduz o tempo dos braços erguidos. |
 | Marcelo Fabiano | 2026-11-06 10:06 | Define como os textos são desenhados. |

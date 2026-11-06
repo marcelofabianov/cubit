@@ -34,17 +34,18 @@
 | 182 | Como essa receita se encaixa no uso do Cubit zerado? | O item com a bateria zerada e com vida pode ser colocado, mas fica desligado e com interação limitada. O player o recolhe e combina com a Power Bank, e ele recebe o suficiente para religar, se a Power Bank tiver a quantidade necessária. Detalha a pergunta 181 |
 | 183 | Um Cubit com a bateria abaixo da carga de religar, mas sem estar zerada, pode usar essa receita? | Sim, recebendo só o que falta para religar. Amplia as perguntas 180 e 181 |
 | 340 | O que um Cubit sem card faz numa área? | Coleta os itens do chão dentro da área, respeitando o filtro de coleta, e descarrega no baú marcado. Complementa a [pergunta 193](fase-5-trabalhos.md) |
-| 341 | O que significa "mandar parar" no controle? | O Cubit continua ativo e com o vínculo, fica parado e não teleporta, e esse estado é salvo. "Voltar a seguir" retoma. Parado, ele não gasta energia. Como mantém o vínculo, a regra da [pergunta 326](fase-2-versao-minima.md) não o desliga |
+| 341 | O que significa "mandar parar" no controle? | O Cubit continua ativo e com o vínculo, fica parado e não teleporta, e esse estado é salvo. "Voltar a seguir" retoma. Parado, ele não gasta energia, exceto com a lanterna acesa, pela [pergunta 469](fase-3-sentidos.md). Como mantém o vínculo, a regra da [pergunta 326](fase-2-versao-minima.md) não o desliga |
 | 342 | A área da Fase 4 é em 2D ou em 3D? | Em 3D, por dois cantos. Os limites de `tiers.md`, como 16×16, valem para a base, e a altura máxima fica no config. Assim, o formato salvo não precisa de migração na Fase 5. Antecipa a [pergunta 194](fase-5-trabalhos.md) |
 | 362 | Quando toca o som de modo agressivo? | Ao trocar para o modo agressivo, e só nesse momento. O desenvolvedor forneceu `cubit_modo_agresivo.wav`, convertido da mesma forma que os demais, para `aggressive_mode.ogg`. Passam a ser onze sons. Entra junto dos modos de defesa. Amplia a [pergunta 135](fase-3-sentidos.md) |
 | 347 | Qual é a expressão do Cubit ao atacar? | Mantém a atual, sem troca, como ao pegar fogo. Com um inimigo perto, em geral ela já será a de alerta. Segue a [pergunta 158](fase-3-sentidos.md) |
 | 422 | O filtro de coleta coleta só os itens definidos, ou também tem outro modo? | Tem os dois modos: lista branca, que coleta só os itens definidos, e lista negra, que coleta tudo menos os itens definidos. Detalhes na pendência 423 |
-| 343 | O que o item guarda das configurações? | Modo de defesa, filtros e os slots ativados ou desativados. Perde a área, os baús marcados e a seleção no controle, porque dependem do lugar onde o robô estava. Detalha a [pergunta 254](fase-5-trabalhos.md) |
+| 343 | O que o item guarda das configurações? | Modo de defesa, filtros e os slots ativados ou desativados. Perde a área, os baús marcados e a seleção no controle, porque dependem do lugar onde o robô estava. Detalha a [pergunta 254](fase-5-trabalhos.md). A [pergunta 468](fase-3-sentidos.md) acrescenta a chave da lanterna |
 
 ## Histórico de modificações
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 13:34 | Aponta as respostas 341 e 343 para as 469 e 468. |
 | Marcelo Fabiano | 2026-11-06 11:10 | Troca 'especialidade' por 'trabalho' e 'card de especialidade' por 'card de Aprendizado de Máquina'. |
 | Marcelo Fabiano | 2026-11-06 09:32 | Registra a resposta 422 e a pendência 423. |
 | Marcelo Fabiano | 2026-11-05 23:16 | Registra a resposta 362. |

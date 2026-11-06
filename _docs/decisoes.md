@@ -69,7 +69,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Painel solar:** só funciona com o Cubit ativo, de dia em todos os tiers e à noite só em Elite e Ultimate. Coberto por um bloco, não carrega. O clima não tem efeito, e no Nether e no End não funciona. Fica abaixo do consumo.
 - **Induction Dock:** é a base de recarga, com torre e placa em U, 2 blocos de altura e dono, recebe energia por cabos ou redstone, sem saída, e tem um único slot, que também recarrega a Power Bank. A energia fica no item ao quebrar, e só o dono o quebra, além de um operador no modo criativo. Sem conseguir chegar, o Cubit teleporta.
 - **Recarga pela grade de craft:** o item do Cubit abaixo da carga de religar, combinado com uma Power Bank, recebe só o que falta para religar, na Fase 4.
-- **Consumo:** gasta ao andar de verdade, sem gastar parado nem empurrado. A exceção é a condição negativa, que gasta mesmo parado.
+- **Consumo:** gasta ao andar de verdade, sem gastar parado nem empurrado. As exceções são a condição negativa e a lanterna acesa, que gastam mesmo parado.
 - **Parada do robô:** uma navegação própria cancela o recálculo de rota pendente, para o robô parado não voltar a andar.
 - **Painel do slot de energia:** visual melhor e tooltips ficam para a tela própria da Fase 3.
 - **Barras de bateria:** mostram ao menos um risco enquanto houver carga e só ficam vazias com 0 FE.
@@ -77,7 +77,10 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Documentação para o player (fase a definir):** uma wiki em site estático no GitHub e um livro entregue ao criar o mundo, que aponta para ela.
 - **Consumo por situação:** inventário cheio, água, subida e condições negativas somam um extra ao gasto. Com o inventário cheio, a velocidade cai. Os números estão em [`tiers.md`](tiers.md#consumo-por-atividade).
 - **Slot de energia do Cubit:** existe em todos os tiers e aceita uma Power Bank ou redstone por vez. A redstone entra na Fase 2, e a Power Bank na Fase 4.
-- **LambDynamicLights:** obrigatório, e entra no build com a lanterna, na Fase 3.
+- **LambDynamicLights:** obrigatório no cliente, e um servidor dedicado abre sem ele.
+- **Lanterna:** luz real, de nível 10, 12, 14 e 15 por tier, com 1, 1, 2 e 2 FE/t enquanto acesa, mesmo parado. Acende abaixo da luz 8 e apaga a partir da 10, lendo blocos e céu. Apagada e sem consumo hibernando ou desligada. A chave `Lamp` fica no painel do inventário, começa ligada e é guardada no item. As pontas das antenas acendem com um halo suave que pulsa, e os olhos ganham um brilho em volta, na cor de cada expressão.
+- **Claridade da tela:** luz 4, sem gastar energia, enquanto a tela brilha, inclusive hibernando.
+- **Feixe:** é da lanterna de cabeça do Minerador, na Fase 5.
 - **Ao colocar no mundo:** toca só o som de colocar. O de ligar fica para a passagem de desligado a ligado.
 - **Margem das telas:** os 4 blocos ficam em constante, fora do config, porque seguem o padrão do jogo.
 - **Ao atacar:** mantém a expressão atual, com o som de ataque.
@@ -106,6 +109,8 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 13:57 | Registra o halo e o brilho dos olhos. |
+| Marcelo Fabiano | 2026-11-06 13:34 | Registra a lanterna, a claridade da tela e o feixe. |
 | Marcelo Fabiano | 2026-11-06 11:10 | Corrige o robô único, os braços, o intervalo e a Fase 2. |
 | Marcelo Fabiano | 2026-11-06 11:10 | Troca 'especialidade' por 'trabalho' e 'card de especialidade' por 'card de Aprendizado de Máquina'. |
 | Marcelo Fabiano | 2026-11-06 10:06 | Registra a bateria crítica e os textos. |

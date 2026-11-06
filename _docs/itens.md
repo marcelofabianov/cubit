@@ -70,7 +70,7 @@ Na mesa de craft, em forma de L (pergunta 336). O desenho espelhado também vale
 ## Virar item
 
 - O player pode recolher o robô a qualquer momento, em qualquer estado.
-- O item mantém bateria, vida, inventário, nome, cor, tier e configurações, nos *data components* do 1.21.1. As configurações são o modo de defesa, os filtros e os slots ativados ou desativados. A área, os baús marcados e a seleção no controle se perdem ao recolher.
+- O item mantém bateria, vida, inventário, nome, cor, tier e configurações, nos *data components* do 1.21.1. As configurações são o modo de defesa, os filtros, os slots ativados ou desativados e a chave da lanterna. A área, os baús marcados e a seleção no controle se perdem ao recolher.
 - O item empilha em 1 e mostra a bateria numa barra.
 - O item não entra no inventário do robô nem em shulker boxes.
 - O dono é quem coloca o item. O robô ganha um UUID novo a cada colocação.
@@ -122,7 +122,7 @@ Estes nomes não mudam sem migração (regra 18 do `AGENTS.md`).
 
 | Onde | Nome | Conteúdo |
 |---|---|---|
-| Componente do item | `cubit:robot_state` | `tier`, `energy` e `health` |
+| Componente do item | `cubit:robot_state` | `tier`, `energy`, `health` e `lamp_enabled`, este opcional, com o padrão ligado, também no item danificado |
 | Componente do item | `cubit:energy_slot` | Item do slot de energia e reserva de FE, também no item danificado |
 | Componente do item do Dock | `cubit:dock_energy` | Energia do estoque |
 | Componente do item | `cubit:robot_inventory` | Conteúdo do inventário, também no item danificado |
@@ -134,6 +134,7 @@ Estes nomes não mudam sem migração (regra 18 do `AGENTS.md`).
 | NBT do bloco do Dock | `Owner`, `Energy` e `Slot` | Dono, estoque e item do slot |
 | Estado do bloco do Dock | `facing`, `half` e `status` | Direção, parte de baixo ou de cima e estado da tela: `off`, `idle`, `charging`, `complete` ou `no_energy` |
 | NBT da entidade na base | `DockPosition` | Posição do Dock em que hiberna |
+| NBT da entidade | `LampEnabled` | Chave da lanterna. Sem a chave no save, vale ligada |
 | Dados do player | `cubit:following_robot` | `robot`: o UUID do robô que segue, ou nada |
 
 O estado salvo é validado ao entrar no jogo, sem derrubá-lo (regra 17 do `AGENTS.md`):
@@ -150,6 +151,7 @@ O estado salvo é validado ao entrar no jogo, sem derrubá-lo (regra 17 do `AGEN
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 13:34 | Adiciona o contrato da chave da lanterna. |
 | Marcelo Fabiano | 2026-11-06 11:10 | Atualiza os nomes e os IDs previstos dos cards e tira o tipo de robô. |
 | Marcelo Fabiano | 2026-11-06 11:10 | Troca 'especialidade' por 'trabalho' e 'card de especialidade' por 'card de Aprendizado de Máquina'. |
 | Marcelo Fabiano | 2026-11-05 21:53 | Define quando as receitas aparecem no livro. |

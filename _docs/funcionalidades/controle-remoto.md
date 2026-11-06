@@ -9,11 +9,12 @@ O controle atende todos os Cubits do player, desde que estejam ligados. Mirando 
 - ligar e desligar;
 - mandar parar e voltar a seguir;
 - trocar o modo de defesa;
-- ativar ou desativar tochas, fornalha e carregador de ferramentas.
+- ativar ou desativar tochas, fornalha e carregador de ferramentas;
+- ligar e desligar a chave da lanterna.
 
 O controle é o mesmo em todos os tiers. As opções bloqueadas aparecem desabilitadas.
 
-Parado pelo controle, o Cubit continua ativo e com o vínculo, não anda nem teleporta, e esse estado é salvo. Voltar a seguir retoma. Parado, ele não gasta energia.
+Parado pelo controle, o Cubit continua ativo e com o vínculo, não anda nem teleporta, e esse estado é salvo. Voltar a seguir retoma. Parado, ele não gasta energia, exceto com a lanterna acesa.
 
 Desligado pelo controle, o Cubit segue as regras do estado inativo, mesmo com bateria, e só volta a ficar ativo pelo controle. Ligar é a única ação do controle sobre um Cubit desligado.
 
@@ -33,6 +34,7 @@ A área é marcada com o controle, clicando com o botão direito em dois blocos,
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 13:34 | Adiciona a chave e o consumo da lanterna. |
 | Marcelo Fabiano | 2026-11-06 11:10 | Troca 'especialidade' por 'trabalho' e 'card de especialidade' por 'card de Aprendizado de Máquina'. |
 | Marcelo Fabiano | 2026-11-05 21:34 | Define o parar, a área em 3D e o que o Cubit sem card faz nela. |
 | Marcelo Fabiano | 2026-11-05 00:12 | Usa o termo modo de defesa. |

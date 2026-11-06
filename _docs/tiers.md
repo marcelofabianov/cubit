@@ -17,10 +17,8 @@ Os tiers são Base, Avançado, Elite e Ultimate (no jogo: Base, Advanced, Elite 
 | Cor do colar | Cinza | Azul | Roxo | Dourado |
 | Vida | 25 (12,5 ❤) | 50 (25 ❤) | 100 (50 ❤) | 200 (100 ❤) |
 | Velocidade | 1,0× | 1,25× | 1,5× | 2,0× |
-| Lanterna | Luz 10 | Luz 15 | Luz 15 + feixe de 25 blocos | Luz 15 + feixe de 30 blocos |
+| Lanterna | Luz 10 | Luz 12 | Luz 14 | Luz 15 |
 | Expressões, nome e cor da carcaça | ✔ | ✔ | ✔ | ✔ |
-
-O feixe depende da viabilidade, a confirmar na Fase 3.
 
 ## Energia
 
@@ -28,7 +26,7 @@ O feixe depende da viabilidade, a confirmar na Fase 3.
 |---|---|---|---|---|
 | Bateria | 300 mil FE | 600 mil FE | 3 mi FE | 8 mi FE |
 | Power Bank (70% da bateria) | 210 mil FE | 420 mil FE | 2,1 mi FE | 5,6 mi FE |
-| Autonomia aproximada, andando no plano, sem o painel | ~16,7 min | ~27,8 min | ~1,9 h | ~3,7 h |
+| Autonomia aproximada, andando no plano, sem o painel e com a lanterna apagada | ~16,7 min | ~27,8 min | ~1,9 h | ~3,7 h |
 | Autonomia com inventário cheio ou na água | ~12,5 min | ~20,8 min | ~1,4 h | ~2,8 h |
 | Autonomia na água e com inventário cheio | ~10 min | ~16,7 min | ~1,2 h | ~2,2 h |
 | Painel solar (de dia) | 5 FE/t | 10 FE/t | 12 FE/t | 16 FE/t |
@@ -50,8 +48,10 @@ Os extras somam ao andar. O consumo só vale com o robô ativo.
 | Extra com condição negativa, mesmo parado | +25 FE/t | +50 FE/t | +125 FE/t | +250 FE/t |
 | Fundir na fornalha | Bloqueado | ~20 FE/t | ~20 FE/t | ~20 FE/t |
 | Choque, por uso | Bloqueado | 2 mil FE | 2 mil FE | 1,5 mil FE |
-| Lanterna, ímã, scanners e colocar tochas | A definir | A definir | A definir | A definir |
+| Extra com a lanterna acesa, mesmo parado | +1 FE/t | +1 FE/t | +2 FE/t | +2 FE/t |
+| Ímã, scanners e colocar tochas | A definir | A definir | A definir | A definir |
 
+- **Claridade da tela:** não gasta energia.
 - **Carregador de ferramentas:** transfere energia para outro item, então não conta como gasto. A velocidade está em [slots exclusivos](#slots-exclusivos).
 - **Cards:** o custo por ação está em [trabalhos](#trabalhos).
 
@@ -89,6 +89,10 @@ Valem para todos os tiers e ficam no config.
 | Intervalo para tentar de novo o resgate no vazio | 20 ticks |
 | Alcance do controle remoto ao mirar num Cubit | 32 blocos |
 | Intervalo mínimo entre repetições de textos e alertas | ~25 s |
+| Luz da claridade da tela | 4 |
+| A lanterna acende abaixo da luz | 8 |
+| A lanterna apaga a partir da luz | 10 |
+| Intervalo para ler a luz do ambiente | 20 ticks |
 | Energia de 1 pó de redstone | 5.000 FE |
 | Energia de 1 bloco de redstone | 45.000 FE |
 
@@ -167,12 +171,14 @@ Planejado para a Fase 5. O tier Base não aceita cards.
 - consumo do Servidor e da antena com o carregamento desligado;
 - custo por ação de cada card, percentuais de Inquebrável e Remendo e dano do Defensor;
 - limites por tick e distância do Dock ao Servidor ou à antena;
-- limite de animais do Pecuarista, intervalo do Pescador e custo do storage e tamanho dos canais.
+- limite de animais do Pecuarista, intervalo do Pescador e custo do storage e tamanho dos canais;
+- alcance e viabilidade do feixe da lanterna de cabeça do Minerador.
 
 ## Histórico de modificações
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 13:34 | Define a luz e o consumo da lanterna, os valores gerais dela e leva o feixe para o Minerador. |
 | Marcelo Fabiano | 2026-11-06 11:10 | Tira a citação ao robô de uso geral. |
 | Marcelo Fabiano | 2026-11-06 11:10 | Troca 'especialidade' por 'trabalho' e 'card de especialidade' por 'card de Aprendizado de Máquina'. |
 | Marcelo Fabiano | 2026-11-06 09:48 | Reduz a bateria crítica para 5% e define o intervalo mínimo. |

@@ -48,6 +48,7 @@ Estado semelhante ao desligado, mas com o inventário e as configurações acess
 - **Modos:** escava a área, abre túnel reto ou em degraus, ou busca minérios do filtro. É um modo por vez, sempre dentro da área. É uma ideia inicial, com os detalhes na entrega do card (pergunta 344).
 - **Opções:** Eficiência, Fortuna e Toque Suave agem como no jogo. Fortuna e Toque Suave não ficam ativos juntos, e o player alterna entre eles na tela.
 - **Economia:** Inquebrável reduz o custo de FE por bloco, e Remendo dá um desconto extra nos blocos em que encontra minério. Nenhum dos dois cria energia.
+- **Lanterna de cabeça:** com um feixe à frente, como na prancha do conceito (pergunta 463). A viabilidade e o alcance ficam para a entrega do card.
 
 ### Fazendeiro
 
@@ -162,6 +163,7 @@ Antes de fechar cada card, testa-se com 20 a 30 robôs.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 13:34 | Adiciona a lanterna de cabeça do Minerador. |
 | Marcelo Fabiano | 2026-11-06 11:10 | Troca 'especialidade' por 'trabalho' e 'card de especialidade' por 'card de Aprendizado de Máquina'. |
 | Marcelo Fabiano | 2026-11-05 21:36 | Marca os modos do Minerador como ideia inicial. |
 | Marcelo Fabiano | 2026-11-05 12:08 | Consolida o conceito dos robôs especializados. |

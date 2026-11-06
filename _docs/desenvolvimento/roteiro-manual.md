@@ -334,6 +334,26 @@ Use `/kill @e[type=cubit:general_robot,limit=1,sort=nearest]` para matar o robô
 | 12 | Mate um robô sobre um buraco até o vazio, para o item cair | O item volta para onde o robô esteve por último no chão |
 | 13 | Saia e entre no mundo com um robô morto antes, e coloque outro | O novo segue você normalmente |
 
+## Lanterna
+
+Os valores são os padrões de [`tiers.md`](../tiers.md). Só o tier Base tem números no config, então os outros tiers usam os dele até a Fase 4.
+
+| # | Passo | Resultado esperado |
+|---|---|---|
+| 1 | Em mundo plano, longe de luzes, digite `/time set noon` e coloque um Cubit | Sem lanterna: pontas laranja, e a bateria não cai parado (`/data get entity @e[type=cubit:general_robot,limit=1] Energy`) |
+| 2 | Digite `/time set night` | Em até 1 s, as pontas ficam em branco quente com um halo que pulsa devagar, os olhos ganham um brilho azul em volta, e o chão clareia em volta do robô (luz 10) |
+| 3 | Ande cerca de 10 blocos | A luz acompanha o Cubit, e a bateria cai andando |
+| 4 | Pare perto do Cubit e meça a energia duas vezes, com 10 s entre elas | Cai cerca de 200 FE, ou 1 FE/t |
+| 5 | Abra o inventário e clique no botão acima do slot de energia, com a luz amarela | A luz do botão apaga, o tooltip mostra `Lamp: Off`, e a lanterna, o halo e o brilho dos olhos apagam na hora. Resta só a claridade fraca da tela |
+| 6 | Recolha com Shift + clique direito e coloque de novo | A lanterna continua desligada. Clique no botão para ligá-la |
+| 7 | Coloque tochas em volta do Cubit, no limite da luz | Não pisca |
+| 8 | Zere a bateria com `/data merge entity @e[type=cubit:general_robot,limit=1] {Energy:0L}` | A tela apaga, a lanterna apaga, as pontas ficam cinza, e não há luz |
+| 9 | Recarregue e leve o Cubit a um Dock, no escuro | Lanterna apagada, pontas laranja e só a claridade da tela. No inventário, o botão fica desabilitado, mantendo o valor |
+| 10 | Libere o Cubit do Dock | A lanterna volta a seguir a chave e o escuro |
+| 11 | Durante o dia, a céu aberto, digite `/weather thunder` | Com a trovoada, a lanterna pode acender, porque o céu escurece |
+| 12 | Com a opção de luz de entidades do LambDynamicLights desligada | Sem luz no chão e sem erro. As pontas continuam acendendo |
+| 13 | Com Iris e um shader, se disponível | A luz e as pontas continuam funcionando |
+
 ## Servidor dedicado
 
 1. Rode `make server` e aceite o EULA em `run/eula.txt`, se ainda não tiver aceitado.
@@ -343,6 +363,8 @@ Use `/kill @e[type=cubit:general_robot,limit=1,sort=nearest]` para matar o robô
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 13:57 | Adiciona o halo e o brilho dos olhos. |
+| Marcelo Fabiano | 2026-11-06 13:52 | Adiciona a lanterna. |
 | Marcelo Fabiano | 2026-11-06 10:36 | Adiciona os textos e os braços por 2 s, e ajusta as cargas para 5%. |
 | Marcelo Fabiano | 2026-11-06 09:03 | Adiciona o colar e o indicador de bateria. |
 | Marcelo Fabiano | 2026-11-06 01:06 | Adiciona as animações. |
