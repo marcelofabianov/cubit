@@ -29,6 +29,14 @@ repositories {
         }
     }
 
+    maven {
+        name = 'Gegy'
+        url = 'https://maven.gegy.dev/releases'
+        content {
+            includeGroup('dev.lambdaurora.lambdynamiclights')
+        }
+    }
+
     // Test tooling only lives on Maven Central, so a NeoForged Maven outage must not break the build.
     exclusiveContent {
         forRepository {
@@ -51,6 +59,12 @@ base {
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
+// Holds what only the client runs load. The game looks for mods on the classpath of the run, and
+// the server runs must open without this library, which proves a dedicated server does not need it.
+sourceSets {
+    clientRun
+}
+
 neoForge {
     version = project.neo_version
 
@@ -62,6 +76,7 @@ neoForge {
     runs {
         client {
             client()
+            sourceSet = sourceSets.clientRun
             systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
         }
 
@@ -80,6 +95,8 @@ neoForge {
 
         data {
             data()
+            // This run also starts as a client, so it requires the same library.
+            sourceSet = sourceSets.clientRun
             programArguments.addAll '--mod', project.mod_id, '--all',
                     '--output', file('src/generated/resources/').getAbsolutePath(),
                     '--existing', file('src/main/resources/').getAbsolutePath()
@@ -100,10 +117,24 @@ neoForge {
 
 configurations {
     runtimeClasspath.extendsFrom localRuntime
+    clientRunRuntimeClasspath.extendsFrom runtimeClasspath
+}
+
+// Each jar already carries what it needs at runtime, and this library is published per mappings.
+def dynamicLightsDependency(String part) {
+    return dependencies.create("dev.lambdaurora.lambdynamiclights:lambdynamiclights-${part}:${lambdynamiclights_version}") {
+        transitive = false
+        attributes {
+            attribute(Attribute.of('net.minecraft.mappings', String), 'mojmap')
+        }
+    }
 }
 
 dependencies {
     implementation "software.bernie.geckolib:geckolib-neoforge-${minecraft_version}:${geckolib_version}"
+
+    compileOnly(dynamicLightsDependency('api'))
+    clientRunRuntimeOnly(dynamicLightsDependency('runtime'))
 
     testImplementation platform("org.junit:junit-bom:${junit_version}")
     testImplementation 'org.junit.jupiter:junit-jupiter'
@@ -118,6 +149,7 @@ var generateModMetadata = tasks.register('generateModMetadata', ProcessResources
             neo_version            : neo_version,
             loader_version_range   : loader_version_range,
             geckolib_version       : geckolib_version,
+            lambdynamiclights_version: lambdynamiclights_version,
             mod_id                 : mod_id,
             mod_name               : mod_name,
             mod_license            : mod_license,
