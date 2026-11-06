@@ -93,6 +93,7 @@ Valem para todos os tiers e ficam no config.
 | A lanterna acende abaixo da luz | 8 |
 | A lanterna apaga a partir da luz | 10 |
 | Intervalo para ler a luz do ambiente | 20 ticks |
+| Intervalo para ler se o sol chega ao painel | 20 ticks |
 | Energia de 1 pó de redstone | 5.000 FE |
 | Energia de 1 bloco de redstone | 45.000 FE |
 
@@ -178,6 +179,7 @@ Planejado para a Fase 5. O tier Base não aceita cards.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 15:05 | Adiciona o intervalo do painel solar. |
 | Marcelo Fabiano | 2026-11-06 13:34 | Define a luz e o consumo da lanterna, os valores gerais dela e leva o feixe para o Minerador. |
 | Marcelo Fabiano | 2026-11-06 11:10 | Tira a citação ao robô de uso geral. |
 | Marcelo Fabiano | 2026-11-06 11:10 | Troca 'especialidade' por 'trabalho' e 'card de especialidade' por 'card de Aprendizado de Máquina'. |

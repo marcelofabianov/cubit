@@ -49,9 +49,11 @@ Funciona como um carregador solar real.
 
 - **Quando carrega:** só com o Cubit ativo e durante o dia. Inativo ou em hibernação, o painel fica desligado.
 - **À noite:** só carrega nos dois últimos tiers, Elite e Ultimate.
-- **Blocos:** coberto por um bloco, não carrega. Com o céu aberto, carrega 100%.
+- **Blocos:** coberto por um bloco opaco, não carrega. Com o céu aberto ou sob vidro, carrega 100%.
 - **Clima:** não tem efeito.
 - **Dimensões:** no Nether e no End, não carrega.
+- **Sinal:** enquanto o painel enche a bateria, a célula clareia e escurece devagar. Com a bateria cheia, o sinal para. O painel não toca o som de recarga, que é da base e do slot.
+- **Chave:** ainda não existe. Entra com a interface de configuração (perguntas 494 e 495).
 
 ## Induction Dock
 
@@ -128,6 +130,7 @@ Se o robô estiver dentro do raio da base e com a bateria baixa, volta sozinho p
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 15:05 | Detalha o vidro, o sinal e a chave do painel solar. |
 | Marcelo Fabiano | 2026-11-06 13:34 | Adiciona o consumo da lanterna. |
 | Marcelo Fabiano | 2026-11-06 11:15 | Limita o texto do retorno ao Cubit que segue. |
 | Marcelo Fabiano | 2026-11-06 11:10 | Troca 'especialidade' por 'trabalho' e 'card de especialidade' por 'card de Aprendizado de Máquina'. |

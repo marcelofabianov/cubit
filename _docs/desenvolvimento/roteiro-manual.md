@@ -354,6 +354,22 @@ Os valores são os padrões de [`tiers.md`](../tiers.md). Só o tier Base tem n�
 | 12 | Com a opção de luz de entidades do LambDynamicLights desligada | Sem luz no chão e sem erro. As pontas continuam acendendo |
 | 13 | Com Iris e um shader, se disponível | A luz e as pontas continuam funcionando |
 
+## Painel solar e tier no corpo
+
+Os valores são os padrões de [`tiers.md`](../tiers.md).
+
+| # | Passo | Resultado esperado |
+|---|---|---|
+| 1 | Veja o topo do Cubit, de lado e de cima | Placa elevada, centralizada, com moldura escura e célula azul. As antenas ficam livres |
+| 2 | Veja a cintura e os antebraços, com os quatro tiers por comando | A fita cobre mais o tronco, sem aumentar o Cubit, e as faixas têm a cor dela |
+| 3 | De dia, a céu aberto, deixe o Cubit parado e meça `Energy` com 10 s entre as leituras | Sobe cerca de 1.000 FE, sem som de recarga, e a célula pulsa de leve |
+| 4 | Coloque um bloco opaco acima dele | Em até 1 s, para de subir e de pulsar |
+| 5 | Troque por vidro | Volta a subir e a pulsar |
+| 6 | Digite `/weather thunder` | Continua carregando |
+| 7 | Digite `/time set night`, com a lanterna desligada | Não sobe nem pulsa |
+| 8 | Encha a bateria de dia | Para de pulsar |
+| 9 | Leve ao Nether e a um Dock | Não carrega pelo painel e não pulsa |
+
 ## Servidor dedicado
 
 1. Rode `make server` e aceite o EULA em `run/eula.txt`, se ainda não tiver aceitado.
@@ -363,6 +379,8 @@ Os valores são os padrões de [`tiers.md`](../tiers.md). Só o tier Base tem n�
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 15:16 | Tira o vidro do painel. |
+| Marcelo Fabiano | 2026-11-06 15:05 | Adiciona o painel solar e o tier no corpo. |
 | Marcelo Fabiano | 2026-11-06 13:57 | Adiciona o halo e o brilho dos olhos. |
 | Marcelo Fabiano | 2026-11-06 13:52 | Adiciona a lanterna. |
 | Marcelo Fabiano | 2026-11-06 10:36 | Adiciona os textos e os braços por 2 s, e ajusta as cargas para 5%. |

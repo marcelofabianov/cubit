@@ -20,6 +20,7 @@ As chaves ficam em `snake_case`. As de um tier ficam em `[general_robot.{tier}]`
 | `general` | `lamp_on_below_light` | A lanterna acende abaixo da luz | 0 a 15 |
 | `general` | `lamp_off_from_light` | A lanterna apaga a partir da luz | 0 a 15 |
 | `general` | `lamp_check_ticks` | Intervalo para ler a luz do ambiente | 1 a 1200 |
+| `general` | `solar_check_ticks` | Intervalo para ler se o sol chega ao painel | 1 a 1200 |
 | `general` | `happy_expression_ticks` | Tempo com a expressão feliz | 1 a 1200 |
 | `general` | `hurt_expression_ticks` | Tempo com a expressão triste, depois de um dano | 1 a 1200 |
 | `general` | `worried_expression_ticks` | Tempo com a expressão de preocupado | 1 a 1200 |
@@ -51,6 +52,8 @@ As chaves ficam em `snake_case`. As de um tier ficam em `[general_robot.{tier}]`
 | `general_robot.base` | `climb_extra_per_block` | Extra ao subir, por bloco de altura | 0 a 2147483647 |
 | `general_robot.base` | `lamp_consumption_per_tick` | Extra com a lanterna acesa | 0 a 2147483647 |
 | `general_robot.base` | `lamp_light_level` | Lanterna | 0 a 15 |
+| `general_robot.base` | `solar_day_per_tick` | Painel solar (de dia) | 0 a 2147483647 |
+| `general_robot.base` | `solar_night_per_tick` | Painel solar (à noite) | 0 a 2147483647 |
 | `general_robot.base` | `recharge_per_tick` | Recarga na base e pelo slot de energia | 1 a 2147483647 |
 | `general_robot.base` | `inventory_slots` | Inventário | 1 a 54 |
 | `general_robot.base` | `max_health` | Vida | 1 a 1024 |
@@ -86,6 +89,7 @@ O mod não cai por causa do config (regra 17 do `AGENTS.md`):
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 15:05 | Adiciona as chaves do painel solar. |
 | Marcelo Fabiano | 2026-11-06 13:34 | Adiciona as chaves da lanterna. |
 | Marcelo Fabiano | 2026-11-06 11:10 | Tira a citação a um robô novo. |
 | Marcelo Fabiano | 2026-11-06 11:10 | Troca 'especialidade' por 'trabalho' e 'card de especialidade' por 'card de Aprendizado de Máquina'. |

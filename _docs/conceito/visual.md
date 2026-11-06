@@ -13,6 +13,8 @@ As imagens individuais estão em [`_docs/imagens/conceito/`](../imagens/conceito
 - Modelo e animações com **GeckoLib**, dependência obrigatória: andar, virar o corpo, mover os braços e trocar a expressão da tela.
 - **Modelo na Fase 2:** traz os detalhes das seis vistas e o ícone do item, com tudo fixo: colar cinza, olhos normais e bateria sem variação. A textura tem 128×128, com 2 pixels por unidade, e a hitbox não muda, então braços e antenas passam um pouco dela.
 - **Modelo final:** mantém a geometria e a textura do corpo, e acrescenta só os ossos que as animações precisarem. As exceções são o tronco central, a coluna entre as esteiras e a carcaça, com 2 unidades de altura, em vez de 1,5, e a haste das antenas, com 2 unidades, em vez de 2,5. A carcaça sobe junto, sem mudar de tamanho, e a ponta da antena desce junto com a haste. Os braços ficam abertos cerca de 5°, a partir do ombro, para não parecerem colados na carcaça.
+- **Painel solar:** uma placa de 0,5 unidade, centralizada no topo, com moldura escura e célula azul. A hitbox não muda.
+- **Tier no corpo:** a fita da cintura cobre 1,25 unidade do tronco, sem aumentar o Cubit, e cada antebraço tem uma faixa na mesma cor, pela mesma camada do colar.
 - **Animações:** andar, olhar para o dono, parado, e desligado e hibernando. Como o modelo não tem cabeça separada, olhar gira o corpo sobre o pescoço, com as esteiras paradas. O robô olha só para o dono, ligado e com ele por perto, inclusive parado. Tempos e poses ficam no arquivo de animação, e o resto em constantes.
 - **Esteiras:** textura por quadros, escolhidos pela distância andada, sem mudar a geometria.
 - **Braços ao levar dano:** ficam erguidos por cerca de 2 s depois do último dano, com a expressão triste ou de olhos em X, numa constante, e o corpo e as antenas continuam balançando. A lágrima segue até o fim do tempo dela.
@@ -75,6 +77,8 @@ Tocam todos, menos os alertas, que entram com os scanners, e o ataque e o modo a
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 15:16 | Tira o vidro do painel. |
+| Marcelo Fabiano | 2026-11-06 15:05 | Adiciona o relevo do painel, a fita maior e as faixas dos braços. |
 | Marcelo Fabiano | 2026-11-06 14:15 | Abre os braços. |
 | Marcelo Fabiano | 2026-11-06 14:05 | Encurta a haste das antenas. |
 | Marcelo Fabiano | 2026-11-06 13:57 | Adiciona o halo e o brilho dos olhos. |
