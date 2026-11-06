@@ -47,7 +47,7 @@ public final class ConfigGameTests {
   private static final String WAKE_CHARGE_KEY = "general.wake_charge_percent";
   private static final int WAKE_CHARGE = 5;
   private static final String CRITICAL_CHARGE_KEY = "general.critical_charge_percent";
-  private static final int CRITICAL_CHARGE = 10;
+  private static final int CRITICAL_CHARGE = 5;
   private static final String WORRIED_TICKS_KEY = "general.worried_expression_ticks";
   private static final int WORRIED_TICKS = 60;
   private static final String HURT_TICKS_KEY = "general.hurt_expression_ticks";
