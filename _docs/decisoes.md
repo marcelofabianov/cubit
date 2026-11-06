@@ -70,6 +70,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Documentação para o player (fase a definir):** uma wiki em site estático no GitHub e um livro entregue ao criar o mundo, que aponta para ela.
 - **Consumo por situação:** inventário cheio, água, subida e condições negativas somam um extra ao gasto. Com o inventário cheio, a velocidade cai. Os números estão em [`tiers.md`](tiers.md#consumo-por-atividade).
 - **Slot de energia do Cubit:** existe em todos os tiers e aceita uma Power Bank ou redstone por vez. A redstone entra na Fase 2, e a Power Bank na Fase 4.
+- **LambDynamicLights:** obrigatório, mas só entra no build com a lanterna, na Fase 3. A `0.1.0` sai sem exigi-lo.
 - **Comunicação:** bipes e expressões, com poucos textos simples e diretos.
 - **Sons:** dez sons. Nove entram na Fase 3, e o do ataque, junto do choque. O bipe padrão toca nas trocas de expressão sem som exclusivo. O intervalo mínimo entre repetições será definido na Fase 3, e os sons são do desenvolvedor.
 - **Modelo:** a geometria melhora já na Fase 2, com os detalhes das seis vistas, tudo fixo e sem mudar a hitbox. As animações e as expressões seguem na Fase 3.
@@ -82,6 +83,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 21:15 | Registra quando o LambDynamicLights entra no build. |
 | Marcelo Fabiano | 2026-11-05 21:02 | Corrige o resumo do Dock, dos robôs especializados, da ordem da Fase 2, do dono e do consumo. |
 | Marcelo Fabiano | 2026-11-05 20:48 | Registra o comando `/cubit reset`. |
 | Marcelo Fabiano | 2026-11-05 20:36 | Define a fase do som de colocar no mundo. |

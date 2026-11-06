@@ -44,7 +44,7 @@ Mod de Minecraft que adiciona um robô companheiro fofo, movido a bateria, de te
 | Java | 21 |
 | Build | MDK oficial do NeoForge para 1.21.1 (ModDevGradle) |
 | GeckoLib | 4.9.3 (versão do pack) |
-| LambDynamicLights | 4.8.11+1.21.1 (versão do pack, obrigatória, no cliente) |
+| LambDynamicLights | 4.8.11+1.21.1 (versão do pack, obrigatória, no cliente). Entra no build com a lanterna, na Fase 3 |
 
 Versões conferidas em 2026-11-04. Confira de novo no `mods/` do Iron Meridian antes de fixar ou atualizar uma dependência. O Gradle não está instalado na máquina: use o wrapper. O JDK 21 é baixado pelo próprio projeto.
 
@@ -197,6 +197,7 @@ io.github.marcelofabianov.cubit
 │   ├── tier/               // RobotTier, TierSpec, TierCatalog (interface)
 │   ├── energy/             // Battery, PowerState (ativo, inativo, hibernação), regras de consumo e religamento
 │   ├── behavior/           // FollowDecision: seguir, parar ou teleportar; BurningAction: reagir a fogo e lava
+│   ├── dock/               // DockStock, DockStatus, DockStay, DockQueue
 │   └── ownership/          // FollowingRobotPolicy
 ├── config/                 // ModConfigSpec → implementa TierCatalog
 ├── registry/               // DeferredRegisters
@@ -204,7 +205,7 @@ io.github.marcelofabianov.cubit
 ├── item/                   // RobotItem, PowerBankItem, RobotStateComponent
 ├── block/                  // InductionDockBlock, BlockEntity
 ├── menu/                   // RobotMenu, InductionDockMenu
-├── player/                 // attachment com o UUID do robô que segue
+├── player/                 // attachment com o UUID do robô que segue, robôs mortos com o dono offline e /cubit reset
 ├── client/                 // renderer, modelo GeckoLib, tela
 └── datagen/                // receitas, loot, traduções
 ```
