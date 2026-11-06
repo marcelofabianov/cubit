@@ -11,7 +11,7 @@ final class GeneralSection {
   private static final int PERCENT_MIN = 0;
   private static final int PERCENT_MAX = 100;
   private static final String BASE_SPEED = "base_movement_speed";
-  private static final double BASE_SPEED_DEFAULT = 0.3;
+  private static final double BASE_SPEED_DEFAULT = 0.33;
   private static final double BASE_SPEED_MIN = 0.01;
   private static final double BASE_SPEED_MAX = 1;
   private static final String REPATH_TICKS = "follow_repath_ticks";

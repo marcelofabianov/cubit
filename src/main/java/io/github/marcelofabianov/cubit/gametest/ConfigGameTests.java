@@ -82,7 +82,7 @@ public final class ConfigGameTests {
   private static final String BURNING_SPEED_KEY = "general.burning_speed_multiplier";
   private static final double BURNING_SPEED = 1.25;
   private static final String BASE_SPEED_KEY = "general.base_movement_speed";
-  private static final double BASE_SPEED = 0.3;
+  private static final double BASE_SPEED = 0.33;
   private static final String SPEED_KEY = "general_robot.base.speed_multiplier";
   private static final double SPEED = 1;
   private static final Map<String, Integer> GENERAL_DEFAULTS =
