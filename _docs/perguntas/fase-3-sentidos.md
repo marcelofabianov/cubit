@@ -31,6 +31,14 @@ Não há perguntas pendentes nesta fase.
 | 320 | O que fazer com o som novo, `robot_quando_colocado_no_mundo.wav`? | Converter para Ogg e colocar no diretório dos demais sons do projeto, para ser usado. Convertido da mesma forma que os demais, para `placed.ogg`. Passam a ser dez sons. O original fica em `tmp/wav/`. Amplia a pergunta 135. As perguntas 321 e 322 detalham o nome, o momento e a fase |
 | 321 | O nome `placed.ogg` e o momento "ao ser colocado no mundo" estão certos? | Sim. Detalha a pergunta 320 |
 | 322 | Em que fase o som de colocar no mundo passa a tocar? | Na Fase 3, junto dos outros oito. Detalha a pergunta 320 |
+| 421 | Como foi o roteiro manual do colar, do indicador de bateria e do tronco central com +0,5? | Teste finalizado, tudo ok, executado pelo desenvolvedor, sem detalhar cada passo. Ele não pediu +1, então o tronco fica em 2 unidades. O `make server` e o olhar de longe não foram citados em separado |
+| 420 | Qual parte do corpo aumenta, e quanto? | O tronco central, a coluna clara entre as esteiras e a carcaça, onde fica o colar. Para conferir no jogo, começa com +0,5 unidade, de 1,5 para 2, e o desenvolvedor considera +1. A carcaça, a tela e as texturas não mudam, e a hitbox continua a mesma. Muda a pergunta 396 só nessa medida |
+| 418 | Como trocar a cor do colar no modelo? | Com uma camada transparente por tier, com as duas tonalidades do conceito, escolhida pela chave do tier. As cores ficam nos arquivos, sem número no código |
+| 419 | Em que pontos ficam os testes do colar e do indicador? | JUnit: qual desenho do indicador vale em cada carga, com as bordas de 0 FE, carga mínima, crítica e cheia, e quando brilha. GameTests: tier e indicador sincronizados mudando no servidor e todos os arquivos presentes. Roteiro manual: ver as quatro cores por comando, cada nível, o vermelho, o brilho no escuro e o estado desligado |
+| 414 | Até onde vai a cor do colar na Fase 3, já que só o tier Base existe até a Fase 4? | O robô no mundo já usa as quatro cores conforme o tier, testáveis por comando. O ícone do item e o do `Damaged Cubit` ficam cinza e ganham cor junto dos módulos, na Fase 4 |
+| 415 | Como desenhar o indicador de bateria nas costas? | Numa camada de alta resolução, 8× a do corpo, como a tela do rosto, com cantos arredondados e fiel ao conceito. São 4 níveis, de 25% em 25%, além do vazio |
+| 416 | Qual é a cor do preenchimento do indicador? | Verde, como no conceito, e vermelho com a bateria crítica, reutilizando `critical_charge_percent`, sem chave nova |
+| 417 | Como o indicador se comporta com o Cubit desligado ou hibernando? | Mostra a carga real em qualquer estado. Brilha no escuro enquanto ligado ou hibernando, e fica sem brilho com a tela apagada |
 | 413 | Como foi o roteiro manual dos braços, dos olhos que acompanham o dono e da inclinação? | Concluído como esperado, executado pelo desenvolvedor, sem detalhar cada passo. O limite de 1 bloco ficou como está |
 | 410 | Dá para o Cubit inclinar de leve para cima ou para baixo quando o dono está em outro nível, e de quanto? | Sim, cerca de 8°, com transição suave, numa constante. Como o modelo não tem cabeça separada, o osso `body` inclina inteiro. Os olhos mantêm o comportamento das perguntas 404 e 406 |
 | 411 | Quando acontece a inclinação do corpo? | Só com o dono 1 bloco ou mais acima ou abaixo, com o robô ligado, na mesma dimensão e até 8 blocos. Um pulo move só os olhos. Usa um segundo dado sincronizado, fora do save |
@@ -50,7 +58,7 @@ Não há perguntas pendentes nesta fase.
 | 400 | O agente corrige os documentos desatualizados no PR da issue #89? | Sim, num commit separado: o status e o roadmap no `README.md`, a etapa atual em `decisoes.md` e o bipe padrão em `visual.md`, conforme a [pergunta 152](fase-2-versao-minima.md) |
 | 394 | Quais animações do Cubit entram no item 9? | Andar, olhar para o player, parado, e desligado e hibernando. Como o modelo não tem cabeça separada, olhar gira o osso `body` sobre o pescoço, com as esteiras paradas |
 | 395 | Como animar as esteiras? | Com textura por quadros, escolhidos pela distância andada, sem mudar a geometria |
-| 396 | O que "modelo final" muda no Cubit? | Mantém a geometria e a textura de 128×128 do corpo, e significa só os ossos que as animações precisarem. Detalha a [pergunta 60](fase-2-versao-minima.md) e mantém a 162 |
+| 396 | O que "modelo final" muda no Cubit? | Mantém a geometria e a textura de 128×128 do corpo, e significa só os ossos que as animações precisarem. Detalha a [pergunta 60](fase-2-versao-minima.md) e mantém a 162. A pergunta 420 aumenta o tronco central |
 | 393 | Como foi o teste da velocidade nova? | "Ok", sem detalhe. A resposta veio antes de o config local ser recriado, então o valor novo pode não ter sido sentido no jogo |
 | 392 | Quanto o Cubit fica mais ágil? | O atributo da velocidade 1,0× passa de 0,30 para 0,33, cerca de 10%, sem mudar os multiplicadores nem o consumo por tick. Muda a [pergunta 113](fase-2-versao-minima.md) |
 | 391 | Como foi o roteiro manual das expressões, da barra de vida e do som de dano? | Fechou o teste e ficou ótimo, executado pelo desenvolvedor, sem detalhar cada passo. O crash anterior, atribuído à compilação simultânea, não foi citado de novo |
@@ -95,6 +103,8 @@ Não há perguntas pendentes nesta fase.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 09:23 | Registra as respostas 420 e 421 e aponta a 396 para a 420. |
+| Marcelo Fabiano | 2026-11-06 08:58 | Registra as respostas 414 a 419. |
 | Marcelo Fabiano | 2026-11-06 01:12 | Registra as respostas 401 a 413. |
 | Marcelo Fabiano | 2026-11-06 00:58 | Registra as respostas 394 a 400. |
 | Marcelo Fabiano | 2026-11-06 00:44 | Registra a resposta 393. |

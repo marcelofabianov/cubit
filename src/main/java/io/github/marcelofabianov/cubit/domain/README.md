@@ -35,6 +35,7 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 | `TrackFrames` | Qual quadro da esteira vale em cada distância andada |
 | `OwnerLook` | Quando o robô vira o corpo para o dono |
 | `HealthLevel` | A vida mostrada numa barra, sem falso zero |
+| `BatteryIndicator` | O que o indicador nas costas mostra: vazio, ou de 1 a 4 níveis, normal ou crítico |
 | `PowerSound` | Som tocado uma vez, ao ligar ou desligar |
 | `ContinuousSound` | Som em loop enquanto a condição valer: esteira, curto elétrico e recarga |
 | `RobotSoundRules` | Diz qual som cada situação toca |
@@ -61,6 +62,8 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 - **Olhar sem tremer:** a direção fica um tempo depois do movimento, porque um degrau dura poucos ticks (perguntas 375 e 376).
 - **Sons:** entrar na base não toca o som de desligar, porque a recarga já toca, e a recarga só vale com a carga subindo de fato, para não tocar com a bateria cheia nem com o Dock sem energia (perguntas 358 e 359).
 - **Barra sem falso zero:** `level` só devolve 0 com a bateria vazia. Com qualquer carga, devolve ao menos 1, para o player não achar que o robô ativo está sem energia (pergunta 269).
+- **Indicador crítico em todos os níveis:** o limite crítico vem do config e pode cobrir mais de um nível, então o vermelho não pode reduzir o preenchimento. O vazio vence o crítico, porque só vale com 0 FE (perguntas 415 e 416).
+- **Brilho junto da tela:** a tela e o indicador brilham pela mesma regra, `RobotExpression.glows`, para nunca discordarem (pergunta 417).
 - **Comparação de porcentagem sem divisão:** `hasAtLeast` multiplica os dois lados, para ser exata com os valores de `tiers.md`.
 
 - **Tipo de robô é dado:** as regras recebem os números de um `TierSpec`, sem saber qual é o robô. Assim, um robô novo não muda as regras (regra 39 do `AGENTS.md`).

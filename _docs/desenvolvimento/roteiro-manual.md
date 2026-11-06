@@ -274,6 +274,27 @@ Alerta e surpreso só aparecem com os scanners.
 | 26 | Com ele inclinado, deixe-o desligar | A pose de desligado toma o lugar da inclinação |
 | 27 | Rode `make server` | O servidor abre sem erro de classe de cliente |
 
+## Colar e bateria
+
+Compare com `tier-base.png`, `tier-avancado.png`, `tier-elite.png`, `tier-ultimate.png` e `vista-costas.png`, em `_docs/imagens/conceito/png/`. Só o tier Base existe até a Fase 4, então os outros são testados por comando, e o robô usa os números do Base. A carga vai de 0 a 300.000 FE.
+
+| # | Faça | Espere |
+|---|---|---|
+| 1 | Coloque um robô e olhe o colar | Cinza, com a faixa de cima mais clara, no tronco central, sem vão entre as peças |
+| 2 | Rode `/data merge entity @e[type=cubit:general_robot,limit=1,sort=nearest] {Tier:"advanced"}` | O colar fica azul, sem falhas em volta do pescoço |
+| 3 | Repita com `{Tier:"elite"}` e `{Tier:"ultimate"}` | Roxo e dourado |
+| 4 | Repita com `{Tier:"base"}` | Volta ao cinza |
+| 5 | Olhe as costas com a carga de 25%, de um robô recém-colocado | Bateria com contorno arredondado e um nível verde, sem o desenho antigo aparecendo por baixo |
+| 6 | Rode o comando com `{Energy:150000L}`, depois `{Energy:225000L}` e `{Energy:300000L}` | 2, 3 e 4 níveis verdes |
+| 7 | Rode com `{Energy:30000L}` | 1 nível vermelho, junto da expressão de sono |
+| 8 | Rode com `{Energy:0L}` | Sem preenchimento, com o contorno visível |
+| 9 | Com `/time set midnight`, coloque um robô ligado, com carga, e olhe as costas no escuro | O preenchimento brilha, e o contorno e o corpo escurecem |
+| 10 | Coloque um segundo robô, que fica desligado, e olhe as costas dele no escuro | Mostra a carga dele, sem brilho |
+| 11 | Coloque um Cubit no Dock com energia, no escuro | O preenchimento brilha e sobe de nível enquanto ele carrega |
+| 12 | Veja o robô de longe, em volta, e com ele virando para você | Colar e bateria acompanham o corpo e o pescoço, sem falhas de desenho |
+| 13 | Olhe o item do Cubit e o `Damaged Cubit` | Os ícones continuam com o colar cinza |
+| 14 | Rode `make server` | O servidor abre sem erro de classe de cliente |
+
 ## Morte e conserto
 
 Use `/kill @e[type=cubit:general_robot,limit=1,sort=nearest]` para matar o robô.
@@ -303,6 +324,7 @@ Use `/kill @e[type=cubit:general_robot,limit=1,sort=nearest]` para matar o robô
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 09:03 | Adiciona o colar e o indicador de bateria. |
 | Marcelo Fabiano | 2026-11-06 01:06 | Adiciona as animações. |
 | Marcelo Fabiano | 2026-11-06 00:28 | Define o tempo dos olhos em X e ordena os passos. |
 | Marcelo Fabiano | 2026-11-06 00:22 | Adiciona a expressão de preocupado. |

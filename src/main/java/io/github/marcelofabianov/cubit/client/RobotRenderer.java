@@ -15,5 +15,7 @@ final class RobotRenderer extends GeoEntityRenderer<RobotEntity> {
         new RobotGeoModel(ResourceLocation.fromNamespaceAndPath(CubitMod.MOD_ID, robotType.id())));
     addRenderLayer(new RobotTrackLayer(this, robotType));
     addRenderLayer(new RobotScreenLayer(this, robotType));
+    addRenderLayer(new RobotCollarLayer(this, robotType));
+    addRenderLayer(new RobotBatteryLayer(this, robotType));
   }
 }

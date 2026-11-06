@@ -270,6 +270,7 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
     docking.tick();
     updateEnergy(chargeBefore);
     face.tick();
+    RobotLooks.update(this);
     RobotLoadSpeed.update(this, inventory.isFull());
     inventory.dropSurplus(
         stack -> Containers.dropItemStack(level(), getX(), getY(), getZ(), stack));
