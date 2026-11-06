@@ -24,6 +24,8 @@ final class RobotSyncedData {
       SynchedEntityData.defineId(RobotEntity.class, EntityDataSerializers.BYTE);
   static final EntityDataAccessor<Byte> OWNER_LEVEL =
       SynchedEntityData.defineId(RobotEntity.class, EntityDataSerializers.BYTE);
+  static final EntityDataAccessor<Boolean> ARMS_RAISED =
+      SynchedEntityData.defineId(RobotEntity.class, EntityDataSerializers.BOOLEAN);
   static final EntityDataAccessor<Byte> TIER =
       SynchedEntityData.defineId(RobotEntity.class, EntityDataSerializers.BYTE);
   static final EntityDataAccessor<Byte> BATTERY_INDICATOR =
@@ -39,6 +41,7 @@ final class RobotSyncedData {
     builder.define(EXPRESSION, (byte) RobotExpression.OFF.ordinal());
     builder.define(OWNER_GAZE, (byte) GazeDirection.LEVEL.ordinal());
     builder.define(OWNER_LEVEL, (byte) GazeDirection.LEVEL.ordinal());
+    builder.define(ARMS_RAISED, false);
     builder.define(TIER, (byte) RobotTier.BASE.ordinal());
     builder.define(BATTERY_INDICATOR, (byte) BatteryIndicator.EMPTY.ordinal());
   }
