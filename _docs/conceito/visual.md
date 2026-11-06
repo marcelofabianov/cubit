@@ -10,7 +10,7 @@ As imagens individuais estão em [`_docs/imagens/conceito/`](../imagens/conceito
 - **Colar** no pescoço com a cor do tier. As cores estão em [`tiers.md`](../tiers.md).
 - **Carcaça** com cor trocável por corantes.
 - O conceito atual é a base. O modelo final tem **design próprio**, para o mod poder ser publicado. A geometria melhora já na Fase 2, mais próxima das imagens de conceito, e as animações e as expressões seguem na Fase 3.
-- Modelo e animações com **GeckoLib** (já presente no pack): andar, virar a cabeça, mover os braços e trocar a expressão da tela.
+- Modelo e animações com **GeckoLib**, dependência obrigatória: andar, virar a cabeça, mover os braços e trocar a expressão da tela.
 - **Modelo na Fase 2:** traz os detalhes das seis vistas e o ícone do item, com tudo fixo: colar cinza, olhos normais e bateria sem variação. A textura tem 128×128, com 2 pixels por unidade, e a hitbox não muda, então braços e antenas passam um pouco dela.
 
 ## O que o conceito mostra
@@ -53,6 +53,7 @@ Os arquivos ficam em `assets/cubit/sounds/general_robot/`, em Ogg Vorbis, mono e
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 21:02 | Trata a GeckoLib como dependência do mod. |
 | Marcelo Fabiano | 2026-11-05 20:36 | Define a fase do som de colocar no mundo. |
 | Marcelo Fabiano | 2026-11-05 20:26 | Adiciona o som de colocar no mundo. |
 | Marcelo Fabiano | 2026-11-05 17:27 | Adiciona o som do ataque. |

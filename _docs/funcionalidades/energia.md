@@ -75,7 +75,7 @@ Funciona como um carregador solar real.
 - **Ir:** o player clica com o botão direito no Dock, e o Cubit ligado mais próximo, dentro do raio do retorno automático, vai até ele, esteja seguindo ou em área. Colocar o item do Cubit em cima do Dock também funciona. Num Dock ocupado ou de outro player, nada acontece, e o item continua na mão.
 - **Sem conseguir chegar:** sem rota ou preso, teleporta para o Dock. Se o chunk estiver descarregado ou houver um bloqueio em cima, desiste e volta ao que fazia.
 - **Fechar o jogo:** só a hibernação é salva. A caminho ou aguardando, o Cubit volta ao que fazia ao carregar de novo. Se o Dock sumiu, ele acorda como numa liberação.
-- **Sair:** o Cubit sai sozinho com a bateria cheia. Antes disso, clicar no Dock o libera. Ao sair, volta ao que fazia: a área ou seguir o player. Se outro assumiu o lugar de seguir, fica parado e desligado.
+- **Sair:** o Cubit sai sozinho cerca de 3 s depois de encher a bateria, com a tela no estado completa. Antes disso, clicar no Dock o libera. Ao sair, volta ao que fazia: a área ou seguir o player. Se outro assumiu o lugar de seguir, fica parado e desligado.
 
 ### Base ocupada
 
@@ -96,7 +96,7 @@ O slot fica num painel ao lado da tela do inventário. O Cubit extrai a energia 
 - Entra na Fase 4. A redstone no slot já funciona na Fase 2.
 - Funciona em um Cubit de qualquer tier, na velocidade de recarga do tier do Cubit.
 - Não empilha: cada uma ocupa um slot.
-- Sai vazia do craft e recarrega no Induction Dock ou em qualquer carregador de FE do pack.
+- Sai vazia do craft e recarrega no Induction Dock ou em qualquer carregador de FE de outros mods, quando houver.
 
 ### Recarregar um Cubit desligado
 
@@ -104,6 +104,8 @@ O slot fica num painel ao lado da tela do inventário. O Cubit extrai a energia 
 2. O item entra sozinho no slot exclusivo, e a recarga começa.
 3. Com a carga mínima, o Cubit liga.
 4. A partir daí, o player pode acessá-lo, remover o item e fazer as outras interações.
+
+Com redstone na mão, o clique num Cubit desligado põe a pilha no slot, mesmo com carga. Para ligá-lo, basta clicar sem redstone na mão.
 
 ### Recarregar o item pela grade de craft
 
@@ -124,6 +126,7 @@ Se o robô estiver dentro do raio da base e com a bateria baixa, mostra o texto 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 21:02 | Detalha a saída da base e o clique com redstone num Cubit desligado. |
 | Marcelo Fabiano | 2026-11-05 16:57 | Adota o formato e os estados da prancha de conceito. |
 | Marcelo Fabiano | 2026-11-05 16:09 | Detalha o Dock: formato, dono, tela, quebra, teleporte e o que é salvo. |
 | Marcelo Fabiano | 2026-11-05 15:32 | Inclui os blocos que ferem na condição negativa. |

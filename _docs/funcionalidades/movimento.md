@@ -48,7 +48,7 @@ Vale para magma, fogueira acesa, cacto, arbusto de frutas, rosa do wither, estal
 - **Colocar:** o robô segue se nenhum outro estiver seguindo. Se já houver um, o novo fica parado e desligado.
 - **Sair da base:** vale a mesma regra de colocar.
 - **Sem bateria:** o robô que segue fica parado, mantém o vínculo e volta a seguir ao religar. Colocado sem bateria, sem outro seguindo, assume o vínculo da mesma forma.
-- **Ligar:** com bateria, o clique direito no robô desligado o liga, e ele passa a seguir o player. A exceção é o robô desligado pelo controle, que só volta pelo controle.
+- **Ligar:** com bateria, o clique direito no robô desligado, sem redstone na mão, o liga, e ele passa a seguir o player. A exceção é o robô desligado pelo controle, que só volta pelo controle.
 - **Chunk descarregado:** se o robô que seguia não estiver carregado na troca, ele se desliga quando voltar a carregar, ao ver que outro assumiu o lugar.
 - **Trocar:** ao ligar um robô, ele desliga o que estava seguindo, mesmo que esteja sem bateria. Os que trabalham em áreas continuam ativos. Também dá para recolher o atual ou colocá-lo na base.
 - **Base:** todos os robôs ligados podem usar a base, e cada Dock recebe um por vez. A chamada está em [`energia.md`](energia.md#ir-para-a-base-e-sair-dela).
@@ -78,6 +78,7 @@ Marca onde o player morreu e o leva até lá, se o tier permitir.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 21:02 | Cita o clique sem redstone para ligar o robô. |
 | Marcelo Fabiano | 2026-11-05 20:42 | Detalha o comando `/cubit reset` e o robô ativo sem vínculo. |
 | Marcelo Fabiano | 2026-11-05 15:32 | Adiciona a reação aos blocos que ferem. |
 | Marcelo Fabiano | 2026-11-05 01:15 | Aponta a proteção e o resgate do item para itens.md. |

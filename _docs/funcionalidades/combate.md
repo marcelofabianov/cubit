@@ -4,7 +4,7 @@ Números por tier: [`tiers.md`](../tiers.md#comportamento-e-combate).
 
 ## Choque
 
-Aplica um choque leve em mobs hostis próximos.
+Aplica um choque leve em mobs hostis próximos, com o som de ataque descrito em [`visual.md`](../conceito/visual.md#sons).
 
 ## Modos de defesa
 
@@ -26,6 +26,7 @@ O Cubit só ataca um mob neutro para defender o player, quando esse mob fica agr
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 21:02 | Cita o som do ataque. |
 | Marcelo Fabiano | 2026-11-05 00:12 | Usa os termos modos de defesa e mobs hostis. |
 | Marcelo Fabiano | 2026-11-04 17:26 | Esclarece a regra de mobs neutros no modo contra-atacar. |
 | Marcelo Fabiano | 2026-11-04 17:15 | Renomeia para português e atualiza os caminhos. |

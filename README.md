@@ -15,8 +15,8 @@ O Cubit segue você e ajuda em tarefas simples:
 - **Carrega itens** no próprio inventário e coleta o que está no chão, com um filtro de coleta.
 - **Funciona com bateria**, que você precisa gerenciar. Sem carga, ele desliga, e só dá para recolhê-lo ou colocar energia nele.
 - **Recarrega** no Induction Dock, uma base fixa alimentada por FE de qualquer mod ou por redstone, onde ele hiberna com o inventário acessível. Também recarrega com uma Power Bank ou redstone no slot exclusivo, ou pelo painel solar, com o céu aberto.
-- **Vira item**, mantendo bateria, vida, inventário, nome, cor, tier e configurações. Ao morrer, vira um Damaged Cubit, que não queima nem some com o tempo e se conserta com uma Toolbox.
-- **Reage ao perigo**: em chamas, procura água para se apagar; na lava, tenta sair. O dono não consegue feri-lo, exceto com o fogo de um isqueiro.
+- **Vira item**, mantendo bateria, vida, inventário, nome, cor, tier e configurações. Ao morrer, vira um Damaged Cubit, que nenhum dano destrói, não some com o tempo e se conserta com uma Toolbox.
+- **Reage ao perigo**: em chamas, procura água para se apagar; na lava ou sobre um bloco que fere, tenta sair. O dono não consegue feri-lo, exceto com o fogo de um isqueiro.
 - **Ilumina o caminho** e coloca tochas sozinho.
 - **Avisa você** sobre mobs hostis e procura os minérios que você escolher.
 - **Protege você** com um choque leve, nos modos pacífico, contra-atacar e agressivo. Nunca ataca o dono nem mobs pacíficos.
@@ -68,12 +68,12 @@ Os nomes estão em inglês porque são os que aparecem no jogo.
 | Elite Power Bank | Bateria portátil com a capacidade do tier Elite |
 | Ultimate Power Bank | Bateria portátil com a capacidade do tier Ultimate |
 
-As receitas usarão só itens do jogo puro e virão em datapack JSON, para os modpacks poderem sobrescrevê-las.
+As receitas usarão só materiais do jogo puro, podendo combinar itens do próprio mod, como no conserto, e virão em datapack JSON, para os modpacks poderem sobrescrevê-las.
 
 ## Roadmap
 
 1. **Conceito (encerrada):** persona, features e demais definições, em documentos.
-2. **Versão mínima (atual):** crafting, seguir o player, inventário, bateria, vários Cubits com um seguindo, reações a fogo e lava, Induction Dock com hibernação, recarga com redstone, virar item, morte com item danificado e conserto, e geometria mais próxima do conceito.
+2. **Versão mínima (atual):** crafting, seguir o player, inventário, bateria com consumo por situação, vários Cubits com um seguindo, `/cubit reset`, reações a fogo, lava e blocos que ferem, Induction Dock com hibernação, recarga com redstone, virar item, morte com item danificado e conserto, e geometria mais próxima do conceito.
 3. **Sentidos:** painel solar, lanterna, scanners, os nove sons, textos curtos, animações, expressões na tela, nome, cor e Jade.
 4. **Upgrades e autonomia:** tiers, Power Bank, ímã, filtros, demais slots exclusivos, choque, modos de defesa, Cubit Remote, modo área, descarga em baú, retorno automático e local de morte.
 5. **Robôs especializados (planejada):** cards de especialidade, antenas, Servidor, carregamento de chunks e storage wireless.

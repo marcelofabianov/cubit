@@ -160,7 +160,7 @@ Não há perguntas pendentes nesta fase.
 | 293 | Como foi o roteiro manual dos blocos que ferem? | Ok, executado pelo desenvolvedor, sem detalhar cada passo |
 | 294 | Qual é a fonte de FE no ambiente de dev para testar o Dock? | Nenhuma dependência nova. A redstone cobre o jogo, e a GameTest insere FE direto pela capability do bloco. O teste com cabos fica para o Iron Meridian. Substitui a pergunta 37 |
 | 295 | Como separar as funções do clique direito no Dock? | Clique: chama o Cubit ou, com um na base, libera. Shift + clique: abre a tela do Dock, com slot e energia. Clique com redstone na mão: a pilha entra no slot, como no Cubit |
-| 296 | Onde o Cubit fica na base, e qual é o formato do Dock? | Em cima de uma placa baixa, de cerca de meio bloco, com modelo próprio provisório. O Cubit sobe nela e fica centralizado |
+| 296 | Onde o Cubit fica na base, e qual é o formato do Dock? | Em cima de uma placa baixa, de cerca de meio bloco, com modelo próprio provisório. O Cubit sobe nela e fica centralizado. A pergunta 311 muda o formato |
 | 297 | O Dock tem dono? | Sim, quem o coloca. Só o dono usa o Dock e abre a tela |
 | 298 | O que acontece ao quebrar o Dock? | O item mantém a energia num data component, sem perder FE, e empilha em 1. O slot cai no chão, e o Cubit sai como numa liberação. O dono do bloco novo é quem o coloca |
 | 299 | Quem pode quebrar um Dock com dono? | Só o dono |
@@ -190,6 +190,7 @@ Não há perguntas pendentes nesta fase.
 | 327 | O que o comando responde? | `Follow link cleared.` e, sem vínculo para limpar, `No Cubit is following you.`, no `en_us.json` |
 | 328 | Em que pontos ficam os testes do `/cubit reset`? | JUnit: a regra de desligar o robô sem vínculo, na `FollowingRobotPolicy`. GameTests: limpar um vínculo perdido e o próximo robô seguir, desligar o robô ativo e um clique religá-lo, não mexer no vínculo de outro player e rodar sem permissão. Roteiro manual: digitar o comando, ver as mensagens e o caso do chunk descarregado |
 | 329 | Como foi o roteiro manual do `/cubit reset`? | Tudo certo, executado pelo desenvolvedor, sem detalhar cada passo |
+| 330 | Como corrigir o que a auditoria dos `.md` encontrou? | Em três blocos, nesta ordem: A, correção direta do que só precisa ser alinhado com as respostas; B, mudança no `AGENTS.md`; C, pontos que dependem de decisão do desenvolvedor |
 
 ### Premissas aprovadas
 
@@ -205,6 +206,7 @@ Não há perguntas pendentes nesta fase.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 21:02 | Registra a resposta 330 e aponta a 296 para a 311. |
 | Marcelo Fabiano | 2026-11-05 20:52 | Registra a resposta 329. |
 | Marcelo Fabiano | 2026-11-05 20:42 | Registra as respostas 325, 326, 327 e 328. |
 | Marcelo Fabiano | 2026-11-05 20:36 | Registra as respostas 323 e 324. |

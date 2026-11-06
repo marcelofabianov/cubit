@@ -35,7 +35,9 @@ Toda tarefa começa por uma issue, atribuída ao desenvolvedor e no milestone da
 Atualize a `develop` e crie a branch a partir dela, com o nome em inglês e em `kebab-case`:
 
 ```bash
-git fetch origin develop:develop
+git fetch origin
+git switch develop
+git merge --ff-only origin/develop
 git switch -c feature/{issue}-{slug} --no-track develop
 ```
 
@@ -183,6 +185,7 @@ O primeiro passo, separando o que está decidido do que está pendente.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 21:02 | Corrige a atualização da `develop`, que falhava com ela em uso. |
 | Marcelo Fabiano | 2026-11-05 14:35 | Deixa o merge somente com o desenvolvedor. |
 | Marcelo Fabiano | 2026-11-05 12:21 | Inclui o teste numa instância só com o mod. |
 | Marcelo Fabiano | 2026-11-05 00:12 | Cita os gates de push na preparação do ambiente. |

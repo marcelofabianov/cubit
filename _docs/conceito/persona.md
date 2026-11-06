@@ -38,7 +38,7 @@ Só em algumas situações ele mostra um texto simples e direto, na barra acima 
 | Inimigo por perto | Alerta | Bipe de alerta de inimigo |
 | Minério raro encontrado | Surpreso | Bipe de alerta de minério |
 
-O bipe padrão toca só nas trocas de expressão sem som exclusivo. Ao ligar, toca só o som de ligar. Os sons estão em [`visual.md`](visual.md#sons).
+O bipe padrão toca só nas trocas de expressão sem som exclusivo. Ao ligar, toca só o som de ligar. Os sons estão em [`visual.md`](visual.md#sons), inclusive os de ser colocado no mundo e de atacar, cujas expressões ainda não foram definidas.
 
 O barulho das esteiras ao andar é um efeito do movimento, não uma forma de comunicação.
 
@@ -50,6 +50,7 @@ O Cubit **nunca ataca o próprio dono nem mobs pacíficos**, em nenhum modo de d
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 21:02 | Cita os sons de colocar no mundo e de atacar. |
 | Marcelo Fabiano | 2026-11-05 12:08 | Cita as exceções dos cards da Fase 5. |
 | Marcelo Fabiano | 2026-11-05 00:56 | Tira a menção a magia da descrição. |
 | Marcelo Fabiano | 2026-11-05 00:17 | Define a expressão ao ligar e ao pegar fogo. |

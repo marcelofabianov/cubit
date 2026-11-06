@@ -21,7 +21,7 @@ As chaves ficam em `snake_case`. As de um robô ficam em `[{tipo}.{tier}]`, como
 | `general` | `burning_speed_multiplier` | Velocidade em chamas, sobre a do tier | 1 a 4 |
 | `general` | `full_inventory_speed_multiplier` | Velocidade com o inventário cheio, sobre a do tier | 0,1 a 1 |
 | `general` | `water_search_radius_blocks` | Busca de água em chamas | 1 a 16 |
-| `general` | `burning_wander_radius_blocks` | Alcance ao andar ao acaso em chamas | 1 a 16 |
+| `general` | `burning_wander_radius_blocks` | Alcance ao andar ao acaso em chamas e ao sair da lava ou de um bloco que fere | 1 a 16 |
 | `general` | `dock_energy_capacity` | Estoque do Induction Dock | 1 a 2147483647 |
 | `general` | `dock_input_per_tick` | Entrada do Induction Dock | 1 a 2147483647 |
 | `general` | `dock_full_heal_ticks` | Tempo para recuperar toda a vida na base | 1 a 72000 |
@@ -66,6 +66,7 @@ O mod não cai por causa do config (regra 17 do `AGENTS.md`):
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 21:02 | Acompanha o nome ampliado do alcance em `tiers.md`. |
 | Marcelo Fabiano | 2026-11-05 17:15 | Adiciona o tempo com a tela completa. |
 | Marcelo Fabiano | 2026-11-05 16:09 | Adiciona as chaves do Induction Dock. |
 | Marcelo Fabiano | 2026-11-05 14:40 | Adiciona as chaves do consumo por situação. |

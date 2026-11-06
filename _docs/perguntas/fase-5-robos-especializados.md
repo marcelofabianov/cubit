@@ -49,7 +49,7 @@ Não há perguntas pendentes nesta fase.
 | 226 | Como o item de upgrade convive com os Modules? | Mantém um Module por tier, Advanced, Elite e Ultimate, sem pular etapas. Cada um serve no Cubit, no Servidor e na antena, com clique direito, e é consumido. Os alvos são reconhecidos por interface. Os números ficam em `tiers.md`. Detalha a pergunta 224 |
 | 227 | Como o carregamento de chunks fica opcional? | Uma chave `chunk_loading_enabled` no config, ligada por padrão. Desligada, os blocos continuam existindo e guardando dados, mas ninguém carrega chunks. A opção do Servidor para o próprio chunk é outro controle, no jogo. Além disso, o Servidor mostra o log do que acontece numa antena, como o que o Cubit está fazendo e os inventários, o que justifica antena e Servidor mesmo com o carregamento desligado |
 | 228 | A regra 22 ganha exceção? | Sim, para o Servidor e as antenas da Fase 5, por ação do player e com limites no config. O `AGENTS.md` foi ajustado |
-| 229 | Como fica a viagem até o Dock? | O Dock fica obrigatoriamente no chunk do Servidor, ligado pelo controle. Com bateria baixa, o Cubit prefere um Dock livre na área. Sem ele, anda até a borda do carregado, teleporta para a borda do chunk do Servidor e caminha até o Dock, sem custo de FE. Se esse chunk estiver descarregado, espera na borda e tenta de novo a cada intervalo. Se a bateria acabar, desliga sem perder nada. Preso sem progresso, teleporta. Sem ponto seguro, aparece na frente do Dock |
+| 229 | Como fica a viagem até o Dock? | O Dock fica obrigatoriamente no chunk do Servidor, ligado pelo controle. Com bateria baixa, o Cubit prefere um Dock livre na área. Sem ele, anda até a borda do carregado, teleporta para a borda do chunk do Servidor e caminha até o Dock, sem custo de FE. Se esse chunk estiver descarregado, espera na borda e tenta de novo a cada intervalo. Se a bateria acabar, desliga sem perder nada. Preso sem progresso, teleporta. Sem ponto seguro, aparece na frente do Dock. A pergunta 243 muda onde os Docks podem ficar |
 | 230 | Como funciona o log do Servidor? | A tela mostra, por antena, robôs, tarefa, bateria, inventário e os últimos eventos, com limite no config. Os dados são enviados enquanto o chunk está carregado. Descarregado, mostra a última foto, com a hora. O controle continua só localizando. Detalha a pergunta 227 |
 | 231 | Como o storage do Cubit se liga à base? | Por um inventário virtual, salvo no mundo, por dono e canal. Um Baú Wireless na base e o upgrade do Cubit acessam o mesmo canal, de qualquer lugar e dimensão, sem carregar chunks. Um Cubit por baú, ou vários no mesmo |
 | 232 | Como escolher o canal? | Numa tela, com número e nome, como `Minérios` e `Fazenda`. A cor do corante pode colorir o bloco só como identificação |
@@ -82,6 +82,7 @@ Não há perguntas pendentes nesta fase.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 21:02 | Aponta a resposta 229 para a 243. |
 | Marcelo Fabiano | 2026-11-05 12:07 | Registra as respostas 253, 254, 255 e 256. |
 | Marcelo Fabiano | 2026-11-05 12:03 | Registra as respostas 250, 251 e 252 e aponta as 236 e 249 para elas. |
 | Marcelo Fabiano | 2026-11-05 11:57 | Registra as respostas 246, 247, 248 e 249. |

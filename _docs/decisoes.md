@@ -33,7 +33,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Validação:** toda entrega é conferida contra os documentos `.md`, e artefatos complementam essa conferência.
 - **Config e testes na Fase 2:** o config entra antes da entidade e cresce a cada etapa. As GameTests e o gate de datagen entram na etapa "Cubit no mundo".
 - **Histórico de modificações:** só os `.md` de `_docs/` têm a tabela.
-- **Ordem da Fase 2:** movimento, fogo, lava e arquivos de som já entraram. Seguem a revisão dos `.md`, o modelo e a morte com o item danificado, antes do inventário.
+- **Ordem da Fase 2:** movimento, fogo, lava, arquivos de som, revisão dos `.md`, modelo, morte com o item danificado, inventário, energia em uso, Induction Dock e `/cubit reset` já entraram. Falta o fechamento, com receitas e teste no Iron Meridian.
 - **Documento desatualizado:** o agente sempre pergunta antes de corrigir, mesmo quando a correção parece clara.
 - **Merge:** é feito somente pelo desenvolvedor.
 - **Números no roteiro manual:** ele pode citar os valores padrão como resultado esperado, e `tiers.md` prevalece.
@@ -42,7 +42,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 ## Mod
 
 - **Energia:** o Cubit só carrega pelo Induction Dock, pela Power Bank, com redstone ou pelo painel solar.
-- **Robôs especializados:** o robô atual, `cubit:general_robot`, é de uso geral. Robôs especializados são uma ideia para o futuro, fora das fases atuais, e nada pode ficar fixo de forma que comprometa essa flexibilidade.
+- **Robôs especializados:** o robô atual, `cubit:general_robot`, é de uso geral. Os robôs especializados são a Fase 5, planejada, e nada pode ficar fixo de forma que comprometa essa flexibilidade.
 - **Quantidade:** o player pode ter quantos robôs preferir, mas só um o segue. Os outros podem trabalhar em áreas. O controle remoto e a base atendem todos os robôs ligados.
 - **Robô que segue sem bateria:** mantém o vínculo e volta a seguir ao religar. Se o player ligar outro, ele vira desligado.
 - **Saída da base com outro seguindo:** o robô fica parado e desligado, como ao ser colocado.
@@ -51,7 +51,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Entidade:** a `RobotEntity` herda de `PathfinderMob`, com o dono num UUID próprio.
 - **Estado como item:** o componente `cubit:robot_state`, e o inventário em `cubit:robot_inventory`, fora do domínio.
 - **Inventário:** menu próprio, com o visual do baú do jogo. Com o config reduzido, o que não couber cai no chão.
-- **Dono:** quem coloca o robô. O item não guarda o dono. Nenhum dano atribuído a ele fere o robô. O fogo de um isqueiro continua ferindo, porque o jogo não guarda quem o acendeu.
+- **Dono:** quem coloca o robô. O item do robô não guarda o dono, e o item danificado guarda, só para o resgate no vazio. Nenhum dano atribuído a ele fere o robô. O fogo de um isqueiro continua ferindo, porque o jogo não guarda quem o acendeu.
 - **Lava:** o robô ativo que está na lava vai para o bloco seguro mais próximo. A rota continua sem entrar em lava.
 - **Blocos que ferem:** o robô ativo vai ao bloco seguro mais próximo, nas mesmas condições em que o jogo fere o player, e isso cobra o extra de condição negativa. Inativo, fica parado.
 - **Fogo:** o robô ativo em chamas anda ao acaso, mais rápido, evita perigos e nunca para enquanto houver para onde ir. Busca água só em chunks carregados, e ela precisa ter o topo livre e rota até ela. Inativo, fica parado. Ao apagar, volta a seguir. Os números estão em [`tiers.md`](tiers.md#valores-gerais).
@@ -61,9 +61,9 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Criativo:** aba própria, `cubit:main`, e colocar sempre gasta o item.
 - **Estados:** ativo (ligado), inativo (desligado) e hibernação (na base, com o inventário e os slots acessíveis).
 - **Painel solar:** só funciona com o Cubit ativo, de dia em todos os tiers e à noite só em Elite e Ultimate. Coberto por um bloco, não carrega. O clima não tem efeito, e no Nether e no End não funciona. Fica abaixo do consumo.
-- **Induction Dock:** é a base de recarga, uma placa baixa com dono, recebe energia por cabos ou redstone, sem saída, e tem um único slot, que também recarrega a Power Bank. A energia fica no item ao quebrar, e só o dono o quebra. Sem conseguir chegar, o Cubit teleporta.
+- **Induction Dock:** é a base de recarga, com torre e placa em U, 2 blocos de altura e dono, recebe energia por cabos ou redstone, sem saída, e tem um único slot, que também recarrega a Power Bank. A energia fica no item ao quebrar, e só o dono o quebra, além de um operador no modo criativo. Sem conseguir chegar, o Cubit teleporta.
 - **Recarga pela grade de craft:** o item do Cubit abaixo da carga de religar, combinado com uma Power Bank, recebe só o que falta para religar, na Fase 4.
-- **Consumo:** gasta ao andar de verdade, sem gastar parado nem empurrado.
+- **Consumo:** gasta ao andar de verdade, sem gastar parado nem empurrado. A exceção é a condição negativa, que gasta mesmo parado.
 - **Parada do robô:** uma navegação própria cancela o recálculo de rota pendente, para o robô parado não voltar a andar.
 - **Painel do slot de energia:** visual melhor e tooltips ficam para a tela própria da Fase 3.
 - **Barras de bateria:** mostram ao menos um risco enquanto houver carga e só ficam vazias com 0 FE.
@@ -82,6 +82,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 21:02 | Corrige o resumo do Dock, dos robôs especializados, da ordem da Fase 2, do dono e do consumo. |
 | Marcelo Fabiano | 2026-11-05 20:48 | Registra o comando `/cubit reset`. |
 | Marcelo Fabiano | 2026-11-05 20:36 | Define a fase do som de colocar no mundo. |
 | Marcelo Fabiano | 2026-11-05 20:26 | Registra o som de colocar no mundo. |
