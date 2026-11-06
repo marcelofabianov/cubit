@@ -27,6 +27,8 @@ Os comandos ficam no `Makefile`. Rode `make` para ver a lista.
 
 **GameTests:** ficam no pacote `gametest`, e cobrem o que está fora de `domain/` (regra 34 do `AGENTS.md`). Os testes usam as estruturas `empty.nbt` e `arena.nbt`, de `data/cubit/structure/`. O framework cerca cada estrutura com paredes e teto de barreira invisível, então a `arena`, com 24 blocos de comprimento e 8 de altura, limita o robô. Nela, o piso de pedra fica em `y=1`, porque o `y=0` relativo está uma camada abaixo da estrutura, e `helper.getEntities` não enxerga nada fora dela. Não compare posições com `helper.relativePos`, que devolve X e Z negativos: use `helper.absolutePos`.
 
+**LambDynamicLights:** é dependência obrigatória só do cliente, então o `neoforge.mods.toml` exige `lambdynlights_runtime` com `side = "CLIENT"`. Esse é o ID presente tanto no artefato de desenvolvimento quanto no jar publicado, que o traz embutido. O código compila contra a API, e o jar não leva a biblioteca. Ela só entra em `make client` e `make data`, pelo conjunto de fontes vazio `clientRun`, porque o jogo procura mods no classpath da execução e o `additionalRuntimeClasspath` não basta. O `make data` a exige porque também inicia como cliente. `make server` e `make gametest` não a carregam, o que prova que um servidor dedicado abre sem ela.
+
 Receita com mais de 3 linhas vira um script `.sh` em `scripts/`, e o `Makefile` só o chama (regra 46 do `AGENTS.md`).
 
 O primeiro build leva alguns minutos, porque baixa o JDK e prepara o Minecraft.
@@ -43,6 +45,7 @@ O primeiro build leva alguns minutos, porque baixa o JDK e prepara o Minecraft.
 | JaCoCo | Mede a cobertura de `domain/`, com mínimo de 85% | Garante a regra 34 do `AGENTS.md` |
 | Spotless com google-java-format | Formata o código Java, com recuo de 2 espaços | É o padrão mais comum em Java, sem opções para discutir (pergunta 95) |
 | Checkstyle | Confere as regras de forma do código | Reprova no build o que antes dependia da revisão (pergunta 97) |
+| LambDynamicLights `4.8.11+1.21.1` | Faz o Cubit iluminar o mundo, sem blocos de luz invisíveis | É a dependência obrigatória da regra 6 do `AGENTS.md`, na versão do Iron Meridian. Vem do repositório `maven.gegy.dev`, limitado ao grupo da biblioteca |
 
 ## Regras do Checkstyle
 
@@ -67,6 +70,7 @@ As bibliotecas de teste vêm só do Maven Central, para o build não depender do
 - **`spotlessJavaCheck`:** o código não está formatado. Rode `make format`.
 - **`checkstyleMain` ou `checkstyleTest`:** uma regra de forma do código foi violada. Corrija a causa, sem suprimir a regra.
 - **`make gametest`:** uma GameTest reprovou, e o nome dela e o motivo aparecem em `build/gametest.log`, depois de `GAME TESTS COMPLETE`. Se esse trecho não existir, o mod não carregou. Com `invalid dist` no log, código comum referenciou uma classe de cliente.
+- **`lambdynlights_runtime is not installed`:** a execução não carregou a biblioteca. Confira se ela usa o conjunto de fontes `clientRun`. Em `make server` ou `make gametest`, esse erro significa que a dependência deixou de ser só do cliente.
 - **`createMinecraftArtifacts`:** a preparação do Minecraft falhou. Rode com `--info` para ler o erro.
 - **`release version 21 not supported`:** o Gradle usou um Java sem o pacote de desenvolvimento. Confira se `gradle/gradle-daemon-jvm.properties` existe e rode `make stop`.
 
@@ -74,6 +78,7 @@ As bibliotecas de teste vêm só do Maven Central, para o build não depender do
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 13:10 | Adiciona o LambDynamicLights. |
 | Marcelo Fabiano | 2026-11-05 00:12 | Corrige o que o make data faz. |
 | Marcelo Fabiano | 2026-11-04 21:49 | Registra as barreiras das GameTests. |
 | Marcelo Fabiano | 2026-11-04 20:21 | Documenta a arena e as coordenadas das GameTests. |

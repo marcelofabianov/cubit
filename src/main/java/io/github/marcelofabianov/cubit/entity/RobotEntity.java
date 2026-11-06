@@ -1,6 +1,5 @@
 package io.github.marcelofabianov.cubit.entity;
 
-import com.mojang.logging.LogUtils;
 import io.github.marcelofabianov.cubit.CubitMod;
 import io.github.marcelofabianov.cubit.block.DockableRobot;
 import io.github.marcelofabianov.cubit.block.InductionDockBlockEntity;
@@ -25,7 +24,6 @@ import java.util.UUID;
 import java.util.function.Supplier;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.Tag;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
@@ -47,7 +45,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.pathfinder.PathType;
-import org.slf4j.Logger;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.animation.AnimatableManager;
@@ -55,14 +52,6 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
 /** A robot in the world. It adapts the game to the domain, where the rules live. */
 public final class RobotEntity extends PathfinderMob implements GeoEntity, DockableRobot {
-  private static final Logger LOGGER = LogUtils.getLogger();
-  private static final String OWNER_KEY = "Owner";
-  private static final String TIER_KEY = "Tier";
-  private static final String ENERGY_KEY = "Energy";
-  private static final String POWER_STATE_KEY = "PowerState";
-  private static final String INVENTORY_KEY = "Inventory";
-  private static final String ENERGY_SLOT_KEY = "EnergySlot";
-  private static final String NO_OWNER_MESSAGE = "Robot {} has no owner. Nobody can interact.";
   private static final double ONE_BLOCK_STEP = 1;
   private static final float BLOCKED_ROUTE = -1f;
   private static final float OPEN_ROUTE = 0f;
@@ -328,32 +317,17 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
   @Override
   public void addAdditionalSaveData(CompoundTag tag) {
     super.addAdditionalSaveData(tag);
-    if (ownerId != null) {
-      tag.putUUID(OWNER_KEY, ownerId);
-    }
-    tag.putString(TIER_KEY, tier.key());
-    tag.putLong(ENERGY_KEY, battery.charge().amount());
-    tag.putString(POWER_STATE_KEY, powerState.name());
-    tag.put(INVENTORY_KEY, inventory.save(registryAccess()));
-    tag.put(ENERGY_SLOT_KEY, inventory.energySlot().save(registryAccess()));
-    docking.save(tag);
-    SavedRobotValues.writeLastSafePosition(tag, lastSafePosition);
+    SavedRobotValues.write(tag, this);
   }
 
   @Override
   public void readAdditionalSaveData(CompoundTag tag) {
     super.readAdditionalSaveData(tag);
-    ownerId = tag.hasUUID(OWNER_KEY) ? tag.getUUID(OWNER_KEY) : null;
-    if (ownerId == null) {
-      LOGGER.warn(NO_OWNER_MESSAGE, getUUID());
-    }
-    tier = SavedRobotValues.tier(tag.getString(TIER_KEY), getUUID());
-    Energy energy = new Energy(Math.max(tag.getLong(ENERGY_KEY), 0));
-    battery = new RobotState(tier, energy, getHealth()).batteryFor(spec());
-    powerState = SavedRobotValues.powerState(tag.getString(POWER_STATE_KEY), getUUID());
-    inventory.load(
-        tag.getList(INVENTORY_KEY, Tag.TAG_COMPOUND), registryAccess(), spec().inventorySlots());
-    inventory.energySlot().load(tag.getCompound(ENERGY_SLOT_KEY), registryAccess());
+    ownerId = SavedRobotValues.owner(tag, getUUID());
+    tier = SavedRobotValues.tier(tag, getUUID());
+    battery = new RobotState(tier, SavedRobotValues.energy(tag), getHealth()).batteryFor(spec());
+    powerState = SavedRobotValues.powerState(tag, getUUID());
+    SavedRobotValues.readContents(tag, inventory, registryAccess(), spec().inventorySlots());
     docking.load(tag);
     lastSafePosition = SavedRobotValues.lastSafePosition(tag);
     RobotInteractions.applyAttributes(this);
