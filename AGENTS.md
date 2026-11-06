@@ -197,6 +197,7 @@ io.github.marcelofabianov.cubit
 │   ├── tier/               // RobotTier, TierSpec, TierCatalog (interface)
 │   ├── energy/             // Battery, PowerState (ativo, inativo, hibernação), regras de consumo e religamento
 │   ├── behavior/           // FollowDecision: seguir, parar ou teleportar; BurningAction: reagir a fogo e lava
+│   ├── dock/               // DockStock, DockStatus, DockStay, DockQueue
 │   └── ownership/          // FollowingRobotPolicy
 ├── config/                 // ModConfigSpec → implementa TierCatalog
 ├── registry/               // DeferredRegisters
@@ -204,7 +205,7 @@ io.github.marcelofabianov.cubit
 ├── item/                   // RobotItem, PowerBankItem, RobotStateComponent
 ├── block/                  // InductionDockBlock, BlockEntity
 ├── menu/                   // RobotMenu, InductionDockMenu
-├── player/                 // attachment com o UUID do robô que segue
+├── player/                 // attachment com o UUID do robô que segue, robôs mortos com o dono offline e /cubit reset
 ├── client/                 // renderer, modelo GeckoLib, tela
 └── datagen/                // receitas, loot, traduções
 ```
