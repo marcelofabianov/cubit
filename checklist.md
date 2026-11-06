@@ -53,12 +53,12 @@ A ordem é a da numeração (perguntas 356 e 365). Sons, intervalo, expressões,
 8. [ ] Alerta e surpreso em uso, que dependem dos scanners, e as reações ao renomear e pintar
 9. [x] Animações e modelo final
 10. [x] Cor do colar e indicador de bateria variando
-11. [ ] Definir o intervalo mínimo entre repetições (pergunta 149), junto dos textos
+11. [x] Definir o intervalo mínimo entre repetições (perguntas 149, 433 e 444), junto dos textos
 12. [ ] Textos curtos na barra acima da hotbar
-13. [ ] Painel solar
-14. [ ] Lanterna, com o LambDynamicLights entrando no build, e a claridade fraca da tela (pergunta 378)
+13. [ ] Painel solar, com a chave dele e a chave geral (perguntas 424 e 425)
+14. [ ] Lanterna, com a chave dela, o LambDynamicLights entrando no build e a claridade fraca da tela (perguntas 378 e 424)
 15. [ ] Confirmar a viabilidade do feixe (pergunta 17)
-16. [ ] Scanner de minérios e scanner de mobs, com os alertas
+16. [ ] Scanner de minérios e scanner de mobs, com a chave deles e os alertas
 17. [ ] Nome personalizado e cor da carcaça
 18. [ ] Jade
 19. [ ] Telas próprias do Cubit e do Induction Dock, com janelas personalizadas, textura de metal de robô e tooltips, sem o padrão do Minecraft (pergunta 371)
@@ -89,21 +89,21 @@ Sai só ao terminar todos os itens da Fase 3 (pergunta 337).
 4. [ ] Tiers Advanced, Elite e Ultimate, com config e módulos
 5. [ ] Definir as receitas dos módulos, da Power Bank e do controle
 6. [ ] Power Bank, inclusive no Dock e na grade de craft (issue #51)
-7. [ ] Ímã e filtro de coleta
+7. [ ] Ímã e coleta, com as chaves deles e o filtro em lista branca e lista negra (perguntas 422 a 424)
 8. [ ] Slots de tochas, fornalha e carregador de ferramentas
 9. [ ] Definir o custo de lanterna, ímã, scanners e tochas
 10. [ ] Choque e modos de defesa
 11. [ ] Cubit Remote: comandos, localizar e marcar área
 12. [ ] Modo área, com a altura máxima a definir
-13. [ ] Descarga em baú marcado
-14. [ ] Retorno automático
-15. [ ] Local de morte
+13. [ ] Descarga em baú marcado, com a chave dela
+14. [ ] Retorno automático, com a chave dele
+15. [ ] Local de morte, com a chave dele
 
-## Fase 5: Robôs especializados (planejada)
+## Fase 5: Trabalhos (planejada)
 
 ### Já existe
 
-1. [x] Conceito em [`robos-especializados.md`](_docs/funcionalidades/robos-especializados.md) e perguntas 190 a 256, com a 344
+1. [x] Conceito em [`trabalhos.md`](_docs/funcionalidades/trabalhos.md) e perguntas 190 a 256, com a 344
 
 ### Falta
 

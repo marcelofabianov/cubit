@@ -8,7 +8,7 @@ Este diretório concentra as perguntas do projeto, com um arquivo por fase. A pe
 | 2. Versão mínima | [`fase-2-versao-minima.md`](fase-2-versao-minima.md) |
 | 3. Sentidos | [`fase-3-sentidos.md`](fase-3-sentidos.md) |
 | 4. Upgrades e autonomia | [`fase-4-upgrades-e-autonomia.md`](fase-4-upgrades-e-autonomia.md) |
-| 5. Robôs especializados | [`fase-5-robos-especializados.md`](fase-5-robos-especializados.md) |
+| 5. Trabalhos | [`fase-5-trabalhos.md`](fase-5-trabalhos.md) |
 
 ## Como usar
 
@@ -17,12 +17,15 @@ Este diretório concentra as perguntas do projeto, com um arquivo por fase. A pe
 - **Pendentes:** têm uma recomendação, que só vale depois da resposta do desenvolvedor.
 - **Respondidas:** a resposta é registrada aqui, e o documento do assunto é atualizado junto.
 - **Fonte da verdade:** as respostas prevalecem sobre os outros documentos.
-- **Próximo número livre:** 447.
+- **Próximo número livre:** 458.
 
 ## Histórico de modificações
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 11:10 | Atualiza o próximo número livre e o nome da Fase 5. |
+| Marcelo Fabiano | 2026-11-06 11:10 | Troca 'especialidade' por 'trabalho' e 'card de especialidade' por 'card de Aprendizado de Máquina'. |
+| Marcelo Fabiano | 2026-11-06 10:56 | Atualiza o próximo número livre. |
 | Marcelo Fabiano | 2026-11-06 10:36 | Atualiza o próximo número livre. |
 | Marcelo Fabiano | 2026-11-06 10:15 | Atualiza o próximo número livre. |
 | Marcelo Fabiano | 2026-11-06 10:02 | Atualiza o próximo número livre. |

@@ -73,11 +73,11 @@ Na mesa de craft, em forma de L (pergunta 336). O desenho espelhado também vale
 - O item mantém bateria, vida, inventário, nome, cor, tier e configurações, nos *data components* do 1.21.1. As configurações são o modo de defesa, os filtros e os slots ativados ou desativados. A área, os baús marcados e a seleção no controle se perdem ao recolher.
 - O item empilha em 1 e mostra a bateria numa barra.
 - O item não entra no inventário do robô nem em shulker boxes.
-- O tipo do robô vem do próprio item, e o dono é quem o coloca. O robô ganha um UUID novo a cada colocação.
+- O dono é quem coloca o item. O robô ganha um UUID novo a cada colocação.
 
 ## Morrer e consertar
 
-- **Item por tipo:** cada tipo de robô tem o próprio item danificado. O do robô de uso geral é o `Damaged Cubit`.
+- **Item próprio:** o `Damaged Cubit`.
 - **Regras do item:** guarda o estado do robô, com o inventário preservado e a bateria zerada, e o dono, só para o resgate no vazio. Empilha em 1. Não pode ser colocado no mundo, não some com o tempo e não entra no inventário do robô nem em shulker boxes.
 - **Dano:** nenhum dano o destrói, como fogo, explosão ou cacto. Só o comando `/kill` o remove.
 - **Vazio:** cair no vazio não destrói o item, que volta para o primeiro destino possível:
@@ -88,7 +88,7 @@ Na mesa de craft, em forma de L (pergunta 336). O desenho espelhado também vale
 - **Vínculo:** a morte libera o vínculo de quem segue. Com o dono offline, o mundo anota o robô morto, e o vínculo é limpo quando o dono entra.
 - **Criativo:** o `Damaged Cubit` e a `Toolbox` ficam na aba `cubit:main`.
 - **Conserto:** combine o `Damaged Cubit` com a `Toolbox`, na grade do inventário ou na mesa de craft. O robô sai com parte da vida, conforme [`tiers.md`](tiers.md#valores-gerais), e a bateria zerada. O Induction Dock recupera o resto.
-- **Toolbox:** um só item para todos os tipos de robô, consumido a cada conserto. Empilha até 16.
+- **Toolbox:** consumida a cada conserto. Empilha até 16.
 
 ## Colocar
 
@@ -107,7 +107,14 @@ Nomes aprovados na pergunta 256. Viram contrato só quando implementados.
 | Signal Antenna | `cubit:signal_antenna` | Bloco com bateria, levado ao local de trabalho, que carrega chunks |
 | Wireless Chest | `cubit:wireless_chest` | Acessa um canal do storage wireless |
 | Wireless Storage Upgrade | A definir | Liga o Cubit Ultimate a um canal |
-| Miner, Farmer, Rancher, Defender, Organizer, Builder, Cook e Fisher Card | `cubit:miner_card` e `cubit:farmer_card`, no mesmo padrão | Cards de especialidade |
+| Machine Learning: Miner | `cubit:ml_miner` | Card de Aprendizado de Máquina do trabalho de Minerador |
+| Machine Learning: Farmer | `cubit:ml_farmer` | Do trabalho de Fazendeiro |
+| Machine Learning: Fisher | `cubit:ml_fisher` | Do trabalho de Pescador |
+| Machine Learning: Rancher | `cubit:ml_rancher` | Do trabalho de Pecuarista |
+| Machine Learning: Defender | `cubit:ml_defender` | Do trabalho de Defensor |
+| Machine Learning: Organizer | `cubit:ml_organizer` | Do trabalho de Organizador |
+| Machine Learning: Cook | `cubit:ml_cook` | Do trabalho de Cozinheiro |
+| Machine Learning: Builder | `cubit:ml_builder` | Do trabalho de Construtor |
 
 ## Contratos de save
 
@@ -143,6 +150,8 @@ O estado salvo é validado ao entrar no jogo, sem derrubá-lo (regra 17 do `AGEN
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 11:10 | Atualiza os nomes e os IDs previstos dos cards e tira o tipo de robô. |
+| Marcelo Fabiano | 2026-11-06 11:10 | Troca 'especialidade' por 'trabalho' e 'card de especialidade' por 'card de Aprendizado de Máquina'. |
 | Marcelo Fabiano | 2026-11-05 21:53 | Define quando as receitas aparecem no livro. |
 | Marcelo Fabiano | 2026-11-05 21:50 | Define a receita do Induction Dock. |
 | Marcelo Fabiano | 2026-11-05 21:47 | Define a receita do Cubit. |

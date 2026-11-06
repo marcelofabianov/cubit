@@ -27,7 +27,7 @@ Só em algumas situações ele mostra um texto simples e direto, começando com 
 | Situação | Expressão | Som |
 |---|---|---|
 | Sem nada acontecendo | Normal | Bipe padrão, ao trocar |
-| Player interage com o Cubit, de qualquer forma | Feliz | Bipe padrão, ao trocar |
+| Player abre o inventário | Feliz | Bipe padrão, ao trocar |
 | Renomeado | Feliz | Bipe padrão, ao trocar |
 | Pintado | Feliz | Bipe padrão, ao trocar |
 | Recebe um upgrade | Feliz | Bipe padrão, ao trocar |
@@ -52,12 +52,14 @@ O barulho das esteiras ao andar é um efeito do movimento, não uma forma de com
 
 ## Limites
 
-O Cubit **nunca ataca o próprio dono nem mobs pacíficos**, em nenhum modo de defesa, e só ataca mobs neutros para defender o player. Na Fase 5, o card de Pecuarista tem uma exceção, só na área de trabalho (pergunta 205), e o Defensor também protege quem está na área. As consequências para o combate estão em [`combate.md`](../funcionalidades/combate.md#quem-o-cubit-nunca-ataca).
+O Cubit **nunca ataca o próprio dono nem mobs pacíficos**, em nenhum modo de defesa, e só ataca mobs neutros para defender o player. Na Fase 5, o Aprendizado de Máquina: Pecuarista tem uma exceção, só na área de trabalho (pergunta 205), e o Defensor também protege quem está na área. As consequências para o combate estão em [`combate.md`](../funcionalidades/combate.md#quem-o-cubit-nunca-ataca).
 
 ## Histórico de modificações
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 11:15 | Limita a reação feliz a abrir o inventário, como no código. |
+| Marcelo Fabiano | 2026-11-06 11:10 | Troca 'especialidade' por 'trabalho' e 'card de especialidade' por 'card de Aprendizado de Máquina'. |
 | Marcelo Fabiano | 2026-11-06 10:15 | Adiciona os textos de dano. |
 | Marcelo Fabiano | 2026-11-06 10:06 | Define o prefixo e o lugar dos textos. |
 | Marcelo Fabiano | 2026-11-06 09:48 | Define de quem vêm os textos e o intervalo. |

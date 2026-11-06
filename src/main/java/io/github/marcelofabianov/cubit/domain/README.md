@@ -11,7 +11,7 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 | `Battery` | Capacidade e carga atual. É imutável, e cada operação devolve uma bateria nova |
 | `PowerState` | Estado do robô |
 | `PowerRules` | Regras que mudam o estado por causa da energia |
-| `RobotType` | Tipo de robô, como o de uso geral. É um dado, identificado por um ID |
+| `RobotType` | Identifica o Cubit nos IDs e no config. O robô é único, e é um dado, identificado por um ID |
 | `RobotTier` | Nível de evolução: Base, Advanced, Elite e Ultimate. A `key` é o nome usado no config e nos saves |
 | `RobotState` | O que o robô guarda ao virar item: tier, energia e vida. `damaged` e `repaired` dão o estado ao morrer e ao consertar |
 | `TierSpec` | Números de um tipo de robô num tier |
@@ -71,7 +71,7 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 - **Intervalo corre sempre:** a espera continua mesmo sem a condição, para um robô que oscila em volta do limite não repetir o aviso antes da hora.
 - **Comparação de porcentagem sem divisão:** `hasAtLeast` multiplica os dois lados, para ser exata com os valores de `tiers.md`.
 
-- **Tipo de robô é dado:** as regras recebem os números de um `TierSpec`, sem saber qual é o robô. Assim, um robô novo não muda as regras (regra 39 do `AGENTS.md`).
+- **Números por dado:** as regras recebem os números de um `TierSpec`, sem constantes no código (regra 39 do `AGENTS.md`).
 - **Upgrade:** as regras de evolução entre tiers entram na Fase 4, junto dos módulos.
 - **Estado guardado se ajusta ao config:** o config pode mudar enquanto o robô está no item, então `batteryFor` e `healthFor` limitam os valores ao `TierSpec` atual. A vida nunca fica abaixo de 1, porque um robô colocado sem vida morreria na hora.
 

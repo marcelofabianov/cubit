@@ -1,6 +1,6 @@
 # Tiers
 
-Esta é a página dos números de balanceamento. O `README.md` traz só um resumo, e o roteiro manual cita os valores padrão como resultado esperado. Os números são o ponto de partida para os testes e valem para o robô de uso geral.
+Esta é a página dos números de balanceamento. O `README.md` traz só um resumo, e o roteiro manual cita os valores padrão como resultado esperado. Os números são o ponto de partida para os testes.
 
 Os tiers são Base, Avançado, Elite e Ultimate (no jogo: Base, Advanced, Elite e Ultimate).
 
@@ -53,7 +53,7 @@ Os extras somam ao andar. O consumo só vale com o robô ativo.
 | Lanterna, ímã, scanners e colocar tochas | A definir | A definir | A definir | A definir |
 
 - **Carregador de ferramentas:** transfere energia para outro item, então não conta como gasto. A velocidade está em [slots exclusivos](#slots-exclusivos).
-- **Cards:** o custo por ação está em [robôs especializados](#robôs-especializados).
+- **Cards:** o custo por ação está em [trabalhos](#trabalhos).
 
 ## Valores gerais
 
@@ -141,13 +141,13 @@ Valem para todos os tiers e ficam no config.
 
 A fornalha gasta cerca de 20 FE por tick enquanto funde.
 
-## Robôs especializados
+## Trabalhos
 
 Planejado para a Fase 5. O tier Base não aceita cards.
 
 | Recurso | Base | Avançado | Elite | Ultimate |
 |---|---|---|---|---|
-| Card de especialidade | Bloqueado | ✔ | ✔ | ✔ |
+| Card de Aprendizado de Máquina | Bloqueado | ✔ | ✔ | ✔ |
 | Minerador equivale a picareta de | — | Ferro | Diamante | Diamante |
 | Minerador: Eficiência | — | — | III | V |
 | Minerador: Fortuna | — | — | II | III |
@@ -173,6 +173,8 @@ Planejado para a Fase 5. O tier Base não aceita cards.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 11:10 | Tira a citação ao robô de uso geral. |
+| Marcelo Fabiano | 2026-11-06 11:10 | Troca 'especialidade' por 'trabalho' e 'card de especialidade' por 'card de Aprendizado de Máquina'. |
 | Marcelo Fabiano | 2026-11-06 09:48 | Reduz a bateria crítica para 5% e define o intervalo mínimo. |
 | Marcelo Fabiano | 2026-11-06 00:40 | Aumenta a velocidade 1,0×. |
 | Marcelo Fabiano | 2026-11-06 00:28 | Adiciona o tempo dos olhos em X. |

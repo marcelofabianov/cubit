@@ -26,13 +26,14 @@ O controle lista todos os Cubits do player, sem limite de distância, com nome, 
 A área é marcada com o controle, clicando com o botão direito em dois blocos, os cantos de um volume em 3D. Os limites de [`tiers.md`](../tiers.md#autonomia), como 16×16, valem para a base, e a altura máxima fica no config.
 
 - **Sem card:** o Cubit coleta os itens do chão dentro da área, respeitando o filtro de coleta, e descarrega no baú marcado.
-- **Com card, na Fase 5:** vale [`robos-especializados.md`](robos-especializados.md).
+- **Com trabalho, na Fase 5:** vale [`trabalhos.md`](trabalhos.md).
 - **Ao recolher:** a área, os baús marcados e a seleção no controle se perdem.
 
 ## Histórico de modificações
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 11:10 | Troca 'especialidade' por 'trabalho' e 'card de especialidade' por 'card de Aprendizado de Máquina'. |
 | Marcelo Fabiano | 2026-11-05 21:34 | Define o parar, a área em 3D e o que o Cubit sem card faz nela. |
 | Marcelo Fabiano | 2026-11-05 00:12 | Usa o termo modo de defesa. |
 | Marcelo Fabiano | 2026-11-04 17:28 | Define o alcance do controle e da função de localizar. |

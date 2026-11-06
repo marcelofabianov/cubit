@@ -16,7 +16,7 @@ Números: [`tiers.md`](../tiers.md#energia) e [valores gerais](../tiers.md#valor
 | **Inativo** | Desligado, por exemplo sem bateria | Desligado | Só recolher, colocar energia no slot exclusivo ou, com bateria, ligar com o clique direito, exceto se tiver sido desligado pelo controle |
 | **Hibernação** | Na base (Induction Dock) | Desligado | Usar o inventário e os slots exclusivos, ou recolher |
 
-- **Hibernação não é o mesmo que desligado:** o Cubit carrega e continua acessível. Fora da base, ela entra na Fase 5, conforme [`robos-especializados.md`](robos-especializados.md#hibernação-fora-do-dock).
+- **Hibernação não é o mesmo que desligado:** o Cubit carrega e continua acessível. Fora da base, ela entra na Fase 5, conforme [`trabalhos.md`](trabalhos.md#hibernação-fora-do-dock).
 - **Base:** é sempre o Induction Dock, o bloco fixo de recarga.
 - **Religar:** sem bateria, com a carga mínima ele volta sozinho a ficar ativo.
 - **Sem bateria na base:** entra em hibernação logo, sem esperar a carga mínima.
@@ -121,12 +121,14 @@ O item com a bateria abaixo da carga de religar, como zerada, e com vida pode se
 
 ## Retorno automático
 
-Se o robô estiver dentro do raio da base e com a bateria baixa, mostra o texto `I need to recharge`, volta sozinho para ela e entra em hibernação.
+Se o robô estiver dentro do raio da base e com a bateria baixa, volta sozinho para ela e entra em hibernação. O Cubit que segue também mostra o texto `I need to recharge`.
 
 ## Histórico de modificações
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 11:15 | Limita o texto do retorno ao Cubit que segue. |
+| Marcelo Fabiano | 2026-11-06 11:10 | Troca 'especialidade' por 'trabalho' e 'card de especialidade' por 'card de Aprendizado de Máquina'. |
 | Marcelo Fabiano | 2026-11-05 23:49 | Cita a janela personalizada do Dock. |
 | Marcelo Fabiano | 2026-11-05 21:30 | Define a saída da base com o dono offline. |
 | Marcelo Fabiano | 2026-11-05 21:02 | Detalha a saída da base e o clique com redstone num Cubit desligado. |

@@ -6,7 +6,7 @@ Tudo que aparece no mod fica em inglês. Os documentos podem usar o termo em por
 
 | Termo nos documentos | Nome no jogo |
 |---|---|
-| Mod, família de robôs e robô de uso geral | Cubit |
+| Mod e robô | Cubit |
 | Controle remoto | Cubit Remote |
 | Cubit danificado | Damaged Cubit |
 | Caixa de ferramentas | Toolbox |
@@ -18,7 +18,11 @@ Tudo que aparece no mod fica em inglês. Os documentos podem usar o termo em por
 | Antena | Signal Antenna |
 | Baú wireless | Wireless Chest |
 | Upgrade do storage wireless | Wireless Storage Upgrade |
-| Card de especialidade | Miner, Farmer, Rancher, Defender, Organizer, Builder, Cook e Fisher Card |
+| Trabalho | Job |
+| Aba Trabalho | Job tab |
+| Card de Aprendizado de Máquina | Machine Learning card |
+| Aprendizado de Máquina: Minerador, Fazendeiro, Pescador, Pecuarista, Defensor, Organizador, Cozinheiro e Construtor | Machine Learning: Miner, Farmer, Fisher, Rancher, Defender, Organizer, Cook e Builder |
+| Generalista | Generalist |
 | Pacífico | Peaceful |
 | Contra-atacar | Retaliate |
 | Agressivo | Aggressive |
@@ -38,14 +42,17 @@ Os IDs estão em [`itens.md`](itens.md).
 - **Ativo:** Cubit ligado, fora da base.
 - **Inativo:** Cubit desligado.
 - **Hibernação:** Cubit imóvel, sem tarefas, com o inventário e as configurações acessíveis. Na base, ele carrega e sai sozinho. Fora dela, na Fase 5, só volta pelo botão `Retomar` ou pelo controle.
-- **Especialidade:** o que um card ensina a um Cubit, na Fase 5.
+- **Trabalho:** o que um card de Aprendizado de Máquina ensina ao Cubit, na Fase 5. Sem card, ele é generalista.
+- **Cubit com trabalho:** o Cubit com um card no slot. O robô é sempre o mesmo.
 - **Área de trabalho:** volume marcado com o controle, onde o card age.
-- **Slot exclusivo:** slot reservado para tochas, fornalha, carregador de ferramentas ou energia (Power Bank ou redstone) e, na Fase 5, para o card de especialidade.
+- **Slot exclusivo:** slot reservado para tochas, fornalha, carregador de ferramentas ou energia (Power Bank ou redstone) e, na Fase 5, para o card de Aprendizado de Máquina.
 
 ## Histórico de modificações
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 11:10 | Adiciona trabalho, aba Trabalho e o robô único. |
+| Marcelo Fabiano | 2026-11-06 11:10 | Troca 'especialidade' por 'trabalho' e 'card de especialidade' por 'card de Aprendizado de Máquina'. |
 | Marcelo Fabiano | 2026-11-05 21:02 | Adiciona vínculo, condição negativa, bloco que fere e o upgrade do storage, e cita o slot do card. |
 | Marcelo Fabiano | 2026-11-05 12:08 | Adiciona os termos dos robôs especializados e amplia a hibernação. |
 | Marcelo Fabiano | 2026-11-05 00:12 | Adiciona o Cubit danificado, a caixa de ferramentas, o Dock e o Avançado. |
