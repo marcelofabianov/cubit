@@ -251,6 +251,7 @@ public final class InventoryGameTests {
         robot.inventory(),
         robot.energySlot(),
         () -> 0,
+        () -> 0,
         robot::canUseInventory);
   }
 

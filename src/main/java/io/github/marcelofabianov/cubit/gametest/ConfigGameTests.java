@@ -46,6 +46,14 @@ public final class ConfigGameTests {
   private static final String RADIUS_KEY = "general_robot.base.call_radius_blocks";
   private static final String WAKE_CHARGE_KEY = "general.wake_charge_percent";
   private static final int WAKE_CHARGE = 5;
+  private static final String CRITICAL_CHARGE_KEY = "general.critical_charge_percent";
+  private static final int CRITICAL_CHARGE = 10;
+  private static final String WORRIED_TICKS_KEY = "general.worried_expression_ticks";
+  private static final int WORRIED_TICKS = 60;
+  private static final String HURT_TICKS_KEY = "general.hurt_expression_ticks";
+  private static final int HURT_TICKS = 100;
+  private static final String HAPPY_TICKS_KEY = "general.happy_expression_ticks";
+  private static final int HAPPY_TICKS = 60;
   private static final int INITIAL_CHARGE = 25;
   private static final int BATTERY = 300_000;
   private static final int CONSUMPTION = 15;
@@ -81,6 +89,9 @@ public final class ConfigGameTests {
       Map.of(
           INITIAL_CHARGE_KEY, INITIAL_CHARGE,
           WAKE_CHARGE_KEY, WAKE_CHARGE,
+          CRITICAL_CHARGE_KEY, CRITICAL_CHARGE,
+          HAPPY_TICKS_KEY, HAPPY_TICKS,
+          WORRIED_TICKS_KEY, WORRIED_TICKS,
           REPATH_KEY, REPATH,
           STOP_KEY, STOP,
           TELEPORT_KEY, TELEPORT,

@@ -3,6 +3,7 @@ package io.github.marcelofabianov.cubit.entity;
 import io.github.marcelofabianov.cubit.CubitMod;
 import io.github.marcelofabianov.cubit.domain.energy.PowerState;
 import io.github.marcelofabianov.cubit.domain.ownership.FollowingOutcome;
+import io.github.marcelofabianov.cubit.domain.robot.HealthLevel;
 import io.github.marcelofabianov.cubit.domain.tier.TierSpec;
 import io.github.marcelofabianov.cubit.menu.RobotMenu;
 import io.github.marcelofabianov.cubit.player.FollowingRobotLink;
@@ -18,6 +19,8 @@ import net.minecraft.world.item.ItemStack;
 
 /** What the owner does to a robot with a click. The rules live in the domain. */
 final class RobotInteractions {
+  private static final double INVENTORY_REACH_MARGIN = 4;
+
   private RobotInteractions() {}
 
   static InteractionResult openInventory(RobotEntity robot, Player player) {
@@ -27,6 +30,7 @@ final class RobotInteractions {
         robot.inventory(),
         robot.energySlot(),
         robot::batteryPercent,
+        () -> HealthLevel.percent(robot.getHealth(), robot.getMaxHealth()),
         robot::canUseInventory);
     return InteractionResult.CONSUME;
   }
@@ -57,6 +61,22 @@ final class RobotInteractions {
         .setBaseValue(CubitMod.CONFIG.followDecision().teleportDistanceBlocks());
   }
 
+  /** The player this robot follows right now, when that player is online. */
+  static Player followedPlayer(RobotEntity robot) {
+    Player owner = robot.onlineOwner();
+    if (owner == null || !RobotEntity.follower(owner).filter(robot.getUUID()::equals).isPresent()) {
+      return null;
+    }
+    return owner;
+  }
+
+  static boolean canUseInventory(RobotEntity robot, Player player) {
+    return robot.isAlive()
+        && robot.powerState().isInteractive()
+        && robot.ownerId().filter(player.getUUID()::equals).isPresent()
+        && player.canInteractWithEntity(robot, INVENTORY_REACH_MARGIN);
+  }
+
   static InteractionResult use(RobotEntity robot, Player player, InteractionHand hand) {
     if (!robot.ownerId().filter(player.getUUID()::equals).isPresent()) {
       return InteractionResult.PASS;
@@ -65,6 +85,7 @@ final class RobotInteractions {
       return collect(robot, player);
     }
     if (robot.powerState().isInteractive()) {
+      robot.face().onInteraction();
       return openInventory(robot, player);
     }
     if (robot.robotInventory().energySlot().insert(player.getItemInHand(hand))) {

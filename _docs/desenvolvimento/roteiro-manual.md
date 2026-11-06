@@ -212,6 +212,36 @@ Com o volume geral e o de "Criaturas amigáveis" ligados nas opções do jogo. P
 | 13 | Abaixe "Criaturas amigáveis" nas opções | Os sons do Cubit abaixam |
 | 14 | Rode `make server` | O servidor abre sem erro de classe de cliente |
 
+## Expressões
+
+Compare com as imagens em `_docs/imagens/conceito/png/`, com os nomes `expressao-*.png`. Para a carga, use `/data merge entity @e[type=cubit:general_robot,limit=1,sort=nearest] {Energy:20000L}`.
+
+| # | Faça | Espere |
+|---|---|---|
+| 1 | Coloque um robô | Expressão feliz, com arcos e bochechas, por cerca de 3 s, e depois a normal, com bipe. Só o som de colocar no início |
+| 2 | Olhe de frente, com luz normal | A tela fica centralizada na moldura, sem vazar para o corpo e sem imagem espelhada |
+| 3 | Botão direito para abrir o inventário | Bipe e expressão feliz, e volta à normal com outro bipe |
+| 4 | Vá para um lugar escuro, com `/time set midnight` | A tela continua brilhando, e o corpo escurece |
+| 5 | Rode o comando de carga acima | Expressão de sono, com a bateria e os "Z" no lado certo, e bipe |
+| 6 | Abra o inventário nesse estado | Continua no sono |
+| 7 | Coloque um segundo robô | Tela apagada, sem brilho no escuro, e antenas com a ponta cinza |
+| 8 | Clique nesse robô | Normal, sem bipe, com o som de ligar. O primeiro apaga |
+| 9 | Coloque um Cubit no Dock com energia | Expressão carregando, com o raio |
+| 10 | Veja o robô de longe, em volta | Sem falhas de desenho, e a tela só na frente |
+| 11 | Fique parado perto de um robô, na expressão normal, por 15 s | Ele pisca a cada cerca de 5 s, rápido e sem bipe |
+| 12 | Coloque um segundo robô ligado longe do primeiro, e compare | Eles não piscam ao mesmo tempo |
+| 13 | Suba uma escada com ele seguindo | Os olhos olham para cima durante a subida e voltam ao centro cerca de 0,5 s depois |
+| 14 | Desça a escada e pule de um degrau alto | Os olhos olham para baixo e voltam ao centro |
+| 15 | Ande no plano | Os olhos ficam no centro, sem tremer |
+| 16 | Em sobrevivência, com outro robô, ou pondo fogo nele, cause dano num robô ligado | Olho triste com lágrima por cerca de 5 s depois do último dano, com o curto elétrico no lugar do som de dano do jogo e sem bipe. Em chamas, só o loop, sem repetição a cada golpe |
+| 17 | Rode `/data merge entity @e[type=cubit:general_robot,limit=1,sort=nearest] {Health:3f}` e cause um dano pequeno | Olhos em X vermelhos por cerca de 3 s, depois a lágrima até os 5 s, e depois a normal |
+| 18 | Coloque esse robô na base | Carregando. Quando a vida subir de 10%, sai da expressão em X |
+| 19 | Com a tela do inventário aberta, leve o robô a perder vida, com fogo por exemplo, e olhe o painel | A barra vermelha, à esquerda da verde, desce junto da vida, e a verde continua igual |
+| 20 | Em modo sobrevivência, com o robô seguindo a menos de 16 blocos, leve dano, por queda ou de um mob | Olhos de preocupado, com a gota de suor, por cerca de 3 s, sem som e sem bipe |
+| 21 | Afaste-se mais de 16 blocos do robô, sem ele seguir por perto, e leve dano | Ele não fica preocupado |
+
+Alerta e surpreso só aparecem com os scanners.
+
 ## Morte e conserto
 
 Use `/kill @e[type=cubit:general_robot,limit=1,sort=nearest]` para matar o robô.
@@ -241,6 +271,14 @@ Use `/kill @e[type=cubit:general_robot,limit=1,sort=nearest]` para matar o robô
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 00:28 | Define o tempo dos olhos em X e ordena os passos. |
+| Marcelo Fabiano | 2026-11-06 00:22 | Adiciona a expressão de preocupado. |
+| Marcelo Fabiano | 2026-11-06 00:20 | Adiciona a barra de vida. |
+| Marcelo Fabiano | 2026-11-06 00:17 | Aumenta o tempo da expressão triste. |
+| Marcelo Fabiano | 2026-11-06 00:12 | Define o som ao levar dano. |
+| Marcelo Fabiano | 2026-11-06 00:10 | Adiciona as expressões triste e quase morto. |
+| Marcelo Fabiano | 2026-11-05 23:58 | Adiciona a piscada e o olhar. |
+| Marcelo Fabiano | 2026-11-05 23:36 | Adiciona as expressões. |
 | Marcelo Fabiano | 2026-11-05 22:44 | Adiciona os sons. |
 | Marcelo Fabiano | 2026-11-05 21:53 | Adiciona as receitas do Cubit e do Induction Dock. |
 | Marcelo Fabiano | 2026-11-05 20:42 | Adiciona o comando `/cubit reset`. |

@@ -54,6 +54,10 @@ public record Battery(Energy capacity, Energy charge) {
     return charge.equals(capacity);
   }
 
+  public boolean hasAtMost(Percentage percentage) {
+    return charge.amount() * Percentage.MAX <= capacity.amount() * percentage.value();
+  }
+
   public boolean hasAtLeast(Percentage percentage) {
     return charge.amount() * Percentage.MAX >= capacity.amount() * percentage.value();
   }
