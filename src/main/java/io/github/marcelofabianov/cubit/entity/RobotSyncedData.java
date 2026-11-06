@@ -2,6 +2,8 @@ package io.github.marcelofabianov.cubit.entity;
 
 import io.github.marcelofabianov.cubit.domain.behavior.GazeDirection;
 import io.github.marcelofabianov.cubit.domain.behavior.RobotExpression;
+import io.github.marcelofabianov.cubit.domain.energy.BatteryIndicator;
+import io.github.marcelofabianov.cubit.domain.tier.RobotTier;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -22,6 +24,10 @@ final class RobotSyncedData {
       SynchedEntityData.defineId(RobotEntity.class, EntityDataSerializers.BYTE);
   static final EntityDataAccessor<Byte> OWNER_LEVEL =
       SynchedEntityData.defineId(RobotEntity.class, EntityDataSerializers.BYTE);
+  static final EntityDataAccessor<Byte> TIER =
+      SynchedEntityData.defineId(RobotEntity.class, EntityDataSerializers.BYTE);
+  static final EntityDataAccessor<Byte> BATTERY_INDICATOR =
+      SynchedEntityData.defineId(RobotEntity.class, EntityDataSerializers.BYTE);
 
   private RobotSyncedData() {}
 
@@ -33,5 +39,7 @@ final class RobotSyncedData {
     builder.define(EXPRESSION, (byte) RobotExpression.OFF.ordinal());
     builder.define(OWNER_GAZE, (byte) GazeDirection.LEVEL.ordinal());
     builder.define(OWNER_LEVEL, (byte) GazeDirection.LEVEL.ordinal());
+    builder.define(TIER, (byte) RobotTier.BASE.ordinal());
+    builder.define(BATTERY_INDICATOR, (byte) BatteryIndicator.EMPTY.ordinal());
   }
 }

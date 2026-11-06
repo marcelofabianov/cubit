@@ -11,5 +11,10 @@ public enum RobotExpression {
   OFF,
   HURT,
   DYING,
-  WORRIED
+  WORRIED;
+
+  /** The screen and the battery indicator glow in the dark only while the screen is on. */
+  public boolean glows() {
+    return this != OFF;
+  }
 }

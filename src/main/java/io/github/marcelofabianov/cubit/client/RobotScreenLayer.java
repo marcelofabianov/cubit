@@ -85,10 +85,12 @@ final class RobotScreenLayer extends GeoRenderLayer<RobotEntity> {
       int packedOverlay) {
     RobotExpression expression = RobotFace.expression(robot);
     ResourceLocation texture = textureOf(robot, expression);
-    boolean lit = expression == RobotExpression.OFF;
+    boolean glows = expression.glows();
     RenderType type =
-        lit ? RenderType.entityTranslucent(texture) : RenderType.entityTranslucentEmissive(texture);
-    int light = lit ? packedLight : LightTexture.FULL_BRIGHT;
+        glows
+            ? RenderType.entityTranslucentEmissive(texture)
+            : RenderType.entityTranslucent(texture);
+    int light = glows ? LightTexture.FULL_BRIGHT : packedLight;
     getRenderer()
         .reRender(
             model,
