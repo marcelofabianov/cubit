@@ -2,9 +2,12 @@ package io.github.marcelofabianov.cubit.client;
 
 import io.github.marcelofabianov.cubit.CubitMod;
 import io.github.marcelofabianov.cubit.config.CubitConfig;
+import io.github.marcelofabianov.cubit.item.RobotItem;
 import io.github.marcelofabianov.cubit.network.CubitNetwork;
 import io.github.marcelofabianov.cubit.registry.CubitEntities;
+import io.github.marcelofabianov.cubit.registry.CubitItems;
 import io.github.marcelofabianov.cubit.registry.CubitMenus;
+import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -25,6 +28,11 @@ public final class CubitClient {
   @SubscribeEvent
   public static void setup(FMLClientSetupEvent event) {
     CubitNetwork.setNoticeDisplay(RobotNoticeOverlay::show);
+    event.enqueueWork(() ->
+        ItemProperties.register(
+            CubitItems.GENERAL_ROBOT.get(),
+            RobotItem.COLOR_PROPERTY,
+            (stack, level, entity, seed) -> RobotItem.iconColor(stack)));
   }
 
   /** Above the message of the game, because the height of the bars is only known by then. */

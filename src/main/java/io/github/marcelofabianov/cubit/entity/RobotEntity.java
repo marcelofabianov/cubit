@@ -24,6 +24,7 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.function.Supplier;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.MinecraftServer;
@@ -129,6 +130,8 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
     lastSafePosition = blockPosition();
     inventory.readFrom(item, spec.inventorySlots());
     lamp.setSwitchedOn(state.lampOn());
+    RobotLooks.setColor(this, state.color());
+    setCustomName(item.get(DataComponents.CUSTOM_NAME));
 
     FollowingOutcome outcome = policy().onArrival(getUUID(), follower(player), battery);
     powerState = outcome.state();
@@ -138,7 +141,8 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
   }
 
   public RobotState state() {
-    return new RobotState(tier, battery.charge(), getHealth(), lamp.switchedOn());
+    return new RobotState(
+        tier, battery.charge(), getHealth(), lamp.switchedOn(), RobotLooks.color(this));
   }
 
   public PowerState powerState() {
@@ -340,8 +344,15 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
     SavedRobotValues.readContents(tag, inventory, registryAccess(), spec().inventorySlots());
     docking.load(tag);
     lamp.setSwitchedOn(SavedRobotValues.lampOn(tag));
+    RobotLooks.setColor(this, SavedRobotValues.color(tag, getUUID()));
     lastSafePosition = SavedRobotValues.lastSafePosition(tag);
     RobotInteractions.applyAttributes(this);
+  }
+
+  /** Asked here, so a robot named before this rule also shows its name. */
+  @Override
+  public boolean isCustomNameVisible() {
+    return hasCustomName();
   }
 
   /** Hibernating robots stay in place, or the plate would no longer hold them. */

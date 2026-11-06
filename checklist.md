@@ -36,7 +36,7 @@ O que está pronto e o que falta em cada fase do projeto. As fases estão no [`R
 
 ## Fase 3: Sentidos (atual)
 
-A ordem é a da numeração (perguntas 356 e 365). Sons, intervalo, expressões, colar e textos entram em partes, e um item só é marcado quando estiver completo na Fase 3.
+A ordem é a da numeração (perguntas 356 e 365), com a lanterna antes do painel solar (pergunta 458) e o item 17 antes do 16 (pergunta 504). Sons, intervalo, expressões, colar e textos entram em partes, e um item só é marcado quando estiver completo na Fase 3.
 
 ### Já existe
 
@@ -55,7 +55,7 @@ A ordem é a da numeração (perguntas 356 e 365). Sons, intervalo, expressões,
 10. [x] Cor do colar e indicador de bateria variando
 11. [x] Definir o intervalo mínimo entre repetições (perguntas 149, 433 e 444), junto dos textos
 12. [ ] Textos curtos na barra acima da hotbar
-13. [ ] Painel solar, sem as chaves, que entram com a interface de configuração (perguntas 494 e 495)
+13. [x] Painel solar, sem as chaves, que entram com a interface de configuração (perguntas 494 e 495)
 14. [x] Lanterna, com a chave dela, o LambDynamicLights entrando no build e a claridade fraca da tela (perguntas 378 e 424)
 15. [x] Feixe: saiu da Fase 3 e foi para o Minerador, na Fase 5 (pergunta 463)
 16. [ ] Scanner de minérios e scanner de mobs, com a chave deles e os alertas

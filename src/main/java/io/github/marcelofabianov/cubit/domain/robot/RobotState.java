@@ -10,7 +10,8 @@ import io.github.marcelofabianov.cubit.domain.tier.TierSpec;
  * What a robot keeps when it becomes an item. The config may change while a robot is stored, so the
  * numbers are only valid after being fitted to a {@link TierSpec}.
  */
-public record RobotState(RobotTier tier, Energy energy, float health, boolean lampOn) {
+public record RobotState(
+    RobotTier tier, Energy energy, float health, boolean lampOn, RobotColor color) {
   private static final String INVALID_HEALTH_MESSAGE = "Invalid robot health: ";
   private static final float MIN_PLACED_HEALTH = 1f;
 
@@ -25,18 +26,27 @@ public record RobotState(RobotTier tier, Energy energy, float health, boolean la
     this(tier, energy, health, true);
   }
 
+  /** The shell starts white, also for what was saved before the colors existed. */
+  public RobotState(RobotTier tier, Energy energy, float health, boolean lampOn) {
+    this(tier, energy, health, lampOn, RobotColor.WHITE);
+  }
+
   public static RobotState initial(RobotTier tier, TierSpec spec, Percentage initialCharge) {
     return new RobotState(tier, spec.newBattery(initialCharge).charge(), spec.maxHealth());
   }
 
-  /** What a robot keeps when it dies: the tier, without energy or health. */
+  /** What a robot keeps when it dies: the tier and the looks, without energy or health. */
   public RobotState damaged() {
-    return new RobotState(tier, Energy.ZERO, 0f, lampOn);
+    return new RobotState(tier, Energy.ZERO, 0f, lampOn, color);
   }
 
   public RobotState repaired(TierSpec spec, Percentage health) {
     return new RobotState(
-        tier, Energy.ZERO, (float) spec.maxHealth() * health.value() / Percentage.MAX, lampOn);
+        tier,
+        Energy.ZERO,
+        (float) spec.maxHealth() * health.value() / Percentage.MAX,
+        lampOn,
+        color);
   }
 
   public Battery batteryFor(TierSpec spec) {

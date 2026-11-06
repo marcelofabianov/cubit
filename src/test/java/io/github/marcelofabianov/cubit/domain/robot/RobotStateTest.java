@@ -45,6 +45,25 @@ class RobotStateTest {
           new SolarOutput(Energy.ZERO, Energy.ZERO));
 
   @Test
+  void aNewRobotIsWhite() {
+    RobotState state = RobotState.initial(RobotTier.BASE, SPEC, new Percentage(INITIAL_PERCENT));
+
+    assertEquals(RobotColor.WHITE, state.color());
+  }
+
+  @Test
+  void dyingAndBeingRepairedKeepTheColor() {
+    RobotState painted =
+        new RobotState(RobotTier.BASE, SOME_ENERGY, SOME_HEALTH, true, RobotColor.RED);
+
+    RobotState damaged = painted.damaged();
+    RobotState repaired = damaged.repaired(SPEC, new Percentage(REPAIR_PERCENT));
+
+    assertEquals(RobotColor.RED, damaged.color());
+    assertEquals(RobotColor.RED, repaired.color());
+  }
+
+  @Test
   void newRobotHasTheInitialChargeAndFullHealth() {
     RobotState state = RobotState.initial(RobotTier.BASE, SPEC, new Percentage(INITIAL_PERCENT));
 

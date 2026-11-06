@@ -10,11 +10,13 @@ import io.github.marcelofabianov.cubit.player.FollowingRobotLink;
 import io.github.marcelofabianov.cubit.registry.CubitAttachments;
 import io.github.marcelofabianov.cubit.registry.CubitDataComponents;
 import java.util.UUID;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.DyeItem;
 import net.minecraft.world.item.ItemStack;
 
 /** What the owner does to a robot with a click. The rules live in the domain. */
@@ -85,6 +87,9 @@ final class RobotInteractions {
     if (player.isShiftKeyDown()) {
       return collect(robot, player);
     }
+    if (player.getItemInHand(hand).getItem() instanceof DyeItem dye) {
+      return RobotPaint.apply(robot, player, player.getItemInHand(hand), dye);
+    }
     if (robot.powerState().isInteractive()) {
       robot.face().onInteraction();
       return openInventory(robot, player);
@@ -98,6 +103,7 @@ final class RobotInteractions {
   static InteractionResult collect(RobotEntity robot, Player player) {
     ItemStack stack = new ItemStack(robot.itemType());
     stack.set(CubitDataComponents.ROBOT_STATE.get(), robot.state());
+    stack.set(DataComponents.CUSTOM_NAME, robot.getCustomName());
     robot.robotInventory().writeTo(stack);
     robot.robotInventory().clear();
     player.setData(

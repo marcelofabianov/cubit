@@ -8,7 +8,7 @@ As imagens individuais estão em [`_docs/imagens/conceito/`](../imagens/conceito
 
 - **Moderno, fofo e doce:** um cubo branco arredondado com uma tela no rosto onde os olhos são luzes, antenas, braços com garras e **esteiras** no lugar dos pés.
 - **Colar** no pescoço com a cor do tier. As cores estão em [`tiers.md`](../tiers.md).
-- **Carcaça** com cor trocável por corantes.
+- **Carcaça** com cor trocável por corantes, em [16 cores](../funcionalidades/personalizacao.md).
 - O conceito atual é a base. O modelo final tem **design próprio**, para o mod poder ser publicado. A geometria melhora já na Fase 2, mais próxima das imagens de conceito, e as animações e as expressões seguem na Fase 3.
 - Modelo e animações com **GeckoLib**, dependência obrigatória: andar, virar o corpo, mover os braços e trocar a expressão da tela.
 - **Modelo na Fase 2:** traz os detalhes das seis vistas e o ícone do item, com tudo fixo: colar cinza, olhos normais e bateria sem variação. A textura tem 128×128, com 2 pixels por unidade, e a hitbox não muda, então braços e antenas passam um pouco dela.
@@ -70,13 +70,14 @@ Tocam todos, menos os alertas, que entram com os scanners, e o ataque e o modo a
 ## Identificação
 
 - **Ícone do mod:** tem o mesmo desenho do ícone do item, em `textures/gui/mod_logo.png`, sem borrar os pixels. O arquivo é separado porque a tela de Mods sempre encaixa o logo numa altura de 50 pixels, então o tamanho vem da margem transparente, e 25×25 dá a escala exata de 2×. Ao mudar o ícone do item, atualize também este arquivo.
-- **Nome personalizado** com bigorna ou etiqueta, aparecendo no Jade.
+- **Nome personalizado** com bigorna ou etiqueta, sempre visível acima do Cubit e, depois, no Jade.
 - **Jade:** mostrar nome, tier, bateria e modo atual.
 
 ## Histórico de modificações
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 15:58 | Aponta a cor e o nome para a personalização. |
 | Marcelo Fabiano | 2026-11-06 15:16 | Tira o vidro do painel. |
 | Marcelo Fabiano | 2026-11-06 15:05 | Adiciona o relevo do painel, a fita maior e as faixas dos braços. |
 | Marcelo Fabiano | 2026-11-06 14:15 | Abre os braços. |

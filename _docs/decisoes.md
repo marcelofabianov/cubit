@@ -84,7 +84,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Ao colocar no mundo:** toca só o som de colocar. O de ligar fica para a passagem de desligado a ligado.
 - **Margem das telas:** os 4 blocos ficam em constante, fora do config, porque seguem o padrão do jogo.
 - **Ao atacar:** mantém a expressão atual, com o som de ataque.
-- **Ordem da Fase 3:** a do [`checklist.md`](../checklist.md), com o intervalo mínimo junto dos textos e alguns itens entrando em partes, até os scanners ligarem o resto.
+- **Ordem da Fase 3:** a do [`checklist.md`](../checklist.md), com a personalização antes dos scanners (pergunta 504), com o intervalo mínimo junto dos textos e alguns itens entrando em partes, até os scanners ligarem o resto.
 - **Expressões:** camada própria da tela, com 8× a resolução do corpo, recortada do conceito, e brilho no escuro. Ordem: tela apagada, carregando, quase morto, triste, preocupado, alerta, surpreso, sono, feliz e normal.
 - **Piscada e olhar:** só na expressão normal, no cliente e sem bipe: pisca a cada 5 s, e os olhos acompanham a subida e a descida.
 - **Comunicação:** bipes e expressões, com poucos textos simples e diretos.
@@ -94,6 +94,8 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Olhar para o dono:** na expressão normal, os olhos reagem a pulo, queda rápida e dono em outro nível, até 8 blocos, e o movimento do próprio robô vence. Com o dono em outro nível, o corpo também inclina cerca de 8°, mas não num pulo.
 - **Colar:** o robô no mundo usa a cor do tier, numa camada por tier. Os ícones ficam cinza até os módulos, na Fase 4.
 - **Indicador de bateria:** mostra a carga real em qualquer estado, com 4 níveis em alta resolução, verde e vermelho na bateria crítica, e brilha só com a tela acesa.
+- **Cor da carcaça:** 16 cores dos corantes, com uma textura por cor, em qualquer estado, só pelo dono, gastando 1 corante. O branco volta ao original. Fita e faixas seguem o tier, e só o ícone do Cubit muda de cor.
+- **Nome:** com etiqueta, só do dono, ou na bigorna, e sempre visível acima do Cubit.
 - **Tronco central:** a coluna entre as esteiras e a carcaça tem 2 unidades de altura, e a hitbox não muda.
 - **Trabalhos (Fase 5, planejada):** um único Cubit, com um card por vez, age só em área marcada e nunca sai dela. Antena e Servidor mantêm os chunks carregados, de forma opcional. Sem chunk de destino, ele espera. O detalhe está em [`trabalhos.md`](funcionalidades/trabalhos.md).
 - **Limites:** nunca ataca o dono nem mobs pacíficos. Só ataca mobs neutros para defender o player.
@@ -109,6 +111,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 15:58 | Registra a cor, o nome e a ordem da personalização. |
 | Marcelo Fabiano | 2026-11-06 15:05 | Registra o vidro, o sinal e a chave do painel solar. |
 | Marcelo Fabiano | 2026-11-06 13:57 | Registra o halo e o brilho dos olhos. |
 | Marcelo Fabiano | 2026-11-06 13:34 | Registra a lanterna, a claridade da tela e o feixe. |

@@ -4,6 +4,7 @@ import com.mojang.logging.LogUtils;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import io.github.marcelofabianov.cubit.domain.energy.Energy;
+import io.github.marcelofabianov.cubit.domain.robot.RobotColor;
 import io.github.marcelofabianov.cubit.domain.robot.RobotState;
 import io.github.marcelofabianov.cubit.domain.tier.RobotTier;
 import io.netty.buffer.ByteBuf;
@@ -22,10 +23,14 @@ public final class RobotStateComponent {
   private static final String HEALTH_FIELD = "health";
   private static final String LAMP_FIELD = "lamp_enabled";
   private static final boolean LAMP_DEFAULT = true;
+  private static final String COLOR_FIELD = "color";
+  private static final String UNKNOWN_COLOR_MESSAGE = "Unknown robot color {}. Using white.";
   private static final String UNKNOWN_TIER_MESSAGE = "Unknown robot tier {}. Using the base tier.";
 
   private static final Codec<RobotTier> TIER_CODEC =
       Codec.STRING.xmap(RobotStateComponent::tierFromKey, RobotTier::key);
+  private static final Codec<RobotColor> COLOR_CODEC =
+      Codec.STRING.xmap(RobotStateComponent::colorFromKey, RobotColor::key);
   private static final Codec<Energy> ENERGY_CODEC =
       Codec.LONG.xmap(amount -> new Energy(Math.max(amount, 0)), Energy::amount);
   private static final Codec<Float> HEALTH_CODEC =
@@ -40,7 +45,10 @@ public final class RobotStateComponent {
                   HEALTH_CODEC.fieldOf(HEALTH_FIELD).forGetter(RobotState::health),
                   Codec.BOOL
                       .optionalFieldOf(LAMP_FIELD, LAMP_DEFAULT)
-                      .forGetter(RobotState::lampOn))
+                      .forGetter(RobotState::lampOn),
+                  COLOR_CODEC
+                      .optionalFieldOf(COLOR_FIELD, RobotColor.WHITE)
+                      .forGetter(RobotState::color))
               .apply(instance, RobotState::new));
 
   public static final StreamCodec<ByteBuf, RobotState> STREAM_CODEC =
@@ -53,6 +61,14 @@ public final class RobotStateComponent {
         .orElseGet(() -> {
           LOGGER.warn(UNKNOWN_TIER_MESSAGE, key);
           return RobotTier.BASE;
+        });
+  }
+
+  private static RobotColor colorFromKey(String key) {
+    return RobotColor.fromKey(key)
+        .orElseGet(() -> {
+          LOGGER.warn(UNKNOWN_COLOR_MESSAGE, key);
+          return RobotColor.WHITE;
         });
   }
 
