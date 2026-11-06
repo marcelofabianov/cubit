@@ -34,6 +34,22 @@
 | 321 | O nome `placed.ogg` e o momento "ao ser colocado no mundo" estão certos? | Sim. Detalha a pergunta 320 |
 | 322 | Em que fase o som de colocar no mundo passa a tocar? | Na Fase 3, junto dos outros oito. Detalha a pergunta 320 |
 | 421 | Como foi o roteiro manual do colar, do indicador de bateria e do tronco central com +0,5? | Teste finalizado, tudo ok, executado pelo desenvolvedor, sem detalhar cada passo. Ele não pediu +1, então o tronco fica em 2 unidades. O `make server` e o olhar de longe não foram citados em separado |
+| 502 | Como foi o teste no jogo depois de tirar o vidro? | "Ótimo, fiz os testes, podemos avançar", executado pelo desenvolvedor, sem detalhar cada passo. O agente entendeu a resposta também como autorização do plano de commits apresentado, inclusive da mudança no `AGENTS.md` |
+| 501 | Como ficaram no jogo o painel, o sinal, a fita e as faixas? | O vidro não ficou legal e deve sair. O restante ficou bom, executado pelo desenvolvedor, sem detalhar cada passo: relevo, recarga, pulso, fita e faixas. Muda a pergunta 498 |
+| 500 | Quando entra a interface de configuração, em relação ao item 19 e às Fases 4 e 5? | O desenvolvedor vai falar sobre isso depois. Até lá, o checklist continua como está nesse ponto |
+| 499 | Onde fica o painel solar no topo? | Centralizado em relação ao topo da cabeça do Cubit |
+| 498 | Dá para criar a ideia de uma camada fina de vidro protegendo o painel solar? | Sim, pedido do desenvolvedor: uma película fina e translúcida sobre a célula, com um reflexo discreto desenhado. Só visual. O sinal continua sendo o pulso suave da pergunta 490, confirmado. A pergunta 501 tira o vidro |
+| 497 | Como entram as mudanças de modelo do item 13, e onde ficam os testes? | No mesmo PR do painel solar, em commit próprio. JUnit: dia e noite, tiers, soma sem criar FE e sinal. GameTests: céu aberto, coberto, outras dimensões e os testes de consumo sem depender do céu. Roteiro manual: ver a placa, o pulso, a fita e as faixas. As chaves e o save da recomendação saem, pelas perguntas 494 e 495 |
+| 496 | Um bloco transparente acima do Cubit impede a recarga solar? | Não: vale a luz do céu que chega ao Cubit, então vidro deixa carregar, e blocos opacos bloqueiam. Detalha a pergunta 53 |
+| 495 | O que entra da chave geral do Cubit nesta entrega? | Nada: "não entra agora". Fica para quando a interface de configuração entrar. Muda o item 13 do checklist |
+| 494 | Onde ficam os botões do painel solar até a tela própria? | Nenhum entra agora. O desenvolvedor pediu só a elevação do painel, para parecer uma peça colocada, e o sinal luminoso. Toda a interface de configuração fica para depois, "ao final da fase 3 entre a fase 4 e 5", momento ainda a esclarecer. Por isso, a pendência 425 continua aberta nessa parte |
+| 493 | Afinal, como fica a fita do tier na cintura? | É uma fita que o robô veste, então não aumenta o tamanho dele: só cobre mais o tronco. O agente definiu 1,25 unidade de altura, em vez de 0,75, com os mesmos 0,25 saindo do tronco, como ponto de partida a avaliar no jogo. Fecha a pergunta 491 e muda a [pergunta 396](fase-3-sentidos.md) nessa peça |
+| 492 | Como mostrar o tier nos braços? | Com uma faixa colorida em volta de cada antebraço, em vez das caixas da ideia original. Muda de cor junto com o colar, sem brilhar, e acompanha o braço. O ícone do item continua cinza até a Fase 4, conforme a pergunta 414 |
+| 491 | Como deixar o colar do tier mais grosso? | Nenhuma das opções apresentadas, de altura 1,25 ou 1,5 e saliência 0,25 ou 0,5. O desenvolvedor vai explicar o que prefere. Hoje o colar tem 0,75 de altura e sai 0,25 do tronco |
+| 490 | Que sinal luminoso mostra que o painel está recebendo luz? | Um pulso suave na célula, que clareia e escurece devagar, só enquanto o painel estiver enchendo a bateria: Cubit ativo, de dia, céu aberto e bateria abaixo do máximo. A recomendação era o reflexo que passa |
+| 489 | Como dar relevo ao painel solar? | Com uma placa de 0,5 unidade sobre a tampa do topo, com moldura escura e a célula azul em cima, cerca de 6 x 5 unidades. A hitbox não muda, e as antenas continuam livres. Muda a [pergunta 396](fase-3-sentidos.md) nessa peça |
+| 488 | Como devem ser as rodadas de perguntas com opções? | Nunca sem a opção "Nenhuma das opções". É uma regra nova, a 51 do `AGENTS.md`, pedida pelo desenvolvedor |
+| 487 | Há algo a acrescentar antes da rodada de decisões do painel solar? | O desenvolvedor disse que não tem nada a acrescentar e que tem ideias sobre o painel, a apresentar antes da rodada |
 | 486 | Como ficaram os braços abertos e o balanço ao andar? | "Fechou, acho que era isso mesmo": a abertura de 5° fica, e o balanço de 12° continua como estava. O agente entendeu a mensagem como o fim dos ajustes visuais. Não foram detalhados os braços erguidos e a pose de desligado, nem o botão `Lamp`, a chave depois de recolher, as tochas, a bateria zerada e o Dock. A claridade da tela continua no nível 4 da pergunta 471 |
 | 485 | Em que entrega entra a abertura dos braços? | No PR da lanterna, issue #99, num commit próprio, porque os testes no jogo estão sendo feitos juntos |
 | 484 | Quanto abrir os braços, que estão quase colados na carcaça? | Cerca de 5°, girando cada braço a partir do ombro, com a garra cerca de 0,6 unidade mais afastada. A hitbox e o tamanho não mudam. É o ponto de partida, a avaliar no jogo. Muda a pergunta 396 nessa pose |
@@ -167,6 +183,13 @@
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 15:25 | Registra a resposta 502. |
+| Marcelo Fabiano | 2026-11-06 15:16 | Registra a resposta 501 e aponta a 498 para ela. |
+| Marcelo Fabiano | 2026-11-06 15:00 | Registra as respostas 498 a 500. |
+| Marcelo Fabiano | 2026-11-06 14:54 | Registra as respostas 493 a 497. |
+| Marcelo Fabiano | 2026-11-06 14:49 | Registra as respostas 489 a 492. |
+| Marcelo Fabiano | 2026-11-06 14:47 | Registra a resposta 488. |
+| Marcelo Fabiano | 2026-11-06 14:38 | Registra a resposta 487. |
 | Marcelo Fabiano | 2026-11-06 14:20 | Registra a resposta 486. |
 | Marcelo Fabiano | 2026-11-06 14:15 | Registra as respostas 483 a 485 e aponta a 396 para a 484. |
 | Marcelo Fabiano | 2026-11-06 14:05 | Registra a resposta 482 e aponta a 396 para ela. |

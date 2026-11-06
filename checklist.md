@@ -55,8 +55,8 @@ A ordem é a da numeração (perguntas 356 e 365). Sons, intervalo, expressões,
 10. [x] Cor do colar e indicador de bateria variando
 11. [x] Definir o intervalo mínimo entre repetições (perguntas 149, 433 e 444), junto dos textos
 12. [ ] Textos curtos na barra acima da hotbar
-13. [ ] Painel solar, com a chave dele e a chave geral (perguntas 424 e 425)
-14. [ ] Lanterna, com a chave dela, o LambDynamicLights entrando no build e a claridade fraca da tela (perguntas 378 e 424)
+13. [ ] Painel solar, sem as chaves, que entram com a interface de configuração (perguntas 494 e 495)
+14. [x] Lanterna, com a chave dela, o LambDynamicLights entrando no build e a claridade fraca da tela (perguntas 378 e 424)
 15. [x] Feixe: saiu da Fase 3 e foi para o Minerador, na Fase 5 (pergunta 463)
 16. [ ] Scanner de minérios e scanner de mobs, com a chave deles e os alertas
 17. [ ] Nome personalizado e cor da carcaça

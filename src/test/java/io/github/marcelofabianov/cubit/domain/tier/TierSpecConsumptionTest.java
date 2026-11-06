@@ -9,6 +9,7 @@ import io.github.marcelofabianov.cubit.domain.energy.ConsumptionExtras;
 import io.github.marcelofabianov.cubit.domain.energy.Energy;
 import io.github.marcelofabianov.cubit.domain.energy.PowerState;
 import io.github.marcelofabianov.cubit.domain.energy.RobotActivity;
+import io.github.marcelofabianov.cubit.domain.energy.SolarOutput;
 import org.junit.jupiter.api.Test;
 
 class TierSpecConsumptionTest {
@@ -52,7 +53,8 @@ class TierSpecConsumptionTest {
             new Energy(negative),
             new Energy(climb),
             new Energy(lamp)),
-        new LightLevel(0));
+        new LightLevel(0),
+        new SolarOutput(Energy.ZERO, Energy.ZERO));
   }
 
   private static RobotActivity walking(boolean full, boolean water, boolean negative, double up) {

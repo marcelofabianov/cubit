@@ -10,11 +10,13 @@ import io.github.marcelofabianov.cubit.domain.energy.Energy;
 import io.github.marcelofabianov.cubit.domain.energy.Percentage;
 import io.github.marcelofabianov.cubit.domain.energy.PowerState;
 import io.github.marcelofabianov.cubit.domain.energy.RobotActivity;
+import io.github.marcelofabianov.cubit.domain.energy.SolarOutput;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 
 class TierSpecTest {
   private static final LightLevel NO_LIGHT = new LightLevel(0);
+  private static final SolarOutput NO_SUN = new SolarOutput(Energy.ZERO, Energy.ZERO);
   private static final ConsumptionExtras NO_EXTRAS =
       new ConsumptionExtras(Energy.ZERO, Energy.ZERO, Energy.ZERO, Energy.ZERO, Energy.ZERO);
   private static final RobotActivity WALKING =
@@ -42,7 +44,16 @@ class TierSpecTest {
 
   private static TierSpec spec(Energy capacity, Energy moving, Energy recharge) {
     return new TierSpec(
-        capacity, moving, recharge, ANY_SLOTS, ANY_HEALTH, ANY_RADIUS, 1, NO_EXTRAS, NO_LIGHT);
+        capacity,
+        moving,
+        recharge,
+        ANY_SLOTS,
+        ANY_HEALTH,
+        ANY_RADIUS,
+        1,
+        NO_EXTRAS,
+        NO_LIGHT,
+        NO_SUN);
   }
 
   @Test
@@ -81,19 +92,19 @@ class TierSpecTest {
   void rejectsZeroValuesThatWouldBreakTheRobot() {
     assertThrows(
         IllegalArgumentException.class,
-        () -> new TierSpec(Energy.ZERO, ONE, ONE, 1, 1, 1, 1, NO_EXTRAS, NO_LIGHT));
+        () -> new TierSpec(Energy.ZERO, ONE, ONE, 1, 1, 1, 1, NO_EXTRAS, NO_LIGHT, NO_SUN));
     assertThrows(
         IllegalArgumentException.class,
-        () -> new TierSpec(ONE, ONE, Energy.ZERO, 1, 1, 1, 1, NO_EXTRAS, NO_LIGHT));
+        () -> new TierSpec(ONE, ONE, Energy.ZERO, 1, 1, 1, 1, NO_EXTRAS, NO_LIGHT, NO_SUN));
     assertThrows(
         IllegalArgumentException.class,
-        () -> new TierSpec(ONE, ONE, ONE, 0, 1, 1, 1, NO_EXTRAS, NO_LIGHT));
+        () -> new TierSpec(ONE, ONE, ONE, 0, 1, 1, 1, NO_EXTRAS, NO_LIGHT, NO_SUN));
     assertThrows(
         IllegalArgumentException.class,
-        () -> new TierSpec(ONE, ONE, ONE, 1, 0, 1, 1, NO_EXTRAS, NO_LIGHT));
+        () -> new TierSpec(ONE, ONE, ONE, 1, 0, 1, 1, NO_EXTRAS, NO_LIGHT, NO_SUN));
     assertThrows(
         IllegalArgumentException.class,
-        () -> new TierSpec(ONE, ONE, ONE, 1, 1, 0, 1, NO_EXTRAS, NO_LIGHT));
+        () -> new TierSpec(ONE, ONE, ONE, 1, 1, 0, 1, NO_EXTRAS, NO_LIGHT, NO_SUN));
   }
 
   @Test
@@ -108,7 +119,7 @@ class TierSpecTest {
   }
 
   private static TierSpec speedOf(double multiplier) {
-    return new TierSpec(ONE, ONE, ONE, 1, 1, 1, multiplier, NO_EXTRAS, NO_LIGHT);
+    return new TierSpec(ONE, ONE, ONE, 1, 1, 1, multiplier, NO_EXTRAS, NO_LIGHT, NO_SUN);
   }
 
   @Test

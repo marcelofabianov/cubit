@@ -7,8 +7,8 @@ Mod de Minecraft que adiciona um robô companheiro fofo, movido a bateria, de te
 ## Estado atual
 
 - **Etapa atual:** Fase 3, sentidos, em andamento. A Fase 2 foi encerrada. As funcionalidades entram por issue, na ordem do `checklist.md`.
-- **Já entrou:** colocar e recolher, seguir o player, vários robôs, fogo, lava, os arquivos de som, a revisão dos `.md`, o novo modelo, a morte com o item danificado, o inventário, a energia em uso, o consumo por situação, a reação a blocos que ferem, o Induction Dock, o `/cubit reset`, as receitas e, na Fase 3, os sons, as expressões, o som de dano, a barra de vida, as animações, o colar e a bateria, os textos curtos e a lanterna.
-- **Próximos:** painel solar, e os demais itens do `checklist.md`. Os testes de instância e a primeira versão, `0.1.0`, ficam para o fim da Fase 3.
+- **Já entrou:** colocar e recolher, seguir o player, vários robôs, fogo, lava, os arquivos de som, a revisão dos `.md`, o novo modelo, a morte com o item danificado, o inventário, a energia em uso, o consumo por situação, a reação a blocos que ferem, o Induction Dock, o `/cubit reset`, as receitas e, na Fase 3, os sons, as expressões, o som de dano, a barra de vida, as animações, o colar e a bateria, os textos curtos, a lanterna e o painel solar.
+- **Próximos:** os demais itens do `checklist.md`. Os testes de instância e a primeira versão, `0.1.0`, ficam para o fim da Fase 3.
 - **Comandos:** estão em [`_docs/desenvolvimento/ferramentas-de-build.md`](_docs/desenvolvimento/ferramentas-de-build.md).
 - **Limite:** não avance para as fases seguintes sem pedido explícito.
 
@@ -158,6 +158,10 @@ O Cubit é o único robô do mod. O que muda entre um Cubit e outro é o tier e 
 
 50. **Alinhamento:** ao iniciar uma feature, o agente descreve em poucas linhas o que vamos fazer e pergunta ao desenvolvedor se tem algo mais para acrescentar, antes da rodada de decisões, da issue e da branch.
 
+### Rodadas de perguntas
+
+51. **Nenhuma das opções:** toda pergunta com opções traz, de forma explícita, a opção "Nenhuma das opções". Vale para qualquer rodada, sem exceção.
+
 ## Git
 
 - **Autorização:** nunca faça commit, push, tag, release ou PR sem autorização explícita para aquela ação. Antes, mostre os arquivos, o resumo e a mensagem proposta.
@@ -200,7 +204,7 @@ io.github.marcelofabianov.cubit
 ├── domain/                 // Java puro, testado com JUnit
 │   ├── robot/              // RobotType, capacidades que o Cubit combina
 │   ├── tier/               // RobotTier, TierSpec, TierCatalog (interface)
-│   ├── energy/             // Battery, PowerState (ativo, inativo, hibernação), regras de consumo e religamento
+│   ├── energy/             // Battery, PowerState (ativo, inativo, hibernação), regras de consumo e religamento, SolarPanel: quando o painel dá energia
 │   ├── behavior/           // FollowDecision: seguir, parar ou teleportar; BurningAction: reagir a fogo e lava; LampPolicy: quando a lanterna acende
 │   ├── dock/               // DockStock, DockStatus, DockStay, DockQueue
 │   └── ownership/          // FollowingRobotPolicy

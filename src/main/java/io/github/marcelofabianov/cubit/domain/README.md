@@ -43,6 +43,9 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 | `LampPolicy` | Quando a lanterna acende e apaga, conforme a chave, o estado e a luz do ambiente |
 | `RobotLight` | A luz final que o robô dá ao mundo: a tela e a lanterna |
 | `LampPulse` | A força do halo das antenas em cada momento |
+| `SolarOutput` | O que o painel dá por tick, de dia e à noite |
+| `SolarPanel` | Quando o painel dá energia |
+| `SolarPulse` | A força do brilho da célula em cada momento |
 | `PowerSound` | Som tocado uma vez, ao ligar ou desligar |
 | `ContinuousSound` | Som em loop enquanto a condição valer: esteira, curto elétrico e recarga |
 | `RobotSoundRules` | Diz qual som cada situação toca |
@@ -94,6 +97,7 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 - **Consumo por deslocamento:** quem chama informa se o robô andou, e o domínio só gasta nesse caso (pergunta 257).
 - **Consumo por situação:** peso, água e subida só somam ao andar. A condição negativa soma mesmo parado, e só uma vez, ainda que haja várias. A lanterna acesa também soma parado (pergunta 469). O robô inativo não gasta (perguntas 271 a 278).
 - **Dois limites na lanterna:** ela acende abaixo de um e apaga a partir do outro, para não piscar perto do limite (pergunta 470). `fitting` existe porque o config pode trazer os dois invertidos, e o construtor rejeita isso.
+- **Dia pelo relógio:** o painel olha o horário do mundo, e não a luz do céu, porque o clima não tem efeito (pergunta 53).
 - **Só a luz espera:** a chave e o estado valem na hora, e só a leitura do mundo roda em intervalos, para a lanterna nunca ficar acesa num robô desligado (pergunta 474).
 - **Luz junto da tela:** `RobotLight` dá zero com a tela apagada, pela mesma regra do brilho, `RobotExpression.glows` (perguntas 378 e 465).
 - **Lanterna na hibernação:** apagada e sem consumo, porque o robô está imóvel e carregando. A tela continua dando a claridade (perguntas 465 e 466).

@@ -37,6 +37,9 @@ final class RobotSyncedData {
   static final EntityDataAccessor<Byte> LIGHT_LEVEL =
       SynchedEntityData.defineId(RobotEntity.class, EntityDataSerializers.BYTE);
 
+  static final EntityDataAccessor<Boolean> SOLAR_CHARGING =
+      SynchedEntityData.defineId(RobotEntity.class, EntityDataSerializers.BOOLEAN);
+
   private RobotSyncedData() {}
 
   /** Called while the class loads, only to make sure it runs before any robot exists. */
@@ -51,6 +54,7 @@ final class RobotSyncedData {
     builder.define(TIER, (byte) RobotTier.BASE.ordinal());
     builder.define(BATTERY_INDICATOR, (byte) BatteryIndicator.EMPTY.ordinal());
     builder.define(LAMP_LIT, false);
+    builder.define(SOLAR_CHARGING, false);
     builder.define(LIGHT_LEVEL, NO_LIGHT);
   }
 }

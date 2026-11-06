@@ -66,7 +66,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Movimento:** a velocidade de referência está em [`tiers.md`](tiers.md#valores-gerais). Na água, o robô afunda e anda no fundo, sem se afogar. Na lava, leva dano igual ao do player. Não há dano de queda. O som de esteira entra na Fase 3.
 - **Criativo:** aba própria, `cubit:main`, e colocar sempre gasta o item.
 - **Estados:** ativo (ligado), inativo (desligado) e hibernação (na base, com o inventário e os slots acessíveis).
-- **Painel solar:** só funciona com o Cubit ativo, de dia em todos os tiers e à noite só em Elite e Ultimate. Coberto por um bloco, não carrega. O clima não tem efeito, e no Nether e no End não funciona. Fica abaixo do consumo.
+- **Painel solar:** só funciona com o Cubit ativo, de dia em todos os tiers e à noite só em Elite e Ultimate. Coberto por um bloco opaco, não carrega, e vidro deixa carregar. A célula pulsa de leve enquanto enche a bateria, e a chave entra com a interface de configuração. O clima não tem efeito, e no Nether e no End não funciona. Fica abaixo do consumo.
 - **Induction Dock:** é a base de recarga, com torre e placa em U, 2 blocos de altura e dono, recebe energia por cabos ou redstone, sem saída, e tem um único slot, que também recarrega a Power Bank. A energia fica no item ao quebrar, e só o dono o quebra, além de um operador no modo criativo. Sem conseguir chegar, o Cubit teleporta.
 - **Recarga pela grade de craft:** o item do Cubit abaixo da carga de religar, combinado com uma Power Bank, recebe só o que falta para religar, na Fase 4.
 - **Consumo:** gasta ao andar de verdade, sem gastar parado nem empurrado. As exceções são a condição negativa e a lanterna acesa, que gastam mesmo parado.
@@ -109,6 +109,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 15:05 | Registra o vidro, o sinal e a chave do painel solar. |
 | Marcelo Fabiano | 2026-11-06 13:57 | Registra o halo e o brilho dos olhos. |
 | Marcelo Fabiano | 2026-11-06 13:34 | Registra a lanterna, a claridade da tela e o feixe. |
 | Marcelo Fabiano | 2026-11-06 11:10 | Corrige o robô único, os braços, o intervalo e a Fase 2. |
