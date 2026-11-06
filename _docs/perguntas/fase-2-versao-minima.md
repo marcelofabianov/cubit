@@ -12,7 +12,7 @@ Não há perguntas pendentes nesta fase.
 | 29 | Quando dá para recolher o robô? | Sempre. Desligado, é a única ação, além de receber energia pelo slot (perguntas 21 e 45) |
 | 30 | Como ele carrega, se sempre segue o player? | Substituída pela pergunta 47 |
 | 31 | Quando ele religa? | Sozinho, com 5% de bateria |
-| 32 | Ele consome energia parado? | 0 FE/t, configurável. A pergunta 277 abre uma exceção para condições negativas |
+| 32 | Ele consome energia parado? | 0 FE/t, configurável. A pergunta 277 abre uma exceção para condições negativas, e a [pergunta 469](fase-3-sentidos.md), para a lanterna acesa |
 | 33 | Com quanta carga sai do craft? | 25%, configurável |
 | 34 | O que acontece na morte, e como repara? | Vira item com inventário preservado e bateria zerada. A vida fica no item e se recupera na estação. O dono não o fere. As perguntas 118 e 119 detalham o item e o dano, e as perguntas 127 a 130, o item danificado e o conserto |
 | 35 | O que conta como robô ativo? | Substituída pela pergunta 65 |
@@ -221,6 +221,7 @@ Não há perguntas pendentes nesta fase.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 13:34 | Aponta a resposta 32 para a 469. |
 | Marcelo Fabiano | 2026-11-06 11:10 | Troca 'especialidade' por 'trabalho' e 'card de especialidade' por 'card de Aprendizado de Máquina'. |
 | Marcelo Fabiano | 2026-11-06 00:58 | Aponta a resposta 60 para a 396. |
 | Marcelo Fabiano | 2026-11-06 00:40 | Aponta a resposta 113 para a 392. |

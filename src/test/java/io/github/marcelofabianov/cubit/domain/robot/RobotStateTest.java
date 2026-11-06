@@ -1,8 +1,11 @@
 package io.github.marcelofabianov.cubit.domain.robot;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import io.github.marcelofabianov.cubit.domain.behavior.LightLevel;
 import io.github.marcelofabianov.cubit.domain.energy.Battery;
 import io.github.marcelofabianov.cubit.domain.energy.ConsumptionExtras;
 import io.github.marcelofabianov.cubit.domain.energy.Energy;
@@ -36,7 +39,8 @@ class RobotStateTest {
           MAX_HEALTH,
           RADIUS,
           1,
-          new ConsumptionExtras(Energy.ZERO, Energy.ZERO, Energy.ZERO, Energy.ZERO));
+          new ConsumptionExtras(Energy.ZERO, Energy.ZERO, Energy.ZERO, Energy.ZERO, Energy.ZERO),
+          new LightLevel(0));
 
   @Test
   void newRobotHasTheInitialChargeAndFullHealth() {
@@ -92,5 +96,19 @@ class RobotStateTest {
         () -> new RobotState(RobotTier.BASE, SOME_ENERGY, Float.NaN));
     assertThrows(
         IllegalArgumentException.class, () -> new RobotState(RobotTier.BASE, SOME_ENERGY, -1f));
+  }
+
+  @Test
+  void theLampStartsSwitchedOn() {
+    assertTrue(RobotState.initial(RobotTier.BASE, SPEC, new Percentage(INITIAL_PERCENT)).lampOn());
+    assertTrue(new RobotState(RobotTier.BASE, SOME_ENERGY, SOME_HEALTH).lampOn());
+  }
+
+  @Test
+  void dyingAndRepairingKeepTheLampSwitch() {
+    RobotState off = new RobotState(RobotTier.BASE, SOME_ENERGY, SOME_HEALTH, false);
+
+    assertFalse(off.damaged().lampOn());
+    assertFalse(off.damaged().repaired(SPEC, new Percentage(REPAIR_PERCENT)).lampOn());
   }
 }

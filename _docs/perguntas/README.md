@@ -17,12 +17,19 @@ Este diretório concentra as perguntas do projeto, com um arquivo por fase. A pe
 - **Pendentes:** têm uma recomendação, que só vale depois da resposta do desenvolvedor.
 - **Respondidas:** a resposta é registrada aqui, e o documento do assunto é atualizado junto.
 - **Fonte da verdade:** as respostas prevalecem sobre os outros documentos.
-- **Próximo número livre:** 462.
+- **Próximo número livre:** 487.
 
 ## Histórico de modificações
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 14:20 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-06 14:15 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-06 14:05 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-06 14:05 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-06 14:03 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-06 13:57 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-06 13:26 | Atualiza o próximo número livre. |
 | Marcelo Fabiano | 2026-11-06 13:10 | Atualiza o próximo número livre. |
 | Marcelo Fabiano | 2026-11-06 12:07 | Atualiza o próximo número livre. |
 | Marcelo Fabiano | 2026-11-06 11:24 | Atualiza o próximo número livre. |

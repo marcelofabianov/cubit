@@ -10,7 +10,7 @@ import io.github.marcelofabianov.cubit.domain.tier.TierSpec;
  * What a robot keeps when it becomes an item. The config may change while a robot is stored, so the
  * numbers are only valid after being fitted to a {@link TierSpec}.
  */
-public record RobotState(RobotTier tier, Energy energy, float health) {
+public record RobotState(RobotTier tier, Energy energy, float health, boolean lampOn) {
   private static final String INVALID_HEALTH_MESSAGE = "Invalid robot health: ";
   private static final float MIN_PLACED_HEALTH = 1f;
 
@@ -20,18 +20,23 @@ public record RobotState(RobotTier tier, Energy energy, float health) {
     }
   }
 
+  /** The lamp starts switched on, also for what was saved before the lamp existed. */
+  public RobotState(RobotTier tier, Energy energy, float health) {
+    this(tier, energy, health, true);
+  }
+
   public static RobotState initial(RobotTier tier, TierSpec spec, Percentage initialCharge) {
     return new RobotState(tier, spec.newBattery(initialCharge).charge(), spec.maxHealth());
   }
 
   /** What a robot keeps when it dies: the tier, without energy or health. */
   public RobotState damaged() {
-    return new RobotState(tier, Energy.ZERO, 0f);
+    return new RobotState(tier, Energy.ZERO, 0f, lampOn);
   }
 
   public RobotState repaired(TierSpec spec, Percentage health) {
     return new RobotState(
-        tier, Energy.ZERO, (float) spec.maxHealth() * health.value() / Percentage.MAX);
+        tier, Energy.ZERO, (float) spec.maxHealth() * health.value() / Percentage.MAX, lampOn);
   }
 
   public Battery batteryFor(TierSpec spec) {

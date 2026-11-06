@@ -4,7 +4,7 @@
 
 | # | Pergunta | Recomendação |
 |---|---|---|
-| 425 | Onde o player aciona as chaves da pergunta 424, qual é o estado inicial de cada uma, e o que "Hibernar" da chave geral faz fora do Dock? | Na tela do Cubit, e também no Cubit Remote a partir da Fase 4. Todas começam ligadas e ficam nas configurações que o item guarda, como na [pergunta 343](fase-4-upgrades-e-autonomia.md). Hibernar fora do Dock segue a [pergunta 198](fase-5-trabalhos.md), hoje prevista só para a Fase 5, então precisa de decisão antes de antecipar |
+| 425 | Onde o player aciona as chaves da pergunta 424, qual é o estado inicial de cada uma, e o que "Hibernar" da chave geral faz fora do Dock? | Na tela do Cubit, e também no Cubit Remote a partir da Fase 4. Todas começam ligadas e ficam nas configurações que o item guarda, como na [pergunta 343](fase-4-upgrades-e-autonomia.md). Hibernar fora do Dock segue a [pergunta 198](fase-5-trabalhos.md), hoje prevista só para a Fase 5, então precisa de decisão antes de antecipar. As perguntas 467 e 468 respondem a parte da lanterna, e a 475 deixa o resto para o painel solar |
 
 ## Respondidas
 
@@ -34,6 +34,31 @@
 | 321 | O nome `placed.ogg` e o momento "ao ser colocado no mundo" estão certos? | Sim. Detalha a pergunta 320 |
 | 322 | Em que fase o som de colocar no mundo passa a tocar? | Na Fase 3, junto dos outros oito. Detalha a pergunta 320 |
 | 421 | Como foi o roteiro manual do colar, do indicador de bateria e do tronco central com +0,5? | Teste finalizado, tudo ok, executado pelo desenvolvedor, sem detalhar cada passo. Ele não pediu +1, então o tronco fica em 2 unidades. O `make server` e o olhar de longe não foram citados em separado |
+| 486 | Como ficaram os braços abertos e o balanço ao andar? | "Fechou, acho que era isso mesmo": a abertura de 5° fica, e o balanço de 12° continua como estava. O agente entendeu a mensagem como o fim dos ajustes visuais. Não foram detalhados os braços erguidos e a pose de desligado, nem o botão `Lamp`, a chave depois de recolher, as tochas, a bateria zerada e o Dock. A claridade da tela continua no nível 4 da pergunta 471 |
+| 485 | Em que entrega entra a abertura dos braços? | No PR da lanterna, issue #99, num commit próprio, porque os testes no jogo estão sendo feitos juntos |
+| 484 | Quanto abrir os braços, que estão quase colados na carcaça? | Cerca de 5°, girando cada braço a partir do ombro, com a garra cerca de 0,6 unidade mais afastada. A hitbox e o tamanho não mudam. É o ponto de partida, a avaliar no jogo. Muda a pergunta 396 nessa pose |
+| 483 | Como ficaram a iluminação, as antenas e os olhos nos testes? | Ótimos, executado pelo desenvolvedor. O halo, os olhos, o tamanho das antenas e a luz ficam como estão. Os passos do roteiro não foram detalhados um a um |
+| 482 | As antenas podem ser um pouco menores? | Sim. O agente encurtou a haste de 2,5 para 2 unidades, cerca de 12% da altura da antena, e a ponta desce junto, sem mudar a espessura, a hitbox nem as animações. É o ponto de partida, a avaliar no jogo. Muda a [pergunta 396](fase-3-sentidos.md) nessa medida |
+| 481 | A intensidade da luz das antenas pode ser um pouco menor? | Sim. O agente entendeu como o brilho do halo, e o reduziu em cerca de um terço, numa constante, sem mudar o tamanho, o pulso, a ponta nem a luz real nos blocos, que continua nos números da pergunta 462. Ajusta a pergunta 480 |
+| 480 | Como ficaram os efeitos da lanterna no jogo? | O halo das antenas ficou como o desenvolvedor queria. O brilho dos olhos ficou exagerado e deve ser um pouco mais sutil. Os demais passos do roteiro não foram citados |
+| 479 | O brilho dos olhos depende da lanterna? | Sim: o desenvolvedor pediu que ele acompanhe as regras da lanterna das antenas, então só aparece com a lanterna acesa e não tem custo próprio. O agente entendeu que continua valendo em toda expressão e sem pulso, porque a mensagem não tratou disso. Muda a pergunta 478 |
+| 478 | Como dar um brilho aos olhos azuis do Cubit? | Em toda expressão: um brilho suave em volta do que acende na tela, com a cor de cada uma, como azul nos olhos normais e âmbar no alerta. Acompanha a piscada e o olhar, só com a tela acesa, sem custo de energia e sem chave nova no config. A luz real no chão não muda de cor, porque o LambDynamicLights só controla a intensidade. Complementa a pergunta 366. A pergunta 479 o liga à lanterna |
+| 477 | Que efeito visual acrescentar à lanterna acesa, depois de ver no jogo só a luz em volta do Cubit e as pontas brancas? | Um halo suave em cada ponta, sempre virado para a câmera e sem borda definida, com um pulso leve, só no cliente, em constantes, sem chave nova no config. Muda a pergunta 464, cujo motivo só vale para um disco rígido no modelo |
+| 476 | Em que pontos ficam os testes da lanterna? | JUnit: acender e apagar nas bordas de 7 a 10, estados, luz final, consumo e config inválido. GameTests: sala escura, céu aberto com a hora fixada, chave, recolher, morrer, consertar, save antigo e botão de quem não é dono. Os testes de consumo existentes desligam a chave, para não dependerem da luz. Roteiro manual: ver a luz e as pontas |
+| 475 | Quando decidir o resto da pendência 425? | Junto do painel solar, no item 13. A 425 fica pendente só na chave geral, no "Hibernar" fora do Dock e nas chaves dos outros recursos |
+| 474 | Os nomes e os padrões da lanterna ficam como propostos? | Sim. Em `[general_robot.base]`: `lamp_light_level` (10) e `lamp_consumption_per_tick` (1). Em `[general]`: `lamp_on_below_light` (8), `lamp_off_from_light` (10), `screen_light_level` (4) e `lamp_check_ticks` (20). No save: `LampEnabled` na entidade e `lamp_enabled` em `cubit:robot_state`. No jogo: `Lamp`. Se `lamp_off_from_light` vier menor que `lamp_on_below_light`, o mod usa o maior dos dois para apagar e registra no log. A leitura da luz roda em intervalos, e o estado e a chave valem na hora |
+| 473 | O que o botão da lanterna faz com o Cubit hibernando no Dock? | Fica desabilitado, mantendo o valor, que volta a valer quando ele sair da base |
+| 472 | Qual luz do ambiente o servidor lê para decidir se está escuro? | O maior valor entre a luz de blocos e a do céu, com o céu escurecendo à noite e com chuva, como o jogo faz para os mobs. A lanterna acende à noite e em tempestade, a céu aberto |
+| 471 | Qual é o nível padrão da claridade da tela? | 4, a avaliar no jogo, numa chave do config. A recomendação era 3. Fecha o ponto de partida da pergunta 378 |
+| 470 | Em que níveis de luz a lanterna acende e apaga? | Acende abaixo de 8 e apaga a partir de 10, nos dois valores no config. Entre 8 e 9, mantém o estado em que estava |
+| 469 | Quanto a lanterna gasta enquanto está acesa? | Base 1, Advanced 1, Elite 2 e Ultimate 2 FE/t, mesmo parado, somados ao andar. É uma nova exceção às perguntas [32](fase-2-versao-minima.md) e [341](fase-4-upgrades-e-autonomia.md). Fecha o custo da lanterna, previsto no item 9 da Fase 4 do checklist |
+| 468 | Como fica a chave da lanterna no primeiro uso e ao virar item? | Começa ligada, inclusive em robôs e itens de saves antigos. Recolher, morrer e consertar mantêm a escolha, num campo opcional de `cubit:robot_state`, como na [pergunta 108](fase-2-versao-minima.md). Amplia a [pergunta 343](fase-4-upgrades-e-autonomia.md), porque a chave não é um slot. Responde a pendência 425 só para a lanterna |
+| 467 | Como o player liga e desliga a chave da lanterna? | Por um botão no painel lateral do inventário, com o clique de botão de menu do próprio jogo, que confere dono e distância pelo `RobotMenu`, sem pacote próprio. O Cubit Remote soma a chave na Fase 4, e a tela própria a reconstrói no item 19. Responde a pendência 425 só para a lanterna |
+| 466 | A lanterna acende com o Cubit hibernando no Dock? | Não: fica apagada e sem consumo, porque ele está imóvel e carregando. Ao sair da base, volta a seguir a chave e o escuro |
+| 465 | A claridade fraca da tela fica acesa com o Cubit hibernando no Dock? | Sim, como nos documentos: enquanto a tela brilha, há a claridade fraca, conforme as perguntas 57 e 378. O pedido original dizia apagada. Desligado, com a tela apagada, não há luz |
+| 464 | Como as antenas aparecem com a lanterna acesa? | Só as pontas acendem, em branco quente, junto da luz real nos blocos em volta, sem o disco da prancha, que num modelo 3D pareceria um objeto sólido. Prévia em imagem antes do jogo. A pergunta 477 acrescenta um halo suave |
+| 463 | De quem é o feixe de luz? | Do Aprendizado de Máquina: Minerador, com a lanterna de cabeça, na Fase 5. Sai dos tiers e da Fase 3, então o item 15 do checklist deixa de existir na fase. Muda a [pergunta 17](fase-1-conceito.md) |
+| 462 | Qual é o nível de luz da lanterna por tier? | Base 10, Advanced 12, Elite 14 e Ultimate 15. Nesta entrega, só o Base entra no config, conforme a [pergunta 39](fase-2-versao-minima.md), e os demais ficam nos documentos e no JUnit até a Fase 4 |
 | 461 | Como foi o teste no jogo da prova do LambDynamicLights, com a luz fixa? | Como esperado, executado pelo desenvolvedor, sem detalhar cada passo. O passo opcional, de conferir a opção de luz de entidades, não foi citado, então o valor padrão dela continua sem confirmação |
 | 460 | Como organizar a prova técnica do LambDynamicLights e as issues da lanterna? | Com uma issue e um PR técnicos, só para separar a `RobotEntity` e adicionar a dependência. A prova roda nessa branch, e a luz provisória não é commitada. A rodada de decisões vem depois da prova e antes da issue da lanterna |
 | 459 | Como seguir com o plano da lanterna, depois da conferência contra os documentos e o código? | Incorporar ao plano os dez pontos encontrados e a leitura da licença do LambDynamicLights antes da etapa 1, e só então começar. O desenvolvedor não citou acréscimos ao responder ao alinhamento. Os pontos não fecham as decisões da lanterna, que seguem para a rodada |
@@ -97,7 +122,7 @@
 | 400 | O agente corrige os documentos desatualizados no PR da issue #89? | Sim, num commit separado: o status e o roadmap no `README.md`, a etapa atual em `decisoes.md` e o bipe padrão em `visual.md`, conforme a [pergunta 152](fase-2-versao-minima.md) |
 | 394 | Quais animações do Cubit entram no item 9? | Andar, olhar para o player, parado, e desligado e hibernando. Como o modelo não tem cabeça separada, olhar gira o osso `body` sobre o pescoço, com as esteiras paradas |
 | 395 | Como animar as esteiras? | Com textura por quadros, escolhidos pela distância andada, sem mudar a geometria |
-| 396 | O que "modelo final" muda no Cubit? | Mantém a geometria e a textura de 128×128 do corpo, e significa só os ossos que as animações precisarem. Detalha a [pergunta 60](fase-2-versao-minima.md) e mantém a 162. A pergunta 420 aumenta o tronco central |
+| 396 | O que "modelo final" muda no Cubit? | Mantém a geometria e a textura de 128×128 do corpo, e significa só os ossos que as animações precisarem. Detalha a [pergunta 60](fase-2-versao-minima.md) e mantém a 162. A pergunta 420 aumenta o tronco central, a 482 encurta as antenas, e a 484 abre os braços |
 | 393 | Como foi o teste da velocidade nova? | "Ok", sem detalhe. A resposta veio antes de o config local ser recriado, então o valor novo pode não ter sido sentido no jogo |
 | 392 | Quanto o Cubit fica mais ágil? | O atributo da velocidade 1,0× passa de 0,30 para 0,33, cerca de 10%, sem mudar os multiplicadores nem o consumo por tick. Muda a [pergunta 113](fase-2-versao-minima.md) |
 | 391 | Como foi o roteiro manual das expressões, da barra de vida e do som de dano? | Fechou o teste e ficou ótimo, executado pelo desenvolvedor, sem detalhar cada passo. O crash anterior, atribuído à compilação simultânea, não foi citado de novo |
@@ -113,7 +138,7 @@
 | 380 | Quando aparecem os olhos em X, de quase morto? | Com a vida em 10% ou menos, numa chave do config |
 | 381 | As expressões triste e quase morto tocam algum som? | Ao levar dano, toca `short_circuit.ogg`, que substitui o som padrão de dano do jogo, sem bipe. Em chamas, o loop de curto elétrico já está tocando, então os golpes do fogo não repetem o som. Quase morto não tem som próprio |
 | 382 | Em que entrega entram essas duas expressões? | Junto das outras, na issue #85. Como não há imagem de conceito, o agente as desenhou no mesmo estilo: `expressao-triste.png` e `expressao-quase-morto.png` |
-| 378 | Como fazer a pequena iluminação em volta do Cubit, que ilustra a claridade da tela? | Com luz real, no item da lanterna, pelo LambDynamicLights: uma luz fraca, de nível 3 a 4 como ponto de partida, sem gastar energia, que apaga quando a tela apaga |
+| 378 | Como fazer a pequena iluminação em volta do Cubit, que ilustra a claridade da tela? | Com luz real, no item da lanterna, pelo LambDynamicLights: uma luz fraca, de nível 3 a 4 como ponto de partida, sem gastar energia, que apaga quando a tela apaga. A pergunta 471 define o nível 4 |
 | 372 | Como é a piscada na expressão normal? | Fica 5 s de olhos abertos e pisca em cerca de 0,25 s, com 3 quadros: meio fechado, fechado e meio fechado. Sem bipe, porque não troca a expressão |
 | 373 | Em que entrega a piscada entra? | Junto das expressões, na issue #85 |
 | 374 | Onde fica o tempo da piscada? | Em constante no código, porque é só visual e não é balanceamento, como na pergunta 335 |
@@ -142,6 +167,14 @@
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 14:20 | Registra a resposta 486. |
+| Marcelo Fabiano | 2026-11-06 14:15 | Registra as respostas 483 a 485 e aponta a 396 para a 484. |
+| Marcelo Fabiano | 2026-11-06 14:05 | Registra a resposta 482 e aponta a 396 para ela. |
+| Marcelo Fabiano | 2026-11-06 14:05 | Registra a resposta 481. |
+| Marcelo Fabiano | 2026-11-06 14:03 | Registra a resposta 480. |
+| Marcelo Fabiano | 2026-11-06 13:57 | Registra as respostas 477 a 479 e aponta a 464 para a 477. |
+| Marcelo Fabiano | 2026-11-06 13:34 | Aponta a 378 para a 471 e a pendência 425 para as 467, 468 e 475. |
+| Marcelo Fabiano | 2026-11-06 13:26 | Registra as respostas 462 a 476. |
 | Marcelo Fabiano | 2026-11-06 13:10 | Registra a resposta 461. |
 | Marcelo Fabiano | 2026-11-06 12:07 | Registra as respostas 459 e 460. |
 | Marcelo Fabiano | 2026-11-06 11:24 | Registra a resposta 458. |

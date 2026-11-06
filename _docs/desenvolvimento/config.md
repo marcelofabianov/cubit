@@ -16,6 +16,10 @@ As chaves ficam em `snake_case`. As de um tier ficam em `[general_robot.{tier}]`
 | `general` | `wake_charge_percent` | Religar | 0 a 100 |
 | `general` | `critical_charge_percent` | Bateria crítica, com expressão de sono, indicador vermelho e texto | 0 a 100 |
 | `general` | `notice_repeat_ticks` | Intervalo mínimo entre repetições de textos e alertas | 1 a 72000 |
+| `general` | `screen_light_level` | Luz da claridade da tela | 0 a 15 |
+| `general` | `lamp_on_below_light` | A lanterna acende abaixo da luz | 0 a 15 |
+| `general` | `lamp_off_from_light` | A lanterna apaga a partir da luz | 0 a 15 |
+| `general` | `lamp_check_ticks` | Intervalo para ler a luz do ambiente | 1 a 1200 |
 | `general` | `happy_expression_ticks` | Tempo com a expressão feliz | 1 a 1200 |
 | `general` | `hurt_expression_ticks` | Tempo com a expressão triste, depois de um dano | 1 a 1200 |
 | `general` | `worried_expression_ticks` | Tempo com a expressão de preocupado | 1 a 1200 |
@@ -45,6 +49,8 @@ As chaves ficam em `snake_case`. As de um tier ficam em `[general_robot.{tier}]`
 | `general_robot.base` | `water_extra_per_tick` | Extra ao andar na água | 0 a 2147483647 |
 | `general_robot.base` | `negative_condition_extra_per_tick` | Extra com condição negativa | 0 a 2147483647 |
 | `general_robot.base` | `climb_extra_per_block` | Extra ao subir, por bloco de altura | 0 a 2147483647 |
+| `general_robot.base` | `lamp_consumption_per_tick` | Extra com a lanterna acesa | 0 a 2147483647 |
+| `general_robot.base` | `lamp_light_level` | Lanterna | 0 a 15 |
 | `general_robot.base` | `recharge_per_tick` | Recarga na base e pelo slot de energia | 1 a 2147483647 |
 | `general_robot.base` | `inventory_slots` | Inventário | 1 a 54 |
 | `general_robot.base` | `max_health` | Vida | 1 a 1024 |
@@ -57,6 +63,7 @@ As chaves ficam em `snake_case`. As de um tier ficam em `[general_robot.{tier}]`
 - **Inventário até 54:** é o tamanho do baú duplo, o maior que a tela padrão do jogo mostra.
 - **Vida até 1024:** é o máximo do atributo de vida do jogo.
 - **Raio até 128:** mantém a busca limitada (regra 21 do `AGENTS.md`).
+- **Luz até 15:** é o maior nível de luz do jogo.
 - **Parada e teleporte sem sobreposição:** os limites não se cruzam, então o config nunca faz o robô parar além da distância em que teleportaria.
 
 ## Fora do config
@@ -71,6 +78,7 @@ O mod não cai por causa do config (regra 17 do `AGENTS.md`):
 |---|---|
 | Número fora dos limites | O NeoForge usa o limite mais próximo e registra no log |
 | Chave ausente ou valor que não é número | O NeoForge volta ao padrão da chave e registra no log |
+| `lamp_off_from_light` menor que `lamp_on_below_light` | A lanterna apaga a partir do maior dos dois, e o mod registra no log uma vez |
 | Tier sem seção no config | O `TierCatalog` usa o tier Base do robô e registra no log uma vez |
 | Tipo de robô sem seção | Erro de programação, então o `TierCatalog` lança uma exceção |
 
@@ -78,6 +86,7 @@ O mod não cai por causa do config (regra 17 do `AGENTS.md`):
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 13:34 | Adiciona as chaves da lanterna. |
 | Marcelo Fabiano | 2026-11-06 11:10 | Tira a citação a um robô novo. |
 | Marcelo Fabiano | 2026-11-06 11:10 | Troca 'especialidade' por 'trabalho' e 'card de especialidade' por 'card de Aprendizado de Máquina'. |
 | Marcelo Fabiano | 2026-11-06 09:48 | Adiciona a chave do intervalo mínimo. |

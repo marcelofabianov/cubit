@@ -5,11 +5,15 @@ public record ConsumptionExtras(
     Energy fullInventoryPerTick,
     Energy waterPerTick,
     Energy negativeConditionPerTick,
-    Energy climbPerBlock) {
+    Energy climbPerBlock,
+    Energy lampPerTick) {
 
-  /** Load, water and climbing only cost while walking. A negative condition always costs. */
+  /** Load, water and climbing only cost while walking. The rest costs even standing still. */
   public Energy of(RobotActivity activity) {
     Energy total = activity.negativeCondition() ? negativeConditionPerTick : Energy.ZERO;
+    if (activity.lampLit()) {
+      total = total.plus(lampPerTick);
+    }
     if (!activity.walking()) {
       return total;
     }

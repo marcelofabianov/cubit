@@ -1,5 +1,6 @@
 package io.github.marcelofabianov.cubit.domain.tier;
 
+import io.github.marcelofabianov.cubit.domain.behavior.LightLevel;
 import io.github.marcelofabianov.cubit.domain.energy.Battery;
 import io.github.marcelofabianov.cubit.domain.energy.ConsumptionExtras;
 import io.github.marcelofabianov.cubit.domain.energy.Energy;
@@ -16,7 +17,8 @@ public record TierSpec(
     int maxHealth,
     int callRadiusBlocks,
     double speedMultiplier,
-    ConsumptionExtras extras) {
+    ConsumptionExtras extras,
+    LightLevel lampLight) {
 
   private static final String BATTERY_CAPACITY = "batteryCapacity";
   private static final String RECHARGE_PER_TICK = "rechargePerTick";

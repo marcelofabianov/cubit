@@ -29,11 +29,19 @@ public final class RobotMenu extends AbstractContainerMenu {
   private static final int PLAYER_ROWS = 3;
   private static final int ENERGY_SLOT_SIZE = 1;
   public static final int ENERGY_SLOT_X = -19;
+  public static final int LAMP_BUTTON = 0;
+  public static final String LAMP_ON_KEY = "gui.cubit.lamp.on";
+  public static final String LAMP_OFF_KEY = "gui.cubit.lamp.off";
+  private static final int TRUE_VALUE = 1;
+  private static final int FALSE_VALUE = 0;
 
   private final Container container;
   private final Predicate<Player> stillValid;
   private int shownBatteryPercent;
   private int shownHealthPercent;
+  private int shownLampOn;
+  private int shownLampAvailable;
+  private final LampSwitch lamp;
 
   public RobotMenu(
       int containerId,
@@ -42,15 +50,19 @@ public final class RobotMenu extends AbstractContainerMenu {
       Container energySlot,
       IntSupplier batteryPercent,
       IntSupplier healthPercent,
+      LampSwitch lamp,
       Predicate<Player> stillValid) {
     super(CubitMenus.ROBOT.get(), containerId);
     this.container = container;
     this.stillValid = stillValid;
+    this.lamp = lamp;
     int rows = rowsFor(container.getContainerSize());
     addRobotSlots(rows);
     addEnergySlot(energySlot);
     addDataSlot(shownValue(batteryPercent, value -> shownBatteryPercent = value));
     addDataSlot(shownValue(healthPercent, value -> shownHealthPercent = value));
+    addDataSlot(shownValue(() -> asValue(lamp.isOn()), value -> shownLampOn = value));
+    addDataSlot(shownValue(() -> asValue(lamp.isAvailable()), value -> shownLampAvailable = value));
     addPlayerSlots(playerInventory, rows);
   }
 
@@ -64,6 +76,7 @@ public final class RobotMenu extends AbstractContainerMenu {
         new SimpleContainer(ENERGY_SLOT_SIZE),
         () -> 0,
         () -> 0,
+        LampSwitch.NONE,
         player -> true);
   }
 
@@ -75,6 +88,7 @@ public final class RobotMenu extends AbstractContainerMenu {
       Container energySlot,
       IntSupplier batteryPercent,
       IntSupplier healthPercent,
+      LampSwitch lamp,
       Predicate<Player> stillValid) {
     player.openMenu(
         new SimpleMenuProvider(
@@ -86,6 +100,7 @@ public final class RobotMenu extends AbstractContainerMenu {
                     energySlot,
                     batteryPercent,
                     healthPercent,
+                    lamp,
                     stillValid),
             title),
         data -> writeSize(data, container));
@@ -111,6 +126,28 @@ public final class RobotMenu extends AbstractContainerMenu {
 
   public int healthPercent() {
     return shownHealthPercent;
+  }
+
+  public boolean lampOn() {
+    return shownLampOn == TRUE_VALUE;
+  }
+
+  public boolean lampAvailable() {
+    return shownLampAvailable == TRUE_VALUE;
+  }
+
+  /** The server checks this menu before calling, and it is checked again for any other caller. */
+  @Override
+  public boolean clickMenuButton(Player player, int button) {
+    if (button != LAMP_BUTTON || !stillValid(player) || !lamp.isAvailable()) {
+      return false;
+    }
+    lamp.toggle();
+    return true;
+  }
+
+  private static int asValue(boolean value) {
+    return value ? TRUE_VALUE : FALSE_VALUE;
   }
 
   private static DataSlot shownValue(IntSupplier source, IntConsumer shown) {

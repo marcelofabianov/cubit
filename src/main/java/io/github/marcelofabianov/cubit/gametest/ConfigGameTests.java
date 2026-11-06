@@ -3,6 +3,7 @@ package io.github.marcelofabianov.cubit.gametest;
 import com.electronwill.nightconfig.core.CommentedConfig;
 import io.github.marcelofabianov.cubit.CubitMod;
 import io.github.marcelofabianov.cubit.config.CubitConfig;
+import io.github.marcelofabianov.cubit.domain.behavior.LightLevel;
 import io.github.marcelofabianov.cubit.domain.energy.ConsumptionExtras;
 import io.github.marcelofabianov.cubit.domain.energy.Energy;
 import io.github.marcelofabianov.cubit.domain.energy.Percentage;
@@ -25,6 +26,26 @@ public final class ConfigGameTests {
   private static final String INITIAL_CHARGE_KEY = "general.initial_charge_percent";
   private static final String BATTERY_KEY = "general_robot.base.battery_capacity";
   private static final String CONSUMPTION_KEY = "general_robot.base.moving_consumption_per_tick";
+  private static final String SCREEN_LIGHT_KEY = "general.screen_light_level";
+  private static final String LAMP_ON_BELOW_KEY = "general.lamp_on_below_light";
+  private static final String LAMP_OFF_FROM_KEY = "general.lamp_off_from_light";
+  private static final String LAMP_CHECK_KEY = "general.lamp_check_ticks";
+  private static final String LAMP_CONSUMPTION_KEY = "general_robot.base.lamp_consumption_per_tick";
+  private static final String LAMP_LIGHT_KEY = "general_robot.base.lamp_light_level";
+  private static final int LAMP_LIGHT = 10;
+  private static final int SCREEN_LIGHT = 4;
+  private static final int LAMP_ON_BELOW = 8;
+  private static final int LAMP_OFF_FROM = 10;
+  private static final int LAMP_CHECK = 20;
+  private static final int LAMP_COST = 1;
+  private static final Map<String, Integer> LAMP_DEFAULTS =
+      Map.of(
+          SCREEN_LIGHT_KEY, SCREEN_LIGHT,
+          LAMP_ON_BELOW_KEY, LAMP_ON_BELOW,
+          LAMP_OFF_FROM_KEY, LAMP_OFF_FROM,
+          LAMP_CHECK_KEY, LAMP_CHECK,
+          LAMP_CONSUMPTION_KEY, LAMP_COST,
+          LAMP_LIGHT_KEY, LAMP_LIGHT);
   private static final String DOCK_CAPACITY_KEY = "general.dock_energy_capacity";
   private static final String DOCK_INPUT_KEY = "general.dock_input_per_tick";
   private static final String DOCK_HEAL_KEY = "general.dock_full_heal_ticks";
@@ -109,6 +130,7 @@ public final class ConfigGameTests {
           SLOTS_KEY, SLOTS,
           HEALTH_KEY, HEALTH,
           RADIUS_KEY, RADIUS);
+  private static final long LAMP_CONSUMPTION = 1;
   private static final TierSpec BASE_SPEC =
       new TierSpec(
           new Energy(BATTERY),
@@ -122,7 +144,9 @@ public final class ConfigGameTests {
               new Energy(FULL_INVENTORY_EXTRA),
               new Energy(WATER_EXTRA),
               new Energy(NEGATIVE_CONDITION_EXTRA),
-              new Energy(CLIMB_EXTRA)));
+              new Energy(CLIMB_EXTRA),
+              new Energy(LAMP_CONSUMPTION)),
+          new LightLevel(LAMP_LIGHT));
   private static final String WRONG_SPEC = "Wrong tier numbers";
   private static final String WRONG_CHARGE = "Wrong initial charge";
   private static final String WRONG_KEY = "Wrong value for a config key";
@@ -167,6 +191,8 @@ public final class ConfigGameTests {
     GENERAL_DEFAULTS.forEach(
         (key, value) -> helper.assertValueEqual(file.<Integer>get(key), value, WRONG_KEY));
     TIER_DEFAULTS.forEach(
+        (key, value) -> helper.assertValueEqual(file.<Integer>get(key), value, WRONG_KEY));
+    LAMP_DEFAULTS.forEach(
         (key, value) -> helper.assertValueEqual(file.<Integer>get(key), value, WRONG_KEY));
     helper.assertValueEqual(file.<Double>get(BASE_SPEED_KEY), BASE_SPEED, WRONG_KEY);
     helper.assertValueEqual(file.<Double>get(BURNING_SPEED_KEY), BURNING_SPEED, WRONG_KEY);

@@ -2,6 +2,8 @@ package io.github.marcelofabianov.cubit.client;
 
 import io.github.marcelofabianov.cubit.menu.RobotMenu;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -33,6 +35,19 @@ final class RobotScreen extends AbstractContainerScreen<RobotMenu> {
   private static final int HEALTH_BAR_COLOR = 0xFFFF5555;
   private static final int BAR_WIDTH = 6;
   private static final int PERCENT = 100;
+  private static final int LAMP_X = -24;
+  private static final int LAMP_Y = 2;
+  private static final int LAMP_WIDTH = 22;
+  private static final int LAMP_HEIGHT = 14;
+  private static final int LAMP_LIGHT_X = 6;
+  private static final int LAMP_LIGHT_Y = 5;
+  private static final int LAMP_LIGHT_WIDTH = 10;
+  private static final int LAMP_LIGHT_HEIGHT = 4;
+  private static final int LAMP_ON_COLOR = 0xFFFFE9A8;
+  private static final int LAMP_OFF_COLOR = 0xFF373737;
+
+  private Button lampButton;
+  private boolean shownLampOn;
 
   RobotScreen(RobotMenu menu, Inventory playerInventory, Component title) {
     super(menu, playerInventory, title);
@@ -41,8 +56,45 @@ final class RobotScreen extends AbstractContainerScreen<RobotMenu> {
   }
 
   @Override
+  protected void init() {
+    super.init();
+    lampButton =
+        addRenderableWidget(
+            Button.builder(Component.empty(), button -> pressLamp())
+                .bounds(leftPos + LAMP_X, topPos + LAMP_Y, LAMP_WIDTH, LAMP_HEIGHT)
+                .build());
+    updateLamp();
+  }
+
+  private void pressLamp() {
+    minecraft.gameMode.handleInventoryButtonClick(menu.containerId, RobotMenu.LAMP_BUTTON);
+  }
+
+  @Override
+  protected void containerTick() {
+    super.containerTick();
+    updateLamp();
+  }
+
+  /** The state comes from the server, so the button only changes when the server says so. */
+  private void updateLamp() {
+    lampButton.active = menu.lampAvailable();
+    shownLampOn = menu.lampOn();
+    String text = shownLampOn ? RobotMenu.LAMP_ON_KEY : RobotMenu.LAMP_OFF_KEY;
+    lampButton.setTooltip(Tooltip.create(Component.translatable(text)));
+  }
+
+  private void renderLampLight(GuiGraphics graphics) {
+    int x = lampButton.getX() + LAMP_LIGHT_X;
+    int y = lampButton.getY() + LAMP_LIGHT_Y;
+    int color = shownLampOn && lampButton.active ? LAMP_ON_COLOR : LAMP_OFF_COLOR;
+    graphics.fill(x, y, x + LAMP_LIGHT_WIDTH, y + LAMP_LIGHT_HEIGHT, color);
+  }
+
+  @Override
   public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
     super.render(graphics, mouseX, mouseY, partialTick);
+    renderLampLight(graphics);
     renderTooltip(graphics, mouseX, mouseY);
   }
 

@@ -36,7 +36,7 @@ Não há perguntas pendentes nesta fase.
 | # | Pergunta | Resposta |
 |---|---|---|
 | 16 | Elite e Ultimate ganham mais energia do sol do que gastam de dia. Isso muda? | Sim, o solar fica abaixo do consumo. Os valores estão na [pergunta 52](fase-3-sentidos.md) |
-| 17 | O feixe de luz resolve Elite e Ultimate, com o limite de luz 15? | Sim, com a viabilidade confirmada na Fase 3 |
+| 17 | O feixe de luz resolve Elite e Ultimate, com o limite de luz 15? | Sim, com a viabilidade confirmada na Fase 3. A [pergunta 463](fase-3-sentidos.md) leva o feixe para o Minerador, na Fase 5 |
 | 18 | O raio do retorno automático cresce por tier? | Sim |
 | 19 | O conceito atual já é o design próprio ou ainda muda? | É a base, e o modelo final foi definido na pergunta 60 |
 | 20 | Quais são as receitas? | Provisórias, seguindo a progressão de [`itens.md`](../itens.md), e ajustadas nos testes |
@@ -65,6 +65,7 @@ Não há perguntas pendentes nesta fase.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 13:26 | Aponta a resposta 17 para a 463. |
 | Marcelo Fabiano | 2026-11-06 11:10 | Aponta as respostas 90 e 91 para a 451. |
 | Marcelo Fabiano | 2026-11-06 11:10 | Troca 'especialidade' por 'trabalho' e 'card de especialidade' por 'card de Aprendizado de Máquina'. |
 | Marcelo Fabiano | 2026-11-06 09:48 | Aponta a resposta 11 para a 432. |

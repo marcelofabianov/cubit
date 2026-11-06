@@ -15,6 +15,7 @@ import io.github.marcelofabianov.cubit.domain.robot.RobotState;
 import io.github.marcelofabianov.cubit.domain.robot.RobotType;
 import io.github.marcelofabianov.cubit.domain.tier.RobotTier;
 import io.github.marcelofabianov.cubit.domain.tier.TierSpec;
+import io.github.marcelofabianov.cubit.menu.LampSwitch;
 import io.github.marcelofabianov.cubit.player.DeadRobotLinks;
 import io.github.marcelofabianov.cubit.player.FollowingRobotLink;
 import io.github.marcelofabianov.cubit.registry.CubitAttachments;
@@ -75,6 +76,7 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
   private final RobotDocking docking = new RobotDocking(this);
   private final RobotFace face = new RobotFace(this);
   private final RobotNotices notices = new RobotNotices(this);
+  private final RobotLamp lamp = new RobotLamp(this);
 
   public RobotEntity(
       EntityType<? extends RobotEntity> type,
@@ -125,6 +127,7 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
     setPersistenceRequired();
     lastSafePosition = blockPosition();
     inventory.readFrom(item, spec.inventorySlots());
+    lamp.setSwitchedOn(state.lampOn());
 
     FollowingOutcome outcome = policy().onArrival(getUUID(), follower(player), battery);
     powerState = outcome.state();
@@ -134,7 +137,7 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
   }
 
   public RobotState state() {
-    return new RobotState(tier, battery.charge(), getHealth());
+    return new RobotState(tier, battery.charge(), getHealth(), lamp.switchedOn());
   }
 
   public PowerState powerState() {
@@ -147,6 +150,10 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
 
   RobotFace face() {
     return face;
+  }
+
+  public LampSwitch lampSwitch() {
+    return lamp;
   }
 
   RobotNotices notices() {
@@ -242,7 +249,7 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
 
   /** Being pushed, or a stuck route, is not walking, so it costs nothing. */
   private void updateEnergy(Energy chargeBefore) {
-    RobotActivity activity = stepMeter.measure(this, inventory.isFull());
+    RobotActivity activity = stepMeter.measure(this, inventory.isFull(), lamp.lit());
     battery = spec().spendOneTick(battery, powerState, activity);
     battery = inventory.energySlot().charge(battery, spec().rechargePerTick());
     PowerState next = CubitMod.CONFIG.powerRules().afterEnergyChange(powerState, battery);
@@ -265,6 +272,7 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
     updateEnergy(chargeBefore);
     face.tick();
     RobotLooks.update(this);
+    lamp.tick();
     notices.tick();
     RobotLoadSpeed.update(this, inventory.isFull());
     inventory.dropSurplus(
@@ -329,6 +337,7 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
     powerState = SavedRobotValues.powerState(tag, getUUID());
     SavedRobotValues.readContents(tag, inventory, registryAccess(), spec().inventorySlots());
     docking.load(tag);
+    lamp.setSwitchedOn(SavedRobotValues.lampOn(tag));
     lastSafePosition = SavedRobotValues.lastSafePosition(tag);
     RobotInteractions.applyAttributes(this);
   }

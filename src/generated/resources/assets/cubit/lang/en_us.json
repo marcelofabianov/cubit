@@ -3,6 +3,8 @@
   "command.cubit.reset.cleared": "Follow link cleared.",
   "command.cubit.reset.nobody": "No Cubit is following you.",
   "entity.cubit.general_robot": "Cubit",
+  "gui.cubit.lamp.off": "Lamp: Off",
+  "gui.cubit.lamp.on": "Lamp: On",
   "item.cubit.damaged_general_robot": "Damaged Cubit",
   "item.cubit.general_robot": "Cubit",
   "item.cubit.toolbox": "Toolbox",

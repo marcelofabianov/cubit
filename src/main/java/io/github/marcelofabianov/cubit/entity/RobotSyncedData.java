@@ -15,6 +15,7 @@ import net.minecraft.network.syncher.SynchedEntityData;
  */
 final class RobotSyncedData {
   private static final byte NOTHING_PLAYING = 0;
+  private static final byte NO_LIGHT = 0;
 
   static final EntityDataAccessor<Byte> PLAYING_SOUNDS =
       SynchedEntityData.defineId(RobotEntity.class, EntityDataSerializers.BYTE);
@@ -31,6 +32,11 @@ final class RobotSyncedData {
   static final EntityDataAccessor<Byte> BATTERY_INDICATOR =
       SynchedEntityData.defineId(RobotEntity.class, EntityDataSerializers.BYTE);
 
+  static final EntityDataAccessor<Boolean> LAMP_LIT =
+      SynchedEntityData.defineId(RobotEntity.class, EntityDataSerializers.BOOLEAN);
+  static final EntityDataAccessor<Byte> LIGHT_LEVEL =
+      SynchedEntityData.defineId(RobotEntity.class, EntityDataSerializers.BYTE);
+
   private RobotSyncedData() {}
 
   /** Called while the class loads, only to make sure it runs before any robot exists. */
@@ -44,5 +50,7 @@ final class RobotSyncedData {
     builder.define(ARMS_RAISED, false);
     builder.define(TIER, (byte) RobotTier.BASE.ordinal());
     builder.define(BATTERY_INDICATOR, (byte) BatteryIndicator.EMPTY.ordinal());
+    builder.define(LAMP_LIT, false);
+    builder.define(LIGHT_LEVEL, NO_LIGHT);
   }
 }

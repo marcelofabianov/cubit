@@ -1,6 +1,9 @@
 package io.github.marcelofabianov.cubit.config;
 
+import com.mojang.logging.LogUtils;
 import io.github.marcelofabianov.cubit.domain.behavior.FollowDecision;
+import io.github.marcelofabianov.cubit.domain.behavior.LampPolicy;
+import io.github.marcelofabianov.cubit.domain.behavior.LightLevel;
 import io.github.marcelofabianov.cubit.domain.energy.ConsumptionExtras;
 import io.github.marcelofabianov.cubit.domain.energy.Energy;
 import io.github.marcelofabianov.cubit.domain.energy.Percentage;
@@ -11,11 +14,15 @@ import io.github.marcelofabianov.cubit.domain.tier.TierCatalog;
 import io.github.marcelofabianov.cubit.domain.tier.TierSpec;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicBoolean;
 import net.neoforged.neoforge.common.ModConfigSpec;
+import org.slf4j.Logger;
 
 /** The COMMON config. The keys and limits are documented in _docs/desenvolvimento/config.md. */
 public final class CubitConfig {
   public static final RobotType GENERAL_ROBOT = new RobotType("general_robot");
+  private static final Logger LOGGER = LogUtils.getLogger();
+  private static final String REVERSED_LAMP = "The lamp limits are reversed: off {}, on {}";
   private static final String GENERAL_SECTION = "general";
   private static final int TIER_SECTION_DEPTH = 2;
   private static final long BASE_BATTERY = 300_000;
@@ -24,6 +31,8 @@ public final class CubitConfig {
   private static final long BASE_WATER_EXTRA = 5;
   private static final long BASE_NEGATIVE_CONDITION_EXTRA = 25;
   private static final long BASE_CLIMB_EXTRA = 15;
+  private static final long BASE_LAMP_CONSUMPTION = 1;
+  private static final int BASE_LAMP_LIGHT = 10;
   private static final long BASE_RECHARGE = 500;
   private static final int BASE_SLOTS = 27;
   private static final int BASE_HEALTH = 25;
@@ -42,7 +51,9 @@ public final class CubitConfig {
               new Energy(BASE_FULL_INVENTORY_EXTRA),
               new Energy(BASE_WATER_EXTRA),
               new Energy(BASE_NEGATIVE_CONDITION_EXTRA),
-              new Energy(BASE_CLIMB_EXTRA)));
+              new Energy(BASE_CLIMB_EXTRA),
+              new Energy(BASE_LAMP_CONSUMPTION)),
+          new LightLevel(BASE_LAMP_LIGHT));
 
   private final ModConfigSpec spec;
   private final GeneralSection general;
@@ -52,6 +63,8 @@ public final class CubitConfig {
   private final ExpressionSection expression;
   private final NoticeSection notice;
   private final DockSection dock;
+  private final LampSection lamp;
+  private final AtomicBoolean warnedLamp = new AtomicBoolean();
   private final TierCatalog tierCatalog;
 
   public CubitConfig() {
@@ -65,6 +78,7 @@ public final class CubitConfig {
     expression = new ExpressionSection(builder);
     notice = new NoticeSection(builder);
     dock = new DockSection(builder);
+    lamp = new LampSection(builder);
     builder.pop();
 
     builder.push(List.of(GENERAL_ROBOT.id(), RobotTier.BASE.key()));
@@ -90,6 +104,24 @@ public final class CubitConfig {
 
   public Percentage criticalCharge() {
     return new Percentage(expression.criticalCharge.get());
+  }
+
+  public LightLevel screenLight() {
+    return new LightLevel(lamp.screenLight.get());
+  }
+
+  public int lampCheckTicks() {
+    return lamp.checkTicks.get();
+  }
+
+  /** A reversed pair in the file must not break the game, so it only goes to the log once. */
+  public LampPolicy lampPolicy() {
+    int onBelow = lamp.onBelow.get();
+    int offFrom = lamp.offFrom.get();
+    if (offFrom < onBelow && warnedLamp.compareAndSet(false, true)) {
+      LOGGER.warn(REVERSED_LAMP, offFrom, onBelow);
+    }
+    return LampPolicy.fitting(new LightLevel(onBelow), new LightLevel(offFrom));
   }
 
   public int noticeRepeatTicks() {
