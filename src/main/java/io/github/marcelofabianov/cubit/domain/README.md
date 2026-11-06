@@ -72,7 +72,7 @@ Os documentos definem três estados: ativo, inativo e hibernação. No código, 
 
 | `PowerState` | Estado | Acesso ao inventário | Como sai |
 |---|---|---|---|
-| `ACTIVE` | Ativo | Sim | Bateria zerada ou troca de robô |
+| `ACTIVE` | Ativo | Sim | Bateria zerada, troca de robô, perda do lugar de seguir ou entrada na base |
 | `INACTIVE_EXHAUSTED` | Inativo, sem bateria | Não | Sozinho, ao atingir a carga mínima |
 | `INACTIVE_SWITCHED_OFF` | Inativo, desligado com carga | Não | Clique direito, se houver carga |
 | `HIBERNATING` | Hibernação, na base | Sim | Ao sair da base |

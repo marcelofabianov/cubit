@@ -20,6 +20,8 @@ Os tiers são Base, Avançado, Elite e Ultimate (no jogo: Base, Advanced, Elite 
 | Lanterna | Luz 10 | Luz 15 | Luz 15 + feixe de 25 blocos | Luz 15 + feixe de 30 blocos |
 | Expressões, nome e cor da carcaça | ✔ | ✔ | ✔ | ✔ |
 
+O feixe depende da viabilidade, a confirmar na Fase 3.
+
 ## Energia
 
 | Recurso | Base | Avançado | Elite | Ultimate |
@@ -68,7 +70,7 @@ Valem para todos os tiers e ficam no config.
 | Velocidade em chamas, sobre a do tier | 1,25× |
 | Velocidade com o inventário cheio, sobre a do tier | 0,75× |
 | Busca de água em chamas, em qualquer direção | 8 blocos |
-| Alcance ao andar ao acaso em chamas | 5 blocos |
+| Alcance ao andar ao acaso em chamas e ao sair da lava ou de um bloco que fere | 5 blocos |
 | Distância para teleportar até o player | ~20 blocos |
 | Religar | 5% de bateria |
 | Bateria crítica, com expressão de sono | 10% |
@@ -80,6 +82,7 @@ Valem para todos os tiers e ficam no config.
 | Vida ao sair do conserto | 25% |
 | Intervalo para tentar de novo o resgate no vazio | 20 ticks |
 | Alcance do controle remoto ao mirar num Cubit | 32 blocos |
+| Intervalo mínimo entre repetições de textos e alertas | A definir na Fase 3 |
 | Energia de 1 pó de redstone | 5.000 FE |
 | Energia de 1 bloco de redstone | 45.000 FE |
 
@@ -163,6 +166,7 @@ Planejado para a Fase 5. O tier Base não aceita cards.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 21:02 | Avisa da viabilidade do feixe, adiciona o intervalo dos alertas e amplia o nome do alcance. |
 | Marcelo Fabiano | 2026-11-05 17:15 | Adiciona o tempo com a tela completa. |
 | Marcelo Fabiano | 2026-11-05 16:09 | Adiciona o tempo sem avançar até o Dock. |
 | Marcelo Fabiano | 2026-11-05 14:40 | Adiciona o consumo por atividade e os novos valores de autonomia. |

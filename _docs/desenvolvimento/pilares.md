@@ -73,7 +73,7 @@ As regras numeradas citadas aqui são as do [`AGENTS.md`](../../AGENTS.md).
 | Saves | Mundos já criados | IDs, data components e NBT mudam só com migração |
 | Config | O pack, pelo packwiz | Chaves não mudam sem migração |
 | Receitas e tags | KubeJS e outros mods | IDs e tags são estáveis, e as receitas são JSON |
-| Energia | Mods de FE do pack | Capabilities padrão do NeoForge |
+| Energia | Mods de FE, quando houver | Capabilities padrão do NeoForge |
 
 - O contrato é definido nos documentos antes do código (regra 11).
 - Arquivos gerados são versionados e nunca editados à mão (regra 30).
@@ -222,6 +222,7 @@ Isso não autoriza refatorar um arquivo inteiro nem mudar o comportamento de out
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 21:02 | Trata os mods de FE como um extra. |
 | Marcelo Fabiano | 2026-11-05 00:05 | Exige perguntar antes de atualizar documento desatualizado. |
 | Marcelo Fabiano | 2026-11-04 18:20 | Cita a regra de constantes. |
 | Marcelo Fabiano | 2026-11-04 17:57 | Cita os gates de formatação e análise estática. |

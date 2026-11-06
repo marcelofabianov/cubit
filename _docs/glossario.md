@@ -17,6 +17,7 @@ Tudo que aparece no mod fica em inglês. Os documentos podem usar o termo em por
 | Servidor | Robot Server |
 | Antena | Signal Antenna |
 | Baú wireless | Wireless Chest |
+| Upgrade do storage wireless | Wireless Storage Upgrade |
 | Card de especialidade | Miner, Farmer, Rancher, Defender, Organizer, Builder, Cook e Fisher Card |
 | Pacífico | Peaceful |
 | Contra-atacar | Retaliate |
@@ -31,17 +32,21 @@ Os IDs estão em [`itens.md`](itens.md).
 - **Tier:** nível de evolução do robô.
 - **Base:** o Induction Dock, bloco fixo de recarga.
 - **Robô que segue:** o único Cubit do player que o acompanha naquele momento.
+- **Vínculo:** o registro, nos dados do player, de qual Cubit o segue.
+- **Condição negativa:** fogo, lava, bloco que fere ou efeito nocivo, que custam energia extra.
+- **Bloco que fere:** bloco que o jogo classifica como perigoso na rota, como magma e cacto.
 - **Ativo:** Cubit ligado, fora da base.
 - **Inativo:** Cubit desligado.
 - **Hibernação:** Cubit imóvel, sem tarefas, com o inventário e as configurações acessíveis. Na base, ele carrega e sai sozinho. Fora dela, na Fase 5, só volta pelo botão `Retomar` ou pelo controle.
 - **Especialidade:** o que um card ensina a um Cubit, na Fase 5.
 - **Área de trabalho:** volume marcado com o controle, onde o card age.
-- **Slot exclusivo:** slot reservado para tochas, fornalha, carregador de ferramentas ou energia (Power Bank ou redstone).
+- **Slot exclusivo:** slot reservado para tochas, fornalha, carregador de ferramentas ou energia (Power Bank ou redstone) e, na Fase 5, para o card de especialidade.
 
 ## Histórico de modificações
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 21:02 | Adiciona vínculo, condição negativa, bloco que fere e o upgrade do storage, e cita o slot do card. |
 | Marcelo Fabiano | 2026-11-05 12:08 | Adiciona os termos dos robôs especializados e amplia a hibernação. |
 | Marcelo Fabiano | 2026-11-05 00:12 | Adiciona o Cubit danificado, a caixa de ferramentas, o Dock e o Avançado. |
 | Marcelo Fabiano | 2026-11-04 17:26 | Adiciona o robô que segue e a família de robôs. |
