@@ -36,9 +36,11 @@ O que está pronto e o que falta em cada fase do projeto. As fases estão no [`R
 
 ## Fase 3: Sentidos (próxima)
 
+A ordem é a da numeração (pergunta 356). Sons, intervalo, expressões, colar, textos e feixe entram em partes, e um item só é marcado quando estiver completo na Fase 3.
+
 ### Já existe
 
-1. [x] Os dez arquivos de som em `.ogg`, sem tocar no jogo
+1. [x] Os onze arquivos de som em `.ogg`
 2. [x] Decisões de sons, textos, expressões e painel solar
 
 ### Falta

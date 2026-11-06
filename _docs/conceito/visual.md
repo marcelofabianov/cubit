@@ -26,22 +26,20 @@ São sete: normal, feliz, sono, alerta, surpreso, carregando e desligado. Os gat
 
 ## Sons
 
-São dez sons diferentes (perguntas 135, 148, 316, 320 e 322). Nove entram na Fase 3, e o do ataque, junto do choque:
+São onze sons diferentes (perguntas 135, 148, 316, 320, 322 e 362). Nove entram na Fase 3, o do ataque, junto do choque, e o de modo agressivo, junto dos modos de defesa. A lista, com o arquivo e o uso de cada um, está em [`sons.md`](sons.md).
 
-| # | Quando toca | Som | Arquivo |
-|---|---|---|---|
-| 1 | Ao andar | Esteiras, como as de um tanque de guerra, em loop e acompanhando a velocidade | `tracks.ogg` |
-| 2 | Ao encontrar um mob hostil | Alerta, com intervalo mínimo entre repetições | `hostile_mob_alert.ogg` |
-| 3 | Ao encontrar um minério raro | Alerta, com intervalo mínimo entre repetições | `rare_ore_alert.ogg` |
-| 4 | Ao trocar para uma expressão sem som exclusivo: normal, feliz ou sono | Bipe padrão | `expression_beep.ogg` |
-| 5 | Enquanto pega fogo | Curto elétrico | `short_circuit.ogg` |
-| 6 | Ao passar de desligado a ligado | Próprio | `power_on.ogg` |
-| 7 | Ao desligar | Próprio | `power_off.ogg` |
-| 8 | Enquanto é recarregado | Próprio | `recharging.ogg` |
-| 9 | Ao atacar | Choque | `shock_attack.ogg` |
-| 10 | Ao ser colocado no mundo, em qualquer estado | Próprio | `placed.ogg` |
+Os arquivos ficam em `assets/cubit/sounds/general_robot/`, em Ogg Vorbis, mono e 48 kHz, porque o jogo só aceita esse formato e só reduz o volume com a distância em sons mono. O valor do intervalo mínimo será definido na Fase 3, num teste no jogo, e ficará no config.
 
-Os arquivos ficam em `assets/cubit/sounds/general_robot/`, em Ogg Vorbis, mono e 48 kHz, porque o jogo só aceita esse formato e só reduz o volume com a distância em sons mono. Ainda não tocam no jogo. O valor do intervalo mínimo será definido na Fase 3, num teste no jogo, e ficará no config.
+Tocam todos, menos o bipe padrão, que entra com as expressões, os alertas, que entram com os scanners, e o ataque e o modo agressivo, que entram na Fase 4.
+
+- **IDs:** `cubit:general_robot.{nome}`, com o nome do arquivo sem a extensão. Não mudam sem aviso.
+- **Quem ouve:** todos os players por perto, com o volume caindo até cerca de 16 blocos, no controle "Criaturas amigáveis" do jogo. Volume e alcance ficam no `sounds.json`, onde um pacote de recursos pode mudá-los.
+- **Ligar:** de inativo para ativo, pelo clique, ao religar sozinho ou ao sair da base ligado.
+- **Desligar:** de ativo para inativo, por bateria zerada, troca de robô ou `/cubit reset`.
+- **Sem esses sons:** entrar na base e ser colocado no mundo.
+- **Esteira:** em loop, enquanto anda, com volume e altura acompanhando a velocidade.
+- **Curto elétrico:** em loop, enquanto pega fogo, ativo ou não, junto da esteira.
+- **Recarga:** em loop, enquanto a bateria sobe de fato, na base ou pelo slot. Para com a bateria cheia ou com o Dock sem energia.
 
 ## Identificação
 
@@ -53,6 +51,9 @@ Os arquivos ficam em `assets/cubit/sounds/general_robot/`, em Ogg Vorbis, mono e
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 23:16 | Adiciona o som de modo agressivo. |
+| Marcelo Fabiano | 2026-11-05 22:47 | Passa a lista dos sons para `sons.md`. |
+| Marcelo Fabiano | 2026-11-05 22:39 | Define quando cada som toca e quem ouve. |
 | Marcelo Fabiano | 2026-11-05 21:30 | Separa o som de ligar do som de colocar. |
 | Marcelo Fabiano | 2026-11-05 21:02 | Trata a GeckoLib como dependência do mod. |
 | Marcelo Fabiano | 2026-11-05 20:36 | Define a fase do som de colocar no mundo. |

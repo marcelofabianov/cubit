@@ -8,6 +8,7 @@ import io.github.marcelofabianov.cubit.domain.energy.Battery;
 import io.github.marcelofabianov.cubit.domain.energy.Energy;
 import io.github.marcelofabianov.cubit.domain.energy.Percentage;
 import io.github.marcelofabianov.cubit.domain.energy.PowerState;
+import io.github.marcelofabianov.cubit.domain.energy.RobotActivity;
 import io.github.marcelofabianov.cubit.domain.ownership.FollowingOutcome;
 import io.github.marcelofabianov.cubit.domain.ownership.FollowingRobotPolicy;
 import io.github.marcelofabianov.cubit.domain.ownership.OwnerProtection;
@@ -24,6 +25,7 @@ import java.util.function.Supplier;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.Container;
@@ -106,6 +108,12 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
   }
 
   @Override
+  protected void defineSynchedData(SynchedEntityData.Builder builder) {
+    super.defineSynchedData(builder);
+    RobotAudio.defineData(builder);
+  }
+
+  @Override
   protected void registerGoals() {
     goalSelector.addGoal(BURNING_GOAL_PRIORITY, new BurningReactionGoal(this));
     goalSelector.addGoal(DAMAGING_BLOCK_GOAL_PRIORITY, new LeaveDamagingBlockGoal(this));
@@ -135,6 +143,7 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
     FollowingOutcome outcome = policy().onArrival(getUUID(), follower(player), battery);
     powerState = outcome.state();
     player.setData(CubitAttachments.FOLLOWING_ROBOT, new FollowingRobotLink(outcome.follower()));
+    RobotAudio.onPlaced(this);
   }
 
   /** The player this robot follows right now, when that player is online. */
@@ -167,6 +176,7 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
   }
 
   void setPowerState(PowerState state) {
+    RobotAudio.onStateChange(this, powerState, state);
     powerState = state;
   }
 
@@ -224,19 +234,7 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
     if (level().isClientSide()) {
       return InteractionResult.SUCCESS;
     }
-    if (!player.getUUID().equals(ownerId)) {
-      return InteractionResult.PASS;
-    }
-    if (player.isShiftKeyDown()) {
-      return RobotInteractions.collect(this, player);
-    }
-    if (powerState.isInteractive()) {
-      return RobotInteractions.openInventory(this, player);
-    }
-    if (inventory.energySlot().insert(player.getItemInHand(hand))) {
-      return InteractionResult.CONSUME;
-    }
-    return RobotInteractions.turnOn(this, player);
+    return RobotInteractions.use(this, player, hand);
   }
 
   /** Checked on the server while the screen is open, because the robot can die or switch off. */
@@ -260,14 +258,16 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
   }
 
   /** Being pushed, or a stuck route, is not walking, so it costs nothing. */
-  private void updateEnergy() {
-    battery = spec().spendOneTick(battery, powerState, stepMeter.measure(this, inventory.isFull()));
+  private void updateEnergy(Energy chargeBefore) {
+    RobotActivity activity = stepMeter.measure(this, inventory.isFull());
+    battery = spec().spendOneTick(battery, powerState, activity);
     battery = inventory.energySlot().charge(battery, spec().rechargePerTick());
     PowerState next = CubitMod.CONFIG.powerRules().afterEnergyChange(powerState, battery);
     if (next != powerState) {
-      powerState = next;
+      setPowerState(next);
       getNavigation().stop();
     }
+    RobotAudio.update(this, activity.walking(), chargeBefore);
   }
 
   @Override
@@ -277,8 +277,9 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
     setPathfindingMalus(PathType.WATER, isInWater() || isOnFire() ? OPEN_ROUTE : BLOCKED_ROUTE);
     super.customServerAiStep();
     rememberSafePosition();
+    Energy chargeBefore = battery.charge();
     docking.tick();
-    updateEnergy();
+    updateEnergy(chargeBefore);
     RobotLoadSpeed.update(this, inventory.isFull());
     inventory.dropSurplus(
         stack -> Containers.dropItemStack(level(), getX(), getY(), getZ(), stack));

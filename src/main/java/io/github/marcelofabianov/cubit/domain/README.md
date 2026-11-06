@@ -23,6 +23,9 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 | `FollowingRobotPolicy` | Garante que só um robô siga o player |
 | `RobotActivity` | O que o robô faz no tick: andar, peso, água, altura subida e condição negativa. Quem chama informa, e o domínio decide o gasto |
 | `ConsumptionExtras` | Extras de energia de um `TierSpec`, por situação |
+| `PowerSound` | Som tocado uma vez, ao ligar ou desligar |
+| `ContinuousSound` | Som em loop enquanto a condição valer: esteira, curto elétrico e recarga |
+| `RobotSoundRules` | Diz qual som cada situação toca |
 | `SlotRecharge` | Reserva de FE do slot de energia e sua passagem para a bateria |
 | `DockStock` | Estoque de energia de um Induction Dock e as transferências dele, sem criar nem perder FE |
 | `DockStatus` | O que a tela de um Dock mostra |
@@ -37,6 +40,7 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 
 - **Energia inteira:** evita erro de arredondamento, e uma transferência nunca cria nem perde FE.
 - **Operações informam o que moveu:** `recharge` devolve o que foi aceito, e `consume`, o que foi consumido. Assim, quem chama sabe o que sobrou e não perde energia.
+- **Sons:** entrar na base não toca o som de desligar, porque a recarga já toca, e a recarga só vale com a carga subindo de fato, para não tocar com a bateria cheia nem com o Dock sem energia (perguntas 358 e 359).
 - **Barra sem falso zero:** `level` só devolve 0 com a bateria vazia. Com qualquer carga, devolve ao menos 1, para o player não achar que o robô ativo está sem energia (pergunta 269).
 - **Comparação de porcentagem sem divisão:** `hasAtLeast` multiplica os dois lados, para ser exata com os valores de `tiers.md`.
 

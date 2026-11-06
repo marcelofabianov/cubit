@@ -10,6 +10,7 @@ import io.github.marcelofabianov.cubit.registry.CubitAttachments;
 import io.github.marcelofabianov.cubit.registry.CubitDataComponents;
 import java.util.UUID;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
@@ -54,6 +55,22 @@ final class RobotInteractions {
     robot
         .getAttribute(Attributes.FOLLOW_RANGE)
         .setBaseValue(CubitMod.CONFIG.followDecision().teleportDistanceBlocks());
+  }
+
+  static InteractionResult use(RobotEntity robot, Player player, InteractionHand hand) {
+    if (!robot.ownerId().filter(player.getUUID()::equals).isPresent()) {
+      return InteractionResult.PASS;
+    }
+    if (player.isShiftKeyDown()) {
+      return collect(robot, player);
+    }
+    if (robot.powerState().isInteractive()) {
+      return openInventory(robot, player);
+    }
+    if (robot.robotInventory().energySlot().insert(player.getItemInHand(hand))) {
+      return InteractionResult.CONSUME;
+    }
+    return turnOn(robot, player);
   }
 
   static InteractionResult collect(RobotEntity robot, Player player) {

@@ -8,6 +8,7 @@ Este é o mapa dos documentos do projeto. A apresentação do mod e o roadmap fi
 |---|---|
 | Personalidade | [`conceito/persona.md`](conceito/persona.md) |
 | Visual, expressões e sons | [`conceito/visual.md`](conceito/visual.md) |
+| Lista dos arquivos de som | [`conceito/sons.md`](conceito/sons.md) |
 | Imagens de conceito | [`imagens/conceito/`](imagens/conceito/) |
 | Bateria, Induction Dock, Power Bank, redstone, painel solar e retorno automático | [`funcionalidades/energia.md`](funcionalidades/energia.md) |
 | Movimento, robô que segue, fogo, lava, vida, morte e local de morte | [`funcionalidades/movimento.md`](funcionalidades/movimento.md) |
@@ -36,6 +37,7 @@ Os números ficam em [`tiers.md`](tiers.md). As outras páginas apontam para lá
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 22:47 | Cita a lista dos sons. |
 | Marcelo Fabiano | 2026-11-05 22:18 | Cita o checklist das fases. |
 | Marcelo Fabiano | 2026-11-05 21:36 | Cita o marcador da wiki. |
 | Marcelo Fabiano | 2026-11-05 12:08 | Adiciona os robôs especializados. |

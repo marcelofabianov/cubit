@@ -191,6 +191,27 @@ Rode num mundo novo, em modo sobrevivência, com `/gamemode survival` e `/give @
 | 7 | Monte o L espelhado, trocando as colunas 1 e 3 | Também sai um `Induction Dock` |
 | 8 | Coloque o `Dock` e abra a tela, com Shift + botão direito | A barra de energia está vazia, e a tela do bloco, apagada |
 
+## Sons
+
+Com o volume geral e o de "Criaturas amigáveis" ligados nas opções do jogo. Para ver as legendas, ligue "Mostrar legendas".
+
+| # | Faça | Espere |
+|---|---|---|
+| 1 | Coloque um robô | Toca o som de colocar, uma vez. Não toca o de ligar |
+| 2 | Ande para ele seguir | A esteira toca em loop enquanto ele anda, sem cortes, e para quando ele para |
+| 3 | Ocupe todos os slots do inventário e ande | A esteira fica um pouco mais grave, porque ele anda mais devagar |
+| 4 | Coloque um segundo robô e clique nele | No segundo, o de ligar. No primeiro, o de desligar |
+| 5 | Rode `/data merge entity @e[type=cubit:general_robot,limit=1,sort=nearest] {Energy:0L}` num robô seguindo, com o slot vazio | Toca o de desligar, e o robô para |
+| 6 | Clique nele com redstone na mão | Toca a recarga, em loop, enquanto a barra sobe. Ao chegar em 5%, toca o de ligar |
+| 7 | Espere a bateria encher, ou tire a redstone do slot | A recarga para |
+| 8 | Ponha fogo no robô, com isqueiro, parado e andando | Toca o curto elétrico enquanto queima, junto da esteira se ele andar |
+| 9 | Ponha fogo num robô desligado | O curto elétrico toca, sem a esteira |
+| 10 | Com o Dock com energia, coloque um Cubit com pouca carga | Toca a recarga, sem o som de desligar. Ao sair, toca o de ligar |
+| 11 | Com o Dock sem energia, coloque um Cubit com pouca carga | Não toca a recarga |
+| 12 | Afaste-se cerca de 16 blocos de um robô fazendo som | O volume cai até sumir |
+| 13 | Abaixe "Criaturas amigáveis" nas opções | Os sons do Cubit abaixam |
+| 14 | Rode `make server` | O servidor abre sem erro de classe de cliente |
+
 ## Morte e conserto
 
 Use `/kill @e[type=cubit:general_robot,limit=1,sort=nearest]` para matar o robô.
@@ -220,6 +241,7 @@ Use `/kill @e[type=cubit:general_robot,limit=1,sort=nearest]` para matar o robô
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 22:44 | Adiciona os sons. |
 | Marcelo Fabiano | 2026-11-05 21:53 | Adiciona as receitas do Cubit e do Induction Dock. |
 | Marcelo Fabiano | 2026-11-05 20:42 | Adiciona o comando `/cubit reset`. |
 | Marcelo Fabiano | 2026-11-05 17:35 | Tira o brilho verde do roteiro do Dock. |
