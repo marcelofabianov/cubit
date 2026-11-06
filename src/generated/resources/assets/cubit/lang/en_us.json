@@ -6,5 +6,14 @@
   "item.cubit.damaged_general_robot": "Damaged Cubit",
   "item.cubit.general_robot": "Cubit",
   "item.cubit.toolbox": "Toolbox",
-  "itemGroup.cubit.main": "Cubit"
+  "itemGroup.cubit.main": "Cubit",
+  "subtitles.cubit.general_robot.expression_beep": "Cubit beeps",
+  "subtitles.cubit.general_robot.hostile_mob_alert": "Cubit warns of an enemy",
+  "subtitles.cubit.general_robot.placed": "Cubit placed",
+  "subtitles.cubit.general_robot.power_off": "Cubit powers off",
+  "subtitles.cubit.general_robot.power_on": "Cubit powers on",
+  "subtitles.cubit.general_robot.rare_ore_alert": "Cubit finds a rare ore",
+  "subtitles.cubit.general_robot.recharging": "Cubit recharges",
+  "subtitles.cubit.general_robot.short_circuit": "Cubit short circuits",
+  "subtitles.cubit.general_robot.tracks": "Cubit tracks rumble"
 }

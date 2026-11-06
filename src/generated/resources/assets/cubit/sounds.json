@@ -1,0 +1,56 @@
+{
+  "general_robot.expression_beep": {
+    "sounds": [
+      "cubit:general_robot/expression_beep"
+    ],
+    "subtitle": "subtitles.cubit.general_robot.expression_beep"
+  },
+  "general_robot.hostile_mob_alert": {
+    "sounds": [
+      "cubit:general_robot/hostile_mob_alert"
+    ],
+    "subtitle": "subtitles.cubit.general_robot.hostile_mob_alert"
+  },
+  "general_robot.placed": {
+    "sounds": [
+      "cubit:general_robot/placed"
+    ],
+    "subtitle": "subtitles.cubit.general_robot.placed"
+  },
+  "general_robot.power_off": {
+    "sounds": [
+      "cubit:general_robot/power_off"
+    ],
+    "subtitle": "subtitles.cubit.general_robot.power_off"
+  },
+  "general_robot.power_on": {
+    "sounds": [
+      "cubit:general_robot/power_on"
+    ],
+    "subtitle": "subtitles.cubit.general_robot.power_on"
+  },
+  "general_robot.rare_ore_alert": {
+    "sounds": [
+      "cubit:general_robot/rare_ore_alert"
+    ],
+    "subtitle": "subtitles.cubit.general_robot.rare_ore_alert"
+  },
+  "general_robot.recharging": {
+    "sounds": [
+      "cubit:general_robot/recharging"
+    ],
+    "subtitle": "subtitles.cubit.general_robot.recharging"
+  },
+  "general_robot.short_circuit": {
+    "sounds": [
+      "cubit:general_robot/short_circuit"
+    ],
+    "subtitle": "subtitles.cubit.general_robot.short_circuit"
+  },
+  "general_robot.tracks": {
+    "sounds": [
+      "cubit:general_robot/tracks"
+    ],
+    "subtitle": "subtitles.cubit.general_robot.tracks"
+  }
+}
