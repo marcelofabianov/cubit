@@ -4,7 +4,6 @@
 
 | # | Pergunta | Recomendação |
 |---|---|---|
-| 336 | Quais são as receitas do Cubit e do Induction Dock? | Usar ferro e redstone, os materiais do tier Base (pergunta 20), com a forma proposta na rodada do fechamento |
 | 337 | Quando publicar a `0.1.0`? | Depois das receitas e dos dois testes da regra 35, numa instância só com o mod e no Iron Meridian. A pergunta 6 define a versão, mas não o momento |
 | 338 | Os sons podem ser publicados? | Conferir os termos das ferramentas de IA usadas antes de publicar, porque os arquivos vão no jar (pergunta 137) |
 
@@ -196,6 +195,12 @@
 | 329 | Como foi o roteiro manual do `/cubit reset`? | Tudo certo, executado pelo desenvolvedor, sem detalhar cada passo |
 | 330 | Como corrigir o que a auditoria dos `.md` encontrou? | Em três blocos, nesta ordem: A, correção direta do que só precisa ser alinhado com as respostas; B, mudança no `AGENTS.md`; C, pontos que dependem de decisão do desenvolvedor |
 | 346 | O comando e as traduções entram nos contratos dos pilares? | Sim, como quinto contrato: os nomes só mudam com aviso, sem exigir migração, porque não ficam nos saves |
+| 336 | Qual é a receita do Induction Dock? | Na mesa de craft, em forma de L. Primeira linha: redstone, vazio e vazio. Segunda: lingote de ferro, vazio e vazio. Terceira: baú, redstone e lingote de ferro |
+| 348 | Qual é a receita do Cubit? | Na mesa de craft, para lembrar o item. Primeira linha: redstone, lâmpada de redstone e redstone. Segunda: lingote de ferro, diamante e lingote de ferro. Terceira: obsidiana, vazio e obsidiana. Vai além da progressão provisória da pergunta 20 |
+| 349 | Quando as receitas aparecem no livro de receitas? | O Cubit, ao ter diamante. O Dock, ao ter um Cubit |
+| 350 | Em que pontos ficam os testes das receitas? | GameTests: cada receita gera o item certo, o Cubit fabricado nasce com tier Base, 25% de carga e vida cheia, o Dock fabricado nasce com o estoque zerado e o L espelhado funciona. Gate: `check-generated`, para os JSONs. Roteiro manual: fazer na mesa em sobrevivência, ver no livro e colocar no mundo |
+| 351 | Como foi o roteiro manual das receitas? | O desenvolvedor fez as três receitas, do Cubit, do Induction Dock e da `Toolbox`, sem problemas. O resultado de cada passo não foi detalhado, então o momento em que aparecem no livro e o L espelhado não foram confirmados |
+| 352 | O que faz o Cubit chamado a um Dock sem energia? | Mantém o que a pergunta 305 define: entra e fica hibernando, sem carregar, até o Dock receber energia ou o player o liberar. A tela "sem energia" é o único aviso nesta fase |
 | 332 | O que faz o Cubit cheio na base com o dono offline? | Continua na base e sai quando o dono entra, porque a regra de sair precisa do vínculo guardado no player. Se o Dock sumir nesse período, ele acorda desligado, e um clique o liga. Detalha as perguntas 55 e 307 |
 | 333 | Como registrar o que está em aberto, se os arquivos diziam que não havia pendentes? | Em "Pendentes", cada uma com recomendação: receitas, momento da `0.1.0` e licença dos sons na Fase 2, e o slot de fornalha na Fase 5 |
 | 335 | A margem de 4 blocos para abrir a tela vai para o config? | Não. Fica como constante, porque não é balanceamento e segue o padrão do jogo (`Container.DEFAULT_DISTANCE_BUFFER`). É uma exceção documentada à regra 3 |
@@ -214,6 +219,11 @@
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 22:11 | Registra a resposta 352. |
+| Marcelo Fabiano | 2026-11-05 22:09 | Registra a resposta 351. |
+| Marcelo Fabiano | 2026-11-05 21:53 | Registra as respostas 349 e 350. |
+| Marcelo Fabiano | 2026-11-05 21:50 | Registra a resposta 336, que sai das pendências. |
+| Marcelo Fabiano | 2026-11-05 21:47 | Registra a resposta 348 e limita a pendência 336 ao Dock. |
 | Marcelo Fabiano | 2026-11-05 21:36 | Registra a resposta 346. |
 | Marcelo Fabiano | 2026-11-05 21:30 | Registra as respostas 332, 333, 334 e 335 e as pendências 336, 337 e 338, e aponta a 258 para a 339. |
 | Marcelo Fabiano | 2026-11-05 21:02 | Registra a resposta 330 e aponta a 296 para a 311. |

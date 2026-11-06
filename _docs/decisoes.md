@@ -58,6 +58,8 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Blocos que ferem:** o robô ativo vai ao bloco seguro mais próximo, nas mesmas condições em que o jogo fere o player, e isso cobra o extra de condição negativa. Inativo, fica parado.
 - **Fogo:** o robô ativo em chamas anda ao acaso, mais rápido, evita perigos e nunca para enquanto houver para onde ir. Busca água só em chunks carregados, e ela precisa ter o topo livre e rota até ela. Inativo, fica parado. Ao apagar, volta a seguir. Os números estão em [`tiers.md`](tiers.md#valores-gerais).
 - **Morte:** o robô vira um item danificado, próprio por tipo, que nenhum dano destrói, não some com o tempo, não entra em shulker box nem no inventário do robô e não pode ser colocado no mundo. Se cair no vazio, volta à última posição segura, ao dono online ou ao spawn do mundo, sem carregar chunk à força. A morte libera o vínculo, e com o dono offline isso acontece quando ele entra.
+- **Receita do Cubit:** lembra o item, com redstone, lâmpada de redstone, ferro, diamante e obsidiana, conforme [`itens.md`](itens.md#cubit).
+- **Receita do Induction Dock:** em forma de L, com redstone, ferro e baú, conforme [`itens.md`](itens.md#induction-dock).
 - **Conserto:** usa a `Toolbox` (`cubit:toolbox`), na grade do inventário ou na mesa de craft, num tipo de receita do mod, `cubit:robot_repair`, com os itens no JSON. Ela é consumida a cada conserto e empilha até 16. O robô sai com parte da vida, conforme [`tiers.md`](tiers.md#valores-gerais), e a bateria zerada.
 - **Movimento:** a velocidade de referência está em [`tiers.md`](tiers.md#valores-gerais). Na água, o robô afunda e anda no fundo, sem se afogar. Na lava, leva dano igual ao do player. Não há dano de queda. O som de esteira entra na Fase 3.
 - **Criativo:** aba própria, `cubit:main`, e colocar sempre gasta o item.
@@ -90,6 +92,8 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 21:50 | Registra a receita do Induction Dock. |
+| Marcelo Fabiano | 2026-11-05 21:47 | Registra a receita do Cubit. |
 | Marcelo Fabiano | 2026-11-05 21:36 | Registra a terceira rodada da auditoria. |
 | Marcelo Fabiano | 2026-11-05 21:34 | Registra a segunda rodada da auditoria. |
 | Marcelo Fabiano | 2026-11-05 21:30 | Registra a primeira rodada da auditoria. |

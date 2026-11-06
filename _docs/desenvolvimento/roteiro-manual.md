@@ -176,6 +176,21 @@ Use `/data get entity @e[type=cubit:general_robot,limit=1,sort=nearest] PowerSta
 | 11 | Quebre o Dock com o Cubit na base | Ele é liberado, sem perder nada |
 | 12 | Saia e entre no mundo com o Cubit na base | Ele continua hibernando |
 
+## Receitas
+
+Rode num mundo novo, em modo sobrevivência, com `/gamemode survival` e `/give @s minecraft:crafting_table`. Antes do passo 1, confira que as receitas do Cubit e do Dock não aparecem no livro.
+
+| # | Faça | Espere |
+|---|---|---|
+| 1 | Pegue um diamante, com `/give @s minecraft:diamond` | A receita do `Cubit` aparece no livro. A do `Induction Dock` ainda não |
+| 2 | Dê os materiais: `/give @s minecraft:redstone 8`, `/give @s minecraft:redstone_lamp`, `/give @s minecraft:iron_ingot 8`, `/give @s minecraft:obsidian 2` e `/give @s minecraft:chest 2` | Os itens chegam |
+| 3 | Na mesa, monte redstone, lâmpada e redstone; ferro, diamante e ferro; obsidiana, vazio e obsidiana | Sai um `Cubit` |
+| 4 | Olhe o livro, com o `Cubit` no inventário | A receita do `Induction Dock` aparece |
+| 5 | Coloque o `Cubit` | Ele segue você, com a barra de 25% na tela |
+| 6 | Na mesa, monte o L: redstone na coluna 1 da linha 1; ferro na coluna 1 da linha 2; baú, redstone e ferro na linha 3 | Sai um `Induction Dock` |
+| 7 | Monte o L espelhado, trocando as colunas 1 e 3 | Também sai um `Induction Dock` |
+| 8 | Coloque o `Dock` e abra a tela, com Shift + botão direito | A barra de energia está vazia, e a tela do bloco, apagada |
+
 ## Morte e conserto
 
 Use `/kill @e[type=cubit:general_robot,limit=1,sort=nearest]` para matar o robô.
@@ -205,6 +220,7 @@ Use `/kill @e[type=cubit:general_robot,limit=1,sort=nearest]` para matar o robô
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 21:53 | Adiciona as receitas do Cubit e do Induction Dock. |
 | Marcelo Fabiano | 2026-11-05 20:42 | Adiciona o comando `/cubit reset`. |
 | Marcelo Fabiano | 2026-11-05 17:35 | Tira o brilho verde do roteiro do Dock. |
 | Marcelo Fabiano | 2026-11-05 17:15 | Adiciona o Cubit na base. |
