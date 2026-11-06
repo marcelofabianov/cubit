@@ -9,6 +9,7 @@ import io.github.marcelofabianov.cubit.registry.CubitDataComponents;
 import io.github.marcelofabianov.cubit.registry.CubitRecipes;
 import java.util.List;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -119,6 +120,7 @@ public final class RobotRepairRecipe extends CustomRecipe {
         damaged.get(CubitDataComponents.ROBOT_INVENTORY.get()));
     repaired.set(
         CubitDataComponents.ENERGY_SLOT.get(), damaged.get(CubitDataComponents.ENERGY_SLOT.get()));
+    repaired.set(DataComponents.CUSTOM_NAME, damaged.get(DataComponents.CUSTOM_NAME));
     return repaired;
   }
 

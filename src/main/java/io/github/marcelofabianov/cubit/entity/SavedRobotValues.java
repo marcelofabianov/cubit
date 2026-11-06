@@ -3,6 +3,7 @@ package io.github.marcelofabianov.cubit.entity;
 import com.mojang.logging.LogUtils;
 import io.github.marcelofabianov.cubit.domain.energy.Energy;
 import io.github.marcelofabianov.cubit.domain.energy.PowerState;
+import io.github.marcelofabianov.cubit.domain.robot.RobotColor;
 import io.github.marcelofabianov.cubit.domain.tier.RobotTier;
 import java.util.Arrays;
 import java.util.UUID;
@@ -25,9 +26,11 @@ final class SavedRobotValues {
   private static final String INVENTORY_KEY = "Inventory";
   private static final String ENERGY_SLOT_KEY = "EnergySlot";
   private static final String LAMP_KEY = "LampEnabled";
+  private static final String COLOR_KEY = "Color";
   private static final String LAST_SAFE_POSITION_KEY = "LastSafePosition";
   private static final String NO_OWNER_MESSAGE = "Robot {} has no owner. Nobody can interact.";
   private static final String INVALID_TIER_MESSAGE = "Robot {} has an invalid tier: {}";
+  private static final String INVALID_COLOR_MESSAGE = "Robot {} has an invalid color: {}";
   private static final String INVALID_STATE_MESSAGE = "Robot {} has an invalid power state: {}";
 
   private SavedRobotValues() {}
@@ -42,6 +45,7 @@ final class SavedRobotValues {
     tag.put(ENERGY_SLOT_KEY, inventory.energySlot().save(robot.registryAccess()));
     robot.docking().save(tag);
     tag.putBoolean(LAMP_KEY, robot.state().lampOn());
+    tag.putString(COLOR_KEY, robot.state().color().key());
     robot
         .lastSafePosition()
         .ifPresent(position -> tag.putLong(LAST_SAFE_POSITION_KEY, position.asLong()));
@@ -68,6 +72,19 @@ final class SavedRobotValues {
   /** Without the key, the robot was saved before the lamp existed, so the lamp stays on. */
   static boolean lampOn(CompoundTag tag) {
     return !tag.contains(LAMP_KEY) || tag.getBoolean(LAMP_KEY);
+  }
+
+  /** Without the key, the robot was saved before the colors existed, so it is white. */
+  static RobotColor color(CompoundTag tag, UUID robot) {
+    if (!tag.contains(COLOR_KEY)) {
+      return RobotColor.WHITE;
+    }
+    String key = tag.getString(COLOR_KEY);
+    return RobotColor.fromKey(key)
+        .orElseGet(() -> {
+          LOGGER.warn(INVALID_COLOR_MESSAGE, robot, key);
+          return RobotColor.WHITE;
+        });
   }
 
   static BlockPos lastSafePosition(CompoundTag tag) {

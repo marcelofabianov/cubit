@@ -11,9 +11,11 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 | `Battery` | Capacidade e carga atual. É imutável, e cada operação devolve uma bateria nova |
 | `PowerState` | Estado do robô |
 | `PowerRules` | Regras que mudam o estado por causa da energia |
+| `RobotColor` | A cor da carcaça, uma para cada corante do jogo. A `key` é o nome do corante, usado nos saves e nas texturas |
+| `PaintRules` | Quando um corante muda o robô e quando ele reage |
 | `RobotType` | Identifica o Cubit nos IDs e no config. O robô é único, e é um dado, identificado por um ID |
 | `RobotTier` | Nível de evolução: Base, Advanced, Elite e Ultimate. A `key` é o nome usado no config e nos saves |
-| `RobotState` | O que o robô guarda ao virar item: tier, energia, vida e a chave da lanterna. `damaged` e `repaired` dão o estado ao morrer e ao consertar |
+| `RobotState` | O que o robô guarda ao virar item: tier, energia, vida, a chave da lanterna e a cor. `damaged` e `repaired` dão o estado ao morrer e ao consertar |
 | `TierSpec` | Números de um tipo de robô num tier |
 | `TierCatalog` | Entrega o `TierSpec` de um tipo de robô num tier. O domínio define a interface, e o config a implementa |
 | `FollowAction` | O que o robô que segue faz: seguir, parar ou teleportar |
@@ -61,6 +63,8 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 
 ## Regras e porquês
 
+- **Mesma cor não gasta:** pintar da cor atual não faz nada, para não desperdiçar o corante (pergunta 509).
+- **Só o ativo reage:** desligado, a tela está apagada, e hibernando ela sempre mostra carregando (perguntas 57 e 510).
 - **Energia inteira:** evita erro de arredondamento, e uma transferência nunca cria nem perde FE.
 - **Operações informam o que moveu:** `recharge` devolve o que foi aceito, e `consume`, o que foi consumido. Assim, quem chama sabe o que sobrou e não perde energia.
 - **Expressões:** o estado vem primeiro, porque tela apagada e carregando não dependem do resto. Depois vêm vida baixa e dano, os avisos e o sono, e a feliz cede a eles (perguntas 368 e 379). O bipe não toca ao sair de uma tela apagada ou carregando, porque ligar e ser colocado têm som próprio e carregar o mundo não é uma troca (pergunta 369).

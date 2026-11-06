@@ -4,6 +4,7 @@ import io.github.marcelofabianov.cubit.CubitMod;
 import io.github.marcelofabianov.cubit.block.DockableRobotItem;
 import io.github.marcelofabianov.cubit.block.InductionDockBlock;
 import io.github.marcelofabianov.cubit.block.InductionDockBlockEntity;
+import io.github.marcelofabianov.cubit.domain.robot.RobotColor;
 import io.github.marcelofabianov.cubit.domain.robot.RobotState;
 import io.github.marcelofabianov.cubit.domain.robot.RobotType;
 import io.github.marcelofabianov.cubit.domain.tier.RobotTier;
@@ -12,6 +13,7 @@ import io.github.marcelofabianov.cubit.entity.RobotEntity;
 import io.github.marcelofabianov.cubit.registry.CubitDataComponents;
 import java.util.function.Supplier;
 import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
@@ -24,6 +26,12 @@ import net.minecraft.world.phys.Vec3;
 
 /** A robot stored as an item. It keeps the whole state, so collecting and placing lose nothing. */
 public final class RobotItem extends Item implements DockableRobotItem {
+  private static final String COLOR_PROPERTY_NAME = "color";
+
+  /** Tells the item model which icon to show. */
+  public static final ResourceLocation COLOR_PROPERTY =
+      ResourceLocation.fromNamespaceAndPath(CubitMod.MOD_ID, COLOR_PROPERTY_NAME);
+
   private static final int BAR_FULL_WIDTH = 13;
   private static final int BAR_COLOR = 0x55FF55;
   private static final float FACE_THE_PLAYER_DEGREES = 180f;
@@ -107,6 +115,12 @@ public final class RobotItem extends Item implements DockableRobotItem {
   public int getBarWidth(ItemStack stack) {
     RobotState state = stateOf(stack);
     return state.batteryFor(specOf(state.tier())).level(BAR_FULL_WIDTH);
+  }
+
+  /** What the icon shows, as a number, because that is all an item model can compare. */
+  public static float iconColor(ItemStack stack) {
+    RobotState saved = stack.get(CubitDataComponents.ROBOT_STATE.get());
+    return saved == null ? RobotColor.WHITE.ordinal() : saved.color().ordinal();
   }
 
   @Override
