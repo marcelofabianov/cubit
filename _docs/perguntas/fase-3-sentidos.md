@@ -34,6 +34,10 @@
 | 321 | O nome `placed.ogg` e o momento "ao ser colocado no mundo" estão certos? | Sim. Detalha a pergunta 320 |
 | 322 | Em que fase o som de colocar no mundo passa a tocar? | Na Fase 3, junto dos outros oito. Detalha a pergunta 320 |
 | 421 | Como foi o roteiro manual do colar, do indicador de bateria e do tronco central com +0,5? | Teste finalizado, tudo ok, executado pelo desenvolvedor, sem detalhar cada passo. Ele não pediu +1, então o tronco fica em 2 unidades. O `make server` e o olhar de longe não foram citados em separado |
+| 461 | Como foi o teste no jogo da prova do LambDynamicLights, com a luz fixa? | Como esperado, executado pelo desenvolvedor, sem detalhar cada passo. O passo opcional, de conferir a opção de luz de entidades, não foi citado, então o valor padrão dela continua sem confirmação |
+| 460 | Como organizar a prova técnica do LambDynamicLights e as issues da lanterna? | Com uma issue e um PR técnicos, só para separar a `RobotEntity` e adicionar a dependência. A prova roda nessa branch, e a luz provisória não é commitada. A rodada de decisões vem depois da prova e antes da issue da lanterna |
+| 459 | Como seguir com o plano da lanterna, depois da conferência contra os documentos e o código? | Incorporar ao plano os dez pontos encontrados e a leitura da licença do LambDynamicLights antes da etapa 1, e só então começar. O desenvolvedor não citou acréscimos ao responder ao alinhamento. Os pontos não fecham as decisões da lanterna, que seguem para a rodada |
+| 458 | O painel solar é o próximo item? | Não. A lanterna, item 14, vem antes, e o desenvolvedor tem ideias a apresentar. Muda a ordem das perguntas 356 e 365 só nesses dois itens |
 | 455 | Quando o Cubit fica feliz por interação? | Como está no código: ao ser colocado e ao abrir o inventário. Só o `persona.md` estava diferente, ao dizer "de qualquer forma". Renomear, pintar e receber upgrade continuam previstos |
 | 456 | O item 11 do checklist fica pronto? | Sim, porque o valor e a chave já existem, e os alertas dos scanners vão usar a mesma chave. Muda a pergunta 428 só no item 11. O item 12 continua aberto |
 | 457 | `I need to recharge` e `Items unloaded` também valem para Cubits em área? | Não: vêm só do Cubit que segue. Fecha o que a pergunta 430 deixou para reavaliar. Um Cubit em área não mostra esses textos |
@@ -138,6 +142,9 @@
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 13:10 | Registra a resposta 461. |
+| Marcelo Fabiano | 2026-11-06 12:07 | Registra as respostas 459 e 460. |
+| Marcelo Fabiano | 2026-11-06 11:24 | Registra a resposta 458. |
 | Marcelo Fabiano | 2026-11-06 11:10 | Registra as respostas 448 a 457 e aponta a 428 e a 430 para elas. |
 | Marcelo Fabiano | 2026-11-06 11:10 | Troca 'especialidade' por 'trabalho' e 'card de especialidade' por 'card de Aprendizado de Máquina'. |
 | Marcelo Fabiano | 2026-11-06 10:56 | Registra a resposta 447. |
