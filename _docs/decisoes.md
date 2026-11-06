@@ -36,6 +36,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Ordem da Fase 2:** movimento, fogo, lava, arquivos de som, revisão dos `.md`, modelo, morte com o item danificado, inventário, energia em uso, Induction Dock e `/cubit reset` já entraram. Falta o fechamento, com receitas e teste no Iron Meridian.
 - **Documento desatualizado:** o agente sempre pergunta antes de corrigir, mesmo quando a correção parece clara.
 - **Merge:** é feito somente pelo desenvolvedor.
+- **Checklist das fases:** fica em [`checklist.md`](../checklist.md). É avaliado ao encerrar cada PR, e a marcação entra num novo commit, no PR seguinte.
 - **Contratos:** comandos e chaves de tradução entram como quinto contrato, e os nomes só mudam com aviso, sem exigir migração.
 - **Números no roteiro manual:** ele pode citar os valores padrão como resultado esperado, e `tiers.md` prevalece.
 - **Gates de push:** as GameTests também detectam classe de cliente carregada no servidor, sem exigir o EULA, então o `runServer` não é um gate. O datagen reprova se `src/generated` ficar diferente do Git.
@@ -92,6 +93,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 22:18 | Registra o checklist das fases. |
 | Marcelo Fabiano | 2026-11-05 21:50 | Registra a receita do Induction Dock. |
 | Marcelo Fabiano | 2026-11-05 21:47 | Registra a receita do Cubit. |
 | Marcelo Fabiano | 2026-11-05 21:36 | Registra a terceira rodada da auditoria. |

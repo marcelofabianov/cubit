@@ -21,6 +21,7 @@ Este é o mapa dos documentos do projeto. A apresentação do mod e o roadmap fi
 | Resumo das decisões | [`decisoes.md`](decisoes.md) |
 | Perguntas e respostas por fase | [`perguntas/`](perguntas/README.md) |
 | Termos e nomes oficiais | [`glossario.md`](glossario.md) |
+| O que está pronto e o que falta em cada fase | [`checklist.md`](../checklist.md) |
 | Pilares de desenvolvimento | [`desenvolvimento/pilares.md`](desenvolvimento/pilares.md) |
 | Fluxo de trabalho | [`desenvolvimento/fluxo-de-trabalho.md`](desenvolvimento/fluxo-de-trabalho.md) |
 | Ferramentas de build e comandos | [`desenvolvimento/ferramentas-de-build.md`](desenvolvimento/ferramentas-de-build.md) |
@@ -35,6 +36,7 @@ Os números ficam em [`tiers.md`](tiers.md). As outras páginas apontam para lá
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 22:18 | Cita o checklist das fases. |
 | Marcelo Fabiano | 2026-11-05 21:36 | Cita o marcador da wiki. |
 | Marcelo Fabiano | 2026-11-05 12:08 | Adiciona os robôs especializados. |
 | Marcelo Fabiano | 2026-11-05 00:15 | Cria o mapa dos documentos, vindo do `robo-companheiro.md`. |
