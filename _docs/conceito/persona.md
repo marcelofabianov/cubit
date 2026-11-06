@@ -10,11 +10,13 @@ O Cubit é um companheiro **tecnológico**, moderno, fofo e doce, que ajuda o pl
 
 **Bipes e expressões.** O Cubit não fala, e demonstra o que sente pela expressão na tela do rosto e pelos bipes.
 
-Só em algumas situações ele mostra um texto simples e direto, na barra acima da hotbar e só para o dono, com intervalo mínimo entre repetições, que será definido na Fase 3:
+Só em algumas situações ele mostra um texto simples e direto, começando com `Cubit: `, logo acima da hotbar e só para o dono, vindo só do Cubit ativo que segue, com o intervalo mínimo de [`tiers.md`](../tiers.md#valores-gerais) entre repetições:
 
 | Situação | Texto no jogo |
 |---|---|
 | Bateria crítica | `Critical battery` |
+| O Cubit leva dano | `That hurts!` |
+| O dono leva dano, por perto | `Careful!` |
 | Inimigo próximo | `Enemy nearby` |
 | Minério encontrado | `Ore found` |
 | Tenho que ir carregar | `I need to recharge` |
@@ -56,6 +58,9 @@ O Cubit **nunca ataca o próprio dono nem mobs pacíficos**, em nenhum modo de d
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 10:15 | Adiciona os textos de dano. |
+| Marcelo Fabiano | 2026-11-06 10:06 | Define o prefixo e o lugar dos textos. |
+| Marcelo Fabiano | 2026-11-06 09:48 | Define de quem vêm os textos e o intervalo. |
 | Marcelo Fabiano | 2026-11-06 00:28 | Define o tempo dos olhos em X. |
 | Marcelo Fabiano | 2026-11-06 00:22 | Adiciona a reação ao dano do dono. |
 | Marcelo Fabiano | 2026-11-06 00:17 | Aumenta o tempo da expressão triste. |

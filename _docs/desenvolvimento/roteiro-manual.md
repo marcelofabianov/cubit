@@ -214,7 +214,7 @@ Com o volume geral e o de "Criaturas amigáveis" ligados nas opções do jogo. P
 
 ## Expressões
 
-Compare com as imagens em `_docs/imagens/conceito/png/`, com os nomes `expressao-*.png`. Para a carga, use `/data merge entity @e[type=cubit:general_robot,limit=1,sort=nearest] {Energy:20000L}`.
+Compare com as imagens em `_docs/imagens/conceito/png/`, com os nomes `expressao-*.png`. Para a carga, use `/data merge entity @e[type=cubit:general_robot,limit=1,sort=nearest] {Energy:10000L}`.
 
 | # | Faça | Espere |
 |---|---|---|
@@ -258,7 +258,7 @@ Alerta e surpreso só aparecem com os scanners.
 | 10 | Coloque um robô no Dock | A mesma pose de desligado, sem atravessar a placa nem a torre |
 | 11 | Religue o robô ou tire-o do Dock | Ele volta suave à pose de ligado |
 | 12 | Leve dano num robô ligado, com a tela triste | A tela e o corpo continuam alinhados, sem vazar, inclusive com o corpo virado |
-| 13 | Em chamas, ou com outra causa de dano, com o robô ligado e parado | Os braços sobem e ficam erguidos enquanto durar a expressão triste ou de olhos em X, cerca de 5 s depois do último dano, e descem |
+| 13 | Em chamas, ou com outra causa de dano, com o robô ligado e parado | Os braços sobem, ficam erguidos por cerca de 2 s depois do último dano e descem, com a lágrima seguindo até cerca de 5 s |
 | 14 | Cause dano com o robô andando | Os braços ficam erguidos, e o corpo e as antenas continuam balançando |
 | 15 | Cause dano num robô desligado ou na base | Os braços não sobem |
 | 16 | Na expressão normal, a até 3 blocos do robô no plano, pule | Os olhos sobem por cerca de 0,5 s e voltam ao centro, sem olhar para baixo ao pousar |
@@ -286,7 +286,7 @@ Compare com `tier-base.png`, `tier-avancado.png`, `tier-elite.png`, `tier-ultima
 | 4 | Repita com `{Tier:"base"}` | Volta ao cinza |
 | 5 | Olhe as costas com a carga de 25%, de um robô recém-colocado | Bateria com contorno arredondado e um nível verde, sem o desenho antigo aparecendo por baixo |
 | 6 | Rode o comando com `{Energy:150000L}`, depois `{Energy:225000L}` e `{Energy:300000L}` | 2, 3 e 4 níveis verdes |
-| 7 | Rode com `{Energy:30000L}` | 1 nível vermelho, junto da expressão de sono |
+| 7 | Rode com `{Energy:15000L}` | 1 nível vermelho, junto da expressão de sono |
 | 8 | Rode com `{Energy:0L}` | Sem preenchimento, com o contorno visível |
 | 9 | Com `/time set midnight`, coloque um robô ligado, com carga, e olhe as costas no escuro | O preenchimento brilha, e o contorno e o corpo escurecem |
 | 10 | Coloque um segundo robô, que fica desligado, e olhe as costas dele no escuro | Mostra a carga dele, sem brilho |
@@ -294,6 +294,25 @@ Compare com `tier-base.png`, `tier-avancado.png`, `tier-elite.png`, `tier-ultima
 | 12 | Veja o robô de longe, em volta, e com ele virando para você | Colar e bateria acompanham o corpo e o pescoço, sem falhas de desenho |
 | 13 | Olhe o item do Cubit e o `Damaged Cubit` | Os ícones continuam com o colar cinza |
 | 14 | Rode `make server` | O servidor abre sem erro de classe de cliente |
+
+## Texto de bateria crítica
+
+Para a carga, use `/data merge entity @e[type=cubit:general_robot,limit=1,sort=nearest] {Energy:15000L}`, com o slot de energia vazio. O limite é de 5% (15.000 FE), e o intervalo é de cerca de 25 s, parado ou andando devagar para a carga não zerar.
+
+| # | Faça | Espere |
+|---|---|---|
+| 1 | Com um robô seguindo, rode o comando | `Cubit: Critical battery` aparece menor que a mensagem do jogo, logo acima da hotbar, some em cerca de 3 s, e ele fica com a expressão de sono e o indicador vermelho |
+| 1a | Em modo sobrevivência, com corações e armadura, repita | O texto fica acima da armadura, sem cobrir nada, e continua legível. Com `F1`, ele não aparece |
+| 2 | Fique parado perto dele e espere cerca de 25 s | O texto aparece de novo, uma vez |
+| 3 | Avalie o intervalo | Diga se 25 s está bom ou se deve mudar |
+| 4 | Rode com `{Energy:16000L}` num robô novo | Nenhum texto, sem sono e com o indicador verde |
+| 5 | Coloque um segundo robô, que fica desligado, e rode o comando perto dele | Nenhum texto |
+| 6 | Coloque um robô com carga de 5% no Dock | Nenhum texto enquanto ele hiberna |
+| 7 | Num servidor com outro player, se possível, repita o passo 1 | Só o dono vê o texto |
+| 8 | Em modo sobrevivência, com um robô seguindo, ponha fogo nele | `Cubit: That hurts!` aparece uma vez, sem repetir a cada golpe, até o intervalo passar |
+| 9 | Com um robô seguindo a menos de 16 blocos, leve dano, por queda ou de um mob | `Cubit: Careful!` e a expressão de preocupado |
+| 10 | Longe de um robô, a mais de 16 blocos, sem ele por perto, leve dano | Nenhum texto |
+| 11 | Cause dano num robô desligado | Nenhum texto |
 
 ## Morte e conserto
 
@@ -324,6 +343,7 @@ Use `/kill @e[type=cubit:general_robot,limit=1,sort=nearest]` para matar o robô
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 10:36 | Adiciona os textos e os braços por 2 s, e ajusta as cargas para 5%. |
 | Marcelo Fabiano | 2026-11-06 09:03 | Adiciona o colar e o indicador de bateria. |
 | Marcelo Fabiano | 2026-11-06 01:06 | Adiciona as animações. |
 | Marcelo Fabiano | 2026-11-06 00:28 | Define o tempo dos olhos em X e ordena os passos. |

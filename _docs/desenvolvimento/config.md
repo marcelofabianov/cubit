@@ -14,7 +14,8 @@ As chaves ficam em `snake_case`. As de um robô ficam em `[{tipo}.{tier}]`, como
 |---|---|---|---|
 | `general` | `initial_charge_percent` | Carga do Cubit ao sair do craft | 0 a 100 |
 | `general` | `wake_charge_percent` | Religar | 0 a 100 |
-| `general` | `critical_charge_percent` | Bateria crítica, com expressão de sono | 0 a 100 |
+| `general` | `critical_charge_percent` | Bateria crítica, com expressão de sono, indicador vermelho e texto | 0 a 100 |
+| `general` | `notice_repeat_ticks` | Intervalo mínimo entre repetições de textos e alertas | 1 a 72000 |
 | `general` | `happy_expression_ticks` | Tempo com a expressão feliz | 1 a 1200 |
 | `general` | `hurt_expression_ticks` | Tempo com a expressão triste, depois de um dano | 1 a 1200 |
 | `general` | `worried_expression_ticks` | Tempo com a expressão de preocupado | 1 a 1200 |
@@ -77,6 +78,7 @@ O mod não cai por causa do config (regra 17 do `AGENTS.md`):
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 09:48 | Adiciona a chave do intervalo mínimo. |
 | Marcelo Fabiano | 2026-11-06 00:28 | Adiciona a chave do tempo dos olhos em X. |
 | Marcelo Fabiano | 2026-11-06 00:22 | Adiciona as chaves da expressão de preocupado. |
 | Marcelo Fabiano | 2026-11-06 00:10 | Adiciona as chaves das expressões triste e quase morto. |

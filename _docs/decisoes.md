@@ -98,11 +98,17 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Estado do robô como item:** inclui as configurações, além de bateria, vida, inventário, tier, nome e cor. Perde a área, os baús marcados e a seleção no controle.
 - **Modo área:** por dois cantos em 3D, já na Fase 4. Sem card, o robô coleta os itens do chão na área e descarrega no baú marcado.
 - **Parar pelo controle:** o robô continua ativo e com o vínculo, parado e sem teleportar, e o estado é salvo.
+- **Bateria crítica e textos:** a bateria crítica é de 5%, com sono, indicador vermelho e `Critical battery`, que vem só do Cubit ativo que segue, repetindo a cada intervalo mínimo. `Cubit: That hurts!` e `Cubit: Careful!` avisam do dano no robô e no dono, com o mesmo intervalo. Os textos começam com `Cubit: ` e são desenhados pelo mod, menores e logo acima das barras da hotbar, com um pacote de rede do servidor para o cliente.
+- **Filtro de coleta:** tem lista branca e lista negra.
+- **Chaveamento:** têm chave a chave geral do Cubit, com ligar, desligar e hibernar, o painel solar, a lanterna, os scanners, o ímã, pegar itens dropados, a descarga em baú, o retorno automático e mostrar o local de morte do player. Cada chave entra com o recurso dela.
 
 ## Histórico de modificações
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 10:06 | Registra a bateria crítica e os textos. |
+| Marcelo Fabiano | 2026-11-06 09:36 | Registra os recursos com chaveamento. |
+| Marcelo Fabiano | 2026-11-06 09:32 | Registra os dois modos do filtro de coleta. |
 | Marcelo Fabiano | 2026-11-06 09:23 | Registra o colar, o indicador de bateria e o tronco central. |
 | Marcelo Fabiano | 2026-11-06 01:00 | Corrige a etapa atual. |
 | Marcelo Fabiano | 2026-11-06 00:58 | Registra as animações e o modelo final. |
