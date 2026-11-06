@@ -58,12 +58,14 @@ Não há perguntas pendentes nesta fase.
 | 91 | Como preparar o projeto para outros robôs? | Nada pode ficar fixo de forma que comprometa a flexibilidade do projeto. As regras 39 a 43 do `AGENTS.md` detalham isso |
 | 121 | Quais perguntas ficam registradas em `.md`? | Todas as que o desenvolvedor responder, conforme a regra 47 do `AGENTS.md` |
 | 283 | O que fica anotado para futuras fases, sobre a documentação para o player? | Uma wiki em site estático, hospedada no GitHub, com os detalhes do mod, e um livro que o jogador recebe ao criar o mundo, com informações resumidas, objetivas e claras e, no final, a referência para a wiki. A fase ainda não foi definida |
+| 345 | O que fazer com o marcador `_wiki/v1/index.html`? | Manter como lugar reservado à wiki da pergunta 283, citado no mapa dos documentos |
 | 107 | O template de pull request segue a regra de nome em português? | Não. `pull_request_template.md` mantém o nome, porque o GitHub só reconhece esse nome. O histórico dele foi removido pela [pergunta 132](fase-2-versao-minima.md) |
 
 ## Histórico de modificações
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 21:36 | Registra a resposta 345. |
 | Marcelo Fabiano | 2026-11-05 14:55 | Registra a resposta 283. |
 | Marcelo Fabiano | 2026-11-05 00:02 | Aponta a resposta 12 para a pergunta 148. |
 | Marcelo Fabiano | 2026-11-04 23:45 | Aponta as respostas 78 e 107 para a pergunta 132. |

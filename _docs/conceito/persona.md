@@ -34,11 +34,14 @@ Só em algumas situações ele mostra um texto simples e direto, na barra acima 
 | Recarregando pelo slot, ligado | Normal | Som de recarga |
 | Desligado, mesmo recarregando pelo slot | Tela apagada | Som de desligar e, se recarregando, som de recarga |
 | Ao ligar | Normal | Som de ligar |
+| Colocado no mundo, ativo | Feliz | Som de colocar |
+| Colocado no mundo, desligado | Tela apagada | Som de colocar |
 | Enquanto pega fogo | Mantém a atual | Curto elétrico |
+| Ao atacar | Mantém a atual | Som de ataque |
 | Inimigo por perto | Alerta | Bipe de alerta de inimigo |
 | Minério raro encontrado | Surpreso | Bipe de alerta de minério |
 
-O bipe padrão toca só nas trocas de expressão sem som exclusivo. Ao ligar, toca só o som de ligar. Os sons estão em [`visual.md`](visual.md#sons), inclusive os de ser colocado no mundo e de atacar, cujas expressões ainda não foram definidas.
+O bipe padrão toca só nas trocas de expressão sem som exclusivo. Ao ligar, toca só o som de ligar, na passagem de desligado a ligado. Ao ser colocado, toca só o som de colocar. Os sons estão em [`visual.md`](visual.md#sons).
 
 O barulho das esteiras ao andar é um efeito do movimento, não uma forma de comunicação.
 
@@ -50,6 +53,8 @@ O Cubit **nunca ataca o próprio dono nem mobs pacíficos**, em nenhum modo de d
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 21:36 | Define a expressão ao atacar. |
+| Marcelo Fabiano | 2026-11-05 21:30 | Define a reação ao ser colocado no mundo. |
 | Marcelo Fabiano | 2026-11-05 21:02 | Cita os sons de colocar no mundo e de atacar. |
 | Marcelo Fabiano | 2026-11-05 12:08 | Cita as exceções dos cards da Fase 5. |
 | Marcelo Fabiano | 2026-11-05 00:56 | Tira a menção a magia da descrição. |

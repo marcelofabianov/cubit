@@ -36,6 +36,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Ordem da Fase 2:** movimento, fogo, lava, arquivos de som, revisão dos `.md`, modelo, morte com o item danificado, inventário, energia em uso, Induction Dock e `/cubit reset` já entraram. Falta o fechamento, com receitas e teste no Iron Meridian.
 - **Documento desatualizado:** o agente sempre pergunta antes de corrigir, mesmo quando a correção parece clara.
 - **Merge:** é feito somente pelo desenvolvedor.
+- **Contratos:** comandos e chaves de tradução entram como quinto contrato, e os nomes só mudam com aviso, sem exigir migração.
 - **Números no roteiro manual:** ele pode citar os valores padrão como resultado esperado, e `tiers.md` prevalece.
 - **Gates de push:** as GameTests também detectam classe de cliente carregada no servidor, sem exigir o EULA, então o `runServer` não é um gate. O datagen reprova se `src/generated` ficar diferente do Git.
 
@@ -46,6 +47,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Quantidade:** o player pode ter quantos robôs preferir, mas só um o segue. Os outros podem trabalhar em áreas. O controle remoto e a base atendem todos os robôs ligados.
 - **Robô que segue sem bateria:** mantém o vínculo e volta a seguir ao religar. Se o player ligar outro, ele vira desligado.
 - **Saída da base com outro seguindo:** o robô fica parado e desligado, como ao ser colocado.
+- **Base com o dono offline:** o robô cheio continua na base e sai quando o dono entra.
 - **Comando `/cubit reset`:** limpa o vínculo de quem segue, só do próprio player e sem permissão. Um robô ativo sem vínculo fica parado e desligado, com a carga mantida, e um clique o liga de novo.
 - **Config:** `COMMON`, com chaves em `snake_case` por tipo de robô e tier, como `[general_robot.base]`.
 - **Entidade:** a `RobotEntity` herda de `PathfinderMob`, com o dono num UUID próprio.
@@ -71,18 +73,26 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Consumo por situação:** inventário cheio, água, subida e condições negativas somam um extra ao gasto. Com o inventário cheio, a velocidade cai. Os números estão em [`tiers.md`](tiers.md#consumo-por-atividade).
 - **Slot de energia do Cubit:** existe em todos os tiers e aceita uma Power Bank ou redstone por vez. A redstone entra na Fase 2, e a Power Bank na Fase 4.
 - **LambDynamicLights:** obrigatório, mas só entra no build com a lanterna, na Fase 3. A `0.1.0` sai sem exigi-lo.
+- **Ao colocar no mundo:** toca só o som de colocar. O de ligar fica para a passagem de desligado a ligado.
+- **Margem das telas:** os 4 blocos ficam em constante, fora do config, porque seguem o padrão do jogo.
+- **Ao atacar:** mantém a expressão atual, com o som de ataque.
 - **Comunicação:** bipes e expressões, com poucos textos simples e diretos.
 - **Sons:** dez sons. Nove entram na Fase 3, e o do ataque, junto do choque. O bipe padrão toca nas trocas de expressão sem som exclusivo. O intervalo mínimo entre repetições será definido na Fase 3, e os sons são do desenvolvedor.
 - **Modelo:** a geometria melhora já na Fase 2, com os detalhes das seis vistas, tudo fixo e sem mudar a hitbox. As animações e as expressões seguem na Fase 3.
 - **Robôs especializados (Fase 5, planejada):** um único Cubit, com um card por vez, age só em área marcada e nunca sai dela. Antena e Servidor mantêm os chunks carregados, de forma opcional. Sem chunk de destino, ele espera. O detalhe está em [`robos-especializados.md`](funcionalidades/robos-especializados.md).
 - **Limites:** nunca ataca o dono nem mobs pacíficos. Só ataca mobs neutros para defender o player.
 - **Scanner:** `c:ores/*` significa a tag-mãe `c:ores` e suas subtags, porque tags não aceitam curinga.
-- **Estado do robô como item:** inclui as configurações, além de bateria, vida, inventário, tier, nome e cor.
+- **Estado do robô como item:** inclui as configurações, além de bateria, vida, inventário, tier, nome e cor. Perde a área, os baús marcados e a seleção no controle.
+- **Modo área:** por dois cantos em 3D, já na Fase 4. Sem card, o robô coleta os itens do chão na área e descarrega no baú marcado.
+- **Parar pelo controle:** o robô continua ativo e com o vínculo, parado e sem teleportar, e o estado é salvo.
 
 ## Histórico de modificações
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 21:36 | Registra a terceira rodada da auditoria. |
+| Marcelo Fabiano | 2026-11-05 21:34 | Registra a segunda rodada da auditoria. |
+| Marcelo Fabiano | 2026-11-05 21:30 | Registra a primeira rodada da auditoria. |
 | Marcelo Fabiano | 2026-11-05 21:15 | Registra quando o LambDynamicLights entra no build. |
 | Marcelo Fabiano | 2026-11-05 21:02 | Corrige o resumo do Dock, dos robôs especializados, da ordem da Fase 2, do dono e do consumo. |
 | Marcelo Fabiano | 2026-11-05 20:48 | Registra o comando `/cubit reset`. |

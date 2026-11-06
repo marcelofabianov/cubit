@@ -27,6 +27,7 @@ Este é o mapa dos documentos do projeto. A apresentação do mod e o roadmap fi
 | Chaves e limites do config | [`desenvolvimento/config.md`](desenvolvimento/config.md) |
 | Roteiro de teste manual no jogo | [`desenvolvimento/roteiro-manual.md`](desenvolvimento/roteiro-manual.md) |
 | Git hooks | [`desenvolvimento/hooks-do-git.md`](desenvolvimento/hooks-do-git.md) |
+| Lugar reservado à wiki para o player (fase a definir) | [`_wiki/v1/index.html`](../_wiki/v1/index.html) |
 
 Os números ficam em [`tiers.md`](tiers.md). As outras páginas apontam para lá. O `README.md` da raiz traz só um resumo, e o roteiro manual cita os valores padrão como resultado esperado.
 
@@ -34,5 +35,6 @@ Os números ficam em [`tiers.md`](tiers.md). As outras páginas apontam para lá
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 21:36 | Cita o marcador da wiki. |
 | Marcelo Fabiano | 2026-11-05 12:08 | Adiciona os robôs especializados. |
 | Marcelo Fabiano | 2026-11-05 00:15 | Cria o mapa dos documentos, vindo do `robo-companheiro.md`. |

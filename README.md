@@ -15,7 +15,7 @@ O Cubit segue você e ajuda em tarefas simples:
 - **Carrega itens** no próprio inventário e coleta o que está no chão, com um filtro de coleta.
 - **Funciona com bateria**, que você precisa gerenciar. Sem carga, ele desliga, e só dá para recolhê-lo ou colocar energia nele.
 - **Recarrega** no Induction Dock, uma base fixa alimentada por FE de qualquer mod ou por redstone, onde ele hiberna com o inventário acessível. Também recarrega com uma Power Bank ou redstone no slot exclusivo, ou pelo painel solar, com o céu aberto.
-- **Vira item**, mantendo bateria, vida, inventário, nome, cor, tier e configurações. Ao morrer, vira um Damaged Cubit, que nenhum dano destrói, não some com o tempo e se conserta com uma Toolbox.
+- **Vira item**, mantendo bateria, vida, inventário, nome, cor, tier e configurações, menos as marcações no mundo, como a área. Ao morrer, vira um Damaged Cubit, que nenhum dano destrói, não some com o tempo e se conserta com uma Toolbox.
 - **Reage ao perigo**: em chamas, procura água para se apagar; na lava ou sobre um bloco que fere, tenta sair. O dono não consegue feri-lo, exceto com o fogo de um isqueiro.
 - **Ilumina o caminho** e coloca tochas sozinho.
 - **Avisa você** sobre mobs hostis e procura os minérios que você escolher.

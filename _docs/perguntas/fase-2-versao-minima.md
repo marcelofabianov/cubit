@@ -2,7 +2,11 @@
 
 ## Pendentes
 
-Não há perguntas pendentes nesta fase.
+| # | Pergunta | Recomendação |
+|---|---|---|
+| 336 | Quais são as receitas do Cubit e do Induction Dock? | Usar ferro e redstone, os materiais do tier Base (pergunta 20), com a forma proposta na rodada do fechamento |
+| 337 | Quando publicar a `0.1.0`? | Depois das receitas e dos dois testes da regra 35, numa instância só com o mod e no Iron Meridian. A pergunta 6 define a versão, mas não o momento |
+| 338 | Os sons podem ser publicados? | Conferir os termos das ferramentas de IA usadas antes de publicar, porque os arquivos vão no jar (pergunta 137) |
 
 ## Respondidas
 
@@ -124,7 +128,7 @@ Não há perguntas pendentes nesta fase.
 | 188 | Em que pontos ficam os testes do inventário? | JUnit no domínio: regra do excedente. GameTests: quem abre, o que não entra, preservar sem perder nem duplicar, e excedente. Roteiro manual: tela e cliques |
 | 189 | Como foi o roteiro manual do inventário? | Ok, executado pelo desenvolvedor, conforme esperado. O resultado de cada passo não foi detalhado. O robô consertado precisou de um comando para ter carga, porque a recarga entra na etapa seguinte |
 | 257 | O que conta como andando, para gastar bateria? | Rota em andamento e deslocamento real no tick, inclusive ao fugir do fogo e da lava. Ser empurrado não gasta, e rota sem avanço também não |
-| 258 | Onde fica o slot de energia na tela? | Num pequeno painel desenhado pelo mod ao lado da tela do baú, com espaço para os próximos slots exclusivos e a barra de bateria. Não muda os slots do inventário nem a textura do jogo. Complementa a pergunta 186. Em avaliação, sem decisão: o slot de fornalha ficar só para o card de Minerador |
+| 258 | Onde fica o slot de energia na tela? | Num pequeno painel desenhado pelo mod ao lado da tela do baú, com espaço para os próximos slots exclusivos e a barra de bateria. Não muda os slots do inventário nem a textura do jogo. Complementa a pergunta 186. Em avaliação, sem decisão: o slot de fornalha ficar só para o card de Minerador, pendente na [pergunta 339](fase-5-robos-especializados.md) |
 | 259 | Onde salvar o conteúdo do slot de energia? | Em `cubit:energy_slot` no item e `EnergySlot` na entidade, separado do inventário. Atravessa recolher, morrer e consertar. O comportamento automático de esvaziar o inventário não coloca nem tira itens dos slots exclusivos. Automatizar isso, por exemplo pela base ou pelo Servidor, é uma ideia para o futuro |
 | 260 | Em que pontos ficam os testes da energia? | JUnit: consumo, extração de redstone sem perder energia e religar. GameTests: gastar andando, não gastar parado ou empurrado, desligar ao zerar mantendo o vínculo, religar sozinho, slot com redstone, clique com redstone desligado e preservar no recolher, morrer, consertar e salvar. Roteiro manual: tela e barra |
 | 261 | Como foi o roteiro manual da energia? | O robô sem energia ainda seguiu o player, e os demais passos ficaram ok, executado pelo desenvolvedor, sem detalhar cada passo. O erro está em investigação e bloqueia os commits da etapa. A pergunta 262 corrige a causa provada, e a 263 traz o que falta conferir |
@@ -191,6 +195,10 @@ Não há perguntas pendentes nesta fase.
 | 328 | Em que pontos ficam os testes do `/cubit reset`? | JUnit: a regra de desligar o robô sem vínculo, na `FollowingRobotPolicy`. GameTests: limpar um vínculo perdido e o próximo robô seguir, desligar o robô ativo e um clique religá-lo, não mexer no vínculo de outro player e rodar sem permissão. Roteiro manual: digitar o comando, ver as mensagens e o caso do chunk descarregado |
 | 329 | Como foi o roteiro manual do `/cubit reset`? | Tudo certo, executado pelo desenvolvedor, sem detalhar cada passo |
 | 330 | Como corrigir o que a auditoria dos `.md` encontrou? | Em três blocos, nesta ordem: A, correção direta do que só precisa ser alinhado com as respostas; B, mudança no `AGENTS.md`; C, pontos que dependem de decisão do desenvolvedor |
+| 346 | O comando e as traduções entram nos contratos dos pilares? | Sim, como quinto contrato: os nomes só mudam com aviso, sem exigir migração, porque não ficam nos saves |
+| 332 | O que faz o Cubit cheio na base com o dono offline? | Continua na base e sai quando o dono entra, porque a regra de sair precisa do vínculo guardado no player. Se o Dock sumir nesse período, ele acorda desligado, e um clique o liga. Detalha as perguntas 55 e 307 |
+| 333 | Como registrar o que está em aberto, se os arquivos diziam que não havia pendentes? | Em "Pendentes", cada uma com recomendação: receitas, momento da `0.1.0` e licença dos sons na Fase 2, e o slot de fornalha na Fase 5 |
+| 335 | A margem de 4 blocos para abrir a tela vai para o config? | Não. Fica como constante, porque não é balanceamento e segue o padrão do jogo (`Container.DEFAULT_DISTANCE_BUFFER`). É uma exceção documentada à regra 3 |
 
 ### Premissas aprovadas
 
@@ -206,6 +214,8 @@ Não há perguntas pendentes nesta fase.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 21:36 | Registra a resposta 346. |
+| Marcelo Fabiano | 2026-11-05 21:30 | Registra as respostas 332, 333, 334 e 335 e as pendências 336, 337 e 338, e aponta a 258 para a 339. |
 | Marcelo Fabiano | 2026-11-05 21:02 | Registra a resposta 330 e aponta a 296 para a 311. |
 | Marcelo Fabiano | 2026-11-05 20:52 | Registra a resposta 329. |
 | Marcelo Fabiano | 2026-11-05 20:42 | Registra as respostas 325, 326, 327 e 328. |

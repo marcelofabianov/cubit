@@ -66,7 +66,7 @@ As regras numeradas citadas aqui são as do [`AGENTS.md`](../../AGENTS.md).
 
 ## 4. Contrato externo
 
-**Quem consome nem sempre atualiza junto.** O Cubit tem quatro contratos:
+**Quem consome nem sempre atualiza junto.** O Cubit tem cinco contratos:
 
 | Contrato | Quem consome | Regra |
 |---|---|---|
@@ -74,6 +74,7 @@ As regras numeradas citadas aqui são as do [`AGENTS.md`](../../AGENTS.md).
 | Config | O pack, pelo packwiz | Chaves não mudam sem migração |
 | Receitas e tags | KubeJS e outros mods | IDs e tags são estáveis, e as receitas são JSON |
 | Energia | Mods de FE, quando houver | Capabilities padrão do NeoForge |
+| Comandos e traduções | Scripts de pack e quem traduz o mod | Os nomes só mudam com aviso, sem exigir migração, porque não ficam nos saves |
 
 - O contrato é definido nos documentos antes do código (regra 11).
 - Arquivos gerados são versionados e nunca editados à mão (regra 30).
@@ -222,6 +223,7 @@ Isso não autoriza refatorar um arquivo inteiro nem mudar o comportamento de out
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 21:36 | Adiciona o contrato de comandos e traduções. |
 | Marcelo Fabiano | 2026-11-05 21:02 | Trata os mods de FE como um extra. |
 | Marcelo Fabiano | 2026-11-05 00:05 | Exige perguntar antes de atualizar documento desatualizado. |
 | Marcelo Fabiano | 2026-11-04 18:20 | Cita a regra de constantes. |

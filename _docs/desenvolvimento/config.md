@@ -51,6 +51,10 @@ As chaves ficam em `snake_case`. As de um robô ficam em `[{tipo}.{tier}]`, como
 - **Raio até 128:** mantém a busca limitada (regra 21 do `AGENTS.md`).
 - **Parada e teleporte sem sobreposição:** os limites não se cruzam, então o config nunca faz o robô parar além da distância em que teleportaria.
 
+## Fora do config
+
+A margem de 4 blocos para abrir uma tela é uma constante, porque não é balanceamento e segue o padrão do jogo (pergunta 335).
+
 ## Valor inválido
 
 O mod não cai por causa do config (regra 17 do `AGENTS.md`):
@@ -66,6 +70,7 @@ O mod não cai por causa do config (regra 17 do `AGENTS.md`):
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 21:30 | Registra a margem das telas como exceção. |
 | Marcelo Fabiano | 2026-11-05 21:02 | Acompanha o nome ampliado do alcance em `tiers.md`. |
 | Marcelo Fabiano | 2026-11-05 17:15 | Adiciona o tempo com a tela completa. |
 | Marcelo Fabiano | 2026-11-05 16:09 | Adiciona as chaves do Induction Dock. |
