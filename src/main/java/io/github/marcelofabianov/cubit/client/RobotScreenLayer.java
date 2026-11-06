@@ -10,7 +10,9 @@ import io.github.marcelofabianov.cubit.domain.behavior.RobotExpression;
 import io.github.marcelofabianov.cubit.domain.robot.RobotType;
 import io.github.marcelofabianov.cubit.entity.RobotEntity;
 import io.github.marcelofabianov.cubit.entity.RobotFace;
+import io.github.marcelofabianov.cubit.entity.RobotLamp;
 import java.util.EnumMap;
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import net.minecraft.client.renderer.LightTexture;
@@ -23,10 +25,12 @@ import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
 
 /**
  * Draws the screen over the body, at a higher resolution, so the face stays close to the concept.
- * The screen glows in the dark, except when it is off, which also greys the antennas.
+ * The screen glows in the dark, except when it is off, which also greys the antennas. While the
+ * lamp is lit, a soft glow around what lights up follows the same picture, so it blinks with it.
  */
 final class RobotScreenLayer extends GeoRenderLayer<RobotEntity> {
   private static final String SCREEN_PATH = "textures/entity/%s_screen/%s.png";
+  private static final String GLOW_PATH = "textures/entity/%s_screen_glow/%s.png";
   private static final String EYES_NAME = "normal_%s_%s";
 
   /** Spreads the robots over the cycle, so they do not all blink at the same moment. */
@@ -38,6 +42,7 @@ final class RobotScreenLayer extends GeoRenderLayer<RobotEntity> {
       new EnumMap<>(RobotExpression.class);
   private final Map<GazeDirection, Map<BlinkFrame, ResourceLocation>> eyes =
       new EnumMap<>(GazeDirection.class);
+  private final Map<ResourceLocation, ResourceLocation> glows = new HashMap<>();
 
   RobotScreenLayer(GeoRenderer<RobotEntity> renderer, RobotType robotType) {
     super(renderer);
@@ -54,9 +59,15 @@ final class RobotScreenLayer extends GeoRenderLayer<RobotEntity> {
     eyes.get(GazeDirection.LEVEL).put(BlinkFrame.OPEN, textures.get(RobotExpression.NORMAL));
   }
 
-  private static ResourceLocation screen(RobotType robotType, String name) {
+  private ResourceLocation screen(RobotType robotType, String name) {
+    ResourceLocation screen = location(SCREEN_PATH, robotType, name);
+    glows.put(screen, location(GLOW_PATH, robotType, name));
+    return screen;
+  }
+
+  private static ResourceLocation location(String path, RobotType robotType, String name) {
     return ResourceLocation.fromNamespaceAndPath(
-        CubitMod.MOD_ID, SCREEN_PATH.formatted(robotType.id(), name));
+        CubitMod.MOD_ID, path.formatted(robotType.id(), name));
   }
 
   private static String lower(Enum<?> value) {
@@ -101,6 +112,32 @@ final class RobotScreenLayer extends GeoRenderLayer<RobotEntity> {
             buffers.getBuffer(type),
             partialTick,
             light,
+            packedOverlay,
+            NO_TINT);
+    if (glows && RobotLamp.isLit(robot)) {
+      renderGlow(poseStack, robot, model, buffers, partialTick, packedOverlay, texture);
+    }
+  }
+
+  private void renderGlow(
+      PoseStack poseStack,
+      RobotEntity robot,
+      BakedGeoModel model,
+      MultiBufferSource buffers,
+      float partialTick,
+      int packedOverlay,
+      ResourceLocation screen) {
+    RenderType type = RenderType.eyes(this.glows.get(screen));
+    getRenderer()
+        .reRender(
+            model,
+            poseStack,
+            buffers,
+            robot,
+            type,
+            buffers.getBuffer(type),
+            partialTick,
+            LightTexture.FULL_BRIGHT,
             packedOverlay,
             NO_TINT);
   }

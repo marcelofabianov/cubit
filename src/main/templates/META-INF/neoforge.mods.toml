@@ -39,3 +39,6 @@ Cubit is a cute robot companion that follows you around and carries your items. 
     versionRange="[${lambdynamiclights_version},)"
     ordering="NONE"
     side="CLIENT"
+
+[modproperties."${mod_id}"."yumi:entrypoints"]
+    "lambdynlights:initializer"="io.github.marcelofabianov.cubit.client.CubitDynamicLights"
