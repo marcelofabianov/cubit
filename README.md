@@ -89,6 +89,7 @@ As receitas usarão só materiais do jogo puro, podendo combinar itens do própr
 
 - [`_docs/README.md`](_docs/README.md): mapa dos documentos, com persona, visual, funcionalidades, itens, tiers, decisões, perguntas por fase e glossário
 - [`AGENTS.md`](AGENTS.md): regras e contexto do projeto para desenvolvedores e agentes
+- [`checklist.md`](checklist.md): o que está pronto e o que falta em cada fase
 
 ## Licença
 

@@ -8,7 +8,7 @@ Mod de Minecraft que adiciona um robô companheiro fofo, movido a bateria, de te
 
 - **Etapa atual:** Fase 2, versão mínima. O projeto Gradle existe, e as funcionalidades entram por issue, na ordem combinada com o desenvolvedor.
 - **Já entrou:** colocar e recolher, seguir o player, vários robôs, fogo, lava, os arquivos de som, a revisão dos `.md`, o novo modelo, a morte com o item danificado, o inventário, a energia em uso, o consumo por situação, a reação a blocos que ferem, o Induction Dock e o `/cubit reset`.
-- **Próximos:** o fechamento da fase, com receitas e teste no Iron Meridian.
+- **Próximos:** o fechamento da fase, com os testes da regra 35 e a publicação da `0.1.0`.
 - **Comandos:** estão em [`_docs/desenvolvimento/ferramentas-de-build.md`](_docs/desenvolvimento/ferramentas-de-build.md).
 - **Limite:** não avance para as fases seguintes sem pedido explícito.
 
@@ -184,6 +184,7 @@ O projeto segue o Gitflow, com Semantic Versioning e Conventional Commits.
 - **Commits:** em Conventional Commits, em português, e atômicos: `feat: adiciona a Power Bank`.
 - **Versão:** Semantic Versioning, com tag anotada `vX.Y.Z` na `main`. Na fase `0.x`, mudança incompatível sobe o MINOR, e o resto sobe o PATCH.
 - **Backlog:** um milestone do GitHub por fase do projeto.
+- **Checklist:** ao encerrar um PR depois do merge, avalie se algum item de [`checklist.md`](checklist.md) deve ser marcado. A marcação entra num novo commit, no PR seguinte, nunca direto na `develop`.
 
 ## Estrutura de pacotes
 

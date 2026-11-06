@@ -201,6 +201,7 @@
 | 350 | Em que pontos ficam os testes das receitas? | GameTests: cada receita gera o item certo, o Cubit fabricado nasce com tier Base, 25% de carga e vida cheia, o Dock fabricado nasce com o estoque zerado e o L espelhado funciona. Gate: `check-generated`, para os JSONs. Roteiro manual: fazer na mesa em sobrevivência, ver no livro e colocar no mundo |
 | 351 | Como foi o roteiro manual das receitas? | O desenvolvedor fez as três receitas, do Cubit, do Induction Dock e da `Toolbox`, sem problemas. O resultado de cada passo não foi detalhado, então o momento em que aparecem no livro e o L espelhado não foram confirmados |
 | 352 | O que faz o Cubit chamado a um Dock sem energia? | Mantém o que a pergunta 305 define: entra e fica hibernando, sem carregar, até o Dock receber energia ou o player o liberar. A tela "sem energia" é o único aviso nesta fase |
+| 353 | Como acompanhar o que está pronto e o que falta em cada fase? | Num `checklist.md` na raiz. Ao encerrar um PR depois do merge, avalia-se se algum item deve ser marcado, e a marcação entra num novo commit, no PR seguinte |
 | 332 | O que faz o Cubit cheio na base com o dono offline? | Continua na base e sai quando o dono entra, porque a regra de sair precisa do vínculo guardado no player. Se o Dock sumir nesse período, ele acorda desligado, e um clique o liga. Detalha as perguntas 55 e 307 |
 | 333 | Como registrar o que está em aberto, se os arquivos diziam que não havia pendentes? | Em "Pendentes", cada uma com recomendação: receitas, momento da `0.1.0` e licença dos sons na Fase 2, e o slot de fornalha na Fase 5 |
 | 335 | A margem de 4 blocos para abrir a tela vai para o config? | Não. Fica como constante, porque não é balanceamento e segue o padrão do jogo (`Container.DEFAULT_DISTANCE_BUFFER`). É uma exceção documentada à regra 3 |
@@ -219,6 +220,7 @@
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 22:18 | Registra a resposta 353. |
 | Marcelo Fabiano | 2026-11-05 22:11 | Registra a resposta 352. |
 | Marcelo Fabiano | 2026-11-05 22:09 | Registra a resposta 351. |
 | Marcelo Fabiano | 2026-11-05 21:53 | Registra as respostas 349 e 350. |

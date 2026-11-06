@@ -101,6 +101,7 @@ O merge é feito no GitHub, somente pelo desenvolvedor.
 1. Confira se a issue fechou. Se continuar aberta, feche-a à mão.
 2. Atualize a `develop` local.
 3. Apague a branch da tarefa, com autorização.
+4. Avalie se algum item de [`checklist.md`](../../checklist.md) deve ser marcado. A marcação entra num novo commit, no PR seguinte, nunca direto na `develop`.
 
 ## O que precisa de autorização
 
@@ -185,6 +186,7 @@ O primeiro passo, separando o que está decidido do que está pendente.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 22:18 | Adiciona a avaliação do checklist ao encerrar um PR. |
 | Marcelo Fabiano | 2026-11-05 21:02 | Corrige a atualização da `develop`, que falhava com ela em uso. |
 | Marcelo Fabiano | 2026-11-05 14:35 | Deixa o merge somente com o desenvolvedor. |
 | Marcelo Fabiano | 2026-11-05 12:21 | Inclui o teste numa instância só com o mod. |
