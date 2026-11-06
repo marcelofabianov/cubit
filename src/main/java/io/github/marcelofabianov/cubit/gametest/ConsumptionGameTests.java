@@ -49,8 +49,8 @@ public final class ConsumptionGameTests {
   private static final long WALK_LOADED = 20;
   private static final long WALK_AND_CLIMB = 30;
   private static final long DRAIN = 25;
-  private static final double BASE_SPEED = 0.3;
-  private static final double LOADED_SPEED = 0.225;
+  private static final double BASE_SPEED = 0.33;
+  private static final double LOADED_SPEED = 0.2475;
   private static final double SPEED_TOLERANCE = 1.0E-6;
   private static final BlockPos FLOOR = new BlockPos(START_X, FLOOR_Y, MIDDLE_Z);
   private static final Energy PLENTY = new Energy(100_000);
