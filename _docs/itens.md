@@ -19,14 +19,14 @@
 
 | Nome | ID | Receita |
 |---|---|---|
-| Cubit | `cubit:general_robot` | A definir |
+| Cubit | `cubit:general_robot` | Abaixo |
 | Damaged Cubit | `cubit:damaged_general_robot` | Não tem: cai quando o Cubit morre |
 | Toolbox | `cubit:toolbox` | Provisória, abaixo |
 | Cubit Remote | `cubit:remote` | A definir |
 | Advanced Module | `cubit:advanced_module` | A definir |
 | Elite Module | `cubit:elite_module` | A definir |
 | Ultimate Module | `cubit:ultimate_module` | A definir |
-| Induction Dock | `cubit:induction_dock` | A definir no fechamento da fase |
+| Induction Dock | `cubit:induction_dock` | Abaixo |
 | Base Power Bank | `cubit:base_power_bank` | A definir |
 | Advanced Power Bank | `cubit:advanced_power_bank` | A definir |
 | Elite Power Bank | `cubit:elite_power_bank` | A definir |
@@ -42,6 +42,26 @@ Receitas provisórias, só com recursos do jogo puro, a ajustar nos testes:
 | Avançado | Ouro e quartzo |
 | Elite | Diamante e ametista |
 | Ultimate | Netherite e estrela do Nether |
+
+### Cubit
+
+Na mesa de craft, com uma forma que lembra o item. Vai além da progressão provisória acima (pergunta 348). A receita aparece no livro ao ter diamante.
+
+| | Coluna 1 | Coluna 2 | Coluna 3 |
+|---|---|---|---|
+| Linha 1 | Redstone | Lâmpada de redstone | Redstone |
+| Linha 2 | Lingote de ferro | Diamante | Lingote de ferro |
+| Linha 3 | Obsidiana | Vazio | Obsidiana |
+
+### Induction Dock
+
+Na mesa de craft, em forma de L (pergunta 336). O desenho espelhado também vale, e a receita aparece no livro ao ter um Cubit.
+
+| | Coluna 1 | Coluna 2 | Coluna 3 |
+|---|---|---|---|
+| Linha 1 | Redstone | Vazio | Vazio |
+| Linha 2 | Lingote de ferro | Vazio | Vazio |
+| Linha 3 | Baú | Redstone | Lingote de ferro |
 
 ### Toolbox
 
@@ -123,6 +143,9 @@ O estado salvo é validado ao entrar no jogo, sem derrubá-lo (regra 17 do `AGEN
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 21:53 | Define quando as receitas aparecem no livro. |
+| Marcelo Fabiano | 2026-11-05 21:50 | Define a receita do Induction Dock. |
+| Marcelo Fabiano | 2026-11-05 21:47 | Define a receita do Cubit. |
 | Marcelo Fabiano | 2026-11-05 21:34 | Detalha o que o item guarda das configurações. |
 | Marcelo Fabiano | 2026-11-05 21:02 | Detalha o contrato do slot de energia na entidade. |
 | Marcelo Fabiano | 2026-11-05 16:57 | Adiciona os estados do bloco do Dock. |
