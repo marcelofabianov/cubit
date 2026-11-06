@@ -4,7 +4,7 @@
 
 | # | Pergunta | Recomendação |
 |---|---|---|
-| 425 | Onde o player aciona as chaves da pergunta 424, qual é o estado inicial de cada uma, e o que "Hibernar" da chave geral faz fora do Dock? | Na tela do Cubit, e também no Cubit Remote a partir da Fase 4. Todas começam ligadas e ficam nas configurações que o item guarda, como na [pergunta 343](fase-4-upgrades-e-autonomia.md). Hibernar fora do Dock segue a [pergunta 198](fase-5-robos-especializados.md), hoje prevista só para a Fase 5, então precisa de decisão antes de antecipar |
+| 425 | Onde o player aciona as chaves da pergunta 424, qual é o estado inicial de cada uma, e o que "Hibernar" da chave geral faz fora do Dock? | Na tela do Cubit, e também no Cubit Remote a partir da Fase 4. Todas começam ligadas e ficam nas configurações que o item guarda, como na [pergunta 343](fase-4-upgrades-e-autonomia.md). Hibernar fora do Dock segue a [pergunta 198](fase-5-trabalhos.md), hoje prevista só para a Fase 5, então precisa de decisão antes de antecipar |
 
 ## Respondidas
 
@@ -25,7 +25,7 @@
 | 141 | Quais versões dos sons ficaram boas no VLC? | Os sons 3, 4 e 6 estão normais. Os sons 1, 2, 5, 7 e 8 têm cortes na reprodução |
 | 142 | Os cortes nos sons vêm dos arquivos ou do reprodutor? | Do reprodutor: no VLC havia cortes, e no `pw-play` os sons tocaram sem problema. A conversão está certa. Desfaz a conclusão da pergunta 140 e explica a 141 |
 | 148 | Ao trocar para uma expressão com som próprio, o bipe padrão toca junto? | Não. O bipe padrão toca nas trocas de expressão que não têm um som exclusivo. Substitui a pergunta 136 |
-| 149 | Qual é o intervalo mínimo entre repetições dos textos e dos alertas sonoros? | O valor será definido na Fase 3, num teste no jogo, e ficará no config. Complementa a pergunta 48 |
+| 149 | Qual é o intervalo mínimo entre repetições dos textos e dos alertas sonoros? | O valor será definido na Fase 3, num teste no jogo, e ficará no config. Complementa a pergunta 48. As perguntas 433 e 444 definem o valor |
 | 157 | Quais são as reações do Cubit ao ligar e ao pegar fogo? | Ao ligar, toca o som de ligar. Ao pegar fogo, toca o som de curto elétrico. Confirma a pergunta 135 |
 | 158 | Qual expressão o Cubit mostra ao ligar e ao pegar fogo? | Ao ligar, a normal. Ao pegar fogo, mantém a atual, sem troca |
 | 264 | Quando entram o visual melhor e os tooltips do painel do slot de energia? | Na tela própria da Fase 3, a da [pergunta 186](fase-2-versao-minima.md). Na Fase 2, o painel continua simples |
@@ -34,6 +34,17 @@
 | 321 | O nome `placed.ogg` e o momento "ao ser colocado no mundo" estão certos? | Sim. Detalha a pergunta 320 |
 | 322 | Em que fase o som de colocar no mundo passa a tocar? | Na Fase 3, junto dos outros oito. Detalha a pergunta 320 |
 | 421 | Como foi o roteiro manual do colar, do indicador de bateria e do tronco central com +0,5? | Teste finalizado, tudo ok, executado pelo desenvolvedor, sem detalhar cada passo. Ele não pediu +1, então o tronco fica em 2 unidades. O `make server` e o olhar de longe não foram citados em separado |
+| 455 | Quando o Cubit fica feliz por interação? | Como está no código: ao ser colocado e ao abrir o inventário. Só o `persona.md` estava diferente, ao dizer "de qualquer forma". Renomear, pintar e receber upgrade continuam previstos |
+| 456 | O item 11 do checklist fica pronto? | Sim, porque o valor e a chave já existem, e os alertas dos scanners vão usar a mesma chave. Muda a pergunta 428 só no item 11. O item 12 continua aberto |
+| 457 | `I need to recharge` e `Items unloaded` também valem para Cubits em área? | Não: vêm só do Cubit que segue. Fecha o que a pergunta 430 deixou para reavaliar. Um Cubit em área não mostra esses textos |
+| 454 | Os usos gerais de "trabalho", como "área de trabalho" e "Cubits trabalhando em áreas", mudam? | Não, ficam como estão, porque o sentido é natural |
+| 448 | Como ficam os termos da Fase 5? | "Especialidade" virou "trabalho" (Job, no jogo). "Card de especialidade" virou "card de Aprendizado de Máquina" (Machine Learning card). Cada card se chama, por exemplo, "Aprendizado de Máquina: Minerador" (Machine Learning: Miner), com ID `cubit:ml_miner`. A aba passa a ser a aba Trabalho (Job tab). "Robô especializado" virou "Cubit com trabalho". "Generalista" não muda. Só o termo muda, sem alterar o sentido das decisões |
+| 449 | O `pt_br.json` citado na troca de termos é criado? | Não. A regra 1 continua valendo, e os nomes em português ficam só nos documentos |
+| 450 | Os arquivos e a âncora com o termo antigo são renomeados? | Sim: `funcionalidades/trabalhos.md`, `perguntas/fase-5-trabalhos.md` e a âncora `#trabalhos` de `tiers.md` |
+| 451 | O projeto terá outros robôs? | Não. O robô é único, o Cubit, e os itens dão a ele o conhecimento para atuar num trabalho. É a ideia das [perguntas 191 e 192](fase-5-trabalhos.md). Muda as [perguntas 90 e 91](fase-1-conceito.md), que previam outros tipos de robô. `general_robot` e `RobotType` continuam no código, sem mudar nesta entrega |
+| 452 | O milestone da Fase 5 é renomeado? | Sim, para `Fase 5: Trabalhos` |
+| 453 | O que fazer com as incoerências dos documentos? | Revisar todos os `.md`, corrigir o que estiver desatualizado e seguir a ideia correta do projeto, aplicando os termos novos |
+| 447 | O que acontece ao iniciar uma feature? | O agente descreve em poucas linhas o que vamos fazer e pergunta ao desenvolvedor se tem algo mais para acrescentar. Vira regra e passo do fluxo de trabalho |
 | 446 | Como foi o roteiro manual dos textos, do intervalo de 25 s e dos braços por 2 s? | Teste finalizado, tudo ok, executado pelo desenvolvedor, sem detalhar cada passo. O `make server` e o texto mais recente substituindo o anterior não foram citados em separado |
 | 445 | Quanto tempo os braços ficam erguidos depois de levar dano? | Cerca de 2 s depois do último dano, numa constante, com um dado sincronizado novo, fora do save. A lágrima continua nos 5 s. Muda a pergunta 402 |
 | 444 | Qual é o intervalo dos textos? | 25 s, ou 500 ticks. O desenvolvedor pediu ao perguntar pelas frases novas, e o agente aplicou aos três textos, porque a chave é a mesma pela pergunta 442. Muda a pergunta 433 |
@@ -49,9 +60,9 @@
 | 432 | Os 5% do texto `Critical battery` valem só para ele ou para toda a bateria crítica? | Para tudo: `critical_charge_percent` passa de 10% para 5%, com a expressão de sono, o indicador vermelho e o texto, sem chave nova. Muda as perguntas [11](fase-1-conceito.md), 66 e 416 nesse número |
 | 433 | Qual é o valor inicial do intervalo mínimo? | 60 s, ou 1.200 ticks, numa chave nova do config, a ajustar no teste no jogo. A recomendação era 30 s. Complementa a pergunta 149. A pergunta 444 muda para 25 s |
 | 434 | Onde ficam os rascunhos e os logs? | Todo `.md` de rascunho de PR fica em `tmp/pr/`, os arquivos de issue, em `tmp/issue/`, e os logs, em `tmp/log/` |
-| 428 | Quais dos cinco textos entram agora? | Só `Critical battery`, que já tem gatilho. `Enemy nearby` e `Ore found` entram com os scanners, e `I need to recharge` e `Items unloaded`, na Fase 4. Os itens 11 e 12 ficam abertos até os scanners, conforme a pergunta 356 |
+| 428 | Quais dos cinco textos entram agora? | Só `Critical battery`, que já tem gatilho. `Enemy nearby` e `Ore found` entram com os scanners, e `I need to recharge` e `Items unloaded`, na Fase 4. Os itens 11 e 12 ficam abertos até os scanners, conforme a pergunta 356. A pergunta 456 fecha o item 11 |
 | 429 | Quando o texto `Critical battery` aparece? | Ao chegar em 5% ou menos, repetindo a cada intervalo mínimo enquanto continuar crítico. Só com o robô ativo: desligado, hibernando ou recarregando acima de 5%, não avisa. A recomendação citava 10%, e o desenvolvedor escreveu 5%. A pergunta 432 leva os 5% a toda a bateria crítica |
-| 430 | Com vários Cubits, de quem vêm as mensagens? | Somente do Cubit ativo que segue o player, que é um só, então o intervalo não precisa ser por dono. Complementa a pergunta 48. O valor inicial está na pergunta 433. Na Fase 4, `Items unloaded` e `I need to recharge` precisam ser reavaliados para robôs em área |
+| 430 | Com vários Cubits, de quem vêm as mensagens? | Somente do Cubit ativo que segue o player, que é um só, então o intervalo não precisa ser por dono. Complementa a pergunta 48. O valor inicial está na pergunta 433. A pergunta 457 confirma isso para `Items unloaded` e `I need to recharge` |
 | 431 | Em que pontos ficam os testes do intervalo e do texto? | JUnit: quando o aviso vale, a entrada, a repetição e o estado. GameTests: tradução e chave do config presentes e aviso calculado no servidor. Roteiro manual: ver o texto na barra, só para o dono, e escolher o valor do intervalo |
 | 426 | O agente corrige o status do `README.md`, que não cita o que já entrou na Fase 3? | Sim, no próximo PR, conforme a [pergunta 152](fase-2-versao-minima.md) |
 | 427 | Os itens 11 e 12, do intervalo mínimo e dos textos, podem começar depois do merge do PR #92? | Sim |
@@ -121,12 +132,15 @@
 | 360 | Em que pontos ficam os testes dos sons? | JUnit: qual som cada mudança de estado toca e quando cada som contínuo vale. GameTests: sons registrados, `sounds.json` carregando e estado sincronizado mudando no servidor. Roteiro manual: ouvir cada som, a distância, o controle de volume e o servidor dedicado abrindo |
 | 356 | Em que ordem segue a Fase 3? | A do `checklist.md`: sons; intervalo mínimo; expressões; animações e modelo final; colar e bateria; textos; painel solar; lanterna; feixe; scanners; nome e cor; Jade; e tela própria. Sons, intervalo, expressões, colar, textos e feixe entram em partes: a parte possível na vez de cada um, e os scanners ligam o resto. Um item só é marcado quando estiver completo na Fase 3. A pergunta 365 muda a ordem |
 | 334 | O que acontece ao colocar um Cubit no mundo? | Toca só `placed.ogg`, em qualquer estado, e `power_on.ogg` fica para a passagem de desligado a ligado. A expressão é feliz, se ele nascer ativo, e tela apagada, se nascer desligado. Detalha as perguntas 158 e 321 |
-| 331 | Quando o LambDynamicLights entra no build? | Com a lanterna, na Fase 3. A [pergunta 337](fase-2-versao-minima.md) muda a segunda parte: a `0.1.0` só sai com a Fase 3, então já o exige. Detalha a [pergunta 242](fase-5-robos-especializados.md) |
+| 331 | Quando o LambDynamicLights entra no build? | Com a lanterna, na Fase 3. A [pergunta 337](fase-2-versao-minima.md) muda a segunda parte: a `0.1.0` só sai com a Fase 3, então já o exige. Detalha a [pergunta 242](fase-5-trabalhos.md) |
 
 ## Histórico de modificações
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 11:10 | Registra as respostas 448 a 457 e aponta a 428 e a 430 para elas. |
+| Marcelo Fabiano | 2026-11-06 11:10 | Troca 'especialidade' por 'trabalho' e 'card de especialidade' por 'card de Aprendizado de Máquina'. |
+| Marcelo Fabiano | 2026-11-06 10:56 | Registra a resposta 447. |
 | Marcelo Fabiano | 2026-11-06 10:49 | Registra as respostas 444, 445 e 446 e aponta a 433 e a 402 para elas. |
 | Marcelo Fabiano | 2026-11-06 10:15 | Registra as respostas 439 a 443 e aponta a 49 para as 440 e 441. |
 | Marcelo Fabiano | 2026-11-06 10:02 | Registra as respostas 435 a 438 e aponta a 48 e a 49 para elas. |

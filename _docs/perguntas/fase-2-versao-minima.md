@@ -23,7 +23,7 @@ Não há perguntas pendentes nesta fase.
 | 43 | Quanta energia a redstone fornece, e quais itens valem? | 1 pó = 5.000 FE e 1 bloco = 45.000 FE, configuráveis |
 | 44 | A Power Bank e a redstone usam o mesmo slot do Cubit? | Sim, um único slot de energia, que aceita um dos dois por vez |
 | 45 | Com o Cubit desligado, clicar com redstone na mão funciona como com a Power Bank? | Sim. A pilha entra no slot, a recarga começa e, com 5%, o Cubit liga |
-| 47 | Como o Cubit carrega no Dock? | "Base" é o Induction Dock, o bloco fixo, inspirado nas bases de robôs aspiradores. Na base, o Cubit fica em hibernação: diferente de desligado, com o painel solar desligado e o inventário e os slots exclusivos acessíveis. Ativo é ligado, e inativo é desligado, com o painel também desligado. A [pergunta 198](fase-5-robos-especializados.md) amplia a hibernação para fora da base, na Fase 5 |
+| 47 | Como o Cubit carrega no Dock? | "Base" é o Induction Dock, o bloco fixo, inspirado nas bases de robôs aspiradores. Na base, o Cubit fica em hibernação: diferente de desligado, com o painel solar desligado e o inventário e os slots exclusivos acessíveis. Ativo é ligado, e inativo é desligado, com o painel também desligado. A [pergunta 198](fase-5-trabalhos.md) amplia a hibernação para fora da base, na Fase 5 |
 | 50 | Em que fase entram a redstone no Dock e no slot de energia do Cubit? | Fase 2. Assim, o carregamento já funciona sem gerador de outro mod |
 | 54 | Sem o retorno automático da Fase 4, como o Cubit chega à base na versão mínima? | O player clica com o botão direito no Dock, e o Cubit por perto vai até ele. Colocar o item do Cubit em cima do Dock também funciona. A distância e o Cubit chamado foram definidos nas perguntas 59 e 81 |
 | 55 | Como o Cubit sai da hibernação, já que interagir com ele abre o inventário? | Sai sozinho com a bateria cheia e volta a seguir. Antes disso, clicar no Dock o libera. O que ele faz ao sair foi ampliado pela pergunta 83 |
@@ -124,7 +124,7 @@ Não há perguntas pendentes nesta fase.
 | 188 | Em que pontos ficam os testes do inventário? | JUnit no domínio: regra do excedente. GameTests: quem abre, o que não entra, preservar sem perder nem duplicar, e excedente. Roteiro manual: tela e cliques |
 | 189 | Como foi o roteiro manual do inventário? | Ok, executado pelo desenvolvedor, conforme esperado. O resultado de cada passo não foi detalhado. O robô consertado precisou de um comando para ter carga, porque a recarga entra na etapa seguinte |
 | 257 | O que conta como andando, para gastar bateria? | Rota em andamento e deslocamento real no tick, inclusive ao fugir do fogo e da lava. Ser empurrado não gasta, e rota sem avanço também não |
-| 258 | Onde fica o slot de energia na tela? | Num pequeno painel desenhado pelo mod ao lado da tela do baú, com espaço para os próximos slots exclusivos e a barra de bateria. Não muda os slots do inventário nem a textura do jogo. Complementa a pergunta 186. Em avaliação, sem decisão: o slot de fornalha ficar só para o card de Minerador, pendente na [pergunta 339](fase-5-robos-especializados.md) |
+| 258 | Onde fica o slot de energia na tela? | Num pequeno painel desenhado pelo mod ao lado da tela do baú, com espaço para os próximos slots exclusivos e a barra de bateria. Não muda os slots do inventário nem a textura do jogo. Complementa a pergunta 186. Em avaliação, sem decisão: o slot de fornalha ficar só para o Aprendizado de Máquina: Minerador, pendente na [pergunta 339](fase-5-trabalhos.md) |
 | 259 | Onde salvar o conteúdo do slot de energia? | Em `cubit:energy_slot` no item e `EnergySlot` na entidade, separado do inventário. Atravessa recolher, morrer e consertar. O comportamento automático de esvaziar o inventário não coloca nem tira itens dos slots exclusivos. Automatizar isso, por exemplo pela base ou pelo Servidor, é uma ideia para o futuro |
 | 260 | Em que pontos ficam os testes da energia? | JUnit: consumo, extração de redstone sem perder energia e religar. GameTests: gastar andando, não gastar parado ou empurrado, desligar ao zerar mantendo o vínculo, religar sozinho, slot com redstone, clique com redstone desligado e preservar no recolher, morrer, consertar e salvar. Roteiro manual: tela e barra |
 | 261 | Como foi o roteiro manual da energia? | O robô sem energia ainda seguiu o player, e os demais passos ficaram ok, executado pelo desenvolvedor, sem detalhar cada passo. O erro está em investigação e bloqueia os commits da etapa. A pergunta 262 corrige a causa provada, e a 263 traz o que falta conferir |
@@ -221,6 +221,7 @@ Não há perguntas pendentes nesta fase.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 11:10 | Troca 'especialidade' por 'trabalho' e 'card de especialidade' por 'card de Aprendizado de Máquina'. |
 | Marcelo Fabiano | 2026-11-06 00:58 | Aponta a resposta 60 para a 396. |
 | Marcelo Fabiano | 2026-11-06 00:40 | Aponta a resposta 113 para a 392. |
 | Marcelo Fabiano | 2026-11-05 22:27 | Registra a resposta 355. |

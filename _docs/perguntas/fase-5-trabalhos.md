@@ -1,4 +1,4 @@
-# Fase 5: Robôs especializados
+# Fase 5: Trabalhos
 
 Conceito para depois da Fase 4. Registrar aqui não autoriza implementar.
 
@@ -6,16 +6,16 @@ Conceito para depois da Fase 4. Registrar aqui não autoriza implementar.
 
 | # | Pergunta | Recomendação |
 |---|---|---|
-| 339 | O slot de fornalha fica só para o card de Minerador? | Manter a fornalha como está em `tiers.md` até decidir os cards, porque ela entra na Fase 4, antes deles. Vem da [pergunta 258](fase-2-versao-minima.md) |
+| 339 | O slot de fornalha fica só para o Aprendizado de Máquina: Minerador? | Manter a fornalha como está em `tiers.md` até decidir os cards, porque ela entra na Fase 4, antes deles. Vem da [pergunta 258](fase-2-versao-minima.md) |
 
 ## Respondidas
 
 | # | Pergunta | Resposta |
 |---|---|---|
-| 190 | Onde registrar as ideias de robôs especializados? | Numa nova Fase 5, neste arquivo, com a fase no roadmap como planejada. Nada é implementado antes de a Fase 4 terminar |
+| 190 | Onde registrar as ideias de trabalhos do Cubit? | Numa nova Fase 5, neste arquivo, com a fase no roadmap como planejada. Nada é implementado antes de a Fase 4 terminar |
 | 191 | Como o card funciona no Cubit? | Fica num slot exclusivo e sai quando o player quiser, sem perda. Sem card, o Cubit é generalista. Morrer e recolher preservam o card |
-| 192 | Quantas especialidades um Cubit tem ao mesmo tempo? | Uma, e o tier melhora o que o card faz |
-| 193 | O que faz um Cubit com card quando está seguindo o player? | Age como generalista. O card só age em área marcada. Exceções podem ser decididas card a card. A [pergunta 340](fase-4-upgrades-e-autonomia.md) define o que ele faz na área sem card |
+| 192 | Quantos trabalhos um Cubit tem ao mesmo tempo? | Uma, e o tier melhora o que o card faz |
+| 193 | O que faz um Cubit com trabalho quando está seguindo o player? | Age como generalista. O card só age em área marcada. Exceções podem ser decididas card a card. A [pergunta 340](fase-4-upgrades-e-autonomia.md) define o que ele faz na área sem card |
 | 194 | Como definir a altura da área de trabalho? | O player marca dois cantos em 3D, e a altura vem deles. A altura máxima fica no config, por tier. A [pergunta 342](fase-4-upgrades-e-autonomia.md) antecipa isso para a Fase 4 |
 | 195 | O que o Cubit nunca pode quebrar ou alterar? | Blocos com dados, como baús, máquinas, Dock, antena e Servidor, e a tag de blocos protegidos, que o pack pode editar. Cada card só mexe no seu tipo de bloco |
 | 196 | O que o Cubit faz com o inventário cheio durante o trabalho? | Descarrega no baú o que conseguir. Quando não conseguir mais, entra em hibernação e só volta quando o player o religar. O termo é detalhado na pergunta 198 |
@@ -31,14 +31,14 @@ Conceito para depois da Fase 4. Registrar aqui não autoriza implementar.
 | 206 | O documentado pode ser alterado? | Sim, conforme a regra 48 do `AGENTS.md`: um impedimento técnico pode alterar ou desfazer uma decisão. Ele é mostrado com evidência, o desenvolvedor decide, e a nova resposta aponta para a antiga. O publicado segue a regra 18 |
 | 207 | O que o Defensor protege e onde? | É diferente do comportamento de defender o player ao seguir. Defende contra qualquer mob agressivo, ou neutro que esteja agredindo algo dentro da área. Ataca e guarda os drops no inventário, e nunca sai da área. Se um mob ataca de fora da área, como um esqueleto com arco, o Cubit recua e procura proteção. Quando o mob entra na área, ele ataca. Se o mob sair, ele volta a se esconder |
 | 208 | O que o Organizador de storage faz? | Os detalhes ainda não estão fechados. Inicialmente, pega itens das saídas de fornalhas e máquinas, ou do chão, e procura baús que já têm o mesmo item. Com mais de um, a prioridade é o que possui a maior quantidade do item carregado |
-| 209 | Como o player configura baús e filtros dos cards? | O Cubit Remote marca no mundo, e a tela do Cubit tem uma aba do card, com modo e filtros. As opções do Minerador ficam nela |
-| 210 | O tier Base usa cards de especialidade? | Não, continuam bloqueados no Base. O primeiro tier que aceita cards é o Avançado, e nele o Minerador começa equivalente a picareta de ferro. Muda a pergunta 197 |
+| 209 | Como o player configura baús e filtros dos cards? | O Cubit Remote marca no mundo, e a tela do Cubit tem uma aba Trabalho, com modo e filtros. As opções do Minerador ficam nela |
+| 210 | O tier Base usa cards de Aprendizado de Máquina? | Não, continuam bloqueados no Base. O primeiro tier que aceita cards é o Avançado, e nele o Minerador começa equivalente a picareta de ferro. Muda a pergunta 197 |
 | 211 | Como o Defensor ataca nos tiers? | Cada tier que aceita o card ataca com mais dano. O Base não atua como Defensor |
 | 212 | O que o Organizador faz quando nenhum baú tem o mesmo item? | Coloca no primeiro baú com espaço |
 | 213 | O que o Construtor faz? | Inicialmente, é simples: retira blocos de uma área para aplainar, ou preenche espaços vazios ou com líquidos usando os blocos do inventário |
 | 214 | O que o Defensor protege dentro da área? | O dono, outros players, robôs, animais e aldeões. Atacado, ele contra-ataca. Um mob hostil que entra na área só é atacado por iniciativa dele se o tier tiver o modo agressivo. Detalha a pergunta 207 |
 | 215 | Em quais baús e máquinas o Organizador mexe? | Só nos baús marcados com o Cubit Remote, e "primeiro" é o primeiro marcado com espaço. Só tira o que a máquina oferece como saída, pela capability do NeoForge, sem tocar em entradas e combustível. A leitura roda em intervalos. Detalha as perguntas 208 e 212 |
-| 216 | Como ficam os itens de card? | Um item por especialidade, como `cubit:miner_card` e `cubit:farmer_card`, cada um com receita própria em JSON e materiais do jogo puro. Eles empilham, porque o item não guarda dados |
+| 216 | Como ficam os itens de card? | Um item por trabalho, como `cubit:ml_miner` e `cubit:ml_farmer`, cada um com receita própria em JSON e materiais do jogo puro. Eles empilham, porque o item não guarda dados |
 | 217 | Como funcionam os modos do Construtor? | Dentro da área 3D. Aplainar retira os blocos permitidos, de cima para baixo. Preencher usa o bloco do filtro em vazios e líquidos, de baixo para cima. Sem o bloco ou com o inventário cheio, ele hiberna. Vale a proteção da pergunta 195. Detalha a pergunta 213 |
 | 218 | Como a antena se relaciona com o Servidor? | Existem Servidores por tier, e cada tier tem uma quantidade fixa de antenas: o primeiro, por exemplo, até 2, e os últimos, mais. A receita de cada Servidor tem a dificuldade do Cubit do mesmo tier. O tier do Servidor não influencia a antena nem o Cubit diretamente: só limita a quantidade de antenas, e tiers variados podem conviver |
 | 219 | Como a antena gasta a bateria? | Por tempo, em FE por tick enquanto ligada, mais em tiers maiores. Tem botão de ligar e desligar. Perto de zerar, avisa o dono. Ao zerar, solta os chunks e guarda o estado, para voltar quando recarregada |
@@ -63,28 +63,29 @@ Conceito para depois da Fase 4. Registrar aqui não autoriza implementar.
 | 238 | Qual é a regra de independência do mod? | O mod prioriza funcionar numa instância de Minecraft só com ele e suas dependências. As bibliotecas e dependências colocadas no mod são exceções: GeckoLib, LambDynamicLights e Jade. A pergunta 242 detalha quais são obrigatórias |
 | 239 | Como fica o Iron Meridian no projeto? | Vira um alvo testado, não o motivo do mod. O texto diz que o mod é para o player. Antes da `main`, testa-se numa instância só com o mod e, depois, no Iron Meridian. As versões continuam compatíveis com ele. A revisão é mostrada antes de aplicar |
 | 240 | De onde vem a energia do Dock, da antena e do Servidor, sem outros mods? | Todos aceitam redstone por slot ou funil, que vira FE interno. Cabos e mods são um extra, e nada exige gerador. O consumo é balanceado para funcionar assim |
-| 241 | Como fechar o registro? | Antes de consolidar, fechar as contradições e avaliar novas especialidades: cozinheiro, pescador e fabricador, este com receitas configuradas e abastecimento de lugares definidos, com pedidos de quantidade fixa de itens para cada destino |
+| 241 | Como fechar o registro? | Antes de consolidar, fechar as contradições e avaliar novos trabalhos: cozinheiro, pescador e fabricador, este com receitas configuradas e abastecimento de lugares definidos, com pedidos de quantidade fixa de itens para cada destino |
 | 242 | Quais dependências são obrigatórias? | GeckoLib e LambDynamicLights são obrigatórias, e Jade é opcional. Detalha a pergunta 238 e muda as regras 6 e 24 do `AGENTS.md` |
 | 243 | Onde os Docks podem ficar? | Todos ficam na área do chunk do Servidor ou próximos a uma antena. Mesmo com o carregamento de chunks desativado, o Dock deve estar próximo, até um número de blocos, do Servidor ou de uma antena. Muda a pergunta 229. A pergunta 246 trata do efeito antes da Fase 5 |
-| 244 | O que vale no Defensor com os modos de defesa? | Com o card de Defensor, a opção Pacífico não fica disponível, e o Cubit é migrado para o modo seguinte. Muda, só para esse card, a pergunta 68 |
+| 244 | O que vale no Defensor com os modos de defesa? | Com o Aprendizado de Máquina: Defensor, a opção Pacífico não fica disponível, e o Cubit é migrado para o modo seguinte. Muda, só para esse card, a pergunta 68 |
 | 245 | E o Defensor com o inventário cheio? | Não hiberna por isso. Guarda os drops enquanto couberem, e o resto cai no chão, como no jogo. Só para sem bateria. Com baú marcado, descarrega quando não houver ameaça. Exceção à pergunta 196 |
-| 246 | A exigência de Dock perto do Servidor ou da antena vale para quem? | Só para um Cubit com card que trabalha em área. Um Cubit sem card usa qualquer Dock, como nas Fases 2 a 4, sem Servidor. Limita a pergunta 243 |
+| 246 | A exigência de Dock perto do Servidor ou da antena vale para quem? | Só para um Cubit com trabalho que trabalha em área. Um Cubit sem card usa qualquer Dock, como nas Fases 2 a 4, sem Servidor. Limita a pergunta 243 |
 | 247 | O Cozinheiro entra? | Sim, simples. Na área, leva alimentos crus de baús marcados a fumeiros e fornalhas marcados, abastece combustível do inventário e leva a comida pronta a um baú marcado. Usa blocos do jogo, sem máquina nova |
 | 248 | O Pescador entra? | Sim. Na área com água aberta, pesca pela tabela de pesca do jogo, em intervalos do config e gastando FE, sem vara e sem boia. Com o inventário cheio, descarrega ou hiberna |
 | 249 | O Fabricador entra? | Só para abastecer, sem craft. Leva uma quantidade fixa de um baú a cada destino, por pedidos. A pergunta 250 o torna um modo do Organizador |
-| 250 | O que acontece com o card de Fabricador, sem craft? | Não existe card próprio: abastecer é um modo do Organizador |
+| 250 | O que acontece com o Aprendizado de Máquina: Fabricador, sem craft? | Não existe card próprio: abastecer é um modo do Organizador |
 | 251 | Em que ordem a Fase 5 seria entregue, com os novos cards? | Base comum; Fazendeiro e Pescador; Organizador, com o modo de abastecer; Cozinheiro; Defensor; Minerador; Construtor; Pecuarista; antena e chunks; Servidor, log e viagem; storage. Muda a pergunta 236 |
 | 252 | Como seguir para consolidar? | Reavaliar se há furos. Se não houver, consolidar |
 | 253 | Como o Cubit volta ao trabalho depois de hibernar fora do Dock? | Por um botão `Retomar` na tela e pelo Cubit Remote. O clique direito continua abrindo a tela, e Shift + clique continua recolhendo. Se o motivo não sumiu, ele hiberna de novo e explica. Detalha a pergunta 198 |
 | 254 | Como um Cubit passa a trabalhar e como volta? | Com o Cubit Remote, o player define a área, e o processo só termina ao selecionar o Cubit no controle. O controle também manda esvaziar o inventário ou voltar à base. Se o player recolher o Cubit e colocá-lo de novo, precisa refazer a configuração. A [pergunta 343](fase-4-upgrades-e-autonomia.md) detalha o que se perde |
 | 255 | A antena gasta bateria com o carregamento desligado? | Um valor menor, no config, só para o log. Sem carga, deixa de enviar log, mas continua valendo como referência de Dock |
 | 344 | Quais são os modos do Minerador? | Como ideia inicial: escavar a área, abrir túnel reto ou em degraus e buscar minérios do filtro, um modo por vez e sempre dentro da área. Os detalhes ficam para a entrega do card |
-| 256 | Quais são os nomes no jogo? | Robot Server (`cubit:robot_server`), Signal Antenna (`cubit:signal_antenna`), Wireless Chest (`cubit:wireless_chest`), Wireless Storage Upgrade, e os cards Miner, Farmer, Rancher, Defender, Organizer, Builder, Cook e Fisher. Viram contrato só quando implementados |
+| 256 | Quais são os nomes no jogo? | Robot Server (`cubit:robot_server`), Signal Antenna (`cubit:signal_antenna`), Wireless Chest (`cubit:wireless_chest`), Wireless Storage Upgrade, e os cards Machine Learning: Miner, Farmer, Rancher, Defender, Organizer, Builder, Cook e Fisher. Viram contrato só quando implementados |
 
 ## Histórico de modificações
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 11:10 | Troca 'especialidade' por 'trabalho' e 'card de especialidade' por 'card de Aprendizado de Máquina'. |
 | Marcelo Fabiano | 2026-11-05 21:36 | Registra a resposta 344. |
 | Marcelo Fabiano | 2026-11-05 21:34 | Aponta as respostas 193, 194 e 254 para a Fase 4. |
 | Marcelo Fabiano | 2026-11-05 21:30 | Registra a pendência 339. |

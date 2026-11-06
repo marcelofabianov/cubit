@@ -8,7 +8,7 @@ O config do Cubit é um contrato com o pack (pilar Contrato externo): as chaves 
 
 ## Chaves
 
-As chaves ficam em `snake_case`. As de um robô ficam em `[{tipo}.{tier}]`, como `[general_robot.base]`, porque um robô novo não pode exigir migração (regra 41 do `AGENTS.md`).
+As chaves ficam em `snake_case`. As de um tier ficam em `[general_robot.{tier}]`, como `[general_robot.base]` (regra 41 do `AGENTS.md`).
 
 | Seção | Chave | Linha em `tiers.md` | Limites |
 |---|---|---|---|
@@ -78,6 +78,8 @@ O mod não cai por causa do config (regra 17 do `AGENTS.md`):
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 11:10 | Tira a citação a um robô novo. |
+| Marcelo Fabiano | 2026-11-06 11:10 | Troca 'especialidade' por 'trabalho' e 'card de especialidade' por 'card de Aprendizado de Máquina'. |
 | Marcelo Fabiano | 2026-11-06 09:48 | Adiciona a chave do intervalo mínimo. |
 | Marcelo Fabiano | 2026-11-06 00:28 | Adiciona a chave do tempo dos olhos em X. |
 | Marcelo Fabiano | 2026-11-06 00:22 | Adiciona as chaves da expressão de preocupado. |

@@ -54,8 +54,8 @@ Não há perguntas pendentes nesta fase.
 | 87 | Os nomes dos arquivos e pastas de documentação ficam em português? | Sim. `README.md`, `AGENTS.md`, `CLAUDE.md` e `LICENSE` mantêm o nome |
 | 88 | As legendas da prancha de conceito ficam em português? | Sim, porque ela não entra no jar |
 | 89 | Os scripts e hooks ficam em inglês? | Arquivos de programação, como `.sh`, ficam em inglês. Ficam em português os arquivos de conteúdo |
-| 90 | Com robôs especializados no futuro, qual é o ID do robô atual? | `cubit:general_robot`. Cubit continua como nome do mod e da família |
-| 91 | Como preparar o projeto para outros robôs? | Nada pode ficar fixo de forma que comprometa a flexibilidade do projeto. As regras 39 a 43 do `AGENTS.md` detalham isso |
+| 90 | Com outros tipos de robô no futuro, qual é o ID do robô atual? | `cubit:general_robot`. Cubit continua como nome do mod e da família. A [pergunta 451](fase-3-sentidos.md) define que o robô é único, e o ID continua |
+| 91 | Como preparar o projeto para outros robôs? | Nada pode ficar fixo de forma que comprometa a flexibilidade do projeto. As regras 39 a 43 do `AGENTS.md` detalham isso. A [pergunta 451](fase-3-sentidos.md) define que o robô é único |
 | 121 | Quais perguntas ficam registradas em `.md`? | Todas as que o desenvolvedor responder, conforme a regra 47 do `AGENTS.md` |
 | 283 | O que fica anotado para futuras fases, sobre a documentação para o player? | Uma wiki em site estático, hospedada no GitHub, com os detalhes do mod, e um livro que o jogador recebe ao criar o mundo, com informações resumidas, objetivas e claras e, no final, a referência para a wiki. A fase ainda não foi definida |
 | 345 | O que fazer com o marcador `_wiki/v1/index.html`? | Manter como lugar reservado à wiki da pergunta 283, citado no mapa dos documentos |
@@ -65,6 +65,8 @@ Não há perguntas pendentes nesta fase.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 11:10 | Aponta as respostas 90 e 91 para a 451. |
+| Marcelo Fabiano | 2026-11-06 11:10 | Troca 'especialidade' por 'trabalho' e 'card de especialidade' por 'card de Aprendizado de Máquina'. |
 | Marcelo Fabiano | 2026-11-06 09:48 | Aponta a resposta 11 para a 432. |
 | Marcelo Fabiano | 2026-11-05 21:36 | Registra a resposta 345. |
 | Marcelo Fabiano | 2026-11-05 14:55 | Registra a resposta 283. |

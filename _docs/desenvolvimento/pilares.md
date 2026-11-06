@@ -115,7 +115,7 @@ As regras numeradas citadas aqui são as do [`AGENTS.md`](../../AGENTS.md).
 | Princípio | Aplicação |
 |---|---|
 | Responsabilidade única | Uma classe tem um motivo para mudar. Entidade adapta, e o domínio decide |
-| Aberto e fechado | Um novo tipo de robô entra por dados e composição, sem mudar as regras existentes (regras 39 e 40) |
+| Aberto e fechado | Um novo trabalho entra por dados e composição, sem mudar as regras existentes (regras 39 e 40) |
 | Substituição de Liskov | Toda implementação de interface respeita o contrato dela |
 | Segregação de interfaces | Interfaces são pequenas e definidas por quem consome (regra 15) |
 | Inversão de dependência | O domínio define a interface, e o código do jogo a implementa, como `TierCatalog` |
@@ -172,7 +172,7 @@ As regras numeradas citadas aqui são as do [`AGENTS.md`](../../AGENTS.md).
 
 **Não implemente o que não é necessário agora.**
 
-- Nada de recurso "por precaução", nem de código de robôs que ainda não existem (regra 43).
+- Nada de recurso "por precaução", nem de código de trabalhos que ainda não entraram (regra 43).
 - Uma opção de config entra junto com o código que a lê.
 - Questão em aberto é bloqueante: pergunte antes de escolher.
 
@@ -223,6 +223,8 @@ Isso não autoriza refatorar um arquivo inteiro nem mudar o comportamento de out
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 11:10 | Troca o novo tipo de robô por novo trabalho. |
+| Marcelo Fabiano | 2026-11-06 11:10 | Troca 'especialidade' por 'trabalho' e 'card de especialidade' por 'card de Aprendizado de Máquina'. |
 | Marcelo Fabiano | 2026-11-05 21:36 | Adiciona o contrato de comandos e traduções. |
 | Marcelo Fabiano | 2026-11-05 21:02 | Trata os mods de FE como um extra. |
 | Marcelo Fabiano | 2026-11-05 00:05 | Exige perguntar antes de atualizar documento desatualizado. |

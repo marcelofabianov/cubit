@@ -26,11 +26,11 @@ Números por tier: [`tiers.md`](../tiers.md#coleta-e-inventário) e [slots exclu
 
 ## Descarregar em baú
 
-O player marca um baú. Quando o inventário do robô enche, ele vai sozinho descarregar os itens que não estão nos slots exclusivos e mostra o texto `Items unloaded`.
+O player marca um baú. Quando o inventário do robô enche, ele vai sozinho descarregar os itens que não estão nos slots exclusivos. O Cubit que segue também mostra o texto `Items unloaded`.
 
 ## Slots exclusivos
 
-São quatro: tochas, fornalha, carregador de ferramentas e energia. Na Fase 5, o card de especialidade ocupa mais um. O controle remoto ativa ou desativa tochas, fornalha e carregador de ferramentas. O slot de energia fica sempre ligado.
+São quatro: tochas, fornalha, carregador de ferramentas e energia. Na Fase 5, o card de Aprendizado de Máquina ocupa mais um. O controle remoto ativa ou desativa tochas, fornalha e carregador de ferramentas. O slot de energia fica sempre ligado.
 
 - **Tochas automáticas:** com tochas no slot exclusivo, o robô as coloca sozinho no chão.
 - **Fornalha de minérios:** funde minérios usando a bateria em vez de combustível, então fundir gasta autonomia.
@@ -42,6 +42,8 @@ São quatro: tochas, fornalha, carregador de ferramentas e energia. Na Fase 5, o
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 11:15 | Limita o texto da descarga ao Cubit que segue. |
+| Marcelo Fabiano | 2026-11-06 11:10 | Troca 'especialidade' por 'trabalho' e 'card de especialidade' por 'card de Aprendizado de Máquina'. |
 | Marcelo Fabiano | 2026-11-06 09:32 | Define os dois modos do filtro de coleta. |
 | Marcelo Fabiano | 2026-11-06 00:20 | Adiciona a barra de vida. |
 | Marcelo Fabiano | 2026-11-05 23:49 | Detalha a tela própria. |

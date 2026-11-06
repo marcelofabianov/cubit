@@ -20,7 +20,7 @@
 | 42 | Onde a Power Bank recarrega? | No Induction Dock e em qualquer carregador de FE do pack |
 | 56 | Desligado pelo controle remoto, ainda com bateria, o Cubit se comporta como inativo? | Sim, e só volta a ficar ativo pelo controle. O religamento sozinho vale apenas para quem ficou sem bateria |
 | 58 | Como a Power Bank recarrega no Dock? | No mesmo slot da redstone. O slot aceita redstone, que vira energia para o Dock, ou uma Power Bank, que recebe energia do Dock |
-| 68 | O que cada modo de defesa faz? | Peaceful nunca ataca. Retaliate ataca só quem atacou o Cubit ou o dono. Aggressive ataca os mobs hostis no alcance. Com mobs neutros, vale a pergunta 13. A [pergunta 244](fase-5-robos-especializados.md) muda isso, só para o card de Defensor |
+| 68 | O que cada modo de defesa faz? | Peaceful nunca ataca. Retaliate ataca só quem atacou o Cubit ou o dono. Aggressive ataca os mobs hostis no alcance. Com mobs neutros, vale a pergunta 13. A [pergunta 244](fase-5-trabalhos.md) muda isso, só para o Aprendizado de Máquina: Defensor |
 | 69 | O controle remoto também desativa o slot de energia? | Não. O controle desativa tochas, fornalha e carregador de ferramentas, e o slot de energia fica sempre ligado |
 | 70 | A Power Bank empilha? | Não, cada uma ocupa um slot |
 | 79 | Quais Cubits o controle remoto atende? | Todos os Cubits do player, desde que estejam ligados. O controle também localiza os Cubits e mostra as coordenadas |
@@ -33,18 +33,19 @@
 | 181 | Quanta energia essa receita transfere? | A carga de religar: a porcentagem de religar sobre a bateria do Cubit, ou só o que falta, pela pergunta 183. A Power Bank perde exatamente isso e precisa ter essa carga, porque 5% dela só daria 3,5% da bateria do mesmo tier, e o Cubit não religaria |
 | 182 | Como essa receita se encaixa no uso do Cubit zerado? | O item com a bateria zerada e com vida pode ser colocado, mas fica desligado e com interação limitada. O player o recolhe e combina com a Power Bank, e ele recebe o suficiente para religar, se a Power Bank tiver a quantidade necessária. Detalha a pergunta 181 |
 | 183 | Um Cubit com a bateria abaixo da carga de religar, mas sem estar zerada, pode usar essa receita? | Sim, recebendo só o que falta para religar. Amplia as perguntas 180 e 181 |
-| 340 | O que um Cubit sem card faz numa área? | Coleta os itens do chão dentro da área, respeitando o filtro de coleta, e descarrega no baú marcado. Complementa a [pergunta 193](fase-5-robos-especializados.md) |
+| 340 | O que um Cubit sem card faz numa área? | Coleta os itens do chão dentro da área, respeitando o filtro de coleta, e descarrega no baú marcado. Complementa a [pergunta 193](fase-5-trabalhos.md) |
 | 341 | O que significa "mandar parar" no controle? | O Cubit continua ativo e com o vínculo, fica parado e não teleporta, e esse estado é salvo. "Voltar a seguir" retoma. Parado, ele não gasta energia. Como mantém o vínculo, a regra da [pergunta 326](fase-2-versao-minima.md) não o desliga |
-| 342 | A área da Fase 4 é em 2D ou em 3D? | Em 3D, por dois cantos. Os limites de `tiers.md`, como 16×16, valem para a base, e a altura máxima fica no config. Assim, o formato salvo não precisa de migração na Fase 5. Antecipa a [pergunta 194](fase-5-robos-especializados.md) |
+| 342 | A área da Fase 4 é em 2D ou em 3D? | Em 3D, por dois cantos. Os limites de `tiers.md`, como 16×16, valem para a base, e a altura máxima fica no config. Assim, o formato salvo não precisa de migração na Fase 5. Antecipa a [pergunta 194](fase-5-trabalhos.md) |
 | 362 | Quando toca o som de modo agressivo? | Ao trocar para o modo agressivo, e só nesse momento. O desenvolvedor forneceu `cubit_modo_agresivo.wav`, convertido da mesma forma que os demais, para `aggressive_mode.ogg`. Passam a ser onze sons. Entra junto dos modos de defesa. Amplia a [pergunta 135](fase-3-sentidos.md) |
 | 347 | Qual é a expressão do Cubit ao atacar? | Mantém a atual, sem troca, como ao pegar fogo. Com um inimigo perto, em geral ela já será a de alerta. Segue a [pergunta 158](fase-3-sentidos.md) |
 | 422 | O filtro de coleta coleta só os itens definidos, ou também tem outro modo? | Tem os dois modos: lista branca, que coleta só os itens definidos, e lista negra, que coleta tudo menos os itens definidos. Detalhes na pendência 423 |
-| 343 | O que o item guarda das configurações? | Modo de defesa, filtros e os slots ativados ou desativados. Perde a área, os baús marcados e a seleção no controle, porque dependem do lugar onde o robô estava. Detalha a [pergunta 254](fase-5-robos-especializados.md) |
+| 343 | O que o item guarda das configurações? | Modo de defesa, filtros e os slots ativados ou desativados. Perde a área, os baús marcados e a seleção no controle, porque dependem do lugar onde o robô estava. Detalha a [pergunta 254](fase-5-trabalhos.md) |
 
 ## Histórico de modificações
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 11:10 | Troca 'especialidade' por 'trabalho' e 'card de especialidade' por 'card de Aprendizado de Máquina'. |
 | Marcelo Fabiano | 2026-11-06 09:32 | Registra a resposta 422 e a pendência 423. |
 | Marcelo Fabiano | 2026-11-05 23:16 | Registra a resposta 362. |
 | Marcelo Fabiano | 2026-11-05 21:36 | Registra a resposta 347. |

@@ -1,23 +1,23 @@
-# Robôs especializados
+# Trabalhos
 
-Conceito da Fase 5, planejada para depois da Fase 4. Nada aqui está implementado, e o documentado pode mudar se aparecer um impedimento técnico (regra 48 do `AGENTS.md`). As decisões ficam em [`fase-5-robos-especializados.md`](../perguntas/fase-5-robos-especializados.md), nas perguntas 190 a 256.
+Conceito da Fase 5, planejada para depois da Fase 4. Nada aqui está implementado, e o documentado pode mudar se aparecer um impedimento técnico (regra 48 do `AGENTS.md`). As decisões ficam em [`fase-5-trabalhos.md`](../perguntas/fase-5-trabalhos.md), nas perguntas 190 a 256.
 
-Números: [`tiers.md`](../tiers.md#robôs-especializados). Nomes e IDs previstos: [`itens.md`](../itens.md#previstos-na-fase-5).
+Números: [`tiers.md`](../tiers.md#trabalhos). Nomes e IDs previstos: [`itens.md`](../itens.md#previstos-na-fase-5).
 
 ## A ideia
 
-Um mundo com vários Cubits trabalhando sozinhos, cada um com uma especialidade. É sempre o mesmo robô: o card define o que ele sabe fazer, a área define onde, e as antenas mantêm esse lugar funcionando.
+Um mundo com vários Cubits trabalhando sozinhos, cada um com um trabalho. É sempre o mesmo robô: o card define o que ele sabe fazer, a área define onde, e as antenas mantêm esse lugar funcionando.
 
 O mod funciona numa instância só com ele e suas dependências. Tudo aceita redstone, e cabos e outros mods são um extra (perguntas 238 e 240).
 
-## Cards de especialidade
+## Cards de Aprendizado de Máquina
 
 - **Slot:** o card fica num slot exclusivo e sai quando o player quiser, sem perda. Sem card, o Cubit é generalista.
 - **Quantidade:** um por Cubit, e o tier melhora o que o card faz.
 - **Tier:** o Base não aceita cards. O primeiro tier que aceita é o Avançado.
 - **Estado:** morrer e recolher preservam o card.
 - **Seguindo:** age como generalista. O card só age em área marcada.
-- **Item:** um por especialidade, com receita própria em JSON e materiais do jogo puro. Os cards empilham.
+- **Item:** um por trabalho, com receita própria em JSON e materiais do jogo puro. Os cards empilham.
 - **Custo:** gasta o consumo ao andar e mais um valor por ação, por card, sem gastar se não houver ação.
 
 ## Como o Cubit começa a trabalhar
@@ -26,7 +26,7 @@ O mod funciona numa instância só com ele e suas dependências. Tudo aceita red
 2. O processo só termina ao selecionar o Cubit no controle. Ele deixa de seguir e passa a trabalhar.
 3. O controle também manda esvaziar o inventário ou voltar à base.
 
-Baús são marcados com o controle, e a tela do Cubit tem uma aba do card, com modo e filtros. Se o player recolher o Cubit e colocá-lo de novo, precisa refazer a configuração.
+Baús são marcados com o controle, e a tela do Cubit tem uma aba Trabalho, com modo e filtros. Se o player recolher o Cubit e colocá-lo de novo, precisa refazer a configuração.
 
 ## Regras de toda área
 
@@ -40,7 +40,7 @@ Baús são marcados com o controle, e a tela do Cubit tem uma aba do card, com m
 
 Estado semelhante ao desligado, mas com o inventário e as configurações acessíveis. O Cubit fica imóvel e sem tarefas, como dormindo. Ele volta pelo botão `Retomar`, na tela, ou pelo controle. Se o motivo não sumiu, hiberna de novo e explica. A hibernação no Dock continua saindo sozinha (pergunta 55).
 
-## Especialidades
+## Trabalhos do Cubit
 
 ### Minerador
 
@@ -122,7 +122,7 @@ A tela do Servidor mostra, por antena, robôs, tarefa, bateria, inventário e os
 
 ## Viagem até o Dock
 
-Com um Cubit com card trabalhando em área, todo Dock precisa estar no chunk do Servidor ou próximo a ele ou a uma antena, mesmo com o carregamento desligado. Um Cubit sem card usa qualquer Dock, como nas Fases 2 a 4.
+Com um Cubit com trabalho trabalhando em área, todo Dock precisa estar no chunk do Servidor ou próximo a ele ou a uma antena, mesmo com o carregamento desligado. Um Cubit sem card usa qualquer Dock, como nas Fases 2 a 4.
 
 1. Com bateria baixa, o Cubit prefere um Dock livre na área.
 2. Sem ele, anda até a borda do carregado, rumo ao Dock ligado ao Servidor pelo controle.
@@ -154,13 +154,14 @@ Antes de fechar cada card, testa-se com 20 a 30 robôs.
 
 ## Pendente
 
-- Os números marcados como "A definir" em [`tiers.md`](../tiers.md#robôs-especializados).
+- Os números marcados como "A definir" em [`tiers.md`](../tiers.md#trabalhos).
 - Os detalhes do Organizador (pergunta 208).
-- O formato da tela do Cubit com a aba do card e o botão `Retomar`.
+- O formato da tela do Cubit com a aba Trabalho e o botão `Retomar`.
 
 ## Histórico de modificações
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 11:10 | Troca 'especialidade' por 'trabalho' e 'card de especialidade' por 'card de Aprendizado de Máquina'. |
 | Marcelo Fabiano | 2026-11-05 21:36 | Marca os modos do Minerador como ideia inicial. |
 | Marcelo Fabiano | 2026-11-05 12:08 | Consolida o conceito dos robôs especializados. |

@@ -34,7 +34,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Validação:** toda entrega é conferida contra os documentos `.md`, e artefatos complementam essa conferência.
 - **Config e testes na Fase 2:** o config entra antes da entidade e cresce a cada etapa. As GameTests e o gate de datagen entram na etapa "Cubit no mundo".
 - **Histórico de modificações:** só os `.md` de `_docs/` têm a tabela.
-- **Ordem da Fase 2:** movimento, fogo, lava, arquivos de som, revisão dos `.md`, modelo, morte com o item danificado, inventário, energia em uso, Induction Dock e `/cubit reset` já entraram. Falta o fechamento, com receitas e teste no Iron Meridian.
+- **Fase 2:** encerrada. Os testes de instância ficaram para o fim da Fase 3.
 - **Documento desatualizado:** o agente sempre pergunta antes de corrigir, mesmo quando a correção parece clara.
 - **Merge:** é feito somente pelo desenvolvedor.
 - **Checklist das fases:** fica em [`checklist.md`](../checklist.md). É avaliado ao encerrar cada PR, e a marcação entra num novo commit, no PR seguinte.
@@ -45,13 +45,13 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 ## Mod
 
 - **Energia:** o Cubit só carrega pelo Induction Dock, pela Power Bank, com redstone ou pelo painel solar.
-- **Robôs especializados:** o robô atual, `cubit:general_robot`, é de uso geral. Os robôs especializados são a Fase 5, planejada, e nada pode ficar fixo de forma que comprometa essa flexibilidade.
+- **Robô único:** o Cubit, `cubit:general_robot`, é o único robô do mod. Um card de Aprendizado de Máquina dá a ele um trabalho, na Fase 5, planejada. Sem card, ele é generalista.
 - **Quantidade:** o player pode ter quantos robôs preferir, mas só um o segue. Os outros podem trabalhar em áreas. O controle remoto e a base atendem todos os robôs ligados.
 - **Robô que segue sem bateria:** mantém o vínculo e volta a seguir ao religar. Se o player ligar outro, ele vira desligado.
 - **Saída da base com outro seguindo:** o robô fica parado e desligado, como ao ser colocado.
 - **Base com o dono offline:** o robô cheio continua na base e sai quando o dono entra.
 - **Comando `/cubit reset`:** limpa o vínculo de quem segue, só do próprio player e sem permissão. Um robô ativo sem vínculo fica parado e desligado, com a carga mantida, e um clique o liga de novo.
-- **Config:** `COMMON`, com chaves em `snake_case` por tipo de robô e tier, como `[general_robot.base]`.
+- **Config:** `COMMON`, com chaves em `snake_case` por tier, como `[general_robot.base]`.
 - **Entidade:** a `RobotEntity` herda de `PathfinderMob`, com o dono num UUID próprio.
 - **Estado como item:** o componente `cubit:robot_state`, e o inventário em `cubit:robot_inventory`, fora do domínio.
 - **Inventário:** menu próprio, com o visual do baú do jogo. Com o config reduzido, o que não couber cai no chão.
@@ -59,7 +59,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Lava:** o robô ativo que está na lava vai para o bloco seguro mais próximo. A rota continua sem entrar em lava.
 - **Blocos que ferem:** o robô ativo vai ao bloco seguro mais próximo, nas mesmas condições em que o jogo fere o player, e isso cobra o extra de condição negativa. Inativo, fica parado.
 - **Fogo:** o robô ativo em chamas anda ao acaso, mais rápido, evita perigos e nunca para enquanto houver para onde ir. Busca água só em chunks carregados, e ela precisa ter o topo livre e rota até ela. Inativo, fica parado. Ao apagar, volta a seguir. Os números estão em [`tiers.md`](tiers.md#valores-gerais).
-- **Morte:** o robô vira um item danificado, próprio por tipo, que nenhum dano destrói, não some com o tempo, não entra em shulker box nem no inventário do robô e não pode ser colocado no mundo. Se cair no vazio, volta à última posição segura, ao dono online ou ao spawn do mundo, sem carregar chunk à força. A morte libera o vínculo, e com o dono offline isso acontece quando ele entra.
+- **Morte:** o robô vira um item danificado, que nenhum dano destrói, não some com o tempo, não entra em shulker box nem no inventário do robô e não pode ser colocado no mundo. Se cair no vazio, volta à última posição segura, ao dono online ou ao spawn do mundo, sem carregar chunk à força. A morte libera o vínculo, e com o dono offline isso acontece quando ele entra.
 - **Receita do Cubit:** lembra o item, com redstone, lâmpada de redstone, ferro, diamante e obsidiana, conforme [`itens.md`](itens.md#cubit).
 - **Receita do Induction Dock:** em forma de L, com redstone, ferro e baú, conforme [`itens.md`](itens.md#induction-dock).
 - **Conserto:** usa a `Toolbox` (`cubit:toolbox`), na grade do inventário ou na mesa de craft, num tipo de receita do mod, `cubit:robot_repair`, com os itens no JSON. Ela é consumida a cada conserto e empilha até 16. O robô sai com parte da vida, conforme [`tiers.md`](tiers.md#valores-gerais), e a bateria zerada.
@@ -85,20 +85,20 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Expressões:** camada própria da tela, com 8× a resolução do corpo, recortada do conceito, e brilho no escuro. Ordem: tela apagada, carregando, quase morto, triste, preocupado, alerta, surpreso, sono, feliz e normal.
 - **Piscada e olhar:** só na expressão normal, no cliente e sem bipe: pisca a cada 5 s, e os olhos acompanham a subida e a descida.
 - **Comunicação:** bipes e expressões, com poucos textos simples e diretos.
-- **Sons:** onze sons. Nove entram na Fase 3, o do ataque, junto do choque, e o de modo agressivo, junto dos modos de defesa. O bipe padrão toca nas trocas de expressão sem som exclusivo. O intervalo mínimo entre repetições será definido na Fase 3, e os sons são do desenvolvedor. Todos os players por perto ouvem, com volume e alcance no `sounds.json`.
+- **Sons:** onze sons. Nove entram na Fase 3, o do ataque, junto do choque, e o de modo agressivo, junto dos modos de defesa. O bipe padrão toca nas trocas de expressão sem som exclusivo. O intervalo mínimo entre repetições está em [`tiers.md`](tiers.md#valores-gerais), e os sons são do desenvolvedor. Todos os players por perto ouvem, com volume e alcance no `sounds.json`.
 - **Modelo:** a geometria melhora já na Fase 2, com os detalhes das seis vistas, tudo fixo e sem mudar a hitbox. As expressões seguem na Fase 3.
-- **Animações:** andar, olhar para o player, parado, e desligado e hibernando, com as esteiras em textura por quadros. O modelo final mantém a geometria e a textura do corpo. Ao levar dano, os braços ficam erguidos enquanto durar a expressão triste ou de olhos em X.
+- **Animações:** andar, olhar para o player, parado, e desligado e hibernando, com as esteiras em textura por quadros. O modelo final mantém a geometria e a textura do corpo. Ao levar dano, os braços ficam erguidos por cerca de 2 s.
 - **Olhar para o dono:** na expressão normal, os olhos reagem a pulo, queda rápida e dono em outro nível, até 8 blocos, e o movimento do próprio robô vence. Com o dono em outro nível, o corpo também inclina cerca de 8°, mas não num pulo.
 - **Colar:** o robô no mundo usa a cor do tier, numa camada por tier. Os ícones ficam cinza até os módulos, na Fase 4.
 - **Indicador de bateria:** mostra a carga real em qualquer estado, com 4 níveis em alta resolução, verde e vermelho na bateria crítica, e brilha só com a tela acesa.
 - **Tronco central:** a coluna entre as esteiras e a carcaça tem 2 unidades de altura, e a hitbox não muda.
-- **Robôs especializados (Fase 5, planejada):** um único Cubit, com um card por vez, age só em área marcada e nunca sai dela. Antena e Servidor mantêm os chunks carregados, de forma opcional. Sem chunk de destino, ele espera. O detalhe está em [`robos-especializados.md`](funcionalidades/robos-especializados.md).
+- **Trabalhos (Fase 5, planejada):** um único Cubit, com um card por vez, age só em área marcada e nunca sai dela. Antena e Servidor mantêm os chunks carregados, de forma opcional. Sem chunk de destino, ele espera. O detalhe está em [`trabalhos.md`](funcionalidades/trabalhos.md).
 - **Limites:** nunca ataca o dono nem mobs pacíficos. Só ataca mobs neutros para defender o player.
 - **Scanner:** `c:ores/*` significa a tag-mãe `c:ores` e suas subtags, porque tags não aceitam curinga.
 - **Estado do robô como item:** inclui as configurações, além de bateria, vida, inventário, tier, nome e cor. Perde a área, os baús marcados e a seleção no controle.
 - **Modo área:** por dois cantos em 3D, já na Fase 4. Sem card, o robô coleta os itens do chão na área e descarrega no baú marcado.
 - **Parar pelo controle:** o robô continua ativo e com o vínculo, parado e sem teleportar, e o estado é salvo.
-- **Bateria crítica e textos:** a bateria crítica é de 5%, com sono, indicador vermelho e `Critical battery`, que vem só do Cubit ativo que segue, repetindo a cada intervalo mínimo. `Cubit: That hurts!` e `Cubit: Careful!` avisam do dano no robô e no dono, com o mesmo intervalo. Os textos começam com `Cubit: ` e são desenhados pelo mod, menores e logo acima das barras da hotbar, com um pacote de rede do servidor para o cliente.
+- **Bateria crítica e textos:** a bateria crítica é de 5%, com sono, indicador vermelho e `Critical battery`, que vem só do Cubit ativo que segue, repetindo a cada intervalo mínimo. `Cubit: That hurts!` e `Cubit: Careful!` avisam do dano no robô e no dono, com o mesmo intervalo. Todos os textos vêm só do Cubit que segue. Os textos começam com `Cubit: ` e são desenhados pelo mod, menores e logo acima das barras da hotbar, com um pacote de rede do servidor para o cliente.
 - **Filtro de coleta:** tem lista branca e lista negra.
 - **Chaveamento:** têm chave a chave geral do Cubit, com ligar, desligar e hibernar, o painel solar, a lanterna, os scanners, o ímã, pegar itens dropados, a descarga em baú, o retorno automático e mostrar o local de morte do player. Cada chave entra com o recurso dela.
 
@@ -106,6 +106,8 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 11:10 | Corrige o robô único, os braços, o intervalo e a Fase 2. |
+| Marcelo Fabiano | 2026-11-06 11:10 | Troca 'especialidade' por 'trabalho' e 'card de especialidade' por 'card de Aprendizado de Máquina'. |
 | Marcelo Fabiano | 2026-11-06 10:06 | Registra a bateria crítica e os textos. |
 | Marcelo Fabiano | 2026-11-06 09:36 | Registra os recursos com chaveamento. |
 | Marcelo Fabiano | 2026-11-06 09:32 | Registra os dois modos do filtro de coleta. |
