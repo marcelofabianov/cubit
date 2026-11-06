@@ -7,8 +7,8 @@ Mod de Minecraft que adiciona um robô companheiro fofo, movido a bateria, de te
 ## Estado atual
 
 - **Etapa atual:** Fase 3, sentidos, em andamento. A Fase 2 foi encerrada. As funcionalidades entram por issue, na ordem do `checklist.md`.
-- **Já entrou:** colocar e recolher, seguir o player, vários robôs, fogo, lava, os arquivos de som, a revisão dos `.md`, o novo modelo, a morte com o item danificado, o inventário, a energia em uso, o consumo por situação, a reação a blocos que ferem, o Induction Dock, o `/cubit reset`, as receitas e, na Fase 3, os sons, as expressões, o som de dano, a barra de vida, as animações e o colar e a bateria.
-- **Próximos:** intervalo mínimo e textos curtos, e os demais itens do `checklist.md`. Os testes de instância e a primeira versão, `0.1.0`, ficam para o fim da Fase 3.
+- **Já entrou:** colocar e recolher, seguir o player, vários robôs, fogo, lava, os arquivos de som, a revisão dos `.md`, o novo modelo, a morte com o item danificado, o inventário, a energia em uso, o consumo por situação, a reação a blocos que ferem, o Induction Dock, o `/cubit reset`, as receitas e, na Fase 3, os sons, as expressões, o som de dano, a barra de vida, as animações, o colar e a bateria e os textos curtos.
+- **Próximos:** painel solar, e os demais itens do `checklist.md`. Os testes de instância e a primeira versão, `0.1.0`, ficam para o fim da Fase 3.
 - **Comandos:** estão em [`_docs/desenvolvimento/ferramentas-de-build.md`](_docs/desenvolvimento/ferramentas-de-build.md).
 - **Limite:** não avance para as fases seguintes sem pedido explícito.
 
@@ -123,15 +123,15 @@ O significado de cada pilar, os checklists e a matriz de decisão estão em [`_d
 37. **Push:** build, testes, ArchUnit, cobertura, formatação, Checkstyle, GameTests e datagen já estão ativos. As GameTests carregam o mod como servidor dedicado, o que também detecta classe de cliente carregada no servidor.
 38. **Ferramentas:** toda ferramenta ou hook entra com um documento em `_docs/desenvolvimento/`: o que faz, por que foi escolhido, a versão e o que fazer quando reprova.
 
-### Flexibilidade para novos robôs
+### Robô único
 
-O robô atual é o primeiro, de uso geral. O mod pode ter robôs especializados no futuro, então nada pode prender o projeto a um único tipo de robô.
+O Cubit é o único robô do mod. O que muda entre um Cubit e outro é o tier e o card de Aprendizado de Máquina, que dá a ele um trabalho. `general_robot` e `RobotType` continuam nos IDs, no config e no código.
 
-39. **Tipo de robô é dado:** regras, números e capacidades vêm do tipo e do tier do robô, nunca de um `if` ou de uma constante do robô geral.
-40. **Capacidades por composição:** ímã, choque, scanner, inventário e demais recursos são peças que um tipo de robô combina, sem herança entre robôs.
-41. **Config, IDs e dados por tipo:** chaves de config, IDs e data components já nascem com o tipo do robô, porque mudá-los depois exige migração (regra 18).
-42. **Itens compartilhados:** Induction Dock, Cubit Remote e Power Bank reconhecem os robôs por tag ou interface, nunca por uma classe concreta.
-43. **Sem antecipar robôs:** essa flexibilidade vale nas fronteiras acima. Nada de implementar tipos, telas ou capacidades de robôs que ainda não existem (regra 15).
+39. **Números por dado:** regras, números e capacidades vêm do tier e do trabalho, nunca de um `if` ou de uma constante fixa.
+40. **Capacidades por composição:** ímã, choque, scanner, inventário e os trabalhos são peças que o Cubit combina, sem herança.
+41. **Config, IDs e dados:** chaves de config, IDs e data components seguem o padrão atual, com `general_robot`, porque mudá-los depois exige migração (regra 18).
+42. **Itens compartilhados:** Induction Dock, Cubit Remote e Power Bank reconhecem o robô por tag ou interface, nunca por uma classe concreta.
+43. **Sem antecipar trabalhos:** nada de implementar trabalhos, telas ou capacidades que ainda não entraram (regra 15).
 
 ### Validação
 
@@ -153,6 +153,10 @@ O robô atual é o primeiro, de uso geral. O mod pode ter robôs especializados 
 ### Independência
 
 49. **Independência:** o mod prioriza funcionar numa instância de Minecraft só com ele e suas dependências. Nenhum recurso pode exigir outro mod ou modpack, e todo cenário é pensado primeiro assim. As exceções são GeckoLib e LambDynamicLights, obrigatórias, e Jade, opcional.
+
+### Início de feature
+
+50. **Alinhamento:** ao iniciar uma feature, o agente descreve em poucas linhas o que vamos fazer e pergunta ao desenvolvedor se tem algo mais para acrescentar, antes da rodada de decisões, da issue e da branch.
 
 ## Git
 
@@ -194,7 +198,7 @@ Aprovada. Vale a partir da Fase 2.
 io.github.marcelofabianov.cubit
 ├── CubitMod                // ponto de entrada: só conecta os registros
 ├── domain/                 // Java puro, testado com JUnit
-│   ├── robot/              // RobotType, capacidades que cada tipo combina
+│   ├── robot/              // RobotType, capacidades que o Cubit combina
 │   ├── tier/               // RobotTier, TierSpec, TierCatalog (interface)
 │   ├── energy/             // Battery, PowerState (ativo, inativo, hibernação), regras de consumo e religamento
 │   ├── behavior/           // FollowDecision: seguir, parar ou teleportar; BurningAction: reagir a fogo e lava

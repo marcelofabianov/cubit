@@ -23,14 +23,18 @@ Se mostrar outra conta, prefixe os comandos com `GH_TOKEN=$(gh auth token --user
 ## Caminho de uma tarefa
 
 ```text
-Issue → Branch → Trabalho → Validação → Plano de commits → Commits → PR → Merge → Encerramento
+Alinhamento → Issue → Branch → Trabalho → Validação → Plano de commits → Commits → PR → Merge → Encerramento
 ```
 
-### 1. Issue
+### 1. Alinhamento
+
+Ao iniciar uma feature, o agente descreve em poucas linhas o que vamos fazer e pergunta ao desenvolvedor se tem algo mais para acrescentar. Só depois vêm a rodada de decisões, a issue e a branch. O que ele acrescentar entra na rodada e é registrado em [`perguntas/`](../perguntas/README.md).
+
+### 2. Issue
 
 Toda tarefa começa por uma issue, atribuída ao desenvolvedor e no milestone da fase, com o que entra e o que fica fora do escopo. Issues e PRs dividem a mesma numeração, então confirme o número antes de nomear a branch.
 
-### 2. Branch
+### 3. Branch
 
 Atualize a `develop` e crie a branch a partir dela, com o nome em inglês e em `kebab-case`:
 
@@ -41,20 +45,20 @@ git merge --ff-only origin/develop
 git switch -c feature/{issue}-{slug} --no-track develop
 ```
 
-### 3. Trabalho
+### 4. Trabalho
 
 - **A partir da Fase 2:** a feature precisa estar documentada em `_docs/funcionalidades/`, com as decisões fechadas. O teste vem antes ou junto do código.
 - **Decisão bloqueante:** pare e siga o [fluxo do `AGENTS.md`](../../AGENTS.md#decisões-bloqueantes). Registre a resposta em [`perguntas/`](../perguntas/README.md), no arquivo da fase.
 - **Rascunhos:** ficam em `tmp/`.
 - **Histórico de modificações:** todo `.md` em `_docs/` termina com uma tabela de histórico. Quem altera o arquivo adiciona uma linha no topo da tabela, com o nome da pessoa, a data e a hora e uma frase direta do que foi feito.
 
-### 4. Validação
+### 5. Validação
 
 Compare a entrega com os documentos `.md`, que são os validadores. As respostas em [`perguntas/`](../perguntas/README.md) prevalecem sobre os demais. Passe também pelos checklists de [`pilares.md`](pilares.md) que se aplicam. Artefatos, como testes, logs, relatórios e capturas de tela, complementam essa conferência, mas não a substituem.
 
 Se a entrega e um documento divergirem, corrija a entrega. Se o documento estiver errado, pergunte ao desenvolvedor antes de mudá-lo.
 
-### 5. Plano de commits
+### 6. Plano de commits
 
 O plano de commits é a relação dos commits a fazer, com os arquivos e a mensagem de cada um. O agente o apresenta e espera a autorização.
 
@@ -64,7 +68,7 @@ O plano de commits é a relação dos commits a fazer, com os arquivos e a mensa
 
 Cada commit trata de uma mudança lógica e deixa o projeto num estado válido, sem link quebrado nem teste falhando.
 
-### 6. Commits
+### 7. Commits
 
 ```bash
 git add {arquivos do commit}
@@ -73,7 +77,7 @@ git commit -m "tipo(escopo opcional): descrição em português"
 
 Use `git add` com os arquivos do plano, nunca `git add .`. Se um gate reprovar, corrija a causa conforme [`hooks-do-git.md`](hooks-do-git.md).
 
-### 7. Pull request
+### 8. Pull request
 
 Antes do push, atualize a branch com a de origem. Depois, abra o PR para a `develop`:
 
@@ -92,11 +96,11 @@ A descrição do PR segue o template [`.github/pull_request_template.md`](../../
 - como revisar ou testar;
 - o que ficou fora do escopo, quando houver.
 
-### 8. Merge
+### 9. Merge
 
 O merge é feito no GitHub, somente pelo desenvolvedor.
 
-### 9. Encerramento
+### 10. Encerramento
 
 1. Confira se a issue fechou. Se continuar aberta, feche-a à mão.
 2. Atualize a `develop` local.
@@ -186,6 +190,7 @@ O primeiro passo, separando o que está decidido do que está pendente.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 10:56 | Adiciona o alinhamento antes de iniciar uma feature. |
 | Marcelo Fabiano | 2026-11-06 09:51 | Move o rascunho do PR para `tmp/pr/`. |
 | Marcelo Fabiano | 2026-11-05 22:18 | Adiciona a avaliação do checklist ao encerrar um PR. |
 | Marcelo Fabiano | 2026-11-05 21:02 | Corrige a atualização da `develop`, que falhava com ela em uso. |
