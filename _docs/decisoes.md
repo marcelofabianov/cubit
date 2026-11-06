@@ -12,7 +12,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Ícone do mod:** o mesmo do item do Cubit.
 - **Primeira versão:** `0.1.0`, publicada só ao terminar todos os itens da Fase 3, com a `1.0.0` só com o mod completo.
 - **Testes de instância:** os da regra 35 ficam para o fim da Fase 3, no teste da versão completa.
-- **Etapa atual:** Fase 2, versão mínima. A Fase 1, de conceito, foi encerrada.
+- **Etapa atual:** Fase 3, sentidos, ainda sem início. As Fases 1 e 2 foram encerradas.
 - **Iron Meridian:** o Cubit entra como exceção à regra do pack contra funções repetidas, por causa do Robit do Mekanism. O registro está na issue `marcelofabianov/iron-meridian#2`.
 
 ## Idioma
@@ -94,6 +94,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 22:33 | Encerra a Fase 2. |
 | Marcelo Fabiano | 2026-11-05 22:25 | Registra a exceção do Gradle Wrapper e o momento dos testes de instância. |
 | Marcelo Fabiano | 2026-11-05 22:22 | Registra que a licença MIT vale para todos os recursos. |
 | Marcelo Fabiano | 2026-11-05 22:21 | Registra que a primeira versão sai com a Fase 3. |

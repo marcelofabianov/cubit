@@ -6,7 +6,7 @@
 
 Um robô companheiro fofo, movido a bateria, para Minecraft 1.21.1 com NeoForge. Funciona só com ele e suas dependências, e também é testado no modpack [Iron Meridian](https://github.com/marcelofabianov/iron-meridian). O Cubit é craftado com recursos do jogo puro.
 
-> **Status: Fase 2, versão mínima.** O mod ainda não tem versão publicada, e a primeira, `0.1.0`, sai ao terminar a Fase 3. Já funcionam colocar e recolher o Cubit, seguir o player, vários Cubits com um seguindo, as reações a fogo, lava e blocos que ferem, o inventário, a bateria com recarga por redstone, o Induction Dock, a morte com o item danificado, o conserto e o comando `/cubit reset`. O resto abaixo está planejado, e os números são o ponto de partida para o balanceamento.
+> **Status: Fase 2 encerrada, Fase 3 a iniciar.** O mod ainda não tem versão publicada, e a primeira, `0.1.0`, sai ao terminar a Fase 3. Já funcionam colocar e recolher o Cubit, seguir o player, vários Cubits com um seguindo, as reações a fogo, lava e blocos que ferem, o inventário, a bateria com recarga por redstone, o Induction Dock, a morte com o item danificado, o conserto e o comando `/cubit reset`. O resto abaixo está planejado, e os números são o ponto de partida para o balanceamento.
 
 ## O que o Cubit faz
 
@@ -73,8 +73,8 @@ As receitas usarão só materiais do jogo puro, podendo combinar itens do própr
 ## Roadmap
 
 1. **Conceito (encerrada):** persona, features e demais definições, em documentos.
-2. **Versão mínima (atual):** crafting, seguir o player, inventário, bateria com consumo por situação, vários Cubits com um seguindo, `/cubit reset`, reações a fogo, lava e blocos que ferem, Induction Dock com hibernação, recarga com redstone, virar item, morte com item danificado e conserto, e geometria mais próxima do conceito.
-3. **Sentidos:** painel solar, lanterna, scanners, os nove sons, textos curtos, animações, expressões na tela, nome, cor e Jade.
+2. **Versão mínima (encerrada):** crafting, seguir o player, inventário, bateria com consumo por situação, vários Cubits com um seguindo, `/cubit reset`, reações a fogo, lava e blocos que ferem, Induction Dock com hibernação, recarga com redstone, virar item, morte com item danificado e conserto, e geometria mais próxima do conceito.
+3. **Sentidos (próxima):** painel solar, lanterna, scanners, os nove sons, textos curtos, animações, expressões na tela, nome, cor e Jade.
 4. **Upgrades e autonomia:** tiers, Power Bank, ímã, filtros, demais slots exclusivos, choque, modos de defesa, Cubit Remote, modo área, descarga em baú, retorno automático e local de morte.
 5. **Robôs especializados (planejada):** cards de especialidade, antenas, Servidor, carregamento de chunks e storage wireless.
 
