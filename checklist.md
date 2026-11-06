@@ -34,7 +34,7 @@ O que está pronto e o que falta em cada fase do projeto. As fases estão no [`R
 
 15. [x] Atualizar o "Próximos" no `AGENTS.md`
 
-## Fase 3: Sentidos (próxima)
+## Fase 3: Sentidos (atual)
 
 A ordem é a da numeração (perguntas 356 e 365). Sons, intervalo, expressões, colar, textos e feixe entram em partes, e um item só é marcado quando estiver completo na Fase 3.
 
@@ -42,22 +42,26 @@ A ordem é a da numeração (perguntas 356 e 365). Sons, intervalo, expressões,
 
 1. [x] Os onze arquivos de som em `.ogg`
 2. [x] Decisões de sons, textos, expressões e painel solar
+3. [x] Esteira, curto elétrico, ligar, desligar, recarga, colocar e bipe padrão tocando
+4. [x] Oito expressões em uso, com piscada e olhar na normal
+5. [x] Som de dano com `short_circuit.ogg` e barra de vida no inventário
+6. [x] Cubit um pouco mais ágil (pergunta 392)
 
 ### Falta
 
-3. [ ] `sounds.json` e os nove sons tocando (o de ataque fica para o choque)
-4. [ ] Dez expressões na tela e as reações da persona
-5. [ ] Animações e modelo final
-6. [ ] Cor do colar e indicador de bateria variando
-7. [ ] Definir o intervalo mínimo entre repetições (pergunta 149), junto dos textos
-8. [ ] Textos curtos na barra acima da hotbar
-9. [ ] Painel solar
-10. [ ] Lanterna, com o LambDynamicLights entrando no build, e a claridade fraca da tela (pergunta 378)
-11. [ ] Confirmar a viabilidade do feixe (pergunta 17)
-12. [ ] Scanner de minérios e scanner de mobs, com os alertas
-13. [ ] Nome personalizado e cor da carcaça
-14. [ ] Jade
-15. [ ] Telas próprias do Cubit e do Induction Dock, com janelas personalizadas, textura de metal de robô e tooltips, sem o padrão do Minecraft (pergunta 371)
+7. [ ] Os dois alertas de som, que dependem dos scanners
+8. [ ] Alerta e surpreso em uso, que dependem dos scanners, e as reações ao renomear e pintar
+9. [ ] Animações e modelo final
+10. [ ] Cor do colar e indicador de bateria variando
+11. [ ] Definir o intervalo mínimo entre repetições (pergunta 149), junto dos textos
+12. [ ] Textos curtos na barra acima da hotbar
+13. [ ] Painel solar
+14. [ ] Lanterna, com o LambDynamicLights entrando no build, e a claridade fraca da tela (pergunta 378)
+15. [ ] Confirmar a viabilidade do feixe (pergunta 17)
+16. [ ] Scanner de minérios e scanner de mobs, com os alertas
+17. [ ] Nome personalizado e cor da carcaça
+18. [ ] Jade
+19. [ ] Telas próprias do Cubit e do Induction Dock, com janelas personalizadas, textura de metal de robô e tooltips, sem o padrão do Minecraft (pergunta 371)
 
 ## Primeira versão: `0.1.0`
 
