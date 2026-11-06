@@ -34,6 +34,7 @@ Não há perguntas pendentes nesta fase.
 | 340 | O que um Cubit sem card faz numa área? | Coleta os itens do chão dentro da área, respeitando o filtro de coleta, e descarrega no baú marcado. Complementa a [pergunta 193](fase-5-robos-especializados.md) |
 | 341 | O que significa "mandar parar" no controle? | O Cubit continua ativo e com o vínculo, fica parado e não teleporta, e esse estado é salvo. "Voltar a seguir" retoma. Parado, ele não gasta energia. Como mantém o vínculo, a regra da [pergunta 326](fase-2-versao-minima.md) não o desliga |
 | 342 | A área da Fase 4 é em 2D ou em 3D? | Em 3D, por dois cantos. Os limites de `tiers.md`, como 16×16, valem para a base, e a altura máxima fica no config. Assim, o formato salvo não precisa de migração na Fase 5. Antecipa a [pergunta 194](fase-5-robos-especializados.md) |
+| 362 | Quando toca o som de modo agressivo? | Ao trocar para o modo agressivo, e só nesse momento. O desenvolvedor forneceu `cubit_modo_agresivo.wav`, convertido da mesma forma que os demais, para `aggressive_mode.ogg`. Passam a ser onze sons. Entra junto dos modos de defesa. Amplia a [pergunta 135](fase-3-sentidos.md) |
 | 347 | Qual é a expressão do Cubit ao atacar? | Mantém a atual, sem troca, como ao pegar fogo. Com um inimigo perto, em geral ela já será a de alerta. Segue a [pergunta 158](fase-3-sentidos.md) |
 | 343 | O que o item guarda das configurações? | Modo de defesa, filtros e os slots ativados ou desativados. Perde a área, os baús marcados e a seleção no controle, porque dependem do lugar onde o robô estava. Detalha a [pergunta 254](fase-5-robos-especializados.md) |
 
@@ -41,6 +42,7 @@ Não há perguntas pendentes nesta fase.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 23:16 | Registra a resposta 362. |
 | Marcelo Fabiano | 2026-11-05 21:36 | Registra a resposta 347. |
 | Marcelo Fabiano | 2026-11-05 21:34 | Registra as respostas 340, 341, 342 e 343. |
 | Marcelo Fabiano | 2026-11-05 21:02 | Aponta a resposta 68 para a 244. |

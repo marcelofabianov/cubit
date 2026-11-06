@@ -80,8 +80,9 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Ao colocar no mundo:** toca só o som de colocar. O de ligar fica para a passagem de desligado a ligado.
 - **Margem das telas:** os 4 blocos ficam em constante, fora do config, porque seguem o padrão do jogo.
 - **Ao atacar:** mantém a expressão atual, com o som de ataque.
+- **Ordem da Fase 3:** a do [`checklist.md`](../checklist.md), com alguns itens entrando em partes, até os scanners ligarem o resto.
 - **Comunicação:** bipes e expressões, com poucos textos simples e diretos.
-- **Sons:** dez sons. Nove entram na Fase 3, e o do ataque, junto do choque. O bipe padrão toca nas trocas de expressão sem som exclusivo. O intervalo mínimo entre repetições será definido na Fase 3, e os sons são do desenvolvedor.
+- **Sons:** onze sons. Nove entram na Fase 3, o do ataque, junto do choque, e o de modo agressivo, junto dos modos de defesa. O bipe padrão toca nas trocas de expressão sem som exclusivo. O intervalo mínimo entre repetições será definido na Fase 3, e os sons são do desenvolvedor. Todos os players por perto ouvem, com volume e alcance no `sounds.json`.
 - **Modelo:** a geometria melhora já na Fase 2, com os detalhes das seis vistas, tudo fixo e sem mudar a hitbox. As animações e as expressões seguem na Fase 3.
 - **Robôs especializados (Fase 5, planejada):** um único Cubit, com um card por vez, age só em área marcada e nunca sai dela. Antena e Servidor mantêm os chunks carregados, de forma opcional. Sem chunk de destino, ele espera. O detalhe está em [`robos-especializados.md`](funcionalidades/robos-especializados.md).
 - **Limites:** nunca ataca o dono nem mobs pacíficos. Só ataca mobs neutros para defender o player.
@@ -94,6 +95,9 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 23:16 | Registra o som de modo agressivo. |
+| Marcelo Fabiano | 2026-11-05 22:39 | Registra quem ouve os sons. |
+| Marcelo Fabiano | 2026-11-05 22:37 | Registra a ordem da Fase 3. |
 | Marcelo Fabiano | 2026-11-05 22:33 | Encerra a Fase 2. |
 | Marcelo Fabiano | 2026-11-05 22:25 | Registra a exceção do Gradle Wrapper e o momento dos testes de instância. |
 | Marcelo Fabiano | 2026-11-05 22:22 | Registra que a licença MIT vale para todos os recursos. |

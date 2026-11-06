@@ -12,7 +12,7 @@ Definido pelo player:
 
 - **Pacífico:** nunca ataca.
 - **Contra-atacar:** ataca só quem atacou o Cubit ou o dono. Com mobs neutros, vale a regra abaixo.
-- **Agressivo:** ataca os mobs hostis no alcance.
+- **Agressivo:** ataca os mobs hostis no alcance. Ao trocar para este modo, toca o som descrito em [`sons.md`](../conceito/sons.md).
 
 ## Quem o Cubit nunca ataca
 
@@ -26,6 +26,7 @@ O Cubit só ataca um mob neutro para defender o player, quando esse mob fica agr
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 23:16 | Cita o som de modo agressivo. |
 | Marcelo Fabiano | 2026-11-05 21:02 | Cita o som do ataque. |
 | Marcelo Fabiano | 2026-11-05 00:12 | Usa os termos modos de defesa e mobs hostis. |
 | Marcelo Fabiano | 2026-11-04 17:26 | Esclarece a regra de mobs neutros no modo contra-atacar. |
