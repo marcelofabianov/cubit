@@ -85,6 +85,7 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
   private final RobotInventory inventory;
   private final RobotDocking docking = new RobotDocking(this);
   private final RobotFace face = new RobotFace(this);
+  private final RobotNotices notices = new RobotNotices(this);
 
   public RobotEntity(
       EntityType<? extends RobotEntity> type,
@@ -157,6 +158,10 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
 
   RobotFace face() {
     return face;
+  }
+
+  RobotNotices notices() {
+    return notices;
   }
 
   Battery battery() {
@@ -271,6 +276,7 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
     updateEnergy(chargeBefore);
     face.tick();
     RobotLooks.update(this);
+    notices.tick();
     RobotLoadSpeed.update(this, inventory.isFull());
     inventory.dropSurplus(
         stack -> Containers.dropItemStack(level(), getX(), getY(), getZ(), stack));

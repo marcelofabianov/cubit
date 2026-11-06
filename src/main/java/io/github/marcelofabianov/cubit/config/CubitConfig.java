@@ -50,6 +50,7 @@ public final class CubitConfig {
   private final EnergySlotSection energySlot;
   private final LoadSection load;
   private final ExpressionSection expression;
+  private final NoticeSection notice;
   private final DockSection dock;
   private final TierCatalog tierCatalog;
 
@@ -62,6 +63,7 @@ public final class CubitConfig {
     energySlot = new EnergySlotSection(builder);
     load = new LoadSection(builder);
     expression = new ExpressionSection(builder);
+    notice = new NoticeSection(builder);
     dock = new DockSection(builder);
     builder.pop();
 
@@ -88,6 +90,10 @@ public final class CubitConfig {
 
   public Percentage criticalCharge() {
     return new Percentage(expression.criticalCharge.get());
+  }
+
+  public int noticeRepeatTicks() {
+    return notice.repeatTicks.get();
   }
 
   public int worriedExpressionTicks() {
