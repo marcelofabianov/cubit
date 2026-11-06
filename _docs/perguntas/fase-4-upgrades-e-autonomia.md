@@ -18,7 +18,7 @@ Não há perguntas pendentes nesta fase.
 | 42 | Onde a Power Bank recarrega? | No Induction Dock e em qualquer carregador de FE do pack |
 | 56 | Desligado pelo controle remoto, ainda com bateria, o Cubit se comporta como inativo? | Sim, e só volta a ficar ativo pelo controle. O religamento sozinho vale apenas para quem ficou sem bateria |
 | 58 | Como a Power Bank recarrega no Dock? | No mesmo slot da redstone. O slot aceita redstone, que vira energia para o Dock, ou uma Power Bank, que recebe energia do Dock |
-| 68 | O que cada modo de defesa faz? | Peaceful nunca ataca. Retaliate ataca só quem atacou o Cubit ou o dono. Aggressive ataca os mobs hostis no alcance. Com mobs neutros, vale a pergunta 13 |
+| 68 | O que cada modo de defesa faz? | Peaceful nunca ataca. Retaliate ataca só quem atacou o Cubit ou o dono. Aggressive ataca os mobs hostis no alcance. Com mobs neutros, vale a pergunta 13. A [pergunta 244](fase-5-robos-especializados.md) muda isso, só para o card de Defensor |
 | 69 | O controle remoto também desativa o slot de energia? | Não. O controle desativa tochas, fornalha e carregador de ferramentas, e o slot de energia fica sempre ligado |
 | 70 | A Power Bank empilha? | Não, cada uma ocupa um slot |
 | 79 | Quais Cubits o controle remoto atende? | Todos os Cubits do player, desde que estejam ligados. O controle também localiza os Cubits e mostra as coordenadas |
@@ -36,6 +36,7 @@ Não há perguntas pendentes nesta fase.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 21:02 | Aponta a resposta 68 para a 244. |
 | Marcelo Fabiano | 2026-11-05 02:00 | Registra a resposta 183 e aponta as 180 e 181 para ela. |
 | Marcelo Fabiano | 2026-11-05 01:58 | Registra a resposta 182. |
 | Marcelo Fabiano | 2026-11-05 01:57 | Registra as respostas 180 e 181. |
