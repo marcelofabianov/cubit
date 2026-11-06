@@ -5,7 +5,7 @@ Como cada expressão é desenhada e qual vence estão em [`visual.md`](visual.md
 | Imagem | Expressão | Quando é usada |
 |---|---|---|
 | <img src="../imagens/conceito/png/expressao-normal.png" alt="Expressão Normal" width="160"> | Normal | Quando não há nada acontecendo, piscando a cada 5 s e olhando para cima ou para baixo ao subir ou descer, e conforme a altura do dono por perto |
-| <img src="../imagens/conceito/png/expressao-feliz.png" alt="Expressão Feliz" width="160"> | Feliz | Por cerca de 3 s, ao ser colocado ativo ou ao abrir o inventário |
+| <img src="../imagens/conceito/png/expressao-feliz.png" alt="Expressão Feliz" width="160"> | Feliz | Por cerca de 3 s, ao ser colocado ativo, ao abrir o inventário, ao ser pintado ou ao receber uma etiqueta |
 | <img src="../imagens/conceito/png/expressao-sono.png" alt="Expressão Sono" width="160"> | Sono | Com a bateria em 5% ou menos, com o robô ligado |
 | <img src="../imagens/conceito/png/expressao-alerta.png" alt="Expressão Alerta" width="160"> | Alerta | Com um inimigo por perto, quando os scanners entrarem |
 | <img src="../imagens/conceito/png/expressao-surpreso.png" alt="Expressão Surpreso" width="160"> | Surpreso | Ao encontrar um minério raro, quando os scanners entrarem |
@@ -19,6 +19,7 @@ Como cada expressão é desenhada e qual vence estão em [`visual.md`](visual.md
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 15:58 | Adiciona as reações a pintar e a nomear. |
 | Marcelo Fabiano | 2026-11-06 09:48 | Reduz o sono para 5% de bateria. |
 | Marcelo Fabiano | 2026-11-06 01:20 | Cita o olhar para o dono. |
 | Marcelo Fabiano | 2026-11-06 00:28 | Define o tempo dos olhos em X. |

@@ -28,8 +28,8 @@ Só em algumas situações ele mostra um texto simples e direto, começando com 
 |---|---|---|
 | Sem nada acontecendo | Normal | Bipe padrão, ao trocar |
 | Player abre o inventário | Feliz | Bipe padrão, ao trocar |
-| Renomeado | Feliz | Bipe padrão, ao trocar |
-| Pintado | Feliz | Bipe padrão, ao trocar |
+| Renomeado com etiqueta, ativo | Feliz | Bipe padrão, ao trocar |
+| Pintado, ativo | Feliz | Bipe padrão, ao trocar |
 | Recebe um upgrade | Feliz | Bipe padrão, ao trocar |
 | Bateria crítica | Sono | Bipe padrão, ao trocar |
 | Em hibernação na base | Carregando | Som de recarga |
@@ -58,6 +58,7 @@ O Cubit **nunca ataca o próprio dono nem mobs pacíficos**, em nenhum modo de d
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 15:58 | Limita as reações ao Cubit ativo. |
 | Marcelo Fabiano | 2026-11-06 11:15 | Limita a reação feliz a abrir o inventário, como no código. |
 | Marcelo Fabiano | 2026-11-06 11:10 | Troca 'especialidade' por 'trabalho' e 'card de especialidade' por 'card de Aprendizado de Máquina'. |
 | Marcelo Fabiano | 2026-11-06 10:15 | Adiciona os textos de dano. |

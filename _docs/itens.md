@@ -122,7 +122,7 @@ Estes nomes não mudam sem migração (regra 18 do `AGENTS.md`).
 
 | Onde | Nome | Conteúdo |
 |---|---|---|
-| Componente do item | `cubit:robot_state` | `tier`, `energy`, `health` e `lamp_enabled`, este opcional, com o padrão ligado, também no item danificado |
+| Componente do item | `cubit:robot_state` | `tier`, `energy`, `health`, `lamp_enabled`, opcional, com o padrão ligado, e `color`, opcional, com o padrão `white`, também no item danificado |
 | Componente do item | `cubit:energy_slot` | Item do slot de energia e reserva de FE, também no item danificado |
 | Componente do item do Dock | `cubit:dock_energy` | Energia do estoque |
 | Componente do item | `cubit:robot_inventory` | Conteúdo do inventário, também no item danificado |
@@ -135,6 +135,9 @@ Estes nomes não mudam sem migração (regra 18 do `AGENTS.md`).
 | Estado do bloco do Dock | `facing`, `half` e `status` | Direção, parte de baixo ou de cima e estado da tela: `off`, `idle`, `charging`, `complete` ou `no_energy` |
 | NBT da entidade na base | `DockPosition` | Posição do Dock em que hiberna |
 | NBT da entidade | `LampEnabled` | Chave da lanterna. Sem a chave no save, vale ligada |
+| NBT da entidade | `Color` | Cor da carcaça, com o nome do corante, como `light_blue`. Sem a chave ou com valor inválido, vale `white` |
+| Componente do jogo no item | `minecraft:custom_name` | Nome do Cubit, inclusive no item danificado |
+| NBT do jogo na entidade | `CustomName` | Nome do Cubit |
 | Dados do player | `cubit:following_robot` | `robot`: o UUID do robô que segue, ou nada |
 
 O estado salvo é validado ao entrar no jogo, sem derrubá-lo (regra 17 do `AGENTS.md`):
@@ -151,6 +154,7 @@ O estado salvo é validado ao entrar no jogo, sem derrubá-lo (regra 17 do `AGEN
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 15:58 | Adiciona a cor e o nome ao contrato do save. |
 | Marcelo Fabiano | 2026-11-06 13:34 | Adiciona o contrato da chave da lanterna. |
 | Marcelo Fabiano | 2026-11-06 11:10 | Atualiza os nomes e os IDs previstos dos cards e tira o tipo de robô. |
 | Marcelo Fabiano | 2026-11-06 11:10 | Troca 'especialidade' por 'trabalho' e 'card de especialidade' por 'card de Aprendizado de Máquina'. |

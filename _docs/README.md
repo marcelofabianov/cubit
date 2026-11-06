@@ -14,6 +14,7 @@ Este é o mapa dos documentos do projeto. A apresentação do mod e o roadmap fi
 | Bateria, Induction Dock, Power Bank, redstone, painel solar e retorno automático | [`funcionalidades/energia.md`](funcionalidades/energia.md) |
 | Movimento, robô que segue, fogo, lava, vida, morte e local de morte | [`funcionalidades/movimento.md`](funcionalidades/movimento.md) |
 | Inventário, ímã, filtros, baús e slots exclusivos | [`funcionalidades/inventario.md`](funcionalidades/inventario.md) |
+| Cor da carcaça e nome | [`funcionalidades/personalizacao.md`](funcionalidades/personalizacao.md) |
 | Scanners, alertas e lanterna | [`funcionalidades/sensores.md`](funcionalidades/sensores.md) |
 | Choque e modos de defesa | [`funcionalidades/combate.md`](funcionalidades/combate.md) |
 | Controle remoto e modo área | [`funcionalidades/controle-remoto.md`](funcionalidades/controle-remoto.md) |
@@ -38,6 +39,7 @@ Os números ficam em [`tiers.md`](tiers.md). As outras páginas apontam para lá
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 15:58 | Cita a personalização. |
 | Marcelo Fabiano | 2026-11-06 11:10 | Troca 'especialidade' por 'trabalho' e 'card de especialidade' por 'card de Aprendizado de Máquina'. |
 | Marcelo Fabiano | 2026-11-05 23:41 | Cita a lista das expressões. |
 | Marcelo Fabiano | 2026-11-05 22:47 | Cita a lista dos sons. |

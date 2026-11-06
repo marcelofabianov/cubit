@@ -34,6 +34,20 @@
 | 321 | O nome `placed.ogg` e o momento "ao ser colocado no mundo" estão certos? | Sim. Detalha a pergunta 320 |
 | 322 | Em que fase o som de colocar no mundo passa a tocar? | Na Fase 3, junto dos outros oito. Detalha a pergunta 320 |
 | 421 | Como foi o roteiro manual do colar, do indicador de bateria e do tronco central com +0,5? | Teste finalizado, tudo ok, executado pelo desenvolvedor, sem detalhar cada passo. Ele não pediu +1, então o tronco fica em 2 unidades. O `make server` e o olhar de longe não foram citados em separado |
+| 516 | As decisões tomadas ao implementar a personalização ficam? | Sim: shift + clique com corante continua recolhendo o Cubit, e hibernando ele é pintado, mas a tela continua em carregando, sem bipe, conforme a pergunta 57 |
+| 515 | Como foi o roteiro manual da cor e do nome? | "Testes feito tudo ok", executado pelo desenvolvedor, sem detalhar cada passo. O passo 13, com outro player, fica para os testes de instância no fim da Fase 3, conforme a resposta 354. O agente não entendeu a resposta como autorização de commits |
+| 514 | O contrato e os testes da cor ficam como propostos? | Sim. No save: `Color` na entidade e `color`, opcional, em `cubit:robot_state`, com os nomes dos corantes do jogo, e `white` como padrão, inclusive em saves antigos e valor inválido. Domínio: `RobotColor`. Nome: `CustomName` da entidade e `minecraft:custom_name` do item. JUnit: regras de pintar e estado. GameTests: dono, não dono, gasto, sincronia, recolher, morrer, consertar, save antigo e arquivos presentes. Roteiro manual: ver as 16 cores e os ícones |
+| 513 | Os ícones dos itens mudam com a cor da carcaça? | Só o do Cubit. O Damaged Cubit mantém o ícone atual e guarda a cor, que volta ao consertar. A recomendação era mudar os dois. O colar no ícone continua cinza até a Fase 4, conforme a pergunta 414 |
+| 512 | Como os nomes são aplicados no Cubit? | Com etiqueta e bigorna. Etiqueta: só do dono, com o robô em qualquer estado, gasta 1, menos no criativo, e faz a reação feliz com bipe se a tela estiver acesa. Bigorna: renomeia o Cubit ou o Damaged Cubit como item, e o nome vale ao colocar. Recolher, morrer e consertar mantêm o nome |
+| 511 | Como o nome personalizado aparece no mundo? | Sempre visível acima do Cubit, dentro do alcance normal do jogo. A recomendação era só ao mirar nele |
+| 510 | Em quais estados o dono pode pintar o Cubit? | Em qualquer estado: ativo, desligado, sem bateria ou hibernando no Dock, porque pintar não gasta energia. Com a tela apagada, a cor muda sem expressão e sem bipe. Quem não é dono nunca pinta (regra 20) |
+| 509 | Como funciona usar um corante no Cubit? | Com clique direito do dono: gasta 1 corante, menos no criativo. Na mesma cor, nada acontece e nada é gasto. Volta ao visual original com o corante branco. Sem novo item nem chave no config |
+| 508 | O que a cor do corante pinta no Cubit? | Como a imagem de conceito: carcaça, ombros, braços, hastes das antenas e tronco. A fita e as faixas dos antebraços continuam na cor do tier. Tela, indicador de bateria, painel solar, garras, esteiras e pontas das antenas não mudam |
+| 507 | Como aplicar as 16 cores no modelo do Cubit? | Com uma textura do corpo por cor, escolhida pelo renderer, como o colar faz por tier na pergunta 418. O branco é o visual atual, e a referência é `cubit-personalizacao.png` |
+| 506 | Há algo a acrescentar sobre a personalização, além da imagem de conceito? | Não: "podemos avançar". O agente entendeu como autorização para seguir à rodada de decisões, não para commits |
+| 505 | O jogo está aberto? | Não. Os gates podem rodar |
+| 504 | A personalização pode vir antes dos scanners? | Sim, a pedido do desenvolvedor: o agente conferiu que nome e cor da carcaça, item 17, não dependem dos scanners, item 16, nem o contrário. Ele já tem a imagem de conceito, `tmp/conceito/cubit-personalizacao.png`, e quer segui-la. Muda a ordem das perguntas 356 e 365 só nesses dois itens. As decisões da personalização ainda vão para a rodada |
+| 503 | Os scanners começam nesta sessão? | Não: o agente deixa o prompt de continuidade, e eles seguem numa sessão nova. A pergunta se há algo a acrescentar sobre os scanners ficou sem resposta |
 | 502 | Como foi o teste no jogo depois de tirar o vidro? | "Ótimo, fiz os testes, podemos avançar", executado pelo desenvolvedor, sem detalhar cada passo. O agente entendeu a resposta também como autorização do plano de commits apresentado, inclusive da mudança no `AGENTS.md` |
 | 501 | Como ficaram no jogo o painel, o sinal, a fita e as faixas? | O vidro não ficou legal e deve sair. O restante ficou bom, executado pelo desenvolvedor, sem detalhar cada passo: relevo, recarga, pulso, fita e faixas. Muda a pergunta 498 |
 | 500 | Quando entra a interface de configuração, em relação ao item 19 e às Fases 4 e 5? | O desenvolvedor vai falar sobre isso depois. Até lá, o checklist continua como está nesse ponto |
@@ -183,6 +197,13 @@
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 16:08 | Registra a resposta 516. |
+| Marcelo Fabiano | 2026-11-06 16:04 | Registra a resposta 515. |
+| Marcelo Fabiano | 2026-11-06 15:48 | Registra as respostas 511 a 514. |
+| Marcelo Fabiano | 2026-11-06 15:46 | Registra as respostas 507 a 510. |
+| Marcelo Fabiano | 2026-11-06 15:44 | Registra as respostas 505 e 506. |
+| Marcelo Fabiano | 2026-11-06 15:40 | Registra a resposta 504. |
+| Marcelo Fabiano | 2026-11-06 15:31 | Registra a resposta 503. |
 | Marcelo Fabiano | 2026-11-06 15:25 | Registra a resposta 502. |
 | Marcelo Fabiano | 2026-11-06 15:16 | Registra a resposta 501 e aponta a 498 para ela. |
 | Marcelo Fabiano | 2026-11-06 15:00 | Registra as respostas 498 a 500. |

@@ -370,6 +370,24 @@ Os valores são os padrões de [`tiers.md`](../tiers.md).
 | 8 | Encha a bateria de dia | Para de pulsar |
 | 9 | Leve ao Nether e a um Dock | Não carrega pelo painel e não pulsa |
 
+## Cor e nome
+
+| # | Passo | Resultado esperado |
+|---|---|---|
+| 1 | Com o Cubit ativo e sobrevivência, clique com um corante vermelho | A cor muda, gasta 1 corante, e ele fica feliz com o bipe. Tela, indicador, painel, garras, esteiras e pontas das antenas não mudam |
+| 2 | Clique de novo com vermelho | Nada muda, nada é gasto, e o inventário não abre |
+| 3 | Pinte com as 16 cores e compare com `cubit-personalizacao.png` | Cada cor lembra a imagem, e a fita e as faixas continuam na cor do tier |
+| 4 | Repita com o branco | Volta ao visual original |
+| 5 | No criativo, pinte | Não gasta o corante |
+| 6 | Pinte o Cubit desligado e o Cubit no Dock | A cor muda. Desligado, a tela fica apagada. No Dock, continua carregando |
+| 7 | Recolha o Cubit pintado | O ícone tem a cor dele e, ao colocar, a cor continua |
+| 8 | Dê um nome na etiqueta, na bigorna, e use no Cubit | O nome fica sempre visível acima dele, gasta a etiqueta, e ele fica feliz. O inventário mostra o nome |
+| 9 | Renomeie um Cubit como item na bigorna e coloque | O nome aparece |
+| 10 | Mate o Cubit pintado e com nome | O Damaged Cubit mantém o nome, e o ícone não muda |
+| 11 | Conserte com a Toolbox e coloque | A cor e o nome voltam |
+| 12 | Saia e entre no mundo | A cor e o nome continuam |
+| 13 | Com outro player no servidor, use corante e etiqueta no Cubit | Nada muda, e nada é gasto |
+
 ## Servidor dedicado
 
 1. Rode `make server` e aceite o EULA em `run/eula.txt`, se ainda não tiver aceitado.
@@ -379,6 +397,7 @@ Os valores são os padrões de [`tiers.md`](../tiers.md).
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 15:58 | Adiciona a cor e o nome. |
 | Marcelo Fabiano | 2026-11-06 15:16 | Tira o vidro do painel. |
 | Marcelo Fabiano | 2026-11-06 15:05 | Adiciona o painel solar e o tier no corpo. |
 | Marcelo Fabiano | 2026-11-06 13:57 | Adiciona o halo e o brilho dos olhos. |
