@@ -12,7 +12,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Ícone do mod:** o mesmo do item do Cubit.
 - **Primeira versão:** `0.1.0`, publicada só ao terminar todos os itens da Fase 3, com a `1.0.0` só com o mod completo.
 - **Testes de instância:** os da regra 35 ficam para o fim da Fase 3, no teste da versão completa.
-- **Etapa atual:** Fase 3, sentidos, ainda sem início. As Fases 1 e 2 foram encerradas.
+- **Etapa atual:** Fase 3, sentidos, em andamento. As Fases 1 e 2 foram encerradas.
 - **Iron Meridian:** o Cubit entra como exceção à regra do pack contra funções repetidas, por causa do Robit do Mekanism. O registro está na issue `marcelofabianov/iron-meridian#2`.
 
 ## Idioma
@@ -86,7 +86,9 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Piscada e olhar:** só na expressão normal, no cliente e sem bipe: pisca a cada 5 s, e os olhos acompanham a subida e a descida.
 - **Comunicação:** bipes e expressões, com poucos textos simples e diretos.
 - **Sons:** onze sons. Nove entram na Fase 3, o do ataque, junto do choque, e o de modo agressivo, junto dos modos de defesa. O bipe padrão toca nas trocas de expressão sem som exclusivo. O intervalo mínimo entre repetições será definido na Fase 3, e os sons são do desenvolvedor. Todos os players por perto ouvem, com volume e alcance no `sounds.json`.
-- **Modelo:** a geometria melhora já na Fase 2, com os detalhes das seis vistas, tudo fixo e sem mudar a hitbox. As animações e as expressões seguem na Fase 3.
+- **Modelo:** a geometria melhora já na Fase 2, com os detalhes das seis vistas, tudo fixo e sem mudar a hitbox. As expressões seguem na Fase 3.
+- **Animações:** andar, olhar para o player, parado, e desligado e hibernando, com as esteiras em textura por quadros. O modelo final mantém a geometria e a textura do corpo. Ao levar dano, os braços ficam erguidos enquanto durar a expressão triste ou de olhos em X.
+- **Olhar para o dono:** na expressão normal, os olhos reagem a pulo, queda rápida e dono em outro nível, até 8 blocos, e o movimento do próprio robô vence. Com o dono em outro nível, o corpo também inclina cerca de 8°, mas não num pulo.
 - **Robôs especializados (Fase 5, planejada):** um único Cubit, com um card por vez, age só em área marcada e nunca sai dela. Antena e Servidor mantêm os chunks carregados, de forma opcional. Sem chunk de destino, ele espera. O detalhe está em [`robos-especializados.md`](funcionalidades/robos-especializados.md).
 - **Limites:** nunca ataca o dono nem mobs pacíficos. Só ataca mobs neutros para defender o player.
 - **Scanner:** `c:ores/*` significa a tag-mãe `c:ores` e suas subtags, porque tags não aceitam curinga.
@@ -98,6 +100,8 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 01:00 | Corrige a etapa atual. |
+| Marcelo Fabiano | 2026-11-06 00:58 | Registra as animações e o modelo final. |
 | Marcelo Fabiano | 2026-11-06 00:22 | Atualiza a ordem das expressões. |
 | Marcelo Fabiano | 2026-11-06 00:20 | Registra a barra de vida. |
 | Marcelo Fabiano | 2026-11-06 00:10 | Atualiza a ordem das expressões. |

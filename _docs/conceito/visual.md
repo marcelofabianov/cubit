@@ -12,6 +12,11 @@ As imagens individuais estão em [`_docs/imagens/conceito/`](../imagens/conceito
 - O conceito atual é a base. O modelo final tem **design próprio**, para o mod poder ser publicado. A geometria melhora já na Fase 2, mais próxima das imagens de conceito, e as animações e as expressões seguem na Fase 3.
 - Modelo e animações com **GeckoLib**, dependência obrigatória: andar, virar a cabeça, mover os braços e trocar a expressão da tela.
 - **Modelo na Fase 2:** traz os detalhes das seis vistas e o ícone do item, com tudo fixo: colar cinza, olhos normais e bateria sem variação. A textura tem 128×128, com 2 pixels por unidade, e a hitbox não muda, então braços e antenas passam um pouco dela.
+- **Modelo final:** mantém a geometria e a textura do corpo, e acrescenta só os ossos que as animações precisarem.
+- **Animações:** andar, olhar para o dono, parado, e desligado e hibernando. Como o modelo não tem cabeça separada, olhar gira o corpo sobre o pescoço, com as esteiras paradas. O robô olha só para o dono, ligado e com ele por perto, inclusive parado. Tempos e poses ficam no arquivo de animação, e o resto em constantes.
+- **Esteiras:** textura por quadros, escolhidos pela distância andada, sem mudar a geometria.
+- **Braços ao levar dano:** ficam erguidos enquanto durar a expressão triste ou de olhos em X, e o corpo e as antenas continuam balançando.
+- **Inclinação para o dono:** com o dono 1 bloco ou mais acima ou abaixo, com o robô ligado, na mesma dimensão e até 8 blocos, o corpo inclina cerca de 8° para cima ou para baixo, com transição suave. Um pulo move só os olhos.
 
 ## O que o conceito mostra
 
@@ -32,6 +37,7 @@ São dez: normal, feliz, sono, alerta, surpreso, carregando, desligado, triste, 
 - **Bipe:** toca ao trocar para normal, feliz ou sono, exceto ao ligar, ao ser colocado e ao carregar o mundo.
 - **Piscada:** na expressão normal, fica 5 s de olhos abertos e pisca em cerca de 0,25 s, sem bipe. Cada robô começa num momento diferente.
 - **Olhar:** na expressão normal, os olhos sobem cerca de 1/6 da tela ao subir e descem ao descer, um ou mais blocos, e ficam assim por cerca de 0,5 s depois do movimento.
+- **Olhar para o dono:** sem movimento próprio, com o robô ligado, na mesma dimensão e o dono a até 8 blocos, os olhos também sobem num pulo e descem numa queda rápida dele, por cerca de 0,5 s, e ficam para cima ou para baixo enquanto ele estiver 1 bloco ou mais acima ou abaixo do robô.
 - **Em uso:** normal, feliz, sono, carregando, desligado, triste, quase morto e preocupado. Alerta e surpreso entram com os scanners.
 
 ## Sons
@@ -40,7 +46,7 @@ São onze sons diferentes (perguntas 135, 148, 316, 320, 322 e 362). Nove entram
 
 Os arquivos ficam em `assets/cubit/sounds/general_robot/`, em Ogg Vorbis, mono e 48 kHz, porque o jogo só aceita esse formato e só reduz o volume com a distância em sons mono. O valor do intervalo mínimo será definido na Fase 3, num teste no jogo, e ficará no config.
 
-Tocam todos, menos o bipe padrão, que entra com as expressões, os alertas, que entram com os scanners, e o ataque e o modo agressivo, que entram na Fase 4.
+Tocam todos, menos os alertas, que entram com os scanners, e o ataque e o modo agressivo, que entram na Fase 4.
 
 - **IDs:** `cubit:general_robot.{nome}`, com o nome do arquivo sem a extensão. Não mudam sem aviso.
 - **Quem ouve:** todos os players por perto, com o volume caindo até cerca de 16 blocos, no controle "Criaturas amigáveis" do jogo. Volume e alcance ficam no `sounds.json`, onde um pacote de recursos pode mudá-los.
@@ -61,6 +67,9 @@ Tocam todos, menos o bipe padrão, que entra com as expressões, os alertas, que
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 01:00 | Corrige o bipe padrão, que já toca. |
+| Marcelo Fabiano | 2026-11-06 01:20 | Adiciona os braços ao levar dano, o olhar e a inclinação para o dono. |
+| Marcelo Fabiano | 2026-11-06 00:58 | Define as animações, as esteiras e o modelo final. |
 | Marcelo Fabiano | 2026-11-06 00:28 | Define o tempo dos olhos em X. |
 | Marcelo Fabiano | 2026-11-06 00:22 | Adiciona a expressão de preocupado. |
 | Marcelo Fabiano | 2026-11-06 00:12 | Define o som ao levar dano. |

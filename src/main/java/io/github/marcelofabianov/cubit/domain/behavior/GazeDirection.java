@@ -4,5 +4,10 @@ package io.github.marcelofabianov.cubit.domain.behavior;
 public enum GazeDirection {
   LEVEL,
   UP,
-  DOWN
+  DOWN;
+
+  /** The movement of the robot comes first, so the other direction only counts without one. */
+  public GazeDirection or(GazeDirection other) {
+    return this == LEVEL ? other : this;
+  }
 }

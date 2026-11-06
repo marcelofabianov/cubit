@@ -242,6 +242,38 @@ Compare com as imagens em `_docs/imagens/conceito/png/`, com os nomes `expressao
 
 Alerta e surpreso só aparecem com os scanners.
 
+## Animações
+
+| # | Faça | Espere |
+|---|---|---|
+| 1 | Fique parado perto de um robô ligado | Ele sobe e desce de leve, e as antenas oscilam |
+| 2 | Ande em volta dele, a até 3 blocos, para ele não sair do lugar | O corpo vira para você, com as esteiras paradas, até cerca de 45°. Tela, antenas e braços giram junto |
+| 3 | Ande para ele seguir | O corpo balança de leve, e braços e antenas se movem. Ao parar, ele volta a ficar parado sem salto |
+| 4 | Olhe as duas esteiras de lado, nas duas laterais, com ele andando para a frente | Em cima, os elos correm para a frente, e embaixo, para trás, nos dois lados. As rodas giram no mesmo sentido |
+| 5 | Olhe as esteiras de frente e de trás | Os elos descem na frente e sobem atrás |
+| 6 | Pare o robô | As esteiras param no quadro em que estavam, sem piscar |
+| 7 | Coloque dois robôs andando em velocidades diferentes, com o inventário de um cheio | Cada um corre a esteira no próprio ritmo |
+| 8 | Desligue um robô com `/cubit reset` ou coloque um segundo | Em cerca de 0,5 s, o corpo abaixa, e braços e antenas caem. Ele fica assim, sem oscilar e sem virar para você |
+| 9 | Empurre esse robô desligado | Continua caído, e as esteiras podem correr |
+| 10 | Coloque um robô no Dock | A mesma pose de desligado, sem atravessar a placa nem a torre |
+| 11 | Religue o robô ou tire-o do Dock | Ele volta suave à pose de ligado |
+| 12 | Leve dano num robô ligado, com a tela triste | A tela e o corpo continuam alinhados, sem vazar, inclusive com o corpo virado |
+| 13 | Em chamas, ou com outra causa de dano, com o robô ligado e parado | Os braços sobem e ficam erguidos enquanto durar a expressão triste ou de olhos em X, cerca de 5 s depois do último dano, e descem |
+| 14 | Cause dano com o robô andando | Os braços ficam erguidos, e o corpo e as antenas continuam balançando |
+| 15 | Cause dano num robô desligado ou na base | Os braços não sobem |
+| 16 | Na expressão normal, a até 3 blocos do robô no plano, pule | Os olhos sobem por cerca de 0,5 s e voltam ao centro, sem olhar para baixo ao pousar |
+| 17 | Suba em blocos, de modo que seus pés fiquem 1 bloco ou mais acima dos dele, a até 8 blocos, e fique parado | Os olhos ficam para cima enquanto você estiver lá. Com o robô subindo até você, também para cima |
+| 18 | Fique 1 bloco ou mais abaixo dele, num buraco, a até 8 blocos | Os olhos ficam para baixo enquanto você estiver lá |
+| 19 | Pule de uma altura de 3 blocos ou mais, perto dele, voltando ao nível dele | Os olhos descem na queda e voltam ao centro depois de cerca de 0,5 s |
+| 20 | Com um robô que sobe uma escada, e você abaixo dele | Os olhos olham para cima, porque o movimento dele vence, e depois para baixo, quando ele parar |
+| 21 | Ande em terreno irregular com ele seguindo | Avalie se os olhos ficam agitados demais com o limite de 1 bloco |
+| 22 | Pule perto de um robô desligado | Tela apagada, sem olhos |
+| 23 | Suba 1 bloco ou mais acima dele, a até 8 blocos | O corpo inclina de leve para cima, cerca de 8°, sem salto, e volta ao centro quando você volta ao nível dele |
+| 24 | Fique 1 bloco ou mais abaixo dele | O corpo inclina de leve para baixo |
+| 25 | Pule no plano perto dele | Só os olhos se movem, e o corpo não inclina |
+| 26 | Com ele inclinado, deixe-o desligar | A pose de desligado toma o lugar da inclinação |
+| 27 | Rode `make server` | O servidor abre sem erro de classe de cliente |
+
 ## Morte e conserto
 
 Use `/kill @e[type=cubit:general_robot,limit=1,sort=nearest]` para matar o robô.
@@ -271,6 +303,7 @@ Use `/kill @e[type=cubit:general_robot,limit=1,sort=nearest]` para matar o robô
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 01:06 | Adiciona as animações. |
 | Marcelo Fabiano | 2026-11-06 00:28 | Define o tempo dos olhos em X e ordena os passos. |
 | Marcelo Fabiano | 2026-11-06 00:22 | Adiciona a expressão de preocupado. |
 | Marcelo Fabiano | 2026-11-06 00:20 | Adiciona a barra de vida. |

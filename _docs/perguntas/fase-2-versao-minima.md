@@ -28,7 +28,7 @@ Não há perguntas pendentes nesta fase.
 | 54 | Sem o retorno automático da Fase 4, como o Cubit chega à base na versão mínima? | O player clica com o botão direito no Dock, e o Cubit por perto vai até ele. Colocar o item do Cubit em cima do Dock também funciona. A distância e o Cubit chamado foram definidos nas perguntas 59 e 81 |
 | 55 | Como o Cubit sai da hibernação, já que interagir com ele abre o inventário? | Sai sozinho com a bateria cheia e volta a seguir. Antes disso, clicar no Dock o libera. O que ele faz ao sair foi ampliado pela pergunta 83 |
 | 59 | A que distância clicar no Dock chama o Cubit "por perto"? | O raio do retorno automático do tier |
-| 60 | O modelo final entra na Fase 2 ou é provisório nessa fase? | Geometria provisória na Fase 2 e modelo final na Fase 3, junto das expressões. A pergunta 134 antecipa parte disso |
+| 60 | O modelo final entra na Fase 2 ou é provisório nessa fase? | Geometria provisória na Fase 2 e modelo final na Fase 3, junto das expressões. A pergunta 134 antecipa parte disso, e a [pergunta 396](fase-3-sentidos.md) detalha o modelo final |
 | 61 | O Dock recebe até 1.000 FE/t, mas recarrega Elite a 2.500 e Ultimate a 5.000 FE/t. Como resolver? | Entrada de 5.000 FE/t, com o estoque de 100 mil FE |
 | 62 | Um Cubit sem bateria colocado no Dock entra em hibernação logo ou só com 5%? | Logo |
 | 63 | Em que velocidade a vida se recupera na base? | Proporcional ao tier: todos levam o mesmo tempo para encher, cerca de 1 minuto, configurável |
@@ -221,6 +221,7 @@ Não há perguntas pendentes nesta fase.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 00:58 | Aponta a resposta 60 para a 396. |
 | Marcelo Fabiano | 2026-11-06 00:40 | Aponta a resposta 113 para a 392. |
 | Marcelo Fabiano | 2026-11-05 22:27 | Registra a resposta 355. |
 | Marcelo Fabiano | 2026-11-05 22:25 | Registra a resposta 354 e cita a exceção do Gradle Wrapper na 338. |

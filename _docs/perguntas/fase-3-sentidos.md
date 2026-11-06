@@ -31,6 +31,26 @@ Não há perguntas pendentes nesta fase.
 | 320 | O que fazer com o som novo, `robot_quando_colocado_no_mundo.wav`? | Converter para Ogg e colocar no diretório dos demais sons do projeto, para ser usado. Convertido da mesma forma que os demais, para `placed.ogg`. Passam a ser dez sons. O original fica em `tmp/wav/`. Amplia a pergunta 135. As perguntas 321 e 322 detalham o nome, o momento e a fase |
 | 321 | O nome `placed.ogg` e o momento "ao ser colocado no mundo" estão certos? | Sim. Detalha a pergunta 320 |
 | 322 | Em que fase o som de colocar no mundo passa a tocar? | Na Fase 3, junto dos outros oito. Detalha a pergunta 320 |
+| 413 | Como foi o roteiro manual dos braços, dos olhos que acompanham o dono e da inclinação? | Concluído como esperado, executado pelo desenvolvedor, sem detalhar cada passo. O limite de 1 bloco ficou como está |
+| 410 | Dá para o Cubit inclinar de leve para cima ou para baixo quando o dono está em outro nível, e de quanto? | Sim, cerca de 8°, com transição suave, numa constante. Como o modelo não tem cabeça separada, o osso `body` inclina inteiro. Os olhos mantêm o comportamento das perguntas 404 e 406 |
+| 411 | Quando acontece a inclinação do corpo? | Só com o dono 1 bloco ou mais acima ou abaixo, com o robô ligado, na mesma dimensão e até 8 blocos. Um pulo move só os olhos. Usa um segundo dado sincronizado, fora do save |
+| 412 | Em que entrega e com quais testes entra a inclinação? | Neste PR, na issue #89. JUnit: direção e ângulo por nível. GameTest: dado sincronizado mudando no servidor. Roteiro manual: ver a inclinação, junto dos braços e dos olhos, num só teste |
+| 406 | A partir de quantos blocos de diferença de altura os olhos olham para o dono? | 1 bloco, entre os pés do dono e os do robô, enquanto a diferença durar, numa constante. A recomendação era 2, e o desenvolvedor escolheu 1. Detalha a pergunta 404 |
+| 407 | Se o robô se move na vertical e o dono está em outra altura, qual movimento vence? | O do robô. Sem movimento próprio, os olhos seguem a altura do dono |
+| 408 | Até que distância os olhos acompanham a altura do dono? | Até 8 blocos, com o robô ligado e na mesma dimensão, o mesmo limite de virar o corpo |
+| 409 | Em que pontos ficam os testes dos braços e dos olhos? | JUnit: quando os braços sobem, a direção dos olhos por pulo e por nível, o tempo e a prioridade. GameTests: animação dos braços no arquivo e direção sincronizada mudando no servidor. Roteiro manual: ver os braços e os olhos |
+| 402 | Por quanto tempo o Cubit fica com os braços erguidos ao levar dano? | Enquanto estiver triste, ou seja, enquanto durar a expressão triste ou de olhos em X, cerca de 5 s depois do último dano |
+| 403 | E se ele estiver andando com os braços erguidos? | Mantém o balanço do corpo e das antenas, e só os braços ficam erguidos, com um segundo controlador da GeckoLib |
+| 404 | Como os olhos da expressão normal acompanham o player? | Uma mudança rápida na altura do dono, como um pulo, move os olhos para cima ou para baixo por cerca de 0,5 s, e eles voltam ao centro. Usa as texturas atuais e mantém a reação à subida do robô. O desenvolvedor acrescentou que também seria legal quando o player está em blocos ou níveis acima ou abaixo do Cubit. Complementa a pergunta 375 |
+| 405 | Em que entrega entram os braços erguidos e os olhos que acompanham o player? | Neste PR, na issue #89, com um novo teste no jogo antes dos commits |
+| 401 | Como foi o roteiro manual das animações? | Testes aprovados, tudo ok, executado pelo desenvolvedor, sem detalhar cada passo |
+| 397 | Para quem o Cubit vira o corpo na animação de olhar? | Só para o dono, com o robô ligado e o dono por perto, inclusive parado |
+| 398 | Onde ficam os números visuais das animações? | Tempos e poses no arquivo de animação, e o resto em constantes no código, como na pergunta 374, sem chave nova no config |
+| 399 | Em que pontos ficam os testes das animações? | JUnit: qual animação vale em cada estado e situação, e qual quadro da esteira vale em cada distância. GameTests: arquivos de animação e quadros presentes, e servidor abrindo. Roteiro manual: ver cada animação e as esteiras |
+| 400 | O agente corrige os documentos desatualizados no PR da issue #89? | Sim, num commit separado: o status e o roadmap no `README.md`, a etapa atual em `decisoes.md` e o bipe padrão em `visual.md`, conforme a [pergunta 152](fase-2-versao-minima.md) |
+| 394 | Quais animações do Cubit entram no item 9? | Andar, olhar para o player, parado, e desligado e hibernando. Como o modelo não tem cabeça separada, olhar gira o osso `body` sobre o pescoço, com as esteiras paradas |
+| 395 | Como animar as esteiras? | Com textura por quadros, escolhidos pela distância andada, sem mudar a geometria |
+| 396 | O que "modelo final" muda no Cubit? | Mantém a geometria e a textura de 128×128 do corpo, e significa só os ossos que as animações precisarem. Detalha a [pergunta 60](fase-2-versao-minima.md) e mantém a 162 |
 | 393 | Como foi o teste da velocidade nova? | "Ok", sem detalhe. A resposta veio antes de o config local ser recriado, então o valor novo pode não ter sido sentido no jogo |
 | 392 | Quanto o Cubit fica mais ágil? | O atributo da velocidade 1,0× passa de 0,30 para 0,33, cerca de 10%, sem mudar os multiplicadores nem o consumo por tick. Muda a [pergunta 113](fase-2-versao-minima.md) |
 | 391 | Como foi o roteiro manual das expressões, da barra de vida e do som de dano? | Fechou o teste e ficou ótimo, executado pelo desenvolvedor, sem detalhar cada passo. O crash anterior, atribuído à compilação simultânea, não foi citado de novo |
@@ -50,7 +70,7 @@ Não há perguntas pendentes nesta fase.
 | 372 | Como é a piscada na expressão normal? | Fica 5 s de olhos abertos e pisca em cerca de 0,25 s, com 3 quadros: meio fechado, fechado e meio fechado. Sem bipe, porque não troca a expressão |
 | 373 | Em que entrega a piscada entra? | Junto das expressões, na issue #85 |
 | 374 | Onde fica o tempo da piscada? | Em constante no código, porque é só visual e não é balanceamento, como na pergunta 335 |
-| 375 | Em que expressões os olhos acompanham a subida e a descida? | Só na normal, olhando para cima ao subir e para baixo ao descer, um ou mais blocos |
+| 375 | Em que expressões os olhos acompanham a subida e a descida? | Só na normal, olhando para cima ao subir e para baixo ao descer, um ou mais blocos. A pergunta 404 complementa com a altura do dono |
 | 376 | Quanto os olhos se deslocam? | Cerca de 1/6 da tela, ou 14 de 88 pixels |
 | 377 | Em que entrega o olhar entra? | Junto da piscada, na issue #85 |
 | 371 | Como serão as telas do Cubit e do Induction Dock? | Reconstruídas, com janelas personalizadas e textura que lembre o metal de um robô, sem aparecer o padrão do Minecraft. Entra no item da tela própria. Amplia as perguntas 186, 264 e 308 |
@@ -75,6 +95,8 @@ Não há perguntas pendentes nesta fase.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 01:12 | Registra as respostas 401 a 413. |
+| Marcelo Fabiano | 2026-11-06 00:58 | Registra as respostas 394 a 400. |
 | Marcelo Fabiano | 2026-11-06 00:44 | Registra a resposta 393. |
 | Marcelo Fabiano | 2026-11-06 00:40 | Registra a resposta 392. |
 | Marcelo Fabiano | 2026-11-06 00:34 | Registra a resposta 391. |
