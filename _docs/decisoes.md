@@ -12,7 +12,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Ícone do mod:** o mesmo do item do Cubit.
 - **Primeira versão:** `0.1.0`, publicada só ao terminar todos os itens da Fase 3, com a `1.0.0` só com o mod completo.
 - **Testes de instância:** os da regra 35 ficam para o fim da Fase 3, no teste da versão completa.
-- **Etapa atual:** Fase 3, sentidos, ainda sem início. As Fases 1 e 2 foram encerradas.
+- **Etapa atual:** Fase 3, sentidos, em andamento. As Fases 1 e 2 foram encerradas.
 - **Iron Meridian:** o Cubit entra como exceção à regra do pack contra funções repetidas, por causa do Robit do Mekanism. O registro está na issue `marcelofabianov/iron-meridian#2`.
 
 ## Idioma
@@ -100,6 +100,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 01:00 | Corrige a etapa atual. |
 | Marcelo Fabiano | 2026-11-06 00:58 | Registra as animações e o modelo final. |
 | Marcelo Fabiano | 2026-11-06 00:22 | Atualiza a ordem das expressões. |
 | Marcelo Fabiano | 2026-11-06 00:20 | Registra a barra de vida. |

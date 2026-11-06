@@ -46,7 +46,7 @@ São onze sons diferentes (perguntas 135, 148, 316, 320, 322 e 362). Nove entram
 
 Os arquivos ficam em `assets/cubit/sounds/general_robot/`, em Ogg Vorbis, mono e 48 kHz, porque o jogo só aceita esse formato e só reduz o volume com a distância em sons mono. O valor do intervalo mínimo será definido na Fase 3, num teste no jogo, e ficará no config.
 
-Tocam todos, menos o bipe padrão, que entra com as expressões, os alertas, que entram com os scanners, e o ataque e o modo agressivo, que entram na Fase 4.
+Tocam todos, menos os alertas, que entram com os scanners, e o ataque e o modo agressivo, que entram na Fase 4.
 
 - **IDs:** `cubit:general_robot.{nome}`, com o nome do arquivo sem a extensão. Não mudam sem aviso.
 - **Quem ouve:** todos os players por perto, com o volume caindo até cerca de 16 blocos, no controle "Criaturas amigáveis" do jogo. Volume e alcance ficam no `sounds.json`, onde um pacote de recursos pode mudá-los.
@@ -67,6 +67,7 @@ Tocam todos, menos o bipe padrão, que entra com as expressões, os alertas, que
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 01:00 | Corrige o bipe padrão, que já toca. |
 | Marcelo Fabiano | 2026-11-06 01:20 | Adiciona os braços ao levar dano, o olhar e a inclinação para o dono. |
 | Marcelo Fabiano | 2026-11-06 00:58 | Define as animações, as esteiras e o modelo final. |
 | Marcelo Fabiano | 2026-11-06 00:28 | Define o tempo dos olhos em X. |
