@@ -158,6 +158,10 @@ O Cubit é o único robô do mod. O que muda entre um Cubit e outro é o tier e 
 
 50. **Alinhamento:** ao iniciar uma feature, o agente descreve em poucas linhas o que vamos fazer e pergunta ao desenvolvedor se tem algo mais para acrescentar, antes da rodada de decisões, da issue e da branch.
 
+### Rodadas de perguntas
+
+51. **Nenhuma das opções:** toda pergunta com opções traz, de forma explícita, a opção "Nenhuma das opções". Vale para qualquer rodada, sem exceção.
+
 ## Git
 
 - **Autorização:** nunca faça commit, push, tag, release ou PR sem autorização explícita para aquela ação. Antes, mostre os arquivos, o resumo e a mensagem proposta.
