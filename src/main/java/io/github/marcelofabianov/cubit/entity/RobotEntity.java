@@ -64,10 +64,6 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
   private static final String ENERGY_SLOT_KEY = "EnergySlot";
   private static final String NO_OWNER_MESSAGE = "Robot {} has no owner. Nobody can interact.";
   private static final double ONE_BLOCK_STEP = 1;
-  private static final int BURNING_GOAL_PRIORITY = 0;
-  private static final int DAMAGING_BLOCK_GOAL_PRIORITY = 1;
-  private static final int DOCK_GOAL_PRIORITY = 2;
-  private static final int FOLLOW_GOAL_PRIORITY = 3;
   private static final float BLOCKED_ROUTE = -1f;
   private static final float OPEN_ROUTE = 0f;
 
@@ -121,13 +117,7 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
 
   @Override
   protected void registerGoals() {
-    goalSelector.addGoal(BURNING_GOAL_PRIORITY, new BurningReactionGoal(this));
-    goalSelector.addGoal(DAMAGING_BLOCK_GOAL_PRIORITY, new LeaveDamagingBlockGoal(this));
-    goalSelector.addGoal(DOCK_GOAL_PRIORITY, new GoToDockGoal(this));
-    goalSelector.addGoal(
-        FOLLOW_GOAL_PRIORITY,
-        new FollowOwnerGoal(
-            this, CubitMod.CONFIG.followDecision(), CubitMod.CONFIG.followRepathTicks()));
+    RobotGoals.register(this, goalSelector);
   }
 
   /** Built without the tier numbers, because attributes are registered before the config loads. */
@@ -379,7 +369,9 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
   }
 
   @Override
-  public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {}
+  public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
+    RobotAnimations.register(this, controllers);
+  }
 
   @Override
   public AnimatableInstanceCache getAnimatableInstanceCache() {

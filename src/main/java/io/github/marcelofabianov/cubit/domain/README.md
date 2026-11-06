@@ -29,6 +29,11 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 | `ExpressionTimer` | Quanto tempo uma expressão temporária ainda dura |
 | `BlinkFrame` e `BlinkCycle` | Os quadros da piscada e qual vale em cada tick |
 | `GazeDirection` e `GazeTracker` | Para onde os olhos olham, com a subida e a descida de cada tick |
+| `RobotPose` | A animação do corpo: desligado, andando ou parado, e se os braços ficam erguidos |
+| `OwnerGaze` | Para onde os olhos olham por causa da altura do dono, e em que nível ele está |
+| `BodyTilt` | Quanto o corpo inclina para o dono em outro nível |
+| `TrackFrames` | Qual quadro da esteira vale em cada distância andada |
+| `OwnerLook` | Quando o robô vira o corpo para o dono |
 | `HealthLevel` | A vida mostrada numa barra, sem falso zero |
 | `PowerSound` | Som tocado uma vez, ao ligar ou desligar |
 | `ContinuousSound` | Som em loop enquanto a condição valer: esteira, curto elétrico e recarga |
@@ -48,6 +53,11 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 - **Energia inteira:** evita erro de arredondamento, e uma transferência nunca cria nem perde FE.
 - **Operações informam o que moveu:** `recharge` devolve o que foi aceito, e `consume`, o que foi consumido. Assim, quem chama sabe o que sobrou e não perde energia.
 - **Expressões:** o estado vem primeiro, porque tela apagada e carregando não dependem do resto. Depois vêm vida baixa e dano, os avisos e o sono, e a feliz cede a eles (perguntas 368 e 379). O bipe não toca ao sair de uma tela apagada ou carregando, porque ligar e ser colocado têm som próprio e carregar o mundo não é uma troca (pergunta 369).
+- **Pose pela expressão:** o cliente já recebe a expressão, e tela apagada e carregando só existem com o robô desligado ou na base, então a pose não precisa de um dado novo. Empurrado, ele continua na pose de desligado (pergunta 394).
+- **Braços junto do dano:** ficam erguidos enquanto durar a expressão triste ou de olhos em X, sem parar o balanço do corpo (perguntas 402 e 403).
+- **Olhar para o dono:** um pulo ou uma queda rápida movem os olhos por um tempo, e estar em outro nível os mantém enquanto durar. O limite da queda fica acima da velocidade de pousar de um pulo, para o pulo não terminar com os olhos para baixo. O movimento do próprio robô vence (perguntas 404, 406 e 407).
+- **Inclinação só por nível:** o corpo inclina de leve com o dono em outro nível, mas não num pulo, que move só os olhos, para ele não balançar a cada salto (perguntas 410 e 411).
+- **Números das animações em constantes:** são só visuais, como os da piscada (pergunta 398).
 - **Olhar sem tremer:** a direção fica um tempo depois do movimento, porque um degrau dura poucos ticks (perguntas 375 e 376).
 - **Sons:** entrar na base não toca o som de desligar, porque a recarga já toca, e a recarga só vale com a carga subindo de fato, para não tocar com a bateria cheia nem com o Dock sem energia (perguntas 358 e 359).
 - **Barra sem falso zero:** `level` só devolve 0 com a bateria vazia. Com qualquer carga, devolve ao menos 1, para o player não achar que o robô ativo está sem energia (pergunta 269).

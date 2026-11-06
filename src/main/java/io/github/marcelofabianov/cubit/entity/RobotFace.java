@@ -3,6 +3,9 @@ package io.github.marcelofabianov.cubit.entity;
 import io.github.marcelofabianov.cubit.CubitMod;
 import io.github.marcelofabianov.cubit.domain.behavior.ExpressionRules;
 import io.github.marcelofabianov.cubit.domain.behavior.ExpressionTimer;
+import io.github.marcelofabianov.cubit.domain.behavior.GazeDirection;
+import io.github.marcelofabianov.cubit.domain.behavior.OwnerGaze;
+import io.github.marcelofabianov.cubit.domain.behavior.OwnerLook;
 import io.github.marcelofabianov.cubit.domain.behavior.RobotExpression;
 import io.github.marcelofabianov.cubit.domain.behavior.RobotSituation;
 import io.github.marcelofabianov.cubit.registry.CubitSounds;
@@ -20,6 +23,8 @@ public final class RobotFace {
   private ExpressionTimer dying = ExpressionTimer.STOPPED;
   private int lastHurtTime;
   private int lastOwnerHurtTime;
+  private OwnerGaze ownerGaze = OwnerGaze.LEVEL;
+  private double lastOwnerY = Double.NaN;
 
   RobotFace(RobotEntity robot) {
     this.robot = robot;
@@ -27,6 +32,14 @@ public final class RobotFace {
 
   public static RobotExpression expression(RobotEntity robot) {
     return RobotExpression.values()[robot.getEntityData().get(RobotSyncedData.EXPRESSION)];
+  }
+
+  public static GazeDirection ownerGaze(RobotEntity robot) {
+    return GazeDirection.values()[robot.getEntityData().get(RobotSyncedData.OWNER_GAZE)];
+  }
+
+  public static GazeDirection ownerLevel(RobotEntity robot) {
+    return GazeDirection.values()[robot.getEntityData().get(RobotSyncedData.OWNER_LEVEL)];
   }
 
   void onInteraction() {
@@ -45,6 +58,28 @@ public final class RobotFace {
       robot.playSound(CubitSounds.EXPRESSION_BEEP.get());
     }
     robot.getEntityData().set(RobotSyncedData.EXPRESSION, (byte) next.ordinal());
+    updateOwnerGaze();
+  }
+
+  /** Only the server knows where the owner is for every player who sees this robot. */
+  private void updateOwnerGaze() {
+    Player owner = robot.onlineOwner();
+    boolean near =
+        owner != null
+            && OwnerLook.applies(
+                robot.powerState(), owner.level() == robot.level(), robot.distanceTo(owner));
+    GazeDirection level = GazeDirection.LEVEL;
+    if (near) {
+      double heightAbove = owner.getY() - robot.getY();
+      ownerGaze = ownerGaze.next(owner.getY() - lastOwnerY, heightAbove);
+      level = OwnerGaze.levelOf(heightAbove);
+      lastOwnerY = owner.getY();
+    } else {
+      ownerGaze = OwnerGaze.LEVEL;
+      lastOwnerY = Double.NaN;
+    }
+    robot.getEntityData().set(RobotSyncedData.OWNER_LEVEL, (byte) level.ordinal());
+    robot.getEntityData().set(RobotSyncedData.OWNER_GAZE, (byte) ownerGaze.direction().ordinal());
   }
 
   /** The game restarts this counter on every hit, so a rise means the robot was just hurt. */

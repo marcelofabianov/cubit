@@ -1,5 +1,6 @@
 package io.github.marcelofabianov.cubit.entity;
 
+import io.github.marcelofabianov.cubit.domain.behavior.GazeDirection;
 import io.github.marcelofabianov.cubit.domain.behavior.RobotExpression;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -17,6 +18,10 @@ final class RobotSyncedData {
       SynchedEntityData.defineId(RobotEntity.class, EntityDataSerializers.BYTE);
   static final EntityDataAccessor<Byte> EXPRESSION =
       SynchedEntityData.defineId(RobotEntity.class, EntityDataSerializers.BYTE);
+  static final EntityDataAccessor<Byte> OWNER_GAZE =
+      SynchedEntityData.defineId(RobotEntity.class, EntityDataSerializers.BYTE);
+  static final EntityDataAccessor<Byte> OWNER_LEVEL =
+      SynchedEntityData.defineId(RobotEntity.class, EntityDataSerializers.BYTE);
 
   private RobotSyncedData() {}
 
@@ -26,5 +31,7 @@ final class RobotSyncedData {
   static void define(SynchedEntityData.Builder builder) {
     builder.define(PLAYING_SOUNDS, NOTHING_PLAYING);
     builder.define(EXPRESSION, (byte) RobotExpression.OFF.ordinal());
+    builder.define(OWNER_GAZE, (byte) GazeDirection.LEVEL.ordinal());
+    builder.define(OWNER_LEVEL, (byte) GazeDirection.LEVEL.ordinal());
   }
 }
