@@ -7,8 +7,8 @@ Mod de Minecraft que adiciona um robô companheiro fofo, movido a bateria, de te
 ## Estado atual
 
 - **Etapa atual:** Fase 3, sentidos, em andamento. A Fase 2 foi encerrada. As funcionalidades entram por issue, na ordem do `checklist.md`.
-- **Já entrou:** colocar e recolher, seguir o player, vários robôs, fogo, lava, os arquivos de som, a revisão dos `.md`, o novo modelo, a morte com o item danificado, o inventário, a energia em uso, o consumo por situação, a reação a blocos que ferem, o Induction Dock, o `/cubit reset`, as receitas e, na Fase 3, os sons, as expressões, o som de dano, a barra de vida e as animações.
-- **Próximos:** colar e bateria, e os demais itens do `checklist.md`. Os testes de instância e a primeira versão, `0.1.0`, ficam para o fim da Fase 3.
+- **Já entrou:** colocar e recolher, seguir o player, vários robôs, fogo, lava, os arquivos de som, a revisão dos `.md`, o novo modelo, a morte com o item danificado, o inventário, a energia em uso, o consumo por situação, a reação a blocos que ferem, o Induction Dock, o `/cubit reset`, as receitas e, na Fase 3, os sons, as expressões, o som de dano, a barra de vida, as animações e o colar e a bateria.
+- **Próximos:** intervalo mínimo e textos curtos, e os demais itens do `checklist.md`. Os testes de instância e a primeira versão, `0.1.0`, ficam para o fim da Fase 3.
 - **Comandos:** estão em [`_docs/desenvolvimento/ferramentas-de-build.md`](_docs/desenvolvimento/ferramentas-de-build.md).
 - **Limite:** não avance para as fases seguintes sem pedido explícito.
 
@@ -19,7 +19,7 @@ Mod de Minecraft que adiciona um robô companheiro fofo, movido a bateria, de te
 - **Decisões:** o resumo do que foi decidido fica em `_docs/decisoes.md`.
 - **Histórico:** todo `.md` em `_docs/` termina com uma tabela de histórico de modificações, e quem altera o arquivo adiciona uma linha no topo dela. Fora de `_docs/`, os `.md` não têm essa tabela.
 - **Imagens:** ficam em `_docs/imagens/`.
-- **Rascunhos:** conversas e ideias vão para `tmp/`, que o Git ignora.
+- **Rascunhos:** conversas e ideias vão para `tmp/`, que o Git ignora. Rascunhos de PR ficam em `tmp/pr/`, arquivos de issue, em `tmp/issue/`, e logs, em `tmp/log/`.
 - **Fluxo de trabalho:** o passo a passo de uma tarefa, de uma versão e de um hotfix está em [`_docs/desenvolvimento/fluxo-de-trabalho.md`](_docs/desenvolvimento/fluxo-de-trabalho.md).
 
 ## Regras do mod
@@ -206,6 +206,7 @@ io.github.marcelofabianov.cubit
 ├── item/                   // RobotItem, PowerBankItem, RobotStateComponent
 ├── block/                  // InductionDockBlock, BlockEntity
 ├── menu/                   // RobotMenu, InductionDockMenu
+├── network/                // pacotes próprios: NoticePayload e CubitNetwork
 ├── player/                 // attachment com o UUID do robô que segue, robôs mortos com o dono offline e /cubit reset
 ├── client/                 // renderer, modelo GeckoLib, tela
 └── datagen/                // receitas, loot, traduções
@@ -217,7 +218,7 @@ Os testes ficam em `src/test` (JUnit) e os GameTests em um pacote `gametest`.
 
 - **Limite do domínio:** um teste com ArchUnit deve falhar se `domain` importar `net.minecraft` ou `net.neoforged`. É mais simples que um subprojeto Gradle.
 - **Cliente e comum:** `Menu` roda nos dois lados, e `Screen` só no cliente. Código comum não pode carregar classes de `client`, senão um servidor dedicado quebra.
-- **Rede:** o menu e o `SynchedEntityData` bastam na versão mínima. Pacotes próprios só entram com o controle remoto.
+- **Rede:** o menu e o `SynchedEntityData` bastam para o estado do robô. Os textos usam um pacote próprio, só do servidor para o cliente, e os pacotes do cliente para o servidor só entram com o controle remoto.
 - **Config `COMMON`:** fica em `config/`, onde o packwiz consegue distribuí-lo. O `SERVER` ficaria dentro de cada mundo.
 - **Atributos:** são registrados antes de o config carregar, então vida e velocidade são aplicadas quando a entidade nasce.
 - **Receitas com datagen:** geram JSONs normais em `data/`, que o KubeJS pode sobrescrever.

@@ -79,9 +79,9 @@ Antes do push, atualize a branch com a de origem. Depois, abra o PR para a `deve
 
 ```bash
 git push -u origin feature/{issue}-{slug}
-cp .github/pull_request_template.md tmp/pr.md
-# Preencha tmp/pr.md antes de abrir o PR.
-gh pr create --base develop --title "tipo: descrição" --body-file tmp/pr.md
+cp .github/pull_request_template.md tmp/pr/pr-{número}.md
+# Preencha o arquivo antes de abrir o PR.
+gh pr create --base develop --title "tipo: descrição" --body-file tmp/pr/pr-{número}.md
 ```
 
 A descrição do PR segue o template [`.github/pull_request_template.md`](../../.github/pull_request_template.md), que o GitHub também aplica aos PRs abertos pelo site. Ele tem:
@@ -186,6 +186,7 @@ O primeiro passo, separando o que está decidido do que está pendente.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 09:51 | Move o rascunho do PR para `tmp/pr/`. |
 | Marcelo Fabiano | 2026-11-05 22:18 | Adiciona a avaliação do checklist ao encerrar um PR. |
 | Marcelo Fabiano | 2026-11-05 21:02 | Corrige a atualização da `develop`, que falhava com ela em uso. |
 | Marcelo Fabiano | 2026-11-05 14:35 | Deixa o merge somente com o desenvolvedor. |
