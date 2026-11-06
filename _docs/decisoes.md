@@ -8,9 +8,10 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Modid:** `cubit`.
 - **Pacote Java:** `io.github.marcelofabianov.cubit`.
 - **Repositório:** `marcelofabianov/cubit`.
-- **Licença:** MIT.
+- **Licença:** MIT, para todos os recursos presentes no repositório, inclusive os sons. A exceção é o Gradle Wrapper, de terceiros, que não vai no jar.
 - **Ícone do mod:** o mesmo do item do Cubit.
-- **Primeira versão:** `0.1.0`, com a `1.0.0` só com o mod completo.
+- **Primeira versão:** `0.1.0`, publicada só ao terminar todos os itens da Fase 3, com a `1.0.0` só com o mod completo.
+- **Testes de instância:** os da regra 35 ficam para o fim da Fase 3, no teste da versão completa.
 - **Etapa atual:** Fase 2, versão mínima. A Fase 1, de conceito, foi encerrada.
 - **Iron Meridian:** o Cubit entra como exceção à regra do pack contra funções repetidas, por causa do Robit do Mekanism. O registro está na issue `marcelofabianov/iron-meridian#2`.
 
@@ -75,7 +76,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Documentação para o player (fase a definir):** uma wiki em site estático no GitHub e um livro entregue ao criar o mundo, que aponta para ela.
 - **Consumo por situação:** inventário cheio, água, subida e condições negativas somam um extra ao gasto. Com o inventário cheio, a velocidade cai. Os números estão em [`tiers.md`](tiers.md#consumo-por-atividade).
 - **Slot de energia do Cubit:** existe em todos os tiers e aceita uma Power Bank ou redstone por vez. A redstone entra na Fase 2, e a Power Bank na Fase 4.
-- **LambDynamicLights:** obrigatório, mas só entra no build com a lanterna, na Fase 3. A `0.1.0` sai sem exigi-lo.
+- **LambDynamicLights:** obrigatório, e entra no build com a lanterna, na Fase 3.
 - **Ao colocar no mundo:** toca só o som de colocar. O de ligar fica para a passagem de desligado a ligado.
 - **Margem das telas:** os 4 blocos ficam em constante, fora do config, porque seguem o padrão do jogo.
 - **Ao atacar:** mantém a expressão atual, com o som de ataque.
@@ -93,6 +94,9 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 22:25 | Registra a exceção do Gradle Wrapper e o momento dos testes de instância. |
+| Marcelo Fabiano | 2026-11-05 22:22 | Registra que a licença MIT vale para todos os recursos. |
+| Marcelo Fabiano | 2026-11-05 22:21 | Registra que a primeira versão sai com a Fase 3. |
 | Marcelo Fabiano | 2026-11-05 22:18 | Registra o checklist das fases. |
 | Marcelo Fabiano | 2026-11-05 21:50 | Registra a receita do Induction Dock. |
 | Marcelo Fabiano | 2026-11-05 21:47 | Registra a receita do Cubit. |
