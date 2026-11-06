@@ -48,7 +48,6 @@ public final class LampGameTests {
   private static final int ROOM_HEIGHT = 2;
   private static final BlockPos FLOOR = new BlockPos(ROOM_X, FLOOR_Y, MIDDLE_Z);
   private static final BlockPos SECOND_FLOOR = new BlockPos(ROOM_X + ROOM_X, FLOOR_Y, MIDDLE_Z);
-  private static final long NOON = 6000;
   private static final int LAMP_LIGHT = 10;
   private static final int SCREEN_LIGHT = 4;
   private static final int NO_LIGHT = 0;
@@ -94,9 +93,8 @@ public final class LampGameTests {
         });
   }
 
-  @GameTest(template = ARENA, timeoutTicks = TIMEOUT)
+  @GameTest(template = ARENA, timeoutTicks = TIMEOUT, batch = SolarGameTests.DAYLIGHT_BATCH)
   public static void staysOutInTheOpenDuringTheDay(GameTestHelper helper) {
-    helper.getLevel().setDayTime(NOON);
     RobotEntity robot = place(helper, helper.makeMockPlayer(GameType.SURVIVAL), PLENTY, FLOOR);
 
     helper.runAfterDelay(
@@ -105,7 +103,8 @@ public final class LampGameTests {
           helper.assertValueEqual(robot.powerState(), PowerState.ACTIVE, NOT_ACTIVE);
           helper.assertTrue(!RobotLamp.isLit(robot), LIT);
           helper.assertValueEqual(RobotLamp.lightLevel(robot), SCREEN_LIGHT, WRONG_LIGHT);
-          helper.assertValueEqual(robot.state().energy(), PLENTY, SPENT);
+          // The panel may add energy here, and the lamp must not take any.
+          helper.assertTrue(robot.state().energy().amount() >= PLENTY.amount(), SPENT);
           helper.succeed();
         });
   }

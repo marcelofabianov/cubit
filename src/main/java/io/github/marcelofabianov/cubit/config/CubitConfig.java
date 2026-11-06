@@ -8,6 +8,7 @@ import io.github.marcelofabianov.cubit.domain.energy.ConsumptionExtras;
 import io.github.marcelofabianov.cubit.domain.energy.Energy;
 import io.github.marcelofabianov.cubit.domain.energy.Percentage;
 import io.github.marcelofabianov.cubit.domain.energy.PowerRules;
+import io.github.marcelofabianov.cubit.domain.energy.SolarOutput;
 import io.github.marcelofabianov.cubit.domain.robot.RobotType;
 import io.github.marcelofabianov.cubit.domain.tier.RobotTier;
 import io.github.marcelofabianov.cubit.domain.tier.TierCatalog;
@@ -33,6 +34,7 @@ public final class CubitConfig {
   private static final long BASE_CLIMB_EXTRA = 15;
   private static final long BASE_LAMP_CONSUMPTION = 1;
   private static final int BASE_LAMP_LIGHT = 10;
+  private static final long BASE_SOLAR_DAY = 5;
   private static final long BASE_RECHARGE = 500;
   private static final int BASE_SLOTS = 27;
   private static final int BASE_HEALTH = 25;
@@ -53,7 +55,8 @@ public final class CubitConfig {
               new Energy(BASE_NEGATIVE_CONDITION_EXTRA),
               new Energy(BASE_CLIMB_EXTRA),
               new Energy(BASE_LAMP_CONSUMPTION)),
-          new LightLevel(BASE_LAMP_LIGHT));
+          new LightLevel(BASE_LAMP_LIGHT),
+          new SolarOutput(new Energy(BASE_SOLAR_DAY), Energy.ZERO));
 
   private final ModConfigSpec spec;
   private final GeneralSection general;
@@ -64,6 +67,7 @@ public final class CubitConfig {
   private final NoticeSection notice;
   private final DockSection dock;
   private final LampSection lamp;
+  private final SolarSection solar;
   private final AtomicBoolean warnedLamp = new AtomicBoolean();
   private final TierCatalog tierCatalog;
 
@@ -79,6 +83,7 @@ public final class CubitConfig {
     notice = new NoticeSection(builder);
     dock = new DockSection(builder);
     lamp = new LampSection(builder);
+    solar = new SolarSection(builder);
     builder.pop();
 
     builder.push(List.of(GENERAL_ROBOT.id(), RobotTier.BASE.key()));
@@ -108,6 +113,10 @@ public final class CubitConfig {
 
   public LightLevel screenLight() {
     return new LightLevel(lamp.screenLight.get());
+  }
+
+  public int solarCheckTicks() {
+    return solar.checkTicks.get();
   }
 
   public int lampCheckTicks() {

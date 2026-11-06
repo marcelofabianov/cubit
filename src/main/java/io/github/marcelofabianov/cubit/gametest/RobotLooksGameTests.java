@@ -146,7 +146,7 @@ public final class RobotLooksGameTests {
 
   private static ItemStack item(RobotTier tier, Energy energy) {
     ItemStack item = new ItemStack(CubitItems.GENERAL_ROBOT.get());
-    item.set(CubitDataComponents.ROBOT_STATE.get(), new RobotState(tier, energy, HEALTH));
+    item.set(CubitDataComponents.ROBOT_STATE.get(), new RobotState(tier, energy, HEALTH, false));
     return item;
   }
 

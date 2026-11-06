@@ -77,6 +77,7 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
   private final RobotFace face = new RobotFace(this);
   private final RobotNotices notices = new RobotNotices(this);
   private final RobotLamp lamp = new RobotLamp(this);
+  private final RobotSolar solar = new RobotSolar(this);
 
   public RobotEntity(
       EntityType<? extends RobotEntity> type,
@@ -270,6 +271,7 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
     Energy chargeBefore = battery.charge();
     docking.tick();
     updateEnergy(chargeBefore);
+    solar.tick();
     face.tick();
     RobotLooks.update(this);
     lamp.tick();

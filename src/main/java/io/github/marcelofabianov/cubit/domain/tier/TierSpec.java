@@ -7,6 +7,7 @@ import io.github.marcelofabianov.cubit.domain.energy.Energy;
 import io.github.marcelofabianov.cubit.domain.energy.Percentage;
 import io.github.marcelofabianov.cubit.domain.energy.PowerState;
 import io.github.marcelofabianov.cubit.domain.energy.RobotActivity;
+import io.github.marcelofabianov.cubit.domain.energy.SolarOutput;
 
 /** The numbers of one robot type at one tier. They come from the config, never from the code. */
 public record TierSpec(
@@ -18,7 +19,8 @@ public record TierSpec(
     int callRadiusBlocks,
     double speedMultiplier,
     ConsumptionExtras extras,
-    LightLevel lampLight) {
+    LightLevel lampLight,
+    SolarOutput solar) {
 
   private static final String BATTERY_CAPACITY = "batteryCapacity";
   private static final String RECHARGE_PER_TICK = "rechargePerTick";

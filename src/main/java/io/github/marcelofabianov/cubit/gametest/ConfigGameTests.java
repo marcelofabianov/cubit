@@ -7,6 +7,7 @@ import io.github.marcelofabianov.cubit.domain.behavior.LightLevel;
 import io.github.marcelofabianov.cubit.domain.energy.ConsumptionExtras;
 import io.github.marcelofabianov.cubit.domain.energy.Energy;
 import io.github.marcelofabianov.cubit.domain.energy.Percentage;
+import io.github.marcelofabianov.cubit.domain.energy.SolarOutput;
 import io.github.marcelofabianov.cubit.domain.robot.RobotType;
 import io.github.marcelofabianov.cubit.domain.tier.RobotTier;
 import io.github.marcelofabianov.cubit.domain.tier.TierSpec;
@@ -26,6 +27,13 @@ public final class ConfigGameTests {
   private static final String INITIAL_CHARGE_KEY = "general.initial_charge_percent";
   private static final String BATTERY_KEY = "general_robot.base.battery_capacity";
   private static final String CONSUMPTION_KEY = "general_robot.base.moving_consumption_per_tick";
+  private static final String SOLAR_CHECK_KEY = "general.solar_check_ticks";
+  private static final String SOLAR_DAY_KEY = "general_robot.base.solar_day_per_tick";
+  private static final String SOLAR_NIGHT_KEY = "general_robot.base.solar_night_per_tick";
+  private static final int SOLAR_CHECK = 20;
+  private static final int SOLAR_DAY = 5;
+  private static final Map<String, Integer> SOLAR_DEFAULTS =
+      Map.of(SOLAR_CHECK_KEY, SOLAR_CHECK, SOLAR_DAY_KEY, SOLAR_DAY, SOLAR_NIGHT_KEY, 0);
   private static final String SCREEN_LIGHT_KEY = "general.screen_light_level";
   private static final String LAMP_ON_BELOW_KEY = "general.lamp_on_below_light";
   private static final String LAMP_OFF_FROM_KEY = "general.lamp_off_from_light";
@@ -146,7 +154,8 @@ public final class ConfigGameTests {
               new Energy(NEGATIVE_CONDITION_EXTRA),
               new Energy(CLIMB_EXTRA),
               new Energy(LAMP_CONSUMPTION)),
-          new LightLevel(LAMP_LIGHT));
+          new LightLevel(LAMP_LIGHT),
+          new SolarOutput(new Energy(SOLAR_DAY), Energy.ZERO));
   private static final String WRONG_SPEC = "Wrong tier numbers";
   private static final String WRONG_CHARGE = "Wrong initial charge";
   private static final String WRONG_KEY = "Wrong value for a config key";
@@ -193,6 +202,8 @@ public final class ConfigGameTests {
     TIER_DEFAULTS.forEach(
         (key, value) -> helper.assertValueEqual(file.<Integer>get(key), value, WRONG_KEY));
     LAMP_DEFAULTS.forEach(
+        (key, value) -> helper.assertValueEqual(file.<Integer>get(key), value, WRONG_KEY));
+    SOLAR_DEFAULTS.forEach(
         (key, value) -> helper.assertValueEqual(file.<Integer>get(key), value, WRONG_KEY));
     helper.assertValueEqual(file.<Double>get(BASE_SPEED_KEY), BASE_SPEED, WRONG_KEY);
     helper.assertValueEqual(file.<Double>get(BURNING_SPEED_KEY), BURNING_SPEED, WRONG_KEY);

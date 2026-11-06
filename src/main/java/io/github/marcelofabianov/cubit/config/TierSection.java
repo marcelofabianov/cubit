@@ -3,6 +3,7 @@ package io.github.marcelofabianov.cubit.config;
 import io.github.marcelofabianov.cubit.domain.behavior.LightLevel;
 import io.github.marcelofabianov.cubit.domain.energy.ConsumptionExtras;
 import io.github.marcelofabianov.cubit.domain.energy.Energy;
+import io.github.marcelofabianov.cubit.domain.energy.SolarOutput;
 import io.github.marcelofabianov.cubit.domain.tier.TierSpec;
 import net.neoforged.neoforge.common.ModConfigSpec;
 
@@ -17,6 +18,8 @@ final class TierSection {
   private static final String LAMP_CONSUMPTION = "lamp_consumption_per_tick";
   private static final String LAMP_LIGHT = "lamp_light_level";
   private static final int MIN_LIGHT = 0;
+  private static final String SOLAR_DAY = "solar_day_per_tick";
+  private static final String SOLAR_NIGHT = "solar_night_per_tick";
   private static final String RECHARGE = "recharge_per_tick";
   private static final String INVENTORY_SLOTS = "inventory_slots";
   private static final String MAX_HEALTH = "max_health";
@@ -39,6 +42,7 @@ final class TierSection {
   private final ModConfigSpec.IntValue climbExtra;
   private final ModConfigSpec.IntValue lampConsumption;
   private final ModConfigSpec.IntValue lampLight;
+  private final SolarKeys solar;
   private final ModConfigSpec.IntValue recharge;
   private final ModConfigSpec.IntValue inventorySlots;
   private final ModConfigSpec.IntValue maxHealth;
@@ -59,15 +63,13 @@ final class TierSection {
     climbExtra = energy(builder, CLIMB_EXTRA, extras.climbPerBlock(), MIN_CONSUMPTION);
     lampConsumption = energy(builder, LAMP_CONSUMPTION, extras.lampPerTick(), MIN_CONSUMPTION);
     lampLight = light(builder, LAMP_LIGHT, defaults.lampLight());
+    solar = new SolarKeys(builder, defaults.solar());
     recharge = energy(builder, RECHARGE, defaults.rechargePerTick(), MIN_POSITIVE);
     inventorySlots =
-        builder.defineInRange(
-            INVENTORY_SLOTS, defaults.inventorySlots(), MIN_POSITIVE, MAX_INVENTORY_SLOTS);
+        count(builder, INVENTORY_SLOTS, defaults.inventorySlots(), MAX_INVENTORY_SLOTS);
     maxHealth =
         builder.defineInRange(MAX_HEALTH, defaults.maxHealth(), MIN_POSITIVE, MAX_HEALTH_LIMIT);
-    callRadius =
-        builder.defineInRange(
-            CALL_RADIUS, defaults.callRadiusBlocks(), MIN_POSITIVE, MAX_CALL_RADIUS);
+    callRadius = count(builder, CALL_RADIUS, defaults.callRadiusBlocks(), MAX_CALL_RADIUS);
     speedMultiplier =
         builder.defineInRange(
             SPEED_MULTIPLIER,
@@ -91,7 +93,13 @@ final class TierSection {
             new Energy(negativeConditionExtra.get()),
             new Energy(climbExtra.get()),
             new Energy(lampConsumption.get())),
-        new LightLevel(lampLight.get()));
+        new LightLevel(lampLight.get()),
+        solar.read());
+  }
+
+  private static ModConfigSpec.IntValue count(
+      ModConfigSpec.Builder builder, String key, int defaultValue, int max) {
+    return builder.defineInRange(key, defaultValue, MIN_POSITIVE, max);
   }
 
   private static ModConfigSpec.IntValue light(
@@ -102,5 +110,20 @@ final class TierSection {
   private static ModConfigSpec.IntValue energy(
       ModConfigSpec.Builder builder, String key, Energy defaultValue, int min) {
     return builder.defineInRange(key, Math.toIntExact(defaultValue.amount()), min, MAX_ENERGY);
+  }
+
+  /** The panel of one tier. A class of its own keeps the constructor above within the limit. */
+  private static final class SolarKeys {
+    private final ModConfigSpec.IntValue day;
+    private final ModConfigSpec.IntValue night;
+
+    SolarKeys(ModConfigSpec.Builder builder, SolarOutput defaults) {
+      day = energy(builder, SOLAR_DAY, defaults.dayPerTick(), MIN_CONSUMPTION);
+      night = energy(builder, SOLAR_NIGHT, defaults.nightPerTick(), MIN_CONSUMPTION);
+    }
+
+    SolarOutput read() {
+      return new SolarOutput(new Energy(day.get()), new Energy(night.get()));
+    }
   }
 }

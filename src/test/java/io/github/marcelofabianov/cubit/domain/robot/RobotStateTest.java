@@ -10,6 +10,7 @@ import io.github.marcelofabianov.cubit.domain.energy.Battery;
 import io.github.marcelofabianov.cubit.domain.energy.ConsumptionExtras;
 import io.github.marcelofabianov.cubit.domain.energy.Energy;
 import io.github.marcelofabianov.cubit.domain.energy.Percentage;
+import io.github.marcelofabianov.cubit.domain.energy.SolarOutput;
 import io.github.marcelofabianov.cubit.domain.tier.RobotTier;
 import io.github.marcelofabianov.cubit.domain.tier.TierSpec;
 import org.junit.jupiter.api.Test;
@@ -40,7 +41,8 @@ class RobotStateTest {
           RADIUS,
           1,
           new ConsumptionExtras(Energy.ZERO, Energy.ZERO, Energy.ZERO, Energy.ZERO, Energy.ZERO),
-          new LightLevel(0));
+          new LightLevel(0),
+          new SolarOutput(Energy.ZERO, Energy.ZERO));
 
   @Test
   void newRobotHasTheInitialChargeAndFullHealth() {
