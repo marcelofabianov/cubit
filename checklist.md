@@ -52,7 +52,7 @@ A ordem é a da numeração (perguntas 356 e 365). Sons, intervalo, expressões,
 7. [ ] Os dois alertas de som, que dependem dos scanners
 8. [ ] Alerta e surpreso em uso, que dependem dos scanners, e as reações ao renomear e pintar
 9. [x] Animações e modelo final
-10. [ ] Cor do colar e indicador de bateria variando
+10. [x] Cor do colar e indicador de bateria variando
 11. [ ] Definir o intervalo mínimo entre repetições (pergunta 149), junto dos textos
 12. [ ] Textos curtos na barra acima da hotbar
 13. [ ] Painel solar

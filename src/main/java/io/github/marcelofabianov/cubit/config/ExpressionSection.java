@@ -5,7 +5,7 @@ import net.neoforged.neoforge.common.ModConfigSpec;
 /** The config keys of the expressions. The names are a contract with the pack. */
 final class ExpressionSection {
   private static final String CRITICAL_CHARGE = "critical_charge_percent";
-  private static final int CRITICAL_CHARGE_DEFAULT = 10;
+  private static final int CRITICAL_CHARGE_DEFAULT = 5;
   private static final int PERCENT_MIN = 0;
   private static final int PERCENT_MAX = 100;
   private static final String HAPPY_TICKS = "happy_expression_ticks";

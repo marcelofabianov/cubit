@@ -22,7 +22,7 @@ Números por tier: [`tiers.md`](../tiers.md#coleta-e-inventário) e [slots exclu
 
 - **Inventário:** armazena itens.
 - **Ímã:** puxa os itens do chão.
-- **Filtro de coleta:** coleta só os itens definidos.
+- **Filtro de coleta:** tem dois modos. Na lista branca, coleta só os itens definidos. Na lista negra, coleta tudo menos os itens definidos.
 
 ## Descarregar em baú
 
@@ -42,6 +42,7 @@ São quatro: tochas, fornalha, carregador de ferramentas e energia. Na Fase 5, o
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 09:32 | Define os dois modos do filtro de coleta. |
 | Marcelo Fabiano | 2026-11-06 00:20 | Adiciona a barra de vida. |
 | Marcelo Fabiano | 2026-11-05 23:49 | Detalha a tela própria. |
 | Marcelo Fabiano | 2026-11-05 21:30 | Define a margem para abrir a tela. |

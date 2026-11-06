@@ -44,8 +44,8 @@ public final class RobotFaceGameTests {
   private static final int START_X = 1;
   private static final int MIDDLE_Z = 2;
   private static final long FULL = 300_000;
-  private static final long CRITICAL = 30_000;
-  private static final long ABOVE_CRITICAL = 31_000;
+  private static final long CRITICAL = 15_000;
+  private static final long ABOVE_CRITICAL = 16_000;
   private static final float HEALTH = 25f;
   private static final BlockPos FLOOR = new BlockPos(START_X, FLOOR_Y, MIDDLE_Z);
   private static final BlockPos SECOND_FLOOR = FLOOR.offset(MIDDLE_Z, 0, 0);

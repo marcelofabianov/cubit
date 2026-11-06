@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import io.github.marcelofabianov.cubit.CubitMod;
 import io.github.marcelofabianov.cubit.domain.behavior.GazeDirection;
+import io.github.marcelofabianov.cubit.domain.behavior.RobotExpression;
 import io.github.marcelofabianov.cubit.domain.behavior.RobotPose;
 import io.github.marcelofabianov.cubit.domain.behavior.TrackFrames;
 import io.github.marcelofabianov.cubit.entity.RobotEntity;
@@ -38,6 +39,10 @@ public final class RobotAnimationGameTests {
   private static final String BAD_FRAME = "A track frame could not be read: ";
 
   private static final String ARMS_RAISED = "arms_raised";
+  private static final String ARMS_DOWN = "The arms should be up after a hit";
+  private static final String ARMS_UP = "The arms should be down by now";
+  private static final String NOT_SAD = "The sad face should outlast the arms";
+  private static final float SMALL_HIT = 1f;
   private static final String WRONG_GAZE = "Wrong direction for the eyes";
   private static final String WRONG_LEVEL = "Wrong level for the owner";
   private static final double JUMP_BLOCKS = 0.42;
@@ -54,6 +59,25 @@ public final class RobotAnimationGameTests {
   private static final BlockPos SECOND_FLOOR = FLOOR.offset(MIDDLE_Z, 0, 0);
 
   private RobotAnimationGameTests() {}
+
+  @GameTest(template = ARENA, timeoutTicks = TIMEOUT)
+  public static void theArmsGoDownBeforeTheSadFace(GameTestHelper helper) {
+    ServerPlayer owner = ownerBeside(helper);
+    RobotEntity robot = GameTestRobots.placeNewRobot(helper, owner, FLOOR);
+
+    helper.runAfterDelay(
+        SETTLE_TICKS, () -> robot.hurt(helper.getLevel().damageSources().generic(), SMALL_HIT));
+    helper.runAfterDelay(
+        SETTLE_TICKS + MARGIN_TICKS,
+        () -> helper.assertTrue(RobotFace.armsRaised(robot), ARMS_DOWN));
+    helper.runAfterDelay(
+        SETTLE_TICKS + RobotPose.ARMS_RAISED_TICKS + MARGIN_TICKS,
+        () -> {
+          helper.assertFalse(RobotFace.armsRaised(robot), ARMS_UP);
+          helper.assertTrue(RobotFace.expression(robot) == RobotExpression.HURT, NOT_SAD);
+          helper.succeed();
+        });
+  }
 
   @GameTest(template = ARENA, timeoutTicks = TIMEOUT)
   public static void theEyesFollowAnOwnerAtAnotherLevel(GameTestHelper helper) {

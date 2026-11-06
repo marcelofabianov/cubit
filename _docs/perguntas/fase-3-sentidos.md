@@ -2,18 +2,20 @@
 
 ## Pendentes
 
-Não há perguntas pendentes nesta fase.
+| # | Pergunta | Recomendação |
+|---|---|---|
+| 425 | Onde o player aciona as chaves da pergunta 424, qual é o estado inicial de cada uma, e o que "Hibernar" da chave geral faz fora do Dock? | Na tela do Cubit, e também no Cubit Remote a partir da Fase 4. Todas começam ligadas e ficam nas configurações que o item guarda, como na [pergunta 343](fase-4-upgrades-e-autonomia.md). Hibernar fora do Dock segue a [pergunta 198](fase-5-robos-especializados.md), hoje prevista só para a Fase 5, então precisa de decisão antes de antecipar |
 
 ## Respondidas
 
 | # | Pergunta | Resposta |
 |---|---|---|
-| 48 | Onde os textos do Cubit aparecem? | Na barra acima da hotbar, só para o dono e com intervalo mínimo entre repetições |
-| 49 | Os cinco textos ficam assim em inglês? | Sim: `Critical battery`, `Enemy nearby`, `Ore found`, `I need to recharge` e `Items unloaded` |
+| 48 | Onde os textos do Cubit aparecem? | Na barra acima da hotbar, só para o dono e com intervalo mínimo entre repetições. A pergunta 436 troca a barra do jogo por uma camada própria, no mesmo lugar |
+| 49 | Os cinco textos ficam assim em inglês? | Sim: `Critical battery`, `Enemy nearby`, `Ore found`, `I need to recharge` e `Items unloaded`. A pergunta 435 acrescenta o prefixo `Cubit: `, e as perguntas 440 e 441, dois textos |
 | 52 | Quais são os novos valores do solar, abaixo do consumo? | De dia: Base 5, Advanced 10, Elite 12 e Ultimate 16 FE/t. À noite, 25% do valor de dia: Elite 3 e Ultimate 4 FE/t |
 | 53 | Como o solar se comporta com blocos, clima e outras dimensões? | Só blocos importam: coberto não carrega, e descoberto carrega 100%. O clima não tem efeito. No Nether e no End não carrega |
 | 57 | Qual é a expressão em hibernação? | Sempre carregando |
-| 66 | A partir de quanta bateria o Cubit mostra a expressão de sono? | 10%, igual à bateria crítica |
+| 66 | A partir de quanta bateria o Cubit mostra a expressão de sono? | 10%, igual à bateria crítica. A pergunta 432 muda para 5% |
 | 67 | O texto `Ore found` vale para qual minério? | Para minério do filtro do scanner. Bipe e surpresa, só para os raros |
 | 92 | Qual é a expressão ao recarregar pelo slot, fora da base? | Inativo, tela apagada. Ativo, a expressão normal. A expressão carregando fica só para a base |
 | 135 | Quais sons o Cubit tem? | Oito sons diferentes: esteiras ao andar, como as de um tanque de guerra; mob hostil encontrado; minério raro encontrado; bipe padrão ao trocar de expressão; curto elétrico enquanto pega fogo; ao ligar; ao desligar; e enquanto é recarregado. O detalhe está em [`visual.md`](../conceito/visual.md#sons). As perguntas 316 e 320 acrescentam o som do ataque e o de colocar no mundo |
@@ -32,6 +34,28 @@ Não há perguntas pendentes nesta fase.
 | 321 | O nome `placed.ogg` e o momento "ao ser colocado no mundo" estão certos? | Sim. Detalha a pergunta 320 |
 | 322 | Em que fase o som de colocar no mundo passa a tocar? | Na Fase 3, junto dos outros oito. Detalha a pergunta 320 |
 | 421 | Como foi o roteiro manual do colar, do indicador de bateria e do tronco central com +0,5? | Teste finalizado, tudo ok, executado pelo desenvolvedor, sem detalhar cada passo. Ele não pediu +1, então o tronco fica em 2 unidades. O `make server` e o olhar de longe não foram citados em separado |
+| 446 | Como foi o roteiro manual dos textos, do intervalo de 25 s e dos braços por 2 s? | Teste finalizado, tudo ok, executado pelo desenvolvedor, sem detalhar cada passo. O `make server` e o texto mais recente substituindo o anterior não foram citados em separado |
+| 445 | Quanto tempo os braços ficam erguidos depois de levar dano? | Cerca de 2 s depois do último dano, numa constante, com um dado sincronizado novo, fora do save. A lágrima continua nos 5 s. Muda a pergunta 402 |
+| 444 | Qual é o intervalo dos textos? | 25 s, ou 500 ticks. O desenvolvedor pediu ao perguntar pelas frases novas, e o agente aplicou aos três textos, porque a chave é a mesma pela pergunta 442. Muda a pergunta 433 |
+| 440 | Qual é o texto quando o Cubit leva dano? | `Cubit: That hurts!`. Amplia a pergunta 49 |
+| 441 | Qual é o texto quando o dono leva dano? | `Cubit: Careful!`. Amplia a pergunta 49 |
+| 442 | De quanto em quanto os textos de dano podem se repetir? | Com o mesmo intervalo dos outros, `notice_repeat_ticks`, contado por texto, sem chave nova |
+| 443 | Quando valem os textos de dano, e em que entrega entram? | Só do Cubit ativo que segue o dono, conforme a pergunta 430. Dor: qualquer dano que dispara a expressão triste, inclusive fogo. Dono: o mesmo gatilho da expressão de preocupado, na mesma dimensão e a até 16 blocos. Entram na issue #93. JUnit nas regras, GameTests no servidor e nas traduções, e roteiro manual |
+| 439 | O tamanho e a posição dos textos ficam como estão? | Sim: 75% da fonte do jogo, logo acima das barras, aprovados pelo desenvolvedor no jogo. Os demais passos do teste não foram detalhados |
+| 435 | Como começam os textos do Cubit? | Toda frase começa com `Cubit: `, como `Cubit: Critical battery`. Muda a pergunta 49 nesse prefixo. O desenvolvedor também achou que a fonte poderia ser um pouco menor e o texto um pouco mais próximo da hotbar, o que as perguntas 436 a 438 definem |
+| 436 | Como deixar os textos menores e mais perto da hotbar? | Com uma camada própria na tela, só do cliente, e o primeiro pacote de rede próprio do mod, só do servidor para o cliente. Tamanho e distância ficam em constantes, porque são só visuais, como na pergunta 398. Detalha a pergunta 48 |
+| 437 | Qual é o tamanho inicial da fonte dos textos? | 75% do tamanho da fonte do jogo, a avaliar no jogo |
+| 438 | A que distância da hotbar ficam os textos? | Logo acima do que estiver em cima da hotbar, cerca de 3 pixels da interface acima da altura que o jogo informa para corações e armadura, subindo sozinho quando eles aparecem |
+| 432 | Os 5% do texto `Critical battery` valem só para ele ou para toda a bateria crítica? | Para tudo: `critical_charge_percent` passa de 10% para 5%, com a expressão de sono, o indicador vermelho e o texto, sem chave nova. Muda as perguntas [11](fase-1-conceito.md), 66 e 416 nesse número |
+| 433 | Qual é o valor inicial do intervalo mínimo? | 60 s, ou 1.200 ticks, numa chave nova do config, a ajustar no teste no jogo. A recomendação era 30 s. Complementa a pergunta 149. A pergunta 444 muda para 25 s |
+| 434 | Onde ficam os rascunhos e os logs? | Todo `.md` de rascunho de PR fica em `tmp/pr/`, os arquivos de issue, em `tmp/issue/`, e os logs, em `tmp/log/` |
+| 428 | Quais dos cinco textos entram agora? | Só `Critical battery`, que já tem gatilho. `Enemy nearby` e `Ore found` entram com os scanners, e `I need to recharge` e `Items unloaded`, na Fase 4. Os itens 11 e 12 ficam abertos até os scanners, conforme a pergunta 356 |
+| 429 | Quando o texto `Critical battery` aparece? | Ao chegar em 5% ou menos, repetindo a cada intervalo mínimo enquanto continuar crítico. Só com o robô ativo: desligado, hibernando ou recarregando acima de 5%, não avisa. A recomendação citava 10%, e o desenvolvedor escreveu 5%. A pergunta 432 leva os 5% a toda a bateria crítica |
+| 430 | Com vários Cubits, de quem vêm as mensagens? | Somente do Cubit ativo que segue o player, que é um só, então o intervalo não precisa ser por dono. Complementa a pergunta 48. O valor inicial está na pergunta 433. Na Fase 4, `Items unloaded` e `I need to recharge` precisam ser reavaliados para robôs em área |
+| 431 | Em que pontos ficam os testes do intervalo e do texto? | JUnit: quando o aviso vale, a entrada, a repetição e o estado. GameTests: tradução e chave do config presentes e aviso calculado no servidor. Roteiro manual: ver o texto na barra, só para o dono, e escolher o valor do intervalo |
+| 426 | O agente corrige o status do `README.md`, que não cita o que já entrou na Fase 3? | Sim, no próximo PR, conforme a [pergunta 152](fase-2-versao-minima.md) |
+| 427 | Os itens 11 e 12, do intervalo mínimo e dos textos, podem começar depois do merge do PR #92? | Sim |
+| 424 | Quais recursos do Cubit têm chaveamento? | Lista do desenvolvedor, com ligado e desligado: 0. chave geral do Cubit, com ligar, desligar e hibernar; 1. painel solar; 2. lanterna; 3. scanners; 4. ímã; 5. pegar itens dropados; 6. descarga em baú; 7. retorno automático; 8. mostrar o local de morte do player. Cada chave entra com o recurso dela, na fase dele. Detalhes na pendência 425 |
 | 420 | Qual parte do corpo aumenta, e quanto? | O tronco central, a coluna clara entre as esteiras e a carcaça, onde fica o colar. Para conferir no jogo, começa com +0,5 unidade, de 1,5 para 2, e o desenvolvedor considera +1. A carcaça, a tela e as texturas não mudam, e a hitbox continua a mesma. Muda a pergunta 396 só nessa medida |
 | 418 | Como trocar a cor do colar no modelo? | Com uma camada transparente por tier, com as duas tonalidades do conceito, escolhida pela chave do tier. As cores ficam nos arquivos, sem número no código |
 | 419 | Em que pontos ficam os testes do colar e do indicador? | JUnit: qual desenho do indicador vale em cada carga, com as bordas de 0 FE, carga mínima, crítica e cheia, e quando brilha. GameTests: tier e indicador sincronizados mudando no servidor e todos os arquivos presentes. Roteiro manual: ver as quatro cores por comando, cada nível, o vermelho, o brilho no escuro e o estado desligado |
@@ -47,7 +71,7 @@ Não há perguntas pendentes nesta fase.
 | 407 | Se o robô se move na vertical e o dono está em outra altura, qual movimento vence? | O do robô. Sem movimento próprio, os olhos seguem a altura do dono |
 | 408 | Até que distância os olhos acompanham a altura do dono? | Até 8 blocos, com o robô ligado e na mesma dimensão, o mesmo limite de virar o corpo |
 | 409 | Em que pontos ficam os testes dos braços e dos olhos? | JUnit: quando os braços sobem, a direção dos olhos por pulo e por nível, o tempo e a prioridade. GameTests: animação dos braços no arquivo e direção sincronizada mudando no servidor. Roteiro manual: ver os braços e os olhos |
-| 402 | Por quanto tempo o Cubit fica com os braços erguidos ao levar dano? | Enquanto estiver triste, ou seja, enquanto durar a expressão triste ou de olhos em X, cerca de 5 s depois do último dano |
+| 402 | Por quanto tempo o Cubit fica com os braços erguidos ao levar dano? | Enquanto estiver triste, ou seja, enquanto durar a expressão triste ou de olhos em X, cerca de 5 s depois do último dano. A pergunta 445 muda para cerca de 2 s |
 | 403 | E se ele estiver andando com os braços erguidos? | Mantém o balanço do corpo e das antenas, e só os braços ficam erguidos, com um segundo controlador da GeckoLib |
 | 404 | Como os olhos da expressão normal acompanham o player? | Uma mudança rápida na altura do dono, como um pulo, move os olhos para cima ou para baixo por cerca de 0,5 s, e eles voltam ao centro. Usa as texturas atuais e mantém a reação à subida do robô. O desenvolvedor acrescentou que também seria legal quando o player está em blocos ou níveis acima ou abaixo do Cubit. Complementa a pergunta 375 |
 | 405 | Em que entrega entram os braços erguidos e os olhos que acompanham o player? | Neste PR, na issue #89, com um novo teste no jogo antes dos commits |
@@ -103,6 +127,13 @@ Não há perguntas pendentes nesta fase.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 10:49 | Registra as respostas 444, 445 e 446 e aponta a 433 e a 402 para elas. |
+| Marcelo Fabiano | 2026-11-06 10:15 | Registra as respostas 439 a 443 e aponta a 49 para as 440 e 441. |
+| Marcelo Fabiano | 2026-11-06 10:02 | Registra as respostas 435 a 438 e aponta a 48 e a 49 para elas. |
+| Marcelo Fabiano | 2026-11-06 09:48 | Registra as respostas 432, 433 e 434 e aponta a 66 para a 432. |
+| Marcelo Fabiano | 2026-11-06 09:45 | Registra as respostas 428 a 431. |
+| Marcelo Fabiano | 2026-11-06 09:40 | Registra as respostas 426 e 427. |
+| Marcelo Fabiano | 2026-11-06 09:36 | Registra a resposta 424 e a pendência 425. |
 | Marcelo Fabiano | 2026-11-06 09:23 | Registra as respostas 420 e 421 e aponta a 396 para a 420. |
 | Marcelo Fabiano | 2026-11-06 08:58 | Registra as respostas 414 a 419. |
 | Marcelo Fabiano | 2026-11-06 01:12 | Registra as respostas 401 a 413. |

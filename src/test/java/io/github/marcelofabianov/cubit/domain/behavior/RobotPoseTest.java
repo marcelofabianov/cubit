@@ -7,6 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 class RobotPoseTest {
+  private static final int ARMS_RAISED_TICKS = 40;
+
   @Test
   void aRobotWithTheScreenOffIsPoweredDownEvenWhenPushed() {
     assertEquals(RobotPose.POWERED_DOWN, RobotPose.of(RobotExpression.OFF, false));
@@ -26,17 +28,28 @@ class RobotPoseTest {
   }
 
   @Test
-  void theArmsStayUpWhileTheRobotShowsTheDamage() {
-    assertTrue(RobotPose.raisesArms(RobotExpression.HURT));
-    assertTrue(RobotPose.raisesArms(RobotExpression.DYING));
+  void theArmsGoUpRightAfterAHit() {
+    assertTrue(RobotPose.raisesArms(RobotExpression.HURT, true));
+    assertTrue(RobotPose.raisesArms(RobotExpression.DYING, true));
+  }
+
+  @Test
+  void theArmsGoDownWhileTheDamageStillShows() {
+    assertFalse(RobotPose.raisesArms(RobotExpression.HURT, false));
+    assertFalse(RobotPose.raisesArms(RobotExpression.DYING, false));
+  }
+
+  @Test
+  void theArmsStayUpForAboutTwoSeconds() {
+    assertEquals(ARMS_RAISED_TICKS, RobotPose.ARMS_RAISED_TICKS);
   }
 
   @Test
   void theArmsStayDownInAnyOtherExpression() {
-    assertFalse(RobotPose.raisesArms(RobotExpression.NORMAL));
-    assertFalse(RobotPose.raisesArms(RobotExpression.WORRIED));
-    assertFalse(RobotPose.raisesArms(RobotExpression.OFF));
-    assertFalse(RobotPose.raisesArms(RobotExpression.CHARGING));
+    assertFalse(RobotPose.raisesArms(RobotExpression.NORMAL, true));
+    assertFalse(RobotPose.raisesArms(RobotExpression.WORRIED, true));
+    assertFalse(RobotPose.raisesArms(RobotExpression.OFF, true));
+    assertFalse(RobotPose.raisesArms(RobotExpression.CHARGING, true));
   }
 
   @Test

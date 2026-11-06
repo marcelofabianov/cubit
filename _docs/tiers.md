@@ -73,7 +73,7 @@ Valem para todos os tiers e ficam no config.
 | Alcance ao andar ao acaso em chamas e ao sair da lava ou de um bloco que fere | 5 blocos |
 | Distância para teleportar até o player | ~20 blocos |
 | Religar | 5% de bateria |
-| Bateria crítica, com expressão de sono | 10% |
+| Bateria crítica, com expressão de sono, indicador vermelho e texto | 5% |
 | Tempo com a expressão feliz | ~3 s |
 | Tempo com a expressão triste, depois de um dano | ~5 s |
 | Vida para a expressão de quase morto | 10% |
@@ -88,7 +88,7 @@ Valem para todos os tiers e ficam no config.
 | Vida ao sair do conserto | 25% |
 | Intervalo para tentar de novo o resgate no vazio | 20 ticks |
 | Alcance do controle remoto ao mirar num Cubit | 32 blocos |
-| Intervalo mínimo entre repetições de textos e alertas | A definir na Fase 3 |
+| Intervalo mínimo entre repetições de textos e alertas | ~25 s |
 | Energia de 1 pó de redstone | 5.000 FE |
 | Energia de 1 bloco de redstone | 45.000 FE |
 
@@ -173,6 +173,7 @@ Planejado para a Fase 5. O tier Base não aceita cards.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 09:48 | Reduz a bateria crítica para 5% e define o intervalo mínimo. |
 | Marcelo Fabiano | 2026-11-06 00:40 | Aumenta a velocidade 1,0×. |
 | Marcelo Fabiano | 2026-11-06 00:28 | Adiciona o tempo dos olhos em X. |
 | Marcelo Fabiano | 2026-11-06 00:22 | Adiciona os valores da expressão de preocupado. |

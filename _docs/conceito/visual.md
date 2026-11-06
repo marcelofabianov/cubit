@@ -15,10 +15,12 @@ As imagens individuais estão em [`_docs/imagens/conceito/`](../imagens/conceito
 - **Modelo final:** mantém a geometria e a textura do corpo, e acrescenta só os ossos que as animações precisarem. A exceção é o tronco central, a coluna entre as esteiras e a carcaça, com 2 unidades de altura, em vez de 1,5. A carcaça sobe junto, sem mudar de tamanho.
 - **Animações:** andar, olhar para o dono, parado, e desligado e hibernando. Como o modelo não tem cabeça separada, olhar gira o corpo sobre o pescoço, com as esteiras paradas. O robô olha só para o dono, ligado e com ele por perto, inclusive parado. Tempos e poses ficam no arquivo de animação, e o resto em constantes.
 - **Esteiras:** textura por quadros, escolhidos pela distância andada, sem mudar a geometria.
-- **Braços ao levar dano:** ficam erguidos enquanto durar a expressão triste ou de olhos em X, e o corpo e as antenas continuam balançando.
+- **Braços ao levar dano:** ficam erguidos por cerca de 2 s depois do último dano, com a expressão triste ou de olhos em X, numa constante, e o corpo e as antenas continuam balançando. A lágrima segue até o fim do tempo dela.
 - **Inclinação para o dono:** com o dono 1 bloco ou mais acima ou abaixo, com o robô ligado, na mesma dimensão e até 8 blocos, o corpo inclina cerca de 8° para cima ou para baixo, com transição suave. Um pulo move só os olhos.
 - **Cor do colar:** o robô no mundo usa a cor do tier, numa camada transparente por tier, em `textures/entity/general_robot_collar/`, com as duas tonalidades do conceito. As cores ficam nos arquivos, e um pacote de recursos pode trocá-las. O ícone do item e o do `Damaged Cubit` ficam cinza e ganham cor junto dos módulos, na Fase 4.
 - **Indicador de bateria:** mostra a carga real em qualquer estado, numa camada de 8× a resolução do corpo, em `textures/entity/general_robot_battery/`, com o contorno e o preenchimento arredondados do conceito. Tem o vazio e 4 níveis, de 25% em 25%, e só fica vazio com 0 FE. O preenchimento é verde e, com a bateria crítica de [`tiers.md`](../tiers.md#valores-gerais), vermelho. Brilha no escuro enquanto a tela estiver acesa, e fica sem brilho com a tela apagada. O contorno nunca brilha.
+
+- **Textos na tela:** o mod desenha os textos numa camada própria, só do cliente, em 75% do tamanho da fonte do jogo, cerca de 3 pixels da interface acima do que estiver em cima da hotbar, e sobem sozinhos com corações e armadura. Duram cerca de 3 s, como a mensagem do jogo. Tamanho, distância e duração ficam em constantes, porque são só visuais.
 
 ## O que o conceito mostra
 
@@ -46,7 +48,7 @@ São dez: normal, feliz, sono, alerta, surpreso, carregando, desligado, triste, 
 
 São onze sons diferentes (perguntas 135, 148, 316, 320, 322 e 362). Nove entram na Fase 3, o do ataque, junto do choque, e o de modo agressivo, junto dos modos de defesa. A lista, com o arquivo e o uso de cada um, está em [`sons.md`](sons.md).
 
-Os arquivos ficam em `assets/cubit/sounds/general_robot/`, em Ogg Vorbis, mono e 48 kHz, porque o jogo só aceita esse formato e só reduz o volume com a distância em sons mono. O valor do intervalo mínimo será definido na Fase 3, num teste no jogo, e ficará no config.
+Os arquivos ficam em `assets/cubit/sounds/general_robot/`, em Ogg Vorbis, mono e 48 kHz, porque o jogo só aceita esse formato e só reduz o volume com a distância em sons mono. O intervalo mínimo fica em [`tiers.md`](../tiers.md#valores-gerais) e no config.
 
 Tocam todos, menos os alertas, que entram com os scanners, e o ataque e o modo agressivo, que entram na Fase 4.
 
@@ -69,6 +71,9 @@ Tocam todos, menos os alertas, que entram com os scanners, e o ataque e o modo a
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 10:36 | Reduz o tempo dos braços erguidos. |
+| Marcelo Fabiano | 2026-11-06 10:06 | Define como os textos são desenhados. |
+| Marcelo Fabiano | 2026-11-06 09:48 | Aponta o intervalo mínimo para `tiers.md`. |
 | Marcelo Fabiano | 2026-11-06 09:18 | Aumenta o tronco central. |
 | Marcelo Fabiano | 2026-11-06 09:03 | Define a cor do colar e o indicador de bateria. |
 | Marcelo Fabiano | 2026-11-06 01:00 | Corrige o bipe padrão, que já toca. |

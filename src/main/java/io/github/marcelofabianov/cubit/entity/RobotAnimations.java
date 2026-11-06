@@ -47,8 +47,6 @@ final class RobotAnimations {
             ARMS_CONTROLLER,
             TRANSITION_TICKS,
             state ->
-                RobotPose.raisesArms(RobotFace.expression(robot))
-                    ? state.setAndContinue(RAISED_ARMS)
-                    : PlayState.STOP));
+                RobotFace.armsRaised(robot) ? state.setAndContinue(RAISED_ARMS) : PlayState.STOP));
   }
 }

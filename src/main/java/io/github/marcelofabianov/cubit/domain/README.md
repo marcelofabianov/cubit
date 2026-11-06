@@ -35,6 +35,9 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 | `TrackFrames` | Qual quadro da esteira vale em cada distância andada |
 | `OwnerLook` | Quando o robô vira o corpo para o dono |
 | `HealthLevel` | A vida mostrada numa barra, sem falso zero |
+| `RobotNotice` | Os textos curtos que o robô mostra ao dono |
+| `NoticeRules` | Em que estado o robô fala |
+| `NoticeRepeat` | Quanto um aviso ainda espera para poder se repetir |
 | `BatteryIndicator` | O que o indicador nas costas mostra: vazio, ou de 1 a 4 níveis, normal ou crítico |
 | `PowerSound` | Som tocado uma vez, ao ligar ou desligar |
 | `ContinuousSound` | Som em loop enquanto a condição valer: esteira, curto elétrico e recarga |
@@ -55,7 +58,7 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 - **Operações informam o que moveu:** `recharge` devolve o que foi aceito, e `consume`, o que foi consumido. Assim, quem chama sabe o que sobrou e não perde energia.
 - **Expressões:** o estado vem primeiro, porque tela apagada e carregando não dependem do resto. Depois vêm vida baixa e dano, os avisos e o sono, e a feliz cede a eles (perguntas 368 e 379). O bipe não toca ao sair de uma tela apagada ou carregando, porque ligar e ser colocado têm som próprio e carregar o mundo não é uma troca (pergunta 369).
 - **Pose pela expressão:** o cliente já recebe a expressão, e tela apagada e carregando só existem com o robô desligado ou na base, então a pose não precisa de um dado novo. Empurrado, ele continua na pose de desligado (pergunta 394).
-- **Braços junto do dano:** ficam erguidos enquanto durar a expressão triste ou de olhos em X, sem parar o balanço do corpo (perguntas 402 e 403).
+- **Braços junto do dano:** ficam erguidos por um tempo menor que o da expressão triste ou de olhos em X, sem parar o balanço do corpo (perguntas 403 e 445).
 - **Olhar para o dono:** um pulo ou uma queda rápida movem os olhos por um tempo, e estar em outro nível os mantém enquanto durar. O limite da queda fica acima da velocidade de pousar de um pulo, para o pulo não terminar com os olhos para baixo. O movimento do próprio robô vence (perguntas 404, 406 e 407).
 - **Inclinação só por nível:** o corpo inclina de leve com o dono em outro nível, mas não num pulo, que move só os olhos, para ele não balançar a cada salto (perguntas 410 e 411).
 - **Números das animações em constantes:** são só visuais, como os da piscada (pergunta 398).
@@ -64,6 +67,8 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 - **Barra sem falso zero:** `level` só devolve 0 com a bateria vazia. Com qualquer carga, devolve ao menos 1, para o player não achar que o robô ativo está sem energia (pergunta 269).
 - **Indicador crítico em todos os níveis:** o limite crítico vem do config e pode cobrir mais de um nível, então o vermelho não pode reduzir o preenchimento. O vazio vence o crítico, porque só vale com 0 FE (perguntas 415 e 416).
 - **Brilho junto da tela:** a tela e o indicador brilham pela mesma regra, `RobotExpression.glows`, para nunca discordarem (pergunta 417).
+- **Aviso só do ativo:** um robô desligado ou na base não fala (perguntas 429 e 443). Quem chama garante que é o robô que segue (pergunta 430).
+- **Intervalo corre sempre:** a espera continua mesmo sem a condição, para um robô que oscila em volta do limite não repetir o aviso antes da hora.
 - **Comparação de porcentagem sem divisão:** `hasAtLeast` multiplica os dois lados, para ser exata com os valores de `tiers.md`.
 
 - **Tipo de robô é dado:** as regras recebem os números de um `TierSpec`, sem saber qual é o robô. Assim, um robô novo não muda as regras (regra 39 do `AGENTS.md`).

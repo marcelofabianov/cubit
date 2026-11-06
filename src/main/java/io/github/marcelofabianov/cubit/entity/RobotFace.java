@@ -7,6 +7,8 @@ import io.github.marcelofabianov.cubit.domain.behavior.GazeDirection;
 import io.github.marcelofabianov.cubit.domain.behavior.OwnerGaze;
 import io.github.marcelofabianov.cubit.domain.behavior.OwnerLook;
 import io.github.marcelofabianov.cubit.domain.behavior.RobotExpression;
+import io.github.marcelofabianov.cubit.domain.behavior.RobotNotice;
+import io.github.marcelofabianov.cubit.domain.behavior.RobotPose;
 import io.github.marcelofabianov.cubit.domain.behavior.RobotSituation;
 import io.github.marcelofabianov.cubit.registry.CubitSounds;
 import net.minecraft.world.entity.player.Player;
@@ -21,6 +23,7 @@ public final class RobotFace {
   private ExpressionTimer hurt = ExpressionTimer.STOPPED;
   private ExpressionTimer worried = ExpressionTimer.STOPPED;
   private ExpressionTimer dying = ExpressionTimer.STOPPED;
+  private ExpressionTimer armsRaised = ExpressionTimer.STOPPED;
   private int lastHurtTime;
   private int lastOwnerHurtTime;
   private OwnerGaze ownerGaze = OwnerGaze.LEVEL;
@@ -32,6 +35,10 @@ public final class RobotFace {
 
   public static RobotExpression expression(RobotEntity robot) {
     return RobotExpression.values()[robot.getEntityData().get(RobotSyncedData.EXPRESSION)];
+  }
+
+  public static boolean armsRaised(RobotEntity robot) {
+    return robot.getEntityData().get(RobotSyncedData.ARMS_RAISED);
   }
 
   public static GazeDirection ownerGaze(RobotEntity robot) {
@@ -54,6 +61,10 @@ public final class RobotFace {
     hurt = hurt.tick();
     worried = worried.tick();
     dying = dying.tick();
+    robot
+        .getEntityData()
+        .set(RobotSyncedData.ARMS_RAISED, RobotPose.raisesArms(next, armsRaised.isRunning()));
+    armsRaised = armsRaised.tick();
     if (ExpressionRules.beeps(expression(robot), next)) {
       robot.playSound(CubitSounds.EXPRESSION_BEEP.get());
     }
@@ -87,6 +98,8 @@ public final class RobotFace {
     if (robot.hurtTime > lastHurtTime) {
       hurt = ExpressionTimer.started(CubitMod.CONFIG.hurtExpressionTicks());
       dying = ExpressionTimer.started(CubitMod.CONFIG.dyingExpressionTicks());
+      armsRaised = ExpressionTimer.started(RobotPose.ARMS_RAISED_TICKS);
+      robot.notices().show(RobotNotice.HURT);
     }
     lastHurtTime = robot.hurtTime;
   }
@@ -97,6 +110,7 @@ public final class RobotFace {
     int ownerHurtTime = owner == null ? 0 : owner.hurtTime;
     if (ownerHurtTime > lastOwnerHurtTime && isNear(owner)) {
       worried = ExpressionTimer.started(CubitMod.CONFIG.worriedExpressionTicks());
+      robot.notices().show(RobotNotice.OWNER_HURT);
     }
     lastOwnerHurtTime = ownerHurtTime;
   }

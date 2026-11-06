@@ -42,7 +42,7 @@ public final class RobotLooksGameTests {
   private static final int SETTLE_TICKS = 3;
   private static final float HEALTH = 25f;
   private static final Energy ONE_FE = new Energy(1);
-  private static final Energy AT_CRITICAL = new Energy(30_000);
+  private static final Energy AT_CRITICAL = new Energy(15_000);
   private static final Energy QUARTER = new Energy(75_000);
   private static final Energy HALF = new Energy(150_000);
   private static final Energy FULL = new Energy(300_000);
