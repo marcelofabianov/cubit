@@ -34,7 +34,7 @@ final class FollowOwnerGoal extends Goal {
 
   @Override
   public boolean canUse() {
-    return nextAction(robot.followedPlayer()) != FollowAction.STOP;
+    return nextAction(RobotInteractions.followedPlayer(robot)) != FollowAction.STOP;
   }
 
   @Override
@@ -54,7 +54,7 @@ final class FollowOwnerGoal extends Goal {
 
   @Override
   public void tick() {
-    Player owner = robot.followedPlayer();
+    Player owner = RobotInteractions.followedPlayer(robot);
     if (owner == null) {
       return;
     }

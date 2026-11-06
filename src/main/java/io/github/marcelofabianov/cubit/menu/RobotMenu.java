@@ -2,6 +2,7 @@ package io.github.marcelofabianov.cubit.menu;
 
 import io.github.marcelofabianov.cubit.item.EnergySlotItems;
 import io.github.marcelofabianov.cubit.registry.CubitMenus;
+import java.util.function.IntConsumer;
 import java.util.function.IntSupplier;
 import java.util.function.Predicate;
 import net.minecraft.network.FriendlyByteBuf;
@@ -32,6 +33,7 @@ public final class RobotMenu extends AbstractContainerMenu {
   private final Container container;
   private final Predicate<Player> stillValid;
   private int shownBatteryPercent;
+  private int shownHealthPercent;
 
   public RobotMenu(
       int containerId,
@@ -39,6 +41,7 @@ public final class RobotMenu extends AbstractContainerMenu {
       Container container,
       Container energySlot,
       IntSupplier batteryPercent,
+      IntSupplier healthPercent,
       Predicate<Player> stillValid) {
     super(CubitMenus.ROBOT.get(), containerId);
     this.container = container;
@@ -46,18 +49,8 @@ public final class RobotMenu extends AbstractContainerMenu {
     int rows = rowsFor(container.getContainerSize());
     addRobotSlots(rows);
     addEnergySlot(energySlot);
-    addDataSlot(
-        new DataSlot() {
-          @Override
-          public int get() {
-            return batteryPercent.getAsInt();
-          }
-
-          @Override
-          public void set(int value) {
-            shownBatteryPercent = value;
-          }
-        });
+    addDataSlot(shownValue(batteryPercent, value -> shownBatteryPercent = value));
+    addDataSlot(shownValue(healthPercent, value -> shownHealthPercent = value));
     addPlayerSlots(playerInventory, rows);
   }
 
@@ -70,6 +63,7 @@ public final class RobotMenu extends AbstractContainerMenu {
         new SimpleContainer(data.readVarInt()),
         new SimpleContainer(ENERGY_SLOT_SIZE),
         () -> 0,
+        () -> 0,
         player -> true);
   }
 
@@ -80,6 +74,7 @@ public final class RobotMenu extends AbstractContainerMenu {
       Container container,
       Container energySlot,
       IntSupplier batteryPercent,
+      IntSupplier healthPercent,
       Predicate<Player> stillValid) {
     player.openMenu(
         new SimpleMenuProvider(
@@ -90,6 +85,7 @@ public final class RobotMenu extends AbstractContainerMenu {
                     container,
                     energySlot,
                     batteryPercent,
+                    healthPercent,
                     stillValid),
             title),
         data -> writeSize(data, container));
@@ -111,6 +107,24 @@ public final class RobotMenu extends AbstractContainerMenu {
 
   public int batteryPercent() {
     return shownBatteryPercent;
+  }
+
+  public int healthPercent() {
+    return shownHealthPercent;
+  }
+
+  private static DataSlot shownValue(IntSupplier source, IntConsumer shown) {
+    return new DataSlot() {
+      @Override
+      public int get() {
+        return source.getAsInt();
+      }
+
+      @Override
+      public void set(int value) {
+        shown.accept(value);
+      }
+    };
   }
 
   public int rows() {

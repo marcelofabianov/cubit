@@ -23,6 +23,13 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 | `FollowingRobotPolicy` | Garante que só um robô siga o player |
 | `RobotActivity` | O que o robô faz no tick: andar, peso, água, altura subida e condição negativa. Quem chama informa, e o domínio decide o gasto |
 | `ConsumptionExtras` | Extras de energia de um `TierSpec`, por situação |
+| `RobotExpression` | O que a tela do rosto mostra |
+| `ExpressionRules` | Qual expressão vence e quando a troca toca o bipe |
+| `RobotSituation` | O que vale agora para escolher a expressão |
+| `ExpressionTimer` | Quanto tempo uma expressão temporária ainda dura |
+| `BlinkFrame` e `BlinkCycle` | Os quadros da piscada e qual vale em cada tick |
+| `GazeDirection` e `GazeTracker` | Para onde os olhos olham, com a subida e a descida de cada tick |
+| `HealthLevel` | A vida mostrada numa barra, sem falso zero |
 | `PowerSound` | Som tocado uma vez, ao ligar ou desligar |
 | `ContinuousSound` | Som em loop enquanto a condição valer: esteira, curto elétrico e recarga |
 | `RobotSoundRules` | Diz qual som cada situação toca |
@@ -40,6 +47,8 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 
 - **Energia inteira:** evita erro de arredondamento, e uma transferência nunca cria nem perde FE.
 - **Operações informam o que moveu:** `recharge` devolve o que foi aceito, e `consume`, o que foi consumido. Assim, quem chama sabe o que sobrou e não perde energia.
+- **Expressões:** o estado vem primeiro, porque tela apagada e carregando não dependem do resto. Depois vêm vida baixa e dano, os avisos e o sono, e a feliz cede a eles (perguntas 368 e 379). O bipe não toca ao sair de uma tela apagada ou carregando, porque ligar e ser colocado têm som próprio e carregar o mundo não é uma troca (pergunta 369).
+- **Olhar sem tremer:** a direção fica um tempo depois do movimento, porque um degrau dura poucos ticks (perguntas 375 e 376).
 - **Sons:** entrar na base não toca o som de desligar, porque a recarga já toca, e a recarga só vale com a carga subindo de fato, para não tocar com a bateria cheia nem com o Dock sem energia (perguntas 358 e 359).
 - **Barra sem falso zero:** `level` só devolve 0 com a bateria vazia. Com qualquer carga, devolve ao menos 1, para o player não achar que o robô ativo está sem energia (pergunta 269).
 - **Comparação de porcentagem sem divisão:** `hasAtLeast` multiplica os dois lados, para ser exata com os valores de `tiers.md`.

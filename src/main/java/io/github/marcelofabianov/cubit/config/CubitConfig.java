@@ -49,6 +49,7 @@ public final class CubitConfig {
   private final DamagedRobotSection damagedRobot;
   private final EnergySlotSection energySlot;
   private final LoadSection load;
+  private final ExpressionSection expression;
   private final DockSection dock;
   private final TierCatalog tierCatalog;
 
@@ -60,6 +61,7 @@ public final class CubitConfig {
     damagedRobot = new DamagedRobotSection(builder);
     energySlot = new EnergySlotSection(builder);
     load = new LoadSection(builder);
+    expression = new ExpressionSection(builder);
     dock = new DockSection(builder);
     builder.pop();
 
@@ -82,6 +84,34 @@ public final class CubitConfig {
 
   public Percentage initialCharge() {
     return new Percentage(general.initialCharge.get());
+  }
+
+  public Percentage criticalCharge() {
+    return new Percentage(expression.criticalCharge.get());
+  }
+
+  public int worriedExpressionTicks() {
+    return expression.worriedTicks.get();
+  }
+
+  public int worriedRadiusBlocks() {
+    return expression.worriedRadius.get();
+  }
+
+  public int dyingExpressionTicks() {
+    return expression.dyingTicks.get();
+  }
+
+  public int hurtExpressionTicks() {
+    return expression.hurtTicks.get();
+  }
+
+  public Percentage dyingHealth() {
+    return new Percentage(expression.dyingHealth.get());
+  }
+
+  public int happyExpressionTicks() {
+    return expression.happyTicks.get();
   }
 
   public PowerRules powerRules() {

@@ -73,6 +73,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Parada do robô:** uma navegação própria cancela o recálculo de rota pendente, para o robô parado não voltar a andar.
 - **Painel do slot de energia:** visual melhor e tooltips ficam para a tela própria da Fase 3.
 - **Barras de bateria:** mostram ao menos um risco enquanto houver carga e só ficam vazias com 0 FE.
+- **Barra de vida:** vermelha, ao lado da bateria no painel do inventário, sem falso zero.
 - **Documentação para o player (fase a definir):** uma wiki em site estático no GitHub e um livro entregue ao criar o mundo, que aponta para ela.
 - **Consumo por situação:** inventário cheio, água, subida e condições negativas somam um extra ao gasto. Com o inventário cheio, a velocidade cai. Os números estão em [`tiers.md`](tiers.md#consumo-por-atividade).
 - **Slot de energia do Cubit:** existe em todos os tiers e aceita uma Power Bank ou redstone por vez. A redstone entra na Fase 2, e a Power Bank na Fase 4.
@@ -80,7 +81,9 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Ao colocar no mundo:** toca só o som de colocar. O de ligar fica para a passagem de desligado a ligado.
 - **Margem das telas:** os 4 blocos ficam em constante, fora do config, porque seguem o padrão do jogo.
 - **Ao atacar:** mantém a expressão atual, com o som de ataque.
-- **Ordem da Fase 3:** a do [`checklist.md`](../checklist.md), com alguns itens entrando em partes, até os scanners ligarem o resto.
+- **Ordem da Fase 3:** a do [`checklist.md`](../checklist.md), com o intervalo mínimo junto dos textos e alguns itens entrando em partes, até os scanners ligarem o resto.
+- **Expressões:** camada própria da tela, com 8× a resolução do corpo, recortada do conceito, e brilho no escuro. Ordem: tela apagada, carregando, quase morto, triste, preocupado, alerta, surpreso, sono, feliz e normal.
+- **Piscada e olhar:** só na expressão normal, no cliente e sem bipe: pisca a cada 5 s, e os olhos acompanham a subida e a descida.
 - **Comunicação:** bipes e expressões, com poucos textos simples e diretos.
 - **Sons:** onze sons. Nove entram na Fase 3, o do ataque, junto do choque, e o de modo agressivo, junto dos modos de defesa. O bipe padrão toca nas trocas de expressão sem som exclusivo. O intervalo mínimo entre repetições será definido na Fase 3, e os sons são do desenvolvedor. Todos os players por perto ouvem, com volume e alcance no `sounds.json`.
 - **Modelo:** a geometria melhora já na Fase 2, com os detalhes das seis vistas, tudo fixo e sem mudar a hitbox. As animações e as expressões seguem na Fase 3.
@@ -95,6 +98,12 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 00:22 | Atualiza a ordem das expressões. |
+| Marcelo Fabiano | 2026-11-06 00:20 | Registra a barra de vida. |
+| Marcelo Fabiano | 2026-11-06 00:10 | Atualiza a ordem das expressões. |
+| Marcelo Fabiano | 2026-11-05 23:56 | Registra a piscada e o olhar. |
+| Marcelo Fabiano | 2026-11-05 23:36 | Registra as expressões. |
+| Marcelo Fabiano | 2026-11-05 23:30 | Atualiza a ordem da Fase 3. |
 | Marcelo Fabiano | 2026-11-05 23:16 | Registra o som de modo agressivo. |
 | Marcelo Fabiano | 2026-11-05 22:39 | Registra quem ouve os sons. |
 | Marcelo Fabiano | 2026-11-05 22:37 | Registra a ordem da Fase 3. |

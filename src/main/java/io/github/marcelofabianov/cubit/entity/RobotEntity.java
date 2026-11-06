@@ -19,6 +19,7 @@ import io.github.marcelofabianov.cubit.domain.tier.TierSpec;
 import io.github.marcelofabianov.cubit.player.DeadRobotLinks;
 import io.github.marcelofabianov.cubit.player.FollowingRobotLink;
 import io.github.marcelofabianov.cubit.registry.CubitAttachments;
+import io.github.marcelofabianov.cubit.registry.CubitSounds;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.function.Supplier;
@@ -28,6 +29,7 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.Container;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
@@ -60,7 +62,6 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
   private static final String POWER_STATE_KEY = "PowerState";
   private static final String INVENTORY_KEY = "Inventory";
   private static final String ENERGY_SLOT_KEY = "EnergySlot";
-  private static final double INVENTORY_REACH_MARGIN = 4;
   private static final String NO_OWNER_MESSAGE = "Robot {} has no owner. Nobody can interact.";
   private static final double ONE_BLOCK_STEP = 1;
   private static final int BURNING_GOAL_PRIORITY = 0;
@@ -69,6 +70,10 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
   private static final int FOLLOW_GOAL_PRIORITY = 3;
   private static final float BLOCKED_ROUTE = -1f;
   private static final float OPEN_ROUTE = 0f;
+
+  static {
+    RobotSyncedData.load();
+  }
 
   private final RobotType robotType;
   private final Supplier<Item> item;
@@ -83,6 +88,7 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
   private final RobotStepMeter stepMeter = new RobotStepMeter();
   private final RobotInventory inventory;
   private final RobotDocking docking = new RobotDocking(this);
+  private final RobotFace face = new RobotFace(this);
 
   public RobotEntity(
       EntityType<? extends RobotEntity> type,
@@ -110,7 +116,7 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
   @Override
   protected void defineSynchedData(SynchedEntityData.Builder builder) {
     super.defineSynchedData(builder);
-    RobotAudio.defineData(builder);
+    RobotSyncedData.define(builder);
   }
 
   @Override
@@ -144,15 +150,7 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
     powerState = outcome.state();
     player.setData(CubitAttachments.FOLLOWING_ROBOT, new FollowingRobotLink(outcome.follower()));
     RobotAudio.onPlaced(this);
-  }
-
-  /** The player this robot follows right now, when that player is online. */
-  Player followedPlayer() {
-    Player owner = onlineOwner();
-    if (owner == null || !follower(owner).filter(getUUID()::equals).isPresent()) {
-      return null;
-    }
-    return owner;
+    face.onInteraction();
   }
 
   public RobotState state() {
@@ -165,6 +163,10 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
 
   RobotDocking docking() {
     return docking;
+  }
+
+  RobotFace face() {
+    return face;
   }
 
   Battery battery() {
@@ -239,10 +241,7 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
 
   /** Checked on the server while the screen is open, because the robot can die or switch off. */
   public boolean canUseInventory(Player player) {
-    return isAlive()
-        && powerState.isInteractive()
-        && player.getUUID().equals(ownerId)
-        && player.canInteractWithEntity(this, INVENTORY_REACH_MARGIN);
+    return RobotInteractions.canUseInventory(this, player);
   }
 
   public Container inventory() {
@@ -280,6 +279,7 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
     Energy chargeBefore = battery.charge();
     docking.tick();
     updateEnergy(chargeBefore);
+    face.tick();
     RobotLoadSpeed.update(this, inventory.isFull());
     inventory.dropSurplus(
         stack -> Containers.dropItemStack(level(), getX(), getY(), getZ(), stack));
@@ -315,6 +315,12 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
         DeadRobotLinks.onRobotDied(serverLevel.getServer(), ownerId, getUUID());
       }
     }
+  }
+
+  /** On fire, the short circuit already loops, so the hits of the fire do not repeat it. */
+  @Override
+  protected SoundEvent getHurtSound(DamageSource source) {
+    return isOnFire() ? null : CubitSounds.SHORT_CIRCUIT.get();
   }
 
   @Override

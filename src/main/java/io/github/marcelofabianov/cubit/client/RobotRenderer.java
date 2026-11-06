@@ -15,5 +15,6 @@ final class RobotRenderer extends GeoEntityRenderer<RobotEntity> {
         context,
         new DefaultedEntityGeoModel<>(
             ResourceLocation.fromNamespaceAndPath(CubitMod.MOD_ID, robotType.id())));
+    addRenderLayer(new RobotScreenLayer(this, robotType));
   }
 }

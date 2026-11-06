@@ -29,6 +29,8 @@ final class RobotScreen extends AbstractContainerScreen<RobotMenu> {
   private static final int BAR_TOP = 40;
   private static final int BAR_HEIGHT = 24;
   private static final int BAR_X = -14;
+  private static final int HEALTH_BAR_X = -22;
+  private static final int HEALTH_BAR_COLOR = 0xFFFF5555;
   private static final int BAR_WIDTH = 6;
   private static final int PERCENT = 100;
 
@@ -60,12 +62,16 @@ final class RobotScreen extends AbstractContainerScreen<RobotMenu> {
     int slotX = left + RobotMenu.ENERGY_SLOT_X - 1;
     int slotY = top + SLOT_Y - 1;
     graphics.fill(slotX, slotY, slotX + SLOT_SIZE, slotY + SLOT_SIZE, SLOT_COLOR);
-    int barX = left + BAR_X;
+    renderBar(graphics, left + HEALTH_BAR_X, top, menu.healthPercent(), HEALTH_BAR_COLOR);
+    renderBar(graphics, left + BAR_X, top, menu.batteryPercent(), BAR_COLOR);
+  }
+
+  private void renderBar(GuiGraphics graphics, int barX, int top, int percent, int color) {
     int barBottom = top + BAR_TOP + BAR_HEIGHT;
     graphics.fill(barX, top + BAR_TOP, barX + BAR_WIDTH, barBottom, BAR_BACK_COLOR);
-    // Rounds up, because 1% is less than one pixel and the bar must still show some charge.
-    int filled = (BAR_HEIGHT * menu.batteryPercent() + PERCENT - 1) / PERCENT;
-    graphics.fill(barX, barBottom - filled, barX + BAR_WIDTH, barBottom, BAR_COLOR);
+    // Rounds up, because 1% is less than one pixel and the bar must still show something.
+    int filled = (BAR_HEIGHT * percent + PERCENT - 1) / PERCENT;
+    graphics.fill(barX, barBottom - filled, barX + BAR_WIDTH, barBottom, color);
   }
 
   @Override
