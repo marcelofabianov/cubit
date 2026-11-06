@@ -120,7 +120,8 @@ Valem para todos os tiers e ficam no config.
 | Recurso | Base | Avançado | Elite | Ultimate |
 |---|---|---|---|---|
 | Seguir o player | ✔ | ✔ | ✔ | ✔ |
-| Modo área (controle remoto) | Bloqueado | Até 16×16 | Até 32×32 | Até 64×64 |
+| Modo área (controle remoto), na base | Bloqueado | Até 16×16 | Até 32×32 | Até 64×64 |
+| Altura máxima da área | — | A definir | A definir | A definir |
 | Local de morte | Bloqueado | Marca a coordenada | Marca e guia até lá | Marca e guia até lá |
 
 ## Slots exclusivos
@@ -159,13 +160,14 @@ Planejado para a Fase 5. O tier Base não aceita cards.
 - antenas e chunks por tier do Servidor, área e consumo por tier da antena e teto de chunks no mundo;
 - consumo do Servidor e da antena com o carregamento desligado;
 - custo por ação de cada card, percentuais de Inquebrável e Remendo e dano do Defensor;
-- altura máxima da área, limites por tick e distância do Dock ao Servidor ou à antena;
+- limites por tick e distância do Dock ao Servidor ou à antena;
 - limite de animais do Pecuarista, intervalo do Pescador e custo do storage e tamanho dos canais.
 
 ## Histórico de modificações
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 21:34 | Adiciona a altura máxima da área, antecipada para a Fase 4. |
 | Marcelo Fabiano | 2026-11-05 21:02 | Avisa da viabilidade do feixe, adiciona o intervalo dos alertas e amplia o nome do alcance. |
 | Marcelo Fabiano | 2026-11-05 17:15 | Adiciona o tempo com a tela completa. |
 | Marcelo Fabiano | 2026-11-05 16:09 | Adiciona o tempo sem avançar até o Dock. |

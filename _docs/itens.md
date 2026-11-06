@@ -50,7 +50,7 @@ Receitas provisórias, só com recursos do jogo puro, a ajustar nos testes:
 ## Virar item
 
 - O player pode recolher o robô a qualquer momento, em qualquer estado.
-- O item mantém bateria, vida, inventário, nome, cor, tier e configurações, nos *data components* do 1.21.1.
+- O item mantém bateria, vida, inventário, nome, cor, tier e configurações, nos *data components* do 1.21.1. As configurações são o modo de defesa, os filtros e os slots ativados ou desativados. A área, os baús marcados e a seleção no controle se perdem ao recolher.
 - O item empilha em 1 e mostra a bateria numa barra.
 - O item não entra no inventário do robô nem em shulker boxes.
 - O tipo do robô vem do próprio item, e o dono é quem o coloca. O robô ganha um UUID novo a cada colocação.
@@ -123,6 +123,7 @@ O estado salvo é validado ao entrar no jogo, sem derrubá-lo (regra 17 do `AGEN
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 21:34 | Detalha o que o item guarda das configurações. |
 | Marcelo Fabiano | 2026-11-05 21:02 | Detalha o contrato do slot de energia na entidade. |
 | Marcelo Fabiano | 2026-11-05 16:57 | Adiciona os estados do bloco do Dock. |
 | Marcelo Fabiano | 2026-11-05 16:09 | Adiciona os contratos do Induction Dock. |

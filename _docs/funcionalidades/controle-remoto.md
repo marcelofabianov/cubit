@@ -13,6 +13,8 @@ O controle atende todos os Cubits do player, desde que estejam ligados. Mirando 
 
 O controle é o mesmo em todos os tiers. As opções bloqueadas aparecem desabilitadas.
 
+Parado pelo controle, o Cubit continua ativo e com o vínculo, não anda nem teleporta, e esse estado é salvo. Voltar a seguir retoma. Parado, ele não gasta energia.
+
 Desligado pelo controle, o Cubit segue as regras do estado inativo, mesmo com bateria, e só volta a ficar ativo pelo controle. Ligar é a única ação do controle sobre um Cubit desligado.
 
 ## Localizar
@@ -21,12 +23,17 @@ O controle lista todos os Cubits do player, sem limite de distância, com nome, 
 
 ## Modo área
 
-A área é marcada com o controle, clicando com o botão direito nos blocos para formar um quadrado ou retângulo.
+A área é marcada com o controle, clicando com o botão direito em dois blocos, os cantos de um volume em 3D. Os limites de [`tiers.md`](../tiers.md#autonomia), como 16×16, valem para a base, e a altura máxima fica no config.
+
+- **Sem card:** o Cubit coleta os itens do chão dentro da área, respeitando o filtro de coleta, e descarrega no baú marcado.
+- **Com card, na Fase 5:** vale [`robos-especializados.md`](robos-especializados.md).
+- **Ao recolher:** a área, os baús marcados e a seleção no controle se perdem.
 
 ## Histórico de modificações
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 21:34 | Define o parar, a área em 3D e o que o Cubit sem card faz nela. |
 | Marcelo Fabiano | 2026-11-05 00:12 | Usa o termo modo de defesa. |
 | Marcelo Fabiano | 2026-11-04 17:28 | Define o alcance do controle e da função de localizar. |
 | Marcelo Fabiano | 2026-11-04 17:15 | Renomeia para português e atualiza os caminhos. |

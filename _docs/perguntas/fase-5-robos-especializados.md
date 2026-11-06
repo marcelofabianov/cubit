@@ -4,7 +4,9 @@ Conceito para depois da Fase 4. Registrar aqui não autoriza implementar.
 
 ## Pendentes
 
-Não há perguntas pendentes nesta fase.
+| # | Pergunta | Recomendação |
+|---|---|---|
+| 339 | O slot de fornalha fica só para o card de Minerador? | Manter a fornalha como está em `tiers.md` até decidir os cards, porque ela entra na Fase 4, antes deles. Vem da [pergunta 258](fase-2-versao-minima.md) |
 
 ## Respondidas
 
@@ -13,8 +15,8 @@ Não há perguntas pendentes nesta fase.
 | 190 | Onde registrar as ideias de robôs especializados? | Numa nova Fase 5, neste arquivo, com a fase no roadmap como planejada. Nada é implementado antes de a Fase 4 terminar |
 | 191 | Como o card funciona no Cubit? | Fica num slot exclusivo e sai quando o player quiser, sem perda. Sem card, o Cubit é generalista. Morrer e recolher preservam o card |
 | 192 | Quantas especialidades um Cubit tem ao mesmo tempo? | Uma, e o tier melhora o que o card faz |
-| 193 | O que faz um Cubit com card quando está seguindo o player? | Age como generalista. O card só age em área marcada. Exceções podem ser decididas card a card |
-| 194 | Como definir a altura da área de trabalho? | O player marca dois cantos em 3D, e a altura vem deles. A altura máxima fica no config, por tier |
+| 193 | O que faz um Cubit com card quando está seguindo o player? | Age como generalista. O card só age em área marcada. Exceções podem ser decididas card a card. A [pergunta 340](fase-4-upgrades-e-autonomia.md) define o que ele faz na área sem card |
+| 194 | Como definir a altura da área de trabalho? | O player marca dois cantos em 3D, e a altura vem deles. A altura máxima fica no config, por tier. A [pergunta 342](fase-4-upgrades-e-autonomia.md) antecipa isso para a Fase 4 |
 | 195 | O que o Cubit nunca pode quebrar ou alterar? | Blocos com dados, como baús, máquinas, Dock, antena e Servidor, e a tag de blocos protegidos, que o pack pode editar. Cada card só mexe no seu tipo de bloco |
 | 196 | O que o Cubit faz com o inventário cheio durante o trabalho? | Descarrega no baú o que conseguir. Quando não conseguir mais, entra em hibernação e só volta quando o player o religar. O termo é detalhado na pergunta 198 |
 | 197 | Com que o Minerador cava? | Sem item de picareta, com a capacidade do tier. Base equivale a picareta de ferro, Avançado a de diamante, e Elite e Ultimate também a de diamante. A pergunta 210 muda isso: o Base não usa card, e o Avançado equivale a picareta de ferro. Os dois primeiros tiers não têm opções. Elite e Ultimate ativam uma ou mais opções equivalentes a encantamentos, como fortuna, eficiência e toque suave. Elite tem lista e nível limitados, e Ultimate abre todos os encantamentos possíveis de picareta, no último nível |
@@ -74,14 +76,18 @@ Não há perguntas pendentes nesta fase.
 | 251 | Em que ordem a Fase 5 seria entregue, com os novos cards? | Base comum; Fazendeiro e Pescador; Organizador, com o modo de abastecer; Cozinheiro; Defensor; Minerador; Construtor; Pecuarista; antena e chunks; Servidor, log e viagem; storage. Muda a pergunta 236 |
 | 252 | Como seguir para consolidar? | Reavaliar se há furos. Se não houver, consolidar |
 | 253 | Como o Cubit volta ao trabalho depois de hibernar fora do Dock? | Por um botão `Retomar` na tela e pelo Cubit Remote. O clique direito continua abrindo a tela, e Shift + clique continua recolhendo. Se o motivo não sumiu, ele hiberna de novo e explica. Detalha a pergunta 198 |
-| 254 | Como um Cubit passa a trabalhar e como volta? | Com o Cubit Remote, o player define a área, e o processo só termina ao selecionar o Cubit no controle. O controle também manda esvaziar o inventário ou voltar à base. Se o player recolher o Cubit e colocá-lo de novo, precisa refazer a configuração |
+| 254 | Como um Cubit passa a trabalhar e como volta? | Com o Cubit Remote, o player define a área, e o processo só termina ao selecionar o Cubit no controle. O controle também manda esvaziar o inventário ou voltar à base. Se o player recolher o Cubit e colocá-lo de novo, precisa refazer a configuração. A [pergunta 343](fase-4-upgrades-e-autonomia.md) detalha o que se perde |
 | 255 | A antena gasta bateria com o carregamento desligado? | Um valor menor, no config, só para o log. Sem carga, deixa de enviar log, mas continua valendo como referência de Dock |
+| 344 | Quais são os modos do Minerador? | Como ideia inicial: escavar a área, abrir túnel reto ou em degraus e buscar minérios do filtro, um modo por vez e sempre dentro da área. Os detalhes ficam para a entrega do card |
 | 256 | Quais são os nomes no jogo? | Robot Server (`cubit:robot_server`), Signal Antenna (`cubit:signal_antenna`), Wireless Chest (`cubit:wireless_chest`), Wireless Storage Upgrade, e os cards Miner, Farmer, Rancher, Defender, Organizer, Builder, Cook e Fisher. Viram contrato só quando implementados |
 
 ## Histórico de modificações
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 21:36 | Registra a resposta 344. |
+| Marcelo Fabiano | 2026-11-05 21:34 | Aponta as respostas 193, 194 e 254 para a Fase 4. |
+| Marcelo Fabiano | 2026-11-05 21:30 | Registra a pendência 339. |
 | Marcelo Fabiano | 2026-11-05 21:02 | Aponta a resposta 229 para a 243. |
 | Marcelo Fabiano | 2026-11-05 12:07 | Registra as respostas 253, 254, 255 e 256. |
 | Marcelo Fabiano | 2026-11-05 12:03 | Registra as respostas 250, 251 e 252 e aponta as 236 e 249 para elas. |

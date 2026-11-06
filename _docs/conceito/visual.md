@@ -35,11 +35,11 @@ São dez sons diferentes (perguntas 135, 148, 316, 320 e 322). Nove entram na Fa
 | 3 | Ao encontrar um minério raro | Alerta, com intervalo mínimo entre repetições | `rare_ore_alert.ogg` |
 | 4 | Ao trocar para uma expressão sem som exclusivo: normal, feliz ou sono | Bipe padrão | `expression_beep.ogg` |
 | 5 | Enquanto pega fogo | Curto elétrico | `short_circuit.ogg` |
-| 6 | Ao ligar | Próprio | `power_on.ogg` |
+| 6 | Ao passar de desligado a ligado | Próprio | `power_on.ogg` |
 | 7 | Ao desligar | Próprio | `power_off.ogg` |
 | 8 | Enquanto é recarregado | Próprio | `recharging.ogg` |
 | 9 | Ao atacar | Choque | `shock_attack.ogg` |
-| 10 | Ao ser colocado no mundo | Próprio | `placed.ogg` |
+| 10 | Ao ser colocado no mundo, em qualquer estado | Próprio | `placed.ogg` |
 
 Os arquivos ficam em `assets/cubit/sounds/general_robot/`, em Ogg Vorbis, mono e 48 kHz, porque o jogo só aceita esse formato e só reduz o volume com a distância em sons mono. Ainda não tocam no jogo. O valor do intervalo mínimo será definido na Fase 3, num teste no jogo, e ficará no config.
 
@@ -53,6 +53,7 @@ Os arquivos ficam em `assets/cubit/sounds/general_robot/`, em Ogg Vorbis, mono e
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 21:30 | Separa o som de ligar do som de colocar. |
 | Marcelo Fabiano | 2026-11-05 21:02 | Trata a GeckoLib como dependência do mod. |
 | Marcelo Fabiano | 2026-11-05 20:36 | Define a fase do som de colocar no mundo. |
 | Marcelo Fabiano | 2026-11-05 20:26 | Adiciona o som de colocar no mundo. |
