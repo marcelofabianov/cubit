@@ -2,10 +2,7 @@
 
 ## Pendentes
 
-| # | Pergunta | Recomendação |
-|---|---|---|
-| 337 | Quando publicar a `0.1.0`? | Depois das receitas e dos dois testes da regra 35, numa instância só com o mod e no Iron Meridian. A pergunta 6 define a versão, mas não o momento |
-| 338 | Os sons podem ser publicados? | Conferir os termos das ferramentas de IA usadas antes de publicar, porque os arquivos vão no jar (pergunta 137) |
+Não há perguntas pendentes nesta fase.
 
 ## Respondidas
 
@@ -108,7 +105,7 @@
 | 165 | Qual é o ícone oficial do mod? | O ícone do item do Cubit. A pergunta 166 ajusta o tamanho na tela de Mods |
 | 166 | Como ficou o ícone na tela de Mods? | Bom, mas um pouco grande, e pode ser menor. Fica em arquivo próprio, com o mesmo desenho e margem transparente |
 | 167 | Onde o projeto cita que o mod não tem magia? | Só na regra 2 do `AGENTS.md`, que continua valendo. A menção sai da descrição do mod, do `README.md`, do `persona.md` e da abertura do `AGENTS.md` |
-| 168 | O texto mais completo da descrição do mod está bom? | Sim. Ele descreve a versão mínima como ficará na `0.1.0` |
+| 168 | O texto mais completo da descrição do mod está bom? | Sim. Ele descreve a versão mínima como ficará na `0.1.0`. Com a pergunta 337, precisa ser revisto antes da publicação |
 | 169 | Como ficou o ícone menor na tela de Mods? | Ok, conferido pelo desenvolvedor |
 | 170 | A regra 4 vale para o conserto, que combina itens do mod? | Tem exceção: os materiais continuam só do jogo puro, e uma receita pode combinar itens do próprio mod. A regra 4 do `AGENTS.md` foi ajustada |
 | 171 | Como fica o JSON do conserto? | Num tipo de receita do mod, `cubit:robot_repair`, com campos para o item danificado, a `Toolbox` e o resultado, porque o 1.21.1 não tem receita que copie os dados do item |
@@ -202,6 +199,10 @@
 | 351 | Como foi o roteiro manual das receitas? | O desenvolvedor fez as três receitas, do Cubit, do Induction Dock e da `Toolbox`, sem problemas. O resultado de cada passo não foi detalhado, então o momento em que aparecem no livro e o L espelhado não foram confirmados |
 | 352 | O que faz o Cubit chamado a um Dock sem energia? | Mantém o que a pergunta 305 define: entra e fica hibernando, sem carregar, até o Dock receber energia ou o player o liberar. A tela "sem energia" é o único aviso nesta fase |
 | 353 | Como acompanhar o que está pronto e o que falta em cada fase? | Num `checklist.md` na raiz. Ao encerrar um PR depois do merge, avalia-se se algum item deve ser marcado, e a marcação entra num novo commit, no PR seguinte |
+| 337 | Quando publicar a `0.1.0`? | Só ao terminar todos os itens da Fase 3. A primeira versão já inclui os sentidos. Complementa a pergunta 6 e muda a [pergunta 331](fase-3-sentidos.md) |
+| 338 | Os sons podem ser publicados? | A licença de todos os recursos presentes no repositório é MIT, inclusive os sons, gerados pelo desenvolvedor em ferramentas de IA. A exceção é o Gradle Wrapper, de terceiros, com licença própria, que não vai no jar. É decisão do desenvolvedor, e os termos das ferramentas não foram conferidos. Complementa a [pergunta 137](fase-3-sentidos.md) e a pergunta 5 |
+| 354 | O que fazer com os testes pendentes da Fase 2? | Deixar todos para o fim da Fase 3: instância limpa, Iron Meridian, outro player num servidor e as confirmações no jogo. Entram no teste da versão completa, antes da `main` |
+| 355 | A Fase 2 fica encerrada? | Sim, com o PR da issue #79, sem itens abertos no checklist. A implementação da Fase 3 continua dependendo de pedido do desenvolvedor |
 | 332 | O que faz o Cubit cheio na base com o dono offline? | Continua na base e sai quando o dono entra, porque a regra de sair precisa do vínculo guardado no player. Se o Dock sumir nesse período, ele acorda desligado, e um clique o liga. Detalha as perguntas 55 e 307 |
 | 333 | Como registrar o que está em aberto, se os arquivos diziam que não havia pendentes? | Em "Pendentes", cada uma com recomendação: receitas, momento da `0.1.0` e licença dos sons na Fase 2, e o slot de fornalha na Fase 5 |
 | 335 | A margem de 4 blocos para abrir a tela vai para o config? | Não. Fica como constante, porque não é balanceamento e segue o padrão do jogo (`Container.DEFAULT_DISTANCE_BUFFER`). É uma exceção documentada à regra 3 |
@@ -220,6 +221,10 @@
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 22:27 | Registra a resposta 355. |
+| Marcelo Fabiano | 2026-11-05 22:25 | Registra a resposta 354 e cita a exceção do Gradle Wrapper na 338. |
+| Marcelo Fabiano | 2026-11-05 22:22 | Registra a resposta 338, que sai das pendências. |
+| Marcelo Fabiano | 2026-11-05 22:21 | Registra a resposta 337, que sai das pendências, e aponta a 168 para ela. |
 | Marcelo Fabiano | 2026-11-05 22:18 | Registra a resposta 353. |
 | Marcelo Fabiano | 2026-11-05 22:11 | Registra a resposta 352. |
 | Marcelo Fabiano | 2026-11-05 22:09 | Registra a resposta 351. |

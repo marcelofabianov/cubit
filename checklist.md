@@ -32,15 +32,7 @@ O que está pronto e o que falta em cada fase do projeto. As fases estão no [`R
 
 ### Fechamento
 
-- [ ] Decidir a licença dos sons (pergunta 338)
 - [x] Atualizar o "Próximos" no `AGENTS.md`
-- [ ] Testar numa instância só com o mod e o GeckoLib (regra 35)
-- [ ] Testar no Iron Meridian, com cabos reais de FE (regra 35)
-- [ ] Testar com outro player num servidor: passo 9 do Dock e passo 6 do `/cubit reset`
-- [ ] Confirmar no jogo quando as receitas aparecem no livro e o `/cubit reset` com chunk descarregado
-- [ ] Decidir o momento e onde publicar a `0.1.0` (pergunta 337)
-- [ ] Conferir a descrição do mod
-- [ ] Publicar: `homolog`, `release/0.1.0`, `main` e tag
 
 ## Fase 3: Sentidos
 
@@ -64,6 +56,19 @@ O que está pronto e o que falta em cada fase do projeto. As fases estão no [`R
 - [ ] Nome personalizado e cor da carcaça
 - [ ] Jade
 - [ ] Tela própria do inventário, com visual melhor e tooltips
+
+## Primeira versão: `0.1.0`
+
+Sai só ao terminar todos os itens da Fase 3 (pergunta 337).
+
+- [x] Decidir o momento da publicação
+- [x] Decidir a licença dos sons (pergunta 338)
+- [ ] Decidir onde publicar: Modrinth, CurseForge ou os dois
+- [ ] Rever a descrição do mod, que hoje descreve só a Fase 2
+- [ ] Testar a versão completa numa instância só com o mod e as dependências e no Iron Meridian (regra 35), inclusive os cabos reais de FE no Dock
+- [ ] Testar com outro player num servidor: passo 9 do Dock e passo 6 do `/cubit reset`
+- [ ] Confirmar no jogo quando as receitas aparecem no livro e o `/cubit reset` com chunk descarregado
+- [ ] Publicar: `homolog`, `release/0.1.0`, `main` e tag
 
 ## Fase 4: Upgrades e autonomia
 
