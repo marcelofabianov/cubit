@@ -26,6 +26,8 @@ O script baixa o gitleaks para `.tools/`, confere o checksum e aponta o `core.ho
 | `pre-push` | GameTests | GameTest reprovada, ou mod que não carrega no servidor, como com uma classe de cliente, por meio de `scripts/development/run-gametests.sh` |
 | `pre-push` | Datagen | `src/generated` diferente do que a geração produz, por meio de `scripts/development/check-generated.sh` |
 
+O `pre-push` roda todos os gates também ao apagar uma branch remota, porque o script não diferencia esse caso.
+
 Os hooks rodam só na máquina local. Eles não bloqueiam merges feitos pelo GitHub nem um push direto de outra máquina, e o plano atual do GitHub não permite proteger branches em repositório privado.
 
 ## gitleaks
@@ -57,6 +59,7 @@ Ele exigiria aceitar o EULA em cada clone. As GameTests usam o mesmo alvo de ser
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-05 21:02 | Avisa que o `pre-push` também roda ao apagar uma branch remota. |
 | Marcelo Fabiano | 2026-11-05 00:12 | Corrige o motivo da escolha do gitleaks. |
 | Marcelo Fabiano | 2026-11-04 23:45 | Limita o gate do histórico aos arquivos de `_docs/`. |
 | Marcelo Fabiano | 2026-11-04 19:56 | Ativa os gates de GameTests e datagen no push. |
