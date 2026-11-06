@@ -12,11 +12,13 @@ As imagens individuais estão em [`_docs/imagens/conceito/`](../imagens/conceito
 - O conceito atual é a base. O modelo final tem **design próprio**, para o mod poder ser publicado. A geometria melhora já na Fase 2, mais próxima das imagens de conceito, e as animações e as expressões seguem na Fase 3.
 - Modelo e animações com **GeckoLib**, dependência obrigatória: andar, virar a cabeça, mover os braços e trocar a expressão da tela.
 - **Modelo na Fase 2:** traz os detalhes das seis vistas e o ícone do item, com tudo fixo: colar cinza, olhos normais e bateria sem variação. A textura tem 128×128, com 2 pixels por unidade, e a hitbox não muda, então braços e antenas passam um pouco dela.
-- **Modelo final:** mantém a geometria e a textura do corpo, e acrescenta só os ossos que as animações precisarem.
+- **Modelo final:** mantém a geometria e a textura do corpo, e acrescenta só os ossos que as animações precisarem. A exceção é o tronco central, a coluna entre as esteiras e a carcaça, com 2 unidades de altura, em vez de 1,5. A carcaça sobe junto, sem mudar de tamanho.
 - **Animações:** andar, olhar para o dono, parado, e desligado e hibernando. Como o modelo não tem cabeça separada, olhar gira o corpo sobre o pescoço, com as esteiras paradas. O robô olha só para o dono, ligado e com ele por perto, inclusive parado. Tempos e poses ficam no arquivo de animação, e o resto em constantes.
 - **Esteiras:** textura por quadros, escolhidos pela distância andada, sem mudar a geometria.
 - **Braços ao levar dano:** ficam erguidos enquanto durar a expressão triste ou de olhos em X, e o corpo e as antenas continuam balançando.
 - **Inclinação para o dono:** com o dono 1 bloco ou mais acima ou abaixo, com o robô ligado, na mesma dimensão e até 8 blocos, o corpo inclina cerca de 8° para cima ou para baixo, com transição suave. Um pulo move só os olhos.
+- **Cor do colar:** o robô no mundo usa a cor do tier, numa camada transparente por tier, em `textures/entity/general_robot_collar/`, com as duas tonalidades do conceito. As cores ficam nos arquivos, e um pacote de recursos pode trocá-las. O ícone do item e o do `Damaged Cubit` ficam cinza e ganham cor junto dos módulos, na Fase 4.
+- **Indicador de bateria:** mostra a carga real em qualquer estado, numa camada de 8× a resolução do corpo, em `textures/entity/general_robot_battery/`, com o contorno e o preenchimento arredondados do conceito. Tem o vazio e 4 níveis, de 25% em 25%, e só fica vazio com 0 FE. O preenchimento é verde e, com a bateria crítica de [`tiers.md`](../tiers.md#valores-gerais), vermelho. Brilha no escuro enquanto a tela estiver acesa, e fica sem brilho com a tela apagada. O contorno nunca brilha.
 
 ## O que o conceito mostra
 
@@ -67,6 +69,8 @@ Tocam todos, menos os alertas, que entram com os scanners, e o ataque e o modo a
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 09:18 | Aumenta o tronco central. |
+| Marcelo Fabiano | 2026-11-06 09:03 | Define a cor do colar e o indicador de bateria. |
 | Marcelo Fabiano | 2026-11-06 01:00 | Corrige o bipe padrão, que já toca. |
 | Marcelo Fabiano | 2026-11-06 01:20 | Adiciona os braços ao levar dano, o olhar e a inclinação para o dono. |
 | Marcelo Fabiano | 2026-11-06 00:58 | Define as animações, as esteiras e o modelo final. |
