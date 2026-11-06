@@ -64,7 +64,7 @@ Valem para todos os tiers e ficam no config.
 | Consumo parado | 0 FE/t |
 | Carga do Cubit ao sair do craft | 25% |
 | Carga da Power Bank ao sair do craft | 0% |
-| Velocidade 1,0× (atributo de movimento) | 0,3 |
+| Velocidade 1,0× (atributo de movimento) | 0,33 |
 | Intervalo para recalcular a rota | 10 ticks |
 | Distância para parar perto do player | 3 blocos |
 | Velocidade em chamas, sobre a do tier | 1,25× |
@@ -173,6 +173,7 @@ Planejado para a Fase 5. O tier Base não aceita cards.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 00:40 | Aumenta a velocidade 1,0×. |
 | Marcelo Fabiano | 2026-11-06 00:28 | Adiciona o tempo dos olhos em X. |
 | Marcelo Fabiano | 2026-11-06 00:22 | Adiciona os valores da expressão de preocupado. |
 | Marcelo Fabiano | 2026-11-06 00:17 | Aumenta o tempo da expressão triste. |

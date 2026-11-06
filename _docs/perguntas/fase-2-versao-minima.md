@@ -61,7 +61,7 @@ Não há perguntas pendentes nesta fase.
 | 110 | Em que aba do criativo o Cubit aparece, e colocar no criativo gasta o item? | Numa aba própria, `cubit:main`. Colocar sempre gasta o item, porque ele carrega o estado do robô |
 | 111 | Qual gate detecta classe de cliente carregada no servidor, já que o `runServer` exige aceitar o EULA? | As GameTests no `pre-push`. Elas carregam o mod com o mesmo alvo de servidor dedicado, sem EULA, e a regra 37 do `AGENTS.md` foi ajustada |
 | 112 | Quando roda a conferência do datagen? | No `pre-push`, por meio de `scripts/development/check-generated.sh` |
-| 113 | Quanto vale a velocidade 1,0× no jogo? | 0,3 no atributo de movimento, como o lobo. O valor e o multiplicador de cada tier ficam no config |
+| 113 | Quanto vale a velocidade 1,0× no jogo? | 0,3 no atributo de movimento, como o lobo. O valor e o multiplicador de cada tier ficam no config. A [pergunta 392](fase-3-sentidos.md) muda o valor para 0,33 |
 | 114 | O que acontece quando o Cubit cai na água? | Afunda e anda no fundo, sem nadar e sem se afogar, e o teleporte o resgata |
 | 115 | Quando entra o som de esteira? | Na Fase 3, com os bipes. A Fase 2 fica sem esse som |
 | 116 | O Cubit leva dano na lava? | Sim, igual ao player sem armadura, e continua pegando fogo ao sair. Na etapa de morte, o item resultante não queima, para cumprir a pergunta 34 |
@@ -221,6 +221,7 @@ Não há perguntas pendentes nesta fase.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-06 00:40 | Aponta a resposta 113 para a 392. |
 | Marcelo Fabiano | 2026-11-05 22:27 | Registra a resposta 355. |
 | Marcelo Fabiano | 2026-11-05 22:25 | Registra a resposta 354 e cita a exceção do Gradle Wrapper na 338. |
 | Marcelo Fabiano | 2026-11-05 22:22 | Registra a resposta 338, que sai das pendências. |
