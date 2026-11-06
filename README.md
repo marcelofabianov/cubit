@@ -82,7 +82,7 @@ As receitas usarão só materiais do jogo puro, podendo combinar itens do própr
 
 - Minecraft 1.21.1, NeoForge 21.1.x e Java 21
 - [GeckoLib](https://modrinth.com/mod/geckolib) para o modelo e as animações
-- [LambDynamicLights](https://modrinth.com/mod/lambdynamiclights) como dependência obrigatória, para a luz dinâmica
+- [LambDynamicLights](https://modrinth.com/mod/lambdynamiclights) como dependência obrigatória, para a luz dinâmica, a partir da lanterna, na Fase 3
 - Forge Energy (FE), pelas capabilities do NeoForge
 
 ## Documentação
