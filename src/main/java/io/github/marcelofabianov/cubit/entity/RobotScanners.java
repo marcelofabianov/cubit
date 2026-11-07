@@ -11,7 +11,7 @@ import io.github.marcelofabianov.cubit.domain.robot.OreSignals;
 import io.github.marcelofabianov.cubit.domain.tier.ScannerSpec;
 import io.github.marcelofabianov.cubit.menu.RobotSwitch;
 import io.github.marcelofabianov.cubit.registry.CubitSounds;
-import java.util.List;
+import java.util.Map;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
@@ -30,6 +30,7 @@ public final class RobotScanners implements RobotSwitch {
   private final RobotEntity robot;
   private final RobotMobScan mobs;
   private final RobotOreScan ores;
+  private final RobotScanMarks marks;
   private boolean switchedOn = true;
   private OreFilter oreFilter = OreFilter.EMPTY;
   private ExpressionTimer surprised = ExpressionTimer.STOPPED;
@@ -38,6 +39,11 @@ public final class RobotScanners implements RobotSwitch {
     this.robot = robot;
     this.mobs = new RobotMobScan(robot);
     this.ores = new RobotOreScan(robot);
+    this.marks = new RobotScanMarks(robot);
+  }
+
+  public RobotScanMarks marks() {
+    return marks;
   }
 
   public OreFilter oreFilter() {
@@ -95,7 +101,7 @@ public final class RobotScanners implements RobotSwitch {
       startOres(spec);
     }
     if (ores.isSweeping()) {
-      continueOres();
+      continueOres(owner);
     }
   }
 
@@ -109,10 +115,11 @@ public final class RobotScanners implements RobotSwitch {
 
   /** Runs a whole scan now, for what cannot wait the interval. It obeys the same rules. */
   public void scanOresNow() {
-    if (ownerToWarn() != null) {
+    Player owner = ownerToWarn();
+    if (owner != null) {
       startOres(robot.spec().scanners());
       while (ores.isSweeping()) {
-        continueOres();
+        continueOres(owner);
       }
     }
   }
@@ -126,6 +133,7 @@ public final class RobotScanners implements RobotSwitch {
   private void scanMobs(Player owner, ScannerSpec spec) {
     spend(spec.mobCost());
     mobs.scan(owner, spec.mobRadiusBlocks()).ifPresent(this::warnOfMob);
+    marks.markMobs(owner, mobs.inRange(), spec);
   }
 
   private void warnOfMob(Mob mob) {
@@ -140,14 +148,15 @@ public final class RobotScanners implements RobotSwitch {
     ores.start(spec.oreRadiusBlocks());
   }
 
-  private void continueOres() {
+  private void continueOres(Player owner) {
     OreSignals signals = CubitMod.CONFIG.oreSignals();
     ores.continueSweep(CubitMod.CONFIG.scanBlocksPerTick(), signals, oreFilter)
-        .ifPresent(fresh -> warnOfOres(fresh, signals));
+        .ifPresent(fresh -> warnOfOres(owner, fresh, signals));
   }
 
-  private void warnOfOres(List<OreKind> fresh, OreSignals signals) {
-    signals.lead(fresh, oreFilter).ifPresent(kind -> warnOfOre(kind, signals));
+  private void warnOfOres(Player owner, Map<Long, OreKind> fresh, OreSignals signals) {
+    marks.markOres(owner, fresh.keySet());
+    signals.lead(fresh.values(), oreFilter).ifPresent(kind -> warnOfOre(kind, signals));
   }
 
   private void warnOfOre(OreKind kind, OreSignals signals) {

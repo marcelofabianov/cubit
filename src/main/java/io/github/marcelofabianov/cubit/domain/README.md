@@ -45,7 +45,9 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 | `OreSignals` | Quais minérios avisam e qual deles o texto cita, a partir da lista dos raros |
 | `ScannerSpec` | Números dos scanners de um tier: raios, intervalos, custos e vagas do filtro |
 | `ScanRules` | Quando os scanners funcionam e o que conta como mob hostil |
-| `ScanArea` | O cubo lido em volta do robô, com cada bloco numerado |
+| `ScanArea` | A esfera lida em volta do robô, com cada bloco do cubo que a contém numerado |
+| `MarkLife` | Até quando uma caixa em volta do que um scanner achou continua desenhada |
+| `MarkPulse` | A força do pulso suave das caixas dos scanners em cada momento |
 | `FreshFinds` | O que um scanner já avisou, para só o que é novo avisar de novo |
 | `ChatTopic` | O que o robô comenta e quantas frases tem para isso |
 | `WeatherReading` | O que o robô lê do mundo para comentar: horário, céu, chuva, trovoada e frio |
@@ -88,6 +90,7 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 - **Falas só com a expressão calma:** qualquer outra expressão indica algo mais importante, como um mob ou um dano.
 - **Volta com o dono:** um robô longe, ou em outra dimensão, ficaria para trás ao descarregar o chunk. Perto, ele anda como sempre, e a caminho do Dock continua indo, porque o dono o chamou (pergunta 567).
 - **Só o que é novo avisa:** o mesmo mob ou bloco não avisa de novo enquanto continuar no raio, porque o intervalo mínimo sozinho repetiria o mesmo minério a cada varredura. O que sai do raio é esquecido (pergunta 561).
+- **Esfera, não cubo:** o canto de um cubo fica a cerca de 1,7 vez o raio, então só conta o que está a até o raio em linha reta. Os dois scanners usam a mesma regra (perguntas 604 e 606).
 - **Varredura por número:** a área numera os blocos, então uma varredura em fatias só guarda um número entre os ticks, sem alocar nada (regra 21).
 - **Bloco pela subtag:** um bloco está em `c:ores` e nas subtags, e só elas dizem o que ele é. `c:ores` só vale para quem não tem subtag, então um filtro nele não pega todo minério (perguntas 546 e 566).
 - **Raro vem antes do filtro:** o texto cita o raro mais raro e, só sem raros, um minério do filtro (pergunta 562).

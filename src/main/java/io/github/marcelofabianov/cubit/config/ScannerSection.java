@@ -25,8 +25,14 @@ final class ScannerSection {
   private static final int BLOCKS_PER_TICK_MIN = 1;
   private static final int BLOCKS_PER_TICK_MAX = 2_146_689;
 
+  private static final String MARK_TICKS = "scan_mark_ticks";
+  private static final int MARK_TICKS_DEFAULT = 200;
+  private static final int MARK_TICKS_MIN = 1;
+  private static final int MARK_TICKS_MAX = 1200;
+
   final ModConfigSpec.ConfigValue<List<? extends String>> rareTags;
   final ModConfigSpec.IntValue surprisedTicks;
+  final ModConfigSpec.IntValue markTicks;
   final ModConfigSpec.IntValue blocksPerTick;
 
   ScannerSection(ModConfigSpec.Builder builder) {
@@ -36,6 +42,8 @@ final class ScannerSection {
     surprisedTicks =
         builder.defineInRange(
             SURPRISED_TICKS, SURPRISED_TICKS_DEFAULT, SURPRISED_TICKS_MIN, SURPRISED_TICKS_MAX);
+    markTicks =
+        builder.defineInRange(MARK_TICKS, MARK_TICKS_DEFAULT, MARK_TICKS_MIN, MARK_TICKS_MAX);
     blocksPerTick =
         builder.defineInRange(
             BLOCKS_PER_TICK, BLOCKS_PER_TICK_DEFAULT, BLOCKS_PER_TICK_MIN, BLOCKS_PER_TICK_MAX);

@@ -1,6 +1,7 @@
 package io.github.marcelofabianov.cubit.entity;
 
 import io.github.marcelofabianov.cubit.domain.behavior.FreshFinds;
+import io.github.marcelofabianov.cubit.domain.behavior.ScanArea;
 import io.github.marcelofabianov.cubit.domain.behavior.ScanRules;
 import java.util.Comparator;
 import java.util.List;
@@ -18,26 +19,35 @@ import net.minecraft.world.entity.player.Player;
 final class RobotMobScan {
   private final RobotEntity robot;
   private FreshFinds<UUID> known = FreshFinds.none();
-  private boolean enemyInRange;
+  private List<Integer> inRange = List.of();
 
   RobotMobScan(RobotEntity robot) {
     this.robot = robot;
   }
 
   boolean enemyInRange() {
-    return enemyInRange;
+    return !inRange.isEmpty();
+  }
+
+  /** The network IDs of the hostile mobs in range at the last scan, to mark each one. */
+  List<Integer> inRange() {
+    return inRange;
   }
 
   /** The closest mob that was not in range before, if any. */
   Optional<Mob> scan(Player owner, int radius) {
+    ScanArea area = new ScanArea(radius);
     List<Mob> mobs =
         robot
             .level()
             .getEntitiesOfClass(
                 Mob.class,
                 robot.getBoundingBox().inflate(radius),
-                mob -> mob.isAlive() && isHostile(mob, owner));
-    enemyInRange = !mobs.isEmpty();
+                mob ->
+                    mob.isAlive()
+                        && area.holdsDistance(robot.distanceToSqr(mob))
+                        && isHostile(mob, owner));
+    inRange = mobs.stream().map(Entity::getId).toList();
     FreshFinds.Update<UUID> update =
         known.seen(mobs.stream().map(Entity::getUUID).collect(Collectors.toSet()));
     known = update.known();
@@ -48,7 +58,7 @@ final class RobotMobScan {
   }
 
   void reset() {
-    enemyInRange = false;
+    inRange = List.of();
     known = FreshFinds.none();
   }
 
