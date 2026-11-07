@@ -43,7 +43,7 @@ São dez: normal, feliz, sono, alerta, surpreso, carregando, desligado, triste, 
 - **Brilho:** a tela brilha no escuro. Desligada, não brilha, e as pontas das antenas ficam cinza.
 - **Qual vence:** tela apagada, carregando, quase morto, triste, preocupado, alerta, surpreso, sono, feliz e normal.
 - **Triste e quase morto:** triste dura o tempo de [`tiers.md`](../tiers.md#valores-gerais) depois de um dano, e quase morto, com a vida no limite da mesma tabela, dura menos, e a lágrima segue até o fim do tempo dela. Ao levar dano, toca o curto elétrico, no lugar do som padrão do jogo e sem bipe. Em chamas, o loop já toca, e os golpes do fogo não o repetem.
-- **Feliz:** dura o tempo de [`tiers.md`](../tiers.md#valores-gerais), depois de colocar o robô ou abrir o inventário.
+- **Feliz:** dura o tempo de [`tiers.md`](../tiers.md#valores-gerais), depois de colocar o robô, abrir o inventário, pintá-lo ou dar a ele uma etiqueta, com ele ativo.
 - **Bipe:** toca ao trocar para normal, feliz ou sono, exceto ao ligar, ao ser colocado e ao carregar o mundo.
 - **Piscada:** na expressão normal, fica 5 s de olhos abertos e pisca em cerca de 0,25 s, sem bipe. Cada robô começa num momento diferente.
 - **Olhar:** na expressão normal, os olhos sobem cerca de 1/6 da tela ao subir e descem ao descer, um ou mais blocos, e ficam assim por cerca de 0,5 s depois do movimento.
@@ -77,6 +77,7 @@ Tocam todos, menos os alertas, que entram com os scanners, e o ataque e o modo a
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-07 14:49 | Acrescenta pintar e receber etiqueta à expressão feliz. |
 | Marcelo Fabiano | 2026-11-06 15:58 | Aponta a cor e o nome para a personalização. |
 | Marcelo Fabiano | 2026-11-06 15:16 | Tira o vidro do painel. |
 | Marcelo Fabiano | 2026-11-06 15:05 | Adiciona o relevo do painel, a fita maior e as faixas dos braços. |
