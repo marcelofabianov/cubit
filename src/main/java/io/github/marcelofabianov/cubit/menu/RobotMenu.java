@@ -57,7 +57,7 @@ public final class RobotMenu extends AbstractContainerMenu {
     this.stillValid = stillValid;
     this.lamp = lamp;
     int rows = rowsFor(container.getContainerSize());
-    addRobotSlots(rows);
+    addRobotSlots();
     addEnergySlot(energySlot);
     addDataSlot(shownValue(batteryPercent, value -> shownBatteryPercent = value));
     addDataSlot(shownValue(healthPercent, value -> shownHealthPercent = value));
@@ -172,7 +172,7 @@ public final class RobotMenu extends AbstractContainerMenu {
     return (slots + SLOTS_PER_ROW - 1) / SLOTS_PER_ROW;
   }
 
-  private void addRobotSlots(int rows) {
+  private void addRobotSlots() {
     for (int slot = 0; slot < container.getContainerSize(); slot++) {
       addSlot(
           new Slot(
