@@ -31,6 +31,11 @@ import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 public final class MovementGameTests {
   private static final String ARENA = "arena";
   private static final int WALK_TIMEOUT = 300;
+  private static final int MAX_DROP = 5;
+  private static final int LEDGE_END_X = 3;
+  private static final int LEDGE_TOP_Y = 6;
+  private static final BlockPos LEDGE_START = new BlockPos(1, LEDGE_TOP_Y, 2);
+  private static final String WRONG_DROP = "Wrong height the route goes down";
   private static final int TELEPORT_TIMEOUT = 40;
   private static final int SETTLE_TICKS = 60;
   private static final int LONG_SETTLE_TICKS = 120;
@@ -133,6 +138,21 @@ public final class MovementGameTests {
     RobotEntity robot = GameTestRobots.placeNewRobot(helper, owner, FLOOR);
     buildWall(helper, 1);
 
+    helper.succeedWhen(
+        () -> helper.assertTrue(robot.distanceTo(owner) < NEAR_DISTANCE, DID_NOT_REACH));
+  }
+
+  @GameTest(template = ARENA, timeoutTicks = WALK_TIMEOUT)
+  public static void goesDownALedgeFiveBlocksHigh(GameTestHelper helper) {
+    ServerPlayer owner = ownerAt(helper, WALK_X);
+    for (BlockPos pos :
+        BlockPos.betweenClosed(
+            new BlockPos(1, FLOOR_Y, 0), new BlockPos(LEDGE_END_X, LEDGE_TOP_Y, LAST_Z))) {
+      helper.setBlock(pos, Blocks.STONE);
+    }
+    RobotEntity robot = GameTestRobots.placeNewRobot(helper, owner, LEDGE_START);
+
+    helper.assertTrue(robot.getMaxFallDistance() == MAX_DROP, WRONG_DROP);
     helper.succeedWhen(
         () -> helper.assertTrue(robot.distanceTo(owner) < NEAR_DISTANCE, DID_NOT_REACH));
   }

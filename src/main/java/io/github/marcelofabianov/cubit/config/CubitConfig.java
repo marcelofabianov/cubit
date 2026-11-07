@@ -218,6 +218,10 @@ public final class CubitConfig {
     return general.baseSpeed.get();
   }
 
+  public int maxDropBlocks() {
+    return general.maxDrop.get();
+  }
+
   public int followRepathTicks() {
     return general.repathTicks.get();
   }

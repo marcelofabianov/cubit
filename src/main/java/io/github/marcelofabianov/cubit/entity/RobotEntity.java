@@ -308,6 +308,12 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
     return isOnFire() ? null : CubitSounds.SHORT_CIRCUIT.get();
   }
 
+  /** The route asks this. Tracks take no fall damage, so the game default of 3 is too careful. */
+  @Override
+  public int getMaxFallDistance() {
+    return CubitMod.CONFIG.maxDropBlocks();
+  }
+
   @Override
   public boolean causeFallDamage(float distance, float multiplier, DamageSource source) {
     return false;
