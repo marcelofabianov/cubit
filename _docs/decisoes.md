@@ -40,6 +40,8 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Checklist das fases:** fica em [`checklist.md`](../checklist.md). É avaliado ao encerrar cada PR, e a marcação entra num novo commit, no PR seguinte.
 - **Contratos:** comandos e chaves de tradução entram como quinto contrato, e os nomes só mudam com aviso, sem exigir migração.
 - **Números no roteiro manual:** ele pode citar os valores padrão como resultado esperado, e `tiers.md` prevalece.
+- **Auditoria de qualidade (perguntas 522 a 528):** antes dos scanners, entram o checksum do wrapper, a regra única de dono, os testes de permissão do Dock, as regras de decisão no domínio, a validação dos cinco records de estado, novas regras de ArchUnit e o gate de ramos. O CI fica para depois.
+- **Jar publicado:** sem as GameTests, o datagen e as estruturas de teste, antes da `0.1.0` (pergunta 523).
 - **Gates de push:** as GameTests também detectam classe de cliente carregada no servidor, sem exigir o EULA, então o `runServer` não é um gate. O datagen reprova se `src/generated` ficar diferente do Git.
 
 ## Mod
@@ -68,6 +70,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Estados:** ativo (ligado), inativo (desligado) e hibernação (na base, com o inventário e os slots acessíveis).
 - **Painel solar:** só funciona com o Cubit ativo, de dia em todos os tiers e à noite só em Elite e Ultimate. Coberto por um bloco opaco, não carrega, e vidro deixa carregar. A célula pulsa de leve enquanto enche a bateria, e a chave entra com a interface de configuração. O clima não tem efeito, e no Nether e no End não funciona. Fica abaixo do consumo.
 - **Induction Dock:** é a base de recarga, com torre e placa em U, 2 blocos de altura e dono, recebe energia por cabos ou redstone, sem saída, e tem um único slot, que também recarrega a Power Bank. A energia fica no item ao quebrar, e só o dono o quebra, além de um operador no modo criativo. Sem conseguir chegar, o Cubit teleporta.
+- **Dock sem dono:** só um operador em criativo o remove, com aviso no log ao carregar (pergunta 524). Entra na issue #106.
 - **Recarga pela grade de craft:** o item do Cubit abaixo da carga de religar, combinado com uma Power Bank, recebe só o que falta para religar, na Fase 4.
 - **Consumo:** gasta ao andar de verdade, sem gastar parado nem empurrado. As exceções são a condição negativa e a lanterna acesa, que gastam mesmo parado.
 - **Parada do robô:** uma navegação própria cancela o recálculo de rota pendente, para o robô parado não voltar a andar.
@@ -84,7 +87,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Ao colocar no mundo:** toca só o som de colocar. O de ligar fica para a passagem de desligado a ligado.
 - **Margem das telas:** os 4 blocos ficam em constante, fora do config, porque seguem o padrão do jogo.
 - **Ao atacar:** mantém a expressão atual, com o som de ataque.
-- **Ordem da Fase 3:** a do [`checklist.md`](../checklist.md), com a personalização antes dos scanners (pergunta 504), com o intervalo mínimo junto dos textos e alguns itens entrando em partes, até os scanners ligarem o resto.
+- **Ordem da Fase 3:** a do [`checklist.md`](../checklist.md), com a personalização (pergunta 504) e uma refatoração técnica (pergunta 517) antes dos scanners, com o intervalo mínimo junto dos textos e alguns itens entrando em partes, até os scanners ligarem o resto.
 - **Expressões:** camada própria da tela, com 8× a resolução do corpo, recortada do conceito, e brilho no escuro. Ordem: tela apagada, carregando, quase morto, triste, preocupado, alerta, surpreso, sono, feliz e normal.
 - **Piscada e olhar:** só na expressão normal, no cliente e sem bipe: pisca a cada 5 s, e os olhos acompanham a subida e a descida.
 - **Comunicação:** bipes e expressões, com poucos textos simples e diretos.
@@ -111,6 +114,8 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-07 13:35 | Registra as decisões da auditoria de qualidade. |
+| Marcelo Fabiano | 2026-11-07 13:21 | Registra a refatoração antes dos scanners. |
 | Marcelo Fabiano | 2026-11-06 15:58 | Registra a cor, o nome e a ordem da personalização. |
 | Marcelo Fabiano | 2026-11-06 15:05 | Registra o vidro, o sinal e a chave do painel solar. |
 | Marcelo Fabiano | 2026-11-06 13:57 | Registra o halo e o brilho dos olhos. |
