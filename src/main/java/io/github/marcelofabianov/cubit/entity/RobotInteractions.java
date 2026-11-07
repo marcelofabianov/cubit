@@ -37,6 +37,7 @@ final class RobotInteractions {
         () -> HealthLevel.percent(robot.getHealth(), robot.getMaxHealth()),
         robot.lampSwitch(),
         robot.scanners(),
+        robot.chatter(),
         robot::canUseInventory);
     return InteractionResult.CONSUME;
   }

@@ -28,6 +28,8 @@ public final class RobotStateComponent {
   private static final String SCANNERS_FIELD = "scanners_enabled";
   private static final boolean SCANNERS_DEFAULT = true;
   private static final String ORE_FILTER_FIELD = "ore_filter";
+  private static final String CHATTER_FIELD = "chatter_enabled";
+  private static final boolean CHATTER_DEFAULT = true;
   private static final String UNKNOWN_COLOR_MESSAGE = "Unknown robot color {}. Using white.";
   private static final String UNKNOWN_TIER_MESSAGE = "Unknown robot tier {}. Using the base tier.";
 
@@ -61,7 +63,10 @@ public final class RobotStateComponent {
                       .forGetter(RobotState::scannersOn),
                   ORE_FILTER_CODEC
                       .optionalFieldOf(ORE_FILTER_FIELD, OreFilter.EMPTY)
-                      .forGetter(RobotState::oreFilter))
+                      .forGetter(RobotState::oreFilter),
+                  Codec.BOOL
+                      .optionalFieldOf(CHATTER_FIELD, CHATTER_DEFAULT)
+                      .forGetter(RobotState::chatterOn))
               .apply(instance, RobotState::new));
 
   public static final StreamCodec<ByteBuf, RobotState> STREAM_CODEC =

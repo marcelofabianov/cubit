@@ -1,7 +1,9 @@
 package io.github.marcelofabianov.cubit.datagen;
 
 import io.github.marcelofabianov.cubit.CubitMod;
+import io.github.marcelofabianov.cubit.domain.behavior.ChatTopic;
 import io.github.marcelofabianov.cubit.domain.behavior.RobotNotice;
+import io.github.marcelofabianov.cubit.entity.RobotChatter;
 import io.github.marcelofabianov.cubit.entity.RobotNotices;
 import io.github.marcelofabianov.cubit.entity.RobotScanners;
 import io.github.marcelofabianov.cubit.menu.RobotMenu;
@@ -11,6 +13,7 @@ import io.github.marcelofabianov.cubit.registry.CubitCreativeTabs;
 import io.github.marcelofabianov.cubit.registry.CubitEntities;
 import io.github.marcelofabianov.cubit.registry.CubitItems;
 import io.github.marcelofabianov.cubit.registry.CubitSounds;
+import java.util.List;
 import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.common.data.LanguageProvider;
 
@@ -35,6 +38,8 @@ final class CubitLanguageProvider extends LanguageProvider {
   private static final String RESET_CLEARED = "Follow link cleared.";
   private static final String RESET_NOBODY = "No Cubit is following you.";
   private static final String NOTICE_FORMAT = "Cubit: %s";
+  private static final String CHATTER_ON = "Chatter: On";
+  private static final String CHATTER_OFF = "Chatter: Off";
   private static final String SCANNERS_ON = "Scanners: On";
   private static final String SCANNERS_OFF = "Scanners: Off";
   private static final String ENEMY_NOTICE = "Careful, %s!";
@@ -60,6 +65,9 @@ final class CubitLanguageProvider extends LanguageProvider {
     add(CubitBlocks.INDUCTION_DOCK.get(), DOCK_NAME);
     add(RobotMenu.LAMP_ON_KEY, LAMP_ON);
     add(RobotMenu.LAMP_OFF_KEY, LAMP_OFF);
+    add(RobotMenu.CHATTER_ON_KEY, CHATTER_ON);
+    add(RobotMenu.CHATTER_OFF_KEY, CHATTER_OFF);
+    addChatPhrases();
     add(RobotMenu.SCANNERS_ON_KEY, SCANNERS_ON);
     add(RobotMenu.SCANNERS_OFF_KEY, SCANNERS_OFF);
     add(ResetCommand.CLEARED_KEY, RESET_CLEARED);
@@ -88,5 +96,14 @@ final class CubitLanguageProvider extends LanguageProvider {
     add(CubitSoundProvider.subtitleKey(CubitSounds.POWER_OFF_NAME), POWER_OFF_SUBTITLE);
     add(CubitSoundProvider.subtitleKey(CubitSounds.RECHARGING_NAME), RECHARGING_SUBTITLE);
     add(CubitSoundProvider.subtitleKey(CubitSounds.PLACED_NAME), PLACED_SUBTITLE);
+  }
+
+  private void addChatPhrases() {
+    for (ChatTopic topic : ChatTopic.values()) {
+      List<String> phrases = ChatPhrases.of(topic);
+      for (int phrase = 0; phrase < phrases.size(); phrase++) {
+        add(RobotChatter.keyOf(topic, phrase), phrases.get(phrase));
+      }
+    }
   }
 }

@@ -33,6 +33,9 @@ public final class RobotMenu extends AbstractContainerMenu {
   public static final String LAMP_ON_KEY = "gui.cubit.lamp.on";
   public static final String LAMP_OFF_KEY = "gui.cubit.lamp.off";
   public static final int SCANNERS_BUTTON = 1;
+  public static final int CHATTER_BUTTON = 2;
+  public static final String CHATTER_ON_KEY = "gui.cubit.chatter.on";
+  public static final String CHATTER_OFF_KEY = "gui.cubit.chatter.off";
   public static final String SCANNERS_ON_KEY = "gui.cubit.scanners.on";
   public static final String SCANNERS_OFF_KEY = "gui.cubit.scanners.off";
   private static final int TRUE_VALUE = 1;
@@ -46,8 +49,11 @@ public final class RobotMenu extends AbstractContainerMenu {
   private int shownLampAvailable;
   private int shownScannersOn;
   private int shownScannersAvailable;
+  private int shownChatterOn;
+  private int shownChatterAvailable;
   private final RobotSwitch lamp;
   private final RobotSwitch scanners;
+  private final RobotSwitch chatter;
 
   public RobotMenu(
       int containerId,
@@ -58,12 +64,14 @@ public final class RobotMenu extends AbstractContainerMenu {
       IntSupplier healthPercent,
       RobotSwitch lamp,
       RobotSwitch scanners,
+      RobotSwitch chatter,
       Predicate<Player> stillValid) {
     super(CubitMenus.ROBOT.get(), containerId);
     this.container = container;
     this.stillValid = stillValid;
     this.lamp = lamp;
     this.scanners = scanners;
+    this.chatter = chatter;
     int rows = rowsFor(container.getContainerSize());
     addRobotSlots();
     addEnergySlot(energySlot);
@@ -74,6 +82,9 @@ public final class RobotMenu extends AbstractContainerMenu {
     addDataSlot(shownValue(() -> asValue(scanners.isOn()), value -> shownScannersOn = value));
     addDataSlot(
         shownValue(() -> asValue(scanners.isAvailable()), value -> shownScannersAvailable = value));
+    addDataSlot(shownValue(() -> asValue(chatter.isOn()), value -> shownChatterOn = value));
+    addDataSlot(
+        shownValue(() -> asValue(chatter.isAvailable()), value -> shownChatterAvailable = value));
     addPlayerSlots(playerInventory, rows);
   }
 
@@ -89,6 +100,7 @@ public final class RobotMenu extends AbstractContainerMenu {
         () -> 0,
         RobotSwitch.NONE,
         RobotSwitch.NONE,
+        RobotSwitch.NONE,
         player -> true);
   }
 
@@ -102,6 +114,7 @@ public final class RobotMenu extends AbstractContainerMenu {
       IntSupplier healthPercent,
       RobotSwitch lamp,
       RobotSwitch scanners,
+      RobotSwitch chatter,
       Predicate<Player> stillValid) {
     player.openMenu(
         new SimpleMenuProvider(
@@ -115,6 +128,7 @@ public final class RobotMenu extends AbstractContainerMenu {
                     healthPercent,
                     lamp,
                     scanners,
+                    chatter,
                     stillValid),
             title),
         data -> writeSize(data, container));
@@ -150,6 +164,14 @@ public final class RobotMenu extends AbstractContainerMenu {
     return shownLampAvailable == TRUE_VALUE;
   }
 
+  public boolean chatterOn() {
+    return shownChatterOn == TRUE_VALUE;
+  }
+
+  public boolean chatterAvailable() {
+    return shownChatterAvailable == TRUE_VALUE;
+  }
+
   public boolean scannersOn() {
     return shownScannersOn == TRUE_VALUE;
   }
@@ -173,6 +195,7 @@ public final class RobotMenu extends AbstractContainerMenu {
     return switch (button) {
       case LAMP_BUTTON -> lamp;
       case SCANNERS_BUTTON -> scanners;
+      case CHATTER_BUTTON -> chatter;
       default -> null;
     };
   }

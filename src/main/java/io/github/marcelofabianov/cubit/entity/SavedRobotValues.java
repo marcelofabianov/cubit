@@ -36,6 +36,7 @@ final class SavedRobotValues {
   private static final String COLOR_KEY = "Color";
   private static final String SCANNERS_KEY = "ScannersEnabled";
   private static final String ORE_FILTER_KEY = "OreFilter";
+  private static final String CHATTER_KEY = "ChatterEnabled";
   private static final String LAST_SAFE_POSITION_KEY = "LastSafePosition";
   private static final String NO_OWNER_MESSAGE = "Robot {} has no owner. Nobody can interact.";
   private static final String INVALID_TIER_MESSAGE = "Robot {} has an invalid tier: {}";
@@ -56,6 +57,7 @@ final class SavedRobotValues {
     tag.putBoolean(LAMP_KEY, robot.state().lampOn());
     tag.putString(COLOR_KEY, robot.state().color().key());
     tag.putBoolean(SCANNERS_KEY, robot.state().scannersOn());
+    tag.putBoolean(CHATTER_KEY, robot.state().chatterOn());
     ListTag filter = new ListTag();
     SavedOreFilter.tagsOf(robot.state().oreFilter())
         .forEach(ore -> filter.add(StringTag.valueOf(ore)));
@@ -86,6 +88,11 @@ final class SavedRobotValues {
   /** Without the key, the robot was saved before the lamp existed, so the lamp stays on. */
   static boolean lampOn(CompoundTag tag) {
     return !tag.contains(LAMP_KEY) || tag.getBoolean(LAMP_KEY);
+  }
+
+  /** Without the key, the robot was saved before the chatter existed, so it stays on. */
+  static boolean chatterOn(CompoundTag tag) {
+    return !tag.contains(CHATTER_KEY) || tag.getBoolean(CHATTER_KEY);
   }
 
   /** Without the key, the robot was saved before the scanners existed, so they stay on. */

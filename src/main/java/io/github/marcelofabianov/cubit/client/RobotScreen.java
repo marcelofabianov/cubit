@@ -21,7 +21,7 @@ final class RobotScreen extends AbstractContainerScreen<RobotMenu> {
   private static final int PLAYER_PANEL_TEXTURE_Y = 126;
   private static final int TITLE_AREA = 94;
   private static final int PANEL_WIDTH = 26;
-  private static final int PANEL_HEIGHT = 84;
+  private static final int PANEL_HEIGHT = 98;
   private static final int PANEL_COLOR = 0xFFC6C6C6;
   private static final int SLOT_COLOR = 0xFF8B8B8B;
   private static final int BAR_COLOR = 0xFF55FF55;
@@ -47,11 +47,15 @@ final class RobotScreen extends AbstractContainerScreen<RobotMenu> {
   private static final int LAMP_OFF_COLOR = 0xFF373737;
   private static final int SCANNERS_Y = 67;
   private static final int SCANNERS_ON_COLOR = 0xFF7FD4FF;
+  private static final int CHATTER_Y = 81;
+  private static final int CHATTER_ON_COLOR = 0xFF9CF08A;
 
   private Button lampButton;
   private boolean shownLampOn;
   private Button scannersButton;
   private boolean shownScannersOn;
+  private Button chatterButton;
+  private boolean shownChatterOn;
 
   RobotScreen(RobotMenu menu, Inventory playerInventory, Component title) {
     super(menu, playerInventory, title);
@@ -72,7 +76,16 @@ final class RobotScreen extends AbstractContainerScreen<RobotMenu> {
             Button.builder(Component.empty(), button -> pressScanners())
                 .bounds(leftPos + LAMP_X, topPos + SCANNERS_Y, LAMP_WIDTH, LAMP_HEIGHT)
                 .build());
+    chatterButton =
+        addRenderableWidget(
+            Button.builder(Component.empty(), button -> pressChatter())
+                .bounds(leftPos + LAMP_X, topPos + CHATTER_Y, LAMP_WIDTH, LAMP_HEIGHT)
+                .build());
     updateSwitches();
+  }
+
+  private void pressChatter() {
+    minecraft.gameMode.handleInventoryButtonClick(menu.containerId, RobotMenu.CHATTER_BUTTON);
   }
 
   private void pressScanners() {
@@ -99,6 +112,10 @@ final class RobotScreen extends AbstractContainerScreen<RobotMenu> {
     shownScannersOn = menu.scannersOn();
     String scannersText = shownScannersOn ? RobotMenu.SCANNERS_ON_KEY : RobotMenu.SCANNERS_OFF_KEY;
     scannersButton.setTooltip(Tooltip.create(Component.translatable(scannersText)));
+    chatterButton.active = menu.chatterAvailable();
+    shownChatterOn = menu.chatterOn();
+    String chatterText = shownChatterOn ? RobotMenu.CHATTER_ON_KEY : RobotMenu.CHATTER_OFF_KEY;
+    chatterButton.setTooltip(Tooltip.create(Component.translatable(chatterText)));
   }
 
   private void renderLight(GuiGraphics graphics, Button button, boolean on, int onColor) {
@@ -113,6 +130,7 @@ final class RobotScreen extends AbstractContainerScreen<RobotMenu> {
     super.render(graphics, mouseX, mouseY, partialTick);
     renderLight(graphics, lampButton, shownLampOn, LAMP_ON_COLOR);
     renderLight(graphics, scannersButton, shownScannersOn, SCANNERS_ON_COLOR);
+    renderLight(graphics, chatterButton, shownChatterOn, CHATTER_ON_COLOR);
     renderTooltip(graphics, mouseX, mouseY);
   }
 

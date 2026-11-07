@@ -89,6 +89,7 @@ public final class CubitConfig {
   private final LampSection lamp;
   private final SolarSection solar;
   private final ScannerSection scanner;
+  private final ChatterSection chatter;
   private final AtomicBoolean warnedRareTags = new AtomicBoolean();
   private final AtomicBoolean warnedLamp = new AtomicBoolean();
   private final TierCatalog tierCatalog;
@@ -107,6 +108,7 @@ public final class CubitConfig {
     lamp = new LampSection(builder);
     solar = new SolarSection(builder);
     scanner = new ScannerSection(builder);
+    chatter = new ChatterSection(builder);
     builder.pop();
 
     builder.push(List.of(GENERAL_ROBOT.id(), RobotTier.BASE.key()));
@@ -149,6 +151,34 @@ public final class CubitConfig {
       }
     }
     return new OreSignals(kinds);
+  }
+
+  public int chatterRepeatTicks() {
+    return chatter.repeatTicks.get();
+  }
+
+  public int chatterLeftBehindBlocks() {
+    return chatter.leftBehindBlocks.get();
+  }
+
+  public int chatterLeftBehindRepeatTicks() {
+    return chatter.leftBehindRepeatTicks.get();
+  }
+
+  public int chatterBiomeRepeatTicks() {
+    return chatter.biomeRepeatTicks.get();
+  }
+
+  public int chatterAnimalRepeatTicks() {
+    return chatter.animalRepeatTicks.get();
+  }
+
+  public int chatterAnimalChancePercent() {
+    return chatter.animalChancePercent.get();
+  }
+
+  public int chatterCheckTicks() {
+    return chatter.checkTicks.get();
   }
 
   public int surprisedExpressionTicks() {

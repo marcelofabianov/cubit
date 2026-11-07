@@ -328,6 +328,7 @@ public final class LampGameTests {
         () -> 0,
         robot.lampSwitch(),
         robot.scanners(),
+        robot.chatter(),
         robot::canUseInventory);
   }
 

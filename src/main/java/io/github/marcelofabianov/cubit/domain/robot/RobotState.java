@@ -17,7 +17,8 @@ public record RobotState(
     boolean lampOn,
     RobotColor color,
     boolean scannersOn,
-    OreFilter oreFilter) {
+    OreFilter oreFilter,
+    boolean chatterOn) {
   private static final String INVALID_HEALTH_MESSAGE = "Invalid robot health: ";
   private static final float MIN_PLACED_HEALTH = 1f;
 
@@ -42,13 +43,25 @@ public record RobotState(
     this(tier, energy, health, lampOn, color, true, OreFilter.EMPTY);
   }
 
+  /** The chatter starts on, also for what was saved before it existed. */
+  public RobotState(
+      RobotTier tier,
+      Energy energy,
+      float health,
+      boolean lampOn,
+      RobotColor color,
+      boolean scannersOn,
+      OreFilter oreFilter) {
+    this(tier, energy, health, lampOn, color, scannersOn, oreFilter, true);
+  }
+
   public static RobotState initial(RobotTier tier, TierSpec spec, Percentage initialCharge) {
     return new RobotState(tier, spec.newBattery(initialCharge).charge(), spec.maxHealth());
   }
 
   /** What a robot keeps when it dies: the tier and the looks, without energy or health. */
   public RobotState damaged() {
-    return new RobotState(tier, Energy.ZERO, 0f, lampOn, color, scannersOn, oreFilter);
+    return new RobotState(tier, Energy.ZERO, 0f, lampOn, color, scannersOn, oreFilter, chatterOn);
   }
 
   public RobotState repaired(TierSpec spec, Percentage health) {
@@ -59,7 +72,8 @@ public record RobotState(
         lampOn,
         color,
         scannersOn,
-        oreFilter);
+        oreFilter,
+        chatterOn);
   }
 
   public Battery batteryFor(TierSpec spec) {
