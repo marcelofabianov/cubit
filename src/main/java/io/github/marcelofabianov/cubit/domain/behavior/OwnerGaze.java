@@ -11,6 +11,13 @@ public record OwnerGaze(GazeDirection direction, int ticksLeft) {
   private static final double QUICK_RISE = 0.2;
   private static final double QUICK_FALL = -0.45;
   private static final double OTHER_LEVEL_BLOCKS = 1;
+  private static final String NEGATIVE_MESSAGE = "A time left cannot be negative: ";
+
+  public OwnerGaze {
+    if (ticksLeft < 0) {
+      throw new IllegalArgumentException(NEGATIVE_MESSAGE + ticksLeft);
+    }
+  }
 
   /** An invalid height fails every comparison, so the eyes just stay level. */
   public OwnerGaze next(double ownerHeightChange, double ownerHeightAboveRobot) {
