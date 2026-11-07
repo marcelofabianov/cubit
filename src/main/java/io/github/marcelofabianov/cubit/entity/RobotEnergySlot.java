@@ -41,14 +41,8 @@ final class RobotEnergySlot {
     return step.battery();
   }
 
-  /** Puts a whole stack in the slot, as far as it fits, and returns whether anything moved. */
   boolean insert(ItemStack stack) {
-    if (!EnergySlotItems.accepts(stack) || !container.canAddItem(stack)) {
-      return false;
-    }
-    ItemStack rest = container.addItem(stack.copy());
-    stack.setCount(rest.getCount());
-    return true;
+    return EnergySlotItems.insert(container, stack);
   }
 
   EnergySlotContents contents() {

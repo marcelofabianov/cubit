@@ -196,14 +196,8 @@ public final class InductionDockBlockEntity extends BlockEntity {
     return stock.energy().level(steps);
   }
 
-  /** Puts a whole stack in the slot, as far as it fits, and returns whether anything moved. */
   boolean insert(ItemStack stack) {
-    if (!EnergySlotItems.accepts(stack) || !slot.canAddItem(stack)) {
-      return false;
-    }
-    ItemStack rest = slot.addItem(stack.copy());
-    stack.setCount(rest.getCount());
-    return true;
+    return EnergySlotItems.insert(slot, stack);
   }
 
   Energy receive(Energy offered, boolean simulate) {
