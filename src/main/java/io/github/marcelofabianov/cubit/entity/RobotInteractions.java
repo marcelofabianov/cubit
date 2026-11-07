@@ -3,6 +3,7 @@ package io.github.marcelofabianov.cubit.entity;
 import io.github.marcelofabianov.cubit.CubitMod;
 import io.github.marcelofabianov.cubit.domain.energy.PowerState;
 import io.github.marcelofabianov.cubit.domain.ownership.FollowingOutcome;
+import io.github.marcelofabianov.cubit.domain.ownership.Ownership;
 import io.github.marcelofabianov.cubit.domain.robot.HealthLevel;
 import io.github.marcelofabianov.cubit.domain.tier.TierSpec;
 import io.github.marcelofabianov.cubit.menu.RobotMenu;
@@ -12,6 +13,7 @@ import io.github.marcelofabianov.cubit.registry.CubitDataComponents;
 import java.util.UUID;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.world.Container;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -21,8 +23,6 @@ import net.minecraft.world.item.ItemStack;
 
 /** What the owner does to a robot with a click. The rules live in the domain. */
 final class RobotInteractions {
-  private static final double INVENTORY_REACH_MARGIN = 4;
-
   private RobotInteractions() {}
 
   static InteractionResult openInventory(RobotEntity robot, Player player) {
@@ -76,12 +76,12 @@ final class RobotInteractions {
   static boolean canUseInventory(RobotEntity robot, Player player) {
     return robot.isAlive()
         && robot.powerState().isInteractive()
-        && robot.ownerId().filter(player.getUUID()::equals).isPresent()
-        && player.canInteractWithEntity(robot, INVENTORY_REACH_MARGIN);
+        && Ownership.owns(robot.ownerId(), player.getUUID())
+        && player.canInteractWithEntity(robot, Container.DEFAULT_DISTANCE_BUFFER);
   }
 
   static InteractionResult use(RobotEntity robot, Player player, InteractionHand hand) {
-    if (!robot.ownerId().filter(player.getUUID()::equals).isPresent()) {
+    if (!Ownership.owns(robot.ownerId(), player.getUUID())) {
       return InteractionResult.PASS;
     }
     if (player.isShiftKeyDown()) {

@@ -10,6 +10,6 @@ public final class OwnerProtection {
   private OwnerProtection() {}
 
   public static boolean blocksDamage(Optional<UUID> owner, Optional<UUID> attacker) {
-    return owner.isPresent() && owner.equals(attacker);
+    return Ownership.sameOwner(owner, attacker);
   }
 }

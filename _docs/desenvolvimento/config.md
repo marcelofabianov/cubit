@@ -71,7 +71,7 @@ As chaves ficam em `snake_case`. As de um tier ficam em `[general_robot.{tier}]`
 
 ## Fora do config
 
-A margem de 4 blocos para abrir uma tela é uma constante, porque não é balanceamento e segue o padrão do jogo (pergunta 335).
+A margem de 4 blocos para abrir uma tela é a constante do próprio jogo, `Container.DEFAULT_DISTANCE_BUFFER`, porque não é balanceamento (pergunta 335).
 
 ## Valor inválido
 
@@ -89,6 +89,7 @@ O mod não cai por causa do config (regra 17 do `AGENTS.md`):
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-07 13:51 | Aponta a margem das telas para a constante do jogo. |
 | Marcelo Fabiano | 2026-11-06 15:05 | Adiciona as chaves do painel solar. |
 | Marcelo Fabiano | 2026-11-06 13:34 | Adiciona as chaves da lanterna. |
 | Marcelo Fabiano | 2026-11-06 11:10 | Tira a citação a um robô novo. |

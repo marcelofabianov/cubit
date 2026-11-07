@@ -39,6 +39,8 @@ public final class RobotGameTests {
   private static final float MAX_HEALTH = 25f;
   private static final int INITIAL_BAR_WIDTH = 3;
   private static final String INVALID_VALUE = "bogus";
+  private static final long NEGATIVE_ENERGY_AMOUNT = -1;
+  private static final String ENERGY_KEY = "Energy";
   private static final String TIER_KEY = "Tier";
   private static final String POWER_STATE_KEY = "PowerState";
   private static final String WRONG_STATE = "Wrong robot state";
@@ -184,6 +186,19 @@ public final class RobotGameTests {
 
     helper.assertValueEqual(loaded.state().tier(), RobotTier.BASE, WRONG_STATE);
     helper.assertValueEqual(loaded.powerState(), PowerState.INACTIVE_SWITCHED_OFF, WRONG_POWER);
+    helper.succeed();
+  }
+
+  @GameTest(template = EMPTY_TEMPLATE)
+  public static void negativeEnergyInASaveBecomesZero(GameTestHelper helper) {
+    Player player = helper.makeMockPlayer(GameType.SURVIVAL);
+    CompoundTag saved =
+        GameTestRobots.placeNewRobot(helper, player, FIRST_FLOOR).saveWithoutId(new CompoundTag());
+    saved.putLong(ENERGY_KEY, NEGATIVE_ENERGY_AMOUNT);
+
+    RobotEntity loaded = reload(helper, saved);
+
+    helper.assertValueEqual(loaded.state().energy(), Energy.ZERO, WRONG_STATE);
     helper.succeed();
   }
 

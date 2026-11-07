@@ -156,6 +156,7 @@ Para conferir a carga, use `/data get entity @e[type=cubit:general_robot,limit=1
 | 7 | Em modo sobrevivência, quebre o Dock com energia, com outro item no slot | Cai o item do Dock, que devolve a energia ao ser colocado, e o item do slot |
 | 8 | Explode um TNT ao lado | O Dock continua lá |
 | 9 | Num servidor com outro player, tente usar e quebrar o Dock | Ele não abre a tela e não quebra. No modo criativo com permissão de operador, quebra |
+| 10 | Olhando para o Dock, rode `/data remove block ~ ~ ~ Owner` com as coordenadas dele, e tente quebrá-lo em modo sobrevivência | Não quebra. Num mundo com comandos, em criativo e como operador, quebra |
 
 ## Cubit na base
 
@@ -397,6 +398,7 @@ Os valores são os padrões de [`tiers.md`](../tiers.md).
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-07 13:51 | Adiciona o Dock sem dono. |
 | Marcelo Fabiano | 2026-11-06 15:58 | Adiciona a cor e o nome. |
 | Marcelo Fabiano | 2026-11-06 15:16 | Tira o vidro do painel. |
 | Marcelo Fabiano | 2026-11-06 15:05 | Adiciona o painel solar e o tier no corpo. |

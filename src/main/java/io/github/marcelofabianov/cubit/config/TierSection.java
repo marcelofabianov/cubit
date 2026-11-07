@@ -32,7 +32,6 @@ final class TierSection {
   private static final int MAX_ENERGY = Integer.MAX_VALUE;
   private static final int MAX_INVENTORY_SLOTS = 54;
   private static final int MAX_HEALTH_LIMIT = 1024;
-  private static final int MAX_CALL_RADIUS = 128;
 
   private final ModConfigSpec.IntValue batteryCapacity;
   private final ModConfigSpec.IntValue movingConsumption;
@@ -57,7 +56,8 @@ final class TierSection {
         count(builder, INVENTORY_SLOTS, defaults.inventorySlots(), MAX_INVENTORY_SLOTS);
     maxHealth =
         builder.defineInRange(MAX_HEALTH, defaults.maxHealth(), MIN_POSITIVE, MAX_HEALTH_LIMIT);
-    callRadius = count(builder, CALL_RADIUS, defaults.callRadiusBlocks(), MAX_CALL_RADIUS);
+    callRadius =
+        count(builder, CALL_RADIUS, defaults.callRadiusBlocks(), TierSpec.MAX_CALL_RADIUS_BLOCKS);
     speedMultiplier =
         builder.defineInRange(
             SPEED_MULTIPLIER,

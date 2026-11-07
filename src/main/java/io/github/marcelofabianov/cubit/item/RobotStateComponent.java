@@ -32,7 +32,7 @@ public final class RobotStateComponent {
   private static final Codec<RobotColor> COLOR_CODEC =
       Codec.STRING.xmap(RobotStateComponent::colorFromKey, RobotColor::key);
   private static final Codec<Energy> ENERGY_CODEC =
-      Codec.LONG.xmap(amount -> new Energy(Math.max(amount, 0)), Energy::amount);
+      Codec.LONG.xmap(SavedEnergy::of, Energy::amount);
   private static final Codec<Float> HEALTH_CODEC =
       Codec.FLOAT.xmap(RobotStateComponent::safeHealth, health -> health);
 

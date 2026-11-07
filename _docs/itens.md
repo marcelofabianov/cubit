@@ -146,6 +146,8 @@ O estado salvo é validado ao entrar no jogo, sem derrubá-lo (regra 17 do `AGEN
 |---|---|
 | Tier | Usa o Base |
 | Energia acima da capacidade | Usa a capacidade |
+| Energia negativa, no robô, no slot de energia, no Dock ou no item | Usa zero e registra no log |
+| Dock sem dono | Registra no log, ninguém o usa, e só um operador em criativo o remove |
 | Vida fora dos limites | Fica entre 1 e o máximo do tier. Sem vida salva, o robô colocado morreria na hora |
 | Estado da entidade | Fica desligado (`INACTIVE_SWITCHED_OFF`), o mais restritivo |
 | Dono ausente | Ninguém consegue interagir com o robô |
@@ -154,6 +156,7 @@ O estado salvo é validado ao entrar no jogo, sem derrubá-lo (regra 17 do `AGEN
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-07 13:51 | Adiciona a energia negativa e o Dock sem dono à validação do save. |
 | Marcelo Fabiano | 2026-11-06 15:58 | Adiciona a cor e o nome ao contrato do save. |
 | Marcelo Fabiano | 2026-11-06 13:34 | Adiciona o contrato da chave da lanterna. |
 | Marcelo Fabiano | 2026-11-06 11:10 | Atualiza os nomes e os IDs previstos dos cards e tira o tipo de robô. |
