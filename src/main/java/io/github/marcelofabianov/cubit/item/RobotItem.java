@@ -88,7 +88,7 @@ public final class RobotItem extends Item implements DockableRobotItem {
     }
     ItemStack stack = context.getItemInHand();
     robot.placedBy(player, stateOf(stack), stack);
-    robot.enterDock(dock);
+    robot.docking().enterNow(dock);
     stack.shrink(1);
     return InteractionResult.CONSUME;
   }

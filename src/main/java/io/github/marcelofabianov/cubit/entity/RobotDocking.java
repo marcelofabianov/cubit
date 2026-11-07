@@ -23,7 +23,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
 /** A robot and its base: going there, waiting for its turn, hibernating and leaving. */
-final class RobotDocking {
+public final class RobotDocking {
   private static final String DOCK_POSITION_KEY = "DockPosition";
   private static final double ROUTE_SPEED_MODIFIER = 1;
   private static final double ENTER_DISTANCE = 1.5;
@@ -139,7 +139,7 @@ final class RobotDocking {
   }
 
   /** For a robot just placed on the dock: it has no way to walk there. */
-  void enterNow(InductionDockBlockEntity dock) {
+  public void enterNow(InductionDockBlockEntity dock) {
     enter(dock, dock.robotSpot());
   }
 
@@ -240,7 +240,7 @@ final class RobotDocking {
     return Optional.of(dock);
   }
 
-  boolean isDockedAt(BlockPos position) {
+  public boolean isDockedAt(BlockPos position) {
     return position.equals(docked);
   }
 

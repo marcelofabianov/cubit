@@ -34,6 +34,20 @@
 | 321 | O nome `placed.ogg` e o momento "ao ser colocado no mundo" estão certos? | Sim. Detalha a pergunta 320 |
 | 322 | Em que fase o som de colocar no mundo passa a tocar? | Na Fase 3, junto dos outros oito. Detalha a pergunta 320 |
 | 421 | Como foi o roteiro manual do colar, do indicador de bateria e do tronco central com +0,5? | Teste finalizado, tudo ok, executado pelo desenvolvedor, sem detalhar cada passo. Ele não pediu +1, então o tronco fica em 2 unidades. O `make server` e o olhar de longe não foram citados em separado |
+| 530 | Como foi o teste rápido no jogo da refatoração da issue #105? | "Testes feito tudo ok", executado pelo desenvolvedor, sem detalhar cada passo: energia, Dock, vazio e config. Na mesma mensagem, ele autorizou os sete commits do plano. O push e o PR não foram autorizados |
+| 529 | O jogo já foi fechado? | Sim. Os gates podem rodar no PR da issue #105 |
+| 528 | Onde entram a margem de 4 blocos e o raio de 128 repetidos em constantes e a energia negativa corrigida sem aviso no log? | Na issue de segurança, a #106 |
+| 527 | O que fazer com a cobertura, que mede só instruções do domínio? | O gate também exige 85% de ramos no domínio. Além disso, o agente testa se o JaCoCo consegue medir as GameTests, só como relatório, sem reprovar nada, e traz o resultado antes de adotar |
+| 526 | Cinco records do domínio aceitam valores inválidos no construtor: `ExpressionTimer`, `NoticeRepeat`, `GazeTracker`, `OwnerGaze` e `BodyTilt`. O que fazer? | Validar os cinco no construtor, com JUnit, como pede a regra 14. Antes, o agente confere se algum config pode chegar a eles com um valor que passaria a lançar erro. Os outros nove records sem construtor próprio não mudam |
+| 525 | O que reforçar nos gates? | Só o ArchUnit, sem dependência nova: domínio isolado dos outros pacotes, código comum sem `client`, `block` sem `entity` (regra 42) e sem `get*` no domínio. O CI fica para depois |
+| 524 | Quem pode quebrar um Induction Dock sem dono? | Só um operador em criativo, com aviso no log ao carregar, para falhar seguro. Num mundo sem comandos, esse Dock raro fica no mundo. Muda o comportamento atual, em que qualquer um o quebra. Detalha a [pergunta 302](fase-2-versao-minima.md) |
+| 523 | O que fazer com as GameTests e o datagen, que vão no jar publicado? | Excluir do jar, junto das estruturas de teste, antes da `0.1.0`. O código continua em `src/main`, então os métodos públicos usados só por testes continuam públicos |
+| 522 | Como organizar o que a auditoria de qualidade encontrou? | Sim, como proposto: no PR #105, só o que muda a forma (Javadoc duplicado, parâmetro sem uso e `insert` repetido); uma issue de segurança, com o checksum do wrapper, a regra única de dono e os testes de permissão do Dock; uma issue de domínio, com as regras de decisão que estão fora de `domain/`, antes dos scanners; e uma rodada de decisões para o resto. A resposta não define o lugar da margem repetida e do log de energia negativa, e o agente os leva à rodada |
+| 521 | O agente corrige o `visual.md`, que cita a expressão feliz só ao colocar o robô e abrir o inventário, sem pintar e receber etiqueta? | "Pode fazer isso depois". Não entra no PR da refatoração, que só muda a forma, e fica para um PR seguinte, conforme a [pergunta 152](fase-2-versao-minima.md) |
+| 520 | As "armadilhas" da pergunta 517 incluem as da máquina, como os scripts de `tmp/modelo/` que desfazem o modelo? | Não: "tmp não faz parte de refatoração, são arquivos temporários para discussões". Os scripts continuam lá, sem apagar. O aviso no `Makefile` ao compilar com o jogo aberto, perguntado junto, não foi citado, e o agente o deixou de fora, porque seria uma ferramenta nova |
+| 519 | Qual é o escopo da refatoração? | "Segue o prompt", em vez da sugestão do agente, de fazer só `RobotEntity` e `DockGameTests`. O agente entendeu como os quatro arquivos do prompt de continuidade: `RobotEntity`, `DockGameTests`, `CustomizationGameTests`, dividido em cor e nome, e `TierSection`, com as chaves de consumo e da lanterna em classes aninhadas. `LampGameTests` só fica em observação. Os métodos de `DockableRobot` continuam na entidade, pela regra 42. Só muda a forma, como na resposta 460 |
+| 518 | O jogo está aberto? | Sim. Enquanto estiver, o agente não compila nem roda os gates, e a branch remota da personalização espera, porque o `pre-push` compila também ao apagar |
+| 517 | A refatoração técnica vem antes dos scanners? | Sim, a pedido do desenvolvedor, em 2026-11-06: "coloque no prompt a refatoracao para nao ficarmos nas armadilhas". O agente entendeu "armadilhas" como os limites de tamanho do Checkstyle. Muda a ordem do item 16 do checklist. A pergunta 519 define o escopo, e a 520 esclarece o que fica de fora |
 | 516 | As decisões tomadas ao implementar a personalização ficam? | Sim: shift + clique com corante continua recolhendo o Cubit, e hibernando ele é pintado, mas a tela continua em carregando, sem bipe, conforme a pergunta 57 |
 | 515 | Como foi o roteiro manual da cor e do nome? | "Testes feito tudo ok", executado pelo desenvolvedor, sem detalhar cada passo. O passo 13, com outro player, fica para os testes de instância no fim da Fase 3, conforme a resposta 354. O agente não entendeu a resposta como autorização de commits |
 | 514 | O contrato e os testes da cor ficam como propostos? | Sim. No save: `Color` na entidade e `color`, opcional, em `cubit:robot_state`, com os nomes dos corantes do jogo, e `white` como padrão, inclusive em saves antigos e valor inválido. Domínio: `RobotColor`. Nome: `CustomName` da entidade e `minecraft:custom_name` do item. JUnit: regras de pintar e estado. GameTests: dono, não dono, gasto, sincronia, recolher, morrer, consertar, save antigo e arquivos presentes. Roteiro manual: ver as 16 cores e os ícones |
@@ -197,6 +211,11 @@
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-07 13:38 | Registra a resposta 530. |
+| Marcelo Fabiano | 2026-11-07 13:35 | Registra as respostas 527 a 529. |
+| Marcelo Fabiano | 2026-11-07 13:34 | Registra as respostas 523 a 526. |
+| Marcelo Fabiano | 2026-11-07 13:32 | Registra a resposta 522. |
+| Marcelo Fabiano | 2026-11-07 13:21 | Registra as respostas 517 a 521. |
 | Marcelo Fabiano | 2026-11-06 16:08 | Registra a resposta 516. |
 | Marcelo Fabiano | 2026-11-06 16:04 | Registra a resposta 515. |
 | Marcelo Fabiano | 2026-11-06 15:48 | Registra as respostas 511 a 514. |

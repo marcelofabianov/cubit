@@ -64,7 +64,7 @@ public final class DockUseGameTests {
     RobotEntity robot = DockScene.placeOnDock(helper, owner, Energy.ZERO);
 
     helper.assertValueEqual(robot.powerState(), PowerState.HIBERNATING, WRONG_POWER);
-    helper.assertTrue(robot.isDockedAt(helper.absolutePos(DOCK)), WRONG_POWER);
+    helper.assertTrue(robot.docking().isDockedAt(helper.absolutePos(DOCK)), WRONG_POWER);
     helper.assertTrue(dock.isOccupied(), WRONG_POWER);
     helper.assertTrue(
         robot.position().distanceTo(helper.absoluteVec(Vec3.atBottomCenterOf(DOCK))) < ON_THE_PLATE,
@@ -270,7 +270,7 @@ public final class DockUseGameTests {
     RobotEntity loaded = CubitEntities.GENERAL_ROBOT.get().create(helper.getLevel());
     loaded.load(saved);
 
-    helper.assertTrue(loaded.isDockedAt(helper.absolutePos(DOCK)), WRONG_POWER);
+    helper.assertTrue(loaded.docking().isDockedAt(helper.absolutePos(DOCK)), WRONG_POWER);
     helper.assertValueEqual(loaded.powerState(), PowerState.HIBERNATING, WRONG_POWER);
     helper.succeed();
   }

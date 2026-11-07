@@ -63,7 +63,7 @@ public final class DockTripGameTests {
         WALK_TICKS,
         () -> {
           helper.assertValueEqual(robot.powerState(), PowerState.HIBERNATING, WRONG_POWER);
-          helper.assertTrue(robot.isDockedAt(helper.absolutePos(DOCK)), WRONG_POWER);
+          helper.assertTrue(robot.docking().isDockedAt(helper.absolutePos(DOCK)), WRONG_POWER);
           helper.succeed();
         });
   }
@@ -148,7 +148,8 @@ public final class DockTripGameTests {
         STUCK_TICKS,
         () -> {
           helper.assertTrue(
-              robot.isDockedAt(helper.absolutePos(OTHER_DOCK_FLOOR.above())), WRONG_POWER);
+              robot.docking().isDockedAt(helper.absolutePos(OTHER_DOCK_FLOOR.above())),
+              WRONG_POWER);
           helper.succeed();
         });
   }

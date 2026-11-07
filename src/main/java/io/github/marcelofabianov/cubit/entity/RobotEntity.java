@@ -2,12 +2,10 @@ package io.github.marcelofabianov.cubit.entity;
 
 import io.github.marcelofabianov.cubit.CubitMod;
 import io.github.marcelofabianov.cubit.block.DockableRobot;
-import io.github.marcelofabianov.cubit.block.InductionDockBlockEntity;
 import io.github.marcelofabianov.cubit.domain.energy.Battery;
 import io.github.marcelofabianov.cubit.domain.energy.Energy;
 import io.github.marcelofabianov.cubit.domain.energy.Percentage;
 import io.github.marcelofabianov.cubit.domain.energy.PowerState;
-import io.github.marcelofabianov.cubit.domain.energy.RobotActivity;
 import io.github.marcelofabianov.cubit.domain.ownership.FollowingOutcome;
 import io.github.marcelofabianov.cubit.domain.ownership.FollowingRobotPolicy;
 import io.github.marcelofabianov.cubit.domain.ownership.OwnerProtection;
@@ -71,8 +69,8 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
   private RobotTier tier = RobotTier.BASE;
   private Battery battery;
   private PowerState powerState = PowerState.INACTIVE_SWITCHED_OFF;
-  private BlockPos lastSafePosition;
-  private final RobotStepMeter stepMeter = new RobotStepMeter();
+  private final RobotSafePosition safePosition = new RobotSafePosition(this);
+  private final RobotEnergyUse energyUse = new RobotEnergyUse(this);
   private final RobotInventory inventory;
   private final RobotDocking docking = new RobotDocking(this);
   private final RobotFace face = new RobotFace(this);
@@ -127,7 +125,7 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
     RobotInteractions.applyAttributes(this);
     setHealth(state.healthFor(spec));
     setPersistenceRequired();
-    lastSafePosition = blockPosition();
+    safePosition.markHere();
     inventory.readFrom(item, spec.inventorySlots());
     lamp.setSwitchedOn(state.lampOn());
     RobotLooks.setColor(this, state.color());
@@ -149,7 +147,7 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
     return powerState;
   }
 
-  RobotDocking docking() {
+  public RobotDocking docking() {
     return docking;
   }
 
@@ -186,11 +184,6 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
     return inventory;
   }
 
-  /** For the item placed on a dock: the robot enters right away. */
-  public void enterDock(InductionDockBlockEntity dock) {
-    docking.enterNow(dock);
-  }
-
   @Override
   public boolean answersDockCall() {
     return powerState == PowerState.ACTIVE && !docking.hasTrip();
@@ -211,12 +204,8 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
     docking.release();
   }
 
-  public boolean isDockedAt(BlockPos dock) {
-    return docking.isDockedAt(dock);
-  }
-
   public Optional<BlockPos> lastSafePosition() {
-    return Optional.ofNullable(lastSafePosition);
+    return safePosition.position();
   }
 
   @Override
@@ -252,29 +241,16 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
     return battery.level(Percentage.MAX);
   }
 
-  /** Being pushed, or a stuck route, is not walking, so it costs nothing. */
-  private void updateEnergy(Energy chargeBefore) {
-    RobotActivity activity = stepMeter.measure(this, inventory.isFull(), lamp.lit());
-    battery = spec().spendOneTick(battery, powerState, activity);
-    battery = inventory.energySlot().charge(battery, spec().rechargePerTick());
-    PowerState next = CubitMod.CONFIG.powerRules().afterEnergyChange(powerState, battery);
-    if (next != powerState) {
-      setPowerState(next);
-      getNavigation().stop();
-    }
-    RobotAudio.update(this, activity.walking(), chargeBefore);
-  }
-
   @Override
   protected void customServerAiStep() {
     // Only a robot in the water or on fire may route through water: to walk out or to put itself
     // out.
     setPathfindingMalus(PathType.WATER, isInWater() || isOnFire() ? OPEN_ROUTE : BLOCKED_ROUTE);
     super.customServerAiStep();
-    rememberSafePosition();
+    safePosition.tick();
     Energy chargeBefore = battery.charge();
     docking.tick();
-    updateEnergy(chargeBefore);
+    energyUse.tick(chargeBefore, lamp.lit());
     solar.tick();
     face.tick();
     RobotLooks.update(this);
@@ -285,12 +261,6 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
         stack -> Containers.dropItemStack(level(), getX(), getY(), getZ(), stack));
     if (tickCount % CubitMod.CONFIG.followRepathTicks() == 0) {
       RobotInteractions.switchOffWithoutThePlace(this);
-    }
-  }
-
-  private void rememberSafePosition() {
-    if (onGround() && !isOnFire() && !isInLava() && !isInWater()) {
-      lastSafePosition = blockPosition();
     }
   }
 
@@ -310,7 +280,8 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
     boolean alreadyDead = dead;
     super.die(source);
     if (dead && !alreadyDead && level() instanceof ServerLevel serverLevel) {
-      DamagedRobotDrop.leave(serverLevel, this, damagedItem.get(), lastSafePosition, inventory);
+      BlockPos safe = safePosition.position().orElse(null);
+      DamagedRobotDrop.leave(serverLevel, this, damagedItem.get(), safe, inventory);
       if (ownerId != null) {
         DeadRobotLinks.onRobotDied(serverLevel.getServer(), ownerId, getUUID());
       }
@@ -345,7 +316,7 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
     docking.load(tag);
     lamp.setSwitchedOn(SavedRobotValues.lampOn(tag));
     RobotLooks.setColor(this, SavedRobotValues.color(tag, getUUID()));
-    lastSafePosition = SavedRobotValues.lastSafePosition(tag);
+    safePosition.restore(SavedRobotValues.lastSafePosition(tag));
     RobotInteractions.applyAttributes(this);
   }
 

@@ -7,6 +7,7 @@ import java.util.List;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.gametest.framework.GameTestHelper;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
@@ -56,5 +57,18 @@ final class GameTestRobots {
 
   static List<RobotEntity> robots(GameTestHelper helper) {
     return helper.getEntities(CubitEntities.GENERAL_ROBOT.get());
+  }
+
+  /** The whole path of a click, because the event that guards a name tag comes before the robot. */
+  static ItemStack clickRobot(Player player, RobotEntity robot, ItemStack stack) {
+    player.setItemInHand(InteractionHand.MAIN_HAND, stack);
+    player.interactOn(robot, InteractionHand.MAIN_HAND);
+    return player.getItemInHand(InteractionHand.MAIN_HAND);
+  }
+
+  static RobotEntity loadRobot(GameTestHelper helper, CompoundTag saved) {
+    RobotEntity loaded = CubitEntities.GENERAL_ROBOT.get().create(helper.getLevel());
+    loaded.load(saved);
+    return loaded;
   }
 }
