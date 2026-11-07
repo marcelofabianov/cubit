@@ -98,6 +98,9 @@ public final class RobotFaceGameTests {
   public static void aPlacedRobotIsHappyAndThenNormal(GameTestHelper helper) {
     ServerPlayer owner = ownerBeside(helper);
     RobotEntity robot = GameTestRobots.placeRobot(helper, owner, itemWith(FULL), FLOOR);
+    // The framework marks a finished test with a beacon, which gives a player nearby an
+    // achievement. The robot would cheer it, so its chatter stays off here.
+    robot.chatter().toggle();
 
     helper.runAfterDelay(
         MARGIN_TICKS, () -> assertExpression(helper, robot, RobotExpression.HAPPY));

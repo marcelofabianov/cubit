@@ -46,11 +46,12 @@ public final class CubitConfig {
   private static final int BASE_HEALTH = 25;
   private static final int BASE_CALL_RADIUS = 15;
   private static final double BASE_SPEED_MULTIPLIER = 1;
-  private static final int BASE_SCAN_RADIUS = 5;
+  private static final int BASE_ORE_SCAN_RADIUS = 5;
+  private static final int BASE_MOB_SCAN_RADIUS = 8;
   private static final int BASE_ORE_SCAN_TICKS = 700;
   private static final int BASE_MOB_SCAN_TICKS = 200;
-  private static final long BASE_ORE_SCAN_COST = 350;
-  private static final long BASE_MOB_SCAN_COST = 100;
+  private static final long BASE_ORE_SCAN_COST = 50;
+  private static final long BASE_MOB_SCAN_COST = 50;
   private static final int BASE_ORE_FILTER_SLOTS = 1;
   private static final TierSpec GENERAL_ROBOT_BASE =
       new TierSpec(
@@ -70,8 +71,8 @@ public final class CubitConfig {
           new LightLevel(BASE_LAMP_LIGHT),
           new SolarOutput(new Energy(BASE_SOLAR_DAY), Energy.ZERO),
           new ScannerSpec(
-              BASE_SCAN_RADIUS,
-              BASE_SCAN_RADIUS,
+              BASE_ORE_SCAN_RADIUS,
+              BASE_MOB_SCAN_RADIUS,
               BASE_ORE_SCAN_TICKS,
               BASE_MOB_SCAN_TICKS,
               new Energy(BASE_ORE_SCAN_COST),
@@ -173,6 +174,10 @@ public final class CubitConfig {
     return chatter.animalRepeatTicks.get();
   }
 
+  public int chatterRedstoneRepeatTicks() {
+    return chatter.redstoneRepeatTicks.get();
+  }
+
   public int chatterAnimalChancePercent() {
     return chatter.animalChancePercent.get();
   }
@@ -183,6 +188,10 @@ public final class CubitConfig {
 
   public int surprisedExpressionTicks() {
     return scanner.surprisedTicks.get();
+  }
+
+  public int scanMarkTicks() {
+    return scanner.markTicks.get();
   }
 
   public int scanBlocksPerTick() {

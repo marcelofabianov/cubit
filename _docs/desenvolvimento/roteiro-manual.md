@@ -414,9 +414,28 @@ Os valores são os padrões de [`tiers.md`](../tiers.md). Mobs varrem a cada 10 
 | 15 | Clique no botão, com um zumbi por perto, e espere 15 s | A luz apaga, o tooltip mostra `Scanners: Off`, e nada avisa nem gasta |
 | 16 | Recolha o Cubit e coloque de novo | A chave e o filtro continuam |
 | 17 | Mate o Cubit, conserte e coloque | A chave e o filtro continuam |
-| 18 | Parado, coberto e com a lanterna desligada, meça a carga com 35 s entre as leituras | Cai de 650 a 750 FE: 3 ou 4 varreduras de mobs e 1 de minérios |
+| 18 | Parado, coberto e com a lanterna desligada, meça a carga com 35 s entre as leituras | Cai de 200 a 250 FE: 3 ou 4 varreduras de mobs e 1 de minérios, a 50 FE cada |
 | 19 | Leve o Cubit a um Dock | Não varre e não avisa, e o botão fica desabilitado |
 | 20 | Rode `make server` | O servidor abre sem erro de classe de cliente |
+
+## Caixas dos scanners
+
+Use um mundo plano em criativo, com um Cubit seguindo. A caixa do minério dura cerca de 10 s, e minérios varrem a cada 35 s, então espere esse tempo em cada passo.
+
+| # | Passo | Resultado esperado |
+|---|---|---|
+| 1 | Coloque minério de diamante a 3 blocos do Cubit e cubra com pedra | Em até 35 s, junto do `Cubit: DIAMOND!!!`, uma caixa azul clara, translúcida e pulsando, visível através da pedra |
+| 2 | Espere 10 s | A caixa some |
+| 3 | Espere a próxima varredura | Nem caixa nem texto: o minério já foi visto |
+| 4 | Coloque minério de ferro e quebre-o logo depois de a caixa aparecer | A caixa some na hora |
+| 5 | Coloque minério de carvão sem filtro e espere uma varredura | Nenhuma caixa |
+| 6 | Ponha carvão no filtro e espere uma varredura | Caixa azul em volta do carvão, com `Cubit: COAL!!!` |
+| 7 | Coloque diamantes a 5 blocos à frente do Cubit e a 4 para o lado e 4 para cima | Só o da frente ganha caixa: o outro fica fora da esfera |
+| 8 | Rode `/summon minecraft:zombie ~3 ~ ~` perto do Cubit | Em até 10 s, uma caixa vermelha, translúcida e pulsando, que acompanha o zumbi através das paredes |
+| 9 | Afaste-se até o zumbi ficar a mais de 8 blocos do Cubit | A caixa vermelha some |
+| 10 | Desligue o botão `Scanners` | Em até 30 s, nenhuma caixa nova, e as que havia somem |
+| 11 | Peça a outro player que olhe o mesmo minério | Ele não vê caixa. Esse passo fica para os testes de instância |
+| 12 | Teste os passos 1 e 8 nos gráficos Rápido, Bonito e Fabuloso | A caixa aparece nos três |
 
 ## Quando o dono renasce
 
@@ -466,6 +485,10 @@ As frases estão em [`falas.md`](../conceito/falas.md). Fique a céu aberto, com
 | 27 | Mate outro animal, como uma raposa | De vez em quando, uma frase genérica |
 | 28 | Domestique um lobo e mate-o várias vezes, por exemplo com `/summon` e um osso | Nunca há fala |
 | 29 | Deixe um zumbi matar o animal | Nenhuma fala |
+| 30 | Em sobrevivência, minere um minério de redstone, sem mob por perto | Bipe e uma frase de redstone, como `Cubit: I love redstone!` |
+| 31 | Minere outro logo depois | Nenhuma fala, até passar 1 minuto |
+| 32 | Coloque redstone perto do Cubit, espere o `Cubit: REDSTONE!!!` e minere durante a surpresa | Nenhuma fala de redstone, porque a surpresa não é calma |
+| 33 | Minere minério de ferro | Nenhuma fala |
 
 ## Servidor dedicado
 
@@ -476,6 +499,10 @@ As frases estão em [`falas.md`](../conceito/falas.md). Fique a céu aberto, com
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-07 20:04 | Adiciona as falas da redstone. |
+| Marcelo Fabiano | 2026-11-07 20:00 | Atualiza o raio do scanner de mobs nas caixas. |
+| Marcelo Fabiano | 2026-11-07 19:21 | Adiciona as caixas dos scanners. |
+| Marcelo Fabiano | 2026-11-07 19:06 | Atualiza o gasto esperado dos scanners. |
 | Marcelo Fabiano | 2026-11-07 17:14 | Adiciona as falas de animais. |
 | Marcelo Fabiano | 2026-11-07 17:11 | Adiciona as falas de bioma. |
 | Marcelo Fabiano | 2026-11-07 17:07 | Adiciona a fala de ficar para trás. |

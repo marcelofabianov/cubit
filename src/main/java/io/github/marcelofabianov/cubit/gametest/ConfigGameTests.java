@@ -140,11 +140,12 @@ public final class ConfigGameTests {
           HEALTH_KEY, HEALTH,
           RADIUS_KEY, RADIUS);
   private static final long LAMP_CONSUMPTION = 1;
-  private static final int SCAN_RADIUS = 5;
+  private static final int ORE_SCAN_RADIUS = 5;
+  private static final int MOB_SCAN_RADIUS = 8;
   private static final int ORE_SCAN_TICKS = 700;
   private static final int MOB_SCAN_TICKS = 200;
-  private static final long ORE_SCAN_COST = 350;
-  private static final long MOB_SCAN_COST = 100;
+  private static final long ORE_SCAN_COST = 50;
+  private static final long MOB_SCAN_COST = 50;
   private static final int ORE_FILTER_SLOTS = 1;
   private static final TierSpec BASE_SPEC =
       new TierSpec(
@@ -164,8 +165,8 @@ public final class ConfigGameTests {
           new LightLevel(LAMP_LIGHT),
           new SolarOutput(new Energy(SOLAR_DAY), Energy.ZERO),
           new ScannerSpec(
-              SCAN_RADIUS,
-              SCAN_RADIUS,
+              ORE_SCAN_RADIUS,
+              MOB_SCAN_RADIUS,
               ORE_SCAN_TICKS,
               MOB_SCAN_TICKS,
               new Energy(ORE_SCAN_COST),

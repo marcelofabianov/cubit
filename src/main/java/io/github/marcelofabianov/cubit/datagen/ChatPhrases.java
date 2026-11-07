@@ -159,6 +159,9 @@ final class ChatPhrases {
   private static final String ANIMAL_OTHER_1 = "Good hunt, partner!";
   private static final String ANIMAL_OTHER_2 = "That smells like lunch.";
   private static final String ANIMAL_OTHER_3 = "I'll add that to the menu.";
+  private static final String REDSTONE_0 = "I love redstone!";
+  private static final String REDSTONE_1 = "Redstone! My favorite snack!";
+  private static final String REDSTONE_2 = "Redstone runs in my circuits!";
   private static final Map<ChatTopic, List<String>> PHRASES = new EnumMap<>(ChatTopic.class);
 
   static {
@@ -252,6 +255,7 @@ final class ChatPhrases {
     PHRASES.put(
         ChatTopic.ANIMAL_OTHER,
         List.of(ANIMAL_OTHER_0, ANIMAL_OTHER_1, ANIMAL_OTHER_2, ANIMAL_OTHER_3));
+    PHRASES.put(ChatTopic.REDSTONE, List.of(REDSTONE_0, REDSTONE_1, REDSTONE_2));
     PHRASES.put(
         ChatTopic.ACHIEVEMENT,
         List.of(

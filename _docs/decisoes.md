@@ -107,8 +107,9 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Modo só o alvo:** ideia aprovada, a refinar na Fase 4: o Cubit só ataca o último mob que o dono feriu ou marcou com o controle (pergunta 578).
 - **Limites:** nunca ataca o dono nem mobs pacíficos. Só ataca mobs neutros para defender o player.
 - **Scanner:** `c:ores/*` significa a tag-mãe `c:ores` e suas subtags, porque tags não aceitam curinga.
-- **Falas (perguntas 572 a 583):** o Cubit comenta o tempo e o horário ao mudarem, com um intervalo mínimo, e dá parabéns pelas conquistas visíveis, com a chave `Chatter`. As frases e as regras estão em [`falas.md`](conceito/falas.md).
-- **Scanners (perguntas 544 a 564):** só o Cubit ativo que segue varre, com a chave `Scanners`, por um custo fixo por varredura, em intervalos separados para minérios e mobs. Só o que é novo avisa, dizendo o nome: `Cubit: DIAMOND!!!` e `Cubit: Careful, Zombie!`, com o intervalo mínimo por nome. O filtro é definido clicando com um minério na mão, e os raros são uma lista de tags, de ferro para cima. Mob hostil é o que o jogo marca como `Enemy`. A entrega tem três PRs: detecção, cores e caixas.
+- **Falas (perguntas 572 a 587 e 618 a 621):** o Cubit comenta o tempo e o horário ao mudarem, com um intervalo mínimo, dá parabéns pelas conquistas visíveis e diz que ama redstone quando o dono a minera, com a chave `Chatter`. As frases e as regras estão em [`falas.md`](conceito/falas.md).
+- **Caixas dos scanners (perguntas 593 a 616):** só o dono vê, através dos blocos, uma caixa azul clara e discreta em volta de cada minério novo que a varredura achou, por cerca de 10 s ou até minerar, e uma vermelha em volta do mob hostil enquanto ele estiver no raio, as duas com um pulso suave.
+- **Scanners (perguntas 544 a 564 e 602 a 610):** só o Cubit ativo que segue varre, com a chave `Scanners`, numa esfera em volta dele, por um custo fixo por varredura, igual nos dois scanners, em intervalos separados para minérios e mobs. Só o que é novo avisa, dizendo o nome: `Cubit: DIAMOND!!!` e `Cubit: Careful, Zombie!`, com o intervalo mínimo por nome. O filtro é definido clicando com um minério na mão, e os raros são uma lista de tags, de ferro para cima. Mob hostil é o que o jogo marca como `Enemy`. A entrega tem três PRs: detecção, cores e caixas.
 - **Estado do robô como item:** inclui as configurações, além de bateria, vida, inventário, tier, nome e cor. Perde a área, os baús marcados e a seleção no controle.
 - **Modo área:** por dois cantos em 3D, já na Fase 4. Sem card, o robô coleta os itens do chão na área e descarrega no baú marcado.
 - **Parar pelo controle:** o robô continua ativo e com o vínculo, parado e sem teleportar, e o estado é salvo.
@@ -120,6 +121,8 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-07 20:04 | Registra as caixas dos scanners e as falas da redstone. |
+| Marcelo Fabiano | 2026-11-07 19:06 | Registra a esfera e o custo igual dos scanners. |
 | Marcelo Fabiano | 2026-11-07 16:54 | Registra as falas. |
 | Marcelo Fabiano | 2026-11-07 16:51 | Registra a ideia do modo só o alvo. |
 | Marcelo Fabiano | 2026-11-07 16:20 | Registra a altura que o robô desce. |

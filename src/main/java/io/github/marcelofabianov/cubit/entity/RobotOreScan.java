@@ -55,8 +55,9 @@ public final class RobotOreScan {
     found.clear();
   }
 
-  /** The kinds of the blocks that became new, once a whole sweep is finished. */
-  Optional<List<OreKind>> continueSweep(int blocksPerTick, OreSignals signals, OreFilter filter) {
+  /** The blocks that became new and their kinds, by position, once a whole sweep is finished. */
+  Optional<Map<Long, OreKind>> continueSweep(
+      int blocksPerTick, OreSignals signals, OreFilter filter) {
     int end = Math.min(area.blocks(), cursor + blocksPerTick);
     for (; cursor < end; cursor++) {
       read(signals, filter);
@@ -71,6 +72,9 @@ public final class RobotOreScan {
   }
 
   private void read(OreSignals signals, OreFilter filter) {
+    if (!area.holds(cursor)) {
+      return;
+    }
     reading.set(
         center.getX() + area.xOf(cursor),
         center.getY() + area.yOf(cursor),
@@ -80,10 +84,12 @@ public final class RobotOreScan {
         .ifPresent(kind -> found.put(reading.asLong(), kind));
   }
 
-  private List<OreKind> finish() {
+  private Map<Long, OreKind> finish() {
     area = null;
     FreshFinds.Update<Long> update = known.seen(Set.copyOf(found.keySet()));
     known = update.known();
-    return update.fresh().stream().map(found::get).toList();
+    Map<Long, OreKind> fresh = new HashMap<>();
+    update.fresh().forEach(pos -> fresh.put(pos, found.get(pos)));
+    return fresh;
   }
 }

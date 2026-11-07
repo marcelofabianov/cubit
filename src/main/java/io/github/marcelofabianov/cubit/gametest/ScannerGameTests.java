@@ -55,8 +55,22 @@ public final class ScannerGameTests {
   private static final int MOB_SCAN_TICKS = 200;
   private static final int AFTER_MOB_SCAN_TICKS = 210;
   private static final int LONG_TIMEOUT = 300;
-  private static final long MOB_SCAN_COST = 100;
-  private static final long ORE_SCAN_COST = 350;
+  private static final long MOB_SCAN_COST = 50;
+  private static final long ORE_SCAN_COST = 50;
+  private static final String CORNER_BATCH = "scanner_corner";
+  private static final String EDGE_BATCH = "scanner_edge";
+  private static final int RADIUS = 5;
+  private static final int CORNER = 4;
+  private static final int MOB_AHEAD = 7;
+  private static final int MOB_CORNER_X = 7;
+  private static final int MOB_CORNER_Y = 5;
+  private static final BlockPos CUBE_CORNER =
+      new BlockPos(ROBOT_X + CORNER, STAND_Y + CORNER, MIDDLE_Z);
+  private static final BlockPos MOB_CUBE_CORNER =
+      new BlockPos(ROBOT_X + MOB_CORNER_X, STAND_Y + MOB_CORNER_Y, MIDDLE_Z);
+  private static final BlockPos ORE_AT_RADIUS = new BlockPos(ROBOT_X + RADIUS, STAND_Y, MIDDLE_Z);
+  private static final BlockPos MOB_IN_RADIUS =
+      new BlockPos(ROBOT_X + MOB_AHEAD, STAND_Y, MIDDLE_Z);
   private static final String ZOMBIE_NAME = "entity.minecraft.zombie";
   private static final String DIAMOND_TAG = "c:ores/diamond";
   private static final String COAL_TAG = "c:ores/coal";
@@ -140,6 +154,35 @@ public final class ScannerGameTests {
     helper.assertTrue(before - charge(robot) == ORE_SCAN_COST, WRONG_COST);
     helper.assertTrue(RobotNotices.isHoldingName(robot, DIAMOND_TAG), NO_WARNING);
     helper.assertTrue(robot.scanners().surprised(), NOT_SURPRISED);
+    helper.succeed();
+  }
+
+  /** The corner of the cube is farther than the radius, so the sphere leaves it out (604, 606). */
+  @GameTest(template = ARENA, batch = CORNER_BATCH)
+  public static void theCornerOfTheCubeIsOutOfRange(GameTestHelper helper) {
+    RobotEntity robot = robot(helper);
+    helper.setBlock(CUBE_CORNER, Blocks.DIAMOND_ORE);
+    helper.spawnWithNoFreeWill(EntityType.ZOMBIE, MOB_CUBE_CORNER);
+
+    robot.scanners().scanMobsNow();
+    robot.scanners().scanOresNow();
+
+    helper.assertFalse(robot.scanners().enemyInRange(), ENEMY);
+    helper.assertFalse(RobotNotices.isHoldingName(robot, DIAMOND_TAG), WARNED);
+    helper.succeed();
+  }
+
+  @GameTest(template = ARENA, batch = EDGE_BATCH)
+  public static void theRadiusIsReachedStraightAhead(GameTestHelper helper) {
+    RobotEntity robot = robot(helper);
+    helper.setBlock(ORE_AT_RADIUS, Blocks.DIAMOND_ORE);
+    helper.spawnWithNoFreeWill(EntityType.ZOMBIE, MOB_IN_RADIUS);
+
+    robot.scanners().scanMobsNow();
+    robot.scanners().scanOresNow();
+
+    helper.assertTrue(robot.scanners().enemyInRange(), NO_ENEMY);
+    helper.assertTrue(RobotNotices.isHoldingName(robot, DIAMOND_TAG), NO_WARNING);
     helper.succeed();
   }
 

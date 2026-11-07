@@ -27,6 +27,7 @@ public enum ChatTopic {
   ANIMAL_SHEEP(4),
   ANIMAL_RABBIT(4),
   ANIMAL_OTHER(4),
+  REDSTONE(3),
   ACHIEVEMENT(8),
   CHALLENGE(6);
 

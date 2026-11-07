@@ -2,7 +2,7 @@
 
 Frases que o Cubit mostra sobre o tempo, o horário e as conquistas do dono, quando ele fica para trás, os biomas e os animais abatidos, junto do bipe padrão. Só o inglês vai para o jogo (regra 1 do `AGENTS.md`), e o português fica só neste documento. Cada frase aparece com o prefixo `Cubit: `, e cada situação sorteia uma das frases dela.
 
-As frases e as regras estão nas perguntas 572 a 587.
+As frases e as regras estão nas perguntas 572 a 587 e 618 a 621.
 
 ## Frases
 
@@ -160,6 +160,9 @@ As frases e as regras estão nas perguntas 572 a 587.
 | Outro animal | `Good hunt, partner!` | Boa caçada, parceiro! | O dono mata outro animal, inclusive de outro mod, com chance de 1 em 3 |
 | Outro animal | `That smells like lunch.` | Isso tem cheiro de almoço. | O dono mata outro animal, inclusive de outro mod, com chance de 1 em 3 |
 | Outro animal | `I'll add that to the menu.` | Vou colocar isso no cardápio. | O dono mata outro animal, inclusive de outro mod, com chance de 1 em 3 |
+| Redstone | `I love redstone!` | Eu amo redstone! | O dono minera um minério de redstone, inclusive de outro mod |
+| Redstone | `Redstone! My favorite snack!` | Redstone! Meu lanche favorito! | O dono minera um minério de redstone, inclusive de outro mod |
+| Redstone | `Redstone runs in my circuits!` | A redstone corre nos meus circuitos! | O dono minera um minério de redstone, inclusive de outro mod |
 
 ## Regras
 
@@ -177,12 +180,14 @@ As frases e as regras estão nas perguntas 572 a 587.
 - **Ficando para trás:** fala uma vez ao passar da distância e só volta a valer depois de chegar perto do dono, com um intervalo próprio. Não fala em chamas, a caminho do Dock nem num salto que passa direto do teleporte, como por um comando (pergunta 585).
 - **Biomas:** valem as tags de bioma do NeoForge, então os biomas de outros mods contam, sem lista fixa. Fala ao mudar de grupo, com um intervalo próprio, e nada ao entrar no mundo. Um bioma sem grupo, como um rio, não conta como mudança, e um bioma com neve usa as falas de frio (pergunta 586).
 - **Animais:** só quando o próprio dono mata, inclusive com arco, com a chance e o intervalo próprio de [`tiers.md`](../tiers.md#valores-gerais). Um animal domesticado, como cachorro, gato ou cavalo, nunca vira piada (pergunta 587).
+- **Redstone:** quando o próprio dono minera um minério com a tag `c:ores/redstone`, sem chance, com o intervalo próprio de [`tiers.md`](../tiers.md#valores-gerais). Como as outras falas, só com a expressão calma, então nunca cobre o `Cubit: REDSTONE!!!` do scanner, que deixa o Cubit surpreso (perguntas 618 a 621).
 - **Custo:** nenhum, com a leitura em intervalos.
 
 ## Histórico de modificações
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-07 20:04 | Adiciona as falas da redstone. |
 | Marcelo Fabiano | 2026-11-07 17:14 | Adiciona as falas de animais. |
 | Marcelo Fabiano | 2026-11-07 17:11 | Adiciona as falas de bioma. |
 | Marcelo Fabiano | 2026-11-07 17:07 | Adiciona as falas de quando fica para trás. |

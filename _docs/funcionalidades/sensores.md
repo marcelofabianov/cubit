@@ -6,7 +6,8 @@ Números por tier: [`tiers.md`](../tiers.md#sensores) e [lanterna](../tiers.md#i
 
 - **Quem varre:** só o Cubit ativo que segue, com a chave ligada. Desligado ou hibernando, ele não varre nem gasta (pergunta 554).
 - **Chave:** o botão `Scanners`, no painel lateral do inventário, vale para os dois, começa ligado e é guardado no item, inclusive ao morrer e consertar (pergunta 549).
-- **Custo:** cada varredura gasta uma quantia fixa de FE, parado ou andando, mesmo sem achar nada. Com menos carga que o custo, gasta o que resta (perguntas 550, 553 e 563).
+- **Área:** uma esfera em volta do Cubit, com um raio para cada scanner, maior no de mobs. Só conta o que está a até o raio em linha reta, em qualquer direção (perguntas 604 a 606 e 622).
+- **Custo:** cada varredura gasta uma quantia fixa de FE, a mesma nos dois scanners, parado ou andando, mesmo sem achar nada. Com menos carga que o custo, gasta o que resta (perguntas 550, 563 e 610).
 - **Avisa só o que é novo:** o mesmo mob ou bloco não avisa de novo enquanto continuar no raio. Se sair e voltar, avisa como novo. A lembrança não entra no save, então ao carregar o mundo ele pode avisar uma vez (pergunta 561).
 
 ## Scanner de minérios
@@ -41,7 +42,10 @@ Os detalhes dos sons estão em [`visual.md`](../conceito/visual.md#sons), e os t
 Definidos, em entregas próprias depois da detecção:
 
 - **Cor:** vermelho para mobs e azul para minérios, nas pontas e nos halos das antenas e num halo suave em volta do corpo, inclusive de dia e com a lanterna apagada. É só visual, sem custo e sem mudar a luz real, que continua branca. Todos os players por perto veem (pergunta 558).
-- **Caixas:** caixa de linhas na mesma cor, só no cliente do dono, sem mixin e sem mexer no mob. A do minério dura cerca de 10 s ou até ele ser minerado, e a do mob, enquanto ele estiver no raio (perguntas 555 a 557). Desenhar através de blocos depende de uma prova técnica.
+- **Caixas:** caixa de linhas na mesma cor, só no cliente do dono, sem mixin e sem mexer no mob, visível através dos blocos, num tom claro e translúcido, com um pulso suave (perguntas 555 a 557, 600 e 614).
+- **Que minério ganha caixa:** todos os minérios novos que a varredura achou dentro da esfera, os raros e os do filtro, mesmo quando o texto espera o intervalo de 25 s. Um minério já visto não ganha caixa de novo (perguntas 593, 597 e 608).
+- **Quanto dura:** a do minério, cerca de 10 s ou até ele deixar de ser minério, e a do mob, enquanto ele estiver no raio do Cubit (perguntas 556 e 599).
+- **Como chega ao cliente:** um pacote só do servidor para o dono, com as posições dos minérios e os IDs dos mobs. O cliente só desenha e apaga a caixa quando o tempo acaba, o bloco muda ou o mob sai do raio (pergunta 613).
 
 ## Lanterna
 
@@ -61,6 +65,9 @@ Definidos, em entregas próprias depois da detecção:
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-07 20:00 | Separa o raio dos dois scanners. |
+| Marcelo Fabiano | 2026-11-07 19:16 | Detalha as caixas: o que ganha caixa, a duração, o pulso e o pacote. |
+| Marcelo Fabiano | 2026-11-07 19:06 | Define a área em esfera e o mesmo custo nos dois scanners. |
 | Marcelo Fabiano | 2026-11-07 15:57 | Define os scanners, os alertas, a cor e as caixas. |
 | Marcelo Fabiano | 2026-11-06 13:34 | Define a lanterna e leva o feixe para o Minerador. |
 | Marcelo Fabiano | 2026-11-06 00:00 | Adiciona a claridade da tela. |

@@ -49,12 +49,12 @@ A ordem é a da numeração (perguntas 356 e 365), com a lanterna antes do paine
 
 ### Falta
 
-7. [ ] Os dois alertas de som, que dependem dos scanners
-8. [ ] Alerta e surpreso em uso, que dependem dos scanners, e as reações ao renomear e pintar
+7. [x] Os dois alertas de som, que dependem dos scanners
+8. [x] Alerta e surpreso em uso, que dependem dos scanners, e as reações ao renomear e pintar
 9. [x] Animações e modelo final
 10. [x] Cor do colar e indicador de bateria variando
 11. [x] Definir o intervalo mínimo entre repetições (perguntas 149, 433 e 444), junto dos textos
-12. [ ] Textos curtos na barra acima da hotbar
+12. [x] Textos curtos na barra acima da hotbar
 13. [x] Painel solar, sem as chaves, que entram com a interface de configuração (perguntas 494 e 495)
 14. [x] Lanterna, com a chave dela, o LambDynamicLights entrando no build e a claridade fraca da tela (perguntas 378 e 424)
 15. [x] Feixe: saiu da Fase 3 e foi para o Minerador, na Fase 5 (pergunta 463)
@@ -62,7 +62,7 @@ A ordem é a da numeração (perguntas 356 e 365), com a lanterna antes do paine
 17. [x] Nome personalizado e cor da carcaça
 18. [ ] Jade
 19. [ ] Telas próprias do Cubit e do Induction Dock, com janelas personalizadas, textura de metal de robô e tooltips, sem o padrão do Minecraft (pergunta 371)
-20. [ ] Falas do Cubit sobre o tempo e as conquistas, na mesma entrega dos scanners (perguntas 572 a 583)
+20. [x] Falas do Cubit sobre o tempo e as conquistas, na mesma entrega dos scanners (perguntas 572 a 583)
 
 ## Primeira versão: `0.1.0`
 

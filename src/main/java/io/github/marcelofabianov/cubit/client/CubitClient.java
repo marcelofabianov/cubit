@@ -28,6 +28,7 @@ public final class CubitClient {
   @SubscribeEvent
   public static void setup(FMLClientSetupEvent event) {
     CubitNetwork.setNoticeDisplay(RobotNoticeOverlay::show);
+    CubitNetwork.setMarksDisplay(ScanMarks::showOres, ScanMarks::showMobs);
     event.enqueueWork(() ->
         ItemProperties.register(
             CubitItems.GENERAL_ROBOT.get(),
