@@ -5,6 +5,7 @@ import io.github.marcelofabianov.cubit.block.DockFinder;
 import io.github.marcelofabianov.cubit.block.InductionDockBlock;
 import io.github.marcelofabianov.cubit.block.InductionDockBlockEntity;
 import io.github.marcelofabianov.cubit.domain.dock.DockStay;
+import io.github.marcelofabianov.cubit.domain.dock.DockTrip;
 import io.github.marcelofabianov.cubit.domain.energy.Battery;
 import io.github.marcelofabianov.cubit.domain.energy.PowerState;
 import io.github.marcelofabianov.cubit.domain.ownership.FollowingOutcome;
@@ -27,14 +28,11 @@ import net.minecraft.world.phys.Vec3;
 public final class RobotDocking {
   private static final String DOCK_POSITION_KEY = "DockPosition";
   private static final double ROUTE_SPEED_MODIFIER = 1;
-  private static final double ENTER_DISTANCE = 1.5;
-  private static final double PROGRESS_BLOCKS = 0.1;
 
   private final RobotEntity robot;
   private BlockPos docked;
   private BlockPos trip;
-  private double bestDistance;
-  private int stuckTicks;
+  private DockTrip progress = DockTrip.START;
   private int repathCountdown;
   private int searchCountdown;
   private int ticksFull;
@@ -49,8 +47,7 @@ public final class RobotDocking {
 
   void callTo(BlockPos dock) {
     trip = dock;
-    bestDistance = Double.MAX_VALUE;
-    stuckTicks = 0;
+    progress = DockTrip.START;
     repathCountdown = 0;
   }
 
@@ -69,25 +66,14 @@ public final class RobotDocking {
     InductionDockBlockEntity dock = target.get();
     Vec3 spot = dock.robotSpot();
     double distance = robot.position().distanceTo(spot);
-    if (distance <= ENTER_DISTANCE) {
-      arrive(dock, spot);
-    } else if (isStuck(distance)) {
-      if (dock.isOccupied()) {
-        arrive(dock, spot);
-      } else {
-        teleportInto(dock, spot);
-      }
-    } else {
-      routeTo(trip, dock);
+    DockTrip.Step step =
+        progress.advance(distance, CubitMod.CONFIG.dockStuckTicks(), dock.isOccupied());
+    progress = step.trip();
+    switch (step.action()) {
+      case WALK -> routeTo(trip, dock);
+      case ARRIVE -> arrive(dock, spot);
+      case TELEPORT -> teleportInto(dock, spot);
     }
-  }
-
-  private boolean isStuck(double distance) {
-    if (distance < bestDistance - PROGRESS_BLOCKS) {
-      bestDistance = distance;
-      stuckTicks = 0;
-    }
-    return ++stuckTicks > CubitMod.CONFIG.dockStuckTicks();
   }
 
   /**
@@ -105,7 +91,7 @@ public final class RobotDocking {
 
   /** Without a free dock it waits by this one, in order of arrival, and looks for another. */
   private void arrive(InductionDockBlockEntity dock, Vec3 spot) {
-    if (!dock.isOccupied() && dock.isNextInLine(robot.getUUID())) {
+    if (DockTrip.entersOnArrival(dock.isOccupied(), dock.isNextInLine(robot.getUUID()))) {
       enter(dock, spot);
       return;
     }
