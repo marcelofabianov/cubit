@@ -34,6 +34,9 @@
 | 321 | O nome `placed.ogg` e o momento "ao ser colocado no mundo" estão certos? | Sim. Detalha a pergunta 320 |
 | 322 | Em que fase o som de colocar no mundo passa a tocar? | Na Fase 3, junto dos outros oito. Detalha a pergunta 320 |
 | 421 | Como foi o roteiro manual do colar, do indicador de bateria e do tronco central com +0,5? | Teste finalizado, tudo ok, executado pelo desenvolvedor, sem detalhar cada passo. Ele não pediu +1, então o tronco fica em 2 unidades. O `make server` e o olhar de longe não foram citados em separado |
+| 633 | O agente segue com o commit 7 e prepara o rascunho do PR? | "Sim". O agente entendeu como autorização do commit 7, com as respostas 631 a 633, e do rascunho em `tmp/pr/`, não do push nem da abertura do PR |
+| 632 | O jogo está fechado? | Sim. Os gates podem rodar no estado final da branch |
+| 631 | O agente pode fazer o commit 6, com o status do `README.md` e do `AGENTS.md`? | Sim, com o diff apresentado, sem push e sem PR. Vale só para esse commit |
 | 630 | A chave das falas da redstone fica `chatter_redstone_repeat_ticks`, com 1.200 ticks, em `[general]`? | Sim, seguindo a recomendação, no padrão de `chatter_animal_repeat_ticks` |
 | 629 | O status do `README.md` e do `AGENTS.md` muda nesta entrega? | Sim, num sexto commit, seguindo a recomendação: o status do `README.md` e, no `AGENTS.md`, "Já entrou", "Próximos" e a estrutura de pacotes. O agente mostra o diff antes do commit |
 | 628 | O agente pode fazer os commits do plano? | Sim, os cinco, na branch `feature/117-scanner-marks`, sem push e sem PR. Vale só para esses commits |
@@ -309,6 +312,8 @@
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-07 20:21 | Registra a resposta 633. |
+| Marcelo Fabiano | 2026-11-07 20:18 | Registra as respostas 631 e 632. |
 | Marcelo Fabiano | 2026-11-07 20:12 | Registra as respostas 628, 629 e 630. |
 | Marcelo Fabiano | 2026-11-07 20:09 | Registra a resposta 627. |
 | Marcelo Fabiano | 2026-11-07 20:06 | Registra as respostas 625 e 626. |
