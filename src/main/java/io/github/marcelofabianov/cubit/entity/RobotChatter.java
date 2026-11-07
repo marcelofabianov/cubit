@@ -37,6 +37,7 @@ public final class RobotChatter implements RobotSwitch {
   private LeftBehindWatch leftBehind = LeftBehindWatch.READY;
   private BiomeWatch biome = BiomeWatch.UNKNOWN;
   private NoticeRepeat animalRepeat = NoticeRepeat.READY;
+  private NoticeRepeat redstoneRepeat = NoticeRepeat.READY;
   private NoticeRepeat biomeRepeat = NoticeRepeat.READY;
   private NoticeRepeat leftBehindRepeat = NoticeRepeat.READY;
 
@@ -56,6 +57,15 @@ public final class RobotChatter implements RobotSwitch {
         .map(RobotEntity.class::cast)
         .ifPresent(
             robot -> robot.chatter().remarkOn(animal, robot.getRandom().nextInt(Percentage.MAX)));
+  }
+
+  /** The robot loves redstone, so it comments when its owner mines it (answer 619). */
+  public static void onOwnerMinedRedstone(ServerPlayer owner) {
+    RobotEntity.follower(owner)
+        .map(id -> owner.serverLevel().getEntity(id))
+        .filter(RobotEntity.class::isInstance)
+        .map(RobotEntity.class::cast)
+        .ifPresent(robot -> robot.chatter().remarkOnRedstone());
   }
 
   /** The robot may be loaded in another dimension, where it would not be following. */
@@ -96,6 +106,7 @@ public final class RobotChatter implements RobotSwitch {
     leftBehindRepeat = leftBehindRepeat.tick();
     biomeRepeat = biomeRepeat.tick();
     animalRepeat = animalRepeat.tick();
+    redstoneRepeat = redstoneRepeat.tick();
     if (!runs()) {
       watch = null;
       leftBehind = LeftBehindWatch.READY;
@@ -197,6 +208,17 @@ public final class RobotChatter implements RobotSwitch {
         && say(RobotAnimals.topicOf(animal))) {
       robot.playSound(CubitSounds.EXPRESSION_BEEP.get());
       animalRepeat = animalRepeat.shown(CubitMod.CONFIG.chatterAnimalRepeatTicks());
+    }
+  }
+
+  /** Calm only, so it never covers the REDSTONE!!! of the scanner, whose surprise is not calm. */
+  public void remarkOnRedstone() {
+    if (runs()
+        && redstoneRepeat.canShow()
+        && ChatRules.isCalm(RobotFace.expression(robot))
+        && say(ChatTopic.REDSTONE)) {
+      robot.playSound(CubitSounds.EXPRESSION_BEEP.get());
+      redstoneRepeat = redstoneRepeat.shown(CubitMod.CONFIG.chatterRedstoneRepeatTicks());
     }
   }
 

@@ -174,6 +174,10 @@ public final class CubitConfig {
     return chatter.animalRepeatTicks.get();
   }
 
+  public int chatterRedstoneRepeatTicks() {
+    return chatter.redstoneRepeatTicks.get();
+  }
+
   public int chatterAnimalChancePercent() {
     return chatter.animalChancePercent.get();
   }

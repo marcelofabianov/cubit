@@ -21,6 +21,8 @@ final class ChatterSection {
   private static final int ANIMAL_CHANCE_DEFAULT = 33;
   private static final int ANIMAL_CHANCE_MIN = 0;
   private static final int ANIMAL_CHANCE_MAX = 100;
+  private static final String REDSTONE_REPEAT = "chatter_redstone_repeat_ticks";
+  private static final int REDSTONE_REPEAT_DEFAULT = 1200;
   private static final String LEFT_BEHIND_BLOCKS = "chatter_left_behind_blocks";
   private static final int LEFT_BEHIND_BLOCKS_DEFAULT = 16;
   private static final int LEFT_BEHIND_BLOCKS_MIN = 1;
@@ -32,6 +34,7 @@ final class ChatterSection {
   final ModConfigSpec.IntValue biomeRepeatTicks;
   final ModConfigSpec.IntValue animalRepeatTicks;
   final ModConfigSpec.IntValue animalChancePercent;
+  final ModConfigSpec.IntValue redstoneRepeatTicks;
   final ModConfigSpec.IntValue leftBehindBlocks;
   final ModConfigSpec.IntValue leftBehindRepeatTicks;
   final ModConfigSpec.IntValue checkTicks;
@@ -49,6 +52,9 @@ final class ChatterSection {
     animalChancePercent =
         builder.defineInRange(
             ANIMAL_CHANCE, ANIMAL_CHANCE_DEFAULT, ANIMAL_CHANCE_MIN, ANIMAL_CHANCE_MAX);
+    redstoneRepeatTicks =
+        builder.defineInRange(
+            REDSTONE_REPEAT, REDSTONE_REPEAT_DEFAULT, REPEAT_TICKS_MIN, REPEAT_TICKS_MAX);
     leftBehindBlocks =
         builder.defineInRange(
             LEFT_BEHIND_BLOCKS,

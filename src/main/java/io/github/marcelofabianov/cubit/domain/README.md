@@ -84,6 +84,7 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 ## Regras e porquês
 
 - **Falas pelo que muda:** o robô comenta quando algo muda, para cada fala ter um motivo, e o sorteio só escolhe a frase. O que ele não pôde comentar se perde, para não anunciar uma tempestade que já passou (perguntas 572 a 583).
+- **Redstone, sempre que calmo:** o Cubit ama redstone, então fala quando o dono a minera, sem chance. Só com a expressão calma, para nunca cobrir o aviso do scanner (perguntas 619 e 620).
 - **Animal abatido, às vezes:** a chance evita uma fala a cada animal numa fazenda, e um animal de estimação nunca vira piada (pergunta 587).
 - **Bioma por grupo:** só uma mudança de grupo conta, e um bioma sem grupo, como um rio, não muda nada, para o robô não repetir o comentário (pergunta 586).
 - **Reclamar uma vez:** ao se afastar, o dono só ouve de novo depois de o robô chegar perto, para não repetir a cada passo. Um salto além do teleporte não conta, porque não é o dono correndo (pergunta 585).
