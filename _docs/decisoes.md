@@ -37,6 +37,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Fase 2:** encerrada. Os testes de instância ficaram para o fim da Fase 3.
 - **Documento desatualizado:** o agente sempre pergunta antes de corrigir, mesmo quando a correção parece clara.
 - **Merge:** é feito somente pelo desenvolvedor.
+- **Depois do merge:** o agente pede autorização para apagar a branch local e a remota, apresenta o próximo trabalho e pergunta se há ajuste no roteiro (regra 52).
 - **Checklist das fases:** fica em [`checklist.md`](../checklist.md). É avaliado ao encerrar cada PR, e a marcação entra num novo commit, no PR seguinte.
 - **Contratos:** comandos e chaves de tradução entram como quinto contrato, e os nomes só mudam com aviso, sem exigir migração.
 - **Números no roteiro manual:** ele pode citar os valores padrão como resultado esperado, e `tiers.md` prevalece.
@@ -114,6 +115,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-07 14:25 | Registra o encerramento depois do merge. |
 | Marcelo Fabiano | 2026-11-07 13:35 | Registra as decisões da auditoria de qualidade. |
 | Marcelo Fabiano | 2026-11-07 13:21 | Registra a refatoração antes dos scanners. |
 | Marcelo Fabiano | 2026-11-06 15:58 | Registra a cor, o nome e a ordem da personalização. |
