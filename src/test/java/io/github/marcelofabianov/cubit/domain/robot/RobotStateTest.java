@@ -12,7 +12,9 @@ import io.github.marcelofabianov.cubit.domain.energy.Energy;
 import io.github.marcelofabianov.cubit.domain.energy.Percentage;
 import io.github.marcelofabianov.cubit.domain.energy.SolarOutput;
 import io.github.marcelofabianov.cubit.domain.tier.RobotTier;
+import io.github.marcelofabianov.cubit.domain.tier.ScannerSpec;
 import io.github.marcelofabianov.cubit.domain.tier.TierSpec;
+import java.util.List;
 import org.junit.jupiter.api.Test;
 
 class RobotStateTest {
@@ -28,6 +30,7 @@ class RobotStateTest {
   private static final float TOO_MUCH_HEALTH = 99f;
   private static final float MIN_PLACED_HEALTH = 1f;
   private static final int REPAIR_PERCENT = 25;
+  private static final String DIAMOND_TAG = "c:ores/diamond";
   private static final float REPAIRED_HEALTH = 6.25f;
   private static final Energy CONSUMPTION = new Energy(10);
   private static final Energy RECHARGE = new Energy(500);
@@ -42,7 +45,8 @@ class RobotStateTest {
           1,
           new ConsumptionExtras(Energy.ZERO, Energy.ZERO, Energy.ZERO, Energy.ZERO, Energy.ZERO),
           new LightLevel(0),
-          new SolarOutput(Energy.ZERO, Energy.ZERO));
+          new SolarOutput(Energy.ZERO, Energy.ZERO),
+          new ScannerSpec(1, 1, 1, 1, Energy.ZERO, Energy.ZERO, 1));
 
   @Test
   void aNewRobotIsWhite() {
@@ -131,5 +135,27 @@ class RobotStateTest {
 
     assertFalse(off.damaged().lampOn());
     assertFalse(off.damaged().repaired(SPEC, new Percentage(REPAIR_PERCENT)).lampOn());
+  }
+
+  @Test
+  void theScannersStartOnAndWithoutAFilter() {
+    RobotState state = new RobotState(RobotTier.BASE, SOME_ENERGY, SOME_HEALTH);
+
+    assertTrue(state.scannersOn());
+    assertEquals(OreFilter.EMPTY, state.oreFilter());
+  }
+
+  @Test
+  void dyingAndRepairingKeepTheScanners() {
+    OreFilter filter = new OreFilter(List.of(new OreKind(DIAMOND_TAG)));
+    RobotState state =
+        new RobotState(
+            RobotTier.BASE, SOME_ENERGY, SOME_HEALTH, true, RobotColor.WHITE, false, filter);
+    RobotState repaired = state.damaged().repaired(SPEC, new Percentage(REPAIR_PERCENT));
+
+    assertFalse(state.damaged().scannersOn());
+    assertEquals(filter, state.damaged().oreFilter());
+    assertFalse(repaired.scannersOn());
+    assertEquals(filter, repaired.oreFilter());
   }
 }

@@ -48,7 +48,7 @@ Não há perguntas pendentes nesta fase.
 | # | Pergunta | Resposta |
 |---|---|---|
 | 40 | Em que fase entram os itens sem fase? | Solar, scanners, nome, cor e Jade na Fase 3; controle remoto na Fase 4 |
-| 41 | Como definir "minério raro, de ferro para cima"? | Uma lista configurável de tags, começando em ferro |
+| 41 | Como definir "minério raro, de ferro para cima"? | Uma lista configurável de tags, começando em ferro. A [pergunta 551](fase-3-sentidos.md) define a lista |
 | 77 | Onde fica a lista de itens, com nome e uma linha de descrição? | Na tabela principal de `itens.md`, e ID e receita numa segunda tabela do mesmo arquivo |
 | 78 | Um gate garante a atualização do histórico de modificações? | Sim, no `pre-commit`, para os arquivos de `_docs/`, conforme a [pergunta 132](fase-2-versao-minima.md) |
 | 87 | Os nomes dos arquivos e pastas de documentação ficam em português? | Sim. `README.md`, `AGENTS.md`, `CLAUDE.md` e `LICENSE` mantêm o nome |
@@ -65,6 +65,7 @@ Não há perguntas pendentes nesta fase.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-07 15:57 | Aponta a resposta 41 para a 551. |
 | Marcelo Fabiano | 2026-11-06 13:26 | Aponta a resposta 17 para a 463. |
 | Marcelo Fabiano | 2026-11-06 11:10 | Aponta as respostas 90 e 91 para a 451. |
 | Marcelo Fabiano | 2026-11-06 11:10 | Troca 'especialidade' por 'trabalho' e 'card de especialidade' por 'card de Aprendizado de Máquina'. |

@@ -9,12 +9,17 @@ import io.github.marcelofabianov.cubit.domain.energy.Energy;
 import io.github.marcelofabianov.cubit.domain.energy.Percentage;
 import io.github.marcelofabianov.cubit.domain.energy.PowerRules;
 import io.github.marcelofabianov.cubit.domain.energy.SolarOutput;
+import io.github.marcelofabianov.cubit.domain.robot.OreKind;
+import io.github.marcelofabianov.cubit.domain.robot.OreSignals;
 import io.github.marcelofabianov.cubit.domain.robot.RobotType;
 import io.github.marcelofabianov.cubit.domain.tier.RobotTier;
+import io.github.marcelofabianov.cubit.domain.tier.ScannerSpec;
 import io.github.marcelofabianov.cubit.domain.tier.TierCatalog;
 import io.github.marcelofabianov.cubit.domain.tier.TierSpec;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
 import net.neoforged.neoforge.common.ModConfigSpec;
 import org.slf4j.Logger;
@@ -24,6 +29,7 @@ public final class CubitConfig {
   public static final RobotType GENERAL_ROBOT = new RobotType("general_robot");
   private static final Logger LOGGER = LogUtils.getLogger();
   private static final String REVERSED_LAMP = "The lamp limits are reversed: off {}, on {}";
+  private static final String INVALID_RARE_TAG = "Ignoring an invalid tag in rare_ore_tags: {}";
   private static final String GENERAL_SECTION = "general";
   private static final int TIER_SECTION_DEPTH = 2;
   private static final long BASE_BATTERY = 300_000;
@@ -40,6 +46,12 @@ public final class CubitConfig {
   private static final int BASE_HEALTH = 25;
   private static final int BASE_CALL_RADIUS = 15;
   private static final double BASE_SPEED_MULTIPLIER = 1;
+  private static final int BASE_SCAN_RADIUS = 5;
+  private static final int BASE_ORE_SCAN_TICKS = 700;
+  private static final int BASE_MOB_SCAN_TICKS = 200;
+  private static final long BASE_ORE_SCAN_COST = 350;
+  private static final long BASE_MOB_SCAN_COST = 100;
+  private static final int BASE_ORE_FILTER_SLOTS = 1;
   private static final TierSpec GENERAL_ROBOT_BASE =
       new TierSpec(
           new Energy(BASE_BATTERY),
@@ -56,7 +68,15 @@ public final class CubitConfig {
               new Energy(BASE_CLIMB_EXTRA),
               new Energy(BASE_LAMP_CONSUMPTION)),
           new LightLevel(BASE_LAMP_LIGHT),
-          new SolarOutput(new Energy(BASE_SOLAR_DAY), Energy.ZERO));
+          new SolarOutput(new Energy(BASE_SOLAR_DAY), Energy.ZERO),
+          new ScannerSpec(
+              BASE_SCAN_RADIUS,
+              BASE_SCAN_RADIUS,
+              BASE_ORE_SCAN_TICKS,
+              BASE_MOB_SCAN_TICKS,
+              new Energy(BASE_ORE_SCAN_COST),
+              new Energy(BASE_MOB_SCAN_COST),
+              BASE_ORE_FILTER_SLOTS));
 
   private final ModConfigSpec spec;
   private final GeneralSection general;
@@ -68,6 +88,9 @@ public final class CubitConfig {
   private final DockSection dock;
   private final LampSection lamp;
   private final SolarSection solar;
+  private final ScannerSection scanner;
+  private final ChatterSection chatter;
+  private final AtomicBoolean warnedRareTags = new AtomicBoolean();
   private final AtomicBoolean warnedLamp = new AtomicBoolean();
   private final TierCatalog tierCatalog;
 
@@ -84,6 +107,8 @@ public final class CubitConfig {
     dock = new DockSection(builder);
     lamp = new LampSection(builder);
     solar = new SolarSection(builder);
+    scanner = new ScannerSection(builder);
+    chatter = new ChatterSection(builder);
     builder.pop();
 
     builder.push(List.of(GENERAL_ROBOT.id(), RobotTier.BASE.key()));
@@ -113,6 +138,55 @@ public final class CubitConfig {
 
   public LightLevel screenLight() {
     return new LightLevel(lamp.screenLight.get());
+  }
+
+  /** An invalid tag in the file must not break the game, so it only goes to the log once. */
+  public OreSignals oreSignals() {
+    List<OreKind> kinds = new ArrayList<>();
+    for (String tag : scanner.rareTags.get()) {
+      Optional<OreKind> kind = OreKind.parse(tag);
+      kind.ifPresent(kinds::add);
+      if (kind.isEmpty() && warnedRareTags.compareAndSet(false, true)) {
+        LOGGER.warn(INVALID_RARE_TAG, tag);
+      }
+    }
+    return new OreSignals(kinds);
+  }
+
+  public int chatterRepeatTicks() {
+    return chatter.repeatTicks.get();
+  }
+
+  public int chatterLeftBehindBlocks() {
+    return chatter.leftBehindBlocks.get();
+  }
+
+  public int chatterLeftBehindRepeatTicks() {
+    return chatter.leftBehindRepeatTicks.get();
+  }
+
+  public int chatterBiomeRepeatTicks() {
+    return chatter.biomeRepeatTicks.get();
+  }
+
+  public int chatterAnimalRepeatTicks() {
+    return chatter.animalRepeatTicks.get();
+  }
+
+  public int chatterAnimalChancePercent() {
+    return chatter.animalChancePercent.get();
+  }
+
+  public int chatterCheckTicks() {
+    return chatter.checkTicks.get();
+  }
+
+  public int surprisedExpressionTicks() {
+    return scanner.surprisedTicks.get();
+  }
+
+  public int scanBlocksPerTick() {
+    return scanner.blocksPerTick.get();
   }
 
   public int solarCheckTicks() {
@@ -172,6 +246,10 @@ public final class CubitConfig {
 
   public double baseMovementSpeed() {
     return general.baseSpeed.get();
+  }
+
+  public int maxDropBlocks() {
+    return general.maxDrop.get();
   }
 
   public int followRepathTicks() {

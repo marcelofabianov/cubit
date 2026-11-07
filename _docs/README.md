@@ -10,6 +10,7 @@ Este é o mapa dos documentos do projeto. A apresentação do mod e o roadmap fi
 | Visual, expressões e sons | [`conceito/visual.md`](conceito/visual.md) |
 | Lista dos arquivos de som | [`conceito/sons.md`](conceito/sons.md) |
 | Lista das expressões, com as imagens | [`conceito/expressoes.md`](conceito/expressoes.md) |
+| Falas do Cubit sobre o tempo e as conquistas, em inglês e em português | [`conceito/falas.md`](conceito/falas.md) |
 | Imagens de conceito | [`imagens/conceito/`](imagens/conceito/) |
 | Bateria, Induction Dock, Power Bank, redstone, painel solar e retorno automático | [`funcionalidades/energia.md`](funcionalidades/energia.md) |
 | Movimento, robô que segue, fogo, lava, vida, morte e local de morte | [`funcionalidades/movimento.md`](funcionalidades/movimento.md) |
@@ -39,6 +40,8 @@ Os números ficam em [`tiers.md`](tiers.md). As outras páginas apontam para lá
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-07 16:43 | Amplia a citação das falas. |
+| Marcelo Fabiano | 2026-11-07 16:41 | Cita as falas. |
 | Marcelo Fabiano | 2026-11-06 15:58 | Cita a personalização. |
 | Marcelo Fabiano | 2026-11-06 11:10 | Troca 'especialidade' por 'trabalho' e 'card de especialidade' por 'card de Aprendizado de Máquina'. |
 | Marcelo Fabiano | 2026-11-05 23:41 | Cita a lista das expressões. |

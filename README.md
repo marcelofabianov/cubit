@@ -6,7 +6,7 @@
 
 Um robô companheiro fofo, movido a bateria, para Minecraft 1.21.1 com NeoForge. Funciona só com ele e suas dependências, e também é testado no modpack [Iron Meridian](https://github.com/marcelofabianov/iron-meridian). O Cubit é craftado com recursos do jogo puro.
 
-> **Status: Fase 2 encerrada, Fase 3 em andamento.** O mod ainda não tem versão publicada, e a primeira, `0.1.0`, sai ao terminar a Fase 3. Já funcionam colocar e recolher o Cubit, seguir o player, vários Cubits com um seguindo, as reações a fogo, lava e blocos que ferem, o inventário, a bateria com recarga por redstone, o Induction Dock, a morte com o item danificado, o conserto e o comando `/cubit reset`. Na Fase 3, já entraram os sons, as expressões, as animações, a barra de vida, a cor do colar, o indicador de bateria, os textos curtos, a lanterna, o painel solar, a cor da carcaça e o nome. O resto abaixo está planejado, e os números são o ponto de partida para o balanceamento.
+> **Status: Fase 2 encerrada, Fase 3 em andamento.** O mod ainda não tem versão publicada, e a primeira, `0.1.0`, sai ao terminar a Fase 3. Já funcionam colocar e recolher o Cubit, seguir o player, vários Cubits com um seguindo, as reações a fogo, lava e blocos que ferem, o inventário, a bateria com recarga por redstone, o Induction Dock, a morte com o item danificado, o conserto e o comando `/cubit reset`. Na Fase 3, já entraram os sons, as expressões, as animações, a barra de vida, a cor do colar, o indicador de bateria, os textos curtos, a lanterna, o painel solar, a cor da carcaça, o nome, a detecção dos scanners e as falas. O resto abaixo está planejado, e os números são o ponto de partida para o balanceamento.
 
 ## O que o Cubit faz
 
@@ -21,7 +21,7 @@ O Cubit segue você e ajuda em tarefas simples:
 - **Avisa você** sobre mobs hostis e procura os minérios que você escolher.
 - **Protege você** com um choque leve, nos modos pacífico, contra-atacar e agressivo. Nunca ataca o dono nem mobs pacíficos.
 - **Trabalha sozinho**: atua numa área marcada, descarrega em baús marcados, funde minérios, carrega suas ferramentas elétricas e guia você até o local da sua morte.
-- **Tem personalidade**: a tela do rosto muda de expressão, e ele se comunica com bipes e poucos textos curtos.
+- **Tem personalidade**: a tela do rosto muda de expressão, e ele se comunica com bipes e textos curtos, comentando o tempo, os biomas e as suas conquistas, com uma chave para desligar.
 
 Você pode ter quantos Cubits quiser trabalhando em áreas marcadas, mas só um segue você por vez.
 

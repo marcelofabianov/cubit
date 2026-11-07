@@ -49,7 +49,9 @@ Os extras somam ao andar. O consumo só vale com o robô ativo.
 | Fundir na fornalha | Bloqueado | ~20 FE/t | ~20 FE/t | ~20 FE/t |
 | Choque, por uso | Bloqueado | 2 mil FE | 2 mil FE | 1,5 mil FE |
 | Extra com a lanterna acesa, mesmo parado | +1 FE/t | +1 FE/t | +2 FE/t | +2 FE/t |
-| Ímã, scanners e colocar tochas | A definir | A definir | A definir | A definir |
+| Scanner de mobs, por varredura | 100 FE | A definir | A definir | A definir |
+| Scanner de minérios, por varredura | 350 FE | A definir | A definir | A definir |
+| Ímã e colocar tochas | A definir | A definir | A definir | A definir |
 
 - **Claridade da tela:** não gasta energia.
 - **Carregador de ferramentas:** transfere energia para outro item, então não conta como gasto. A velocidade está em [slots exclusivos](#slots-exclusivos).
@@ -67,6 +69,7 @@ Valem para todos os tiers e ficam no config.
 | Velocidade 1,0× (atributo de movimento) | 0,33 |
 | Intervalo para recalcular a rota | 10 ticks |
 | Distância para parar perto do player | 3 blocos |
+| Altura máxima que a rota desce | 5 blocos |
 | Velocidade em chamas, sobre a do tier | 1,25× |
 | Velocidade com o inventário cheio, sobre a do tier | 0,75× |
 | Busca de água em chamas, em qualquer direção | 8 blocos |
@@ -89,6 +92,17 @@ Valem para todos os tiers e ficam no config.
 | Intervalo para tentar de novo o resgate no vazio | 20 ticks |
 | Alcance do controle remoto ao mirar num Cubit | 32 blocos |
 | Intervalo mínimo entre repetições de textos e alertas | ~25 s |
+| Intervalo mínimo entre falas sobre o tempo | 5 min |
+| Intervalo mínimo entre falas de bioma | 2 min |
+| Intervalo mínimo entre falas de animais | 1 min |
+| Chance de falar ao abater um animal | 33% |
+| Distância para reclamar de ficar para trás | 16 blocos |
+| Intervalo mínimo entre falas de ficar para trás | 1 min |
+| Intervalo para ler o tempo e o horário das falas | 20 ticks |
+| Tempo com a expressão de surpresa | ~3 s |
+| Tempo da caixa em volta de um minério | ~10 s |
+| Limite de blocos lidos por tick numa varredura | 2.000 |
+| Minérios raros, do mais raro para o menos raro | Sucata de netherita, esmeralda, diamante, ouro, lápis, redstone e ferro |
 | Luz da claridade da tela | 4 |
 | A lanterna acende abaixo da luz | 8 |
 | A lanterna apaga a partir da luz | 10 |
@@ -114,7 +128,8 @@ Valem para todos os tiers e ficam no config.
 | Scanner de minérios (raio) | 5 blocos | 10 blocos | 16 blocos | 24 blocos |
 | Minérios no filtro do scanner | 1 | 3 | 6 | Ilimitado |
 | Scanner de mobs hostis (raio) | 5 blocos | 10 blocos | 16 blocos | 24 blocos |
-| Intervalo de varredura | 5 s | 4 s | 3 s | 2 s |
+| Intervalo de varredura de minérios | 35 s | 20 s | 15 s | 5 s |
+| Intervalo de varredura de mobs | 10 s | 8 s | 6 s | 4 s |
 
 ## Comportamento e combate
 
@@ -179,6 +194,12 @@ Planejado para a Fase 5. O tier Base não aceita cards.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-07 17:14 | Adiciona os números das falas de animais. |
+| Marcelo Fabiano | 2026-11-07 17:11 | Adiciona o intervalo das falas de bioma. |
+| Marcelo Fabiano | 2026-11-07 17:07 | Adiciona os números de ficar para trás. |
+| Marcelo Fabiano | 2026-11-07 16:54 | Adiciona os intervalos das falas. |
+| Marcelo Fabiano | 2026-11-07 16:20 | Adiciona a altura máxima que a rota desce. |
+| Marcelo Fabiano | 2026-11-07 15:57 | Define os intervalos e o custo dos scanners, a surpresa, a caixa, o limite por tick e os minérios raros. |
 | Marcelo Fabiano | 2026-11-06 15:05 | Adiciona o intervalo do painel solar. |
 | Marcelo Fabiano | 2026-11-06 13:34 | Define a luz e o consumo da lanterna, os valores gerais dela e leva o feixe para o Minerador. |
 | Marcelo Fabiano | 2026-11-06 11:10 | Tira a citação ao robô de uso geral. |

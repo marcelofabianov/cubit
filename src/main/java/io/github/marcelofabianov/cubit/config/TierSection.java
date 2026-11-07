@@ -4,6 +4,7 @@ import io.github.marcelofabianov.cubit.domain.behavior.LightLevel;
 import io.github.marcelofabianov.cubit.domain.energy.ConsumptionExtras;
 import io.github.marcelofabianov.cubit.domain.energy.Energy;
 import io.github.marcelofabianov.cubit.domain.energy.SolarOutput;
+import io.github.marcelofabianov.cubit.domain.tier.ScannerSpec;
 import io.github.marcelofabianov.cubit.domain.tier.TierSpec;
 import net.neoforged.neoforge.common.ModConfigSpec;
 
@@ -32,12 +33,23 @@ final class TierSection {
   private static final int MAX_ENERGY = Integer.MAX_VALUE;
   private static final int MAX_INVENTORY_SLOTS = 54;
   private static final int MAX_HEALTH_LIMIT = 1024;
+  private static final String ORE_RADIUS = "ore_scan_radius_blocks";
+  private static final String MOB_RADIUS = "mob_scan_radius_blocks";
+  private static final String ORE_INTERVAL = "ore_scan_interval_ticks";
+  private static final String MOB_INTERVAL = "mob_scan_interval_ticks";
+  private static final String ORE_COST = "ore_scan_cost";
+  private static final String MOB_COST = "mob_scan_cost";
+  private static final String ORE_FILTER_SLOTS = "ore_filter_slots";
+  private static final int MAX_SCAN_RADIUS = 64;
+  private static final int MAX_SCAN_INTERVAL = 72000;
+  private static final int MAX_ORE_FILTER_SLOTS = 64;
 
   private final ModConfigSpec.IntValue batteryCapacity;
   private final ModConfigSpec.IntValue movingConsumption;
   private final ExtraKeys extras;
   private final ModConfigSpec.IntValue lampLight;
   private final SolarKeys solar;
+  private final ScannerKeys scanners;
   private final ModConfigSpec.IntValue recharge;
   private final ModConfigSpec.IntValue inventorySlots;
   private final ModConfigSpec.IntValue maxHealth;
@@ -51,6 +63,7 @@ final class TierSection {
     extras = new ExtraKeys(builder, defaults.extras());
     lampLight = light(builder, LAMP_LIGHT, defaults.lampLight());
     solar = new SolarKeys(builder, defaults.solar());
+    scanners = new ScannerKeys(builder, defaults.scanners());
     recharge = energy(builder, RECHARGE, defaults.rechargePerTick(), MIN_POSITIVE);
     inventorySlots =
         count(builder, INVENTORY_SLOTS, defaults.inventorySlots(), MAX_INVENTORY_SLOTS);
@@ -77,7 +90,8 @@ final class TierSection {
         speedMultiplier.get(),
         extras.read(),
         new LightLevel(lampLight.get()),
-        solar.read());
+        solar.read(),
+        scanners.read());
   }
 
   private static ModConfigSpec.IntValue count(
@@ -139,6 +153,39 @@ final class TierSection {
 
     SolarOutput read() {
       return new SolarOutput(new Energy(day.get()), new Energy(night.get()));
+    }
+  }
+
+  /** The scanners of one tier. A class of its own keeps the constructor above within the limit. */
+  private static final class ScannerKeys {
+    private final ModConfigSpec.IntValue oreRadius;
+    private final ModConfigSpec.IntValue mobRadius;
+    private final ModConfigSpec.IntValue oreInterval;
+    private final ModConfigSpec.IntValue mobInterval;
+    private final ModConfigSpec.IntValue oreCost;
+    private final ModConfigSpec.IntValue mobCost;
+    private final ModConfigSpec.IntValue oreFilterSlots;
+
+    ScannerKeys(ModConfigSpec.Builder builder, ScannerSpec defaults) {
+      oreRadius = count(builder, ORE_RADIUS, defaults.oreRadiusBlocks(), MAX_SCAN_RADIUS);
+      mobRadius = count(builder, MOB_RADIUS, defaults.mobRadiusBlocks(), MAX_SCAN_RADIUS);
+      oreInterval = count(builder, ORE_INTERVAL, defaults.oreIntervalTicks(), MAX_SCAN_INTERVAL);
+      mobInterval = count(builder, MOB_INTERVAL, defaults.mobIntervalTicks(), MAX_SCAN_INTERVAL);
+      oreCost = energy(builder, ORE_COST, defaults.oreCost(), MIN_CONSUMPTION);
+      mobCost = energy(builder, MOB_COST, defaults.mobCost(), MIN_CONSUMPTION);
+      oreFilterSlots =
+          count(builder, ORE_FILTER_SLOTS, defaults.oreFilterSlots(), MAX_ORE_FILTER_SLOTS);
+    }
+
+    ScannerSpec read() {
+      return new ScannerSpec(
+          oreRadius.get(),
+          mobRadius.get(),
+          oreInterval.get(),
+          mobInterval.get(),
+          new Energy(oreCost.get()),
+          new Energy(mobCost.get()),
+          oreFilterSlots.get());
     }
   }
 }

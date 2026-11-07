@@ -43,12 +43,12 @@ São dez: normal, feliz, sono, alerta, surpreso, carregando, desligado, triste, 
 - **Brilho:** a tela brilha no escuro. Desligada, não brilha, e as pontas das antenas ficam cinza.
 - **Qual vence:** tela apagada, carregando, quase morto, triste, preocupado, alerta, surpreso, sono, feliz e normal.
 - **Triste e quase morto:** triste dura o tempo de [`tiers.md`](../tiers.md#valores-gerais) depois de um dano, e quase morto, com a vida no limite da mesma tabela, dura menos, e a lágrima segue até o fim do tempo dela. Ao levar dano, toca o curto elétrico, no lugar do som padrão do jogo e sem bipe. Em chamas, o loop já toca, e os golpes do fogo não o repetem.
-- **Feliz:** dura o tempo de [`tiers.md`](../tiers.md#valores-gerais), depois de colocar o robô, abrir o inventário, pintá-lo ou dar a ele uma etiqueta, com ele ativo.
+- **Feliz:** dura o tempo de [`tiers.md`](../tiers.md#valores-gerais), depois de colocar o robô, abrir o inventário, pintá-lo, dar a ele uma etiqueta ou quando o dono ganha uma conquista, com ele ativo.
 - **Bipe:** toca ao trocar para normal, feliz ou sono, exceto ao ligar, ao ser colocado e ao carregar o mundo.
 - **Piscada:** na expressão normal, fica 5 s de olhos abertos e pisca em cerca de 0,25 s, sem bipe. Cada robô começa num momento diferente.
 - **Olhar:** na expressão normal, os olhos sobem cerca de 1/6 da tela ao subir e descem ao descer, um ou mais blocos, e ficam assim por cerca de 0,5 s depois do movimento.
 - **Olhar para o dono:** sem movimento próprio, com o robô ligado, na mesma dimensão e o dono a até 8 blocos, os olhos também sobem num pulo e descem numa queda rápida dele, por cerca de 0,5 s, e ficam para cima ou para baixo enquanto ele estiver 1 bloco ou mais acima ou abaixo do robô.
-- **Em uso:** normal, feliz, sono, carregando, desligado, triste, quase morto e preocupado. Alerta e surpreso entram com os scanners.
+- **Em uso:** todas. Alerta e surpreso vêm dos scanners.
 
 ## Sons
 
@@ -56,7 +56,7 @@ São onze sons diferentes (perguntas 135, 148, 316, 320, 322 e 362). Nove entram
 
 Os arquivos ficam em `assets/cubit/sounds/general_robot/`, em Ogg Vorbis, mono e 48 kHz, porque o jogo só aceita esse formato e só reduz o volume com a distância em sons mono. O intervalo mínimo fica em [`tiers.md`](../tiers.md#valores-gerais) e no config.
 
-Tocam todos, menos os alertas, que entram com os scanners, e o ataque e o modo agressivo, que entram na Fase 4.
+Tocam todos, menos o ataque e o modo agressivo, que entram na Fase 4.
 
 - **IDs:** `cubit:general_robot.{nome}`, com o nome do arquivo sem a extensão. Não mudam sem aviso.
 - **Quem ouve:** todos os players por perto, com o volume caindo até cerca de 16 blocos, no controle "Criaturas amigáveis" do jogo. Volume e alcance ficam no `sounds.json`, onde um pacote de recursos pode mudá-los.
@@ -77,6 +77,8 @@ Tocam todos, menos os alertas, que entram com os scanners, e o ataque e o modo a
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-07 16:54 | Adiciona a reação às conquistas. |
+| Marcelo Fabiano | 2026-11-07 15:57 | Coloca o alerta e a surpresa em uso, com os sons de alerta. |
 | Marcelo Fabiano | 2026-11-07 14:49 | Acrescenta pintar e receber etiqueta à expressão feliz. |
 | Marcelo Fabiano | 2026-11-06 15:58 | Aponta a cor e o nome para a personalização. |
 | Marcelo Fabiano | 2026-11-06 15:16 | Tira o vidro do painel. |

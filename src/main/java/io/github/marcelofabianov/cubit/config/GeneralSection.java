@@ -22,6 +22,10 @@ final class GeneralSection {
   private static final int STOP_DISTANCE_DEFAULT = 3;
   private static final int STOP_DISTANCE_MIN = 1;
   private static final int STOP_DISTANCE_MAX = 16;
+  private static final String MAX_DROP = "max_drop_blocks";
+  private static final int MAX_DROP_DEFAULT = 5;
+  private static final int MAX_DROP_MIN = 1;
+  private static final int MAX_DROP_MAX = 16;
   private static final String TELEPORT_DISTANCE = "teleport_distance_blocks";
   private static final int TELEPORT_DISTANCE_DEFAULT = 20;
   private static final int TELEPORT_DISTANCE_MIN = STOP_DISTANCE_MAX + 1;
@@ -43,6 +47,7 @@ final class GeneralSection {
   final ModConfigSpec.DoubleValue baseSpeed;
   final ModConfigSpec.IntValue repathTicks;
   final ModConfigSpec.IntValue stopDistance;
+  final ModConfigSpec.IntValue maxDrop;
   final ModConfigSpec.IntValue teleportDistance;
   final ModConfigSpec.DoubleValue burningSpeed;
   final ModConfigSpec.IntValue waterSearchRadius;
@@ -57,6 +62,7 @@ final class GeneralSection {
     repathTicks =
         builder.defineInRange(
             REPATH_TICKS, REPATH_TICKS_DEFAULT, REPATH_TICKS_MIN, REPATH_TICKS_MAX);
+    maxDrop = builder.defineInRange(MAX_DROP, MAX_DROP_DEFAULT, MAX_DROP_MIN, MAX_DROP_MAX);
     stopDistance =
         builder.defineInRange(
             STOP_DISTANCE, STOP_DISTANCE_DEFAULT, STOP_DISTANCE_MIN, STOP_DISTANCE_MAX);

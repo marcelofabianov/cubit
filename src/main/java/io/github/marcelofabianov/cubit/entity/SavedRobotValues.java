@@ -3,14 +3,20 @@ package io.github.marcelofabianov.cubit.entity;
 import com.mojang.logging.LogUtils;
 import io.github.marcelofabianov.cubit.domain.energy.Energy;
 import io.github.marcelofabianov.cubit.domain.energy.PowerState;
+import io.github.marcelofabianov.cubit.domain.robot.OreFilter;
 import io.github.marcelofabianov.cubit.domain.robot.RobotColor;
 import io.github.marcelofabianov.cubit.domain.tier.RobotTier;
 import io.github.marcelofabianov.cubit.item.SavedEnergy;
+import io.github.marcelofabianov.cubit.item.SavedOreFilter;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.StringTag;
 import net.minecraft.nbt.Tag;
 import org.slf4j.Logger;
 
@@ -28,6 +34,9 @@ final class SavedRobotValues {
   private static final String ENERGY_SLOT_KEY = "EnergySlot";
   private static final String LAMP_KEY = "LampEnabled";
   private static final String COLOR_KEY = "Color";
+  private static final String SCANNERS_KEY = "ScannersEnabled";
+  private static final String ORE_FILTER_KEY = "OreFilter";
+  private static final String CHATTER_KEY = "ChatterEnabled";
   private static final String LAST_SAFE_POSITION_KEY = "LastSafePosition";
   private static final String NO_OWNER_MESSAGE = "Robot {} has no owner. Nobody can interact.";
   private static final String INVALID_TIER_MESSAGE = "Robot {} has an invalid tier: {}";
@@ -47,6 +56,12 @@ final class SavedRobotValues {
     robot.docking().save(tag);
     tag.putBoolean(LAMP_KEY, robot.state().lampOn());
     tag.putString(COLOR_KEY, robot.state().color().key());
+    tag.putBoolean(SCANNERS_KEY, robot.state().scannersOn());
+    tag.putBoolean(CHATTER_KEY, robot.state().chatterOn());
+    ListTag filter = new ListTag();
+    SavedOreFilter.tagsOf(robot.state().oreFilter())
+        .forEach(ore -> filter.add(StringTag.valueOf(ore)));
+    tag.put(ORE_FILTER_KEY, filter);
     robot
         .lastSafePosition()
         .ifPresent(position -> tag.putLong(LAST_SAFE_POSITION_KEY, position.asLong()));
@@ -73,6 +88,26 @@ final class SavedRobotValues {
   /** Without the key, the robot was saved before the lamp existed, so the lamp stays on. */
   static boolean lampOn(CompoundTag tag) {
     return !tag.contains(LAMP_KEY) || tag.getBoolean(LAMP_KEY);
+  }
+
+  /** Without the key, the robot was saved before the chatter existed, so it stays on. */
+  static boolean chatterOn(CompoundTag tag) {
+    return !tag.contains(CHATTER_KEY) || tag.getBoolean(CHATTER_KEY);
+  }
+
+  /** Without the key, the robot was saved before the scanners existed, so they stay on. */
+  static boolean scannersOn(CompoundTag tag) {
+    return !tag.contains(SCANNERS_KEY) || tag.getBoolean(SCANNERS_KEY);
+  }
+
+  /** Without the key, the list is empty, which is the filter of a robot saved before it existed. */
+  static OreFilter oreFilter(CompoundTag tag) {
+    ListTag saved = tag.getList(ORE_FILTER_KEY, Tag.TAG_STRING);
+    List<String> tags = new ArrayList<>();
+    for (int index = 0; index < saved.size(); index++) {
+      tags.add(saved.getString(index));
+    }
+    return SavedOreFilter.of(tags);
   }
 
   /** Without the key, the robot was saved before the colors existed, so it is white. */

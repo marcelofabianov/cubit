@@ -5,14 +5,14 @@ import io.github.marcelofabianov.cubit.domain.behavior.LampPolicy;
 import io.github.marcelofabianov.cubit.domain.behavior.LightLevel;
 import io.github.marcelofabianov.cubit.domain.behavior.RobotLight;
 import io.github.marcelofabianov.cubit.domain.energy.PowerState;
-import io.github.marcelofabianov.cubit.menu.LampSwitch;
+import io.github.marcelofabianov.cubit.menu.RobotSwitch;
 
 /**
  * Decides on the server whether the lamp is lit and how much light the robot gives, and sends it to
  * the client, because the config does not reach it. The lit state stays out of the saves because it
  * is recalculated.
  */
-public final class RobotLamp implements LampSwitch {
+public final class RobotLamp implements RobotSwitch {
   private final RobotEntity robot;
   private boolean switchedOn = true;
   private boolean lit;

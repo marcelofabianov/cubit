@@ -10,6 +10,7 @@ import io.github.marcelofabianov.cubit.domain.energy.Percentage;
 import io.github.marcelofabianov.cubit.domain.energy.SolarOutput;
 import io.github.marcelofabianov.cubit.domain.robot.RobotType;
 import io.github.marcelofabianov.cubit.domain.tier.RobotTier;
+import io.github.marcelofabianov.cubit.domain.tier.ScannerSpec;
 import io.github.marcelofabianov.cubit.domain.tier.TierSpec;
 import java.util.Map;
 import net.minecraft.gametest.framework.GameTest;
@@ -139,6 +140,12 @@ public final class ConfigGameTests {
           HEALTH_KEY, HEALTH,
           RADIUS_KEY, RADIUS);
   private static final long LAMP_CONSUMPTION = 1;
+  private static final int SCAN_RADIUS = 5;
+  private static final int ORE_SCAN_TICKS = 700;
+  private static final int MOB_SCAN_TICKS = 200;
+  private static final long ORE_SCAN_COST = 350;
+  private static final long MOB_SCAN_COST = 100;
+  private static final int ORE_FILTER_SLOTS = 1;
   private static final TierSpec BASE_SPEC =
       new TierSpec(
           new Energy(BATTERY),
@@ -155,7 +162,15 @@ public final class ConfigGameTests {
               new Energy(CLIMB_EXTRA),
               new Energy(LAMP_CONSUMPTION)),
           new LightLevel(LAMP_LIGHT),
-          new SolarOutput(new Energy(SOLAR_DAY), Energy.ZERO));
+          new SolarOutput(new Energy(SOLAR_DAY), Energy.ZERO),
+          new ScannerSpec(
+              SCAN_RADIUS,
+              SCAN_RADIUS,
+              ORE_SCAN_TICKS,
+              MOB_SCAN_TICKS,
+              new Energy(ORE_SCAN_COST),
+              new Energy(MOB_SCAN_COST),
+              ORE_FILTER_SLOTS));
   private static final String WRONG_SPEC = "Wrong tier numbers";
   private static final String WRONG_CHARGE = "Wrong initial charge";
   private static final String WRONG_KEY = "Wrong value for a config key";
