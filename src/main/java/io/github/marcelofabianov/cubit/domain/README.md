@@ -56,6 +56,9 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 | `DockStatus` | O que a tela de um Dock mostra |
 | `DockStay` | Vida recuperada por tick e quando o robô sai da base |
 | `DockQueue` | Robôs aguardando um Dock ocupado, por ordem de chegada |
+| `DockTrip` | Um robô a caminho do Dock: o quanto chegou perto, há quanto tempo não avança e o que faz em cada tick |
+| `DockRemoval` | Quem pode quebrar um Dock |
+| `RobotClick` | O que o clique direito faz no robô |
 | `InventoryFit` | Separa os itens que cabem nos slots do config dos que sobram |
 | `Ownership` | Diz quem é dono de um robô ou de um Dock, e se os dois têm o mesmo dono |
 | `OwnerProtection` | Diz se um dano é do dono e, por isso, não fere o robô |
@@ -108,6 +111,9 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 - **Luz junto da tela:** `RobotLight` dá zero com a tela apagada, pela mesma regra do brilho, `RobotExpression.glows` (perguntas 378 e 465).
 - **Lanterna na hibernação:** apagada e sem consumo, porque o robô está imóvel e carregando. A tela continua dando a claridade (perguntas 465 e 466).
 - **Subida em FE inteiro:** o extra é arredondado, porque energia é inteira (regra 13). Descer não devolve nada, porque criaria FE.
+- **Preso a caminho do Dock:** um movimento pequeno não conta como avanço, para um robô contra uma parede desistir. Preso com o Dock ocupado, ele aguarda onde está, porque teleportar não o deixaria entrar. Perto do Dock, o tempo não conta, porque ele pode estar esperando a vez (perguntas 84 e 301).
+- **Ordem do clique:** o Shift sempre recolhe, inclusive com corante na mão, e o corante vem antes de abrir o inventário, para pintar em qualquer estado (perguntas 510 e 516).
+- **Estado interno também valida:** os records que só guardam tempo ou ângulo rejeitam valor inválido, como os demais value objects (pergunta 526).
 - **Fila sem remoção:** um robô se informa a cada tick, então o que saiu do mundo perde o lugar sem ninguém precisar tirá-lo (perguntas 85 e 86).
 - **Cheio espera um momento:** o robô cheio fica cerca de 3 s antes de sair, para o player ver a tela completa (pergunta 312).
 - **Vida igual em todos os tiers:** a vida por tick segue a vida máxima, então todos levam o mesmo tempo para encher (pergunta 63).
