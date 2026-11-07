@@ -22,6 +22,9 @@ public record TierSpec(
     LightLevel lampLight,
     SolarOutput solar) {
 
+  /** The largest radius the config accepts, which also limits the search for a robot to call. */
+  public static final int MAX_CALL_RADIUS_BLOCKS = 128;
+
   private static final String BATTERY_CAPACITY = "batteryCapacity";
   private static final String RECHARGE_PER_TICK = "rechargePerTick";
   private static final String INVENTORY_SLOTS = "inventorySlots";

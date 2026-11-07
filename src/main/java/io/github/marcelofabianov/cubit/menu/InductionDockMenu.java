@@ -27,7 +27,6 @@ public final class InductionDockMenu extends AbstractContainerMenu {
   private static final int PLAYER_ROWS = 3;
   private static final int SLOTS_PER_ROW = 9;
   private static final int DOCK_SLOTS = 1;
-  private static final double REACH_MARGIN = 4;
 
   private final Predicate<Player> stillValid;
   private int shownEnergyPercent;
@@ -72,7 +71,8 @@ public final class InductionDockMenu extends AbstractContainerMenu {
         player ->
             !dock.isRemoved()
                 && dock.isOwner(player)
-                && player.canInteractWithBlock(dock.getBlockPos(), REACH_MARGIN));
+                && player.canInteractWithBlock(
+                    dock.getBlockPos(), Container.DEFAULT_DISTANCE_BUFFER));
   }
 
   /** On the client. The real item and the energy come from the server. */
