@@ -22,9 +22,11 @@ As chaves ficam em `snake_case`. As de um tier ficam em `[general_robot.{tier}]`
 | `general` | `chatter_biome_repeat_ticks` | Intervalo mínimo entre falas de bioma | 1 a 72000 |
 | `general` | `chatter_animal_repeat_ticks` | Intervalo mínimo entre falas de animais | 1 a 72000 |
 | `general` | `chatter_animal_chance_percent` | Chance de falar ao abater um animal | 0 a 100 |
+| `general` | `chatter_redstone_repeat_ticks` | Intervalo mínimo entre falas da redstone | 1 a 72000 |
 | `general` | `chatter_check_ticks` | Intervalo para ler o tempo e o horário das falas | 1 a 1200 |
 | `general` | `rare_ore_tags` | Minérios raros, do mais raro para o menos raro | Lista de tags |
 | `general` | `surprised_expression_ticks` | Tempo com a expressão de surpresa | 1 a 1200 |
+| `general` | `scan_mark_ticks` | Tempo da caixa em volta de um minério | 1 a 1200 |
 | `general` | `scan_blocks_per_tick` | Limite de blocos lidos por tick numa varredura | 1 a 2146689 |
 | `general` | `screen_light_level` | Luz da claridade da tela | 0 a 15 |
 | `general` | `lamp_on_below_light` | A lanterna acende abaixo da luz | 0 a 15 |
@@ -109,6 +111,8 @@ O mod não cai por causa do config (regra 17 do `AGENTS.md`):
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-07 20:04 | Adiciona o intervalo das falas da redstone. |
+| Marcelo Fabiano | 2026-11-07 19:21 | Adiciona o tempo da caixa em volta de um minério. |
 | Marcelo Fabiano | 2026-11-07 17:14 | Adiciona as chaves das falas de animais. |
 | Marcelo Fabiano | 2026-11-07 17:11 | Adiciona a chave das falas de bioma. |
 | Marcelo Fabiano | 2026-11-07 17:07 | Adiciona as chaves de ficar para trás. |

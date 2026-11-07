@@ -34,6 +34,47 @@
 | 321 | O nome `placed.ogg` e o momento "ao ser colocado no mundo" estão certos? | Sim. Detalha a pergunta 320 |
 | 322 | Em que fase o som de colocar no mundo passa a tocar? | Na Fase 3, junto dos outros oito. Detalha a pergunta 320 |
 | 421 | Como foi o roteiro manual do colar, do indicador de bateria e do tronco central com +0,5? | Teste finalizado, tudo ok, executado pelo desenvolvedor, sem detalhar cada passo. Ele não pediu +1, então o tronco fica em 2 unidades. O `make server` e o olhar de longe não foram citados em separado |
+| 630 | A chave das falas da redstone fica `chatter_redstone_repeat_ticks`, com 1.200 ticks, em `[general]`? | Sim, seguindo a recomendação, no padrão de `chatter_animal_repeat_ticks` |
+| 629 | O status do `README.md` e do `AGENTS.md` muda nesta entrega? | Sim, num sexto commit, seguindo a recomendação: o status do `README.md` e, no `AGENTS.md`, "Já entrou", "Próximos" e a estrutura de pacotes. O agente mostra o diff antes do commit |
+| 628 | O agente pode fazer os commits do plano? | Sim, os cinco, na branch `feature/117-scanner-marks`, sem push e sem PR. Vale só para esses commits |
+| 627 | Como foi o teste no jogo das caixas, do raio dos mobs e da fala da redstone? | "Podemos avançar, está ok", executado pelo desenvolvedor, sem detalhar cada passo do roteiro. O agente não entendeu a resposta como autorização de commits e apresenta o plano |
+| 626 | O jogo está fechado? | Sim. O `make data` e os gates podem rodar |
+| 625 | O que o desenvolvedor pediu no meio da mudança do raio? | "Também faça a frase que combinamos" e "atualize os documentos .md". O agente entendeu como implementar a fala da redstone das respostas 619 a 621 e atualizar os `.md` dela e das caixas: `falas.md`, `tiers.md`, `config.md`, o roteiro manual, o README do domínio e `decisoes.md`. A chave nova, `chatter_redstone_repeat_ticks` (1.200), segue o padrão das falas de animais e ainda pode mudar antes do commit |
+| 624 | O jogo está fechado? | Sim. Os gates podem rodar |
+| 623 | O que fazer com os configs locais, que guardam o raio antigo do scanner de mobs? | Apagar os dois de novo, para o jogo recriá-los com os padrões novos. A recomendação era trocar só a linha do raio. Vale só para esta vez, como a resposta 611 |
+| 622 | Como fica o raio do scanner de mobs hostis por tier? | 8, 14, 20 e 25 blocos, a pedido do desenvolvedor, depois de ver a tabela de tiers. O agente entendeu que o raio dos minérios continua 5, 8, 12 e 20, porque a mensagem só trata dos mobs, então os dois raios deixam de ser iguais. Muda as respostas 605 e 609 só nesse ponto. A esfera e o custo igual continuam. No config, o Base passa a 8 em `mob_scan_radius_blocks` |
+| 621 | Em que entrega entra a fala da redstone? | Na issue #117, num commit próprio, como as falas entraram na #115 (resposta 580). A recomendação era uma issue própria, depois da #117 |
+| 620 | Quais frases da redstone ficam? | As três: `I love redstone!`, `Redstone! My favorite snack!` e `Redstone runs in my circuits!`, com o prefixo `Cubit: `, e o Cubit sorteia uma |
+| 619 | Quando o Cubit diz que ama redstone? | Quando o dono minera um minério de redstone, como uma fala, seguindo a recomendação: bipe, a chave `Chatter` e 1 minuto entre falas, sem brigar com o `Cubit: REDSTONE!!!` do scanner. O agente entendeu que vale o mesmo das falas de animais: só do Cubit ativo que segue e com a expressão calma, sem a chance de 1 em 3, que não foi citada |
+| 618 | Entra uma fala do Cubit sobre a redstone? | Sim, ideia do desenvolvedor: "quando cubit ver o player um minerio de redstone ele fala para o player que ele ama redstone". O gatilho, a frase em inglês e a entrega vão para a rodada, porque o scanner já mostra `Cubit: REDSTONE!!!` para esse minério raro |
+| 617 | O jogo está fechado? | Sim. Os gates podem rodar |
+| 616 | Como ficou a caixa azul no jogo? | "Poderia deixar pouco mais discreto a marcacao azul". O agente entendeu como baixar só a opacidade do azul, de cerca de 50% para cerca de 30%, sem mudar a linha, o pulso nem o vermelho dos mobs. Detalha a resposta 600. A mensagem não diz como foram os outros passos do roteiro |
+| 615 | O item 16 do checklist fecha com as caixas ou depois das cores? | Depois das cores das antenas e do halo, seguindo a recomendação, porque as cores também são sinais dos scanners. Muda a resposta 559 nesse ponto |
+| 614 | A caixa pisca ou fica fixa? | Pulso suave, que clareia e escurece devagar, como o do painel solar. A recomendação era fixa. Detalha a resposta 600 |
+| 613 | Como o servidor avisa o cliente do dono sobre as caixas? | Por posições e IDs, seguindo a recomendação, num pacote só do servidor para o cliente do dono. Minério: as posições novas da varredura, e o cliente apaga a caixa depois de ~10 s ou quando o bloco deixa de ser minério. Mob: os IDs a cada varredura, e o cliente segue o mob e apaga a caixa quando ele sai do raio do Cubit |
+| 612 | O jogo está fechado? | Sim. Os gates podem rodar |
+| 611 | O que fazer com os configs locais, que guardam os custos antigos dos scanners? | Apagar os dois, `run/config/cubit-common.toml` e `run/gametest/config/cubit-common.toml`, para o jogo recriá-los com os padrões novos. Os valores editados à mão se perdem. A recomendação era trocar só os dois valores. Vale só para esta vez |
+| 610 | Quanto cada scanner gasta por varredura? | "Vamos manter 50 para base e os demais 100, 150 e 300". O agente entendeu como FE por varredura, igual nos dois scanners: Base 50, Advanced 100, Elite 150 e Ultimate 300. No Base, mobs gastam 50 FE a cada 10 s e minérios, 50 FE a cada 35 s, somando cerca de 0,32 FE/t. A recomendação era manter 100 e 350. Muda a resposta 553, e só o Base entra no config agora |
+| 609 | O código faz o que foi discutido, e como fica o gasto dos dois scanners? | O desenvolvedor pediu a revisão do código contra as decisões e escreveu "Ambos scanner de mobs deve gastar a mesma energia e ter o mesmo raio". O agente entendeu "ambos" como os dois scanners, de mobs e de minérios. O raio igual já é a resposta 605. Hoje os dois gastam 0,5 FE/t cada, mas com valores diferentes por varredura: 100 FE a cada 10 s e 350 FE a cada 35 s. Qual "mesma energia" vale vai para a rodada |
+| 608 | Com vários minérios novos numa varredura, quais ganham caixa? | Todos os novos, seguindo a recomendação, por cerca de 10 s. Mantém a resposta 562 e fecha a 598 |
+| 607 | Onde entram a esfera e os raios novos? | Na issue #117, num commit próprio, com JUnit e GameTests, seguindo a recomendação |
+| 606 | O scanner de mobs também vira uma esfera? | Sim, seguindo a recomendação: só conta o mob a até o raio em linha reta, medido a partir do Cubit. Amplia a resposta 604 |
+| 605 | O raio do scanner de mobs muda junto? | Sim, para 5, 8, 12 e 20, igual aos minérios, seguindo a recomendação. Muda `tiers.md`, e o Base continua em 5 |
+| 604 | A área do scanner de minérios continua um cubo? | Não: "deve ser uma esfera em volta do cubit sendo ele o centro para ser possivel pegar minerios 5 para frente, 5 atras e as demais regioes". Só conta o bloco a até o raio em linha reta, a partir do bloco do Cubit. A recomendação era a esfera. O agente entendeu a resposta para os minérios, que eram o assunto da pergunta, e leva os mobs à rodada |
+| 603 | O que o raio 5 do scanner de minérios significa? | 5 blocos para cada lado do Cubit, seguindo a recomendação. Os outros tiers ficam 8, 12 e 20 para cada lado. Detalha a resposta 602 |
+| 602 | Como fica o raio do scanner de minérios por tier? | O desenvolvedor pediu 5, 8, 12 e 20 blocos, em vez de 5, 10, 16 e 24, depois de entender que o Base lia 11×11×11. O agente explicou que raio 5 são 5 blocos para cada lado, o que dá 11 de largura. O que o "5" significa, se a forma continua um cubo e se os mobs mudam junto vão para a rodada. Muda a tabela de sensores de `tiers.md`, e só o Base entra no config agora |
+| 601 | O jogo está fechado? | Sim. A prova pode compilar |
+| 600 | Como deixar o azul da caixa mais sutil? | Mais claro e translúcido, seguindo a recomendação: azul claro com cerca de 50% de opacidade e a linha de 2 px, com o ajuste fino no teste no jogo. Detalha a resposta 594 |
+| 599 | Depois de quanto tempo a caixa de um minério some, se ele não for minerado antes? | Cerca de 10 s, em `scan_mark_ticks` (200), seguindo a recomendação. Confirma a resposta 556 e fecha o que a 597 deixou em aberto |
+| 598 | Com vários minérios novos numa varredura, quais ganham caixa? | Sem escolha: o desenvolvedor pediu para ver a tabela de tiers do scanner, para revisá-la. A pergunta volta depois da revisão |
+| 597 | Um minério novo achado dentro do intervalo de 25 s do mesmo nome, sem texto, ganha caixa? | "Sim pode marcar apenas os minerios encontrados dentro do raio de blocos do cubit quando é disparado o scanner. depois o internavo deve desaparecer". O agente entendeu que todo minério novo daquela varredura ganha caixa, mesmo com o texto esperando, e que a caixa some depois de um tempo. A recomendação era não marcar sem texto. Ficou em aberto qual intervalo: os ~10 s de `scan_mark_ticks` (resposta 556) ou outro |
+| 596 | Minério só do filtro, com texto e sem surpresa, ganha caixa? | Sim, com o texto, seguindo a recomendação. Mantém a resposta 562 nesse ponto |
+| 595 | Com vários minérios novos numa varredura, quais ganham caixa? | Sem escolha: o desenvolvedor perguntou se os minérios encontrados estão dentro do raio do Cubit quando o scanner dispara e pediu para conferir o código. O agente conferiu: a varredura lê um cubo de 11×11×11 em volta do bloco do Cubit no momento em que dispara, com raio 5, e só guarda os raros e os do filtro. A pergunta volta para a rodada |
+| 594 | Como foi a prova técnica das caixas? | "Não gostei do resultado": o desenvolvedor quer um azul mais sutil e viu "todos os minérios por onde eu passo" marcados. O agente explicou que a prova marcava de propósito todo minério em volta do player, sem seguir o Cubit. A mensagem não diz se a caixa apareceu através dos blocos em cada modo gráfico, mas o desenvolvedor viu as caixas no jogo. Repete o pedido da resposta 593 |
+| 593 | Quais minérios ganham caixa? | A pedido do desenvolvedor: só os que o Cubit identifica dentro do raio, só quando ele faz a animação e o texto, e só aquele que encontrou. O agente entendeu que a caixa de minério aparece junto do aviso, não a cada varredura, e que a prova, que marca todo minério em volta do player, não mostra o comportamento final. A mensagem não trata dos mobs, então continuam as respostas 556 e 557. Vários juntos, minério só do filtro e aviso dentro do intervalo de 25 s seguem para a rodada, porque podem mudar a resposta 562. A mensagem também não informa o resultado do roteiro da prova |
+| 592 | O jogo está aberto? | Não. Os gates podem rodar |
+| 591 | Há algo a acrescentar sobre as caixas dos scanners, como um efeito ao aparecer ou uma ideia visual? | Não: "Nada a acrescentar". O agente entendeu como autorização para seguir à prova técnica e à rodada de decisões, não para commits |
+| 590 | O que vem depois do PR #116? | As caixas antes das cores, seguindo a recomendação, porque hoje o aviso não diz onde está o que foi achado. Muda a ordem da pergunta 559. O desenvolvedor autorizou apagar a branch da #115 e disse "pode fazer as marcações", que o agente entendeu como as do checklist, sem autorizar o commit |
 | 589 | `Cubit: COAL!!!`, `Cubit: Careful!` e as repetições de `Cubit: Critical battery` também tocam o bipe? | Não: "deixar o bipe" como está, seguindo a recomendação. Na mesma mensagem, ele autorizou os commits do plano e a atualização do `AGENTS.md` e do `README.md`. O push e o PR não foram autorizados |
 | 588 | Como foi o teste no jogo dos scanners, da volta com o dono, da descida, dos sons e das falas? | "Teste fechou ok", executado pelo desenvolvedor, sem detalhar cada passo. O agente não entendeu a resposta como autorização de commits. Ficaram sem resposta se o `AGENTS.md` e o `README.md` mudam neste PR e se `Cubit: COAL!!!`, `Cubit: Careful!` e as repetições de `Cubit: Critical battery` tocam o bipe |
 | 587 | As falas ao abater animais ficam? | Sim: "gostei de todas, vamos usar todas as frases". São 26 frases, em `conceito/falas.md`. O agente entendeu que vale também o proposto: só quando o próprio dono mata, com chance de 1 em 3 e 1 minuto entre falas, e sem frase para animal domesticado, porque a pergunta sobre esses números e a trava não teve resposta separada |
@@ -268,6 +309,26 @@
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-07 20:12 | Registra as respostas 628, 629 e 630. |
+| Marcelo Fabiano | 2026-11-07 20:09 | Registra a resposta 627. |
+| Marcelo Fabiano | 2026-11-07 20:06 | Registra as respostas 625 e 626. |
+| Marcelo Fabiano | 2026-11-07 20:02 | Registra as respostas 623 e 624. |
+| Marcelo Fabiano | 2026-11-07 20:00 | Registra a resposta 622. |
+| Marcelo Fabiano | 2026-11-07 19:56 | Registra as respostas 619, 620 e 621. |
+| Marcelo Fabiano | 2026-11-07 19:53 | Registra a resposta 618. |
+| Marcelo Fabiano | 2026-11-07 19:49 | Registra a resposta 617. |
+| Marcelo Fabiano | 2026-11-07 19:48 | Registra a resposta 616. |
+| Marcelo Fabiano | 2026-11-07 19:16 | Registra as respostas 613, 614 e 615. |
+| Marcelo Fabiano | 2026-11-07 19:07 | Registra as respostas 611 e 612. |
+| Marcelo Fabiano | 2026-11-07 19:04 | Registra a resposta 610. |
+| Marcelo Fabiano | 2026-11-07 19:02 | Registra as respostas 606, 607, 608 e 609. |
+| Marcelo Fabiano | 2026-11-07 19:01 | Registra as respostas 603, 604 e 605. |
+| Marcelo Fabiano | 2026-11-07 18:58 | Registra a resposta 602. |
+| Marcelo Fabiano | 2026-11-07 18:56 | Registra as respostas 598, 599, 600 e 601. |
+| Marcelo Fabiano | 2026-11-07 18:55 | Registra as respostas 594, 595, 596 e 597. |
+| Marcelo Fabiano | 2026-11-07 17:49 | Registra a resposta 593. |
+| Marcelo Fabiano | 2026-11-07 17:41 | Registra as respostas 591 e 592. |
+| Marcelo Fabiano | 2026-11-07 17:32 | Registra a resposta 590. |
 | Marcelo Fabiano | 2026-11-07 17:23 | Registra a resposta 589. |
 | Marcelo Fabiano | 2026-11-07 17:21 | Registra a resposta 588. |
 | Marcelo Fabiano | 2026-11-07 17:14 | Registra a resposta 587. |

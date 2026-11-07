@@ -49,8 +49,8 @@ Os extras somam ao andar. O consumo só vale com o robô ativo.
 | Fundir na fornalha | Bloqueado | ~20 FE/t | ~20 FE/t | ~20 FE/t |
 | Choque, por uso | Bloqueado | 2 mil FE | 2 mil FE | 1,5 mil FE |
 | Extra com a lanterna acesa, mesmo parado | +1 FE/t | +1 FE/t | +2 FE/t | +2 FE/t |
-| Scanner de mobs, por varredura | 100 FE | A definir | A definir | A definir |
-| Scanner de minérios, por varredura | 350 FE | A definir | A definir | A definir |
+| Scanner de mobs, por varredura | 50 FE | 100 FE | 150 FE | 300 FE |
+| Scanner de minérios, por varredura | 50 FE | 100 FE | 150 FE | 300 FE |
 | Ímã e colocar tochas | A definir | A definir | A definir | A definir |
 
 - **Claridade da tela:** não gasta energia.
@@ -96,6 +96,7 @@ Valem para todos os tiers e ficam no config.
 | Intervalo mínimo entre falas de bioma | 2 min |
 | Intervalo mínimo entre falas de animais | 1 min |
 | Chance de falar ao abater um animal | 33% |
+| Intervalo mínimo entre falas da redstone | 1 min |
 | Distância para reclamar de ficar para trás | 16 blocos |
 | Intervalo mínimo entre falas de ficar para trás | 1 min |
 | Intervalo para ler o tempo e o horário das falas | 20 ticks |
@@ -125,9 +126,11 @@ Valem para todos os tiers e ficam no config.
 
 | Recurso | Base | Avançado | Elite | Ultimate |
 |---|---|---|---|---|
-| Scanner de minérios (raio) | 5 blocos | 10 blocos | 16 blocos | 24 blocos |
+| Scanner de minérios (raio) | 5 blocos | 8 blocos | 12 blocos | 20 blocos |
 | Minérios no filtro do scanner | 1 | 3 | 6 | Ilimitado |
-| Scanner de mobs hostis (raio) | 5 blocos | 10 blocos | 16 blocos | 24 blocos |
+| Scanner de mobs hostis (raio) | 8 blocos | 14 blocos | 20 blocos | 25 blocos |
+
+O raio dos dois scanners é o de uma esfera em volta do Cubit: só conta o que está a até esse número de blocos em linha reta, em qualquer direção (perguntas 602 a 606 e 622).
 | Intervalo de varredura de minérios | 35 s | 20 s | 15 s | 5 s |
 | Intervalo de varredura de mobs | 10 s | 8 s | 6 s | 4 s |
 
@@ -194,6 +197,9 @@ Planejado para a Fase 5. O tier Base não aceita cards.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-07 20:04 | Adiciona o intervalo das falas da redstone. |
+| Marcelo Fabiano | 2026-11-07 20:00 | Muda o raio do scanner de mobs. |
+| Marcelo Fabiano | 2026-11-07 19:06 | Muda os raios e os custos dos scanners e define a área como esfera. |
 | Marcelo Fabiano | 2026-11-07 17:14 | Adiciona os números das falas de animais. |
 | Marcelo Fabiano | 2026-11-07 17:11 | Adiciona o intervalo das falas de bioma. |
 | Marcelo Fabiano | 2026-11-07 17:07 | Adiciona os números de ficar para trás. |
