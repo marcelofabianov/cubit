@@ -1,6 +1,6 @@
 # Ferramentas de build
 
-Todas as versões ficam em `gradle.properties`, exceto o Gradle, fixado em `gradle/wrapper/gradle-wrapper.properties`.
+Todas as versões ficam em `gradle.properties`, exceto o Gradle, fixado em `gradle/wrapper/gradle-wrapper.properties`, com o `distributionSha256Sum` publicado em `services.gradle.org`, para o wrapper recusar uma distribuição alterada. Ao atualizar o Gradle, troque os dois juntos.
 
 ## Comandos
 
@@ -71,6 +71,7 @@ As bibliotecas de teste vêm só do Maven Central, para o build não depender do
 - **`checkstyleMain` ou `checkstyleTest`:** uma regra de forma do código foi violada. Corrija a causa, sem suprimir a regra.
 - **`make gametest`:** uma GameTest reprovou, e o nome dela e o motivo aparecem em `build/gametest.log`, depois de `GAME TESTS COMPLETE`. Se esse trecho não existir, o mod não carregou. Com `invalid dist` no log, código comum referenciou uma classe de cliente.
 - **`lambdynlights_runtime is not installed`:** a execução não carregou a biblioteca. Confira se ela usa o conjunto de fontes `clientRun`. Em `make server` ou `make gametest`, esse erro significa que a dependência deixou de ser só do cliente.
+- **`Verification of Gradle distribution failed`:** o arquivo baixado não bate com o `distributionSha256Sum`. Não apague o hash: confira a versão e o valor publicado, porque o download pode estar alterado.
 - **`createMinecraftArtifacts`:** a preparação do Minecraft falhou. Rode com `--info` para ler o erro.
 - **`release version 21 not supported`:** o Gradle usou um Java sem o pacote de desenvolvimento. Confira se `gradle/gradle-daemon-jvm.properties` existe e rode `make stop`.
 
@@ -78,6 +79,7 @@ As bibliotecas de teste vêm só do Maven Central, para o build não depender do
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-07 13:51 | Adiciona o checksum do wrapper. |
 | Marcelo Fabiano | 2026-11-06 13:10 | Adiciona o LambDynamicLights. |
 | Marcelo Fabiano | 2026-11-05 00:12 | Corrige o que o make data faz. |
 | Marcelo Fabiano | 2026-11-04 21:49 | Registra as barreiras das GameTests. |
