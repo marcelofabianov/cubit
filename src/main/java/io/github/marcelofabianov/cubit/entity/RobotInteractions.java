@@ -5,6 +5,7 @@ import io.github.marcelofabianov.cubit.domain.energy.PowerState;
 import io.github.marcelofabianov.cubit.domain.ownership.FollowingOutcome;
 import io.github.marcelofabianov.cubit.domain.ownership.Ownership;
 import io.github.marcelofabianov.cubit.domain.robot.HealthLevel;
+import io.github.marcelofabianov.cubit.domain.robot.RobotClick;
 import io.github.marcelofabianov.cubit.domain.tier.TierSpec;
 import io.github.marcelofabianov.cubit.menu.RobotMenu;
 import io.github.marcelofabianov.cubit.player.FollowingRobotLink;
@@ -81,23 +82,26 @@ final class RobotInteractions {
   }
 
   static InteractionResult use(RobotEntity robot, Player player, InteractionHand hand) {
-    if (!Ownership.owns(robot.ownerId(), player.getUUID())) {
-      return InteractionResult.PASS;
-    }
-    if (player.isShiftKeyDown()) {
-      return collect(robot, player);
-    }
-    if (player.getItemInHand(hand).getItem() instanceof DyeItem dye) {
-      return RobotPaint.apply(robot, player, player.getItemInHand(hand), dye);
-    }
-    if (robot.powerState().isInteractive()) {
-      robot.face().onInteraction();
-      return openInventory(robot, player);
-    }
-    if (robot.robotInventory().energySlot().insert(player.getItemInHand(hand))) {
-      return InteractionResult.CONSUME;
-    }
-    return turnOn(robot, player);
+    ItemStack held = player.getItemInHand(hand);
+    RobotClick click =
+        RobotClick.of(
+            Ownership.owns(robot.ownerId(), player.getUUID()),
+            player.isShiftKeyDown(),
+            held.getItem() instanceof DyeItem,
+            robot.powerState());
+    return switch (click) {
+      case IGNORE -> InteractionResult.PASS;
+      case COLLECT -> collect(robot, player);
+      case PAINT -> RobotPaint.apply(robot, player, held, (DyeItem) held.getItem());
+      case OPEN -> {
+        robot.face().onInteraction();
+        yield openInventory(robot, player);
+      }
+      case CHARGE_OR_TURN_ON ->
+          robot.robotInventory().energySlot().insert(held)
+              ? InteractionResult.CONSUME
+              : turnOn(robot, player);
+    };
   }
 
   static InteractionResult collect(RobotEntity robot, Player player) {

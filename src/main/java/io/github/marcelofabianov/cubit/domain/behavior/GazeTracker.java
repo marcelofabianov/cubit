@@ -9,6 +9,13 @@ public record GazeTracker(GazeDirection direction, int ticksLeft) {
 
   private static final int HOLD_TICKS = 10;
   private static final double MIN_MOVEMENT = 0.02;
+  private static final String NEGATIVE_MESSAGE = "A time left cannot be negative: ";
+
+  public GazeTracker {
+    if (ticksLeft < 0) {
+      throw new IllegalArgumentException(NEGATIVE_MESSAGE + ticksLeft);
+    }
+  }
 
   public GazeTracker next(double heightChange) {
     if (heightChange > MIN_MOVEMENT) {

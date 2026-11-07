@@ -34,6 +34,9 @@
 | 321 | O nome `placed.ogg` e o momento "ao ser colocado no mundo" estão certos? | Sim. Detalha a pergunta 320 |
 | 322 | Em que fase o som de colocar no mundo passa a tocar? | Na Fase 3, junto dos outros oito. Detalha a pergunta 320 |
 | 421 | Como foi o roteiro manual do colar, do indicador de bateria e do tronco central com +0,5? | Teste finalizado, tudo ok, executado pelo desenvolvedor, sem detalhar cada passo. Ele não pediu +1, então o tronco fica em 2 unidades. O `make server` e o olhar de longe não foram citados em separado |
+| 535 | O agente atualiza a estrutura de pacotes do `AGENTS.md`, que não cita `DockTrip`, `DockRemoval` e `Ownership`? | Sim, nas linhas `dock/` e `ownership/`, num commit próprio |
+| 534 | Como foi o teste rápido no jogo da issue #107, e o agente pode fazer os commits? | "Sim". O agente entendeu como teste sem problemas e autorização dos commits do plano, porque as duas coisas foram perguntadas juntas. O resultado de cada passo não foi detalhado, então o teste pode não ter sido feito em todos eles |
+| 533 | Há algo a acrescentar à issue #107? | Não: "pode avançar", depois de ver a lista das próximas tarefas. O agente entendeu como autorização para criar a branch e começar pela #107, na ordem sugerida, não para commits |
 | 532 | Como foi o teste no jogo da issue #106? | "Tudo certo no teste", executado pelo desenvolvedor, sem detalhar cada passo: dono normal, Dock sem dono, operador e aviso no log. O agente não entendeu a resposta como autorização de commits |
 | 531 | Há algo a acrescentar à issue #106? | Não: "continue". O agente entendeu como autorização para criar a branch e começar, não para commits |
 | 530 | Como foi o teste rápido no jogo da refatoração da issue #105? | "Testes feito tudo ok", executado pelo desenvolvedor, sem detalhar cada passo: energia, Dock, vazio e config. Na mesma mensagem, ele autorizou os sete commits do plano. O push e o PR não foram autorizados |
@@ -213,6 +216,8 @@
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-07 14:18 | Registra as respostas 534 e 535. |
+| Marcelo Fabiano | 2026-11-07 14:10 | Registra a resposta 533. |
 | Marcelo Fabiano | 2026-11-07 13:57 | Registra a resposta 532. |
 | Marcelo Fabiano | 2026-11-07 13:46 | Registra a resposta 531. |
 | Marcelo Fabiano | 2026-11-07 13:38 | Registra a resposta 530. |

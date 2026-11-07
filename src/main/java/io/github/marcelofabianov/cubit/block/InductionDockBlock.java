@@ -1,6 +1,7 @@
 package io.github.marcelofabianov.cubit.block;
 
 import com.mojang.serialization.MapCodec;
+import io.github.marcelofabianov.cubit.domain.dock.DockRemoval;
 import io.github.marcelofabianov.cubit.menu.InductionDockMenu;
 import io.github.marcelofabianov.cubit.registry.CubitBlockEntities;
 import java.util.Optional;
@@ -217,11 +218,12 @@ public final class InductionDockBlock extends BaseEntityBlock {
 
   private static boolean canBreak(
       BlockGetter level, BlockPos pos, BlockState state, Player player) {
-    if (player.isCreative() && player.hasPermissions(OPERATOR_LEVEL)) {
-      return true;
-    }
     InductionDockBlockEntity dock = dockAt(level, pos, state);
-    return dock != null && dock.isOwner(player);
+    return DockRemoval.allows(
+        player.isCreative(),
+        player.hasPermissions(OPERATOR_LEVEL),
+        dock == null ? Optional.empty() : dock.owner(),
+        player.getUUID());
   }
 
   @Override

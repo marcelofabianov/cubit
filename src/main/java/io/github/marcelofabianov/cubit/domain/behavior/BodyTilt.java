@@ -9,6 +9,19 @@ public record BodyTilt(float previous, float current) {
 
   private static final float FULL_DEGREES = 8f;
   private static final float DEGREES_PER_TICK = 1f;
+  private static final String INVALID_MESSAGE = "Invalid body tilt: ";
+  private static final String SEPARATOR = ", ";
+
+  public BodyTilt {
+    if (!isWithinTheLean(previous) || !isWithinTheLean(current)) {
+      throw new IllegalArgumentException(INVALID_MESSAGE + previous + SEPARATOR + current);
+    }
+  }
+
+  /** Also false for a value that is not a number. */
+  private static boolean isWithinTheLean(float degrees) {
+    return Math.abs(degrees) <= FULL_DEGREES;
+  }
 
   public BodyTilt next(GazeDirection ownerLevel) {
     float target =
