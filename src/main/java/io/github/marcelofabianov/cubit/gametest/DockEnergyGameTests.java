@@ -9,6 +9,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -40,6 +41,8 @@ public final class DockEnergyGameTests {
   private static final int CAPACITY = 100_000;
   private static final long ONE_DUST = 5_000;
   private static final long SAVED = 12_345;
+  private static final long NEGATIVE = -1;
+  private static final String ENERGY_KEY = "Energy";
   private static final BlockPos FLOOR = new BlockPos(START_X, FLOOR_Y, MIDDLE_Z);
   private static final BlockPos DOCK = FLOOR.above();
   private static final String WRONG_INPUT = "Wrong energy accepted";
@@ -97,6 +100,19 @@ public final class DockEnergyGameTests {
     helper.assertValueEqual(energy.extractEnergy(MANY, false), 0, GAVE_OUT);
     helper.assertFalse(energy.canExtract(), GAVE_OUT);
     helper.assertValueEqual(energy.getEnergyStored(), (int) SAVED, GAVE_OUT);
+    helper.succeed();
+  }
+
+  @GameTest(template = ARENA)
+  public static void negativeEnergyInASaveBecomesZero(GameTestHelper helper) {
+    InductionDockBlockEntity dock =
+        place(helper, helper.makeMockPlayer(GameType.SURVIVAL), new Energy(SAVED));
+    CompoundTag saved = dock.saveWithoutMetadata(helper.getLevel().registryAccess());
+    saved.putLong(ENERGY_KEY, NEGATIVE);
+
+    dock.loadWithComponents(saved, helper.getLevel().registryAccess());
+
+    helper.assertValueEqual(dock.energy(), Energy.ZERO, WRONG_ENERGY);
     helper.succeed();
   }
 

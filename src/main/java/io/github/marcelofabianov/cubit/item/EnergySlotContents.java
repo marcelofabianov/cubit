@@ -24,7 +24,7 @@ public record EnergySlotContents(ItemContainerContents item, long reserve) {
                       .fieldOf(ITEM_FIELD)
                       .forGetter(EnergySlotContents::item),
                   Codec.LONG
-                      .xmap(reserve -> Math.max(reserve, NO_RESERVE), reserve -> reserve)
+                      .xmap(reserve -> SavedEnergy.of(reserve).amount(), reserve -> reserve)
                       .fieldOf(RESERVE_FIELD)
                       .forGetter(EnergySlotContents::reserve))
               .apply(instance, EnergySlotContents::new));

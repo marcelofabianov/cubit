@@ -5,6 +5,7 @@ import io.github.marcelofabianov.cubit.domain.energy.Energy;
 import io.github.marcelofabianov.cubit.domain.energy.PowerState;
 import io.github.marcelofabianov.cubit.domain.robot.RobotColor;
 import io.github.marcelofabianov.cubit.domain.tier.RobotTier;
+import io.github.marcelofabianov.cubit.item.SavedEnergy;
 import java.util.Arrays;
 import java.util.UUID;
 import net.minecraft.core.BlockPos;
@@ -60,7 +61,7 @@ final class SavedRobotValues {
   }
 
   static Energy energy(CompoundTag tag) {
-    return new Energy(Math.max(tag.getLong(ENERGY_KEY), 0));
+    return SavedEnergy.of(tag.getLong(ENERGY_KEY));
   }
 
   static void readContents(

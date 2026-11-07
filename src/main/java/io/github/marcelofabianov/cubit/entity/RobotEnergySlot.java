@@ -5,6 +5,7 @@ import io.github.marcelofabianov.cubit.domain.energy.Energy;
 import io.github.marcelofabianov.cubit.domain.energy.SlotRecharge;
 import io.github.marcelofabianov.cubit.item.EnergySlotContents;
 import io.github.marcelofabianov.cubit.item.EnergySlotItems;
+import io.github.marcelofabianov.cubit.item.SavedEnergy;
 import java.util.List;
 import java.util.Optional;
 import net.minecraft.core.HolderLookup;
@@ -54,7 +55,7 @@ final class RobotEnergySlot {
   void fill(EnergySlotContents contents) {
     container.setItem(
         SLOT, contents.item().stream().findFirst().map(ItemStack::copy).orElse(ItemStack.EMPTY));
-    recharge = new SlotRecharge(new Energy(Math.max(contents.reserve(), 0)));
+    recharge = new SlotRecharge(SavedEnergy.of(contents.reserve()));
   }
 
   void clear() {
@@ -73,7 +74,7 @@ final class RobotEnergySlot {
   }
 
   void load(CompoundTag tag, HolderLookup.Provider registries) {
-    recharge = new SlotRecharge(new Energy(Math.max(tag.getLong(RESERVE_KEY), 0)));
+    recharge = new SlotRecharge(SavedEnergy.of(tag.getLong(RESERVE_KEY)));
     Optional<ItemStack> stack =
         tag.contains(ITEM_KEY)
             ? ItemStack.parse(registries, tag.getCompound(ITEM_KEY))
