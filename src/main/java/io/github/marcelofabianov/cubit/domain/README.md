@@ -15,7 +15,7 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 | `PaintRules` | Quando um corante muda o robô e quando ele reage |
 | `RobotType` | Identifica o Cubit nos IDs e no config. O robô é único, e é um dado, identificado por um ID |
 | `RobotTier` | Nível de evolução: Base, Advanced, Elite e Ultimate. A `key` é o nome usado no config e nos saves |
-| `RobotState` | O que o robô guarda ao virar item: tier, energia, vida, a chave da lanterna e a cor. `damaged` e `repaired` dão o estado ao morrer e ao consertar |
+| `RobotState` | O que o robô guarda ao virar item: tier, energia, vida, a chave da lanterna, a cor, a chave dos scanners, o filtro de minérios e a chave das falas. `damaged` e `repaired` dão o estado ao morrer e ao consertar |
 | `TierSpec` | Números de um tipo de robô num tier |
 | `TierCatalog` | Entrega o `TierSpec` de um tipo de robô num tier. O domínio define a interface, e o config a implementa |
 | `FollowAction` | O que o robô que segue faz: seguir, parar ou teleportar |
@@ -40,6 +40,20 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 | `RobotNotice` | Os textos curtos que o robô mostra ao dono |
 | `NoticeRules` | Em que estado o robô fala |
 | `NoticeRepeat` | Quanto um aviso ainda espera para poder se repetir |
+| `OreKind` | Um tipo de minério, pela tag: uma subtag, como `c:ores/diamond`, com nome em caixa alta, ou `c:ores`, sem nome |
+| `OreFilter` | Os minérios que o dono pediu ao scanner, do mais antigo para o mais novo |
+| `OreSignals` | Quais minérios avisam e qual deles o texto cita, a partir da lista dos raros |
+| `ScannerSpec` | Números dos scanners de um tier: raios, intervalos, custos e vagas do filtro |
+| `ScanRules` | Quando os scanners funcionam e o que conta como mob hostil |
+| `ScanArea` | O cubo lido em volta do robô, com cada bloco numerado |
+| `FreshFinds` | O que um scanner já avisou, para só o que é novo avisar de novo |
+| `ChatTopic` | O que o robô comenta e quantas frases tem para isso |
+| `WeatherReading` | O que o robô lê do mundo para comentar: horário, céu, chuva, trovoada e frio |
+| `ChatWatch` | O que mudou entre duas leituras e qual assunto isso dá |
+| `ChatRules` | Quando o robô pode comentar algo |
+| `BiomeWatch` | Quando o robô entra em outro grupo de biomas |
+| `LeftBehindWatch` | Quando o robô reclama de o dono se afastar |
+| `RespawnReturn` | Se o robô que segue volta com o dono que renasceu |
 | `BatteryIndicator` | O que o indicador nas costas mostra: vazio, ou de 1 a 4 níveis, normal ou crítico |
 | `LightLevel` | Nível de luz do jogo, de 0 a 15 |
 | `LampPolicy` | Quando a lanterna acende e apaga, conforme a chave, o estado e a luz do ambiente |
@@ -67,6 +81,17 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 
 ## Regras e porquês
 
+- **Falas pelo que muda:** o robô comenta quando algo muda, para cada fala ter um motivo, e o sorteio só escolhe a frase. O que ele não pôde comentar se perde, para não anunciar uma tempestade que já passou (perguntas 572 a 583).
+- **Animal abatido, às vezes:** a chance evita uma fala a cada animal numa fazenda, e um animal de estimação nunca vira piada (pergunta 587).
+- **Bioma por grupo:** só uma mudança de grupo conta, e um bioma sem grupo, como um rio, não muda nada, para o robô não repetir o comentário (pergunta 586).
+- **Reclamar uma vez:** ao se afastar, o dono só ouve de novo depois de o robô chegar perto, para não repetir a cada passo. Um salto além do teleporte não conta, porque não é o dono correndo (pergunta 585).
+- **Falas só com a expressão calma:** qualquer outra expressão indica algo mais importante, como um mob ou um dano.
+- **Volta com o dono:** um robô longe, ou em outra dimensão, ficaria para trás ao descarregar o chunk. Perto, ele anda como sempre, e a caminho do Dock continua indo, porque o dono o chamou (pergunta 567).
+- **Só o que é novo avisa:** o mesmo mob ou bloco não avisa de novo enquanto continuar no raio, porque o intervalo mínimo sozinho repetiria o mesmo minério a cada varredura. O que sai do raio é esquecido (pergunta 561).
+- **Varredura por número:** a área numera os blocos, então uma varredura em fatias só guarda um número entre os ticks, sem alocar nada (regra 21).
+- **Bloco pela subtag:** um bloco está em `c:ores` e nas subtags, e só elas dizem o que ele é. `c:ores` só vale para quem não tem subtag, então um filtro nele não pega todo minério (perguntas 546 e 566).
+- **Raro vem antes do filtro:** o texto cita o raro mais raro e, só sem raros, um minério do filtro (pergunta 562).
+- **Filtro cheio troca o mais antigo:** assim, um clique sempre funciona, mesmo com só uma vaga (pergunta 548).
 - **Mesma cor não gasta:** pintar da cor atual não faz nada, para não desperdiçar o corante (pergunta 509).
 - **Só o ativo reage:** desligado, a tela está apagada, e hibernando ela sempre mostra carregando (perguntas 57 e 510).
 - **Energia inteira:** evita erro de arredondamento, e uma transferência nunca cria nem perde FE.

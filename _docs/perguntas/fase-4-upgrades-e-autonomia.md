@@ -5,11 +5,13 @@
 | # | Pergunta | Recomendação |
 |---|---|---|
 | 423 | Qual é o modo padrão do filtro de coleta, o que vale com a lista vazia, e o limite de itens de `tiers.md` vale para os dois modos? | Lista negra por padrão, em que a lista vazia pega qualquer item. Na lista branca, a lista vazia não pega nada. O mesmo limite vale para os dois modos. Vem da pergunta 422 |
+| 577 | Entra um modo de defesa "só o alvo", em que o Cubit ignora os outros inimigos e ataca só o último mob que o dono atacou, trocando de alvo a cada novo ataque, ou o mob em que o dono mira e clica à distância? | A ideia entra, conforme a pergunta 578, e os detalhes ficam para refinar na Fase 4. Recomendação: um quarto modo, a partir do tier Advanced, com a mira pelo Cubit Remote, porque um clique de mão vazia no ar não chega ao servidor. A regra de nunca atacar mobs pacíficos, players e o dono continua valendo |
 
 ## Respondidas
 
 | # | Pergunta | Resposta |
 |---|---|---|
+| 578 | Como fica a proposta do modo só o alvo? | "Gostei", e vai para a documentação, para ser refinada na Fase 4. Está em `funcionalidades/combate.md` como proposta. O desenvolvedor não respondeu separadamente sobre o nome e o tier, então seguem abertos na pendência 577 |
 | 21 | Um robô desligado aceita a Power Bank? | Sim. Com o Cubit desligado e a Power Bank na mão, o clique direito coloca a Power Bank no slot exclusivo e inicia a recarga. Com 5% ele liga, e o player pode acessá-lo, remover a Power Bank e fazer as outras interações |
 | 23 | Uma Power Bank funciona em robô de outro tier? | Sim, em qualquer tier |
 | 24 | Qual é a velocidade de extração da Power Bank? | A mesma da recarga na base, conforme o tier do Cubit, configurável |
@@ -45,6 +47,8 @@
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-07 16:51 | Registra a resposta 578. |
+| Marcelo Fabiano | 2026-11-07 16:48 | Registra a pendência 577. |
 | Marcelo Fabiano | 2026-11-06 13:34 | Aponta as respostas 341 e 343 para as 469 e 468. |
 | Marcelo Fabiano | 2026-11-06 11:10 | Troca 'especialidade' por 'trabalho' e 'card de especialidade' por 'card de Aprendizado de Máquina'. |
 | Marcelo Fabiano | 2026-11-06 09:32 | Registra a resposta 422 e a pendência 423. |

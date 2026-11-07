@@ -16,6 +16,16 @@ As chaves ficam em `snake_case`. As de um tier ficam em `[general_robot.{tier}]`
 | `general` | `wake_charge_percent` | Religar | 0 a 100 |
 | `general` | `critical_charge_percent` | Bateria crítica, com expressão de sono, indicador vermelho e texto | 0 a 100 |
 | `general` | `notice_repeat_ticks` | Intervalo mínimo entre repetições de textos e alertas | 1 a 72000 |
+| `general` | `chatter_repeat_ticks` | Intervalo mínimo entre falas sobre o tempo | 1 a 72000 |
+| `general` | `chatter_left_behind_blocks` | Distância para reclamar de ficar para trás | 1 a 128 |
+| `general` | `chatter_left_behind_repeat_ticks` | Intervalo mínimo entre falas de ficar para trás | 1 a 72000 |
+| `general` | `chatter_biome_repeat_ticks` | Intervalo mínimo entre falas de bioma | 1 a 72000 |
+| `general` | `chatter_animal_repeat_ticks` | Intervalo mínimo entre falas de animais | 1 a 72000 |
+| `general` | `chatter_animal_chance_percent` | Chance de falar ao abater um animal | 0 a 100 |
+| `general` | `chatter_check_ticks` | Intervalo para ler o tempo e o horário das falas | 1 a 1200 |
+| `general` | `rare_ore_tags` | Minérios raros, do mais raro para o menos raro | Lista de tags |
+| `general` | `surprised_expression_ticks` | Tempo com a expressão de surpresa | 1 a 1200 |
+| `general` | `scan_blocks_per_tick` | Limite de blocos lidos por tick numa varredura | 1 a 2146689 |
 | `general` | `screen_light_level` | Luz da claridade da tela | 0 a 15 |
 | `general` | `lamp_on_below_light` | A lanterna acende abaixo da luz | 0 a 15 |
 | `general` | `lamp_off_from_light` | A lanterna apaga a partir da luz | 0 a 15 |
@@ -30,6 +40,7 @@ As chaves ficam em `snake_case`. As de um tier ficam em `[general_robot.{tier}]`
 | `general` | `base_movement_speed` | Velocidade 1,0× | 0,01 a 1 |
 | `general` | `follow_repath_ticks` | Intervalo para recalcular a rota | 1 a 200 |
 | `general` | `stop_distance_blocks` | Distância para parar perto do player | 1 a 16 |
+| `general` | `max_drop_blocks` | Altura máxima que a rota desce | 1 a 16 |
 | `general` | `teleport_distance_blocks` | Distância para teleportar até o player | 17 a 128 |
 | `general` | `burning_speed_multiplier` | Velocidade em chamas, sobre a do tier | 1 a 4 |
 | `general` | `full_inventory_speed_multiplier` | Velocidade com o inventário cheio, sobre a do tier | 0,1 a 1 |
@@ -54,6 +65,13 @@ As chaves ficam em `snake_case`. As de um tier ficam em `[general_robot.{tier}]`
 | `general_robot.base` | `lamp_light_level` | Lanterna | 0 a 15 |
 | `general_robot.base` | `solar_day_per_tick` | Painel solar (de dia) | 0 a 2147483647 |
 | `general_robot.base` | `solar_night_per_tick` | Painel solar (à noite) | 0 a 2147483647 |
+| `general_robot.base` | `ore_scan_radius_blocks` | Scanner de minérios (raio) | 1 a 64 |
+| `general_robot.base` | `mob_scan_radius_blocks` | Scanner de mobs hostis (raio) | 1 a 64 |
+| `general_robot.base` | `ore_scan_interval_ticks` | Intervalo de varredura de minérios | 1 a 72000 |
+| `general_robot.base` | `mob_scan_interval_ticks` | Intervalo de varredura de mobs | 1 a 72000 |
+| `general_robot.base` | `ore_scan_cost` | Scanner de minérios, por varredura | 0 a 2147483647 |
+| `general_robot.base` | `mob_scan_cost` | Scanner de mobs, por varredura | 0 a 2147483647 |
+| `general_robot.base` | `ore_filter_slots` | Minérios no filtro do scanner | 1 a 64 |
 | `general_robot.base` | `recharge_per_tick` | Recarga na base e pelo slot de energia | 1 a 2147483647 |
 | `general_robot.base` | `inventory_slots` | Inventário | 1 a 54 |
 | `general_robot.base` | `max_health` | Vida | 1 a 1024 |
@@ -66,6 +84,7 @@ As chaves ficam em `snake_case`. As de um tier ficam em `[general_robot.{tier}]`
 - **Inventário até 54:** é o tamanho do baú duplo, o maior que a tela padrão do jogo mostra.
 - **Vida até 1024:** é o máximo do atributo de vida do jogo.
 - **Raio até 128:** mantém a busca limitada (regra 21 do `AGENTS.md`).
+- **Raio dos scanners até 64:** cobre os 24 blocos do Ultimate com folga, sem deixar a varredura crescer sem limite. Em 64 blocos, são até 2.146.689 blocos por varredura, o limite de `scan_blocks_per_tick`.
 - **Luz até 15:** é o maior nível de luz do jogo.
 - **Parada e teleporte sem sobreposição:** os limites não se cruzam, então o config nunca faz o robô parar além da distância em que teleportaria.
 
@@ -82,6 +101,7 @@ O mod não cai por causa do config (regra 17 do `AGENTS.md`):
 | Número fora dos limites | O NeoForge usa o limite mais próximo e registra no log |
 | Chave ausente ou valor que não é número | O NeoForge volta ao padrão da chave e registra no log |
 | `lamp_off_from_light` menor que `lamp_on_below_light` | A lanterna apaga a partir do maior dos dois, e o mod registra no log uma vez |
+| Tag inválida em `rare_ore_tags` | O mod ignora a tag e registra no log uma vez |
 | Tier sem seção no config | O `TierCatalog` usa o tier Base do robô e registra no log uma vez |
 | Tipo de robô sem seção | Erro de programação, então o `TierCatalog` lança uma exceção |
 
@@ -89,6 +109,12 @@ O mod não cai por causa do config (regra 17 do `AGENTS.md`):
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-07 17:14 | Adiciona as chaves das falas de animais. |
+| Marcelo Fabiano | 2026-11-07 17:11 | Adiciona a chave das falas de bioma. |
+| Marcelo Fabiano | 2026-11-07 17:07 | Adiciona as chaves de ficar para trás. |
+| Marcelo Fabiano | 2026-11-07 16:54 | Adiciona as chaves das falas. |
+| Marcelo Fabiano | 2026-11-07 16:20 | Adiciona a altura máxima que a rota desce. |
+| Marcelo Fabiano | 2026-11-07 15:57 | Adiciona as chaves dos scanners. |
 | Marcelo Fabiano | 2026-11-07 13:51 | Aponta a margem das telas para a constante do jogo. |
 | Marcelo Fabiano | 2026-11-06 15:05 | Adiciona as chaves do painel solar. |
 | Marcelo Fabiano | 2026-11-06 13:34 | Adiciona as chaves da lanterna. |

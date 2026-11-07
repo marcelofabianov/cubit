@@ -9,11 +9,13 @@ O player escolhe entre o robô seguir ou atuar numa área. A marcação da área
 ## Movimento
 
 - Por causa das esteiras, ele não pula; só sobe um bloco por vez.
+- **Descer:** a rota desce de uma altura de até o limite de [`tiers.md`](../tiers.md#valores-gerais), sem dano de queda (pergunta 569).
 - A rota evita água e lava, e ele não leva dano de queda.
 - **Na água:** se cair nela, afunda e anda no fundo, sem nadar e sem se afogar. O teleporte o resgata quando o player se afasta.
 - **Na lava:** leva dano igual ao player sem armadura e continua pegando fogo ao sair. Ativo, se colocarem lava no bloco dele, tenta ir para o bloco seguro mais próximo, mas a lava o deixa muito lento. Quanto menor o tier, maior a chance de morrer antes de sair, e no Base isso costuma acontecer. Inativo, fica parado.
 - O robô que segue anda até o player e para quando chega perto.
 - O robô que segue, se ficar longe demais do player, teleporta para perto, só na mesma dimensão.
+- **Quando o dono renasce:** o robô ativo que segue volta com ele, em qualquer dimensão, se ainda estiver carregado nesse momento e longe demais. Um robô já descarregado continua onde está, porque nenhum chunk é carregado à força. Um robô a caminho do Dock continua indo, e passar por um portal não o leva (pergunta 567).
 - Só se move no estado ativo. Inativo ou em hibernação, fica parado e não teleporta.
 - Faz barulho de esteira ao andar. O som entra na Fase 3.
 
@@ -78,6 +80,8 @@ Marca onde o player morreu e o leva até lá, se o tier permitir.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-07 16:20 | Define a altura que o robô desce. |
+| Marcelo Fabiano | 2026-11-07 16:17 | Define a volta do robô com o dono que renasce. |
 | Marcelo Fabiano | 2026-11-05 21:02 | Cita o clique sem redstone para ligar o robô. |
 | Marcelo Fabiano | 2026-11-05 20:42 | Detalha o comando `/cubit reset` e o robô ativo sem vínculo. |
 | Marcelo Fabiano | 2026-11-05 15:32 | Adiciona a reação aos blocos que ferem. |

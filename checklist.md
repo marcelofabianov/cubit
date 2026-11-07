@@ -62,6 +62,7 @@ A ordem é a da numeração (perguntas 356 e 365), com a lanterna antes do paine
 17. [x] Nome personalizado e cor da carcaça
 18. [ ] Jade
 19. [ ] Telas próprias do Cubit e do Induction Dock, com janelas personalizadas, textura de metal de robô e tooltips, sem o padrão do Minecraft (pergunta 371)
+20. [ ] Falas do Cubit sobre o tempo e as conquistas, na mesma entrega dos scanners (perguntas 572 a 583)
 
 ## Primeira versão: `0.1.0`
 
@@ -92,7 +93,7 @@ Sai só ao terminar todos os itens da Fase 3 (pergunta 337).
 7. [ ] Ímã e coleta, com as chaves deles e o filtro em lista branca e lista negra (perguntas 422 a 424)
 8. [ ] Slots de tochas, fornalha e carregador de ferramentas
 9. [ ] Definir o custo de ímã, scanners e tochas
-10. [ ] Choque e modos de defesa
+10. [ ] Choque e modos de defesa, refinando o modo só o alvo (perguntas 577 e 578)
 11. [ ] Cubit Remote: comandos, localizar e marcar área
 12. [ ] Modo área, com a altura máxima a definir
 13. [ ] Descarga em baú marcado, com a chave dela

@@ -24,6 +24,8 @@ Tudo que aparece no mod fica em inglês. Os documentos podem usar o termo em por
 | Aprendizado de Máquina: Minerador, Fazendeiro, Pescador, Pecuarista, Defensor, Organizador, Cozinheiro e Construtor | Machine Learning: Miner, Farmer, Fisher, Rancher, Defender, Organizer, Cook e Builder |
 | Generalista | Generalist |
 | Lanterna | Lamp |
+| Scanners | Scanners |
+| Falas | Chatter |
 | Pacífico | Peaceful |
 | Contra-atacar | Retaliate |
 | Agressivo | Aggressive |
@@ -42,6 +44,9 @@ Os IDs estão em [`itens.md`](itens.md).
 - **Lanterna:** a luz do Cubit no escuro, que gasta energia enquanto acesa e acende as pontas das antenas.
 - **Claridade da tela:** a luz fraca que a tela acesa emite, sem gastar energia.
 - **Chave:** o que o player liga ou desliga para um recurso do Cubit.
+- **Varredura:** uma leitura dos scanners em volta do Cubit, com um custo fixo de energia.
+- **Minério raro:** minério de uma lista de tags no config, que avisa com som e surpresa mesmo fora do filtro.
+- **Filtro do scanner:** os minérios que o dono pediu ao Cubit, clicando nele com um minério na mão.
 - **Bloco que fere:** bloco que o jogo classifica como perigoso na rota, como magma e cacto.
 - **Ativo:** Cubit ligado, fora da base.
 - **Inativo:** Cubit desligado.
@@ -55,6 +60,8 @@ Os IDs estão em [`itens.md`](itens.md).
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-07 16:54 | Adiciona as falas. |
+| Marcelo Fabiano | 2026-11-07 16:10 | Adiciona os scanners, a varredura, o minério raro e o filtro. |
 | Marcelo Fabiano | 2026-11-06 13:34 | Adiciona a lanterna, a claridade da tela e a chave. |
 | Marcelo Fabiano | 2026-11-06 11:10 | Adiciona trabalho, aba Trabalho e o robô único. |
 | Marcelo Fabiano | 2026-11-06 11:10 | Troca 'especialidade' por 'trabalho' e 'card de especialidade' por 'card de Aprendizado de Máquina'. |

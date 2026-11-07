@@ -17,8 +17,14 @@ Só em algumas situações ele mostra um texto simples e direto, começando com 
 | Bateria crítica | `Critical battery` |
 | O Cubit leva dano | `That hurts!` |
 | O dono leva dano, por perto | `Careful!` |
-| Inimigo próximo | `Enemy nearby` |
-| Minério encontrado | `Ore found` |
+| Inimigo próximo | `Careful, Zombie!`, com o nome do mob |
+| Minério encontrado | `DIAMOND!!!`, com o nome do minério, ou `Ore found`, se ele só tiver a tag `c:ores` |
+| O tempo ou o horário muda | Uma das frases de [`falas.md`](falas.md) |
+| O dono ganha uma conquista | Uma das frases de [`falas.md`](falas.md) |
+| O dono se afasta demais | Uma das frases de [`falas.md`](falas.md) |
+| Entra em outro tipo de bioma | Uma das frases de [`falas.md`](falas.md) |
+| O dono abate um animal | Uma das frases de [`falas.md`](falas.md), às vezes |
+| Clique com um minério na mão | `Looking for DIAMOND` ou `Filter cleared`, vindo de qualquer estado do Cubit |
 | Tenho que ir carregar | `I need to recharge` |
 | Itens descarregados | `Items unloaded` |
 
@@ -31,6 +37,7 @@ Só em algumas situações ele mostra um texto simples e direto, começando com 
 | Renomeado com etiqueta, ativo | Feliz | Bipe padrão, ao trocar |
 | Pintado, ativo | Feliz | Bipe padrão, ao trocar |
 | Recebe um upgrade | Feliz | Bipe padrão, ao trocar |
+| O dono ganha uma conquista, ativo | Feliz | Bipe padrão, ao trocar |
 | Bateria crítica | Sono | Bipe padrão, ao trocar |
 | Em hibernação na base | Carregando | Som de recarga |
 | Recarregando pelo slot, ligado | Normal | Som de recarga |
@@ -44,7 +51,7 @@ Só em algumas situações ele mostra um texto simples e direto, começando com 
 | Ao levar dano com pouca vida | Olhos em X, por cerca de 3 s, e depois a lágrima | Curto elétrico |
 | O dono leva dano, por perto, no robô que segue | Preocupado, por cerca de 3 s | Nenhum |
 | Inimigo por perto | Alerta | Bipe de alerta de inimigo |
-| Minério raro encontrado | Surpreso | Bipe de alerta de minério |
+| Minério raro encontrado | Surpreso, por cerca de 3 s | Bipe de alerta de minério |
 
 O bipe padrão toca só nas trocas de expressão sem som exclusivo. Ao ligar, toca só o som de ligar, na passagem de desligado a ligado. Ao ser colocado, toca só o som de colocar. Os sons estão em [`visual.md`](visual.md#sons).
 
@@ -58,6 +65,11 @@ O Cubit **nunca ataca o próprio dono nem mobs pacíficos**, em nenhum modo de d
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-07 17:14 | Adiciona as falas de animais. |
+| Marcelo Fabiano | 2026-11-07 17:11 | Adiciona as falas de bioma. |
+| Marcelo Fabiano | 2026-11-07 17:07 | Adiciona a fala de ficar para trás. |
+| Marcelo Fabiano | 2026-11-07 16:54 | Adiciona as falas e a reação às conquistas. |
+| Marcelo Fabiano | 2026-11-07 15:57 | Faz os textos dos scanners citarem o que foi achado e define o tempo da surpresa. |
 | Marcelo Fabiano | 2026-11-06 15:58 | Limita as reações ao Cubit ativo. |
 | Marcelo Fabiano | 2026-11-06 11:15 | Limita a reação feliz a abrir o inventário, como no código. |
 | Marcelo Fabiano | 2026-11-06 11:10 | Troca 'especialidade' por 'trabalho' e 'card de especialidade' por 'card de Aprendizado de Máquina'. |

@@ -63,6 +63,8 @@ Coloque um robô, que segue você, e use blocos para montar o terreno.
 | 5 | Fique do outro lado de uma poça, com um caminho em volta | O robô contorna a água |
 | 6 | Coloque o robô dentro de uma piscina funda e fique por perto | Ele afunda, anda no fundo e não perde vida |
 | 7 | Deixe o robô num penhasco e pule, para ele cair ao seguir | Ele não perde vida |
+| 7b | Fique abaixo de um degrau de 5 blocos, a menos de 20 blocos | Ele desce do degrau e vem até você, sem perder vida |
+| 7c | Fique abaixo de um degrau de 6 blocos, sem outro caminho, a menos de 20 blocos | Ele não desce e fica em cima |
 | 7a | Fique do outro lado de uma vala de lava, sem caminho em volta | Ele não entra na lava |
 | 8 | Vá para o Nether e volte | Ele não vai junto. Ao voltar, retoma quando o chunk dele estiver carregado |
 | 9 | Coloque um segundo robô, longe do primeiro, e ande | O segundo fica parado |
@@ -241,7 +243,7 @@ Compare com as imagens em `_docs/imagens/conceito/png/`, com os nomes `expressao
 | 20 | Em modo sobrevivência, com o robô seguindo a menos de 16 blocos, leve dano, por queda ou de um mob | Olhos de preocupado, com a gota de suor, por cerca de 3 s, sem som e sem bipe |
 | 21 | Afaste-se mais de 16 blocos do robô, sem ele seguir por perto, e leve dano | Ele não fica preocupado |
 
-Alerta e surpreso só aparecem com os scanners.
+Alerta e surpreso estão na seção Scanners.
 
 ## Animações
 
@@ -389,6 +391,82 @@ Os valores são os padrões de [`tiers.md`](../tiers.md).
 | 12 | Saia e entre no mundo | A cor e o nome continuam |
 | 13 | Com outro player no servidor, use corante e etiqueta no Cubit | Nada muda, e nada é gasto |
 
+## Scanners
+
+Os valores são os padrões de [`tiers.md`](../tiers.md). Mobs varrem a cada 10 s e minérios a cada 35 s, então espere esse tempo em cada passo. Para ver a carga, use `/data get entity @e[type=cubit:general_robot,limit=1,sort=nearest] Energy`.
+
+| # | Passo | Resultado esperado |
+|---|---|---|
+| 1 | Com um Cubit seguindo, invoque um zumbi a 3 blocos, com `/summon minecraft:zombie ~3 ~ ~ {NoAI:1b}` | Em até 10 s, toca o alerta, aparece `Cubit: Careful, Zombie!` e a tela fica em alerta |
+| 2 | Continue perto do zumbi por 30 s | O texto e o som não se repetem, e o alerta continua na tela |
+| 3 | Mate o zumbi com `/kill @e[type=minecraft:zombie]` | Em até 10 s, a tela volta ao normal, com o bipe |
+| 4 | Repita com esqueleto e creeper, um de cada vez | O texto cita cada um, sem esperar os 25 s do outro |
+| 5 | Invoque uma vaca ao lado | Nenhum alerta |
+| 6 | Coloque minério de diamante a 3 blocos | Em até 35 s, toca o som do minério, aparece `Cubit: DIAMOND!!!` e a tela fica surpresa por cerca de 3 s |
+| 7 | Espere mais 40 s | Não avisa de novo sobre o mesmo bloco |
+| 8 | Quebre o minério, espere uma varredura e coloque de novo | Avisa de novo |
+| 9 | Coloque minério de carvão | Nenhum aviso |
+| 10 | Clique no Cubit com minério de carvão na mão | Bipe e `Cubit: Looking for COAL`, e o item continua na mão |
+| 11 | Espere uma varredura | Aparece `Cubit: COAL!!!`, sem som e sem surpresa |
+| 12 | Clique de novo com minério de carvão | Bipe e `Cubit: Filter cleared` |
+| 13 | Clique com minério de ferro num Cubit desligado | O filtro muda, com o bipe e o texto, e a tela continua apagada |
+| 14 | Abra o inventário e olhe embaixo das barras do painel lateral | O botão `Scanners`, com a luz azul. O tooltip mostra `Scanners: On` |
+| 15 | Clique no botão, com um zumbi por perto, e espere 15 s | A luz apaga, o tooltip mostra `Scanners: Off`, e nada avisa nem gasta |
+| 16 | Recolha o Cubit e coloque de novo | A chave e o filtro continuam |
+| 17 | Mate o Cubit, conserte e coloque | A chave e o filtro continuam |
+| 18 | Parado, coberto e com a lanterna desligada, meça a carga com 35 s entre as leituras | Cai de 650 a 750 FE: 3 ou 4 varreduras de mobs e 1 de minérios |
+| 19 | Leve o Cubit a um Dock | Não varre e não avisa, e o botão fica desabilitado |
+| 20 | Rode `make server` | O servidor abre sem erro de classe de cliente |
+
+## Quando o dono renasce
+
+Use modo sobrevivência, com `/gamemode survival`. Para morrer, use `/kill @s`. Para ir longe do spawn, use `/tp @s ~1000 ~ ~`, e espere o Cubit aparecer perto de você antes de cada morte.
+
+| # | Passo | Resultado esperado |
+|---|---|---|
+| 1 | Com um Cubit seguindo, longe do spawn, morra e renasça | Ele aparece com você no spawn, com a mesma carga e o mesmo inventário |
+| 2 | Morra perto do spawn, a menos de 20 blocos de onde vai renascer | Ele vem andando até você, sem aparecer de repente |
+| 3 | Com o Cubit seguindo no Nether, morra e renasça no mundo normal | Ele aparece com você no mundo normal |
+| 4 | Passe por um portal do Nether, sem morrer | Ele não vai junto |
+| 5 | Deixe um Cubit desligado longe, ligue outro para seguir, morra e renasça | O que seguia volta, e o desligado continua no lugar |
+| 6 | Chame o Cubit a um Dock e morra antes de ele chegar, perto do Dock | Ele continua indo ao Dock |
+
+## Falas
+
+As frases estão em [`falas.md`](../conceito/falas.md). Fique a céu aberto, com um Cubit seguindo, e espere 5 minutos entre as falas sobre o tempo, ou reduza `chatter_repeat_ticks` no config.
+
+| # | Passo | Resultado esperado |
+|---|---|---|
+| 1 | Rode `/time set 22900` e espere | Ao chegar o amanhecer, em até 1 s, bipe e uma frase de amanhecer |
+| 2 | Rode `/time set 2500` e espere | Bipe e uma frase de dia lindo |
+| 3 | Rode `/time set 11900` e espere | Bipe e uma frase de entardecer |
+| 4 | Rode `/weather rain` | Bipe e uma frase de chuva |
+| 5 | De dia, rode `/weather clear` | Bipe e uma frase de dia lindo |
+| 6 | Rode `/weather thunder` | Bipe e uma frase de chuva forte |
+| 7 | Vá a um bioma com neve, com `/locate biome minecraft:snowy_plains` e `/tp` | Bipe e uma frase de frio |
+| 8 | Repita qualquer passo logo depois de uma fala | Nada: o intervalo de 5 minutos não acabou |
+| 9 | Entre numa caverna e rode `/weather rain` | Nenhuma fala de chuva |
+| 10 | Com um zumbi no raio do scanner, troque o horário | Nenhuma fala |
+| 11 | Ganhe uma conquista, por exemplo com `/advancement grant @s only minecraft:story/mine_stone` | Expressão feliz, bipe e uma frase de parabéns |
+| 12 | Ganhe um desafio, com `/advancement grant @s only minecraft:adventure/kill_all_mobs` | Expressão feliz, bipe e uma frase mais forte |
+| 13 | Faça um item que libera uma receita nova | Nenhuma fala |
+| 14 | Abra o inventário e olhe abaixo do botão `Scanners` | O botão `Chatter`, com luz verde. O tooltip mostra `Chatter: On` |
+| 15 | Desligue o botão e repita os passos 4 e 11 | Nenhuma fala, e a conquista não faz o Cubit comemorar |
+| 16 | Recolha e coloque o Cubit | A chave continua desligada |
+| 17 | Com um zumbi no raio, ganhe uma conquista | A expressão continua em alerta, com uma frase de parabéns e um bipe |
+| 18 | Ganhe outra conquista, na expressão normal | Um bipe só, sem repetir |
+| 19 | Em sobrevivência, corra para longe do Cubit em linha reta | Por volta de 16 blocos, bipe e uma frase de ficar para trás, antes de ele aparecer perto de você |
+| 20 | Corra de novo logo depois | Nenhuma fala, até passar 1 minuto |
+| 21 | Rode `/tp @s ~100 ~ ~` | Ele aparece perto de você, sem essa fala |
+| 22 | Saia e entre no mundo | Nenhuma fala de bioma ao entrar |
+| 23 | Com `/locate biome minecraft:desert` e `/tp`, leve o Cubit a um deserto, vindo de outro tipo de bioma | Bipe e uma frase de deserto. O Cubit vem junto pelo teleporte dele |
+| 24 | Logo depois, vá a uma floresta | Nada, até passarem 2 minutos da última fala de bioma |
+| 25 | Atravesse um rio entre duas florestas, depois dos 2 minutos | Nenhuma fala nova |
+| 26 | Mate vários porcos, vacas e galinhas, um por vez | De vez em quando, cerca de 1 em 3 e com ao menos 1 minuto entre as falas, bipe e uma frase daquele animal |
+| 27 | Mate outro animal, como uma raposa | De vez em quando, uma frase genérica |
+| 28 | Domestique um lobo e mate-o várias vezes, por exemplo com `/summon` e um osso | Nunca há fala |
+| 29 | Deixe um zumbi matar o animal | Nenhuma fala |
+
 ## Servidor dedicado
 
 1. Rode `make server` e aceite o EULA em `run/eula.txt`, se ainda não tiver aceitado.
@@ -398,6 +476,12 @@ Os valores são os padrões de [`tiers.md`](../tiers.md).
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-07 17:14 | Adiciona as falas de animais. |
+| Marcelo Fabiano | 2026-11-07 17:11 | Adiciona as falas de bioma. |
+| Marcelo Fabiano | 2026-11-07 17:07 | Adiciona a fala de ficar para trás. |
+| Marcelo Fabiano | 2026-11-07 16:57 | Adiciona o bipe nas falas. |
+| Marcelo Fabiano | 2026-11-07 16:54 | Adiciona as falas. |
+| Marcelo Fabiano | 2026-11-07 16:19 | Adiciona os scanners e o dono que renasce. |
 | Marcelo Fabiano | 2026-11-07 13:51 | Adiciona o Dock sem dono. |
 | Marcelo Fabiano | 2026-11-06 15:58 | Adiciona a cor e o nome. |
 | Marcelo Fabiano | 2026-11-06 15:16 | Tira o vidro do painel. |

@@ -66,6 +66,8 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Receita do Cubit:** lembra o item, com redstone, lâmpada de redstone, ferro, diamante e obsidiana, conforme [`itens.md`](itens.md#cubit).
 - **Receita do Induction Dock:** em forma de L, com redstone, ferro e baú, conforme [`itens.md`](itens.md#induction-dock).
 - **Conserto:** usa a `Toolbox` (`cubit:toolbox`), na grade do inventário ou na mesa de craft, num tipo de receita do mod, `cubit:robot_repair`, com os itens no JSON. Ela é consumida a cada conserto e empilha até 16. O robô sai com parte da vida, conforme [`tiers.md`](tiers.md#valores-gerais), e a bateria zerada.
+- **Dono que renasce:** o robô ativo que segue volta com ele, em qualquer dimensão, se ainda estiver carregado. Nenhum chunk é carregado à força, e passar por um portal não o leva.
+- **Descida:** a rota desce de até 5 blocos, sem dano de queda, e continua subindo só 1 por vez.
 - **Movimento:** a velocidade de referência está em [`tiers.md`](tiers.md#valores-gerais). Na água, o robô afunda e anda no fundo, sem se afogar. Na lava, leva dano igual ao do player. Não há dano de queda. O som de esteira entra na Fase 3.
 - **Criativo:** aba própria, `cubit:main`, e colocar sempre gasta o item.
 - **Estados:** ativo (ligado), inativo (desligado) e hibernação (na base, com o inventário e os slots acessíveis).
@@ -73,7 +75,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Induction Dock:** é a base de recarga, com torre e placa em U, 2 blocos de altura e dono, recebe energia por cabos ou redstone, sem saída, e tem um único slot, que também recarrega a Power Bank. A energia fica no item ao quebrar, e só o dono o quebra, além de um operador no modo criativo. Sem conseguir chegar, o Cubit teleporta.
 - **Dock sem dono:** só um operador em criativo o remove, com aviso no log ao carregar (pergunta 524). Entra na issue #106.
 - **Recarga pela grade de craft:** o item do Cubit abaixo da carga de religar, combinado com uma Power Bank, recebe só o que falta para religar, na Fase 4.
-- **Consumo:** gasta ao andar de verdade, sem gastar parado nem empurrado. As exceções são a condição negativa e a lanterna acesa, que gastam mesmo parado.
+- **Consumo:** gasta ao andar de verdade, sem gastar parado nem empurrado. As exceções são a condição negativa, a lanterna acesa e as varreduras dos scanners, que gastam mesmo parado.
 - **Parada do robô:** uma navegação própria cancela o recálculo de rota pendente, para o robô parado não voltar a andar.
 - **Painel do slot de energia:** visual melhor e tooltips ficam para a tela própria da Fase 3.
 - **Barras de bateria:** mostram ao menos um risco enquanto houver carga e só ficam vazias com 0 FE.
@@ -102,8 +104,11 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Nome:** com etiqueta, só do dono, ou na bigorna, e sempre visível acima do Cubit.
 - **Tronco central:** a coluna entre as esteiras e a carcaça tem 2 unidades de altura, e a hitbox não muda.
 - **Trabalhos (Fase 5, planejada):** um único Cubit, com um card por vez, age só em área marcada e nunca sai dela. Antena e Servidor mantêm os chunks carregados, de forma opcional. Sem chunk de destino, ele espera. O detalhe está em [`trabalhos.md`](funcionalidades/trabalhos.md).
+- **Modo só o alvo:** ideia aprovada, a refinar na Fase 4: o Cubit só ataca o último mob que o dono feriu ou marcou com o controle (pergunta 578).
 - **Limites:** nunca ataca o dono nem mobs pacíficos. Só ataca mobs neutros para defender o player.
 - **Scanner:** `c:ores/*` significa a tag-mãe `c:ores` e suas subtags, porque tags não aceitam curinga.
+- **Falas (perguntas 572 a 583):** o Cubit comenta o tempo e o horário ao mudarem, com um intervalo mínimo, e dá parabéns pelas conquistas visíveis, com a chave `Chatter`. As frases e as regras estão em [`falas.md`](conceito/falas.md).
+- **Scanners (perguntas 544 a 564):** só o Cubit ativo que segue varre, com a chave `Scanners`, por um custo fixo por varredura, em intervalos separados para minérios e mobs. Só o que é novo avisa, dizendo o nome: `Cubit: DIAMOND!!!` e `Cubit: Careful, Zombie!`, com o intervalo mínimo por nome. O filtro é definido clicando com um minério na mão, e os raros são uma lista de tags, de ferro para cima. Mob hostil é o que o jogo marca como `Enemy`. A entrega tem três PRs: detecção, cores e caixas.
 - **Estado do robô como item:** inclui as configurações, além de bateria, vida, inventário, tier, nome e cor. Perde a área, os baús marcados e a seleção no controle.
 - **Modo área:** por dois cantos em 3D, já na Fase 4. Sem card, o robô coleta os itens do chão na área e descarrega no baú marcado.
 - **Parar pelo controle:** o robô continua ativo e com o vínculo, parado e sem teleportar, e o estado é salvo.
@@ -115,6 +120,11 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-07 16:54 | Registra as falas. |
+| Marcelo Fabiano | 2026-11-07 16:51 | Registra a ideia do modo só o alvo. |
+| Marcelo Fabiano | 2026-11-07 16:20 | Registra a altura que o robô desce. |
+| Marcelo Fabiano | 2026-11-07 16:17 | Registra a volta do robô com o dono que renasce. |
+| Marcelo Fabiano | 2026-11-07 15:57 | Registra os scanners. |
 | Marcelo Fabiano | 2026-11-07 14:25 | Registra o encerramento depois do merge. |
 | Marcelo Fabiano | 2026-11-07 13:35 | Registra as decisões da auditoria de qualidade. |
 | Marcelo Fabiano | 2026-11-07 13:21 | Registra a refatoração antes dos scanners. |
