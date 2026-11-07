@@ -2,10 +2,10 @@
 
 GRADLE := ./gradlew
 
-.PHONY: help setup check test coverage format format-check build clean client server data check-generated gametest stop
+.PHONY: help setup check test coverage format format-check build clean client server data check-generated gametest gametest-coverage stop
 
 help: ## Show the available commands
-	@grep -E '^[a-z-]+:.*## ' $(MAKEFILE_LIST) | awk -F ':.*## ' '{printf "  %-14s %s\n", $$1, $$2}'
+	@grep -E '^[a-z-]+:.*## ' $(MAKEFILE_LIST) | awk -F ':.*## ' '{printf "  %-18s %s\n", $$1, $$2}'
 
 setup: ## Install the development tools and enable the git hooks
 	scripts/development/setup-dev.sh
@@ -46,6 +46,10 @@ check-generated: ## Fail when the data generation changes src/generated
 
 gametest: ## Run the GameTests on a headless server and confirm that they passed
 	scripts/development/run-gametests.sh
+
+gametest-coverage: ## Run the GameTests and report what they cover outside the domain, without failing on it
+	$(GRADLE) -PgameTestCoverage gameTestCoverageReport
+	@echo "Report: build/reports/jacoco/gametest/index.html"
 
 stop: ## Stop the Gradle daemons
 	$(GRADLE) --stop

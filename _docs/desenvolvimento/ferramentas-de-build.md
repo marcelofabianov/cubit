@@ -21,11 +21,16 @@ Os comandos ficam no `Makefile`. Rode `make` para ver a lista.
 | `make data` | Roda a geração de dados |
 | `make check-generated` | Roda a geração de dados e reprova se `src/generated` mudar |
 | `make gametest` | Roda os GameTests num servidor sem interface |
+| `make gametest-coverage` | Roda os GameTests e gera o relatório do que eles cobrem fora do domínio, sem reprovar nada |
 | `make stop` | Para os daemons do Gradle |
 
 **`make gametest`:** o jogo termina com sucesso mesmo quando o mod falha ao carregar, então `scripts/development/run-gametests.sh` só aprova se o log trouxer `All N required tests passed`. Foi conferido que o comando falha com uma GameTest reprovada e com uma classe de cliente no código comum. O `pre-push` também o roda, e o log fica em `build/gametest.log`. O servidor roda em `run/gametest/`, separado do `run/` do `make client`, para um config editado à mão não mudar o resultado. Num diretório novo, o log mostra um erro por falta do `server.properties`, que o jogo cria em seguida.
 
 **GameTests:** ficam no pacote `gametest`, e cobrem o que está fora de `domain/` (regra 34 do `AGENTS.md`). Os testes usam as estruturas `empty.nbt` e `arena.nbt`, de `data/cubit/structure/`. O framework cerca cada estrutura com paredes e teto de barreira invisível, então a `arena`, com 24 blocos de comprimento e 8 de altura, limita o robô. Nela, o piso de pedra fica em `y=1`, porque o `y=0` relativo está uma camada abaixo da estrutura, e `helper.getEntities` não enxerga nada fora dela. Não compare posições com `helper.relativePos`, que devolve X e Z negativos: use `helper.absolutePos`.
+
+**`make gametest-coverage`:** liga o agente do JaCoCo só nesse comando, pela propriedade `gameTestCoverage`, para os GameTests do `pre-push` rodarem sem ele. O relatório fica em `build/reports/jacoco/gametest/index.html`, sem `domain/`, que tem gate próprio, e sem `client/`, que não roda numa GameTest (perguntas 527 e 538). Se o mod não carregar, o relatório sai vazio, então leia a contagem de testes no log.
+
+**Jar publicado:** a tarefa `jar` exclui os pacotes `gametest` e `datagen` e as estruturas de `data/cubit/structure/`, que só servem ao desenvolvimento. As execuções de `make gametest`, `make data`, `make client` e `make server` leem as classes direto, sem passar pelo jar, então um problema só no jar aparece nos testes de instância, no fim da Fase 3.
 
 **LambDynamicLights:** é dependência obrigatória só do cliente, então o `neoforge.mods.toml` exige `lambdynlights_runtime` com `side = "CLIENT"`. Esse é o ID presente tanto no artefato de desenvolvimento quanto no jar publicado, que o traz embutido. O código compila contra a API, e o jar não leva a biblioteca. Ela só entra em `make client` e `make data`, pelo conjunto de fontes vazio `clientRun`, porque o jogo procura mods no classpath da execução e o `additionalRuntimeClasspath` não basta. O `make data` a exige porque também inicia como cliente. `make server` e `make gametest` não a carregam, o que prova que um servidor dedicado abre sem ela.
 
@@ -41,8 +46,8 @@ O primeiro build leva alguns minutos, porque baixa o JDK e prepara o Minecraft.
 | ModDevGradle | Integra o Gradle ao NeoForge | É o plugin do MDK oficial |
 | JDK 21 Adoptium | Compila o mod e o Minecraft | O projeto o baixa sozinho, porque o Java do sistema pode não ter o pacote de desenvolvimento |
 | JUnit | Roda os testes do domínio sem subir o jogo | É o padrão em Java e está na regra 32 do `AGENTS.md` |
-| ArchUnit | Impede que `domain/` dependa do jogo | Garante a regra 12 do `AGENTS.md` no build |
-| JaCoCo | Mede a cobertura de `domain/`, com mínimo de 85% | Garante a regra 34 do `AGENTS.md` |
+| ArchUnit | Isola `domain/`, separa o código comum do cliente, separa `block/` de `entity/` e proíbe `get*` no domínio | Garante as regras 12, 14, 23 e 42 do `AGENTS.md` no build |
+| JaCoCo | Mede a cobertura de `domain/`, com mínimo de 85% de instruções e de ramos | Garante a regra 34 do `AGENTS.md` |
 | Spotless com google-java-format | Formata o código Java, com recuo de 2 espaços | É o padrão mais comum em Java, sem opções para discutir (pergunta 95) |
 | Checkstyle | Confere as regras de forma do código | Reprova no build o que antes dependia da revisão (pergunta 97) |
 | LambDynamicLights `4.8.11+1.21.1` | Faz o Cubit iluminar o mundo, sem blocos de luz invisíveis | É a dependência obrigatória da regra 6 do `AGENTS.md`, na versão do Iron Meridian. Vem do repositório `maven.gegy.dev`, limitado ao grupo da biblioteca |
@@ -65,7 +70,11 @@ As bibliotecas de teste vêm só do Maven Central, para o build não depender do
 
 ## Quando algo reprova
 
-- **`DomainBoundaryTest`:** uma classe de `domain/` importou o jogo. Mova a regra para fora do domínio ou inverta a dependência com uma interface.
+- **`DomainBoundaryTest`:** o nome da regra que reprovou diz o motivo.
+  - `theDomainOnlyDependsOnItselfAndJava`: uma classe de `domain/` importou o jogo ou outro pacote do mod. Mova a regra para fora do domínio ou inverta a dependência com uma interface.
+  - `commonCodeDoesNotUseTheClient`: código comum citou uma classe de cliente. Mova a referência para `client/`.
+  - `theDockDoesNotKnowTheEntity`: `block/` citou `entity/`. Use uma interface, como `DockableRobot`.
+  - `theDomainHasNoGetters`: troque `getCapacity()` por `capacity()`.
 - **`jacocoTestCoverageVerification`:** faltam testes no domínio. Abra `build/reports/jacoco/test/html/index.html` para ver o que falta.
 - **`spotlessJavaCheck`:** o código não está formatado. Rode `make format`.
 - **`checkstyleMain` ou `checkstyleTest`:** uma regra de forma do código foi violada. Corrija a causa, sem suprimir a regra.
@@ -79,6 +88,8 @@ As bibliotecas de teste vêm só do Maven Central, para o build não depender do
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-07 14:38 | Adiciona o relatório de cobertura dos GameTests. |
+| Marcelo Fabiano | 2026-11-07 14:31 | Adiciona o jar publicado, as regras de ArchUnit e o gate de ramos. |
 | Marcelo Fabiano | 2026-11-07 13:51 | Adiciona o checksum do wrapper. |
 | Marcelo Fabiano | 2026-11-06 13:10 | Adiciona o LambDynamicLights. |
 | Marcelo Fabiano | 2026-11-05 00:12 | Corrige o que o make data faz. |
