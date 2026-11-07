@@ -34,6 +34,9 @@
 | 321 | O nome `placed.ogg` e o momento "ao ser colocado no mundo" estão certos? | Sim. Detalha a pergunta 320 |
 | 322 | Em que fase o som de colocar no mundo passa a tocar? | Na Fase 3, junto dos outros oito. Detalha a pergunta 320 |
 | 421 | Como foi o roteiro manual do colar, do indicador de bateria e do tronco central com +0,5? | Teste finalizado, tudo ok, executado pelo desenvolvedor, sem detalhar cada passo. Ele não pediu +1, então o tronco fica em 2 unidades. O `make server` e o olhar de longe não foram citados em separado |
+| 538 | O JaCoCo mede as GameTests. O agente adota essa medição? | Sim, com um comando só de relatório, `make gametest-coverage`, que não reprova nada e não entra no `pre-push`. A prova deu 92% das linhas (1.954 de 2.117) e 78% dos ramos, fora de `domain/`, `client/`, `gametest/` e `datagen/`. Os mais baixos foram `RobotAnimations` (0%, só roda no cliente), os dois menus (cerca de 50%) e a rede (cerca de 65%). Fecha a pergunta 527 |
+| 537 | O desenvolvedor quer algum ajuste no roteiro das próximas tarefas, depois do PR #111? | Não: "ok" e "continue". Segue a #108, depois a correção do `visual.md`, os scanners, o Jade, as telas próprias e a `0.1.0`. O item 19 continua dependendo da resposta 500 |
+| 536 | O que o agente faz depois do merge de um PR? | É uma regra nova, a 52 do `AGENTS.md`, pedida pelo desenvolvedor: pede autorização para apagar a branch local e a remota, que não são mais necessárias, apresenta no que vai atuar em seguida e pergunta se ele quer algum ajuste no roteiro. O agente entendeu "PR 1" como o primeiro passo da lista, e "roteiro" como a sequência das próximas tarefas, não o roteiro manual de testes |
 | 535 | O agente atualiza a estrutura de pacotes do `AGENTS.md`, que não cita `DockTrip`, `DockRemoval` e `Ownership`? | Sim, nas linhas `dock/` e `ownership/`, num commit próprio |
 | 534 | Como foi o teste rápido no jogo da issue #107, e o agente pode fazer os commits? | "Sim". O agente entendeu como teste sem problemas e autorização dos commits do plano, porque as duas coisas foram perguntadas juntas. O resultado de cada passo não foi detalhado, então o teste pode não ter sido feito em todos eles |
 | 533 | Há algo a acrescentar à issue #107? | Não: "pode avançar", depois de ver a lista das próximas tarefas. O agente entendeu como autorização para criar a branch e começar pela #107, na ordem sugerida, não para commits |
@@ -216,6 +219,9 @@
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-07 14:38 | Registra a resposta 538. |
+| Marcelo Fabiano | 2026-11-07 14:28 | Registra a resposta 537. |
+| Marcelo Fabiano | 2026-11-07 14:25 | Registra a resposta 536. |
 | Marcelo Fabiano | 2026-11-07 14:18 | Registra as respostas 534 e 535. |
 | Marcelo Fabiano | 2026-11-07 14:10 | Registra a resposta 533. |
 | Marcelo Fabiano | 2026-11-07 13:57 | Registra a resposta 532. |

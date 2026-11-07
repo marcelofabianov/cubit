@@ -104,8 +104,9 @@ O merge é feito no GitHub, somente pelo desenvolvedor.
 
 1. Confira se a issue fechou. Se continuar aberta, feche-a à mão.
 2. Atualize a `develop` local.
-3. Apague a branch da tarefa, com autorização.
-4. Avalie se algum item de [`checklist.md`](../../checklist.md) deve ser marcado. A marcação entra num novo commit, no PR seguinte, nunca direto na `develop`.
+3. Avalie se algum item de [`checklist.md`](../../checklist.md) deve ser marcado. A marcação entra num novo commit, no PR seguinte, nunca direto na `develop`.
+4. Peça autorização para apagar a branch da tarefa, local e remota, que não é mais necessária.
+5. Apresente no que vai atuar em seguida e pergunte se o desenvolvedor quer algum ajuste no roteiro das próximas tarefas (regra 52).
 
 ## O que precisa de autorização
 
@@ -190,6 +191,7 @@ O primeiro passo, separando o que está decidido do que está pendente.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-07 14:25 | Adiciona a apresentação do próximo trabalho ao encerrar um PR. |
 | Marcelo Fabiano | 2026-11-06 10:56 | Adiciona o alinhamento antes de iniciar uma feature. |
 | Marcelo Fabiano | 2026-11-06 09:51 | Move o rascunho do PR para `tmp/pr/`. |
 | Marcelo Fabiano | 2026-11-05 22:18 | Adiciona a avaliação do checklist ao encerrar um PR. |

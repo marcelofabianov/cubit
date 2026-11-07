@@ -163,8 +163,12 @@ var generateModMetadata = tasks.register('generateModMetadata', ProcessResources
 sourceSets.main.resources.srcDir generateModMetadata
 neoForge.ideSyncTask generateModMetadata
 
+def modPath = project.mod_group_id.replace('.', '/')
+
 tasks.named('jar', Jar) {
     from('LICENSE')
+    // Only the development runs use these, and they read the classes directly, not the jar.
+    exclude "${modPath}/gametest/**", "${modPath}/datagen/**", 'data/cubit/structure/**'
 }
 
 tasks.withType(JavaCompile).configureEach {
@@ -202,6 +206,31 @@ tasks.named('jacocoTestCoverageVerification', JacocoCoverageVerification) {
             limit {
                 minimum = 0.85
             }
+            limit {
+                counter = 'BRANCH'
+                minimum = 0.85
+            }
+        }
+    }
+}
+
+// Only on request, so the GameTests of the push gate run without the agent. It reports and never
+// fails: the client cannot run in a GameTest, and the domain has its own gate.
+if (providers.gradleProperty('gameTestCoverage').isPresent()) {
+    jacoco.applyTo(tasks.named('runGameTestServer').get())
+
+    tasks.register('gameTestCoverageReport', JacocoReport) {
+        dependsOn 'runGameTestServer'
+        executionData file('build/jacoco/runGameTestServer.exec')
+        sourceDirectories.setFrom(sourceSets.main.java.srcDirs)
+        classDirectories.setFrom(sourceSets.main.output.asFileTree.matching {
+            include "${modPath}/**"
+            exclude "${modPath}/gametest/**", "${modPath}/datagen/**", "${modPath}/client/**",
+                    "${modPath}/domain/**"
+        })
+        reports {
+            html.required = true
+            html.outputLocation = file('build/reports/jacoco/gametest')
         }
     }
 }

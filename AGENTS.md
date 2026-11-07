@@ -162,6 +162,10 @@ O Cubit é o único robô do mod. O que muda entre um Cubit e outro é o tier e 
 
 51. **Nenhuma das opções:** toda pergunta com opções traz, de forma explícita, a opção "Nenhuma das opções". Vale para qualquer rodada, sem exceção.
 
+### Depois do merge
+
+52. **Encerramento do PR:** depois do merge de um PR, nesta ordem, o agente pede autorização para apagar a branch local e a remota, que não são mais necessárias, apresenta no que vai atuar em seguida e pergunta se o desenvolvedor quer algum ajuste no roteiro das próximas tarefas.
+
 ## Git
 
 - **Autorização:** nunca faça commit, push, tag, release ou PR sem autorização explícita para aquela ação. Antes, mostre os arquivos, o resumo e a mensagem proposta.
