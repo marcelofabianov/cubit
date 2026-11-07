@@ -206,8 +206,8 @@ io.github.marcelofabianov.cubit
 │   ├── tier/               // RobotTier, TierSpec, TierCatalog (interface)
 │   ├── energy/             // Battery, PowerState (ativo, inativo, hibernação), regras de consumo e religamento, SolarPanel: quando o painel dá energia
 │   ├── behavior/           // FollowDecision: seguir, parar ou teleportar; BurningAction: reagir a fogo e lava; LampPolicy: quando a lanterna acende
-│   ├── dock/               // DockStock, DockStatus, DockStay, DockQueue
-│   └── ownership/          // FollowingRobotPolicy
+│   ├── dock/               // DockStock, DockStatus, DockStay, DockQueue, DockTrip, DockRemoval
+│   └── ownership/          // FollowingRobotPolicy, Ownership
 ├── config/                 // ModConfigSpec → implementa TierCatalog
 ├── registry/               // DeferredRegisters
 ├── entity/                 // RobotEntity, goals de IA
