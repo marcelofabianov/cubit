@@ -36,11 +36,7 @@ final class TierSection {
 
   private final ModConfigSpec.IntValue batteryCapacity;
   private final ModConfigSpec.IntValue movingConsumption;
-  private final ModConfigSpec.IntValue fullInventoryExtra;
-  private final ModConfigSpec.IntValue waterExtra;
-  private final ModConfigSpec.IntValue negativeConditionExtra;
-  private final ModConfigSpec.IntValue climbExtra;
-  private final ModConfigSpec.IntValue lampConsumption;
+  private final ExtraKeys extras;
   private final ModConfigSpec.IntValue lampLight;
   private final SolarKeys solar;
   private final ModConfigSpec.IntValue recharge;
@@ -53,15 +49,7 @@ final class TierSection {
     batteryCapacity = energy(builder, BATTERY_CAPACITY, defaults.batteryCapacity(), MIN_POSITIVE);
     movingConsumption =
         energy(builder, MOVING_CONSUMPTION, defaults.movingConsumptionPerTick(), MIN_CONSUMPTION);
-    ConsumptionExtras extras = defaults.extras();
-    fullInventoryExtra =
-        energy(builder, FULL_INVENTORY_EXTRA, extras.fullInventoryPerTick(), MIN_CONSUMPTION);
-    waterExtra = energy(builder, WATER_EXTRA, extras.waterPerTick(), MIN_CONSUMPTION);
-    negativeConditionExtra =
-        energy(
-            builder, NEGATIVE_CONDITION_EXTRA, extras.negativeConditionPerTick(), MIN_CONSUMPTION);
-    climbExtra = energy(builder, CLIMB_EXTRA, extras.climbPerBlock(), MIN_CONSUMPTION);
-    lampConsumption = energy(builder, LAMP_CONSUMPTION, extras.lampPerTick(), MIN_CONSUMPTION);
+    extras = new ExtraKeys(builder, defaults.extras());
     lampLight = light(builder, LAMP_LIGHT, defaults.lampLight());
     solar = new SolarKeys(builder, defaults.solar());
     recharge = energy(builder, RECHARGE, defaults.rechargePerTick(), MIN_POSITIVE);
@@ -87,12 +75,7 @@ final class TierSection {
         maxHealth.get(),
         callRadius.get(),
         speedMultiplier.get(),
-        new ConsumptionExtras(
-            new Energy(fullInventoryExtra.get()),
-            new Energy(waterExtra.get()),
-            new Energy(negativeConditionExtra.get()),
-            new Energy(climbExtra.get()),
-            new Energy(lampConsumption.get())),
+        extras.read(),
         new LightLevel(lampLight.get()),
         solar.read());
   }
@@ -110,6 +93,38 @@ final class TierSection {
   private static ModConfigSpec.IntValue energy(
       ModConfigSpec.Builder builder, String key, Energy defaultValue, int min) {
     return builder.defineInRange(key, Math.toIntExact(defaultValue.amount()), min, MAX_ENERGY);
+  }
+
+  /** The extra consumption of one tier, in the order the keys have always had in the file. */
+  private static final class ExtraKeys {
+    private final ModConfigSpec.IntValue fullInventory;
+    private final ModConfigSpec.IntValue water;
+    private final ModConfigSpec.IntValue negativeCondition;
+    private final ModConfigSpec.IntValue climb;
+    private final ModConfigSpec.IntValue lamp;
+
+    ExtraKeys(ModConfigSpec.Builder builder, ConsumptionExtras defaults) {
+      fullInventory =
+          energy(builder, FULL_INVENTORY_EXTRA, defaults.fullInventoryPerTick(), MIN_CONSUMPTION);
+      water = energy(builder, WATER_EXTRA, defaults.waterPerTick(), MIN_CONSUMPTION);
+      negativeCondition =
+          energy(
+              builder,
+              NEGATIVE_CONDITION_EXTRA,
+              defaults.negativeConditionPerTick(),
+              MIN_CONSUMPTION);
+      climb = energy(builder, CLIMB_EXTRA, defaults.climbPerBlock(), MIN_CONSUMPTION);
+      lamp = energy(builder, LAMP_CONSUMPTION, defaults.lampPerTick(), MIN_CONSUMPTION);
+    }
+
+    ConsumptionExtras read() {
+      return new ConsumptionExtras(
+          new Energy(fullInventory.get()),
+          new Energy(water.get()),
+          new Energy(negativeCondition.get()),
+          new Energy(climb.get()),
+          new Energy(lamp.get()));
+    }
   }
 
   /** The panel of one tier. A class of its own keeps the constructor above within the limit. */
