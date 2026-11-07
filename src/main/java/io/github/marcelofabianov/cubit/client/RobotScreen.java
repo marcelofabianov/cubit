@@ -21,7 +21,7 @@ final class RobotScreen extends AbstractContainerScreen<RobotMenu> {
   private static final int PLAYER_PANEL_TEXTURE_Y = 126;
   private static final int TITLE_AREA = 94;
   private static final int PANEL_WIDTH = 26;
-  private static final int PANEL_HEIGHT = 70;
+  private static final int PANEL_HEIGHT = 84;
   private static final int PANEL_COLOR = 0xFFC6C6C6;
   private static final int SLOT_COLOR = 0xFF8B8B8B;
   private static final int BAR_COLOR = 0xFF55FF55;
@@ -45,9 +45,13 @@ final class RobotScreen extends AbstractContainerScreen<RobotMenu> {
   private static final int LAMP_LIGHT_HEIGHT = 4;
   private static final int LAMP_ON_COLOR = 0xFFFFE9A8;
   private static final int LAMP_OFF_COLOR = 0xFF373737;
+  private static final int SCANNERS_Y = 67;
+  private static final int SCANNERS_ON_COLOR = 0xFF7FD4FF;
 
   private Button lampButton;
   private boolean shownLampOn;
+  private Button scannersButton;
+  private boolean shownScannersOn;
 
   RobotScreen(RobotMenu menu, Inventory playerInventory, Component title) {
     super(menu, playerInventory, title);
@@ -63,7 +67,16 @@ final class RobotScreen extends AbstractContainerScreen<RobotMenu> {
             Button.builder(Component.empty(), button -> pressLamp())
                 .bounds(leftPos + LAMP_X, topPos + LAMP_Y, LAMP_WIDTH, LAMP_HEIGHT)
                 .build());
-    updateLamp();
+    scannersButton =
+        addRenderableWidget(
+            Button.builder(Component.empty(), button -> pressScanners())
+                .bounds(leftPos + LAMP_X, topPos + SCANNERS_Y, LAMP_WIDTH, LAMP_HEIGHT)
+                .build());
+    updateSwitches();
+  }
+
+  private void pressScanners() {
+    minecraft.gameMode.handleInventoryButtonClick(menu.containerId, RobotMenu.SCANNERS_BUTTON);
   }
 
   private void pressLamp() {
@@ -73,28 +86,33 @@ final class RobotScreen extends AbstractContainerScreen<RobotMenu> {
   @Override
   protected void containerTick() {
     super.containerTick();
-    updateLamp();
+    updateSwitches();
   }
 
-  /** The state comes from the server, so the button only changes when the server says so. */
-  private void updateLamp() {
+  /** The state comes from the server, so the buttons only change when the server says so. */
+  private void updateSwitches() {
     lampButton.active = menu.lampAvailable();
     shownLampOn = menu.lampOn();
-    String text = shownLampOn ? RobotMenu.LAMP_ON_KEY : RobotMenu.LAMP_OFF_KEY;
-    lampButton.setTooltip(Tooltip.create(Component.translatable(text)));
+    String lampText = shownLampOn ? RobotMenu.LAMP_ON_KEY : RobotMenu.LAMP_OFF_KEY;
+    lampButton.setTooltip(Tooltip.create(Component.translatable(lampText)));
+    scannersButton.active = menu.scannersAvailable();
+    shownScannersOn = menu.scannersOn();
+    String scannersText = shownScannersOn ? RobotMenu.SCANNERS_ON_KEY : RobotMenu.SCANNERS_OFF_KEY;
+    scannersButton.setTooltip(Tooltip.create(Component.translatable(scannersText)));
   }
 
-  private void renderLampLight(GuiGraphics graphics) {
-    int x = lampButton.getX() + LAMP_LIGHT_X;
-    int y = lampButton.getY() + LAMP_LIGHT_Y;
-    int color = shownLampOn && lampButton.active ? LAMP_ON_COLOR : LAMP_OFF_COLOR;
+  private void renderLight(GuiGraphics graphics, Button button, boolean on, int onColor) {
+    int x = button.getX() + LAMP_LIGHT_X;
+    int y = button.getY() + LAMP_LIGHT_Y;
+    int color = on && button.active ? onColor : LAMP_OFF_COLOR;
     graphics.fill(x, y, x + LAMP_LIGHT_WIDTH, y + LAMP_LIGHT_HEIGHT, color);
   }
 
   @Override
   public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
     super.render(graphics, mouseX, mouseY, partialTick);
-    renderLampLight(graphics);
+    renderLight(graphics, lampButton, shownLampOn, LAMP_ON_COLOR);
+    renderLight(graphics, scannersButton, shownScannersOn, SCANNERS_ON_COLOR);
     renderTooltip(graphics, mouseX, mouseY);
   }
 

@@ -13,7 +13,7 @@ import io.github.marcelofabianov.cubit.domain.robot.RobotState;
 import io.github.marcelofabianov.cubit.domain.robot.RobotType;
 import io.github.marcelofabianov.cubit.domain.tier.RobotTier;
 import io.github.marcelofabianov.cubit.domain.tier.TierSpec;
-import io.github.marcelofabianov.cubit.menu.LampSwitch;
+import io.github.marcelofabianov.cubit.menu.RobotSwitch;
 import io.github.marcelofabianov.cubit.player.DeadRobotLinks;
 import io.github.marcelofabianov.cubit.player.FollowingRobotLink;
 import io.github.marcelofabianov.cubit.registry.CubitAttachments;
@@ -77,6 +77,7 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
   private final RobotNotices notices = new RobotNotices(this);
   private final RobotLamp lamp = new RobotLamp(this);
   private final RobotSolar solar = new RobotSolar(this);
+  private final RobotScanners scanners = new RobotScanners(this);
 
   public RobotEntity(
       EntityType<? extends RobotEntity> type,
@@ -128,6 +129,8 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
     safePosition.markHere();
     inventory.readFrom(item, spec.inventorySlots());
     lamp.setSwitchedOn(state.lampOn());
+    scanners.setSwitchedOn(state.scannersOn());
+    scanners.setOreFilter(state.oreFilter().fitting(spec.scanners().oreFilterSlots()));
     RobotLooks.setColor(this, state.color());
     setCustomName(item.get(DataComponents.CUSTOM_NAME));
 
@@ -140,7 +143,13 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
 
   public RobotState state() {
     return new RobotState(
-        tier, battery.charge(), getHealth(), lamp.switchedOn(), RobotLooks.color(this));
+        tier,
+        battery.charge(),
+        getHealth(),
+        lamp.switchedOn(),
+        RobotLooks.color(this),
+        scanners.switchedOn(),
+        scanners.oreFilter());
   }
 
   public PowerState powerState() {
@@ -155,8 +164,12 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
     return face;
   }
 
-  public LampSwitch lampSwitch() {
+  public RobotSwitch lampSwitch() {
     return lamp;
+  }
+
+  public RobotScanners scanners() {
+    return scanners;
   }
 
   RobotNotices notices() {
@@ -256,6 +269,7 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
     RobotLooks.update(this);
     lamp.tick();
     notices.tick();
+    scanners.tick();
     RobotLoadSpeed.update(this, inventory.isFull());
     inventory.dropSurplus(
         stack -> Containers.dropItemStack(level(), getX(), getY(), getZ(), stack));
@@ -315,6 +329,9 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
     SavedRobotValues.readContents(tag, inventory, registryAccess(), spec().inventorySlots());
     docking.load(tag);
     lamp.setSwitchedOn(SavedRobotValues.lampOn(tag));
+    scanners.setSwitchedOn(SavedRobotValues.scannersOn(tag));
+    scanners.setOreFilter(
+        SavedRobotValues.oreFilter(tag).fitting(spec().scanners().oreFilterSlots()));
     RobotLooks.setColor(this, SavedRobotValues.color(tag, getUUID()));
     safePosition.restore(SavedRobotValues.lastSafePosition(tag));
     RobotInteractions.applyAttributes(this);

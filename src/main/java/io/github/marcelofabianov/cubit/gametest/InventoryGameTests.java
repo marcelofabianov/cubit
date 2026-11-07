@@ -253,6 +253,7 @@ public final class InventoryGameTests {
         () -> 0,
         () -> 0,
         robot.lampSwitch(),
+        robot.scanners(),
         robot::canUseInventory);
   }
 

@@ -127,8 +127,8 @@ public final class RobotFace {
                 robot.getHealth(), robot.getMaxHealth(), CubitMod.CONFIG.dyingHealth()),
         hurt.isRunning(),
         worried.isRunning(),
-        false,
-        false,
+        robot.scanners().enemyInRange(),
+        robot.scanners().surprised(),
         robot.battery().hasAtMost(CubitMod.CONFIG.criticalCharge()),
         happy.isRunning());
   }

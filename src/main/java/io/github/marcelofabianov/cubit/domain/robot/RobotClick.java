@@ -7,10 +7,12 @@ public enum RobotClick {
   IGNORE,
   COLLECT,
   PAINT,
+  CHOOSE_ORE,
   OPEN,
   CHARGE_OR_TURN_ON;
 
-  public static RobotClick of(boolean owner, boolean shift, boolean dye, PowerState state) {
+  public static RobotClick of(
+      boolean owner, boolean shift, boolean dye, boolean ore, PowerState state) {
     if (!owner) {
       return IGNORE;
     }
@@ -19,6 +21,9 @@ public enum RobotClick {
     }
     if (dye) {
       return PAINT;
+    }
+    if (ore) {
+      return CHOOSE_ORE;
     }
     return state.isInteractive() ? OPEN : CHARGE_OR_TURN_ON;
   }

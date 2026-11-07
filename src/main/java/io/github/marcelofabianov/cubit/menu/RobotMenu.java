@@ -32,6 +32,9 @@ public final class RobotMenu extends AbstractContainerMenu {
   public static final int LAMP_BUTTON = 0;
   public static final String LAMP_ON_KEY = "gui.cubit.lamp.on";
   public static final String LAMP_OFF_KEY = "gui.cubit.lamp.off";
+  public static final int SCANNERS_BUTTON = 1;
+  public static final String SCANNERS_ON_KEY = "gui.cubit.scanners.on";
+  public static final String SCANNERS_OFF_KEY = "gui.cubit.scanners.off";
   private static final int TRUE_VALUE = 1;
   private static final int FALSE_VALUE = 0;
 
@@ -41,7 +44,10 @@ public final class RobotMenu extends AbstractContainerMenu {
   private int shownHealthPercent;
   private int shownLampOn;
   private int shownLampAvailable;
-  private final LampSwitch lamp;
+  private int shownScannersOn;
+  private int shownScannersAvailable;
+  private final RobotSwitch lamp;
+  private final RobotSwitch scanners;
 
   public RobotMenu(
       int containerId,
@@ -50,12 +56,14 @@ public final class RobotMenu extends AbstractContainerMenu {
       Container energySlot,
       IntSupplier batteryPercent,
       IntSupplier healthPercent,
-      LampSwitch lamp,
+      RobotSwitch lamp,
+      RobotSwitch scanners,
       Predicate<Player> stillValid) {
     super(CubitMenus.ROBOT.get(), containerId);
     this.container = container;
     this.stillValid = stillValid;
     this.lamp = lamp;
+    this.scanners = scanners;
     int rows = rowsFor(container.getContainerSize());
     addRobotSlots();
     addEnergySlot(energySlot);
@@ -63,6 +71,9 @@ public final class RobotMenu extends AbstractContainerMenu {
     addDataSlot(shownValue(healthPercent, value -> shownHealthPercent = value));
     addDataSlot(shownValue(() -> asValue(lamp.isOn()), value -> shownLampOn = value));
     addDataSlot(shownValue(() -> asValue(lamp.isAvailable()), value -> shownLampAvailable = value));
+    addDataSlot(shownValue(() -> asValue(scanners.isOn()), value -> shownScannersOn = value));
+    addDataSlot(
+        shownValue(() -> asValue(scanners.isAvailable()), value -> shownScannersAvailable = value));
     addPlayerSlots(playerInventory, rows);
   }
 
@@ -76,7 +87,8 @@ public final class RobotMenu extends AbstractContainerMenu {
         new SimpleContainer(ENERGY_SLOT_SIZE),
         () -> 0,
         () -> 0,
-        LampSwitch.NONE,
+        RobotSwitch.NONE,
+        RobotSwitch.NONE,
         player -> true);
   }
 
@@ -88,7 +100,8 @@ public final class RobotMenu extends AbstractContainerMenu {
       Container energySlot,
       IntSupplier batteryPercent,
       IntSupplier healthPercent,
-      LampSwitch lamp,
+      RobotSwitch lamp,
+      RobotSwitch scanners,
       Predicate<Player> stillValid) {
     player.openMenu(
         new SimpleMenuProvider(
@@ -101,6 +114,7 @@ public final class RobotMenu extends AbstractContainerMenu {
                     batteryPercent,
                     healthPercent,
                     lamp,
+                    scanners,
                     stillValid),
             title),
         data -> writeSize(data, container));
@@ -136,14 +150,31 @@ public final class RobotMenu extends AbstractContainerMenu {
     return shownLampAvailable == TRUE_VALUE;
   }
 
+  public boolean scannersOn() {
+    return shownScannersOn == TRUE_VALUE;
+  }
+
+  public boolean scannersAvailable() {
+    return shownScannersAvailable == TRUE_VALUE;
+  }
+
   /** The server checks this menu before calling, and it is checked again for any other caller. */
   @Override
   public boolean clickMenuButton(Player player, int button) {
-    if (button != LAMP_BUTTON || !stillValid(player) || !lamp.isAvailable()) {
+    RobotSwitch pressed = switchOf(button);
+    if (pressed == null || !stillValid(player) || !pressed.isAvailable()) {
       return false;
     }
-    lamp.toggle();
+    pressed.toggle();
     return true;
+  }
+
+  private RobotSwitch switchOf(int button) {
+    return switch (button) {
+      case LAMP_BUTTON -> lamp;
+      case SCANNERS_BUTTON -> scanners;
+      default -> null;
+    };
   }
 
   private static int asValue(boolean value) {

@@ -6,6 +6,7 @@ import io.github.marcelofabianov.cubit.domain.behavior.NoticeRules;
 import io.github.marcelofabianov.cubit.domain.behavior.RobotNotice;
 import io.github.marcelofabianov.cubit.network.CubitNetwork;
 import java.util.EnumMap;
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import net.minecraft.network.chat.Component;
@@ -22,6 +23,7 @@ public final class RobotNotices {
 
   private final RobotEntity robot;
   private final Map<RobotNotice, NoticeRepeat> repeats = new EnumMap<>(RobotNotice.class);
+  private final Map<String, NoticeRepeat> namedRepeats = new HashMap<>();
 
   RobotNotices(RobotEntity robot) {
     this.robot = robot;
@@ -39,23 +41,46 @@ public final class RobotNotices {
     return !robot.notices().repeats.get(notice).canShow();
   }
 
+  /** Whether the robot showed a text with this name less than an interval ago. */
+  public static boolean isHoldingName(RobotEntity robot, String name) {
+    return robot.notices().namedRepeats.containsKey(name);
+  }
+
   void tick() {
     repeats.replaceAll((notice, repeat) -> repeat.tick());
+    namedRepeats.replaceAll((name, repeat) -> repeat.tick());
+    namedRepeats.values().removeIf(NoticeRepeat::canShow);
     if (robot.battery().hasAtMost(CubitMod.CONFIG.criticalCharge())) {
       show(RobotNotice.CRITICAL_BATTERY);
     }
   }
 
   void show(RobotNotice notice) {
+    if (!repeats.get(notice).canShow()) {
+      return;
+    }
+    if (send(Component.translatable(keyOf(notice)))) {
+      repeats.put(notice, repeats.get(notice).shown(CubitMod.CONFIG.noticeRepeatTicks()));
+    }
+  }
+
+  /** A text that says what the robot found. Each name waits its own interval to repeat. */
+  boolean showNamed(String name, Component text) {
+    if (namedRepeats.containsKey(name) || !send(text)) {
+      return false;
+    }
+    namedRepeats.put(name, NoticeRepeat.READY.shown(CubitMod.CONFIG.noticeRepeatTicks()));
+    return true;
+  }
+
+  private boolean send(Component text) {
     Player owner = RobotInteractions.followedPlayer(robot);
     if (!(owner instanceof ServerPlayer player)
         || owner.level() != robot.level()
-        || !NoticeRules.speaks(robot.powerState())
-        || !repeats.get(notice).canShow()) {
-      return;
+        || !NoticeRules.speaks(robot.powerState())) {
+      return false;
     }
-    CubitNetwork.sendNotice(
-        player, Component.translatable(FORMAT_KEY, Component.translatable(keyOf(notice))));
-    repeats.put(notice, repeats.get(notice).shown(CubitMod.CONFIG.noticeRepeatTicks()));
+    CubitNetwork.sendNotice(player, Component.translatable(FORMAT_KEY, text));
+    return true;
   }
 }

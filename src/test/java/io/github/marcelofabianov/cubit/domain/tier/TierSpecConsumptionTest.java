@@ -54,7 +54,8 @@ class TierSpecConsumptionTest {
             new Energy(climb),
             new Energy(lamp)),
         new LightLevel(0),
-        new SolarOutput(Energy.ZERO, Energy.ZERO));
+        new SolarOutput(Energy.ZERO, Energy.ZERO),
+        new ScannerSpec(1, 1, 1, 1, Energy.ZERO, Energy.ZERO, 1));
   }
 
   private static RobotActivity walking(boolean full, boolean water, boolean negative, double up) {

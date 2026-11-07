@@ -41,6 +41,8 @@ class TierSpecTest {
   private static final Energy ULTIMATE_AFTER_RECHARGE = new Energy(4_005_000);
   private static final Energy ONE = new Energy(1);
   private static final double ULTIMATE_SPEED = 2.0;
+  private static final ScannerSpec NO_SCANNERS =
+      new ScannerSpec(1, 1, 1, 1, Energy.ZERO, Energy.ZERO, 1);
 
   private static TierSpec spec(Energy capacity, Energy moving, Energy recharge) {
     return new TierSpec(
@@ -53,7 +55,8 @@ class TierSpecTest {
         1,
         NO_EXTRAS,
         NO_LIGHT,
-        NO_SUN);
+        NO_SUN,
+        NO_SCANNERS);
   }
 
   @Test
@@ -92,19 +95,23 @@ class TierSpecTest {
   void rejectsZeroValuesThatWouldBreakTheRobot() {
     assertThrows(
         IllegalArgumentException.class,
-        () -> new TierSpec(Energy.ZERO, ONE, ONE, 1, 1, 1, 1, NO_EXTRAS, NO_LIGHT, NO_SUN));
+        () ->
+            new TierSpec(
+                Energy.ZERO, ONE, ONE, 1, 1, 1, 1, NO_EXTRAS, NO_LIGHT, NO_SUN, NO_SCANNERS));
     assertThrows(
         IllegalArgumentException.class,
-        () -> new TierSpec(ONE, ONE, Energy.ZERO, 1, 1, 1, 1, NO_EXTRAS, NO_LIGHT, NO_SUN));
+        () ->
+            new TierSpec(
+                ONE, ONE, Energy.ZERO, 1, 1, 1, 1, NO_EXTRAS, NO_LIGHT, NO_SUN, NO_SCANNERS));
     assertThrows(
         IllegalArgumentException.class,
-        () -> new TierSpec(ONE, ONE, ONE, 0, 1, 1, 1, NO_EXTRAS, NO_LIGHT, NO_SUN));
+        () -> new TierSpec(ONE, ONE, ONE, 0, 1, 1, 1, NO_EXTRAS, NO_LIGHT, NO_SUN, NO_SCANNERS));
     assertThrows(
         IllegalArgumentException.class,
-        () -> new TierSpec(ONE, ONE, ONE, 1, 0, 1, 1, NO_EXTRAS, NO_LIGHT, NO_SUN));
+        () -> new TierSpec(ONE, ONE, ONE, 1, 0, 1, 1, NO_EXTRAS, NO_LIGHT, NO_SUN, NO_SCANNERS));
     assertThrows(
         IllegalArgumentException.class,
-        () -> new TierSpec(ONE, ONE, ONE, 1, 1, 0, 1, NO_EXTRAS, NO_LIGHT, NO_SUN));
+        () -> new TierSpec(ONE, ONE, ONE, 1, 1, 0, 1, NO_EXTRAS, NO_LIGHT, NO_SUN, NO_SCANNERS));
   }
 
   @Test
@@ -119,7 +126,8 @@ class TierSpecTest {
   }
 
   private static TierSpec speedOf(double multiplier) {
-    return new TierSpec(ONE, ONE, ONE, 1, 1, 1, multiplier, NO_EXTRAS, NO_LIGHT, NO_SUN);
+    return new TierSpec(
+        ONE, ONE, ONE, 1, 1, 1, multiplier, NO_EXTRAS, NO_LIGHT, NO_SUN, NO_SCANNERS);
   }
 
   @Test

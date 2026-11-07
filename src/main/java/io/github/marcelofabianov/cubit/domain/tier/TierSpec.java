@@ -20,7 +20,8 @@ public record TierSpec(
     double speedMultiplier,
     ConsumptionExtras extras,
     LightLevel lampLight,
-    SolarOutput solar) {
+    SolarOutput solar,
+    ScannerSpec scanners) {
 
   /** The largest radius the config accepts, which also limits the search for a robot to call. */
   public static final int MAX_CALL_RADIUS_BLOCKS = 128;

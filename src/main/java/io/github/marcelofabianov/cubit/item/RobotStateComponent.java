@@ -4,6 +4,7 @@ import com.mojang.logging.LogUtils;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import io.github.marcelofabianov.cubit.domain.energy.Energy;
+import io.github.marcelofabianov.cubit.domain.robot.OreFilter;
 import io.github.marcelofabianov.cubit.domain.robot.RobotColor;
 import io.github.marcelofabianov.cubit.domain.robot.RobotState;
 import io.github.marcelofabianov.cubit.domain.tier.RobotTier;
@@ -24,6 +25,9 @@ public final class RobotStateComponent {
   private static final String LAMP_FIELD = "lamp_enabled";
   private static final boolean LAMP_DEFAULT = true;
   private static final String COLOR_FIELD = "color";
+  private static final String SCANNERS_FIELD = "scanners_enabled";
+  private static final boolean SCANNERS_DEFAULT = true;
+  private static final String ORE_FILTER_FIELD = "ore_filter";
   private static final String UNKNOWN_COLOR_MESSAGE = "Unknown robot color {}. Using white.";
   private static final String UNKNOWN_TIER_MESSAGE = "Unknown robot tier {}. Using the base tier.";
 
@@ -35,6 +39,9 @@ public final class RobotStateComponent {
       Codec.LONG.xmap(SavedEnergy::of, Energy::amount);
   private static final Codec<Float> HEALTH_CODEC =
       Codec.FLOAT.xmap(RobotStateComponent::safeHealth, health -> health);
+
+  private static final Codec<OreFilter> ORE_FILTER_CODEC =
+      Codec.STRING.listOf().xmap(SavedOreFilter::of, SavedOreFilter::tagsOf);
 
   public static final Codec<RobotState> CODEC =
       RecordCodecBuilder.create(instance ->
@@ -48,7 +55,13 @@ public final class RobotStateComponent {
                       .forGetter(RobotState::lampOn),
                   COLOR_CODEC
                       .optionalFieldOf(COLOR_FIELD, RobotColor.WHITE)
-                      .forGetter(RobotState::color))
+                      .forGetter(RobotState::color),
+                  Codec.BOOL
+                      .optionalFieldOf(SCANNERS_FIELD, SCANNERS_DEFAULT)
+                      .forGetter(RobotState::scannersOn),
+                  ORE_FILTER_CODEC
+                      .optionalFieldOf(ORE_FILTER_FIELD, OreFilter.EMPTY)
+                      .forGetter(RobotState::oreFilter))
               .apply(instance, RobotState::new));
 
   public static final StreamCodec<ByteBuf, RobotState> STREAM_CODEC =

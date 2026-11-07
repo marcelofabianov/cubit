@@ -11,7 +11,13 @@ import io.github.marcelofabianov.cubit.domain.tier.TierSpec;
  * numbers are only valid after being fitted to a {@link TierSpec}.
  */
 public record RobotState(
-    RobotTier tier, Energy energy, float health, boolean lampOn, RobotColor color) {
+    RobotTier tier,
+    Energy energy,
+    float health,
+    boolean lampOn,
+    RobotColor color,
+    boolean scannersOn,
+    OreFilter oreFilter) {
   private static final String INVALID_HEALTH_MESSAGE = "Invalid robot health: ";
   private static final float MIN_PLACED_HEALTH = 1f;
 
@@ -31,13 +37,18 @@ public record RobotState(
     this(tier, energy, health, lampOn, RobotColor.WHITE);
   }
 
+  /** The scanners start on and looking for nothing in particular, also for older saves. */
+  public RobotState(RobotTier tier, Energy energy, float health, boolean lampOn, RobotColor color) {
+    this(tier, energy, health, lampOn, color, true, OreFilter.EMPTY);
+  }
+
   public static RobotState initial(RobotTier tier, TierSpec spec, Percentage initialCharge) {
     return new RobotState(tier, spec.newBattery(initialCharge).charge(), spec.maxHealth());
   }
 
   /** What a robot keeps when it dies: the tier and the looks, without energy or health. */
   public RobotState damaged() {
-    return new RobotState(tier, Energy.ZERO, 0f, lampOn, color);
+    return new RobotState(tier, Energy.ZERO, 0f, lampOn, color, scannersOn, oreFilter);
   }
 
   public RobotState repaired(TierSpec spec, Percentage health) {
@@ -46,7 +57,9 @@ public record RobotState(
         Energy.ZERO,
         (float) spec.maxHealth() * health.value() / Percentage.MAX,
         lampOn,
-        color);
+        color,
+        scannersOn,
+        oreFilter);
   }
 
   public Battery batteryFor(TierSpec spec) {

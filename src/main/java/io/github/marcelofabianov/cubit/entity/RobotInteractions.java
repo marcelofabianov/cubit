@@ -21,6 +21,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.DyeItem;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.common.Tags;
 
 /** What the owner does to a robot with a click. The rules live in the domain. */
 final class RobotInteractions {
@@ -35,6 +36,7 @@ final class RobotInteractions {
         robot::batteryPercent,
         () -> HealthLevel.percent(robot.getHealth(), robot.getMaxHealth()),
         robot.lampSwitch(),
+        robot.scanners(),
         robot::canUseInventory);
     return InteractionResult.CONSUME;
   }
@@ -88,11 +90,13 @@ final class RobotInteractions {
             Ownership.owns(robot.ownerId(), player.getUUID()),
             player.isShiftKeyDown(),
             held.getItem() instanceof DyeItem,
+            held.is(Tags.Items.ORES),
             robot.powerState());
     return switch (click) {
       case IGNORE -> InteractionResult.PASS;
       case COLLECT -> collect(robot, player);
       case PAINT -> RobotPaint.apply(robot, player, held, (DyeItem) held.getItem());
+      case CHOOSE_ORE -> RobotOreChoice.apply(robot, player, held);
       case OPEN -> {
         robot.face().onInteraction();
         yield openInventory(robot, player);
