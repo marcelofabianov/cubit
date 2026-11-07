@@ -8,6 +8,7 @@ import io.github.marcelofabianov.cubit.domain.dock.DockStay;
 import io.github.marcelofabianov.cubit.domain.energy.Battery;
 import io.github.marcelofabianov.cubit.domain.energy.PowerState;
 import io.github.marcelofabianov.cubit.domain.ownership.FollowingOutcome;
+import io.github.marcelofabianov.cubit.domain.ownership.Ownership;
 import io.github.marcelofabianov.cubit.domain.tier.TierSpec;
 import io.github.marcelofabianov.cubit.player.FollowingRobotLink;
 import io.github.marcelofabianov.cubit.registry.CubitAttachments;
@@ -234,7 +235,7 @@ public final class RobotDocking {
     if (position == null
         || !level.hasChunkAt(position)
         || !(level.getBlockEntity(position) instanceof InductionDockBlockEntity dock)
-        || !dock.owner().equals(robot.ownerId())) {
+        || !Ownership.sameOwner(dock.owner(), robot.ownerId())) {
       return Optional.empty();
     }
     return Optional.of(dock);

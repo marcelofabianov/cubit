@@ -1,5 +1,7 @@
 package io.github.marcelofabianov.cubit.block;
 
+import io.github.marcelofabianov.cubit.domain.ownership.Ownership;
+import io.github.marcelofabianov.cubit.domain.tier.TierSpec;
 import java.util.Comparator;
 import java.util.Optional;
 import java.util.UUID;
@@ -14,15 +16,13 @@ import net.minecraft.world.phys.Vec3;
 
 /** Finds robots and docks around a position. Runs on a click or on an interval, never per tick. */
 public final class DockFinder {
-  /** The largest call radius the config accepts. */
-  private static final double SEARCH_RADIUS = 128;
-
   private DockFinder() {}
 
   /** The robot of this owner that answers a call, the nearest one inside its own radius. */
   static Optional<DockableRobot> nearestRobot(ServerLevel level, BlockPos dock, UUID owner) {
     Vec3 center = Vec3.atCenterOf(dock);
-    return level.getEntitiesOfClass(Mob.class, new AABB(dock).inflate(SEARCH_RADIUS)).stream()
+    AABB area = new AABB(dock).inflate(TierSpec.MAX_CALL_RADIUS_BLOCKS);
+    return level.getEntitiesOfClass(Mob.class, area).stream()
         .filter(mob -> mob instanceof DockableRobot robot && answers(robot, mob, center, owner))
         .min(Comparator.comparingDouble(mob -> mob.distanceToSqr(center)))
         .map(mob -> (DockableRobot) mob);
@@ -31,7 +31,7 @@ public final class DockFinder {
   private static boolean answers(DockableRobot robot, Entity mob, Vec3 center, UUID owner) {
     int radius = robot.dockCallRadius();
     return robot.answersDockCall()
-        && robot.ownerId().filter(owner::equals).isPresent()
+        && Ownership.owns(robot.ownerId(), owner)
         && mob.distanceToSqr(center) <= (double) radius * radius;
   }
 
@@ -53,7 +53,7 @@ public final class DockFinder {
           double distance = entity.getBlockPos().distSqr(from);
           if (entity instanceof InductionDockBlockEntity dock
               && distance < bestDistance
-              && dock.owner().filter(owner::equals).isPresent()
+              && Ownership.owns(dock.owner(), owner)
               && !dock.isOccupied()) {
             best = dock;
             bestDistance = distance;

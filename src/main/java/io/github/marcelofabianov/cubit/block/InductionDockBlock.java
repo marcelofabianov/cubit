@@ -221,7 +221,7 @@ public final class InductionDockBlock extends BaseEntityBlock {
       return true;
     }
     InductionDockBlockEntity dock = dockAt(level, pos, state);
-    return dock != null && (dock.owner().isEmpty() || dock.isOwner(player));
+    return dock != null && dock.isOwner(player);
   }
 
   @Override

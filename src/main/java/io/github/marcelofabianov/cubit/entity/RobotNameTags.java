@@ -1,6 +1,7 @@
 package io.github.marcelofabianov.cubit.entity;
 
 import io.github.marcelofabianov.cubit.CubitMod;
+import io.github.marcelofabianov.cubit.domain.ownership.Ownership;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Items;
@@ -24,7 +25,7 @@ public final class RobotNameTags {
         || !event.getItemStack().has(DataComponents.CUSTOM_NAME)) {
       return;
     }
-    if (robot.ownerId().filter(event.getEntity().getUUID()::equals).isPresent()) {
+    if (Ownership.owns(robot.ownerId(), event.getEntity().getUUID())) {
       RobotPaint.react(robot);
     } else {
       event.setCancellationResult(InteractionResult.FAIL);

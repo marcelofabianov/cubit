@@ -71,7 +71,7 @@ Funciona como um carregador solar real.
 - **Dono:** quem coloca o Dock. Só o dono usa o Dock e abre a tela, e só os Cubits dele entram.
 - **Clique direito:** chama o Cubit ou, com um na base, o libera. Com redstone na mão, a pilha entra no slot.
 - **Shift + clique direito:** abre a tela, com o slot e uma barra de energia. A janela personalizada, com textura de metal de robô, entra na Fase 3 (pergunta 371).
-- **Quebrar:** só o dono, ou um player no modo criativo com permissão de operador, para remover um Dock abandonado. Explosões e pistões não o afetam. O item guarda a energia e empilha em 1, o slot cai no chão, e o Cubit sai como numa liberação. O dono do bloco novo é quem o coloca.
+- **Quebrar:** só o dono, ou um player no modo criativo com permissão de operador, para remover um Dock abandonado. Sem dono, como num save sem a chave ou colocado por algo que não é um player, só o operador o remove, e o log avisa ao carregar (pergunta 524). Explosões e pistões não o afetam. O item guarda a energia e empilha em 1, o slot cai no chão, e o Cubit sai como numa liberação. O dono do bloco novo é quem o coloca.
 
 ### Ir para a base e sair dela
 
@@ -130,6 +130,7 @@ Se o robô estiver dentro do raio da base e com a bateria baixa, volta sozinho p
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-07 13:51 | Define quem quebra o Dock sem dono. |
 | Marcelo Fabiano | 2026-11-06 15:05 | Detalha o vidro, o sinal e a chave do painel solar. |
 | Marcelo Fabiano | 2026-11-06 13:34 | Adiciona o consumo da lanterna. |
 | Marcelo Fabiano | 2026-11-06 11:15 | Limita o texto do retorno ao Cubit que segue. |

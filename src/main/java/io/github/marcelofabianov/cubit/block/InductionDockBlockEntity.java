@@ -1,12 +1,15 @@
 package io.github.marcelofabianov.cubit.block;
 
+import com.mojang.logging.LogUtils;
 import io.github.marcelofabianov.cubit.CubitMod;
 import io.github.marcelofabianov.cubit.domain.dock.DockQueue;
 import io.github.marcelofabianov.cubit.domain.dock.DockStatus;
 import io.github.marcelofabianov.cubit.domain.dock.DockStock;
 import io.github.marcelofabianov.cubit.domain.energy.Battery;
 import io.github.marcelofabianov.cubit.domain.energy.Energy;
+import io.github.marcelofabianov.cubit.domain.ownership.Ownership;
 import io.github.marcelofabianov.cubit.item.EnergySlotItems;
+import io.github.marcelofabianov.cubit.item.SavedEnergy;
 import io.github.marcelofabianov.cubit.registry.CubitBlockEntities;
 import io.github.marcelofabianov.cubit.registry.CubitDataComponents;
 import java.util.Optional;
@@ -31,9 +34,12 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.energy.IEnergyStorage;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.wrapper.InvWrapper;
+import org.slf4j.Logger;
 
 /** The state of a dock: its owner, its energy and its slot. The rules live in the domain. */
 public final class InductionDockBlockEntity extends BlockEntity {
+  private static final Logger LOGGER = LogUtils.getLogger();
+  private static final String NO_OWNER_MESSAGE = "The dock at {} has no owner.";
   private static final String OWNER_KEY = "Owner";
   private static final String ENERGY_KEY = "Energy";
   private static final String SLOT_KEY = "Slot";
@@ -125,7 +131,7 @@ public final class InductionDockBlockEntity extends BlockEntity {
   }
 
   public boolean isOwner(Player player) {
-    return player.getUUID().equals(owner);
+    return Ownership.owns(owner(), player.getUUID());
   }
 
   void setOwner(Player player) {
@@ -231,7 +237,10 @@ public final class InductionDockBlockEntity extends BlockEntity {
   protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
     super.loadAdditional(tag, registries);
     owner = tag.hasUUID(OWNER_KEY) ? tag.getUUID(OWNER_KEY) : null;
-    stock = DockStock.of(capacity(), new Energy(Math.max(tag.getLong(ENERGY_KEY), 0)));
+    if (owner == null && (level == null || !level.isClientSide())) {
+      LOGGER.warn(NO_OWNER_MESSAGE, worldPosition);
+    }
+    stock = DockStock.of(capacity(), SavedEnergy.of(tag.getLong(ENERGY_KEY)));
     slot.setItem(
         SLOT,
         tag.contains(SLOT_KEY)
@@ -243,7 +252,7 @@ public final class InductionDockBlockEntity extends BlockEntity {
   protected void applyImplicitComponents(DataComponentInput input) {
     super.applyImplicitComponents(input);
     long saved = input.getOrDefault(CubitDataComponents.DOCK_ENERGY.get(), 0L);
-    stock = DockStock.of(capacity(), new Energy(Math.max(saved, 0)));
+    stock = DockStock.of(capacity(), SavedEnergy.of(saved));
   }
 
   @Override

@@ -57,6 +57,7 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 | `DockStay` | Vida recuperada por tick e quando o robô sai da base |
 | `DockQueue` | Robôs aguardando um Dock ocupado, por ordem de chegada |
 | `InventoryFit` | Separa os itens que cabem nos slots do config dos que sobram |
+| `Ownership` | Diz quem é dono de um robô ou de um Dock, e se os dois têm o mesmo dono |
 | `OwnerProtection` | Diz se um dano é do dono e, por isso, não fere o robô |
 | `VoidRescueTarget` | Para onde vai o robô danificado que caiu no vazio |
 | `FollowingOutcome` | Resultado da política: estado do robô, quem segue e quem desligar |
@@ -96,6 +97,7 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 - **Quem guarda o vínculo é quem chama:** a política recebe quem segue e devolve o resultado, sem ler os dados do player.
 - **Ativo sem o lugar de seguir:** um robô ativo que descobre que não é o que segue se desliga, porque só um robô desligado volta a seguir com o clique. É o caso de quem estava em chunk descarregado na troca e do robô que perdeu o vínculo pelo `/cubit reset` (pergunta 326).
 - **Morte e conserto zeram a bateria:** ao morrer, o robô fica sem vida e sem energia. O conserto devolve parte da vida, e o Induction Dock recupera o resto (perguntas 34 e 129).
+- **Sem dono, a resposta é não:** dois `Optional` vazios são iguais em Java, então a regra exige um dono presente, para um robô sem dono não combinar com um Dock sem dono (regra 20 do `AGENTS.md`).
 - **Dano do dono:** só conta o que o jogo atribui a ele. O fogo de um isqueiro não tem autor, então fere (pergunta 119).
 - **Resgate no vazio:** a ordem é a posição segura, o dono online e o spawn do mundo. Sem destino possível, o item espera, porque nunca é destruído nem força um chunk a carregar (perguntas 147, 172 e 174).
 - **Consumo por deslocamento:** quem chama informa se o robô andou, e o domínio só gasta nesse caso (pergunta 257).
