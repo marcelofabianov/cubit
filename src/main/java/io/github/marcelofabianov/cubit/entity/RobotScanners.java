@@ -192,9 +192,9 @@ public final class RobotScanners implements RobotSwitch {
   }
 
   private static Component oreText(OreKind kind) {
-    return kind.name()
-        .<Component>map(name -> Component.translatable(ORE_KEY, name))
-        .orElseGet(() -> Component.translatable(ORE_FOUND_KEY));
+    return kind.name().isPresent()
+        ? Component.translatable(ORE_KEY, OreNames.of(kind))
+        : Component.translatable(ORE_FOUND_KEY);
   }
 
   /** With less charge than the cost, it spends what is left, like any other use. */

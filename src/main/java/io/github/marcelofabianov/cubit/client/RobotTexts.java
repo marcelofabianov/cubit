@@ -5,6 +5,8 @@ import io.github.marcelofabianov.cubit.domain.energy.EnergyFormat;
 import io.github.marcelofabianov.cubit.domain.energy.EnergyReading;
 import io.github.marcelofabianov.cubit.domain.energy.EnergyUseCause;
 import io.github.marcelofabianov.cubit.domain.energy.SolarStatus;
+import io.github.marcelofabianov.cubit.domain.robot.OreKind;
+import io.github.marcelofabianov.cubit.entity.OreNames;
 import io.github.marcelofabianov.cubit.menu.RobotMenu;
 import io.github.marcelofabianov.cubit.menu.ScreenKeys;
 import java.util.List;
@@ -57,7 +59,16 @@ final class RobotTexts {
     if (!menu.opening().hasFilter()) {
       return Component.translatable(ScreenKeys.NO_FILTER);
     }
-    String names = String.join(CAUSE_SEPARATOR, menu.opening().filterNames());
+    MutableComponent names = Component.empty();
+    for (String tag : menu.opening().filterTags()) {
+      OreKind.parse(tag)
+          .ifPresent(kind -> {
+            if (!names.getSiblings().isEmpty()) {
+              names.append(CAUSE_SEPARATOR);
+            }
+            names.append(OreNames.of(kind));
+          });
+    }
     return Component.translatable(ScreenKeys.LOOKING_FOR, names);
   }
 

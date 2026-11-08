@@ -38,7 +38,7 @@ final class RobotOreChoice {
   private static Component answer(OreKind kind, OreFilter filter) {
     Component text =
         filter.contains(kind)
-            ? Component.translatable(RobotScanners.LOOKING_KEY, kind.shownName())
+            ? Component.translatable(RobotScanners.LOOKING_KEY, OreNames.of(kind))
             : Component.translatable(RobotScanners.CLEARED_KEY);
     return Component.translatable(RobotNotices.FORMAT_KEY, text);
   }
