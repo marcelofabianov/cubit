@@ -120,10 +120,10 @@ Use um balde de lava, com `/give @s minecraft:lava_bucket`. Ele tem 25 de vida e
 
 | # | Faça | Espere |
 |---|---|---|
-| 1 | Coloque um robô e abra a tela | Painel à esquerda, com o slot de energia e uma barra verde de cerca de um quarto |
+| 1 | Coloque um robô e abra a tela | O slot `Redstone` à direita e a barra `Battery`, verde, com cerca de um quarto |
 | 2 | Ande por um tempo com o robô seguindo | A barra da tela cai devagar e a do item, ao recolher, também |
 | 3 | Guarde redstone e bloco de redstone no slot, com clique e Shift + clique, e tente outro item | Só a redstone entra, e o item some aos poucos, com a barra subindo |
-| 4 | Clique no painel com um item na mão, fora do slot | O item não cai no chão |
+| 4 | Clique na janela com um item na mão, fora dos slots, e nas abas à direita | O item não cai no chão |
 | 5 | Tire tudo do slot e aguarde a barra parar de subir. Rode `/data merge entity @e[type=cubit:general_robot,limit=1,sort=nearest] {Energy:0L}` e afaste-se | Ele para, sem abrir a tela nem ligar com um clique |
 | 5a | Com carga baixa, olhe as barras da tela e do item | As duas mostram ao menos um risco enquanto houver carga, e só ficam vazias com 0 FE |
 | 6 | Clique com redstone na mão no robô sem bateria | A pilha entra no slot e, com 5%, ele volta a seguir você |
@@ -239,7 +239,7 @@ Compare com as imagens em `_docs/imagens/conceito/png/`, com os nomes `expressao
 | 16 | Em sobrevivência, com outro robô, ou pondo fogo nele, cause dano num robô ligado | Olho triste com lágrima por cerca de 5 s depois do último dano, com o curto elétrico no lugar do som de dano do jogo e sem bipe. Em chamas, só o loop, sem repetição a cada golpe |
 | 17 | Rode `/data merge entity @e[type=cubit:general_robot,limit=1,sort=nearest] {Health:3f}` e cause um dano pequeno | Olhos em X vermelhos por cerca de 3 s, depois a lágrima até os 5 s, e depois a normal |
 | 18 | Coloque esse robô na base | Carregando. Quando a vida subir de 10%, sai da expressão em X |
-| 19 | Com a tela do inventário aberta, leve o robô a perder vida, com fogo por exemplo, e olhe o painel | A barra vermelha, à esquerda da verde, desce junto da vida, e a verde continua igual |
+| 19 | Com a tela do inventário aberta, leve o robô a perder vida, com fogo por exemplo | A barra `Health`, vermelha, desce junto da vida, e a `Battery` continua igual |
 | 20 | Em modo sobrevivência, com o robô seguindo a menos de 16 blocos, leve dano, por queda ou de um mob | Olhos de preocupado, com a gota de suor, por cerca de 3 s, sem som e sem bipe |
 | 21 | Afaste-se mais de 16 blocos do robô, sem ele seguir por perto, e leve dano | Ele não fica preocupado |
 
@@ -347,8 +347,8 @@ Os valores são os padrões de [`tiers.md`](../tiers.md). Só o tier Base tem n�
 | 2 | Digite `/time set night` | Em até 1 s, as pontas ficam em branco quente com um halo que pulsa devagar, os olhos ganham um brilho azul em volta, e o chão clareia em volta do robô (luz 10) |
 | 3 | Ande cerca de 10 blocos | A luz acompanha o Cubit, e a bateria cai andando |
 | 4 | Pare perto do Cubit e meça a energia duas vezes, com 10 s entre elas | Cai cerca de 200 FE, ou 1 FE/t |
-| 5 | Abra o inventário e clique no botão acima do slot de energia, com a luz amarela | A luz do botão apaga, o tooltip mostra `Lamp: Off`, e a lanterna, o halo e o brilho dos olhos apagam na hora. Resta só a claridade fraca da tela |
-| 6 | Recolha com Shift + clique direito e coloque de novo | A lanterna continua desligada. Clique no botão para ligá-la |
+| 5 | Abra a aba Settings e clique na chave `Lamp`, em ON | A chave vai para OFF, e a lanterna, o halo e o brilho dos olhos apagam na hora. Resta só a claridade fraca da tela |
+| 6 | Recolha com Shift + clique direito e coloque de novo | A lanterna continua desligada. Clique na chave para ligá-la |
 | 7 | Coloque tochas em volta do Cubit, no limite da luz | Não pisca |
 | 8 | Zere a bateria com `/data merge entity @e[type=cubit:general_robot,limit=1] {Energy:0L}` | A tela apaga, a lanterna apaga, as pontas ficam cinza, e não há luz |
 | 9 | Recarregue e leve o Cubit a um Dock, no escuro | Lanterna apagada, pontas laranja e só a claridade da tela. No inventário, o botão fica desabilitado, mantendo o valor |
@@ -410,8 +410,8 @@ Os valores são os padrões de [`tiers.md`](../tiers.md). Mobs varrem a cada 10 
 | 11 | Espere uma varredura | Aparece `Cubit: COAL!!!`, sem som e sem surpresa |
 | 12 | Clique de novo com minério de carvão | Bipe e `Cubit: Filter cleared` |
 | 13 | Clique com minério de ferro num Cubit desligado | O filtro muda, com o bipe e o texto, e a tela continua apagada |
-| 14 | Abra o inventário e olhe embaixo das barras do painel lateral | O botão `Scanners`, com a luz azul. O tooltip mostra `Scanners: On` |
-| 15 | Clique no botão, com um zumbi por perto, e espere 15 s | A luz apaga, o tooltip mostra `Scanners: Off`, e nada avisa nem gasta |
+| 14 | Abra a aba Settings | A chave `Scanners` em ON |
+| 15 | Clique na chave, com um zumbi por perto, e espere 15 s | A chave vai para OFF, e nada avisa nem gasta |
 | 16 | Recolha o Cubit e coloque de novo | A chave e o filtro continuam |
 | 17 | Mate o Cubit, conserte e coloque | A chave e o filtro continuam |
 | 18 | Parado, coberto e com a lanterna desligada, meça a carga com 35 s entre as leituras | Cai de 200 a 250 FE: 3 ou 4 varreduras de mobs e 1 de minérios, a 50 FE cada |
@@ -433,7 +433,7 @@ Use um mundo plano em criativo, com um Cubit seguindo. A caixa do minério dura 
 | 7 | Coloque diamantes a 5 blocos à frente do Cubit e a 4 para o lado e 4 para cima | Só o da frente ganha caixa: o outro fica fora da esfera |
 | 8 | Rode `/summon minecraft:zombie ~3 ~ ~` perto do Cubit | Em até 10 s, uma seta vermelha para baixo sobre a cabeça do zumbi, translúcida, pulsando e balançando de leve, que o acompanha através das paredes e fica virada para você |
 | 9 | Afaste-se até o zumbi ficar a mais de 8 blocos do Cubit | A seta some |
-| 10 | Desligue o botão `Scanners` | Em até 30 s, nenhuma caixa nova, e as que havia somem |
+| 10 | Desligue a chave `Scanners` | Em até 30 s, nenhuma caixa nova, e as que havia somem |
 | 11 | Peça a outro player que olhe o mesmo minério | Ele não vê caixa. Esse passo fica para os testes de instância |
 | 12 | Teste os passos 1 e 8 nos gráficos Rápido, Bonito e Fabuloso | A caixa aparece nos três |
 
@@ -443,7 +443,7 @@ Use um mundo plano, com um Cubit seguindo. Para ver de dia e de noite, use `/tim
 
 | # | Passo | Resultado esperado |
 |---|---|---|
-| 1 | De dia, com o botão `Lamp` desligado, rode `/summon minecraft:zombie ~3 ~ ~ {NoAI:1b}` | Em até 10 s, as pontas e os halos das antenas ficam vermelhos, com um brilho vermelho suave atrás do corpo |
+| 1 | De dia, com a chave `Lamp` desligada, rode `/summon minecraft:zombie ~3 ~ ~ {NoAI:1b}` | Em até 10 s, as pontas e os halos das antenas ficam vermelhos, com um brilho vermelho suave atrás do corpo |
 | 2 | Mate o zumbi com `/kill @e[type=minecraft:zombie]` | Em até 10 s, as antenas apagam e o brilho some |
 | 3 | Coloque minério de diamante a 3 blocos e espere a varredura | Junto do `Cubit: DIAMOND!!!`, antenas e brilho azuis por cerca de 3 s |
 | 4 | Ponha carvão no filtro e coloque minério de carvão | Junto do `Cubit: COAL!!!`, antenas e brilho azuis por cerca de 3 s |
@@ -451,7 +451,7 @@ Use um mundo plano, com um Cubit seguindo. Para ver de dia e de noite, use `/tim
 | 6 | Com um zumbi no raio, leve dano, com `/damage @e[type=cubit:general_robot,limit=1,sort=nearest] 1` | A tela fica triste, e as antenas continuam vermelhas |
 | 7 | De noite, com a lanterna acesa, repita o passo 1 | As antenas ficam vermelhas e, depois do zumbi, voltam ao branco da lanterna |
 | 8 | Olhe o chão em volta do Cubit com a cor acesa | A luz no chão continua branca, ou nenhuma, sem a lanterna |
-| 9 | Desligue o botão `Scanners` com um zumbi no raio | As cores apagam |
+| 9 | Desligue a chave `Scanners` com um zumbi no raio | As cores apagam |
 | 10 | Peça a outro player que olhe o Cubit no passo 1 | Ele também vê as cores. Esse passo fica para os testes de instância |
 
 ## Quando o dono renasce
@@ -486,8 +486,8 @@ As frases estão em [`falas.md`](../conceito/falas.md). Fique a céu aberto, com
 | 11 | Ganhe uma conquista, por exemplo com `/advancement grant @s only minecraft:story/mine_stone` | Expressão feliz, bipe e uma frase de parabéns |
 | 12 | Ganhe um desafio, com `/advancement grant @s only minecraft:adventure/kill_all_mobs` | Expressão feliz, bipe e uma frase mais forte |
 | 13 | Faça um item que libera uma receita nova | Nenhuma fala |
-| 14 | Abra o inventário e olhe abaixo do botão `Scanners` | O botão `Chatter`, com luz verde. O tooltip mostra `Chatter: On` |
-| 15 | Desligue o botão e repita os passos 4 e 11 | Nenhuma fala, e a conquista não faz o Cubit comemorar |
+| 14 | Abra a aba Settings | A chave `Chatter` em ON |
+| 15 | Desligue a chave e repita os passos 4 e 11 | Nenhuma fala, e a conquista não faz o Cubit comemorar |
 | 16 | Recolha e coloque o Cubit | A chave continua desligada |
 | 17 | Com um zumbi no raio, ganhe uma conquista | A expressão continua em alerta, com uma frase de parabéns e um bipe |
 | 18 | Ganhe outra conquista, na expressão normal | Um bipe só, sem repetir |
@@ -518,11 +518,40 @@ O `make client` já carrega o Jade. Mire no Cubit ou no Induction Dock para ver 
 | 3 | Zere a bateria com `/data merge entity @e[type=cubit:general_robot,limit=1,sort=nearest] {Energy:0L}` | `State: Out of battery` e `Battery: 0% (0 / 300,000 FE)` |
 | 4 | Ligue outro Cubit, para desligar o primeiro, e mire no primeiro com carga | `State: Switched off` |
 | 5 | Leve um Cubit ao Dock e mire nele | `State: Hibernating` |
-| 6 | Mire no Dock vazio, sem energia | `Energy: 0 / 100,000 FE` e `Status: Off` |
+| 6 | Mire no Dock vazio, sem energia | `Energy: 0 / 100,000 FE` e `Status: No power` (pergunta 685) |
 | 7 | Coloque redstone no Dock e mire | O estoque sobe, e `Status: Idle` |
 | 8 | Com o Cubit na base, mire no Dock | `Status: Charging` e, cheio, `Status: Complete` |
 | 9 | Nas opções do Jade, em Plugins, desligue `Cubit` e `Induction Dock` | As linhas do mod somem |
 | 10 | Rode `make server` | O servidor abre sem o Jade |
+
+## Telas
+
+Compare cada tela com as imagens [`tela-cubit.png`](../imagens/conceito/tela-cubit.png) e [`tela-induction-dock.png`](../imagens/conceito/tela-induction-dock.png). Os textos sem imagem estão em [`telas.md`](../funcionalidades/telas.md#textos-sem-imagem).
+
+| # | Passo | Resultado esperado |
+|---|---|---|
+| 1 | Coloque um Cubit e clique nele | A tela do Cubit no estilo da imagem, sem a textura do baú: retrato piscando, `Cubit` com `BASE`, `● Following` em verde, vida e bateria em `75k / 300k FE`, slot `Redstone`, `Cubit's inventory` e `Inventory` |
+| 2 | Ande de dia ao ar livre com a tela aberta | `Solar +5 FE/t` sob a bateria |
+| 3 | Ponha redstone no slot com a bateria abaixo da capacidade | `Slot +500 FE/t` |
+| 4 | Zere quase toda a bateria, até 5% | `● Critical battery` em vermelho, e a barra fica vermelha |
+| 5 | Ligue outro Cubit e abra o primeiro, já religado com o clique | `● Active` em cinza |
+| 6 | Com a tela aberta, ligue outro Cubit pelo clique, para desligar este | A tela fecha na hora, e o item no cursor volta ao inventário |
+| 7 | Renomeie o Cubit para `Bolt` e leve-o ao Dock | `Bolt`, `● Hibernating · Dock` em azul, a expressão carregando, `Dock +500 FE/t` e `Bolt's inventory` |
+| 8 | Clique na engrenagem | A aba Settings: `Battery` em porcentagem, `Lamp`, `Scanners` e `Chatter` com ON e OFF, o filtro, o status e o rodapé. Os slots somem |
+| 9 | Clique nas três chaves | Cada uma troca entre ON e OFF. Na base, `Lamp` fica apagada e não muda |
+| 10 | Escolha carvão no filtro e abra a aba Settings | O ícone do minério e `Looking for COAL`. Sem filtro, `No filter · rare ores only` |
+| 11 | Veja o status de dia, à noite, coberto e no Nether | `Charging · 5 FE/t`, `Night · not charging`, `No sky · not charging` e `No sun here · not charging` |
+| 12 | Ande, ande na água e acenda a lanterna | `Energy use` lista as causas, como `16 FE/t · walking, lamp`. Parado, `0 FE/t · idle` |
+| 13 | Volte à aba do baú | Os slots voltam, com os itens no lugar |
+| 14 | Passe o mouse num texto cortado, se houver | O tooltip mostra o texto inteiro |
+| 15 | Coloque um Dock sem energia e abra com Shift + clique | `● No power` em laranja, a torre com o raio cortado, `0 / 100k FE`, `No input`, `No Cubit docked`, `Needs energy before it can charge.`, `Empty`, o seu nome e o botão cinza |
+| 16 | Ponha redstone no slot do Dock | `● Idle` em azul, a torre azul, `Ready to charge.`. Com o estoque cheio, `Full` |
+| 17 | Aperte `Call the nearest Cubit (15 blocks)` com um Cubit perto | O Cubit vai ao Dock, mesmo com o botão cinza sem energia |
+| 18 | Com o Cubit na base, veja a tela | `● Charging` em verde, o retrato carregando, `Cubit · Battery`, a vida e `+500 FE/t · ...`. Com a vida cheia, `health full` |
+| 19 | Ligue um cabo de FE de outro mod, no Iron Meridian | `Input +... FE/t` com a média do último segundo |
+| 20 | Chame um segundo Cubit com o Dock ocupado | `Queue` mostra `1 Cubit waiting` |
+| 21 | Teste outro player no servidor | Ele não abre as telas do seu Cubit nem do seu Dock |
+| 22 | Mude a escala da interface nas opções de vídeo | As torres, os ícones e os retratos continuam nítidos |
 
 ## Servidor dedicado
 
@@ -533,6 +562,8 @@ O `make client` já carrega o Jade. Mire no Cubit ou no Induction Dock para ver 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-07 23:12 | Troca o painel lateral pelas chaves da aba Settings. |
+| Marcelo Fabiano | 2026-11-07 23:11 | Adiciona as telas próprias e troca o estado do Dock no Jade. |
 | Marcelo Fabiano | 2026-11-07 21:40 | Adiciona o Jade. |
 | Marcelo Fabiano | 2026-11-07 21:05 | Troca a caixa do mob pela seta. |
 | Marcelo Fabiano | 2026-11-07 20:51 | Adiciona as cores dos scanners. |

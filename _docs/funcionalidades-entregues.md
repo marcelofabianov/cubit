@@ -63,7 +63,7 @@ O que o Cubit já faz, do primeiro commit até o merge do PR #122. As regras com
 ## Inventário
 
 - **27 slots:** clique direito abre a tela, só para o dono.
-- **Painel lateral:** o slot de energia, a barra verde de bateria, a barra vermelha de vida e os botões `Lamp`, `Scanners` e `Chatter`.
+- **Tela:** a tela própria do Cubit, descrita em [Telas](#telas), com o slot de energia, as barras e as chaves.
 - **Excedente:** se o config reduzir os slots, o que sobra cai no chão. Nada é apagado.
 
 ## Energia
@@ -157,7 +157,15 @@ Frases com o bipe padrão, só do Cubit ativo que segue e com a expressão calma
 Opcional: o mod funciona sem ele.
 
 - **Cubit:** o tier na cor do colar, a bateria em porcentagem e FE e o estado. O Jade já mostra o nome e a vida.
-- **Induction Dock:** o estoque de FE e o estado da tela.
+- **Induction Dock:** o estoque de FE e o estado da tela, com os nomes das telas, como `No power` (pergunta 685).
+
+## Telas
+
+No estilo das imagens de conceito, sem a textura do baú do jogo.
+
+- **Cubit:** abas do inventário e de configurações. O inventário mostra o retrato com a expressão, o nome, o tier, o estado, a vida, a bateria, a recarga, o slot de redstone e os inventários. As configurações têm as chaves `Lamp`, `Scanners` e `Chatter`, o filtro do scanner e o status do painel solar, do consumo, da vida e de quem ele segue.
+- **Induction Dock:** a torre com a luz do estado, o estoque, a entrada média de FE, o slot de redstone, o Cubit na base, a fila, o dono e o botão de chamar o Cubit mais próximo.
+- **Regras:** só o dono abre, e a tela do Cubit fecha se ele desligar. Os números são abreviados, como `214k / 300k FE`.
 
 ## Técnica
 
@@ -171,7 +179,7 @@ Opcional: o mod funciona sem ele.
 
 ## Ainda não entrou
 
-- **Fase 3:** telas próprias do Cubit e do Induction Dock (item 19) e a primeira versão, `0.1.0`.
+- **Fase 3:** a primeira versão, `0.1.0`.
 - **Fase 4:** tiers Advanced, Elite e Ultimate, Power Bank, ímã e coleta, choque e modos de defesa, Cubit Remote, modo área, descarga em baú, retorno automático e local de morte.
 - **Fase 5:** trabalhos com os cards de Aprendizado de Máquina, antenas, Servidor e storage wireless.
 
@@ -179,4 +187,6 @@ Opcional: o mod funciona sem ele.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-07 23:12 | Adiciona as telas próprias. |
+| Marcelo Fabiano | 2026-11-07 23:11 | Adiciona as telas próprias. |
 | Marcelo Fabiano | 2026-11-07 21:55 | Lista as funcionalidades entregues até o PR #122. |
