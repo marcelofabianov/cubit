@@ -1,6 +1,6 @@
 # Glossário
 
-Tudo que aparece no mod fica em inglês. Os documentos podem usar o termo em português da primeira coluna.
+O inglês é o idioma base do mod, e o jogo também tem a tradução para o português, no `pt_br.json`, com os nomes traduzidos, como `Base de Indução` (perguntas 712 e 733). Os documentos podem usar o termo em português da primeira coluna.
 
 ## Nomes definidos
 
@@ -60,6 +60,7 @@ Os IDs estão em [`itens.md`](itens.md).
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-08 00:11 | Cita a tradução para o português. |
 | Marcelo Fabiano | 2026-11-07 16:54 | Adiciona as falas. |
 | Marcelo Fabiano | 2026-11-07 16:10 | Adiciona os scanners, a varredura, o minério raro e o filtro. |
 | Marcelo Fabiano | 2026-11-06 13:34 | Adiciona a lanterna, a claridade da tela e a chave. |

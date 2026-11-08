@@ -10,7 +10,7 @@ As telas próprias do Cubit e do Induction Dock, item 19 da Fase 3. Elas substit
 
 - **Fidelidade:** as telas seguem as imagens ao máximo. Onde uma resposta em [`perguntas/`](../perguntas/fase-3-sentidos.md) diz outra coisa, vale a resposta (pergunta 676).
 - **Estilo:** janelas próprias, com textura que lembra o metal de um robô, sem a textura do baú do jogo (pergunta 371).
-- **Textos:** todos em inglês, no `en_us.json`. Títulos, rótulos e valores usam 75% da fonte do jogo, e os detalhes, cerca de 56%, numa redução proporcional (pergunta 705, que muda a 437 nas telas). Nada passa da borda, e um tooltip mostra o texto inteiro.
+- **Textos:** em inglês, no `en_us.json`, e em português, no `pt_br.json` (pergunta 712). Títulos, rótulos e valores usam 75% da fonte do jogo, e os detalhes, cerca de 56%, numa redução proporcional (pergunta 705, que muda a 437 nas telas). Nada passa da borda, e um tooltip mostra o texto inteiro.
 - **Retratos:** sprites 2D. O retrato do Cubit monta a moldura com a tela do rosto, reaproveitando as texturas de expressão que já existem, com a piscada, e a cor do colar do tier. A torre do Dock é um sprite próprio, com a luz do estado (pergunta 690).
 - **Números:** estoques e baterias abreviados, como `214k / 300k FE`, com `M` acima de um milhão. Taxas por tick inteiras, com separador de milhar, como `+2,400 FE/t`. O Jade continua com os números inteiros (pergunta 687).
 
@@ -60,7 +60,7 @@ Duas abas, à direita da janela: **Inventory**, com o ícone do baú, e **Settin
 | `Scanners` | `Ores 5 blocks · mobs 8 · 50 FE per scan` |
 | `Chatter` | `Weather, biomes and reactions` |
 
-- **Scanner filter:** só leitura, com o ícone do minério, `Looking for COAL` e `Right-click the Cubit holding an ore to change it.` (pergunta 688).
+- **Scanner filter:** só leitura, com o ícone do minério, `Looking for Coal Ore` e `Right-click the Cubit holding an ore to change it.` (pergunta 688).
 - **Status:** `Solar panel`, `Energy use`, `Health` e `Following`.
 - **Rodapé:** `More functions arrive with the next updates.`
 
@@ -180,6 +180,7 @@ Pergunta 691.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-08 00:11 | Cita a tradução para o português. |
 | Marcelo Fabiano | 2026-11-07 23:46 | Tira da tabela de estados as linhas de histórico que caíram nela. |
 | Marcelo Fabiano | 2026-11-07 23:19 | Diminui os textos na mesma proporção. |
 | Marcelo Fabiano | 2026-11-07 22:57 | Registra a leitura do último tick. |

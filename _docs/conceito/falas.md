@@ -1,6 +1,6 @@
 # Falas do Cubit
 
-Frases que o Cubit mostra sobre o tempo, o horário e as conquistas do dono, quando ele fica para trás, os biomas, os animais abatidos e a redstone minerada, junto do bipe padrão. Só o inglês vai para o jogo (regra 1 do `AGENTS.md`), e o português fica só neste documento. Cada frase aparece com o prefixo `Cubit: `, e cada situação sorteia uma das frases dela.
+Frases que o Cubit mostra sobre o tempo, o horário e as conquistas do dono, quando ele fica para trás, os biomas, os animais abatidos e a redstone minerada, junto do bipe padrão. As duas colunas vão para o jogo: o inglês no `en_us.json` e o português no `pt_br.json`, conforme o idioma do player (perguntas 712 e 735). Cada frase aparece com o prefixo `Cubit: `, e cada situação sorteia uma das frases dela.
 
 As frases e as regras estão nas perguntas 572 a 587 e 618 a 621.
 
@@ -187,6 +187,7 @@ As frases e as regras estão nas perguntas 572 a 587 e 618 a 621.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-08 00:11 | Leva o português das falas para o jogo. |
 | Marcelo Fabiano | 2026-11-07 23:42 | Cita a redstone na introdução. |
 | Marcelo Fabiano | 2026-11-07 23:12 | Aponta a chave para a aba Settings. |
 | Marcelo Fabiano | 2026-11-07 20:04 | Adiciona as falas da redstone. |

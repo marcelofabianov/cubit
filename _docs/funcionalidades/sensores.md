@@ -26,13 +26,13 @@ Localiza os mobs que o jogo marca como `Enemy`, inclusive de outros mods e atrá
 | Achado | Texto | Som | Expressão |
 |---|---|---|---|
 | Mob hostil novo | `Cubit: Careful, Zombie!`, com o mob mais próximo | `hostile_mob_alert.ogg` | Alerta, enquanto houver mob no raio |
-| Minério raro novo | `Cubit: DIAMOND!!!`, com o mais raro | `rare_ore_alert.ogg` | Surpresa, por cerca de 3 s |
-| Minério só do filtro, novo | `Cubit: COAL!!!` | Nenhum | Nenhuma |
+| Minério raro novo | `Cubit: Diamond Ore!!!`, com o mais raro | `rare_ore_alert.ogg` | Surpresa, por cerca de 3 s |
+| Minério só do filtro, novo | `Cubit: Coal Ore!!!` | Nenhum | Nenhuma |
 | Bateria crítica | `Cubit: Critical battery` | Bipe padrão, ao trocar | Sono |
 
-- **Nomes:** o do mob vem do próprio jogo e segue o idioma dele. O do minério vem da subtag, em inglês e em caixa alta. Um minério que só tem a tag `c:ores` mostra `Ore found` (perguntas 546 e 566).
-- **Resposta ao clique do filtro:** `Cubit: Looking for DIAMOND` ao definir e `Cubit: Filter cleared` ao limpar, com o bipe padrão, sem o intervalo mínimo (pergunta 565).
-- **Repetição:** cada nome espera o próprio intervalo mínimo, então `DIAMOND!!!` pode aparecer logo depois de `IRON!!!` (pergunta 547).
+- **Nomes:** o do mob vem do próprio jogo e segue o idioma dele. O do minério é o nome do primeiro bloco da subtag, no idioma do jogo, como `Diamond Ore` ou `Minério de Diamante`. Uma tag sem bloco mostra o nome da subtag, e um minério que só tem a tag `c:ores` mostra `Ore found` (perguntas 546, 566 e 734).
+- **Resposta ao clique do filtro:** `Cubit: Looking for Diamond Ore` ao definir e `Cubit: Filter cleared` ao limpar, com o bipe padrão, sem o intervalo mínimo (pergunta 565).
+- **Repetição:** cada nome espera o próprio intervalo mínimo, então `Diamond Ore!!!` pode aparecer logo depois de `IRON!!!` (pergunta 547).
 - **Sinais visuais:** a cor das antenas, o halo em volta do corpo, a caixa em volta do minério e a seta sobre o mob, descritos em "Cor e caixas" (perguntas 555 a 559, 590 e 615).
 
 Os detalhes dos sons estão em [`visual.md`](../conceito/visual.md#sons), e os textos em [`persona.md`](../conceito/persona.md#comunicação).
@@ -69,6 +69,7 @@ Definidos, em entregas próprias depois da detecção:
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-08 00:11 | Nomeia o minério pelo bloco, no idioma do jogo. |
 | Marcelo Fabiano | 2026-11-07 23:42 | Troca a caixa do mob pela seta nos sinais e no pacote. |
 | Marcelo Fabiano | 2026-11-07 23:11 | Aponta as chaves para a aba Settings. |
 | Marcelo Fabiano | 2026-11-07 21:05 | Troca a caixa do mob por uma seta sobre a cabeça. |
