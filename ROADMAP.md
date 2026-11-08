@@ -1,0 +1,89 @@
+# Roadmap
+
+As fases do Cubit, do conceito aos trabalhos. O que está pronto em cada uma é marcado no [`checklist.md`](checklist.md), e as decisões ficam em [`_docs/perguntas/`](_docs/perguntas/README.md), que prevalecem sobre este arquivo. Os números de cada recurso ficam em [`_docs/tiers.md`](_docs/tiers.md).
+
+Cada fase só começa com pedido explícito, e cada funcionalidade entra por issue, documentada em [`_docs/funcionalidades/`](_docs/funcionalidades/) antes do código.
+
+## Fase 1: Conceito (encerrada)
+
+Persona, visual, expressões, funcionalidades, itens, tiers, glossário, regras, pilares e fluxo de trabalho, em documentos.
+
+## Fase 2: Versão mínima (encerrada)
+
+- Crafting do Cubit, do Induction Dock e da Toolbox, com materiais do jogo puro.
+- Seguir o player, com teleporte e parada, e vários Cubits com um seguindo.
+- Inventário, bateria com consumo por situação e recarga com redstone.
+- Induction Dock, com hibernação e fila.
+- Reações a fogo, lava e blocos que ferem.
+- Virar item, morte com o Damaged Cubit e conserto.
+- O comando `/cubit reset` e o modelo novo.
+
+## Fase 3: Sentidos (reta final)
+
+Todas as funcionalidades entraram:
+
+- painel solar e lanterna;
+- scanners de minérios e de mobs, com a caixa, a seta e as cores das antenas;
+- os sons, os textos curtos e as falas;
+- as animações, as expressões, o nome e a cor da carcaça;
+- o Jade e as telas próprias do Cubit e do Induction Dock.
+
+Falta a reta final do lançamento:
+
+- auditoria dos documentos;
+- tradução para o português;
+- `CHANGELOG.md` e guia de publicação;
+- testes de instância.
+
+### Primeira versão: `0.1.0`
+
+Sai ao terminar a Fase 3, no Modrinth e no CurseForge, com o mod funcionando só com ele e as dependências: GeckoLib e LambDynamicLights, obrigatórias, e Jade, opcional.
+
+## Fase 4: Upgrades e autonomia
+
+Dividida em três partes, na ordem em que uma depende da outra.
+
+### Fase 4: Power Bank, ímã e defesa
+
+- Power Bank, também no Dock e na grade de craft.
+- Ímã e coleta de itens do chão, com o filtro em lista branca e lista negra.
+- Choque, com o modo Pacífico, o único do tier Base.
+- Interface de configuração na aba Settings, com a chave geral e a do painel solar.
+
+### Fase 4.1: Tiers
+
+- Tiers Advanced, Elite e Ultimate, com os módulos de upgrade.
+- Modos de defesa Contra-atacar e Agressivo.
+- Slots exclusivos de tochas, fornalha e carregador de ferramentas, com o Cubit colocando tochas sozinho.
+
+### Fase 4.2: Controle e autonomia
+
+- Cubit Remote: comandos, localizar os Cubits e marcar áreas.
+- Modo de defesa só o alvo, com o último mob atacado e a mira pelo controle.
+- Modo área e descarga em baú marcado.
+- Retorno automático e local de morte.
+
+## Fase 5: Trabalhos (planejada)
+
+Dividida em três partes.
+
+### Fase 5: Antenas, Servidor e storage
+
+- Antenas, com a ligação ao Servidor, o log e o Dock de referência.
+- Robot Server, com o log dos Cubits e a viagem até o Dock.
+- Storage wireless virtual.
+
+### Fase 5.1: Carregamento de chunks
+
+- Carregamento de chunks pelas antenas e pelo Servidor, com os limites do config.
+
+### Fase 5.2: Cards de Aprendizado de Máquina
+
+- Base comum dos trabalhos: estado de trabalho, card em slot e aba de configuração.
+- Hibernação fora do Dock.
+- Personalização do Cubit de acordo com o card recebido.
+- Os trabalhos: Fazendeiro, Pescador, Organizador, Cozinheiro, Defensor, Minerador, Construtor e Pecuarista.
+
+## Ainda sem fase
+
+- Wiki e livro para o player.

@@ -31,7 +31,7 @@ O Cubit ignora os inimigos por perto, mesmo os que atacam o dono, e só ataca o 
 | Sem alvo | Só segue o dono e não ataca ninguém |
 | Fim do alvo | O alvo morre, muda de dimensão ou fica muito longe do dono |
 | Perseguição | Vai atrás do alvo até um limite de distância do dono, no config, e depois volta |
-| Sinais | A caixa vermelha dos scanners, só no alvo, e `Cubit: Target: Zombie` |
+| Sinais | A seta vermelha dos scanners, só sobre o alvo (pergunta 646), e `Cubit: Target: Zombie` |
 | Risco a avaliar | Sem alvo, o Cubit fica parado enquanto um mob ataca o dono. O texto ao trocar de modo pode deixar isso claro |
 
 ## Quem o Cubit nunca ataca
@@ -46,6 +46,7 @@ O Cubit só ataca um mob neutro para defender o player, quando esse mob fica agr
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-07 23:42 | Troca a caixa do alvo pela seta. |
 | Marcelo Fabiano | 2026-11-07 16:51 | Adiciona a proposta do modo só o alvo. |
 | Marcelo Fabiano | 2026-11-05 23:16 | Cita o som de modo agressivo. |
 | Marcelo Fabiano | 2026-11-05 21:02 | Cita o som do ataque. |

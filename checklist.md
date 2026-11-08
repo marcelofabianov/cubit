@@ -61,7 +61,7 @@ A ordem é a da numeração (perguntas 356 e 365), com a lanterna antes do paine
 16. [x] Scanner de minérios e scanner de mobs, com a chave deles e os alertas
 17. [x] Nome personalizado e cor da carcaça
 18. [x] Jade
-19. [ ] Telas próprias do Cubit e do Induction Dock, com janelas personalizadas, textura de metal de robô e tooltips, sem o padrão do Minecraft (pergunta 371)
+19. [x] Telas próprias do Cubit e do Induction Dock, com janelas personalizadas, textura de metal de robô e tooltips, sem o padrão do Minecraft (pergunta 371)
 20. [x] Falas do Cubit sobre o tempo e as conquistas, na mesma entrega dos scanners (perguntas 572 a 583)
 
 ## Primeira versão: `0.1.0`
@@ -70,14 +70,17 @@ Sai só ao terminar todos os itens da Fase 3 (pergunta 337).
 
 1. [x] Decidir o momento da publicação
 2. [x] Decidir a licença dos sons (pergunta 338)
-3. [ ] Decidir onde publicar: Modrinth, CurseForge ou os dois
+3. [x] Decidir onde publicar: Modrinth e CurseForge (pergunta 714)
 4. [ ] Rever a descrição do mod, que hoje descreve só a Fase 2
 5. [ ] Testar a versão completa numa instância só com o mod e as dependências e no Iron Meridian (regra 35), inclusive os cabos reais de FE no Dock
-6. [ ] Testar com outro player num servidor: passo 9 do Dock e passo 6 do `/cubit reset`
-7. [ ] Confirmar no jogo quando as receitas aparecem no livro e o `/cubit reset` com chunk descarregado
-8. [ ] Publicar: `homolog`, `release/0.1.0`, `main` e tag
+6. [ ] Testar com outro player num servidor: passo 9 do Dock, passo 6 do `/cubit reset` e passo 13 da cor e do nome (pergunta 515)
+7. [ ] Confirmar no jogo quando as receitas aparecem no livro, a receita do Dock em L espelhado (pergunta 351), o `/cubit reset` com chunk descarregado e o padrão da opção de luz de entidades do LambDynamicLights (perguntas 461 e 719)
+8. [ ] Conferir os termos das ferramentas de IA usadas nos sons antes de publicar (perguntas 338 e 719)
+9. [ ] Publicar: `homolog`, `release/0.1.0`, `main` e tag
 
 ## Fase 4: Upgrades e autonomia
+
+Dividida em três partes, na ordem em que dependem uma da outra (perguntas 722 a 726). "Fase 4" nos documentos vale para as três.
 
 ### Já existe
 
@@ -85,43 +88,61 @@ Sai só ao terminar todos os itens da Fase 3 (pergunta 337).
 2. [x] Decisões do modo área, do "parar" e do que o item guarda (perguntas 340 a 343)
 3. [x] Som e expressão do ataque definidos (perguntas 316 e 347)
 
-### Falta
+### Fase 4: Power Bank, ímã e defesa
 
-4. [ ] Tiers Advanced, Elite e Ultimate, com config e módulos
-5. [ ] Definir as receitas dos módulos, da Power Bank e do controle
-6. [ ] Power Bank, inclusive no Dock e na grade de craft (issue #51)
-7. [ ] Ímã e coleta, com as chaves deles e o filtro em lista branca e lista negra (perguntas 422 a 424)
-8. [ ] Slots de tochas, fornalha e carregador de ferramentas
-9. [ ] Definir o custo de ímã, scanners e tochas
-10. [ ] Choque e modos de defesa, refinando o modo só o alvo (perguntas 577 e 578)
-11. [ ] Cubit Remote: comandos, localizar e marcar área
-12. [ ] Modo área, com a altura máxima a definir
-13. [ ] Descarga em baú marcado, com a chave dela
-14. [ ] Retorno automático, com a chave dele
-15. [ ] Local de morte, com a chave dele
+4. [ ] Power Bank, inclusive no Dock e na grade de craft (issue #51), com a receita dela
+5. [ ] Ímã e coleta, com as chaves deles e o filtro em lista branca e lista negra (perguntas 422 a 424), e o custo do ímã
+6. [ ] Choque e modo Pacífico, o único do tier Base (pergunta 722)
+7. [ ] Interface de configuração na aba Settings: chave geral e chave do painel solar (perguntas 717 e 425)
+
+### Fase 4.1: Tiers
+
+8. [ ] Tiers Advanced, Elite e Ultimate, com config, módulos e as receitas deles
+9. [ ] Modos Contra-atacar e Agressivo
+10. [ ] Slots de tochas, fornalha e carregador de ferramentas, com o Cubit colocando tochas e o custo delas (pergunta 724)
+
+### Fase 4.2: Controle e autonomia
+
+11. [ ] Cubit Remote: comandos, localizar e marcar área, com a receita dele
+12. [ ] Modo só o alvo, com o último mob atacado e a mira pelo controle (perguntas 577, 578 e 726)
+13. [ ] Modo área, com a altura máxima a definir
+14. [ ] Descarga em baú marcado, com a chave dela
+15. [ ] Retorno automático, com a chave dele
+16. [ ] Local de morte, com a chave dele
 
 ## Fase 5: Trabalhos (planejada)
+
+Dividida em três partes (perguntas 722 e 725). "Fase 5" nos documentos vale para as três.
 
 ### Já existe
 
 1. [x] Conceito em [`trabalhos.md`](_docs/funcionalidades/trabalhos.md) e perguntas 190 a 256, com a 344
 
-### Falta
+### Fase 5: Antenas, Servidor e storage
 
-2. [ ] Base comum: estado de trabalho, card em slot e aba de configuração
-3. [ ] Fazendeiro e Pescador
-4. [ ] Organizador, com o modo de abastecer, e fechar os detalhes dele (pergunta 208)
-5. [ ] Cozinheiro
-6. [ ] Defensor
-7. [ ] Minerador, com os modos definidos na entrega e a lanterna de cabeça com feixe (pergunta 463)
-8. [ ] Construtor
-9. [ ] Pecuarista
-10. [ ] Antena e carregamento de chunks
-11. [ ] Robot Server, log e viagem até o Dock
-12. [ ] Storage wireless
-13. [ ] Definir os números "A definir" de `tiers.md`
-14. [ ] Decidir o slot de fornalha (pergunta 339)
-15. [ ] Testar cada card com 20 a 30 robôs
+2. [ ] Antenas: ligação ao Servidor, log e Dock de referência
+3. [ ] Robot Server, log e viagem até o Dock
+4. [ ] Storage wireless virtual
+
+### Fase 5.1: Carregamento de chunks
+
+5. [ ] Carregamento de chunks pelas antenas e pelo Servidor, com os limites do config
+
+### Fase 5.2: Cards de Aprendizado de Máquina
+
+6. [ ] Base comum: estado de trabalho, card em slot e aba de configuração
+7. [ ] Hibernação fora do Dock
+8. [ ] Conceito e entrega da personalização do Cubit de acordo com o card (pergunta 725)
+9. [ ] Fazendeiro e Pescador
+10. [ ] Organizador, com o modo de abastecer, e fechar os detalhes dele (pergunta 208)
+11. [ ] Cozinheiro
+12. [ ] Defensor
+13. [ ] Minerador, com os modos definidos na entrega e a lanterna de cabeça com feixe (pergunta 463)
+14. [ ] Construtor
+15. [ ] Pecuarista
+16. [ ] Definir os números "A definir" de `tiers.md`
+17. [ ] Decidir o slot de fornalha (pergunta 339)
+18. [ ] Testar cada card com 20 a 30 robôs
 
 ## Ainda sem fase
 

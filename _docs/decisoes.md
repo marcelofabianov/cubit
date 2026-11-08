@@ -11,13 +11,18 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Licença:** MIT, para todos os recursos presentes no repositório, inclusive os sons. A exceção é o Gradle Wrapper, de terceiros, que não vai no jar.
 - **Ícone do mod:** o mesmo do item do Cubit.
 - **Primeira versão:** `0.1.0`, publicada só ao terminar todos os itens da Fase 3, com a `1.0.0` só com o mod completo.
+- **Publicação:** no Modrinth e no CurseForge, com a mesma versão nos dois (pergunta 714).
+- **Interface de configuração:** a chave geral e a do painel solar entram na Fase 4, na aba Settings, e a `0.1.0` sai com as chaves de hoje (pergunta 717).
+- **Fases 4 e 5 divididas:** Fase 4 com Power Bank, ímã, coleta, choque com o Pacífico e a interface de configuração; 4.1 com os tiers, os outros modos e os slots exclusivos; 4.2 com o Cubit Remote, o modo só o alvo, o modo área, a descarga, o retorno e o local de morte. Fase 5 com antenas, Servidor e storage wireless virtual; 5.1 com o carregamento de chunks; e 5.2 com os cards, a hibernação fora do Dock e a personalização por card (perguntas 722 a 726).
+- **Planejado nos documentos:** o que é de fase futura fica nos documentos, marcado com a fase em que entra, sem parecer pronto (pergunta 718).
 - **Testes de instância:** os da regra 35 ficam para o fim da Fase 3, no teste da versão completa.
 - **Etapa atual:** Fase 3, sentidos, em andamento. As Fases 1 e 2 foram encerradas.
 - **Iron Meridian:** o Cubit entra como exceção à regra do pack contra funções repetidas, por causa do Robit do Mekanism. O registro está na issue `marcelofabianov/iron-meridian#2`.
 
 ## Idioma
 
-- **Mod:** o que entra no jar, aparece no jogo ou acompanha o download fica em inglês, com um único `en_us.json`.
+- **Mod:** o que entra no jar, aparece no jogo ou acompanha o download fica em inglês, o idioma base. O jogo também tem o `pt_br.json`, gerado pelo mesmo datagen, para o player escolher o português (pergunta 712, que substitui a 449).
+- **Changelog:** o `CHANGELOG.md`, na raiz, fica em inglês, no formato Keep a Changelog (pergunta 713).
 - **Programação:** arquivos como `.java` e `.sh` ficam em inglês.
 - **Conteúdo:** arquivos como `.md` ficam em português, inclusive o nome do arquivo e da pasta.
 - **Commits:** português, em Conventional Commits.
@@ -57,7 +62,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Config:** `COMMON`, com chaves em `snake_case` por tier, como `[general_robot.base]`.
 - **Entidade:** a `RobotEntity` herda de `PathfinderMob`, com o dono num UUID próprio.
 - **Estado como item:** o componente `cubit:robot_state`, e o inventário em `cubit:robot_inventory`, fora do domínio.
-- **Inventário:** menu próprio, com o visual do baú do jogo. Com o config reduzido, o que não couber cai no chão.
+- **Inventário:** menu próprio, na tela própria do Cubit, no estilo das imagens de conceito (perguntas 371 e 676). Com o config reduzido, o que não couber cai no chão.
 - **Dono:** quem coloca o robô. O item do robô não guarda o dono, e o item danificado guarda, só para o resgate no vazio. Nenhum dano atribuído a ele fere o robô. O fogo de um isqueiro continua ferindo, porque o jogo não guarda quem o acendeu.
 - **Lava:** o robô ativo que está na lava vai para o bloco seguro mais próximo. A rota continua sem entrar em lava.
 - **Blocos que ferem:** o robô ativo vai ao bloco seguro mais próximo, nas mesmas condições em que o jogo fere o player, e isso cobra o extra de condição negativa. Inativo, fica parado.
@@ -77,14 +82,14 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Recarga pela grade de craft:** o item do Cubit abaixo da carga de religar, combinado com uma Power Bank, recebe só o que falta para religar, na Fase 4.
 - **Consumo:** gasta ao andar de verdade, sem gastar parado nem empurrado. As exceções são a condição negativa, a lanterna acesa e as varreduras dos scanners, que gastam mesmo parado.
 - **Parada do robô:** uma navegação própria cancela o recálculo de rota pendente, para o robô parado não voltar a andar.
-- **Painel do slot de energia:** visual melhor e tooltips ficam para a tela própria da Fase 3.
+- **Slot de energia na tela:** fica na aba Inventory da tela própria do Cubit, ao lado das barras, e o texto cortado ganha um tooltip.
 - **Barras de bateria:** mostram ao menos um risco enquanto houver carga e só ficam vazias com 0 FE.
-- **Barra de vida:** vermelha, ao lado da bateria no painel do inventário, sem falso zero.
+- **Barra de vida:** vermelha, acima da bateria na aba Inventory da tela do Cubit, sem falso zero.
 - **Documentação para o player (fase a definir):** uma wiki em site estático no GitHub e um livro entregue ao criar o mundo, que aponta para ela.
 - **Consumo por situação:** inventário cheio, água, subida e condições negativas somam um extra ao gasto. Com o inventário cheio, a velocidade cai. Os números estão em [`tiers.md`](tiers.md#consumo-por-atividade).
 - **Slot de energia do Cubit:** existe em todos os tiers e aceita uma Power Bank ou redstone por vez. A redstone entra na Fase 2, e a Power Bank na Fase 4.
 - **LambDynamicLights:** obrigatório no cliente, e um servidor dedicado abre sem ele.
-- **Lanterna:** luz real, de nível 10, 12, 14 e 15 por tier, com 1, 1, 2 e 2 FE/t enquanto acesa, mesmo parado. Acende abaixo da luz 8 e apaga a partir da 10, lendo blocos e céu. Apagada e sem consumo hibernando ou desligada. A chave `Lamp` fica no painel do inventário, começa ligada e é guardada no item. As pontas das antenas acendem com um halo suave que pulsa, e os olhos ganham um brilho em volta, na cor de cada expressão.
+- **Lanterna:** luz real, de nível 10, 12, 14 e 15 por tier, com 1, 1, 2 e 2 FE/t enquanto acesa, mesmo parado. Acende abaixo da luz 8 e apaga a partir da 10, lendo blocos e céu. Apagada e sem consumo hibernando ou desligada. A chave `Lamp` fica na aba Settings da tela do Cubit, começa ligada e é guardada no item. As pontas das antenas acendem com um halo suave que pulsa, e os olhos ganham um brilho em volta, na cor de cada expressão.
 - **Claridade da tela:** luz 4, sem gastar energia, enquanto a tela brilha, inclusive hibernando.
 - **Feixe:** é da lanterna de cabeça do Minerador, na Fase 5.
 - **Ao colocar no mundo:** toca só o som de colocar. O de ligar fica para a passagem de desligado a ligado.
@@ -112,7 +117,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Telas próprias (perguntas 371 e 675 a 692):** a tela do Cubit e a do Induction Dock seguem as imagens de conceito `v0.1.0`, e não o estilo do Minecraft, com retratos e torre em sprites 2D e as respostas como prioridade sobre as imagens. O Cubit desligado não abre a tela, e ela fecha se ele desligar. Os botões usam o clique de botão de menu do jogo, sem pacote próprio. Os estados do Dock usam os nomes das imagens, também no Jade, e os números aparecem abreviados, como `214k / 300k FE`. O Dock lê o Cubit na base por uma capability de entidade (pergunta 696), e o menu do Cubit lê o último tick por um attachment sem save (pergunta 698). O detalhe está em [`telas.md`](funcionalidades/telas.md).
 - **Jade (perguntas 659 a 667):** opcional, na versão do Iron Meridian, num pacote isolado, `compat.jade`, mostra o tier, a bateria e o estado do Cubit e o estoque e o estado do Induction Dock, com os dados do servidor só enquanto alguém mira.
 - **Cores dos scanners (perguntas 558 e 638 a 643):** as antenas e um brilho atrás do corpo ficam vermelhos com mob no raio e azuis por cerca de 3 s com minério achado, no tom das caixas, com o vermelho vencendo. Todos veem, e a luz real continua branca.
-- **Scanners (perguntas 544 a 564 e 602 a 610):** só o Cubit ativo que segue varre, com a chave `Scanners`, numa esfera em volta dele, por um custo fixo por varredura, igual nos dois scanners, em intervalos separados para minérios e mobs. Só o que é novo avisa, dizendo o nome: `Cubit: DIAMOND!!!` e `Cubit: Careful, Zombie!`, com o intervalo mínimo por nome. O filtro é definido clicando com um minério na mão, e os raros são uma lista de tags, de ferro para cima. Mob hostil é o que o jogo marca como `Enemy`. A entrega tem três PRs: detecção, cores e caixas.
+- **Scanners (perguntas 544 a 564 e 602 a 610):** só o Cubit ativo que segue varre, com a chave `Scanners`, numa esfera em volta dele, por um custo fixo por varredura, igual nos dois scanners, em intervalos separados para minérios e mobs. Só o que é novo avisa, dizendo o nome: `Cubit: DIAMOND!!!` e `Cubit: Careful, Zombie!`, com o intervalo mínimo por nome. O filtro é definido clicando com um minério na mão, e os raros são uma lista de tags, de ferro para cima. Mob hostil é o que o jogo marca como `Enemy`. A entrega teve três PRs: detecção, caixas e cores, com a seta sobre o mob entrando junto das cores (perguntas 590, 615 e 647).
 - **Estado do robô como item:** inclui as configurações, além de bateria, vida, inventário, tier, nome e cor. Perde a área, os baús marcados e a seleção no controle.
 - **Modo área:** por dois cantos em 3D, já na Fase 4. Sem card, o robô coleta os itens do chão na área e descarrega no baú marcado.
 - **Parar pelo controle:** o robô continua ativo e com o vínculo, parado e sem teleportar, e o estado é salvo.
@@ -124,6 +129,8 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-07 23:42 | Atualiza o inventário, a lanterna e os PRs dos scanners para as telas próprias e registra a interface na Fase 4, o planejado e a divisão das Fases 4 e 5. |
+| Marcelo Fabiano | 2026-11-07 23:34 | Registra o pt_br, o changelog e as plataformas. |
 | Marcelo Fabiano | 2026-11-07 22:57 | Registra a leitura do último tick. |
 | Marcelo Fabiano | 2026-11-07 22:44 | Registra a leitura do Cubit pelo Dock. |
 | Marcelo Fabiano | 2026-11-07 22:30 | Registra as telas próprias. |

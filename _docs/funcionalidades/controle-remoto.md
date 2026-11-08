@@ -16,7 +16,7 @@ Na proposta do [modo só o alvo](combate.md#modo-só-o-alvo-proposta), o control
 
 O controle é o mesmo em todos os tiers. As opções bloqueadas aparecem desabilitadas.
 
-Parado pelo controle, o Cubit continua ativo e com o vínculo, não anda nem teleporta, e esse estado é salvo. Voltar a seguir retoma. Parado, ele não gasta energia, exceto com a lanterna acesa.
+Parado pelo controle, o Cubit continua ativo e com o vínculo, não anda nem teleporta, e esse estado é salvo. Voltar a seguir retoma. Parado, ele não gasta energia ao andar, mas a lanterna acesa e as varreduras dos scanners continuam gastando (perguntas 469 e 550).
 
 Desligado pelo controle, o Cubit segue as regras do estado inativo, mesmo com bateria, e só volta a ficar ativo pelo controle. Ligar é a única ação do controle sobre um Cubit desligado.
 
@@ -36,6 +36,7 @@ A área é marcada com o controle, clicando com o botão direito em dois blocos,
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-07 23:42 | Acrescenta os scanners ao consumo do Cubit parado. |
 | Marcelo Fabiano | 2026-11-07 16:51 | Cita a marcação de um mob no modo só o alvo. |
 | Marcelo Fabiano | 2026-11-06 13:34 | Adiciona a chave e o consumo da lanterna. |
 | Marcelo Fabiano | 2026-11-06 11:10 | Troca 'especialidade' por 'trabalho' e 'card de especialidade' por 'card de Aprendizado de Máquina'. |

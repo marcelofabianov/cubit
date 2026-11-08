@@ -53,7 +53,7 @@ Funciona como um carregador solar real.
 - **Clima:** não tem efeito.
 - **Dimensões:** no Nether e no End, não carrega.
 - **Sinal:** enquanto o painel enche a bateria, a célula clareia e escurece devagar. Com a bateria cheia, o sinal para. O painel não toca o som de recarga, que é da base e do slot.
-- **Chave:** ainda não existe. Entra com a interface de configuração (perguntas 494 e 495).
+- **Chave:** ainda não existe. Entra com a interface de configuração, na Fase 4, na aba Settings da tela do Cubit (perguntas 494, 495 e 717).
 
 ## Induction Dock
 
@@ -130,6 +130,7 @@ Se o robô estiver dentro do raio da base e com a bateria baixa, volta sozinho p
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-07 23:42 | Leva a chave do painel solar para a Fase 4. |
 | Marcelo Fabiano | 2026-11-07 23:12 | Aponta a tela do Dock para as telas próprias. |
 | Marcelo Fabiano | 2026-11-07 23:11 | Aponta a tela do Dock para as telas próprias. |
 | Marcelo Fabiano | 2026-11-07 13:51 | Define quem quebra o Dock sem dono. |

@@ -6,7 +6,7 @@
 
 Um robô companheiro fofo, movido a bateria, para Minecraft 1.21.1 com NeoForge. Funciona só com ele e suas dependências, e também é testado no modpack [Iron Meridian](https://github.com/marcelofabianov/iron-meridian). O Cubit é craftado com recursos do jogo puro.
 
-> **Status: Fase 2 encerrada, Fase 3 em andamento.** O mod ainda não tem versão publicada, e a primeira, `0.1.0`, sai ao terminar a Fase 3. Já funcionam colocar e recolher o Cubit, seguir o player, vários Cubits com um seguindo, as reações a fogo, lava e blocos que ferem, o inventário, a bateria com recarga por redstone, o Induction Dock, a morte com o item danificado, o conserto e o comando `/cubit reset`. Na Fase 3, já entraram os sons, as expressões, as animações, a barra de vida, a cor do colar, o indicador de bateria, os textos curtos, a lanterna, o painel solar, a cor da carcaça, o nome, a detecção dos scanners, numa esfera em volta do Cubit, as caixas e a seta em volta do que eles acham, as cores das antenas com um halo em volta do corpo e as falas, inclusive sobre a redstone que você minera. O resto abaixo está planejado, e os números são o ponto de partida para o balanceamento.
+> **Status: reta final da Fase 3.** Todas as funcionalidades da fase entraram, e o mod ainda não tem versão publicada: a primeira, `0.1.0`, está em preparação para o Modrinth e o CurseForge. Já funcionam colocar e recolher o Cubit, seguir o player, vários Cubits com um seguindo, as reações a fogo, lava e blocos que ferem, o inventário, a bateria com recarga por redstone, o Induction Dock, a morte com o item danificado, o conserto e o comando `/cubit reset`. Na Fase 3, já entraram os sons, as expressões, as animações, a barra de vida, a cor do colar, o indicador de bateria, os textos curtos, a lanterna, o painel solar, a cor da carcaça, o nome, a detecção dos scanners, numa esfera em volta do Cubit, a caixa em volta do minério e a seta sobre o mob que eles acham, as cores das antenas com um halo em volta do corpo, as falas, inclusive sobre a redstone que você minera, o Jade e as telas próprias do Cubit e do Induction Dock, no estilo do conceito. O resto abaixo está planejado, e os números são o ponto de partida para o balanceamento.
 
 ## O que o Cubit faz
 
@@ -45,7 +45,8 @@ O Cubit mantém os recursos ao evoluir, e cada tier os melhora. Os recursos avan
 | Capacidade da Power Bank | 210 mil FE | 420 mil FE | 2,1 mi FE | 5,6 mi FE |
 | Inventário | 27 slots | 36 slots | 45 slots | 54 slots |
 | Raio do ímã | 1 bloco | 3 blocos | 5 blocos | 8 blocos |
-| Raio do scanner | 5 blocos | 10 blocos | 16 blocos | 24 blocos |
+| Raio do scanner de minérios | 5 blocos | 8 blocos | 12 blocos | 20 blocos |
+| Raio do scanner de mobs | 8 blocos | 14 blocos | 20 blocos | 25 blocos |
 | Modos de defesa | Pacífico | + Contra-atacar | + Agressivo | Todos |
 | Modo área | Bloqueado | Até 16×16 | Até 32×32 | Até 64×64 |
 
@@ -72,23 +73,27 @@ As receitas usarão só materiais do jogo puro, podendo combinar itens do própr
 
 ## Roadmap
 
-1. **Conceito (encerrada):** persona, features e demais definições, em documentos.
-2. **Versão mínima (encerrada):** crafting, seguir o player, inventário, bateria com consumo por situação, vários Cubits com um seguindo, `/cubit reset`, reações a fogo, lava e blocos que ferem, Induction Dock com hibernação, recarga com redstone, virar item, morte com item danificado e conserto, e geometria mais próxima do conceito.
-3. **Sentidos (em andamento):** painel solar, lanterna, scanners, os nove sons, textos curtos, animações, expressões na tela, nome, cor e Jade.
-4. **Upgrades e autonomia:** tiers, Power Bank, ímã, filtros, demais slots exclusivos, choque, modos de defesa, Cubit Remote, modo área, descarga em baú, retorno automático e local de morte.
-5. **Trabalhos (planejada):** cards de Aprendizado de Máquina, antenas, Servidor, carregamento de chunks e storage wireless.
+1. **Conceito (encerrada)**
+2. **Versão mínima (encerrada)**
+3. **Sentidos (reta final),** com a primeira versão, `0.1.0`
+4. **Upgrades e autonomia,** em 4, 4.1 e 4.2: Power Bank, ímã, defesa, tiers, Cubit Remote, modo área e retorno
+5. **Trabalhos (planejada),** em 5, 5.1 e 5.2: antenas, Servidor, storage, carregamento de chunks e os cards de Aprendizado de Máquina
+
+O que entra em cada fase está no [`ROADMAP.md`](ROADMAP.md).
 
 ## Stack
 
 - Minecraft 1.21.1, NeoForge 21.1.x e Java 21
 - [GeckoLib](https://modrinth.com/mod/geckolib) para o modelo e as animações
 - [LambDynamicLights](https://modrinth.com/mod/lambdynamiclights) como dependência obrigatória, para a luz dinâmica, a partir da lanterna, na Fase 3
+- [Jade](https://modrinth.com/mod/jade) como dependência opcional, para os tooltips do Cubit e do Induction Dock
 - Forge Energy (FE), pelas capabilities do NeoForge
 
 ## Documentação
 
 - [`_docs/README.md`](_docs/README.md): mapa dos documentos, com persona, visual, funcionalidades, itens, tiers, decisões, perguntas por fase e glossário
 - [`AGENTS.md`](AGENTS.md): regras e contexto do projeto para desenvolvedores e agentes
+- [`ROADMAP.md`](ROADMAP.md): as fases e o que entra em cada uma
 - [`checklist.md`](checklist.md): o que está pronto e o que falta em cada fase
 
 ## Licença
