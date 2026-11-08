@@ -143,6 +143,12 @@ develop → homolog → release/X.Y.Z → main (tag vX.Y.Z)
    git push origin vX.Y.Z
    ```
 
+   Depois da tag, gere o jar da `main` com `make build` e crie a release no GitHub, também com autorização, com a seção da versão do `CHANGELOG.md` e o jar (pergunta 778):
+
+   ```bash
+   gh release create vX.Y.Z build/libs/cubit-X.Y.Z.jar --verify-tag --title "Cubit X.Y.Z" --notes-file tmp/release/notes-X.Y.Z.md
+   ```
+
 7. **Volta:** abra um PR da `release/X.Y.Z` para a `develop`.
 
 Na fase `0.x`, mudança incompatível sobe o MINOR, e o resto sobe o PATCH.
@@ -191,6 +197,7 @@ O primeiro passo, separando o que está decidido do que está pendente.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-08 01:41 | Adiciona a release no GitHub depois da tag. |
 | Marcelo Fabiano | 2026-11-08 00:33 | Atualiza o `CHANGELOG.md` na release e aponta para o guia de publicação. |
 | Marcelo Fabiano | 2026-11-07 14:25 | Adiciona a apresentação do próximo trabalho ao encerrar um PR. |
 | Marcelo Fabiano | 2026-11-06 10:56 | Adiciona o alinhamento antes de iniciar uma feature. |
