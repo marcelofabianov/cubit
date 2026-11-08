@@ -5,7 +5,7 @@ import io.github.marcelofabianov.cubit.domain.energy.PowerState;
 import io.github.marcelofabianov.cubit.domain.tier.RobotTier;
 import java.util.function.BiConsumer;
 
-/** What the Jade plugin shows, in English (answers 660 and 662). */
+/** What the Jade plugin shows, in English (answers 660, 662 and 685). */
 final class JadeTexts {
   private static final String TIER = "Tier: %s";
   private static final String BATTERY = "Battery: %s%% (%s / %s FE)";
@@ -18,11 +18,11 @@ final class JadeTexts {
   private static final String OUT_OF_BATTERY = "State: Out of battery";
   private static final String SWITCHED_OFF = "State: Switched off";
   private static final String HIBERNATING = "State: Hibernating";
-  private static final String DOCK_OFF = "Status: Off";
+  private static final String DOCK_OFF = "Status: No power";
   private static final String DOCK_IDLE = "Status: Idle";
   private static final String DOCK_CHARGING = "Status: Charging";
   private static final String DOCK_COMPLETE = "Status: Complete";
-  private static final String DOCK_NO_ENERGY = "Status: No energy";
+  private static final String DOCK_NO_ENERGY = DOCK_OFF;
   private static final String OFF_NAME = "off";
   private static final String IDLE_NAME = "idle";
   private static final String CHARGING_NAME = "charging";
