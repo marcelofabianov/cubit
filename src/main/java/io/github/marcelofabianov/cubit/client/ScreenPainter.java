@@ -33,14 +33,18 @@ final class ScreenPainter {
   static final int STATUS_ORANGE = 0xFFC27A12;
   static final int STATUS_RED = 0xFFC62828;
   static final int STATUS_GRAY = 0xFF757575;
-  static final float FULL_SCALE = 1f;
-  static final float DETAIL_SCALE = 0.75f;
+
+  /** Every text of the screens shrinks by the same factor, in proportion (answer 705). */
+  static final float TEXT_FACTOR = 0.75f;
+
+  static final float FULL_SCALE = TEXT_FACTOR;
+  static final float DETAIL_SCALE = 0.75f * TEXT_FACTOR;
   static final int SLOT_SIZE = 18;
   private static final int SHADOW = 2;
   private static final int HIGHLIGHT = 3;
-  private static final int DOT_SIZE = 4;
+  private static final int DOT_SIZE = 3;
   private static final int DOT_GAP = 3;
-  private static final int DOT_TOP = 2;
+  private static final int DOT_TOP = 1;
   private static final String CUT = "...";
   private static final int PAIR_GAP = 6;
 
@@ -96,7 +100,7 @@ final class ScreenPainter {
   /** A label on the left and its value on the right of the same line, at full size. */
   void pair(GuiGraphics graphics, Box box, Component label, Component value, Colors colors) {
     text(graphics, label, box, colors.label(), FULL_SCALE);
-    int used = Math.min(font.width(label) + PAIR_GAP, box.width());
+    int used = Math.min(width(label, FULL_SCALE) + PAIR_GAP, box.width());
     Box room = new Box(box.x() + used, box.y(), box.width() - used, box.height());
     textRight(graphics, value, room, colors.value(), FULL_SCALE);
   }
@@ -105,7 +109,7 @@ final class ScreenPainter {
   void status(GuiGraphics graphics, Component text, Box box, int color) {
     Box room = new Box(box.x() + DOT_SIZE + DOT_GAP, box.y(), box.width() - DOT_SIZE, box.height());
     FormattedCharSequence shown = fit(text, room, FULL_SCALE);
-    int textX = box.right() - font.width(shown);
+    int textX = box.right() - Math.round(font.width(shown) * FULL_SCALE);
     draw(graphics, shown, textX, box.y(), color, FULL_SCALE);
     int dotX = textX - DOT_GAP - DOT_SIZE;
     int dotY = box.y() + DOT_TOP;

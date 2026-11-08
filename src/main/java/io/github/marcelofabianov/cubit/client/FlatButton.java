@@ -46,9 +46,14 @@ final class FlatButton extends AbstractButton {
       graphics.fill(left + 1, top + 1, left + width - 1, top + height - 1, HOVER);
     }
     var font = Minecraft.getInstance().font;
-    int textX = left + (width - font.width(getMessage())) / 2;
-    int textY = top + (height - TEXT_HEIGHT) / 2;
-    graphics.drawString(font, getMessage(), textX, textY, ScreenPainter.WHITE, false);
+    float scale = ScreenPainter.FULL_SCALE;
+    float textX = left + (width - font.width(getMessage()) * scale) / 2;
+    float textY = top + (height - TEXT_HEIGHT * scale) / 2;
+    graphics.pose().pushPose();
+    graphics.pose().translate(textX, textY, 0);
+    graphics.pose().scale(scale, scale, 1f);
+    graphics.drawString(font, getMessage(), 0, 0, ScreenPainter.WHITE, false);
+    graphics.pose().popPose();
   }
 
   @Override
