@@ -26,6 +26,7 @@ Este é o mapa dos documentos do projeto. A apresentação do mod e o roadmap fi
 | Perguntas e respostas por fase | [`perguntas/`](perguntas/README.md) |
 | Termos e nomes oficiais | [`glossario.md`](glossario.md) |
 | O que está pronto e o que falta em cada fase | [`checklist.md`](../checklist.md) |
+| Tudo o que o Cubit já faz, num só lugar | [`funcionalidades-entregues.md`](funcionalidades-entregues.md) |
 | Pilares de desenvolvimento | [`desenvolvimento/pilares.md`](desenvolvimento/pilares.md) |
 | Fluxo de trabalho | [`desenvolvimento/fluxo-de-trabalho.md`](desenvolvimento/fluxo-de-trabalho.md) |
 | Ferramentas de build e comandos | [`desenvolvimento/ferramentas-de-build.md`](desenvolvimento/ferramentas-de-build.md) |
@@ -40,6 +41,7 @@ Os números ficam em [`tiers.md`](tiers.md). As outras páginas apontam para lá
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-07 21:55 | Cita as funcionalidades entregues. |
 | Marcelo Fabiano | 2026-11-07 16:43 | Amplia a citação das falas. |
 | Marcelo Fabiano | 2026-11-07 16:41 | Cita as falas. |
 | Marcelo Fabiano | 2026-11-06 15:58 | Cita a personalização. |
