@@ -86,7 +86,7 @@ As chaves ficam em `snake_case`. As de um tier ficam em `[general_robot.{tier}]`
 - **Inventário até 54:** é o tamanho do baú duplo, o maior que a tela padrão do jogo mostra.
 - **Vida até 1024:** é o máximo do atributo de vida do jogo.
 - **Raio até 128:** mantém a busca limitada (regra 21 do `AGENTS.md`).
-- **Raio dos scanners até 64:** cobre os 24 blocos do Ultimate com folga, sem deixar a varredura crescer sem limite. Em 64 blocos, são até 2.146.689 blocos por varredura, o limite de `scan_blocks_per_tick`.
+- **Raio dos scanners até 64:** cobre os 20 blocos de minérios e os 25 de mobs do Ultimate com folga, sem deixar a varredura crescer sem limite. Em 64 blocos, são até 2.146.689 blocos por varredura, o limite de `scan_blocks_per_tick`.
 - **Luz até 15:** é o maior nível de luz do jogo.
 - **Parada e teleporte sem sobreposição:** os limites não se cruzam, então o config nunca faz o robô parar além da distância em que teleportaria.
 
@@ -111,6 +111,7 @@ O mod não cai por causa do config (regra 17 do `AGENTS.md`):
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-07 23:41 | Corrige os raios do Ultimate. |
 | Marcelo Fabiano | 2026-11-07 20:04 | Adiciona o intervalo das falas da redstone. |
 | Marcelo Fabiano | 2026-11-07 19:21 | Adiciona o tempo da caixa em volta de um minério. |
 | Marcelo Fabiano | 2026-11-07 17:14 | Adiciona as chaves das falas de animais. |

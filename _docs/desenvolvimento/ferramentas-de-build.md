@@ -48,7 +48,7 @@ O primeiro build leva alguns minutos, porque baixa o JDK e prepara o Minecraft.
 | ModDevGradle | Integra o Gradle ao NeoForge | É o plugin do MDK oficial |
 | JDK 21 Adoptium | Compila o mod e o Minecraft | O projeto o baixa sozinho, porque o Java do sistema pode não ter o pacote de desenvolvimento |
 | JUnit | Roda os testes do domínio sem subir o jogo | É o padrão em Java e está na regra 32 do `AGENTS.md` |
-| ArchUnit | Isola `domain/`, separa o código comum do cliente, separa `block/` de `entity/` e proíbe `get*` no domínio | Garante as regras 12, 14, 23 e 42 do `AGENTS.md` no build |
+| ArchUnit | Isola `domain/`, separa o código comum do cliente, separa `block/` de `entity/`, proíbe `get*` no domínio e deixa só o `compat.jade` importar o Jade | Garante as regras 12, 14, 23, 24 e 42 do `AGENTS.md` no build |
 | JaCoCo | Mede a cobertura de `domain/`, com mínimo de 85% de instruções e de ramos | Garante a regra 34 do `AGENTS.md` |
 | Spotless com google-java-format | Formata o código Java, com recuo de 2 espaços | É o padrão mais comum em Java, sem opções para discutir (pergunta 95) |
 | Checkstyle | Confere as regras de forma do código | Reprova no build o que antes dependia da revisão (pergunta 97) |
@@ -93,6 +93,7 @@ As bibliotecas de teste vêm só do Maven Central, para o build não depender do
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-07 23:41 | Acrescenta a regra do Jade ao ArchUnit. |
 | Marcelo Fabiano | 2026-11-07 21:40 | Adiciona o Jade. |
 | Marcelo Fabiano | 2026-11-07 14:38 | Adiciona o relatório de cobertura dos GameTests. |
 | Marcelo Fabiano | 2026-11-07 14:31 | Adiciona o jar publicado, as regras de ArchUnit e o gate de ramos. |

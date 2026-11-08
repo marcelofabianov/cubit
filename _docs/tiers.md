@@ -25,14 +25,14 @@ Os tiers são Base, Avançado, Elite e Ultimate (no jogo: Base, Advanced, Elite 
 | Recurso | Base | Avançado | Elite | Ultimate |
 |---|---|---|---|---|
 | Bateria | 300 mil FE | 600 mil FE | 3 mi FE | 8 mi FE |
-| Power Bank (70% da bateria) | 210 mil FE | 420 mil FE | 2,1 mi FE | 5,6 mi FE |
+| Power Bank (70% da bateria), planejada para a Fase 4 | 210 mil FE | 420 mil FE | 2,1 mi FE | 5,6 mi FE |
 | Autonomia aproximada, andando no plano, sem o painel e com a lanterna apagada | ~16,7 min | ~27,8 min | ~1,9 h | ~3,7 h |
 | Autonomia com inventário cheio ou na água | ~12,5 min | ~20,8 min | ~1,4 h | ~2,8 h |
 | Autonomia na água e com inventário cheio | ~10 min | ~16,7 min | ~1,2 h | ~2,2 h |
 | Painel solar (de dia) | 5 FE/t | 10 FE/t | 12 FE/t | 16 FE/t |
 | Painel solar (à noite) | — | — | 3 FE/t | 4 FE/t |
 | Recarga na base e pelo slot de energia | 500 FE/t | 1.000 FE/t | 2.500 FE/t | 5.000 FE/t |
-| Raio do retorno automático e da chamada pelo Dock, e bateria do retorno | 15 blocos, 10% | 24 blocos, 10% | 32 blocos, 10% | 48 blocos, 10% |
+| Raio do retorno automático e da chamada pelo Dock, e bateria do retorno (o retorno é planejado para a Fase 4; a chamada já existe) | 15 blocos, 10% | 24 blocos, 10% | 32 blocos, 10% | 48 blocos, 10% |
 
 ## Consumo por atividade
 
@@ -59,13 +59,13 @@ Os extras somam ao andar. O consumo só vale com o robô ativo.
 
 ## Valores gerais
 
-Valem para todos os tiers e ficam no config.
+Valem para todos os tiers e ficam no config. Os marcados como planejados entram no config junto do recurso, na fase indicada (pergunta 718).
 
 | Recurso | Valor |
 |---|---|
 | Consumo parado | 0 FE/t |
 | Carga do Cubit ao sair do craft | 25% |
-| Carga da Power Bank ao sair do craft | 0% |
+| Carga da Power Bank ao sair do craft, planejada para a Fase 4 | 0% |
 | Velocidade 1,0× (atributo de movimento) | 0,33 |
 | Intervalo para recalcular a rota | 10 ticks |
 | Distância para parar perto do player | 3 blocos |
@@ -90,7 +90,7 @@ Valem para todos os tiers e ficam no config.
 | Tempo para recuperar toda a vida na base | ~1 min |
 | Vida ao sair do conserto | 25% |
 | Intervalo para tentar de novo o resgate no vazio | 20 ticks |
-| Alcance do controle remoto ao mirar num Cubit | 32 blocos |
+| Alcance do controle remoto ao mirar num Cubit, planejado para a Fase 4 | 32 blocos |
 | Intervalo mínimo entre repetições de textos e alertas | ~25 s |
 | Intervalo mínimo entre falas sobre o tempo | 5 min |
 | Intervalo mínimo entre falas de bioma | 2 min |
@@ -130,9 +130,10 @@ Valem para todos os tiers e ficam no config.
 | Minérios no filtro do scanner | 1 | 3 | 6 | Ilimitado |
 | Scanner de mobs hostis (raio) | 8 blocos | 14 blocos | 20 blocos | 25 blocos |
 
-O raio dos dois scanners é o de uma esfera em volta do Cubit: só conta o que está a até esse número de blocos em linha reta, em qualquer direção (perguntas 602 a 606 e 622).
 | Intervalo de varredura de minérios | 35 s | 20 s | 15 s | 5 s |
 | Intervalo de varredura de mobs | 10 s | 8 s | 6 s | 4 s |
+
+O raio dos dois scanners é o de uma esfera em volta do Cubit: só conta o que está a até esse número de blocos em linha reta, em qualquer direção (perguntas 602 a 606 e 622).
 
 ## Comportamento e combate
 
@@ -197,6 +198,7 @@ Planejado para a Fase 5. O tier Base não aceita cards.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-07 23:41 | Arruma a tabela dos sensores e marca os valores planejados. |
 | Marcelo Fabiano | 2026-11-07 20:04 | Adiciona o intervalo das falas da redstone. |
 | Marcelo Fabiano | 2026-11-07 20:00 | Muda o raio do scanner de mobs. |
 | Marcelo Fabiano | 2026-11-07 19:06 | Muda os raios e os custos dos scanners e define a área como esfera. |

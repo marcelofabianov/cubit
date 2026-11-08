@@ -122,7 +122,7 @@ Estes nomes não mudam sem migração (regra 18 do `AGENTS.md`).
 
 | Onde | Nome | Conteúdo |
 |---|---|---|
-| Componente do item | `cubit:robot_state` | `tier`, `energy`, `health`, `lamp_enabled`, opcional, com o padrão ligado, e `color`, opcional, com o padrão `white`, também no item danificado |
+| Componente do item | `cubit:robot_state` | `tier`, `energy`, `health`, `lamp_enabled`, opcional, com o padrão ligado, `color`, opcional, com o padrão `white`, `scanners_enabled` e `chatter_enabled`, opcionais, com o padrão ligado, e `ore_filter`, opcional, com a lista de tags de minério, vazia por padrão (perguntas 560 e 582), também no item danificado |
 | Componente do item | `cubit:energy_slot` | Item do slot de energia e reserva de FE, também no item danificado |
 | Componente do item do Dock | `cubit:dock_energy` | Energia do estoque |
 | Componente do item | `cubit:robot_inventory` | Conteúdo do inventário, também no item danificado |
@@ -136,6 +136,8 @@ Estes nomes não mudam sem migração (regra 18 do `AGENTS.md`).
 | NBT da entidade na base | `DockPosition` | Posição do Dock em que hiberna |
 | NBT da entidade | `LampEnabled` | Chave da lanterna. Sem a chave no save, vale ligada |
 | NBT da entidade | `Color` | Cor da carcaça, com o nome do corante, como `light_blue`. Sem a chave ou com valor inválido, vale `white` |
+| NBT da entidade | `ScannersEnabled` e `ChatterEnabled` | Chaves dos scanners e das falas. Sem a chave no save, vale ligada |
+| NBT da entidade | `OreFilter` | Filtro do scanner, com as tags de minério. Uma tag inválida é ignorada e vai para o log |
 | Componente do jogo no item | `minecraft:custom_name` | Nome do Cubit, inclusive no item danificado |
 | NBT do jogo na entidade | `CustomName` | Nome do Cubit |
 | Dados do player | `cubit:following_robot` | `robot`: o UUID do robô que segue, ou nada |
@@ -156,6 +158,7 @@ O estado salvo é validado ao entrar no jogo, sem derrubá-lo (regra 17 do `AGEN
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-07 23:41 | Acrescenta as chaves dos scanners, do filtro e das falas aos contratos de save. |
 | Marcelo Fabiano | 2026-11-07 13:51 | Adiciona a energia negativa e o Dock sem dono à validação do save. |
 | Marcelo Fabiano | 2026-11-06 15:58 | Adiciona a cor e o nome ao contrato do save. |
 | Marcelo Fabiano | 2026-11-06 13:34 | Adiciona o contrato da chave da lanterna. |

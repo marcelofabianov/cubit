@@ -1,6 +1,6 @@
 # Funcionalidades entregues
 
-O que o Cubit já faz, do primeiro commit até o merge do PR #122. As regras completas ficam nas páginas de [`funcionalidades/`](funcionalidades/), e as respostas em [`perguntas/`](perguntas/README.md) prevalecem. Os números são os padrões do tier Base, o único no config até a Fase 4, e ficam em [`tiers.md`](tiers.md).
+O que o Cubit já faz, do primeiro commit até o merge do PR #126. As regras completas ficam nas páginas de [`funcionalidades/`](funcionalidades/), e as respostas em [`perguntas/`](perguntas/README.md) prevalecem. Os números são os padrões do tier Base, o único no config até a Fase 4, e ficam em [`tiers.md`](tiers.md).
 
 ## Visão geral
 
@@ -103,7 +103,7 @@ A tela do rosto mostra: normal, com piscada e olhar que acompanha a subida e o d
 
 ## Animações
 
-- **Corpo:** andar, parado, olhar para o dono e desligado.
+- **Corpo:** andar, parado, olhar para o dono, desligado e hibernando.
 - **Braços:** sobem por cerca de 2 s ao levar dano.
 - **Olhar e corpo:** os olhos acompanham um pulo ou um nível diferente do dono, e o corpo inclina de leve para ele.
 - **Esteiras:** animadas pela distância andada.
@@ -187,6 +187,7 @@ No estilo das imagens de conceito, sem a textura do baú do jogo.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-07 23:42 | Atualiza o marco e acrescenta a animação de hibernando. |
 | Marcelo Fabiano | 2026-11-07 23:12 | Adiciona as telas próprias. |
 | Marcelo Fabiano | 2026-11-07 23:11 | Adiciona as telas próprias. |
 | Marcelo Fabiano | 2026-11-07 21:55 | Lista as funcionalidades entregues até o PR #122. |

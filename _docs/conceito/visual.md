@@ -33,6 +33,7 @@ As imagens individuais estão em [`_docs/imagens/conceito/`](../imagens/conceito
 - **Lanterna acesa:** as pontas das antenas acendem em branco quente, numa camada transparente, em `textures/entity/general_robot_antenna/`, e a luz real ilumina os blocos em volta.
 - **Halo:** com a lanterna acesa, cada ponta tem um halo suave, sempre virado para a câmera e sem borda definida, que cresce e diminui devagar. O disco rígido da prancha não entra no modelo, porque pareceria um objeto sólido (perguntas 464 e 477).
 - **Brilho dos olhos:** com a lanterna acesa, um brilho suave aparece em volta do que acende na tela, com a cor de cada expressão, em `textures/entity/general_robot_screen_glow/`. Ele não cobre os olhos, para não estourar a cor deles, e acompanha a piscada e o olhar. A luz real no chão não muda de cor (perguntas 478 e 479).
+- **Scanners:** as pontas e os halos das antenas ficam vermelhos com um mob hostil no raio e azuis por cerca de 3 s com um minério achado, com um brilho no mesmo tom atrás do corpo, e o vermelho vence. A luz real continua branca. O detalhe está em [`sensores.md`](../funcionalidades/sensores.md#cor-e-caixas) (perguntas 558 e 638 a 642).
 - **Fora da lanterna:** a luz âmbar no alerta e a luz fraca com bateria baixa, também da prancha, não foram decididas.
 
 ## Expressões
@@ -70,13 +71,14 @@ Tocam todos, menos o ataque e o modo agressivo, que entram na Fase 4.
 ## Identificação
 
 - **Ícone do mod:** tem o mesmo desenho do ícone do item, em `textures/gui/mod_logo.png`, sem borrar os pixels. O arquivo é separado porque a tela de Mods sempre encaixa o logo numa altura de 50 pixels, então o tamanho vem da margem transparente, e 25×25 dá a escala exata de 2×. Ao mudar o ícone do item, atualize também este arquivo.
-- **Nome personalizado** com bigorna ou etiqueta, sempre visível acima do Cubit e, depois, no Jade.
+- **Nome personalizado** com bigorna ou etiqueta, sempre visível acima do Cubit, na tela dele e no Jade.
 - **Jade:** ao mirar no Cubit, o nome e a vida, que o Jade já mostra, o tier na cor do colar, a bateria em porcentagem e FE e o estado. Ao mirar no Induction Dock, o estoque de FE e o estado da tela. O modo atual entra com os modos de defesa e área, na Fase 4 (perguntas 659 a 662).
 
 ## Histórico de modificações
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-07 23:42 | Acrescenta as cores dos scanners e atualiza onde o nome aparece. |
 | Marcelo Fabiano | 2026-11-07 21:40 | Define o que o Jade mostra. |
 | Marcelo Fabiano | 2026-11-07 16:54 | Adiciona a reação às conquistas. |
 | Marcelo Fabiano | 2026-11-07 15:57 | Coloca o alerta e a surpresa em uso, com os sons de alerta. |

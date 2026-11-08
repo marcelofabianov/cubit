@@ -44,9 +44,6 @@ Duas abas, à direita da janela: **Inventory**, com o ícone do baú, e **Settin
 
 | Estado | Quando | Texto | Cor |
 |---|---|---|---|
-| Marcelo Fabiano | 2026-11-07 23:19 | Diminui os textos na mesma proporção. |
-| Marcelo Fabiano | 2026-11-07 22:57 | Registra a leitura do último tick. |
-| Marcelo Fabiano | 2026-11-07 22:44 | Registra a leitura do Cubit pelo Dock. |
 | Bateria crítica | Ativo, com a bateria crítica, que vence os dois de baixo | `● Critical battery` | Vermelho |
 | Seguindo | Ativo, seguindo o dono | `● Following` | Verde |
 | Ativo | Ativo, sem seguir ninguém (pergunta 686) | `● Active` | Cinza |
@@ -183,5 +180,9 @@ Pergunta 691.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-07 23:46 | Tira da tabela de estados as linhas de histórico que caíram nela. |
+| Marcelo Fabiano | 2026-11-07 23:19 | Diminui os textos na mesma proporção. |
+| Marcelo Fabiano | 2026-11-07 22:57 | Registra a leitura do último tick. |
+| Marcelo Fabiano | 2026-11-07 22:44 | Registra a leitura do Cubit pelo Dock. |
 | Marcelo Fabiano | 2026-11-07 22:34 | Registra a aprovação dos textos sem imagem. |
 | Marcelo Fabiano | 2026-11-07 22:31 | Define as telas próprias do Cubit e do Induction Dock. |

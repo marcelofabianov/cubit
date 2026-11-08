@@ -24,6 +24,7 @@ Só em algumas situações ele mostra um texto simples e direto, começando com 
 | O dono se afasta demais | Uma das frases de [`falas.md`](falas.md) |
 | Entra em outro tipo de bioma | Uma das frases de [`falas.md`](falas.md) |
 | O dono abate um animal | Uma das frases de [`falas.md`](falas.md), às vezes |
+| O dono minera redstone | Uma das frases de [`falas.md`](falas.md) |
 | Clique com um minério na mão | `Looking for DIAMOND` ou `Filter cleared`, vindo de qualquer estado do Cubit |
 | Tenho que ir carregar | `I need to recharge` |
 | Itens descarregados | `Items unloaded` |
@@ -65,6 +66,7 @@ O Cubit **nunca ataca o próprio dono nem mobs pacíficos**, em nenhum modo de d
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-07 23:42 | Acrescenta a fala da redstone. |
 | Marcelo Fabiano | 2026-11-07 17:14 | Adiciona as falas de animais. |
 | Marcelo Fabiano | 2026-11-07 17:11 | Adiciona as falas de bioma. |
 | Marcelo Fabiano | 2026-11-07 17:07 | Adiciona a fala de ficar para trás. |
