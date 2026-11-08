@@ -34,6 +34,26 @@
 | 321 | O nome `placed.ogg` e o momento "ao ser colocado no mundo" estão certos? | Sim. Detalha a pergunta 320 |
 | 322 | Em que fase o som de colocar no mundo passa a tocar? | Na Fase 3, junto dos outros oito. Detalha a pergunta 320 |
 | 421 | Como foi o roteiro manual do colar, do indicador de bateria e do tronco central com +0,5? | Teste finalizado, tudo ok, executado pelo desenvolvedor, sem detalhar cada passo. Ele não pediu +1, então o tronco fica em 2 unidades. O `make server` e o olhar de longe não foram citados em separado |
+| 653 | O agente prepara o commit 4, com o estado do projeto no `README.md` e no `AGENTS.md`? | "Nenhuma das opções", sem explicação. O agente não mexe nos dois arquivos e pergunta o que o desenvolvedor prefere |
+| 652 | O agente pode fazer os 3 commits do plano das cores? | Sim, os três, na branch `feature/119-scanner-colors`, sem push e sem PR. Vale só para esses commits |
+| 651 | Como foi o teste no jogo das cores das antenas, do halo do corpo e da seta do mob? | "Top, concluído o teste, tudo ok", executado pelo desenvolvedor, sem detalhar cada passo. Os tamanhos da seta e do halo ficam como estão. O agente não entendeu a resposta como autorização de commits e apresenta o plano |
+| 650 | O jogo está fechado antes dos gates da seta? | Sim. Os gates podem rodar |
+| 649 | Como o marcador do mob é desenhado? | Preenchido e translúcido, seguindo a recomendação: vermelho claro, como o das caixas, com cerca de 50% de opacidade, o pulso suave e um leve balanço para cima e para baixo |
+| 648 | Qual forma tem o marcador acima da cabeça do mob? | Uma seta para baixo, ▼, seguindo a recomendação, porque aponta para o mob e se entende de longe qual é ele, mesmo num grupo |
+| 647 | Em que entrega entra o marcador do mob? | Na issue #119, num commit próprio, junto das cores, seguindo a recomendação, porque os dois são sinais visuais do scanner de mobs |
+| 646 | Como o scanner identifica o mob hostil, no lugar da caixa de linhas retas? | Ideia do desenvolvedor, que viu a caixa no jogo: "será que conseguimos fazer identificação diferente?". Fica um marcador acima da cabeça do mob, vermelho, virado para a câmera e visível através das paredes, só no cliente do dono, sem mixin. A recomendação era a silhueta vermelha, pelo `requestOutlineEffect` da NeoForge, com prova técnica. Muda as respostas 557 e 613 no desenho do mob, e a caixa de minério continua. A forma e o desenho vão para a rodada |
+| 645 | O jogo está fechado antes dos gates das cores? | Sim. O agente já tinha compilado uma vez sem perguntar, depois de conferir que nenhum jogo estava aberto, e avisou o desenvolvedor do erro |
+| 644 | Como entra a entrega das cores? | Pelo fluxo normal, seguindo a recomendação: issue nova no milestone da Fase 3, branch `feature/{issue}-scanner-colors` a partir da `develop` e um PR que fecha o item 16 |
+| 643 | Em que pontos ficam os testes das cores? | JUnit: qual cor vence, quanto dura o azul e quando volta ao estado anterior. GameTests: o dado sincronizado com mob, com minério, com os dois, ao levar dano e com a chave desligada. Roteiro manual: ver as cores de dia, de noite e com a lanterna apagada. Segue a recomendação |
+| 642 | Qual tom as cores das antenas e do halo usam? | O mesmo das caixas, azul claro e vermelho claro, seguindo a recomendação, para cada cor ter um só significado (resposta 555). As pontas ficam sólidas, e os halos, translúcidos |
+| 641 | Como é o halo suave em volta do corpo? | Um brilho atrás do corpo, seguindo a recomendação: um disco translúcido e sem borda, sempre virado para a câmera, maior que o Cubit e centrado nele, como o halo das antenas, sem mixin. Detalha a resposta 558 |
+| 640 | Minério só do filtro deixa as antenas e o halo azuis? | Sim, por cerca de 3 s, seguindo a recomendação, o mesmo tempo da surpresa de um raro, em `surprised_expression_ticks`, sem chave nova. O azul quer dizer minério achado, como na caixa. Muda a resposta 556, que ligava o azul à surpresa |
+| 639 | Com um mob no raio e um minério achado ao mesmo tempo, qual cor vence? | O vermelho, seguindo a recomendação, porque o perigo vem primeiro, como na expressão. O azul volta se ainda houver tempo dele |
+| 638 | Como o cliente sabe quando acender as cores dos scanners? | Por um dado sincronizado novo, fora do save, com nenhum, mob ou minério, decidido no servidor pelo scanner, seguindo a recomendação. O vermelho continua mesmo se o Cubit levar dano com o mob no raio |
+| 637 | Há algo a acrescentar sobre a cor das antenas e o halo dos scanners? | Não: "Nada a acrescentar". O agente entendeu como autorização para seguir à rodada de decisões, não para a issue, a branch ou commits |
+| 636 | O desenvolvedor quer algum ajuste no roteiro, depois do PR #118? | Não: "seguir assim". Segue a cor das antenas e o halo dos scanners (resposta 558), que fecha o item 16, depois o Jade, as telas próprias e a `0.1.0`. As branches da #117 foram apagadas, com autorização |
+| 635 | O jogo está fechado antes de apagar a branch remota? | Sim. O `pre-push` rodou ao apagar a remota |
+| 634 | O jogo está fechado antes do push? | Sim. O `pre-push` rodou, e o PR #118 foi aberto. Fica sem commit até o próximo PR |
 | 633 | O agente segue com o commit 7 e prepara o rascunho do PR? | "Sim". O agente entendeu como autorização do commit 7, com as respostas 631 a 633, e do rascunho em `tmp/pr/`, não do push nem da abertura do PR |
 | 632 | O jogo está fechado? | Sim. Os gates podem rodar no estado final da branch |
 | 631 | O agente pode fazer o commit 6, com o status do `README.md` e do `AGENTS.md`? | Sim, com o diff apresentado, sem push e sem PR. Vale só para esse commit |
@@ -312,6 +332,17 @@
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-07 21:10 | Registra as respostas 652 e 653. |
+| Marcelo Fabiano | 2026-11-07 21:08 | Registra a resposta 651. |
+| Marcelo Fabiano | 2026-11-07 21:06 | Registra a resposta 650. |
+| Marcelo Fabiano | 2026-11-07 21:03 | Registra as respostas 648 e 649. |
+| Marcelo Fabiano | 2026-11-07 21:01 | Registra as respostas 646 e 647. |
+| Marcelo Fabiano | 2026-11-07 20:53 | Registra a resposta 645. |
+| Marcelo Fabiano | 2026-11-07 20:46 | Registra as respostas 642, 643 e 644. |
+| Marcelo Fabiano | 2026-11-07 20:44 | Registra as respostas 638, 639, 640 e 641. |
+| Marcelo Fabiano | 2026-11-07 20:40 | Registra a resposta 637. |
+| Marcelo Fabiano | 2026-11-07 20:39 | Registra as respostas 635 e 636. |
+| Marcelo Fabiano | 2026-11-07 20:33 | Registra a resposta 634. |
 | Marcelo Fabiano | 2026-11-07 20:21 | Registra a resposta 633. |
 | Marcelo Fabiano | 2026-11-07 20:18 | Registra as respostas 631 e 632. |
 | Marcelo Fabiano | 2026-11-07 20:12 | Registra as respostas 628, 629 e 630. |
