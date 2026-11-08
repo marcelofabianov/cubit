@@ -34,6 +34,8 @@
 | 321 | O nome `placed.ogg` e o momento "ao ser colocado no mundo" estão certos? | Sim. Detalha a pergunta 320 |
 | 322 | Em que fase o som de colocar no mundo passa a tocar? | Na Fase 3, junto dos outros oito. Detalha a pergunta 320 |
 | 421 | Como foi o roteiro manual do colar, do indicador de bateria e do tronco central com +0,5? | Teste finalizado, tudo ok, executado pelo desenvolvedor, sem detalhar cada passo. Ele não pediu +1, então o tronco fica em 2 unidades. O `make server` e o olhar de longe não foram citados em separado |
+| 699 | O jogo está fechado antes de compilar a leitura do último tick do Cubit, na #125? | Sim |
+| 698 | Como o gasto, as causas, a origem da recarga e o estado do painel do último tick chegam ao menu do Cubit, se a `RobotEntity` está no limite de 400 linhas? | Por um data attachment do NeoForge no robô, sem serializador, que não vai para o save nem para a rede. O `RobotEnergyUse` e o `RobotSolar` gravam a leitura a cada tick, e o menu a lê no servidor. Segue o caminho da resposta 696 |
 | 697 | O jogo está fechado antes de compilar a parte do Dock da #125? | Sim |
 | 696 | Como a tela do Dock lê a bateria, a vida, a recarga e a expressão do Cubit na base, se a `RobotEntity` está no limite de 400 linhas e a regra 42 pede interface? | Por uma capability de entidade do NeoForge: o `block/` define uma interface curta de leitura, e o registro a liga ao tipo do Cubit, com um adaptador no pacote `entity/`. Não toca na `RobotEntity` nem nos saves |
 | 695 | O jogo está fechado antes do segundo `make format` e `make test` da #125? | Sim |
@@ -376,6 +378,8 @@
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-07 22:59 | Registra a resposta 699. |
+| Marcelo Fabiano | 2026-11-07 22:57 | Registra a resposta 698. |
 | Marcelo Fabiano | 2026-11-07 22:53 | Registra a resposta 697. |
 | Marcelo Fabiano | 2026-11-07 22:44 | Registra a resposta 696. |
 | Marcelo Fabiano | 2026-11-07 22:39 | Registra a resposta 695. |
