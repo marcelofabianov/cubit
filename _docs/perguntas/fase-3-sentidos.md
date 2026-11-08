@@ -34,6 +34,24 @@
 | 321 | O nome `placed.ogg` e o momento "ao ser colocado no mundo" estão certos? | Sim. Detalha a pergunta 320 |
 | 322 | Em que fase o som de colocar no mundo passa a tocar? | Na Fase 3, junto dos outros oito. Detalha a pergunta 320 |
 | 421 | Como foi o roteiro manual do colar, do indicador de bateria e do tronco central com +0,5? | Teste finalizado, tudo ok, executado pelo desenvolvedor, sem detalhar cada passo. Ele não pediu +1, então o tronco fica em 2 unidades. O `make server` e o olhar de longe não foram citados em separado |
+| 671 | O agente pode fazer os 3 commits do plano do Jade? | Sim, os três, na branch `feature/121-jade`, sem push e sem PR. Vale só para esses commits |
+| 670 | Como foi o teste no jogo do Jade? | "Perfeito, teste ok", executado pelo desenvolvedor, sem detalhar cada passo do roteiro. O agente não entendeu a resposta como autorização de commits e apresenta o plano |
+| 669 | O jogo está fechado antes do `make data` e dos gates do Jade? | Sim |
+| 668 | O jogo está fechado antes de baixar o Jade e compilar? | Sim. O SHA-512 do jar baixado do Modrinth bateu com o do `jade.pw.toml` do Iron Meridian |
+| 667 | Onde fica o plugin do Jade? | Num pacote novo, `io.github.marcelofabianov.cubit.compat.jade`, só com as classes que importam o Jade, seguindo a recomendação. O Jade carrega o plugin pela anotação dele, então nada do mod o referencia. Uma regra de ArchUnit garante que só esse pacote importa o Jade, e a estrutura de pacotes do `AGENTS.md` ganha a linha `compat/` |
+| 666 | Em que pontos ficam os testes do Jade? | JUnit: o texto da bateria em porcentagem e FE. GameTest: o mod abre e o Cubit funciona sem o Jade. Roteiro manual: ver o tooltip do Cubit e do Dock em cada estado. Segue a recomendação |
+| 665 | Em quais execuções o Jade carrega? | Só no `make client`, seguindo a recomendação. O código compila contra o Jade, e o jar não o leva. As GameTests e o `make server` rodam sem ele, o que prova que o mod abre sem o Jade (regra 24) |
+| 664 | De qual repositório Maven o Jade entra no build? | Do Maven do Modrinth, `api.modrinth.com/maven`, limitado ao grupo `maven.modrinth`, seguindo a recomendação. O agente conferiu na API do Modrinth que a versão `eYz2YBGT` é a `15.10.6+neoforge`, com o mesmo SHA-512 do `jade.pw.toml` do Iron Meridian |
+| 663 | Qual versão do Jade entra no build? | A do Iron Meridian, conferida pelo agente no GitHub do pack, só lendo o arquivo pelo `gh`, sem baixar nada: `Jade-1.21.1-NeoForge-15.10.6.jar` |
+| 662 | O Induction Dock aparece no Jade? | Sim, com o estoque de FE e o estado da tela: desligada, ociosa, carregando, completa ou sem energia, seguindo a recomendação |
+| 661 | Como o Jade mostra a bateria exata, que só existe no servidor? | Pelo provedor de dados de servidor do Jade, que envia a carga só enquanto alguém mira no Cubit, sem pacote próprio do mod, seguindo a recomendação |
+| 660 | O que o tooltip do Jade mostra ao mirar no Cubit? | O tier, a bateria, em porcentagem e FE, e o estado: ativo, desligado, sem bateria ou hibernando. O nome e a vida o Jade já mostra sozinho |
+| 659 | Há algo a acrescentar sobre o Jade? | Não: "Nada a acrescentar", depois do alinhamento: nome, tier, bateria e estado do Cubit, sem o "modo atual", que é da Fase 4 (regra 43), e o Jade opcional e isolado. O agente entendeu como autorização para seguir à rodada de decisões, não para a issue, a branch ou commits |
+| 658 | O desenvolvedor quer algum ajuste no roteiro, depois do PR #120? | Não: "seguir assim". Segue o Jade (item 18), depois as telas próprias (item 19, que depende da resposta 500) e a `0.1.0`. As branches da #119 foram apagadas, com autorização |
+| 657 | Onde entram a marcação do item 16, o estado do projeto e as respostas sem commit? | No PR do Jade, num commit próprio no início da branch, seguindo a recomendação, como os itens 7, 8, 12 e 20 entraram na #117 |
+| 656 | O jogo está fechado antes de apagar a branch remota da #119? | Sim. O `pre-push` rodou ao apagar a remota |
+| 655 | O jogo está fechado antes do push da #119? | Sim. O `pre-push` rodou, e o PR #120 foi aberto. Fica sem commit até o próximo PR |
+| 654 | Quando o estado do projeto no `README.md` e no `AGENTS.md` é atualizado com as cores? | No PR seguinte, junto da marcação do item 16 do checklist, depois do merge da #119. Fecha a resposta 653 |
 | 653 | O agente prepara o commit 4, com o estado do projeto no `README.md` e no `AGENTS.md`? | "Nenhuma das opções", sem explicação. O agente não mexe nos dois arquivos e pergunta o que o desenvolvedor prefere |
 | 652 | O agente pode fazer os 3 commits do plano das cores? | Sim, os três, na branch `feature/119-scanner-colors`, sem push e sem PR. Vale só para esses commits |
 | 651 | Como foi o teste no jogo das cores das antenas, do halo do corpo e da seta do mob? | "Top, concluído o teste, tudo ok", executado pelo desenvolvedor, sem detalhar cada passo. Os tamanhos da seta e do halo ficam como estão. O agente não entendeu a resposta como autorização de commits e apresenta o plano |
@@ -332,6 +350,16 @@
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-07 21:46 | Registra a resposta 671. |
+| Marcelo Fabiano | 2026-11-07 21:45 | Registra a resposta 670. |
+| Marcelo Fabiano | 2026-11-07 21:41 | Registra a resposta 669. |
+| Marcelo Fabiano | 2026-11-07 21:36 | Registra as respostas 667 e 668. |
+| Marcelo Fabiano | 2026-11-07 21:32 | Registra as respostas 664, 665 e 666. |
+| Marcelo Fabiano | 2026-11-07 21:29 | Registra as respostas 660, 661, 662 e 663. |
+| Marcelo Fabiano | 2026-11-07 21:27 | Registra a resposta 659. |
+| Marcelo Fabiano | 2026-11-07 21:25 | Registra as respostas 656, 657 e 658. |
+| Marcelo Fabiano | 2026-11-07 21:18 | Registra a resposta 655. |
+| Marcelo Fabiano | 2026-11-07 21:11 | Registra a resposta 654. |
 | Marcelo Fabiano | 2026-11-07 21:10 | Registra as respostas 652 e 653. |
 | Marcelo Fabiano | 2026-11-07 21:08 | Registra a resposta 651. |
 | Marcelo Fabiano | 2026-11-07 21:06 | Registra a resposta 650. |

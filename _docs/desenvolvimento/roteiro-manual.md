@@ -507,6 +507,23 @@ As frases estão em [`falas.md`](../conceito/falas.md). Fique a céu aberto, com
 | 32 | Coloque redstone perto do Cubit, espere o `Cubit: REDSTONE!!!` e minere durante a surpresa | Nenhuma fala de redstone, porque a surpresa não é calma |
 | 33 | Minere minério de ferro | Nenhuma fala |
 
+## Jade
+
+O `make client` já carrega o Jade. Mire no Cubit ou no Induction Dock para ver o tooltip no alto da tela.
+
+| # | Passo | Resultado esperado |
+|---|---|---|
+| 1 | Coloque um Cubit e mire nele | Nome, vida, `Tier: Base` em cinza, `Battery: 25% (75,000 / 300,000 FE)` e `State: Active` |
+| 2 | Deixe-o andar um pouco e mire de novo | A bateria cai |
+| 3 | Zere a bateria com `/data merge entity @e[type=cubit:general_robot,limit=1,sort=nearest] {Energy:0L}` | `State: Out of battery` e `Battery: 0% (0 / 300,000 FE)` |
+| 4 | Ligue outro Cubit, para desligar o primeiro, e mire no primeiro com carga | `State: Switched off` |
+| 5 | Leve um Cubit ao Dock e mire nele | `State: Hibernating` |
+| 6 | Mire no Dock vazio, sem energia | `Energy: 0 / 100,000 FE` e `Status: Off` |
+| 7 | Coloque redstone no Dock e mire | O estoque sobe, e `Status: Idle` |
+| 8 | Com o Cubit na base, mire no Dock | `Status: Charging` e, cheio, `Status: Complete` |
+| 9 | Nas opções do Jade, em Plugins, desligue `Cubit` e `Induction Dock` | As linhas do mod somem |
+| 10 | Rode `make server` | O servidor abre sem o Jade |
+
 ## Servidor dedicado
 
 1. Rode `make server` e aceite o EULA em `run/eula.txt`, se ainda não tiver aceitado.
@@ -516,6 +533,7 @@ As frases estão em [`falas.md`](../conceito/falas.md). Fique a céu aberto, com
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-07 21:40 | Adiciona o Jade. |
 | Marcelo Fabiano | 2026-11-07 21:05 | Troca a caixa do mob pela seta. |
 | Marcelo Fabiano | 2026-11-07 20:51 | Adiciona as cores dos scanners. |
 | Marcelo Fabiano | 2026-11-07 20:04 | Adiciona as falas da redstone. |
