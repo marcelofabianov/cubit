@@ -34,6 +34,9 @@
 | 321 | O nome `placed.ogg` e o momento "ao ser colocado no mundo" estão certos? | Sim. Detalha a pergunta 320 |
 | 322 | Em que fase o som de colocar no mundo passa a tocar? | Na Fase 3, junto dos outros oito. Detalha a pergunta 320 |
 | 421 | Como foi o roteiro manual do colar, do indicador de bateria e do tronco central com +0,5? | Teste finalizado, tudo ok, executado pelo desenvolvedor, sem detalhar cada passo. Ele não pediu +1, então o tronco fica em 2 unidades. O `make server` e o olhar de longe não foram citados em separado |
+| 674 | O jogo está fechado antes do push da #123? | Sim |
+| 673 | O que o desenvolvedor pediu depois do PR #122? | Um `.md` com todas as funcionalidades do Cubit, do início ao último commit, que o agente criou em `_docs/funcionalidades-entregues.md`, e o commit dos arquivos sem commit, com push e PR. O agente entendeu como autorização desses commits, do push e do PR, numa issue e numa branch próprias (#123), porque o commit direto na `develop` é proibido. A marcação do item 18, Jade, entra junto. A pergunta sobre apagar a branch da #121 e a do roteiro do item 19 ficaram sem resposta |
+| 672 | O jogo está fechado antes do push da #121? | Sim. O `pre-push` rodou, e o PR #122 foi aberto. Fica sem commit até o próximo PR |
 | 671 | O agente pode fazer os 3 commits do plano do Jade? | Sim, os três, na branch `feature/121-jade`, sem push e sem PR. Vale só para esses commits |
 | 670 | Como foi o teste no jogo do Jade? | "Perfeito, teste ok", executado pelo desenvolvedor, sem detalhar cada passo do roteiro. O agente não entendeu a resposta como autorização de commits e apresenta o plano |
 | 669 | O jogo está fechado antes do `make data` e dos gates do Jade? | Sim |
@@ -350,6 +353,8 @@
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-07 22:00 | Registra as respostas 673 e 674. |
+| Marcelo Fabiano | 2026-11-07 21:49 | Registra a resposta 672. |
 | Marcelo Fabiano | 2026-11-07 21:46 | Registra a resposta 671. |
 | Marcelo Fabiano | 2026-11-07 21:45 | Registra a resposta 670. |
 | Marcelo Fabiano | 2026-11-07 21:41 | Registra a resposta 669. |
