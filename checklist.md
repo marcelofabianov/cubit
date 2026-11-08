@@ -60,7 +60,7 @@ A ordem é a da numeração (perguntas 356 e 365), com a lanterna antes do paine
 15. [x] Feixe: saiu da Fase 3 e foi para o Minerador, na Fase 5 (pergunta 463)
 16. [x] Scanner de minérios e scanner de mobs, com a chave deles e os alertas
 17. [x] Nome personalizado e cor da carcaça
-18. [ ] Jade
+18. [x] Jade
 19. [ ] Telas próprias do Cubit e do Induction Dock, com janelas personalizadas, textura de metal de robô e tooltips, sem o padrão do Minecraft (pergunta 371)
 20. [x] Falas do Cubit sobre o tempo e as conquistas, na mesma entrega dos scanners (perguntas 572 a 583)
 
