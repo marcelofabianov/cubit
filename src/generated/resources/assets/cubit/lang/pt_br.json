@@ -5,6 +5,7 @@
   "config.jade.plugin_cubit.induction_dock": "Base de Indução",
   "config.jade.plugin_cubit.robot": "Cubit",
   "entity.cubit.general_robot": "Cubit",
+  "fml.menu.mods.info.description.cubit": "Cubit é um robô companheiro fofo, movido a bateria, que segue você, carrega seus itens e ilumina o caminho. Ele procura minérios e mobs hostis, conversa com bipes e textos curtos e recarrega na Base de Indução com FE de qualquer mod, com redstone ou com o painel solar. Recolha-o como item quando quiser, com tudo o que ele guarda a salvo.",
   "gui.cubit.dock.call": "Chamar o Cubit mais próximo (%s blocos)",
   "gui.cubit.dock.charging_line": "+%s FE/t · %s",
   "gui.cubit.dock.complete_line": "Bateria cheia · %s",

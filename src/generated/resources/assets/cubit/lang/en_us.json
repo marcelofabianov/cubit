@@ -5,6 +5,7 @@
   "config.jade.plugin_cubit.induction_dock": "Induction Dock",
   "config.jade.plugin_cubit.robot": "Cubit",
   "entity.cubit.general_robot": "Cubit",
+  "fml.menu.mods.info.description.cubit": "Cubit is a cute battery-powered robot companion that follows you, carries your items and lights the way. It scans for ores and hostile mobs, talks with beeps and short messages, and recharges at the Induction Dock with FE from any mod, with redstone or with its solar panel. Pick it back up as an item whenever you want, with everything inside it kept safe.",
   "gui.cubit.dock.call": "Call the nearest Cubit (%s blocks)",
   "gui.cubit.dock.charging_line": "+%s FE/t · %s",
   "gui.cubit.dock.complete_line": "Battery full · %s",
