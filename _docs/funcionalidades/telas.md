@@ -44,6 +44,7 @@ Duas abas, à direita da janela: **Inventory**, com o ícone do baú, e **Settin
 
 | Estado | Quando | Texto | Cor |
 |---|---|---|---|
+| Marcelo Fabiano | 2026-11-07 22:44 | Registra a leitura do Cubit pelo Dock. |
 | Bateria crítica | Ativo, com a bateria crítica, que vence os dois de baixo | `● Critical battery` | Vermelho |
 | Seguindo | Ativo, seguindo o dono | `● Following` | Verde |
 | Ativo | Ativo, sem seguir ninguém (pergunta 686) | `● Active` | Cinza |
@@ -103,6 +104,7 @@ O enum e o nome de contrato `status` não mudam (pergunta 313). Muda só o texto
 - **Botões:** a chave das funções e o botão de chamar usam o clique de botão de menu do próprio jogo, validado no servidor, sem pacote próprio (pergunta 683).
 - **Menus:** `RobotMenu` e `InductionDockMenu` evoluem, sem menus paralelos, com `RobotScreen` e `InductionDockScreen`.
 - **Valores grandes:** um valor do menu só leva 16 bits. Bateria e estoque, que passam disso, vão divididos em duas partes e são remontados no cliente.
+- **Cubit na base:** o Dock o lê por uma capability de entidade do NeoForge, uma interface curta de leitura, sem depender da classe do robô (regra 42 e pergunta 696).
 - **O que vai ao abrir:** o que não muda com a tela aberta, como o nome do dono, o tier e o filtro do scanner, vai junto da abertura.
 - **Regras:** a escolha do estado do topo e o formato dos números ficam em `domain/`, testados com JUnit. A `RobotEntity` não recebe código novo, porque está perto do limite de 400 linhas.
 
