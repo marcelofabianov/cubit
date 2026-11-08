@@ -89,7 +89,7 @@ public final class RobotScreenReadout {
         scanners.oreRadiusBlocks(),
         scanners.mobRadiusBlocks(),
         scanners.oreCost().amount(),
-        filter.kinds().stream().map(OreKind::shownName).toList(),
+        filter.kinds().stream().map(OreKind::tag).toList(),
         filter.kinds().stream().findFirst().map(OreKind::tag).orElse(NO_ICON));
   }
 }

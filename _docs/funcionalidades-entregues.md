@@ -134,9 +134,9 @@ Uma camada própria, logo acima da hotbar, só para o dono, a 75% da fonte do jo
 - **Minérios:** a cada 35 s, por 50 FE. Usa a tag `c:ores`, então reconhece minérios de qualquer mod.
 - **Minérios raros:** sucata de netherita, esmeralda, diamante, ouro, lápis, redstone e ferro, numa lista do config.
 - **Mobs:** a cada 10 s, por 50 FE, tudo o que o jogo marca como inimigo, inclusive de outros mods e atrás de paredes, e o mob neutro que ataca o dono.
-- **Filtro:** clique no Cubit com um minério na mão, sem gastar o item. Responde `Cubit: Looking for COAL` e `Cubit: Filter cleared`.
+- **Filtro:** clique no Cubit com um minério na mão, sem gastar o item. Responde `Cubit: Looking for Coal Ore` e `Cubit: Filter cleared`.
 - **Só o novo avisa:** o mesmo mob ou bloco não avisa de novo enquanto continuar no raio.
-- **Avisos:** `Cubit: DIAMOND!!!`, com som e surpresa, para minério raro. `Cubit: COAL!!!`, sem som, para minério do filtro. `Cubit: Careful, Zombie!`, com som e a expressão de alerta, para mob.
+- **Avisos:** `Cubit: Diamond Ore!!!`, com som e surpresa, para minério raro. `Cubit: Coal Ore!!!`, sem som, para minério do filtro. `Cubit: Careful, Zombie!`, com som e a expressão de alerta, para mob.
 - **Caixas:** só o dono vê, através dos blocos, uma caixa azul clara e discreta em volta de cada minério novo, por cerca de 10 s ou até minerar.
 - **Seta:** uma seta vermelha para baixo sobre a cabeça do mob, enquanto ele estiver no raio, com pulso e um leve balanço.
 - **Cores:** as antenas e um halo atrás do corpo ficam vermelhos com mob e azuis por cerca de 3 s com minério, de dia ou de noite, e todos veem. O vermelho vence.
@@ -174,7 +174,7 @@ No estilo das imagens de conceito, sem a textura do baú do jogo.
 - **Energia:** FE pelas capabilities do NeoForge, aceitando cabos de qualquer mod, e redstone para funcionar sem outros mods.
 - **Dependências:** GeckoLib e LambDynamicLights, obrigatórias, e Jade, opcional.
 - **Servidor dedicado:** abre sem classes do cliente, conferido pelas GameTests.
-- **Idioma:** tudo no jogo em inglês, no `en_us.json`.
+- **Idioma:** inglês e português, no `en_us.json` e no `pt_br.json`, conforme o idioma do jogo, com as mesmas chaves conferidas por um teste.
 - **Qualidade:** testes JUnit no domínio, com cobertura acima de 85%, GameTests no mundo e um roteiro manual. Os gates de commit e de push rodam formatação, Checkstyle, ArchUnit, testes e datagen.
 
 ## Ainda não entrou
@@ -187,6 +187,7 @@ No estilo das imagens de conceito, sem a textura do baú do jogo.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-08 00:11 | Cita a tradução para o português. |
 | Marcelo Fabiano | 2026-11-07 23:42 | Atualiza o marco e acrescenta a animação de hibernando. |
 | Marcelo Fabiano | 2026-11-07 23:12 | Adiciona as telas próprias. |
 | Marcelo Fabiano | 2026-11-07 23:11 | Adiciona as telas próprias. |

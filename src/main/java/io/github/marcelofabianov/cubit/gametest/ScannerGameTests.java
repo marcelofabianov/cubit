@@ -4,6 +4,7 @@ import io.github.marcelofabianov.cubit.CubitMod;
 import io.github.marcelofabianov.cubit.domain.behavior.RobotExpression;
 import io.github.marcelofabianov.cubit.domain.robot.OreFilter;
 import io.github.marcelofabianov.cubit.domain.robot.OreKind;
+import io.github.marcelofabianov.cubit.entity.OreNames;
 import io.github.marcelofabianov.cubit.entity.RobotEntity;
 import io.github.marcelofabianov.cubit.entity.RobotFace;
 import io.github.marcelofabianov.cubit.entity.RobotNotices;
@@ -15,6 +16,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.animal.Wolf;
@@ -74,6 +77,8 @@ public final class ScannerGameTests {
       new BlockPos(ROBOT_X + MOB_AHEAD, STAND_Y, MIDDLE_Z);
   private static final String ZOMBIE_NAME = "entity.minecraft.zombie";
   private static final String DIAMOND_TAG = "c:ores/diamond";
+  private static final String DIAMOND_BLOCK = "diamond_ore";
+  private static final String NOT_THE_BLOCK = "The ore is not named by the block of its tag";
   private static final String COAL_TAG = "c:ores/coal";
   private static final OreKind COAL = new OreKind(COAL_TAG);
   private static final OreFilter COAL_FILTER = new OreFilter(List.of(COAL));
@@ -95,6 +100,17 @@ public final class ScannerGameTests {
   private static final String LOADED = "Reading loaded a chunk";
 
   private ScannerGameTests() {}
+
+  /** The name follows the language of the player, as the block does (answer 734). */
+  @GameTest(template = ARENA)
+  public static void anOreIsNamedByTheBlockOfItsTag(GameTestHelper helper) {
+    Component name = OreNames.of(new OreKind(DIAMOND_TAG));
+    boolean byBlock =
+        name.getContents() instanceof TranslatableContents translatable
+            && translatable.getKey().endsWith(DIAMOND_BLOCK);
+    helper.assertTrue(byBlock, NOT_THE_BLOCK);
+    helper.succeed();
+  }
 
   @GameTest(template = ARENA, batch = MOBS_BATCH)
   public static void aMobInRangeWarnsSpendsAndAlerts(GameTestHelper helper) {

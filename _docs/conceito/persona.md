@@ -18,14 +18,14 @@ Só em algumas situações ele mostra um texto simples e direto, começando com 
 | O Cubit leva dano | `That hurts!` |
 | O dono leva dano, por perto | `Careful!` |
 | Inimigo próximo | `Careful, Zombie!`, com o nome do mob |
-| Minério encontrado | `DIAMOND!!!`, com o nome do minério, ou `Ore found`, se ele só tiver a tag `c:ores` |
+| Minério encontrado | `Diamond Ore!!!`, com o nome do minério, ou `Ore found`, se ele só tiver a tag `c:ores` |
 | O tempo ou o horário muda | Uma das frases de [`falas.md`](falas.md) |
 | O dono ganha uma conquista | Uma das frases de [`falas.md`](falas.md) |
 | O dono se afasta demais | Uma das frases de [`falas.md`](falas.md) |
 | Entra em outro tipo de bioma | Uma das frases de [`falas.md`](falas.md) |
 | O dono abate um animal | Uma das frases de [`falas.md`](falas.md), às vezes |
 | O dono minera redstone | Uma das frases de [`falas.md`](falas.md) |
-| Clique com um minério na mão | `Looking for DIAMOND` ou `Filter cleared`, vindo de qualquer estado do Cubit |
+| Clique com um minério na mão | `Looking for Diamond Ore` ou `Filter cleared`, vindo de qualquer estado do Cubit |
 | Tenho que ir carregar | `I need to recharge` |
 | Itens descarregados | `Items unloaded` |
 
@@ -66,6 +66,7 @@ O Cubit **nunca ataca o próprio dono nem mobs pacíficos**, em nenhum modo de d
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-08 00:11 | Usa o nome do bloco nos exemplos de minério. |
 | Marcelo Fabiano | 2026-11-07 23:42 | Acrescenta a fala da redstone. |
 | Marcelo Fabiano | 2026-11-07 17:14 | Adiciona as falas de animais. |
 | Marcelo Fabiano | 2026-11-07 17:11 | Adiciona as falas de bioma. |

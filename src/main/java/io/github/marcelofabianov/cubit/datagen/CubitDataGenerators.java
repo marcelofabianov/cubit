@@ -22,7 +22,9 @@ public final class CubitDataGenerators {
     DataGenerator generator = event.getGenerator();
     PackOutput output = generator.getPackOutput();
     ExistingFileHelper existingFiles = event.getExistingFileHelper();
-    generator.addProvider(event.includeClient(), new CubitLanguageProvider(output));
+    for (Language language : Language.values()) {
+      generator.addProvider(event.includeClient(), new CubitLanguageProvider(output, language));
+    }
     generator.addProvider(event.includeClient(), new CubitItemModelProvider(output, existingFiles));
     generator.addProvider(event.includeClient(), new CubitSoundProvider(output, existingFiles));
     generator.addProvider(

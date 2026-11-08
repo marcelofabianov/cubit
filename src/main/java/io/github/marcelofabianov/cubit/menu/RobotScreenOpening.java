@@ -5,8 +5,9 @@ import net.minecraft.network.FriendlyByteBuf;
 
 /**
  * What travels once, when the robot screen opens, because it does not change while it is open: the
- * size of the inventory, the numbers in the descriptions of the switches and the scanner filter.
- * The filter only changes by a click on the robot, which the open screen does not allow.
+ * size of the inventory, the numbers in the descriptions of the switches and the tags of the
+ * scanner filter, which the client names in its own language. The filter only changes by a click on
+ * the robot, which the open screen does not allow.
  */
 public record RobotScreenOpening(
     int slots,
@@ -15,12 +16,12 @@ public record RobotScreenOpening(
     int oreRadius,
     int mobRadius,
     long scanCost,
-    List<String> filterNames,
+    List<String> filterTags,
     String filterIconTag) {
   private static final int MAX_FILTER = 64;
 
   public RobotScreenOpening {
-    filterNames = List.copyOf(filterNames);
+    filterTags = List.copyOf(filterTags);
   }
 
   public void write(FriendlyByteBuf data) {
@@ -30,7 +31,7 @@ public record RobotScreenOpening(
     data.writeVarInt(oreRadius);
     data.writeVarInt(mobRadius);
     data.writeVarLong(scanCost);
-    data.writeCollection(filterNames, FriendlyByteBuf::writeUtf);
+    data.writeCollection(filterTags, FriendlyByteBuf::writeUtf);
     data.writeUtf(filterIconTag);
   }
 
@@ -49,6 +50,6 @@ public record RobotScreenOpening(
   }
 
   public boolean hasFilter() {
-    return !filterNames.isEmpty();
+    return !filterTags.isEmpty();
   }
 }

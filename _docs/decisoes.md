@@ -22,6 +22,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 ## Idioma
 
 - **Mod:** o que entra no jar, aparece no jogo ou acompanha o download fica em inglês, o idioma base. O jogo também tem o `pt_br.json`, gerado pelo mesmo datagen, para o player escolher o português (pergunta 712, que substitui a 449).
+- **Tradução:** os nomes são todos traduzidos, como `Base de Indução`, e o minério nos avisos e no filtro é o nome do bloco da tag, no idioma do jogo (perguntas 733 e 734).
 - **Changelog:** o `CHANGELOG.md`, na raiz, fica em inglês, no formato Keep a Changelog (pergunta 713).
 - **Programação:** arquivos como `.java` e `.sh` ficam em inglês.
 - **Conteúdo:** arquivos como `.md` ficam em português, inclusive o nome do arquivo e da pasta.
@@ -117,7 +118,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Telas próprias (perguntas 371 e 675 a 692):** a tela do Cubit e a do Induction Dock seguem as imagens de conceito `v0.1.0`, e não o estilo do Minecraft, com retratos e torre em sprites 2D e as respostas como prioridade sobre as imagens. O Cubit desligado não abre a tela, e ela fecha se ele desligar. Os botões usam o clique de botão de menu do jogo, sem pacote próprio. Os estados do Dock usam os nomes das imagens, também no Jade, e os números aparecem abreviados, como `214k / 300k FE`. O Dock lê o Cubit na base por uma capability de entidade (pergunta 696), e o menu do Cubit lê o último tick por um attachment sem save (pergunta 698). O detalhe está em [`telas.md`](funcionalidades/telas.md).
 - **Jade (perguntas 659 a 667):** opcional, na versão do Iron Meridian, num pacote isolado, `compat.jade`, mostra o tier, a bateria e o estado do Cubit e o estoque e o estado do Induction Dock, com os dados do servidor só enquanto alguém mira.
 - **Cores dos scanners (perguntas 558 e 638 a 643):** as antenas e um brilho atrás do corpo ficam vermelhos com mob no raio e azuis por cerca de 3 s com minério achado, no tom das caixas, com o vermelho vencendo. Todos veem, e a luz real continua branca.
-- **Scanners (perguntas 544 a 564 e 602 a 610):** só o Cubit ativo que segue varre, com a chave `Scanners`, numa esfera em volta dele, por um custo fixo por varredura, igual nos dois scanners, em intervalos separados para minérios e mobs. Só o que é novo avisa, dizendo o nome: `Cubit: DIAMOND!!!` e `Cubit: Careful, Zombie!`, com o intervalo mínimo por nome. O filtro é definido clicando com um minério na mão, e os raros são uma lista de tags, de ferro para cima. Mob hostil é o que o jogo marca como `Enemy`. A entrega teve três PRs: detecção, caixas e cores, com a seta sobre o mob entrando junto das cores (perguntas 590, 615 e 647).
+- **Scanners (perguntas 544 a 564 e 602 a 610):** só o Cubit ativo que segue varre, com a chave `Scanners`, numa esfera em volta dele, por um custo fixo por varredura, igual nos dois scanners, em intervalos separados para minérios e mobs. Só o que é novo avisa, dizendo o nome: `Cubit: Diamond Ore!!!` e `Cubit: Careful, Zombie!`, com o intervalo mínimo por nome. O filtro é definido clicando com um minério na mão, e os raros são uma lista de tags, de ferro para cima. Mob hostil é o que o jogo marca como `Enemy`. A entrega teve três PRs: detecção, caixas e cores, com a seta sobre o mob entrando junto das cores (perguntas 590, 615 e 647).
 - **Estado do robô como item:** inclui as configurações, além de bateria, vida, inventário, tier, nome e cor. Perde a área, os baús marcados e a seleção no controle.
 - **Modo área:** por dois cantos em 3D, já na Fase 4. Sem card, o robô coleta os itens do chão na área e descarrega no baú marcado.
 - **Parar pelo controle:** o robô continua ativo e com o vínculo, parado e sem teleportar, e o estado é salvo.
@@ -129,6 +130,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-08 00:11 | Usa o nome do bloco nos exemplos de minério. |
 | Marcelo Fabiano | 2026-11-07 23:42 | Atualiza o inventário, a lanterna e os PRs dos scanners para as telas próprias e registra a interface na Fase 4, o planejado e a divisão das Fases 4 e 5. |
 | Marcelo Fabiano | 2026-11-07 23:34 | Registra o pt_br, o changelog e as plataformas. |
 | Marcelo Fabiano | 2026-11-07 22:57 | Registra a leitura do último tick. |

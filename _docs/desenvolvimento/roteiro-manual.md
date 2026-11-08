@@ -402,12 +402,12 @@ Os valores são os padrões de [`tiers.md`](../tiers.md). Mobs varrem a cada 10 
 | 3 | Mate o zumbi com `/kill @e[type=minecraft:zombie]` | Em até 10 s, a tela volta ao normal, com o bipe |
 | 4 | Repita com esqueleto e creeper, um de cada vez | O texto cita cada um, sem esperar os 25 s do outro |
 | 5 | Invoque uma vaca ao lado | Nenhum alerta |
-| 6 | Coloque minério de diamante a 3 blocos | Em até 35 s, toca o som do minério, aparece `Cubit: DIAMOND!!!` e a tela fica surpresa por cerca de 3 s |
+| 6 | Coloque minério de diamante a 3 blocos | Em até 35 s, toca o som do minério, aparece `Cubit: Diamond Ore!!!` e a tela fica surpresa por cerca de 3 s |
 | 7 | Espere mais 40 s | Não avisa de novo sobre o mesmo bloco |
 | 8 | Quebre o minério, espere uma varredura e coloque de novo | Avisa de novo |
 | 9 | Coloque minério de carvão | Nenhum aviso |
-| 10 | Clique no Cubit com minério de carvão na mão | Bipe e `Cubit: Looking for COAL`, e o item continua na mão |
-| 11 | Espere uma varredura | Aparece `Cubit: COAL!!!`, sem som e sem surpresa |
+| 10 | Clique no Cubit com minério de carvão na mão | Bipe e `Cubit: Looking for Coal Ore`, e o item continua na mão |
+| 11 | Espere uma varredura | Aparece `Cubit: Coal Ore!!!`, sem som e sem surpresa |
 | 12 | Clique de novo com minério de carvão | Bipe e `Cubit: Filter cleared` |
 | 13 | Clique com minério de ferro num Cubit desligado | O filtro muda, com o bipe e o texto, e a tela continua apagada |
 | 14 | Abra a aba Settings | A chave `Scanners` em ON |
@@ -424,12 +424,12 @@ Use um mundo plano em criativo, com um Cubit seguindo. A caixa do minério dura 
 
 | # | Passo | Resultado esperado |
 |---|---|---|
-| 1 | Coloque minério de diamante a 3 blocos do Cubit e cubra com pedra | Em até 35 s, junto do `Cubit: DIAMOND!!!`, uma caixa azul clara, translúcida e pulsando, visível através da pedra |
+| 1 | Coloque minério de diamante a 3 blocos do Cubit e cubra com pedra | Em até 35 s, junto do `Cubit: Diamond Ore!!!`, uma caixa azul clara, translúcida e pulsando, visível através da pedra |
 | 2 | Espere 10 s | A caixa some |
 | 3 | Espere a próxima varredura | Nem caixa nem texto: o minério já foi visto |
 | 4 | Coloque minério de ferro e quebre-o logo depois de a caixa aparecer | A caixa some na hora |
 | 5 | Coloque minério de carvão sem filtro e espere uma varredura | Nenhuma caixa |
-| 6 | Ponha carvão no filtro e espere uma varredura | Caixa azul em volta do carvão, com `Cubit: COAL!!!` |
+| 6 | Ponha carvão no filtro e espere uma varredura | Caixa azul em volta do carvão, com `Cubit: Coal Ore!!!` |
 | 7 | Coloque diamantes a 5 blocos à frente do Cubit e a 4 para o lado e 4 para cima | Só o da frente ganha caixa: o outro fica fora da esfera |
 | 8 | Rode `/summon minecraft:zombie ~3 ~ ~` perto do Cubit | Em até 10 s, uma seta vermelha para baixo sobre a cabeça do zumbi, translúcida, pulsando e balançando de leve, que o acompanha através das paredes e fica virada para você |
 | 9 | Afaste-se até o zumbi ficar a mais de 8 blocos do Cubit | A seta some |
@@ -445,8 +445,8 @@ Use um mundo plano, com um Cubit seguindo. Para ver de dia e de noite, use `/tim
 |---|---|---|
 | 1 | De dia, com a chave `Lamp` desligada, rode `/summon minecraft:zombie ~3 ~ ~ {NoAI:1b}` | Em até 10 s, as pontas e os halos das antenas ficam vermelhos, com um brilho vermelho suave atrás do corpo |
 | 2 | Mate o zumbi com `/kill @e[type=minecraft:zombie]` | Em até 10 s, as antenas apagam e o brilho some |
-| 3 | Coloque minério de diamante a 3 blocos e espere a varredura | Junto do `Cubit: DIAMOND!!!`, antenas e brilho azuis por cerca de 3 s |
-| 4 | Ponha carvão no filtro e coloque minério de carvão | Junto do `Cubit: COAL!!!`, antenas e brilho azuis por cerca de 3 s |
+| 3 | Coloque minério de diamante a 3 blocos e espere a varredura | Junto do `Cubit: Diamond Ore!!!`, antenas e brilho azuis por cerca de 3 s |
+| 4 | Ponha carvão no filtro e coloque minério de carvão | Junto do `Cubit: Coal Ore!!!`, antenas e brilho azuis por cerca de 3 s |
 | 5 | Com um zumbi no raio, coloque um diamante | As antenas continuam vermelhas |
 | 6 | Com um zumbi no raio, leve dano, com `/damage @e[type=cubit:general_robot,limit=1,sort=nearest] 1` | A tela fica triste, e as antenas continuam vermelhas |
 | 7 | De noite, com a lanterna acesa, repita o passo 1 | As antenas ficam vermelhas e, depois do zumbi, voltam ao branco da lanterna |
@@ -539,7 +539,7 @@ Compare cada tela com as imagens [`tela-cubit.png`](../imagens/conceito/tela-cub
 | 7 | Renomeie o Cubit para `Bolt` e leve-o ao Dock | `Bolt`, `● Hibernating · Dock` em azul, a expressão carregando, `Dock +500 FE/t` e `Bolt's inventory` |
 | 8 | Clique na engrenagem | A aba Settings: `Battery` em porcentagem, `Lamp`, `Scanners` e `Chatter` com ON e OFF, o filtro, o status e o rodapé. Os slots somem |
 | 9 | Clique nas três chaves | Cada uma troca entre ON e OFF. Na base, `Lamp` fica apagada e não muda |
-| 10 | Escolha carvão no filtro e abra a aba Settings | O ícone do minério e `Looking for COAL`. Sem filtro, `No filter · rare ores only` |
+| 10 | Escolha carvão no filtro e abra a aba Settings | O ícone do minério e `Looking for Coal Ore`. Sem filtro, `No filter · rare ores only` |
 | 11 | Veja o status de dia, à noite, coberto e no Nether | `Charging · 5 FE/t`, `Night · not charging`, `No sky · not charging` e `No sun here · not charging` |
 | 12 | Ande, ande na água e acenda a lanterna | `Energy use` lista as causas, como `16 FE/t · walking, lamp`. Parado, `0 FE/t · idle` |
 | 13 | Volte à aba do baú | Os slots voltam, com os itens no lugar |
@@ -553,6 +553,15 @@ Compare cada tela com as imagens [`tela-cubit.png`](../imagens/conceito/tela-cub
 | 21 | Teste outro player no servidor | Ele não abre as telas do seu Cubit nem do seu Dock |
 | 22 | Mude a escala da interface nas opções de vídeo | As torres, os ícones e os retratos continuam nítidos |
 
+## Tradução
+
+| # | Passo | Resultado esperado |
+|---|---|---|
+| 1 | Em Opções, Idioma, escolha Português (Brasil) | Os itens viram `Cubit`, `Cubit Danificado`, `Caixa de Ferramentas` e `Base de Indução` |
+| 2 | Abra as telas do Cubit e da base | Todos os textos em português, sem chave crua como `gui.cubit...`, e nada passa da borda |
+| 3 | Espere uma fala e um aviso de minério | A fala em português e `Cubit: Minério de Diamante!!!` |
+| 4 | Volte ao inglês | Tudo em inglês de novo, com `Cubit: Diamond Ore!!!` |
+
 ## Servidor dedicado
 
 1. Rode `make server` e aceite o EULA em `run/eula.txt`, se ainda não tiver aceitado.
@@ -562,6 +571,7 @@ Compare cada tela com as imagens [`tela-cubit.png`](../imagens/conceito/tela-cub
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-08 00:11 | Usa o nome do bloco nos exemplos de minério. |
 | Marcelo Fabiano | 2026-11-07 23:12 | Troca o painel lateral pelas chaves da aba Settings. |
 | Marcelo Fabiano | 2026-11-07 23:11 | Adiciona as telas próprias e troca o estado do Dock no Jade. |
 | Marcelo Fabiano | 2026-11-07 21:40 | Adiciona o Jade. |
