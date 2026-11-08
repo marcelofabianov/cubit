@@ -36,6 +36,7 @@ Este é o mapa dos documentos do projeto. A apresentação do mod e o roadmap fi
 | Roteiro de teste manual no jogo | [`desenvolvimento/roteiro-manual.md`](desenvolvimento/roteiro-manual.md) |
 | Git hooks | [`desenvolvimento/hooks-do-git.md`](desenvolvimento/hooks-do-git.md) |
 | Publicação no Modrinth e no CurseForge | [`desenvolvimento/publicacao.md`](desenvolvimento/publicacao.md) |
+| Descrição do mod no jogo e nas plataformas | [`desenvolvimento/descricao-das-plataformas.md`](desenvolvimento/descricao-das-plataformas.md) |
 | Lugar reservado à wiki para o player (fase a definir) | [`_wiki/v1/index.html`](../_wiki/v1/index.html) |
 
 Os números ficam em [`tiers.md`](tiers.md). As outras páginas apontam para lá. O `README.md` da raiz traz só um resumo, e o roteiro manual cita os valores padrão como resultado esperado.
@@ -44,6 +45,7 @@ Os números ficam em [`tiers.md`](tiers.md). As outras páginas apontam para lá
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-08 01:05 | Cita a descrição das plataformas. |
 | Marcelo Fabiano | 2026-11-08 00:33 | Cita o guia de publicação. |
 | Marcelo Fabiano | 2026-11-07 23:46 | Cita o roadmap. |
 | Marcelo Fabiano | 2026-11-07 23:42 | Amplia a descrição das falas. |
