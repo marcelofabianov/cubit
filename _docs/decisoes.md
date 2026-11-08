@@ -11,7 +11,11 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Licença:** MIT, para todos os recursos presentes no repositório, inclusive os sons. A exceção é o Gradle Wrapper, de terceiros, que não vai no jar.
 - **Ícone do mod:** o mesmo do item do Cubit.
 - **Primeira versão:** `0.1.0`, publicada só ao terminar todos os itens da Fase 3, com a `1.0.0` só com o mod completo.
-- **Publicação:** no Modrinth e no CurseForge, com a mesma versão nos dois (pergunta 714).
+- **Publicação:** no Modrinth e no CurseForge, com a mesma versão nos dois (pergunta 714). A `0.1.0` sai como release, e o jar é enviado à mão, pelo site, sem plugin do Gradle (perguntas 743 e 744).
+- **Aviso de IA:** no Modrinth, o aviso `Contains AI-generated content` fica marcado para os assets, por causa dos sons (pergunta 746).
+- **Páginas nas plataformas:** slug `cubit`, com `cubit-robot` nas duas se o CurseForge recusar. O ícone é o do item, e a galeria só tem capturas do jogo. O desenvolvedor cria as contas e os projetos, e o agente prepara os textos (perguntas 747, 748 e 750).
+- **Changelog por versão:** atualizado ao criar a `release/X.Y.Z` (pergunta 749).
+- **Repositório público:** o desenvolvedor o torna público antes de enviar o jar da `0.1.0`, e as issues do GitHub são o canal de bugs (pergunta 751).
 - **Interface de configuração:** a chave geral e a do painel solar entram na Fase 4, na aba Settings, e a `0.1.0` sai com as chaves de hoje (pergunta 717).
 - **Fases 4 e 5 divididas:** Fase 4 com Power Bank, ímã, coleta, choque com o Pacífico e a interface de configuração; 4.1 com os tiers, os outros modos e os slots exclusivos; 4.2 com o Cubit Remote, o modo só o alvo, o modo área, a descarga, o retorno e o local de morte. Fase 5 com antenas, Servidor e storage wireless virtual; 5.1 com o carregamento de chunks; e 5.2 com os cards, a hibernação fora do Dock e a personalização por card (perguntas 722 a 726).
 - **Planejado nos documentos:** o que é de fase futura fica nos documentos, marcado com a fase em que entra, sem parecer pronto (pergunta 718).
@@ -23,7 +27,8 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 
 - **Mod:** o que entra no jar, aparece no jogo ou acompanha o download fica em inglês, o idioma base. O jogo também tem o `pt_br.json`, gerado pelo mesmo datagen, para o player escolher o português (pergunta 712, que substitui a 449).
 - **Tradução:** os nomes são todos traduzidos, como `Base de Indução`, e o minério nos avisos e no filtro é o nome do bloco da tag, no idioma do jogo (perguntas 733 e 734).
-- **Changelog:** o `CHANGELOG.md`, na raiz, fica em inglês, no formato Keep a Changelog (pergunta 713).
+- **Changelog:** o `CHANGELOG.md`, na raiz, fica em inglês, no formato Keep a Changelog, como exceção da regra 25 (perguntas 713 e 752).
+- **Páginas das plataformas:** o resumo e a descrição longa ficam em inglês e citam a tradução para o português (pergunta 745).
 - **Programação:** arquivos como `.java` e `.sh` ficam em inglês.
 - **Conteúdo:** arquivos como `.md` ficam em português, inclusive o nome do arquivo e da pasta.
 - **Commits:** português, em Conventional Commits.
@@ -130,6 +135,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-08 00:33 | Registra o tipo da `0.1.0`, o envio manual, o idioma das páginas, o aviso de IA no Modrinth, as imagens, as contas, o slug, o momento do changelog e o repositório público. |
 | Marcelo Fabiano | 2026-11-08 00:11 | Usa o nome do bloco nos exemplos de minério. |
 | Marcelo Fabiano | 2026-11-07 23:42 | Atualiza o inventário, a lanterna e os PRs dos scanners para as telas próprias e registra a interface na Fase 4, o planejado e a divisão das Fases 4 e 5. |
 | Marcelo Fabiano | 2026-11-07 23:34 | Registra o pt_br, o changelog e as plataformas. |

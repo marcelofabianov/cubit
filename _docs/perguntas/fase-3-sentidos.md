@@ -32,6 +32,20 @@ Nenhuma. A pendente 425 foi para a Fase 4 (pergunta 721).
 | 321 | O nome `placed.ogg` e o momento "ao ser colocado no mundo" estão certos? | Sim. Detalha a pergunta 320 |
 | 322 | Em que fase o som de colocar no mundo passa a tocar? | Na Fase 3, junto dos outros oito. Detalha a pergunta 320 |
 | 421 | Como foi o roteiro manual do colar, do indicador de bateria e do tronco central com +0,5? | Teste finalizado, tudo ok, executado pelo desenvolvedor, sem detalhar cada passo. Ele não pediu +1, então o tronco fica em 2 unidades. O `make server` e o olhar de longe não foram citados em separado |
+| 752 | O texto da exceção do `CHANGELOG.md` na regra 25 do `AGENTS.md` está aprovado? | Sim: "O `CHANGELOG.md` fica em inglês, no nome e no conteúdo, porque vai para as páginas de versão das plataformas (pergunta 713)." Aplica a resposta 713 |
+| 751 | Como tratar os links do código e das issues, com o repositório privado? | O desenvolvedor torna o repositório público antes de enviar o jar da `0.1.0`, depois de conferir que nada privado está nele. O guia e o `CHANGELOG.md` usam os links do GitHub, e as issues são o canal de bugs |
+| 750 | Qual slug o Cubit usa nas duas plataformas? | `cubit`, livre no Modrinth (conferido pela API pública em 2026-11-08). Se o CurseForge recusar, os dois usam `cubit-robot`, para ficarem iguais |
+| 749 | Em que momento o `CHANGELOG.md` é atualizado, a partir da `0.1.0`? | Ao criar a `release/X.Y.Z`, junto do ajuste da versão, com o que entrou desde a versão anterior. Os PRs de feature não mudam o changelog. Detalha a resposta 713 |
+| 748 | Quem cria as contas e os projetos nas plataformas? | O desenvolvedor cria as contas e os projetos e envia o jar, pelo guia. O agente prepara os textos, o changelog e a lista do que preencher |
+| 747 | Que imagens vão para o ícone e a galeria nas plataformas? | Só o ícone do item e capturas de tela feitas no jogo, sem as pranchas de conceito, porque o Modrinth proíbe imagem criada ou derivada de IA na página do projeto. As capturas são feitas no teste de instância |
+| 746 | O que fazer com a regra do Modrinth que exige o aviso de conteúdo gerado por IA, já que os sons foram gerados com ferramentas de IA (resposta 137)? | Marcar o aviso `Contains AI-generated content` na aba Disclosures do Modrinth, só para os assets, citando os sons. O guia de publicação registra isso, e o item 8 da `0.1.0` continua conferindo os termos das ferramentas. O CurseForge só pede aviso em imagem de vitrine que engane |
+| 745 | Em que idioma ficam o resumo e a descrição longa nas páginas do Modrinth e do CurseForge? | Em inglês, pela regra 1, citando que o mod também tem a tradução para o português |
+| 744 | Como o jar é enviado ao Modrinth e ao CurseForge a cada versão? | Manual, pelo site, sem plugin do Gradle e sem token na máquina. O guia descreve o passo a passo |
+| 743 | Com que tipo a `0.1.0` sai nas plataformas: alpha, beta ou release? | Release. O agente tinha recomendado alpha |
+| 742 | Há algo a acrescentar no alinhamento da issue do `CHANGELOG.md` e do guia de publicação? | "continue, nada a acrescentar": o plano segue como apresentado, e as decisões prováveis vão para a rodada |
+| 741 | Há ajuste no roteiro depois do PR #130? | Não: seguir o plano, com a issue do `CHANGELOG.md` e do guia de publicação, e depois os itens 4 a 9 da `0.1.0` |
+| 740 | O desenvolvedor fez o merge do PR #130? | Sim. O agente conferiu o merge (`d522098`) e a issue #129 fechada e, com a autorização, apagou a branch local e a remota |
+| 739 | O jogo está fechado antes do push da #129? | Sim. Fica sem commit até o próximo PR |
 | 738 | O jogo está fechado antes de compilar o nome do minério pelo bloco e rodar as GameTests, na #129? | Sim |
 | 737 | O jogo está fechado antes de gerar o `pt_br.json`, na #129? | Sim |
 | 736 | A nova regra 1 do `AGENTS.md` fica com o inglês como base e os arquivos de tradução em outros idiomas, com as mesmas chaves conferidas por um teste? | Sim, o desenvolvedor aprovou o texto. Aplica as respostas 712 e 732 |
@@ -415,6 +429,7 @@ Nenhuma. A pendente 425 foi para a Fase 4 (pergunta 721).
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-08 00:33 | Registra as respostas 739 a 752. |
 | Marcelo Fabiano | 2026-11-07 23:48 | Registra as respostas 728 a 738. |
 | Marcelo Fabiano | 2026-11-07 23:45 | Registra as respostas 716 a 727. |
 | Marcelo Fabiano | 2026-11-07 23:42 | Acrescenta os ponteiros da auditoria e leva a pendente 425 à Fase 4. |
