@@ -82,6 +82,14 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 | `OwnerProtection` | Diz se um dano é do dono e, por isso, não fere o robô |
 | `VoidRescueTarget` | Para onde vai o robô danificado que caiu no vazio |
 | `FollowingOutcome` | Resultado da política: estado do robô, quem segue e quem desligar |
+| `RobotScreenStatus` | O estado no topo da tela do Cubit: bateria crítica, seguindo, ativo ou hibernando |
+| `EnergyFormat` | Como as telas escrevem a energia: quantidades curtas, como `214k`, e taxas inteiras, como `2,400` |
+| `EnergyHalves` | Divide uma quantidade de energia em duas metades de 16 bits e as junta de volta |
+| `SolarStatus` | O que a tela diz do painel solar: carregando, coberto, noite, sem sol, bateria cheia ou desligado |
+| `EnergyUseCause` | Por que o robô gastou energia no tick, na ordem que a tela lista |
+| `RechargeSource` | De onde a bateria recebeu energia no último tick: Dock, slot, painel ou nada |
+| `HealTime` | Quanto tempo a base leva para encher a vida, em minutos |
+| `DockInputMeter` | A média do que entrou num Dock por tick, no último segundo |
 
 ## Regras e porquês
 
@@ -152,6 +160,14 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 - **Reserva do slot:** um item só é consumido quando a energia dele cabe, e a reserva nunca some, para a transferência não criar nem perder FE (regra 13 e pergunta 64).
 - **Excedente:** se o config reduzir os slots, o que não couber sobra, e quem chama o larga no chão. Nada é apagado (pergunta 187).
 - **Vínculo apontando para o próprio robô:** não conta como outro robô seguindo. Assim, um vínculo antigo não deixa o robô desligado.
+- **Crítico só fora da base:** na tela, a bateria crítica vence seguindo e ativo, mas hibernando vale o estado da base, como nas imagens das telas (perguntas 681 e 686). O inativo dá `OFF` em vez de falhar, porque a tela ainda pode ser desenhada uma vez antes de fechar (pergunta 684).
+- **Número arredondado para baixo:** a tela nunca mostra mais energia do que existe. As taxas usam o separador de milhar da localidade raiz, para não mudar com o idioma do player (pergunta 687).
+- **Metades sem sinal:** o jogo envia cada valor da tela como um `short`, que chega com sinal, então `join` só usa os 16 bits de cada metade. Acima de 32 bits, mostra o maior valor possível, muito acima de qualquer bateria.
+- **Ordem do painel:** desligado vem primeiro, depois a dimensão sem sol e a bateria cheia, que não dependem do céu, e só então o céu coberto e a noite (pergunta 693).
+- **Causas como no gasto:** peso, água e subida só aparecem andando, a mesma regra de `ConsumptionExtras`, para a tela nunca citar o que não custou (pergunta 693).
+- **Slot antes do painel:** na linha de recarga, o slot vence o painel, e na base só o Dock conta (pergunta 693).
+- **Tempo da vida pela parte que falta:** a base enche a vida inteira num tempo fixo, então uma perda menor leva menos tempo. Menos de um minuto aparece como tal (pergunta 693).
+- **Entrada pela média:** cabos entregam energia aos saltos, então a média de um segundo evita um número que pula (pergunta 693).
 
 ## Estados
 
