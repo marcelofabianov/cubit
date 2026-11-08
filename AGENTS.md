@@ -208,9 +208,9 @@ io.github.marcelofabianov.cubit
 ├── domain/                 // Java puro, testado com JUnit
 │   ├── robot/              // RobotType, capacidades que o Cubit combina, OreKind, OreFilter, OreSignals
 │   ├── tier/               // RobotTier, TierSpec, TierCatalog (interface)
-│   ├── energy/             // Battery, PowerState (ativo, inativo, hibernação), regras de consumo e religamento, SolarPanel: quando o painel dá energia
-│   ├── behavior/           // FollowDecision: seguir, parar ou teleportar; BurningAction: reagir a fogo e lava; LampPolicy: quando a lanterna acende; ScanRules, ScanArea, FreshFinds, MarkLife, MarkPulse, ScanSignal: scanners, caixas e cores; ChatWatch, BiomeWatch, LeftBehindWatch, ChatRules: falas; RespawnReturn: voltar com o dono
-│   ├── dock/               // DockStock, DockStatus, DockStay, DockQueue, DockTrip, DockRemoval
+│   ├── energy/             // Battery, PowerState (ativo, inativo, hibernação), regras de consumo e religamento, SolarPanel: quando o painel dá energia; SolarStatus, EnergyUseCause, RechargeSource, EnergyFormat, EnergyHalves: o que as telas mostram
+│   ├── behavior/           // FollowDecision: seguir, parar ou teleportar; BurningAction: reagir a fogo e lava; LampPolicy: quando a lanterna acende; ScanRules, ScanArea, FreshFinds, MarkLife, MarkPulse, ScanSignal: scanners, caixas e cores; ChatWatch, BiomeWatch, LeftBehindWatch, ChatRules: falas; RespawnReturn: voltar com o dono; RobotScreenStatus: o estado no topo da tela
+│   ├── dock/               // DockStock, DockStatus, DockStay, DockQueue, DockTrip, DockRemoval, DockInputMeter
 │   └── ownership/          // FollowingRobotPolicy, Ownership
 ├── config/                 // ModConfigSpec → implementa TierCatalog
 ├── registry/               // DeferredRegisters
