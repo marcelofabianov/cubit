@@ -4,6 +4,7 @@
 
 | # | Pergunta | Recomendação |
 |---|---|---|
+| 425 | Onde o player aciona as chaves que faltam da pergunta 424, qual é o estado inicial delas, e o que "Hibernar" da chave geral faz fora do Dock? | Já respondido: a lanterna (467 e 468), os scanners (549) e as falas (582), na aba Settings da tela do Cubit (683), e a interface de configuração entra na Fase 4 (717). Falta: a chave geral, com ligar, desligar e hibernar, e as chaves dos recursos das Fases 4 e 5, como o painel solar, o ímã, a coleta, a descarga, o retorno e o local de morte. Recomendação: na aba Settings, e também no Cubit Remote, todas começando ligadas e guardadas no item, como na pergunta 343. Hibernar fora do Dock segue a pergunta 198, prevista para a Fase 5, então precisa de decisão antes de antecipar. Veio da Fase 3 pela pergunta 721 |
 | 423 | Qual é o modo padrão do filtro de coleta, o que vale com a lista vazia, e o limite de itens de `tiers.md` vale para os dois modos? | Lista negra por padrão, em que a lista vazia pega qualquer item. Na lista branca, a lista vazia não pega nada. O mesmo limite vale para os dois modos. Vem da pergunta 422 |
 | 577 | Entra um modo de defesa "só o alvo", em que o Cubit ignora os outros inimigos e ataca só o último mob que o dono atacou, trocando de alvo a cada novo ataque, ou o mob em que o dono mira e clica à distância? | A ideia entra, conforme a pergunta 578, e os detalhes ficam para refinar na Fase 4. Recomendação: um quarto modo, a partir do tier Advanced, com a mira pelo Cubit Remote, porque um clique de mão vazia no ar não chega ao servidor. A regra de nunca atacar mobs pacíficos, players e o dono continua valendo |
 
@@ -41,12 +42,13 @@
 | 362 | Quando toca o som de modo agressivo? | Ao trocar para o modo agressivo, e só nesse momento. O desenvolvedor forneceu `cubit_modo_agresivo.wav`, convertido da mesma forma que os demais, para `aggressive_mode.ogg`. Passam a ser onze sons. Entra junto dos modos de defesa. Amplia a [pergunta 135](fase-3-sentidos.md) |
 | 347 | Qual é a expressão do Cubit ao atacar? | Mantém a atual, sem troca, como ao pegar fogo. Com um inimigo perto, em geral ela já será a de alerta. Segue a [pergunta 158](fase-3-sentidos.md) |
 | 422 | O filtro de coleta coleta só os itens definidos, ou também tem outro modo? | Tem os dois modos: lista branca, que coleta só os itens definidos, e lista negra, que coleta tudo menos os itens definidos. Detalhes na pendência 423 |
-| 343 | O que o item guarda das configurações? | Modo de defesa, filtros e os slots ativados ou desativados. Perde a área, os baús marcados e a seleção no controle, porque dependem do lugar onde o robô estava. Detalha a [pergunta 254](fase-5-trabalhos.md). A [pergunta 468](fase-3-sentidos.md) acrescenta a chave da lanterna |
+| 343 | O que o item guarda das configurações? | Modo de defesa, filtros e os slots ativados ou desativados. Perde a área, os baús marcados e a seleção no controle, porque dependem do lugar onde o robô estava. Detalha a [pergunta 254](fase-5-trabalhos.md). A [pergunta 468](fase-3-sentidos.md) acrescenta a chave da lanterna. As perguntas 514, 548, 549 e 582 acrescentam a cor, o filtro do scanner e as chaves dos scanners e das falas |
 
 ## Histórico de modificações
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-07 23:42 | Recebe a pendente 425 da Fase 3 e acrescenta um ponteiro à 343. |
 | Marcelo Fabiano | 2026-11-07 16:51 | Registra a resposta 578. |
 | Marcelo Fabiano | 2026-11-07 16:48 | Registra a pendência 577. |
 | Marcelo Fabiano | 2026-11-06 13:34 | Aponta as respostas 341 e 343 para as 469 e 468. |
