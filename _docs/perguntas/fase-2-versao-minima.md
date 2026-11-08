@@ -199,7 +199,7 @@ Não há perguntas pendentes nesta fase.
 | 351 | Como foi o roteiro manual das receitas? | O desenvolvedor fez as três receitas, do Cubit, do Induction Dock e da `Toolbox`, sem problemas. O resultado de cada passo não foi detalhado, então o momento em que aparecem no livro e o L espelhado não foram confirmados |
 | 352 | O que faz o Cubit chamado a um Dock sem energia? | Mantém o que a pergunta 305 define: entra e fica hibernando, sem carregar, até o Dock receber energia ou o player o liberar. A tela "sem energia" é o único aviso nesta fase |
 | 353 | Como acompanhar o que está pronto e o que falta em cada fase? | Num `checklist.md` na raiz. Ao encerrar um PR depois do merge, avalia-se se algum item deve ser marcado, e a marcação entra num novo commit, no PR seguinte |
-| 337 | Quando publicar a `0.1.0`? | Só ao terminar todos os itens da Fase 3. A primeira versão já inclui os sentidos. Complementa a pergunta 6 e muda a [pergunta 331](fase-3-sentidos.md) |
+| 337 | Quando publicar a `0.1.0`? | Só ao terminar todos os itens da Fase 3. A [776](fase-3-sentidos.md) tira da `0.1.0` a instância só com o mod e as confirmações do item 7. A primeira versão já inclui os sentidos. Complementa a pergunta 6 e muda a [pergunta 331](fase-3-sentidos.md) |
 | 338 | Os sons podem ser publicados? | A licença de todos os recursos presentes no repositório é MIT, inclusive os sons, gerados pelo desenvolvedor em ferramentas de IA. A exceção é o Gradle Wrapper, de terceiros, com licença própria, que não vai no jar. É decisão do desenvolvedor, e os termos das ferramentas não foram conferidos. Complementa a [pergunta 137](fase-3-sentidos.md) e a pergunta 5 |
 | 354 | O que fazer com os testes pendentes da Fase 2? | Deixar todos para o fim da Fase 3: instância limpa, Iron Meridian, outro player num servidor e as confirmações no jogo. Entram no teste da versão completa, antes da `main` |
 | 355 | A Fase 2 fica encerrada? | Sim, com o PR da issue #79, sem itens abertos no checklist. A implementação da Fase 3 continua dependendo de pedido do desenvolvedor |
@@ -221,6 +221,7 @@ Não há perguntas pendentes nesta fase.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-08 01:41 | Aponta a resposta 337 para a 776. |
 | Marcelo Fabiano | 2026-11-07 15:57 | Aponta a resposta 32 para a 550. |
 | Marcelo Fabiano | 2026-11-06 13:34 | Aponta a resposta 32 para a 469. |
 | Marcelo Fabiano | 2026-11-06 11:10 | Troca 'especialidade' por 'trabalho' e 'card de especialidade' por 'card de Aprendizado de Máquina'. |
