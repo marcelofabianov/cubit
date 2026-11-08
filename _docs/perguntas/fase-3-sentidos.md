@@ -34,6 +34,8 @@
 | 321 | O nome `placed.ogg` e o momento "ao ser colocado no mundo" estão certos? | Sim. Detalha a pergunta 320 |
 | 322 | Em que fase o som de colocar no mundo passa a tocar? | Na Fase 3, junto dos outros oito. Detalha a pergunta 320 |
 | 421 | Como foi o roteiro manual do colar, do indicador de bateria e do tronco central com +0,5? | Teste finalizado, tudo ok, executado pelo desenvolvedor, sem detalhar cada passo. Ele não pediu +1, então o tronco fica em 2 unidades. O `make server` e o olhar de longe não foram citados em separado |
+| 695 | O jogo está fechado antes do segundo `make format` e `make test` da #125? | Sim |
+| 694 | O jogo está fechado antes do primeiro `make format` e `make test` da #125? | Sim |
 | 693 | Os textos sem imagem propostos em `telas.md` estão aprovados, e a issue e a branch das telas podem ser criadas? | Sim: "aprovo os textos propostos, pode criar a issue e a branch". Todos os textos da seção "Textos sem imagem" de [`telas.md`](../funcionalidades/telas.md) valem como estão, inclusive o slot vencendo o solar na linha de recarga, a entrada do Dock como a média do último segundo e o raio do botão de chamar do tier Base. Responde a pergunta 692 |
 | 692 | Como definir os textos que as imagens não mostram, como o painel solar no Nether, no End ou hibernando, o consumo parado, a linha `Following` sem seguir ninguém e a seção `Docked Cubit` no estado Complete? | O agente propõe cada texto em `_docs/funcionalidades/telas.md`, marcado como proposta, e o desenvolvedor aprova ou corrige na revisão do documento, antes do código. Cada resposta é registrada |
 | 691 | Como testar as telas? | JUnit no domínio, na escolha do estado do topo, no formato dos números e na divisão dos valores acima de 16 bits. GameTests de só o dono abrir, Shift + clique no Dock, a tela fechar com o Cubit desligado, o botão de chamar e as chaves, sem duplicar itens. Roteiro manual comparando cada tela com as imagens |
@@ -372,6 +374,8 @@
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-07 22:39 | Registra a resposta 695. |
+| Marcelo Fabiano | 2026-11-07 22:37 | Registra a resposta 694. |
 | Marcelo Fabiano | 2026-11-07 22:34 | Registra a resposta 693. |
 | Marcelo Fabiano | 2026-11-07 22:29 | Registra as respostas 691 e 692. |
 | Marcelo Fabiano | 2026-11-07 22:27 | Registra as respostas 687 a 690. |
