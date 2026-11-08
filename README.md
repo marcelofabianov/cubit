@@ -95,6 +95,7 @@ O que entra em cada fase está no [`ROADMAP.md`](ROADMAP.md).
 - [`AGENTS.md`](AGENTS.md): regras e contexto do projeto para desenvolvedores e agentes
 - [`ROADMAP.md`](ROADMAP.md): as fases e o que entra em cada uma
 - [`checklist.md`](checklist.md): o que está pronto e o que falta em cada fase
+- [`CHANGELOG.md`](CHANGELOG.md): o que muda em cada versão, em inglês
 
 ## Licença
 
