@@ -48,7 +48,7 @@ Para conferir o estado, use `/data get entity @e[type=cubit:general_robot,limit=
 | 3 | Rode `/cubit reset` de novo | A mensagem `No Cubit is following you.` aparece |
 | 4 | Botão direito no robô | Ele liga e volta a seguir você |
 | 5 | Deixe o robô seguindo, afaste-se com comando até o chunk dele descarregar, por exemplo com `/tp @s ~2000 ~ ~`, e rode `/cubit reset`. Volte com `/tp @s ~-2000 ~ ~` | Ao carregar de novo, ele fica parado, com `INACTIVE_SWITCHED_OFF`. Um clique o liga |
-| 6 | Rode o comando num servidor, com um player que não é operador | Funciona da mesma forma, só no vínculo dele |
+| 6 | Rode o comando num servidor, com um player que não é operador | Funciona da mesma forma, só no vínculo dele. Coberto pelas GameTests, sem teste no jogo (pergunta 771) |
 
 ## Movimento
 
@@ -157,7 +157,7 @@ Para conferir a carga, use `/data get entity @e[type=cubit:general_robot,limit=1
 | 6 | Coloque um funil em cima, apontando para o Dock, com redstone | A redstone entra no Dock |
 | 7 | Em modo sobrevivência, quebre o Dock com energia, com outro item no slot | Cai o item do Dock, que devolve a energia ao ser colocado, e o item do slot |
 | 8 | Explode um TNT ao lado | O Dock continua lá |
-| 9 | Num servidor com outro player, tente usar e quebrar o Dock | Ele não abre a tela e não quebra. No modo criativo com permissão de operador, quebra |
+| 9 | Num servidor com outro player, tente usar e quebrar o Dock | Ele não abre a tela e não quebra. No modo criativo com permissão de operador, quebra. Coberto pelas GameTests, sem teste no jogo (pergunta 771) |
 | 10 | Olhando para o Dock, rode `/data remove block ~ ~ ~ Owner` com as coordenadas dele, e tente quebrá-lo em modo sobrevivência | Não quebra. Num mundo com comandos, em criativo e como operador, quebra |
 
 ## Cubit na base
@@ -389,7 +389,7 @@ Os valores são os padrões de [`tiers.md`](../tiers.md).
 | 10 | Mate o Cubit pintado e com nome | O Damaged Cubit mantém o nome, e o ícone não muda |
 | 11 | Conserte com a Toolbox e coloque | A cor e o nome voltam |
 | 12 | Saia e entre no mundo | A cor e o nome continuam |
-| 13 | Com outro player no servidor, use corante e etiqueta no Cubit | Nada muda, e nada é gasto |
+| 13 | Com outro player no servidor, use corante e etiqueta no Cubit | Nada muda, e nada é gasto. Coberto pelas GameTests, sem teste no jogo (pergunta 771) |
 
 ## Scanners
 
@@ -568,10 +568,51 @@ Compare cada tela com as imagens [`tela-cubit.png`](../imagens/conceito/tela-cub
 1. Rode `make server` e aceite o EULA em `run/eula.txt`, se ainda não tiver aceitado.
 2. Espere a mensagem `Done`, e confirme que o servidor abriu sem erro de classe de cliente.
 
+## Teste da versão
+
+Antes da `main`, a versão é testada com o jar, e não com o `make client`, numa instância só com o mod e suas dependências e, depois, numa do Iron Meridian (regra 35 e perguntas 767 a 769). As instâncias ficam no Prism Launcher. Cada parte testada vira uma resposta em [`perguntas/`](../perguntas/README.md), e um problema vira uma issue própria.
+
+O teste com outro player não é feito no jogo: as GameTests com um player que não é o dono cobrem o passo 9 do Induction Dock, o 6 do `/cubit reset` e o 13 da cor e do nome (perguntas 770 a 772).
+
+### Preparar o jar
+
+1. Feche o jogo e rode `make build`, na branch da versão. O jar fica em `build/libs/cubit-X.Y.Z.jar`.
+2. Baixe do Modrinth as dependências nas versões do `gradle.properties`: GeckoLib, LambDynamicLights e Jade, as mesmas do Iron Meridian.
+
+### Instância só com o mod
+
+| # | Passo | Resultado esperado |
+|---|---|---|
+| 1 | No Prism, crie uma instância em **Adicionar instância → Personalizado**, com o Minecraft 1.21.1 e o NeoForge 21.1.265 | A instância abre sem mods |
+| 2 | Em **Pasta → `minecraft/mods`**, coloque o jar do Cubit, o GeckoLib e o LambDynamicLights, sem o Jade, e abra | O jogo abre sem erro, e a tela de Mods mostra o Cubit, com o ícone e a descrição |
+| 3 | Num mundo novo, rode [Colocar e recolher](#colocar-e-recolher), [Inventário](#inventário), [Induction Dock](#induction-dock), [Cubit na base](#cubit-na-base), [Lanterna](#lanterna), [Scanners](#scanners) e [Falas](#falas) | Como em cada seção, agora a partir do jar |
+| 4 | Rode [Telas](#telas) e [Tradução](#tradução), ainda não feitas no jogo | Como em cada seção |
+| 5 | Num mundo novo, em sobrevivência, rode [Receitas](#receitas), anotando os passos 1, 4 e 7 | A receita do Cubit aparece com o diamante, a do Dock com o Cubit, e o L espelhado também faz o Dock (pergunta 351) |
+| 6 | Rode o passo 5 do [`/cubit reset`](#comando-cubit-reset), com o chunk descarregado | Como no passo |
+| 7 | Em **Opções → Vídeo**, abra as opções do LambDynamicLights e anote o valor padrão da luz de entidades, sem mudar | Com o padrão, a lanterna do Cubit ilumina o chão no escuro (perguntas 461 e 719) |
+| 8 | Saia, coloque o jar do Jade em `mods/` e rode [Jade](#jade) | Como na seção |
+
+### Iron Meridian
+
+| # | Passo | Resultado esperado |
+|---|---|---|
+| 1 | No Prism, clique com o botão direito na instância do Iron Meridian → **Copiar** | Uma cópia separada, sem mexer na instância nem nos mundos de sempre |
+| 2 | Na cópia, em **Editar instância → Configurações → Comandos personalizados**, tire o comando de pré-lançamento do packwiz | A cópia abre sem sincronizar com o pack |
+| 3 | Em **Pasta → `minecraft/mods`** da cópia, coloque só o jar do Cubit, porque o GeckoLib, o LambDynamicLights e o Jade já estão no pack, e abra | O jogo abre sem erro, e a tela de Mods mostra o Cubit |
+| 4 | Num mundo novo, coloque um Cubit, ande com ele e abra as telas do Cubit e do Dock | Segue, aparece com a textura, toca os sons, e as telas abrem |
+| 5 | Ligue um gerador de FE de um mod do pack ao Dock, com um cabo do pack | O estoque do Dock sobe, e a tela mostra a entrada média de FE, até 5.000 FE/t |
+| 6 | À noite, com os shaders do pack, deixe a lanterna acender | O chão clareia em volta do Cubit |
+| 7 | Mire no Cubit e no Dock | O Jade mostra o tier, a bateria e o estado do Cubit e o estoque e o estado do Dock |
+
+### Capturas da galeria
+
+Na instância só com o mod, tire capturas com F2 do Cubit seguindo, da tela do inventário, da aba Settings, do Dock com um Cubit na base, da caixa de um minério e das antenas coloridas. Elas ficam na pasta `screenshots` da instância, e só elas vão para a galeria das plataformas (pergunta 747).
+
 ## Histórico de modificações
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-08 01:17 | Adiciona o teste da versão, com as instâncias no Prism, e troca o teste com outro player pelas GameTests. |
 | Marcelo Fabiano | 2026-11-08 01:05 | Confere a descrição traduzida na lista de mods. |
 | Marcelo Fabiano | 2026-11-08 00:11 | Usa o nome do bloco nos exemplos de minério. |
 | Marcelo Fabiano | 2026-11-07 23:12 | Troca o painel lateral pelas chaves da aba Settings. |
