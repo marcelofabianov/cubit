@@ -37,7 +37,6 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 | `BodyTilt` | Quanto o corpo inclina para o dono em outro nível |
 | `TrackFrames` | Qual quadro da esteira vale em cada distância andada |
 | `OwnerLook` | Quando o robô vira o corpo para o dono |
-| `HealthLevel` | A vida mostrada numa barra, sem falso zero |
 | `RobotNotice` | Os textos curtos que o robô mostra ao dono |
 | `NoticeRules` | Em que estado o robô fala |
 | `NoticeRepeat` | Quanto um aviso ainda espera para poder se repetir |
