@@ -34,6 +34,25 @@
 | 321 | O nome `placed.ogg` e o momento "ao ser colocado no mundo" estão certos? | Sim. Detalha a pergunta 320 |
 | 322 | Em que fase o som de colocar no mundo passa a tocar? | Na Fase 3, junto dos outros oito. Detalha a pergunta 320 |
 | 421 | Como foi o roteiro manual do colar, do indicador de bateria e do tronco central com +0,5? | Teste finalizado, tudo ok, executado pelo desenvolvedor, sem detalhar cada passo. Ele não pediu +1, então o tronco fica em 2 unidades. O `make server` e o olhar de longe não foram citados em separado |
+| 693 | Os textos sem imagem propostos em `telas.md` estão aprovados, e a issue e a branch das telas podem ser criadas? | Sim: "aprovo os textos propostos, pode criar a issue e a branch". Todos os textos da seção "Textos sem imagem" de [`telas.md`](../funcionalidades/telas.md) valem como estão, inclusive o slot vencendo o solar na linha de recarga, a entrada do Dock como a média do último segundo e o raio do botão de chamar do tier Base. Responde a pergunta 692 |
+| 692 | Como definir os textos que as imagens não mostram, como o painel solar no Nether, no End ou hibernando, o consumo parado, a linha `Following` sem seguir ninguém e a seção `Docked Cubit` no estado Complete? | O agente propõe cada texto em `_docs/funcionalidades/telas.md`, marcado como proposta, e o desenvolvedor aprova ou corrige na revisão do documento, antes do código. Cada resposta é registrada |
+| 691 | Como testar as telas? | JUnit no domínio, na escolha do estado do topo, no formato dos números e na divisão dos valores acima de 16 bits. GameTests de só o dono abrir, Shift + clique no Dock, a tela fechar com o Cubit desligado, o botão de chamar e as chaves, sem duplicar itens. Roteiro manual comparando cada tela com as imagens |
+| 690 | Como desenhar a torre do Dock e os retratos do Cubit nas telas? | Em sprites 2D, fiéis às imagens. O retrato do Cubit monta a moldura com a tela do rosto, reaproveitando as texturas de expressão que já existem, com a piscada, e a cor do colar do tier. A torre do Dock vira um sprite próprio em `textures/gui/`, com a luz do estado |
+| 689 | O que a linha `Owner` da tela do Dock mostra? | O nome do dono, que o servidor busca pelo UUID no cache de perfis do jogo e envia ao abrir a tela. Sem nome no cache, mostra `Unknown` e registra no log, sem derrubar o jogo (regra 17) |
+| 688 | A seção `Scanner filter` da aba Settings é só leitura ou tem um botão para limpar? | Só leitura, como na imagem. O filtro continua mudando só pelo clique com o minério na mão |
+| 687 | Em que formato as telas mostram os números de energia? | O das imagens: estoques e baterias abreviados com `k`, e com `M` acima de um milhão, para os tiers futuros, e taxas por tick inteiras com separador de milhar, como `+2,400 FE/t`. O Jade continua como está |
+| 686 | Que estado o topo da tela do Cubit mostra com ele ativo e sem seguir ninguém? | `● Active`, em cinza, a mesma palavra do Jade. `Critical battery` continua valendo por cima de `Following` e de `Active` |
+| 685 | Que texto cada estado do Dock mostra no topo da tela? | Os nomes das imagens: `OFF` e `NO_ENERGY` mostram `● No power`, em laranja; `IDLE`, `● Idle`, em azul; `CHARGING`, `● Charging`, em verde; e `COMPLETE`, `● Complete`, em verde. O Jade passa a usar os mesmos textos. O enum e o nome de contrato `status` (resposta 313) não mudam |
+| 684 | O que a tela do Cubit faz se ele desligar com ela aberta? | Fecha na hora: o menu deixa de valer com o Cubit inativo, e o item no cursor volta ao inventário do player, sem perder nem duplicar. Detalha a resposta 677 |
+| 683 | Como os botões novos das telas chegam ao servidor? | Pelo clique de botão de menu do próprio jogo (`clickMenuButton`), validado no servidor pelo menu, sem pacote próprio do cliente para o servidor. Vale para o botão de chamar do Dock e para as chaves da aba Settings. Responde a pergunta 680 e mantém a resposta 467 |
+| 682 | Há algo a acrescentar no alinhamento das telas próprias (regra 50), antes da leitura e da rodada de decisões? | Não: "vamos trabalhar conforme o prompt de continuidade". O agente resumiu o que entendeu de `tmp/prompt/2026-11-07_22h14_continuidade_fase-3-telas.md`, e o desenvolvedor respondeu "pode seguir" para a leitura obrigatória e a rodada das 9 decisões em aberto |
+| 681 | E a barra de bateria vermelha com o Cubit desligado? | "Vamos ajustar para ficar como imagem": as barras seguem os mockups. O agente entendeu que o vermelho continua só na bateria crítica (respostas 415 e 416), como nas imagens, em que o Cubit desligado tem a barra vazia |
+| 680 | As telas criam pacotes próprios do cliente para o servidor? | "Depois falamos melhor sobre." Fica em aberto. Hoje as chaves usam `clickMenuButton`, sem pacote próprio (resposta 467) |
+| 679 | O botão de chamar fica desabilitado com o Dock sem energia, como no mockup? | Não: mantém o comportamento atual. A chamada funciona, e o Cubit entra e hiberna (resposta 352), então o botão fica habilitado |
+| 678 | Como a tela nova do Induction Dock abre? | Do mesmo jeito de hoje, com Shift + clique. O clique continua chamando ou liberando o Cubit (respostas 295 e 308) |
+| 677 | O Cubit desligado dá acesso ao inventário, como no mockup "Off"? | Não: "o Cubit desligado não pode ser acesso". Vale a tabela de estados do domínio, e a redstone continua entrando pelo clique com ela na mão (resposta 45). O que a tela faz se o Cubit desligar com ela aberta fica para a rodada |
+| 676 | Que estilo as telas próprias usam? | O das imagens de conceito, `tmp/conceito/cubit-v0.1.0.png` e `dock-v0.1.0.png`, e não o do Minecraft: "não quero usar estilo minecraft quero da imagem". O desenvolvedor pediu fidelidade máxima ao conceito, com as respostas 676 a 681 tendo prioridade sobre ele. Detalha a resposta 371 |
+| 675 | O que entra no prompt da próxima sessão, sobre as telas? | O desenvolvedor criou dois mockups e um prompt em `tmp/conceito/` e pediu a avaliação do agente, que apontou contradições com os documentos. Com as respostas 676 a 681, o agente escreve o prompt de continuidade das telas |
 | 674 | O jogo está fechado antes do push da #123? | Sim |
 | 673 | O que o desenvolvedor pediu depois do PR #122? | Um `.md` com todas as funcionalidades do Cubit, do início ao último commit, que o agente criou em `_docs/funcionalidades-entregues.md`, e o commit dos arquivos sem commit, com push e PR. O agente entendeu como autorização desses commits, do push e do PR, numa issue e numa branch próprias (#123), porque o commit direto na `develop` é proibido. A marcação do item 18, Jade, entra junto. A pergunta sobre apagar a branch da #121 e a do roteiro do item 19 ficaram sem resposta |
 | 672 | O jogo está fechado antes do push da #121? | Sim. O `pre-push` rodou, e o PR #122 foi aberto. Fica sem commit até o próximo PR |
@@ -353,6 +372,12 @@
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-07 22:34 | Registra a resposta 693. |
+| Marcelo Fabiano | 2026-11-07 22:29 | Registra as respostas 691 e 692. |
+| Marcelo Fabiano | 2026-11-07 22:27 | Registra as respostas 687 a 690. |
+| Marcelo Fabiano | 2026-11-07 22:24 | Registra as respostas 683 a 686. |
+| Marcelo Fabiano | 2026-11-07 22:20 | Registra a resposta 682. |
+| Marcelo Fabiano | 2026-11-07 22:14 | Registra as respostas 675 a 681. |
 | Marcelo Fabiano | 2026-11-07 22:00 | Registra as respostas 673 e 674. |
 | Marcelo Fabiano | 2026-11-07 21:49 | Registra a resposta 672. |
 | Marcelo Fabiano | 2026-11-07 21:46 | Registra a resposta 671. |
