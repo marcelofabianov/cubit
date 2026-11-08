@@ -28,7 +28,8 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Mod:** o que entra no jar, aparece no jogo ou acompanha o download fica em inglês, o idioma base. O jogo também tem o `pt_br.json`, gerado pelo mesmo datagen, para o player escolher o português (pergunta 712, que substitui a 449).
 - **Tradução:** os nomes são todos traduzidos, como `Base de Indução`, e o minério nos avisos e no filtro é o nome do bloco da tag, no idioma do jogo (perguntas 733 e 734).
 - **Changelog:** o `CHANGELOG.md`, na raiz, fica em inglês, no formato Keep a Changelog, como exceção da regra 25 (perguntas 713 e 752).
-- **Páginas das plataformas:** o resumo e a descrição longa ficam em inglês e citam a tradução para o português (pergunta 745).
+- **Páginas das plataformas:** o resumo e a descrição longa ficam em inglês e citam a tradução para o português (pergunta 745). O texto fica em `desenvolvimento/descricao-das-plataformas.md` e termina com uma linha curta sobre o que vem depois, sem datas (perguntas 758 e 760).
+- **Descrição na lista de mods:** traduzida pela chave `fml.menu.mods.info.description.cubit`, gerada pelo datagen, com o mesmo texto em inglês no `neoforge.mods.toml` (pergunta 759).
 - **Programação:** arquivos como `.java` e `.sh` ficam em inglês.
 - **Conteúdo:** arquivos como `.md` ficam em português, inclusive o nome do arquivo e da pasta.
 - **Commits:** português, em Conventional Commits.
@@ -135,6 +136,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-08 00:55 | Registra onde fica a descrição das plataformas e a tradução da descrição na lista de mods. |
 | Marcelo Fabiano | 2026-11-08 00:33 | Registra o tipo da `0.1.0`, o envio manual, o idioma das páginas, o aviso de IA no Modrinth, as imagens, as contas, o slug, o momento do changelog e o repositório público. |
 | Marcelo Fabiano | 2026-11-08 00:11 | Usa o nome do bloco nos exemplos de minério. |
 | Marcelo Fabiano | 2026-11-07 23:42 | Atualiza o inventário, a lanterna e os PRs dos scanners para as telas próprias e registra a interface na Fase 4, o planejado e a divisão das Fases 4 e 5. |

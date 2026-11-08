@@ -38,9 +38,19 @@ final class PortugueseGameTexts {
   private static final String HURT_NOTICE = "Isso dói!";
   private static final String OWNER_HURT_NOTICE = "Cuidado!";
 
+  private static final String MOD_DESCRIPTION =
+      Description.PART_1
+          + Description.PART_2
+          + Description.PART_3
+          + Description.PART_4
+          + Description.PART_5
+          + Description.PART_6
+          + Description.PART_7;
+
   private PortugueseGameTexts() {}
 
   static void addTo(BiConsumer<String, String> add) {
+    add.accept(CubitLanguageProvider.MOD_DESCRIPTION_KEY, MOD_DESCRIPTION);
     add.accept(CubitItems.GENERAL_ROBOT.get().getDescriptionId(), ROBOT_NAME);
     add.accept(CubitEntities.GENERAL_ROBOT.get().getDescriptionId(), ROBOT_NAME);
     add.accept(CubitCreativeTabs.MAIN_TITLE_KEY, ROBOT_NAME);
@@ -76,5 +86,16 @@ final class PortugueseGameTexts {
     add.accept(CubitSoundProvider.subtitleKey(CubitSounds.POWER_OFF_NAME), POWER_OFF_SUBTITLE);
     add.accept(CubitSoundProvider.subtitleKey(CubitSounds.RECHARGING_NAME), RECHARGING_SUBTITLE);
     add.accept(CubitSoundProvider.subtitleKey(CubitSounds.PLACED_NAME), PLACED_SUBTITLE);
+  }
+
+  /** The mod list description, in parts short enough to keep each literal on its own line. */
+  private static final class Description {
+    private static final String PART_1 = "Cubit é um robô companheiro fofo, movido a bateria, ";
+    private static final String PART_2 = "que segue você, carrega seus itens e ilumina o caminho. ";
+    private static final String PART_3 = "Ele procura minérios e mobs hostis, conversa com bipes ";
+    private static final String PART_4 = "e textos curtos e recarrega na Base de Indução com FE ";
+    private static final String PART_5 = "de qualquer mod, com redstone ou com o painel solar. ";
+    private static final String PART_6 = "Recolha-o como item quando quiser, com tudo o que ele ";
+    private static final String PART_7 = "guarda a salvo.";
   }
 }

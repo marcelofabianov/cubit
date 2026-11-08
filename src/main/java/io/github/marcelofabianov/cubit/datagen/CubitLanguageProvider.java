@@ -9,6 +9,9 @@ import net.neoforged.neoforge.common.data.LanguageProvider;
 
 /** One language file of the mod. English is the base, and every language has the same keys. */
 final class CubitLanguageProvider extends LanguageProvider {
+  /** The mod list reads this key before the description of the neoforge.mods.toml (answer 759). */
+  static final String MOD_DESCRIPTION_KEY = "fml.menu.mods.info.description." + CubitMod.MOD_ID;
+
   private final Language language;
 
   CubitLanguageProvider(PackOutput output, Language language) {

@@ -32,6 +32,15 @@ Nenhuma. A pendente 425 foi para a Fase 4 (pergunta 721).
 | 321 | O nome `placed.ogg` e o momento "ao ser colocado no mundo" estão certos? | Sim. Detalha a pergunta 320 |
 | 322 | Em que fase o som de colocar no mundo passa a tocar? | Na Fase 3, junto dos outros oito. Detalha a pergunta 320 |
 | 421 | Como foi o roteiro manual do colar, do indicador de bateria e do tronco central com +0,5? | Teste finalizado, tudo ok, executado pelo desenvolvedor, sem detalhar cada passo. Ele não pediu +1, então o tronco fica em 2 unidades. O `make server` e o olhar de longe não foram citados em separado |
+| 761 | O jogo está fechado antes de formatar, gerar os idiomas e rodar o `make check` da #133? | Sim. O `./gradlew test` do teste novo já tinha rodado antes da pergunta, uma falha do agente, que passou a perguntar antes de cada compilação |
+| 760 | A descrição longa das plataformas mostra o que está planejado para as próximas fases? | Só uma linha curta no fim, sem datas. O texto descreve o que a versão faz e diz que só o tier Base existe |
+| 759 | A descrição curta na lista de mods ganha tradução? | Sim: a chave `fml.menu.mods.info.description.cubit`, que o NeoForge 21.1.265 lê antes do `neoforge.mods.toml` (`ModListScreen.java:426`), entra no `en_us.json` e no `pt_br.json` pelo datagen. O `neoforge.mods.toml` leva o mesmo texto em inglês |
+| 758 | Onde fica guardada a descrição longa das plataformas? | Em `_docs/desenvolvimento/descricao-das-plataformas.md`, em português, com o resumo e a descrição em inglês em blocos prontos para copiar. O guia de publicação aponta para ele |
+| 757 | Há algo a acrescentar no alinhamento do item 4 da `0.1.0`, a revisão da descrição do mod? | "continue": nada a acrescentar, e as decisões vão para a rodada |
+| 756 | Há ajuste no roteiro depois do PR #132? | Não: seguir o plano, com o item 4 da `0.1.0`, a revisão da descrição do mod, e depois os itens 5 a 9 |
+| 755 | O jogo está fechado antes de apagar a branch remota da #131? | Sim. O agente, com a autorização, apagou a branch local e a remota |
+| 754 | O desenvolvedor fez o merge do PR #132? | Sim. O agente conferiu o merge (`4a54d74`) e a issue #131 fechada. Nenhum item do `checklist.md` fica marcado, porque os itens 4 a 9 da `0.1.0` continuam abertos |
+| 753 | O jogo está fechado antes do push da #131? | Sim. Fica sem commit até o próximo PR |
 | 752 | O texto da exceção do `CHANGELOG.md` na regra 25 do `AGENTS.md` está aprovado? | Sim: "O `CHANGELOG.md` fica em inglês, no nome e no conteúdo, porque vai para as páginas de versão das plataformas (pergunta 713)." Aplica a resposta 713 |
 | 751 | Como tratar os links do código e das issues, com o repositório privado? | O desenvolvedor torna o repositório público antes de enviar o jar da `0.1.0`, depois de conferir que nada privado está nele. O guia e o `CHANGELOG.md` usam os links do GitHub, e as issues são o canal de bugs |
 | 750 | Qual slug o Cubit usa nas duas plataformas? | `cubit`, livre no Modrinth (conferido pela API pública em 2026-11-08). Se o CurseForge recusar, os dois usam `cubit-robot`, para ficarem iguais |
@@ -429,6 +438,7 @@ Nenhuma. A pendente 425 foi para a Fase 4 (pergunta 721).
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-08 00:50 | Registra as respostas 753 a 761. |
 | Marcelo Fabiano | 2026-11-08 00:33 | Registra as respostas 739 a 752. |
 | Marcelo Fabiano | 2026-11-07 23:48 | Registra as respostas 728 a 738. |
 | Marcelo Fabiano | 2026-11-07 23:45 | Registra as respostas 716 a 727. |

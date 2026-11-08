@@ -560,7 +560,8 @@ Compare cada tela com as imagens [`tela-cubit.png`](../imagens/conceito/tela-cub
 | 1 | Em Opções, Idioma, escolha Português (Brasil) | Os itens viram `Cubit`, `Cubit Danificado`, `Caixa de Ferramentas` e `Base de Indução` |
 | 2 | Abra as telas do Cubit e da base | Todos os textos em português, sem chave crua como `gui.cubit...`, e nada passa da borda |
 | 3 | Espere uma fala e um aviso de minério | A fala em português e `Cubit: Minério de Diamante!!!` |
-| 4 | Volte ao inglês | Tudo em inglês de novo, com `Cubit: Diamond Ore!!!` |
+| 4 | Ainda em português, abra Mods e escolha o Cubit | A descrição em português, que começa com `Cubit é um robô companheiro fofo` |
+| 5 | Volte ao inglês | Tudo em inglês de novo, com `Cubit: Diamond Ore!!!`, e a descrição na lista de mods em inglês |
 
 ## Servidor dedicado
 
@@ -571,6 +572,7 @@ Compare cada tela com as imagens [`tela-cubit.png`](../imagens/conceito/tela-cub
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-08 01:05 | Confere a descrição traduzida na lista de mods. |
 | Marcelo Fabiano | 2026-11-08 00:11 | Usa o nome do bloco nos exemplos de minério. |
 | Marcelo Fabiano | 2026-11-07 23:12 | Troca o painel lateral pelas chaves da aba Settings. |
 | Marcelo Fabiano | 2026-11-07 23:11 | Adiciona as telas próprias e troca o estado do Dock no Jade. |

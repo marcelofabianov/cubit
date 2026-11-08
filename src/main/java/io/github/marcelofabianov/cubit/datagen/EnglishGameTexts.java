@@ -38,9 +38,20 @@ final class EnglishGameTexts {
   private static final String HURT_NOTICE = "That hurts!";
   private static final String OWNER_HURT_NOTICE = "Careful!";
 
+  /** Must match the description of the neoforge.mods.toml, checked by LanguageFilesTest. */
+  private static final String MOD_DESCRIPTION =
+      Description.PART_1
+          + Description.PART_2
+          + Description.PART_3
+          + Description.PART_4
+          + Description.PART_5
+          + Description.PART_6
+          + Description.PART_7;
+
   private EnglishGameTexts() {}
 
   static void addTo(BiConsumer<String, String> add) {
+    add.accept(CubitLanguageProvider.MOD_DESCRIPTION_KEY, MOD_DESCRIPTION);
     add.accept(CubitItems.GENERAL_ROBOT.get().getDescriptionId(), ROBOT_NAME);
     add.accept(CubitEntities.GENERAL_ROBOT.get().getDescriptionId(), ROBOT_NAME);
     add.accept(CubitCreativeTabs.MAIN_TITLE_KEY, ROBOT_NAME);
@@ -76,5 +87,16 @@ final class EnglishGameTexts {
     add.accept(CubitSoundProvider.subtitleKey(CubitSounds.POWER_OFF_NAME), POWER_OFF_SUBTITLE);
     add.accept(CubitSoundProvider.subtitleKey(CubitSounds.RECHARGING_NAME), RECHARGING_SUBTITLE);
     add.accept(CubitSoundProvider.subtitleKey(CubitSounds.PLACED_NAME), PLACED_SUBTITLE);
+  }
+
+  /** The mod list description, in parts short enough to keep each literal on its own line. */
+  private static final class Description {
+    private static final String PART_1 = "Cubit is a cute battery-powered robot companion that ";
+    private static final String PART_2 = "follows you, carries your items and lights the way. ";
+    private static final String PART_3 = "It scans for ores and hostile mobs, talks with beeps ";
+    private static final String PART_4 = "and short messages, and recharges at the Induction ";
+    private static final String PART_5 = "Dock with FE from any mod, with redstone or with its ";
+    private static final String PART_6 = "solar panel. Pick it back up as an item whenever you ";
+    private static final String PART_7 = "want, with everything inside it kept safe.";
   }
 }

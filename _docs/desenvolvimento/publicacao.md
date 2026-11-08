@@ -27,8 +27,8 @@ Os mesmos dados valem para as duas plataformas.
 |---|---|
 | Nome | `Cubit`. O Modrinth pede que o título seja só o nome do projeto |
 | Slug | `cubit`, livre no Modrinth em 2026-11-08. Se o CurseForge recusar, use `cubit-robot` nas duas, para ficarem iguais (pergunta 750) |
-| Resumo | Uma frase em inglês, sem repetir o nome. Proposta: `A cute battery-powered robot companion that follows you, carries your items and scans for ores and mobs.` |
-| Descrição longa | Em inglês, citando a tradução para o português (pergunta 745). O texto é o do item 4 da `0.1.0`, a revisão da descrição do mod |
+| Resumo | Uma frase em inglês, sem repetir o nome, em [`descricao-das-plataformas.md`](descricao-das-plataformas.md#resumo) |
+| Descrição longa | Em inglês, citando a tradução para o português (pergunta 745), em [`descricao-das-plataformas.md`](descricao-das-plataformas.md#descrição-longa) (pergunta 758) |
 | Ícone | O ícone do mod, ampliado sem suavizar, como em [Ícone](#ícone) |
 | Galeria | Só capturas de tela feitas no jogo, no teste de instância. Nada de pranchas de conceito nem de imagem feita com IA (pergunta 747) |
 | Licença | MIT |
@@ -114,4 +114,5 @@ Conferidas em 2026-11-08:
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-08 01:05 | Aponta o resumo e a descrição longa para a descrição das plataformas. |
 | Marcelo Fabiano | 2026-11-08 00:33 | Cria o guia de publicação no Modrinth e no CurseForge. |

@@ -20,6 +20,21 @@ class LanguageFilesTest {
   private static final Pattern KEY = Pattern.compile("^\\s*\"([^\"]+)\"\\s*:", Pattern.MULTILINE);
   private static final String SAME_KEYS = "The Portuguese file must have the same keys as English";
   private static final String EMPTY = "The English file must have keys";
+  private static final String MODS_TOML = "src/main/templates/META-INF/neoforge.mods.toml";
+  private static final String TOML_REGEX = "description='''(.*?)'''";
+  private static final String QUOTE = "\"";
+  private static final String VALUE_REGEX = "\"\\s*:\\s*\"([^\"]*)\"";
+  private static final String SAME_TEXT = "The mod list text differs from the mods.toml";
+  private static final String NONE = "";
+  private static final Pattern TOML_DESCRIPTION = Pattern.compile(TOML_REGEX, Pattern.DOTALL);
+  private static final Pattern LIST_DESCRIPTION =
+      Pattern.compile(
+          QUOTE + Pattern.quote(CubitLanguageProvider.MOD_DESCRIPTION_KEY) + VALUE_REGEX);
+
+  private static String firstMatch(Pattern pattern, Path file) throws IOException {
+    Matcher matcher = pattern.matcher(Files.readString(file));
+    return matcher.find() ? matcher.group(1).strip() : NONE;
+  }
 
   private static Set<String> keysOf(String file) throws IOException {
     Matcher matcher = KEY.matcher(Files.readString(LANG.resolve(file)));
@@ -35,5 +50,13 @@ class LanguageFilesTest {
     Set<String> english = keysOf(ENGLISH);
     assertFalse(english.isEmpty(), EMPTY);
     assertEquals(english, keysOf(PORTUGUESE), SAME_KEYS);
+  }
+
+  /** The same English text lives in both places, so they must not drift apart (answer 759). */
+  @Test
+  void theModListDescriptionMatchesTheModsToml() throws IOException {
+    String toml = firstMatch(TOML_DESCRIPTION, Path.of(MODS_TOML));
+    assertFalse(toml.isEmpty(), SAME_TEXT);
+    assertEquals(toml, firstMatch(LIST_DESCRIPTION, LANG.resolve(ENGLISH)), SAME_TEXT);
   }
 }
