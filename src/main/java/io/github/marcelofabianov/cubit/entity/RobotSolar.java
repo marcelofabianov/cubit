@@ -14,7 +14,8 @@ import net.minecraft.world.level.Level;
  */
 public final class RobotSolar {
   private final RobotEntity robot;
-  private boolean sunReachesIt;
+  private boolean sunExists;
+  private boolean skyOpen;
   private boolean wasActive;
 
   RobotSolar(RobotEntity robot) {
@@ -29,26 +30,22 @@ public final class RobotSolar {
   void tick() {
     boolean active = robot.powerState() == PowerState.ACTIVE;
     if (active && (!wasActive || robot.tickCount % CubitMod.CONFIG.solarCheckTicks() == 0)) {
-      sunReachesIt = readSun();
+      readSun();
     }
     wasActive = active;
-    Level level = robot.level();
+    boolean day = SolarPanel.isDay(robot.level().getDayTime());
     Energy offered =
-        SolarPanel.output(
-            robot.spec().solar(),
-            robot.powerState(),
-            sunReachesIt,
-            SolarPanel.isDay(level.getDayTime()));
+        SolarPanel.output(robot.spec().solar(), robot.powerState(), sunExists && skyOpen, day);
     Battery.Charged charged = robot.battery().recharge(offered);
     robot.setBattery(charged.battery());
     robot.getEntityData().set(RobotSyncedData.SOLAR_CHARGING, !charged.accepted().isZero());
+    RobotTickReading.of(robot).recordSolar(sunExists, skyOpen, day, charged.accepted());
   }
 
   /** Light that passes through glass still counts, and the Nether and the End have no sun. */
-  private boolean readSun() {
+  private void readSun() {
     Level level = robot.level();
-    return level.dimensionType().hasSkyLight()
-        && !level.dimensionType().hasCeiling()
-        && level.canSeeSky(robot.blockPosition().above());
+    sunExists = level.dimensionType().hasSkyLight() && !level.dimensionType().hasCeiling();
+    skyOpen = level.canSeeSky(robot.blockPosition().above());
   }
 }
