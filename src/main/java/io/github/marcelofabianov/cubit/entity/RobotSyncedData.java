@@ -2,6 +2,7 @@ package io.github.marcelofabianov.cubit.entity;
 
 import io.github.marcelofabianov.cubit.domain.behavior.GazeDirection;
 import io.github.marcelofabianov.cubit.domain.behavior.RobotExpression;
+import io.github.marcelofabianov.cubit.domain.behavior.ScanSignal;
 import io.github.marcelofabianov.cubit.domain.energy.BatteryIndicator;
 import io.github.marcelofabianov.cubit.domain.robot.RobotColor;
 import io.github.marcelofabianov.cubit.domain.tier.RobotTier;
@@ -45,6 +46,9 @@ final class RobotSyncedData {
   static final EntityDataAccessor<Byte> COLOR =
       SynchedEntityData.defineId(RobotEntity.class, EntityDataSerializers.BYTE);
 
+  static final EntityDataAccessor<Byte> SCAN_SIGNAL =
+      SynchedEntityData.defineId(RobotEntity.class, EntityDataSerializers.BYTE);
+
   private RobotSyncedData() {}
 
   /** Called while the class loads, only to make sure it runs before any robot exists. */
@@ -62,5 +66,6 @@ final class RobotSyncedData {
     builder.define(SOLAR_CHARGING, false);
     builder.define(LIGHT_LEVEL, NO_LIGHT);
     builder.define(COLOR, (byte) RobotColor.WHITE.ordinal());
+    builder.define(SCAN_SIGNAL, (byte) ScanSignal.NONE.ordinal());
   }
 }

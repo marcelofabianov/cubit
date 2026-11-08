@@ -18,6 +18,7 @@ final class RobotRenderer extends GeoEntityRenderer<RobotEntity> {
     addRenderLayer(new RobotCollarLayer(this, robotType));
     addRenderLayer(new RobotBatteryLayer(this, robotType));
     addRenderLayer(new RobotAntennaGlowLayer(this, robotType));
+    addRenderLayer(new RobotScanHaloLayer(this, robotType));
     addRenderLayer(new RobotSolarPanelLayer(this, robotType));
   }
 }
