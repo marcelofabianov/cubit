@@ -24,7 +24,7 @@ Mod de Minecraft que adiciona um robô companheiro fofo, movido a bateria, de te
 
 ## Regras do mod
 
-1. **Idioma:** o que entra no jar, aparece no jogo ou acompanha o download do mod fica em inglês: nome, itens, legendas, telas, mensagens, IDs, comandos, config e licença. Existe só o `en_us.json`, sem `pt_br.json`.
+1. **Idioma:** o inglês é o idioma base. O que entra no jar, aparece no jogo ou acompanha o download do mod fica em inglês, como nome, IDs, comandos, config, logs e licença, e o `en_us.json` é a referência. Os arquivos de tradução, como o `pt_br.json`, podem ter textos em outros idiomas além do padrão, gerados pelo mesmo datagen e com as mesmas chaves do inglês, conferidas por um teste (perguntas 712 e 732).
 2. **Sem magia:** nem nos nomes, nem nas mecânicas.
 3. **Números em config:** bateria, consumo, raios, intervalos, dano e slots por tier nunca ficam fixos na lógica.
 4. **Receitas:** os materiais são só do jogo puro, e uma receita pode combinar itens do próprio mod, como no conserto. Ficam em datapack JSON, para o pack poder sobrescrever com KubeJS.
