@@ -10,7 +10,7 @@ Este é o mapa dos documentos do projeto. A apresentação do mod e o roadmap fi
 | Visual, expressões e sons | [`conceito/visual.md`](conceito/visual.md) |
 | Lista dos arquivos de som | [`conceito/sons.md`](conceito/sons.md) |
 | Lista das expressões, com as imagens | [`conceito/expressoes.md`](conceito/expressoes.md) |
-| Falas do Cubit sobre o tempo e as conquistas, em inglês e em português | [`conceito/falas.md`](conceito/falas.md) |
+| Falas do Cubit sobre o tempo, as conquistas, os biomas, o dono que fica para trás, os animais e a redstone, em inglês e em português | [`conceito/falas.md`](conceito/falas.md) |
 | Imagens de conceito | [`imagens/conceito/`](imagens/conceito/) |
 | Bateria, Induction Dock, Power Bank, redstone, painel solar e retorno automático | [`funcionalidades/energia.md`](funcionalidades/energia.md) |
 | Movimento, robô que segue, fogo, lava, vida, morte e local de morte | [`funcionalidades/movimento.md`](funcionalidades/movimento.md) |
@@ -26,6 +26,7 @@ Este é o mapa dos documentos do projeto. A apresentação do mod e o roadmap fi
 | Resumo das decisões | [`decisoes.md`](decisoes.md) |
 | Perguntas e respostas por fase | [`perguntas/`](perguntas/README.md) |
 | Termos e nomes oficiais | [`glossario.md`](glossario.md) |
+| As fases e o que entra em cada uma | [`ROADMAP.md`](../ROADMAP.md) |
 | O que está pronto e o que falta em cada fase | [`checklist.md`](../checklist.md) |
 | Tudo o que o Cubit já faz, num só lugar | [`funcionalidades-entregues.md`](funcionalidades-entregues.md) |
 | Pilares de desenvolvimento | [`desenvolvimento/pilares.md`](desenvolvimento/pilares.md) |
@@ -42,6 +43,8 @@ Os números ficam em [`tiers.md`](tiers.md). As outras páginas apontam para lá
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-07 23:46 | Cita o roadmap. |
+| Marcelo Fabiano | 2026-11-07 23:42 | Amplia a descrição das falas. |
 | Marcelo Fabiano | 2026-11-07 22:31 | Cita as telas próprias. |
 | Marcelo Fabiano | 2026-11-07 21:55 | Cita as funcionalidades entregues. |
 | Marcelo Fabiano | 2026-11-07 16:43 | Amplia a citação das falas. |

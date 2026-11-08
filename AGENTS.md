@@ -6,9 +6,9 @@ Mod de Minecraft que adiciona um robô companheiro fofo, movido a bateria, de te
 
 ## Estado atual
 
-- **Etapa atual:** Fase 3, sentidos, em andamento. A Fase 2 foi encerrada. As funcionalidades entram por issue, na ordem do `checklist.md`.
-- **Já entrou:** colocar e recolher, seguir o player, vários robôs, fogo, lava, os arquivos de som, a revisão dos `.md`, o novo modelo, a morte com o item danificado, o inventário, a energia em uso, o consumo por situação, a reação a blocos que ferem, o Induction Dock, o `/cubit reset`, as receitas e, na Fase 3, os sons, as expressões, o som de dano, a barra de vida, as animações, o colar e a bateria, os textos curtos, a lanterna, o painel solar, a cor da carcaça, o nome, a detecção dos scanners, com chave e filtro, numa esfera, as caixas dos scanners, a seta sobre o mob, as cores das antenas com o halo do corpo e as falas, inclusive sobre a redstone minerada. Também entraram a volta do Cubit com o dono que renasce e a descida de até 5 blocos.
-- **Próximos:** o Jade, item 18, e os demais itens do `checklist.md`. Os testes de instância e a primeira versão, `0.1.0`, ficam para o fim da Fase 3.
+- **Etapa atual:** reta final da Fase 3, sentidos. Todas as funcionalidades da fase entraram, e falta preparar e publicar a primeira versão, `0.1.0`. As Fases 1 e 2 foram encerradas. O trabalho entra por issue, na ordem do `checklist.md`.
+- **Já entrou:** colocar e recolher, seguir o player, vários robôs, fogo, lava, os arquivos de som, a revisão dos `.md`, o novo modelo, a morte com o item danificado, o inventário, a energia em uso, o consumo por situação, a reação a blocos que ferem, o Induction Dock, o `/cubit reset`, as receitas e, na Fase 3, os sons, as expressões, o som de dano, a barra de vida, as animações, o colar e a bateria, os textos curtos, a lanterna, o painel solar, a cor da carcaça, o nome, a detecção dos scanners, com chave e filtro, numa esfera, as caixas dos scanners, a seta sobre o mob, as cores das antenas com o halo do corpo e as falas, inclusive sobre a redstone minerada. Também entraram a volta do Cubit com o dono que renasce, a descida de até 5 blocos, o Jade e as telas próprias do Cubit e do Induction Dock.
+- **Próximos:** a reta final das respostas 712 a 715, com a auditoria dos documentos, a tradução para o português e o `CHANGELOG.md` com o guia de publicação. Depois, os itens da `0.1.0` do `checklist.md`, com os testes de instância e a publicação.
 - **Comandos:** estão em [`_docs/desenvolvimento/ferramentas-de-build.md`](_docs/desenvolvimento/ferramentas-de-build.md).
 - **Limite:** não avance para as fases seguintes sem pedido explícito.
 
@@ -45,6 +45,7 @@ Mod de Minecraft que adiciona um robô companheiro fofo, movido a bateria, de te
 | Build | MDK oficial do NeoForge para 1.21.1 (ModDevGradle) |
 | GeckoLib | 4.9.3 (versão do pack) |
 | LambDynamicLights | 4.8.11+1.21.1 (versão do pack, obrigatória, no cliente) |
+| Jade | 15.10.6+neoforge (versão do pack, opcional) |
 
 Versões conferidas em 2026-11-04. Confira de novo no `mods/` do Iron Meridian antes de fixar ou atualizar uma dependência. O Gradle não está instalado na máquina: use o wrapper. O JDK 21 é baixado pelo próprio projeto.
 
@@ -102,7 +103,7 @@ O significado de cada pilar, os checklists e a matriz de decisão estão em [`_d
 
 ### Forma do código
 
-25. **Idioma:** arquivos de programação (como `.java` e `.sh`) ficam em inglês, incluindo comentários, logs e testes. Arquivos de conteúdo (como `.md`) ficam em português, inclusive o nome do arquivo e da pasta, assim como issues, PRs e mensagens de commit. `README.md`, `AGENTS.md`, `CLAUDE.md`, `LICENSE` e `pull_request_template.md` mantêm o nome, porque as ferramentas dependem dele.
+25. **Idioma:** arquivos de programação (como `.java` e `.sh`) ficam em inglês, incluindo comentários, logs e testes. Arquivos de conteúdo (como `.md`) ficam em português, inclusive o nome do arquivo e da pasta, assim como issues, PRs e mensagens de commit. `README.md`, `AGENTS.md`, `CLAUDE.md`, `LICENSE` e `pull_request_template.md` mantêm o nome, porque as ferramentas dependem dele, e o `ROADMAP.md` segue o mesmo padrão dos arquivos da raiz.
 26. **Constantes em vez de literais:** nada de número mágico nem string literal solta, inclusive nos testes. Balanceamento vai no config, e o resto vira constante nomeada. O Checkstyle reprova a violação.
 27. **Funções** têm no máximo 30 linhas e uma responsabilidade. Prefira classes pequenas e composição em vez de herança profunda.
 28. **Nomes:** classes em `PascalCase`; JSONs e IDs em `snake_case`, no singular; scripts `.sh` e arquivos `.md` em `kebab-case`. Adapters levam o que adaptam como prefixo (`NeoForgeTierCatalog`).
@@ -215,12 +216,12 @@ io.github.marcelofabianov.cubit
 ├── config/                 // ModConfigSpec → implementa TierCatalog
 ├── registry/               // DeferredRegisters
 ├── entity/                 // RobotEntity, goals de IA
-├── item/                   // RobotItem, PowerBankItem, RobotStateComponent
+├── item/                   // RobotItem, RobotStateComponent; PowerBankItem planejado para a Fase 4
 ├── block/                  // InductionDockBlock, BlockEntity
 ├── menu/                   // RobotMenu, InductionDockMenu
 ├── network/                // pacotes próprios: NoticePayload, OreMarksPayload, MobMarksPayload e CubitNetwork
 ├── compat/jade/            // plugin do Jade, opcional: só este pacote importa o Jade
-├── player/                 // attachment com o UUID do robô que segue, robôs mortos com o dono offline, /cubit reset e o que o dono faz: renascer, conquistar e caçar
+├── player/                 // attachment com o UUID do robô que segue, robôs mortos com o dono offline, /cubit reset e o que o dono faz: renascer, conquistar, caçar e minerar redstone
 ├── client/                 // renderer, modelo GeckoLib, tela
 └── datagen/                // receitas, loot, traduções
 ```
