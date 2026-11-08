@@ -83,6 +83,7 @@ final class CubitLanguageProvider extends LanguageProvider {
     add(RobotNotices.keyOf(RobotNotice.OWNER_HURT), OWNER_HURT_NOTICE);
     addSubtitles();
     JadeTexts.addTo(this::add);
+    ScreenTexts.addTo(this::add);
   }
 
   private void addSubtitles() {

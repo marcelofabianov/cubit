@@ -185,7 +185,8 @@ public final class InductionDockBlock extends BaseEntityBlock {
       return InteractionResult.PASS;
     }
     if (player.isShiftKeyDown()) {
-      player.openMenu(state.getMenuProvider(level, pos));
+      player.openMenu(
+          state.getMenuProvider(level, pos), data -> InductionDockMenu.writeOpening(data, dock));
     } else if (level instanceof ServerLevel serverLevel) {
       callOrRelease(serverLevel, dock);
     }
