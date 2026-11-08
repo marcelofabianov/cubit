@@ -71,12 +71,12 @@ Sai só ao terminar todos os itens da Fase 3 (pergunta 337).
 1. [x] Decidir o momento da publicação
 2. [x] Decidir a licença dos sons (pergunta 338)
 3. [x] Decidir onde publicar: Modrinth e CurseForge (pergunta 714)
-4. [ ] Rever a descrição do mod, que hoje descreve só a Fase 2
-5. [ ] Testar a versão completa numa instância só com o mod e as dependências e no Iron Meridian (regra 35), inclusive os cabos reais de FE no Dock
-6. [ ] Testar com outro player num servidor: passo 9 do Dock, passo 6 do `/cubit reset` e passo 13 da cor e do nome (pergunta 515)
-7. [ ] Confirmar no jogo quando as receitas aparecem no livro, a receita do Dock em L espelhado (pergunta 351), o `/cubit reset` com chunk descarregado e o padrão da opção de luz de entidades do LambDynamicLights (perguntas 461 e 719)
-8. [ ] Conferir os termos das ferramentas de IA usadas nos sons antes de publicar (perguntas 338 e 719)
-9. [ ] Publicar: `homolog`, `release/0.1.0`, `main` e tag
+4. [x] Rever a descrição do mod, no jogo e nas plataformas (PR #134)
+5. [x] Testar a versão completa no Iron Meridian, inclusive os cabos reais de FE no Dock. A instância só com o mod ficou de fora nesta versão, como exceção à regra 35 (perguntas 774 e 776)
+6. [x] Outro player: o passo 9 do Dock, o 6 do `/cubit reset` e o 13 da cor e do nome ficam cobertos pelas GameTests, sem teste no jogo (perguntas 770 a 772)
+7. [x] Confirmações no jogo: saíram da `0.1.0` e ficam para depois dela, com a instância só com o mod: quando as receitas aparecem no livro, a receita do Dock em L espelhado (pergunta 351), o `/cubit reset` com chunk descarregado e o padrão da opção de luz de entidades do LambDynamicLights (perguntas 461, 719 e 776)
+8. [x] Conferir os termos das ferramentas de IA usadas nos sons antes de publicar (perguntas 338, 719 e 777)
+9. [ ] Publicar: `homolog`, `release/0.1.0`, `main`, tag, release no GitHub e envio ao Modrinth e ao CurseForge (perguntas 744 e 778)
 
 ## Fase 4: Upgrades e autonomia
 

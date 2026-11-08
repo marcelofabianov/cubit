@@ -7,7 +7,7 @@ As regras das plataformas foram conferidas em 2026-11-08, nas [fontes](#fontes) 
 ## Antes de enviar
 
 1. **Checklist:** os itens 4 a 8 da versão no [`checklist.md`](../../checklist.md) estão feitos, inclusive os testes de instância e os termos das ferramentas de IA dos sons.
-2. **Versão:** a `release/X.Y.Z` foi mesclada na `main`, com a tag `vX.Y.Z` e o [`CHANGELOG.md`](../../CHANGELOG.md) com a data, como em [Publicar uma versão](fluxo-de-trabalho.md#publicar-uma-versão).
+2. **Versão:** a `release/X.Y.Z` foi mesclada na `main`, com a tag `vX.Y.Z`, a release no GitHub com o jar e o [`CHANGELOG.md`](../../CHANGELOG.md) com a data, como em [Publicar uma versão](fluxo-de-trabalho.md#publicar-uma-versão) (pergunta 778). O jar enviado aos sites é o mesmo da release do GitHub.
 3. **Jar:** gerado da `main`, na tag:
 
    ```bash
@@ -114,5 +114,6 @@ Conferidas em 2026-11-08:
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-08 01:41 | Cita a release no GitHub antes do envio aos sites. |
 | Marcelo Fabiano | 2026-11-08 01:05 | Aponta o resumo e a descrição longa para a descrição das plataformas. |
 | Marcelo Fabiano | 2026-11-08 00:33 | Cria o guia de publicação no Modrinth e no CurseForge. |

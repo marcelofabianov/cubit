@@ -19,7 +19,10 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Interface de configuração:** a chave geral e a do painel solar entram na Fase 4, na aba Settings, e a `0.1.0` sai com as chaves de hoje (pergunta 717).
 - **Fases 4 e 5 divididas:** Fase 4 com Power Bank, ímã, coleta, choque com o Pacífico e a interface de configuração; 4.1 com os tiers, os outros modos e os slots exclusivos; 4.2 com o Cubit Remote, o modo só o alvo, o modo área, a descarga, o retorno e o local de morte. Fase 5 com antenas, Servidor e storage wireless virtual; 5.1 com o carregamento de chunks; e 5.2 com os cards, a hibernação fora do Dock e a personalização por card (perguntas 722 a 726).
 - **Planejado nos documentos:** o que é de fase futura fica nos documentos, marcado com a fase em que entra, sem parecer pronto (pergunta 718).
-- **Testes de instância:** os da regra 35 ficam para o fim da Fase 3, no teste da versão completa.
+- **Testes de instância:** os da regra 35 ficam para o fim da Fase 3, no teste da versão completa, na seção "Teste da versão" do roteiro manual, no Prism Launcher. O Iron Meridian é testado numa cópia da instância, com o jar em `mods/` (perguntas 767 a 769).
+- **Exceção na `0.1.0`:** a versão sai com o teste no Iron Meridian, sem a instância só com o mod e sem as confirmações do item 7, que ficam para depois dela (pergunta 776).
+- **Release no GitHub:** cada versão tem a tag anotada e uma release no GitHub, com a seção do `CHANGELOG.md` e o jar, antes do envio aos sites (pergunta 778).
+- **Outro player:** o teste com outro player não é feito no jogo. As GameTests com um player que não é o dono cobrem o Dock, o `/cubit reset`, a cor e o nome (perguntas 770 a 772).
 - **Etapa atual:** Fase 3, sentidos, em andamento. As Fases 1 e 2 foram encerradas.
 - **Iron Meridian:** o Cubit entra como exceção à regra do pack contra funções repetidas, por causa do Robit do Mekanism. O registro está na issue `marcelofabianov/iron-meridian#2`.
 
@@ -136,6 +139,8 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-08 01:41 | Registra a exceção da `0.1.0` e a release no GitHub. |
+| Marcelo Fabiano | 2026-11-08 01:15 | Registra como ficam os testes de instância e o teste com outro player. |
 | Marcelo Fabiano | 2026-11-08 00:55 | Registra onde fica a descrição das plataformas e a tradução da descrição na lista de mods. |
 | Marcelo Fabiano | 2026-11-08 00:33 | Registra o tipo da `0.1.0`, o envio manual, o idioma das páginas, o aviso de IA no Modrinth, as imagens, as contas, o slug, o momento do changelog e o repositório público. |
 | Marcelo Fabiano | 2026-11-08 00:11 | Usa o nome do bloco nos exemplos de minério. |
