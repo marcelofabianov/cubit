@@ -174,7 +174,7 @@ As frases e as regras estão nas perguntas 572 a 587 e 618 a 621.
 - **Céu:** amanhecer, dia lindo, entardecer, chuva e trovoada exigem céu visível, e não valem no Nether nem no End. O frio vale em qualquer lugar.
 - **Chuva:** vale só onde chove de fato, então não vale em deserto nem em bioma com neve, que tem a fala do frio.
 - **Dia lindo:** cerca de 3 minutos depois do amanhecer, sem chuva, ou quando a chuva para de dia (pergunta 583).
-- **Chave:** o botão `Chatter`, no painel lateral, começa ligado e é guardado no item. Vale também para os parabéns.
+- **Chave:** a chave `Chatter`, na aba Settings da [tela do Cubit](../funcionalidades/telas.md#aba-settings), começa ligada e é guardado no item. Vale também para os parabéns.
 - **Conquistas:** só as visíveis ao player, de qualquer mod, sem lista fixa. Mostram a expressão feliz por cerca de 3 s. Usam o intervalo mínimo por texto, e não o das falas sobre o tempo.
 - **Sem o nome da conquista:** o Cubit só usa as frases da tabela (pergunta 575).
 - **Ficando para trás:** fala uma vez ao passar da distância e só volta a valer depois de chegar perto do dono, com um intervalo próprio. Não fala em chamas, a caminho do Dock nem num salto que passa direto do teleporte, como por um comando (pergunta 585).
@@ -187,6 +187,7 @@ As frases e as regras estão nas perguntas 572 a 587 e 618 a 621.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-07 23:12 | Aponta a chave para a aba Settings. |
 | Marcelo Fabiano | 2026-11-07 20:04 | Adiciona as falas da redstone. |
 | Marcelo Fabiano | 2026-11-07 17:14 | Adiciona as falas de animais. |
 | Marcelo Fabiano | 2026-11-07 17:11 | Adiciona as falas de bioma. |

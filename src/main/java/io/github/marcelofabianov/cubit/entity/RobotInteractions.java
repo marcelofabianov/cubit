@@ -4,10 +4,9 @@ import io.github.marcelofabianov.cubit.CubitMod;
 import io.github.marcelofabianov.cubit.domain.energy.PowerState;
 import io.github.marcelofabianov.cubit.domain.ownership.FollowingOutcome;
 import io.github.marcelofabianov.cubit.domain.ownership.Ownership;
-import io.github.marcelofabianov.cubit.domain.robot.HealthLevel;
 import io.github.marcelofabianov.cubit.domain.robot.RobotClick;
 import io.github.marcelofabianov.cubit.domain.tier.TierSpec;
-import io.github.marcelofabianov.cubit.menu.RobotMenu;
+import io.github.marcelofabianov.cubit.menu.RobotScreenOpening;
 import io.github.marcelofabianov.cubit.player.FollowingRobotLink;
 import io.github.marcelofabianov.cubit.registry.CubitAttachments;
 import io.github.marcelofabianov.cubit.registry.CubitDataComponents;
@@ -17,6 +16,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.Container;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.DyeItem;
@@ -27,18 +27,15 @@ import net.neoforged.neoforge.common.Tags;
 final class RobotInteractions {
   private RobotInteractions() {}
 
+  /** Only the numbers in the descriptions and the filter travel once, when it opens. */
   static InteractionResult openInventory(RobotEntity robot, Player player) {
-    RobotMenu.open(
-        player,
-        robot.getDisplayName(),
-        robot.inventory(),
-        robot.energySlot(),
-        robot::batteryPercent,
-        () -> HealthLevel.percent(robot.getHealth(), robot.getMaxHealth()),
-        robot.lampSwitch(),
-        robot.scanners(),
-        robot.chatter(),
-        robot::canUseInventory);
+    RobotScreenOpening opening = RobotScreenReadout.opening(robot);
+    player.openMenu(
+        new SimpleMenuProvider(
+            (containerId, inventory, opener) ->
+                RobotScreenReadout.serverMenu(containerId, inventory, robot),
+            robot.getDisplayName()),
+        opening::write);
     return InteractionResult.CONSUME;
   }
 

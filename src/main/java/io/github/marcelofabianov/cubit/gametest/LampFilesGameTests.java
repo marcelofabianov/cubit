@@ -4,7 +4,7 @@ import io.github.marcelofabianov.cubit.CubitMod;
 import io.github.marcelofabianov.cubit.domain.behavior.BlinkFrame;
 import io.github.marcelofabianov.cubit.domain.behavior.GazeDirection;
 import io.github.marcelofabianov.cubit.domain.behavior.RobotExpression;
-import io.github.marcelofabianov.cubit.menu.RobotMenu;
+import io.github.marcelofabianov.cubit.menu.ScreenKeys;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
@@ -37,7 +37,7 @@ public final class LampFilesGameTests {
     for (String file : List.of(LIGHT, TIP_GLOW, HALO)) {
       assertFileExists(helper, file);
     }
-    for (String key : List.of(RobotMenu.LAMP_ON_KEY, RobotMenu.LAMP_OFF_KEY)) {
+    for (String key : List.of(ScreenKeys.LAMP, ScreenKeys.SWITCH_ON, ScreenKeys.SWITCH_OFF)) {
       helper.assertTrue(Language.getInstance().has(key), MISSING_TEXT + key);
     }
     helper.succeed();

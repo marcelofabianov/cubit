@@ -7,6 +7,7 @@ import io.github.marcelofabianov.cubit.domain.robot.RobotState;
 import io.github.marcelofabianov.cubit.domain.tier.RobotTier;
 import io.github.marcelofabianov.cubit.entity.RobotEntity;
 import io.github.marcelofabianov.cubit.entity.RobotLamp;
+import io.github.marcelofabianov.cubit.entity.RobotScreenReadout;
 import io.github.marcelofabianov.cubit.item.RobotStateComponent;
 import io.github.marcelofabianov.cubit.menu.RobotMenu;
 import io.github.marcelofabianov.cubit.registry.CubitDataComponents;
@@ -319,17 +320,7 @@ public final class LampGameTests {
   }
 
   private static RobotMenu menuOf(RobotEntity robot, Player player) {
-    return new RobotMenu(
-        0,
-        player.getInventory(),
-        robot.inventory(),
-        robot.energySlot(),
-        () -> 0,
-        () -> 0,
-        robot.lampSwitch(),
-        robot.scanners(),
-        robot.chatter(),
-        robot::canUseInventory);
+    return RobotScreenReadout.serverMenu(0, player.getInventory(), robot);
   }
 
   private static RobotEntity place(

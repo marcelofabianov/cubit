@@ -1,65 +1,299 @@
 package io.github.marcelofabianov.cubit.client;
 
-import io.github.marcelofabianov.cubit.domain.energy.Percentage;
+import io.github.marcelofabianov.cubit.client.ScreenPainter.Box;
+import io.github.marcelofabianov.cubit.client.ScreenPainter.Colors;
+import io.github.marcelofabianov.cubit.domain.dock.DockStatus;
+import io.github.marcelofabianov.cubit.domain.energy.EnergyFormat;
 import io.github.marcelofabianov.cubit.menu.InductionDockMenu;
+import io.github.marcelofabianov.cubit.menu.ScreenKeys;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
-/** A simple screen: one slot and one energy bar. The final look comes with the Fase 3 screens. */
+/** The dock screen of the concept image, in its three states and the two without a picture. */
 final class InductionDockScreen extends AbstractContainerScreen<InductionDockMenu> {
-  private static final String CHEST_TEXTURE_PATH = "textures/gui/container/generic_54.png";
-  private static final ResourceLocation CHEST_TEXTURE =
-      ResourceLocation.withDefaultNamespace(CHEST_TEXTURE_PATH);
-  private static final int PLAYER_PANEL_HEIGHT = 96;
-  private static final int PLAYER_PANEL_TEXTURE_Y = 126;
-  private static final int TOP_HEIGHT = 40;
-  private static final int LABEL_MARGIN = 94;
-  private static final int PANEL_COLOR = 0xFFC6C6C6;
-  private static final int SLOT_COLOR = 0xFF8B8B8B;
-  private static final int BAR_COLOR = 0xFF55FF55;
-  private static final int BAR_BACK_COLOR = 0xFF373737;
-  private static final int SLOT_SIZE = 18;
-  private static final int BAR_X = 104;
-  private static final int BAR_Y = 24;
-  private static final int BAR_WIDTH = 60;
-  private static final int BAR_HEIGHT = 8;
+  private static final int WIDTH = 176;
+  private static final int HEIGHT = 262;
+  private static final int MARGIN = 8;
+  private static final int LINE = 9;
+  private static final int DETAIL_LINE = 7;
+  private static final Box TITLE = new Box(8, 6, 92, LINE);
+  private static final Box STATUS = new Box(100, 6, 68, LINE);
+  private static final int PICTURE_X = 8;
+  private static final int TOWER_Y = 17;
+  private static final int ROBOT_Y = 73;
+  private static final Box STORED = new Box(50, 18, 96, LINE);
+  private static final Box STOCK_BAR = new Box(50, 26, 96, 7);
+  private static final Box INPUT = new Box(50, 36, 100, DETAIL_LINE);
+  private static final Box LIMIT = new Box(50, 43, 100, DETAIL_LINE);
+  private static final int BOLT_X = 156;
+  private static final int BOLT_Y = 18;
+  private static final int SLOT_FRAME_X = InductionDockMenu.SLOT_X - 1;
+  private static final int SLOT_FRAME_Y = InductionDockMenu.SLOT_Y - 1;
+  private static final int REDSTONE_CENTER = 160;
+  private static final int REDSTONE_Y = 53;
+  private static final Box DOCKED = new Box(8, 60, 160, LINE);
+  private static final int RULE_Y = 69;
+  private static final Box SECTION = new Box(50, 74, 116, LINE);
+  private static final Box BATTERY_BAR = new Box(50, 82, 116, 6);
+  private static final Box HEALTH = new Box(50, 92, 116, LINE);
+  private static final Box HEALTH_BAR = new Box(50, 100, 116, 6);
+  private static final Box ROBOT_LINE = new Box(50, 109, 116, DETAIL_LINE);
+  private static final Box NO_ROBOT = new Box(50, 78, 116, LINE);
+  private static final Box NO_ROBOT_STATE = new Box(50, 89, 116, DETAIL_LINE);
+  private static final Box NO_ROBOT_HINT = new Box(50, 97, 118, DETAIL_LINE);
+  private static final int ROW_LEFT = 7;
+  private static final int ROW_RIGHT = 169;
+  private static final int QUEUE_TOP = 119;
+  private static final int ROW_HEIGHT = 13;
+  private static final Box QUEUE = new Box(11, 122, 154, LINE);
+  private static final Box OWNER = new Box(11, 135, 154, LINE);
+  private static final Box CALL = new Box(7, 149, 162, 16);
+  private static final int INVENTORY_LABEL_Y = 169;
+  private static final int ROWS = 3;
+  private static final int COLUMNS = 9;
+  private static final int SLOTS_FRAME_X = 7;
+  private static final int HOTBAR_GAP = 58;
+
+  private final ScreenPainter painter = new ScreenPainter();
+  private FlatButton callButton;
 
   InductionDockScreen(InductionDockMenu menu, Inventory playerInventory, Component title) {
     super(menu, playerInventory, title);
-    imageHeight = TOP_HEIGHT + PLAYER_PANEL_HEIGHT;
-    inventoryLabelY = imageHeight - LABEL_MARGIN;
+    imageWidth = WIDTH;
+    imageHeight = HEIGHT;
+    inventoryLabelX = MARGIN;
+    inventoryLabelY = INVENTORY_LABEL_Y;
+  }
+
+  @Override
+  protected void init() {
+    super.init();
+    Component label =
+        Component.translatable(ScreenKeys.DOCK_CALL, menu.callRadius())
+            .withStyle(ChatFormatting.BOLD);
+    Box shown = CALL.moved(leftPos, topPos);
+    callButton =
+        addRenderableWidget(
+            new FlatButton(shown.x(), shown.y(), shown.width(), shown.height(), label, this::call));
+  }
+
+  private void call() {
+    minecraft.gameMode.handleInventoryButtonClick(menu.containerId, InductionDockMenu.CALL_BUTTON);
   }
 
   @Override
   public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
+    painter.begin(font);
+    callButton.setMuted(noPower(menu.status()));
     super.render(graphics, mouseX, mouseY, partialTick);
     renderTooltip(graphics, mouseX, mouseY);
+    graphics.pose().pushPose();
+    graphics.pose().translate(leftPos, topPos, 0);
+    painter.cutTooltip(graphics, mouseX - leftPos, mouseY - topPos);
+    graphics.pose().popPose();
   }
 
   @Override
   protected void renderBg(GuiGraphics graphics, float partialTick, int mouseX, int mouseY) {
-    int left = (width - imageWidth) / 2;
-    int top = (height - imageHeight) / 2;
-    graphics.fill(left, top, left + imageWidth, top + TOP_HEIGHT, PANEL_COLOR);
-    int slotX = left + InductionDockMenu.SLOT_X - 1;
-    int slotY = top + InductionDockMenu.SLOT_Y - 1;
-    graphics.fill(slotX, slotY, slotX + SLOT_SIZE, slotY + SLOT_SIZE, SLOT_COLOR);
-    int barX = left + BAR_X;
-    int barY = top + BAR_Y;
-    graphics.fill(barX, barY, barX + BAR_WIDTH, barY + BAR_HEIGHT, BAR_BACK_COLOR);
-    // Rounds up, because 1% is less than one pixel and the bar must still show some energy.
-    int filled = (BAR_WIDTH * menu.energyPercent() + Percentage.MAX - 1) / Percentage.MAX;
-    graphics.fill(barX, barY, barX + filled, barY + BAR_HEIGHT, BAR_COLOR);
-    graphics.blit(
-        CHEST_TEXTURE,
-        left,
-        top + TOP_HEIGHT,
-        0,
-        PLAYER_PANEL_TEXTURE_Y,
-        imageWidth,
-        PLAYER_PANEL_HEIGHT);
+    ScreenPainter.window(graphics, leftPos, topPos, imageWidth, imageHeight);
+    int left = leftPos;
+    int top = topPos;
+    ScreenPainter.sunken(
+        graphics,
+        left + PICTURE_X,
+        top + TOWER_Y,
+        RobotPortrait.SIZE,
+        RobotPortrait.SIZE,
+        ScreenPainter.PORTRAIT);
+    ScreenSprites.tower(graphics, left + PICTURE_X + 1, top + TOWER_Y + 1, menu.status());
+    ScreenSprites.bolt(graphics, left + BOLT_X, top + BOLT_Y);
+    ScreenPainter.slot(graphics, left + SLOT_FRAME_X, top + SLOT_FRAME_Y);
+    graphics.fill(
+        left + MARGIN, top + RULE_Y, left + ROW_RIGHT - 1, top + RULE_Y + 1, ScreenPainter.SHADE);
+    graphics.fill(
+        left + ROW_LEFT,
+        top + QUEUE_TOP,
+        left + ROW_RIGHT,
+        top + QUEUE_TOP + ROW_HEIGHT,
+        ScreenPainter.ROW);
+    renderPicture(graphics, left, top);
+    renderSlots(graphics, left, top);
+  }
+
+  private void renderPicture(GuiGraphics graphics, int left, int top) {
+    if (menu.hasRobot()) {
+      long tick = minecraft.player == null ? 0 : minecraft.player.tickCount;
+      RobotPortrait.draw(
+          graphics,
+          left + PICTURE_X,
+          top + ROBOT_Y,
+          menu.robotExpression(),
+          menu.robotTier(),
+          tick);
+      return;
+    }
+    ScreenPainter.sunken(
+        graphics,
+        left + PICTURE_X,
+        top + ROBOT_Y,
+        RobotPortrait.SIZE,
+        RobotPortrait.SIZE,
+        ScreenPainter.WINDOW);
+    ScreenSprites.emptyPlate(graphics, left + PICTURE_X + 1, top + ROBOT_Y + 1);
+  }
+
+  private void renderSlots(GuiGraphics graphics, int left, int top) {
+    int firstRow = InductionDockMenu.PLAYER_INVENTORY_Y - 1;
+    for (int row = 0; row < ROWS; row++) {
+      for (int column = 0; column < COLUMNS; column++) {
+        ScreenPainter.slot(
+            graphics,
+            left + SLOTS_FRAME_X + column * ScreenPainter.SLOT_SIZE,
+            top + firstRow + row * ScreenPainter.SLOT_SIZE);
+      }
+    }
+    for (int column = 0; column < COLUMNS; column++) {
+      ScreenPainter.slot(
+          graphics,
+          left + SLOTS_FRAME_X + column * ScreenPainter.SLOT_SIZE,
+          top + firstRow + HOTBAR_GAP);
+    }
+  }
+
+  @Override
+  protected void renderLabels(GuiGraphics graphics, int mouseX, int mouseY) {
+    Component bold = title.copy().withStyle(ChatFormatting.BOLD);
+    painter.text(graphics, bold, TITLE, ScreenPainter.TEXT, ScreenPainter.FULL_SCALE);
+    DockStatus status = menu.status();
+    painter.status(
+        graphics, Component.translatable(ScreenKeys.dockStatus(status)), STATUS, colorOf(status));
+    renderStock(graphics);
+    renderRedstoneLabel(graphics);
+    painter.text(
+        graphics,
+        Component.translatable(ScreenKeys.DOCK_DOCKED).withStyle(ChatFormatting.BOLD),
+        DOCKED,
+        ScreenPainter.TEXT,
+        ScreenPainter.FULL_SCALE);
+    if (menu.hasRobot()) {
+      renderRobot(graphics);
+    } else {
+      renderNoRobot(graphics, status);
+    }
+    renderRows(graphics);
+    painter.text(
+        graphics,
+        playerInventoryTitle,
+        inventoryLabelX,
+        inventoryLabelY,
+        ScreenPainter.TEXT,
+        ScreenPainter.FULL_SCALE);
+  }
+
+  private void renderStock(GuiGraphics graphics) {
+    painter.pair(
+        graphics,
+        STORED,
+        Component.translatable(ScreenKeys.DOCK_STORED_ENERGY),
+        DockTexts.amount(menu.stock(), menu.capacity()),
+        Colors.TITLE_FIRST);
+    ScreenPainter.bar(
+        graphics, STOCK_BAR, menu.stock().amount(), menu.capacity().amount(), ScreenPainter.ORANGE);
+    painter.text(
+        graphics, DockTexts.input(menu), INPUT, ScreenPainter.DETAIL, ScreenPainter.DETAIL_SCALE);
+    Component limit =
+        Component.translatable(ScreenKeys.DOCK_LIMIT, EnergyFormat.rate(menu.inputLimit()));
+    painter.text(graphics, limit, LIMIT, ScreenPainter.DETAIL, ScreenPainter.DETAIL_SCALE);
+  }
+
+  private void renderRedstoneLabel(GuiGraphics graphics) {
+    Component label = Component.translatable(ScreenKeys.REDSTONE);
+    int width = painter.width(label, ScreenPainter.DETAIL_SCALE);
+    painter.text(
+        graphics,
+        label,
+        REDSTONE_CENTER - width / 2,
+        REDSTONE_Y,
+        ScreenPainter.DETAIL,
+        ScreenPainter.DETAIL_SCALE);
+  }
+
+  private void renderRobot(GuiGraphics graphics) {
+    painter.pair(
+        graphics,
+        SECTION,
+        Component.translatable(ScreenKeys.DOCK_ROBOT_BATTERY),
+        DockTexts.amount(menu.robotCharge(), menu.robotCapacity()),
+        Colors.TITLE_FIRST);
+    ScreenPainter.bar(
+        graphics,
+        BATTERY_BAR,
+        menu.robotCharge().amount(),
+        menu.robotCapacity().amount(),
+        ScreenPainter.GREEN);
+    Component health =
+        Component.translatable(ScreenKeys.HEALTH_AMOUNT, menu.robotHealth(), menu.robotMaxHealth());
+    painter.pair(
+        graphics, HEALTH, Component.translatable(ScreenKeys.HEALTH), health, Colors.TITLE_FIRST);
+    ScreenPainter.bar(
+        graphics, HEALTH_BAR, menu.robotHealth(), menu.robotMaxHealth(), ScreenPainter.RED);
+    painter.text(
+        graphics,
+        DockTexts.robotLine(menu),
+        ROBOT_LINE,
+        ScreenPainter.DETAIL,
+        ScreenPainter.DETAIL_SCALE);
+  }
+
+  private void renderNoRobot(GuiGraphics graphics, DockStatus status) {
+    painter.text(
+        graphics,
+        Component.translatable(ScreenKeys.DOCK_NO_ROBOT).withStyle(ChatFormatting.BOLD),
+        NO_ROBOT,
+        ScreenPainter.TEXT,
+        ScreenPainter.FULL_SCALE);
+    String state = noPower(status) ? ScreenKeys.DOCK_NEEDS_ENERGY : ScreenKeys.DOCK_READY;
+    painter.text(
+        graphics,
+        Component.translatable(state),
+        NO_ROBOT_STATE,
+        ScreenPainter.DETAIL,
+        ScreenPainter.DETAIL_SCALE);
+    painter.text(
+        graphics,
+        Component.translatable(ScreenKeys.DOCK_PLACE_HINT),
+        NO_ROBOT_HINT,
+        ScreenPainter.DETAIL,
+        ScreenPainter.DETAIL_SCALE);
+  }
+
+  private void renderRows(GuiGraphics graphics) {
+    painter.pair(
+        graphics,
+        QUEUE,
+        Component.translatable(ScreenKeys.DOCK_QUEUE),
+        DockTexts.queue(menu.waiting()).withStyle(ChatFormatting.BOLD),
+        Colors.VALUE_FIRST);
+    painter.pair(
+        graphics,
+        OWNER,
+        Component.translatable(ScreenKeys.DOCK_OWNER),
+        DockTexts.owner(menu).withStyle(ChatFormatting.BOLD),
+        Colors.VALUE_FIRST);
+  }
+
+  private static boolean noPower(DockStatus status) {
+    return status == DockStatus.OFF || status == DockStatus.NO_ENERGY;
+  }
+
+  private static int colorOf(DockStatus status) {
+    return switch (status) {
+      case CHARGING, COMPLETE -> ScreenPainter.STATUS_GREEN;
+      case IDLE -> ScreenPainter.STATUS_BLUE;
+      case OFF, NO_ENERGY -> ScreenPainter.STATUS_ORANGE;
+    };
   }
 }

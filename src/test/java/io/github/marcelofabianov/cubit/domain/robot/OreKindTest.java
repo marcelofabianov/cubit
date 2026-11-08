@@ -16,6 +16,7 @@ class OreKindTest {
   private static final String EMPTY_SUBTAG = "c:ores/";
   private static final String DIAMOND_NAME = "DIAMOND";
   private static final String SCRAP_NAME = "NETHERITE SCRAP";
+  private static final String ANY_NAME = "ORE";
 
   @Test
   void aSubtagIsNamedInCapitals() {
@@ -27,6 +28,12 @@ class OreKindTest {
   void theParentTagHasNoName() {
     assertEquals(Optional.empty(), OreKind.ANY.name());
     assertEquals(PARENT_TAG, OreKind.ANY.tag());
+  }
+
+  @Test
+  void theShownNameNeverLeavesTheSentenceEmpty() {
+    assertEquals(DIAMOND_NAME, new OreKind(DIAMOND_TAG).shownName());
+    assertEquals(ANY_NAME, OreKind.ANY.shownName());
   }
 
   @Test

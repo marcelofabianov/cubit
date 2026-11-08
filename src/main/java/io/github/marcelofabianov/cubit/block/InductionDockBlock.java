@@ -185,15 +185,15 @@ public final class InductionDockBlock extends BaseEntityBlock {
       return InteractionResult.PASS;
     }
     if (player.isShiftKeyDown()) {
-      player.openMenu(state.getMenuProvider(level, pos));
+      player.openMenu(
+          state.getMenuProvider(level, pos), data -> InductionDockMenu.writeOpening(data, dock));
     } else if (level instanceof ServerLevel serverLevel) {
-      callOrRelease(serverLevel, dock, player);
+      callOrRelease(serverLevel, dock);
     }
     return InteractionResult.CONSUME;
   }
 
-  private static void callOrRelease(
-      ServerLevel level, InductionDockBlockEntity dock, Player player) {
+  private static void callOrRelease(ServerLevel level, InductionDockBlockEntity dock) {
     Optional<UUID> occupant = dock.occupant();
     if (occupant.isPresent()) {
       if (level.getEntity(occupant.get()) instanceof DockableRobot robot) {
@@ -201,8 +201,7 @@ public final class InductionDockBlock extends BaseEntityBlock {
       }
       return;
     }
-    DockFinder.nearestRobot(level, dock.getBlockPos(), player.getUUID())
-        .ifPresent(robot -> robot.callToDock(dock.getBlockPos()));
+    dock.callNearestRobot();
   }
 
   @Override

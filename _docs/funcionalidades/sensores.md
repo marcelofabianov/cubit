@@ -5,7 +5,7 @@ Números por tier: [`tiers.md`](../tiers.md#sensores) e [lanterna](../tiers.md#i
 ## Quando os scanners funcionam
 
 - **Quem varre:** só o Cubit ativo que segue, com a chave ligada. Desligado ou hibernando, ele não varre nem gasta (pergunta 554).
-- **Chave:** o botão `Scanners`, no painel lateral do inventário, vale para os dois, começa ligado e é guardado no item, inclusive ao morrer e consertar (pergunta 549).
+- **Chave:** a chave `Scanners`, na aba Settings da [tela do Cubit](telas.md#aba-settings), vale para os dois, começa ligado e é guardado no item, inclusive ao morrer e consertar (pergunta 549).
 - **Área:** uma esfera em volta do Cubit, com um raio para cada scanner, maior no de mobs. Só conta o que está a até o raio em linha reta, em qualquer direção (perguntas 604 a 606 e 622).
 - **Custo:** cada varredura gasta uma quantia fixa de FE, a mesma nos dois scanners, parado ou andando, mesmo sem achar nada. Com menos carga que o custo, gasta o que resta (perguntas 550, 563 e 610).
 - **Avisa só o que é novo:** o mesmo mob ou bloco não avisa de novo enquanto continuar no raio. Se sair e voltar, avisa como novo. A lembrança não entra no save, então ao carregar o mundo ele pode avisar uma vez (pergunta 561).
@@ -61,7 +61,7 @@ Definidos, em entregas próprias depois da detecção:
 - **Luz lida:** o maior valor entre a luz de blocos e a do céu, com o céu escurecendo à noite e com chuva, em intervalos. A lanterna não conta, porque só existe no cliente (pergunta 472).
 - **Consumo:** gasta só enquanto acesa, mesmo parado (pergunta 469).
 - **Hibernando ou desligado:** apagada e sem consumo (pergunta 466).
-- **Chave:** o botão `Lamp`, no painel lateral do inventário, começa ligado e é guardado no item, inclusive ao morrer e consertar. Fica desabilitado na hibernação, mantendo o valor. O Cubit Remote soma a chave na Fase 4 (perguntas 467, 468 e 473).
+- **Chave:** a chave `Lamp`, na aba Settings da [tela do Cubit](telas.md#aba-settings), começa ligado e é guardado no item, inclusive ao morrer e consertar. Fica desabilitado na hibernação, mantendo o valor. O Cubit Remote soma a chave na Fase 4 (perguntas 467, 468 e 473).
 - **Opção do player:** se ele desligar a luz de entidades nas opções do LambDynamicLights, o Cubit não ilumina o mundo, e o resto continua igual.
 - **Feixe:** é da lanterna de cabeça do Minerador, na Fase 5 (pergunta 463).
 
@@ -69,6 +69,7 @@ Definidos, em entregas próprias depois da detecção:
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-07 23:11 | Aponta as chaves para a aba Settings. |
 | Marcelo Fabiano | 2026-11-07 21:05 | Troca a caixa do mob por uma seta sobre a cabeça. |
 | Marcelo Fabiano | 2026-11-07 20:51 | Detalha as cores das antenas e o halo do corpo. |
 | Marcelo Fabiano | 2026-11-07 20:00 | Separa o raio dos dois scanners. |

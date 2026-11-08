@@ -17,6 +17,7 @@ Este é o mapa dos documentos do projeto. A apresentação do mod e o roadmap fi
 | Inventário, ímã, filtros, baús e slots exclusivos | [`funcionalidades/inventario.md`](funcionalidades/inventario.md) |
 | Cor da carcaça e nome | [`funcionalidades/personalizacao.md`](funcionalidades/personalizacao.md) |
 | Scanners, alertas e lanterna | [`funcionalidades/sensores.md`](funcionalidades/sensores.md) |
+| Telas próprias do Cubit e do Induction Dock | [`funcionalidades/telas.md`](funcionalidades/telas.md) |
 | Choque e modos de defesa | [`funcionalidades/combate.md`](funcionalidades/combate.md) |
 | Controle remoto e modo área | [`funcionalidades/controle-remoto.md`](funcionalidades/controle-remoto.md) |
 | Trabalhos, antena, Servidor e storage wireless (Fase 5, planejada) | [`funcionalidades/trabalhos.md`](funcionalidades/trabalhos.md) |
@@ -41,6 +42,7 @@ Os números ficam em [`tiers.md`](tiers.md). As outras páginas apontam para lá
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-07 22:31 | Cita as telas próprias. |
 | Marcelo Fabiano | 2026-11-07 21:55 | Cita as funcionalidades entregues. |
 | Marcelo Fabiano | 2026-11-07 16:43 | Amplia a citação das falas. |
 | Marcelo Fabiano | 2026-11-07 16:41 | Cita as falas. |

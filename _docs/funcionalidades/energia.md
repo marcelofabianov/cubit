@@ -70,7 +70,7 @@ Funciona como um carregador solar real.
 
 - **Dono:** quem coloca o Dock. Só o dono usa o Dock e abre a tela, e só os Cubits dele entram.
 - **Clique direito:** chama o Cubit ou, com um na base, o libera. Com redstone na mão, a pilha entra no slot.
-- **Shift + clique direito:** abre a tela, com o slot e uma barra de energia. A janela personalizada, com textura de metal de robô, entra na Fase 3 (pergunta 371).
+- **Shift + clique direito:** abre a tela própria do Dock, descrita em [`telas.md`](telas.md#tela-do-induction-dock), com o botão de chamar o Cubit mais próximo (perguntas 371 e 678).
 - **Quebrar:** só o dono, ou um player no modo criativo com permissão de operador, para remover um Dock abandonado. Sem dono, como num save sem a chave ou colocado por algo que não é um player, só o operador o remove, e o log avisa ao carregar (pergunta 524). Explosões e pistões não o afetam. O item guarda a energia e empilha em 1, o slot cai no chão, e o Cubit sai como numa liberação. O dono do bloco novo é quem o coloca.
 
 ### Ir para a base e sair dela
@@ -91,7 +91,7 @@ Cada Dock recebe um Cubit por vez. Se a base estiver ocupada:
 
 ## Slot exclusivo de energia
 
-O slot fica num painel ao lado da tela do inventário. O Cubit extrai a energia da Power Bank ou da redstone colocada no slot para a bateria interna, na velocidade de recarga do tier. Cada item extraído vira uma reserva, salva com o slot, para nada se perder se o robô for recolhido no meio da recarga. O slot existe em todos os tiers e aceita um dos dois por vez. A redstone é consumida um item por vez, e só quando a energia couber na bateria.
+O slot fica na tela do Cubit, ao lado das barras ([`telas.md`](telas.md#aba-inventory)). O Cubit extrai a energia da Power Bank ou da redstone colocada no slot para a bateria interna, na velocidade de recarga do tier. Cada item extraído vira uma reserva, salva com o slot, para nada se perder se o robô for recolhido no meio da recarga. O slot existe em todos os tiers e aceita um dos dois por vez. A redstone é consumida um item por vez, e só quando a energia couber na bateria.
 
 ### Power Bank
 
@@ -130,6 +130,8 @@ Se o robô estiver dentro do raio da base e com a bateria baixa, volta sozinho p
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-07 23:12 | Aponta a tela do Dock para as telas próprias. |
+| Marcelo Fabiano | 2026-11-07 23:11 | Aponta a tela do Dock para as telas próprias. |
 | Marcelo Fabiano | 2026-11-07 13:51 | Define quem quebra o Dock sem dono. |
 | Marcelo Fabiano | 2026-11-06 15:05 | Detalha o vidro, o sinal e a chave do painel solar. |
 | Marcelo Fabiano | 2026-11-06 13:34 | Adiciona o consumo da lanterna. |

@@ -1,13 +1,16 @@
 package io.github.marcelofabianov.cubit.registry;
 
 import io.github.marcelofabianov.cubit.CubitMod;
+import io.github.marcelofabianov.cubit.block.DockCapabilities;
 import io.github.marcelofabianov.cubit.config.CubitConfig;
+import io.github.marcelofabianov.cubit.entity.RobotDockedView;
 import io.github.marcelofabianov.cubit.entity.RobotEntity;
 import java.util.function.Supplier;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -40,6 +43,14 @@ public final class CubitEntities {
   public static void register(IEventBus modBus) {
     ENTITIES.register(modBus);
     modBus.addListener(CubitEntities::createAttributes);
+    modBus.addListener(CubitEntities::registerCapabilities);
+  }
+
+  private static void registerCapabilities(RegisterCapabilitiesEvent event) {
+    event.registerEntity(
+        DockCapabilities.DOCKED_ROBOT,
+        GENERAL_ROBOT.get(),
+        (robot, context) -> new RobotDockedView(robot));
   }
 
   private static void createAttributes(EntityAttributeCreationEvent event) {

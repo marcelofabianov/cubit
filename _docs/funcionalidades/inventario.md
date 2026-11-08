@@ -10,7 +10,7 @@ Números por tier: [`tiers.md`](../tiers.md#coleta-e-inventário) e [slots exclu
 ## Tela
 
 - **Quem abre:** só o dono, com o robô ativo ou em hibernação e por perto. O servidor confere os três, ao abrir e enquanto a tela estiver aberta. Por perto é o alcance do player mais uma margem de 4 blocos, a mesma dos baús do jogo.
-- **Visual:** o do baú do jogo, com as linhas que o número de slots pedir. O slot de energia, a barra de bateria, verde, e a barra de vida, vermelha, ficam num painel ao lado. A tela própria entra na Fase 3, com janela personalizada, textura de metal de robô e tooltips no painel, sem o padrão do Minecraft (pergunta 371).
+- **Visual:** a tela própria, descrita em [`telas.md`](telas.md#tela-do-cubit), com as linhas que o número de slots pedir (perguntas 371 e 676).
 - **O que não entra:** o Cubit, o `Damaged Cubit` e os itens que o jogo não deixa entrar em containers, como shulker boxes.
 
 ## Conteúdo preservado
@@ -42,6 +42,7 @@ São quatro: tochas, fornalha, carregador de ferramentas e energia. Na Fase 5, o
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-07 23:11 | Aponta a tela do inventário para as telas próprias. |
 | Marcelo Fabiano | 2026-11-06 11:15 | Limita o texto da descarga ao Cubit que segue. |
 | Marcelo Fabiano | 2026-11-06 11:10 | Troca 'especialidade' por 'trabalho' e 'card de especialidade' por 'card de Aprendizado de Máquina'. |
 | Marcelo Fabiano | 2026-11-06 09:32 | Define os dois modos do filtro de coleta. |
