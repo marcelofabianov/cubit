@@ -7,8 +7,8 @@ Mod de Minecraft que adiciona um robô companheiro fofo, movido a bateria, de te
 ## Estado atual
 
 - **Etapa atual:** Fase 3, sentidos, em andamento. A Fase 2 foi encerrada. As funcionalidades entram por issue, na ordem do `checklist.md`.
-- **Já entrou:** colocar e recolher, seguir o player, vários robôs, fogo, lava, os arquivos de som, a revisão dos `.md`, o novo modelo, a morte com o item danificado, o inventário, a energia em uso, o consumo por situação, a reação a blocos que ferem, o Induction Dock, o `/cubit reset`, as receitas e, na Fase 3, os sons, as expressões, o som de dano, a barra de vida, as animações, o colar e a bateria, os textos curtos, a lanterna, o painel solar, a cor da carcaça, o nome, a detecção dos scanners, com chave e filtro, numa esfera, as caixas dos scanners e as falas, inclusive sobre a redstone minerada. Também entraram a volta do Cubit com o dono que renasce e a descida de até 5 blocos.
-- **Próximos:** as cores das antenas e o halo dos scanners, que fecham o item 16, e os demais itens do `checklist.md`. Os testes de instância e a primeira versão, `0.1.0`, ficam para o fim da Fase 3.
+- **Já entrou:** colocar e recolher, seguir o player, vários robôs, fogo, lava, os arquivos de som, a revisão dos `.md`, o novo modelo, a morte com o item danificado, o inventário, a energia em uso, o consumo por situação, a reação a blocos que ferem, o Induction Dock, o `/cubit reset`, as receitas e, na Fase 3, os sons, as expressões, o som de dano, a barra de vida, as animações, o colar e a bateria, os textos curtos, a lanterna, o painel solar, a cor da carcaça, o nome, a detecção dos scanners, com chave e filtro, numa esfera, as caixas dos scanners, a seta sobre o mob, as cores das antenas com o halo do corpo e as falas, inclusive sobre a redstone minerada. Também entraram a volta do Cubit com o dono que renasce e a descida de até 5 blocos.
+- **Próximos:** o Jade, item 18, e os demais itens do `checklist.md`. Os testes de instância e a primeira versão, `0.1.0`, ficam para o fim da Fase 3.
 - **Comandos:** estão em [`_docs/desenvolvimento/ferramentas-de-build.md`](_docs/desenvolvimento/ferramentas-de-build.md).
 - **Limite:** não avance para as fases seguintes sem pedido explícito.
 
@@ -209,7 +209,7 @@ io.github.marcelofabianov.cubit
 │   ├── robot/              // RobotType, capacidades que o Cubit combina, OreKind, OreFilter, OreSignals
 │   ├── tier/               // RobotTier, TierSpec, TierCatalog (interface)
 │   ├── energy/             // Battery, PowerState (ativo, inativo, hibernação), regras de consumo e religamento, SolarPanel: quando o painel dá energia
-│   ├── behavior/           // FollowDecision: seguir, parar ou teleportar; BurningAction: reagir a fogo e lava; LampPolicy: quando a lanterna acende; ScanRules, ScanArea, FreshFinds, MarkLife, MarkPulse: scanners e caixas; ChatWatch, BiomeWatch, LeftBehindWatch, ChatRules: falas; RespawnReturn: voltar com o dono
+│   ├── behavior/           // FollowDecision: seguir, parar ou teleportar; BurningAction: reagir a fogo e lava; LampPolicy: quando a lanterna acende; ScanRules, ScanArea, FreshFinds, MarkLife, MarkPulse, ScanSignal: scanners, caixas e cores; ChatWatch, BiomeWatch, LeftBehindWatch, ChatRules: falas; RespawnReturn: voltar com o dono
 │   ├── dock/               // DockStock, DockStatus, DockStay, DockQueue, DockTrip, DockRemoval
 │   └── ownership/          // FollowingRobotPolicy, Ownership
 ├── config/                 // ModConfigSpec → implementa TierCatalog
