@@ -37,6 +37,19 @@ repositories {
         }
     }
 
+    // Jade, optional, comes as the same file the pack downloads from Modrinth, and nothing else does.
+    exclusiveContent {
+        forRepository {
+            maven {
+                name = 'Modrinth'
+                url = 'https://api.modrinth.com/maven'
+            }
+        }
+        filter {
+            includeGroup('maven.modrinth')
+        }
+    }
+
     // Test tooling only lives on Maven Central, so a NeoForged Maven outage must not break the build.
     exclusiveContent {
         forRepository {
@@ -136,6 +149,11 @@ dependencies {
     compileOnly(dynamicLightsDependency('api'))
     clientRunRuntimeOnly(dynamicLightsDependency('runtime'))
 
+    // Optional: the mod compiles against Jade, the jar does not carry it, and only the client runs
+    // load it, so the GameTests and the server prove the mod opens without it (AGENTS.md, rule 24).
+    compileOnly "maven.modrinth:jade:${jade_version}"
+    clientRunRuntimeOnly "maven.modrinth:jade:${jade_version}"
+
     testImplementation platform("org.junit:junit-bom:${junit_version}")
     testImplementation 'org.junit.jupiter:junit-jupiter'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
@@ -150,6 +168,7 @@ var generateModMetadata = tasks.register('generateModMetadata', ProcessResources
             loader_version_range   : loader_version_range,
             geckolib_version       : geckolib_version,
             lambdynamiclights_version: lambdynamiclights_version,
+            jade_min_version       : jade_min_version,
             mod_id                 : mod_id,
             mod_name               : mod_name,
             mod_license            : mod_license,

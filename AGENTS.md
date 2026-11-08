@@ -219,6 +219,7 @@ io.github.marcelofabianov.cubit
 ├── block/                  // InductionDockBlock, BlockEntity
 ├── menu/                   // RobotMenu, InductionDockMenu
 ├── network/                // pacotes próprios: NoticePayload, OreMarksPayload, MobMarksPayload e CubitNetwork
+├── compat/jade/            // plugin do Jade, opcional: só este pacote importa o Jade
 ├── player/                 // attachment com o UUID do robô que segue, robôs mortos com o dono offline, /cubit reset e o que o dono faz: renascer, conquistar e caçar
 ├── client/                 // renderer, modelo GeckoLib, tela
 └── datagen/                // receitas, loot, traduções

@@ -21,6 +21,8 @@ class DomainBoundaryTest {
   private static final String BLOCK = "..cubit.block..";
   private static final String ENTITY = "..cubit.entity..";
   private static final String GETTER = "get[A-Z].*";
+  private static final String JADE_PLUGIN = "..cubit.compat.jade..";
+  private static final String JADE = "snownee.jade..";
 
   /** AGENTS.md, rule 12: this keeps out the game and also the other packages of the mod. */
   @ArchTest
@@ -54,6 +56,19 @@ class DomainBoundaryTest {
           .should()
           .dependOnClassesThat()
           .resideInAPackage(ENTITY);
+
+  /**
+   * AGENTS.md, rule 24, and answer 667: only the plugin imports Jade, which Jade finds by itself,
+   * so the mod never loads a class of Jade and opens without it.
+   */
+  @ArchTest
+  static final ArchRule onlyThePluginUsesJade =
+      noClasses()
+          .that()
+          .resideOutsideOfPackage(JADE_PLUGIN)
+          .should()
+          .dependOnClassesThat()
+          .resideInAPackage(JADE);
 
   /** AGENTS.md, rule 14: {@code capacity()}, not {@code getCapacity()}. */
   @ArchTest
