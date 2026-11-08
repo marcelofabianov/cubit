@@ -36,12 +36,6 @@ public final class RobotMenu extends AbstractContainerMenu {
   public static final int LAMP_BUTTON = 0;
   public static final int SCANNERS_BUTTON = 1;
   public static final int CHATTER_BUTTON = 2;
-  public static final String LAMP_ON_KEY = "gui.cubit.lamp.on";
-  public static final String LAMP_OFF_KEY = "gui.cubit.lamp.off";
-  public static final String CHATTER_ON_KEY = "gui.cubit.chatter.on";
-  public static final String CHATTER_OFF_KEY = "gui.cubit.chatter.off";
-  public static final String SCANNERS_ON_KEY = "gui.cubit.scanners.on";
-  public static final String SCANNERS_OFF_KEY = "gui.cubit.scanners.off";
   private static final int PLAYER_ROWS = 3;
   private static final int ENERGY_SLOT_SIZE = 1;
   private static final int[] SWITCH_INDEXES = {
