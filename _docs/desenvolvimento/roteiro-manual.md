@@ -431,11 +431,28 @@ Use um mundo plano em criativo, com um Cubit seguindo. A caixa do minério dura 
 | 5 | Coloque minério de carvão sem filtro e espere uma varredura | Nenhuma caixa |
 | 6 | Ponha carvão no filtro e espere uma varredura | Caixa azul em volta do carvão, com `Cubit: COAL!!!` |
 | 7 | Coloque diamantes a 5 blocos à frente do Cubit e a 4 para o lado e 4 para cima | Só o da frente ganha caixa: o outro fica fora da esfera |
-| 8 | Rode `/summon minecraft:zombie ~3 ~ ~` perto do Cubit | Em até 10 s, uma caixa vermelha, translúcida e pulsando, que acompanha o zumbi através das paredes |
-| 9 | Afaste-se até o zumbi ficar a mais de 8 blocos do Cubit | A caixa vermelha some |
+| 8 | Rode `/summon minecraft:zombie ~3 ~ ~` perto do Cubit | Em até 10 s, uma seta vermelha para baixo sobre a cabeça do zumbi, translúcida, pulsando e balançando de leve, que o acompanha através das paredes e fica virada para você |
+| 9 | Afaste-se até o zumbi ficar a mais de 8 blocos do Cubit | A seta some |
 | 10 | Desligue o botão `Scanners` | Em até 30 s, nenhuma caixa nova, e as que havia somem |
 | 11 | Peça a outro player que olhe o mesmo minério | Ele não vê caixa. Esse passo fica para os testes de instância |
 | 12 | Teste os passos 1 e 8 nos gráficos Rápido, Bonito e Fabuloso | A caixa aparece nos três |
+
+## Cores dos scanners
+
+Use um mundo plano, com um Cubit seguindo. Para ver de dia e de noite, use `/time set day` e `/time set night`.
+
+| # | Passo | Resultado esperado |
+|---|---|---|
+| 1 | De dia, com o botão `Lamp` desligado, rode `/summon minecraft:zombie ~3 ~ ~ {NoAI:1b}` | Em até 10 s, as pontas e os halos das antenas ficam vermelhos, com um brilho vermelho suave atrás do corpo |
+| 2 | Mate o zumbi com `/kill @e[type=minecraft:zombie]` | Em até 10 s, as antenas apagam e o brilho some |
+| 3 | Coloque minério de diamante a 3 blocos e espere a varredura | Junto do `Cubit: DIAMOND!!!`, antenas e brilho azuis por cerca de 3 s |
+| 4 | Ponha carvão no filtro e coloque minério de carvão | Junto do `Cubit: COAL!!!`, antenas e brilho azuis por cerca de 3 s |
+| 5 | Com um zumbi no raio, coloque um diamante | As antenas continuam vermelhas |
+| 6 | Com um zumbi no raio, leve dano, com `/damage @e[type=cubit:general_robot,limit=1,sort=nearest] 1` | A tela fica triste, e as antenas continuam vermelhas |
+| 7 | De noite, com a lanterna acesa, repita o passo 1 | As antenas ficam vermelhas e, depois do zumbi, voltam ao branco da lanterna |
+| 8 | Olhe o chão em volta do Cubit com a cor acesa | A luz no chão continua branca, ou nenhuma, sem a lanterna |
+| 9 | Desligue o botão `Scanners` com um zumbi no raio | As cores apagam |
+| 10 | Peça a outro player que olhe o Cubit no passo 1 | Ele também vê as cores. Esse passo fica para os testes de instância |
 
 ## Quando o dono renasce
 
@@ -499,6 +516,8 @@ As frases estão em [`falas.md`](../conceito/falas.md). Fique a céu aberto, com
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-07 21:05 | Troca a caixa do mob pela seta. |
+| Marcelo Fabiano | 2026-11-07 20:51 | Adiciona as cores dos scanners. |
 | Marcelo Fabiano | 2026-11-07 20:04 | Adiciona as falas da redstone. |
 | Marcelo Fabiano | 2026-11-07 20:00 | Atualiza o raio do scanner de mobs nas caixas. |
 | Marcelo Fabiano | 2026-11-07 19:21 | Adiciona as caixas dos scanners. |

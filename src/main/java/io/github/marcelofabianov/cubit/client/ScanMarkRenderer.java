@@ -26,9 +26,10 @@ import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
 import org.joml.Matrix4fStack;
 
 /**
- * Draws the boxes of the scanners through blocks, without a mixin and without touching the mob
- * (answers 557 and 594). After the level, so it works in every graphics mode, even fabulous, where
- * the other stages draw into targets of their own. The numbers are only visual, so they stay here.
+ * Draws what the scanners found through blocks, without a mixin and without touching the mob: a box
+ * around each ore and an arrow over each mob (answers 557, 594 and 646). After the level, so it
+ * works in every graphics mode, even fabulous, where the other stages draw into targets of their
+ * own. The numbers are only visual, so they stay here.
  */
 @EventBusSubscriber(modid = CubitMod.MOD_ID, value = Dist.CLIENT)
 public final class ScanMarkRenderer {
@@ -37,12 +38,6 @@ public final class ScanMarkRenderer {
   private static final double LINE_WIDTH = 2.0;
   private static final float ORE_ALPHA = 0.3f;
   private static final float MOB_ALPHA = 0.5f;
-  private static final float ORE_RED = 0.55f;
-  private static final float ORE_GREEN = 0.8f;
-  private static final float ORE_BLUE = 1f;
-  private static final float MOB_RED = 1f;
-  private static final float MOB_GREEN = 0.45f;
-  private static final float MOB_BLUE = 0.45f;
 
   /** Lines that ignore depth, so the box shows through blocks. */
   private static final RenderType THROUGH_BLOCKS =
@@ -77,31 +72,32 @@ public final class ScanMarkRenderer {
       return;
     }
     float partialTick = event.getPartialTick().getGameTimeDeltaPartialTick(false);
-    float pulse = (float) MarkPulse.at(level.getGameTime() + partialTick);
+    double ticks = level.getGameTime() + partialTick;
+    float pulse = (float) MarkPulse.at(ticks);
     Matrix4fStack view = RenderSystem.getModelViewStack();
     view.pushMatrix();
     view.mul(event.getModelViewMatrix());
     RenderSystem.applyModelViewMatrix();
-    draw(event.getCamera().getPosition(), ores, mobs, partialTick, pulse);
+    MultiBufferSource.BufferSource buffers = Minecraft.getInstance().renderBuffers().bufferSource();
+    drawOres(buffers, event.getCamera().getPosition(), ores, pulse);
+    MobMarker.draw(buffers, event.getCamera(), mobs, partialTick, ticks, MOB_ALPHA * pulse);
     view.popMatrix();
     RenderSystem.applyModelViewMatrix();
   }
 
-  private static void draw(
-      Vec3 camera, List<BlockPos> ores, List<Entity> mobs, float partialTick, float pulse) {
-    MultiBufferSource.BufferSource buffers = Minecraft.getInstance().renderBuffers().bufferSource();
+  private static void drawOres(
+      MultiBufferSource.BufferSource buffers, Vec3 camera, List<BlockPos> ores, float pulse) {
     VertexConsumer lines = buffers.getBuffer(THROUGH_BLOCKS);
     PoseStack pose = new PoseStack();
     pose.translate(-camera.x, -camera.y, -camera.z);
     for (BlockPos pos : ores) {
-      LevelRenderer.renderLineBox(
-          pose, lines, new AABB(pos), ORE_RED, ORE_GREEN, ORE_BLUE, ORE_ALPHA * pulse);
-    }
-    for (Entity mob : mobs) {
-      AABB box = mob.getBoundingBox().move(mob.getPosition(partialTick).subtract(mob.position()));
-      LevelRenderer.renderLineBox(
-          pose, lines, box, MOB_RED, MOB_GREEN, MOB_BLUE, MOB_ALPHA * pulse);
+      box(pose, lines, new AABB(pos), ScanColor.ORE, ORE_ALPHA * pulse);
     }
     buffers.endBatch(THROUGH_BLOCKS);
+  }
+
+  private static void box(
+      PoseStack pose, VertexConsumer lines, AABB box, ScanColor color, float alpha) {
+    LevelRenderer.renderLineBox(pose, lines, box, color.red, color.green, color.blue, alpha);
   }
 }

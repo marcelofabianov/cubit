@@ -3,6 +3,7 @@ package io.github.marcelofabianov.cubit.entity;
 import io.github.marcelofabianov.cubit.CubitMod;
 import io.github.marcelofabianov.cubit.domain.behavior.ExpressionTimer;
 import io.github.marcelofabianov.cubit.domain.behavior.ScanRules;
+import io.github.marcelofabianov.cubit.domain.behavior.ScanSignal;
 import io.github.marcelofabianov.cubit.domain.energy.Energy;
 import io.github.marcelofabianov.cubit.domain.energy.PowerState;
 import io.github.marcelofabianov.cubit.domain.robot.OreFilter;
@@ -34,6 +35,7 @@ public final class RobotScanners implements RobotSwitch {
   private boolean switchedOn = true;
   private OreFilter oreFilter = OreFilter.EMPTY;
   private ExpressionTimer surprised = ExpressionTimer.STOPPED;
+  private ExpressionTimer oreFound = ExpressionTimer.STOPPED;
 
   RobotScanners(RobotEntity robot) {
     this.robot = robot;
@@ -85,14 +87,31 @@ public final class RobotScanners implements RobotSwitch {
     switchedOn = !switchedOn;
   }
 
+  /** What the antennas and the halo show, as the client knows it. */
+  public static ScanSignal signal(RobotEntity robot) {
+    return ScanSignal.fromOrdinal(robot.getEntityData().get(RobotSyncedData.SCAN_SIGNAL));
+  }
+
   void tick() {
     surprised = surprised.tick();
+    oreFound = oreFound.tick();
     Player owner = ownerToWarn();
     if (owner == null) {
       mobs.reset();
       ores.reset();
-      return;
+      oreFound = ExpressionTimer.STOPPED;
+    } else {
+      scan(owner);
     }
+    publishSignal();
+  }
+
+  private void publishSignal() {
+    ScanSignal now = ScanSignal.of(mobs.enemyInRange(), oreFound.isRunning());
+    robot.getEntityData().set(RobotSyncedData.SCAN_SIGNAL, (byte) now.ordinal());
+  }
+
+  private void scan(Player owner) {
     ScannerSpec spec = robot.spec().scanners();
     if (ScanRules.isDue(robot.tickCount, spec.mobIntervalTicks())) {
       scanMobs(owner, spec);
@@ -159,7 +178,9 @@ public final class RobotScanners implements RobotSwitch {
     signals.lead(fresh.values(), oreFilter).ifPresent(kind -> warnOfOre(kind, signals));
   }
 
+  /** Rare or of the filter, any ore found turns the antennas blue (answer 640). */
   private void warnOfOre(OreKind kind, OreSignals signals) {
+    oreFound = ExpressionTimer.started(CubitMod.CONFIG.surprisedExpressionTicks());
     boolean rare = signals.isRare(kind);
     if (rare) {
       surprised = ExpressionTimer.started(CubitMod.CONFIG.surprisedExpressionTicks());

@@ -33,7 +33,7 @@ Localiza os mobs que o jogo marca como `Enemy`, inclusive de outros mods e atrá
 - **Nomes:** o do mob vem do próprio jogo e segue o idioma dele. O do minério vem da subtag, em inglês e em caixa alta. Um minério que só tem a tag `c:ores` mostra `Ore found` (perguntas 546 e 566).
 - **Resposta ao clique do filtro:** `Cubit: Looking for DIAMOND` ao definir e `Cubit: Filter cleared` ao limpar, com o bipe padrão, sem o intervalo mínimo (pergunta 565).
 - **Repetição:** cada nome espera o próprio intervalo mínimo, então `DIAMOND!!!` pode aparecer logo depois de `IRON!!!` (pergunta 547).
-- **Sinais visuais:** a cor das antenas e o halo em volta do corpo, e as caixas em volta do que foi achado, entram nas duas entregas seguintes (perguntas 555 a 559).
+- **Sinais visuais:** a cor das antenas, o halo em volta do corpo e as caixas em volta do que foi achado, descritos em "Cor e caixas" (perguntas 555 a 559, 590 e 615).
 
 Os detalhes dos sons estão em [`visual.md`](../conceito/visual.md#sons), e os textos em [`persona.md`](../conceito/persona.md#comunicação).
 
@@ -42,9 +42,13 @@ Os detalhes dos sons estão em [`visual.md`](../conceito/visual.md#sons), e os t
 Definidos, em entregas próprias depois da detecção:
 
 - **Cor:** vermelho para mobs e azul para minérios, nas pontas e nos halos das antenas e num halo suave em volta do corpo, inclusive de dia e com a lanterna apagada. É só visual, sem custo e sem mudar a luz real, que continua branca. Todos os players por perto veem (pergunta 558).
-- **Caixas:** caixa de linhas na mesma cor, só no cliente do dono, sem mixin e sem mexer no mob, visível através dos blocos, num tom claro e translúcido, com um pulso suave (perguntas 555 a 557, 600 e 614).
+- **Quando acende:** o vermelho, enquanto houver mob hostil no raio, mesmo com o Cubit ferido. O azul, por cerca de 3 s depois de achar um minério, raro ou do filtro, o mesmo tempo da surpresa. Com os dois, o vermelho vence. Depois, as antenas voltam ao estado anterior: brancas com a lanterna acesa, apagadas sem ela (perguntas 638 a 640).
+- **Halo do corpo:** um brilho translúcido atrás do Cubit, sempre virado para a câmera, maior que ele (pergunta 641).
+- **Tom:** o mesmo azul claro e vermelho claro das caixas (pergunta 642).
+- **Sinal:** o servidor decide e envia a todos por um dado sincronizado, fora do save (pergunta 638).
+- **Caixas e seta:** em volta do minério, uma caixa de linhas azul. Sobre a cabeça do mob, uma seta vermelha para baixo, ▼, preenchida, virada para a câmera e com um leve balanço. As duas ficam só no cliente do dono, sem mixin e sem mexer no mob, visíveis através dos blocos, num tom claro e translúcido, com um pulso suave (perguntas 555 a 557, 600, 614 e 646 a 649).
 - **Que minério ganha caixa:** todos os minérios novos que a varredura achou dentro da esfera, os raros e os do filtro, mesmo quando o texto espera o intervalo de 25 s. Um minério já visto não ganha caixa de novo (perguntas 593, 597 e 608).
-- **Quanto dura:** a do minério, cerca de 10 s ou até ele deixar de ser minério, e a do mob, enquanto ele estiver no raio do Cubit (perguntas 556 e 599).
+- **Quanto dura:** a caixa do minério, cerca de 10 s ou até ele deixar de ser minério, e a seta do mob, enquanto ele estiver no raio do Cubit (perguntas 556 e 599).
 - **Como chega ao cliente:** um pacote só do servidor para o dono, com as posições dos minérios e os IDs dos mobs. O cliente só desenha e apaga a caixa quando o tempo acaba, o bloco muda ou o mob sai do raio (pergunta 613).
 
 ## Lanterna
@@ -65,6 +69,8 @@ Definidos, em entregas próprias depois da detecção:
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-07 21:05 | Troca a caixa do mob por uma seta sobre a cabeça. |
+| Marcelo Fabiano | 2026-11-07 20:51 | Detalha as cores das antenas e o halo do corpo. |
 | Marcelo Fabiano | 2026-11-07 20:00 | Separa o raio dos dois scanners. |
 | Marcelo Fabiano | 2026-11-07 19:16 | Detalha as caixas: o que ganha caixa, a duração, o pulso e o pacote. |
 | Marcelo Fabiano | 2026-11-07 19:06 | Define a área em esfera e o mesmo custo nos dois scanners. |
