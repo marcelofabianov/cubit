@@ -36,9 +36,18 @@ public record DockQueue(List<Waiting> waiting) {
 
   public Optional<UUID> first(long now) {
     return waiting.stream()
-        .filter(entry -> now - entry.lastSeen() < TICKS_TO_FORGET)
+        .filter(entry -> stillWaiting(entry, now))
         .map(Waiting::robot)
         .findFirst();
+  }
+
+  /** For the dock screen: who still reports itself, by the same rule as {@link #first}. */
+  public int waitingCount(long now) {
+    return (int) waiting.stream().filter(entry -> stillWaiting(entry, now)).count();
+  }
+
+  private static boolean stillWaiting(Waiting entry, long now) {
+    return now - entry.lastSeen() < TICKS_TO_FORGET;
   }
 
   /** One robot in the queue, and the last tick it reported itself. */

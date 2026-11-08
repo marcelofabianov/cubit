@@ -1,7 +1,9 @@
 package io.github.marcelofabianov.cubit.block;
 
+import com.mojang.authlib.GameProfile;
 import com.mojang.logging.LogUtils;
 import io.github.marcelofabianov.cubit.CubitMod;
+import io.github.marcelofabianov.cubit.domain.dock.DockInputMeter;
 import io.github.marcelofabianov.cubit.domain.dock.DockQueue;
 import io.github.marcelofabianov.cubit.domain.dock.DockStatus;
 import io.github.marcelofabianov.cubit.domain.dock.DockStock;
@@ -22,6 +24,9 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.players.GameProfileCache;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Player;
@@ -40,6 +45,7 @@ import org.slf4j.Logger;
 public final class InductionDockBlockEntity extends BlockEntity {
   private static final Logger LOGGER = LogUtils.getLogger();
   private static final String NO_OWNER_MESSAGE = "The dock at {} has no owner.";
+  private static final String UNKNOWN_OWNER_MESSAGE = "The dock owner at {} has no known name.";
   private static final String OWNER_KEY = "Owner";
   private static final String ENERGY_KEY = "Energy";
   private static final String SLOT_KEY = "Slot";
@@ -83,6 +89,8 @@ public final class InductionDockBlockEntity extends BlockEntity {
   private DockQueue queue = DockQueue.EMPTY;
   private DockStock stock = emptyStock();
   private Energy inputLeft = inputPerTick();
+  private final DockInputMeter inputMeter = new DockInputMeter();
+  private Energy entered = Energy.ZERO;
 
   public InductionDockBlockEntity(BlockPos pos, BlockState state) {
     super(CubitBlockEntities.INDUCTION_DOCK.get(), pos, state);
@@ -103,6 +111,8 @@ public final class InductionDockBlockEntity extends BlockEntity {
   static void serverTick(
       Level level, BlockPos pos, BlockState state, InductionDockBlockEntity dock) {
     dock.inputLeft = inputPerTick();
+    dock.inputMeter.record(dock.entered);
+    dock.entered = Energy.ZERO;
     dock.useSlot();
     dock.showStatus(level, pos, state);
   }
@@ -113,14 +123,68 @@ public final class InductionDockBlockEntity extends BlockEntity {
     if (stock.canTake(itemEnergy)) {
       stack.shrink(ONE_ITEM);
       stock = stock.take(itemEnergy);
+      entered = entered.plus(itemEnergy);
       setChanged();
     }
   }
 
+  public DockStatus status() {
+    return DockStatus.decide(stock.energy().isEmpty(), isOccupied(), isOccupied() && robotFull);
+  }
+
+  /** What entered by cables and redstone, per tick, on average over the last second. */
+  public Energy inputShown() {
+    return inputMeter.perTick();
+  }
+
+  public int waitingCount() {
+    return level == null ? 0 : queue.waitingCount(level.getGameTime());
+  }
+
+  /** The robot in the base, read through its capability, while it is loaded. */
+  public Optional<DockedRobot> dockedRobot() {
+    if (!(level instanceof ServerLevel server)) {
+      return Optional.empty();
+    }
+    return occupant()
+        .map(server::getEntity)
+        .map(robot -> robot.getCapability(DockCapabilities.DOCKED_ROBOT));
+  }
+
+  /**
+   * The name of the owner, online or from the profile cache of the server. The cache may not know
+   * it, and then the screen shows a safe text (AGENTS.md, rule 17).
+   */
+  public Optional<String> ownerName() {
+    if (owner == null || level == null || level.getServer() == null) {
+      return Optional.empty();
+    }
+    MinecraftServer server = level.getServer();
+    Optional<String> name =
+        Optional.ofNullable(server.getPlayerList().getPlayer(owner))
+            .map(player -> player.getGameProfile().getName())
+            .or(() -> cachedName(server));
+    if (name.isEmpty()) {
+      LOGGER.warn(UNKNOWN_OWNER_MESSAGE, worldPosition);
+    }
+    return name;
+  }
+
+  private Optional<String> cachedName(MinecraftServer server) {
+    GameProfileCache cache = server.getProfileCache();
+    return cache == null ? Optional.empty() : cache.get(owner).map(GameProfile::getName);
+  }
+
+  /** The click on the dock and the button on its screen call the same way. */
+  public void callNearestRobot() {
+    if (level instanceof ServerLevel server && owner != null) {
+      DockFinder.nearestRobot(server, worldPosition, owner)
+          .ifPresent(robot -> robot.callToDock(worldPosition));
+    }
+  }
+
   private void showStatus(Level level, BlockPos pos, BlockState state) {
-    DockStatus status =
-        DockStatus.decide(stock.energy().isEmpty(), isOccupied(), isOccupied() && robotFull);
-    DockStatusProperty shown = DockStatusProperty.of(status);
+    DockStatusProperty shown = DockStatusProperty.of(status());
     if (state.getValue(InductionDockBlock.STATUS) != shown) {
       level.setBlock(pos, state.setValue(InductionDockBlock.STATUS, shown), Block.UPDATE_CLIENTS);
     }
@@ -211,6 +275,7 @@ public final class InductionDockBlockEntity extends BlockEntity {
     if (!simulate) {
       stock = received.stock();
       inputLeft = inputLeft.minus(received.accepted());
+      entered = entered.plus(received.accepted());
       setChanged();
     }
     return received.accepted();

@@ -11,6 +11,7 @@ class DockQueueTest {
   private static final UUID SECOND = new UUID(0, 2);
   private static final long START = 100;
   private static final long LONG_AFTER = 110;
+  private static final int TWO_WAITING = 2;
 
   @Test
   void nobodyIsFirstInAnEmptyQueue() {
@@ -41,5 +42,13 @@ class DockQueueTest {
   @Test
   void anAbandonedQueueIsEmpty() {
     assertEquals(Optional.empty(), DockQueue.EMPTY.report(FIRST, START).first(LONG_AFTER));
+  }
+
+  @Test
+  void theCountOnlyIncludesRobotsStillWaiting() {
+    DockQueue queue = DockQueue.EMPTY.report(FIRST, START).report(SECOND, START);
+    assertEquals(0, DockQueue.EMPTY.waitingCount(START));
+    assertEquals(TWO_WAITING, queue.waitingCount(START));
+    assertEquals(0, queue.waitingCount(LONG_AFTER));
   }
 }
