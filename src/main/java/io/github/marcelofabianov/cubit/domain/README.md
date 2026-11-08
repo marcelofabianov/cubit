@@ -7,6 +7,7 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 | Termo | Significado |
 |---|---|
 | `Energy` | Quantidade inteira de FE, nunca negativa |
+| `EnergyReading` | Uma carga lida contra a capacidade, para mostrar em porcentagem e FE, como no Jade, sem falso zero |
 | `Percentage` | Porcentagem inteira, de 0 a 100 |
 | `Battery` | Capacidade e carga atual. É imutável, e cada operação devolve uma bateria nova |
 | `PowerState` | Estado do robô |

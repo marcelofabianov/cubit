@@ -71,12 +71,13 @@ Tocam todos, menos o ataque e o modo agressivo, que entram na Fase 4.
 
 - **Ícone do mod:** tem o mesmo desenho do ícone do item, em `textures/gui/mod_logo.png`, sem borrar os pixels. O arquivo é separado porque a tela de Mods sempre encaixa o logo numa altura de 50 pixels, então o tamanho vem da margem transparente, e 25×25 dá a escala exata de 2×. Ao mudar o ícone do item, atualize também este arquivo.
 - **Nome personalizado** com bigorna ou etiqueta, sempre visível acima do Cubit e, depois, no Jade.
-- **Jade:** mostrar nome, tier, bateria e modo atual.
+- **Jade:** ao mirar no Cubit, o nome e a vida, que o Jade já mostra, o tier na cor do colar, a bateria em porcentagem e FE e o estado. Ao mirar no Induction Dock, o estoque de FE e o estado da tela. O modo atual entra com os modos de defesa e área, na Fase 4 (perguntas 659 a 662).
 
 ## Histórico de modificações
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-07 21:40 | Define o que o Jade mostra. |
 | Marcelo Fabiano | 2026-11-07 16:54 | Adiciona a reação às conquistas. |
 | Marcelo Fabiano | 2026-11-07 15:57 | Coloca o alerta e a surpresa em uso, com os sons de alerta. |
 | Marcelo Fabiano | 2026-11-07 14:49 | Acrescenta pintar e receber etiqueta à expressão feliz. |

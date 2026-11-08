@@ -58,7 +58,7 @@ A ordem é a da numeração (perguntas 356 e 365), com a lanterna antes do paine
 13. [x] Painel solar, sem as chaves, que entram com a interface de configuração (perguntas 494 e 495)
 14. [x] Lanterna, com a chave dela, o LambDynamicLights entrando no build e a claridade fraca da tela (perguntas 378 e 424)
 15. [x] Feixe: saiu da Fase 3 e foi para o Minerador, na Fase 5 (pergunta 463)
-16. [ ] Scanner de minérios e scanner de mobs, com a chave deles e os alertas
+16. [x] Scanner de minérios e scanner de mobs, com a chave deles e os alertas
 17. [x] Nome personalizado e cor da carcaça
 18. [ ] Jade
 19. [ ] Telas próprias do Cubit e do Induction Dock, com janelas personalizadas, textura de metal de robô e tooltips, sem o padrão do Minecraft (pergunta 371)

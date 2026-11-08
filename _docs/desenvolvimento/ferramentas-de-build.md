@@ -34,6 +34,8 @@ Os comandos ficam no `Makefile`. Rode `make` para ver a lista.
 
 **LambDynamicLights:** é dependência obrigatória só do cliente, então o `neoforge.mods.toml` exige `lambdynlights_runtime` com `side = "CLIENT"`. Esse é o ID presente tanto no artefato de desenvolvimento quanto no jar publicado, que o traz embutido. O código compila contra a API, e o jar não leva a biblioteca. Ela só entra em `make client` e `make data`, pelo conjunto de fontes vazio `clientRun`, porque o jogo procura mods no classpath da execução e o `additionalRuntimeClasspath` não basta. O `make data` a exige porque também inicia como cliente. `make server` e `make gametest` não a carregam, o que prova que um servidor dedicado abre sem ela.
 
+**Jade:** é dependência opcional, então o `neoforge.mods.toml` declara `jade` com `type = "optional"`, e o mod abre sem ele (regra 24 do `AGENTS.md`). O código compila contra o Jade (`compileOnly`), e o jar não o leva. Ele só entra em `make client` e `make data`, pelo conjunto de fontes `clientRun`. `make server` e `make gametest` não o carregam, e a GameTest `theRobotWorksWithoutJade` reprova se ele estiver presente. Só o pacote `compat.jade` importa o Jade, conferido pelo ArchUnit, e o próprio Jade acha o plugin pela anotação `@WailaPlugin` (perguntas 664, 665 e 667).
+
 Receita com mais de 3 linhas vira um script `.sh` em `scripts/`, e o `Makefile` só o chama (regra 46 do `AGENTS.md`).
 
 O primeiro build leva alguns minutos, porque baixa o JDK e prepara o Minecraft.
@@ -50,6 +52,7 @@ O primeiro build leva alguns minutos, porque baixa o JDK e prepara o Minecraft.
 | JaCoCo | Mede a cobertura de `domain/`, com mínimo de 85% de instruções e de ramos | Garante a regra 34 do `AGENTS.md` |
 | Spotless com google-java-format | Formata o código Java, com recuo de 2 espaços | É o padrão mais comum em Java, sem opções para discutir (pergunta 95) |
 | Checkstyle | Confere as regras de forma do código | Reprova no build o que antes dependia da revisão (pergunta 97) |
+| Jade `15.10.6+neoforge` | Mostra o tier, a bateria e o estado do Cubit e o estoque e o estado do Induction Dock ao mirar neles | É o mod de informações do Iron Meridian, na mesma versão, e opcional (pergunta 242). Vem do Maven do Modrinth, limitado ao grupo `maven.modrinth`, e o SHA-512 do jar foi conferido contra o `jade.pw.toml` do pack (pergunta 664) |
 | LambDynamicLights `4.8.11+1.21.1` | Faz o Cubit iluminar o mundo, sem blocos de luz invisíveis | É a dependência obrigatória da regra 6 do `AGENTS.md`, na versão do Iron Meridian. Vem do repositório `maven.gegy.dev`, limitado ao grupo da biblioteca |
 
 ## Regras do Checkstyle
@@ -79,6 +82,8 @@ As bibliotecas de teste vêm só do Maven Central, para o build não depender do
 - **`spotlessJavaCheck`:** o código não está formatado. Rode `make format`.
 - **`checkstyleMain` ou `checkstyleTest`:** uma regra de forma do código foi violada. Corrija a causa, sem suprimir a regra.
 - **`make gametest`:** uma GameTest reprovou, e o nome dela e o motivo aparecem em `build/gametest.log`, depois de `GAME TESTS COMPLETE`. Se esse trecho não existir, o mod não carregou. Com `invalid dist` no log, código comum referenciou uma classe de cliente.
+- **`onlyThePluginUsesJade`:** uma classe fora de `compat.jade` importou o Jade. Mova a referência para o plugin, porque sem o Jade essa classe quebraria o mod.
+- **`theRobotWorksWithoutJade`:** o Jade entrou nas GameTests. Confira se ele continua só em `clientRunRuntimeOnly`.
 - **`lambdynlights_runtime is not installed`:** a execução não carregou a biblioteca. Confira se ela usa o conjunto de fontes `clientRun`. Em `make server` ou `make gametest`, esse erro significa que a dependência deixou de ser só do cliente.
 - **`Verification of Gradle distribution failed`:** o arquivo baixado não bate com o `distributionSha256Sum`. Não apague o hash: confira a versão e o valor publicado, porque o download pode estar alterado.
 - **`createMinecraftArtifacts`:** a preparação do Minecraft falhou. Rode com `--info` para ler o erro.
@@ -88,6 +93,7 @@ As bibliotecas de teste vêm só do Maven Central, para o build não depender do
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-07 21:40 | Adiciona o Jade. |
 | Marcelo Fabiano | 2026-11-07 14:38 | Adiciona o relatório de cobertura dos GameTests. |
 | Marcelo Fabiano | 2026-11-07 14:31 | Adiciona o jar publicado, as regras de ArchUnit e o gate de ramos. |
 | Marcelo Fabiano | 2026-11-07 13:51 | Adiciona o checksum do wrapper. |

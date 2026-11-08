@@ -109,6 +109,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Scanner:** `c:ores/*` significa a tag-mãe `c:ores` e suas subtags, porque tags não aceitam curinga.
 - **Falas (perguntas 572 a 587 e 618 a 621):** o Cubit comenta o tempo e o horário ao mudarem, com um intervalo mínimo, dá parabéns pelas conquistas visíveis e diz que ama redstone quando o dono a minera, com a chave `Chatter`. As frases e as regras estão em [`falas.md`](conceito/falas.md).
 - **Caixas dos scanners (perguntas 593 a 616):** só o dono vê, através dos blocos, uma caixa azul clara e discreta em volta de cada minério novo que a varredura achou, por cerca de 10 s ou até minerar, e uma seta vermelha para baixo sobre a cabeça do mob hostil enquanto ele estiver no raio, as duas com um pulso suave (perguntas 646 a 649).
+- **Jade (perguntas 659 a 667):** opcional, na versão do Iron Meridian, num pacote isolado, `compat.jade`, mostra o tier, a bateria e o estado do Cubit e o estoque e o estado do Induction Dock, com os dados do servidor só enquanto alguém mira.
 - **Cores dos scanners (perguntas 558 e 638 a 643):** as antenas e um brilho atrás do corpo ficam vermelhos com mob no raio e azuis por cerca de 3 s com minério achado, no tom das caixas, com o vermelho vencendo. Todos veem, e a luz real continua branca.
 - **Scanners (perguntas 544 a 564 e 602 a 610):** só o Cubit ativo que segue varre, com a chave `Scanners`, numa esfera em volta dele, por um custo fixo por varredura, igual nos dois scanners, em intervalos separados para minérios e mobs. Só o que é novo avisa, dizendo o nome: `Cubit: DIAMOND!!!` e `Cubit: Careful, Zombie!`, com o intervalo mínimo por nome. O filtro é definido clicando com um minério na mão, e os raros são uma lista de tags, de ferro para cima. Mob hostil é o que o jogo marca como `Enemy`. A entrega tem três PRs: detecção, cores e caixas.
 - **Estado do robô como item:** inclui as configurações, além de bateria, vida, inventário, tier, nome e cor. Perde a área, os baús marcados e a seleção no controle.
@@ -122,6 +123,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-07 21:40 | Registra o Jade. |
 | Marcelo Fabiano | 2026-11-07 21:05 | Troca a caixa do mob pela seta. |
 | Marcelo Fabiano | 2026-11-07 20:51 | Registra as cores dos scanners. |
 | Marcelo Fabiano | 2026-11-07 20:04 | Registra as caixas dos scanners e as falas da redstone. |
