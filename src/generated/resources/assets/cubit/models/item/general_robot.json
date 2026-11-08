@@ -1,0 +1,98 @@
+{
+  "parent": "minecraft:item/generated",
+  "overrides": [
+    {
+      "model": "cubit:item/general_robot_orange",
+      "predicate": {
+        "cubit:color": 1.0
+      }
+    },
+    {
+      "model": "cubit:item/general_robot_magenta",
+      "predicate": {
+        "cubit:color": 2.0
+      }
+    },
+    {
+      "model": "cubit:item/general_robot_light_blue",
+      "predicate": {
+        "cubit:color": 3.0
+      }
+    },
+    {
+      "model": "cubit:item/general_robot_yellow",
+      "predicate": {
+        "cubit:color": 4.0
+      }
+    },
+    {
+      "model": "cubit:item/general_robot_lime",
+      "predicate": {
+        "cubit:color": 5.0
+      }
+    },
+    {
+      "model": "cubit:item/general_robot_pink",
+      "predicate": {
+        "cubit:color": 6.0
+      }
+    },
+    {
+      "model": "cubit:item/general_robot_gray",
+      "predicate": {
+        "cubit:color": 7.0
+      }
+    },
+    {
+      "model": "cubit:item/general_robot_light_gray",
+      "predicate": {
+        "cubit:color": 8.0
+      }
+    },
+    {
+      "model": "cubit:item/general_robot_cyan",
+      "predicate": {
+        "cubit:color": 9.0
+      }
+    },
+    {
+      "model": "cubit:item/general_robot_purple",
+      "predicate": {
+        "cubit:color": 10.0
+      }
+    },
+    {
+      "model": "cubit:item/general_robot_blue",
+      "predicate": {
+        "cubit:color": 11.0
+      }
+    },
+    {
+      "model": "cubit:item/general_robot_brown",
+      "predicate": {
+        "cubit:color": 12.0
+      }
+    },
+    {
+      "model": "cubit:item/general_robot_green",
+      "predicate": {
+        "cubit:color": 13.0
+      }
+    },
+    {
+      "model": "cubit:item/general_robot_red",
+      "predicate": {
+        "cubit:color": 14.0
+      }
+    },
+    {
+      "model": "cubit:item/general_robot_black",
+      "predicate": {
+        "cubit:color": 15.0
+      }
+    }
+  ],
+  "textures": {
+    "layer0": "cubit:item/general_robot"
+  }
+}

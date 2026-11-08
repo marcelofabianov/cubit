@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# Gates for every push: every check, the GameTests on a dedicated server and the generated files.
+set -euo pipefail
+
+root="$(git rev-parse --show-toplevel)"
+readonly root
+
+"${root}/gradlew" --project-dir "${root}" check
+"${root}/scripts/development/run-gametests.sh"
+"${root}/scripts/development/check-generated.sh"

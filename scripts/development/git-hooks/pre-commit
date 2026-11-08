@@ -1,0 +1,61 @@
+#!/usr/bin/env bash
+# Gates for every commit: allowed branch, change history, Java formatting and secret scan.
+set -euo pipefail
+
+readonly BRANCH_PATTERN='^((feature|hotfix)/[0-9]+-[a-z0-9]+(-[a-z0-9]+)*|release/[0-9]+\.[0-9]+\.[0-9]+)$'
+readonly HISTORY_ROW_PATTERN='^\+\| .+ \| [0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2} \| .+ \|$'
+
+root="$(git rev-parse --show-toplevel)"
+readonly root
+readonly gitleaks_bin="${root}/.tools/gitleaks"
+
+current_branch() {
+  local git_dir
+  git_dir="$(git rev-parse --git-dir)"
+
+  # A rebase detaches HEAD, so the real branch is read from the rebase state.
+  if [[ -f "${git_dir}/rebase-merge/head-name" ]]; then
+    sed 's|^refs/heads/||' "${git_dir}/rebase-merge/head-name"
+    return
+  fi
+
+  git symbolic-ref --short HEAD 2>/dev/null || true
+}
+
+branch="$(current_branch)"
+
+if [[ ! "${branch}" =~ ${BRANCH_PATTERN} ]]; then
+  cat >&2 <<EOF
+pre-commit: commits are not allowed on branch '${branch:-detached HEAD}'.
+Use feature/{issue}-{slug}, hotfix/{issue}-{slug} or release/X.Y.Z.
+EOF
+  exit 1
+fi
+
+if [[ ! -x "${gitleaks_bin}" ]]; then
+  echo "pre-commit: gitleaks not found. Run scripts/development/setup-dev.sh" >&2
+  exit 1
+fi
+
+# Every staged Markdown file in _docs/ must record the change in its history table.
+missing_history=()
+while IFS= read -r file; do
+  # grep -q would close the pipe early and fail the pipeline under pipefail on large diffs.
+  if ! git diff --cached --unified=0 -- "${file}" | grep -E "${HISTORY_ROW_PATTERN}" >/dev/null; then
+    missing_history+=("${file}")
+  fi
+done < <(git diff --cached --name-only --diff-filter=ACMR -- '_docs/*.md')
+
+if ((${#missing_history[@]} > 0)); then
+  {
+    echo "pre-commit: add a new row to the change history table of:"
+    printf '  %s\n' "${missing_history[@]}"
+  } >&2
+  exit 1
+fi
+
+if [[ -n "$(git diff --cached --name-only --diff-filter=ACMR -- '*.java')" ]]; then
+  "${root}/gradlew" --project-dir "${root}" spotlessCheck --quiet
+fi
+
+"${gitleaks_bin}" git --pre-commit --staged --redact --no-banner --log-level warn "${root}"

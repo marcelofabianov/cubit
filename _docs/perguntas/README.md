@@ -1,0 +1,301 @@
+# Perguntas e respostas
+
+Este diretório concentra as perguntas do projeto, com um arquivo por fase. A pergunta fica na fase em que a resposta é usada.
+
+| Fase | Arquivo |
+|---|---|
+| 1. Conceito | [`fase-1-conceito.md`](fase-1-conceito.md) |
+| 2. Versão mínima | [`fase-2-versao-minima.md`](fase-2-versao-minima.md) |
+| 3. Sentidos | [`fase-3-sentidos.md`](fase-3-sentidos.md) |
+| 4. Upgrades e autonomia | [`fase-4-upgrades-e-autonomia.md`](fase-4-upgrades-e-autonomia.md) |
+| 5. Trabalhos | [`fase-5-trabalhos.md`](fase-5-trabalhos.md) |
+
+## Como usar
+
+- **Registro:** toda pergunta respondida pelo desenvolvedor entra aqui antes do próximo passo (regra 47 do `AGENTS.md`).
+- **Numeração:** o número de uma pergunta é único no projeto e nunca muda. Pergunta nova recebe o próximo número livre.
+- **Ordem:** nas tabelas, a mais nova fica no topo. Os trechos antigos em outra ordem ficam como estão, e a busca é pelo número (pergunta 720).
+- **Ponteiros:** quando uma resposta muda outra, a nova cita a antiga, e a antiga ganha um ponteiro para a nova.
+- **Pendentes:** têm uma recomendação, que só vale depois da resposta do desenvolvedor.
+- **Respondidas:** a resposta é registrada aqui, e o documento do assunto é atualizado junto.
+- **Fonte da verdade:** as respostas prevalecem sobre os outros documentos.
+- **Próximo número livre:** 785.
+
+## Histórico de modificações
+
+| Pessoa | Data e hora | Modificação |
+|---|---|---|
+| Marcelo Fabiano | 2026-11-08 01:48 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-08 01:06 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-08 00:50 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-08 00:33 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 23:48 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 23:45 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 23:42 | Acrescenta a regra da ordem e dos ponteiros. |
+| Marcelo Fabiano | 2026-11-07 23:40 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 23:39 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 23:34 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 23:32 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 23:28 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 23:25 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 23:23 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 23:20 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 23:19 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 23:13 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 23:13 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 23:10 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 23:08 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 23:02 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 22:59 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 22:57 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 22:53 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 22:44 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 22:39 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 22:37 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 22:34 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 22:29 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 22:27 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 22:24 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 22:20 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 22:14 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 22:00 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 21:49 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 21:46 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 21:45 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 21:41 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 21:36 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 21:32 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 21:29 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 21:27 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 21:25 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 21:18 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 21:11 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 21:10 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 21:08 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 21:06 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 21:03 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 21:01 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 20:53 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 20:46 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 20:44 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 20:40 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 20:39 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 20:33 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 20:21 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 20:18 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 20:12 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 20:09 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 20:06 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 20:02 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 20:00 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 19:56 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 19:53 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 19:49 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 19:48 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 19:16 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 19:07 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 19:04 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 19:02 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 19:01 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 18:58 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 18:56 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 18:55 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 17:49 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 17:41 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 17:32 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 17:23 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 17:21 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 17:14 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 17:11 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 17:07 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 16:57 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 16:54 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 16:51 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 16:48 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 16:44 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 16:43 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 16:41 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 16:40 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 14:49 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 14:38 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 14:28 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 14:25 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 14:18 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 14:10 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 13:57 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 13:46 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 13:38 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 13:35 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 13:34 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 13:32 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-07 13:21 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-06 16:08 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-06 16:04 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-06 15:48 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-06 15:46 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-06 15:44 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-06 15:40 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-06 15:31 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-06 15:25 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-06 15:16 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-06 15:00 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-06 14:54 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-06 14:49 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-06 14:47 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-06 14:38 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-06 14:20 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-06 14:15 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-06 14:05 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-06 14:05 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-06 14:03 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-06 13:57 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-06 13:26 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-06 13:10 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-06 12:07 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-06 11:24 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-06 11:10 | Atualiza o próximo número livre e o nome da Fase 5. |
+| Marcelo Fabiano | 2026-11-06 11:10 | Troca 'especialidade' por 'trabalho' e 'card de especialidade' por 'card de Aprendizado de Máquina'. |
+| Marcelo Fabiano | 2026-11-06 10:56 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-06 10:36 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-06 10:15 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-06 10:02 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-06 09:48 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-06 09:45 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-06 09:40 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-06 09:36 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-06 09:32 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-06 09:18 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-06 08:57 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-06 00:58 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-06 00:44 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-06 00:40 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-06 00:34 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-06 00:28 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-06 00:22 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-06 00:20 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-06 00:17 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-06 00:10 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-06 00:00 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 23:56 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 23:49 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 23:33 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 23:31 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 23:30 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 23:20 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 23:16 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 22:39 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 22:37 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 22:27 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 22:25 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 22:18 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 22:11 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 22:09 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 21:53 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 21:47 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 21:36 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 21:34 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 21:30 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 21:15 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 21:02 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 20:52 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 20:42 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 20:36 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 20:26 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 17:39 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 17:37 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 17:35 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 17:27 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 17:11 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 16:57 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 16:47 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 16:09 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 16:07 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 16:02 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 15:59 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 15:46 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 15:32 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 15:09 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 15:07 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 14:55 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 14:40 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 14:38 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 14:32 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 14:23 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 14:13 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 14:12 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 14:10 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 13:54 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 13:53 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 13:51 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 13:30 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 13:13 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 12:52 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 12:07 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 12:03 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 11:57 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 11:52 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 11:47 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 11:41 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 11:36 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 11:31 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 11:25 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 11:14 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 11:06 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 11:02 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 10:55 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 10:46 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 10:44 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 10:38 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 10:28 | Adiciona a Fase 5 e atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 02:29 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 02:11 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 02:07 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 02:00 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 01:58 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 01:57 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 01:41 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 01:14 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 01:12 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 01:01 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 00:56 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 00:55 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 00:35 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 00:34 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 00:31 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 00:17 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 00:16 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 00:15 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 00:09 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 00:07 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 00:05 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-05 00:02 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-04 23:40 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-04 23:20 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-04 23:16 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-04 23:11 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-04 22:56 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-04 22:12 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-04 22:05 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-04 22:01 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-04 21:51 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-04 21:49 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-04 21:19 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-04 21:02 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-04 20:41 | Adiciona a regra de registro e atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-04 20:31 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-04 20:09 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-04 19:56 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-04 19:24 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-04 19:05 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-04 18:50 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-04 18:20 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-04 17:52 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-04 17:48 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-04 17:48 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-04 17:26 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-04 17:16 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-04 17:15 | Atualiza os caminhos e o próximo número livre. |
+| Marcelo Fabiano | 2026-11-04 17:12 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-04 17:11 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-04 17:08 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-04 16:57 | Cria o índice das perguntas por fase. |

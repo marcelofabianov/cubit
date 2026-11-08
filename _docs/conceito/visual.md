@@ -1,0 +1,127 @@
+# Visual e sons
+
+![Prancha de conceito do Cubit](../imagens/conceito/robo-conceito-prancha.png)
+
+As imagens individuais estão em [`_docs/imagens/conceito/`](../imagens/conceito/), em PNG e SVG.
+
+## Estilo
+
+- **Moderno, fofo e doce:** um cubo branco arredondado com uma tela no rosto onde os olhos são luzes, antenas, braços com garras e **esteiras** no lugar dos pés.
+- **Colar** no pescoço com a cor do tier. As cores estão em [`tiers.md`](../tiers.md).
+- **Carcaça** com cor trocável por corantes, em [16 cores](../funcionalidades/personalizacao.md).
+- O conceito atual é a base. O modelo final tem **design próprio**, para o mod poder ser publicado. A geometria melhora já na Fase 2, mais próxima das imagens de conceito, e as animações e as expressões seguem na Fase 3.
+- Modelo e animações com **GeckoLib**, dependência obrigatória: andar, virar o corpo, mover os braços e trocar a expressão da tela.
+- **Modelo na Fase 2:** traz os detalhes das seis vistas e o ícone do item, com tudo fixo: colar cinza, olhos normais e bateria sem variação. A textura tem 128×128, com 2 pixels por unidade, e a hitbox não muda, então braços e antenas passam um pouco dela.
+- **Modelo final:** mantém a geometria e a textura do corpo, e acrescenta só os ossos que as animações precisarem. As exceções são o tronco central, a coluna entre as esteiras e a carcaça, com 2 unidades de altura, em vez de 1,5, e a haste das antenas, com 2 unidades, em vez de 2,5. A carcaça sobe junto, sem mudar de tamanho, e a ponta da antena desce junto com a haste. Os braços ficam abertos cerca de 5°, a partir do ombro, para não parecerem colados na carcaça.
+- **Painel solar:** uma placa de 0,5 unidade, centralizada no topo, com moldura escura e célula azul. A hitbox não muda.
+- **Tier no corpo:** a fita da cintura cobre 1,25 unidade do tronco, sem aumentar o Cubit, e cada antebraço tem uma faixa na mesma cor, pela mesma camada do colar.
+- **Animações:** andar, olhar para o dono, parado, e desligado e hibernando. Como o modelo não tem cabeça separada, olhar gira o corpo sobre o pescoço, com as esteiras paradas. O robô olha só para o dono, ligado e com ele por perto, inclusive parado. Tempos e poses ficam no arquivo de animação, e o resto em constantes.
+- **Esteiras:** textura por quadros, escolhidos pela distância andada, sem mudar a geometria.
+- **Braços ao levar dano:** ficam erguidos por cerca de 2 s depois do último dano, com a expressão triste ou de olhos em X, numa constante, e o corpo e as antenas continuam balançando. A lágrima segue até o fim do tempo dela.
+- **Inclinação para o dono:** com o dono 1 bloco ou mais acima ou abaixo, com o robô ligado, na mesma dimensão e até 8 blocos, o corpo inclina cerca de 8° para cima ou para baixo, com transição suave. Um pulo move só os olhos.
+- **Cor do colar:** o robô no mundo usa a cor do tier, numa camada transparente por tier, em `textures/entity/general_robot_collar/`, com as duas tonalidades do conceito. As cores ficam nos arquivos, e um pacote de recursos pode trocá-las. O ícone do item e o do `Damaged Cubit` ficam cinza e ganham cor junto dos módulos, na Fase 4.
+- **Indicador de bateria:** mostra a carga real em qualquer estado, numa camada de 8× a resolução do corpo, em `textures/entity/general_robot_battery/`, com o contorno e o preenchimento arredondados do conceito. Tem o vazio e 4 níveis, de 25% em 25%, e só fica vazio com 0 FE. O preenchimento é verde e, com a bateria crítica de [`tiers.md`](../tiers.md#valores-gerais), vermelho. Brilha no escuro enquanto a tela estiver acesa, e fica sem brilho com a tela apagada. O contorno nunca brilha.
+
+- **Textos na tela:** o mod desenha os textos numa camada própria, só do cliente, em 75% do tamanho da fonte do jogo, cerca de 3 pixels da interface acima do que estiver em cima da hotbar, e sobem sozinhos com corações e armadura. Duram cerca de 3 s, como a mensagem do jogo. Tamanho, distância e duração ficam em constantes, porque são só visuais.
+
+## O que o conceito mostra
+
+- **Vistas:** frente, costas, esquerda, direita, cima e baixo.
+- **Corpo:** tela escura no rosto, olhos ciano e antenas com ponta laranja.
+- **Detalhes:** painel solar em cima, indicador de bateria nas costas e bobina de indução embaixo. O painel carrega a bateria, conforme [`energia.md`](../funcionalidades/energia.md#painel-solar).
+- **Desligado:** a tela apaga e as pontas das antenas ficam cinza.
+- **Lanterna acesa:** as pontas das antenas acendem em branco quente, numa camada transparente, em `textures/entity/general_robot_antenna/`, e a luz real ilumina os blocos em volta.
+- **Halo:** com a lanterna acesa, cada ponta tem um halo suave, sempre virado para a câmera e sem borda definida, que cresce e diminui devagar. O disco rígido da prancha não entra no modelo, porque pareceria um objeto sólido (perguntas 464 e 477).
+- **Brilho dos olhos:** com a lanterna acesa, um brilho suave aparece em volta do que acende na tela, com a cor de cada expressão, em `textures/entity/general_robot_screen_glow/`. Ele não cobre os olhos, para não estourar a cor deles, e acompanha a piscada e o olhar. A luz real no chão não muda de cor (perguntas 478 e 479).
+- **Scanners:** as pontas e os halos das antenas ficam vermelhos com um mob hostil no raio e azuis por cerca de 3 s com um minério achado, com um brilho no mesmo tom atrás do corpo, e o vermelho vence. A luz real continua branca. O detalhe está em [`sensores.md`](../funcionalidades/sensores.md#cor-e-caixas) (perguntas 558 e 638 a 642).
+- **Fora da lanterna:** a luz âmbar no alerta e a luz fraca com bateria baixa, também da prancha, não foram decididas.
+
+## Expressões
+
+São dez: normal, feliz, sono, alerta, surpreso, carregando, desligado, triste, quase morto e preocupado. Os gatilhos estão em [`persona.md`](persona.md#reações), e a lista, com as imagens, em [`expressoes.md`](expressoes.md).
+
+- **Desenho:** cada uma é uma camada só para a tela, em `textures/entity/general_robot_screen/`, com 8× a resolução do corpo, ou 144×88 pixels na tela, recortada das imagens de conceito. O corpo não muda.
+- **Brilho:** a tela brilha no escuro. Desligada, não brilha, e as pontas das antenas ficam cinza.
+- **Qual vence:** tela apagada, carregando, quase morto, triste, preocupado, alerta, surpreso, sono, feliz e normal.
+- **Triste e quase morto:** triste dura o tempo de [`tiers.md`](../tiers.md#valores-gerais) depois de um dano, e quase morto, com a vida no limite da mesma tabela, dura menos, e a lágrima segue até o fim do tempo dela. Ao levar dano, toca o curto elétrico, no lugar do som padrão do jogo e sem bipe. Em chamas, o loop já toca, e os golpes do fogo não o repetem.
+- **Feliz:** dura o tempo de [`tiers.md`](../tiers.md#valores-gerais), depois de colocar o robô, abrir o inventário, pintá-lo, dar a ele uma etiqueta ou quando o dono ganha uma conquista, com ele ativo.
+- **Bipe:** toca ao trocar para normal, feliz ou sono, exceto ao ligar, ao ser colocado e ao carregar o mundo.
+- **Piscada:** na expressão normal, fica 5 s de olhos abertos e pisca em cerca de 0,25 s, sem bipe. Cada robô começa num momento diferente.
+- **Olhar:** na expressão normal, os olhos sobem cerca de 1/6 da tela ao subir e descem ao descer, um ou mais blocos, e ficam assim por cerca de 0,5 s depois do movimento.
+- **Olhar para o dono:** sem movimento próprio, com o robô ligado, na mesma dimensão e o dono a até 8 blocos, os olhos também sobem num pulo e descem numa queda rápida dele, por cerca de 0,5 s, e ficam para cima ou para baixo enquanto ele estiver 1 bloco ou mais acima ou abaixo do robô.
+- **Em uso:** todas. Alerta e surpreso vêm dos scanners.
+
+## Sons
+
+São onze sons diferentes (perguntas 135, 148, 316, 320, 322 e 362). Nove entram na Fase 3, o do ataque, junto do choque, e o de modo agressivo, junto dos modos de defesa. A lista, com o arquivo e o uso de cada um, está em [`sons.md`](sons.md).
+
+Os arquivos ficam em `assets/cubit/sounds/general_robot/`, em Ogg Vorbis, mono e 48 kHz, porque o jogo só aceita esse formato e só reduz o volume com a distância em sons mono. O intervalo mínimo fica em [`tiers.md`](../tiers.md#valores-gerais) e no config.
+
+Tocam todos, menos o ataque e o modo agressivo, que entram na Fase 4.
+
+- **IDs:** `cubit:general_robot.{nome}`, com o nome do arquivo sem a extensão. Não mudam sem aviso.
+- **Quem ouve:** todos os players por perto, com o volume caindo até cerca de 16 blocos, no controle "Criaturas amigáveis" do jogo. Volume e alcance ficam no `sounds.json`, onde um pacote de recursos pode mudá-los.
+- **Ligar:** de inativo para ativo, pelo clique, ao religar sozinho ou ao sair da base ligado.
+- **Desligar:** de ativo para inativo, por bateria zerada, troca de robô ou `/cubit reset`.
+- **Sem esses sons:** entrar na base e ser colocado no mundo.
+- **Esteira:** em loop, enquanto anda, com volume e altura acompanhando a velocidade.
+- **Curto elétrico:** em loop, enquanto pega fogo, ativo ou não, junto da esteira.
+- **Recarga:** em loop, enquanto a bateria sobe de fato, na base ou pelo slot. Para com a bateria cheia ou com o Dock sem energia.
+
+## Identificação
+
+- **Ícone do mod:** tem o mesmo desenho do ícone do item, em `textures/gui/mod_logo.png`, sem borrar os pixels. O arquivo é separado porque a tela de Mods sempre encaixa o logo numa altura de 50 pixels, então o tamanho vem da margem transparente, e 25×25 dá a escala exata de 2×. Ao mudar o ícone do item, atualize também este arquivo.
+- **Nome personalizado** com bigorna ou etiqueta, sempre visível acima do Cubit, na tela dele e no Jade.
+- **Jade:** ao mirar no Cubit, o nome e a vida, que o Jade já mostra, o tier na cor do colar, a bateria em porcentagem e FE e o estado. Ao mirar no Induction Dock, o estoque de FE e o estado da tela. O modo atual entra com os modos de defesa e área, na Fase 4 (perguntas 659 a 662).
+
+## Histórico de modificações
+
+| Pessoa | Data e hora | Modificação |
+|---|---|---|
+| Marcelo Fabiano | 2026-11-07 23:42 | Acrescenta as cores dos scanners e atualiza onde o nome aparece. |
+| Marcelo Fabiano | 2026-11-07 21:40 | Define o que o Jade mostra. |
+| Marcelo Fabiano | 2026-11-07 16:54 | Adiciona a reação às conquistas. |
+| Marcelo Fabiano | 2026-11-07 15:57 | Coloca o alerta e a surpresa em uso, com os sons de alerta. |
+| Marcelo Fabiano | 2026-11-07 14:49 | Acrescenta pintar e receber etiqueta à expressão feliz. |
+| Marcelo Fabiano | 2026-11-06 15:58 | Aponta a cor e o nome para a personalização. |
+| Marcelo Fabiano | 2026-11-06 15:16 | Tira o vidro do painel. |
+| Marcelo Fabiano | 2026-11-06 15:05 | Adiciona o relevo do painel, a fita maior e as faixas dos braços. |
+| Marcelo Fabiano | 2026-11-06 14:15 | Abre os braços. |
+| Marcelo Fabiano | 2026-11-06 14:05 | Encurta a haste das antenas. |
+| Marcelo Fabiano | 2026-11-06 13:57 | Adiciona o halo e o brilho dos olhos. |
+| Marcelo Fabiano | 2026-11-06 13:34 | Adiciona as pontas acesas com a lanterna. |
+| Marcelo Fabiano | 2026-11-06 11:13 | Corrige a cabeça, que o modelo não tem separada. |
+| Marcelo Fabiano | 2026-11-06 10:36 | Reduz o tempo dos braços erguidos. |
+| Marcelo Fabiano | 2026-11-06 10:06 | Define como os textos são desenhados. |
+| Marcelo Fabiano | 2026-11-06 09:48 | Aponta o intervalo mínimo para `tiers.md`. |
+| Marcelo Fabiano | 2026-11-06 09:18 | Aumenta o tronco central. |
+| Marcelo Fabiano | 2026-11-06 09:03 | Define a cor do colar e o indicador de bateria. |
+| Marcelo Fabiano | 2026-11-06 01:00 | Corrige o bipe padrão, que já toca. |
+| Marcelo Fabiano | 2026-11-06 01:20 | Adiciona os braços ao levar dano, o olhar e a inclinação para o dono. |
+| Marcelo Fabiano | 2026-11-06 00:58 | Define as animações, as esteiras e o modelo final. |
+| Marcelo Fabiano | 2026-11-06 00:28 | Define o tempo dos olhos em X. |
+| Marcelo Fabiano | 2026-11-06 00:22 | Adiciona a expressão de preocupado. |
+| Marcelo Fabiano | 2026-11-06 00:12 | Define o som ao levar dano. |
+| Marcelo Fabiano | 2026-11-06 00:10 | Adiciona as expressões triste e quase morto. |
+| Marcelo Fabiano | 2026-11-05 23:56 | Adiciona a piscada e o olhar. |
+| Marcelo Fabiano | 2026-11-05 23:41 | Aponta para a lista das expressões. |
+| Marcelo Fabiano | 2026-11-05 23:36 | Define como as expressões são desenhadas e qual vence. |
+| Marcelo Fabiano | 2026-11-05 23:16 | Adiciona o som de modo agressivo. |
+| Marcelo Fabiano | 2026-11-05 22:47 | Passa a lista dos sons para `sons.md`. |
+| Marcelo Fabiano | 2026-11-05 22:39 | Define quando cada som toca e quem ouve. |
+| Marcelo Fabiano | 2026-11-05 21:30 | Separa o som de ligar do som de colocar. |
+| Marcelo Fabiano | 2026-11-05 21:02 | Trata a GeckoLib como dependência do mod. |
+| Marcelo Fabiano | 2026-11-05 20:36 | Define a fase do som de colocar no mundo. |
+| Marcelo Fabiano | 2026-11-05 20:26 | Adiciona o som de colocar no mundo. |
+| Marcelo Fabiano | 2026-11-05 17:27 | Adiciona o som do ataque. |
+| Marcelo Fabiano | 2026-11-05 00:55 | Reduz o ícone do mod na tela de Mods. |
+| Marcelo Fabiano | 2026-11-05 00:35 | Define o ícone do mod. |
+| Marcelo Fabiano | 2026-11-05 00:31 | Define o modelo da Fase 2. |
+| Marcelo Fabiano | 2026-11-05 00:12 | Limita o bipe padrão, antecipa a geometria e cita o intervalo mínimo. |
+| Marcelo Fabiano | 2026-11-04 22:51 | Adiciona os arquivos dos sons. |
+| Marcelo Fabiano | 2026-11-04 22:12 | Define os oito sons do Cubit. |
+| Marcelo Fabiano | 2026-11-04 17:15 | Atualiza os caminhos após a renomeação para português. |
+| Marcelo Fabiano | 2026-11-04 17:08 | Define o modelo final na Fase 3. |
+| Marcelo Fabiano | 2026-11-04 16:57 | Atualiza as expressões, os sons e o painel solar. |
+| Marcelo Fabiano | 2026-11-04 16:02 | Define a persona do Cubit. |
+| Marcelo Fabiano | 2026-11-04 15:23 | Adiciona o rascunho da persona e o visual do Cubit. |

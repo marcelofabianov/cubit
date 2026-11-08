@@ -1,0 +1,52 @@
+modLoader="javafml"
+loaderVersion="${loader_version_range}"
+license="${mod_license}"
+
+[[mods]]
+modId="${mod_id}"
+version="${mod_version}"
+displayName="${mod_name}"
+logoFile="assets/${mod_id}/textures/gui/mod_logo.png"
+logoBlur=false
+description='''
+Cubit is a cute battery-powered robot companion that follows you, carries your items and lights the way. It scans for ores and hostile mobs, talks with beeps and short messages, and recharges at the Induction Dock with FE from any mod, with redstone or with its solar panel. Pick it back up as an item whenever you want, with everything inside it kept safe.
+'''
+
+[[dependencies.${mod_id}]]
+    modId="neoforge"
+    type="required"
+    versionRange="[${neo_version},)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.${mod_id}]]
+    modId="minecraft"
+    type="required"
+    versionRange="${minecraft_version_range}"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.${mod_id}]]
+    modId="geckolib"
+    type="required"
+    versionRange="[${geckolib_version},)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.${mod_id}]]
+    modId="lambdynlights_runtime"
+    type="required"
+    versionRange="[${lambdynamiclights_version},)"
+    ordering="NONE"
+    side="CLIENT"
+
+# Optional: the mod opens without it, and only a version too old is refused.
+[[dependencies.${mod_id}]]
+    modId="jade"
+    type="optional"
+    versionRange="[${jade_min_version},)"
+    ordering="NONE"
+    side="BOTH"
+
+[modproperties."${mod_id}"."yumi:entrypoints"]
+    "lambdynlights:initializer"="io.github.marcelofabianov.cubit.client.CubitDynamicLights"
