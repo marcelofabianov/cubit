@@ -32,6 +32,11 @@ Nenhuma. A pendente 425 foi para a Fase 4 (pergunta 721).
 | 321 | O nome `placed.ogg` e o momento "ao ser colocado no mundo" estão certos? | Sim. Detalha a pergunta 320 |
 | 322 | Em que fase o som de colocar no mundo passa a tocar? | Na Fase 3, junto dos outros oito. Detalha a pergunta 320 |
 | 421 | Como foi o roteiro manual do colar, do indicador de bateria e do tronco central com +0,5? | Teste finalizado, tudo ok, executado pelo desenvolvedor, sem detalhar cada passo. Ele não pediu +1, então o tronco fica em 2 unidades. O `make server` e o olhar de longe não foram citados em separado |
+| 784 | O jogo está fechado antes do push da `release/0.1.0`? | Sim |
+| 783 | O desenvolvedor fez o merge do PR #138, da `develop` para a `homolog`? | Sim. O agente conferiu o merge (`7a0bd90`) e criou a `release/0.1.0` a partir da `homolog`. As respostas 780 a 782 tinham sumido do disco às 01:46, durante o `pre-push` da remoção da branch remota da #135, sem causa achada nos hooks, e foram registradas de novo |
+| 782 | Como a publicação da `0.1.0` entra no fluxo de issues? | Por uma issue "Publicação da 0.1.0" (#137), no milestone da Fase 3. Os PRs da `develop` para a `homolog`, da `release/0.1.0` para a `main` e de volta para a `develop` citam a issue, que fecha no fim |
+| 781 | O jogo está fechado antes de apagar a branch remota da #135? | Sim. O agente, com a autorização, apagou a branch local e a remota |
+| 780 | O desenvolvedor fez o merge do PR #136? | Sim. O agente conferiu o merge (`e927bdd`) e a issue #135 fechada. Os itens 4 a 8 da `0.1.0` já entraram marcados no próprio PR |
 | 779 | O jogo está fechado antes do push da #135? | Sim |
 | 778 | A publicação também tem release no GitHub? | Sim: "vamos criar a release e tags no github". Depois do merge na `main`, a tag anotada `v0.1.0` e uma release no GitHub com a seção da versão do `CHANGELOG.md` e o jar, antes do envio aos sites. Entra no `fluxo-de-trabalho.md` e no `publicacao.md` |
 | 777 | Os termos das ferramentas de IA que geraram os sons foram conferidos (item 8 da `0.1.0`, resposta 338)? | Sim: o desenvolvedor conferiu, e eles permitem publicar os sons sob a licença MIT |
@@ -456,6 +461,7 @@ Nenhuma. A pendente 425 foi para a Fase 4 (pergunta 721).
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-08 01:48 | Registra as respostas 780 a 784. |
 | Marcelo Fabiano | 2026-11-08 01:06 | Registra as respostas 762 a 779 e o ponteiro na 515. |
 | Marcelo Fabiano | 2026-11-08 00:50 | Registra as respostas 753 a 761. |
 | Marcelo Fabiano | 2026-11-08 00:33 | Registra as respostas 739 a 752. |
