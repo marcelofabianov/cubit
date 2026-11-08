@@ -34,6 +34,11 @@
 | 321 | O nome `placed.ogg` e o momento "ao ser colocado no mundo" estão certos? | Sim. Detalha a pergunta 320 |
 | 322 | Em que fase o som de colocar no mundo passa a tocar? | Na Fase 3, junto dos outros oito. Detalha a pergunta 320 |
 | 421 | Como foi o roteiro manual do colar, do indicador de bateria e do tronco central com +0,5? | Teste finalizado, tudo ok, executado pelo desenvolvedor, sem detalhar cada passo. Ele não pediu +1, então o tronco fica em 2 unidades. O `make server` e o olhar de longe não foram citados em separado |
+| 707 | Os quatro commits da tela do Cubit podem ser feitos, e a branch segue para o teste no jogo? | "top fechamos tudo ok pode fazer os commits push e abrir a PR": autoriza os commits, o push e o PR da #125. O agente entendeu "fechamos tudo ok" como o fim do trabalho da issue, sem o detalhe dos passos do roteiro "Telas" no jogo, que o PR informa como pendente de confirmação |
+| 706 | O jogo está fechado antes de compilar os textos reduzidos, na #125? | Sim |
+| 705 | Quanto diminuir todos os textos das telas do Cubit e do Dock, na mesma proporção? | Fator 0,75: títulos, rótulos e valores passam de 1,0 para 0,75, e os detalhes, de 0,75 para cerca de 0,56. O desenvolvedor escolheu mesmo com o aviso de que os detalhes podem ficar ilegíveis com a escala da interface em 2. Muda a escala dos detalhes das telas, que seguia a resposta 437 |
+| 704 | O jogo está fechado antes de regenerar o `en_us.json` sem as chaves antigas, na #125? | Sim |
+| 703 | O agente atualiza a lista de classes do domínio no `AGENTS.md` e remove as chaves de tradução sem uso do painel antigo (`gui.cubit.lamp.on/off`, `gui.cubit.scanners.on/off` e `gui.cubit.chatter.on/off`)? | Sim, as duas: "pode atualizar o AGENTS.md e remover as chaves antigas". A remoção das chaves é avisada no PR, como pede o contrato de traduções. O desenvolvedor também autorizou os cinco commits da tela do Cubit |
 | 702 | O jogo está fechado antes de rodar as GameTests das telas, na #125? | Sim |
 | 701 | O jogo está fechado antes de compilar o menu e a tela do Cubit, na #125? | Sim |
 | 700 | O agente segue nesta sessão com o menu e a tela do Cubit, ou numa sessão nova, a partir do prompt de continuidade? | Nesta sessão: "pode seguir aqui com o menu e a tela do Cubit" |
@@ -381,6 +386,11 @@
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-07 23:23 | Registra a resposta 707. |
+| Marcelo Fabiano | 2026-11-07 23:20 | Registra a resposta 706. |
+| Marcelo Fabiano | 2026-11-07 23:19 | Registra a resposta 705. |
+| Marcelo Fabiano | 2026-11-07 23:13 | Registra a resposta 704. |
+| Marcelo Fabiano | 2026-11-07 23:13 | Registra a resposta 703. |
 | Marcelo Fabiano | 2026-11-07 23:10 | Registra a resposta 702. |
 | Marcelo Fabiano | 2026-11-07 23:08 | Registra a resposta 701. |
 | Marcelo Fabiano | 2026-11-07 23:02 | Registra a resposta 700. |
