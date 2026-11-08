@@ -16,8 +16,6 @@ import net.minecraft.world.item.ItemStack;
  * the hand, and the answer has no interval, because it replies to a click.
  */
 final class RobotOreChoice {
-  private static final String ANY_ORE_NAME = "ORE";
-
   private RobotOreChoice() {}
 
   static InteractionResult apply(RobotEntity robot, Player player, ItemStack held) {
@@ -40,7 +38,7 @@ final class RobotOreChoice {
   private static Component answer(OreKind kind, OreFilter filter) {
     Component text =
         filter.contains(kind)
-            ? Component.translatable(RobotScanners.LOOKING_KEY, kind.name().orElse(ANY_ORE_NAME))
+            ? Component.translatable(RobotScanners.LOOKING_KEY, kind.shownName())
             : Component.translatable(RobotScanners.CLEARED_KEY);
     return Component.translatable(RobotNotices.FORMAT_KEY, text);
   }

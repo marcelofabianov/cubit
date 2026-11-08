@@ -16,6 +16,7 @@ public record OreKind(String tag) {
   private static final String INVALID_MESSAGE = "Not an ore tag: ";
   private static final String WORD_SEPARATORS = "[_/]";
   private static final String SPACE = " ";
+  private static final String ANY_ORE_NAME = "ORE";
 
   public static final OreKind ANY = new OreKind(PARENT_TAG);
 
@@ -51,6 +52,11 @@ public record OreKind(String tag) {
     }
     String words = tag.substring(SUBTAG_PREFIX.length()).replaceAll(WORD_SEPARATORS, SPACE);
     return Optional.of(words.toUpperCase(Locale.ROOT));
+  }
+
+  /** The name, or a plain word for the parent tag, so the filter always reads as a sentence. */
+  public String shownName() {
+    return name().orElse(ANY_ORE_NAME);
   }
 
   private static boolean isOreTag(String tag) {

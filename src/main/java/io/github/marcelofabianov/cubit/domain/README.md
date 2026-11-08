@@ -41,7 +41,7 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 | `RobotNotice` | Os textos curtos que o robô mostra ao dono |
 | `NoticeRules` | Em que estado o robô fala |
 | `NoticeRepeat` | Quanto um aviso ainda espera para poder se repetir |
-| `OreKind` | Um tipo de minério, pela tag: uma subtag, como `c:ores/diamond`, com nome em caixa alta, ou `c:ores`, sem nome |
+| `OreKind` | Um tipo de minério, pela tag: uma subtag, como `c:ores/diamond`, com nome em caixa alta, ou `c:ores`, sem nome. `shownName` dá `ORE` para ele, no aviso e na tela |
 | `OreFilter` | Os minérios que o dono pediu ao scanner, do mais antigo para o mais novo |
 | `OreSignals` | Quais minérios avisam e qual deles o texto cita, a partir da lista dos raros |
 | `ScannerSpec` | Números dos scanners de um tier: raios, intervalos, custos e vagas do filtro |
