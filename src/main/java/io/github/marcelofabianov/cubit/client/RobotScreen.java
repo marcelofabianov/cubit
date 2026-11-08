@@ -1,181 +1,296 @@
 package io.github.marcelofabianov.cubit.client;
 
+import io.github.marcelofabianov.cubit.client.ScreenPainter.Box;
+import io.github.marcelofabianov.cubit.client.ScreenPainter.Colors;
+import io.github.marcelofabianov.cubit.domain.behavior.RobotScreenStatus;
 import io.github.marcelofabianov.cubit.menu.RobotMenu;
+import io.github.marcelofabianov.cubit.menu.ScreenKeys;
+import java.util.OptionalInt;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.components.Button;
-import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
 
-/** Draws the robot inventory with the chest texture of the game, as many rows as it needs. */
+/**
+ * The robot screen of the concept image, with two tabs: the inventory and the settings. The tab is
+ * only a choice of the client, and the server never depends on it.
+ */
 final class RobotScreen extends AbstractContainerScreen<RobotMenu> {
-  private static final String CHEST_TEXTURE_PATH = "textures/gui/container/generic_54.png";
-  private static final ResourceLocation CHEST_TEXTURE =
-      ResourceLocation.withDefaultNamespace(CHEST_TEXTURE_PATH);
-  private static final int ROW_HEIGHT = 18;
-  private static final int TOP_HEIGHT = 17;
-  private static final int BASE_HEIGHT = 114;
-  private static final int PLAYER_PANEL_HEIGHT = 96;
-  private static final int PLAYER_PANEL_TEXTURE_Y = 126;
-  private static final int TITLE_AREA = 94;
-  private static final int PANEL_WIDTH = 26;
-  private static final int PANEL_HEIGHT = 98;
-  private static final int PANEL_COLOR = 0xFFC6C6C6;
-  private static final int SLOT_COLOR = 0xFF8B8B8B;
-  private static final int BAR_COLOR = 0xFF55FF55;
-  private static final int BAR_BACK_COLOR = 0xFF373737;
-  private static final int SLOT_Y = 18;
-  private static final int SLOT_SIZE = 18;
-  private static final int BAR_TOP = 40;
-  private static final int BAR_HEIGHT = 24;
-  private static final int BAR_X = -14;
-  private static final int HEALTH_BAR_X = -22;
-  private static final int HEALTH_BAR_COLOR = 0xFFFF5555;
-  private static final int BAR_WIDTH = 6;
-  private static final int PERCENT = 100;
-  private static final int LAMP_X = -24;
-  private static final int LAMP_Y = 2;
-  private static final int LAMP_WIDTH = 22;
-  private static final int LAMP_HEIGHT = 14;
-  private static final int LAMP_LIGHT_X = 6;
-  private static final int LAMP_LIGHT_Y = 5;
-  private static final int LAMP_LIGHT_WIDTH = 10;
-  private static final int LAMP_LIGHT_HEIGHT = 4;
-  private static final int LAMP_ON_COLOR = 0xFFFFE9A8;
-  private static final int LAMP_OFF_COLOR = 0xFF373737;
-  private static final int SCANNERS_Y = 67;
-  private static final int SCANNERS_ON_COLOR = 0xFF7FD4FF;
-  private static final int CHATTER_Y = 81;
-  private static final int CHATTER_ON_COLOR = 0xFF9CF08A;
+  private static final int WIDTH = 176;
+  private static final int BELOW_HOTBAR = 29;
+  private static final int LINE = 9;
+  private static final int DETAIL_LINE = 7;
+  private static final int MARGIN = 8;
+  private static final Box STATUS = new Box(100, 6, 68, LINE);
+  private static final int TITLE_Y = 6;
+  private static final int TITLE_WIDTH = 90;
+  private static final int BADGE_GAP = 4;
+  private static final int BADGE_PADDING = 3;
+  private static final int BADGE_HEIGHT = 9;
+  private static final int BADGE_TOP = 5;
+  private static final int BADGE_TEXT_TOP = 7;
+  private static final int BADGE_COLOR = 0xFF8B8B8B;
+  private static final int PORTRAIT_Y = 17;
+  private static final Box HEALTH = new Box(50, 18, 96, LINE);
+  private static final Box HEALTH_BAR = new Box(50, 26, 96, 7);
+  private static final Box BATTERY = new Box(50, 37, 96, LINE);
+  private static final Box BATTERY_BAR = new Box(50, 45, 96, 7);
+  private static final Box RECHARGE = new Box(50, 55, 96, DETAIL_LINE);
+  private static final int BOLT_X = 156;
+  private static final int BOLT_Y = 20;
+  private static final int REDSTONE_CENTER = 160;
+  private static final int REDSTONE_Y = 54;
+  private static final int ROBOT_LABEL_Y = 63;
+  private static final int PLAYER_LABEL_GAP = 10;
+  private static final int PLAYER_ROWS = 3;
+  private static final int TAB_LEFT = WIDTH - 3;
+  private static final int TAB_WIDTH = 26;
+  private static final int TAB_HEIGHT = 24;
+  private static final int INVENTORY_TAB_Y = 9;
+  private static final int SETTINGS_TAB_Y = 37;
+  private static final int TAB_IDLE = 0xFFA9A9A9;
+  private static final int CHEST_X = 6;
+  private static final int CHEST_Y = 6;
+  private static final int GEAR_X = 5;
+  private static final int GEAR_Y = 4;
 
-  private Button lampButton;
-  private boolean shownLampOn;
-  private Button scannersButton;
-  private boolean shownScannersOn;
-  private Button chatterButton;
-  private boolean shownChatterOn;
+  private final ScreenPainter painter = new ScreenPainter();
+  private RobotSettingsPanel settings;
+  private boolean settingsShown;
 
   RobotScreen(RobotMenu menu, Inventory playerInventory, Component title) {
     super(menu, playerInventory, title);
-    imageHeight = BASE_HEIGHT + menu.rows() * ROW_HEIGHT;
-    inventoryLabelY = imageHeight - TITLE_AREA;
+    imageWidth = WIDTH;
+    imageHeight = menu.playerInventoryY() + RobotMenu.HOTBAR_GAP + BELOW_HOTBAR;
   }
 
   @Override
   protected void init() {
     super.init();
-    lampButton =
-        addRenderableWidget(
-            Button.builder(Component.empty(), button -> pressLamp())
-                .bounds(leftPos + LAMP_X, topPos + LAMP_Y, LAMP_WIDTH, LAMP_HEIGHT)
-                .build());
-    scannersButton =
-        addRenderableWidget(
-            Button.builder(Component.empty(), button -> pressScanners())
-                .bounds(leftPos + LAMP_X, topPos + SCANNERS_Y, LAMP_WIDTH, LAMP_HEIGHT)
-                .build());
-    chatterButton =
-        addRenderableWidget(
-            Button.builder(Component.empty(), button -> pressChatter())
-                .bounds(leftPos + LAMP_X, topPos + CHATTER_Y, LAMP_WIDTH, LAMP_HEIGHT)
-                .build());
-    updateSwitches();
+    settings = new RobotSettingsPanel(painter, menu, oreIcon(menu.opening().filterIconTag()));
+    menu.showInventory(!settingsShown);
   }
 
-  private void pressChatter() {
-    minecraft.gameMode.handleInventoryButtonClick(menu.containerId, RobotMenu.CHATTER_BUTTON);
-  }
-
-  private void pressScanners() {
-    minecraft.gameMode.handleInventoryButtonClick(menu.containerId, RobotMenu.SCANNERS_BUTTON);
-  }
-
-  private void pressLamp() {
-    minecraft.gameMode.handleInventoryButtonClick(menu.containerId, RobotMenu.LAMP_BUTTON);
-  }
-
-  @Override
-  protected void containerTick() {
-    super.containerTick();
-    updateSwitches();
-  }
-
-  /** The state comes from the server, so the buttons only change when the server says so. */
-  private void updateSwitches() {
-    lampButton.active = menu.lampAvailable();
-    shownLampOn = menu.lampOn();
-    String lampText = shownLampOn ? RobotMenu.LAMP_ON_KEY : RobotMenu.LAMP_OFF_KEY;
-    lampButton.setTooltip(Tooltip.create(Component.translatable(lampText)));
-    scannersButton.active = menu.scannersAvailable();
-    shownScannersOn = menu.scannersOn();
-    String scannersText = shownScannersOn ? RobotMenu.SCANNERS_ON_KEY : RobotMenu.SCANNERS_OFF_KEY;
-    scannersButton.setTooltip(Tooltip.create(Component.translatable(scannersText)));
-    chatterButton.active = menu.chatterAvailable();
-    shownChatterOn = menu.chatterOn();
-    String chatterText = shownChatterOn ? RobotMenu.CHATTER_ON_KEY : RobotMenu.CHATTER_OFF_KEY;
-    chatterButton.setTooltip(Tooltip.create(Component.translatable(chatterText)));
-  }
-
-  private void renderLight(GuiGraphics graphics, Button button, boolean on, int onColor) {
-    int x = button.getX() + LAMP_LIGHT_X;
-    int y = button.getY() + LAMP_LIGHT_Y;
-    int color = on && button.active ? onColor : LAMP_OFF_COLOR;
-    graphics.fill(x, y, x + LAMP_LIGHT_WIDTH, y + LAMP_LIGHT_HEIGHT, color);
+  /** The first block of the tag stands for the ore, as the client knows the tags. */
+  private static ItemStack oreIcon(String tag) {
+    ResourceLocation id = ResourceLocation.tryParse(tag);
+    if (tag.isEmpty() || id == null) {
+      return ItemStack.EMPTY;
+    }
+    TagKey<Block> key = TagKey.create(Registries.BLOCK, id);
+    return BuiltInRegistries.BLOCK
+        .getTag(key)
+        .flatMap(blocks -> blocks.stream().findFirst())
+        .map(block -> new ItemStack(block.value()))
+        .orElse(ItemStack.EMPTY);
   }
 
   @Override
   public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
+    painter.begin(font);
     super.render(graphics, mouseX, mouseY, partialTick);
-    renderLight(graphics, lampButton, shownLampOn, LAMP_ON_COLOR);
-    renderLight(graphics, scannersButton, shownScannersOn, SCANNERS_ON_COLOR);
-    renderLight(graphics, chatterButton, shownChatterOn, CHATTER_ON_COLOR);
     renderTooltip(graphics, mouseX, mouseY);
+    graphics.pose().pushPose();
+    graphics.pose().translate(leftPos, topPos, 0);
+    painter.cutTooltip(graphics, mouseX - leftPos, mouseY - topPos);
+    graphics.pose().popPose();
+    renderTabTooltip(graphics, mouseX, mouseY);
   }
 
-  /** The side panel is outside the chest texture, and a click there must not throw the item. */
-  @Override
-  protected boolean hasClickedOutside(double mouseX, double mouseY, int left, int top, int button) {
-    boolean onPanel =
-        mouseX >= left - PANEL_WIDTH
-            && mouseX < left
-            && mouseY >= top
-            && mouseY < top + PANEL_HEIGHT;
-    return !onPanel && super.hasClickedOutside(mouseX, mouseY, left, top, button);
-  }
-
-  private void renderEnergyPanel(GuiGraphics graphics, int left, int top) {
-    graphics.fill(left - PANEL_WIDTH, top, left, top + PANEL_HEIGHT, PANEL_COLOR);
-    int slotX = left + RobotMenu.ENERGY_SLOT_X - 1;
-    int slotY = top + SLOT_Y - 1;
-    graphics.fill(slotX, slotY, slotX + SLOT_SIZE, slotY + SLOT_SIZE, SLOT_COLOR);
-    renderBar(graphics, left + HEALTH_BAR_X, top, menu.healthPercent(), HEALTH_BAR_COLOR);
-    renderBar(graphics, left + BAR_X, top, menu.batteryPercent(), BAR_COLOR);
-  }
-
-  private void renderBar(GuiGraphics graphics, int barX, int top, int percent, int color) {
-    int barBottom = top + BAR_TOP + BAR_HEIGHT;
-    graphics.fill(barX, top + BAR_TOP, barX + BAR_WIDTH, barBottom, BAR_BACK_COLOR);
-    // Rounds up, because 1% is less than one pixel and the bar must still show something.
-    int filled = (BAR_HEIGHT * percent + PERCENT - 1) / PERCENT;
-    graphics.fill(barX, barBottom - filled, barX + BAR_WIDTH, barBottom, color);
+  private void renderTabTooltip(GuiGraphics graphics, int mouseX, int mouseY) {
+    if (onTab(mouseX, mouseY, INVENTORY_TAB_Y)) {
+      graphics.renderTooltip(
+          font, Component.translatable(ScreenKeys.TAB_INVENTORY), mouseX, mouseY);
+    } else if (onTab(mouseX, mouseY, SETTINGS_TAB_Y)) {
+      graphics.renderTooltip(font, Component.translatable(ScreenKeys.TAB_SETTINGS), mouseX, mouseY);
+    }
   }
 
   @Override
   protected void renderBg(GuiGraphics graphics, float partialTick, int mouseX, int mouseY) {
-    int left = (width - imageWidth) / 2;
-    int top = (height - imageHeight) / 2;
-    renderEnergyPanel(graphics, left, top);
-    int slotsHeight = menu.rows() * ROW_HEIGHT + TOP_HEIGHT;
-    graphics.blit(CHEST_TEXTURE, left, top, 0, 0, imageWidth, slotsHeight);
-    graphics.blit(
-        CHEST_TEXTURE,
+    renderTab(graphics, INVENTORY_TAB_Y, !settingsShown);
+    renderTab(graphics, SETTINGS_TAB_Y, settingsShown);
+    ScreenPainter.window(graphics, leftPos, topPos, imageWidth, imageHeight);
+    renderOpenTab(graphics, settingsShown ? SETTINGS_TAB_Y : INVENTORY_TAB_Y);
+    ScreenSprites.chest(graphics, leftPos + TAB_LEFT + CHEST_X, topPos + INVENTORY_TAB_Y + CHEST_Y);
+    ScreenSprites.gear(graphics, leftPos + TAB_LEFT + GEAR_X, topPos + SETTINGS_TAB_Y + GEAR_Y);
+    if (settingsShown) {
+      return;
+    }
+    long tick = minecraft.player == null ? 0 : minecraft.player.tickCount;
+    RobotPortrait.draw(
+        graphics, leftPos + MARGIN, topPos + PORTRAIT_Y, menu.expression(), menu.tier(), tick);
+    ScreenSprites.bolt(graphics, leftPos + BOLT_X, topPos + BOLT_Y);
+    renderSlots(graphics);
+  }
+
+  private void renderTab(GuiGraphics graphics, int y, boolean open) {
+    int left = leftPos + TAB_LEFT;
+    int top = topPos + y;
+    graphics.fill(left, top, left + TAB_WIDTH, top + TAB_HEIGHT, ScreenPainter.EDGE);
+    graphics.fill(
         left,
-        top + slotsHeight,
-        0,
-        PLAYER_PANEL_TEXTURE_Y,
-        imageWidth,
-        PLAYER_PANEL_HEIGHT);
+        top + 1,
+        left + TAB_WIDTH - 1,
+        top + TAB_HEIGHT - 1,
+        open ? ScreenPainter.WINDOW : TAB_IDLE);
+  }
+
+  /** The open tab covers the border of the window, so both look like one piece. */
+  private void renderOpenTab(GuiGraphics graphics, int y) {
+    int left = leftPos + TAB_LEFT;
+    int top = topPos + y;
+    graphics.fill(left, top + 1, left + TAB_WIDTH - 1, top + TAB_HEIGHT - 1, ScreenPainter.WINDOW);
+  }
+
+  private void renderSlots(GuiGraphics graphics) {
+    int frameX = leftPos + RobotMenu.FIRST_SLOT_X - 1;
+    for (int slot = 0; slot < menu.opening().slots(); slot++) {
+      ScreenPainter.slot(
+          graphics,
+          frameX + slot % RobotMenu.SLOTS_PER_ROW * RobotMenu.SLOT_SIZE,
+          topPos
+              + RobotMenu.FIRST_SLOT_Y
+              - 1
+              + slot / RobotMenu.SLOTS_PER_ROW * RobotMenu.SLOT_SIZE);
+    }
+    ScreenPainter.slot(
+        graphics, leftPos + RobotMenu.ENERGY_SLOT_X - 1, topPos + RobotMenu.ENERGY_SLOT_Y - 1);
+    int playerTop = topPos + menu.playerInventoryY() - 1;
+    for (int row = 0; row < PLAYER_ROWS; row++) {
+      for (int column = 0; column < RobotMenu.SLOTS_PER_ROW; column++) {
+        ScreenPainter.slot(
+            graphics, frameX + column * RobotMenu.SLOT_SIZE, playerTop + row * RobotMenu.SLOT_SIZE);
+      }
+    }
+    for (int column = 0; column < RobotMenu.SLOTS_PER_ROW; column++) {
+      ScreenPainter.slot(
+          graphics, frameX + column * RobotMenu.SLOT_SIZE, playerTop + RobotMenu.HOTBAR_GAP);
+    }
+  }
+
+  @Override
+  protected void renderLabels(GuiGraphics graphics, int mouseX, int mouseY) {
+    Component heading = settingsShown ? Component.translatable(ScreenKeys.SETTINGS) : title;
+    int titleEnd = renderTitle(graphics, heading.copy().withStyle(ChatFormatting.BOLD));
+    renderBadge(graphics, titleEnd + BADGE_GAP);
+    if (settingsShown) {
+      painter.textRight(
+          graphics,
+          RobotTexts.batteryPercent(menu),
+          STATUS,
+          ScreenPainter.DETAIL,
+          ScreenPainter.FULL_SCALE);
+      settings.render(graphics);
+      return;
+    }
+    RobotScreenStatus status = menu.status();
+    painter.status(graphics, RobotTexts.status(menu), STATUS, RobotTexts.statusColor(status));
+    renderBars(graphics, status);
+    renderInventoryLabels(graphics);
+  }
+
+  private int renderTitle(GuiGraphics graphics, Component heading) {
+    Box box = new Box(MARGIN, TITLE_Y, TITLE_WIDTH, LINE);
+    painter.text(graphics, heading, box, ScreenPainter.TEXT, ScreenPainter.FULL_SCALE);
+    return MARGIN + Math.min(painter.width(heading, ScreenPainter.FULL_SCALE), TITLE_WIDTH);
+  }
+
+  private void renderBadge(GuiGraphics graphics, int x) {
+    Component tier = Component.translatable(ScreenKeys.tier(menu.tier()));
+    int width = painter.width(tier, ScreenPainter.DETAIL_SCALE) + BADGE_PADDING * 2;
+    graphics.fill(x, BADGE_TOP, x + width, BADGE_TOP + BADGE_HEIGHT, BADGE_COLOR);
+    painter.text(
+        graphics,
+        tier,
+        x + BADGE_PADDING,
+        BADGE_TEXT_TOP,
+        ScreenPainter.WHITE,
+        ScreenPainter.DETAIL_SCALE);
+  }
+
+  /** The battery is red only with a critical battery, as in the images (answer 681). */
+  private void renderBars(GuiGraphics graphics, RobotScreenStatus status) {
+    Component health =
+        Component.translatable(ScreenKeys.HEALTH_AMOUNT, menu.health(), menu.maxHealth());
+    painter.pair(
+        graphics, HEALTH, Component.translatable(ScreenKeys.HEALTH), health, Colors.TITLE_FIRST);
+    ScreenPainter.bar(graphics, HEALTH_BAR, menu.health(), menu.maxHealth(), ScreenPainter.RED);
+    painter.pair(
+        graphics,
+        BATTERY,
+        Component.translatable(ScreenKeys.BATTERY),
+        DockTexts.amount(menu.charge(), menu.capacity()),
+        Colors.TITLE_FIRST);
+    int color =
+        status == RobotScreenStatus.CRITICAL_BATTERY ? ScreenPainter.RED : ScreenPainter.GREEN;
+    ScreenPainter.bar(
+        graphics, BATTERY_BAR, menu.charge().amount(), menu.capacity().amount(), color);
+    painter.text(
+        graphics,
+        RobotTexts.recharge(menu),
+        RECHARGE,
+        ScreenPainter.DETAIL,
+        ScreenPainter.DETAIL_SCALE);
+  }
+
+  private void renderInventoryLabels(GuiGraphics graphics) {
+    Component redstone = Component.translatable(ScreenKeys.REDSTONE);
+    int width = painter.width(redstone, ScreenPainter.DETAIL_SCALE);
+    painter.text(
+        graphics,
+        redstone,
+        REDSTONE_CENTER - width / 2,
+        REDSTONE_Y,
+        ScreenPainter.DETAIL,
+        ScreenPainter.DETAIL_SCALE);
+    Component robotLabel = Component.translatable(ScreenKeys.ROBOT_INVENTORY, title);
+    painter.text(
+        graphics, robotLabel, MARGIN, ROBOT_LABEL_Y, ScreenPainter.TEXT, ScreenPainter.FULL_SCALE);
+    painter.text(
+        graphics,
+        playerInventoryTitle,
+        MARGIN,
+        menu.playerInventoryY() - PLAYER_LABEL_GAP,
+        ScreenPainter.TEXT,
+        ScreenPainter.FULL_SCALE);
+  }
+
+  @Override
+  public boolean mouseClicked(double mouseX, double mouseY, int button) {
+    if (onTab(mouseX, mouseY, INVENTORY_TAB_Y) || onTab(mouseX, mouseY, SETTINGS_TAB_Y)) {
+      settingsShown = onTab(mouseX, mouseY, SETTINGS_TAB_Y);
+      menu.showInventory(!settingsShown);
+      return true;
+    }
+    if (settingsShown) {
+      OptionalInt pressed = settings.switchAt(mouseX - leftPos, mouseY - topPos);
+      if (pressed.isPresent()) {
+        minecraft.gameMode.handleInventoryButtonClick(menu.containerId, pressed.getAsInt());
+        return true;
+      }
+    }
+    return super.mouseClicked(mouseX, mouseY, button);
+  }
+
+  private boolean onTab(double mouseX, double mouseY, int y) {
+    double x = mouseX - leftPos - TAB_LEFT;
+    double top = mouseY - topPos - y;
+    return x >= 0 && x < TAB_WIDTH && top >= 0 && top < TAB_HEIGHT;
+  }
+
+  /** The tabs stand outside the window, and a click there must not throw the item. */
+  @Override
+  protected boolean hasClickedOutside(double mouseX, double mouseY, int left, int top, int button) {
+    boolean onTabs =
+        onTab(mouseX, mouseY, INVENTORY_TAB_Y) || onTab(mouseX, mouseY, SETTINGS_TAB_Y);
+    return !onTabs && super.hasClickedOutside(mouseX, mouseY, left, top, button);
   }
 }

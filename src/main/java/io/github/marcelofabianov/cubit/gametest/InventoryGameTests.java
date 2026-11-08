@@ -3,6 +3,7 @@ package io.github.marcelofabianov.cubit.gametest;
 import io.github.marcelofabianov.cubit.CubitMod;
 import io.github.marcelofabianov.cubit.domain.energy.PowerState;
 import io.github.marcelofabianov.cubit.entity.RobotEntity;
+import io.github.marcelofabianov.cubit.entity.RobotScreenReadout;
 import io.github.marcelofabianov.cubit.menu.RobotMenu;
 import io.github.marcelofabianov.cubit.registry.CubitDataComponents;
 import io.github.marcelofabianov.cubit.registry.CubitEntities;
@@ -245,17 +246,7 @@ public final class InventoryGameTests {
   }
 
   private static RobotMenu menuOf(RobotEntity robot, Player player) {
-    return new RobotMenu(
-        0,
-        player.getInventory(),
-        robot.inventory(),
-        robot.energySlot(),
-        () -> 0,
-        () -> 0,
-        robot.lampSwitch(),
-        robot.scanners(),
-        robot.chatter(),
-        robot::canUseInventory);
+    return RobotScreenReadout.serverMenu(0, player.getInventory(), robot);
   }
 
   private static ServerPlayer playerNear(GameTestHelper helper) {

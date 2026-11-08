@@ -42,6 +42,7 @@ final class ScreenPainter {
   private static final int DOT_GAP = 3;
   private static final int DOT_TOP = 2;
   private static final String CUT = "...";
+  private static final int PAIR_GAP = 6;
 
   private final List<Cut> cuts = new ArrayList<>();
   private Font font;
@@ -95,7 +96,9 @@ final class ScreenPainter {
   /** A label on the left and its value on the right of the same line, at full size. */
   void pair(GuiGraphics graphics, Box box, Component label, Component value, Colors colors) {
     text(graphics, label, box, colors.label(), FULL_SCALE);
-    textRight(graphics, value, box, colors.value(), FULL_SCALE);
+    int used = Math.min(font.width(label) + PAIR_GAP, box.width());
+    Box room = new Box(box.x() + used, box.y(), box.width() - used, box.height());
+    textRight(graphics, value, room, colors.value(), FULL_SCALE);
   }
 
   /** A status, like "● Charging", ending at the right side of the box. */

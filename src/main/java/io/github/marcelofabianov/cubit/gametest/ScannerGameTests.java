@@ -8,6 +8,7 @@ import io.github.marcelofabianov.cubit.entity.RobotEntity;
 import io.github.marcelofabianov.cubit.entity.RobotFace;
 import io.github.marcelofabianov.cubit.entity.RobotNotices;
 import io.github.marcelofabianov.cubit.entity.RobotOreScan;
+import io.github.marcelofabianov.cubit.entity.RobotScreenReadout;
 import io.github.marcelofabianov.cubit.menu.RobotMenu;
 import java.util.List;
 import net.minecraft.core.BlockPos;
@@ -366,16 +367,6 @@ public final class ScannerGameTests {
   }
 
   private static RobotMenu menuOf(RobotEntity robot, Player player) {
-    return new RobotMenu(
-        0,
-        player.getInventory(),
-        robot.inventory(),
-        robot.energySlot(),
-        () -> 0,
-        () -> 0,
-        robot.lampSwitch(),
-        robot.scanners(),
-        robot.chatter(),
-        robot::canUseInventory);
+    return RobotScreenReadout.serverMenu(0, player.getInventory(), robot);
   }
 }

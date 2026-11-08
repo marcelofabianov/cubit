@@ -27,7 +27,46 @@ final class ScreenSprites {
   private static final int BOLT_SHOWN_WIDTH = 8;
   private static final int BOLT_SHOWN_HEIGHT = 10;
 
+  private static final int ICON_V = 176;
+  private static final int CHEST_WIDTH = 64;
+  private static final int CHEST_HEIGHT = 52;
+  private static final int CHEST_SHOWN_WIDTH = 16;
+  private static final int CHEST_SHOWN_HEIGHT = 13;
+  private static final int ICON = 64;
+  private static final int ICON_SHOWN = 16;
+  private static final int GEAR_U = 64;
+  private static final int FIRST_FUNCTION_U = 128;
+
   private ScreenSprites() {}
+
+  static void chest(GuiGraphics graphics, int x, int y) {
+    graphics.blit(
+        SHEET,
+        x,
+        y,
+        CHEST_SHOWN_WIDTH,
+        CHEST_SHOWN_HEIGHT,
+        0,
+        ICON_V,
+        CHEST_WIDTH,
+        CHEST_HEIGHT,
+        SHEET_WIDTH,
+        SHEET_HEIGHT);
+  }
+
+  static void gear(GuiGraphics graphics, int x, int y) {
+    icon(graphics, x, y, GEAR_U);
+  }
+
+  /** The lamp, the scanners and the chatter, in the order of their buttons. */
+  static void function(GuiGraphics graphics, int x, int y, int button) {
+    icon(graphics, x, y, FIRST_FUNCTION_U + button * ICON);
+  }
+
+  private static void icon(GuiGraphics graphics, int x, int y, int u) {
+    graphics.blit(
+        SHEET, x, y, ICON_SHOWN, ICON_SHOWN, u, ICON_V, ICON, ICON, SHEET_WIDTH, SHEET_HEIGHT);
+  }
 
   /** The tower lights up as the dock does: green charging, blue idle and orange without power. */
   static void tower(GuiGraphics graphics, int x, int y, DockStatus status) {

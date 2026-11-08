@@ -39,6 +39,44 @@ public final class ScreenKeys {
   public static final String DOCK_CALL = DOCK + "call";
 
   private static final String DOCK_STATUS = DOCK + "status.";
+  private static final String ROBOT = PREFIX + "robot.";
+  private static final String ROBOT_STATUS = ROBOT + "status.";
+  private static final String RECHARGE = ROBOT + "recharge.";
+  private static final String SOLAR = ROBOT + "solar.";
+  private static final String CAUSE = ROBOT + "cause.";
+  private static final String TIER = ROBOT + "tier.";
+
+  public static final String BATTERY = ROBOT + "battery";
+  public static final String ROBOT_INVENTORY = ROBOT + "inventory";
+  public static final String TAB_INVENTORY = ROBOT + "tab_inventory";
+  public static final String TAB_SETTINGS = ROBOT + "tab_settings";
+  public static final String SETTINGS = ROBOT + "settings";
+  public static final String SETTINGS_BATTERY = ROBOT + "settings_battery";
+  public static final String FUNCTIONS = ROBOT + "functions";
+  public static final String LAMP = ROBOT + "lamp";
+  public static final String LAMP_DETAIL = ROBOT + "lamp_detail";
+  public static final String SCANNERS = ROBOT + "scanners";
+  public static final String SCANNERS_DETAIL = ROBOT + "scanners_detail";
+  public static final String CHATTER = ROBOT + "chatter";
+  public static final String CHATTER_DETAIL = ROBOT + "chatter_detail";
+  public static final String SWITCH_ON = ROBOT + "switch_on";
+  public static final String SWITCH_OFF = ROBOT + "switch_off";
+  public static final String SCANNER_FILTER = ROBOT + "scanner_filter";
+  public static final String LOOKING_FOR = ROBOT + "looking_for";
+  public static final String NO_FILTER = ROBOT + "no_filter";
+  public static final String FILTER_HINT = ROBOT + "filter_hint";
+  public static final String STATUS = ROBOT + "status";
+  public static final String SOLAR_PANEL = ROBOT + "solar_panel";
+  public static final String ENERGY_USE = ROBOT + "energy_use";
+  public static final String ENERGY_USE_VALUE = ROBOT + "energy_use_value";
+  public static final String IDLE = ROBOT + "idle";
+  public static final String HIBERNATING = ROBOT + "hibernating";
+  public static final String HEALTH_RECOVERS = ROBOT + "health_recovers";
+  public static final String HEALTH_RECOVERING = ROBOT + "health_recovering";
+  public static final String FOLLOWING = ROBOT + "following";
+  public static final String FOLLOWING_YOU = ROBOT + "following_you";
+  public static final String FOLLOWING_NOBODY = ROBOT + "following_nobody";
+  public static final String MORE_FUNCTIONS = ROBOT + "more_functions";
 
   private ScreenKeys() {}
 
@@ -50,6 +88,30 @@ public final class ScreenKeys {
           default -> status.name().toLowerCase(Locale.ROOT);
         };
     return DOCK_STATUS + name;
+  }
+
+  public static String robotStatus(Enum<?> status) {
+    return ROBOT_STATUS + lower(status);
+  }
+
+  public static String recharge(Enum<?> source) {
+    return RECHARGE + lower(source);
+  }
+
+  public static String solar(Enum<?> status) {
+    return SOLAR + lower(status);
+  }
+
+  public static String cause(Enum<?> cause) {
+    return CAUSE + lower(cause);
+  }
+
+  public static String tier(Enum<?> tier) {
+    return TIER + lower(tier);
+  }
+
+  private static String lower(Enum<?> value) {
+    return value.name().toLowerCase(Locale.ROOT);
   }
 
   /** The names of the dock status keys, for the language file. */
