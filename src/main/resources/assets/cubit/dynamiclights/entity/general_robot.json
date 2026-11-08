@@ -1,0 +1,8 @@
+{
+  "match": {
+    "type": "cubit:general_robot"
+  },
+  "luminance": {
+    "type": "cubit:robot"
+  }
+}

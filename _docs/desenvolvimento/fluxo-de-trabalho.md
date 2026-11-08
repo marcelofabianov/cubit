@@ -1,0 +1,218 @@
+# Fluxo de trabalho
+
+Este documento mostra, passo a passo, como uma tarefa vai da issue ao merge e como uma versão é publicada. As regras ficam no [`AGENTS.md`](../../AGENTS.md). Em caso de divergência, vale o `AGENTS.md`.
+
+## Preparar o ambiente
+
+Rode uma vez em cada clone:
+
+```bash
+make setup
+```
+
+O script ativa os gates de commit e de push, descritos em [`hooks-do-git.md`](hooks-do-git.md).
+
+O `gh` precisa usar a conta pessoal:
+
+```bash
+gh api user --jq .login
+```
+
+Se mostrar outra conta, prefixe os comandos com `GH_TOKEN=$(gh auth token --user marcelofabianov)`.
+
+## Caminho de uma tarefa
+
+```text
+Alinhamento → Issue → Branch → Trabalho → Validação → Plano de commits → Commits → PR → Merge → Encerramento
+```
+
+### 1. Alinhamento
+
+Ao iniciar uma feature, o agente descreve em poucas linhas o que vamos fazer e pergunta ao desenvolvedor se tem algo mais para acrescentar. Só depois vêm a rodada de decisões, a issue e a branch. O que ele acrescentar entra na rodada e é registrado em [`perguntas/`](../perguntas/README.md).
+
+### 2. Issue
+
+Toda tarefa começa por uma issue, atribuída ao desenvolvedor e no milestone da fase, com o que entra e o que fica fora do escopo. Issues e PRs dividem a mesma numeração, então confirme o número antes de nomear a branch.
+
+### 3. Branch
+
+Atualize a `develop` e crie a branch a partir dela, com o nome em inglês e em `kebab-case`:
+
+```bash
+git fetch origin
+git switch develop
+git merge --ff-only origin/develop
+git switch -c feature/{issue}-{slug} --no-track develop
+```
+
+### 4. Trabalho
+
+- **A partir da Fase 2:** a feature precisa estar documentada em `_docs/funcionalidades/`, com as decisões fechadas. O teste vem antes ou junto do código.
+- **Decisão bloqueante:** pare e siga o [fluxo do `AGENTS.md`](../../AGENTS.md#decisões-bloqueantes). Registre a resposta em [`perguntas/`](../perguntas/README.md), no arquivo da fase.
+- **Rascunhos:** ficam em `tmp/`.
+- **Histórico de modificações:** todo `.md` em `_docs/` termina com uma tabela de histórico. Quem altera o arquivo adiciona uma linha no topo da tabela, com o nome da pessoa, a data e a hora e uma frase direta do que foi feito.
+
+### 5. Validação
+
+Compare a entrega com os documentos `.md`, que são os validadores. As respostas em [`perguntas/`](../perguntas/README.md) prevalecem sobre os demais. Passe também pelos checklists de [`pilares.md`](pilares.md) que se aplicam. Artefatos, como testes, logs, relatórios e capturas de tela, complementam essa conferência, mas não a substituem.
+
+Se a entrega e um documento divergirem, corrija a entrega. Se o documento estiver errado, pergunte ao desenvolvedor antes de mudá-lo.
+
+### 6. Plano de commits
+
+O plano de commits é a relação dos commits a fazer, com os arquivos e a mensagem de cada um. O agente o apresenta e espera a autorização.
+
+| # | Branch | Mensagem | Arquivos |
+|---|---|---|---|
+| 1 | `feature/12-power-bank` | `docs: descreve a Power Bank` | `_docs/funcionalidades/energia.md` |
+
+Cada commit trata de uma mudança lógica e deixa o projeto num estado válido, sem link quebrado nem teste falhando.
+
+### 7. Commits
+
+```bash
+git add {arquivos do commit}
+git commit -m "tipo(escopo opcional): descrição em português"
+```
+
+Use `git add` com os arquivos do plano, nunca `git add .`. Se um gate reprovar, corrija a causa conforme [`hooks-do-git.md`](hooks-do-git.md).
+
+### 8. Pull request
+
+Antes do push, atualize a branch com a de origem. Depois, abra o PR para a `develop`:
+
+```bash
+git push -u origin feature/{issue}-{slug}
+cp .github/pull_request_template.md tmp/pr/pr-{número}.md
+# Preencha o arquivo antes de abrir o PR.
+gh pr create --base develop --title "tipo: descrição" --body-file tmp/pr/pr-{número}.md
+```
+
+A descrição do PR segue o template [`.github/pull_request_template.md`](../../.github/pull_request_template.md), que o GitHub também aplica aos PRs abertos pelo site. Ele tem:
+
+- `Closes #n` na primeira linha;
+- o que muda;
+- a validação: os documentos conferidos e a evidência de cada um, os comandos, o teste numa instância limpa e no Iron Meridian e os checklists dos pilares;
+- como revisar ou testar;
+- o que ficou fora do escopo, quando houver.
+
+### 9. Merge
+
+O merge é feito no GitHub, somente pelo desenvolvedor.
+
+### 10. Encerramento
+
+1. Confira se a issue fechou. Se continuar aberta, feche-a à mão.
+2. Atualize a `develop` local.
+3. Avalie se algum item de [`checklist.md`](../../checklist.md) deve ser marcado. A marcação entra num novo commit, no PR seguinte, nunca direto na `develop`.
+4. Peça autorização para apagar a branch da tarefa, local e remota, que não é mais necessária.
+5. Apresente no que vai atuar em seguida e pergunte se o desenvolvedor quer algum ajuste no roteiro das próximas tarefas (regra 52).
+
+## O que precisa de autorização
+
+A autorização vale só para aquela ação e não se estende às seguintes.
+
+| O agente faz sem pedir | O agente só faz com autorização |
+|---|---|
+| Ler, investigar e apresentar opções | Commit, push, tag, release e PR |
+| Editar arquivos da tarefa aprovada, sem commit | Push forçado e qualquer reescrita de histórico |
+| Rodar testes e gates | Apagar branches e arquivos |
+| Criar a issue exigida por uma tarefa pedida | Mudar o `AGENTS.md` |
+| Corrigir o que quebra um gate, sem mudar comportamento | Decisão bloqueante, mesmo com recomendação clara |
+
+O merge fica fora da tabela porque o agente não o faz, nem com autorização.
+
+Todo item criado no GitHub é informado com o link, na mesma resposta.
+
+## Publicar uma versão
+
+```text
+develop → homolog → release/X.Y.Z → main (tag vX.Y.Z)
+                         └────────→ develop
+```
+
+1. **Homologação:** abra um PR da `develop` para a `homolog`.
+2. **Teste:** teste a `homolog` numa instância só com o mod e suas dependências e, depois, numa do Iron Meridian.
+3. **Correções:** o que aparecer no teste passa pelo caminho normal, de `feature/*` para a `develop`, e volta à `homolog` por PR.
+4. **Release fechada:** com o teste aprovado, crie a `release/X.Y.Z` a partir da `homolog` e ajuste a versão no `gradle.properties`. No mesmo commit, atualize o [`CHANGELOG.md`](../../CHANGELOG.md), em inglês: a seção da versão recebe a data e o que entrou desde a versão anterior (pergunta 749). Só entram ajustes da própria release.
+5. **Publicação:** abra um PR da `release/X.Y.Z` para a `main`. Depois do merge e da tag do passo 6, envie o jar da `main` às plataformas pelo [guia de publicação](publicacao.md).
+6. **Tag:** depois do merge, crie a tag anotada na `main`, com autorização:
+
+   ```bash
+   git tag -a vX.Y.Z -m "vX.Y.Z"
+   git push origin vX.Y.Z
+   ```
+
+   Depois da tag, gere o jar da `main` com `make build` e crie a release no GitHub, também com autorização, com a seção da versão do `CHANGELOG.md` e o jar (pergunta 778):
+
+   ```bash
+   gh release create vX.Y.Z build/libs/cubit-X.Y.Z.jar --verify-tag --title "Cubit X.Y.Z" --notes-file tmp/release/notes-X.Y.Z.md
+   ```
+
+7. **Volta:** abra um PR da `release/X.Y.Z` para a `develop`.
+
+Na fase `0.x`, mudança incompatível sobe o MINOR, e o resto sobe o PATCH.
+
+## Corrigir com urgência
+
+Use só para um problema no que já foi publicado.
+
+1. Crie a issue e a `hotfix/{issue}-{slug}` a partir da `main`.
+2. Faça a correção e teste numa instância só com o mod e suas dependências e, depois, numa do Iron Meridian.
+3. Abra um PR para a `main` e crie a tag do novo PATCH depois do merge.
+4. Leve a correção para a `homolog` e para a `develop`, por PR.
+
+## Reescrever o histórico
+
+Só em último caso, numa branch sem merge e com autorização, como para tirar um dado que não podia ter sido enviado. Nunca em `main`, `homolog` ou `develop`.
+
+```bash
+git push --force-with-lease=feature/{issue}-{slug}:{hash esperado} origin feature/{issue}-{slug}
+```
+
+## Encerrar uma sessão
+
+Se restar trabalho pendente, deixe um prompt em `tmp/prompt/{AAAA-MM-DD_HHhMM}_continuidade_{assunto}.md`:
+
+```markdown
+# Continuidade: {assunto}
+
+## Leitura obrigatória
+O que ler, em ordem, e o que entender de cada item.
+
+## O que foi feito
+Links, estado do repositório, o que não foi commitado e como cada autorização foi interpretada.
+
+## O que se espera da próxima sessão
+O primeiro passo, separando o que está decidido do que está pendente.
+```
+
+## Cuidados
+
+- **Conteúdo público do projeto:** não cite projetos privados em arquivos, commits, issues ou PRs.
+- **Autoria:** nada de coautoria ou atribuição a uma IA.
+- **Saves:** antes de mudar um ID, um data component ou uma chave de config, leia a regra 18 do `AGENTS.md`.
+
+## Histórico de modificações
+
+| Pessoa | Data e hora | Modificação |
+|---|---|---|
+| Marcelo Fabiano | 2026-11-08 01:41 | Adiciona a release no GitHub depois da tag. |
+| Marcelo Fabiano | 2026-11-08 00:33 | Atualiza o `CHANGELOG.md` na release e aponta para o guia de publicação. |
+| Marcelo Fabiano | 2026-11-07 14:25 | Adiciona a apresentação do próximo trabalho ao encerrar um PR. |
+| Marcelo Fabiano | 2026-11-06 10:56 | Adiciona o alinhamento antes de iniciar uma feature. |
+| Marcelo Fabiano | 2026-11-06 09:51 | Move o rascunho do PR para `tmp/pr/`. |
+| Marcelo Fabiano | 2026-11-05 22:18 | Adiciona a avaliação do checklist ao encerrar um PR. |
+| Marcelo Fabiano | 2026-11-05 21:02 | Corrige a atualização da `develop`, que falhava com ela em uso. |
+| Marcelo Fabiano | 2026-11-05 14:35 | Deixa o merge somente com o desenvolvedor. |
+| Marcelo Fabiano | 2026-11-05 12:21 | Inclui o teste numa instância só com o mod. |
+| Marcelo Fabiano | 2026-11-05 00:12 | Cita os gates de push na preparação do ambiente. |
+| Marcelo Fabiano | 2026-11-04 23:45 | Limita o histórico aos arquivos de `_docs/`. |
+| Marcelo Fabiano | 2026-11-04 19:12 | Adota o template de pull request. |
+| Marcelo Fabiano | 2026-11-04 18:02 | Usa o Makefile na preparação do ambiente. |
+| Marcelo Fabiano | 2026-11-04 17:51 | Inclui os pilares na validação. |
+| Marcelo Fabiano | 2026-11-04 17:44 | Adiciona a etapa de validação contra os documentos. |
+| Marcelo Fabiano | 2026-11-04 17:26 | Esclarece o que é permitido na Fase 1. |
+| Marcelo Fabiano | 2026-11-04 17:15 | Renomeia para português e atualiza os caminhos. |
+| Marcelo Fabiano | 2026-11-04 16:57 | Aponta as decisões para as perguntas por fase e adiciona o milestone e o histórico. |
+| Marcelo Fabiano | 2026-11-04 16:07 | Documenta o fluxo de trabalho. |

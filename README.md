@@ -1,88 +1,102 @@
 # Cubit
 
-A cute, battery-powered robot companion for Minecraft 1.21.1 on NeoForge, built for the [Iron Meridian](https://github.com/marcelofabianov/iron-meridian) modpack. No magic: Cubit is pure technology, crafted from vanilla resources.
+<p align="center">
+  <img src="_docs/imagens/conceito/png/expressao-feliz.png" alt="Cubit com a expressão feliz" width="240">
+</p>
 
-> **Status: design stage.** There is no code or release yet. All features and numbers below are planned, and the numbers are starting points for balancing.
+Um robô companheiro fofo, movido a bateria, para Minecraft 1.21.1 com NeoForge. Funciona só com ele e suas dependências, e também é testado no modpack [Iron Meridian](https://github.com/marcelofabianov/iron-meridian). O Cubit é craftado com recursos do jogo puro.
 
-## What Cubit does
+> **Status: reta final da Fase 3.** Todas as funcionalidades da fase entraram, e o mod ainda não tem versão publicada: a primeira, `0.1.0`, está em preparação para o Modrinth e o CurseForge. Já funcionam colocar e recolher o Cubit, seguir o player, vários Cubits com um seguindo, as reações a fogo, lava e blocos que ferem, o inventário, a bateria com recarga por redstone, o Induction Dock, a morte com o item danificado, o conserto e o comando `/cubit reset`. Na Fase 3, já entraram os sons, as expressões, as animações, a barra de vida, a cor do colar, o indicador de bateria, os textos curtos, a lanterna, o painel solar, a cor da carcaça, o nome, a detecção dos scanners, numa esfera em volta do Cubit, a caixa em volta do minério e a seta sobre o mob que eles acham, as cores das antenas com um halo em volta do corpo, as falas, inclusive sobre a redstone que você minera, o Jade e as telas próprias do Cubit e do Induction Dock, no estilo do conceito. O resto abaixo está planejado, e os números são o ponto de partida para o balanceamento.
 
-Cubit follows you around and helps with simple tasks:
+## O que o Cubit faz
 
-- **Carries items** in its own inventory and picks up nearby drops, with a pickup filter.
-- **Runs on a battery** that you have to manage. When it runs out, Cubit shuts down and can only be picked up.
-- **Recharges** at the Induction Dock, which accepts FE from any mod, through its solar charger, or from a portable Power Bank placed in its dedicated slot.
-- **Turns into an item** that keeps its battery, inventory, name, color and tier.
-- **Lights the way** and places torches on its own.
-- **Warns you** about hostile mobs and scans for the ores you choose.
-- **Defends itself** with a light electric shock, in a peaceful, retaliating or aggressive mode.
-- **Works on its own**: it can stay in a marked area, unload into marked chests, smelt ores, charge your electric tools and guide you to where you died.
-- **Has personality**: its screen face changes expression, and it makes track and alert sounds.
+O Cubit segue você e ajuda em tarefas simples:
 
-Each player can have only one active Cubit.
+- **Carrega itens** no próprio inventário e coleta o que está no chão, com um filtro de coleta.
+- **Funciona com bateria**, que você precisa gerenciar. Sem carga, ele desliga, e só dá para recolhê-lo ou colocar energia nele.
+- **Recarrega** no Induction Dock, uma base fixa alimentada por FE de qualquer mod ou por redstone, onde ele hiberna com o inventário acessível. Também recarrega com uma Power Bank ou redstone no slot exclusivo, ou pelo painel solar, com o céu aberto.
+- **Vira item**, mantendo bateria, vida, inventário, nome, cor, tier e configurações, menos as marcações no mundo, como a área. Ao morrer, vira um Damaged Cubit, que nenhum dano destrói, não some com o tempo e se conserta com uma Toolbox.
+- **Reage ao perigo**: em chamas, procura água para se apagar; na lava ou sobre um bloco que fere, tenta sair. O dono não consegue feri-lo, exceto com o fogo de um isqueiro.
+- **Ilumina o caminho** e coloca tochas sozinho.
+- **Avisa você** sobre mobs hostis e procura os minérios que você escolher.
+- **Protege você** com um choque leve, nos modos pacífico, contra-atacar e agressivo. Nunca ataca o dono nem mobs pacíficos.
+- **Trabalha sozinho**: atua numa área marcada, descarrega em baús marcados, funde minérios, carrega suas ferramentas elétricas e guia você até o local da sua morte.
+- **Tem personalidade**: a tela do rosto muda de expressão, e ele se comunica com bipes e textos curtos, comentando o tempo, os biomas e as suas conquistas, com uma chave para desligar.
 
-## Look
+Você pode ter quantos Cubits quiser trabalhando em áreas marcadas, mas só um segue você por vez.
 
-A rounded white body with a screen face and glowing eyes, two antennas, clawed arms and tracks instead of feet. It has a solar panel on top, a battery indicator on the back and an induction coil underneath. The band at its neck shows its tier, and the body color can be changed with dyes.
+## Visual
 
-![Cubit concept sheet](_docs/assets/concept/robo-conceito-prancha.png)
+Um corpo branco e arredondado, com uma tela no rosto e olhos que brilham, duas antenas, braços com garras e esteiras no lugar dos pés. Tem um painel solar em cima, um indicador de bateria nas costas e uma bobina de indução embaixo. O colar no pescoço mostra o tier, e a cor da carcaça muda com corantes.
+
+![Prancha de conceito do Cubit](_docs/imagens/conceito/robo-conceito-prancha.png)
 
 ## Tiers
 
-Cubit keeps its features as it evolves, and each tier improves them. Advanced features stay locked until the right tier.
+O Cubit mantém os recursos ao evoluir, e cada tier os melhora. Os recursos avançados ficam bloqueados até o tier certo.
 
-| | Base | Advanced | Elite | Ultimate |
+| | Base | Avançado | Elite | Ultimate |
 |---|---|---|---|---|
-| Band color | Gray | Blue | Purple | Gold |
-| Health | 25 | 50 | 100 | 200 |
-| Speed | 1.0× | 1.25× | 1.5× | 2.0× |
-| Battery | 300k FE | 600k FE | 3M FE | 8M FE |
-| Runtime while moving | ~25 min | ~42 min | ~2.8 h | ~5.6 h |
-| Power Bank capacity | 210k FE | 420k FE | 2.1M FE | 5.6M FE |
-| Inventory | 27 slots | 36 slots | 45 slots | 54 slots |
-| Magnet radius | 1 block | 3 blocks | 5 blocks | 8 blocks |
-| Scanner radius | 5 blocks | 10 blocks | 16 blocks | 24 blocks |
-| Defense modes | Peaceful | + Retaliate | + Aggressive | All |
-| Area mode | Locked | Up to 16×16 | Up to 32×32 | Up to 64×64 |
+| Cor do colar | Cinza | Azul | Roxo | Dourado |
+| Vida | 25 | 50 | 100 | 200 |
+| Velocidade | 1,0× | 1,25× | 1,5× | 2,0× |
+| Bateria | 300 mil FE | 600 mil FE | 3 mi FE | 8 mi FE |
+| Autonomia em movimento, sem o painel e com a lanterna apagada | ~16,7 min | ~27,8 min | ~1,9 h | ~3,7 h |
+| Capacidade da Power Bank | 210 mil FE | 420 mil FE | 2,1 mi FE | 5,6 mi FE |
+| Inventário | 27 slots | 36 slots | 45 slots | 54 slots |
+| Raio do ímã | 1 bloco | 3 blocos | 5 blocos | 8 blocos |
+| Raio do scanner de minérios | 5 blocos | 8 blocos | 12 blocos | 20 blocos |
+| Raio do scanner de mobs | 8 blocos | 14 blocos | 20 blocos | 25 blocos |
+| Modos de defesa | Pacífico | + Contra-atacar | + Agressivo | Todos |
+| Modo área | Bloqueado | Até 16×16 | Até 32×32 | Até 64×64 |
 
-## Items and blocks
+## Itens e blocos
 
-| Name | ID | Purpose |
-|---|---|---|
-| Cubit | `cubit:robot` | The companion, as a placeable item |
-| Cubit Remote | `cubit:remote` | Sends commands and marks work areas |
-| Advanced Module | `cubit:advanced_module` | Upgrades Base to Advanced |
-| Elite Module | `cubit:elite_module` | Upgrades Advanced to Elite |
-| Ultimate Module | `cubit:ultimate_module` | Upgrades Elite to Ultimate |
-| Induction Dock | `cubit:induction_dock` | Recharges Cubit using FE |
-| Base Power Bank | `cubit:base_power_bank` | Portable battery for the Base tier |
-| Advanced Power Bank | `cubit:advanced_power_bank` | Portable battery for the Advanced tier |
-| Elite Power Bank | `cubit:elite_power_bank` | Portable battery for the Elite tier |
-| Ultimate Power Bank | `cubit:ultimate_power_bank` | Portable battery for the Ultimate tier |
+Os nomes estão em inglês porque são os que aparecem no jogo.
 
-Recipes will use vanilla items only and ship as datapack JSON, so modpacks can override them.
+| Nome | Descrição |
+|---|---|
+| Cubit | Robô companheiro, colocado no mundo como item |
+| Damaged Cubit | O que cai quando o Cubit morre. Guarda o estado dele e não pode ser colocado no mundo |
+| Toolbox | Conserta o Damaged Cubit e é consumida a cada conserto |
+| Cubit Remote | Envia comandos aos Cubits, marca áreas de trabalho e localiza os Cubits |
+| Advanced Module | Leva o Cubit do tier Base para o Advanced |
+| Elite Module | Leva o Cubit do tier Advanced para o Elite |
+| Ultimate Module | Leva o Cubit do tier Elite para o Ultimate |
+| Induction Dock | Base de recarga do Cubit, alimentada por cabos ou redstone |
+| Base Power Bank | Bateria portátil com a capacidade do tier Base |
+| Advanced Power Bank | Bateria portátil com a capacidade do tier Advanced |
+| Elite Power Bank | Bateria portátil com a capacidade do tier Elite |
+| Ultimate Power Bank | Bateria portátil com a capacidade do tier Ultimate |
+
+As receitas usarão só materiais do jogo puro, podendo combinar itens do próprio mod, como no conserto, e virão em datapack JSON, para os modpacks poderem sobrescrevê-las.
 
 ## Roadmap
 
-1. **Concept (current):** persona, features and other definitions, written as documents.
-2. **Minimum version:** crafting, following the player, inventory, battery, Induction Dock and turning into an item.
-3. **Senses:** flashlight, enemy and ore sounds, and screen expressions.
-4. **Upgrades and autonomy:** tiers, magnet, filters, dedicated slots, shock, defense modes, area mode, chest unloading, automatic return and death location.
+1. **Conceito (encerrada)**
+2. **Versão mínima (encerrada)**
+3. **Sentidos (reta final),** com a primeira versão, `0.1.0`
+4. **Upgrades e autonomia,** em 4, 4.1 e 4.2: Power Bank, ímã, defesa, tiers, Cubit Remote, modo área e retorno
+5. **Trabalhos (planejada),** em 5, 5.1 e 5.2: antenas, Servidor, storage, carregamento de chunks e os cards de Aprendizado de Máquina
 
-## Tech stack
+O que entra em cada fase está no [`ROADMAP.md`](ROADMAP.md).
 
-- Minecraft 1.21.1, NeoForge 21.1.x and Java 21
-- [GeckoLib](https://modrinth.com/mod/geckolib) for the model and animations
-- [LambDynamicLights](https://modrinth.com/mod/lambdynamiclights) as an optional dependency for dynamic light
-- Forge Energy (FE) through NeoForge capabilities
+## Stack
 
-## Documentation
+- Minecraft 1.21.1, NeoForge 21.1.x e Java 21
+- [GeckoLib](https://modrinth.com/mod/geckolib) para o modelo e as animações
+- [LambDynamicLights](https://modrinth.com/mod/lambdynamiclights) como dependência obrigatória, para a luz dinâmica, a partir da lanterna, na Fase 3
+- [Jade](https://modrinth.com/mod/jade) como dependência opcional, para os tooltips do Cubit e do Induction Dock
+- Forge Energy (FE), pelas capabilities do NeoForge
 
-All project documents are in Portuguese:
+## Documentação
 
-- [`robo-companheiro.md`](robo-companheiro.md): overview, phases and a map of the documents
-- [`_docs/`](_docs/): persona, visual, features, items, tiers, decisions and glossary
-- [`AGENTS.md`](AGENTS.md): project rules and context for developers and coding agents
+- [`_docs/README.md`](_docs/README.md): mapa dos documentos, com persona, visual, funcionalidades, itens, tiers, decisões, perguntas por fase e glossário
+- [`AGENTS.md`](AGENTS.md): regras e contexto do projeto para desenvolvedores e agentes
+- [`ROADMAP.md`](ROADMAP.md): as fases e o que entra em cada uma
+- [`checklist.md`](checklist.md): o que está pronto e o que falta em cada fase
+- [`CHANGELOG.md`](CHANGELOG.md): o que muda em cada versão, em inglês
 
-## License
+## Licença
 
-Not defined yet.
+[MIT](LICENSE)

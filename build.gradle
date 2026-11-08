@@ -1,0 +1,279 @@
+plugins {
+    id 'java-library'
+    id 'jacoco'
+    id 'checkstyle'
+    id 'com.diffplug.spotless'
+    id 'net.neoforged.moddev'
+    id 'idea'
+}
+
+tasks.named('wrapper', Wrapper).configure {
+    distributionType = Wrapper.DistributionType.BIN
+}
+
+version = mod_version
+group = mod_group_id
+
+sourceSets.main.resources {
+    srcDir('src/generated/resources')
+    exclude('**/*.bbmodel')
+    exclude('.cache/**')
+}
+
+repositories {
+    maven {
+        name = 'GeckoLib'
+        url = 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
+        content {
+            includeGroup('software.bernie.geckolib')
+        }
+    }
+
+    maven {
+        name = 'Gegy'
+        url = 'https://maven.gegy.dev/releases'
+        content {
+            includeGroup('dev.lambdaurora.lambdynamiclights')
+        }
+    }
+
+    // Jade, optional, comes as the same file the pack downloads from Modrinth, and nothing else does.
+    exclusiveContent {
+        forRepository {
+            maven {
+                name = 'Modrinth'
+                url = 'https://api.modrinth.com/maven'
+            }
+        }
+        filter {
+            includeGroup('maven.modrinth')
+        }
+    }
+
+    // Test tooling only lives on Maven Central, so a NeoForged Maven outage must not break the build.
+    exclusiveContent {
+        forRepository {
+            mavenCentral()
+        }
+        filter {
+            includeGroup('org.jacoco')
+            includeGroup('org.ow2.asm')
+            includeGroup('com.tngtech.archunit')
+            includeGroupAndSubgroups('org.junit')
+        }
+    }
+
+    mavenCentral()
+}
+
+base {
+    archivesName = mod_id
+}
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+
+// Holds what only the client runs load. The game looks for mods on the classpath of the run, and
+// the server runs must open without this library, which proves a dedicated server does not need it.
+sourceSets {
+    clientRun
+}
+
+neoForge {
+    version = project.neo_version
+
+    parchment {
+        mappingsVersion = project.parchment_mappings_version
+        minecraftVersion = project.parchment_minecraft_version
+    }
+
+    runs {
+        client {
+            client()
+            sourceSet = sourceSets.clientRun
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+        }
+
+        server {
+            server()
+            programArgument '--nogui'
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+        }
+
+        gameTestServer {
+            type = 'gameTestServer'
+            // Keeps a config edited by hand in run/ from changing the test results.
+            gameDirectory = project.file('run/gametest')
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+        }
+
+        data {
+            data()
+            // This run also starts as a client, so it requires the same library.
+            sourceSet = sourceSets.clientRun
+            programArguments.addAll '--mod', project.mod_id, '--all',
+                    '--output', file('src/generated/resources/').getAbsolutePath(),
+                    '--existing', file('src/main/resources/').getAbsolutePath()
+        }
+
+        configureEach {
+            systemProperty 'forge.logging.markers', 'REGISTRIES'
+            logLevel = org.slf4j.event.Level.DEBUG
+        }
+    }
+
+    mods {
+        "${mod_id}" {
+            sourceSet(sourceSets.main)
+        }
+    }
+}
+
+configurations {
+    runtimeClasspath.extendsFrom localRuntime
+    clientRunRuntimeClasspath.extendsFrom runtimeClasspath
+}
+
+// Each jar already carries what it needs at runtime, and this library is published per mappings.
+def dynamicLightsDependency(String part) {
+    return dependencies.create("dev.lambdaurora.lambdynamiclights:lambdynamiclights-${part}:${lambdynamiclights_version}") {
+        transitive = false
+        attributes {
+            attribute(Attribute.of('net.minecraft.mappings', String), 'mojmap')
+        }
+    }
+}
+
+dependencies {
+    implementation "software.bernie.geckolib:geckolib-neoforge-${minecraft_version}:${geckolib_version}"
+
+    compileOnly(dynamicLightsDependency('api'))
+    clientRunRuntimeOnly(dynamicLightsDependency('runtime'))
+
+    // Optional: the mod compiles against Jade, the jar does not carry it, and only the client runs
+    // load it, so the GameTests and the server prove the mod opens without it (AGENTS.md, rule 24).
+    compileOnly "maven.modrinth:jade:${jade_version}"
+    clientRunRuntimeOnly "maven.modrinth:jade:${jade_version}"
+
+    testImplementation platform("org.junit:junit-bom:${junit_version}")
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    testImplementation "com.tngtech.archunit:archunit-junit5:${archunit_version}"
+}
+
+var generateModMetadata = tasks.register('generateModMetadata', ProcessResources) {
+    var replaceProperties = [
+            minecraft_version      : minecraft_version,
+            minecraft_version_range: minecraft_version_range,
+            neo_version            : neo_version,
+            loader_version_range   : loader_version_range,
+            geckolib_version       : geckolib_version,
+            lambdynamiclights_version: lambdynamiclights_version,
+            jade_min_version       : jade_min_version,
+            mod_id                 : mod_id,
+            mod_name               : mod_name,
+            mod_license            : mod_license,
+            mod_version            : mod_version,
+    ]
+    inputs.properties replaceProperties
+    expand replaceProperties
+    from 'src/main/templates'
+    into 'build/generated/sources/modMetadata'
+}
+sourceSets.main.resources.srcDir generateModMetadata
+neoForge.ideSyncTask generateModMetadata
+
+def modPath = project.mod_group_id.replace('.', '/')
+
+tasks.named('jar', Jar) {
+    from('LICENSE')
+    // Only the development runs use these, and they read the classes directly, not the jar.
+    exclude "${modPath}/gametest/**", "${modPath}/datagen/**", 'data/cubit/structure/**'
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+tasks.named('test', Test) {
+    useJUnitPlatform()
+    finalizedBy 'jacocoTestReport'
+}
+
+jacoco {
+    toolVersion = project.jacoco_version
+}
+
+// Coverage only targets the domain: the rest is validated by GameTests and a manual script.
+def domainClasses = sourceSets.main.output.asFileTree.matching {
+    include 'io/github/marcelofabianov/cubit/domain/**'
+}
+
+tasks.named('jacocoTestReport', JacocoReport) {
+    dependsOn 'test'
+    classDirectories.setFrom(domainClasses)
+    reports {
+        html.required = true
+        xml.required = true
+    }
+}
+
+tasks.named('jacocoTestCoverageVerification', JacocoCoverageVerification) {
+    dependsOn 'test'
+    classDirectories.setFrom(domainClasses)
+    violationRules {
+        rule {
+            limit {
+                minimum = 0.85
+            }
+            limit {
+                counter = 'BRANCH'
+                minimum = 0.85
+            }
+        }
+    }
+}
+
+// Only on request, so the GameTests of the push gate run without the agent. It reports and never
+// fails: the client cannot run in a GameTest, and the domain has its own gate.
+if (providers.gradleProperty('gameTestCoverage').isPresent()) {
+    jacoco.applyTo(tasks.named('runGameTestServer').get())
+
+    tasks.register('gameTestCoverageReport', JacocoReport) {
+        dependsOn 'runGameTestServer'
+        executionData file('build/jacoco/runGameTestServer.exec')
+        sourceDirectories.setFrom(sourceSets.main.java.srcDirs)
+        classDirectories.setFrom(sourceSets.main.output.asFileTree.matching {
+            include "${modPath}/**"
+            exclude "${modPath}/gametest/**", "${modPath}/datagen/**", "${modPath}/client/**",
+                    "${modPath}/domain/**"
+        })
+        reports {
+            html.required = true
+            html.outputLocation = file('build/reports/jacoco/gametest')
+        }
+    }
+}
+
+tasks.named('check') {
+    dependsOn 'jacocoTestCoverageVerification'
+}
+
+spotless {
+    java {
+        target 'src/*/java/**/*.java'
+        googleJavaFormat(project.google_java_format_version)
+        removeUnusedImports()
+    }
+}
+
+checkstyle {
+    toolVersion = project.checkstyle_version
+    maxWarnings = 0
+}
+
+idea {
+    module {
+        downloadSources = true
+        downloadJavadoc = true
+    }
+}
