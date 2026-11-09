@@ -6,8 +6,6 @@
 
 Um robô companheiro fofo, movido a bateria, para Minecraft 1.21.1 com NeoForge. Funciona só com ele e suas dependências, e também é testado no modpack [Iron Meridian](https://github.com/marcelofabianov/iron-meridian). O Cubit é craftado com recursos do jogo puro.
 
-> **Status: reta final da Fase 3.** Todas as funcionalidades da fase entraram, e o mod ainda não tem versão publicada: a primeira, `0.1.0`, está em preparação para o Modrinth e o CurseForge. Já funcionam colocar e recolher o Cubit, seguir o player, vários Cubits com um seguindo, as reações a fogo, lava e blocos que ferem, o inventário, a bateria com recarga por redstone, o Induction Dock, a morte com o item danificado, o conserto e o comando `/cubit reset`. Na Fase 3, já entraram os sons, as expressões, as animações, a barra de vida, a cor do colar, o indicador de bateria, os textos curtos, a lanterna, o painel solar, a cor da carcaça, o nome, a detecção dos scanners, numa esfera em volta do Cubit, a caixa em volta do minério e a seta sobre o mob que eles acham, as cores das antenas com um halo em volta do corpo, as falas, inclusive sobre a redstone que você minera, o Jade e as telas próprias do Cubit e do Induction Dock, no estilo do conceito. O resto abaixo está planejado, e os números são o ponto de partida para o balanceamento.
-
 ## O que o Cubit faz
 
 O Cubit segue você e ajuda em tarefas simples:
