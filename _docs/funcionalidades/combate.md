@@ -16,7 +16,7 @@ Definido pelo player:
 
 ## Modo só o alvo (proposta)
 
-Ideia aprovada para a Fase 4, onde será refinada. Nada aqui está decidido em detalhe, e os números ainda não estão em [`tiers.md`](../tiers.md) (perguntas 577 e 578).
+Ideia aprovada para a Fase 4, onde será refinada. O modo, com o último mob atacado, entra na Fase 4, e a mira pelo controle, na 4.2, junto do Cubit Remote (pergunta 795). Nada aqui está decidido em detalhe, e os números ainda não estão em [`tiers.md`](../tiers.md) (perguntas 577 e 578).
 
 O Cubit ignora os inimigos por perto, mesmo os que atacam o dono, e só ataca o alvo que o dono escolheu.
 
@@ -46,6 +46,7 @@ O Cubit só ataca um mob neutro para defender o player, quando esse mob fica agr
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-10 10:17 | Separa a mira pelo controle do modo só o alvo para a Fase 4.2. |
 | Marcelo Fabiano | 2026-11-07 23:42 | Troca a caixa do alvo pela seta. |
 | Marcelo Fabiano | 2026-11-07 16:51 | Adiciona a proposta do modo só o alvo. |
 | Marcelo Fabiano | 2026-11-05 23:16 | Cita o som de modo agressivo. |

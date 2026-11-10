@@ -80,7 +80,7 @@ Sai só ao terminar todos os itens da Fase 3 (pergunta 337).
 
 ## Fase 4: Upgrades e autonomia
 
-Dividida em três partes, na ordem em que dependem uma da outra (perguntas 722 a 726). "Fase 4" nos documentos vale para as três.
+Dividida em três partes, na ordem em que dependem uma da outra (perguntas 722 a 726, reorganizadas pelas 794 a 796). "Fase 4" nos documentos vale para as três.
 
 ### Já existe
 
@@ -88,23 +88,23 @@ Dividida em três partes, na ordem em que dependem uma da outra (perguntas 722 a
 2. [x] Decisões do modo área, do "parar" e do que o item guarda (perguntas 340 a 343)
 3. [x] Som e expressão do ataque definidos (perguntas 316 e 347)
 
-### Fase 4: Power Bank, ímã e defesa
+### Fase 4: Tier e ataque
 
-4. [ ] Power Bank, inclusive no Dock e na grade de craft (issue #51), com a receita dela
-5. [ ] Ímã e coleta, com as chaves deles e o filtro em lista branca e lista negra (perguntas 422 a 424), e o custo do ímã
-6. [ ] Choque e modo Pacífico, o único do tier Base (pergunta 722)
-7. [ ] Interface de configuração na aba Settings: chave geral e chave do painel solar (perguntas 717 e 425)
+4. [ ] Tiers Advanced, Elite e Ultimate, com config, módulos e as receitas deles
+5. [ ] Choque e modo Pacífico, o único do tier Base (perguntas 722 e 796)
+6. [ ] Modos Contra-atacar e Agressivo
+7. [ ] Modo só o alvo, com o último mob atacado (perguntas 577, 578 e 795)
+8. [ ] Interface de configuração na aba Settings: chave geral e chave do painel solar (perguntas 717 e 425)
 
-### Fase 4.1: Tiers
+### Fase 4.1: Itens, filtros, carregamento e mais
 
-8. [ ] Tiers Advanced, Elite e Ultimate, com config, módulos e as receitas deles
-9. [ ] Modos Contra-atacar e Agressivo
-10. [ ] Slots de tochas, fornalha e carregador de ferramentas, com o Cubit colocando tochas e o custo delas (pergunta 724)
+9. [ ] Ímã e coleta, com as chaves deles e o filtro em lista branca e lista negra (perguntas 422 a 424), e o custo do ímã
+10. [ ] Power Bank, inclusive no Dock e na grade de craft (issue #51), com a receita dela
+11. [ ] Slots de tochas, fornalha e carregador de ferramentas, com o Cubit colocando tochas e o custo delas (pergunta 724)
 
-### Fase 4.2: Controle e autonomia
+### Fase 4.2: Remote, área e retorno
 
-11. [ ] Cubit Remote: comandos, localizar e marcar área, com a receita dele
-12. [ ] Modo só o alvo, com o último mob atacado e a mira pelo controle (perguntas 577, 578 e 726)
+12. [ ] Cubit Remote: comandos, localizar e marcar área, com a receita dele e a mira do modo só o alvo (perguntas 726 e 795)
 13. [ ] Modo área, com a altura máxima a definir
 14. [ ] Descarga em baú marcado, com a chave dela
 15. [ ] Retorno automático, com a chave dele
