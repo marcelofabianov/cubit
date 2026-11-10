@@ -34,7 +34,7 @@ O que está pronto e o que falta em cada fase do projeto. As fases estão no [`R
 
 15. [x] Atualizar o "Próximos" no `AGENTS.md`
 
-## Fase 3: Sentidos (atual)
+## Fase 3: Sentidos (encerrada)
 
 A ordem é a da numeração (perguntas 356 e 365), com a lanterna antes do painel solar (pergunta 458) e o item 17 antes do 16 (pergunta 504). Sons, intervalo, expressões, colar e textos entram em partes, e um item só é marcado quando estiver completo na Fase 3.
 
@@ -76,7 +76,7 @@ Sai só ao terminar todos os itens da Fase 3 (pergunta 337).
 6. [x] Outro player: o passo 9 do Dock, o 6 do `/cubit reset` e o 13 da cor e do nome ficam cobertos pelas GameTests, sem teste no jogo (perguntas 770 a 772)
 7. [x] Confirmações no jogo: saíram da `0.1.0` e ficam para depois dela, com a instância só com o mod: quando as receitas aparecem no livro, a receita do Dock em L espelhado (pergunta 351), o `/cubit reset` com chunk descarregado e o padrão da opção de luz de entidades do LambDynamicLights (perguntas 461, 719 e 776)
 8. [x] Conferir os termos das ferramentas de IA usadas nos sons antes de publicar (perguntas 338, 719 e 777)
-9. [ ] Publicar: `homolog`, `release/0.1.0`, `main`, tag, release no GitHub e envio ao Modrinth e ao CurseForge (perguntas 744 e 778)
+9. [x] Publicar: `homolog`, `release/0.1.0`, `main`, tag, release no GitHub e envio ao Modrinth. O envio ao CurseForge fica para depois da `0.1.0` (perguntas 744, 778, 785 e 787)
 
 ## Fase 4: Upgrades e autonomia
 

@@ -18,7 +18,7 @@ Persona, visual, expressões, funcionalidades, itens, tiers, glossário, regras,
 - Virar item, morte com o Damaged Cubit e conserto.
 - O comando `/cubit reset` e o modelo novo.
 
-## Fase 3: Sentidos (reta final)
+## Fase 3: Sentidos (encerrada)
 
 Todas as funcionalidades entraram:
 
@@ -28,16 +28,9 @@ Todas as funcionalidades entraram:
 - as animações, as expressões, o nome e a cor da carcaça;
 - o Jade e as telas próprias do Cubit e do Induction Dock.
 
-Falta a reta final do lançamento:
-
-- auditoria dos documentos;
-- tradução para o português;
-- `CHANGELOG.md` e guia de publicação;
-- testes de instância.
-
 ### Primeira versão: `0.1.0`
 
-Sai ao terminar a Fase 3, no Modrinth e no CurseForge, com o mod funcionando só com ele e as dependências: GeckoLib e LambDynamicLights, obrigatórias, e Jade, opcional.
+Saiu ao terminar a Fase 3, no Modrinth, com o mod funcionando só com ele e as dependências: GeckoLib e LambDynamicLights, obrigatórias, e Jade, opcional. O envio ao CurseForge, com a mesma versão, fica para depois.
 
 ## Fase 4: Upgrades e autonomia
 

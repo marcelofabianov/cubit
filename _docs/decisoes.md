@@ -11,7 +11,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Licença:** MIT, para todos os recursos presentes no repositório, inclusive os sons. A exceção é o Gradle Wrapper, de terceiros, que não vai no jar.
 - **Ícone do mod:** o mesmo do item do Cubit.
 - **Primeira versão:** `0.1.0`, publicada só ao terminar todos os itens da Fase 3, com a `1.0.0` só com o mod completo.
-- **Publicação:** no Modrinth e no CurseForge, com a mesma versão nos dois (pergunta 714). A `0.1.0` sai como release, e o jar é enviado à mão, pelo site, sem plugin do Gradle (perguntas 743 e 744).
+- **Publicação:** no Modrinth e no CurseForge, com a mesma versão nos dois (pergunta 714). A `0.1.0` sai como release, e o jar é enviado à mão, pelo site, sem plugin do Gradle (perguntas 743 e 744). Ela saiu no Modrinth, e o CurseForge fica para depois (perguntas 785 e 787).
 - **Aviso de IA:** no Modrinth, o aviso `Contains AI-generated content` fica marcado para os assets, por causa dos sons (pergunta 746).
 - **Páginas nas plataformas:** slug `cubit`, com `cubit-robot` nas duas se o CurseForge recusar. O ícone é o do item, e a galeria só tem capturas do jogo. O desenvolvedor cria as contas e os projetos, e o agente prepara os textos (perguntas 747, 748 e 750).
 - **Changelog por versão:** atualizado ao criar a `release/X.Y.Z` (pergunta 749).
@@ -23,7 +23,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Exceção na `0.1.0`:** a versão sai com o teste no Iron Meridian, sem a instância só com o mod e sem as confirmações do item 7, que ficam para depois dela (pergunta 776).
 - **Release no GitHub:** cada versão tem a tag anotada e uma release no GitHub, com a seção do `CHANGELOG.md` e o jar, antes do envio aos sites (pergunta 778).
 - **Outro player:** o teste com outro player não é feito no jogo. As GameTests com um player que não é o dono cobrem o Dock, o `/cubit reset`, a cor e o nome (perguntas 770 a 772).
-- **Etapa atual:** Fase 3, sentidos, em andamento. As Fases 1 e 2 foram encerradas.
+- **Etapa atual:** as Fases 1, 2 e 3 foram encerradas, com a `0.1.0` publicada (perguntas 785 e 786). A Fase 4 só começa com pedido explícito.
 - **Iron Meridian:** o Cubit entra como exceção à regra do pack contra funções repetidas, por causa do Robit do Mekanism. O registro está na issue `marcelofabianov/iron-meridian#2`.
 
 ## Idioma
@@ -139,6 +139,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-10 09:53 | Encerra a Fase 3 e registra a `0.1.0` no Modrinth, com o CurseForge depois. |
 | Marcelo Fabiano | 2026-11-08 01:41 | Registra a exceção da `0.1.0` e a release no GitHub. |
 | Marcelo Fabiano | 2026-11-08 01:15 | Registra como ficam os testes de instância e o teste com outro player. |
 | Marcelo Fabiano | 2026-11-08 00:55 | Registra onde fica a descrição das plataformas e a tradução da descrição na lista de mods. |
