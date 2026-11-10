@@ -17,7 +17,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Changelog por versão:** atualizado ao criar a `release/X.Y.Z` (pergunta 749).
 - **Repositório público:** o desenvolvedor o torna público antes de enviar o jar da `0.1.0`, e as issues do GitHub são o canal de bugs (pergunta 751).
 - **Interface de configuração:** a chave geral e a do painel solar entram na Fase 4, na aba Settings, e a `0.1.0` sai com as chaves de hoje (pergunta 717).
-- **Fases 4 e 5 divididas:** Fase 4 com Power Bank, ímã, coleta, choque com o Pacífico e a interface de configuração; 4.1 com os tiers, os outros modos e os slots exclusivos; 4.2 com o Cubit Remote, o modo só o alvo, o modo área, a descarga, o retorno e o local de morte. Fase 5 com antenas, Servidor e storage wireless virtual; 5.1 com o carregamento de chunks; e 5.2 com os cards, a hibernação fora do Dock e a personalização por card (perguntas 722 a 726).
+- **Fases 4 e 5 divididas:** Fase 4 com os tiers, o choque com o Pacífico, os outros modos de defesa, o modo só o alvo e a interface de configuração, nessa ordem; 4.1 com o ímã, a coleta, a Power Bank e os slots exclusivos; 4.2 com o Cubit Remote, a mira do modo só o alvo, o modo área, a descarga, o retorno e o local de morte. Fase 5 com antenas, Servidor e storage wireless virtual; 5.1 com o carregamento de chunks; e 5.2 com os cards, a hibernação fora do Dock e a personalização por card (perguntas 722 a 726, com a Fase 4 reorganizada pelas 794 a 796).
 - **Planejado nos documentos:** o que é de fase futura fica nos documentos, marcado com a fase em que entra, sem parecer pronto (pergunta 718).
 - **Testes de instância:** os da regra 35 ficam para o fim da Fase 3, no teste da versão completa, na seção "Teste da versão" do roteiro manual, no Prism Launcher. O Iron Meridian é testado numa cópia da instância, com o jar em `mods/` (perguntas 767 a 769).
 - **Exceção na `0.1.0`:** a versão sai com o teste no Iron Meridian, sem a instância só com o mod e sem as confirmações do item 7, que ficam para depois dela (pergunta 776).
@@ -119,7 +119,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Nome:** com etiqueta, só do dono, ou na bigorna, e sempre visível acima do Cubit.
 - **Tronco central:** a coluna entre as esteiras e a carcaça tem 2 unidades de altura, e a hitbox não muda.
 - **Trabalhos (Fase 5, planejada):** um único Cubit, com um card por vez, age só em área marcada e nunca sai dela. Antena e Servidor mantêm os chunks carregados, de forma opcional. Sem chunk de destino, ele espera. O detalhe está em [`trabalhos.md`](funcionalidades/trabalhos.md).
-- **Modo só o alvo:** ideia aprovada, a refinar na Fase 4: o Cubit só ataca o último mob que o dono feriu ou marcou com o controle (pergunta 578).
+- **Modo só o alvo:** ideia aprovada, a refinar na Fase 4: o Cubit só ataca o último mob que o dono feriu ou marcou com o controle (pergunta 578). O último mob atacado entra na Fase 4, e a mira pelo controle, na 4.2, com o Cubit Remote (pergunta 795).
 - **Limites:** nunca ataca o dono nem mobs pacíficos. Só ataca mobs neutros para defender o player.
 - **Scanner:** `c:ores/*` significa a tag-mãe `c:ores` e suas subtags, porque tags não aceitam curinga.
 - **Falas (perguntas 572 a 587 e 618 a 621):** o Cubit comenta o tempo e o horário ao mudarem, com um intervalo mínimo, dá parabéns pelas conquistas visíveis e diz que ama redstone quando o dono a minera, com a chave `Chatter`. As frases e as regras estão em [`falas.md`](conceito/falas.md).
@@ -139,6 +139,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-10 10:17 | Registra a Fase 4 reorganizada e a mira do modo só o alvo na 4.2. |
 | Marcelo Fabiano | 2026-11-10 09:53 | Encerra a Fase 3 e registra a `0.1.0` no Modrinth, com o CurseForge depois. |
 | Marcelo Fabiano | 2026-11-08 01:41 | Registra a exceção da `0.1.0` e a release no GitHub. |
 | Marcelo Fabiano | 2026-11-08 01:15 | Registra como ficam os testes de instância e o teste com outro player. |

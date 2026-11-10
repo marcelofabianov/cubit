@@ -74,7 +74,7 @@ As receitas usarão só materiais do jogo puro, podendo combinar itens do própr
 1. **Conceito (encerrada)**
 2. **Versão mínima (encerrada)**
 3. **Sentidos (encerrada),** com a primeira versão, `0.1.0`
-4. **Upgrades e autonomia,** em 4, 4.1 e 4.2: Power Bank, ímã, defesa, tiers, Cubit Remote, modo área e retorno
+4. **Upgrades e autonomia,** em 4, 4.1 e 4.2: tiers, defesa, ímã, Power Bank, Cubit Remote, modo área e retorno
 5. **Trabalhos (planejada),** em 5, 5.1 e 5.2: antenas, Servidor, storage, carregamento de chunks e os cards de Aprendizado de Máquina
 
 O que entra em cada fase está no [`ROADMAP.md`](ROADMAP.md).
