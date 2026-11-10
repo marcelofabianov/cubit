@@ -32,6 +32,13 @@ Nenhuma. A pendente 425 foi para a Fase 4 (pergunta 721).
 | 321 | O nome `placed.ogg` e o momento "ao ser colocado no mundo" estão certos? | Sim. Detalha a pergunta 320 |
 | 322 | Em que fase o som de colocar no mundo passa a tocar? | Na Fase 3, junto dos outros oito. Detalha a pergunta 320 |
 | 421 | Como foi o roteiro manual do colar, do indicador de bateria e do tronco central com +0,5? | Teste finalizado, tudo ok, executado pelo desenvolvedor, sem detalhar cada passo. Ele não pediu +1, então o tronco fica em 2 unidades. O `make server` e o olhar de longe não foram citados em separado |
+| 791 | O `README.md` ganha o link da página do Cubit no Modrinth? | Não, por enquanto. Os links das plataformas entram juntos, quando o CurseForge entrar (resposta 787) |
+| 790 | O `ROADMAP.md` é atualizado no encerramento da Fase 3? | Sim: a Fase 3 passa a encerrada, a lista "Falta a reta final do lançamento" sai, e a seção da `0.1.0` diz que ela saiu no Modrinth, com o CurseForge depois (resposta 787). Amplia a 789 |
+| 789 | O que o encerramento da Fase 3 atualiza? | O `checklist.md`, com o item 9 da `0.1.0` e a Fase 3 encerrada; o roadmap do `README.md`, de onde o desenvolvedor já tinha tirado o status (`96ed561`); o "Estado atual" do `AGENTS.md`, com a autorização do desenvolvedor; e estas respostas, com o resumo em `decisoes.md` |
+| 788 | Por qual issue entra o encerramento da Fase 3? | Pela #137, ainda aberta, na branch `feature/137-close-phase-3`, e o PR fecha a issue |
+| 787 | Como fica o CurseForge, que a pergunta 714 previa junto do Modrinth? | Fica para depois, com a mesma versão, sem bloquear o encerramento. Muda a 714 só nesse ponto |
+| 786 | A publicação da `0.1.0` e a Fase 3 estão encerradas? | Sim: "esta parte de publicacao e fase 3 podemos definir como encerrado" |
+| 785 | O envio da `0.1.0` aos sites foi feito? | Ao Modrinth, sim, pelo desenvolvedor. Antes, o agente conferiu os merges do PR #139, da `release/0.1.0` para a `main` (`1480b53`), e do #140, de volta para a `develop` (`a75ca09`), a tag `v0.1.0` no remote, a release no GitHub com o `cubit-0.1.0.jar` e o repositório público |
 | 784 | O jogo está fechado antes do push da `release/0.1.0`? | Sim |
 | 783 | O desenvolvedor fez o merge do PR #138, da `develop` para a `homolog`? | Sim. O agente conferiu o merge (`7a0bd90`) e criou a `release/0.1.0` a partir da `homolog`. As respostas 780 a 782 tinham sumido do disco às 01:46, durante o `pre-push` da remoção da branch remota da #135, sem causa achada nos hooks, e foram registradas de novo |
 | 782 | Como a publicação da `0.1.0` entra no fluxo de issues? | Por uma issue "Publicação da 0.1.0" (#137), no milestone da Fase 3. Os PRs da `develop` para a `homolog`, da `release/0.1.0` para a `main` e de volta para a `develop` citam a issue, que fecha no fim |
@@ -102,7 +109,7 @@ Nenhuma. A pendente 425 foi para a Fase 4 (pergunta 721).
 | 717 | Quando entra a interface de configuração, com a chave geral e a do painel solar (perguntas 494, 495 e 500)? | Fora da `0.1.0`, na Fase 4, junto do Cubit Remote e das chaves novas, na aba Settings que já existe. A `0.1.0` sai com as chaves de hoje. Responde a pergunta 500 |
 | 716 | O agente aplica as correções diretas da auditoria e acrescenta os ponteiros às respostas antigas? | Sim: as correções A1 a A27 e os ponteiros na issue da auditoria, e a A28, da regra de idioma, na issue da tradução. O relatório fica em `tmp/auditoria/2026-11-08_auditoria-pre-lancamento.md` |
 | 715 | Como organizar a reta final em issues e PRs? | Três issues, cada uma com a sua branch e o seu PR: a auditoria dos documentos, com o fechamento do item 19 e as respostas sem commit; a tradução `pt_br`, com a mudança da regra 1; e o `CHANGELOG.md` com o guia de publicação em `_docs/desenvolvimento/publicacao.md` |
-| 714 | Onde publicar o Cubit? | No Modrinth e no CurseForge, com a mesma versão nos dois. Responde o item 3 da `0.1.0` no checklist |
+| 714 | Onde publicar o Cubit? | No Modrinth e no CurseForge, com a mesma versão nos dois. Responde o item 3 da `0.1.0` no checklist. A pergunta 787 deixa o CurseForge para depois da `0.1.0` |
 | 713 | Em que idioma fica o `CHANGELOG.md`? | Em inglês, no formato Keep a Changelog, na raiz, porque vai para as páginas de versão das plataformas. É uma exceção à regra 25, como o `README.md` e o `LICENSE`, e é atualizado a cada versão depois da `0.1.0` |
 | 712 | Como fica a regra de idioma com a tradução para o português? | O inglês continua o idioma base: IDs, comandos, config, logs e o `en_us.json`. O `pt_br.json` é gerado pelo mesmo datagen, com um teste que confere que as duas línguas têm as mesmas chaves, e o player escolhe o idioma no jogo. Muda a regra 1 do `AGENTS.md` e substitui a resposta 449 |
 | 711 | Há algo a acrescentar no alinhamento da reta final: estudo do estado, auditoria dos documentos, tradução para o português, `CHANGELOG.md` e guia de publicação? | "continue": nada a acrescentar, e as ideias antes da publicação (resposta 710) são essas. Os pontos em conflito com as regras, como o `pt_br.json` contra a regra 1, vão para a rodada de decisões |
@@ -461,6 +468,7 @@ Nenhuma. A pendente 425 foi para a Fase 4 (pergunta 721).
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-10 09:53 | Registra as respostas 785 a 791 e o ponteiro na 714. |
 | Marcelo Fabiano | 2026-11-08 01:48 | Registra as respostas 780 a 784. |
 | Marcelo Fabiano | 2026-11-08 01:06 | Registra as respostas 762 a 779 e o ponteiro na 515. |
 | Marcelo Fabiano | 2026-11-08 00:50 | Registra as respostas 753 a 761. |
