@@ -12,6 +12,9 @@
 
 | # | Pergunta | Resposta |
 |---|---|---|
+| 796 | Em que ordem entram os itens da Fase 4, já que os modos de defesa atacam com o choque, e o choque é bloqueado no Base? | Tiers, choque com o Pacífico, Contra-atacar e Agressivo, só o alvo com o último mob atacado e, por fim, a aba Settings. Detalha a 794 |
+| 795 | Onde entra a mira pelo controle do modo só o alvo, que na sequência nova ficaria na Fase 4, antes do Cubit Remote? | "a mira pelo controle do modo de defesa alvo pode entrar junto do controle": na Fase 4.2. O modo, com o último mob atacado, fica na Fase 4. Muda a 726 nesse ponto |
+| 794 | A Fase 4 pode seguir a sequência proposta pelo desenvolvedor? | Sim, depois da avaliação do agente, que não achou impacto em saves nem contratos, porque o item já guarda o tier. Fase 4, Tier e ataque: tiers Advanced, Elite e Ultimate, com os módulos, os modos de defesa, o choque com o Pacífico e a aba Settings, com a chave geral e a do painel solar. Fase 4.1, Itens, filtros, carregamento e mais: ímã e coleta com o filtro, Power Bank, também no Dock e na grade de craft, e os slots de tochas, fornalha e carregador. Fase 4.2, Remote, área e retorno: Cubit Remote, modo área com a descarga, retorno automático e local de morte. Muda as 722 a 724 só na Fase 4, e as 795 e 796 ajustam o modo só o alvo e a ordem |
 | 578 | Como fica a proposta do modo só o alvo? | "Gostei", e vai para a documentação, para ser refinada na Fase 4. Está em `funcionalidades/combate.md` como proposta. O desenvolvedor não respondeu separadamente sobre o nome e o tier, então seguem abertos na pendência 577 |
 | 21 | Um robô desligado aceita a Power Bank? | Sim. Com o Cubit desligado e a Power Bank na mão, o clique direito coloca a Power Bank no slot exclusivo e inicia a recarga. Com 5% ele liga, e o player pode acessá-lo, remover a Power Bank e fazer as outras interações |
 | 23 | Uma Power Bank funciona em robô de outro tier? | Sim, em qualquer tier |
@@ -48,6 +51,7 @@
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-10 10:17 | Registra as respostas 794 a 796. |
 | Marcelo Fabiano | 2026-11-07 23:42 | Recebe a pendente 425 da Fase 3 e acrescenta um ponteiro à 343. |
 | Marcelo Fabiano | 2026-11-07 16:51 | Registra a resposta 578. |
 | Marcelo Fabiano | 2026-11-07 16:48 | Registra a pendência 577. |
