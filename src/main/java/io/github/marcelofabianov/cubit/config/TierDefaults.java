@@ -127,7 +127,7 @@ final class TierDefaults {
           ADVANCED_SHOCK_TICKS,
           new Energy(ADVANCED_SHOCK_COST),
           false,
-          Set.of(DefenseMode.RETALIATE));
+          Set.of(DefenseMode.RETALIATE, DefenseMode.FOCUS));
   private static final int ELITE_SHOCK_DAMAGE = 4;
   private static final int ELITE_SHOCK_RANGE = 5;
   private static final int ELITE_SHOCK_TICKS = 40;
@@ -139,7 +139,7 @@ final class TierDefaults {
           ELITE_SHOCK_TICKS,
           new Energy(ELITE_SHOCK_COST),
           false,
-          Set.of(DefenseMode.RETALIATE, DefenseMode.AGGRESSIVE));
+          Set.of(DefenseMode.RETALIATE, DefenseMode.AGGRESSIVE, DefenseMode.FOCUS));
   private static final int ULTIMATE_SHOCK_DAMAGE = 6;
   private static final int ULTIMATE_SHOCK_RANGE = 8;
   private static final int ULTIMATE_SHOCK_TICKS = 20;
@@ -151,7 +151,7 @@ final class TierDefaults {
           ULTIMATE_SHOCK_TICKS,
           new Energy(ULTIMATE_SHOCK_COST),
           true,
-          Set.of(DefenseMode.RETALIATE, DefenseMode.AGGRESSIVE));
+          Set.of(DefenseMode.RETALIATE, DefenseMode.AGGRESSIVE, DefenseMode.FOCUS));
   private static final TierSpec BASE_SPEC =
       new TierSpec(
           new Energy(BASE_BATTERY),

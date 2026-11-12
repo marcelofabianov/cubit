@@ -86,6 +86,10 @@ public final class CubitConfig {
     return defense.retaliateMemory.get();
   }
 
+  public int focusForgetDistanceBlocks() {
+    return defense.focusForget.get();
+  }
+
   public TierCatalog tierCatalog() {
     return tierCatalog;
   }

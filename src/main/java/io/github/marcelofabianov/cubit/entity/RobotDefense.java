@@ -2,6 +2,7 @@ package io.github.marcelofabianov.cubit.entity;
 
 import io.github.marcelofabianov.cubit.CubitMod;
 import io.github.marcelofabianov.cubit.domain.behavior.DefenseRules;
+import io.github.marcelofabianov.cubit.domain.behavior.FocusTarget;
 import io.github.marcelofabianov.cubit.domain.behavior.RetaliationMemory;
 import io.github.marcelofabianov.cubit.domain.behavior.ShockRules;
 import io.github.marcelofabianov.cubit.domain.behavior.ShockSignals;
@@ -24,9 +25,15 @@ public final class RobotDefense implements DefenseControl {
   private DefenseMode mode = DefenseMode.INITIAL;
   private RetaliationMemory memory = RetaliationMemory.EMPTY;
   private long lastAttemptTick;
+  private final RobotFocus focus;
 
   RobotDefense(RobotEntity robot) {
     this.robot = robot;
+    this.focus = new RobotFocus(robot);
+  }
+
+  public FocusTarget focusTarget() {
+    return focus.target();
   }
 
   @Override
@@ -39,6 +46,7 @@ public final class RobotDefense implements DefenseControl {
     if (robot.spec().shock().allows(next) && next != mode) {
       mode = next;
       memory = memory.forget();
+      focus.clear();
     }
   }
 
@@ -66,7 +74,15 @@ public final class RobotDefense implements DefenseControl {
             CubitMod.CONFIG.retaliateMemoryTicks());
   }
 
+  /** The owner hurt a mob. Only Focus cares, and it takes the mob as its target. */
+  void ownerHurt(LivingEntity mob) {
+    if (mode == DefenseMode.FOCUS) {
+      focus.ownerHurt(mob);
+    }
+  }
+
   void tick() {
+    focus.tick();
     long now = robot.level().getGameTime();
     ShockSpec spec = robot.spec().shock();
     if (!ShockRules.ready(robot.powerState(), mode, spec, robot.battery(), lastAttemptTick, now)) {
@@ -99,8 +115,8 @@ public final class RobotDefense implements DefenseControl {
                         new ShockSignals(
                             ShockCandidates.angryAtOwner(owner, entity),
                             memory.remembers(entity.getUUID(), now),
-                            false,
-                            false)))
+                            focus.target().is(entity.getUUID()),
+                            mode == DefenseMode.FOCUS && focus.target().hasTarget())))
         .stream()
         .sorted(Comparator.comparingDouble(robot::distanceToSqr))
         .toList();
