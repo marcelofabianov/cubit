@@ -2,7 +2,7 @@
 
 GRADLE := ./gradlew
 
-.PHONY: help setup check test coverage format format-check build clean client server data check-generated gametest gametest-coverage stop
+.PHONY: help setup check test coverage format format-check build clean client server data check-generated gametest gametest-coverage bundle stop
 
 help: ## Show the available commands
 	@grep -E '^[a-z-]+:.*## ' $(MAKEFILE_LIST) | awk -F ':.*## ' '{printf "  %-18s %s\n", $$1, $$2}'
@@ -50,6 +50,9 @@ gametest: ## Run the GameTests on a headless server and confirm that they passed
 gametest-coverage: ## Run the GameTests and report what they cover outside the domain, without failing on it
 	$(GRADLE) -PgameTestCoverage gameTestCoverageReport
 	@echo "Report: build/reports/jacoco/gametest/index.html"
+
+bundle: ## Download the latest release jar with its dependencies into a zip (VERSION=0.1.0 for another)
+	VERSION=$(VERSION) scripts/development/bundle-release.sh
 
 stop: ## Stop the Gradle daemons
 	$(GRADLE) --stop

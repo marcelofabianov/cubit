@@ -22,6 +22,7 @@ Os comandos ficam no `Makefile`. Rode `make` para ver a lista.
 | `make check-generated` | Roda a geração de dados e reprova se `src/generated` mudar |
 | `make gametest` | Roda os GameTests num servidor sem interface |
 | `make gametest-coverage` | Roda os GameTests e gera o relatório do que eles cobrem fora do domínio, sem reprovar nada |
+| `make bundle` | Baixa o jar da última release com as dependências num `.zip` em `build/dist/`. Com `VERSION=0.1.0`, baixa a release escolhida |
 | `make stop` | Para os daemons do Gradle |
 
 **`make gametest`:** o jogo termina com sucesso mesmo quando o mod falha ao carregar, então `scripts/development/run-gametests.sh` só aprova se o log trouxer `All N required tests passed`. Foi conferido que o comando falha com uma GameTest reprovada e com uma classe de cliente no código comum. O `pre-push` também o roda, e o log fica em `build/gametest.log`. O servidor roda em `run/gametest/`, separado do `run/` do `make client`, para um config editado à mão não mudar o resultado. Num diretório novo, o log mostra um erro por falta do `server.properties`, que o jogo cria em seguida.
@@ -54,6 +55,18 @@ O primeiro build leva alguns minutos, porque baixa o JDK e prepara o Minecraft.
 | Checkstyle | Confere as regras de forma do código | Reprova no build o que antes dependia da revisão (pergunta 97) |
 | Jade `15.10.6+neoforge` | Mostra o tier, a bateria e o estado do Cubit e o estoque e o estado do Induction Dock ao mirar neles | É o mod de informações do Iron Meridian, na mesma versão, e opcional (pergunta 242). Vem do Maven do Modrinth, limitado ao grupo `maven.modrinth`, e o SHA-512 do jar foi conferido contra o `jade.pw.toml` do pack (pergunta 664) |
 | LambDynamicLights `4.8.11+1.21.1` | Faz o Cubit iluminar o mundo, sem blocos de luz invisíveis | É a dependência obrigatória da regra 6 do `AGENTS.md`, na versão do Iron Meridian. Vem do repositório `maven.gegy.dev`, limitado ao grupo da biblioteca |
+
+## Pacote de uma release
+
+O `make bundle` chama o `scripts/development/bundle-release.sh` e monta um `.zip` com uma release pronta para instalar (perguntas 870 a 873).
+
+- **O que faz:** pega a última release do GitHub, ou a de `VERSION`, e baixa o jar do Cubit dela. Lê as versões das dependências no `gradle.properties` da tag da release, e não da `develop`, e baixa do Modrinth o GeckoLib, o LambDynamicLights e o Jade.
+- **Conferência:** o SHA-512 de cada dependência é conferido com o que o Modrinth publica, e o SHA-256 do jar do Cubit, com o que o GitHub publica. Um arquivo diferente reprova o comando.
+- **Saída:** `build/dist/cubit-X.Y.Z-with-dependencies.zip`, com `mods/` para o Cubit, o GeckoLib e o LambDynamicLights, e `optional/` para o Jade.
+- **Por que assim:** as dependências vêm do Modrinth, como no Iron Meridian e nas instâncias de teste, e as versões vêm da própria tag, para o pacote ser igual ao que a release foi testada.
+- **Rede:** só as APIs públicas do GitHub e do Modrinth, sem login, com o user agent `cubit-bundle-script`. O JSON baixado é lido com `python3 -I`, como dado.
+- **Precisa de:** `curl`, `python3`, `shasum` e `zip`, que o macOS já traz.
+- **Quando reprova:** `no release vX.Y.Z on GitHub` quer dizer que a versão não existe. `Modrinth has no …` quer dizer que a versão da dependência na tag não está no Modrinth para o Minecraft e o NeoForge dela. `wrong SHA-…` quer dizer que o arquivo baixado não bate com o publicado: rode de novo e, se repetir, não use o pacote.
 
 ## Regras do Checkstyle
 
@@ -93,6 +106,7 @@ As bibliotecas de teste vêm só do Maven Central, para o build não depender do
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-12 21:50 | Adiciona o `make bundle`. |
 | Marcelo Fabiano | 2026-11-07 23:41 | Acrescenta a regra do Jade ao ArchUnit. |
 | Marcelo Fabiano | 2026-11-07 21:40 | Adiciona o Jade. |
 | Marcelo Fabiano | 2026-11-07 14:38 | Adiciona o relatório de cobertura dos GameTests. |
