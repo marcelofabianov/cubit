@@ -10,6 +10,8 @@
 
 | # | Pergunta | Resposta |
 |---|---|---|
+| 865 | Qual é o número da versão da Fase 4 "Tier e ataque"? | `0.1.1`, seguindo a regra do `AGENTS.md`: na fase `0.x`, sem mudança incompatível, sobe o PATCH. A Fase 4 só acrescenta campos e chaves opcionais aos saves e ao config |
+| 864 | Quando sai a próxima tag e release? | "quando fechar fase 4 vamos fazer uma tag e release nova": ao fechar a Fase 4 "Tier e ataque", logo depois do merge do PR #153, com os tiers, os Modules, o choque, os modos de defesa, o Focus e as chaves da Settings. A 4.1 e a 4.2 viram as releases seguintes |
 | 863 | Como foi o teste manual das chaves da aba Settings? | "testes feitos, tudo ok", executados pelo desenvolvedor no `make client`, na branch `feature/152-power-and-solar-switches`, com os ícones do `Power` e do painel solar, sem detalhar cada passo. Cobre a seção "Chaves da aba Settings" do roteiro manual. O teste com o jar numa instância só com o mod continua pendente para antes da `main` (regra 35) |
 | 862 | No modo Focus, o Cubit ataca uma vaca ou outro animal que o dono feriu? | Não, e fica como está: mobs pacíficos nunca viram alvo, em nenhum modo, como nas perguntas 13, 68 e 845. A caça de animais não entra no combate, e o trabalho com animais é do card de Aprendizado de Máquina: Pecuarista, na Fase 5 |
 | 861 | Como encaixar o painel solar e a chave geral na aba Settings, se duas linhas a mais passam 28 px da janela de 225 px? | A chave geral vira um botão pequeno com o ícone de energia, no cabeçalho, ao lado de `Battery 71%`. O `Solar panel` entra como quarta linha em Functions, as linhas de Functions baixam de 20 para 18 px, e o rodapé `More functions arrive with the next updates.` sai. O botão usa um ícone novo, gerado pelo desenvolvedor. Detalha a 857 |
@@ -118,6 +120,7 @@
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-12 19:10 | Registra as respostas 864 e 865. |
 | Marcelo Fabiano | 2026-11-12 18:40 | Registra as respostas 862 e 863. |
 | Marcelo Fabiano | 2026-11-12 16:50 | Registra as respostas 855 a 861 e fecha a pendente 425. |
 | Marcelo Fabiano | 2026-11-12 16:20 | Registra a resposta 854. |
