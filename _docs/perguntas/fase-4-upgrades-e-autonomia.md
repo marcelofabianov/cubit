@@ -12,6 +12,7 @@
 
 | # | Pergunta | Resposta |
 |---|---|---|
+| 837 | Como foi o teste manual do choque e dos modos de defesa? | "testes feitos, tudo ok", executados pelo desenvolvedor no `make client`, na branch `feature/148-shock-and-defense-modes`, com o Jade junto, sem detalhar cada passo. Cobre a seção "Choque e modos de defesa" do roteiro manual, com a aba Defense. O teste com o jar numa instância só com o mod continua pendente para antes da `main` (regra 35) |
 | 836 | A estrutura de pacotes do `AGENTS.md` pode citar o que entrou na Fase 4? | Sim, autorizado pelo desenvolvedor: `DefenseMode`, `TierUpgrade`, `ShockSpec`, as regras do choque, `CubitDamageTypes`, `RobotUpgrade`, `RobotDefense`, `RobotShock`, `ModuleItem`, `TierLook`, `DefenseControl`, `DefenseOpening` e as três abas da tela, com a Power Bank na Fase 4.1 |
 | 835 | Como ficam os textos da aba Defense e do choque que a 833 não cobria? | Como propostos: a lista se chama `Modes` / `Modos`; a seção `Shock` / `Choque` tem `Damage` / `Dano`, `Range` / `Alcance` com `5 blocks` / `5 blocos`, `Interval` / `Intervalo` com `Every 2 s` / `A cada 2 s`, `Cost` / `Custo` com `2000 FE per shock` / `2000 FE por choque` e `Targets` / `Alvos` com `The nearest` / `O mais próximo` ou `All in range` / `Todos no alcance`. As legendas de som são `Cubit shocks` / `Cubit dá um choque` e `Cubit turns aggressive` / `Cubit fica agressivo`. Detalha a 833 |
 | 834 | Quais chaves do config o choque e os modos de defesa ganham? | Em cada `[general_robot.{tier}]`: `defense_modes`, uma lista com `peaceful`, `retaliate` e `aggressive`; `shock_damage`; `shock_range_blocks`; `shock_interval_ticks`; `shock_cost`; e `shock_hits_all_in_range`, que só é `true` no Ultimate. O Base vem só com `peaceful` e o choque zerado. Em `[general]`: `retaliate_memory_ticks`, com 600, os 30 s da 832 |
@@ -91,6 +92,7 @@
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-12 12:40 | Registra a resposta 837. |
 | Marcelo Fabiano | 2026-11-12 11:40 | Registra as respostas 835 e 836. |
 | Marcelo Fabiano | 2026-11-12 09:40 | Registra as respostas 820 a 834. |
 | Marcelo Fabiano | 2026-11-12 08:30 | Responde a pendente 807 e registra as respostas 817 a 819. |
