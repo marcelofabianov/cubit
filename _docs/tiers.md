@@ -51,7 +51,8 @@ Os extras somam ao andar. O consumo só vale com o robô ativo.
 | Extra com a lanterna acesa, mesmo parado | +1 FE/t | +1 FE/t | +2 FE/t | +2 FE/t |
 | Scanner de mobs, por varredura | 50 FE | 100 FE | 150 FE | 300 FE |
 | Scanner de minérios, por varredura | 50 FE | 100 FE | 150 FE | 300 FE |
-| Ímã e colocar tochas | A definir | A definir | A definir | A definir |
+| Ímã, por item puxado (respostas 877 e 879) | Bloqueado | 20 FE | 30 FE | 60 FE |
+| Colocar tochas, no item 11 da Fase 4.1 | Bloqueado | A definir | A definir | A definir |
 
 - **Claridade da tela:** não gasta energia.
 - **Carregador de ferramentas:** transfere energia para outro item, então não conta como gasto. A velocidade está em [slots exclusivos](#slots-exclusivos).
@@ -113,14 +114,17 @@ Valem para todos os tiers e ficam no config. Os marcados como planejados entram 
 | Intervalo para ler se o sol chega ao painel | 20 ticks |
 | Energia de 1 pó de redstone | 5.000 FE |
 | Energia de 1 bloco de redstone | 45.000 FE |
+| Intervalo da coleta por contato | 5 ticks (resposta 887) |
+| Intervalo do ímã | 10 ticks (resposta 887) |
 
 ## Coleta e inventário
 
 | Recurso | Base | Avançado | Elite | Ultimate |
 |---|---|---|---|---|
 | Inventário | 27 slots (baú simples) | 36 slots | 45 slots | 54 slots (baú duplo) |
-| Ímã (raio) | 1 bloco | 3 blocos | 5 blocos | 8 blocos |
-| Filtro de coleta | 3 itens | 9 itens | 18 itens + tags | 27 itens + tags |
+| Coleta por contato | ✔ | ✔ | ✔ | ✔ |
+| Ímã (raio), do Advanced em diante (resposta 879) | Bloqueado | 3 blocos | 5 blocos | 8 blocos |
+| Filtro de coleta, nos dois modos (resposta 423) | 3 itens | 9 itens | 18 itens + tags | 27 itens + tags |
 | Baús marcados para descarregar | 1 | 1 | 2 | 3 |
 | Distância máxima até o baú | 16 blocos | 32 blocos | 48 blocos | 64 blocos |
 
@@ -200,6 +204,7 @@ Planejado para a Fase 5. O tier Base não aceita cards.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-12 21:45 | Define o ímã do Advanced em diante, o custo dele e os intervalos da coleta. |
 | Marcelo Fabiano | 2026-11-12 15:10 | Adiciona o modo Focus e a distância do alvo. |
 | Marcelo Fabiano | 2026-11-12 10:30 | Adiciona os alvos por choque e a memória do Contra-atacar. |
 | Marcelo Fabiano | 2026-11-11 22:01 | Aponta para o upgrade de tier, junta a tabela dos sensores e troca o filtro ilimitado por 64. |

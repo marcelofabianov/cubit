@@ -48,6 +48,10 @@ Os IDs estão em [`itens.md`](itens.md).
 - **Varredura:** uma leitura dos scanners em volta do Cubit, com um custo fixo de energia.
 - **Minério raro:** minério de uma lista de tags no config, que avisa com som e surpresa mesmo fora do filtro.
 - **Filtro do scanner:** os minérios que o dono pediu ao Cubit, clicando nele com um minério na mão.
+- **Coleta:** o Cubit pega o item do chão que encosta nele, desde o Base.
+- **Ímã:** do Advanced em diante, puxa até o Cubit os itens no raio do tier, por um custo por item puxado.
+- **Filtro de coleta:** a lista branca ou negra dos itens que a coleta e o ímã pegam, com os slots do tier.
+- **Slot fantasma:** slot do filtro que guarda uma cópia do item, sem consumi-lo.
 - **Bloco que fere:** bloco que o jogo classifica como perigoso na rota, como magma e cacto.
 - **Ativo:** Cubit ligado, fora da base.
 - **Inativo:** Cubit desligado.
@@ -61,6 +65,7 @@ Os IDs estão em [`itens.md`](itens.md).
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-12 21:45 | Adiciona a coleta, o ímã, o filtro de coleta e o slot fantasma. |
 | Marcelo Fabiano | 2026-11-12 15:10 | Adiciona o modo Focus. |
 | Marcelo Fabiano | 2026-11-08 00:11 | Cita a tradução para o português. |
 | Marcelo Fabiano | 2026-11-07 16:54 | Adiciona as falas. |

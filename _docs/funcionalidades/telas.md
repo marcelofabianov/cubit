@@ -24,7 +24,7 @@ As telas próprias do Cubit e do Induction Dock, item 19 da Fase 3. Elas substit
 
 ### Abas
 
-Três abas, à direita da janela: **Inventory**, com o ícone do baú, **Settings**, com a engrenagem, e **Defense**, com o escudo (perguntas 824 e 828). A aba é estado só do cliente. Fora da Inventory, os slots ficam desligados e não podem ser usados.
+Quatro abas, à direita da janela: **Inventory**, com o ícone do baú, **Settings**, com a engrenagem, **Defense**, com o escudo (perguntas 824 e 828), e **Behavior**, com o funil (perguntas 878 e 888). A aba é estado só do cliente. Fora da Inventory, os slots ficam desligados e não podem ser usados, exceto os do player na Behavior (pergunta 893).
 
 ### Aba Inventory
 
@@ -86,6 +86,25 @@ Entra com o choque e os modos de defesa, nos itens 5 e 6 da Fase 4 (perguntas 82
 | Bloqueado | `Unlocks at Advanced`, com o tier que libera o modo |
 
 - **Choque:** os números do tier, do config, numa seção `Shock`: `Damage`, `Range` em blocos, `Interval`, como `Every 2 s`, `Cost`, como `2000 FE per shock`, e `Targets`, `The nearest` ou `All in range` (pergunta 835). No Base, que só tem o Pacífico, a seção mostra `Unlocks at Advanced`.
+
+### Aba Behavior
+
+Entra com a coleta e o ímã, no item 9 da Fase 4.1 (perguntas 878 a 888). As regras estão em [`inventario.md`](inventario.md#coleta). Na Fase 4.2, recebe a descarga, o retorno e o local de morte.
+
+- **Slots:** o inventário e a hotbar do player continuam visíveis e usáveis, para o player pegar o item do filtro. Só o inventário do Cubit e o slot de energia somem, e o painel ocupa o lugar deles (pergunta 893).
+- **Cabeçalho:** `Behavior` / `Comportamento`, a etiqueta do tier e `Battery 71%`, como na Settings.
+- **Functions:** as duas chaves, com ON e OFF, nas linhas de 18 px da Settings.
+
+| Chave | Descrição |
+|---|---|
+| `Pickup` / `Coleta` | `Picks up items it touches` / `Pega os itens que toca` |
+| `Magnet` / `Ímã` | `Pulls items within 3 blocks · 20 FE per item` / `Puxa itens a até 3 blocos · 20 FE por item`, com os números do tier. No Base, apagada, com `Unlocks at Advanced`, como os modos bloqueados da Defense (pergunta 881). Com a coleta desligada, fica apagada, mantendo o valor |
+
+- **Pickup filter** / **Filtro de coleta:** o botão `Blacklist` / `Lista negra` ou `Whitelist` / `Lista branca`, que alterna o modo, e a grade de slots fantasma, com os slots do tier, de 3, 9, 18 ou 27, em linhas de 9 (pergunta 880).
+  - **Clique com um item no cursor:** copia o tipo do item para o slot, sem consumi-lo. O item no cursor não muda.
+  - **Clique com o cursor vazio:** limpa o slot.
+  - **Clique direito num slot preenchido, no Elite e no Ultimate:** alterna do item para cada tag dele e volta ao item. O slot com tag ganha uma marca, e a dica mostra `Tag: #c:ores` (pergunta 882). No Base e no Advanced, não faz nada.
+- **Validação:** as chaves, o modo e os slots usam o clique de botão de menu do jogo. O servidor confere o dono, o tier, o limite e se a tag pertence ao item, sem pacote novo (pergunta 683).
 
 ## Tela do Induction Dock
 
@@ -179,7 +198,7 @@ Estes textos não aparecem nas imagens. O agente os propôs (pergunta 692), e o 
 
 ## Fora do escopo
 
-- Tudo das Fases 4 e 5: as abas Behavior e Job, a chave geral e as chaves de ímã, coleta, descarga, retorno e local de morte.
+- Tudo das Fases 4.2 e 5: a aba Job e as chaves de descarga, retorno e local de morte.
 - A chave do painel solar, que entra com a interface de configuração (perguntas 494 e 495).
 - Os tiers acima do Base.
 - O botão para limpar o filtro do scanner (pergunta 688).
@@ -202,6 +221,7 @@ Pergunta 691.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-12 21:45 | Adiciona a aba Behavior, com a coleta, o ímã e o filtro de coleta. |
 | Marcelo Fabiano | 2026-11-12 17:20 | Adiciona a chave do painel solar e o botão Power à aba Settings. |
 | Marcelo Fabiano | 2026-11-12 15:10 | Adiciona o modo Focus à aba Defense. |
 | Marcelo Fabiano | 2026-11-12 13:10 | Adiciona a rolagem do inventário nos tiers altos. |

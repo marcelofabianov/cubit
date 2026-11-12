@@ -70,7 +70,7 @@ Na mesa de craft, em forma de L (pergunta 336). O desenho espelhado também vale
 ## Virar item
 
 - O player pode recolher o robô a qualquer momento, em qualquer estado.
-- O item mantém bateria, vida, inventário, nome, cor, tier e configurações, nos *data components* do 1.21.1. As configurações são o modo de defesa, os filtros, os slots ativados ou desativados e a chave da lanterna. A área, os baús marcados e a seleção no controle se perdem ao recolher.
+- O item mantém bateria, vida, inventário, nome, cor, tier e configurações, nos *data components* do 1.21.1. As configurações são o modo de defesa, os filtros, os slots ativados ou desativados e as chaves, como a da lanterna, a da coleta e a do ímã. A área, os baús marcados e a seleção no controle se perdem ao recolher.
 - O item empilha em 1 e mostra a bateria numa barra.
 - O item não entra no inventário do robô nem em shulker boxes.
 - O dono é quem coloca o item. O robô ganha um UUID novo a cada colocação.
@@ -154,7 +154,7 @@ Estes nomes não mudam sem migração (regra 18 do `AGENTS.md`).
 
 | Onde | Nome | Conteúdo |
 |---|---|---|
-| Componente do item | `cubit:robot_state` | `tier`, `energy`, `health`, `lamp_enabled`, opcional, com o padrão ligado, `color`, opcional, com o padrão `white`, `scanners_enabled` e `chatter_enabled`, opcionais, com o padrão ligado, `ore_filter`, opcional, com a lista de tags de minério, vazia por padrão (perguntas 560 e 582), `defense_mode`, opcional, com o padrão `peaceful` (pergunta 830), e `solar_enabled`, opcional, com o padrão ligado (pergunta 859), também no item danificado |
+| Componente do item | `cubit:robot_state` | `tier`, `energy`, `health`, `lamp_enabled`, opcional, com o padrão ligado, `color`, opcional, com o padrão `white`, `scanners_enabled` e `chatter_enabled`, opcionais, com o padrão ligado, `ore_filter`, opcional, com a lista de tags de minério, vazia por padrão (perguntas 560 e 582), `defense_mode`, opcional, com o padrão `peaceful` (pergunta 830), `solar_enabled`, opcional, com o padrão ligado (pergunta 859), e `pickup_enabled`, `magnet_enabled` e `pickup_filter`, opcionais, com o padrão ligado, ligado e a lista negra vazia, com `mode` e `entries` (pergunta 889), também no item danificado |
 | Componente do item | `cubit:energy_slot` | Item do slot de energia e reserva de FE, também no item danificado |
 | Componente do item do Dock | `cubit:dock_energy` | Energia do estoque |
 | Componente do item | `cubit:robot_inventory` | Conteúdo do inventário, também no item danificado |
@@ -173,6 +173,8 @@ Estes nomes não mudam sem migração (regra 18 do `AGENTS.md`).
 | NBT da entidade | `Color` | Cor da carcaça, com o nome do corante, como `light_blue`. Sem a chave ou com valor inválido, vale `white` |
 | NBT da entidade | `ScannersEnabled` e `ChatterEnabled` | Chaves dos scanners e das falas. Sem a chave no save, vale ligada |
 | NBT da entidade | `OreFilter` | Filtro do scanner, com as tags de minério. Uma tag inválida é ignorada e vai para o log |
+| NBT da entidade | `PickupEnabled` e `MagnetEnabled` | Chaves da coleta e do ímã. Sem a chave no save, vale ligada (pergunta 891) |
+| NBT da entidade | `PickupFilter` | Filtro de coleta, com `Mode`, `blacklist` ou `whitelist`, e `Entries`, com o ID do item ou a `#tag`. Sem o modo ou com valor inválido, vale `blacklist` (pergunta 891) |
 | Componente do jogo no item | `minecraft:custom_name` | Nome do Cubit, inclusive no item danificado |
 | NBT do jogo na entidade | `CustomName` | Nome do Cubit |
 | Dados do player | `cubit:following_robot` | `robot`: o UUID do robô que segue, ou nada |
@@ -188,11 +190,13 @@ O estado salvo é validado ao entrar no jogo, sem derrubá-lo (regra 17 do `AGEN
 | Vida fora dos limites | Fica entre 1 e o máximo do tier. Sem vida salva, o robô colocado morreria na hora |
 | Estado da entidade | Fica desligado (`INACTIVE_SWITCHED_OFF`), o mais restritivo |
 | Dono ausente | Ninguém consegue interagir com o robô |
+| Entrada do filtro de coleta | Item ou tag que não existe é ignorado e vai para o log. Entradas acima do limite do tier e tags num tier sem tags ficam guardadas, sem valer na coleta (pergunta 892) |
 
 ## Histórico de modificações
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-12 21:45 | Adiciona a coleta, o ímã e o filtro de coleta aos contratos de save. |
 | Marcelo Fabiano | 2026-11-12 17:20 | Adiciona a chave do painel solar aos contratos de save. |
 | Marcelo Fabiano | 2026-11-12 15:10 | Adiciona o modo Focus ao NBT. |
 | Marcelo Fabiano | 2026-11-12 10:30 | Adiciona o modo de defesa e o tipo de dano do choque aos contratos de save. |
