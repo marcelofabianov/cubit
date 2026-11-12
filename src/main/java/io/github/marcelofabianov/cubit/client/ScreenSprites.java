@@ -37,6 +37,9 @@ final class ScreenSprites {
   private static final int GEAR_U = 64;
   private static final int FIRST_FUNCTION_U = 128;
 
+  /** The shield of the defense tab, in the free place after the chatter icon. */
+  private static final int SHIELD_U = 320;
+
   private ScreenSprites() {}
 
   static void chest(GuiGraphics graphics, int x, int y) {
@@ -56,6 +59,10 @@ final class ScreenSprites {
 
   static void gear(GuiGraphics graphics, int x, int y) {
     icon(graphics, x, y, GEAR_U);
+  }
+
+  static void shield(GuiGraphics graphics, int x, int y) {
+    icon(graphics, x, y, SHIELD_U);
   }
 
   /** The lamp, the scanners and the chatter, in the order of their buttons. */

@@ -40,6 +40,7 @@ public final class CubitConfig {
   private final SolarSection solar;
   private final ScannerSection scanner;
   private final ChatterSection chatter;
+  private final DefenseSection defense;
   private final AtomicBoolean warnedRareTags = new AtomicBoolean();
   private final AtomicBoolean warnedLamp = new AtomicBoolean();
   private final TierCatalog tierCatalog;
@@ -59,6 +60,7 @@ public final class CubitConfig {
     solar = new SolarSection(builder);
     scanner = new ScannerSection(builder);
     chatter = new ChatterSection(builder);
+    defense = new DefenseSection(builder);
     builder.pop();
 
     tierCatalog = new NeoForgeTierCatalog(Map.of(GENERAL_ROBOT, tierSections(builder)));
@@ -78,6 +80,10 @@ public final class CubitConfig {
 
   public ModConfigSpec spec() {
     return spec;
+  }
+
+  public int retaliateMemoryTicks() {
+    return defense.retaliateMemory.get();
   }
 
   public TierCatalog tierCatalog() {

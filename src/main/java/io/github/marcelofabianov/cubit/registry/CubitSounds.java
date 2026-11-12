@@ -21,6 +21,8 @@ public final class CubitSounds {
   public static final String POWER_OFF_NAME = "power_off";
   public static final String RECHARGING_NAME = "recharging";
   public static final String PLACED_NAME = "placed";
+  public static final String SHOCK_ATTACK_NAME = "shock_attack";
+  public static final String AGGRESSIVE_MODE_NAME = "aggressive_mode";
   private static final String GENERAL_ROBOT_PREFIX = "general_robot.";
   private static final DeferredRegister<SoundEvent> SOUNDS =
       DeferredRegister.create(Registries.SOUND_EVENT, CubitMod.MOD_ID);
@@ -34,6 +36,8 @@ public final class CubitSounds {
   public static final Supplier<SoundEvent> POWER_OFF = generalRobot(POWER_OFF_NAME);
   public static final Supplier<SoundEvent> RECHARGING = generalRobot(RECHARGING_NAME);
   public static final Supplier<SoundEvent> PLACED = generalRobot(PLACED_NAME);
+  public static final Supplier<SoundEvent> SHOCK_ATTACK = generalRobot(SHOCK_ATTACK_NAME);
+  public static final Supplier<SoundEvent> AGGRESSIVE_MODE = generalRobot(AGGRESSIVE_MODE_NAME);
 
   private CubitSounds() {}
 

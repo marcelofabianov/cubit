@@ -6,6 +6,7 @@ import io.github.marcelofabianov.cubit.domain.energy.Energy;
 import io.github.marcelofabianov.cubit.domain.energy.EnergyUseCause;
 import io.github.marcelofabianov.cubit.domain.energy.RechargeSource;
 import io.github.marcelofabianov.cubit.domain.energy.SolarStatus;
+import io.github.marcelofabianov.cubit.domain.robot.DefenseMode;
 import io.github.marcelofabianov.cubit.domain.tier.RobotTier;
 import io.github.marcelofabianov.cubit.item.EnergySlotItems;
 import io.github.marcelofabianov.cubit.registry.CubitMenus;
@@ -36,6 +37,10 @@ public final class RobotMenu extends AbstractContainerMenu {
   public static final int LAMP_BUTTON = 0;
   public static final int SCANNERS_BUTTON = 1;
   public static final int CHATTER_BUTTON = 2;
+
+  /** The defense modes come after the switches, in the order of the modes. */
+  public static final int FIRST_DEFENSE_BUTTON = 3;
+
   private static final int PLAYER_ROWS = 3;
   private static final int ENERGY_SLOT_SIZE = 1;
   private static final int[] SWITCH_INDEXES = {
@@ -47,6 +52,7 @@ public final class RobotMenu extends AbstractContainerMenu {
   private final ContainerData values;
   private final Runnable refresh;
   private final RobotSwitch[] switches;
+  private final DefenseControl defense;
   private final RobotScreenOpening opening;
   private boolean inventoryShown = true;
 
@@ -57,6 +63,7 @@ public final class RobotMenu extends AbstractContainerMenu {
     this.values = server.values();
     this.refresh = server.refresh();
     this.switches = server.switches().clone();
+    this.defense = server.defense();
     this.opening = contents.opening();
     addRobotSlots();
     addEnergySlot(contents.energySlot());
@@ -77,9 +84,12 @@ public final class RobotMenu extends AbstractContainerMenu {
   /** On the server, where the values come from the robot itself. */
   public static RobotMenu onServer(
       int containerId, Inventory playerInventory, Contents contents, RobotSource source) {
-    RobotScreenValues values = new RobotScreenValues(source.reading(), source.switches());
+    RobotScreenValues values =
+        new RobotScreenValues(source.reading(), source.defense(), source.switches());
     values.refresh();
-    Server server = new Server(source.stillValid(), values, values::refresh, source.switches());
+    Server server =
+        new Server(
+            source.stillValid(), values, values::refresh, source.switches(), source.defense());
     return new RobotMenu(containerId, playerInventory, contents, server);
   }
 
@@ -92,6 +102,10 @@ public final class RobotMenu extends AbstractContainerMenu {
   /** The server checks this menu before calling, and it is checked again for any other caller. */
   @Override
   public boolean clickMenuButton(Player player, int button) {
+    int mode = button - FIRST_DEFENSE_BUTTON;
+    if (mode >= 0 && mode < DefenseMode.values().length) {
+      return stillValid(player) && defense.choose(player, DefenseMode.values()[mode]);
+    }
     if (button < 0 || button >= switches.length || !stillValid(player)) {
       return false;
     }
@@ -162,6 +176,10 @@ public final class RobotMenu extends AbstractContainerMenu {
 
   public RobotExpression expression() {
     return ScreenEnums.of(RobotExpression.values(), values.get(RobotScreenValues.EXPRESSION));
+  }
+
+  public DefenseMode defenseMode() {
+    return ScreenEnums.of(DefenseMode.values(), values.get(RobotScreenValues.DEFENSE));
   }
 
   public RobotTier tier() {
@@ -286,20 +304,28 @@ public final class RobotMenu extends AbstractContainerMenu {
 
   /** What the server reads from the robot: the screen values, the switches and who may use it. */
   public record RobotSource(
-      Supplier<RobotScreenReading> reading, RobotSwitch[] switches, Predicate<Player> stillValid) {}
+      Supplier<RobotScreenReading> reading,
+      RobotSwitch[] switches,
+      DefenseControl defense,
+      Predicate<Player> stillValid) {}
 
   private record Server(
       Predicate<Player> stillValid,
       ContainerData values,
       Runnable refresh,
-      RobotSwitch[] switches) {
+      RobotSwitch[] switches,
+      DefenseControl defense) {
     private static final RobotSwitch[] NO_SWITCHES = {
       RobotSwitch.NONE, RobotSwitch.NONE, RobotSwitch.NONE
     };
 
     static Server onClient() {
       return new Server(
-          player -> true, new SimpleContainerData(RobotScreenValues.COUNT), () -> {}, NO_SWITCHES);
+          player -> true,
+          new SimpleContainerData(RobotScreenValues.COUNT),
+          () -> {},
+          NO_SWITCHES,
+          DefenseControl.NONE);
     }
   }
 }

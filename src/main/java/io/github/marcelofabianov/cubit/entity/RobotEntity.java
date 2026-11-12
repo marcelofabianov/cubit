@@ -12,7 +12,6 @@ import io.github.marcelofabianov.cubit.domain.robot.RobotState;
 import io.github.marcelofabianov.cubit.domain.robot.RobotType;
 import io.github.marcelofabianov.cubit.domain.tier.RobotTier;
 import io.github.marcelofabianov.cubit.domain.tier.TierSpec;
-import io.github.marcelofabianov.cubit.menu.RobotSwitch;
 import io.github.marcelofabianov.cubit.player.DeadRobotLinks;
 import io.github.marcelofabianov.cubit.player.FollowingRobotLink;
 import io.github.marcelofabianov.cubit.registry.CubitAttachments;
@@ -78,6 +77,7 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
   private final RobotSolar solar = new RobotSolar(this);
   private final RobotScanners scanners = new RobotScanners(this);
   private final RobotChatter chatter = new RobotChatter(this);
+  private final RobotDefense defense = new RobotDefense(this);
 
   public RobotEntity(
       EntityType<? extends RobotEntity> type,
@@ -128,11 +128,7 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
     setPersistenceRequired();
     safePosition.markHere();
     inventory.readFrom(item, spec.inventorySlots());
-    lamp.setSwitchedOn(state.lampOn());
-    scanners.setSwitchedOn(state.scannersOn());
-    chatter.setSwitchedOn(state.chatterOn());
-    scanners.setOreFilter(state.oreFilter().fitting(spec.scanners().oreFilterSlots()));
-    RobotLooks.setColor(this, state.color());
+    RobotSettings.apply(this, state);
     setCustomName(item.get(DataComponents.CUSTOM_NAME));
 
     FollowingOutcome outcome = policy().onArrival(getUUID(), follower(player), battery);
@@ -151,7 +147,8 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
         RobotLooks.color(this),
         scanners.switchedOn(),
         scanners.oreFilter(),
-        chatter.switchedOn());
+        chatter.switchedOn(),
+        defense.mode());
   }
 
   public PowerState powerState() {
@@ -166,7 +163,7 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
     return face;
   }
 
-  public RobotSwitch lampSwitch() {
+  public RobotLamp lampSwitch() {
     return lamp;
   }
 
@@ -176,6 +173,10 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
 
   public RobotScanners scanners() {
     return scanners;
+  }
+
+  public RobotDefense defense() {
+    return defense;
   }
 
   RobotNotices notices() {
@@ -277,6 +278,7 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
     notices.tick();
     scanners.tick();
     chatter.tick();
+    defense.tick();
     RobotLoadSpeed.update(this, inventory.isFull());
     inventory.dropSurplus(
         stack -> Containers.dropItemStack(level(), getX(), getY(), getZ(), stack));
@@ -341,12 +343,7 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
     powerState = SavedRobotValues.powerState(tag, getUUID());
     SavedRobotValues.readContents(tag, inventory, registryAccess(), spec().inventorySlots());
     docking.load(tag);
-    lamp.setSwitchedOn(SavedRobotValues.lampOn(tag));
-    scanners.setSwitchedOn(SavedRobotValues.scannersOn(tag));
-    chatter.setSwitchedOn(SavedRobotValues.chatterOn(tag));
-    scanners.setOreFilter(
-        SavedRobotValues.oreFilter(tag).fitting(spec().scanners().oreFilterSlots()));
-    RobotLooks.setColor(this, SavedRobotValues.color(tag, getUUID()));
+    RobotSettings.apply(this, SavedRobotValues.settings(tag, tier, getUUID()));
     safePosition.restore(SavedRobotValues.lastSafePosition(tag));
     RobotInteractions.applyAttributes(this);
   }
@@ -384,7 +381,11 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
   }
 
   TierSpec spec() {
-    return CubitMod.CONFIG.tierCatalog().spec(robotType, tier);
+    return specAt(tier);
+  }
+
+  TierSpec specAt(RobotTier at) {
+    return CubitMod.CONFIG.tierCatalog().spec(robotType, at);
   }
 
   static FollowingRobotPolicy policy() {

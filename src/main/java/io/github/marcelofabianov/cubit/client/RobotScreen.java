@@ -3,8 +3,11 @@ package io.github.marcelofabianov.cubit.client;
 import io.github.marcelofabianov.cubit.client.ScreenPainter.Box;
 import io.github.marcelofabianov.cubit.client.ScreenPainter.Colors;
 import io.github.marcelofabianov.cubit.domain.behavior.RobotScreenStatus;
+import io.github.marcelofabianov.cubit.menu.DefenseKeys;
 import io.github.marcelofabianov.cubit.menu.RobotMenu;
 import io.github.marcelofabianov.cubit.menu.ScreenKeys;
+import java.util.Arrays;
+import java.util.Optional;
 import java.util.OptionalInt;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
@@ -19,8 +22,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 
 /**
- * The robot screen of the concept image, with two tabs: the inventory and the settings. The tab is
- * only a choice of the client, and the server never depends on it.
+ * The robot screen of the concept image, with three tabs: the inventory, the settings and the
+ * defense. The tab is only a choice of the client, and the server never depends on it.
  */
 final class RobotScreen extends AbstractContainerScreen<RobotMenu> {
   private static final int WIDTH = 176;
@@ -55,15 +58,34 @@ final class RobotScreen extends AbstractContainerScreen<RobotMenu> {
   private static final int TAB_HEIGHT = 24;
   private static final int INVENTORY_TAB_Y = 9;
   private static final int SETTINGS_TAB_Y = 37;
+  private static final int DEFENSE_TAB_Y = 65;
   private static final int TAB_IDLE = 0xFFA9A9A9;
   private static final int CHEST_X = 6;
   private static final int CHEST_Y = 6;
   private static final int GEAR_X = 5;
   private static final int GEAR_Y = 4;
+  private static final int SHIELD_X = 5;
+  private static final int SHIELD_Y = 4;
 
   private final ScreenPainter painter = new ScreenPainter();
   private RobotSettingsPanel settings;
-  private boolean settingsShown;
+  private RobotDefensePanel defense;
+  private Tab tab = Tab.INVENTORY;
+
+  /** The tabs, from the top. Only the inventory shows the slots. */
+  private enum Tab {
+    INVENTORY(INVENTORY_TAB_Y, ScreenKeys.TAB_INVENTORY),
+    SETTINGS(SETTINGS_TAB_Y, ScreenKeys.TAB_SETTINGS),
+    DEFENSE(DEFENSE_TAB_Y, DefenseKeys.TAB);
+
+    private final int y;
+    private final String name;
+
+    Tab(int y, String name) {
+      this.y = y;
+      this.name = name;
+    }
+  }
 
   RobotScreen(RobotMenu menu, Inventory playerInventory, Component title) {
     super(menu, playerInventory, title);
@@ -75,7 +97,8 @@ final class RobotScreen extends AbstractContainerScreen<RobotMenu> {
   protected void init() {
     super.init();
     settings = new RobotSettingsPanel(painter, menu, oreIcon(menu.opening().filterIconTag()));
-    menu.showInventory(!settingsShown);
+    defense = new RobotDefensePanel(painter, menu);
+    menu.showInventory(tab == Tab.INVENTORY);
   }
 
   /** The first block of the tag stands for the ore, as the client knows the tags. */
@@ -105,23 +128,23 @@ final class RobotScreen extends AbstractContainerScreen<RobotMenu> {
   }
 
   private void renderTabTooltip(GuiGraphics graphics, int mouseX, int mouseY) {
-    if (onTab(mouseX, mouseY, INVENTORY_TAB_Y)) {
-      graphics.renderTooltip(
-          font, Component.translatable(ScreenKeys.TAB_INVENTORY), mouseX, mouseY);
-    } else if (onTab(mouseX, mouseY, SETTINGS_TAB_Y)) {
-      graphics.renderTooltip(font, Component.translatable(ScreenKeys.TAB_SETTINGS), mouseX, mouseY);
-    }
+    tabAt(mouseX, mouseY)
+        .ifPresent(under ->
+            graphics.renderTooltip(font, Component.translatable(under.name), mouseX, mouseY));
   }
 
   @Override
   protected void renderBg(GuiGraphics graphics, float partialTick, int mouseX, int mouseY) {
-    renderTab(graphics, INVENTORY_TAB_Y, !settingsShown);
-    renderTab(graphics, SETTINGS_TAB_Y, settingsShown);
+    for (Tab each : Tab.values()) {
+      renderTab(graphics, each.y, each == tab);
+    }
     ScreenPainter.window(graphics, leftPos, topPos, imageWidth, imageHeight);
-    renderOpenTab(graphics, settingsShown ? SETTINGS_TAB_Y : INVENTORY_TAB_Y);
+    renderOpenTab(graphics, tab.y);
     ScreenSprites.chest(graphics, leftPos + TAB_LEFT + CHEST_X, topPos + INVENTORY_TAB_Y + CHEST_Y);
     ScreenSprites.gear(graphics, leftPos + TAB_LEFT + GEAR_X, topPos + SETTINGS_TAB_Y + GEAR_Y);
-    if (settingsShown) {
+    ScreenSprites.shield(
+        graphics, leftPos + TAB_LEFT + SHIELD_X, topPos + DEFENSE_TAB_Y + SHIELD_Y);
+    if (tab != Tab.INVENTORY) {
       return;
     }
     long tick = minecraft.player == null ? 0 : minecraft.player.tickCount;
@@ -178,17 +201,21 @@ final class RobotScreen extends AbstractContainerScreen<RobotMenu> {
 
   @Override
   protected void renderLabels(GuiGraphics graphics, int mouseX, int mouseY) {
-    Component heading = settingsShown ? Component.translatable(ScreenKeys.SETTINGS) : title;
+    Component heading = tab == Tab.INVENTORY ? title : Component.translatable(tab.name);
     int titleEnd = renderTitle(graphics, heading.copy().withStyle(ChatFormatting.BOLD));
     renderBadge(graphics, titleEnd + BADGE_GAP);
-    if (settingsShown) {
+    if (tab != Tab.INVENTORY) {
       painter.textRight(
           graphics,
           RobotTexts.batteryPercent(menu),
           STATUS,
           ScreenPainter.DETAIL,
           ScreenPainter.FULL_SCALE);
-      settings.render(graphics);
+      if (tab == Tab.SETTINGS) {
+        settings.render(graphics);
+      } else {
+        defense.render(graphics);
+      }
       return;
     }
     RobotScreenStatus status = menu.status();
@@ -265,19 +292,31 @@ final class RobotScreen extends AbstractContainerScreen<RobotMenu> {
 
   @Override
   public boolean mouseClicked(double mouseX, double mouseY, int button) {
-    if (onTab(mouseX, mouseY, INVENTORY_TAB_Y) || onTab(mouseX, mouseY, SETTINGS_TAB_Y)) {
-      settingsShown = onTab(mouseX, mouseY, SETTINGS_TAB_Y);
-      menu.showInventory(!settingsShown);
+    Optional<Tab> clicked = tabAt(mouseX, mouseY);
+    if (clicked.isPresent()) {
+      tab = clicked.get();
+      menu.showInventory(tab == Tab.INVENTORY);
       return true;
     }
-    if (settingsShown) {
-      OptionalInt pressed = settings.switchAt(mouseX - leftPos, mouseY - topPos);
-      if (pressed.isPresent()) {
-        minecraft.gameMode.handleInventoryButtonClick(menu.containerId, pressed.getAsInt());
-        return true;
-      }
+    OptionalInt pressed = pressedButton(mouseX - leftPos, mouseY - topPos);
+    if (pressed.isPresent()) {
+      minecraft.gameMode.handleInventoryButtonClick(menu.containerId, pressed.getAsInt());
+      return true;
     }
     return super.mouseClicked(mouseX, mouseY, button);
+  }
+
+  /** The button under the mouse in the open tab, as the server numbers them. */
+  private OptionalInt pressedButton(double x, double y) {
+    return switch (tab) {
+      case SETTINGS -> settings.switchAt(x, y);
+      case DEFENSE -> defense.modeAt(x, y);
+      case INVENTORY -> OptionalInt.empty();
+    };
+  }
+
+  private Optional<Tab> tabAt(double mouseX, double mouseY) {
+    return Arrays.stream(Tab.values()).filter(each -> onTab(mouseX, mouseY, each.y)).findFirst();
   }
 
   private boolean onTab(double mouseX, double mouseY, int y) {
@@ -289,8 +328,7 @@ final class RobotScreen extends AbstractContainerScreen<RobotMenu> {
   /** The tabs stand outside the window, and a click there must not throw the item. */
   @Override
   protected boolean hasClickedOutside(double mouseX, double mouseY, int left, int top, int button) {
-    boolean onTabs =
-        onTab(mouseX, mouseY, INVENTORY_TAB_Y) || onTab(mouseX, mouseY, SETTINGS_TAB_Y);
-    return !onTabs && super.hasClickedOutside(mouseX, mouseY, left, top, button);
+    return tabAt(mouseX, mouseY).isEmpty()
+        && super.hasClickedOutside(mouseX, mouseY, left, top, button);
   }
 }
