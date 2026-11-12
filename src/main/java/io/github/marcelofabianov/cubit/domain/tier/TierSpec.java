@@ -22,7 +22,8 @@ public record TierSpec(
     LightLevel lampLight,
     SolarOutput solar,
     ScannerSpec scanners,
-    ShockSpec shock) {
+    ShockSpec shock,
+    PickupSpec pickup) {
 
   /** The largest radius the config accepts, which also limits the search for a robot to call. */
   public static final int MAX_CALL_RADIUS_BLOCKS = 128;
@@ -44,6 +45,36 @@ public record TierSpec(
     if (!(speedMultiplier > 0)) {
       throw new IllegalArgumentException(SPEED_MULTIPLIER + NOT_POSITIVE_MESSAGE + speedMultiplier);
     }
+  }
+
+  /** A tier without pickup numbers has no magnet and no filter slots. */
+  public TierSpec(
+      Energy batteryCapacity,
+      Energy movingConsumptionPerTick,
+      Energy rechargePerTick,
+      int inventorySlots,
+      int maxHealth,
+      int callRadiusBlocks,
+      double speedMultiplier,
+      ConsumptionExtras extras,
+      LightLevel lampLight,
+      SolarOutput solar,
+      ScannerSpec scanners,
+      ShockSpec shock) {
+    this(
+        batteryCapacity,
+        movingConsumptionPerTick,
+        rechargePerTick,
+        inventorySlots,
+        maxHealth,
+        callRadiusBlocks,
+        speedMultiplier,
+        extras,
+        lampLight,
+        solar,
+        scanners,
+        shock,
+        PickupSpec.NONE);
   }
 
   /** A tier without shock numbers only has Peaceful, like Base. */

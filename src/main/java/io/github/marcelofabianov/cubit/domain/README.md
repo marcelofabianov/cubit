@@ -21,6 +21,7 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 | `TierSpec` | Números de um tipo de robô num tier |
 | `ShockSpec` | O choque de um tier: dano, alcance, intervalo, custo, se atinge todos no alcance e os modos de defesa liberados. O Pacífico sempre está liberado. `NONE` é o tier sem choque |
 | `DefenseMode` | Quem o robô ataca: Pacífico, Contra-atacar, Agressivo ou Focus. A `key` é o nome usado no config e nos saves, e `INITIAL` é o Pacífico |
+| `PickupSpec` | A coleta de um tier: o raio do ímã, com 0 para bloqueado, o custo por item puxado e os slots e as tags do filtro de coleta. `NONE` é o tier sem esses números |
 | `ShockCandidate` | O que é um ser vivo perto do robô, para o choque: o dono, um player, um robô, ou um mob pacífico, neutro ou hostil. A camada do jogo classifica |
 | `DefenseRules` | Quem cada modo de defesa ataca |
 | `ShockSignals` | O que o robô sabe de um ser vivo além do que ele é: se está agressivo com o dono, se é o atacante lembrado, se é o alvo do Focus e se o Focus tem alvo |
@@ -51,6 +52,11 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 | `NoticeRepeat` | Quanto um aviso ainda espera para poder se repetir |
 | `OreKind` | Um tipo de minério, pela tag: uma subtag, como `c:ores/diamond`, com nome em caixa alta, ou `c:ores`, sem nome. `shownName` dá `ORE` para ele, e é a reserva quando a tag não tem bloco, porque o aviso e a tela usam o nome do bloco no idioma do jogo (pergunta 734) |
 | `OreFilter` | Os minérios que o dono pediu ao scanner, do mais antigo para o mais novo |
+| `PickupFilter` | O filtro de coleta: o `PickupMode` e as entradas, uma por slot fantasma. Só conta o que o tier permite, e o resto fica guardado |
+| `PickupMode` | Lista negra, a inicial, ou lista branca. A `key` é o nome usado nos saves |
+| `PickupEntry` | Um slot do filtro: o ID de um item ou, no Elite e no Ultimate, de uma tag, salva com `#` |
+| `PickupItem` | O que o filtro lê de um item no chão: o ID e as tags |
+| `PickupSettings` | As chaves da coleta e do ímã e o filtro, que o item guarda |
 | `OreSignals` | Quais minérios avisam e qual deles o texto cita, a partir da lista dos raros |
 | `ScannerSpec` | Números dos scanners de um tier: raios, intervalos, custos e vagas do filtro |
 | `ScanRules` | Quando os scanners funcionam e o que conta como mob hostil |
@@ -142,6 +148,9 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 - **Focus sem alvo defende:** sem alvo, o Focus age como o Contra-atacar, para o dono nunca ficar sem defesa (pergunta 848). Com alvo, só o alvo leva o choque, mesmo um neutro calmo, porque o dono o feriu (pergunta 845).
 - **Nunca atacados:** o dono, outros players, outros robôs e mobs pacíficos, em qualquer modo. Um mob neutro só vira alvo quando fica agressivo contra o dono (perguntas 13 e 68).
 - **Tempo sem relógio:** a `RetaliationMemory` e as `ShockRules` recebem o tick atual de quem chama, como o resto do domínio.
+- **Coleta e ímã separados:** a coleta por contato vale em todo tier e não gasta. O ímã precisa da coleta ligada, porque puxar sem pegar só amontoaria itens, e só puxa com carga para o custo inteiro de um item (perguntas 876, 877 e 879).
+- **Filtro sem apagar:** as entradas acima do limite do tier e as tags num tier sem tags ficam guardadas sem contar, para um config maior trazê-las de volta (pergunta 892).
+- **Comparação pelo ID:** o filtro compara só o ID do item, nunca os componentes, para uma espada encantada valer por todas (pergunta 883).
 - **Números por dado:** as regras recebem os números de um `TierSpec`, sem constantes no código (regra 39 do `AGENTS.md`).
 - **Upgrade sem pular etapas:** um Module só leva ao tier logo depois do atual. O que pula uma etapa ou chega a um tier igual ou menor não é consumido, e o motivo vira o texto da recusa (perguntas 226, 802 e 808). A ordem dos tiers é a do `enum`, então um tier novo entra no lugar certo da lista.
 - **Estado guardado se ajusta ao config:** o config pode mudar enquanto o robô está no item, então `batteryFor` e `healthFor` limitam os valores ao `TierSpec` atual. A vida nunca fica abaixo de 1, porque um robô colocado sem vida morreria na hora.
