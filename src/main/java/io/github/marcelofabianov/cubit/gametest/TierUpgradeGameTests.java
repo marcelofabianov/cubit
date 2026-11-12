@@ -36,6 +36,7 @@ public final class TierUpgradeGameTests {
   private static final String EMPTY_TEMPLATE = "empty";
   private static final String ITEM_TEXTURES = "/assets/cubit/textures/item/";
   private static final String PNG = ".png";
+  private static final String COLLAR_LAYER = "general_robot_collar";
   private static final String NO_FILE = "Missing picture: ";
   private static final String BAD_FILE = "A picture could not be read: ";
   private static final String WRONG_TIER = "Wrong tier";
@@ -187,11 +188,12 @@ public final class TierUpgradeGameTests {
   }
 
   @GameTest(template = EMPTY_TEMPLATE)
-  public static void everyModuleHasAPicture(GameTestHelper helper) {
+  public static void everyModuleAndTheCollarLayerHaveAPicture(GameTestHelper helper) {
     for (Supplier<Item> module :
         List.of(CubitItems.ADVANCED_MODULE, CubitItems.ELITE_MODULE, CubitItems.ULTIMATE_MODULE)) {
       assertFile(helper, module.get().builtInRegistryHolder().key().location().getPath());
     }
+    assertFile(helper, COLLAR_LAYER);
     helper.succeed();
   }
 

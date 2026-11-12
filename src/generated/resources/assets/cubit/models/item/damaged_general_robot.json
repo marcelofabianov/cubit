@@ -1,6 +1,7 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "cubit:item/damaged_general_robot"
+    "layer0": "cubit:item/damaged_general_robot",
+    "layer1": "cubit:item/general_robot_collar"
   }
 }
