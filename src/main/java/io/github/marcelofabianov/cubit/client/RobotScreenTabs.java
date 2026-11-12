@@ -1,5 +1,6 @@
 package io.github.marcelofabianov.cubit.client;
 
+import io.github.marcelofabianov.cubit.menu.BehaviorKeys;
 import io.github.marcelofabianov.cubit.menu.DefenseKeys;
 import io.github.marcelofabianov.cubit.menu.ScreenKeys;
 import java.util.Arrays;
@@ -17,6 +18,7 @@ final class RobotScreenTabs {
   private static final int INVENTORY_Y = 9;
   private static final int SETTINGS_Y = 37;
   private static final int DEFENSE_Y = 65;
+  private static final int BEHAVIOR_Y = 93;
   private static final int IDLE = 0xFFA9A9A9;
   private static final int CHEST_X = 6;
   private static final int CHEST_Y = 6;
@@ -24,6 +26,8 @@ final class RobotScreenTabs {
   private static final int GEAR_Y = 4;
   private static final int SHIELD_X = 5;
   private static final int SHIELD_Y = 4;
+  private static final int FUNNEL_X = 5;
+  private static final int FUNNEL_Y = 4;
 
   private Tab open = Tab.INVENTORY;
 
@@ -31,7 +35,8 @@ final class RobotScreenTabs {
   enum Tab {
     INVENTORY(INVENTORY_Y, ScreenKeys.TAB_INVENTORY),
     SETTINGS(SETTINGS_Y, ScreenKeys.TAB_SETTINGS),
-    DEFENSE(DEFENSE_Y, DefenseKeys.TAB);
+    DEFENSE(DEFENSE_Y, DefenseKeys.TAB),
+    BEHAVIOR(BEHAVIOR_Y, BehaviorKeys.TAB);
 
     private final int y;
     private final String name;
@@ -75,6 +80,7 @@ final class RobotScreenTabs {
     ScreenSprites.chest(graphics, left + CHEST_X, top + INVENTORY_Y + CHEST_Y);
     ScreenSprites.gear(graphics, left + GEAR_X, top + SETTINGS_Y + GEAR_Y);
     ScreenSprites.shield(graphics, left + SHIELD_X, top + DEFENSE_Y + SHIELD_Y);
+    ScreenSprites.funnel(graphics, left + FUNNEL_X, top + BEHAVIOR_Y + FUNNEL_Y);
   }
 
   /** The tab under a point given from the left of the tabs and the top of the window. */

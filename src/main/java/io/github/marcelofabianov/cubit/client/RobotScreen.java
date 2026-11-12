@@ -3,6 +3,8 @@ package io.github.marcelofabianov.cubit.client;
 import io.github.marcelofabianov.cubit.client.ScreenPainter.Box;
 import io.github.marcelofabianov.cubit.client.ScreenPainter.Colors;
 import io.github.marcelofabianov.cubit.domain.behavior.RobotScreenStatus;
+import io.github.marcelofabianov.cubit.domain.robot.PickupEntry;
+import io.github.marcelofabianov.cubit.menu.BehaviorKeys;
 import io.github.marcelofabianov.cubit.menu.RobotMenu;
 import io.github.marcelofabianov.cubit.menu.ScreenKeys;
 import java.util.List;
@@ -60,6 +62,7 @@ final class RobotScreen extends AbstractContainerScreen<RobotMenu> {
   private final ScreenPainter painter = new ScreenPainter();
   private RobotSettingsPanel settings;
   private RobotDefensePanel defense;
+  private RobotBehaviorPanel behavior;
   private final InventoryScrollbar scrollbar;
   private final RobotScreenTabs tabs = new RobotScreenTabs();
 
@@ -75,7 +78,8 @@ final class RobotScreen extends AbstractContainerScreen<RobotMenu> {
     super.init();
     settings = new RobotSettingsPanel(painter, menu, oreIcon(menu.opening().filterIconTag()));
     defense = new RobotDefensePanel(painter, menu);
-    menu.showInventory(tabs.open() == RobotScreenTabs.Tab.INVENTORY);
+    behavior = new RobotBehaviorPanel(painter, menu);
+    showOpenTab();
   }
 
   /** The first block of the tag stands for the ore, as the client knows the tags. */
@@ -96,12 +100,35 @@ final class RobotScreen extends AbstractContainerScreen<RobotMenu> {
   public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
     painter.begin(font);
     super.render(graphics, mouseX, mouseY, partialTick);
-    renderTooltip(graphics, mouseX, mouseY);
+    if (!renderTagTooltip(graphics, mouseX, mouseY)) {
+      renderTooltip(graphics, mouseX, mouseY);
+    }
     graphics.pose().pushPose();
     graphics.pose().translate(leftPos, topPos, 0);
     painter.cutTooltip(graphics, mouseX - leftPos, mouseY - topPos);
     graphics.pose().popPose();
     renderTabTooltip(graphics, mouseX, mouseY);
+  }
+
+  /** A filter slot that holds a tag shows the tag, not the item it stands for (answer 882). */
+  private boolean renderTagTooltip(GuiGraphics graphics, int mouseX, int mouseY) {
+    if (tabs.open() != RobotScreenTabs.Tab.BEHAVIOR || hoveredSlot == null) {
+      return false;
+    }
+    Optional<String> tag =
+        behavior.filterSlotOf(hoveredSlot).stream().boxed().findFirst().flatMap(behavior::tagAt);
+    tag.ifPresent(name ->
+        graphics.renderTooltip(
+            font,
+            Component.translatable(BehaviorKeys.TAG, PickupEntry.TAG_MARK + name),
+            mouseX,
+            mouseY));
+    return tag.isPresent();
+  }
+
+  private void showOpenTab() {
+    menu.showTab(
+        tabs.open() == RobotScreenTabs.Tab.INVENTORY, tabs.open() == RobotScreenTabs.Tab.BEHAVIOR);
   }
 
   private void renderTabTooltip(GuiGraphics graphics, int mouseX, int mouseY) {
@@ -126,6 +153,10 @@ final class RobotScreen extends AbstractContainerScreen<RobotMenu> {
     tabs.renderBehind(graphics, leftPos + tabLeft(), topPos);
     ScreenPainter.window(graphics, leftPos, topPos, imageWidth, imageHeight);
     tabs.renderFront(graphics, leftPos + tabLeft(), topPos);
+    if (tabs.open() == RobotScreenTabs.Tab.BEHAVIOR) {
+      behavior.renderFrames(graphics, leftPos, topPos);
+      renderPlayerSlots(graphics);
+    }
     if (tabs.open() != RobotScreenTabs.Tab.INVENTORY) {
       return;
     }
@@ -150,6 +181,11 @@ final class RobotScreen extends AbstractContainerScreen<RobotMenu> {
     }
     ScreenPainter.slot(
         graphics, leftPos + RobotMenu.ENERGY_SLOT_X - 1, topPos + RobotMenu.ENERGY_SLOT_Y - 1);
+    renderPlayerSlots(graphics);
+  }
+
+  private void renderPlayerSlots(GuiGraphics graphics) {
+    int frameX = leftPos + RobotMenu.FIRST_SLOT_X - 1;
     int playerTop = topPos + menu.playerInventoryY() - 1;
     for (int row = 0; row < PLAYER_ROWS; row++) {
       for (int column = 0; column < RobotMenu.SLOTS_PER_ROW; column++) {
@@ -178,10 +214,10 @@ final class RobotScreen extends AbstractContainerScreen<RobotMenu> {
           tabs.open() == RobotScreenTabs.Tab.SETTINGS ? SETTINGS_BATTERY : STATUS,
           ScreenPainter.DETAIL,
           ScreenPainter.FULL_SCALE);
-      if (tabs.open() == RobotScreenTabs.Tab.SETTINGS) {
-        settings.render(graphics);
-      } else {
-        defense.render(graphics);
+      switch (tabs.open()) {
+        case SETTINGS -> settings.render(graphics);
+        case DEFENSE -> defense.render(graphics);
+        default -> renderBehavior(graphics);
       }
       return;
     }
@@ -189,6 +225,17 @@ final class RobotScreen extends AbstractContainerScreen<RobotMenu> {
     painter.status(graphics, RobotTexts.status(menu), STATUS, RobotTexts.statusColor(status));
     renderBars(graphics, status);
     renderInventoryLabels(graphics);
+  }
+
+  private void renderBehavior(GuiGraphics graphics) {
+    behavior.render(graphics);
+    painter.text(
+        graphics,
+        playerInventoryTitle,
+        MARGIN,
+        menu.playerInventoryY() - PLAYER_LABEL_GAP,
+        ScreenPainter.TEXT,
+        ScreenPainter.FULL_SCALE);
   }
 
   private int renderTitle(GuiGraphics graphics, Component heading) {
@@ -262,7 +309,7 @@ final class RobotScreen extends AbstractContainerScreen<RobotMenu> {
     Optional<RobotScreenTabs.Tab> clicked = tabAt(mouseX, mouseY);
     if (clicked.isPresent()) {
       tabs.open(clicked.get());
-      menu.showInventory(tabs.open() == RobotScreenTabs.Tab.INVENTORY);
+      showOpenTab();
       return true;
     }
     if (tabs.open() == RobotScreenTabs.Tab.INVENTORY) {
@@ -326,6 +373,7 @@ final class RobotScreen extends AbstractContainerScreen<RobotMenu> {
     return switch (tabs.open()) {
       case SETTINGS -> settings.switchAt(x, y);
       case DEFENSE -> defense.modeAt(x, y);
+      case BEHAVIOR -> behavior.buttonAt(x, y);
       case INVENTORY -> OptionalInt.empty();
     };
   }

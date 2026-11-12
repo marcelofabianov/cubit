@@ -4,6 +4,7 @@ import io.github.marcelofabianov.cubit.CubitMod;
 import io.github.marcelofabianov.cubit.domain.energy.PowerState;
 import io.github.marcelofabianov.cubit.entity.RobotEntity;
 import io.github.marcelofabianov.cubit.entity.RobotScreenReadout;
+import io.github.marcelofabianov.cubit.menu.PickupScreenValues;
 import io.github.marcelofabianov.cubit.menu.RobotMenu;
 import io.github.marcelofabianov.cubit.registry.CubitDataComponents;
 import io.github.marcelofabianov.cubit.registry.CubitEntities;
@@ -71,7 +72,9 @@ public final class InventoryGameTests {
     helper.assertValueEqual(
         robot.interact(owner, InteractionHand.MAIN_HAND), InteractionResult.CONSUME, NOT_OPENED);
     helper.assertValueEqual(
-        menuOf(robot, owner).slots.size(), BASE_SLOTS + ENERGY_SLOTS + PLAYER_SLOTS, NOT_OPENED);
+        menuOf(robot, owner).slots.size(),
+        BASE_SLOTS + ENERGY_SLOTS + PLAYER_SLOTS + PickupScreenValues.MAX_FILTER_SLOTS,
+        NOT_OPENED);
     helper.succeed();
   }
 
