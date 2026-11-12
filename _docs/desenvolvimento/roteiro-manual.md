@@ -181,18 +181,21 @@ Use `/data get entity @e[type=cubit:general_robot,limit=1,sort=nearest] PowerSta
 
 ## Receitas
 
-Rode num mundo novo, em modo sobrevivência, com `/gamemode survival` e `/give @s minecraft:crafting_table`. Antes do passo 1, confira que as receitas do Cubit e do Dock não aparecem no livro.
+Rode num mundo novo, em modo sobrevivência, com `/gamemode survival` e `/give @s minecraft:crafting_table`. Antes do passo 1, confira que as receitas do Cubit, do Dock e dos Modules não aparecem no livro.
 
 | # | Faça | Espere |
 |---|---|---|
 | 1 | Pegue um diamante, com `/give @s minecraft:diamond` | A receita do `Cubit` aparece no livro. A do `Induction Dock` ainda não |
 | 2 | Dê os materiais: `/give @s minecraft:redstone 8`, `/give @s minecraft:redstone_lamp`, `/give @s minecraft:iron_ingot 8`, `/give @s minecraft:obsidian 2` e `/give @s minecraft:chest 2` | Os itens chegam |
 | 3 | Na mesa, monte redstone, lâmpada e redstone; ferro, diamante e ferro; obsidiana, vazio e obsidiana | Sai um `Cubit` |
-| 4 | Olhe o livro, com o `Cubit` no inventário | A receita do `Induction Dock` aparece |
+| 4 | Olhe o livro, com o `Cubit` no inventário | As receitas do `Induction Dock` e dos três Modules aparecem |
 | 5 | Coloque o `Cubit` | Ele segue você, com a barra de 25% na tela |
 | 6 | Na mesa, monte o L: redstone na coluna 1 da linha 1; ferro na coluna 1 da linha 2; baú, redstone e ferro na linha 3 | Sai um `Induction Dock` |
 | 7 | Monte o L espelhado, trocando as colunas 1 e 3 | Também sai um `Induction Dock` |
 | 8 | Coloque o `Dock` e abra a tela, com Shift + botão direito | A barra de energia está vazia, e a tela do bloco, apagada |
+| 9 | Dê `/give @s minecraft:gold_ingot 4`, `/give @s minecraft:quartz 4` e `/give @s minecraft:comparator` e monte ouro nos cantos, quartzo nos lados e o comparador no centro | Sai um `Advanced Module` |
+| 10 | Dê `/give @s minecraft:diamond 4`, `/give @s minecraft:purple_dye 4` e `/give @s minecraft:redstone_block` e monte diamante nos cantos, corante roxo nos lados e o bloco de redstone no centro | Sai um `Elite Module` |
+| 11 | Dê `/give @s minecraft:diamond 4`, `/give @s minecraft:netherite_ingot 2`, `/give @s minecraft:nether_star` e `/give @s minecraft:redstone_block` e monte diamante, bloco de redstone e diamante; netherite, estrela do Nether e netherite; diamante, vazio e diamante | Sai um `Ultimate Module` |
 
 ## Sons
 
@@ -279,7 +282,7 @@ Alerta e surpreso estão na seção Scanners.
 
 ## Colar e bateria
 
-Compare com `tier-base.png`, `tier-avancado.png`, `tier-elite.png`, `tier-ultimate.png` e `vista-costas.png`, em `_docs/imagens/conceito/png/`. Só o tier Base existe até a Fase 4, então os outros são testados por comando, e o robô usa os números do Base. A carga vai de 0 a 300.000 FE.
+Compare com `tier-base.png`, `tier-avancado.png`, `tier-elite.png`, `tier-ultimate.png` e `vista-costas.png`, em `_docs/imagens/conceito/png/`. Os comandos abaixo trocam o tier sem Module, só para ver o colar. O upgrade de verdade está em [Upgrade de tier](#upgrade-de-tier). A carga vai de 0 a 300.000 FE, a bateria do Base.
 
 | # | Faça | Espere |
 |---|---|---|
@@ -295,7 +298,7 @@ Compare com `tier-base.png`, `tier-avancado.png`, `tier-elite.png`, `tier-ultima
 | 10 | Coloque um segundo robô, que fica desligado, e olhe as costas dele no escuro | Mostra a carga dele, sem brilho |
 | 11 | Coloque um Cubit no Dock com energia, no escuro | O preenchimento brilha e sobe de nível enquanto ele carrega |
 | 12 | Veja o robô de longe, em volta, e com ele virando para você | Colar e bateria acompanham o corpo e o pescoço, sem falhas de desenho |
-| 13 | Olhe o item do Cubit e o `Damaged Cubit` | Os ícones continuam com o colar cinza |
+| 13 | Olhe o item do Cubit e o `Damaged Cubit` de um robô Base | Os ícones têm o colar cinza, como antes do upgrade de tier |
 | 14 | Rode `make server` | O servidor abre sem erro de classe de cliente |
 
 ## Texto de bateria crítica
@@ -390,6 +393,51 @@ Os valores são os padrões de [`tiers.md`](../tiers.md).
 | 11 | Conserte com a Toolbox e coloque | A cor e o nome voltam |
 | 12 | Saia e entre no mundo | A cor e o nome continuam |
 | 13 | Com outro player no servidor, use corante e etiqueta no Cubit | Nada muda, e nada é gasto. Coberto pelas GameTests, sem teste no jogo (pergunta 771) |
+
+## Upgrade de tier
+
+Compare os ícones com `modulo-avancado.png`, `modulo-elite.png` e `modulo-ultimate.png`, em `_docs/imagens/conceito/png/`. Os Modules saem das receitas da seção [Receitas](#receitas) ou da aba do criativo. Os números são os de [`tiers.md`](../tiers.md).
+
+| # | Faça | Espere |
+|---|---|---|
+| 1 | Abra a aba do Cubit no criativo, ou faça os Modules pelas receitas | Os três Modules aparecem, com os nomes em azul, roxo e dourado |
+| 2 | Passe o mouse em cada Module | `Requires a Base Cubit`, `Requires an Advanced Cubit` e `Requires an Elite Cubit`, em cinza |
+| 3 | Em sobrevivência, com um Cubit Base ativo, clique com o Elite Module | Nada muda, o Module fica na mão, e aparece `Cubit: I need to be Advanced first` |
+| 4 | Clique com o Advanced Module | O Module é gasto, ele fica feliz com o bipe, aparece `Cubit: Upgraded to Advanced!`, e o colar e as faixas ficam azuis |
+| 5 | Abra o inventário dele | A janela tem a mesma altura da do Base, com 3 linhas à vista e uma barra de rolagem à direita. Rolando, aparecem os 36 slots, com os itens nos mesmos lugares. A vida atual é a mesma, a vida máxima é 50, e a bateria tem a mesma carga sobre 600 mil FE |
+| 6 | Clique de novo com o Advanced Module | Nada é gasto, e aparece `Cubit: I'm already Advanced` |
+| 7 | Ande com ele | Mais rápido que o Base |
+| 8 | Aplique o Elite Module num Cubit desligado e o Ultimate num Cubit no Dock | Os dois sobem de tier. Com a tela apagada, só o texto aparece, e no Dock ele continua carregando |
+| 9 | Abra o Cubit Ultimate numa janela pequena do jogo, com a escala automática | A tela cabe inteira. A roda do mouse sobre o inventário, um clique na barra e arrastar o marcador passam pelas 6 linhas. Shift + clique de um item do player, com as 3 linhas de cima cheias, guarda o item numa linha de baixo |
+| 10 | Recolha o Cubit Ultimate | O ícone tem o colar dourado, também pintado de outra cor |
+| 11 | Mate esse Cubit | O ícone do `Damaged Cubit` tem o colar dourado, e o conserto mantém o tier |
+| 12 | No criativo, aplique um Module | O Module não é gasto |
+| 13 | Com o jogo em português, repita os passos 2 a 6 | `Módulo Avançado`, `Exige um Cubit Base`, `Cubit: Preciso ser Avançado antes`, `Cubit: Evoluí para Avançado!` e `Cubit: Já sou Avançado` |
+| 14 | Com outro player no servidor, use um Module no Cubit | Nada acontece, sem texto, e o Module não é gasto. Coberto pelas GameTests, sem teste no jogo (pergunta 809) |
+
+## Choque e modos de defesa
+
+As regras estão em [`combate.md`](../funcionalidades/combate.md), e os números, em [`tiers.md`](../tiers.md#comportamento-e-combate). Use os Modules da aba do criativo para chegar a cada tier, em sobrevivência.
+
+| # | Faça | Espere |
+|---|---|---|
+| 1 | Com um Cubit Base, abra a tela | Três abas: baú, engrenagem e escudo. Na Defense, `Peaceful` marcado, `Retaliate` e `Aggressive` apagados, com `Unlocks at Advanced` e `Unlocks at Elite`, e a seção `Shock` com `Unlocks at Advanced` |
+| 2 | Suba para o Advanced e abra a aba Defense | `Retaliate` liberado, e a seção `Shock` com dano 2, 3 blocos, a cada 3 s, 2000 FE por choque e o mais próximo |
+| 3 | Escolha `Retaliate`, chegue perto de um zumbi e deixe ele te bater | O Cubit dá choque nele, com faíscas do Cubit até o zumbi e o som de choque. Um zumbi que não atacou ninguém não leva choque |
+| 4 | Suba para o Elite e escolha `Aggressive` | Toca o som do modo agressivo, só nessa troca |
+| 5 | Ande perto de mobs hostis, de animais e de um piglin zumbificado calmo | Só os hostis levam choque. Animais e o piglin calmo, não |
+| 6 | Bata no piglin zumbificado | Ele fica agressivo contra você e passa a levar choque |
+| 7 | Deixe um mob morrer pelo choque | Ele solta XP, e, se tiver nome, a mensagem é `X was zapped by Cubit` |
+| 8 | Suba para o Ultimate, com dois mobs hostis no alcance | Os dois levam choque de uma vez, a cada 1 s |
+| 9 | Ponha um bloco entre o Cubit e o mob | Sem choque através do bloco |
+| 9a | Com o Cubit no Advanced, escolha `Focus` e bata num zumbi, com outros zumbis por perto | Aparece `Cubit: Target: Zombie`, o zumbi ganha uma seta amarela maior, e só ele leva choque. As setas vermelhas do scanner continuam nos outros |
+| 9b | Atire uma flecha em outro zumbi | Ele vira o alvo, com o texto e a seta amarela |
+| 9c | Bata numa vaca | Ela não vira alvo, e o alvo continua o mesmo |
+| 9d | Afaste-se mais de 32 blocos do alvo, ou deixe ele morrer | A seta amarela some. Sem alvo, o Cubit volta a defender quem te ferir |
+| 10 | Desligue o Cubit ou deixe ele no Dock, com mobs por perto | Sem choque |
+| 11 | Recolha e coloque o Cubit, e saia e entre no mundo | O modo escolhido continua |
+| 12 | Com o jogo em português, abra a aba | `Defesa`, `Modos`, `Pacífico`, `Contra-atacar`, `Agressivo`, `Libera no Avançado` e a seção `Choque` |
+| 13 | Com outro player no servidor, tente mudar o modo pela tela | Ele não abre a tela do Cubit. Coberto pelas GameTests, sem teste no jogo |
 
 ## Scanners
 
@@ -553,6 +601,22 @@ Compare cada tela com as imagens [`tela-cubit.png`](../imagens/conceito/tela-cub
 | 21 | Teste outro player no servidor | Ele não abre as telas do seu Cubit nem do seu Dock |
 | 22 | Mude a escala da interface nas opções de vídeo | As torres, os ícones e os retratos continuam nítidos |
 
+## Chaves da aba Settings
+
+As regras estão em [`telas.md`](../funcionalidades/telas.md#aba-settings) e em [`energia.md`](../funcionalidades/energia.md).
+
+| # | Faça | Espere |
+|---|---|---|
+| 1 | Abra a aba Settings de um Cubit ativo | Quatro chaves em Functions, com `Solar panel` na última, `Charges in the sun · 5 FE/t` no Base, e tudo cabe na janela, sem o rodapé antigo. No cabeçalho, o botão `Power` ao lado de `Battery` |
+| 2 | Passe o mouse no `Power` | `Power` e `Turns the Cubit off` |
+| 3 | De dia, ao céu aberto, desligue o `Solar panel` | A célula para de pulsar, a bateria não sobe pelo sol, e o Status mostra `Solar panel` `Off` |
+| 4 | Recolha e coloque o Cubit, e saia e entre no mundo | A chave continua desligada |
+| 5 | Clique no `Power` | O Cubit desliga, com o som de desligar, e a tela fecha |
+| 6 | Coloque outro Cubit | Ele passa a seguir você, porque o primeiro liberou o lugar |
+| 7 | Clique com o botão direito no primeiro | Ele liga, e fica desligado de novo se o outro estiver seguindo, pela regra que já existe |
+| 8 | Abra a tela de um Cubit hibernando no Dock | O `Power` aparece apagado e não faz nada |
+| 9 | Com o jogo em português, abra a aba | `Painel solar`, `Carrega no sol · 5 FE/t`, e no `Power`, `Energia` e `Desliga o Cubit` |
+
 ## Tradução
 
 | # | Passo | Resultado esperado |
@@ -612,6 +676,12 @@ Na instância só com o mod, tire capturas com F2 do Cubit seguindo, da tela do 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-12 18:10 | Adiciona as chaves da aba Settings. |
+| Marcelo Fabiano | 2026-11-12 15:50 | Adiciona o modo Focus. |
+| Marcelo Fabiano | 2026-11-12 13:40 | Adiciona a rolagem do inventário ao upgrade de tier. |
+| Marcelo Fabiano | 2026-11-12 11:40 | Adiciona o choque e os modos de defesa. |
+| Marcelo Fabiano | 2026-11-12 08:50 | Adiciona as receitas dos Modules. |
+| Marcelo Fabiano | 2026-11-11 23:40 | Adiciona o upgrade de tier e atualiza o colar no ícone. |
 | Marcelo Fabiano | 2026-11-08 01:17 | Adiciona o teste da versão, com as instâncias no Prism, e troca o teste com outro player pelas GameTests. |
 | Marcelo Fabiano | 2026-11-08 01:05 | Confere a descrição traduzida na lista de mods. |
 | Marcelo Fabiano | 2026-11-08 00:11 | Usa o nome do bloco nos exemplos de minério. |

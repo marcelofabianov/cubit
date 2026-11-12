@@ -8,7 +8,7 @@ Os tiers são Base, Avançado, Elite e Ultimate (no jogo: Base, Advanced, Elite 
 
 - Os **upgrades são os próprios tiers**. A cada tier, o robô mantém as features do anterior, só que melhoradas.
 - O robô Base já tem os recursos com capacidade menor, e os que ele não usa ficam **bloqueados** até o tier certo.
-- O **upgrade de tier** é um item aplicado no robô e não pode pular etapas: Base → Avançado → Elite → Ultimate. Inventário, bateria, vida, nome, cor e configurações se mantêm, e a vida máxima sobe para a do novo tier.
+- O **upgrade de tier** é um item aplicado no robô e não pode pular etapas: Base → Avançado → Elite → Ultimate. Inventário, bateria, vida, nome, cor e configurações se mantêm, e a vida máxima sobe para a do novo tier. O detalhe está em [`upgrade-de-tier.md`](funcionalidades/upgrade-de-tier.md).
 
 ## Identidade
 
@@ -92,6 +92,8 @@ Valem para todos os tiers e ficam no config. Os marcados como planejados entram 
 | Intervalo para tentar de novo o resgate no vazio | 20 ticks |
 | Alcance do controle remoto ao mirar num Cubit, planejado para a Fase 4 | 32 blocos |
 | Intervalo mínimo entre repetições de textos e alertas | ~25 s |
+| Tempo em que o Contra-atacar lembra de quem feriu o Cubit ou o dono | ~30 s (pergunta 832) |
+| Distância do dono em que o alvo do Focus deixa de ser alvo | 32 blocos (pergunta 846) |
 | Intervalo mínimo entre falas sobre o tempo | 5 min |
 | Intervalo mínimo entre falas de bioma | 2 min |
 | Intervalo mínimo entre falas de animais | 1 min |
@@ -127,9 +129,8 @@ Valem para todos os tiers e ficam no config. Os marcados como planejados entram 
 | Recurso | Base | Avançado | Elite | Ultimate |
 |---|---|---|---|---|
 | Scanner de minérios (raio) | 5 blocos | 8 blocos | 12 blocos | 20 blocos |
-| Minérios no filtro do scanner | 1 | 3 | 6 | Ilimitado |
+| Minérios no filtro do scanner | 1 | 3 | 6 | 64, o limite do config (pergunta 810) |
 | Scanner de mobs hostis (raio) | 8 blocos | 14 blocos | 20 blocos | 25 blocos |
-
 | Intervalo de varredura de minérios | 35 s | 20 s | 15 s | 5 s |
 | Intervalo de varredura de mobs | 10 s | 8 s | 6 s | 4 s |
 
@@ -139,11 +140,12 @@ O raio dos dois scanners é o de uma esfera em volta do Cubit: só conta o que e
 
 | Recurso | Base | Avançado | Elite | Ultimate |
 |---|---|---|---|---|
-| Modos de defesa | Pacífico | + Contra-atacar | + Agressivo | Todos |
+| Modos de defesa | Pacífico | + Contra-atacar e Focus | + Agressivo | Todos |
 | Choque (dano) | Bloqueado | 2 (1 ❤) | 4 (2 ❤) | 6 (3 ❤), em área |
 | Choque (alcance) | — | 3 blocos | 5 blocos | 8 blocos |
 | Choque (intervalo) | — | 3 s | 2 s | 1 s |
 | Custo do choque | — | 2 mil FE | 2 mil FE | 1,5 mil FE |
+| Alvos por choque | — | 1, o mais próximo | 1, o mais próximo | Todos no alcance (pergunta 826) |
 
 ## Autonomia
 
@@ -198,6 +200,9 @@ Planejado para a Fase 5. O tier Base não aceita cards.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-12 15:10 | Adiciona o modo Focus e a distância do alvo. |
+| Marcelo Fabiano | 2026-11-12 10:30 | Adiciona os alvos por choque e a memória do Contra-atacar. |
+| Marcelo Fabiano | 2026-11-11 22:01 | Aponta para o upgrade de tier, junta a tabela dos sensores e troca o filtro ilimitado por 64. |
 | Marcelo Fabiano | 2026-11-07 23:41 | Arruma a tabela dos sensores e marca os valores planejados. |
 | Marcelo Fabiano | 2026-11-07 20:04 | Adiciona o intervalo das falas da redstone. |
 | Marcelo Fabiano | 2026-11-07 20:00 | Muda o raio do scanner de mobs. |

@@ -13,7 +13,7 @@ O dono escolhe a cor da carcaça e o nome de cada Cubit (perguntas 504 a 514).
 - **Corante:** gasta 1, menos no criativo. Na mesma cor, nada acontece e nada é gasto, e o inventário não abre.
 - **Quem não é dono:** nunca pinta.
 - **Como é desenhado:** com uma textura do corpo por cor, escolhida pelo renderer, que um pacote de recursos pode trocar.
-- **Ícone:** o do Cubit acompanha a cor. O do Damaged Cubit não muda, e a cor volta ao consertar. O colar no ícone continua cinza até a Fase 4 (pergunta 414).
+- **Ícone:** o do Cubit acompanha a cor. O do Damaged Cubit não muda, e a cor volta ao consertar. O colar no ícone dos dois segue o tier, numa camada tingida (perguntas 414 e 803), conforme [`upgrade-de-tier.md`](upgrade-de-tier.md#ícone-do-item).
 
 ## Nome
 
@@ -33,5 +33,6 @@ Recolher, morrer, consertar e salvar o mundo mantêm a cor e o nome. Saves antig
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-11 22:01 | Atualiza o colar no ícone. |
 | Marcelo Fabiano | 2026-11-07 23:42 | Atualiza onde o nome aparece. |
 | Marcelo Fabiano | 2026-11-06 15:58 | Define a cor da carcaça e o nome. |

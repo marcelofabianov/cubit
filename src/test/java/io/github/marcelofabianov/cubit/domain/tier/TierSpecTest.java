@@ -136,4 +136,9 @@ class TierSpecTest {
         List.of(RobotTier.BASE, RobotTier.ADVANCED, RobotTier.ELITE, RobotTier.ULTIMATE),
         List.of(RobotTier.values()));
   }
+
+  @Test
+  void aTierWithoutShockNumbersOnlyHasPeaceful() {
+    assertEquals(ShockSpec.NONE, BASE.shock());
+  }
 }

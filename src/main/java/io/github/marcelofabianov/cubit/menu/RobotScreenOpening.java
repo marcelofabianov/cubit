@@ -16,8 +16,10 @@ public record RobotScreenOpening(
     int oreRadius,
     int mobRadius,
     long scanCost,
+    long solarDay,
     List<String> filterTags,
-    String filterIconTag) {
+    String filterIconTag,
+    DefenseOpening defense) {
   private static final int MAX_FILTER = 64;
 
   public RobotScreenOpening {
@@ -31,8 +33,10 @@ public record RobotScreenOpening(
     data.writeVarInt(oreRadius);
     data.writeVarInt(mobRadius);
     data.writeVarLong(scanCost);
+    data.writeVarLong(solarDay);
     data.writeCollection(filterTags, FriendlyByteBuf::writeUtf);
     data.writeUtf(filterIconTag);
+    defense.write(data);
   }
 
   /** A filter longer than any tier allows is cut, so a bad packet cannot grow the screen. */
@@ -43,10 +47,21 @@ public record RobotScreenOpening(
     int oreRadius = data.readVarInt();
     int mobRadius = data.readVarInt();
     long scanCost = data.readVarLong();
+    long solarDay = data.readVarLong();
     List<String> names = data.readList(FriendlyByteBuf::readUtf);
     List<String> kept = names.subList(0, Math.min(names.size(), MAX_FILTER));
+    String iconTag = data.readUtf();
     return new RobotScreenOpening(
-        slots, lampOnBelow, lampCost, oreRadius, mobRadius, scanCost, kept, data.readUtf());
+        slots,
+        lampOnBelow,
+        lampCost,
+        oreRadius,
+        mobRadius,
+        scanCost,
+        solarDay,
+        kept,
+        iconTag,
+        DefenseOpening.read(data));
   }
 
   public boolean hasFilter() {

@@ -19,6 +19,16 @@ public record PowerRules(Percentage wakeThreshold) {
     return state;
   }
 
+  /** Only an active robot: in the base it hibernates, and off it is already off (answer 857). */
+  public static boolean canSwitchOff(PowerState state) {
+    return state == PowerState.ACTIVE;
+  }
+
+  /** The owner switches the robot off on its screen. It turns on again with a click. */
+  public PowerState switchOff(PowerState state) {
+    return canSwitchOff(state) ? PowerState.INACTIVE_SWITCHED_OFF : state;
+  }
+
   public PowerState leaveBase(Battery battery) {
     return battery.isEmpty() ? PowerState.INACTIVE_EXHAUSTED : PowerState.ACTIVE;
   }

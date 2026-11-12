@@ -95,6 +95,21 @@ public final class SolarGameTests {
   }
 
   @GameTest(template = ARENA, timeoutTicks = TIMEOUT, batch = DAYLIGHT_BATCH)
+  public static void aSwitchedOffPanelGivesNothingInTheSun(GameTestHelper helper) {
+    RobotEntity robot = place(helper, helper.makeMockPlayer(GameType.SURVIVAL), SOME_ENERGY);
+    robot.solar().toggle();
+    long before = robot.state().energy().amount();
+
+    helper.runAfterDelay(
+        SETTLED_TICKS,
+        () -> {
+          helper.assertFalse(RobotSolar.isCharging(robot), CHARGING);
+          helper.assertValueEqual(robot.state().energy().amount(), before, GAINED);
+          helper.succeed();
+        });
+  }
+
+  @GameTest(template = ARENA, timeoutTicks = TIMEOUT, batch = DAYLIGHT_BATCH)
   public static void anOpaqueBlockAboveStopsThePanel(GameTestHelper helper) {
     assertRoof(helper, Blocks.STONE, false);
   }

@@ -74,7 +74,10 @@ final class ScreenTexts {
   private static final String FOLLOWING = "Following";
   private static final String FOLLOWING_YOU = "You";
   private static final String FOLLOWING_NOBODY = "Nobody";
-  private static final String MORE_FUNCTIONS = "More functions arrive with the next updates.";
+  private static final String SOLAR_DETAIL = "Charges in the sun · %s FE/t";
+  private static final String POWER = "Power";
+  private static final String POWER_DETAIL = "Turns the Cubit off";
+  private static final String SOLAR_SWITCHED_OFF_TEXT = "Off";
   private static final String STATUS_CRITICAL_BATTERY_TEXT = "Critical battery";
   private static final String STATUS_FOLLOWING_TEXT = "Following";
   private static final String STATUS_ACTIVE_TEXT = "Active";
@@ -124,7 +127,8 @@ final class ScreenTexts {
           SolarStatus.NIGHT, SOLAR_NIGHT_TEXT,
           SolarStatus.NO_SUN, SOLAR_NO_SUN_TEXT,
           SolarStatus.FULL, SOLAR_FULL_TEXT,
-          SolarStatus.OFF, SOLAR_OFF_TEXT);
+          SolarStatus.OFF, SOLAR_OFF_TEXT,
+          SolarStatus.SWITCHED_OFF, SOLAR_SWITCHED_OFF_TEXT);
   private static final Map<EnergyUseCause, String> CAUSES =
       Map.of(
           EnergyUseCause.WALKING, CAUSE_WALKING_TEXT,
@@ -187,7 +191,9 @@ final class ScreenTexts {
     add.accept(ScreenKeys.FOLLOWING, FOLLOWING);
     add.accept(ScreenKeys.FOLLOWING_YOU, FOLLOWING_YOU);
     add.accept(ScreenKeys.FOLLOWING_NOBODY, FOLLOWING_NOBODY);
-    add.accept(ScreenKeys.MORE_FUNCTIONS, MORE_FUNCTIONS);
+    add.accept(ScreenKeys.SOLAR_DETAIL, SOLAR_DETAIL);
+    add.accept(ScreenKeys.POWER, POWER);
+    add.accept(ScreenKeys.POWER_DETAIL, POWER_DETAIL);
   }
 
   private static void addStates(BiConsumer<String, String> add) {

@@ -11,15 +11,22 @@ import io.github.marcelofabianov.cubit.domain.energy.RechargeSource.RechargeView
 import io.github.marcelofabianov.cubit.domain.energy.SolarOutput;
 import io.github.marcelofabianov.cubit.domain.energy.SolarStatus;
 import io.github.marcelofabianov.cubit.domain.energy.SolarStatus.SolarView;
+import io.github.marcelofabianov.cubit.domain.robot.DefenseMode;
 import io.github.marcelofabianov.cubit.domain.robot.OreFilter;
 import io.github.marcelofabianov.cubit.domain.robot.OreKind;
+import io.github.marcelofabianov.cubit.domain.tier.RobotTier;
 import io.github.marcelofabianov.cubit.domain.tier.ScannerSpec;
+import io.github.marcelofabianov.cubit.domain.tier.ShockSpec;
 import io.github.marcelofabianov.cubit.domain.tier.TierSpec;
+import io.github.marcelofabianov.cubit.menu.DefenseOpening;
 import io.github.marcelofabianov.cubit.menu.RobotMenu;
 import io.github.marcelofabianov.cubit.menu.RobotScreenOpening;
 import io.github.marcelofabianov.cubit.menu.RobotScreenReading;
 import io.github.marcelofabianov.cubit.menu.RobotScreenReading.Vitals;
 import io.github.marcelofabianov.cubit.menu.RobotSwitch;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import net.minecraft.world.entity.player.Inventory;
 
 /** Reads a robot for its screen. Only reads, and the rules come from the domain. */
@@ -32,12 +39,17 @@ public final class RobotScreenReadout {
   public static RobotMenu serverMenu(int containerId, Inventory inventory, RobotEntity robot) {
     RobotMenu.Contents contents =
         new RobotMenu.Contents(robot.inventory(), robot.energySlot(), opening(robot));
-    RobotSwitch[] switches = {robot.lampSwitch(), robot.scanners(), robot.chatter()};
+    RobotSwitch[] switches = {robot.lampSwitch(), robot.scanners(), robot.chatter(), robot.solar()};
     return RobotMenu.onServer(
         containerId,
         inventory,
         contents,
-        new RobotMenu.RobotSource(() -> read(robot), switches, robot::canUseInventory));
+        new RobotMenu.RobotSource(
+            () -> read(robot),
+            switches,
+            robot.defense(),
+            new RobotPower(robot),
+            robot::canUseInventory));
   }
 
   static RobotScreenReading read(RobotEntity robot) {
@@ -48,7 +60,8 @@ public final class RobotScreenReadout {
     RechargeSource recharge = recharge(tick, state, battery);
     SolarStatus solar =
         SolarStatus.of(
-            new SolarView(state, tick.sunExists(), tick.skyOpen(), tick.day()),
+            new SolarView(
+                state, tick.sunExists(), tick.skyOpen(), tick.day(), robot.solar().switchedOn()),
             battery,
             robot.spec().solar());
     return new RobotScreenReading(
@@ -89,7 +102,33 @@ public final class RobotScreenReadout {
         scanners.oreRadiusBlocks(),
         scanners.mobRadiusBlocks(),
         scanners.oreCost().amount(),
+        spec.solar().dayPerTick().amount(),
         filter.kinds().stream().map(OreKind::tag).toList(),
-        filter.kinds().stream().findFirst().map(OreKind::tag).orElse(NO_ICON));
+        filter.kinds().stream().findFirst().map(OreKind::tag).orElse(NO_ICON),
+        defense(robot));
+  }
+
+  /** The tier that first allows each mode comes from the config, as the modes do (answer 834). */
+  private static DefenseOpening defense(RobotEntity robot) {
+    ShockSpec shock = robot.spec().shock();
+    List<Boolean> allowed = new ArrayList<>();
+    List<Integer> unlock = new ArrayList<>();
+    for (DefenseMode mode : DefenseMode.values()) {
+      allowed.add(shock.allows(mode));
+      unlock.add(
+          Arrays.stream(RobotTier.values())
+              .filter(tier -> robot.specAt(tier).shock().allows(mode))
+              .findFirst()
+              .map(RobotTier::ordinal)
+              .orElse(DefenseOpening.NEVER));
+    }
+    return new DefenseOpening(
+        allowed,
+        unlock,
+        shock.damage(),
+        shock.rangeBlocks(),
+        shock.intervalTicks(),
+        shock.cost().amount(),
+        shock.hitsAllInRange());
   }
 }

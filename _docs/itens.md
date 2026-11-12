@@ -23,9 +23,9 @@
 | Damaged Cubit | `cubit:damaged_general_robot` | Não tem: cai quando o Cubit morre |
 | Toolbox | `cubit:toolbox` | Provisória, abaixo |
 | Cubit Remote | `cubit:remote` | A definir |
-| Advanced Module | `cubit:advanced_module` | A definir |
-| Elite Module | `cubit:elite_module` | A definir |
-| Ultimate Module | `cubit:ultimate_module` | A definir |
+| Advanced Module | `cubit:advanced_module` | [Abaixo](#advanced-module) |
+| Elite Module | `cubit:elite_module` | [Abaixo](#elite-module) |
+| Ultimate Module | `cubit:ultimate_module` | [Abaixo](#ultimate-module) |
 | Induction Dock | `cubit:induction_dock` | Abaixo |
 | Base Power Bank | `cubit:base_power_bank` | A definir |
 | Advanced Power Bank | `cubit:advanced_power_bank` | A definir |
@@ -40,7 +40,7 @@ Receitas provisórias, só com recursos do jogo puro, a ajustar nos testes:
 |---|---|
 | Base | Ferro e redstone |
 | Avançado | Ouro e quartzo |
-| Elite | Diamante e ametista |
+| Elite | Diamante e corante roxo (pergunta 817) |
 | Ultimate | Netherite e estrela do Nether |
 
 ### Cubit
@@ -97,6 +97,38 @@ Na mesa de craft, em forma de L (pergunta 336). O desenho espelhado também vale
 - O item sem estado salvo, como o da aba do criativo, vale como um robô novo: tier Base, carga inicial e vida cheia.
 - A aba do criativo do mod é `cubit:main`.
 
+## Modules
+
+Levam o Cubit ao tier seguinte, sem pular etapas. As regras estão em [`upgrade-de-tier.md`](funcionalidades/upgrade-de-tier.md).
+
+- **Empilha** até 64, e o nome aparece na cor do colar do tier (pergunta 804).
+- **Criativo:** os três ficam na aba `cubit:main`.
+- **Receitas:** na mesa de craft, independentes, sem o Module anterior, só com materiais do jogo puro (pergunta 799). As três aparecem no livro ao ter um Cubit (pergunta 805). Os materiais e a grade vêm das perguntas 807, 817 e 818.
+
+### Advanced Module
+
+| | Coluna 1 | Coluna 2 | Coluna 3 |
+|---|---|---|---|
+| Linha 1 | Lingote de ouro | Quartzo | Lingote de ouro |
+| Linha 2 | Quartzo | Comparador | Quartzo |
+| Linha 3 | Lingote de ouro | Quartzo | Lingote de ouro |
+
+### Elite Module
+
+| | Coluna 1 | Coluna 2 | Coluna 3 |
+|---|---|---|---|
+| Linha 1 | Diamante | Corante roxo | Diamante |
+| Linha 2 | Corante roxo | Bloco de redstone | Corante roxo |
+| Linha 3 | Diamante | Corante roxo | Diamante |
+
+### Ultimate Module
+
+| | Coluna 1 | Coluna 2 | Coluna 3 |
+|---|---|---|---|
+| Linha 1 | Diamante | Bloco de redstone | Diamante |
+| Linha 2 | Lingote de netherite | Estrela do Nether | Lingote de netherite |
+| Linha 3 | Diamante | Vazio | Diamante |
+
 ## Previstos na Fase 5
 
 Nomes aprovados na pergunta 256. Viram contrato só quando implementados.
@@ -122,7 +154,7 @@ Estes nomes não mudam sem migração (regra 18 do `AGENTS.md`).
 
 | Onde | Nome | Conteúdo |
 |---|---|---|
-| Componente do item | `cubit:robot_state` | `tier`, `energy`, `health`, `lamp_enabled`, opcional, com o padrão ligado, `color`, opcional, com o padrão `white`, `scanners_enabled` e `chatter_enabled`, opcionais, com o padrão ligado, e `ore_filter`, opcional, com a lista de tags de minério, vazia por padrão (perguntas 560 e 582), também no item danificado |
+| Componente do item | `cubit:robot_state` | `tier`, `energy`, `health`, `lamp_enabled`, opcional, com o padrão ligado, `color`, opcional, com o padrão `white`, `scanners_enabled` e `chatter_enabled`, opcionais, com o padrão ligado, `ore_filter`, opcional, com a lista de tags de minério, vazia por padrão (perguntas 560 e 582), `defense_mode`, opcional, com o padrão `peaceful` (pergunta 830), e `solar_enabled`, opcional, com o padrão ligado (pergunta 859), também no item danificado |
 | Componente do item | `cubit:energy_slot` | Item do slot de energia e reserva de FE, também no item danificado |
 | Componente do item do Dock | `cubit:dock_energy` | Energia do estoque |
 | Componente do item | `cubit:robot_inventory` | Conteúdo do inventário, também no item danificado |
@@ -135,6 +167,9 @@ Estes nomes não mudam sem migração (regra 18 do `AGENTS.md`).
 | Estado do bloco do Dock | `facing`, `half` e `status` | Direção, parte de baixo ou de cima e estado da tela: `off`, `idle`, `charging`, `complete` ou `no_energy` |
 | NBT da entidade na base | `DockPosition` | Posição do Dock em que hiberna |
 | NBT da entidade | `LampEnabled` | Chave da lanterna. Sem a chave no save, vale ligada |
+| NBT da entidade | `SolarEnabled` | Chave do painel solar. Sem a chave no save, vale ligada (pergunta 859) |
+| NBT da entidade | `DefenseMode` | Modo de defesa: `peaceful`, `retaliate`, `aggressive` ou `focus`. Sem a chave ou com valor inválido, vale `peaceful` |
+| Tipo de dano | `cubit:shock` | O choque do Cubit, com a mensagem de morte `X was zapped by Cubit` (pergunta 831) |
 | NBT da entidade | `Color` | Cor da carcaça, com o nome do corante, como `light_blue`. Sem a chave ou com valor inválido, vale `white` |
 | NBT da entidade | `ScannersEnabled` e `ChatterEnabled` | Chaves dos scanners e das falas. Sem a chave no save, vale ligada |
 | NBT da entidade | `OreFilter` | Filtro do scanner, com as tags de minério. Uma tag inválida é ignorada e vai para o log |
@@ -158,6 +193,11 @@ O estado salvo é validado ao entrar no jogo, sem derrubá-lo (regra 17 do `AGEN
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-12 17:20 | Adiciona a chave do painel solar aos contratos de save. |
+| Marcelo Fabiano | 2026-11-12 15:10 | Adiciona o modo Focus ao NBT. |
+| Marcelo Fabiano | 2026-11-12 10:30 | Adiciona o modo de defesa e o tipo de dano do choque aos contratos de save. |
+| Marcelo Fabiano | 2026-11-12 08:30 | Adiciona as receitas dos Modules. |
+| Marcelo Fabiano | 2026-11-11 22:01 | Adiciona os Modules. |
 | Marcelo Fabiano | 2026-11-07 23:41 | Acrescenta as chaves dos scanners, do filtro e das falas aos contratos de save. |
 | Marcelo Fabiano | 2026-11-07 13:51 | Adiciona a energia negativa e o Dock sem dono à validação do save. |
 | Marcelo Fabiano | 2026-11-06 15:58 | Adiciona a cor e o nome ao contrato do save. |

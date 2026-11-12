@@ -93,6 +93,7 @@
     }
   ],
   "textures": {
-    "layer0": "cubit:item/general_robot"
+    "layer0": "cubit:item/general_robot",
+    "layer1": "cubit:item/general_robot_collar"
   }
 }

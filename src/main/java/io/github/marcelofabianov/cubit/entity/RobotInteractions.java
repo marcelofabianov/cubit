@@ -6,6 +6,7 @@ import io.github.marcelofabianov.cubit.domain.ownership.FollowingOutcome;
 import io.github.marcelofabianov.cubit.domain.ownership.Ownership;
 import io.github.marcelofabianov.cubit.domain.robot.RobotClick;
 import io.github.marcelofabianov.cubit.domain.tier.TierSpec;
+import io.github.marcelofabianov.cubit.item.ModuleItem;
 import io.github.marcelofabianov.cubit.menu.RobotScreenOpening;
 import io.github.marcelofabianov.cubit.player.FollowingRobotLink;
 import io.github.marcelofabianov.cubit.registry.CubitAttachments;
@@ -47,7 +48,8 @@ final class RobotInteractions {
     Player owner = robot.onlineOwner();
     if (robot.powerState() == PowerState.ACTIVE
         && owner != null
-        && !RobotEntity.policy().holdsThePlace(robot.getUUID(), RobotEntity.follower(owner))) {
+        && !RobotFollowing.policy()
+            .holdsThePlace(robot.getUUID(), RobotFollowing.follower(owner))) {
       robot.setPowerState(PowerState.INACTIVE_SWITCHED_OFF);
       robot.getNavigation().stop();
     }
@@ -68,7 +70,8 @@ final class RobotInteractions {
   /** The player this robot follows right now, when that player is online. */
   static Player followedPlayer(RobotEntity robot) {
     Player owner = robot.onlineOwner();
-    if (owner == null || !RobotEntity.follower(owner).filter(robot.getUUID()::equals).isPresent()) {
+    if (owner == null
+        || !RobotFollowing.follower(owner).filter(robot.getUUID()::equals).isPresent()) {
       return null;
     }
     return owner;
@@ -86,12 +89,14 @@ final class RobotInteractions {
     RobotClick click =
         RobotClick.of(
             Ownership.owns(robot.ownerId(), player.getUUID()),
+            held.getItem() instanceof ModuleItem,
             player.isShiftKeyDown(),
             held.getItem() instanceof DyeItem,
             held.is(Tags.Items.ORES),
             robot.powerState());
     return switch (click) {
       case IGNORE -> InteractionResult.PASS;
+      case UPGRADE -> RobotUpgrade.apply(robot, player, held, (ModuleItem) held.getItem());
       case COLLECT -> collect(robot, player);
       case PAINT -> RobotPaint.apply(robot, player, held, (DyeItem) held.getItem());
       case CHOOSE_ORE -> RobotOreChoice.apply(robot, player, held);
@@ -112,10 +117,7 @@ final class RobotInteractions {
     stack.set(DataComponents.CUSTOM_NAME, robot.getCustomName());
     robot.robotInventory().writeTo(stack);
     robot.robotInventory().clear();
-    player.setData(
-        CubitAttachments.FOLLOWING_ROBOT,
-        new FollowingRobotLink(
-            RobotEntity.policy().release(robot.getUUID(), RobotEntity.follower(player))));
+    RobotFollowing.release(robot, player);
     robot.discard();
     // Drops the item at the player's feet when the inventory is full, so the robot is never lost.
     player.getInventory().placeItemBackInInventory(stack);
@@ -124,9 +126,12 @@ final class RobotInteractions {
 
   static InteractionResult turnOn(RobotEntity robot, Player player) {
     FollowingOutcome outcome =
-        RobotEntity.policy()
+        RobotFollowing.policy()
             .onTurnOn(
-                robot.getUUID(), RobotEntity.follower(player), robot.powerState(), robot.battery());
+                robot.getUUID(),
+                RobotFollowing.follower(player),
+                robot.powerState(),
+                robot.battery());
     if (outcome.state() == robot.powerState()) {
       return InteractionResult.PASS;
     }

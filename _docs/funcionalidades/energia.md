@@ -20,6 +20,7 @@ Números: [`tiers.md`](../tiers.md#energia) e [valores gerais](../tiers.md#valor
 - **Base:** é sempre o Induction Dock, o bloco fixo de recarga.
 - **Religar:** sem bateria, com a carga mínima ele volta sozinho a ficar ativo.
 - **Sem bateria na base:** entra em hibernação logo, sem esperar a carga mínima.
+- **Desligado pela tela:** o botão `Power` da aba Settings desliga o Cubit, que fica como o desligado com carga, e libera o lugar de quem segue. Ligar de novo é pelo clique direito, e ele volta a seguir se ninguém estiver seguindo (perguntas 857 e 858).
 - **Desligado pelo controle remoto:** segue as regras do inativo, mesmo com bateria, e só volta a ficar ativo pelo controle.
 - **Sons:** o Cubit tem um som ao ligar, um ao desligar e um enquanto é recarregado. Eles entram na Fase 3, e os detalhes estão em [`visual.md`](../conceito/visual.md#sons).
 
@@ -53,7 +54,7 @@ Funciona como um carregador solar real.
 - **Clima:** não tem efeito.
 - **Dimensões:** no Nether e no End, não carrega.
 - **Sinal:** enquanto o painel enche a bateria, a célula clareia e escurece devagar. Com a bateria cheia, o sinal para. O painel não toca o som de recarga, que é da base e do slot.
-- **Chave:** ainda não existe. Entra com a interface de configuração, na Fase 4, na aba Settings da tela do Cubit (perguntas 494, 495 e 717).
+- **Chave:** `Solar panel`, na aba Settings da tela do Cubit. Começa ligada, também em saves antigos, e fica no item. Desligada, o painel não carrega nem pulsa (perguntas 859 e 860).
 
 ## Induction Dock
 
@@ -130,6 +131,7 @@ Se o robô estiver dentro do raio da base e com a bateria baixa, volta sozinho p
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-12 17:20 | Define a chave do painel solar e o desligar pela tela. |
 | Marcelo Fabiano | 2026-11-07 23:42 | Leva a chave do painel solar para a Fase 4. |
 | Marcelo Fabiano | 2026-11-07 23:12 | Aponta a tela do Dock para as telas próprias. |
 | Marcelo Fabiano | 2026-11-07 23:11 | Aponta a tela do Dock para as telas próprias. |
