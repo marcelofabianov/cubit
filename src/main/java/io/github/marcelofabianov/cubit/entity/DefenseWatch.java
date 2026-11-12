@@ -33,7 +33,7 @@ public final class DefenseWatch {
   }
 
   private static Optional<RobotEntity> followerOf(ServerPlayer owner) {
-    return RobotEntity.follower(owner)
+    return RobotFollowing.follower(owner)
         .map(owner.serverLevel()::getEntity)
         .filter(RobotEntity.class::isInstance)
         .map(RobotEntity.class::cast);

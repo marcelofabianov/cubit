@@ -6,7 +6,6 @@ import io.github.marcelofabianov.cubit.domain.energy.Battery;
 import io.github.marcelofabianov.cubit.domain.energy.Energy;
 import io.github.marcelofabianov.cubit.domain.energy.PowerState;
 import io.github.marcelofabianov.cubit.domain.ownership.FollowingOutcome;
-import io.github.marcelofabianov.cubit.domain.ownership.FollowingRobotPolicy;
 import io.github.marcelofabianov.cubit.domain.ownership.OwnerProtection;
 import io.github.marcelofabianov.cubit.domain.robot.RobotState;
 import io.github.marcelofabianov.cubit.domain.robot.RobotType;
@@ -131,7 +130,8 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
     RobotSettings.apply(this, state);
     setCustomName(item.get(DataComponents.CUSTOM_NAME));
 
-    FollowingOutcome outcome = policy().onArrival(getUUID(), follower(player), battery);
+    FollowingOutcome outcome =
+        RobotFollowing.policy().onArrival(getUUID(), RobotFollowing.follower(player), battery);
     powerState = outcome.state();
     player.setData(CubitAttachments.FOLLOWING_ROBOT, new FollowingRobotLink(outcome.follower()));
     RobotAudio.onPlaced(this);
@@ -263,8 +263,7 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
 
   @Override
   protected void customServerAiStep() {
-    // Only a robot in the water or on fire may route through water: to walk out or to put itself
-    // out.
+    // Only in water or on fire may it route through water, to walk out or to put itself out.
     setPathfindingMalus(PathType.WATER, isInWater() || isOnFire() ? OPEN_ROUTE : BLOCKED_ROUTE);
     super.customServerAiStep();
     safePosition.tick();
@@ -386,13 +385,5 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
 
   TierSpec specAt(RobotTier at) {
     return CubitMod.CONFIG.tierCatalog().spec(robotType, at);
-  }
-
-  static FollowingRobotPolicy policy() {
-    return new FollowingRobotPolicy(CubitMod.CONFIG.powerRules());
-  }
-
-  static Optional<UUID> follower(Player player) {
-    return player.getData(CubitAttachments.FOLLOWING_ROBOT).robot();
   }
 }

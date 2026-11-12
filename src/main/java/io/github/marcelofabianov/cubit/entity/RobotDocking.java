@@ -144,10 +144,7 @@ public final class RobotDocking {
     robot.setPowerState(PowerState.HIBERNATING);
     Player owner = robot.onlineOwner();
     if (owner != null) {
-      owner.setData(
-          CubitAttachments.FOLLOWING_ROBOT,
-          new FollowingRobotLink(
-              RobotEntity.policy().release(robot.getUUID(), RobotEntity.follower(owner))));
+      RobotFollowing.release(robot, owner);
     }
     dock.reportRobot(robot.getUUID(), false);
   }
@@ -190,8 +187,8 @@ public final class RobotDocking {
       robot.setPowerState(PowerState.INACTIVE_SWITCHED_OFF);
     } else {
       FollowingOutcome outcome =
-          RobotEntity.policy()
-              .onArrival(robot.getUUID(), RobotEntity.follower(owner), robot.battery());
+          RobotFollowing.policy()
+              .onArrival(robot.getUUID(), RobotFollowing.follower(owner), robot.battery());
       owner.setData(CubitAttachments.FOLLOWING_ROBOT, new FollowingRobotLink(outcome.follower()));
       robot.setPowerState(outcome.state());
     }
