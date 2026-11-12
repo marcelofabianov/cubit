@@ -7,6 +7,7 @@ import io.github.marcelofabianov.cubit.domain.energy.EnergyUseCause;
 import io.github.marcelofabianov.cubit.domain.energy.RechargeSource;
 import io.github.marcelofabianov.cubit.domain.energy.SolarStatus;
 import io.github.marcelofabianov.cubit.domain.robot.DefenseMode;
+import io.github.marcelofabianov.cubit.domain.robot.InventoryWindow;
 import io.github.marcelofabianov.cubit.domain.tier.RobotTier;
 import io.github.marcelofabianov.cubit.item.EnergySlotItems;
 import io.github.marcelofabianov.cubit.registry.CubitMenus;
@@ -41,6 +42,12 @@ public final class RobotMenu extends AbstractContainerMenu {
   /** The defense modes come after the switches, in the order of the modes. */
   public static final int FIRST_DEFENSE_BUTTON = 3;
 
+  /** The rows to scroll to come last, one button per row on top (answer 838). */
+  public static final int FIRST_SCROLL_BUTTON = 16;
+
+  /** The rows of the Base, so the screen keeps its height in every tier. */
+  public static final int VISIBLE_ROWS = 3;
+
   private static final int PLAYER_ROWS = 3;
   private static final int ENERGY_SLOT_SIZE = 1;
   private static final int[] SWITCH_INDEXES = {
@@ -48,6 +55,8 @@ public final class RobotMenu extends AbstractContainerMenu {
   };
 
   private final Container container;
+  private final InventoryWindow window;
+  private final ScrolledContainer view;
   private final Predicate<Player> stillValid;
   private final ContainerData values;
   private final Runnable refresh;
@@ -59,6 +68,8 @@ public final class RobotMenu extends AbstractContainerMenu {
   private RobotMenu(int containerId, Inventory playerInventory, Contents contents, Server server) {
     super(CubitMenus.ROBOT.get(), containerId);
     this.container = contents.inventory();
+    this.window = new InventoryWindow(container.getContainerSize(), SLOTS_PER_ROW, VISIBLE_ROWS);
+    this.view = new ScrolledContainer(container, window);
     this.stillValid = server.stillValid();
     this.values = server.values();
     this.refresh = server.refresh();
@@ -102,6 +113,9 @@ public final class RobotMenu extends AbstractContainerMenu {
   /** The server checks this menu before calling, and it is checked again for any other caller. */
   @Override
   public boolean clickMenuButton(Player player, int button) {
+    if (button >= FIRST_SCROLL_BUTTON) {
+      return scrollFromClient(player, button - FIRST_SCROLL_BUTTON);
+    }
     int mode = button - FIRST_DEFENSE_BUTTON;
     if (mode >= 0 && mode < DefenseMode.values().length) {
       return stillValid(player) && defense.choose(player, DefenseMode.values()[mode]);
@@ -115,6 +129,27 @@ public final class RobotMenu extends AbstractContainerMenu {
     }
     pressed.toggle();
     return true;
+  }
+
+  private boolean scrollFromClient(Player player, int row) {
+    if (row > window.maxTopRow() || !stillValid(player)) {
+      return false;
+    }
+    view.setTopRow(row);
+    return true;
+  }
+
+  /** On the client, at once, so the screen does not wait for the server to show the rows. */
+  public void scrollTo(int row) {
+    view.setTopRow(row);
+  }
+
+  public int topRow() {
+    return view.topRow();
+  }
+
+  public InventoryWindow window() {
+    return window;
   }
 
   /** Only the client hides the slots, while its settings tab is open. */
@@ -196,15 +231,11 @@ public final class RobotMenu extends AbstractContainerMenu {
   }
 
   public int rows() {
-    return rowsFor(container.getContainerSize());
+    return window.visibleRows();
   }
 
   public int playerInventoryY() {
     return FIRST_SLOT_Y + rows() * SLOT_SIZE + PLAYER_INVENTORY_GAP;
-  }
-
-  private static int rowsFor(int slots) {
-    return (slots + SLOTS_PER_ROW - 1) / SLOTS_PER_ROW;
   }
 
   private void addEnergySlot(Container energySlot) {
@@ -223,11 +254,11 @@ public final class RobotMenu extends AbstractContainerMenu {
   }
 
   private void addRobotSlots() {
-    for (int slot = 0; slot < container.getContainerSize(); slot++) {
+    for (int slot = 0; slot < view.getContainerSize(); slot++) {
       int x = FIRST_SLOT_X + slot % SLOTS_PER_ROW * SLOT_SIZE;
       int y = FIRST_SLOT_Y + slot / SLOTS_PER_ROW * SLOT_SIZE;
       addSlot(
-          new Slot(container, slot, x, y) {
+          new Slot(view, slot, x, y) {
             @Override
             public boolean mayPlace(ItemStack stack) {
               return stack.getItem().canFitInsideContainerItems();
@@ -264,13 +295,13 @@ public final class RobotMenu extends AbstractContainerMenu {
     }
     ItemStack stack = slot.getItem();
     ItemStack moved = stack.copy();
-    int inventorySlots = container.getContainerSize();
+    int inventorySlots = view.getContainerSize();
     int robotSlots = inventorySlots + ENERGY_SLOT_SIZE;
     boolean fits =
         index < robotSlots
             ? moveItemStackTo(stack, robotSlots, slots.size(), true)
             : moveItemStackTo(stack, inventorySlots, robotSlots, false)
-                || moveItemStackTo(stack, 0, inventorySlots, false);
+                || RobotStorage.insert(container, stack);
     if (!fits) {
       return ItemStack.EMPTY;
     }

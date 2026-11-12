@@ -84,6 +84,7 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 | `DockRemoval` | Quem pode quebrar um Dock |
 | `RobotClick` | O que o clique direito faz no robô: ignorar, recolher, subir o tier, pintar, escolher o minério, abrir ou ligar |
 | `InventoryFit` | Separa os itens que cabem nos slots do config dos que sobram |
+| `InventoryWindow` | As linhas do inventário que a tela mostra de uma vez, o limite da rolagem e o slot que cada slot da tela mostra |
 | `Ownership` | Diz quem é dono de um robô ou de um Dock, e se os dois têm o mesmo dono |
 | `OwnerProtection` | Diz se um dano é do dono e, por isso, não fere o robô |
 | `VoidRescueTarget` | Para onde vai o robô danificado que caiu no vazio |
@@ -132,6 +133,7 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 - **Intervalo corre sempre:** a espera continua mesmo sem a condição, para um robô que oscila em volta do limite não repetir o aviso antes da hora.
 - **Comparação de porcentagem sem divisão:** `hasAtLeast` multiplica os dois lados, para ser exata com os valores de `tiers.md`.
 
+- **Tela com a altura do Base:** o inventário dos tiers altos rola, em vez de a janela crescer, porque no Ultimate ela passaria da altura da tela do jogo (pergunta 838).
 - **Choque só com quem o usa:** o choque e os três modos entram juntos, porque o Pacífico sozinho nunca dispara o choque (pergunta 822).
 - **Pacífico sempre liberado:** o `ShockSpec` acrescenta o Pacífico a qualquer lista de modos, para o dono sempre poder parar os ataques, mesmo com um config que esqueça dele (pergunta 834).
 - **Nunca atacados:** o dono, outros players, outros robôs e mobs pacíficos, em qualquer modo. Um mob neutro só vira alvo quando fica agressivo contra o dono (perguntas 13 e 68).
