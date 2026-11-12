@@ -22,6 +22,7 @@ final class TierSection {
   private static final String SOLAR_DAY = "solar_day_per_tick";
   private static final String SOLAR_NIGHT = "solar_night_per_tick";
   private static final String RECHARGE = "recharge_per_tick";
+  private static final String POWER_BANK_CAPACITY = "power_bank_capacity";
   private static final String INVENTORY_SLOTS = "inventory_slots";
   private static final String MAX_HEALTH = "max_health";
   private static final String CALL_RADIUS = "call_radius_blocks";
@@ -57,6 +58,7 @@ final class TierSection {
   private final ModConfigSpec.DoubleValue speedMultiplier;
   private final ShockKeys shock;
   private final PickupKeys pickup;
+  private final ModConfigSpec.IntValue powerBankCapacity;
 
   TierSection(ModConfigSpec.Builder builder, TierSpec defaults) {
     batteryCapacity = energy(builder, BATTERY_CAPACITY, defaults.batteryCapacity(), MIN_POSITIVE);
@@ -81,6 +83,8 @@ final class TierSection {
             MAX_SPEED_MULTIPLIER);
     shock = new ShockKeys(builder, defaults.shock());
     pickup = new PickupKeys(builder, defaults.pickup());
+    powerBankCapacity =
+        energy(builder, POWER_BANK_CAPACITY, defaults.powerBankCapacity(), MIN_POSITIVE);
   }
 
   TierSpec read() {
@@ -97,7 +101,8 @@ final class TierSection {
         solar.read(),
         scanners.read(),
         shock.read(),
-        pickup.read());
+        pickup.read(),
+        new Energy(powerBankCapacity.get()));
   }
 
   private static ModConfigSpec.IntValue count(

@@ -157,6 +157,8 @@ public final class ConfigGameTests {
   /** The Base has no magnet, only the three slots of its pickup filter (answer 879). */
   private static final int BASE_PICKUP_FILTER_SLOTS = 3;
 
+  private static final long BASE_POWER_BANK = 210_000;
+
   private static final TierSpec BASE_SPEC =
       new TierSpec(
           new Energy(BATTERY),
@@ -183,7 +185,8 @@ public final class ConfigGameTests {
               new Energy(MOB_SCAN_COST),
               ORE_FILTER_SLOTS),
           new ShockSpec(0, 0, BASE_SHOCK_TICKS, Energy.ZERO, false, Set.of()),
-          new PickupSpec(0, Energy.ZERO, BASE_PICKUP_FILTER_SLOTS, false));
+          new PickupSpec(0, Energy.ZERO, BASE_PICKUP_FILTER_SLOTS, false),
+          new Energy(BASE_POWER_BANK));
   private static final String WRONG_SPEC = "Wrong tier numbers";
   private static final String ULTIMATE_SPEED_KEY = "general_robot.ultimate.speed_multiplier";
   private static final double ULTIMATE_SPEED_MULTIPLIER = 2.0;

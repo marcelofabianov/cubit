@@ -157,6 +157,10 @@ final class TierDefaults {
   private static final PickupSpec ADVANCED_PICKUP = new PickupSpec(3, new Energy(20), 9, false);
   private static final PickupSpec ELITE_PICKUP = new PickupSpec(5, new Energy(30), 18, true);
   private static final PickupSpec ULTIMATE_PICKUP = new PickupSpec(8, new Energy(60), 27, true);
+  private static final long BASE_POWER_BANK = 210_000;
+  private static final long ADVANCED_POWER_BANK = 420_000;
+  private static final long ELITE_POWER_BANK = 2_100_000;
+  private static final long ULTIMATE_POWER_BANK = 5_600_000;
   private static final TierSpec BASE_SPEC =
       new TierSpec(
           new Energy(BASE_BATTERY),
@@ -183,7 +187,8 @@ final class TierDefaults {
               new Energy(BASE_MOB_SCAN_COST),
               BASE_ORE_FILTER_SLOTS),
           BASE_SHOCK,
-          BASE_PICKUP);
+          BASE_PICKUP,
+          new Energy(BASE_POWER_BANK));
   private static final TierSpec ADVANCED_SPEC =
       new TierSpec(
           new Energy(ADVANCED_BATTERY),
@@ -210,7 +215,8 @@ final class TierDefaults {
               new Energy(ADVANCED_MOB_SCAN_COST),
               ADVANCED_ORE_FILTER_SLOTS),
           ADVANCED_SHOCK,
-          ADVANCED_PICKUP);
+          ADVANCED_PICKUP,
+          new Energy(ADVANCED_POWER_BANK));
   private static final TierSpec ELITE_SPEC =
       new TierSpec(
           new Energy(ELITE_BATTERY),
@@ -237,7 +243,8 @@ final class TierDefaults {
               new Energy(ELITE_MOB_SCAN_COST),
               ELITE_ORE_FILTER_SLOTS),
           ELITE_SHOCK,
-          ELITE_PICKUP);
+          ELITE_PICKUP,
+          new Energy(ELITE_POWER_BANK));
   private static final TierSpec ULTIMATE_SPEC =
       new TierSpec(
           new Energy(ULTIMATE_BATTERY),
@@ -264,7 +271,8 @@ final class TierDefaults {
               new Energy(ULTIMATE_MOB_SCAN_COST),
               ULTIMATE_ORE_FILTER_SLOTS),
           ULTIMATE_SHOCK,
-          ULTIMATE_PICKUP);
+          ULTIMATE_PICKUP,
+          new Energy(ULTIMATE_POWER_BANK));
 
   private TierDefaults() {}
 
