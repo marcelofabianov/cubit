@@ -5,6 +5,7 @@ import io.github.marcelofabianov.cubit.domain.energy.ConsumptionExtras;
 import io.github.marcelofabianov.cubit.domain.energy.Energy;
 import io.github.marcelofabianov.cubit.domain.energy.SolarOutput;
 import io.github.marcelofabianov.cubit.domain.robot.DefenseMode;
+import io.github.marcelofabianov.cubit.domain.tier.PickupSpec;
 import io.github.marcelofabianov.cubit.domain.tier.RobotTier;
 import io.github.marcelofabianov.cubit.domain.tier.ScannerSpec;
 import io.github.marcelofabianov.cubit.domain.tier.ShockSpec;
@@ -152,6 +153,10 @@ final class TierDefaults {
           new Energy(ULTIMATE_SHOCK_COST),
           true,
           Set.of(DefenseMode.RETALIATE, DefenseMode.AGGRESSIVE, DefenseMode.FOCUS));
+  private static final PickupSpec BASE_PICKUP = new PickupSpec(0, Energy.ZERO, 3, false);
+  private static final PickupSpec ADVANCED_PICKUP = new PickupSpec(3, new Energy(20), 9, false);
+  private static final PickupSpec ELITE_PICKUP = new PickupSpec(5, new Energy(30), 18, true);
+  private static final PickupSpec ULTIMATE_PICKUP = new PickupSpec(8, new Energy(60), 27, true);
   private static final TierSpec BASE_SPEC =
       new TierSpec(
           new Energy(BASE_BATTERY),
@@ -177,7 +182,8 @@ final class TierDefaults {
               new Energy(BASE_ORE_SCAN_COST),
               new Energy(BASE_MOB_SCAN_COST),
               BASE_ORE_FILTER_SLOTS),
-          BASE_SHOCK);
+          BASE_SHOCK,
+          BASE_PICKUP);
   private static final TierSpec ADVANCED_SPEC =
       new TierSpec(
           new Energy(ADVANCED_BATTERY),
@@ -203,7 +209,8 @@ final class TierDefaults {
               new Energy(ADVANCED_ORE_SCAN_COST),
               new Energy(ADVANCED_MOB_SCAN_COST),
               ADVANCED_ORE_FILTER_SLOTS),
-          ADVANCED_SHOCK);
+          ADVANCED_SHOCK,
+          ADVANCED_PICKUP);
   private static final TierSpec ELITE_SPEC =
       new TierSpec(
           new Energy(ELITE_BATTERY),
@@ -229,7 +236,8 @@ final class TierDefaults {
               new Energy(ELITE_ORE_SCAN_COST),
               new Energy(ELITE_MOB_SCAN_COST),
               ELITE_ORE_FILTER_SLOTS),
-          ELITE_SHOCK);
+          ELITE_SHOCK,
+          ELITE_PICKUP);
   private static final TierSpec ULTIMATE_SPEC =
       new TierSpec(
           new Energy(ULTIMATE_BATTERY),
@@ -255,7 +263,8 @@ final class TierDefaults {
               new Energy(ULTIMATE_ORE_SCAN_COST),
               new Energy(ULTIMATE_MOB_SCAN_COST),
               ULTIMATE_ORE_FILTER_SLOTS),
-          ULTIMATE_SHOCK);
+          ULTIMATE_SHOCK,
+          ULTIMATE_PICKUP);
 
   private TierDefaults() {}
 

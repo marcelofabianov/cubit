@@ -41,6 +41,7 @@ public final class CubitConfig {
   private final ScannerSection scanner;
   private final ChatterSection chatter;
   private final DefenseSection defense;
+  private final PickupSection pickup;
   private final AtomicBoolean warnedRareTags = new AtomicBoolean();
   private final AtomicBoolean warnedLamp = new AtomicBoolean();
   private final TierCatalog tierCatalog;
@@ -61,6 +62,7 @@ public final class CubitConfig {
     scanner = new ScannerSection(builder);
     chatter = new ChatterSection(builder);
     defense = new DefenseSection(builder);
+    pickup = new PickupSection(builder);
     builder.pop();
 
     tierCatalog = new NeoForgeTierCatalog(Map.of(GENERAL_ROBOT, tierSections(builder)));
@@ -88,6 +90,14 @@ public final class CubitConfig {
 
   public int focusForgetDistanceBlocks() {
     return defense.focusForget.get();
+  }
+
+  public int pickupCheckTicks() {
+    return pickup.pickupCheck.get();
+  }
+
+  public int magnetCheckTicks() {
+    return pickup.magnetCheck.get();
   }
 
   public TierCatalog tierCatalog() {

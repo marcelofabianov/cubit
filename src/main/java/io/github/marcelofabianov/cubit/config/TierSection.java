@@ -56,6 +56,7 @@ final class TierSection {
   private final ModConfigSpec.IntValue callRadius;
   private final ModConfigSpec.DoubleValue speedMultiplier;
   private final ShockKeys shock;
+  private final PickupKeys pickup;
 
   TierSection(ModConfigSpec.Builder builder, TierSpec defaults) {
     batteryCapacity = energy(builder, BATTERY_CAPACITY, defaults.batteryCapacity(), MIN_POSITIVE);
@@ -79,6 +80,7 @@ final class TierSection {
             MIN_SPEED_MULTIPLIER,
             MAX_SPEED_MULTIPLIER);
     shock = new ShockKeys(builder, defaults.shock());
+    pickup = new PickupKeys(builder, defaults.pickup());
   }
 
   TierSpec read() {
@@ -94,7 +96,8 @@ final class TierSection {
         new LightLevel(lampLight.get()),
         solar.read(),
         scanners.read(),
-        shock.read());
+        shock.read(),
+        pickup.read());
   }
 
   private static ModConfigSpec.IntValue count(
