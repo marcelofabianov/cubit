@@ -181,18 +181,21 @@ Use `/data get entity @e[type=cubit:general_robot,limit=1,sort=nearest] PowerSta
 
 ## Receitas
 
-Rode num mundo novo, em modo sobrevivência, com `/gamemode survival` e `/give @s minecraft:crafting_table`. Antes do passo 1, confira que as receitas do Cubit e do Dock não aparecem no livro.
+Rode num mundo novo, em modo sobrevivência, com `/gamemode survival` e `/give @s minecraft:crafting_table`. Antes do passo 1, confira que as receitas do Cubit, do Dock e dos Modules não aparecem no livro.
 
 | # | Faça | Espere |
 |---|---|---|
 | 1 | Pegue um diamante, com `/give @s minecraft:diamond` | A receita do `Cubit` aparece no livro. A do `Induction Dock` ainda não |
 | 2 | Dê os materiais: `/give @s minecraft:redstone 8`, `/give @s minecraft:redstone_lamp`, `/give @s minecraft:iron_ingot 8`, `/give @s minecraft:obsidian 2` e `/give @s minecraft:chest 2` | Os itens chegam |
 | 3 | Na mesa, monte redstone, lâmpada e redstone; ferro, diamante e ferro; obsidiana, vazio e obsidiana | Sai um `Cubit` |
-| 4 | Olhe o livro, com o `Cubit` no inventário | A receita do `Induction Dock` aparece |
+| 4 | Olhe o livro, com o `Cubit` no inventário | As receitas do `Induction Dock` e dos três Modules aparecem |
 | 5 | Coloque o `Cubit` | Ele segue você, com a barra de 25% na tela |
 | 6 | Na mesa, monte o L: redstone na coluna 1 da linha 1; ferro na coluna 1 da linha 2; baú, redstone e ferro na linha 3 | Sai um `Induction Dock` |
 | 7 | Monte o L espelhado, trocando as colunas 1 e 3 | Também sai um `Induction Dock` |
 | 8 | Coloque o `Dock` e abra a tela, com Shift + botão direito | A barra de energia está vazia, e a tela do bloco, apagada |
+| 9 | Dê `/give @s minecraft:gold_ingot 4`, `/give @s minecraft:quartz 4` e `/give @s minecraft:comparator` e monte ouro nos cantos, quartzo nos lados e o comparador no centro | Sai um `Advanced Module` |
+| 10 | Dê `/give @s minecraft:diamond 4`, `/give @s minecraft:purple_dye 4` e `/give @s minecraft:redstone_block` e monte diamante nos cantos, corante roxo nos lados e o bloco de redstone no centro | Sai um `Elite Module` |
+| 11 | Dê `/give @s minecraft:diamond 4`, `/give @s minecraft:netherite_ingot 2`, `/give @s minecraft:nether_star` e `/give @s minecraft:redstone_block` e monte diamante, bloco de redstone e diamante; netherite, estrela do Nether e netherite; diamante, vazio e diamante | Sai um `Ultimate Module` |
 
 ## Sons
 
@@ -393,11 +396,11 @@ Os valores são os padrões de [`tiers.md`](../tiers.md).
 
 ## Upgrade de tier
 
-Compare os ícones com `modulo-avancado.png`, `modulo-elite.png` e `modulo-ultimate.png`, em `_docs/imagens/conceito/png/`. Os Modules ficam na aba do criativo enquanto as receitas estão pendentes (pergunta 807). Os números são os de [`tiers.md`](../tiers.md).
+Compare os ícones com `modulo-avancado.png`, `modulo-elite.png` e `modulo-ultimate.png`, em `_docs/imagens/conceito/png/`. Os Modules saem das receitas da seção [Receitas](#receitas) ou da aba do criativo. Os números são os de [`tiers.md`](../tiers.md).
 
 | # | Faça | Espere |
 |---|---|---|
-| 1 | Abra a aba do Cubit no criativo | Os três Modules aparecem, com os nomes em azul, roxo e dourado |
+| 1 | Abra a aba do Cubit no criativo, ou faça os Modules pelas receitas | Os três Modules aparecem, com os nomes em azul, roxo e dourado |
 | 2 | Passe o mouse em cada Module | `Requires a Base Cubit`, `Requires an Advanced Cubit` e `Requires an Elite Cubit`, em cinza |
 | 3 | Em sobrevivência, com um Cubit Base ativo, clique com o Elite Module | Nada muda, o Module fica na mão, e aparece `Cubit: I need to be Advanced first` |
 | 4 | Clique com o Advanced Module | O Module é gasto, ele fica feliz com o bipe, aparece `Cubit: Upgraded to Advanced!`, e o colar e as faixas ficam azuis |
@@ -632,6 +635,7 @@ Na instância só com o mod, tire capturas com F2 do Cubit seguindo, da tela do 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-12 08:50 | Adiciona as receitas dos Modules. |
 | Marcelo Fabiano | 2026-11-11 23:40 | Adiciona o upgrade de tier e atualiza o colar no ícone. |
 | Marcelo Fabiano | 2026-11-08 01:17 | Adiciona o teste da versão, com as instâncias no Prism, e troca o teste com outro player pelas GameTests. |
 | Marcelo Fabiano | 2026-11-08 01:05 | Confere a descrição traduzida na lista de mods. |
