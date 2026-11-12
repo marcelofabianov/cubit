@@ -414,6 +414,26 @@ Compare os ícones com `modulo-avancado.png`, `modulo-elite.png` e `modulo-ultim
 | 12 | Com o jogo em português, repita os passos 2 a 6 | `Módulo Avançado`, `Exige um Cubit Base`, `Cubit: Preciso ser Avançado antes`, `Cubit: Evoluí para Avançado!` e `Cubit: Já sou Avançado` |
 | 13 | Com outro player no servidor, use um Module no Cubit | Nada acontece, sem texto, e o Module não é gasto. Coberto pelas GameTests, sem teste no jogo (pergunta 809) |
 
+## Choque e modos de defesa
+
+As regras estão em [`combate.md`](../funcionalidades/combate.md), e os números, em [`tiers.md`](../tiers.md#comportamento-e-combate). Use os Modules da aba do criativo para chegar a cada tier, em sobrevivência.
+
+| # | Faça | Espere |
+|---|---|---|
+| 1 | Com um Cubit Base, abra a tela | Três abas: baú, engrenagem e escudo. Na Defense, `Peaceful` marcado, `Retaliate` e `Aggressive` apagados, com `Unlocks at Advanced` e `Unlocks at Elite`, e a seção `Shock` com `Unlocks at Advanced` |
+| 2 | Suba para o Advanced e abra a aba Defense | `Retaliate` liberado, e a seção `Shock` com dano 2, 3 blocos, a cada 3 s, 2000 FE por choque e o mais próximo |
+| 3 | Escolha `Retaliate`, chegue perto de um zumbi e deixe ele te bater | O Cubit dá choque nele, com faíscas do Cubit até o zumbi e o som de choque. Um zumbi que não atacou ninguém não leva choque |
+| 4 | Suba para o Elite e escolha `Aggressive` | Toca o som do modo agressivo, só nessa troca |
+| 5 | Ande perto de mobs hostis, de animais e de um piglin zumbificado calmo | Só os hostis levam choque. Animais e o piglin calmo, não |
+| 6 | Bata no piglin zumbificado | Ele fica agressivo contra você e passa a levar choque |
+| 7 | Deixe um mob morrer pelo choque | Ele solta XP, e, se tiver nome, a mensagem é `X was zapped by Cubit` |
+| 8 | Suba para o Ultimate, com dois mobs hostis no alcance | Os dois levam choque de uma vez, a cada 1 s |
+| 9 | Ponha um bloco entre o Cubit e o mob | Sem choque através do bloco |
+| 10 | Desligue o Cubit ou deixe ele no Dock, com mobs por perto | Sem choque |
+| 11 | Recolha e coloque o Cubit, e saia e entre no mundo | O modo escolhido continua |
+| 12 | Com o jogo em português, abra a aba | `Defesa`, `Modos`, `Pacífico`, `Contra-atacar`, `Agressivo`, `Libera no Avançado` e a seção `Choque` |
+| 13 | Com outro player no servidor, tente mudar o modo pela tela | Ele não abre a tela do Cubit. Coberto pelas GameTests, sem teste no jogo |
+
 ## Scanners
 
 Os valores são os padrões de [`tiers.md`](../tiers.md). Mobs varrem a cada 10 s e minérios a cada 35 s, então espere esse tempo em cada passo. Para ver a carga, use `/data get entity @e[type=cubit:general_robot,limit=1,sort=nearest] Energy`.
@@ -635,6 +655,7 @@ Na instância só com o mod, tire capturas com F2 do Cubit seguindo, da tela do 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-12 11:40 | Adiciona o choque e os modos de defesa. |
 | Marcelo Fabiano | 2026-11-12 08:50 | Adiciona as receitas dos Modules. |
 | Marcelo Fabiano | 2026-11-11 23:40 | Adiciona o upgrade de tier e atualiza o colar no ícone. |
 | Marcelo Fabiano | 2026-11-08 01:17 | Adiciona o teste da versão, com as instâncias no Prism, e troca o teste com outro player pelas GameTests. |

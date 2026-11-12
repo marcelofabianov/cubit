@@ -80,7 +80,7 @@ Entra com o choque e os modos de defesa, nos itens 5 e 6 da Fase 4 (perguntas 82
 | `Aggressive` | `Shocks hostile mobs in range` |
 | Bloqueado | `Unlocks at Advanced`, com o tier que libera o modo |
 
-- **Choque:** os números do tier, do config: dano, alcance, intervalo e custo. No Base, que só tem o Pacífico, a seção mostra que o choque libera no Advanced.
+- **Choque:** os números do tier, do config, numa seção `Shock`: `Damage`, `Range` em blocos, `Interval`, como `Every 2 s`, `Cost`, como `2000 FE per shock`, e `Targets`, `The nearest` ou `All in range` (pergunta 835). No Base, que só tem o Pacífico, a seção mostra `Unlocks at Advanced`.
 
 ## Tela do Induction Dock
 
@@ -196,6 +196,7 @@ Pergunta 691.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-12 11:40 | Detalha os textos da seção do choque. |
 | Marcelo Fabiano | 2026-11-12 10:30 | Adiciona a aba Defense. |
 | Marcelo Fabiano | 2026-11-08 00:11 | Cita a tradução para o português. |
 | Marcelo Fabiano | 2026-11-07 23:46 | Tira da tabela de estados as linhas de histórico que caíram nela. |

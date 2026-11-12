@@ -12,6 +12,7 @@
 
 | # | Pergunta | Resposta |
 |---|---|---|
+| 835 | Como ficam os textos da aba Defense e do choque que a 833 não cobria? | Como propostos: a lista se chama `Modes` / `Modos`; a seção `Shock` / `Choque` tem `Damage` / `Dano`, `Range` / `Alcance` com `5 blocks` / `5 blocos`, `Interval` / `Intervalo` com `Every 2 s` / `A cada 2 s`, `Cost` / `Custo` com `2000 FE per shock` / `2000 FE por choque` e `Targets` / `Alvos` com `The nearest` / `O mais próximo` ou `All in range` / `Todos no alcance`. As legendas de som são `Cubit shocks` / `Cubit dá um choque` e `Cubit turns aggressive` / `Cubit fica agressivo`. Detalha a 833 |
 | 834 | Quais chaves do config o choque e os modos de defesa ganham? | Em cada `[general_robot.{tier}]`: `defense_modes`, uma lista com `peaceful`, `retaliate` e `aggressive`; `shock_damage`; `shock_range_blocks`; `shock_interval_ticks`; `shock_cost`; e `shock_hits_all_in_range`, que só é `true` no Ultimate. O Base vem só com `peaceful` e o choque zerado. Em `[general]`: `retaliate_memory_ticks`, com 600, os 30 s da 832 |
 | 833 | Quais textos a aba Defense usa? | Peaceful / Pacífico: `Never attacks` / `Nunca ataca`. Retaliate / Contra-atacar: `Shocks whoever hurts you or the Cubit` / `Dá choque em quem ferir você ou o Cubit`. Aggressive / Agressivo: `Shocks hostile mobs in range` / `Dá choque em mobs hostis no alcance`. Bloqueado: `Unlocks at Advanced` / `Libera no Avançado`. Morte: `X was zapped by Cubit` / `X levou um choque de Cubit`. Os nomes dos modos seguem o glossário |
 | 832 | Por quanto tempo o Contra-atacar lembra de quem atacou o Cubit ou o dono? | O último mob que feriu o Cubit ou o dono vira alvo por cerca de 30 s, no config, ou até morrer ou mudar de dimensão. Um novo ataque renova o tempo, e ele só leva o choque quando estiver no alcance |
@@ -89,6 +90,7 @@
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-12 11:40 | Registra a resposta 835. |
 | Marcelo Fabiano | 2026-11-12 09:40 | Registra as respostas 820 a 834. |
 | Marcelo Fabiano | 2026-11-12 08:30 | Responde a pendente 807 e registra as respostas 817 a 819. |
 | Marcelo Fabiano | 2026-11-12 00:10 | Registra as respostas 815 e 816. |
