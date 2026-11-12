@@ -9,7 +9,6 @@ import io.github.marcelofabianov.cubit.domain.energy.SolarStatus;
 import io.github.marcelofabianov.cubit.domain.robot.DefenseMode;
 import io.github.marcelofabianov.cubit.domain.robot.InventoryWindow;
 import io.github.marcelofabianov.cubit.domain.tier.RobotTier;
-import io.github.marcelofabianov.cubit.item.EnergySlotItems;
 import io.github.marcelofabianov.cubit.registry.CubitMenus;
 import java.util.List;
 import java.util.function.Predicate;
@@ -52,7 +51,6 @@ public final class RobotMenu extends AbstractContainerMenu {
   /** The rows of the Base, so the screen keeps its height in every tier. */
   public static final int VISIBLE_ROWS = 3;
 
-  private static final int PLAYER_ROWS = 3;
   private static final int ENERGY_SLOT_SIZE = 1;
   private static final int[] SWITCH_INDEXES = {
     RobotScreenValues.LAMP,
@@ -71,7 +69,7 @@ public final class RobotMenu extends AbstractContainerMenu {
   private final DefenseControl defense;
   private final PowerControl power;
   private final RobotScreenOpening opening;
-  private boolean inventoryShown = true;
+  private final RobotMenuSlots slotGroups = new RobotMenuSlots();
 
   private RobotMenu(int containerId, Inventory playerInventory, Contents contents, Server server) {
     super(CubitMenus.ROBOT.get(), containerId);
@@ -85,10 +83,10 @@ public final class RobotMenu extends AbstractContainerMenu {
     this.defense = server.defense();
     this.power = server.power();
     this.opening = contents.opening();
-    addRobotSlots();
-    addEnergySlot(contents.energySlot());
+    slotGroups.addRobotSlots(this::addSlot, view);
+    slotGroups.addEnergySlot(this::addSlot, contents.energySlot());
     addDataSlots(values);
-    addPlayerSlots(playerInventory);
+    slotGroups.addPlayerSlots(this::addSlot, playerInventory, playerInventoryY());
   }
 
   /** On the client. The real items and numbers come from the server. */
@@ -174,9 +172,9 @@ public final class RobotMenu extends AbstractContainerMenu {
     return window;
   }
 
-  /** Only the client hides the slots, while its settings tab is open. */
+  /** Only the client hides the slots, while another tab is open. */
   public void showInventory(boolean shown) {
-    inventoryShown = shown;
+    slotGroups.show(shown, shown);
   }
 
   public RobotScreenOpening opening() {
@@ -264,55 +262,6 @@ public final class RobotMenu extends AbstractContainerMenu {
     return FIRST_SLOT_Y + rows() * SLOT_SIZE + PLAYER_INVENTORY_GAP;
   }
 
-  private void addEnergySlot(Container energySlot) {
-    addSlot(
-        new Slot(energySlot, 0, ENERGY_SLOT_X, ENERGY_SLOT_Y) {
-          @Override
-          public boolean mayPlace(ItemStack stack) {
-            return EnergySlotItems.accepts(stack);
-          }
-
-          @Override
-          public boolean isActive() {
-            return inventoryShown;
-          }
-        });
-  }
-
-  private void addRobotSlots() {
-    for (int slot = 0; slot < view.getContainerSize(); slot++) {
-      int x = FIRST_SLOT_X + slot % SLOTS_PER_ROW * SLOT_SIZE;
-      int y = FIRST_SLOT_Y + slot / SLOTS_PER_ROW * SLOT_SIZE;
-      addSlot(
-          new Slot(view, slot, x, y) {
-            @Override
-            public boolean mayPlace(ItemStack stack) {
-              return stack.getItem().canFitInsideContainerItems();
-            }
-
-            @Override
-            public boolean isActive() {
-              return inventoryShown;
-            }
-          });
-    }
-  }
-
-  private void addPlayerSlots(Inventory playerInventory) {
-    int inventoryY = playerInventoryY();
-    for (int row = 0; row < PLAYER_ROWS; row++) {
-      for (int column = 0; column < SLOTS_PER_ROW; column++) {
-        int index = column + row * SLOTS_PER_ROW + SLOTS_PER_ROW;
-        int y = inventoryY + row * SLOT_SIZE;
-        addSlot(new PlayerSlot(playerInventory, index, FIRST_SLOT_X + column * SLOT_SIZE, y));
-      }
-    }
-    for (int column = 0; column < SLOTS_PER_ROW; column++) {
-      int x = FIRST_SLOT_X + column * SLOT_SIZE;
-      addSlot(new PlayerSlot(playerInventory, column, x, inventoryY + HOTBAR_GAP));
-    }
-  }
-
   @Override
   public ItemStack quickMoveStack(Player player, int index) {
     Slot slot = slots.get(index);
@@ -342,18 +291,6 @@ public final class RobotMenu extends AbstractContainerMenu {
   @Override
   public boolean stillValid(Player player) {
     return stillValid.test(player);
-  }
-
-  /** A slot of the player that hides with the robot slots, while the settings tab is open. */
-  private final class PlayerSlot extends Slot {
-    PlayerSlot(Inventory inventory, int index, int x, int y) {
-      super(inventory, index, x, y);
-    }
-
-    @Override
-    public boolean isActive() {
-      return inventoryShown;
-    }
   }
 
   /** The containers of the robot and what travels when the screen opens. */
