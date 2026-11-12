@@ -113,7 +113,8 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Modelo:** a geometria melhora já na Fase 2, com os detalhes das seis vistas, tudo fixo e sem mudar a hitbox. As expressões seguem na Fase 3.
 - **Animações:** andar, olhar para o player, parado, e desligado e hibernando, com as esteiras em textura por quadros. O modelo final mantém a geometria e a textura do corpo. Ao levar dano, os braços ficam erguidos por cerca de 2 s.
 - **Olhar para o dono:** na expressão normal, os olhos reagem a pulo, queda rápida e dono em outro nível, até 8 blocos, e o movimento do próprio robô vence. Com o dono em outro nível, o corpo também inclina cerca de 8°, mas não num pulo.
-- **Colar:** o robô no mundo usa a cor do tier, numa camada por tier. Os ícones ficam cinza até os módulos, na Fase 4.
+- **Colar:** o robô no mundo usa a cor do tier, numa camada por tier. Nos ícones do Cubit e do Damaged Cubit, uma camada do colar tingida pelo cliente com a cor do tier, sem multiplicar os modelos de cor (pergunta 803).
+- **Modules (perguntas 799 a 807):** cartucho de circuito com núcleo na cor do tier, empilhando até 64 e com o nome nessa cor. Só o dono aplica, em qualquer estado do Cubit, inclusive no Dock. O Cubit fica feliz, bipa e mostra o novo tier num texto curto. O Module que não serve não é consumido, e um texto explica o motivo, menos para quem não é dono, em que nada acontece (pergunta 809). As receitas são independentes, sem o Module anterior, e aparecem no livro ao ter um Cubit. Os materiais estão pendentes (pergunta 807). O filtro do scanner do Ultimate é 64, o limite do config (pergunta 810).
 - **Indicador de bateria:** mostra a carga real em qualquer estado, com 4 níveis em alta resolução, verde e vermelho na bateria crítica, e brilha só com a tela acesa.
 - **Cor da carcaça:** 16 cores dos corantes, com uma textura por cor, em qualquer estado, só pelo dono, gastando 1 corante. O branco volta ao original. Fita e faixas seguem o tier, e só o ícone do Cubit muda de cor.
 - **Nome:** com etiqueta, só do dono, ou na bigorna, e sempre visível acima do Cubit.
@@ -139,6 +140,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-11 22:01 | Registra as decisões dos Modules e do colar no ícone. |
 | Marcelo Fabiano | 2026-11-10 10:17 | Registra a Fase 4 reorganizada e a mira do modo só o alvo na 4.2. |
 | Marcelo Fabiano | 2026-11-10 09:53 | Encerra a Fase 3 e registra a `0.1.0` no Modrinth, com o CurseForge depois. |
 | Marcelo Fabiano | 2026-11-08 01:41 | Registra a exceção da `0.1.0` e a release no GitHub. |

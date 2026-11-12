@@ -4,7 +4,6 @@ import io.github.marcelofabianov.cubit.CubitMod;
 import io.github.marcelofabianov.cubit.block.DockableRobot;
 import io.github.marcelofabianov.cubit.domain.energy.Battery;
 import io.github.marcelofabianov.cubit.domain.energy.Energy;
-import io.github.marcelofabianov.cubit.domain.energy.Percentage;
 import io.github.marcelofabianov.cubit.domain.energy.PowerState;
 import io.github.marcelofabianov.cubit.domain.ownership.FollowingOutcome;
 import io.github.marcelofabianov.cubit.domain.ownership.FollowingRobotPolicy;
@@ -191,6 +190,10 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
     this.battery = battery;
   }
 
+  void setTier(RobotTier tier) {
+    this.tier = tier;
+  }
+
   void setPowerState(PowerState state) {
     RobotAudio.onStateChange(this, powerState, state);
     powerState = state;
@@ -255,10 +258,6 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
 
   public Container energySlot() {
     return inventory.energySlot().container();
-  }
-
-  int batteryPercent() {
-    return battery.level(Percentage.MAX);
   }
 
   @Override

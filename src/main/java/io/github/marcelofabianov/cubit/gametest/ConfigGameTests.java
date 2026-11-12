@@ -173,6 +173,22 @@ public final class ConfigGameTests {
               new Energy(MOB_SCAN_COST),
               ORE_FILTER_SLOTS));
   private static final String WRONG_SPEC = "Wrong tier numbers";
+  private static final String ULTIMATE_SPEED_KEY = "general_robot.ultimate.speed_multiplier";
+  private static final double ULTIMATE_SPEED_MULTIPLIER = 2.0;
+  private static final int ADVANCED_HEALTH = 50;
+  private static final int ELITE_SLOTS = 45;
+  private static final int ULTIMATE_BATTERY = 8_000_000;
+  private static final int ULTIMATE_ORE_FILTER_SLOTS = 64;
+  private static final String ADVANCED_HEALTH_KEY = "general_robot.advanced.max_health";
+  private static final String ELITE_SLOTS_KEY = "general_robot.elite.inventory_slots";
+  private static final String ULTIMATE_BATTERY_KEY = "general_robot.ultimate.battery_capacity";
+  private static final String ULTIMATE_FILTER_KEY = "general_robot.ultimate.ore_filter_slots";
+  private static final Map<String, Integer> UPGRADED_TIER_DEFAULTS =
+      Map.of(
+          ADVANCED_HEALTH_KEY, ADVANCED_HEALTH,
+          ELITE_SLOTS_KEY, ELITE_SLOTS,
+          ULTIMATE_BATTERY_KEY, ULTIMATE_BATTERY,
+          ULTIMATE_FILTER_KEY, ULTIMATE_ORE_FILTER_SLOTS);
   private static final String WRONG_CHARGE = "Wrong initial charge";
   private static final String WRONG_KEY = "Wrong value for a config key";
   private static final String UNKNOWN_TYPE_ACCEPTED = "A robot type without config was accepted";
@@ -192,10 +208,13 @@ public final class ConfigGameTests {
   }
 
   @GameTest(template = EMPTY_TEMPLATE)
-  public static void tierWithoutConfigUsesTheBaseTier(GameTestHelper helper) {
-    TierSpec spec = CubitMod.CONFIG.tierCatalog().spec(GENERAL_ROBOT, RobotTier.ULTIMATE);
+  public static void everyTierHasItsOwnSection(GameTestHelper helper) {
+    CommentedConfig file = correctedFile();
 
-    helper.assertValueEqual(spec, BASE_SPEC, WRONG_SPEC);
+    UPGRADED_TIER_DEFAULTS.forEach(
+        (key, value) -> helper.assertValueEqual(file.<Integer>get(key), value, WRONG_KEY));
+    helper.assertValueEqual(
+        file.<Double>get(ULTIMATE_SPEED_KEY), ULTIMATE_SPEED_MULTIPLIER, WRONG_KEY);
     helper.succeed();
   }
 

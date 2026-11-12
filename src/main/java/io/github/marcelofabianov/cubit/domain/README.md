@@ -15,7 +15,8 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 | `RobotColor` | A cor da carcaça, uma para cada corante do jogo. A `key` é o nome do corante, usado nos saves e nas texturas |
 | `PaintRules` | Quando um corante muda o robô e quando ele reage |
 | `RobotType` | Identifica o Cubit nos IDs e no config. O robô é único, e é um dado, identificado por um ID |
-| `RobotTier` | Nível de evolução: Base, Advanced, Elite e Ultimate. A `key` é o nome usado no config e nos saves |
+| `RobotTier` | Nível de evolução: Base, Advanced, Elite e Ultimate. A `key` é o nome usado no config e nos saves. `next` é o tier seguinte, e `previous`, o que um Module desse tier exige |
+| `TierUpgrade` | O que um Module faz no robô: sobe o tier, pede o tier anterior primeiro ou encontra o robô já nesse tier ou acima |
 | `RobotState` | O que o robô guarda ao virar item: tier, energia, vida, a chave da lanterna, a cor, a chave dos scanners, o filtro de minérios e a chave das falas. `damaged` e `repaired` dão o estado ao morrer e ao consertar |
 | `TierSpec` | Números de um tipo de robô num tier |
 | `TierCatalog` | Entrega o `TierSpec` de um tipo de robô num tier. O domínio define a interface, e o config a implementa |
@@ -75,7 +76,7 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 | `DockQueue` | Robôs aguardando um Dock ocupado, por ordem de chegada |
 | `DockTrip` | Um robô a caminho do Dock: o quanto chegou perto, há quanto tempo não avança e o que faz em cada tick |
 | `DockRemoval` | Quem pode quebrar um Dock |
-| `RobotClick` | O que o clique direito faz no robô |
+| `RobotClick` | O que o clique direito faz no robô: ignorar, recolher, subir o tier, pintar, escolher o minério, abrir ou ligar |
 | `InventoryFit` | Separa os itens que cabem nos slots do config dos que sobram |
 | `Ownership` | Diz quem é dono de um robô ou de um Dock, e se os dois têm o mesmo dono |
 | `OwnerProtection` | Diz se um dano é do dono e, por isso, não fere o robô |
@@ -126,7 +127,7 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 - **Comparação de porcentagem sem divisão:** `hasAtLeast` multiplica os dois lados, para ser exata com os valores de `tiers.md`.
 
 - **Números por dado:** as regras recebem os números de um `TierSpec`, sem constantes no código (regra 39 do `AGENTS.md`).
-- **Upgrade:** as regras de evolução entre tiers entram na Fase 4, junto dos módulos.
+- **Upgrade sem pular etapas:** um Module só leva ao tier logo depois do atual. O que pula uma etapa ou chega a um tier igual ou menor não é consumido, e o motivo vira o texto da recusa (perguntas 226, 802 e 808). A ordem dos tiers é a do `enum`, então um tier novo entra no lugar certo da lista.
 - **Estado guardado se ajusta ao config:** o config pode mudar enquanto o robô está no item, então `batteryFor` e `healthFor` limitam os valores ao `TierSpec` atual. A vida nunca fica abaixo de 1, porque um robô colocado sem vida morreria na hora.
 
 - **Só o ativo se move:** inativo ou em hibernação, o robô para e não teleporta. Em outra dimensão também para, porque o teleporte só vale na mesma dimensão.
@@ -151,7 +152,7 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 - **Lanterna na hibernação:** apagada e sem consumo, porque o robô está imóvel e carregando. A tela continua dando a claridade (perguntas 465 e 466).
 - **Subida em FE inteiro:** o extra é arredondado, porque energia é inteira (regra 13). Descer não devolve nada, porque criaria FE.
 - **Preso a caminho do Dock:** um movimento pequeno não conta como avanço, para um robô contra uma parede desistir. Preso com o Dock ocupado, ele aguarda onde está, porque teleportar não o deixaria entrar. Perto do Dock, o tempo não conta, porque ele pode estar esperando a vez (perguntas 84 e 301).
-- **Ordem do clique:** o Shift sempre recolhe, inclusive com corante na mão, e o corante vem antes de abrir o inventário, para pintar em qualquer estado (perguntas 510 e 516).
+- **Ordem do clique:** o Shift sempre recolhe, inclusive com corante ou Module na mão. O Module e o corante vêm antes de abrir o inventário, para agir em qualquer estado (perguntas 510, 516 e 800).
 - **Estado interno também valida:** os records que só guardam tempo ou ângulo rejeitam valor inválido, como os demais value objects (pergunta 526).
 - **Fila sem remoção:** um robô se informa a cada tick, então o que saiu do mundo perde o lugar sem ninguém precisar tirá-lo (perguntas 85 e 86).
 - **Cheio espera um momento:** o robô cheio fica cerca de 3 s antes de sair, para o player ver a tela completa (pergunta 312).

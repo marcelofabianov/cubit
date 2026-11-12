@@ -6,18 +6,22 @@ import io.github.marcelofabianov.cubit.domain.energy.PowerState;
 public enum RobotClick {
   IGNORE,
   COLLECT,
+  UPGRADE,
   PAINT,
   CHOOSE_ORE,
   OPEN,
   CHARGE_OR_TURN_ON;
 
   public static RobotClick of(
-      boolean owner, boolean shift, boolean dye, boolean ore, PowerState state) {
+      boolean owner, boolean module, boolean shift, boolean dye, boolean ore, PowerState state) {
     if (!owner) {
       return IGNORE;
     }
     if (shift) {
       return COLLECT;
+    }
+    if (module) {
+      return UPGRADE;
     }
     if (dye) {
       return PAINT;
