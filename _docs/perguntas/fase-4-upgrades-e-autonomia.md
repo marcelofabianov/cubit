@@ -10,6 +10,10 @@
 
 | # | Pergunta | Resposta |
 |---|---|---|
+| 873 | O alinhamento do comando que baixa a release com as dependências tem algo a acrescentar? Um script em `scripts/development/`, chamado pelo `Makefile`, que baixa o jar da release do GitHub e as dependências do Modrinth, nas versões do `gradle.properties` da tag, com o SHA-512 conferido, num `.zip` em `build/dist/`, documentado em `ferramentas-de-build.md` | Nada a acrescentar |
+| 872 | O comando baixa só a última release, ou também uma versão escolhida? | Sem parâmetro, a última release. Com `make bundle VERSION=0.1.0`, a release escolhida |
+| 871 | Como o zip leva o Jade, que é opcional? | Numa pasta separada: `mods/` com o Cubit, o GeckoLib e o LambDynamicLights, e `optional/` com o Jade |
+| 870 | Qual é o nome do comando que baixa a release com as dependências num zip? | `make bundle`, com a descrição `Download the latest release jar with its dependencies into a zip` no `make help` |
 | 869 | O texto longo das páginas do Modrinth e do CurseForge pode ser atualizado para a `0.1.1`, na própria release? | Sim: "Carries your items" passa a 27 a 54 slots, entram os itens "Grows with you", com os tiers e os Modules, e "Defends you", com o choque e os quatro modos, sai a linha de que só existe o tier Base, e o "Coming next" passa a citar a Power Bank, o ímã, o controle remoto e a área de trabalho. A descrição curta e o resumo não mudam |
 | 868 | A `0.1.1` sai sem o teste no Iron Meridian? | Sim: "pode seguir sem o Iron Meridian". A `0.1.1` sai só com o teste da instância só com o mod, como exceção à regra 35, porque o Prism do desenvolvedor não tem mais a instância do Iron Meridian. É a exceção oposta à da `0.1.0` (pergunta 776) |
 | 867 | Como foi o teste da `0.1.1` na instância só com o mod? | "testes feitos, tudo ok", executados pelo desenvolvedor no Prism, na instância `Cubit - Teste 0.1.1 (homolog e584928)`, com o jar da `homolog` em `e584928`, o GeckoLib e o LambDynamicLights, e o Jade depois, num mundo novo, sem detalhar cada passo. Cobre o upgrade de tier com a rolagem, as receitas, o choque e os modos de defesa com o Focus, as chaves da aba Settings e o que já existia |
@@ -124,6 +128,7 @@
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-12 21:30 | Registra as respostas 870 a 873. |
 | Marcelo Fabiano | 2026-11-12 20:30 | Registra as respostas 867 a 869. |
 | Marcelo Fabiano | 2026-11-12 19:40 | Registra a resposta 866. |
 | Marcelo Fabiano | 2026-11-12 19:10 | Registra as respostas 864 e 865. |
