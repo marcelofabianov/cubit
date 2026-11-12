@@ -1,6 +1,8 @@
 package io.github.marcelofabianov.cubit.domain.energy;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
@@ -75,5 +77,21 @@ class PowerRulesTest {
     assertEquals(false, PowerState.INACTIVE_SWITCHED_OFF.isInteractive());
     assertEquals(true, PowerState.ACTIVE.isInteractive());
     assertEquals(true, PowerState.HIBERNATING.isInteractive());
+  }
+
+  @Test
+  void theOwnerSwitchesOffAnActiveRobot() {
+    assertTrue(PowerRules.canSwitchOff(PowerState.ACTIVE));
+    assertEquals(PowerState.INACTIVE_SWITCHED_OFF, RULES.switchOff(PowerState.ACTIVE));
+  }
+
+  @Test
+  void onlyAnActiveRobotCanBeSwitchedOff() {
+    for (PowerState state : PowerState.values()) {
+      if (state != PowerState.ACTIVE) {
+        assertFalse(PowerRules.canSwitchOff(state));
+        assertEquals(state, RULES.switchOff(state));
+      }
+    }
   }
 }

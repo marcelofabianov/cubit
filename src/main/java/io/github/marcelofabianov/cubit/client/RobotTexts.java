@@ -81,7 +81,7 @@ final class RobotTexts {
     return switch (status) {
       case CHARGING -> ScreenPainter.STATUS_GREEN;
       case NO_SKY, NIGHT, NO_SUN -> ScreenPainter.STATUS_ORANGE;
-      case FULL, OFF -> ScreenPainter.STATUS_GRAY;
+      case FULL, OFF, SWITCHED_OFF -> ScreenPainter.STATUS_GRAY;
     };
   }
 

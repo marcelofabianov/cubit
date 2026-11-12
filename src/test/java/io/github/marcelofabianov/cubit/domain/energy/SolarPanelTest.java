@@ -7,6 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 class SolarPanelTest {
+  private static final boolean SWITCHED_ON = true;
+  private static final boolean SWITCHED_OFF = false;
   private static final Energy DAY = new Energy(12);
   private static final Energy NIGHT = new Energy(3);
   private static final SolarOutput ELITE = new SolarOutput(DAY, NIGHT);
@@ -35,25 +37,26 @@ class SolarPanelTest {
 
   @Test
   void anActiveRobotInTheSunGetsTheOutputOfTheDay() {
-    assertEquals(DAY, SolarPanel.output(ELITE, PowerState.ACTIVE, true, true));
+    assertEquals(DAY, SolarPanel.output(ELITE, PowerState.ACTIVE, SWITCHED_ON, true, true));
   }
 
   @Test
   void atNightOnlyTheTiersWithANightOutputGetEnergy() {
-    assertEquals(NIGHT, SolarPanel.output(ELITE, PowerState.ACTIVE, true, false));
-    assertEquals(Energy.ZERO, SolarPanel.output(BASE, PowerState.ACTIVE, true, false));
+    assertEquals(NIGHT, SolarPanel.output(ELITE, PowerState.ACTIVE, SWITCHED_ON, true, false));
+    assertEquals(Energy.ZERO, SolarPanel.output(BASE, PowerState.ACTIVE, SWITCHED_ON, true, false));
   }
 
   @Test
   void withoutTheSunItGivesNothing() {
-    assertEquals(Energy.ZERO, SolarPanel.output(ELITE, PowerState.ACTIVE, false, true));
+    assertEquals(
+        Energy.ZERO, SolarPanel.output(ELITE, PowerState.ACTIVE, SWITCHED_ON, false, true));
   }
 
   @Test
   void onlyAnActiveRobotUsesThePanel() {
     for (PowerState state : PowerState.values()) {
       if (state != PowerState.ACTIVE) {
-        assertEquals(Energy.ZERO, SolarPanel.output(ELITE, state, true, true));
+        assertEquals(Energy.ZERO, SolarPanel.output(ELITE, state, SWITCHED_ON, true, true));
       }
     }
   }
@@ -66,5 +69,11 @@ class SolarPanelTest {
 
     assertEquals(Energy.ZERO, charged.accepted());
     assertEquals(DAY, charged.battery().charge());
+  }
+
+  @Test
+  void aSwitchedOffPanelGivesNothing() {
+    assertEquals(
+        Energy.ZERO, SolarPanel.output(ELITE, PowerState.ACTIVE, SWITCHED_OFF, true, true));
   }
 }

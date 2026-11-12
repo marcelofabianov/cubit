@@ -12,9 +12,10 @@ public final class SolarPanel {
     return Math.floorMod(dayTime, TICKS_PER_DAY) < DAY_ENDS_AT;
   }
 
+  /** Switched off by the owner, the panel gives nothing (answer 859). */
   public static Energy output(
-      SolarOutput solar, PowerState state, boolean sunReachesIt, boolean day) {
-    if (state != PowerState.ACTIVE || !sunReachesIt) {
+      SolarOutput solar, PowerState state, boolean switchedOn, boolean sunReachesIt, boolean day) {
+    if (state != PowerState.ACTIVE || !switchedOn || !sunReachesIt) {
       return Energy.ZERO;
     }
     return day ? solar.dayPerTick() : solar.nightPerTick();

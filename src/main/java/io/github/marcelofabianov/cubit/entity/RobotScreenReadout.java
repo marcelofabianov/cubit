@@ -56,7 +56,7 @@ public final class RobotScreenReadout {
     RechargeSource recharge = recharge(tick, state, battery);
     SolarStatus solar =
         SolarStatus.of(
-            new SolarView(state, tick.sunExists(), tick.skyOpen(), tick.day()),
+            new SolarView(state, tick.sunExists(), tick.skyOpen(), tick.day(), true),
             battery,
             robot.spec().solar());
     return new RobotScreenReading(

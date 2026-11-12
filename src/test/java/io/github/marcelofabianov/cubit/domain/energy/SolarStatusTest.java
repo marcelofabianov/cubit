@@ -6,6 +6,7 @@ import io.github.marcelofabianov.cubit.domain.energy.SolarStatus.SolarView;
 import org.junit.jupiter.api.Test;
 
 class SolarStatusTest {
+  private static final boolean SWITCHED_ON = true;
   private static final Energy CAPACITY = new Energy(300_000);
   private static final Battery HALF = new Battery(CAPACITY, new Energy(150_000));
   private static final Battery FULL = new Battery(CAPACITY, CAPACITY);
@@ -19,7 +20,7 @@ class SolarStatusTest {
   }
 
   private static SolarView active(boolean sunExists, boolean skyOpen, boolean day) {
-    return new SolarView(PowerState.ACTIVE, sunExists, skyOpen, day);
+    return new SolarView(PowerState.ACTIVE, sunExists, skyOpen, day, SWITCHED_ON);
   }
 
   @Test
@@ -50,9 +51,16 @@ class SolarStatusTest {
 
   @Test
   void theBaseAndTheInactiveStatesTurnThePanelOff() {
-    SolarView hibernating = new SolarView(PowerState.HIBERNATING, YES, YES, YES);
-    SolarView exhausted = new SolarView(PowerState.INACTIVE_EXHAUSTED, YES, YES, YES);
+    SolarView hibernating = new SolarView(PowerState.HIBERNATING, YES, YES, YES, SWITCHED_ON);
+    SolarView exhausted = new SolarView(PowerState.INACTIVE_EXHAUSTED, YES, YES, YES, SWITCHED_ON);
     assertEquals(SolarStatus.OFF, status(hibernating, HALF, DAY_ONLY));
     assertEquals(SolarStatus.OFF, status(exhausted, HALF, DAY_ONLY));
+  }
+
+  @Test
+  void aSwitchedOffPanelSaysSo() {
+    SolarView off = new SolarView(PowerState.ACTIVE, YES, YES, YES, NO);
+
+    assertEquals(SolarStatus.SWITCHED_OFF, status(off, HALF, DAY_AND_NIGHT));
   }
 }

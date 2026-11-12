@@ -185,4 +185,28 @@ class RobotStateTest {
     assertEquals(DefenseMode.AGGRESSIVE, aggressive.damaged().defenseMode());
     assertEquals(DefenseMode.AGGRESSIVE, repaired.defenseMode());
   }
+
+  @Test
+  void theSolarPanelStartsSwitchedOn() {
+    assertTrue(new RobotState(RobotTier.BASE, SOME_ENERGY, SOME_HEALTH).solarOn());
+  }
+
+  @Test
+  void dyingAndRepairingKeepTheSolarSwitch() {
+    RobotState off =
+        new RobotState(
+            RobotTier.BASE,
+            SOME_ENERGY,
+            SOME_HEALTH,
+            true,
+            RobotColor.WHITE,
+            true,
+            OreFilter.EMPTY,
+            true,
+            DefenseMode.PEACEFUL,
+            false);
+
+    assertFalse(off.damaged().solarOn());
+    assertFalse(off.damaged().repaired(SPEC, new Percentage(REPAIR_PERCENT)).solarOn());
+  }
 }

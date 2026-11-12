@@ -11,13 +11,13 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 | `Percentage` | Porcentagem inteira, de 0 a 100 |
 | `Battery` | Capacidade e carga atual. É imutável, e cada operação devolve uma bateria nova |
 | `PowerState` | Estado do robô |
-| `PowerRules` | Regras que mudam o estado por causa da energia |
+| `PowerRules` | Regras que mudam o estado por causa da energia, e o desligar pela tela, só do robô ativo |
 | `RobotColor` | A cor da carcaça, uma para cada corante do jogo. A `key` é o nome do corante, usado nos saves e nas texturas |
 | `PaintRules` | Quando um corante muda o robô e quando ele reage |
 | `RobotType` | Identifica o Cubit nos IDs e no config. O robô é único, e é um dado, identificado por um ID |
 | `RobotTier` | Nível de evolução: Base, Advanced, Elite e Ultimate. A `key` é o nome usado no config e nos saves. `next` é o tier seguinte, e `previous`, o que um Module desse tier exige |
 | `TierUpgrade` | O que um Module faz no robô: sobe o tier, pede o tier anterior primeiro ou encontra o robô já nesse tier ou acima |
-| `RobotState` | O que o robô guarda ao virar item: tier, energia, vida, a chave da lanterna, a cor, a chave dos scanners, o filtro de minérios, a chave das falas e o modo de defesa. `damaged` e `repaired` dão o estado ao morrer e ao consertar |
+| `RobotState` | O que o robô guarda ao virar item: tier, energia, vida, a chave da lanterna, a cor, a chave dos scanners, o filtro de minérios, a chave das falas, o modo de defesa e a chave do painel solar. `damaged` e `repaired` dão o estado ao morrer e ao consertar |
 | `TierSpec` | Números de um tipo de robô num tier |
 | `ShockSpec` | O choque de um tier: dano, alcance, intervalo, custo, se atinge todos no alcance e os modos de defesa liberados. O Pacífico sempre está liberado. `NONE` é o tier sem choque |
 | `DefenseMode` | Quem o robô ataca: Pacífico, Contra-atacar, Agressivo ou Focus. A `key` é o nome usado no config e nos saves, e `INITIAL` é o Pacífico |
@@ -72,7 +72,7 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 | `RobotLight` | A luz final que o robô dá ao mundo: a tela e a lanterna |
 | `LampPulse` | A força do halo das antenas em cada momento |
 | `SolarOutput` | O que o painel dá por tick, de dia e à noite |
-| `SolarPanel` | Quando o painel dá energia |
+| `SolarPanel` | Quando o painel dá energia: ativo, com a chave ligada e com o sol chegando |
 | `SolarPulse` | A força do brilho da célula em cada momento |
 | `PowerSound` | Som tocado uma vez, ao ligar ou desligar |
 | `ContinuousSound` | Som em loop enquanto a condição valer: esteira, curto elétrico e recarga |
@@ -135,6 +135,7 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 - **Intervalo corre sempre:** a espera continua mesmo sem a condição, para um robô que oscila em volta do limite não repetir o aviso antes da hora.
 - **Comparação de porcentagem sem divisão:** `hasAtLeast` multiplica os dois lados, para ser exata com os valores de `tiers.md`.
 
+- **Desligar pela tela, só o ativo:** no Dock o robô hiberna, e desligado ele já está desligado, então só o robô ativo pode ser desligado pela tela (pergunta 857). Ele volta a ligar pelo clique, como qualquer robô desligado com carga.
 - **Tela com a altura do Base:** o inventário dos tiers altos rola, em vez de a janela crescer, porque no Ultimate ela passaria da altura da tela do jogo (pergunta 838).
 - **Choque só com quem o usa:** o choque e os três modos entram juntos, porque o Pacífico sozinho nunca dispara o choque (pergunta 822).
 - **Pacífico sempre liberado:** o `ShockSpec` acrescenta o Pacífico a qualquer lista de modos, para o dono sempre poder parar os ataques, mesmo com um config que esqueça dele (pergunta 834).

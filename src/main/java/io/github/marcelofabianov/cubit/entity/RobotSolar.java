@@ -35,7 +35,8 @@ public final class RobotSolar {
     wasActive = active;
     boolean day = SolarPanel.isDay(robot.level().getDayTime());
     Energy offered =
-        SolarPanel.output(robot.spec().solar(), robot.powerState(), sunExists && skyOpen, day);
+        SolarPanel.output(
+            robot.spec().solar(), robot.powerState(), true, sunExists && skyOpen, day);
     Battery.Charged charged = robot.battery().recharge(offered);
     robot.setBattery(charged.battery());
     robot.getEntityData().set(RobotSyncedData.SOLAR_CHARGING, !charged.accepted().isZero());
