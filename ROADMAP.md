@@ -36,7 +36,7 @@ Saiu ao terminar a Fase 3, no Modrinth, com o mod funcionando só com ele e as d
 
 Dividida em três partes, na ordem em que uma depende da outra.
 
-### Fase 4: Tier e ataque
+### Fase 4: Tier e ataque (encerrada)
 
 - Tiers Advanced, Elite e Ultimate, com os módulos de upgrade.
 - Choque, com o modo Pacífico, o único do tier Base.

@@ -94,7 +94,7 @@ Dividida em três partes, na ordem em que dependem uma da outra (perguntas 722 a
 5. [x] Choque e modo Pacífico, o único do tier Base (perguntas 722 e 796), na mesma entrega do item 6 (pergunta 822, PR #149)
 6. [x] Modos Contra-atacar e Agressivo (PR #149)
 7. [x] Modo só o alvo, com o último mob atacado (perguntas 577, 578 e 795), como o modo Focus (PR #151)
-8. [ ] Interface de configuração na aba Settings: chave geral e chave do painel solar (perguntas 717 e 425)
+8. [x] Interface de configuração na aba Settings: chave geral e chave do painel solar (perguntas 717 e 425, PR #153)
 
 ### Fase 4.1: Itens, filtros, carregamento e mais
 
