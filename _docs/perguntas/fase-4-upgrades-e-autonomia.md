@@ -13,6 +13,8 @@
 
 | # | Pergunta | Resposta |
 |---|---|---|
+| 816 | O push da #144 espera o GitHub listar o `id_rsa` como chave de assinatura? | Não: o push segue, e os commits podem aparecer como Unverified até a chave de assinatura estar cadastrada |
+| 815 | O remote `git@github.com:`, fora do padrão do `AGENTS.md`, pode ser trocado antes do push? | Sim, para `git@github.com-personal:marcelofabianov/cubit.git`, só neste repositório |
 | 814 | Qual chave SSH assina os commits, se a ed25519 dos commits anteriores não está acessível nesta máquina? | O `~/.ssh/id_rsa`, a mesma chave do remote pessoal, configurado só neste repositório. O desenvolvedor a cadastra como chave de assinatura no GitHub, para os commits aparecerem como Verified. Detalha a 813 |
 | 813 | Como assinar os commits da #144, que saíram com a chave GPG, se o `AGENTS.md` pede SSH? | Configurar a assinatura do repositório para seguir o padrão do projeto, com SSH, e reassinar os commits antes do push |
 | 812 | As receitas dos Modules entram no PR da #144? | Não: ficam para o próximo PR, com os materiais da pendente 807. O item 4 do `checklist.md` só é marcado depois delas |
@@ -69,6 +71,7 @@
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-12 00:10 | Registra as respostas 815 e 816. |
 | Marcelo Fabiano | 2026-11-11 23:55 | Registra as respostas 812 a 814. |
 | Marcelo Fabiano | 2026-11-11 23:10 | Registra a resposta 811. |
 | Marcelo Fabiano | 2026-11-11 22:01 | Registra as respostas 797 a 806 e 808 a 810, e a pendente 807. |
