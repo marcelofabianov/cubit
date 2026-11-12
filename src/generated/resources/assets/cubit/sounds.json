@@ -1,4 +1,10 @@
 {
+  "general_robot.aggressive_mode": {
+    "sounds": [
+      "cubit:general_robot/aggressive_mode"
+    ],
+    "subtitle": "subtitles.cubit.general_robot.aggressive_mode"
+  },
   "general_robot.expression_beep": {
     "sounds": [
       "cubit:general_robot/expression_beep"
@@ -40,6 +46,12 @@
       "cubit:general_robot/recharging"
     ],
     "subtitle": "subtitles.cubit.general_robot.recharging"
+  },
+  "general_robot.shock_attack": {
+    "sounds": [
+      "cubit:general_robot/shock_attack"
+    ],
+    "subtitle": "subtitles.cubit.general_robot.shock_attack"
   },
   "general_robot.short_circuit": {
     "sounds": [

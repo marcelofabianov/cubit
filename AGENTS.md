@@ -6,9 +6,9 @@ Mod de Minecraft que adiciona um robô companheiro fofo, movido a bateria, de te
 
 ## Estado atual
 
-- **Etapa atual:** as Fases 1, 2 e 3 foram encerradas, e a primeira versão, `0.1.0`, foi publicada no Modrinth. O trabalho entra por issue, na ordem do `checklist.md`.
+- **Etapa atual:** as Fases 1, 2 e 3 foram encerradas, e a primeira versão, `0.1.0`, foi publicada no Modrinth. A Fase 4 começou: o item 4, com os tiers, os Modules e as receitas, entrou nos PRs #145 e #147, e a instância só com o mod e as confirmações que saíram da `0.1.0` foram feitas (resposta 820). O trabalho entra por issue, na ordem do `checklist.md`.
 - **Já entrou:** colocar e recolher, seguir o player, vários robôs, fogo, lava, os arquivos de som, a revisão dos `.md`, o novo modelo, a morte com o item danificado, o inventário, a energia em uso, o consumo por situação, a reação a blocos que ferem, o Induction Dock, o `/cubit reset`, as receitas e, na Fase 3, os sons, as expressões, o som de dano, a barra de vida, as animações, o colar e a bateria, os textos curtos, a lanterna, o painel solar, a cor da carcaça, o nome, a detecção dos scanners, com chave e filtro, numa esfera, as caixas dos scanners, a seta sobre o mob, as cores das antenas com o halo do corpo e as falas, inclusive sobre a redstone minerada. Também entraram a volta do Cubit com o dono que renasce, a descida de até 5 blocos, o Jade e as telas próprias do Cubit e do Induction Dock.
-- **Próximos:** o envio da `0.1.0` ao CurseForge (resposta 787), a instância só com o mod e as confirmações que saíram da `0.1.0` (item 7 do `checklist.md`, resposta 776). Depois, a Fase 4, quando o desenvolvedor pedir.
+- **Próximos:** o item 5 da Fase 4, o choque com o modo Pacífico, e depois os itens 6 a 8. O envio da `0.1.0` ao CurseForge continua pendente (resposta 787).
 - **Comandos:** estão em [`_docs/desenvolvimento/ferramentas-de-build.md`](_docs/desenvolvimento/ferramentas-de-build.md).
 - **Limite:** não avance para as fases seguintes sem pedido explícito.
 
@@ -207,22 +207,22 @@ Aprovada. Vale a partir da Fase 2.
 io.github.marcelofabianov.cubit
 ├── CubitMod                // ponto de entrada: só conecta os registros
 ├── domain/                 // Java puro, testado com JUnit
-│   ├── robot/              // RobotType, capacidades que o Cubit combina, OreKind, OreFilter, OreSignals
-│   ├── tier/               // RobotTier, TierSpec, TierCatalog (interface)
+│   ├── robot/              // RobotType, capacidades que o Cubit combina, OreKind, OreFilter, OreSignals, DefenseMode
+│   ├── tier/               // RobotTier, TierSpec, TierCatalog (interface); TierUpgrade: subir de tier com um Module; ShockSpec: o choque e os modos de cada tier
 │   ├── energy/             // Battery, PowerState (ativo, inativo, hibernação), regras de consumo e religamento, SolarPanel: quando o painel dá energia; SolarStatus, EnergyUseCause, RechargeSource, EnergyFormat, EnergyHalves: o que as telas mostram
-│   ├── behavior/           // FollowDecision: seguir, parar ou teleportar; BurningAction: reagir a fogo e lava; LampPolicy: quando a lanterna acende; ScanRules, ScanArea, FreshFinds, MarkLife, MarkPulse, ScanSignal: scanners, caixas e cores; ChatWatch, BiomeWatch, LeftBehindWatch, ChatRules: falas; RespawnReturn: voltar com o dono; RobotScreenStatus: o estado no topo da tela
+│   ├── behavior/           // FollowDecision: seguir, parar ou teleportar; BurningAction: reagir a fogo e lava; LampPolicy: quando a lanterna acende; ScanRules, ScanArea, FreshFinds, MarkLife, MarkPulse, ScanSignal: scanners, caixas e cores; ChatWatch, BiomeWatch, LeftBehindWatch, ChatRules: falas; RespawnReturn: voltar com o dono; RobotScreenStatus: o estado no topo da tela; DefenseRules, ShockCandidate, RetaliationMemory, ShockRules: o choque e os modos de defesa
 │   ├── dock/               // DockStock, DockStatus, DockStay, DockQueue, DockTrip, DockRemoval, DockInputMeter
 │   └── ownership/          // FollowingRobotPolicy, Ownership
 ├── config/                 // ModConfigSpec → implementa TierCatalog
-├── registry/               // DeferredRegisters
-├── entity/                 // RobotEntity, goals de IA
-├── item/                   // RobotItem, RobotStateComponent; PowerBankItem planejado para a Fase 4
+├── registry/               // DeferredRegisters e CubitDamageTypes, o dano do choque
+├── entity/                 // RobotEntity, goals de IA; RobotUpgrade: o Module aplicado; RobotDefense e RobotShock: o choque
+├── item/                   // RobotItem, RobotStateComponent, ModuleItem e TierLook; PowerBankItem planejado para a Fase 4.1
 ├── block/                  // InductionDockBlock, BlockEntity
-├── menu/                   // RobotMenu, InductionDockMenu
+├── menu/                   // RobotMenu, InductionDockMenu; DefenseControl e DefenseOpening: a aba Defense
 ├── network/                // pacotes próprios: NoticePayload, OreMarksPayload, MobMarksPayload e CubitNetwork
 ├── compat/jade/            // plugin do Jade, opcional: só este pacote importa o Jade
 ├── player/                 // attachment com o UUID do robô que segue, robôs mortos com o dono offline, /cubit reset e o que o dono faz: renascer, conquistar, caçar e minerar redstone
-├── client/                 // renderer, modelo GeckoLib, tela
+├── client/                 // renderer, modelo GeckoLib, telas, com as abas Inventory, Settings e Defense
 └── datagen/                // receitas, loot, traduções
 ```
 

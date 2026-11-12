@@ -13,7 +13,12 @@ import java.util.function.Function;
 enum Language {
   EN_US(
       Locales.ENGLISH,
-      List.of(EnglishGameTexts::addTo, ScreenTexts::addTo, JadeTexts::addTo, UpgradeTexts::addTo),
+      List.of(
+          EnglishGameTexts::addTo,
+          ScreenTexts::addTo,
+          JadeTexts::addTo,
+          UpgradeTexts::addTo,
+          DefenseTexts::addTo),
       ChatPhrases::of),
   PT_BR(
       Locales.PORTUGUESE,
@@ -21,7 +26,8 @@ enum Language {
           PortugueseGameTexts::addTo,
           PortugueseScreenTexts::addTo,
           PortugueseJadeTexts::addTo,
-          PortugueseUpgradeTexts::addTo),
+          PortugueseUpgradeTexts::addTo,
+          PortugueseDefenseTexts::addTo),
       PortugueseChatPhrases::of);
 
   private final String locale;

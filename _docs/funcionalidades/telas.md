@@ -24,7 +24,7 @@ As telas próprias do Cubit e do Induction Dock, item 19 da Fase 3. Elas substit
 
 ### Abas
 
-Duas abas, à direita da janela: **Inventory**, com o ícone do baú, e **Settings**, com a engrenagem. A aba é estado só do cliente. Na Settings, os slots ficam desligados e não podem ser usados.
+Três abas, à direita da janela: **Inventory**, com o ícone do baú, **Settings**, com a engrenagem, e **Defense**, com o escudo (perguntas 824 e 828). A aba é estado só do cliente. Fora da Inventory, os slots ficam desligados e não podem ser usados.
 
 ### Aba Inventory
 
@@ -39,6 +39,9 @@ Duas abas, à direita da janela: **Inventory**, com o ícone do baú, e **Settin
 | Slot de energia | O slot de redstone, com o rótulo `Redstone` |
 | Inventário do Cubit | `Cubit's inventory`, ou com o nome dele, como `Bolt's inventory` |
 | Inventário do player | `Inventory` e a hotbar |
+
+- **Rolagem nos tiers altos:** a janela tem sempre a altura da do Base, com 3 linhas do inventário do Cubit à vista, para não passar da altura da tela (perguntas 838 e 839). Com mais de 27 slots, uma barra de rolagem fica à direita do inventário, e a janela ganha a largura dela. A roda do mouse sobre o inventário, um clique na barra ou arrastar o marcador mudam a linha de cima. O servidor recebe a rolagem como botão de menu, confere o limite e manda os itens da parte à vista.
+- **Shift + clique** de um item do player procura espaço no inventário inteiro do Cubit, e não só nas linhas à vista.
 
 ### Estados do topo
 
@@ -65,6 +68,22 @@ Duas abas, à direita da janela: **Inventory**, com o ícone do baú, e **Settin
 - **Rodapé:** `More functions arrive with the next updates.`
 
 Os números das descrições vêm do config e do tier, nunca fixos no texto (regras 3 e 39).
+
+### Aba Defense
+
+Entra com o choque e os modos de defesa, nos itens 5 e 6 da Fase 4 (perguntas 824 e 829). As regras estão em [`combate.md`](combate.md).
+
+- **Cabeçalho:** `Defense`, a etiqueta do tier e `Battery 71%`, como na Settings.
+- **Modos:** uma lista com os três, cada um com o nome, uma descrição curta e o atual marcado. O clique num modo liberado troca o modo, pelo clique de botão de menu do jogo, e o servidor confere o dono e o tier. Os bloqueados ficam apagados, com o tier que os libera (pergunta 833):
+
+| Modo | Descrição |
+|---|---|
+| `Peaceful` | `Never attacks` |
+| `Retaliate` | `Shocks whoever hurts you or the Cubit` |
+| `Aggressive` | `Shocks hostile mobs in range` |
+| Bloqueado | `Unlocks at Advanced`, com o tier que libera o modo |
+
+- **Choque:** os números do tier, do config, numa seção `Shock`: `Damage`, `Range` em blocos, `Interval`, como `Every 2 s`, `Cost`, como `2000 FE per shock`, e `Targets`, `The nearest` ou `All in range` (pergunta 835). No Base, que só tem o Pacífico, a seção mostra `Unlocks at Advanced`.
 
 ## Tela do Induction Dock
 
@@ -180,6 +199,9 @@ Pergunta 691.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-12 13:10 | Adiciona a rolagem do inventário nos tiers altos. |
+| Marcelo Fabiano | 2026-11-12 11:40 | Detalha os textos da seção do choque. |
+| Marcelo Fabiano | 2026-11-12 10:30 | Adiciona a aba Defense. |
 | Marcelo Fabiano | 2026-11-08 00:11 | Cita a tradução para o português. |
 | Marcelo Fabiano | 2026-11-07 23:46 | Tira da tabela de estados as linhas de histórico que caíram nela. |
 | Marcelo Fabiano | 2026-11-07 23:19 | Diminui os textos na mesma proporção. |

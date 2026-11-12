@@ -4,9 +4,12 @@ import io.github.marcelofabianov.cubit.domain.behavior.LightLevel;
 import io.github.marcelofabianov.cubit.domain.energy.ConsumptionExtras;
 import io.github.marcelofabianov.cubit.domain.energy.Energy;
 import io.github.marcelofabianov.cubit.domain.energy.SolarOutput;
+import io.github.marcelofabianov.cubit.domain.robot.DefenseMode;
 import io.github.marcelofabianov.cubit.domain.tier.RobotTier;
 import io.github.marcelofabianov.cubit.domain.tier.ScannerSpec;
+import io.github.marcelofabianov.cubit.domain.tier.ShockSpec;
 import io.github.marcelofabianov.cubit.domain.tier.TierSpec;
+import java.util.Set;
 
 /**
  * The default numbers of the Cubit at each tier, from _docs/tiers.md. The pack can change them in
@@ -101,6 +104,54 @@ final class TierDefaults {
   private static final long ULTIMATE_ORE_SCAN_COST = 300;
   private static final long ULTIMATE_MOB_SCAN_COST = 300;
   private static final int ULTIMATE_ORE_FILTER_SLOTS = 64;
+  private static final int BASE_SHOCK_DAMAGE = 0;
+  private static final int BASE_SHOCK_RANGE = 0;
+  private static final int BASE_SHOCK_TICKS = 60;
+  private static final long BASE_SHOCK_COST = 0;
+  private static final ShockSpec BASE_SHOCK =
+      new ShockSpec(
+          BASE_SHOCK_DAMAGE,
+          BASE_SHOCK_RANGE,
+          BASE_SHOCK_TICKS,
+          new Energy(BASE_SHOCK_COST),
+          false,
+          Set.of());
+  private static final int ADVANCED_SHOCK_DAMAGE = 2;
+  private static final int ADVANCED_SHOCK_RANGE = 3;
+  private static final int ADVANCED_SHOCK_TICKS = 60;
+  private static final long ADVANCED_SHOCK_COST = 2_000;
+  private static final ShockSpec ADVANCED_SHOCK =
+      new ShockSpec(
+          ADVANCED_SHOCK_DAMAGE,
+          ADVANCED_SHOCK_RANGE,
+          ADVANCED_SHOCK_TICKS,
+          new Energy(ADVANCED_SHOCK_COST),
+          false,
+          Set.of(DefenseMode.RETALIATE));
+  private static final int ELITE_SHOCK_DAMAGE = 4;
+  private static final int ELITE_SHOCK_RANGE = 5;
+  private static final int ELITE_SHOCK_TICKS = 40;
+  private static final long ELITE_SHOCK_COST = 2_000;
+  private static final ShockSpec ELITE_SHOCK =
+      new ShockSpec(
+          ELITE_SHOCK_DAMAGE,
+          ELITE_SHOCK_RANGE,
+          ELITE_SHOCK_TICKS,
+          new Energy(ELITE_SHOCK_COST),
+          false,
+          Set.of(DefenseMode.RETALIATE, DefenseMode.AGGRESSIVE));
+  private static final int ULTIMATE_SHOCK_DAMAGE = 6;
+  private static final int ULTIMATE_SHOCK_RANGE = 8;
+  private static final int ULTIMATE_SHOCK_TICKS = 20;
+  private static final long ULTIMATE_SHOCK_COST = 1_500;
+  private static final ShockSpec ULTIMATE_SHOCK =
+      new ShockSpec(
+          ULTIMATE_SHOCK_DAMAGE,
+          ULTIMATE_SHOCK_RANGE,
+          ULTIMATE_SHOCK_TICKS,
+          new Energy(ULTIMATE_SHOCK_COST),
+          true,
+          Set.of(DefenseMode.RETALIATE, DefenseMode.AGGRESSIVE));
   private static final TierSpec BASE_SPEC =
       new TierSpec(
           new Energy(BASE_BATTERY),
@@ -125,7 +176,8 @@ final class TierDefaults {
               BASE_MOB_SCAN_TICKS,
               new Energy(BASE_ORE_SCAN_COST),
               new Energy(BASE_MOB_SCAN_COST),
-              BASE_ORE_FILTER_SLOTS));
+              BASE_ORE_FILTER_SLOTS),
+          BASE_SHOCK);
   private static final TierSpec ADVANCED_SPEC =
       new TierSpec(
           new Energy(ADVANCED_BATTERY),
@@ -150,7 +202,8 @@ final class TierDefaults {
               ADVANCED_MOB_SCAN_TICKS,
               new Energy(ADVANCED_ORE_SCAN_COST),
               new Energy(ADVANCED_MOB_SCAN_COST),
-              ADVANCED_ORE_FILTER_SLOTS));
+              ADVANCED_ORE_FILTER_SLOTS),
+          ADVANCED_SHOCK);
   private static final TierSpec ELITE_SPEC =
       new TierSpec(
           new Energy(ELITE_BATTERY),
@@ -175,7 +228,8 @@ final class TierDefaults {
               ELITE_MOB_SCAN_TICKS,
               new Energy(ELITE_ORE_SCAN_COST),
               new Energy(ELITE_MOB_SCAN_COST),
-              ELITE_ORE_FILTER_SLOTS));
+              ELITE_ORE_FILTER_SLOTS),
+          ELITE_SHOCK);
   private static final TierSpec ULTIMATE_SPEC =
       new TierSpec(
           new Energy(ULTIMATE_BATTERY),
@@ -200,7 +254,8 @@ final class TierDefaults {
               ULTIMATE_MOB_SCAN_TICKS,
               new Energy(ULTIMATE_ORE_SCAN_COST),
               new Energy(ULTIMATE_MOB_SCAN_COST),
-              ULTIMATE_ORE_FILTER_SLOTS));
+              ULTIMATE_ORE_FILTER_SLOTS),
+          ULTIMATE_SHOCK);
 
   private TierDefaults() {}
 

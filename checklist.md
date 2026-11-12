@@ -90,8 +90,8 @@ Dividida em três partes, na ordem em que dependem uma da outra (perguntas 722 a
 
 ### Fase 4: Tier e ataque
 
-4. [ ] Tiers Advanced, Elite e Ultimate, com config, módulos e as receitas deles
-5. [ ] Choque e modo Pacífico, o único do tier Base (perguntas 722 e 796)
+4. [x] Tiers Advanced, Elite e Ultimate, com config, módulos e as receitas deles (PRs #145 e #147)
+5. [ ] Choque e modo Pacífico, o único do tier Base (perguntas 722 e 796), na mesma entrega do item 6 (pergunta 822)
 6. [ ] Modos Contra-atacar e Agressivo
 7. [ ] Modo só o alvo, com o último mob atacado (perguntas 577, 578 e 795)
 8. [ ] Interface de configuração na aba Settings: chave geral e chave do painel solar (perguntas 717 e 425)

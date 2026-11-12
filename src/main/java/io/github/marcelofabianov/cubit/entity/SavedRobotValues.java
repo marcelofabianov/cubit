@@ -3,8 +3,10 @@ package io.github.marcelofabianov.cubit.entity;
 import com.mojang.logging.LogUtils;
 import io.github.marcelofabianov.cubit.domain.energy.Energy;
 import io.github.marcelofabianov.cubit.domain.energy.PowerState;
+import io.github.marcelofabianov.cubit.domain.robot.DefenseMode;
 import io.github.marcelofabianov.cubit.domain.robot.OreFilter;
 import io.github.marcelofabianov.cubit.domain.robot.RobotColor;
+import io.github.marcelofabianov.cubit.domain.robot.RobotState;
 import io.github.marcelofabianov.cubit.domain.tier.RobotTier;
 import io.github.marcelofabianov.cubit.item.SavedEnergy;
 import io.github.marcelofabianov.cubit.item.SavedOreFilter;
@@ -37,11 +39,13 @@ final class SavedRobotValues {
   private static final String SCANNERS_KEY = "ScannersEnabled";
   private static final String ORE_FILTER_KEY = "OreFilter";
   private static final String CHATTER_KEY = "ChatterEnabled";
+  private static final String DEFENSE_KEY = "DefenseMode";
   private static final String LAST_SAFE_POSITION_KEY = "LastSafePosition";
   private static final String NO_OWNER_MESSAGE = "Robot {} has no owner. Nobody can interact.";
   private static final String INVALID_TIER_MESSAGE = "Robot {} has an invalid tier: {}";
   private static final String INVALID_COLOR_MESSAGE = "Robot {} has an invalid color: {}";
   private static final String INVALID_STATE_MESSAGE = "Robot {} has an invalid power state: {}";
+  private static final String INVALID_DEFENSE_MESSAGE = "Robot {} has an invalid defense mode: {}";
 
   private SavedRobotValues() {}
 
@@ -62,6 +66,7 @@ final class SavedRobotValues {
     SavedOreFilter.tagsOf(robot.state().oreFilter())
         .forEach(ore -> filter.add(StringTag.valueOf(ore)));
     tag.put(ORE_FILTER_KEY, filter);
+    tag.putString(DEFENSE_KEY, robot.state().defenseMode().key());
     robot
         .lastSafePosition()
         .ifPresent(position -> tag.putLong(LAST_SAFE_POSITION_KEY, position.asLong()));
@@ -120,6 +125,36 @@ final class SavedRobotValues {
         .orElseGet(() -> {
           LOGGER.warn(INVALID_COLOR_MESSAGE, robot, key);
           return RobotColor.WHITE;
+        });
+  }
+
+  /**
+   * The settings the robot keeps, as a state. Only the settings matter here: the tier, the energy
+   * and the health are read on their own, because they need the config of the tier.
+   */
+  static RobotState settings(CompoundTag tag, RobotTier tier, UUID robot) {
+    return new RobotState(
+        tier,
+        Energy.ZERO,
+        0f,
+        lampOn(tag),
+        color(tag, robot),
+        scannersOn(tag),
+        oreFilter(tag),
+        chatterOn(tag),
+        defenseMode(tag, robot));
+  }
+
+  /** Without the key, the robot was saved before the modes existed, so it is peaceful. */
+  static DefenseMode defenseMode(CompoundTag tag, UUID robot) {
+    if (!tag.contains(DEFENSE_KEY)) {
+      return DefenseMode.INITIAL;
+    }
+    String key = tag.getString(DEFENSE_KEY);
+    return DefenseMode.fromKey(key)
+        .orElseGet(() -> {
+          LOGGER.warn(INVALID_DEFENSE_MESSAGE, robot, key);
+          return DefenseMode.INITIAL;
         });
   }
 

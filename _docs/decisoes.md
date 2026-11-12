@@ -20,7 +20,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Fases 4 e 5 divididas:** Fase 4 com os tiers, o choque com o Pacífico, os outros modos de defesa, o modo só o alvo e a interface de configuração, nessa ordem; 4.1 com o ímã, a coleta, a Power Bank e os slots exclusivos; 4.2 com o Cubit Remote, a mira do modo só o alvo, o modo área, a descarga, o retorno e o local de morte. Fase 5 com antenas, Servidor e storage wireless virtual; 5.1 com o carregamento de chunks; e 5.2 com os cards, a hibernação fora do Dock e a personalização por card (perguntas 722 a 726, com a Fase 4 reorganizada pelas 794 a 796).
 - **Planejado nos documentos:** o que é de fase futura fica nos documentos, marcado com a fase em que entra, sem parecer pronto (pergunta 718).
 - **Testes de instância:** os da regra 35 ficam para o fim da Fase 3, no teste da versão completa, na seção "Teste da versão" do roteiro manual, no Prism Launcher. O Iron Meridian é testado numa cópia da instância, com o jar em `mods/` (perguntas 767 a 769).
-- **Exceção na `0.1.0`:** a versão sai com o teste no Iron Meridian, sem a instância só com o mod e sem as confirmações do item 7, que ficam para depois dela (pergunta 776).
+- **Exceção na `0.1.0`:** a versão sai com o teste no Iron Meridian, sem a instância só com o mod e sem as confirmações do item 7, que ficam para depois dela (pergunta 776). As confirmações e a instância só com o mod foram feitas depois, com o upgrade de tier e as receitas dos Modules (pergunta 820).
 - **Release no GitHub:** cada versão tem a tag anotada e uma release no GitHub, com a seção do `CHANGELOG.md` e o jar, antes do envio aos sites (pergunta 778).
 - **Outro player:** o teste com outro player não é feito no jogo. As GameTests com um player que não é o dono cobrem o Dock, o `/cubit reset`, a cor e o nome (perguntas 770 a 772).
 - **Etapa atual:** as Fases 1, 2 e 3 foram encerradas, com a `0.1.0` publicada (perguntas 785 e 786). A Fase 4 só começa com pedido explícito.
@@ -121,7 +121,8 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Tronco central:** a coluna entre as esteiras e a carcaça tem 2 unidades de altura, e a hitbox não muda.
 - **Trabalhos (Fase 5, planejada):** um único Cubit, com um card por vez, age só em área marcada e nunca sai dela. Antena e Servidor mantêm os chunks carregados, de forma opcional. Sem chunk de destino, ele espera. O detalhe está em [`trabalhos.md`](funcionalidades/trabalhos.md).
 - **Modo só o alvo:** ideia aprovada, a refinar na Fase 4: o Cubit só ataca o último mob que o dono feriu ou marcou com o controle (pergunta 578). O último mob atacado entra na Fase 4, e a mira pelo controle, na 4.2, com o Cubit Remote (pergunta 795).
-- **Limites:** nunca ataca o dono nem mobs pacíficos. Só ataca mobs neutros para defender o player.
+- **Limites:** nunca ataca o dono, outros players, outros Cubits nem mobs pacíficos. Só ataca mobs neutros para defender o player.
+- **Choque e modos de defesa (perguntas 822 a 834):** entram juntos. O Cubit ativo dá o choque sem perseguir, com linha de visão, no alcance e no intervalo do tier, num alvo, ou em todos no Ultimate, com faíscas e o abate do dono. Pacífico no Base, Contra-atacar a partir do Advanced, com 30 s de memória, e Agressivo a partir do Elite, escolhidos numa aba Defense própria, com o escudo. O modo começa Pacífico e fica no item, e os modos e números de cada tier ficam no config.
 - **Scanner:** `c:ores/*` significa a tag-mãe `c:ores` e suas subtags, porque tags não aceitam curinga.
 - **Falas (perguntas 572 a 587 e 618 a 621):** o Cubit comenta o tempo e o horário ao mudarem, com um intervalo mínimo, dá parabéns pelas conquistas visíveis e diz que ama redstone quando o dono a minera, com a chave `Chatter`. As frases e as regras estão em [`falas.md`](conceito/falas.md).
 - **Caixas dos scanners (perguntas 593 a 616):** só o dono vê, através dos blocos, uma caixa azul clara e discreta em volta de cada minério novo que a varredura achou, por cerca de 10 s ou até minerar, e uma seta vermelha para baixo sobre a cabeça do mob hostil enquanto ele estiver no raio, as duas com um pulso suave (perguntas 646 a 649).
@@ -140,6 +141,8 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-12 10:30 | Resume o choque e os modos de defesa. |
+| Marcelo Fabiano | 2026-11-12 09:40 | Registra as confirmações feitas depois da `0.1.0`. |
 | Marcelo Fabiano | 2026-11-12 08:30 | Fecha as receitas dos Modules. |
 | Marcelo Fabiano | 2026-11-11 22:01 | Registra as decisões dos Modules e do colar no ícone. |
 | Marcelo Fabiano | 2026-11-10 10:17 | Registra a Fase 4 reorganizada e a mira do modo só o alvo na 4.2. |

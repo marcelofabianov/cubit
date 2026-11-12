@@ -404,15 +404,36 @@ Compare os ícones com `modulo-avancado.png`, `modulo-elite.png` e `modulo-ultim
 | 2 | Passe o mouse em cada Module | `Requires a Base Cubit`, `Requires an Advanced Cubit` e `Requires an Elite Cubit`, em cinza |
 | 3 | Em sobrevivência, com um Cubit Base ativo, clique com o Elite Module | Nada muda, o Module fica na mão, e aparece `Cubit: I need to be Advanced first` |
 | 4 | Clique com o Advanced Module | O Module é gasto, ele fica feliz com o bipe, aparece `Cubit: Upgraded to Advanced!`, e o colar e as faixas ficam azuis |
-| 5 | Abra o inventário dele | 36 slots, com os itens nos mesmos lugares, a vida atual igual e a vida máxima de 50, e a bateria com a mesma carga sobre 600 mil FE |
+| 5 | Abra o inventário dele | A janela tem a mesma altura da do Base, com 3 linhas à vista e uma barra de rolagem à direita. Rolando, aparecem os 36 slots, com os itens nos mesmos lugares. A vida atual é a mesma, a vida máxima é 50, e a bateria tem a mesma carga sobre 600 mil FE |
 | 6 | Clique de novo com o Advanced Module | Nada é gasto, e aparece `Cubit: I'm already Advanced` |
 | 7 | Ande com ele | Mais rápido que o Base |
 | 8 | Aplique o Elite Module num Cubit desligado e o Ultimate num Cubit no Dock | Os dois sobem de tier. Com a tela apagada, só o texto aparece, e no Dock ele continua carregando |
-| 9 | Recolha o Cubit Ultimate | O ícone tem o colar dourado, também pintado de outra cor |
-| 10 | Mate esse Cubit | O ícone do `Damaged Cubit` tem o colar dourado, e o conserto mantém o tier |
-| 11 | No criativo, aplique um Module | O Module não é gasto |
-| 12 | Com o jogo em português, repita os passos 2 a 6 | `Módulo Avançado`, `Exige um Cubit Base`, `Cubit: Preciso ser Avançado antes`, `Cubit: Evoluí para Avançado!` e `Cubit: Já sou Avançado` |
-| 13 | Com outro player no servidor, use um Module no Cubit | Nada acontece, sem texto, e o Module não é gasto. Coberto pelas GameTests, sem teste no jogo (pergunta 809) |
+| 9 | Abra o Cubit Ultimate numa janela pequena do jogo, com a escala automática | A tela cabe inteira. A roda do mouse sobre o inventário, um clique na barra e arrastar o marcador passam pelas 6 linhas. Shift + clique de um item do player, com as 3 linhas de cima cheias, guarda o item numa linha de baixo |
+| 10 | Recolha o Cubit Ultimate | O ícone tem o colar dourado, também pintado de outra cor |
+| 11 | Mate esse Cubit | O ícone do `Damaged Cubit` tem o colar dourado, e o conserto mantém o tier |
+| 12 | No criativo, aplique um Module | O Module não é gasto |
+| 13 | Com o jogo em português, repita os passos 2 a 6 | `Módulo Avançado`, `Exige um Cubit Base`, `Cubit: Preciso ser Avançado antes`, `Cubit: Evoluí para Avançado!` e `Cubit: Já sou Avançado` |
+| 14 | Com outro player no servidor, use um Module no Cubit | Nada acontece, sem texto, e o Module não é gasto. Coberto pelas GameTests, sem teste no jogo (pergunta 809) |
+
+## Choque e modos de defesa
+
+As regras estão em [`combate.md`](../funcionalidades/combate.md), e os números, em [`tiers.md`](../tiers.md#comportamento-e-combate). Use os Modules da aba do criativo para chegar a cada tier, em sobrevivência.
+
+| # | Faça | Espere |
+|---|---|---|
+| 1 | Com um Cubit Base, abra a tela | Três abas: baú, engrenagem e escudo. Na Defense, `Peaceful` marcado, `Retaliate` e `Aggressive` apagados, com `Unlocks at Advanced` e `Unlocks at Elite`, e a seção `Shock` com `Unlocks at Advanced` |
+| 2 | Suba para o Advanced e abra a aba Defense | `Retaliate` liberado, e a seção `Shock` com dano 2, 3 blocos, a cada 3 s, 2000 FE por choque e o mais próximo |
+| 3 | Escolha `Retaliate`, chegue perto de um zumbi e deixe ele te bater | O Cubit dá choque nele, com faíscas do Cubit até o zumbi e o som de choque. Um zumbi que não atacou ninguém não leva choque |
+| 4 | Suba para o Elite e escolha `Aggressive` | Toca o som do modo agressivo, só nessa troca |
+| 5 | Ande perto de mobs hostis, de animais e de um piglin zumbificado calmo | Só os hostis levam choque. Animais e o piglin calmo, não |
+| 6 | Bata no piglin zumbificado | Ele fica agressivo contra você e passa a levar choque |
+| 7 | Deixe um mob morrer pelo choque | Ele solta XP, e, se tiver nome, a mensagem é `X was zapped by Cubit` |
+| 8 | Suba para o Ultimate, com dois mobs hostis no alcance | Os dois levam choque de uma vez, a cada 1 s |
+| 9 | Ponha um bloco entre o Cubit e o mob | Sem choque através do bloco |
+| 10 | Desligue o Cubit ou deixe ele no Dock, com mobs por perto | Sem choque |
+| 11 | Recolha e coloque o Cubit, e saia e entre no mundo | O modo escolhido continua |
+| 12 | Com o jogo em português, abra a aba | `Defesa`, `Modos`, `Pacífico`, `Contra-atacar`, `Agressivo`, `Libera no Avançado` e a seção `Choque` |
+| 13 | Com outro player no servidor, tente mudar o modo pela tela | Ele não abre a tela do Cubit. Coberto pelas GameTests, sem teste no jogo |
 
 ## Scanners
 
@@ -635,6 +656,8 @@ Na instância só com o mod, tire capturas com F2 do Cubit seguindo, da tela do 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-12 13:40 | Adiciona a rolagem do inventário ao upgrade de tier. |
+| Marcelo Fabiano | 2026-11-12 11:40 | Adiciona o choque e os modos de defesa. |
 | Marcelo Fabiano | 2026-11-12 08:50 | Adiciona as receitas dos Modules. |
 | Marcelo Fabiano | 2026-11-11 23:40 | Adiciona o upgrade de tier e atualiza o colar no ícone. |
 | Marcelo Fabiano | 2026-11-08 01:17 | Adiciona o teste da versão, com as instâncias no Prism, e troca o teste com outro player pelas GameTests. |
