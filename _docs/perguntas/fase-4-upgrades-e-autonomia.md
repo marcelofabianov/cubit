@@ -11,6 +11,7 @@
 
 | # | Pergunta | Resposta |
 |---|---|---|
+| 854 | Como foi o teste manual do modo Focus? | "testes feitos, tudo ok", executados pelo desenvolvedor no `make client`, na branch `feature/150-focus-mode`, sem detalhar cada passo. Cobre os passos 9a a 9d da seção "Choque e modos de defesa" do roteiro manual e a quarta linha da aba Defense. O teste com o jar numa instância só com o mod continua pendente para antes da `main` (regra 35) |
 | 853 | Como é a seta que destaca o alvo do Focus? | Amarela, do raio do choque, com cerca de 1,5× o tamanho da seta vermelha. Aparece sobre o alvo mesmo fora do raio do scanner ou com os scanners desligados, só para o dono. Se o alvo também tiver a seta vermelha, a amarela fica no lugar dela. Detalha a 851 |
 | 852 | O que conta como o dono ferir um mob, para ele virar o alvo do Focus? | Qualquer dano em que o dono seja a causa: golpe, flecha, tridente e outros, como a 577 já previa com o arco |
 | 851 | No Focus, como fica a seta sobre o alvo, se a seta vermelha já aparece sobre todo mob hostil no raio do scanner? | O alvo fica destacado: as setas do scanner continuam, e o alvo ganha uma seta diferente. A recomendação era deixar a seta só sobre o alvo. Detalha a 847, e a 853 define a seta |
@@ -108,6 +109,7 @@
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-12 16:20 | Registra a resposta 854. |
 | Marcelo Fabiano | 2026-11-12 14:40 | Registra as respostas 841 a 853. |
 | Marcelo Fabiano | 2026-11-12 14:10 | Registra a resposta 840. |
 | Marcelo Fabiano | 2026-11-12 12:40 | Registra as respostas 837 a 839. |
