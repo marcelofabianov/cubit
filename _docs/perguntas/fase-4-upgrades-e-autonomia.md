@@ -10,6 +10,8 @@
 
 | # | Pergunta | Resposta |
 |---|---|---|
+| 863 | Como foi o teste manual das chaves da aba Settings? | "testes feitos, tudo ok", executados pelo desenvolvedor no `make client`, na branch `feature/152-power-and-solar-switches`, com os ícones do `Power` e do painel solar, sem detalhar cada passo. Cobre a seção "Chaves da aba Settings" do roteiro manual. O teste com o jar numa instância só com o mod continua pendente para antes da `main` (regra 35) |
+| 862 | No modo Focus, o Cubit ataca uma vaca ou outro animal que o dono feriu? | Não, e fica como está: mobs pacíficos nunca viram alvo, em nenhum modo, como nas perguntas 13, 68 e 845. A caça de animais não entra no combate, e o trabalho com animais é do card de Aprendizado de Máquina: Pecuarista, na Fase 5 |
 | 861 | Como encaixar o painel solar e a chave geral na aba Settings, se duas linhas a mais passam 28 px da janela de 225 px? | A chave geral vira um botão pequeno com o ícone de energia, no cabeçalho, ao lado de `Battery 71%`. O `Solar panel` entra como quarta linha em Functions, as linhas de Functions baixam de 20 para 18 px, e o rodapé `More functions arrive with the next updates.` sai. O botão usa um ícone novo, gerado pelo desenvolvedor. Detalha a 857 |
 | 860 | Quais textos as chaves do painel solar e geral usam? | Painel: `Solar panel` / `Painel solar`, com `Charges in the sun · 5 FE/t` / `Carrega no sol · 5 FE/t`, no número do tier. Chave geral: `Power` / `Energia`, com `Turns the Cubit off` / `Desliga o Cubit`. No Status, o painel desligado mostra `Off` / `Desligado` |
 | 859 | Como começa a chave do painel solar, e o que ela guarda? | Começa ligada, também em saves antigos, e fica num campo opcional do `cubit:robot_state` e no NBT, como a da lanterna. Recolher, morrer e consertar mantêm a escolha |
@@ -116,6 +118,7 @@
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-12 18:40 | Registra as respostas 862 e 863. |
 | Marcelo Fabiano | 2026-11-12 16:50 | Registra as respostas 855 a 861 e fecha a pendente 425. |
 | Marcelo Fabiano | 2026-11-12 16:20 | Registra a resposta 854. |
 | Marcelo Fabiano | 2026-11-12 14:40 | Registra as respostas 841 a 853. |
