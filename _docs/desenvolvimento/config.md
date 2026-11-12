@@ -93,6 +93,7 @@ As chaves ficam em `snake_case`. As de um tier ficam em `[general_robot.{tier}]`
 | `general_robot.base` | `magnet_cost_per_item` | Ímã, por item puxado | 0 a 2147483647 |
 | `general_robot.base` | `pickup_filter_slots` | Filtro de coleta | 1 a 27 |
 | `general_robot.base` | `pickup_filter_tags` | Filtro de coleta com tags | `true` ou `false` |
+| `general_robot.base` | `power_bank_capacity` | Power Bank (70% da bateria) | 1 a 2147483647 |
 
 ## Por que esses limites
 
@@ -128,6 +129,7 @@ O mod não cai por causa do config (regra 17 do `AGENTS.md`):
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-12 22:30 | Adiciona a capacidade da Power Bank (pergunta 910). |
 | Marcelo Fabiano | 2026-11-12 21:45 | Adiciona as chaves da coleta e do ímã (pergunta 889). |
 | Marcelo Fabiano | 2026-11-12 15:10 | Adiciona o modo Focus (pergunta 850). |
 | Marcelo Fabiano | 2026-11-12 10:30 | Adiciona as chaves do choque e dos modos de defesa (pergunta 834). |

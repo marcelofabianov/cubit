@@ -25,7 +25,7 @@ Os tiers são Base, Avançado, Elite e Ultimate (no jogo: Base, Advanced, Elite 
 | Recurso | Base | Avançado | Elite | Ultimate |
 |---|---|---|---|---|
 | Bateria | 300 mil FE | 600 mil FE | 3 mi FE | 8 mi FE |
-| Power Bank (70% da bateria), planejada para a Fase 4 | 210 mil FE | 420 mil FE | 2,1 mi FE | 5,6 mi FE |
+| Power Bank (70% da bateria), em `power_bank_capacity` (pergunta 910) | 210 mil FE | 420 mil FE | 2,1 mi FE | 5,6 mi FE |
 | Autonomia aproximada, andando no plano, sem o painel e com a lanterna apagada | ~16,7 min | ~27,8 min | ~1,9 h | ~3,7 h |
 | Autonomia com inventário cheio ou na água | ~12,5 min | ~20,8 min | ~1,4 h | ~2,8 h |
 | Autonomia na água e com inventário cheio | ~10 min | ~16,7 min | ~1,2 h | ~2,2 h |
@@ -66,7 +66,8 @@ Valem para todos os tiers e ficam no config. Os marcados como planejados entram 
 |---|---|
 | Consumo parado | 0 FE/t |
 | Carga do Cubit ao sair do craft | 25% |
-| Carga da Power Bank ao sair do craft, planejada para a Fase 4 | 0% |
+| Carga da Power Bank ao sair do craft | 0% |
+| Recarga da Power Bank no Dock | A do Base, depois do Cubit que hiberna (pergunta 906) |
 | Velocidade 1,0× (atributo de movimento) | 0,33 |
 | Intervalo para recalcular a rota | 10 ticks |
 | Distância para parar perto do player | 3 blocos |
@@ -204,6 +205,7 @@ Planejado para a Fase 5. O tier Base não aceita cards.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-12 22:30 | Tira a marca de planejada da Power Bank e acrescenta a recarga dela no Dock. |
 | Marcelo Fabiano | 2026-11-12 21:45 | Define o ímã do Advanced em diante, o custo dele e os intervalos da coleta. |
 | Marcelo Fabiano | 2026-11-12 15:10 | Adiciona o modo Focus e a distância do alvo. |
 | Marcelo Fabiano | 2026-11-12 10:30 | Adiciona os alvos por choque e a memória do Contra-atacar. |

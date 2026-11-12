@@ -64,7 +64,7 @@ Funciona como um carregador solar real.
 - **Tela:** desligada, sem energia e sem Cubit; ociosa, com energia e sem Cubit; carregando, com o Cubit recebendo; completa, com a bateria dele cheia; sem energia, com o Cubit na base e o estoque zerado.
 - **Energia:** recebe por cabos de outros mods, em **FE**, em qualquer face, ou com redstone em um slot próprio, também por funil. Nada sai por cabo nem por funil.
 - **Estoque:** tem um pequeno estoque de energia. Um item de redstone só vira energia quando couber inteiro no estoque. Sem FE, o Cubit fica hibernando.
-- **Slot:** tem um único slot, que aceita redstone ou, na Fase 4, uma Power Bank, que recebe energia do Dock.
+- **Slot:** tem um único slot, que aceita redstone ou uma Power Bank, que recebe energia do Dock (perguntas 58 e 906).
 - **Vida:** recupera a vida do Cubit durante a hibernação, sem gastar FE, mesmo com o estoque zerado.
 - **Retorno automático:** serve de base para ele, na Fase 4.
 
@@ -102,7 +102,10 @@ O slot fica na tela do Cubit, ao lado das barras ([`telas.md`](telas.md#aba-inve
 - Entra na Fase 4. A redstone no slot já funciona na Fase 2.
 - Funciona em um Cubit de qualquer tier, na velocidade de recarga do tier do Cubit.
 - Não empilha: cada uma ocupa um slot.
-- Sai vazia do craft e recarrega no Induction Dock ou em qualquer carregador de FE de outros mods, quando houver.
+- Sai vazia do craft e recarrega só no slot do Induction Dock. Não tem capability de FE: outros mods não a carregam nem tiram energia dela, e ela só entrega energia ao Cubit (pergunta 905, que muda a 42).
+- **Carga:** fica no componente `cubit:power_bank_energy`, como energia inteira, e aparece na barra verde e na dica do item, como `105k / 210k FE` (perguntas 903 e 909). A capacidade é a `power_bank_capacity` do tier dela.
+- **No slot do Cubit:** entrega na velocidade de recarga do tier do Cubit, até a bateria encher ou ela esvaziar. Vazia, continua no slot (pergunta 904).
+- **No Dock:** o Cubit que hiberna carrega primeiro, na velocidade do tier dele, e a Power Bank recebe o que sobrar no mesmo tick, até a velocidade de recarga do Base (pergunta 906).
 
 ### Recarregar um Cubit desligado
 
@@ -132,6 +135,7 @@ Se o robô estiver dentro do raio da base e com a bateria baixa, volta sozinho p
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-12 22:30 | Define a Power Bank só no Dock e no Cubit, a carga, o slot e a divisão no Dock. |
 | Marcelo Fabiano | 2026-11-12 21:45 | Adiciona o consumo do ímã. |
 | Marcelo Fabiano | 2026-11-12 17:20 | Define a chave do painel solar e o desligar pela tela. |
 | Marcelo Fabiano | 2026-11-07 23:42 | Leva a chave do painel solar para a Fase 4. |
