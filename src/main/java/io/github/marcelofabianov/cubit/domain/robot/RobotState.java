@@ -20,7 +20,8 @@ public record RobotState(
     OreFilter oreFilter,
     boolean chatterOn,
     DefenseMode defenseMode,
-    boolean solarOn) {
+    boolean solarOn,
+    PickupSettings pickup) {
   private static final String INVALID_HEALTH_MESSAGE = "Invalid robot health: ";
   private static final float MIN_PLACED_HEALTH = 1f;
 
@@ -28,6 +29,32 @@ public record RobotState(
     if (Float.isNaN(health) || health < 0) {
       throw new IllegalArgumentException(INVALID_HEALTH_MESSAGE + health);
     }
+  }
+
+  /** Pickup starts with its initial settings, also for what was saved before it existed. */
+  public RobotState(
+      RobotTier tier,
+      Energy energy,
+      float health,
+      boolean lampOn,
+      RobotColor color,
+      boolean scannersOn,
+      OreFilter oreFilter,
+      boolean chatterOn,
+      DefenseMode defenseMode,
+      boolean solarOn) {
+    this(
+        tier,
+        energy,
+        health,
+        lampOn,
+        color,
+        scannersOn,
+        oreFilter,
+        chatterOn,
+        defenseMode,
+        solarOn,
+        PickupSettings.INITIAL);
   }
 
   /** The solar panel starts switched on, also for what was saved before its switch existed. */
@@ -101,7 +128,8 @@ public record RobotState(
         oreFilter,
         chatterOn,
         defenseMode,
-        solarOn);
+        solarOn,
+        pickup);
   }
 
   public RobotState repaired(TierSpec spec, Percentage health) {
@@ -115,7 +143,23 @@ public record RobotState(
         oreFilter,
         chatterOn,
         defenseMode,
-        solarOn);
+        solarOn,
+        pickup);
+  }
+
+  public RobotState withPickup(PickupSettings next) {
+    return new RobotState(
+        tier,
+        energy,
+        health,
+        lampOn,
+        color,
+        scannersOn,
+        oreFilter,
+        chatterOn,
+        defenseMode,
+        solarOn,
+        next);
   }
 
   public Battery batteryFor(TierSpec spec) {

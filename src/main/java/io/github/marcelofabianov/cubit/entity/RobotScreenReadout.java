@@ -49,6 +49,7 @@ public final class RobotScreenReadout {
             switches,
             robot.defense(),
             new RobotPower(robot),
+            robot.pickup(),
             robot::canUseInventory));
   }
 

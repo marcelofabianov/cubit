@@ -9,7 +9,6 @@ import io.github.marcelofabianov.cubit.domain.energy.SolarStatus;
 import io.github.marcelofabianov.cubit.domain.robot.DefenseMode;
 import io.github.marcelofabianov.cubit.domain.robot.InventoryWindow;
 import io.github.marcelofabianov.cubit.domain.tier.RobotTier;
-import io.github.marcelofabianov.cubit.item.EnergySlotItems;
 import io.github.marcelofabianov.cubit.registry.CubitMenus;
 import java.util.List;
 import java.util.function.Predicate;
@@ -20,6 +19,7 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ClickType;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.inventory.Slot;
@@ -46,13 +46,21 @@ public final class RobotMenu extends AbstractContainerMenu {
   /** After the four defense modes (answer 857). */
   public static final int POWER_BUTTON = 8;
 
+  /** The buttons of the behavior tab, after Power: pickup, magnet and the filter mode. */
+  public static final int PICKUP_BUTTON = 9;
+
+  public static final int MAGNET_BUTTON = 10;
+  public static final int PICKUP_MODE_BUTTON = 11;
+
+  /** The top of the ghost slots of the pickup filter, in the behavior tab. */
+  public static final int PICKUP_FILTER_Y = PickupMenuPart.FILTER_Y;
+
   /** The rows to scroll to come last, one button per row on top (answer 838). */
   public static final int FIRST_SCROLL_BUTTON = 16;
 
   /** The rows of the Base, so the screen keeps its height in every tier. */
   public static final int VISIBLE_ROWS = 3;
 
-  private static final int PLAYER_ROWS = 3;
   private static final int ENERGY_SLOT_SIZE = 1;
   private static final int[] SWITCH_INDEXES = {
     RobotScreenValues.LAMP,
@@ -71,7 +79,8 @@ public final class RobotMenu extends AbstractContainerMenu {
   private final DefenseControl defense;
   private final PowerControl power;
   private final RobotScreenOpening opening;
-  private boolean inventoryShown = true;
+  private final RobotMenuSlots slotGroups = new RobotMenuSlots();
+  private final PickupMenuPart pickup;
 
   private RobotMenu(int containerId, Inventory playerInventory, Contents contents, Server server) {
     super(CubitMenus.ROBOT.get(), containerId);
@@ -85,10 +94,13 @@ public final class RobotMenu extends AbstractContainerMenu {
     this.defense = server.defense();
     this.power = server.power();
     this.opening = contents.opening();
-    addRobotSlots();
-    addEnergySlot(contents.energySlot());
+    this.pickup = new PickupMenuPart(server.pickup());
+    slotGroups.addRobotSlots(this::addSlot, view);
+    slotGroups.addEnergySlot(this::addSlot, contents.energySlot());
     addDataSlots(values);
-    addPlayerSlots(playerInventory);
+    slotGroups.addPlayerSlots(this::addSlot, playerInventory, playerInventoryY());
+    pickup.addSlots(this::addSlot, slots.size());
+    addDataSlots(pickup.values());
   }
 
   /** On the client. The real items and numbers come from the server. */
@@ -115,13 +127,15 @@ public final class RobotMenu extends AbstractContainerMenu {
             values::refresh,
             source.switches(),
             source.defense(),
-            source.power());
+            source.power(),
+            source.pickup());
     return new RobotMenu(containerId, playerInventory, contents, server);
   }
 
   @Override
   public void broadcastChanges() {
     refresh.run();
+    pickup.refresh();
     super.broadcastChanges();
   }
 
@@ -130,6 +144,10 @@ public final class RobotMenu extends AbstractContainerMenu {
   public boolean clickMenuButton(Player player, int button) {
     if (button >= FIRST_SCROLL_BUTTON) {
       return scrollFromClient(player, button - FIRST_SCROLL_BUTTON);
+    }
+    if (button >= PICKUP_BUTTON && button <= PICKUP_MODE_BUTTON) {
+      return stillValid(player)
+          && pickup.press(player, PickupControl.PickupButton.values()[button - PICKUP_BUTTON]);
     }
     if (button == POWER_BUTTON) {
       return stillValid(player) && power.switchOff(player);
@@ -174,9 +192,33 @@ public final class RobotMenu extends AbstractContainerMenu {
     return window;
   }
 
-  /** Only the client hides the slots, while its settings tab is open. */
-  public void showInventory(boolean shown) {
-    inventoryShown = shown;
+  /** Only the client hides the slots. The behavior tab keeps the player's, to copy items. */
+  public void showTab(boolean inventory, boolean behavior) {
+    slotGroups.show(inventory, inventory || behavior);
+    pickup.show(behavior);
+  }
+
+  public ContainerData pickupValues() {
+    return pickup.values();
+  }
+
+  public int filterFirstSlot() {
+    return pickup.firstSlot();
+  }
+
+  /** A click on a ghost slot of the filter never moves an item (answer 880). */
+  @Override
+  public void clicked(int slotId, int button, ClickType type, Player player) {
+    if (!pickup.owns(slotId)) {
+      super.clicked(slotId, button, type, player);
+    } else if (stillValid(player)) {
+      pickup.click(slotId, button, type, player, getCarried());
+    }
+  }
+
+  @Override
+  public boolean canTakeItemForPickAll(ItemStack stack, Slot slot) {
+    return !pickup.owns(slot.index) && super.canTakeItemForPickAll(stack, slot);
   }
 
   public RobotScreenOpening opening() {
@@ -264,55 +306,6 @@ public final class RobotMenu extends AbstractContainerMenu {
     return FIRST_SLOT_Y + rows() * SLOT_SIZE + PLAYER_INVENTORY_GAP;
   }
 
-  private void addEnergySlot(Container energySlot) {
-    addSlot(
-        new Slot(energySlot, 0, ENERGY_SLOT_X, ENERGY_SLOT_Y) {
-          @Override
-          public boolean mayPlace(ItemStack stack) {
-            return EnergySlotItems.accepts(stack);
-          }
-
-          @Override
-          public boolean isActive() {
-            return inventoryShown;
-          }
-        });
-  }
-
-  private void addRobotSlots() {
-    for (int slot = 0; slot < view.getContainerSize(); slot++) {
-      int x = FIRST_SLOT_X + slot % SLOTS_PER_ROW * SLOT_SIZE;
-      int y = FIRST_SLOT_Y + slot / SLOTS_PER_ROW * SLOT_SIZE;
-      addSlot(
-          new Slot(view, slot, x, y) {
-            @Override
-            public boolean mayPlace(ItemStack stack) {
-              return stack.getItem().canFitInsideContainerItems();
-            }
-
-            @Override
-            public boolean isActive() {
-              return inventoryShown;
-            }
-          });
-    }
-  }
-
-  private void addPlayerSlots(Inventory playerInventory) {
-    int inventoryY = playerInventoryY();
-    for (int row = 0; row < PLAYER_ROWS; row++) {
-      for (int column = 0; column < SLOTS_PER_ROW; column++) {
-        int index = column + row * SLOTS_PER_ROW + SLOTS_PER_ROW;
-        int y = inventoryY + row * SLOT_SIZE;
-        addSlot(new PlayerSlot(playerInventory, index, FIRST_SLOT_X + column * SLOT_SIZE, y));
-      }
-    }
-    for (int column = 0; column < SLOTS_PER_ROW; column++) {
-      int x = FIRST_SLOT_X + column * SLOT_SIZE;
-      addSlot(new PlayerSlot(playerInventory, column, x, inventoryY + HOTBAR_GAP));
-    }
-  }
-
   @Override
   public ItemStack quickMoveStack(Player player, int index) {
     Slot slot = slots.get(index);
@@ -325,7 +318,8 @@ public final class RobotMenu extends AbstractContainerMenu {
     int robotSlots = inventorySlots + ENERGY_SLOT_SIZE;
     boolean fits =
         index < robotSlots
-            ? moveItemStackTo(stack, robotSlots, slots.size(), true)
+            ? moveItemStackTo(
+                stack, robotSlots, slots.size() - PickupScreenValues.MAX_FILTER_SLOTS, true)
             : moveItemStackTo(stack, inventorySlots, robotSlots, false)
                 || RobotStorage.insert(container, stack);
     if (!fits) {
@@ -344,18 +338,6 @@ public final class RobotMenu extends AbstractContainerMenu {
     return stillValid.test(player);
   }
 
-  /** A slot of the player that hides with the robot slots, while the settings tab is open. */
-  private final class PlayerSlot extends Slot {
-    PlayerSlot(Inventory inventory, int index, int x, int y) {
-      super(inventory, index, x, y);
-    }
-
-    @Override
-    public boolean isActive() {
-      return inventoryShown;
-    }
-  }
-
   /** The containers of the robot and what travels when the screen opens. */
   public record Contents(Container inventory, Container energySlot, RobotScreenOpening opening) {}
 
@@ -365,6 +347,7 @@ public final class RobotMenu extends AbstractContainerMenu {
       RobotSwitch[] switches,
       DefenseControl defense,
       PowerControl power,
+      PickupControl pickup,
       Predicate<Player> stillValid) {}
 
   private record Server(
@@ -373,7 +356,8 @@ public final class RobotMenu extends AbstractContainerMenu {
       Runnable refresh,
       RobotSwitch[] switches,
       DefenseControl defense,
-      PowerControl power) {
+      PowerControl power,
+      PickupControl pickup) {
     private static final RobotSwitch[] NO_SWITCHES = {
       RobotSwitch.NONE, RobotSwitch.NONE, RobotSwitch.NONE, RobotSwitch.NONE
     };
@@ -385,7 +369,8 @@ public final class RobotMenu extends AbstractContainerMenu {
           () -> {},
           NO_SWITCHES,
           DefenseControl.NONE,
-          PowerControl.NONE);
+          PowerControl.NONE,
+          PickupControl.NONE);
     }
   }
 }

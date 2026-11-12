@@ -14,7 +14,7 @@ final class ScreenSprites {
   private static final ResourceLocation SHEET =
       ResourceLocation.fromNamespaceAndPath(CubitMod.MOD_ID, SHEET_PATH);
   private static final int SHEET_WIDTH = 512;
-  private static final int SHEET_HEIGHT = 256;
+  private static final int SHEET_HEIGHT = 320;
   private static final int PICTURE = 136;
   private static final int PICTURE_SHOWN = 34;
   private static final int CHARGING_U = 0;
@@ -52,6 +52,11 @@ final class ScreenSprites {
 
   private static final int POWER_SHOWN = 12;
 
+  /** The funnel of the behavior tab, in the row added below the icons (answer 897). */
+  private static final int FUNNEL_U = 0;
+
+  private static final int FUNNEL_V = 256;
+
   private ScreenSprites() {}
 
   static void chest(GuiGraphics graphics, int x, int y) {
@@ -75,6 +80,21 @@ final class ScreenSprites {
 
   static void shield(GuiGraphics graphics, int x, int y) {
     icon(graphics, x, y, SHIELD_U);
+  }
+
+  static void funnel(GuiGraphics graphics, int x, int y) {
+    graphics.blit(
+        SHEET,
+        x,
+        y,
+        ICON_SHOWN,
+        ICON_SHOWN,
+        FUNNEL_U,
+        FUNNEL_V,
+        ICON,
+        ICON,
+        SHEET_WIDTH,
+        SHEET_HEIGHT);
   }
 
   /** The lamp, the scanners, the chatter and the solar panel, in the order of their buttons. */

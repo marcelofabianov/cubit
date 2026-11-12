@@ -17,12 +17,31 @@ Números por tier: [`tiers.md`](../tiers.md#coleta-e-inventário) e [slots exclu
 
 - Recolher, colocar, morrer, consertar e salvar o mundo nunca apagam nem duplicam itens, nem com a tela aberta.
 - **Config reduzido:** ao colocar ou carregar o robô, o que não couber nos slots do config cai no chão, ao lado dele, com um aviso no log.
+- **Excedente e coleta:** com a coleta ligada, o Cubit pode recolher do excedente o que couber numa pilha que ele já tem. Nada se perde nem duplica, e nenhum slot passa do config (pergunta 894).
 
 ## Coleta
 
+Entra no item 9 da Fase 4.1 (respostas 422, 423 e 876 a 889). A coleta e o ímã são peças separadas, cada uma com a sua chave na [aba Behavior](telas.md#aba-behavior).
+
 - **Inventário:** armazena itens.
-- **Ímã:** puxa os itens do chão.
-- **Filtro de coleta:** tem dois modos. Na lista branca, coleta só os itens definidos. Na lista negra, coleta tudo menos os itens definidos.
+- **Coleta:** desde o Base, o Cubit pega o item que encosta nele, com a caixa dele aumentada em 1 bloco, como o player. Não gasta energia.
+- **Ímã:** do Advanced em diante, puxa até o Cubit os itens no raio do tier, empurrando o item na direção dele, com o movimento visível e sem teleportar. Gasta energia por item puxado, uma pilha no chão. No Base, fica bloqueado. Com a coleta desligada, o ímã fica inativo, porque puxar sem pegar só amontoaria itens.
+- **Quando coleta:** só ativo, seguindo ou parado. Hibernando, desligado ou sem bateria, não coleta.
+- **Inventário cheio:** pega o que cabe, juntando nas pilhas e nos slots livres, e o resto fica no chão. O ímã só puxa, e só cobra, os itens que cabem pelo menos em parte. Vale só o inventário principal, nunca os slots exclusivos.
+- **Sem energia para o ímã:** ele não puxa, e a coleta por contato continua.
+- **O que nunca pega:** o item ainda no atraso de coleta do jogo, como o que o player acabou de jogar, o Cubit e o `Damaged Cubit`, para o player não perder o rastro de um robô.
+- **Varredura:** a coleta a cada 5 ticks e o ímã a cada 10 ticks, no config, só em chunks carregados (regras 21 e 22).
+- **Estado inicial:** as duas chaves começam ligadas e ficam no item (pergunta 343).
+
+### Filtro de coleta
+
+- **Modos:** na lista branca, coleta só os itens definidos. Na lista negra, coleta tudo menos os itens definidos. O padrão é a lista negra.
+- **Lista vazia:** na lista negra, pega qualquer item. Na lista branca, não pega nada.
+- **Limite:** os slots do tier, iguais nos dois modos.
+- **Comparação:** só o tipo do item, pelo ID. Uma espada encantada no filtro vale para qualquer espada de ferro.
+- **Tags:** no Elite e no Ultimate, um slot pode valer por uma tag do item, como `#c:ores`, dentro do mesmo limite.
+- **Edição:** por slots fantasma, na aba Behavior. O item não é consumido.
+- **Vale também para o ímã:** o ímã só puxa o que a coleta pegaria.
 
 ## Descarregar em baú
 
@@ -42,6 +61,7 @@ São quatro: tochas, fornalha, carregador de ferramentas e energia. Na Fase 5, o
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-12 21:45 | Detalha a coleta, o ímã, o filtro de coleta e o excedente recolhido. |
 | Marcelo Fabiano | 2026-11-07 23:11 | Aponta a tela do inventário para as telas próprias. |
 | Marcelo Fabiano | 2026-11-06 11:15 | Limita o texto da descarga ao Cubit que segue. |
 | Marcelo Fabiano | 2026-11-06 11:10 | Troca 'especialidade' por 'trabalho' e 'card de especialidade' por 'card de Aprendizado de Máquina'. |

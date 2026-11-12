@@ -34,6 +34,7 @@ Os números estão em [`tiers.md`](../tiers.md#consumo-por-atividade), e o consu
 - **Subir:** cada bloco de altura subido na própria rota custa um extra, proporcional à altura. Descer não devolve energia.
 - **Condição negativa:** fogo, lava, [blocos que ferem](movimento.md#sobre-um-bloco-que-fere) e efeitos nocivos do jogo ou de outros mods custam um extra a cada tick, mesmo parado. Várias juntas cobram um extra só, e um golpe não conta. O extra pode zerar a bateria. Aí o robô desliga e, em chamas, queima parado.
 - **Lanterna:** acesa, custa um extra a cada tick, mesmo parado, e pode zerar a bateria. A claridade da tela não gasta. Os detalhes estão em [`sensores.md`](sensores.md#lanterna).
+- **Ímã:** do Advanced em diante, custa um valor fixo por item que ele puxa, e nada sem itens por perto. Sem energia suficiente, não puxa, e a coleta por contato, que não gasta, continua. Os detalhes estão em [`inventario.md`](inventario.md#coleta).
 
 ## Como o Cubit carrega
 
@@ -131,6 +132,7 @@ Se o robô estiver dentro do raio da base e com a bateria baixa, volta sozinho p
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-12 21:45 | Adiciona o consumo do ímã. |
 | Marcelo Fabiano | 2026-11-12 17:20 | Define a chave do painel solar e o desligar pela tela. |
 | Marcelo Fabiano | 2026-11-07 23:42 | Leva a chave do painel solar para a Fase 4. |
 | Marcelo Fabiano | 2026-11-07 23:12 | Aponta a tela do Dock para as telas próprias. |

@@ -42,7 +42,7 @@ O Cubit mantém os recursos ao evoluir, e cada tier os melhora. Os recursos avan
 | Autonomia em movimento, sem o painel e com a lanterna apagada | ~16,7 min | ~27,8 min | ~1,9 h | ~3,7 h |
 | Capacidade da Power Bank | 210 mil FE | 420 mil FE | 2,1 mi FE | 5,6 mi FE |
 | Inventário | 27 slots | 36 slots | 45 slots | 54 slots |
-| Raio do ímã | 1 bloco | 3 blocos | 5 blocos | 8 blocos |
+| Raio do ímã | Bloqueado | 3 blocos | 5 blocos | 8 blocos |
 | Raio do scanner de minérios | 5 blocos | 8 blocos | 12 blocos | 20 blocos |
 | Raio do scanner de mobs | 8 blocos | 14 blocos | 20 blocos | 25 blocos |
 | Modos de defesa | Pacífico | + Contra-atacar | + Agressivo | Todos |

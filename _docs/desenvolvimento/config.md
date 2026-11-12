@@ -59,6 +59,8 @@ As chaves ficam em `snake_case`. As de um tier ficam em `[general_robot.{tier}]`
 | `general` | `void_rescue_retry_ticks` | Intervalo para tentar de novo o resgate no vazio | 1 a 1200 |
 | `general` | `retaliate_memory_ticks` | Tempo em que o Contra-atacar lembra de quem feriu o Cubit ou o dono | 1 a 72000 |
 | `general` | `focus_forget_distance_blocks` | Distância do dono em que o alvo do Focus deixa de ser alvo | 1 a 128 |
+| `general` | `pickup_check_ticks` | Intervalo da coleta por contato | 1 a 1200 |
+| `general` | `magnet_check_ticks` | Intervalo do ímã | 1 a 1200 |
 | `general_robot.base` | `battery_capacity` | Bateria | 1 a 2147483647 |
 | `general_robot.base` | `moving_consumption_per_tick` | Andar | 0 a 2147483647 |
 | `general_robot.base` | `full_inventory_extra_per_tick` | Extra ao andar com o inventário cheio | 0 a 2147483647 |
@@ -87,6 +89,10 @@ As chaves ficam em `snake_case`. As de um tier ficam em `[general_robot.{tier}]`
 | `general_robot.base` | `shock_interval_ticks` | Choque (intervalo) | 1 a 72000 |
 | `general_robot.base` | `shock_cost` | Custo do choque | 0 a 2147483647 |
 | `general_robot.base` | `shock_hits_all_in_range` | Alvos por choque: todos no alcance, ou só o mais próximo | `true` ou `false` |
+| `general_robot.base` | `magnet_radius_blocks` | Ímã (raio), com 0 para bloqueado | 0 a 16 |
+| `general_robot.base` | `magnet_cost_per_item` | Ímã, por item puxado | 0 a 2147483647 |
+| `general_robot.base` | `pickup_filter_slots` | Filtro de coleta | 1 a 27 |
+| `general_robot.base` | `pickup_filter_tags` | Filtro de coleta com tags | `true` ou `false` |
 
 ## Por que esses limites
 
@@ -96,6 +102,8 @@ As chaves ficam em `snake_case`. As de um tier ficam em `[general_robot.{tier}]`
 - **Raio até 128:** mantém a busca limitada (regra 21 do `AGENTS.md`).
 - **Raio dos scanners até 64:** cobre os 20 blocos de minérios e os 25 de mobs do Ultimate com folga, sem deixar a varredura crescer sem limite. Em 64 blocos, são até 2.146.689 blocos por varredura, o limite de `scan_blocks_per_tick`.
 - **Luz até 15:** é o maior nível de luz do jogo.
+- **Ímã até 16 blocos:** cobre os 8 blocos do Ultimate com folga, e 0 deixa o ímã bloqueado no tier, como no Base (pergunta 889).
+- **Filtro de coleta até 27:** é a grade de 3 linhas de 9 slots fantasma da aba Behavior, o tamanho do Ultimate.
 - **Parada e teleporte sem sobreposição:** os limites não se cruzam, então o config nunca faz o robô parar além da distância em que teleportaria.
 
 ## Fora do config
@@ -120,6 +128,7 @@ O mod não cai por causa do config (regra 17 do `AGENTS.md`):
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-12 21:45 | Adiciona as chaves da coleta e do ímã (pergunta 889). |
 | Marcelo Fabiano | 2026-11-12 15:10 | Adiciona o modo Focus (pergunta 850). |
 | Marcelo Fabiano | 2026-11-12 10:30 | Adiciona as chaves do choque e dos modos de defesa (pergunta 834). |
 | Marcelo Fabiano | 2026-11-11 22:01 | Adiciona as seções dos tiers Advanced, Elite e Ultimate. |

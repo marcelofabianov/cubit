@@ -31,9 +31,6 @@ final class RobotSettingsPanel {
   private static final int NAME_WIDTH = 106;
   private static final int TOGGLE_X = 139;
   private static final int TOGGLE_TOP = 4;
-  private static final int TOGGLE_WIDTH = 26;
-  private static final int TOGGLE_HEIGHT = 11;
-  private static final int KNOB_WIDTH = 10;
   private static final Box FILTER_TITLE = new Box(8, 108, 150, LINE);
   private static final int FILTER_RULE = 117;
   private static final int ORE_FRAME_X = 8;
@@ -53,10 +50,6 @@ final class RobotSettingsPanel {
   private static final int POWER_Y = 4;
   private static final int POWER_SIZE = 14;
   private static final int POWER_ICON_INSET = 1;
-  private static final int TOGGLE_ON = 0xFF4CAF50;
-  private static final int TOGGLE_OFF = 0xFFF4F4F4;
-  private static final int KNOB_OFF = 0xFFCFCFCF;
-  private static final int DISABLED = 0x88C6C6C6;
   private static final String[] NAMES = {
     ScreenKeys.LAMP, ScreenKeys.SCANNERS, ScreenKeys.CHATTER, ScreenKeys.SOLAR_PANEL
   };
@@ -89,7 +82,8 @@ final class RobotSettingsPanel {
     ScreenPainter.sunken(graphics, POWER_X, POWER_Y, POWER_SIZE, POWER_SIZE, ScreenPainter.WHITE);
     ScreenSprites.power(graphics, POWER_X + POWER_ICON_INSET, POWER_Y + POWER_ICON_INSET);
     if (!menu.powerAvailable()) {
-      graphics.fill(POWER_X, POWER_Y, POWER_X + POWER_SIZE, POWER_Y + POWER_SIZE, DISABLED);
+      graphics.fill(
+          POWER_X, POWER_Y, POWER_X + POWER_SIZE, POWER_Y + POWER_SIZE, ScreenToggle.DISABLED);
     }
   }
 
@@ -104,9 +98,7 @@ final class RobotSettingsPanel {
     }
     for (int button = 0; button < SWITCHES; button++) {
       int top = FIRST_FUNCTION + button * FUNCTION_HEIGHT + TOGGLE_TOP;
-      boolean inside =
-          x >= TOGGLE_X && x < TOGGLE_X + TOGGLE_WIDTH && y >= top && y < top + TOGGLE_HEIGHT;
-      if (inside && menu.switchAvailable(button)) {
+      if (ScreenToggle.contains(TOGGLE_X, top, x, y) && menu.switchAvailable(button)) {
         return OptionalInt.of(button);
       }
     }
@@ -147,26 +139,9 @@ final class RobotSettingsPanel {
     };
   }
 
-  /** On: green with the knob on the right. Off: light with the knob on the left. */
   private void renderToggle(GuiGraphics graphics, int button, int top) {
-    boolean on = menu.switchOn(button);
-    int right = TOGGLE_X + TOGGLE_WIDTH;
-    ScreenPainter.sunken(
-        graphics, TOGGLE_X, top, TOGGLE_WIDTH, TOGGLE_HEIGHT, on ? TOGGLE_ON : TOGGLE_OFF);
-    int knobX = on ? right - 1 - KNOB_WIDTH : TOGGLE_X + 1;
-    graphics.fill(
-        knobX,
-        top + 1,
-        knobX + KNOB_WIDTH,
-        top + TOGGLE_HEIGHT - 1,
-        on ? ScreenPainter.WHITE : KNOB_OFF);
-    Component label = Component.translatable(on ? ScreenKeys.SWITCH_ON : ScreenKeys.SWITCH_OFF);
-    int labelX = on ? TOGGLE_X + 2 : knobX + KNOB_WIDTH + 1;
-    int color = on ? ScreenPainter.WHITE : ScreenPainter.DETAIL;
-    painter.text(graphics, label, labelX, top + 2, color, ScreenPainter.DETAIL_SCALE);
-    if (!menu.switchAvailable(button)) {
-      graphics.fill(TOGGLE_X, top, right, top + TOGGLE_HEIGHT, DISABLED);
-    }
+    ScreenToggle.draw(
+        graphics, painter, TOGGLE_X, top, menu.switchOn(button), menu.switchAvailable(button));
   }
 
   private void renderFilter(GuiGraphics graphics) {

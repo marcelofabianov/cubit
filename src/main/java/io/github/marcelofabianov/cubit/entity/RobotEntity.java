@@ -77,6 +77,7 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
   private final RobotScanners scanners = new RobotScanners(this);
   private final RobotChatter chatter = new RobotChatter(this);
   private final RobotDefense defense = new RobotDefense(this);
+  private final RobotPickup pickup = new RobotPickup(this);
 
   public RobotEntity(
       EntityType<? extends RobotEntity> type,
@@ -139,17 +140,7 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
   }
 
   public RobotState state() {
-    return new RobotState(
-        tier,
-        battery.charge(),
-        getHealth(),
-        lamp.switchedOn(),
-        RobotLooks.color(this),
-        scanners.switchedOn(),
-        scanners.oreFilter(),
-        chatter.switchedOn(),
-        defense.mode(),
-        solar.switchedOn());
+    return RobotSettings.stateOf(this, tier, battery.charge());
   }
 
   public PowerState powerState() {
@@ -182,6 +173,10 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
 
   public RobotSolar solar() {
     return solar;
+  }
+
+  public RobotPickup pickup() {
+    return pickup;
   }
 
   RobotNotices notices() {
@@ -283,6 +278,7 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
     scanners.tick();
     chatter.tick();
     defense.tick();
+    pickup.tick();
     RobotLoadSpeed.update(this, inventory.isFull());
     inventory.dropSurplus(
         stack -> Containers.dropItemStack(level(), getX(), getY(), getZ(), stack));

@@ -3,10 +3,10 @@ package io.github.marcelofabianov.cubit.client;
 import io.github.marcelofabianov.cubit.client.ScreenPainter.Box;
 import io.github.marcelofabianov.cubit.client.ScreenPainter.Colors;
 import io.github.marcelofabianov.cubit.domain.behavior.RobotScreenStatus;
-import io.github.marcelofabianov.cubit.menu.DefenseKeys;
+import io.github.marcelofabianov.cubit.domain.robot.PickupEntry;
+import io.github.marcelofabianov.cubit.menu.BehaviorKeys;
 import io.github.marcelofabianov.cubit.menu.RobotMenu;
 import io.github.marcelofabianov.cubit.menu.ScreenKeys;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.OptionalInt;
@@ -58,40 +58,13 @@ final class RobotScreen extends AbstractContainerScreen<RobotMenu> {
   private static final int ROBOT_LABEL_Y = 63;
   private static final int PLAYER_LABEL_GAP = 10;
   private static final int PLAYER_ROWS = 3;
-  private static final int TAB_INSET = 3;
-  private static final int TAB_WIDTH = 26;
-  private static final int TAB_HEIGHT = 24;
-  private static final int INVENTORY_TAB_Y = 9;
-  private static final int SETTINGS_TAB_Y = 37;
-  private static final int DEFENSE_TAB_Y = 65;
-  private static final int TAB_IDLE = 0xFFA9A9A9;
-  private static final int CHEST_X = 6;
-  private static final int CHEST_Y = 6;
-  private static final int GEAR_X = 5;
-  private static final int GEAR_Y = 4;
-  private static final int SHIELD_X = 5;
-  private static final int SHIELD_Y = 4;
 
   private final ScreenPainter painter = new ScreenPainter();
   private RobotSettingsPanel settings;
   private RobotDefensePanel defense;
+  private RobotBehaviorPanel behavior;
   private final InventoryScrollbar scrollbar;
-  private Tab tab = Tab.INVENTORY;
-
-  /** The tabs, from the top. Only the inventory shows the slots. */
-  private enum Tab {
-    INVENTORY(INVENTORY_TAB_Y, ScreenKeys.TAB_INVENTORY),
-    SETTINGS(SETTINGS_TAB_Y, ScreenKeys.TAB_SETTINGS),
-    DEFENSE(DEFENSE_TAB_Y, DefenseKeys.TAB);
-
-    private final int y;
-    private final String name;
-
-    Tab(int y, String name) {
-      this.y = y;
-      this.name = name;
-    }
-  }
+  private final RobotScreenTabs tabs = new RobotScreenTabs();
 
   RobotScreen(RobotMenu menu, Inventory playerInventory, Component title) {
     super(menu, playerInventory, title);
@@ -105,7 +78,8 @@ final class RobotScreen extends AbstractContainerScreen<RobotMenu> {
     super.init();
     settings = new RobotSettingsPanel(painter, menu, oreIcon(menu.opening().filterIconTag()));
     defense = new RobotDefensePanel(painter, menu);
-    menu.showInventory(tab == Tab.INVENTORY);
+    behavior = new RobotBehaviorPanel(painter, menu);
+    showOpenTab();
   }
 
   /** The first block of the tag stands for the ore, as the client knows the tags. */
@@ -126,7 +100,9 @@ final class RobotScreen extends AbstractContainerScreen<RobotMenu> {
   public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
     painter.begin(font);
     super.render(graphics, mouseX, mouseY, partialTick);
-    renderTooltip(graphics, mouseX, mouseY);
+    if (!renderTagTooltip(graphics, mouseX, mouseY)) {
+      renderTooltip(graphics, mouseX, mouseY);
+    }
     graphics.pose().pushPose();
     graphics.pose().translate(leftPos, topPos, 0);
     painter.cutTooltip(graphics, mouseX - leftPos, mouseY - topPos);
@@ -134,8 +110,30 @@ final class RobotScreen extends AbstractContainerScreen<RobotMenu> {
     renderTabTooltip(graphics, mouseX, mouseY);
   }
 
+  /** A filter slot that holds a tag shows the tag, not the item it stands for (answer 882). */
+  private boolean renderTagTooltip(GuiGraphics graphics, int mouseX, int mouseY) {
+    if (tabs.open() != RobotScreenTabs.Tab.BEHAVIOR || hoveredSlot == null) {
+      return false;
+    }
+    Optional<String> tag =
+        behavior.filterSlotOf(hoveredSlot).stream().boxed().findFirst().flatMap(behavior::tagAt);
+    tag.ifPresent(name ->
+        graphics.renderTooltip(
+            font,
+            Component.translatable(BehaviorKeys.TAG, PickupEntry.TAG_MARK + name),
+            mouseX,
+            mouseY));
+    return tag.isPresent();
+  }
+
+  private void showOpenTab() {
+    menu.showTab(
+        tabs.open() == RobotScreenTabs.Tab.INVENTORY, tabs.open() == RobotScreenTabs.Tab.BEHAVIOR);
+  }
+
   private void renderTabTooltip(GuiGraphics graphics, int mouseX, int mouseY) {
-    if (tab == Tab.SETTINGS && settings.overPower(mouseX - leftPos, mouseY - topPos)) {
+    if (tabs.open() == RobotScreenTabs.Tab.SETTINGS
+        && settings.overPower(mouseX - leftPos, mouseY - topPos)) {
       graphics.renderComponentTooltip(
           font,
           List.of(
@@ -147,22 +145,19 @@ final class RobotScreen extends AbstractContainerScreen<RobotMenu> {
     }
     tabAt(mouseX, mouseY)
         .ifPresent(under ->
-            graphics.renderTooltip(font, Component.translatable(under.name), mouseX, mouseY));
+            graphics.renderTooltip(font, Component.translatable(under.title()), mouseX, mouseY));
   }
 
   @Override
   protected void renderBg(GuiGraphics graphics, float partialTick, int mouseX, int mouseY) {
-    for (Tab each : Tab.values()) {
-      renderTab(graphics, each.y, each == tab);
-    }
+    tabs.renderBehind(graphics, leftPos + tabLeft(), topPos);
     ScreenPainter.window(graphics, leftPos, topPos, imageWidth, imageHeight);
-    renderOpenTab(graphics, tab.y);
-    ScreenSprites.chest(
-        graphics, leftPos + tabLeft() + CHEST_X, topPos + INVENTORY_TAB_Y + CHEST_Y);
-    ScreenSprites.gear(graphics, leftPos + tabLeft() + GEAR_X, topPos + SETTINGS_TAB_Y + GEAR_Y);
-    ScreenSprites.shield(
-        graphics, leftPos + tabLeft() + SHIELD_X, topPos + DEFENSE_TAB_Y + SHIELD_Y);
-    if (tab != Tab.INVENTORY) {
+    tabs.renderFront(graphics, leftPos + tabLeft(), topPos);
+    if (tabs.open() == RobotScreenTabs.Tab.BEHAVIOR) {
+      behavior.renderFrames(graphics, leftPos, topPos);
+      renderPlayerSlots(graphics);
+    }
+    if (tabs.open() != RobotScreenTabs.Tab.INVENTORY) {
       return;
     }
     scrollbar.render(graphics, leftPos, topPos);
@@ -171,25 +166,6 @@ final class RobotScreen extends AbstractContainerScreen<RobotMenu> {
         graphics, leftPos + MARGIN, topPos + PORTRAIT_Y, menu.expression(), menu.tier(), tick);
     ScreenSprites.bolt(graphics, leftPos + BOLT_X, topPos + BOLT_Y);
     renderSlots(graphics);
-  }
-
-  private void renderTab(GuiGraphics graphics, int y, boolean open) {
-    int left = leftPos + tabLeft();
-    int top = topPos + y;
-    graphics.fill(left, top, left + TAB_WIDTH, top + TAB_HEIGHT, ScreenPainter.EDGE);
-    graphics.fill(
-        left,
-        top + 1,
-        left + TAB_WIDTH - 1,
-        top + TAB_HEIGHT - 1,
-        open ? ScreenPainter.WINDOW : TAB_IDLE);
-  }
-
-  /** The open tab covers the border of the window, so both look like one piece. */
-  private void renderOpenTab(GuiGraphics graphics, int y) {
-    int left = leftPos + tabLeft();
-    int top = topPos + y;
-    graphics.fill(left, top + 1, left + TAB_WIDTH - 1, top + TAB_HEIGHT - 1, ScreenPainter.WINDOW);
   }
 
   private void renderSlots(GuiGraphics graphics) {
@@ -205,6 +181,11 @@ final class RobotScreen extends AbstractContainerScreen<RobotMenu> {
     }
     ScreenPainter.slot(
         graphics, leftPos + RobotMenu.ENERGY_SLOT_X - 1, topPos + RobotMenu.ENERGY_SLOT_Y - 1);
+    renderPlayerSlots(graphics);
+  }
+
+  private void renderPlayerSlots(GuiGraphics graphics) {
+    int frameX = leftPos + RobotMenu.FIRST_SLOT_X - 1;
     int playerTop = topPos + menu.playerInventoryY() - 1;
     for (int row = 0; row < PLAYER_ROWS; row++) {
       for (int column = 0; column < RobotMenu.SLOTS_PER_ROW; column++) {
@@ -220,20 +201,23 @@ final class RobotScreen extends AbstractContainerScreen<RobotMenu> {
 
   @Override
   protected void renderLabels(GuiGraphics graphics, int mouseX, int mouseY) {
-    Component heading = tab == Tab.INVENTORY ? title : Component.translatable(tab.name);
+    Component heading =
+        tabs.open() == RobotScreenTabs.Tab.INVENTORY
+            ? title
+            : Component.translatable(tabs.open().title());
     int titleEnd = renderTitle(graphics, heading.copy().withStyle(ChatFormatting.BOLD));
     renderBadge(graphics, titleEnd + BADGE_GAP);
-    if (tab != Tab.INVENTORY) {
+    if (tabs.open() != RobotScreenTabs.Tab.INVENTORY) {
       painter.textRight(
           graphics,
           RobotTexts.batteryPercent(menu),
-          tab == Tab.SETTINGS ? SETTINGS_BATTERY : STATUS,
+          tabs.open() == RobotScreenTabs.Tab.SETTINGS ? SETTINGS_BATTERY : STATUS,
           ScreenPainter.DETAIL,
           ScreenPainter.FULL_SCALE);
-      if (tab == Tab.SETTINGS) {
-        settings.render(graphics);
-      } else {
-        defense.render(graphics);
+      switch (tabs.open()) {
+        case SETTINGS -> settings.render(graphics);
+        case DEFENSE -> defense.render(graphics);
+        default -> renderBehavior(graphics);
       }
       return;
     }
@@ -241,6 +225,17 @@ final class RobotScreen extends AbstractContainerScreen<RobotMenu> {
     painter.status(graphics, RobotTexts.status(menu), STATUS, RobotTexts.statusColor(status));
     renderBars(graphics, status);
     renderInventoryLabels(graphics);
+  }
+
+  private void renderBehavior(GuiGraphics graphics) {
+    behavior.render(graphics);
+    painter.text(
+        graphics,
+        playerInventoryTitle,
+        MARGIN,
+        menu.playerInventoryY() - PLAYER_LABEL_GAP,
+        ScreenPainter.TEXT,
+        ScreenPainter.FULL_SCALE);
   }
 
   private int renderTitle(GuiGraphics graphics, Component heading) {
@@ -311,13 +306,13 @@ final class RobotScreen extends AbstractContainerScreen<RobotMenu> {
 
   @Override
   public boolean mouseClicked(double mouseX, double mouseY, int button) {
-    Optional<Tab> clicked = tabAt(mouseX, mouseY);
+    Optional<RobotScreenTabs.Tab> clicked = tabAt(mouseX, mouseY);
     if (clicked.isPresent()) {
-      tab = clicked.get();
-      menu.showInventory(tab == Tab.INVENTORY);
+      tabs.open(clicked.get());
+      showOpenTab();
       return true;
     }
-    if (tab == Tab.INVENTORY) {
+    if (tabs.open() == RobotScreenTabs.Tab.INVENTORY) {
       OptionalInt row = scrollbar.press(mouseX - leftPos, mouseY - topPos);
       if (row.isPresent()) {
         scrollTo(row.getAsInt());
@@ -351,7 +346,8 @@ final class RobotScreen extends AbstractContainerScreen<RobotMenu> {
 
   @Override
   public boolean mouseScrolled(double mouseX, double mouseY, double scrollX, double scrollY) {
-    if (tab == Tab.INVENTORY && scrollbar.overInventory(mouseX - leftPos, mouseY - topPos)) {
+    if (tabs.open() == RobotScreenTabs.Tab.INVENTORY
+        && scrollbar.overInventory(mouseX - leftPos, mouseY - topPos)) {
       scrollTo(menu.topRow() - (int) Math.signum(scrollY));
       return true;
     }
@@ -369,26 +365,21 @@ final class RobotScreen extends AbstractContainerScreen<RobotMenu> {
   }
 
   private int tabLeft() {
-    return imageWidth - TAB_INSET;
+    return imageWidth - RobotScreenTabs.INSET;
   }
 
   /** The button under the mouse in the open tab, as the server numbers them. */
   private OptionalInt pressedButton(double x, double y) {
-    return switch (tab) {
+    return switch (tabs.open()) {
       case SETTINGS -> settings.switchAt(x, y);
       case DEFENSE -> defense.modeAt(x, y);
+      case BEHAVIOR -> behavior.buttonAt(x, y);
       case INVENTORY -> OptionalInt.empty();
     };
   }
 
-  private Optional<Tab> tabAt(double mouseX, double mouseY) {
-    return Arrays.stream(Tab.values()).filter(each -> onTab(mouseX, mouseY, each.y)).findFirst();
-  }
-
-  private boolean onTab(double mouseX, double mouseY, int y) {
-    double x = mouseX - leftPos - tabLeft();
-    double top = mouseY - topPos - y;
-    return x >= 0 && x < TAB_WIDTH && top >= 0 && top < TAB_HEIGHT;
+  private Optional<RobotScreenTabs.Tab> tabAt(double mouseX, double mouseY) {
+    return tabs.at(mouseX - leftPos - tabLeft(), mouseY - topPos);
   }
 
   /** The tabs stand outside the window, and a click there must not throw the item. */

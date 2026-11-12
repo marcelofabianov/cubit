@@ -617,6 +617,29 @@ As regras estão em [`telas.md`](../funcionalidades/telas.md#aba-settings) e em 
 | 8 | Abra a tela de um Cubit hibernando no Dock | O `Power` aparece apagado e não faz nada |
 | 9 | Com o jogo em português, abra a aba | `Painel solar`, `Carrega no sol · 5 FE/t`, e no `Power`, `Energia` e `Desliga o Cubit` |
 
+## Coleta e ímã
+
+As regras estão em [`inventario.md`](../funcionalidades/inventario.md#coleta) e em [`telas.md`](../funcionalidades/telas.md#aba-behavior). Use `/give` para os Modules e os itens.
+
+| # | Faça | Espere |
+|---|---|---|
+| 1 | Abra a aba Behavior de um Cubit Base ativo | `Pickup` ligada, `Magnet` apagada, com `Unlocks at Advanced`, o botão `Blacklist`, 3 slots fantasma, e o seu inventário e a hotbar visíveis |
+| 2 | Jogue terra no chão e ande até o Cubit passar por ela | Ele pega a terra quando encosta nela, e a bateria não cai pela coleta |
+| 3 | Jogue um item e fique perto do Cubit | Ele não pega o item na hora, pelo atraso de coleta do jogo |
+| 4 | Clique num slot fantasma com terra no cursor | A terra aparece no slot, e a terra do cursor continua com você |
+| 5 | Jogue terra e pedra perto do Cubit | Ele pega a pedra e deixa a terra |
+| 6 | Troque para `Whitelist` | Ele pega a terra e deixa a pedra |
+| 7 | Limpe o slot com o cursor vazio, ainda na `Whitelist` | Ele não pega nada |
+| 8 | Volte para `Blacklist`, aplique o Advanced Module e abra a aba | `Magnet` ligada, com `Pulls items within 3 blocks · 20 FE per item`, e 9 slots |
+| 9 | Jogue um item a 3 blocos do Cubit parado | O item desliza até ele, e a bateria cai 20 FE |
+| 10 | Desligue `Pickup` | `Magnet` fica apagada, e ele não pega nem puxa nada |
+| 11 | Encha o inventário do Cubit, deixando espaço para meia pilha de terra, e jogue uma pilha inteira | Ele pega o que cabe, e o resto fica no chão |
+| 12 | Jogue um Cubit recolhido perto dele | Ele não pega nem puxa o item |
+| 13 | No Elite, clique com o botão direito num slot com tora de carvalho | O slot ganha a marca, e a dica mostra `Tag: #minecraft:logs`. Outras toras passam a valer |
+| 14 | Recolha e coloque o Cubit, e saia e entre no mundo | As chaves, o modo e o filtro continuam iguais |
+| 15 | Ponha o Cubit para hibernar no Dock e jogue itens nele | Ele não pega nada |
+| 16 | Com o jogo em português, abra a aba | `Comportamento`, `Coleta`, `Ímã`, `Filtro de coleta` e `Lista negra` |
+
 ## Tradução
 
 | # | Passo | Resultado esperado |
@@ -676,6 +699,7 @@ Na instância só com o mod, tire capturas com F2 do Cubit seguindo, da tela do 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-12 21:45 | Adiciona o roteiro da coleta e do ímã. |
 | Marcelo Fabiano | 2026-11-12 18:10 | Adiciona as chaves da aba Settings. |
 | Marcelo Fabiano | 2026-11-12 15:50 | Adiciona o modo Focus. |
 | Marcelo Fabiano | 2026-11-12 13:40 | Adiciona a rolagem do inventário ao upgrade de tier. |
