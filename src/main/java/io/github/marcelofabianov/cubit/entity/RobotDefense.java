@@ -4,6 +4,7 @@ import io.github.marcelofabianov.cubit.CubitMod;
 import io.github.marcelofabianov.cubit.domain.behavior.DefenseRules;
 import io.github.marcelofabianov.cubit.domain.behavior.RetaliationMemory;
 import io.github.marcelofabianov.cubit.domain.behavior.ShockRules;
+import io.github.marcelofabianov.cubit.domain.behavior.ShockSignals;
 import io.github.marcelofabianov.cubit.domain.ownership.Ownership;
 import io.github.marcelofabianov.cubit.domain.robot.DefenseMode;
 import io.github.marcelofabianov.cubit.domain.tier.ShockSpec;
@@ -95,8 +96,11 @@ public final class RobotDefense implements DefenseControl {
                     && DefenseRules.shocks(
                         mode,
                         ShockCandidates.of(robot, entity),
-                        ShockCandidates.angryAtOwner(owner, entity),
-                        memory.remembers(entity.getUUID(), now)))
+                        new ShockSignals(
+                            ShockCandidates.angryAtOwner(owner, entity),
+                            memory.remembers(entity.getUUID(), now),
+                            false,
+                            false)))
         .stream()
         .sorted(Comparator.comparingDouble(robot::distanceToSqr))
         .toList();
