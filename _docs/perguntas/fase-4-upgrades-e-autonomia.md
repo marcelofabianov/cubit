@@ -4,13 +4,19 @@
 
 | # | Pergunta | Recomendação |
 |---|---|---|
-| 425 | Onde o player aciona as chaves que faltam da pergunta 424, qual é o estado inicial delas, e o que "Hibernar" da chave geral faz fora do Dock? | Já respondido: a lanterna (467 e 468), os scanners (549) e as falas (582), na aba Settings da tela do Cubit (683), e a interface de configuração entra na Fase 4 (717). Falta: a chave geral, com ligar, desligar e hibernar, e as chaves dos recursos das Fases 4 e 5, como o painel solar, o ímã, a coleta, a descarga, o retorno e o local de morte. Recomendação: na aba Settings, e também no Cubit Remote, todas começando ligadas e guardadas no item, como na pergunta 343. Hibernar fora do Dock segue a pergunta 198, prevista para a Fase 5, então precisa de decisão antes de antecipar. Veio da Fase 3 pela pergunta 721 |
 | 423 | Qual é o modo padrão do filtro de coleta, o que vale com a lista vazia, e o limite de itens de `tiers.md` vale para os dois modos? | Lista negra por padrão, em que a lista vazia pega qualquer item. Na lista branca, a lista vazia não pega nada. O mesmo limite vale para os dois modos. Vem da pergunta 422 |
 
 ## Respondidas
 
 | # | Pergunta | Resposta |
 |---|---|---|
+| 861 | Como encaixar o painel solar e a chave geral na aba Settings, se duas linhas a mais passam 28 px da janela de 225 px? | A chave geral vira um botão pequeno com o ícone de energia, no cabeçalho, ao lado de `Battery 71%`. O `Solar panel` entra como quarta linha em Functions, as linhas de Functions baixam de 20 para 18 px, e o rodapé `More functions arrive with the next updates.` sai. O botão usa um ícone novo, gerado pelo desenvolvedor. Detalha a 857 |
+| 860 | Quais textos as chaves do painel solar e geral usam? | Painel: `Solar panel` / `Painel solar`, com `Charges in the sun · 5 FE/t` / `Carrega no sol · 5 FE/t`, no número do tier. Chave geral: `Power` / `Energia`, com `Turns the Cubit off` / `Desliga o Cubit`. No Status, o painel desligado mostra `Off` / `Desligado` |
+| 859 | Como começa a chave do painel solar, e o que ela guarda? | Começa ligada, também em saves antigos, e fica num campo opcional do `cubit:robot_state` e no NBT, como a da lanterna. Recolher, morrer e consertar mantêm a escolha |
+| 858 | O Cubit que segue o dono e é desligado pela tela libera o lugar de quem segue? | Sim, como ao ser recolhido: outro Cubit pode passar a seguir. Ao ligar de novo pelo clique direito, ele volta a seguir se ninguém estiver seguindo, pela regra que já existe |
+| 857 | O que a chave geral da aba Settings oferece agora? | Só desligar: uma linha `Power` em Functions, com a chave ligada, em que o clique desliga o Cubit e fecha a tela. Ligar de novo continua pelo clique direito nele. Hibernar fica para a Fase 5 (pergunta 198), e no Dock a chave fica desabilitada, porque ele já hiberna |
+| 856 | O alinhamento do item 8 tem algo a acrescentar? A chave do painel solar em Functions, guardada no item, e um controle da chave geral na Settings, sabendo que a tela só abre com o Cubit ativo ou hibernando e que hibernar fora do Dock é da Fase 5 | Nada a acrescentar |
+| 855 | Depois do merge do PR #151, a ordem das próximas tarefas precisa de ajuste? | Não: seguir com o item 8, a chave geral e a do painel solar na aba Settings |
 | 854 | Como foi o teste manual do modo Focus? | "testes feitos, tudo ok", executados pelo desenvolvedor no `make client`, na branch `feature/150-focus-mode`, sem detalhar cada passo. Cobre os passos 9a a 9d da seção "Choque e modos de defesa" do roteiro manual e a quarta linha da aba Defense. O teste com o jar numa instância só com o mod continua pendente para antes da `main` (regra 35) |
 | 853 | Como é a seta que destaca o alvo do Focus? | Amarela, do raio do choque, com cerca de 1,5× o tamanho da seta vermelha. Aparece sobre o alvo mesmo fora do raio do scanner ou com os scanners desligados, só para o dono. Se o alvo também tiver a seta vermelha, a amarela fica no lugar dela. Detalha a 851 |
 | 852 | O que conta como o dono ferir um mob, para ele virar o alvo do Focus? | Qualquer dano em que o dono seja a causa: golpe, flecha, tridente e outros, como a 577 já previa com o arco |
@@ -73,6 +79,7 @@
 | 795 | Onde entra a mira pelo controle do modo só o alvo, que na sequência nova ficaria na Fase 4, antes do Cubit Remote? | "a mira pelo controle do modo de defesa alvo pode entrar junto do controle": na Fase 4.2. O modo, com o último mob atacado, fica na Fase 4. Muda a 726 nesse ponto |
 | 794 | A Fase 4 pode seguir a sequência proposta pelo desenvolvedor? | Sim, depois da avaliação do agente, que não achou impacto em saves nem contratos, porque o item já guarda o tier. Fase 4, Tier e ataque: tiers Advanced, Elite e Ultimate, com os módulos, os modos de defesa, o choque com o Pacífico e a aba Settings, com a chave geral e a do painel solar. Fase 4.1, Itens, filtros, carregamento e mais: ímã e coleta com o filtro, Power Bank, também no Dock e na grade de craft, e os slots de tochas, fornalha e carregador. Fase 4.2, Remote, área e retorno: Cubit Remote, modo área com a descarga, retorno automático e local de morte. Muda as 722 a 724 só na Fase 4, e as 795 e 796 ajustam o modo só o alvo e a ordem |
 | 577 | Entra um modo de defesa "só o alvo", em que o Cubit ignora os outros inimigos e ataca só o último mob que o dono atacou, trocando de alvo a cada novo ataque, ou o mob em que o dono mira e clica à distância? | Sim, conforme a 578. Fechado pelas respostas 843 a 853: o modo se chama `Focus`, libera no Advanced e usa o último mob que o dono feriu. A mira pelo Cubit Remote fica na Fase 4.2 (pergunta 795) |
+| 425 | Onde o player aciona as chaves que faltam da pergunta 424, qual é o estado inicial delas, e o que "Hibernar" da chave geral faz fora do Dock? | Fechado em partes: a lanterna (467 e 468), os scanners (549) e as falas (582) ficam na aba Settings (683); a chave geral, só com desligar, e a do painel solar entram no item 8 da Fase 4 (857 a 860); as chaves do ímã, da coleta, da descarga, do retorno e do local de morte entram com o recurso de cada uma (424); e hibernar fora do Dock fica para a Fase 5 (198). Se a chave geral também vai para o Cubit Remote, decide-se na Fase 4.2 |
 | 578 | Como fica a proposta do modo só o alvo? | "Gostei", e vai para a documentação, para ser refinada na Fase 4. Está em `funcionalidades/combate.md` como proposta. O desenvolvedor não respondeu separadamente sobre o nome e o tier, então seguem abertos na pendência 577 |
 | 21 | Um robô desligado aceita a Power Bank? | Sim. Com o Cubit desligado e a Power Bank na mão, o clique direito coloca a Power Bank no slot exclusivo e inicia a recarga. Com 5% ele liga, e o player pode acessá-lo, remover a Power Bank e fazer as outras interações |
 | 23 | Uma Power Bank funciona em robô de outro tier? | Sim, em qualquer tier |
@@ -109,6 +116,7 @@
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-12 16:50 | Registra as respostas 855 a 861 e fecha a pendente 425. |
 | Marcelo Fabiano | 2026-11-12 16:20 | Registra a resposta 854. |
 | Marcelo Fabiano | 2026-11-12 14:40 | Registra as respostas 841 a 853. |
 | Marcelo Fabiano | 2026-11-12 14:10 | Registra a resposta 840. |

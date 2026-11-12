@@ -54,18 +54,19 @@ Três abas, à direita da janela: **Inventory**, com o ícone do baú, **Setting
 
 ### Aba Settings
 
-- **Cabeçalho:** `Settings`, a etiqueta do tier e `Battery 71%`.
-- **Functions:** as três chaves que já existem, com ON e OFF. Nenhuma chave nova entra nesta entrega (perguntas 494 e 495).
+- **Cabeçalho:** `Settings`, a etiqueta do tier, `Battery 71%` e, ao lado, o botão `Power`, com o ícone de energia (perguntas 857 e 861). O clique desliga o Cubit e fecha a tela. Ligar de novo continua pelo clique direito nele. Hibernando no Dock, o botão fica desabilitado. A dica do botão é `Power` / `Energia` e `Turns the Cubit off` / `Desliga o Cubit` (pergunta 860).
+- **Functions:** as quatro chaves, com ON e OFF, em linhas de 18 px (pergunta 861).
 
 | Chave | Descrição |
 |---|---|
 | `Lamp` | `Lights up below level 8 · 1 FE/t`. Desabilitada ao hibernar, mantendo o valor (pergunta 473) |
 | `Scanners` | `Ores 5 blocks · mobs 8 · 50 FE per scan` |
 | `Chatter` | `Weather, biomes and reactions` |
+| `Solar panel` | `Charges in the sun · 5 FE/t`, com o número do tier de dia. Começa ligada e fica no item (perguntas 859 e 860) |
 
 - **Scanner filter:** só leitura, com o ícone do minério, `Looking for Coal Ore` e `Right-click the Cubit holding an ore to change it.` (pergunta 688).
 - **Status:** `Solar panel`, `Energy use`, `Health` e `Following`.
-- **Rodapé:** `More functions arrive with the next updates.`
+- **Sem rodapé:** o `More functions arrive with the next updates.` saiu, para as quatro chaves caberem (pergunta 861).
 
 Os números das descrições vêm do config e do tier, nunca fixos no texto (regras 3 e 39).
 
@@ -148,6 +149,7 @@ Estes textos não aparecem nas imagens. O agente os propôs (pergunta 692), e o 
 | `Solar panel` | No Nether ou no End | `No sun here · not charging`, em laranja |
 | `Solar panel` | Com a bateria cheia | `Battery full`, em cinza |
 | `Solar panel` | Hibernando | `Off · hibernating`, em cinza |
+| `Solar panel` | Com a chave desligada | `Off`, em cinza (pergunta 860) |
 | `Energy use` | Parado, sem a lanterna | `0 FE/t · idle` |
 | `Energy use` | Várias causas juntas | A soma e as causas, nesta ordem: `walking`, `full inventory`, `water`, `climbing`, `danger` e `lamp`, como `16 FE/t · walking, lamp` |
 | `Energy use` | Hibernando | `0 FE/t · hibernating` |
@@ -200,6 +202,7 @@ Pergunta 691.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-12 17:20 | Adiciona a chave do painel solar e o botão Power à aba Settings. |
 | Marcelo Fabiano | 2026-11-12 15:10 | Adiciona o modo Focus à aba Defense. |
 | Marcelo Fabiano | 2026-11-12 13:10 | Adiciona a rolagem do inventário nos tiers altos. |
 | Marcelo Fabiano | 2026-11-12 11:40 | Detalha os textos da seção do choque. |

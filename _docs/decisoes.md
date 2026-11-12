@@ -16,7 +16,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Páginas nas plataformas:** slug `cubit`, com `cubit-robot` nas duas se o CurseForge recusar. O ícone é o do item, e a galeria só tem capturas do jogo. O desenvolvedor cria as contas e os projetos, e o agente prepara os textos (perguntas 747, 748 e 750).
 - **Changelog por versão:** atualizado ao criar a `release/X.Y.Z` (pergunta 749).
 - **Repositório público:** o desenvolvedor o torna público antes de enviar o jar da `0.1.0`, e as issues do GitHub são o canal de bugs (pergunta 751).
-- **Interface de configuração:** a chave geral e a do painel solar entram na Fase 4, na aba Settings, e a `0.1.0` sai com as chaves de hoje (pergunta 717).
+- **Interface de configuração:** a chave geral e a do painel solar entram na Fase 4, na aba Settings, e a `0.1.0` sai com as chaves de hoje (pergunta 717). A chave geral só desliga, por um botão `Power` no cabeçalho, e libera o lugar de quem segue. O painel solar ganha a quarta linha em Functions, começa ligado e fica no item. O rodapé da aba sai, e hibernar fora do Dock fica para a Fase 5 (perguntas 857 a 861).
 - **Fases 4 e 5 divididas:** Fase 4 com os tiers, o choque com o Pacífico, os outros modos de defesa, o modo só o alvo e a interface de configuração, nessa ordem; 4.1 com o ímã, a coleta, a Power Bank e os slots exclusivos; 4.2 com o Cubit Remote, a mira do modo só o alvo, o modo área, a descarga, o retorno e o local de morte. Fase 5 com antenas, Servidor e storage wireless virtual; 5.1 com o carregamento de chunks; e 5.2 com os cards, a hibernação fora do Dock e a personalização por card (perguntas 722 a 726, com a Fase 4 reorganizada pelas 794 a 796).
 - **Planejado nos documentos:** o que é de fase futura fica nos documentos, marcado com a fase em que entra, sem parecer pronto (pergunta 718).
 - **Testes de instância:** os da regra 35 ficam para o fim da Fase 3, no teste da versão completa, na seção "Teste da versão" do roteiro manual, no Prism Launcher. O Iron Meridian é testado numa cópia da instância, com o jar em `mods/` (perguntas 767 a 769).
@@ -141,6 +141,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-12 17:20 | Resume as chaves do item 8. |
 | Marcelo Fabiano | 2026-11-12 15:10 | Fecha o modo Focus. |
 | Marcelo Fabiano | 2026-11-12 10:30 | Resume o choque e os modos de defesa. |
 | Marcelo Fabiano | 2026-11-12 09:40 | Registra as confirmações feitas depois da `0.1.0`. |
