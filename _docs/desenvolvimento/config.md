@@ -4,11 +4,11 @@ O config do Cubit é um contrato com o pack (pilar Contrato externo): as chaves 
 
 - **Arquivo:** `config/cubit-common.toml`, do tipo `COMMON`, para o packwiz poder distribuí-lo.
 - **Valores padrão:** são os de [`tiers.md`](../tiers.md), a única página com os números de balanceamento.
-- **Crescimento:** uma chave entra junto com o código que a lê. Por enquanto, só existem os valores do tier Base (pergunta 39).
+- **Crescimento:** uma chave entra junto com o código que a lê. Os tiers Advanced, Elite e Ultimate entram na Fase 4, com as mesmas chaves do Base nas seções `[general_robot.advanced]`, `[general_robot.elite]` e `[general_robot.ultimate]`, e os padrões de [`tiers.md`](../tiers.md) (perguntas 39 e 797).
 
 ## Chaves
 
-As chaves ficam em `snake_case`. As de um tier ficam em `[general_robot.{tier}]`, como `[general_robot.base]` (regra 41 do `AGENTS.md`).
+As chaves ficam em `snake_case`. As de um tier ficam em `[general_robot.{tier}]`, como `[general_robot.base]` (regra 41 do `AGENTS.md`). A tabela mostra as do Base, e os outros tiers repetem as mesmas chaves e limites.
 
 | Seção | Chave | Linha em `tiers.md` | Limites |
 |---|---|---|---|
@@ -111,6 +111,7 @@ O mod não cai por causa do config (regra 17 do `AGENTS.md`):
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-11 22:01 | Adiciona as seções dos tiers Advanced, Elite e Ultimate. |
 | Marcelo Fabiano | 2026-11-07 23:41 | Corrige os raios do Ultimate. |
 | Marcelo Fabiano | 2026-11-07 20:04 | Adiciona o intervalo das falas da redstone. |
 | Marcelo Fabiano | 2026-11-07 19:21 | Adiciona o tempo da caixa em volta de um minério. |

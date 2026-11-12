@@ -16,6 +16,7 @@ Este é o mapa dos documentos do projeto. A apresentação do mod e o roadmap fi
 | Movimento, robô que segue, fogo, lava, vida, morte e local de morte | [`funcionalidades/movimento.md`](funcionalidades/movimento.md) |
 | Inventário, ímã, filtros, baús e slots exclusivos | [`funcionalidades/inventario.md`](funcionalidades/inventario.md) |
 | Cor da carcaça e nome | [`funcionalidades/personalizacao.md`](funcionalidades/personalizacao.md) |
+| Upgrade de tier com os Modules | [`funcionalidades/upgrade-de-tier.md`](funcionalidades/upgrade-de-tier.md) |
 | Scanners, alertas e lanterna | [`funcionalidades/sensores.md`](funcionalidades/sensores.md) |
 | Telas próprias do Cubit e do Induction Dock | [`funcionalidades/telas.md`](funcionalidades/telas.md) |
 | Choque e modos de defesa | [`funcionalidades/combate.md`](funcionalidades/combate.md) |
@@ -45,6 +46,7 @@ Os números ficam em [`tiers.md`](tiers.md). As outras páginas apontam para lá
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-11 22:01 | Cita o upgrade de tier. |
 | Marcelo Fabiano | 2026-11-08 01:05 | Cita a descrição das plataformas. |
 | Marcelo Fabiano | 2026-11-08 00:33 | Cita o guia de publicação. |
 | Marcelo Fabiano | 2026-11-07 23:46 | Cita o roadmap. |

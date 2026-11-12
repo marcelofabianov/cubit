@@ -97,6 +97,14 @@ Na mesa de craft, em forma de L (pergunta 336). O desenho espelhado também vale
 - O item sem estado salvo, como o da aba do criativo, vale como um robô novo: tier Base, carga inicial e vida cheia.
 - A aba do criativo do mod é `cubit:main`.
 
+## Modules
+
+Levam o Cubit ao tier seguinte, sem pular etapas. As regras estão em [`upgrade-de-tier.md`](funcionalidades/upgrade-de-tier.md).
+
+- **Empilha** até 64, e o nome aparece na cor do colar do tier (pergunta 804).
+- **Criativo:** os três ficam na aba `cubit:main`.
+- **Receitas:** na mesa de craft, independentes, sem o Module anterior, só com materiais do jogo puro (pergunta 799). As três aparecem no livro ao ter um Cubit (pergunta 805). Os materiais estão pendentes na pergunta 807.
+
 ## Previstos na Fase 5
 
 Nomes aprovados na pergunta 256. Viram contrato só quando implementados.
@@ -158,6 +166,7 @@ O estado salvo é validado ao entrar no jogo, sem derrubá-lo (regra 17 do `AGEN
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-11 22:01 | Adiciona os Modules. |
 | Marcelo Fabiano | 2026-11-07 23:41 | Acrescenta as chaves dos scanners, do filtro e das falas aos contratos de save. |
 | Marcelo Fabiano | 2026-11-07 13:51 | Adiciona a energia negativa e o Dock sem dono à validação do save. |
 | Marcelo Fabiano | 2026-11-06 15:58 | Adiciona a cor e o nome ao contrato do save. |
