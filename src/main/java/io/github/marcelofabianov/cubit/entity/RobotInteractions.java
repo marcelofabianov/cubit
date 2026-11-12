@@ -48,7 +48,8 @@ final class RobotInteractions {
     Player owner = robot.onlineOwner();
     if (robot.powerState() == PowerState.ACTIVE
         && owner != null
-        && !RobotEntity.policy().holdsThePlace(robot.getUUID(), RobotEntity.follower(owner))) {
+        && !RobotFollowing.policy()
+            .holdsThePlace(robot.getUUID(), RobotFollowing.follower(owner))) {
       robot.setPowerState(PowerState.INACTIVE_SWITCHED_OFF);
       robot.getNavigation().stop();
     }
@@ -69,7 +70,8 @@ final class RobotInteractions {
   /** The player this robot follows right now, when that player is online. */
   static Player followedPlayer(RobotEntity robot) {
     Player owner = robot.onlineOwner();
-    if (owner == null || !RobotEntity.follower(owner).filter(robot.getUUID()::equals).isPresent()) {
+    if (owner == null
+        || !RobotFollowing.follower(owner).filter(robot.getUUID()::equals).isPresent()) {
       return null;
     }
     return owner;
@@ -115,10 +117,7 @@ final class RobotInteractions {
     stack.set(DataComponents.CUSTOM_NAME, robot.getCustomName());
     robot.robotInventory().writeTo(stack);
     robot.robotInventory().clear();
-    player.setData(
-        CubitAttachments.FOLLOWING_ROBOT,
-        new FollowingRobotLink(
-            RobotEntity.policy().release(robot.getUUID(), RobotEntity.follower(player))));
+    RobotFollowing.release(robot, player);
     robot.discard();
     // Drops the item at the player's feet when the inventory is full, so the robot is never lost.
     player.getInventory().placeItemBackInInventory(stack);
@@ -127,9 +126,12 @@ final class RobotInteractions {
 
   static InteractionResult turnOn(RobotEntity robot, Player player) {
     FollowingOutcome outcome =
-        RobotEntity.policy()
+        RobotFollowing.policy()
             .onTurnOn(
-                robot.getUUID(), RobotEntity.follower(player), robot.powerState(), robot.battery());
+                robot.getUUID(),
+                RobotFollowing.follower(player),
+                robot.powerState(),
+                robot.battery());
     if (outcome.state() == robot.powerState()) {
       return InteractionResult.PASS;
     }

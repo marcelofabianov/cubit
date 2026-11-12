@@ -154,7 +154,7 @@ Estes nomes não mudam sem migração (regra 18 do `AGENTS.md`).
 
 | Onde | Nome | Conteúdo |
 |---|---|---|
-| Componente do item | `cubit:robot_state` | `tier`, `energy`, `health`, `lamp_enabled`, opcional, com o padrão ligado, `color`, opcional, com o padrão `white`, `scanners_enabled` e `chatter_enabled`, opcionais, com o padrão ligado, `ore_filter`, opcional, com a lista de tags de minério, vazia por padrão (perguntas 560 e 582), e `defense_mode`, opcional, com o padrão `peaceful` (pergunta 830), também no item danificado |
+| Componente do item | `cubit:robot_state` | `tier`, `energy`, `health`, `lamp_enabled`, opcional, com o padrão ligado, `color`, opcional, com o padrão `white`, `scanners_enabled` e `chatter_enabled`, opcionais, com o padrão ligado, `ore_filter`, opcional, com a lista de tags de minério, vazia por padrão (perguntas 560 e 582), `defense_mode`, opcional, com o padrão `peaceful` (pergunta 830), e `solar_enabled`, opcional, com o padrão ligado (pergunta 859), também no item danificado |
 | Componente do item | `cubit:energy_slot` | Item do slot de energia e reserva de FE, também no item danificado |
 | Componente do item do Dock | `cubit:dock_energy` | Energia do estoque |
 | Componente do item | `cubit:robot_inventory` | Conteúdo do inventário, também no item danificado |
@@ -167,6 +167,7 @@ Estes nomes não mudam sem migração (regra 18 do `AGENTS.md`).
 | Estado do bloco do Dock | `facing`, `half` e `status` | Direção, parte de baixo ou de cima e estado da tela: `off`, `idle`, `charging`, `complete` ou `no_energy` |
 | NBT da entidade na base | `DockPosition` | Posição do Dock em que hiberna |
 | NBT da entidade | `LampEnabled` | Chave da lanterna. Sem a chave no save, vale ligada |
+| NBT da entidade | `SolarEnabled` | Chave do painel solar. Sem a chave no save, vale ligada (pergunta 859) |
 | NBT da entidade | `DefenseMode` | Modo de defesa: `peaceful`, `retaliate`, `aggressive` ou `focus`. Sem a chave ou com valor inválido, vale `peaceful` |
 | Tipo de dano | `cubit:shock` | O choque do Cubit, com a mensagem de morte `X was zapped by Cubit` (pergunta 831) |
 | NBT da entidade | `Color` | Cor da carcaça, com o nome do corante, como `light_blue`. Sem a chave ou com valor inválido, vale `white` |
@@ -192,6 +193,7 @@ O estado salvo é validado ao entrar no jogo, sem derrubá-lo (regra 17 do `AGEN
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-12 17:20 | Adiciona a chave do painel solar aos contratos de save. |
 | Marcelo Fabiano | 2026-11-12 15:10 | Adiciona o modo Focus ao NBT. |
 | Marcelo Fabiano | 2026-11-12 10:30 | Adiciona o modo de defesa e o tipo de dano do choque aos contratos de save. |
 | Marcelo Fabiano | 2026-11-12 08:30 | Adiciona as receitas dos Modules. |

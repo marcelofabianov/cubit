@@ -5,6 +5,7 @@ import io.github.marcelofabianov.cubit.domain.energy.Battery;
 import io.github.marcelofabianov.cubit.domain.energy.Energy;
 import io.github.marcelofabianov.cubit.domain.energy.PowerState;
 import io.github.marcelofabianov.cubit.domain.energy.SolarPanel;
+import io.github.marcelofabianov.cubit.menu.RobotSwitch;
 import net.minecraft.world.level.Level;
 
 /**
@@ -12,8 +13,9 @@ import net.minecraft.world.level.Level;
  * cell. It runs after the sounds are decided, so the panel does not play the recharge sound, which
  * is for the base and the slot. Nothing here is saved, because it is recalculated.
  */
-public final class RobotSolar {
+public final class RobotSolar implements RobotSwitch {
   private final RobotEntity robot;
+  private boolean switchedOn = true;
   private boolean sunExists;
   private boolean skyOpen;
   private boolean wasActive;
@@ -26,6 +28,30 @@ public final class RobotSolar {
     return robot.getEntityData().get(RobotSyncedData.SOLAR_CHARGING);
   }
 
+  boolean switchedOn() {
+    return switchedOn;
+  }
+
+  void setSwitchedOn(boolean switchedOn) {
+    this.switchedOn = switchedOn;
+  }
+
+  @Override
+  public boolean isOn() {
+    return switchedOn;
+  }
+
+  /** As the other switches, it waits while the robot hibernates in the base. */
+  @Override
+  public boolean isAvailable() {
+    return robot.powerState() != PowerState.HIBERNATING;
+  }
+
+  @Override
+  public void toggle() {
+    switchedOn = !switchedOn;
+  }
+
   /** Only reading the sky waits for the interval (AGENTS.md, rule 21). */
   void tick() {
     boolean active = robot.powerState() == PowerState.ACTIVE;
@@ -35,7 +61,8 @@ public final class RobotSolar {
     wasActive = active;
     boolean day = SolarPanel.isDay(robot.level().getDayTime());
     Energy offered =
-        SolarPanel.output(robot.spec().solar(), robot.powerState(), sunExists && skyOpen, day);
+        SolarPanel.output(
+            robot.spec().solar(), robot.powerState(), switchedOn, sunExists && skyOpen, day);
     Battery.Charged charged = robot.battery().recharge(offered);
     robot.setBattery(charged.battery());
     robot.getEntityData().set(RobotSyncedData.SOLAR_CHARGING, !charged.accepted().isZero());

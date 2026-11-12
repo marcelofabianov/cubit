@@ -7,6 +7,7 @@ import io.github.marcelofabianov.cubit.menu.DefenseKeys;
 import io.github.marcelofabianov.cubit.menu.RobotMenu;
 import io.github.marcelofabianov.cubit.menu.ScreenKeys;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import java.util.OptionalInt;
 import net.minecraft.ChatFormatting;
@@ -32,6 +33,10 @@ final class RobotScreen extends AbstractContainerScreen<RobotMenu> {
   private static final int DETAIL_LINE = 7;
   private static final int MARGIN = 8;
   private static final Box STATUS = new Box(100, 6, 68, LINE);
+
+  /** Narrower in the settings, to leave room for the Power button (answer 861). */
+  private static final Box SETTINGS_BATTERY = new Box(100, 6, 50, LINE);
+
   private static final int TITLE_Y = 6;
   private static final int TITLE_WIDTH = 90;
   private static final int BADGE_GAP = 4;
@@ -130,6 +135,16 @@ final class RobotScreen extends AbstractContainerScreen<RobotMenu> {
   }
 
   private void renderTabTooltip(GuiGraphics graphics, int mouseX, int mouseY) {
+    if (tab == Tab.SETTINGS && settings.overPower(mouseX - leftPos, mouseY - topPos)) {
+      graphics.renderComponentTooltip(
+          font,
+          List.of(
+              Component.translatable(ScreenKeys.POWER),
+              Component.translatable(ScreenKeys.POWER_DETAIL)),
+          mouseX,
+          mouseY);
+      return;
+    }
     tabAt(mouseX, mouseY)
         .ifPresent(under ->
             graphics.renderTooltip(font, Component.translatable(under.name), mouseX, mouseY));
@@ -212,7 +227,7 @@ final class RobotScreen extends AbstractContainerScreen<RobotMenu> {
       painter.textRight(
           graphics,
           RobotTexts.batteryPercent(menu),
-          STATUS,
+          tab == Tab.SETTINGS ? SETTINGS_BATTERY : STATUS,
           ScreenPainter.DETAIL,
           ScreenPainter.FULL_SCALE);
       if (tab == Tab.SETTINGS) {

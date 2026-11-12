@@ -22,39 +22,44 @@ final class RobotSettingsPanel {
   private static final Box FUNCTIONS = new Box(8, 18, 150, LINE);
   private static final int FUNCTIONS_RULE = 27;
   private static final int FIRST_FUNCTION = 31;
-  private static final int FUNCTION_HEIGHT = 20;
+  private static final int FUNCTION_HEIGHT = 18;
   private static final int ICON_X = 11;
   private static final int ICON_TOP = 2;
   private static final int NAME_X = 30;
   private static final int NAME_TOP = 3;
-  private static final int DETAIL_TOP = 12;
+  private static final int DETAIL_TOP = 11;
   private static final int NAME_WIDTH = 106;
   private static final int TOGGLE_X = 139;
   private static final int TOGGLE_TOP = 4;
   private static final int TOGGLE_WIDTH = 26;
   private static final int TOGGLE_HEIGHT = 11;
   private static final int KNOB_WIDTH = 10;
-  private static final Box FILTER_TITLE = new Box(8, 96, 150, LINE);
-  private static final int FILTER_RULE = 105;
+  private static final Box FILTER_TITLE = new Box(8, 108, 150, LINE);
+  private static final int FILTER_RULE = 117;
   private static final int ORE_FRAME_X = 8;
-  private static final int ORE_FRAME_Y = 110;
-  private static final Box LOOKING = new Box(32, 111, 134, LINE);
-  private static final Box HINT = new Box(32, 121, 134, DETAIL_LINE);
-  private static final Box STATUS_TITLE = new Box(8, 136, 150, LINE);
-  private static final int STATUS_RULE = 145;
-  private static final int FIRST_STATUS = 149;
+  private static final int ORE_FRAME_Y = 122;
+  private static final Box LOOKING = new Box(32, 123, 134, LINE);
+  private static final Box HINT = new Box(32, 133, 134, DETAIL_LINE);
+  private static final Box STATUS_TITLE = new Box(8, 148, 150, LINE);
+  private static final int STATUS_RULE = 157;
+  private static final int FIRST_STATUS = 161;
   private static final int STATUS_HEIGHT = 14;
   private static final int STATUS_TEXT_TOP = 3;
   private static final int STATUS_LABEL_X = 10;
   private static final int STATUS_WIDTH = 155;
-  private static final int FOOTER_Y = 213;
-  private static final int CENTER = 88;
-  private static final int SWITCHES = 3;
+  private static final int SWITCHES = 4;
+  private static final int FOLLOWING_ROW = 3;
+  private static final int POWER_X = 154;
+  private static final int POWER_Y = 4;
+  private static final int POWER_SIZE = 14;
+  private static final int POWER_ICON_INSET = 1;
   private static final int TOGGLE_ON = 0xFF4CAF50;
   private static final int TOGGLE_OFF = 0xFFF4F4F4;
   private static final int KNOB_OFF = 0xFFCFCFCF;
   private static final int DISABLED = 0x88C6C6C6;
-  private static final String[] NAMES = {ScreenKeys.LAMP, ScreenKeys.SCANNERS, ScreenKeys.CHATTER};
+  private static final String[] NAMES = {
+    ScreenKeys.LAMP, ScreenKeys.SCANNERS, ScreenKeys.CHATTER, ScreenKeys.SOLAR_PANEL
+  };
 
   private final ScreenPainter painter;
   private final RobotMenu menu;
@@ -76,19 +81,27 @@ final class RobotSettingsPanel {
     renderFilter(graphics);
     heading(graphics, ScreenKeys.STATUS, STATUS_TITLE, STATUS_RULE);
     renderStatus(graphics);
-    Component footer = Component.translatable(ScreenKeys.MORE_FUNCTIONS);
-    int width = painter.width(footer, ScreenPainter.DETAIL_SCALE);
-    painter.text(
-        graphics,
-        footer,
-        CENTER - width / 2,
-        FOOTER_Y,
-        ScreenPainter.DETAIL,
-        ScreenPainter.DETAIL_SCALE);
+    renderPower(graphics);
   }
 
-  /** The switch under the mouse, in the coordinates of the window, when it can change. */
+  /** The Power button in the header, dimmed while it cannot switch the robot off. */
+  private void renderPower(GuiGraphics graphics) {
+    ScreenPainter.sunken(graphics, POWER_X, POWER_Y, POWER_SIZE, POWER_SIZE, ScreenPainter.WHITE);
+    ScreenSprites.power(graphics, POWER_X + POWER_ICON_INSET, POWER_Y + POWER_ICON_INSET);
+    if (!menu.powerAvailable()) {
+      graphics.fill(POWER_X, POWER_Y, POWER_X + POWER_SIZE, POWER_Y + POWER_SIZE, DISABLED);
+    }
+  }
+
+  boolean overPower(double x, double y) {
+    return x >= POWER_X && x < POWER_X + POWER_SIZE && y >= POWER_Y && y < POWER_Y + POWER_SIZE;
+  }
+
+  /** The switch or the Power button under the mouse, when it can change. */
   OptionalInt switchAt(double x, double y) {
+    if (overPower(x, y)) {
+      return menu.powerAvailable() ? OptionalInt.of(RobotMenu.POWER_BUTTON) : OptionalInt.empty();
+    }
     for (int button = 0; button < SWITCHES; button++) {
       int top = FIRST_FUNCTION + button * FUNCTION_HEIGHT + TOGGLE_TOP;
       boolean inside =
@@ -129,6 +142,7 @@ final class RobotSettingsPanel {
     return switch (button) {
       case RobotMenu.LAMP_BUTTON -> RobotTexts.lampDetail(menu);
       case RobotMenu.SCANNERS_BUTTON -> RobotTexts.scannersDetail(menu);
+      case RobotMenu.SOLAR_BUTTON -> RobotTexts.solarDetail(menu);
       default -> Component.translatable(ScreenKeys.CHATTER_DETAIL);
     };
   }
@@ -174,7 +188,11 @@ final class RobotSettingsPanel {
     statusRow(graphics, 1, ScreenKeys.ENERGY_USE, RobotTexts.energyUse(menu), Colors.VALUE_FIRST);
     statusRow(graphics, 2, ScreenKeys.HEALTH, RobotTexts.health(menu), Colors.VALUE_FIRST);
     statusRow(
-        graphics, SWITCHES, ScreenKeys.FOLLOWING, RobotTexts.following(menu), Colors.VALUE_FIRST);
+        graphics,
+        FOLLOWING_ROW,
+        ScreenKeys.FOLLOWING,
+        RobotTexts.following(menu),
+        Colors.VALUE_FIRST);
   }
 
   private void statusRow(

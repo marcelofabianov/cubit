@@ -16,5 +16,6 @@ final class RobotSettings {
         .setOreFilter(state.oreFilter().fitting(robot.spec().scanners().oreFilterSlots()));
     RobotLooks.setColor(robot, state.color());
     robot.defense().setMode(state.defenseMode());
+    robot.solar().setSwitchedOn(state.solarOn());
   }
 }

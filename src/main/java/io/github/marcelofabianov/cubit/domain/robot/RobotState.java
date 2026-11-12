@@ -19,7 +19,8 @@ public record RobotState(
     boolean scannersOn,
     OreFilter oreFilter,
     boolean chatterOn,
-    DefenseMode defenseMode) {
+    DefenseMode defenseMode,
+    boolean solarOn) {
   private static final String INVALID_HEALTH_MESSAGE = "Invalid robot health: ";
   private static final float MIN_PLACED_HEALTH = 1f;
 
@@ -27,6 +28,20 @@ public record RobotState(
     if (Float.isNaN(health) || health < 0) {
       throw new IllegalArgumentException(INVALID_HEALTH_MESSAGE + health);
     }
+  }
+
+  /** The solar panel starts switched on, also for what was saved before its switch existed. */
+  public RobotState(
+      RobotTier tier,
+      Energy energy,
+      float health,
+      boolean lampOn,
+      RobotColor color,
+      boolean scannersOn,
+      OreFilter oreFilter,
+      boolean chatterOn,
+      DefenseMode defenseMode) {
+    this(tier, energy, health, lampOn, color, scannersOn, oreFilter, chatterOn, defenseMode, true);
   }
 
   /** The robot starts peaceful, also for what was saved before the modes existed. */
@@ -77,7 +92,16 @@ public record RobotState(
   /** What a robot keeps when it dies: the tier and the looks, without energy or health. */
   public RobotState damaged() {
     return new RobotState(
-        tier, Energy.ZERO, 0f, lampOn, color, scannersOn, oreFilter, chatterOn, defenseMode);
+        tier,
+        Energy.ZERO,
+        0f,
+        lampOn,
+        color,
+        scannersOn,
+        oreFilter,
+        chatterOn,
+        defenseMode,
+        solarOn);
   }
 
   public RobotState repaired(TierSpec spec, Percentage health) {
@@ -90,7 +114,8 @@ public record RobotState(
         scannersOn,
         oreFilter,
         chatterOn,
-        defenseMode);
+        defenseMode,
+        solarOn);
   }
 
   public Battery batteryFor(TierSpec spec) {

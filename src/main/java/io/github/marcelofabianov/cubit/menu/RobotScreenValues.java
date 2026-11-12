@@ -30,20 +30,27 @@ final class RobotScreenValues implements ContainerData {
   static final int LAMP = 19;
   static final int SCANNERS = 21;
   static final int CHATTER = 23;
-  static final int DEFENSE = 25;
-  static final int COUNT = 26;
+  static final int SOLAR_SWITCH = 25;
+  static final int DEFENSE = 27;
+  static final int POWER = 28;
+  static final int COUNT = 29;
   static final int TRUE_VALUE = 1;
   private static final int AVAILABLE = 1;
 
   private final Supplier<RobotScreenReading> source;
   private final RobotSwitch[] switches;
   private final DefenseControl defense;
+  private final PowerControl power;
   private final int[] values = new int[COUNT];
 
   RobotScreenValues(
-      Supplier<RobotScreenReading> source, DefenseControl defense, RobotSwitch... switches) {
+      Supplier<RobotScreenReading> source,
+      DefenseControl defense,
+      PowerControl power,
+      RobotSwitch... switches) {
     this.source = source;
     this.defense = defense;
+    this.power = power;
     this.switches = switches.clone();
   }
 
@@ -65,6 +72,7 @@ final class RobotScreenValues implements ContainerData {
     values[EXPRESSION] = reading.vitals().expression().ordinal();
     values[TIER] = reading.tier().ordinal();
     values[DEFENSE] = defense.mode().ordinal();
+    values[POWER] = power.available() ? TRUE_VALUE : 0;
     for (int index = 0; index < switches.length; index++) {
       putSwitch(LAMP + index * 2, switches[index]);
     }

@@ -20,7 +20,7 @@ public final class RobotRespawn {
   public static void bringTo(ServerPlayer owner) {
     MinecraftServer server = owner.getServer();
     if (server != null) {
-      RobotEntity.follower(owner).ifPresent(robot -> bringTo(owner, server, robot));
+      RobotFollowing.follower(owner).ifPresent(robot -> bringTo(owner, server, robot));
     }
   }
 

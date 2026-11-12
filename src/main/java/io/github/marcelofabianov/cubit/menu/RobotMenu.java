@@ -38,9 +38,13 @@ public final class RobotMenu extends AbstractContainerMenu {
   public static final int LAMP_BUTTON = 0;
   public static final int SCANNERS_BUTTON = 1;
   public static final int CHATTER_BUTTON = 2;
+  public static final int SOLAR_BUTTON = 3;
 
   /** The defense modes come after the switches, in the order of the modes. */
-  public static final int FIRST_DEFENSE_BUTTON = 3;
+  public static final int FIRST_DEFENSE_BUTTON = 4;
+
+  /** After the four defense modes (answer 857). */
+  public static final int POWER_BUTTON = 8;
 
   /** The rows to scroll to come last, one button per row on top (answer 838). */
   public static final int FIRST_SCROLL_BUTTON = 16;
@@ -51,7 +55,10 @@ public final class RobotMenu extends AbstractContainerMenu {
   private static final int PLAYER_ROWS = 3;
   private static final int ENERGY_SLOT_SIZE = 1;
   private static final int[] SWITCH_INDEXES = {
-    RobotScreenValues.LAMP, RobotScreenValues.SCANNERS, RobotScreenValues.CHATTER
+    RobotScreenValues.LAMP,
+    RobotScreenValues.SCANNERS,
+    RobotScreenValues.CHATTER,
+    RobotScreenValues.SOLAR_SWITCH
   };
 
   private final Container container;
@@ -62,6 +69,7 @@ public final class RobotMenu extends AbstractContainerMenu {
   private final Runnable refresh;
   private final RobotSwitch[] switches;
   private final DefenseControl defense;
+  private final PowerControl power;
   private final RobotScreenOpening opening;
   private boolean inventoryShown = true;
 
@@ -75,6 +83,7 @@ public final class RobotMenu extends AbstractContainerMenu {
     this.refresh = server.refresh();
     this.switches = server.switches().clone();
     this.defense = server.defense();
+    this.power = server.power();
     this.opening = contents.opening();
     addRobotSlots();
     addEnergySlot(contents.energySlot());
@@ -96,11 +105,17 @@ public final class RobotMenu extends AbstractContainerMenu {
   public static RobotMenu onServer(
       int containerId, Inventory playerInventory, Contents contents, RobotSource source) {
     RobotScreenValues values =
-        new RobotScreenValues(source.reading(), source.defense(), source.switches());
+        new RobotScreenValues(
+            source.reading(), source.defense(), source.power(), source.switches());
     values.refresh();
     Server server =
         new Server(
-            source.stillValid(), values, values::refresh, source.switches(), source.defense());
+            source.stillValid(),
+            values,
+            values::refresh,
+            source.switches(),
+            source.defense(),
+            source.power());
     return new RobotMenu(containerId, playerInventory, contents, server);
   }
 
@@ -116,10 +131,17 @@ public final class RobotMenu extends AbstractContainerMenu {
     if (button >= FIRST_SCROLL_BUTTON) {
       return scrollFromClient(player, button - FIRST_SCROLL_BUTTON);
     }
+    if (button == POWER_BUTTON) {
+      return stillValid(player) && power.switchOff(player);
+    }
     int mode = button - FIRST_DEFENSE_BUTTON;
     if (mode >= 0 && mode < DefenseMode.values().length) {
       return stillValid(player) && defense.choose(player, DefenseMode.values()[mode]);
     }
+    return toggleFromClient(player, button);
+  }
+
+  private boolean toggleFromClient(Player player, int button) {
     if (button < 0 || button >= switches.length || !stillValid(player)) {
       return false;
     }
@@ -211,6 +233,10 @@ public final class RobotMenu extends AbstractContainerMenu {
 
   public RobotExpression expression() {
     return ScreenEnums.of(RobotExpression.values(), values.get(RobotScreenValues.EXPRESSION));
+  }
+
+  public boolean powerAvailable() {
+    return RobotScreenValues.isTrue(values, RobotScreenValues.POWER);
   }
 
   public DefenseMode defenseMode() {
@@ -338,6 +364,7 @@ public final class RobotMenu extends AbstractContainerMenu {
       Supplier<RobotScreenReading> reading,
       RobotSwitch[] switches,
       DefenseControl defense,
+      PowerControl power,
       Predicate<Player> stillValid) {}
 
   private record Server(
@@ -345,9 +372,10 @@ public final class RobotMenu extends AbstractContainerMenu {
       ContainerData values,
       Runnable refresh,
       RobotSwitch[] switches,
-      DefenseControl defense) {
+      DefenseControl defense,
+      PowerControl power) {
     private static final RobotSwitch[] NO_SWITCHES = {
-      RobotSwitch.NONE, RobotSwitch.NONE, RobotSwitch.NONE
+      RobotSwitch.NONE, RobotSwitch.NONE, RobotSwitch.NONE, RobotSwitch.NONE
     };
 
     static Server onClient() {
@@ -356,7 +384,8 @@ public final class RobotMenu extends AbstractContainerMenu {
           new SimpleContainerData(RobotScreenValues.COUNT),
           () -> {},
           NO_SWITCHES,
-          DefenseControl.NONE);
+          DefenseControl.NONE,
+          PowerControl.NONE);
     }
   }
 }

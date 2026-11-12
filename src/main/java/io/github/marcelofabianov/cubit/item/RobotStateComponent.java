@@ -32,6 +32,8 @@ public final class RobotStateComponent {
   private static final String CHATTER_FIELD = "chatter_enabled";
   private static final boolean CHATTER_DEFAULT = true;
   private static final String DEFENSE_FIELD = "defense_mode";
+  private static final String SOLAR_FIELD = "solar_enabled";
+  private static final boolean SOLAR_DEFAULT = true;
   private static final String UNKNOWN_DEFENSE_MESSAGE = "Unknown defense mode {}. Using peaceful.";
   private static final String UNKNOWN_COLOR_MESSAGE = "Unknown robot color {}. Using white.";
   private static final String UNKNOWN_TIER_MESSAGE = "Unknown robot tier {}. Using the base tier.";
@@ -74,7 +76,10 @@ public final class RobotStateComponent {
                       .forGetter(RobotState::chatterOn),
                   DEFENSE_CODEC
                       .optionalFieldOf(DEFENSE_FIELD, DefenseMode.INITIAL)
-                      .forGetter(RobotState::defenseMode))
+                      .forGetter(RobotState::defenseMode),
+                  Codec.BOOL
+                      .optionalFieldOf(SOLAR_FIELD, SOLAR_DEFAULT)
+                      .forGetter(RobotState::solarOn))
               .apply(instance, RobotState::new));
 
   public static final StreamCodec<ByteBuf, RobotState> STREAM_CODEC =

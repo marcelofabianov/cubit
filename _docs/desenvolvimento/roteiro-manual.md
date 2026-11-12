@@ -601,6 +601,22 @@ Compare cada tela com as imagens [`tela-cubit.png`](../imagens/conceito/tela-cub
 | 21 | Teste outro player no servidor | Ele não abre as telas do seu Cubit nem do seu Dock |
 | 22 | Mude a escala da interface nas opções de vídeo | As torres, os ícones e os retratos continuam nítidos |
 
+## Chaves da aba Settings
+
+As regras estão em [`telas.md`](../funcionalidades/telas.md#aba-settings) e em [`energia.md`](../funcionalidades/energia.md).
+
+| # | Faça | Espere |
+|---|---|---|
+| 1 | Abra a aba Settings de um Cubit ativo | Quatro chaves em Functions, com `Solar panel` na última, `Charges in the sun · 5 FE/t` no Base, e tudo cabe na janela, sem o rodapé antigo. No cabeçalho, o botão `Power` ao lado de `Battery` |
+| 2 | Passe o mouse no `Power` | `Power` e `Turns the Cubit off` |
+| 3 | De dia, ao céu aberto, desligue o `Solar panel` | A célula para de pulsar, a bateria não sobe pelo sol, e o Status mostra `Solar panel` `Off` |
+| 4 | Recolha e coloque o Cubit, e saia e entre no mundo | A chave continua desligada |
+| 5 | Clique no `Power` | O Cubit desliga, com o som de desligar, e a tela fecha |
+| 6 | Coloque outro Cubit | Ele passa a seguir você, porque o primeiro liberou o lugar |
+| 7 | Clique com o botão direito no primeiro | Ele liga, e fica desligado de novo se o outro estiver seguindo, pela regra que já existe |
+| 8 | Abra a tela de um Cubit hibernando no Dock | O `Power` aparece apagado e não faz nada |
+| 9 | Com o jogo em português, abra a aba | `Painel solar`, `Carrega no sol · 5 FE/t`, e no `Power`, `Energia` e `Desliga o Cubit` |
+
 ## Tradução
 
 | # | Passo | Resultado esperado |
@@ -660,6 +676,7 @@ Na instância só com o mod, tire capturas com F2 do Cubit seguindo, da tela do 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-12 18:10 | Adiciona as chaves da aba Settings. |
 | Marcelo Fabiano | 2026-11-12 15:50 | Adiciona o modo Focus. |
 | Marcelo Fabiano | 2026-11-12 13:40 | Adiciona a rolagem do inventário ao upgrade de tier. |
 | Marcelo Fabiano | 2026-11-12 11:40 | Adiciona o choque e os modos de defesa. |
