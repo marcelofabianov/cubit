@@ -207,22 +207,22 @@ Aprovada. Vale a partir da Fase 2.
 io.github.marcelofabianov.cubit
 ├── CubitMod                // ponto de entrada: só conecta os registros
 ├── domain/                 // Java puro, testado com JUnit
-│   ├── robot/              // RobotType, capacidades que o Cubit combina, OreKind, OreFilter, OreSignals
-│   ├── tier/               // RobotTier, TierSpec, TierCatalog (interface)
+│   ├── robot/              // RobotType, capacidades que o Cubit combina, OreKind, OreFilter, OreSignals, DefenseMode
+│   ├── tier/               // RobotTier, TierSpec, TierCatalog (interface); TierUpgrade: subir de tier com um Module; ShockSpec: o choque e os modos de cada tier
 │   ├── energy/             // Battery, PowerState (ativo, inativo, hibernação), regras de consumo e religamento, SolarPanel: quando o painel dá energia; SolarStatus, EnergyUseCause, RechargeSource, EnergyFormat, EnergyHalves: o que as telas mostram
-│   ├── behavior/           // FollowDecision: seguir, parar ou teleportar; BurningAction: reagir a fogo e lava; LampPolicy: quando a lanterna acende; ScanRules, ScanArea, FreshFinds, MarkLife, MarkPulse, ScanSignal: scanners, caixas e cores; ChatWatch, BiomeWatch, LeftBehindWatch, ChatRules: falas; RespawnReturn: voltar com o dono; RobotScreenStatus: o estado no topo da tela
+│   ├── behavior/           // FollowDecision: seguir, parar ou teleportar; BurningAction: reagir a fogo e lava; LampPolicy: quando a lanterna acende; ScanRules, ScanArea, FreshFinds, MarkLife, MarkPulse, ScanSignal: scanners, caixas e cores; ChatWatch, BiomeWatch, LeftBehindWatch, ChatRules: falas; RespawnReturn: voltar com o dono; RobotScreenStatus: o estado no topo da tela; DefenseRules, ShockCandidate, RetaliationMemory, ShockRules: o choque e os modos de defesa
 │   ├── dock/               // DockStock, DockStatus, DockStay, DockQueue, DockTrip, DockRemoval, DockInputMeter
 │   └── ownership/          // FollowingRobotPolicy, Ownership
 ├── config/                 // ModConfigSpec → implementa TierCatalog
-├── registry/               // DeferredRegisters
-├── entity/                 // RobotEntity, goals de IA
-├── item/                   // RobotItem, RobotStateComponent; PowerBankItem planejado para a Fase 4
+├── registry/               // DeferredRegisters e CubitDamageTypes, o dano do choque
+├── entity/                 // RobotEntity, goals de IA; RobotUpgrade: o Module aplicado; RobotDefense e RobotShock: o choque
+├── item/                   // RobotItem, RobotStateComponent, ModuleItem e TierLook; PowerBankItem planejado para a Fase 4.1
 ├── block/                  // InductionDockBlock, BlockEntity
-├── menu/                   // RobotMenu, InductionDockMenu
+├── menu/                   // RobotMenu, InductionDockMenu; DefenseControl e DefenseOpening: a aba Defense
 ├── network/                // pacotes próprios: NoticePayload, OreMarksPayload, MobMarksPayload e CubitNetwork
 ├── compat/jade/            // plugin do Jade, opcional: só este pacote importa o Jade
 ├── player/                 // attachment com o UUID do robô que segue, robôs mortos com o dono offline, /cubit reset e o que o dono faz: renascer, conquistar, caçar e minerar redstone
-├── client/                 // renderer, modelo GeckoLib, tela
+├── client/                 // renderer, modelo GeckoLib, telas, com as abas Inventory, Settings e Defense
 └── datagen/                // receitas, loot, traduções
 ```
 
