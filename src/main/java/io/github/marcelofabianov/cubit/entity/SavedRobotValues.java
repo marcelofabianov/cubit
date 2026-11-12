@@ -40,6 +40,7 @@ final class SavedRobotValues {
   private static final String ORE_FILTER_KEY = "OreFilter";
   private static final String CHATTER_KEY = "ChatterEnabled";
   private static final String DEFENSE_KEY = "DefenseMode";
+  private static final String SOLAR_KEY = "SolarEnabled";
   private static final String LAST_SAFE_POSITION_KEY = "LastSafePosition";
   private static final String NO_OWNER_MESSAGE = "Robot {} has no owner. Nobody can interact.";
   private static final String INVALID_TIER_MESSAGE = "Robot {} has an invalid tier: {}";
@@ -67,6 +68,7 @@ final class SavedRobotValues {
         .forEach(ore -> filter.add(StringTag.valueOf(ore)));
     tag.put(ORE_FILTER_KEY, filter);
     tag.putString(DEFENSE_KEY, robot.state().defenseMode().key());
+    tag.putBoolean(SOLAR_KEY, robot.state().solarOn());
     robot
         .lastSafePosition()
         .ifPresent(position -> tag.putLong(LAST_SAFE_POSITION_KEY, position.asLong()));
@@ -142,7 +144,13 @@ final class SavedRobotValues {
         scannersOn(tag),
         oreFilter(tag),
         chatterOn(tag),
-        defenseMode(tag, robot));
+        defenseMode(tag, robot),
+        solarOn(tag));
+  }
+
+  /** Without the key, the robot was saved before the solar switch existed, so it stays on. */
+  static boolean solarOn(CompoundTag tag) {
+    return !tag.contains(SOLAR_KEY) || tag.getBoolean(SOLAR_KEY);
   }
 
   /** Without the key, the robot was saved before the modes existed, so it is peaceful. */

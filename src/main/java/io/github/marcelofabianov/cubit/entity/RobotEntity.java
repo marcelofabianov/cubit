@@ -148,7 +148,8 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
         scanners.switchedOn(),
         scanners.oreFilter(),
         chatter.switchedOn(),
-        defense.mode());
+        defense.mode(),
+        solar.switchedOn());
   }
 
   public PowerState powerState() {
@@ -177,6 +178,10 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
 
   public RobotDefense defense() {
     return defense;
+  }
+
+  public RobotSolar solar() {
+    return solar;
   }
 
   RobotNotices notices() {

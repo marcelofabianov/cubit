@@ -59,6 +59,9 @@ public final class ScreenKeys {
   public static final String SCANNERS_DETAIL = ROBOT + "scanners_detail";
   public static final String CHATTER = ROBOT + "chatter";
   public static final String CHATTER_DETAIL = ROBOT + "chatter_detail";
+  public static final String SOLAR_DETAIL = ROBOT + "solar_detail";
+  public static final String POWER = ROBOT + "power";
+  public static final String POWER_DETAIL = ROBOT + "power_detail";
   public static final String SWITCH_ON = ROBOT + "switch_on";
   public static final String SWITCH_OFF = ROBOT + "switch_off";
   public static final String SCANNER_FILTER = ROBOT + "scanner_filter";
@@ -76,7 +79,6 @@ public final class ScreenKeys {
   public static final String FOLLOWING = ROBOT + "following";
   public static final String FOLLOWING_YOU = ROBOT + "following_you";
   public static final String FOLLOWING_NOBODY = ROBOT + "following_nobody";
-  public static final String MORE_FUNCTIONS = ROBOT + "more_functions";
 
   private ScreenKeys() {}
 

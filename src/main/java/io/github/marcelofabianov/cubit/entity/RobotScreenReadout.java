@@ -39,13 +39,17 @@ public final class RobotScreenReadout {
   public static RobotMenu serverMenu(int containerId, Inventory inventory, RobotEntity robot) {
     RobotMenu.Contents contents =
         new RobotMenu.Contents(robot.inventory(), robot.energySlot(), opening(robot));
-    RobotSwitch[] switches = {robot.lampSwitch(), robot.scanners(), robot.chatter()};
+    RobotSwitch[] switches = {robot.lampSwitch(), robot.scanners(), robot.chatter(), robot.solar()};
     return RobotMenu.onServer(
         containerId,
         inventory,
         contents,
         new RobotMenu.RobotSource(
-            () -> read(robot), switches, robot.defense(), robot::canUseInventory));
+            () -> read(robot),
+            switches,
+            robot.defense(),
+            new RobotPower(robot),
+            robot::canUseInventory));
   }
 
   static RobotScreenReading read(RobotEntity robot) {
@@ -56,7 +60,8 @@ public final class RobotScreenReadout {
     RechargeSource recharge = recharge(tick, state, battery);
     SolarStatus solar =
         SolarStatus.of(
-            new SolarView(state, tick.sunExists(), tick.skyOpen(), tick.day(), true),
+            new SolarView(
+                state, tick.sunExists(), tick.skyOpen(), tick.day(), robot.solar().switchedOn()),
             battery,
             robot.spec().solar());
     return new RobotScreenReading(
@@ -97,6 +102,7 @@ public final class RobotScreenReadout {
         scanners.oreRadiusBlocks(),
         scanners.mobRadiusBlocks(),
         scanners.oreCost().amount(),
+        spec.solar().dayPerTick().amount(),
         filter.kinds().stream().map(OreKind::tag).toList(),
         filter.kinds().stream().findFirst().map(OreKind::tag).orElse(NO_ICON),
         defense(robot));

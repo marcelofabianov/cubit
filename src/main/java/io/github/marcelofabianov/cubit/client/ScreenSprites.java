@@ -40,6 +40,18 @@ final class ScreenSprites {
   /** The shield of the defense tab, in the free place after the chatter icon. */
   private static final int SHIELD_U = 320;
 
+  /** The Power button and the solar switch, in the free places after the shield. */
+  private static final int POWER_U = 384;
+
+  private static final int SOLAR_U = 448;
+
+  /** The icon of each switch, in the order of the buttons: lamp, scanners, chatter and solar. */
+  private static final int[] FUNCTION_U = {
+    FIRST_FUNCTION_U, FIRST_FUNCTION_U + ICON, FIRST_FUNCTION_U + 2 * ICON, SOLAR_U
+  };
+
+  private static final int POWER_SHOWN = 12;
+
   private ScreenSprites() {}
 
   static void chest(GuiGraphics graphics, int x, int y) {
@@ -65,9 +77,24 @@ final class ScreenSprites {
     icon(graphics, x, y, SHIELD_U);
   }
 
-  /** The lamp, the scanners and the chatter, in the order of their buttons. */
+  /** The lamp, the scanners, the chatter and the solar panel, in the order of their buttons. */
   static void function(GuiGraphics graphics, int x, int y, int button) {
-    icon(graphics, x, y, FIRST_FUNCTION_U + button * ICON);
+    icon(graphics, x, y, FUNCTION_U[button]);
+  }
+
+  static void power(GuiGraphics graphics, int x, int y) {
+    graphics.blit(
+        SHEET,
+        x,
+        y,
+        POWER_SHOWN,
+        POWER_SHOWN,
+        POWER_U,
+        ICON_V,
+        ICON,
+        ICON,
+        SHEET_WIDTH,
+        SHEET_HEIGHT);
   }
 
   private static void icon(GuiGraphics graphics, int x, int y, int u) {

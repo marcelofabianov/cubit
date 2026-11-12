@@ -55,6 +55,10 @@ final class RobotTexts {
         menu.opening().scanCost());
   }
 
+  static Component solarDetail(RobotMenu menu) {
+    return Component.translatable(ScreenKeys.SOLAR_DETAIL, menu.opening().solarDay());
+  }
+
   static Component filter(RobotMenu menu) {
     if (!menu.opening().hasFilter()) {
       return Component.translatable(ScreenKeys.NO_FILTER);
