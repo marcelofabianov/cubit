@@ -21,6 +21,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Planejado nos documentos:** o que é de fase futura fica nos documentos, marcado com a fase em que entra, sem parecer pronto (pergunta 718).
 - **Testes de instância:** os da regra 35 ficam para o fim da Fase 3, no teste da versão completa, na seção "Teste da versão" do roteiro manual, no Prism Launcher. O Iron Meridian é testado numa cópia da instância, com o jar em `mods/` (perguntas 767 a 769).
 - **Exceção na `0.1.0`:** a versão sai com o teste no Iron Meridian, sem a instância só com o mod e sem as confirmações do item 7, que ficam para depois dela (pergunta 776). As confirmações e a instância só com o mod foram feitas depois, com o upgrade de tier e as receitas dos Modules (pergunta 820).
+- **Exceção na `0.1.1`:** a versão sai com o teste na instância só com o mod, sem o Iron Meridian, que não está mais instalado no Prism do desenvolvedor (perguntas 867 e 868).
 - **Release no GitHub:** cada versão tem a tag anotada e uma release no GitHub, com a seção do `CHANGELOG.md` e o jar, antes do envio aos sites (pergunta 778).
 - **Outro player:** o teste com outro player não é feito no jogo. As GameTests com um player que não é o dono cobrem o Dock, o `/cubit reset`, a cor e o nome (perguntas 770 a 772).
 - **Etapa atual:** as Fases 1, 2 e 3 foram encerradas, com a `0.1.0` publicada (perguntas 785 e 786). A Fase 4 só começa com pedido explícito.
@@ -141,6 +142,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-12 20:30 | Registra a exceção da `0.1.1`. |
 | Marcelo Fabiano | 2026-11-12 17:20 | Resume as chaves do item 8. |
 | Marcelo Fabiano | 2026-11-12 15:10 | Fecha o modo Focus. |
 | Marcelo Fabiano | 2026-11-12 10:30 | Resume o choque e os modos de defesa. |

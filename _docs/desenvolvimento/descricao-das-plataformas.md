@@ -36,8 +36,10 @@ Cubit is a cute, battery-powered robot companion. It follows you around, carries
 ## What Cubit does
 
 - **Follows you:** walks behind you, climbs one block at a time, walks down drops of up to 5 blocks and teleports back when it falls too far behind.
-- **Carries your items:** 27 slots, in its own screen that only you can open.
+- **Carries your items:** 27 to 54 slots, growing with the tier, in its own screen that only you can open.
 - **Runs on a battery:** walking, scanning and the lamp use energy, and it shuts down when the battery runs out. Recharge it with redstone, with its solar panel under open sky, or at the Induction Dock, a charging base powered by redstone or by FE cables from any mod.
+- **Grows with you:** three upgrade tiers, Advanced, Elite and Ultimate, reached with Modules crafted from vanilla materials, each with a bigger battery, inventory and reach.
+- **Defends you:** from Advanced on, a light electric shock in four defense modes, Peaceful, Retaliate, Aggressive and Focus, which shocks only the mob you hit. It never attacks you, other players or peaceful mobs.
 - **Lights the way:** its lamp turns on in dark places, through LambDynamicLights, with no invisible light blocks.
 - **Scans around you:** finds ores from any mod through the `c:ores` tag and spots hostile mobs, even behind walls. New ores get a box only you can see, and mobs get an arrow above their heads.
 - **Has a personality:** a face screen with expressions, animations, beeps, short messages above the hotbar and chatter about the weather, biomes and your advancements, with a toggle to turn it off.
@@ -46,7 +48,6 @@ Cubit is a cute, battery-powered robot companion. It follows you around, carries
 
 ## Good to know
 
-- **Tier:** this version has the Base tier only.
 - **Requirements:** NeoForge for Minecraft 1.21.1, GeckoLib and, on the client, LambDynamicLights. Jade is optional and adds tooltips.
 - **Server:** install Cubit on both the server and the client.
 - **Config:** every balance number is in `config/cubit-common.toml`.
@@ -54,11 +55,12 @@ Cubit is a cute, battery-powered robot companion. It follows you around, carries
 - **Languages:** English and Brazilian Portuguese.
 - **Bugs and ideas:** open an issue on [GitHub](https://github.com/marcelofabianov/cubit/issues).
 
-Coming next: upgrade tiers, a Power Bank, an item magnet, a defense mode and a remote control.
+Coming next: a Power Bank, an item magnet, a remote control and a work area.
 ```
 
 ## Histórico de modificações
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-12 20:50 | Atualiza a descrição longa para a `0.1.1` (pergunta 869). |
 | Marcelo Fabiano | 2026-11-08 00:58 | Cria a descrição curta, o resumo e a descrição longa das plataformas. |
