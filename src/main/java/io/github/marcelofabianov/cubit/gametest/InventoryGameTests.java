@@ -48,7 +48,6 @@ public final class InventoryGameTests {
   private static final int PLAYER_SLOTS = 36;
   private static final int ENERGY_SLOTS = 1;
   private static final int ABOVE_THE_SLOTS = 30;
-  private static final int SURPLUS_ITEMS = 3;
   private static final int SETTLE_TICKS = 5;
   private static final double FAR_AWAY = 30;
   private static final String NOT_OPENED = "The screen did not open";
@@ -216,12 +215,8 @@ public final class InventoryGameTests {
     helper.runAfterDelay(
         SETTLE_TICKS,
         () -> {
-          int kept = 0;
-          for (int slot = 0; slot < robot.inventory().getContainerSize(); slot++) {
-            kept += robot.inventory().getItem(slot).getCount();
-          }
-          helper.assertValueEqual(kept, BASE_SLOTS, WRONG_CONTENT);
-          helper.assertValueEqual(droppedCount(helper), SURPLUS_ITEMS, LOST);
+          helper.assertValueEqual(robot.inventory().getContainerSize(), BASE_SLOTS, WRONG_CONTENT);
+          helper.assertValueEqual(heldCount(robot) + droppedCount(helper), ABOVE_THE_SLOTS, LOST);
           helper.succeed();
         });
   }
@@ -240,7 +235,7 @@ public final class InventoryGameTests {
     helper.runAfterDelay(
         SETTLE_TICKS,
         () -> {
-          helper.assertValueEqual(droppedCount(helper), SURPLUS_ITEMS, LOST);
+          helper.assertValueEqual(heldCount(loaded) + droppedCount(helper), ABOVE_THE_SLOTS, LOST);
           helper.succeed();
         });
   }
@@ -305,6 +300,15 @@ public final class InventoryGameTests {
 
   private static ItemStack droppedRobot(GameTestHelper helper) {
     return helper.getEntities(EntityType.ITEM).getFirst().getItem();
+  }
+
+  /** The pickup may take back what fits in a stack, so only the total proves nothing is lost. */
+  private static int heldCount(RobotEntity robot) {
+    int held = 0;
+    for (int slot = 0; slot < robot.inventory().getContainerSize(); slot++) {
+      held += robot.inventory().getItem(slot).getCount();
+    }
+    return held;
   }
 
   private static int droppedCount(GameTestHelper helper) {

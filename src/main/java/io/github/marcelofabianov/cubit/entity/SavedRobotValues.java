@@ -69,6 +69,7 @@ final class SavedRobotValues {
     tag.put(ORE_FILTER_KEY, filter);
     tag.putString(DEFENSE_KEY, robot.state().defenseMode().key());
     tag.putBoolean(SOLAR_KEY, robot.state().solarOn());
+    SavedPickup.write(tag, robot.state().pickup());
     robot
         .lastSafePosition()
         .ifPresent(position -> tag.putLong(LAST_SAFE_POSITION_KEY, position.asLong()));
@@ -136,16 +137,17 @@ final class SavedRobotValues {
    */
   static RobotState settings(CompoundTag tag, RobotTier tier, UUID robot) {
     return new RobotState(
-        tier,
-        Energy.ZERO,
-        0f,
-        lampOn(tag),
-        color(tag, robot),
-        scannersOn(tag),
-        oreFilter(tag),
-        chatterOn(tag),
-        defenseMode(tag, robot),
-        solarOn(tag));
+            tier,
+            Energy.ZERO,
+            0f,
+            lampOn(tag),
+            color(tag, robot),
+            scannersOn(tag),
+            oreFilter(tag),
+            chatterOn(tag),
+            defenseMode(tag, robot),
+            solarOn(tag))
+        .withPickup(SavedPickup.read(tag));
   }
 
   /** Without the key, the robot was saved before the solar switch existed, so it stays on. */

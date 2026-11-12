@@ -17,6 +17,7 @@ Números por tier: [`tiers.md`](../tiers.md#coleta-e-inventário) e [slots exclu
 
 - Recolher, colocar, morrer, consertar e salvar o mundo nunca apagam nem duplicam itens, nem com a tela aberta.
 - **Config reduzido:** ao colocar ou carregar o robô, o que não couber nos slots do config cai no chão, ao lado dele, com um aviso no log.
+- **Excedente e coleta:** com a coleta ligada, o Cubit pode recolher do excedente o que couber numa pilha que ele já tem. Nada se perde nem duplica, e nenhum slot passa do config (pergunta 894).
 
 ## Coleta
 
@@ -60,7 +61,7 @@ São quatro: tochas, fornalha, carregador de ferramentas e energia. Na Fase 5, o
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
-| Marcelo Fabiano | 2026-11-12 21:45 | Detalha a coleta, o ímã e o filtro de coleta. |
+| Marcelo Fabiano | 2026-11-12 21:45 | Detalha a coleta, o ímã, o filtro de coleta e o excedente recolhido. |
 | Marcelo Fabiano | 2026-11-07 23:11 | Aponta a tela do inventário para as telas próprias. |
 | Marcelo Fabiano | 2026-11-06 11:15 | Limita o texto da descarga ao Cubit que segue. |
 | Marcelo Fabiano | 2026-11-06 11:10 | Troca 'especialidade' por 'trabalho' e 'card de especialidade' por 'card de Aprendizado de Máquina'. |

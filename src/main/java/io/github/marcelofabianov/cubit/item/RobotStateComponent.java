@@ -6,6 +6,8 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import io.github.marcelofabianov.cubit.domain.energy.Energy;
 import io.github.marcelofabianov.cubit.domain.robot.DefenseMode;
 import io.github.marcelofabianov.cubit.domain.robot.OreFilter;
+import io.github.marcelofabianov.cubit.domain.robot.PickupFilter;
+import io.github.marcelofabianov.cubit.domain.robot.PickupSettings;
 import io.github.marcelofabianov.cubit.domain.robot.RobotColor;
 import io.github.marcelofabianov.cubit.domain.robot.RobotState;
 import io.github.marcelofabianov.cubit.domain.tier.RobotTier;
@@ -34,6 +36,9 @@ public final class RobotStateComponent {
   private static final String DEFENSE_FIELD = "defense_mode";
   private static final String SOLAR_FIELD = "solar_enabled";
   private static final boolean SOLAR_DEFAULT = true;
+  private static final String PICKUP_FIELD = "pickup_enabled";
+  private static final String MAGNET_FIELD = "magnet_enabled";
+  private static final String PICKUP_FILTER_FIELD = "pickup_filter";
   private static final String UNKNOWN_DEFENSE_MESSAGE = "Unknown defense mode {}. Using peaceful.";
   private static final String UNKNOWN_COLOR_MESSAGE = "Unknown robot color {}. Using white.";
   private static final String UNKNOWN_TIER_MESSAGE = "Unknown robot tier {}. Using the base tier.";
@@ -79,8 +84,43 @@ public final class RobotStateComponent {
                       .forGetter(RobotState::defenseMode),
                   Codec.BOOL
                       .optionalFieldOf(SOLAR_FIELD, SOLAR_DEFAULT)
-                      .forGetter(RobotState::solarOn))
-              .apply(instance, RobotState::new));
+                      .forGetter(RobotState::solarOn),
+                  Codec.BOOL
+                      .optionalFieldOf(PICKUP_FIELD, PickupSettings.INITIAL.pickupOn())
+                      .forGetter(state -> state.pickup().pickupOn()),
+                  Codec.BOOL
+                      .optionalFieldOf(MAGNET_FIELD, PickupSettings.INITIAL.magnetOn())
+                      .forGetter(state -> state.pickup().magnetOn()),
+                  SavedPickupFilter.CODEC
+                      .optionalFieldOf(PICKUP_FILTER_FIELD, PickupFilter.EMPTY)
+                      .forGetter(state -> state.pickup().filter()))
+              .apply(
+                  instance,
+                  (tier,
+                      energy,
+                      health,
+                      lamp,
+                      color,
+                      scanners,
+                      oreFilter,
+                      chatter,
+                      defense,
+                      solar,
+                      pickup,
+                      magnet,
+                      pickupFilter) ->
+                      new RobotState(
+                          tier,
+                          energy,
+                          health,
+                          lamp,
+                          color,
+                          scanners,
+                          oreFilter,
+                          chatter,
+                          defense,
+                          solar,
+                          new PickupSettings(pickup, magnet, pickupFilter))));
 
   public static final StreamCodec<ByteBuf, RobotState> STREAM_CODEC =
       ByteBufCodecs.fromCodec(CODEC);

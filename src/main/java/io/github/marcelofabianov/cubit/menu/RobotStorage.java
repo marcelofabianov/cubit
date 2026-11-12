@@ -7,11 +7,11 @@ import net.minecraft.world.item.ItemStack;
  * Puts a stack in the whole robot inventory, also in the rows the screen does not show. It fills
  * the stacks of the same item first and then the empty slots, as the game does.
  */
-final class RobotStorage {
+public final class RobotStorage {
   private RobotStorage() {}
 
   /** True when anything moved. The stack keeps what did not fit. */
-  static boolean insert(Container inventory, ItemStack stack) {
+  public static boolean insert(Container inventory, ItemStack stack) {
     if (!stack.getItem().canFitInsideContainerItems()) {
       return false;
     }
@@ -22,6 +22,24 @@ final class RobotStorage {
       inventory.setChanged();
     }
     return stack.getCount() != before;
+  }
+
+  /** True when at least part of the stack fits, without moving anything. */
+  public static boolean hasRoomFor(Container inventory, ItemStack stack) {
+    if (!stack.getItem().canFitInsideContainerItems()) {
+      return false;
+    }
+    for (int slot = 0; slot < inventory.getContainerSize(); slot++) {
+      ItemStack held = inventory.getItem(slot);
+      if (held.isEmpty()) {
+        return true;
+      }
+      int max = Math.min(held.getMaxStackSize(), inventory.getMaxStackSize());
+      if (ItemStack.isSameItemSameComponents(held, stack) && held.getCount() < max) {
+        return true;
+      }
+    }
+    return false;
   }
 
   private static void merge(Container inventory, ItemStack stack) {

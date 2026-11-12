@@ -8,6 +8,7 @@ Não há perguntas pendentes nesta fase.
 
 | # | Pergunta | Resposta |
 |---|---|---|
+| 894 | Com a coleta, o excedente de um config reduzido, que cai aos pés do Cubit sem atraso, é recolhido de volta quando cabe numa pilha. Como deve ficar? | Pode recolher o que cabe: o que cabe numa pilha não é excedente, e nada se perde nem duplica. Os GameTests do inventário passam a conferir o total, do inventário e do chão, e o tamanho dos slots. Pela regra 48, completa a regra do config reduzido de `inventario.md`. Confirma a recomendação |
 | 893 | Como o player põe um item no cursor para o slot fantasma, se fora da aba Inventory os slots dele ficam escondidos (`RobotMenu`)? | Na aba Behavior, o inventário e a hotbar do player continuam visíveis e usáveis. Só o inventário do Cubit e o slot de energia somem, e o painel ocupa o lugar deles, com o cabeçalho, as duas chaves, o botão do modo e a grade de até 3 linhas. Se o layout não couber, o agente para e mostra a evidência, como na pergunta 861. Completa a resposta 880, pela regra 48 |
 | 892 | O que acontece com um filtro de coleta salvo inválido ao carregar (regra 17)? | Um item ou uma tag que não existe é ignorado e vai para o log. As entradas acima do limite do tier e as tags num tier sem tags são ignoradas na coleta, mas ficam guardadas, sem apagar nada, e voltam a valer se o config permitir. A aba mostra só as que valem. Confirma a recomendação |
 | 891 | Quais são os nomes da coleta e do ímã no NBT da entidade? | Seguem o padrão em PascalCase: `PickupEnabled` e `MagnetEnabled`, que valem ligadas sem a chave no save, e `PickupFilter`, com `Mode`, `blacklist` ou `whitelist`, que vale `blacklist` sem o valor ou com um valor inválido, e `Entries`, uma lista com o ID do item ou a `#tag`. Completa a resposta 889. Confirma a recomendação |
@@ -147,7 +148,7 @@ Não há perguntas pendentes nesta fase.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
-| Marcelo Fabiano | 2026-11-12 21:45 | Registra as respostas 874 a 893 e fecha a pendente 423. |
+| Marcelo Fabiano | 2026-11-12 21:45 | Registra as respostas 874 a 894 e fecha a pendente 423. |
 | Marcelo Fabiano | 2026-11-12 21:30 | Registra as respostas 870 a 873. |
 | Marcelo Fabiano | 2026-11-12 20:30 | Registra as respostas 867 a 869. |
 | Marcelo Fabiano | 2026-11-12 19:40 | Registra a resposta 866. |
