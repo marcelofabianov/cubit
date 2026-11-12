@@ -25,6 +25,9 @@ final class CubitItemModelProvider extends ItemModelProvider {
     robotWithColors();
     basicItem(CubitItems.DAMAGED_GENERAL_ROBOT.get());
     basicItem(CubitItems.TOOLBOX.get());
+    basicItem(CubitItems.ADVANCED_MODULE.get());
+    basicItem(CubitItems.ELITE_MODULE.get());
+    basicItem(CubitItems.ULTIMATE_MODULE.get());
   }
 
   /** The game uses the last override that matches, so they go in the order of the numbers. */

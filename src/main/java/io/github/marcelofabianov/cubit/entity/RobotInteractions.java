@@ -6,6 +6,7 @@ import io.github.marcelofabianov.cubit.domain.ownership.FollowingOutcome;
 import io.github.marcelofabianov.cubit.domain.ownership.Ownership;
 import io.github.marcelofabianov.cubit.domain.robot.RobotClick;
 import io.github.marcelofabianov.cubit.domain.tier.TierSpec;
+import io.github.marcelofabianov.cubit.item.ModuleItem;
 import io.github.marcelofabianov.cubit.menu.RobotScreenOpening;
 import io.github.marcelofabianov.cubit.player.FollowingRobotLink;
 import io.github.marcelofabianov.cubit.registry.CubitAttachments;
@@ -86,13 +87,14 @@ final class RobotInteractions {
     RobotClick click =
         RobotClick.of(
             Ownership.owns(robot.ownerId(), player.getUUID()),
-            false,
+            held.getItem() instanceof ModuleItem,
             player.isShiftKeyDown(),
             held.getItem() instanceof DyeItem,
             held.is(Tags.Items.ORES),
             robot.powerState());
     return switch (click) {
-      case IGNORE, UPGRADE -> InteractionResult.PASS;
+      case IGNORE -> InteractionResult.PASS;
+      case UPGRADE -> RobotUpgrade.apply(robot, player, held, (ModuleItem) held.getItem());
       case COLLECT -> collect(robot, player);
       case PAINT -> RobotPaint.apply(robot, player, held, (DyeItem) held.getItem());
       case CHOOSE_ORE -> RobotOreChoice.apply(robot, player, held);

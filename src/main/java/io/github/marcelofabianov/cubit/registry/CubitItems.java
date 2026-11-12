@@ -2,7 +2,9 @@ package io.github.marcelofabianov.cubit.registry;
 
 import io.github.marcelofabianov.cubit.CubitMod;
 import io.github.marcelofabianov.cubit.config.CubitConfig;
+import io.github.marcelofabianov.cubit.domain.tier.RobotTier;
 import io.github.marcelofabianov.cubit.item.DamagedRobotItem;
+import io.github.marcelofabianov.cubit.item.ModuleItem;
 import io.github.marcelofabianov.cubit.item.RobotItem;
 import java.util.function.Supplier;
 import net.minecraft.core.registries.Registries;
@@ -16,6 +18,8 @@ public final class CubitItems {
   private static final int ROBOT_STACK_SIZE = 1;
   private static final int TOOLBOX_STACK_SIZE = 16;
   private static final int DOCK_STACK_SIZE = 1;
+  private static final int MODULE_STACK_SIZE = 64;
+  private static final String MODULE_SUFFIX = "_module";
   private static final String DAMAGED_PREFIX = "damaged_";
   private static final String TOOLBOX_ID = "toolbox";
   private static final DeferredRegister<Item> ITEMS =
@@ -49,7 +53,18 @@ public final class CubitItems {
                   CubitBlocks.INDUCTION_DOCK.get(),
                   new Item.Properties().stacksTo(DOCK_STACK_SIZE)));
 
+  public static final Supplier<Item> ADVANCED_MODULE = module(RobotTier.ADVANCED);
+  public static final Supplier<Item> ELITE_MODULE = module(RobotTier.ELITE);
+  public static final Supplier<Item> ULTIMATE_MODULE = module(RobotTier.ULTIMATE);
+
   private CubitItems() {}
+
+  /** The ID is the tier and the suffix, like advanced_module, from _docs/itens.md. */
+  private static Supplier<Item> module(RobotTier tier) {
+    return ITEMS.register(
+        tier.key() + MODULE_SUFFIX,
+        () -> new ModuleItem(new Item.Properties().stacksTo(MODULE_STACK_SIZE), tier));
+  }
 
   public static void register(IEventBus modBus) {
     ITEMS.register(modBus);

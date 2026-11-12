@@ -46,6 +46,8 @@ O tier fica guardado no item ao recolher, morrer e consertar, no campo `tier` de
 | Etapa pulada | `Cubit: I need to be Advanced first`, com o tier que o Module exige |
 | Mesmo tier ou acima | `Cubit: I'm already Ultimate`, com o tier atual |
 
+Em português, os itens são `Módulo Avançado`, `Módulo Elite` e `Módulo Supremo`, os textos são `Cubit: Evoluí para Elite!`, `Cubit: Preciso ser Avançado antes` e `Cubit: Já sou Supremo`, e a dica é `Exige um Cubit Avançado` (pergunta 811).
+
 ## Ícone do item
 
 O colar do ícone do Cubit e do Damaged Cubit ganha a cor do tier por uma segunda camada, só com o colar em tons claros, que o cliente tinge com a cor do tier. É uma textura só, sem multiplicar os 16 modelos de cor da carcaça (perguntas 414 e 803).
@@ -59,4 +61,5 @@ O colar do ícone do Cubit e do Damaged Cubit ganha a cor do tier por uma segund
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-11 23:10 | Acrescenta os nomes e os textos em português. |
 | Marcelo Fabiano | 2026-11-11 22:01 | Define o upgrade de tier com os Modules. |

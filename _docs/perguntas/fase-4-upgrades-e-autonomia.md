@@ -13,6 +13,7 @@
 
 | # | Pergunta | Resposta |
 |---|---|---|
+| 811 | Como ficam os Modules e os textos do upgrade em português? | Itens: `Módulo Avançado`, `Módulo Elite` e `Módulo Supremo`. Textos: `Cubit: Evoluí para Elite!`, `Cubit: Preciso ser Avançado antes` e `Cubit: Já sou Supremo`. Dica: `Exige um Cubit Avançado`. Segue os tiers já traduzidos no `pt_br` e a pergunta [733](fase-3-sentidos.md). Detalha a 808 |
 | 810 | Como representar o filtro "Ilimitado" do scanner no Ultimate, se a chave `ore_filter_slots` aceita de 1 a 64? | Com o padrão 64, o limite da chave, que na prática cobre todos os minérios das tags `c:ores`. O `tiers.md` passa a dizer 64, e o contrato do config não muda |
 | 809 | O que acontece quando quem não é dono aplica um Module, já que o aviso para outro player citado na 802 não existe? | Nada acontece, como na pintura e na etiqueta: sem texto, e o Module não é consumido. Corrige a [802](#respondidas) nesse ponto, pela regra 48 |
 | 808 | Quais textos curtos o upgrade mostra? | Upgrade: `Cubit: Upgraded to Elite!`. Etapa pulada: `Cubit: I need to be Advanced first`. Mesmo tier ou acima: `Cubit: I'm already Ultimate`. Dica do Module: `Requires an Advanced Cubit`. O nome do tier vem traduzido no `pt_br` |
@@ -65,6 +66,7 @@
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-11 23:10 | Registra a resposta 811. |
 | Marcelo Fabiano | 2026-11-11 22:01 | Registra as respostas 797 a 806 e 808 a 810, e a pendente 807. |
 | Marcelo Fabiano | 2026-11-10 10:17 | Registra as respostas 794 a 796. |
 | Marcelo Fabiano | 2026-11-07 23:42 | Recebe a pendente 425 da Fase 3 e acrescenta um ponteiro à 343. |

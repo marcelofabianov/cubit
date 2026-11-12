@@ -73,6 +73,13 @@ final class RobotInventory {
     }
   }
 
+  /** A bigger tier keeps every item in its slot, and a surplus from the config may now fit. */
+  void resize(int slots) {
+    SimpleContainer previous = container;
+    fill(allStacks(), slots);
+    previous.clearContent();
+  }
+
   RobotEnergySlot energySlot() {
     return energySlot;
   }

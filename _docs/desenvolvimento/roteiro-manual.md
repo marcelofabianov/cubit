@@ -279,7 +279,7 @@ Alerta e surpreso estão na seção Scanners.
 
 ## Colar e bateria
 
-Compare com `tier-base.png`, `tier-avancado.png`, `tier-elite.png`, `tier-ultimate.png` e `vista-costas.png`, em `_docs/imagens/conceito/png/`. Só o tier Base existe até a Fase 4, então os outros são testados por comando, e o robô usa os números do Base. A carga vai de 0 a 300.000 FE.
+Compare com `tier-base.png`, `tier-avancado.png`, `tier-elite.png`, `tier-ultimate.png` e `vista-costas.png`, em `_docs/imagens/conceito/png/`. Os comandos abaixo trocam o tier sem Module, só para ver o colar. O upgrade de verdade está em [Upgrade de tier](#upgrade-de-tier). A carga vai de 0 a 300.000 FE, a bateria do Base.
 
 | # | Faça | Espere |
 |---|---|---|
@@ -295,7 +295,7 @@ Compare com `tier-base.png`, `tier-avancado.png`, `tier-elite.png`, `tier-ultima
 | 10 | Coloque um segundo robô, que fica desligado, e olhe as costas dele no escuro | Mostra a carga dele, sem brilho |
 | 11 | Coloque um Cubit no Dock com energia, no escuro | O preenchimento brilha e sobe de nível enquanto ele carrega |
 | 12 | Veja o robô de longe, em volta, e com ele virando para você | Colar e bateria acompanham o corpo e o pescoço, sem falhas de desenho |
-| 13 | Olhe o item do Cubit e o `Damaged Cubit` | Os ícones continuam com o colar cinza |
+| 13 | Olhe o item do Cubit e o `Damaged Cubit` de um robô Base | Os ícones têm o colar cinza, como antes do upgrade de tier |
 | 14 | Rode `make server` | O servidor abre sem erro de classe de cliente |
 
 ## Texto de bateria crítica
@@ -390,6 +390,26 @@ Os valores são os padrões de [`tiers.md`](../tiers.md).
 | 11 | Conserte com a Toolbox e coloque | A cor e o nome voltam |
 | 12 | Saia e entre no mundo | A cor e o nome continuam |
 | 13 | Com outro player no servidor, use corante e etiqueta no Cubit | Nada muda, e nada é gasto. Coberto pelas GameTests, sem teste no jogo (pergunta 771) |
+
+## Upgrade de tier
+
+Compare os ícones com `modulo-avancado.png`, `modulo-elite.png` e `modulo-ultimate.png`, em `_docs/imagens/conceito/png/`. Os Modules ficam na aba do criativo enquanto as receitas estão pendentes (pergunta 807). Os números são os de [`tiers.md`](../tiers.md).
+
+| # | Faça | Espere |
+|---|---|---|
+| 1 | Abra a aba do Cubit no criativo | Os três Modules aparecem, com os nomes em azul, roxo e dourado |
+| 2 | Passe o mouse em cada Module | `Requires a Base Cubit`, `Requires an Advanced Cubit` e `Requires an Elite Cubit`, em cinza |
+| 3 | Em sobrevivência, com um Cubit Base ativo, clique com o Elite Module | Nada muda, o Module fica na mão, e aparece `Cubit: I need to be Advanced first` |
+| 4 | Clique com o Advanced Module | O Module é gasto, ele fica feliz com o bipe, aparece `Cubit: Upgraded to Advanced!`, e o colar e as faixas ficam azuis |
+| 5 | Abra o inventário dele | 36 slots, com os itens nos mesmos lugares, a vida atual igual e a vida máxima de 50, e a bateria com a mesma carga sobre 600 mil FE |
+| 6 | Clique de novo com o Advanced Module | Nada é gasto, e aparece `Cubit: I'm already Advanced` |
+| 7 | Ande com ele | Mais rápido que o Base |
+| 8 | Aplique o Elite Module num Cubit desligado e o Ultimate num Cubit no Dock | Os dois sobem de tier. Com a tela apagada, só o texto aparece, e no Dock ele continua carregando |
+| 9 | Recolha o Cubit Ultimate | O ícone tem o colar dourado, também pintado de outra cor |
+| 10 | Mate esse Cubit | O ícone do `Damaged Cubit` tem o colar dourado, e o conserto mantém o tier |
+| 11 | No criativo, aplique um Module | O Module não é gasto |
+| 12 | Com o jogo em português, repita os passos 2 a 6 | `Módulo Avançado`, `Exige um Cubit Base`, `Cubit: Preciso ser Avançado antes`, `Cubit: Evoluí para Avançado!` e `Cubit: Já sou Avançado` |
+| 13 | Com outro player no servidor, use um Module no Cubit | Nada acontece, sem texto, e o Module não é gasto. Coberto pelas GameTests, sem teste no jogo (pergunta 809) |
 
 ## Scanners
 
@@ -612,6 +632,7 @@ Na instância só com o mod, tire capturas com F2 do Cubit seguindo, da tela do 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-11 23:40 | Adiciona o upgrade de tier e atualiza o colar no ícone. |
 | Marcelo Fabiano | 2026-11-08 01:17 | Adiciona o teste da versão, com as instâncias no Prism, e troca o teste com outro player pelas GameTests. |
 | Marcelo Fabiano | 2026-11-08 01:05 | Confere a descrição traduzida na lista de mods. |
 | Marcelo Fabiano | 2026-11-08 00:11 | Usa o nome do bloco nos exemplos de minério. |
