@@ -13,6 +13,9 @@
 
 | # | Pergunta | Resposta |
 |---|---|---|
+| 814 | Qual chave SSH assina os commits, se a ed25519 dos commits anteriores não está acessível nesta máquina? | O `~/.ssh/id_rsa`, a mesma chave do remote pessoal, configurado só neste repositório. O desenvolvedor a cadastra como chave de assinatura no GitHub, para os commits aparecerem como Verified. Detalha a 813 |
+| 813 | Como assinar os commits da #144, que saíram com a chave GPG, se o `AGENTS.md` pede SSH? | Configurar a assinatura do repositório para seguir o padrão do projeto, com SSH, e reassinar os commits antes do push |
+| 812 | As receitas dos Modules entram no PR da #144? | Não: ficam para o próximo PR, com os materiais da pendente 807. O item 4 do `checklist.md` só é marcado depois delas |
 | 811 | Como ficam os Modules e os textos do upgrade em português? | Itens: `Módulo Avançado`, `Módulo Elite` e `Módulo Supremo`. Textos: `Cubit: Evoluí para Elite!`, `Cubit: Preciso ser Avançado antes` e `Cubit: Já sou Supremo`. Dica: `Exige um Cubit Avançado`. Segue os tiers já traduzidos no `pt_br` e a pergunta [733](fase-3-sentidos.md). Detalha a 808 |
 | 810 | Como representar o filtro "Ilimitado" do scanner no Ultimate, se a chave `ore_filter_slots` aceita de 1 a 64? | Com o padrão 64, o limite da chave, que na prática cobre todos os minérios das tags `c:ores`. O `tiers.md` passa a dizer 64, e o contrato do config não muda |
 | 809 | O que acontece quando quem não é dono aplica um Module, já que o aviso para outro player citado na 802 não existe? | Nada acontece, como na pintura e na etiqueta: sem texto, e o Module não é consumido. Corrige a [802](#respondidas) nesse ponto, pela regra 48 |
@@ -66,6 +69,7 @@
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-11 23:55 | Registra as respostas 812 a 814. |
 | Marcelo Fabiano | 2026-11-11 23:10 | Registra a resposta 811. |
 | Marcelo Fabiano | 2026-11-11 22:01 | Registra as respostas 797 a 806 e 808 a 810, e a pendente 807. |
 | Marcelo Fabiano | 2026-11-10 10:17 | Registra as respostas 794 a 796. |
