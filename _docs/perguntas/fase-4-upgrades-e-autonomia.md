@@ -12,6 +12,21 @@
 
 | # | Pergunta | Resposta |
 |---|---|---|
+| 834 | Quais chaves do config o choque e os modos de defesa ganham? | Em cada `[general_robot.{tier}]`: `defense_modes`, uma lista com `peaceful`, `retaliate` e `aggressive`; `shock_damage`; `shock_range_blocks`; `shock_interval_ticks`; `shock_cost`; e `shock_hits_all_in_range`, que só é `true` no Ultimate. O Base vem só com `peaceful` e o choque zerado. Em `[general]`: `retaliate_memory_ticks`, com 600, os 30 s da 832 |
+| 833 | Quais textos a aba Defense usa? | Peaceful / Pacífico: `Never attacks` / `Nunca ataca`. Retaliate / Contra-atacar: `Shocks whoever hurts you or the Cubit` / `Dá choque em quem ferir você ou o Cubit`. Aggressive / Agressivo: `Shocks hostile mobs in range` / `Dá choque em mobs hostis no alcance`. Bloqueado: `Unlocks at Advanced` / `Libera no Avançado`. Morte: `X was zapped by Cubit` / `X levou um choque de Cubit`. Os nomes dos modos seguem o glossário |
+| 832 | Por quanto tempo o Contra-atacar lembra de quem atacou o Cubit ou o dono? | O último mob que feriu o Cubit ou o dono vira alvo por cerca de 30 s, no config, ou até morrer ou mudar de dimensão. Um novo ataque renova o tempo, e ele só leva o choque quando estiver no alcance |
+| 831 | Quando um choque mata um mob, quem fica com o abate e o que diz a mensagem de morte? | Como num lobo domesticado: o abate conta como do dono, e o mob solta XP e os itens que só caem por player. Um tipo de dano próprio, `cubit:shock`, dá a mensagem `X was zapped by Cubit` |
+| 830 | Qual é o modo de defesa inicial, e o que o item guarda? | Cubit novo e saves antigos começam em Pacífico. O modo fica num campo opcional de `cubit:robot_state`, e recolher, morrer, consertar e o upgrade mantêm a escolha, como a chave da lanterna |
+| 829 | O que a aba de defesa mostra? | Um cabeçalho como o da Settings, com `Defense`, o tier e a bateria. Uma lista com Peaceful, Retaliate e Aggressive, cada um com uma descrição curta e o atual marcado, e os bloqueados apagados com `Unlocks at Advanced`. Embaixo, os números do choque do tier: dano, alcance, intervalo e custo |
+| 828 | Qual ícone a aba de defesa usa? | Um escudo, e a aba se chama Defense. A recomendação era um raio. Detalha a 824 |
+| 827 | Como o choque aparece no mundo, além do som `shock_attack.ogg`? | Com faíscas elétricas do próprio jogo numa linha do Cubit até cada alvo, por um instante, vistas por todos por perto |
+| 826 | O que significa o choque "em área" do Ultimate? | Um choque atinge de uma vez todos os alvos válidos do modo dentro dos 8 blocos, com o custo de um choque só. Os outros tiers atingem um alvo, o mais próximo |
+| 825 | Quando e como o Cubit ataca? | Só ativo, seguindo ou parado, nunca desligado nem hibernando. Ele continua seguindo, sem perseguir, e dá o choque em quem estiver no alcance do tier, com linha de visão, no intervalo do tier. Sem carga para o custo, não dá o choque |
+| 824 | Como o dono escolhe o modo de defesa na tela do Cubit? | "novo icone de aba e tela": uma terceira aba, com ícone e tela próprios, em vez de uma seção na aba Settings. A recomendação era uma seção com três botões na Settings. Os detalhes da aba seguem na rodada |
+| 823 | O alinhamento da entrega do choque com os modos de defesa tem algo a acrescentar? | Nada a acrescentar |
+| 822 | Como dividir os itens 5 e 6 da Fase 4, se só com o Pacífico o Cubit nunca dispara o choque? | Juntar os dois numa entrega: o choque, o modo de defesa guardado no item e os três modos, Pacífico no Base, Contra-atacar a partir do Advanced e Agressivo a partir do Elite, escolhidos na aba Settings. Os itens 5 e 6 do `checklist.md` são marcados juntos. Detalha a 796 |
+| 821 | O "Estado atual" do `AGENTS.md` pode ser atualizado, com a Fase 4 começada e as confirmações da `0.1.0` feitas? | Sim, autorizado pelo desenvolvedor: a etapa atual cita o item 4 nos PRs #145 e #147 e a resposta 820, e os próximos são o item 5, o choque com o modo Pacífico, os itens 6 a 8 e o envio ao CurseForge, ainda pendente |
+| 820 | Como foram os testes manuais na instância só com o mod? | "testes feitos, tudo ok", executados pelo desenvolvedor no Prism, na instância `Cubit - Teste develop (d8afab5)`, com o jar da `develop` em `d8afab5`, o GeckoLib e o LambDynamicLights, e o Jade depois, sem detalhar cada passo. Cobre a seção "Upgrade de tier", as receitas, inclusive as dos Modules, e as confirmações que saíram da `0.1.0` pela pergunta [776](fase-3-sentidos.md): as receitas no livro, o Dock em L espelhado, o `/cubit reset` com chunk descarregado e a luz de entidades do LambDynamicLights no padrão, cujo valor não foi anotado |
 | 819 | O alinhamento do PR das receitas tem algo a acrescentar? As três receitas em datagen, aparecendo no livro ao ter um Cubit, com uma GameTest de cada uma e o roteiro manual atualizado | Nada a acrescentar. O item 4 do `checklist.md` é marcado no PR seguinte ao merge, conforme a regra do próprio checklist |
 | 818 | Como os itens dos Modules ficam na grade 3×3? | O material principal nos 4 cantos, o secundário nos 4 lados e o núcleo no centro, no Advanced e no Elite. No Ultimate: diamantes nos cantos, netherite à esquerda e à direita, a estrela do Nether no centro, o bloco de redstone em cima e o meio de baixo vazio, como os conectores do cartucho |
 | 817 | Qual item roxo entra no Elite Module no lugar da ametista? | O corante roxo |
@@ -74,6 +89,7 @@
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-12 09:40 | Registra as respostas 820 a 834. |
 | Marcelo Fabiano | 2026-11-12 08:30 | Responde a pendente 807 e registra as respostas 817 a 819. |
 | Marcelo Fabiano | 2026-11-12 00:10 | Registra as respostas 815 e 816. |
 | Marcelo Fabiano | 2026-11-11 23:55 | Registra as respostas 812 a 814. |

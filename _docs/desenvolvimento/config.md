@@ -57,6 +57,7 @@ As chaves ficam em `snake_case`. As de um tier ficam em `[general_robot.{tier}]`
 | `general` | `redstone_block_energy` | Energia de 1 bloco de redstone | 1 a 2147483647 |
 | `general` | `repair_health_percent` | Vida ao sair do conserto | 1 a 100 |
 | `general` | `void_rescue_retry_ticks` | Intervalo para tentar de novo o resgate no vazio | 1 a 1200 |
+| `general` | `retaliate_memory_ticks` | Tempo em que o Contra-atacar lembra de quem feriu o Cubit ou o dono | 1 a 72000 |
 | `general_robot.base` | `battery_capacity` | Bateria | 1 a 2147483647 |
 | `general_robot.base` | `moving_consumption_per_tick` | Andar | 0 a 2147483647 |
 | `general_robot.base` | `full_inventory_extra_per_tick` | Extra ao andar com o inventário cheio | 0 a 2147483647 |
@@ -79,6 +80,12 @@ As chaves ficam em `snake_case`. As de um tier ficam em `[general_robot.{tier}]`
 | `general_robot.base` | `max_health` | Vida | 1 a 1024 |
 | `general_robot.base` | `call_radius_blocks` | Raio do retorno automático e da chamada pelo Dock | 1 a 128 |
 | `general_robot.base` | `speed_multiplier` | Velocidade | 0,1 a 4 |
+| `general_robot.base` | `defense_modes` | Modos de defesa: `peaceful`, `retaliate` e `aggressive` | Lista com esses nomes |
+| `general_robot.base` | `shock_damage` | Choque (dano) | 0 a 1024 |
+| `general_robot.base` | `shock_range_blocks` | Choque (alcance) | 0 a 16 |
+| `general_robot.base` | `shock_interval_ticks` | Choque (intervalo) | 1 a 72000 |
+| `general_robot.base` | `shock_cost` | Custo do choque | 0 a 2147483647 |
+| `general_robot.base` | `shock_hits_all_in_range` | Alvos por choque: todos no alcance, ou só o mais próximo | `true` ou `false` |
 
 ## Por que esses limites
 
@@ -104,6 +111,7 @@ O mod não cai por causa do config (regra 17 do `AGENTS.md`):
 | Chave ausente ou valor que não é número | O NeoForge volta ao padrão da chave e registra no log |
 | `lamp_off_from_light` menor que `lamp_on_below_light` | A lanterna apaga a partir do maior dos dois, e o mod registra no log uma vez |
 | Tag inválida em `rare_ore_tags` | O mod ignora a tag e registra no log uma vez |
+| Nome inválido em `defense_modes` | O mod ignora o nome e registra no log uma vez. O Pacífico vale sempre, mesmo fora da lista |
 | Tier sem seção no config | O `TierCatalog` usa o tier Base do robô e registra no log uma vez |
 | Tipo de robô sem seção | Erro de programação, então o `TierCatalog` lança uma exceção |
 
@@ -111,6 +119,7 @@ O mod não cai por causa do config (regra 17 do `AGENTS.md`):
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-12 10:30 | Adiciona as chaves do choque e dos modos de defesa (pergunta 834). |
 | Marcelo Fabiano | 2026-11-11 22:01 | Adiciona as seções dos tiers Advanced, Elite e Ultimate. |
 | Marcelo Fabiano | 2026-11-07 23:41 | Corrige os raios do Ultimate. |
 | Marcelo Fabiano | 2026-11-07 20:04 | Adiciona o intervalo das falas da redstone. |
