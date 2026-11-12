@@ -4,7 +4,6 @@
 
 | # | Pergunta | Recomendação |
 |---|---|---|
-| 807 | Quais são os materiais das receitas dos três Modules? | O desenvolvedor vai enviar, conforme a pergunta 799. Proposta do agente, provisória: Advanced com 4 lingotes de ouro, 4 quartzos e um comparador no centro; Elite com 4 diamantes, 4 fragmentos de ametista e um bloco de redstone no centro; Ultimate com 2 lingotes de netherite, 1 estrela do Nether, 4 diamantes e um bloco de redstone |
 | 425 | Onde o player aciona as chaves que faltam da pergunta 424, qual é o estado inicial delas, e o que "Hibernar" da chave geral faz fora do Dock? | Já respondido: a lanterna (467 e 468), os scanners (549) e as falas (582), na aba Settings da tela do Cubit (683), e a interface de configuração entra na Fase 4 (717). Falta: a chave geral, com ligar, desligar e hibernar, e as chaves dos recursos das Fases 4 e 5, como o painel solar, o ímã, a coleta, a descarga, o retorno e o local de morte. Recomendação: na aba Settings, e também no Cubit Remote, todas começando ligadas e guardadas no item, como na pergunta 343. Hibernar fora do Dock segue a pergunta 198, prevista para a Fase 5, então precisa de decisão antes de antecipar. Veio da Fase 3 pela pergunta 721 |
 | 423 | Qual é o modo padrão do filtro de coleta, o que vale com a lista vazia, e o limite de itens de `tiers.md` vale para os dois modos? | Lista negra por padrão, em que a lista vazia pega qualquer item. Na lista branca, a lista vazia não pega nada. O mesmo limite vale para os dois modos. Vem da pergunta 422 |
 | 577 | Entra um modo de defesa "só o alvo", em que o Cubit ignora os outros inimigos e ataca só o último mob que o dono atacou, trocando de alvo a cada novo ataque, ou o mob em que o dono mira e clica à distância? | A ideia entra, conforme a pergunta 578, e os detalhes ficam para refinar na Fase 4. Recomendação: um quarto modo, a partir do tier Advanced, com a mira pelo Cubit Remote, porque um clique de mão vazia no ar não chega ao servidor. A regra de nunca atacar mobs pacíficos, players e o dono continua valendo |
@@ -13,6 +12,10 @@
 
 | # | Pergunta | Resposta |
 |---|---|---|
+| 819 | O alinhamento do PR das receitas tem algo a acrescentar? As três receitas em datagen, aparecendo no livro ao ter um Cubit, com uma GameTest de cada uma e o roteiro manual atualizado | Nada a acrescentar. O item 4 do `checklist.md` é marcado no PR seguinte ao merge, conforme a regra do próprio checklist |
+| 818 | Como os itens dos Modules ficam na grade 3×3? | O material principal nos 4 cantos, o secundário nos 4 lados e o núcleo no centro, no Advanced e no Elite. No Ultimate: diamantes nos cantos, netherite à esquerda e à direita, a estrela do Nether no centro, o bloco de redstone em cima e o meio de baixo vazio, como os conectores do cartucho |
+| 817 | Qual item roxo entra no Elite Module no lugar da ametista? | O corante roxo |
+| 807 | Quais são os materiais das receitas dos três Modules? | Advanced: 4 lingotes de ouro, 4 quartzos e um comparador. Elite: 4 diamantes, 4 corantes roxos e um bloco de redstone, porque a ametista deu lugar a outro item que lembra a cor do tier (pergunta 817). Ultimate: 2 lingotes de netherite, 1 estrela do Nether, 4 diamantes e um bloco de redstone. A grade está na 818. Fecha a 799 |
 | 816 | O push da #144 espera o GitHub listar o `id_rsa` como chave de assinatura? | Não: o push segue, e os commits podem aparecer como Unverified até a chave de assinatura estar cadastrada |
 | 815 | O remote `git@github.com:`, fora do padrão do `AGENTS.md`, pode ser trocado antes do push? | Sim, para `git@github.com-personal:marcelofabianov/cubit.git`, só neste repositório |
 | 814 | Qual chave SSH assina os commits, se a ed25519 dos commits anteriores não está acessível nesta máquina? | O `~/.ssh/id_rsa`, a mesma chave do remote pessoal, configurado só neste repositório. O desenvolvedor a cadastra como chave de assinatura no GitHub, para os commits aparecerem como Verified. Detalha a 813 |
@@ -71,6 +74,7 @@
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-12 08:30 | Responde a pendente 807 e registra as respostas 817 a 819. |
 | Marcelo Fabiano | 2026-11-12 00:10 | Registra as respostas 815 e 816. |
 | Marcelo Fabiano | 2026-11-11 23:55 | Registra as respostas 812 a 814. |
 | Marcelo Fabiano | 2026-11-11 23:10 | Registra a resposta 811. |
