@@ -8,6 +8,11 @@ Não há perguntas pendentes nesta fase.
 
 | # | Pergunta | Resposta |
 |---|---|---|
+| 899 | Como foi o teste no `make client` das abas atuais, depois da extração, e da aba Behavior? | "testes feitos, tudo ok", executados pelo desenvolvedor no `make client`, na branch `feature/162-magnet-and-pickup`, sem detalhar cada passo. Cobre as abas Inventory, Settings e Defense depois da extração e a seção "Coleta e ímã" do roteiro manual. O teste com o jar numa instância só com o mod fica para a release (regra 35) |
+| 898 | Na aba Behavior, o título Functions não cabe com a grade de 3 linhas e o inventário do player. O cabeçalho vai até y=17, as chaves até 54, o título do filtro até 67, a grade de 70 a 124, e o rótulo do inventário fica em 128. Como fica? | Sem o título Functions: as duas chaves começam logo abaixo do cabeçalho, e o título `Pickup filter` continua, com o botão do modo à direita. Pela regra 48, muda a `telas.md`. Confirma a recomendação |
+| 897 | Quem faz o ícone de funil da aba Behavior, que não existe em `screen_sprites.png`? | O agente desenha um funil de 16×16 em pixel art, nas cores e no traço do baú, da engrenagem e do escudo, e o acrescenta à folha com um script. O desenvolvedor confere no `make client` e pode trocar depois. Confirma a recomendação |
+| 896 | Como abrir espaço para a aba Behavior, se o `RobotMenu` tem 391 linhas e o `RobotScreen`, 400, o máximo? | Extraindo sem mudar o comportamento: a montagem dos slots e a visibilidade por aba vão do `RobotMenu` para uma `RobotMenuSlots`, e as abas, do `RobotScreen` para uma `RobotScreenTabs`, cada uma num commit `refactor:` próprio, antes da feature, com as GameTests passando. Confirma a recomendação |
+| 895 | Como o filtro de coleta chega à tela do cliente? | Os slots fantasma são slots do menu, e o jogo sincroniza o item de cada um. A tag de cada slot vai como um número em `RobotScreenValues`, a posição dela na lista ordenada de tags do item. O clique é o do próprio jogo, interceptado pelo `RobotMenu`, e o servidor confere o dono, o tier e o limite, sem pacote novo. Confirma a recomendação |
 | 894 | Com a coleta, o excedente de um config reduzido, que cai aos pés do Cubit sem atraso, é recolhido de volta quando cabe numa pilha. Como deve ficar? | Pode recolher o que cabe: o que cabe numa pilha não é excedente, e nada se perde nem duplica. Os GameTests do inventário passam a conferir o total, do inventário e do chão, e o tamanho dos slots. Pela regra 48, completa a regra do config reduzido de `inventario.md`. Confirma a recomendação |
 | 893 | Como o player põe um item no cursor para o slot fantasma, se fora da aba Inventory os slots dele ficam escondidos (`RobotMenu`)? | Na aba Behavior, o inventário e a hotbar do player continuam visíveis e usáveis. Só o inventário do Cubit e o slot de energia somem, e o painel ocupa o lugar deles, com o cabeçalho, as duas chaves, o botão do modo e a grade de até 3 linhas. Se o layout não couber, o agente para e mostra a evidência, como na pergunta 861. Completa a resposta 880, pela regra 48 |
 | 892 | O que acontece com um filtro de coleta salvo inválido ao carregar (regra 17)? | Um item ou uma tag que não existe é ignorado e vai para o log. As entradas acima do limite do tier e as tags num tier sem tags são ignoradas na coleta, mas ficam guardadas, sem apagar nada, e voltam a valer se o config permitir. A aba mostra só as que valem. Confirma a recomendação |
@@ -148,7 +153,7 @@ Não há perguntas pendentes nesta fase.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
-| Marcelo Fabiano | 2026-11-12 21:45 | Registra as respostas 874 a 894 e fecha a pendente 423. |
+| Marcelo Fabiano | 2026-11-12 21:45 | Registra as respostas 874 a 899 e fecha a pendente 423. |
 | Marcelo Fabiano | 2026-11-12 21:30 | Registra as respostas 870 a 873. |
 | Marcelo Fabiano | 2026-11-12 20:30 | Registra as respostas 867 a 869. |
 | Marcelo Fabiano | 2026-11-12 19:40 | Registra a resposta 866. |

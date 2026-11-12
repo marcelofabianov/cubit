@@ -93,18 +93,19 @@ Entra com a coleta e o ímã, no item 9 da Fase 4.1 (perguntas 878 a 888). As re
 
 - **Slots:** o inventário e a hotbar do player continuam visíveis e usáveis, para o player pegar o item do filtro. Só o inventário do Cubit e o slot de energia somem, e o painel ocupa o lugar deles (pergunta 893).
 - **Cabeçalho:** `Behavior` / `Comportamento`, a etiqueta do tier e `Battery 71%`, como na Settings.
-- **Functions:** as duas chaves, com ON e OFF, nas linhas de 18 px da Settings.
+- **Chaves:** as duas, com ON e OFF, nas linhas de 18 px da Settings, logo abaixo do cabeçalho e sem o título Functions, para a grade de 3 linhas caber acima do inventário do player (pergunta 898).
 
 | Chave | Descrição |
 |---|---|
 | `Pickup` / `Coleta` | `Picks up items it touches` / `Pega os itens que toca` |
 | `Magnet` / `Ímã` | `Pulls items within 3 blocks · 20 FE per item` / `Puxa itens a até 3 blocos · 20 FE por item`, com os números do tier. No Base, apagada, com `Unlocks at Advanced`, como os modos bloqueados da Defense (pergunta 881). Com a coleta desligada, fica apagada, mantendo o valor |
 
-- **Pickup filter** / **Filtro de coleta:** o botão `Blacklist` / `Lista negra` ou `Whitelist` / `Lista branca`, que alterna o modo, e a grade de slots fantasma, com os slots do tier, de 3, 9, 18 ou 27, em linhas de 9 (pergunta 880).
+- **Pickup filter** / **Filtro de coleta:** o título, com o botão `Blacklist` / `Lista negra` ou `Whitelist` / `Lista branca`, que alterna o modo, e a grade de slots fantasma, com os slots do tier, de 3, 9, 18 ou 27, em linhas de 9 (pergunta 880).
   - **Clique com um item no cursor:** copia o tipo do item para o slot, sem consumi-lo. O item no cursor não muda.
   - **Clique com o cursor vazio:** limpa o slot.
   - **Clique direito num slot preenchido, no Elite e no Ultimate:** alterna do item para cada tag dele e volta ao item. O slot com tag ganha uma marca, e a dica mostra `Tag: #c:ores` (pergunta 882). No Base e no Advanced, não faz nada.
-- **Validação:** as chaves, o modo e os slots usam o clique de botão de menu do jogo. O servidor confere o dono, o tier, o limite e se a tag pertence ao item, sem pacote novo (pergunta 683).
+- **Validação:** as chaves e o modo usam o clique de botão de menu do jogo, e os slots fantasma, o clique de slot do próprio jogo, interceptado pelo `RobotMenu`. O servidor confere o dono, o tier, o limite e se a tag pertence ao item, sem pacote novo (perguntas 683 e 895).
+- **Sincronia:** o jogo sincroniza o item de cada slot fantasma, e a tag de cada um vai em `RobotScreenValues`, como a posição dela na lista ordenada de tags do item (pergunta 895).
 
 ## Tela do Induction Dock
 
@@ -221,7 +222,7 @@ Pergunta 691.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
-| Marcelo Fabiano | 2026-11-12 21:45 | Adiciona a aba Behavior, com a coleta, o ímã e o filtro de coleta. |
+| Marcelo Fabiano | 2026-11-12 21:45 | Adiciona a aba Behavior, com a coleta, o ímã, o filtro de coleta e a sincronia dos slots fantasma. |
 | Marcelo Fabiano | 2026-11-12 17:20 | Adiciona a chave do painel solar e o botão Power à aba Settings. |
 | Marcelo Fabiano | 2026-11-12 15:10 | Adiciona o modo Focus à aba Defense. |
 | Marcelo Fabiano | 2026-11-12 13:10 | Adiciona a rolagem do inventário nos tiers altos. |
