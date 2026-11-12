@@ -4,6 +4,7 @@ import com.mojang.logging.LogUtils;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import io.github.marcelofabianov.cubit.domain.energy.Energy;
+import io.github.marcelofabianov.cubit.domain.robot.DefenseMode;
 import io.github.marcelofabianov.cubit.domain.robot.OreFilter;
 import io.github.marcelofabianov.cubit.domain.robot.RobotColor;
 import io.github.marcelofabianov.cubit.domain.robot.RobotState;
@@ -30,6 +31,10 @@ public final class RobotStateComponent {
   private static final String ORE_FILTER_FIELD = "ore_filter";
   private static final String CHATTER_FIELD = "chatter_enabled";
   private static final boolean CHATTER_DEFAULT = true;
+  private static final String DEFENSE_FIELD = "defense_mode";
+  private static final String SOLAR_FIELD = "solar_enabled";
+  private static final boolean SOLAR_DEFAULT = true;
+  private static final String UNKNOWN_DEFENSE_MESSAGE = "Unknown defense mode {}. Using peaceful.";
   private static final String UNKNOWN_COLOR_MESSAGE = "Unknown robot color {}. Using white.";
   private static final String UNKNOWN_TIER_MESSAGE = "Unknown robot tier {}. Using the base tier.";
 
@@ -37,6 +42,8 @@ public final class RobotStateComponent {
       Codec.STRING.xmap(RobotStateComponent::tierFromKey, RobotTier::key);
   private static final Codec<RobotColor> COLOR_CODEC =
       Codec.STRING.xmap(RobotStateComponent::colorFromKey, RobotColor::key);
+  private static final Codec<DefenseMode> DEFENSE_CODEC =
+      Codec.STRING.xmap(RobotStateComponent::defenseFromKey, DefenseMode::key);
   private static final Codec<Energy> ENERGY_CODEC =
       Codec.LONG.xmap(SavedEnergy::of, Energy::amount);
   private static final Codec<Float> HEALTH_CODEC =
@@ -66,7 +73,13 @@ public final class RobotStateComponent {
                       .forGetter(RobotState::oreFilter),
                   Codec.BOOL
                       .optionalFieldOf(CHATTER_FIELD, CHATTER_DEFAULT)
-                      .forGetter(RobotState::chatterOn))
+                      .forGetter(RobotState::chatterOn),
+                  DEFENSE_CODEC
+                      .optionalFieldOf(DEFENSE_FIELD, DefenseMode.INITIAL)
+                      .forGetter(RobotState::defenseMode),
+                  Codec.BOOL
+                      .optionalFieldOf(SOLAR_FIELD, SOLAR_DEFAULT)
+                      .forGetter(RobotState::solarOn))
               .apply(instance, RobotState::new));
 
   public static final StreamCodec<ByteBuf, RobotState> STREAM_CODEC =
@@ -87,6 +100,14 @@ public final class RobotStateComponent {
         .orElseGet(() -> {
           LOGGER.warn(UNKNOWN_COLOR_MESSAGE, key);
           return RobotColor.WHITE;
+        });
+  }
+
+  private static DefenseMode defenseFromKey(String key) {
+    return DefenseMode.fromKey(key)
+        .orElseGet(() -> {
+          LOGGER.warn(UNKNOWN_DEFENSE_MESSAGE, key);
+          return DefenseMode.INITIAL;
         });
   }
 

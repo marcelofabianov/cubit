@@ -34,7 +34,7 @@ O que está pronto e o que falta em cada fase do projeto. As fases estão no [`R
 
 15. [x] Atualizar o "Próximos" no `AGENTS.md`
 
-## Fase 3: Sentidos (atual)
+## Fase 3: Sentidos (encerrada)
 
 A ordem é a da numeração (perguntas 356 e 365), com a lanterna antes do painel solar (pergunta 458) e o item 17 antes do 16 (pergunta 504). Sons, intervalo, expressões, colar e textos entram em partes, e um item só é marcado quando estiver completo na Fase 3.
 
@@ -76,11 +76,11 @@ Sai só ao terminar todos os itens da Fase 3 (pergunta 337).
 6. [x] Outro player: o passo 9 do Dock, o 6 do `/cubit reset` e o 13 da cor e do nome ficam cobertos pelas GameTests, sem teste no jogo (perguntas 770 a 772)
 7. [x] Confirmações no jogo: saíram da `0.1.0` e ficam para depois dela, com a instância só com o mod: quando as receitas aparecem no livro, a receita do Dock em L espelhado (pergunta 351), o `/cubit reset` com chunk descarregado e o padrão da opção de luz de entidades do LambDynamicLights (perguntas 461, 719 e 776)
 8. [x] Conferir os termos das ferramentas de IA usadas nos sons antes de publicar (perguntas 338, 719 e 777)
-9. [ ] Publicar: `homolog`, `release/0.1.0`, `main`, tag, release no GitHub e envio ao Modrinth e ao CurseForge (perguntas 744 e 778)
+9. [x] Publicar: `homolog`, `release/0.1.0`, `main`, tag, release no GitHub e envio ao Modrinth. O envio ao CurseForge fica para depois da `0.1.0` (perguntas 744, 778, 785 e 787)
 
 ## Fase 4: Upgrades e autonomia
 
-Dividida em três partes, na ordem em que dependem uma da outra (perguntas 722 a 726). "Fase 4" nos documentos vale para as três.
+Dividida em três partes, na ordem em que dependem uma da outra (perguntas 722 a 726, reorganizadas pelas 794 a 796). "Fase 4" nos documentos vale para as três.
 
 ### Já existe
 
@@ -88,23 +88,23 @@ Dividida em três partes, na ordem em que dependem uma da outra (perguntas 722 a
 2. [x] Decisões do modo área, do "parar" e do que o item guarda (perguntas 340 a 343)
 3. [x] Som e expressão do ataque definidos (perguntas 316 e 347)
 
-### Fase 4: Power Bank, ímã e defesa
+### Fase 4: Tier e ataque
 
-4. [ ] Power Bank, inclusive no Dock e na grade de craft (issue #51), com a receita dela
-5. [ ] Ímã e coleta, com as chaves deles e o filtro em lista branca e lista negra (perguntas 422 a 424), e o custo do ímã
-6. [ ] Choque e modo Pacífico, o único do tier Base (pergunta 722)
-7. [ ] Interface de configuração na aba Settings: chave geral e chave do painel solar (perguntas 717 e 425)
+4. [x] Tiers Advanced, Elite e Ultimate, com config, módulos e as receitas deles (PRs #145 e #147)
+5. [x] Choque e modo Pacífico, o único do tier Base (perguntas 722 e 796), na mesma entrega do item 6 (pergunta 822, PR #149)
+6. [x] Modos Contra-atacar e Agressivo (PR #149)
+7. [x] Modo só o alvo, com o último mob atacado (perguntas 577, 578 e 795), como o modo Focus (PR #151)
+8. [x] Interface de configuração na aba Settings: chave geral e chave do painel solar (perguntas 717 e 425, PR #153)
 
-### Fase 4.1: Tiers
+### Fase 4.1: Itens, filtros, carregamento e mais
 
-8. [ ] Tiers Advanced, Elite e Ultimate, com config, módulos e as receitas deles
-9. [ ] Modos Contra-atacar e Agressivo
-10. [ ] Slots de tochas, fornalha e carregador de ferramentas, com o Cubit colocando tochas e o custo delas (pergunta 724)
+9. [ ] Ímã e coleta, com as chaves deles e o filtro em lista branca e lista negra (perguntas 422 a 424), e o custo do ímã
+10. [ ] Power Bank, inclusive no Dock e na grade de craft (issue #51), com a receita dela
+11. [ ] Slots de tochas, fornalha e carregador de ferramentas, com o Cubit colocando tochas e o custo delas (pergunta 724)
 
-### Fase 4.2: Controle e autonomia
+### Fase 4.2: Remote, área e retorno
 
-11. [ ] Cubit Remote: comandos, localizar e marcar área, com a receita dele
-12. [ ] Modo só o alvo, com o último mob atacado e a mira pelo controle (perguntas 577, 578 e 726)
+12. [ ] Cubit Remote: comandos, localizar e marcar área, com a receita dele e a mira do modo só o alvo (perguntas 726 e 795)
 13. [ ] Modo área, com a altura máxima a definir
 14. [ ] Descarga em baú marcado, com a chave dela
 15. [ ] Retorno automático, com a chave dele

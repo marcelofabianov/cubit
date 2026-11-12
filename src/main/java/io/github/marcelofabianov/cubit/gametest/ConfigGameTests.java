@@ -11,8 +11,10 @@ import io.github.marcelofabianov.cubit.domain.energy.SolarOutput;
 import io.github.marcelofabianov.cubit.domain.robot.RobotType;
 import io.github.marcelofabianov.cubit.domain.tier.RobotTier;
 import io.github.marcelofabianov.cubit.domain.tier.ScannerSpec;
+import io.github.marcelofabianov.cubit.domain.tier.ShockSpec;
 import io.github.marcelofabianov.cubit.domain.tier.TierSpec;
 import java.util.Map;
+import java.util.Set;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.neoforged.neoforge.gametest.GameTestHolder;
@@ -147,6 +149,10 @@ public final class ConfigGameTests {
   private static final long ORE_SCAN_COST = 50;
   private static final long MOB_SCAN_COST = 50;
   private static final int ORE_FILTER_SLOTS = 1;
+
+  /** The Base has no shock, so its interval is only the default of the key. */
+  private static final int BASE_SHOCK_TICKS = 60;
+
   private static final TierSpec BASE_SPEC =
       new TierSpec(
           new Energy(BATTERY),
@@ -171,8 +177,25 @@ public final class ConfigGameTests {
               MOB_SCAN_TICKS,
               new Energy(ORE_SCAN_COST),
               new Energy(MOB_SCAN_COST),
-              ORE_FILTER_SLOTS));
+              ORE_FILTER_SLOTS),
+          new ShockSpec(0, 0, BASE_SHOCK_TICKS, Energy.ZERO, false, Set.of()));
   private static final String WRONG_SPEC = "Wrong tier numbers";
+  private static final String ULTIMATE_SPEED_KEY = "general_robot.ultimate.speed_multiplier";
+  private static final double ULTIMATE_SPEED_MULTIPLIER = 2.0;
+  private static final int ADVANCED_HEALTH = 50;
+  private static final int ELITE_SLOTS = 45;
+  private static final int ULTIMATE_BATTERY = 8_000_000;
+  private static final int ULTIMATE_ORE_FILTER_SLOTS = 64;
+  private static final String ADVANCED_HEALTH_KEY = "general_robot.advanced.max_health";
+  private static final String ELITE_SLOTS_KEY = "general_robot.elite.inventory_slots";
+  private static final String ULTIMATE_BATTERY_KEY = "general_robot.ultimate.battery_capacity";
+  private static final String ULTIMATE_FILTER_KEY = "general_robot.ultimate.ore_filter_slots";
+  private static final Map<String, Integer> UPGRADED_TIER_DEFAULTS =
+      Map.of(
+          ADVANCED_HEALTH_KEY, ADVANCED_HEALTH,
+          ELITE_SLOTS_KEY, ELITE_SLOTS,
+          ULTIMATE_BATTERY_KEY, ULTIMATE_BATTERY,
+          ULTIMATE_FILTER_KEY, ULTIMATE_ORE_FILTER_SLOTS);
   private static final String WRONG_CHARGE = "Wrong initial charge";
   private static final String WRONG_KEY = "Wrong value for a config key";
   private static final String UNKNOWN_TYPE_ACCEPTED = "A robot type without config was accepted";
@@ -192,10 +215,13 @@ public final class ConfigGameTests {
   }
 
   @GameTest(template = EMPTY_TEMPLATE)
-  public static void tierWithoutConfigUsesTheBaseTier(GameTestHelper helper) {
-    TierSpec spec = CubitMod.CONFIG.tierCatalog().spec(GENERAL_ROBOT, RobotTier.ULTIMATE);
+  public static void everyTierHasItsOwnSection(GameTestHelper helper) {
+    CommentedConfig file = correctedFile();
 
-    helper.assertValueEqual(spec, BASE_SPEC, WRONG_SPEC);
+    UPGRADED_TIER_DEFAULTS.forEach(
+        (key, value) -> helper.assertValueEqual(file.<Integer>get(key), value, WRONG_KEY));
+    helper.assertValueEqual(
+        file.<Double>get(ULTIMATE_SPEED_KEY), ULTIMATE_SPEED_MULTIPLIER, WRONG_KEY);
     helper.succeed();
   }
 

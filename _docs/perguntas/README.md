@@ -19,12 +19,32 @@ Este diretório concentra as perguntas do projeto, com um arquivo por fase. A pe
 - **Pendentes:** têm uma recomendação, que só vale depois da resposta do desenvolvedor.
 - **Respondidas:** a resposta é registrada aqui, e o documento do assunto é atualizado junto.
 - **Fonte da verdade:** as respostas prevalecem sobre os outros documentos.
-- **Próximo número livre:** 785.
+- **Próximo número livre:** 870.
 
 ## Histórico de modificações
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-12 20:30 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-12 19:40 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-12 19:10 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-12 18:40 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-12 16:50 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-12 16:20 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-12 14:40 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-12 14:10 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-12 13:10 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-12 12:40 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-12 12:05 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-12 11:40 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-12 09:40 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-12 08:30 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-12 00:10 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-11 23:55 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-11 23:10 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-11 22:01 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-10 10:17 | Atualiza o próximo número livre. |
+| Marcelo Fabiano | 2026-11-10 09:53 | Atualiza o próximo número livre. |
 | Marcelo Fabiano | 2026-11-08 01:48 | Atualiza o próximo número livre. |
 | Marcelo Fabiano | 2026-11-08 01:06 | Atualiza o próximo número livre. |
 | Marcelo Fabiano | 2026-11-08 00:50 | Atualiza o próximo número livre. |

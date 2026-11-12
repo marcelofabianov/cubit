@@ -51,7 +51,7 @@ public final class RobotChatter implements RobotSwitch {
 
   /** The robot comments on what its owner killed. The draw is here, so a test can fix it. */
   public static void onOwnerKilled(ServerPlayer owner, Animal animal) {
-    RobotEntity.follower(owner)
+    RobotFollowing.follower(owner)
         .map(id -> owner.serverLevel().getEntity(id))
         .filter(RobotEntity.class::isInstance)
         .map(RobotEntity.class::cast)
@@ -61,7 +61,7 @@ public final class RobotChatter implements RobotSwitch {
 
   /** The robot loves redstone, so it comments when its owner mines it (answer 619). */
   public static void onOwnerMinedRedstone(ServerPlayer owner) {
-    RobotEntity.follower(owner)
+    RobotFollowing.follower(owner)
         .map(id -> owner.serverLevel().getEntity(id))
         .filter(RobotEntity.class::isInstance)
         .map(RobotEntity.class::cast)
@@ -70,7 +70,7 @@ public final class RobotChatter implements RobotSwitch {
 
   /** The robot may be loaded in another dimension, where it would not be following. */
   public static void congratulate(ServerPlayer owner, boolean challenge) {
-    RobotEntity.follower(owner)
+    RobotFollowing.follower(owner)
         .map(id -> owner.serverLevel().getEntity(id))
         .filter(RobotEntity.class::isInstance)
         .map(RobotEntity.class::cast)

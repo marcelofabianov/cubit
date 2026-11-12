@@ -18,7 +18,7 @@ Persona, visual, expressões, funcionalidades, itens, tiers, glossário, regras,
 - Virar item, morte com o Damaged Cubit e conserto.
 - O comando `/cubit reset` e o modelo novo.
 
-## Fase 3: Sentidos (reta final)
+## Fase 3: Sentidos (encerrada)
 
 Todas as funcionalidades entraram:
 
@@ -28,38 +28,31 @@ Todas as funcionalidades entraram:
 - as animações, as expressões, o nome e a cor da carcaça;
 - o Jade e as telas próprias do Cubit e do Induction Dock.
 
-Falta a reta final do lançamento:
-
-- auditoria dos documentos;
-- tradução para o português;
-- `CHANGELOG.md` e guia de publicação;
-- testes de instância.
-
 ### Primeira versão: `0.1.0`
 
-Sai ao terminar a Fase 3, no Modrinth e no CurseForge, com o mod funcionando só com ele e as dependências: GeckoLib e LambDynamicLights, obrigatórias, e Jade, opcional.
+Saiu ao terminar a Fase 3, no Modrinth, com o mod funcionando só com ele e as dependências: GeckoLib e LambDynamicLights, obrigatórias, e Jade, opcional. O envio ao CurseForge, com a mesma versão, fica para depois.
 
 ## Fase 4: Upgrades e autonomia
 
 Dividida em três partes, na ordem em que uma depende da outra.
 
-### Fase 4: Power Bank, ímã e defesa
-
-- Power Bank, também no Dock e na grade de craft.
-- Ímã e coleta de itens do chão, com o filtro em lista branca e lista negra.
-- Choque, com o modo Pacífico, o único do tier Base.
-- Interface de configuração na aba Settings, com a chave geral e a do painel solar.
-
-### Fase 4.1: Tiers
+### Fase 4: Tier e ataque (encerrada)
 
 - Tiers Advanced, Elite e Ultimate, com os módulos de upgrade.
+- Choque, com o modo Pacífico, o único do tier Base.
 - Modos de defesa Contra-atacar e Agressivo.
+- Modo de defesa só o alvo, com o último mob atacado.
+- Interface de configuração na aba Settings, com a chave geral e a do painel solar.
+
+### Fase 4.1: Itens, filtros, carregamento e mais
+
+- Ímã e coleta de itens do chão, com o filtro em lista branca e lista negra.
+- Power Bank, também no Dock e na grade de craft.
 - Slots exclusivos de tochas, fornalha e carregador de ferramentas, com o Cubit colocando tochas sozinho.
 
-### Fase 4.2: Controle e autonomia
+### Fase 4.2: Remote, área e retorno
 
-- Cubit Remote: comandos, localizar os Cubits e marcar áreas.
-- Modo de defesa só o alvo, com o último mob atacado e a mira pelo controle.
+- Cubit Remote: comandos, localizar os Cubits e marcar áreas, com a mira do modo só o alvo.
 - Modo área e descarga em baú marcado.
 - Retorno automático e local de morte.
 

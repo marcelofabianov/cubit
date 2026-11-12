@@ -158,4 +158,55 @@ class RobotStateTest {
     assertFalse(repaired.scannersOn());
     assertEquals(filter, repaired.oreFilter());
   }
+
+  @Test
+  void aNewRobotIsPeaceful() {
+    assertEquals(
+        DefenseMode.PEACEFUL,
+        new RobotState(RobotTier.BASE, SOME_ENERGY, SOME_HEALTH).defenseMode());
+  }
+
+  @Test
+  void dyingAndRepairingKeepTheDefenseMode() {
+    RobotState aggressive =
+        new RobotState(
+            RobotTier.ELITE,
+            SOME_ENERGY,
+            SOME_HEALTH,
+            true,
+            RobotColor.WHITE,
+            true,
+            OreFilter.EMPTY,
+            true,
+            DefenseMode.AGGRESSIVE);
+
+    RobotState repaired = aggressive.damaged().repaired(SPEC, new Percentage(REPAIR_PERCENT));
+
+    assertEquals(DefenseMode.AGGRESSIVE, aggressive.damaged().defenseMode());
+    assertEquals(DefenseMode.AGGRESSIVE, repaired.defenseMode());
+  }
+
+  @Test
+  void theSolarPanelStartsSwitchedOn() {
+    assertTrue(new RobotState(RobotTier.BASE, SOME_ENERGY, SOME_HEALTH).solarOn());
+  }
+
+  @Test
+  void dyingAndRepairingKeepTheSolarSwitch() {
+    RobotState off =
+        new RobotState(
+            RobotTier.BASE,
+            SOME_ENERGY,
+            SOME_HEALTH,
+            true,
+            RobotColor.WHITE,
+            true,
+            OreFilter.EMPTY,
+            true,
+            DefenseMode.PEACEFUL,
+            false);
+
+    assertFalse(off.damaged().solarOn());
+    assertFalse(off.damaged().repaired(SPEC, new Percentage(REPAIR_PERCENT)).solarOn());
+  }
 }

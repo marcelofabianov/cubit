@@ -55,6 +55,10 @@ final class RobotTexts {
         menu.opening().scanCost());
   }
 
+  static Component solarDetail(RobotMenu menu) {
+    return Component.translatable(ScreenKeys.SOLAR_DETAIL, menu.opening().solarDay());
+  }
+
   static Component filter(RobotMenu menu) {
     if (!menu.opening().hasFilter()) {
       return Component.translatable(ScreenKeys.NO_FILTER);
@@ -81,7 +85,7 @@ final class RobotTexts {
     return switch (status) {
       case CHARGING -> ScreenPainter.STATUS_GREEN;
       case NO_SKY, NIGHT, NO_SUN -> ScreenPainter.STATUS_ORANGE;
-      case FULL, OFF -> ScreenPainter.STATUS_GRAY;
+      case FULL, OFF, SWITCHED_OFF -> ScreenPainter.STATUS_GRAY;
     };
   }
 

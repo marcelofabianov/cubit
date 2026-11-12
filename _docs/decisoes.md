@@ -11,19 +11,20 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Licença:** MIT, para todos os recursos presentes no repositório, inclusive os sons. A exceção é o Gradle Wrapper, de terceiros, que não vai no jar.
 - **Ícone do mod:** o mesmo do item do Cubit.
 - **Primeira versão:** `0.1.0`, publicada só ao terminar todos os itens da Fase 3, com a `1.0.0` só com o mod completo.
-- **Publicação:** no Modrinth e no CurseForge, com a mesma versão nos dois (pergunta 714). A `0.1.0` sai como release, e o jar é enviado à mão, pelo site, sem plugin do Gradle (perguntas 743 e 744).
+- **Publicação:** no Modrinth e no CurseForge, com a mesma versão nos dois (pergunta 714). A `0.1.0` sai como release, e o jar é enviado à mão, pelo site, sem plugin do Gradle (perguntas 743 e 744). Ela saiu no Modrinth, e o CurseForge fica para depois (perguntas 785 e 787).
 - **Aviso de IA:** no Modrinth, o aviso `Contains AI-generated content` fica marcado para os assets, por causa dos sons (pergunta 746).
 - **Páginas nas plataformas:** slug `cubit`, com `cubit-robot` nas duas se o CurseForge recusar. O ícone é o do item, e a galeria só tem capturas do jogo. O desenvolvedor cria as contas e os projetos, e o agente prepara os textos (perguntas 747, 748 e 750).
 - **Changelog por versão:** atualizado ao criar a `release/X.Y.Z` (pergunta 749).
 - **Repositório público:** o desenvolvedor o torna público antes de enviar o jar da `0.1.0`, e as issues do GitHub são o canal de bugs (pergunta 751).
-- **Interface de configuração:** a chave geral e a do painel solar entram na Fase 4, na aba Settings, e a `0.1.0` sai com as chaves de hoje (pergunta 717).
-- **Fases 4 e 5 divididas:** Fase 4 com Power Bank, ímã, coleta, choque com o Pacífico e a interface de configuração; 4.1 com os tiers, os outros modos e os slots exclusivos; 4.2 com o Cubit Remote, o modo só o alvo, o modo área, a descarga, o retorno e o local de morte. Fase 5 com antenas, Servidor e storage wireless virtual; 5.1 com o carregamento de chunks; e 5.2 com os cards, a hibernação fora do Dock e a personalização por card (perguntas 722 a 726).
+- **Interface de configuração:** a chave geral e a do painel solar entram na Fase 4, na aba Settings, e a `0.1.0` sai com as chaves de hoje (pergunta 717). A chave geral só desliga, por um botão `Power` no cabeçalho, e libera o lugar de quem segue. O painel solar ganha a quarta linha em Functions, começa ligado e fica no item. O rodapé da aba sai, e hibernar fora do Dock fica para a Fase 5 (perguntas 857 a 861).
+- **Fases 4 e 5 divididas:** Fase 4 com os tiers, o choque com o Pacífico, os outros modos de defesa, o modo só o alvo e a interface de configuração, nessa ordem; 4.1 com o ímã, a coleta, a Power Bank e os slots exclusivos; 4.2 com o Cubit Remote, a mira do modo só o alvo, o modo área, a descarga, o retorno e o local de morte. Fase 5 com antenas, Servidor e storage wireless virtual; 5.1 com o carregamento de chunks; e 5.2 com os cards, a hibernação fora do Dock e a personalização por card (perguntas 722 a 726, com a Fase 4 reorganizada pelas 794 a 796).
 - **Planejado nos documentos:** o que é de fase futura fica nos documentos, marcado com a fase em que entra, sem parecer pronto (pergunta 718).
 - **Testes de instância:** os da regra 35 ficam para o fim da Fase 3, no teste da versão completa, na seção "Teste da versão" do roteiro manual, no Prism Launcher. O Iron Meridian é testado numa cópia da instância, com o jar em `mods/` (perguntas 767 a 769).
-- **Exceção na `0.1.0`:** a versão sai com o teste no Iron Meridian, sem a instância só com o mod e sem as confirmações do item 7, que ficam para depois dela (pergunta 776).
+- **Exceção na `0.1.0`:** a versão sai com o teste no Iron Meridian, sem a instância só com o mod e sem as confirmações do item 7, que ficam para depois dela (pergunta 776). As confirmações e a instância só com o mod foram feitas depois, com o upgrade de tier e as receitas dos Modules (pergunta 820).
+- **Exceção na `0.1.1`:** a versão sai com o teste na instância só com o mod, sem o Iron Meridian, que não está mais instalado no Prism do desenvolvedor (perguntas 867 e 868).
 - **Release no GitHub:** cada versão tem a tag anotada e uma release no GitHub, com a seção do `CHANGELOG.md` e o jar, antes do envio aos sites (pergunta 778).
 - **Outro player:** o teste com outro player não é feito no jogo. As GameTests com um player que não é o dono cobrem o Dock, o `/cubit reset`, a cor e o nome (perguntas 770 a 772).
-- **Etapa atual:** Fase 3, sentidos, em andamento. As Fases 1 e 2 foram encerradas.
+- **Etapa atual:** as Fases 1, 2 e 3 foram encerradas, com a `0.1.0` publicada (perguntas 785 e 786). A Fase 4 só começa com pedido explícito.
 - **Iron Meridian:** o Cubit entra como exceção à regra do pack contra funções repetidas, por causa do Robit do Mekanism. O registro está na issue `marcelofabianov/iron-meridian#2`.
 
 ## Idioma
@@ -113,14 +114,16 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Modelo:** a geometria melhora já na Fase 2, com os detalhes das seis vistas, tudo fixo e sem mudar a hitbox. As expressões seguem na Fase 3.
 - **Animações:** andar, olhar para o player, parado, e desligado e hibernando, com as esteiras em textura por quadros. O modelo final mantém a geometria e a textura do corpo. Ao levar dano, os braços ficam erguidos por cerca de 2 s.
 - **Olhar para o dono:** na expressão normal, os olhos reagem a pulo, queda rápida e dono em outro nível, até 8 blocos, e o movimento do próprio robô vence. Com o dono em outro nível, o corpo também inclina cerca de 8°, mas não num pulo.
-- **Colar:** o robô no mundo usa a cor do tier, numa camada por tier. Os ícones ficam cinza até os módulos, na Fase 4.
+- **Colar:** o robô no mundo usa a cor do tier, numa camada por tier. Nos ícones do Cubit e do Damaged Cubit, uma camada do colar tingida pelo cliente com a cor do tier, sem multiplicar os modelos de cor (pergunta 803).
+- **Modules (perguntas 799 a 811, 817 e 818):** cartucho de circuito com núcleo na cor do tier, empilhando até 64 e com o nome nessa cor. Só o dono aplica, em qualquer estado do Cubit, inclusive no Dock. O Cubit fica feliz, bipa e mostra o novo tier num texto curto. O Module que não serve não é consumido, e um texto explica o motivo, menos para quem não é dono, em que nada acontece (pergunta 809). As receitas são independentes, sem o Module anterior, e aparecem no livro ao ter um Cubit. Os materiais e a grade estão em [`itens.md`](itens.md#modules) (perguntas 807, 817 e 818). O filtro do scanner do Ultimate é 64, o limite do config (pergunta 810).
 - **Indicador de bateria:** mostra a carga real em qualquer estado, com 4 níveis em alta resolução, verde e vermelho na bateria crítica, e brilha só com a tela acesa.
 - **Cor da carcaça:** 16 cores dos corantes, com uma textura por cor, em qualquer estado, só pelo dono, gastando 1 corante. O branco volta ao original. Fita e faixas seguem o tier, e só o ícone do Cubit muda de cor.
 - **Nome:** com etiqueta, só do dono, ou na bigorna, e sempre visível acima do Cubit.
 - **Tronco central:** a coluna entre as esteiras e a carcaça tem 2 unidades de altura, e a hitbox não muda.
 - **Trabalhos (Fase 5, planejada):** um único Cubit, com um card por vez, age só em área marcada e nunca sai dela. Antena e Servidor mantêm os chunks carregados, de forma opcional. Sem chunk de destino, ele espera. O detalhe está em [`trabalhos.md`](funcionalidades/trabalhos.md).
-- **Modo só o alvo:** ideia aprovada, a refinar na Fase 4: o Cubit só ataca o último mob que o dono feriu ou marcou com o controle (pergunta 578).
-- **Limites:** nunca ataca o dono nem mobs pacíficos. Só ataca mobs neutros para defender o player.
+- **Modo Focus (perguntas 843 a 853):** o modo só o alvo se chama `Focus` e libera no Advanced. Só dá o choque no último mob que o dono feriu, com qualquer dano, sem perseguir, e um neutro ferido também vira alvo. Sem alvo, age como o Contra-atacar. O alvo acaba ao morrer, mudar de dimensão ou ficar a mais de 32 blocos do dono. Ganha uma seta amarela e maior, e o texto `Cubit: Target: Zombie` ao mudar. A mira pelo controle fica na Fase 4.2 (pergunta 795).
+- **Limites:** nunca ataca o dono, outros players, outros Cubits nem mobs pacíficos. Só ataca mobs neutros para defender o player.
+- **Choque e modos de defesa (perguntas 822 a 834):** entram juntos. O Cubit ativo dá o choque sem perseguir, com linha de visão, no alcance e no intervalo do tier, num alvo, ou em todos no Ultimate, com faíscas e o abate do dono. Pacífico no Base, Contra-atacar a partir do Advanced, com 30 s de memória, e Agressivo a partir do Elite, escolhidos numa aba Defense própria, com o escudo. O modo começa Pacífico e fica no item, e os modos e números de cada tier ficam no config.
 - **Scanner:** `c:ores/*` significa a tag-mãe `c:ores` e suas subtags, porque tags não aceitam curinga.
 - **Falas (perguntas 572 a 587 e 618 a 621):** o Cubit comenta o tempo e o horário ao mudarem, com um intervalo mínimo, dá parabéns pelas conquistas visíveis e diz que ama redstone quando o dono a minera, com a chave `Chatter`. As frases e as regras estão em [`falas.md`](conceito/falas.md).
 - **Caixas dos scanners (perguntas 593 a 616):** só o dono vê, através dos blocos, uma caixa azul clara e discreta em volta de cada minério novo que a varredura achou, por cerca de 10 s ou até minerar, e uma seta vermelha para baixo sobre a cabeça do mob hostil enquanto ele estiver no raio, as duas com um pulso suave (perguntas 646 a 649).
@@ -139,6 +142,15 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-12 20:30 | Registra a exceção da `0.1.1`. |
+| Marcelo Fabiano | 2026-11-12 17:20 | Resume as chaves do item 8. |
+| Marcelo Fabiano | 2026-11-12 15:10 | Fecha o modo Focus. |
+| Marcelo Fabiano | 2026-11-12 10:30 | Resume o choque e os modos de defesa. |
+| Marcelo Fabiano | 2026-11-12 09:40 | Registra as confirmações feitas depois da `0.1.0`. |
+| Marcelo Fabiano | 2026-11-12 08:30 | Fecha as receitas dos Modules. |
+| Marcelo Fabiano | 2026-11-11 22:01 | Registra as decisões dos Modules e do colar no ícone. |
+| Marcelo Fabiano | 2026-11-10 10:17 | Registra a Fase 4 reorganizada e a mira do modo só o alvo na 4.2. |
+| Marcelo Fabiano | 2026-11-10 09:53 | Encerra a Fase 3 e registra a `0.1.0` no Modrinth, com o CurseForge depois. |
 | Marcelo Fabiano | 2026-11-08 01:41 | Registra a exceção da `0.1.0` e a release no GitHub. |
 | Marcelo Fabiano | 2026-11-08 01:15 | Registra como ficam os testes de instância e o teste com outro player. |
 | Marcelo Fabiano | 2026-11-08 00:55 | Registra onde fica a descrição das plataformas e a tradução da descrição na lista de mods. |

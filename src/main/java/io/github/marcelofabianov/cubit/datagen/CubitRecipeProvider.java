@@ -14,6 +14,7 @@ import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.ItemLike;
 
 /** The recipes become plain JSON files, which the pack can override with KubeJS. */
 final class CubitRecipeProvider extends RecipeProvider {
@@ -32,6 +33,17 @@ final class CubitRecipeProvider extends RecipeProvider {
   private static final char LAMP = 'L';
   private static final char DIAMOND = 'D';
   private static final char CHEST = 'C';
+  private static final String MODULE_TOP_ROW = "MSM";
+  private static final String MODULE_MIDDLE_ROW = "SCS";
+  private static final String MODULE_BOTTOM_ROW = "MSM";
+  private static final String ULTIMATE_TOP_ROW = "DRD";
+  private static final String ULTIMATE_MIDDLE_ROW = "NSN";
+  private static final String ULTIMATE_BOTTOM_ROW = "D D";
+  private static final char MAIN = 'M';
+  private static final char SIDE = 'S';
+  private static final char CORE = 'C';
+  private static final char NETHERITE = 'N';
+  private static final char STAR = 'S';
   private static final String HAS_IRON = "has_iron";
   private static final String HAS_DIAMOND = "has_diamond";
   private static final String HAS_ROBOT = "has_robot";
@@ -54,6 +66,7 @@ final class CubitRecipeProvider extends RecipeProvider {
         .save(output);
     robot(output);
     dock(output);
+    modules(output);
     String robotId = CubitConfig.GENERAL_ROBOT.id();
     output.accept(
         ResourceLocation.fromNamespaceAndPath(CubitMod.MOD_ID, REPAIR_PREFIX + robotId),
@@ -76,6 +89,37 @@ final class CubitRecipeProvider extends RecipeProvider {
         .define(OBSIDIAN, Items.OBSIDIAN)
         .unlockedBy(HAS_DIAMOND, has(Items.DIAMOND))
         .save(output);
+  }
+
+  /** Each module has its own recipe, without the one before it (answers 799, 807 and 817). */
+  private void modules(RecipeOutput output) {
+    module(CubitItems.ADVANCED_MODULE.get(), Items.GOLD_INGOT, Items.QUARTZ)
+        .define(CORE, Items.COMPARATOR)
+        .save(output);
+    module(CubitItems.ELITE_MODULE.get(), Items.DIAMOND, Items.PURPLE_DYE)
+        .define(CORE, Items.REDSTONE_BLOCK)
+        .save(output);
+    ShapedRecipeBuilder.shaped(RecipeCategory.MISC, CubitItems.ULTIMATE_MODULE.get())
+        .pattern(ULTIMATE_TOP_ROW)
+        .pattern(ULTIMATE_MIDDLE_ROW)
+        .pattern(ULTIMATE_BOTTOM_ROW)
+        .define(DIAMOND, Items.DIAMOND)
+        .define(REDSTONE, Items.REDSTONE_BLOCK)
+        .define(NETHERITE, Items.NETHERITE_INGOT)
+        .define(STAR, Items.NETHER_STAR)
+        .unlockedBy(HAS_ROBOT, has(CubitItems.GENERAL_ROBOT.get()))
+        .save(output);
+  }
+
+  /** The main material in the corners and the second one on the sides (answer 818). */
+  private static ShapedRecipeBuilder module(ItemLike result, ItemLike main, ItemLike side) {
+    return ShapedRecipeBuilder.shaped(RecipeCategory.MISC, result)
+        .pattern(MODULE_TOP_ROW)
+        .pattern(MODULE_MIDDLE_ROW)
+        .pattern(MODULE_BOTTOM_ROW)
+        .define(MAIN, main)
+        .define(SIDE, side)
+        .unlockedBy(HAS_ROBOT, has(CubitItems.GENERAL_ROBOT.get()));
   }
 
   private void dock(RecipeOutput output) {

@@ -33,10 +33,16 @@ public final class CubitDataGenerators {
     generator.addProvider(
         event.includeServer(), new CubitRecipeProvider(output, event.getLookupProvider()));
     generator.addProvider(
+        event.includeServer(), new CubitDamageTypeProvider(output, event.getLookupProvider()));
+    generator.addProvider(
         event.includeClient(), new CubitBlockStateProvider(output, existingFiles));
     generator.addProvider(
         event.includeServer(),
         new CubitBlockTagsProvider(output, event.getLookupProvider(), existingFiles));
+    addLoot(event, generator, output);
+  }
+
+  private static void addLoot(GatherDataEvent event, DataGenerator generator, PackOutput output) {
     generator.addProvider(
         event.includeServer(),
         new LootTableProvider(

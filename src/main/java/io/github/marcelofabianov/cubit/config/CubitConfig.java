@@ -4,19 +4,15 @@ import com.mojang.logging.LogUtils;
 import io.github.marcelofabianov.cubit.domain.behavior.FollowDecision;
 import io.github.marcelofabianov.cubit.domain.behavior.LampPolicy;
 import io.github.marcelofabianov.cubit.domain.behavior.LightLevel;
-import io.github.marcelofabianov.cubit.domain.energy.ConsumptionExtras;
-import io.github.marcelofabianov.cubit.domain.energy.Energy;
 import io.github.marcelofabianov.cubit.domain.energy.Percentage;
 import io.github.marcelofabianov.cubit.domain.energy.PowerRules;
-import io.github.marcelofabianov.cubit.domain.energy.SolarOutput;
 import io.github.marcelofabianov.cubit.domain.robot.OreKind;
 import io.github.marcelofabianov.cubit.domain.robot.OreSignals;
 import io.github.marcelofabianov.cubit.domain.robot.RobotType;
 import io.github.marcelofabianov.cubit.domain.tier.RobotTier;
-import io.github.marcelofabianov.cubit.domain.tier.ScannerSpec;
 import io.github.marcelofabianov.cubit.domain.tier.TierCatalog;
-import io.github.marcelofabianov.cubit.domain.tier.TierSpec;
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -32,53 +28,6 @@ public final class CubitConfig {
   private static final String INVALID_RARE_TAG = "Ignoring an invalid tag in rare_ore_tags: {}";
   private static final String GENERAL_SECTION = "general";
   private static final int TIER_SECTION_DEPTH = 2;
-  private static final long BASE_BATTERY = 300_000;
-  private static final long BASE_CONSUMPTION = 15;
-  private static final long BASE_FULL_INVENTORY_EXTRA = 5;
-  private static final long BASE_WATER_EXTRA = 5;
-  private static final long BASE_NEGATIVE_CONDITION_EXTRA = 25;
-  private static final long BASE_CLIMB_EXTRA = 15;
-  private static final long BASE_LAMP_CONSUMPTION = 1;
-  private static final int BASE_LAMP_LIGHT = 10;
-  private static final long BASE_SOLAR_DAY = 5;
-  private static final long BASE_RECHARGE = 500;
-  private static final int BASE_SLOTS = 27;
-  private static final int BASE_HEALTH = 25;
-  private static final int BASE_CALL_RADIUS = 15;
-  private static final double BASE_SPEED_MULTIPLIER = 1;
-  private static final int BASE_ORE_SCAN_RADIUS = 5;
-  private static final int BASE_MOB_SCAN_RADIUS = 8;
-  private static final int BASE_ORE_SCAN_TICKS = 700;
-  private static final int BASE_MOB_SCAN_TICKS = 200;
-  private static final long BASE_ORE_SCAN_COST = 50;
-  private static final long BASE_MOB_SCAN_COST = 50;
-  private static final int BASE_ORE_FILTER_SLOTS = 1;
-  private static final TierSpec GENERAL_ROBOT_BASE =
-      new TierSpec(
-          new Energy(BASE_BATTERY),
-          new Energy(BASE_CONSUMPTION),
-          new Energy(BASE_RECHARGE),
-          BASE_SLOTS,
-          BASE_HEALTH,
-          BASE_CALL_RADIUS,
-          BASE_SPEED_MULTIPLIER,
-          new ConsumptionExtras(
-              new Energy(BASE_FULL_INVENTORY_EXTRA),
-              new Energy(BASE_WATER_EXTRA),
-              new Energy(BASE_NEGATIVE_CONDITION_EXTRA),
-              new Energy(BASE_CLIMB_EXTRA),
-              new Energy(BASE_LAMP_CONSUMPTION)),
-          new LightLevel(BASE_LAMP_LIGHT),
-          new SolarOutput(new Energy(BASE_SOLAR_DAY), Energy.ZERO),
-          new ScannerSpec(
-              BASE_ORE_SCAN_RADIUS,
-              BASE_MOB_SCAN_RADIUS,
-              BASE_ORE_SCAN_TICKS,
-              BASE_MOB_SCAN_TICKS,
-              new Energy(BASE_ORE_SCAN_COST),
-              new Energy(BASE_MOB_SCAN_COST),
-              BASE_ORE_FILTER_SLOTS));
-
   private final ModConfigSpec spec;
   private final GeneralSection general;
   private final DamagedRobotSection damagedRobot;
@@ -91,6 +40,7 @@ public final class CubitConfig {
   private final SolarSection solar;
   private final ScannerSection scanner;
   private final ChatterSection chatter;
+  private final DefenseSection defense;
   private final AtomicBoolean warnedRareTags = new AtomicBoolean();
   private final AtomicBoolean warnedLamp = new AtomicBoolean();
   private final TierCatalog tierCatalog;
@@ -110,19 +60,34 @@ public final class CubitConfig {
     solar = new SolarSection(builder);
     scanner = new ScannerSection(builder);
     chatter = new ChatterSection(builder);
+    defense = new DefenseSection(builder);
     builder.pop();
 
-    builder.push(List.of(GENERAL_ROBOT.id(), RobotTier.BASE.key()));
-    TierSection generalRobotBase = new TierSection(builder, GENERAL_ROBOT_BASE);
-    builder.pop(TIER_SECTION_DEPTH);
-
-    tierCatalog =
-        new NeoForgeTierCatalog(Map.of(GENERAL_ROBOT, Map.of(RobotTier.BASE, generalRobotBase)));
+    tierCatalog = new NeoForgeTierCatalog(Map.of(GENERAL_ROBOT, tierSections(builder)));
     spec = builder.build();
+  }
+
+  /** In the order of the tiers, so the file keeps the base section first, as it always had. */
+  private static Map<RobotTier, TierSection> tierSections(ModConfigSpec.Builder builder) {
+    Map<RobotTier, TierSection> sections = new EnumMap<>(RobotTier.class);
+    for (RobotTier tier : RobotTier.values()) {
+      builder.push(List.of(GENERAL_ROBOT.id(), tier.key()));
+      sections.put(tier, new TierSection(builder, TierDefaults.of(tier)));
+      builder.pop(TIER_SECTION_DEPTH);
+    }
+    return sections;
   }
 
   public ModConfigSpec spec() {
     return spec;
+  }
+
+  public int retaliateMemoryTicks() {
+    return defense.retaliateMemory.get();
+  }
+
+  public int focusForgetDistanceBlocks() {
+    return defense.focusForget.get();
   }
 
   public TierCatalog tierCatalog() {

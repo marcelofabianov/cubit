@@ -34,6 +34,8 @@ final class CubitSoundProvider extends SoundDefinitionsProvider {
     addSound(CubitSounds.POWER_OFF, CubitSounds.POWER_OFF_NAME);
     addSound(CubitSounds.RECHARGING, CubitSounds.RECHARGING_NAME);
     addSound(CubitSounds.PLACED, CubitSounds.PLACED_NAME);
+    addSound(CubitSounds.SHOCK_ATTACK, CubitSounds.SHOCK_ATTACK_NAME);
+    addSound(CubitSounds.AGGRESSIVE_MODE, CubitSounds.AGGRESSIVE_MODE_NAME);
   }
 
   private void addSound(Supplier<SoundEvent> event, String name) {

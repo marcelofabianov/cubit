@@ -1,6 +1,7 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "cubit:item/general_robot_color/black"
+    "layer0": "cubit:item/general_robot_color/black",
+    "layer1": "cubit:item/general_robot_collar"
   }
 }

@@ -25,4 +25,28 @@ class RobotTierTest {
   void unknownKeyFindsNothing() {
     assertEquals(Optional.empty(), RobotTier.fromKey(UNKNOWN_KEY));
   }
+
+  @Test
+  void nextIsTheTierRightAfter() {
+    assertEquals(Optional.of(RobotTier.ADVANCED), RobotTier.BASE.next());
+    assertEquals(Optional.of(RobotTier.ELITE), RobotTier.ADVANCED.next());
+    assertEquals(Optional.of(RobotTier.ULTIMATE), RobotTier.ELITE.next());
+  }
+
+  @Test
+  void ultimateHasNoNextTier() {
+    assertEquals(Optional.empty(), RobotTier.ULTIMATE.next());
+  }
+
+  @Test
+  void previousIsTheTierRightBefore() {
+    assertEquals(Optional.of(RobotTier.BASE), RobotTier.ADVANCED.previous());
+    assertEquals(Optional.of(RobotTier.ADVANCED), RobotTier.ELITE.previous());
+    assertEquals(Optional.of(RobotTier.ELITE), RobotTier.ULTIMATE.previous());
+  }
+
+  @Test
+  void baseHasNoPreviousTier() {
+    assertEquals(Optional.empty(), RobotTier.BASE.previous());
+  }
 }

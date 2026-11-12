@@ -2,6 +2,7 @@ package io.github.marcelofabianov.cubit.client;
 
 import io.github.marcelofabianov.cubit.domain.behavior.MarkLife;
 import io.github.marcelofabianov.cubit.domain.behavior.ScanArea;
+import io.github.marcelofabianov.cubit.network.FocusMarkPayload;
 import io.github.marcelofabianov.cubit.network.MobMarksPayload;
 import io.github.marcelofabianov.cubit.network.OreMarksPayload;
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ import net.neoforged.neoforge.common.Tags;
 final class ScanMarks {
   private static final Map<BlockPos, MarkLife> ORES = new HashMap<>();
   private static MobMarks mobs;
+  private static FocusMarkPayload focus;
   private static ClientLevel shownIn;
 
   private ScanMarks() {}
@@ -47,6 +49,21 @@ final class ScanMarks {
             MarkLife.from(level.getGameTime(), Math.max(marks.holdTicks(), 0)));
   }
 
+  static void showFocus(FocusMarkPayload mark) {
+    if (currentLevel() != null) {
+      focus = mark.mobId() == FocusMarkPayload.NO_MOB ? null : mark;
+    }
+  }
+
+  /** The target of Focus while it is alive. The server clears it when the target ends. */
+  static Entity focusTarget(ClientLevel level) {
+    if (focus == null) {
+      return null;
+    }
+    Entity mob = level.getEntity(focus.mobId());
+    return mob != null && mob.isAlive() ? mob : null;
+  }
+
   /** The ores still worth a box. A block in an unloaded chunk is never read, so it is dropped. */
   static List<BlockPos> ores(ClientLevel level) {
     long now = level.getGameTime();
@@ -70,6 +87,7 @@ final class ScanMarks {
       Entity mob = level.getEntity(id);
       if (robot != null
           && mob != null
+          && (focus == null || focus.mobId() != id)
           && mob.isAlive()
           && mobs.area().holdsDistance(robot.distanceToSqr(mob))) {
         shown.add(mob);
@@ -84,6 +102,7 @@ final class ScanMarks {
     if (level != shownIn) {
       ORES.clear();
       mobs = null;
+      focus = null;
       shownIn = level;
     }
     return level;

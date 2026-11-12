@@ -4,6 +4,8 @@ package io.github.marcelofabianov.cubit.domain.energy;
 public enum SolarStatus {
   /** Inactive or in the base, the panel is off (energia.md). */
   OFF,
+  /** The owner switched the panel off on the screen (answer 860). */
+  SWITCHED_OFF,
   /** The Nether and the End have no sun. */
   NO_SUN,
   FULL,
@@ -15,6 +17,9 @@ public enum SolarStatus {
   public static SolarStatus of(SolarView view, Battery battery, SolarOutput output) {
     if (view.state() != PowerState.ACTIVE) {
       return OFF;
+    }
+    if (!view.switchedOn()) {
+      return SWITCHED_OFF;
     }
     if (!view.sunExists()) {
       return NO_SUN;
@@ -32,5 +37,6 @@ public enum SolarStatus {
   }
 
   /** What the caller read from the world. */
-  public record SolarView(PowerState state, boolean sunExists, boolean skyOpen, boolean day) {}
+  public record SolarView(
+      PowerState state, boolean sunExists, boolean skyOpen, boolean day, boolean switchedOn) {}
 }

@@ -55,6 +55,7 @@ final class TierSection {
   private final ModConfigSpec.IntValue maxHealth;
   private final ModConfigSpec.IntValue callRadius;
   private final ModConfigSpec.DoubleValue speedMultiplier;
+  private final ShockKeys shock;
 
   TierSection(ModConfigSpec.Builder builder, TierSpec defaults) {
     batteryCapacity = energy(builder, BATTERY_CAPACITY, defaults.batteryCapacity(), MIN_POSITIVE);
@@ -77,6 +78,7 @@ final class TierSection {
             defaults.speedMultiplier(),
             MIN_SPEED_MULTIPLIER,
             MAX_SPEED_MULTIPLIER);
+    shock = new ShockKeys(builder, defaults.shock());
   }
 
   TierSpec read() {
@@ -91,7 +93,8 @@ final class TierSection {
         extras.read(),
         new LightLevel(lampLight.get()),
         solar.read(),
-        scanners.read());
+        scanners.read(),
+        shock.read());
   }
 
   private static ModConfigSpec.IntValue count(
