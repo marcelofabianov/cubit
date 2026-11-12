@@ -86,12 +86,13 @@ final class RobotInteractions {
     RobotClick click =
         RobotClick.of(
             Ownership.owns(robot.ownerId(), player.getUUID()),
+            false,
             player.isShiftKeyDown(),
             held.getItem() instanceof DyeItem,
             held.is(Tags.Items.ORES),
             robot.powerState());
     return switch (click) {
-      case IGNORE -> InteractionResult.PASS;
+      case IGNORE, UPGRADE -> InteractionResult.PASS;
       case COLLECT -> collect(robot, player);
       case PAINT -> RobotPaint.apply(robot, player, held, (DyeItem) held.getItem());
       case CHOOSE_ORE -> RobotOreChoice.apply(robot, player, held);
