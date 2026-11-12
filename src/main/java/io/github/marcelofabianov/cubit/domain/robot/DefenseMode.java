@@ -8,7 +8,8 @@ import java.util.Optional;
 public enum DefenseMode {
   PEACEFUL,
   RETALIATE,
-  AGGRESSIVE;
+  AGGRESSIVE,
+  FOCUS;
 
   /** A new robot, and one saved before the modes existed, never attacks (answer 830). */
   public static final DefenseMode INITIAL = PEACEFUL;

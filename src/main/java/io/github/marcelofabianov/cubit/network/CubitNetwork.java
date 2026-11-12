@@ -18,6 +18,7 @@ public final class CubitNetwork {
   private static Consumer<Component> noticeDisplay = text -> {};
   private static Consumer<OreMarksPayload> oreMarksDisplay = marks -> {};
   private static Consumer<MobMarksPayload> mobMarksDisplay = marks -> {};
+  private static Consumer<FocusMarkPayload> focusMarkDisplay = mark -> {};
 
   private CubitNetwork() {}
 
@@ -35,7 +36,11 @@ public final class CubitNetwork {
         .playToClient(
             MobMarksPayload.TYPE,
             MobMarksPayload.STREAM_CODEC,
-            (payload, context) -> mobMarksDisplay.accept(payload));
+            (payload, context) -> mobMarksDisplay.accept(payload))
+        .playToClient(
+            FocusMarkPayload.TYPE,
+            FocusMarkPayload.STREAM_CODEC,
+            (payload, context) -> focusMarkDisplay.accept(payload));
   }
 
   public static void setNoticeDisplay(Consumer<Component> display) {
@@ -46,6 +51,14 @@ public final class CubitNetwork {
       Consumer<OreMarksPayload> ores, Consumer<MobMarksPayload> mobs) {
     oreMarksDisplay = ores;
     mobMarksDisplay = mobs;
+  }
+
+  public static void setFocusMarkDisplay(Consumer<FocusMarkPayload> display) {
+    focusMarkDisplay = display;
+  }
+
+  public static void sendFocusMark(ServerPlayer player, FocusMarkPayload mark) {
+    send(player, mark);
   }
 
   public static void sendNotice(ServerPlayer player, Component text) {

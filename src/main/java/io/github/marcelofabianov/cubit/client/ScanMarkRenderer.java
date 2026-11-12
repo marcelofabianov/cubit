@@ -9,6 +9,7 @@ import io.github.marcelofabianov.cubit.CubitMod;
 import io.github.marcelofabianov.cubit.domain.behavior.MarkPulse;
 import java.util.List;
 import java.util.OptionalDouble;
+import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.LevelRenderer;
@@ -68,7 +69,8 @@ public final class ScanMarkRenderer {
     }
     List<BlockPos> ores = ScanMarks.ores(level);
     List<Entity> mobs = ScanMarks.mobs(level);
-    if (ores.isEmpty() && mobs.isEmpty()) {
+    Entity target = ScanMarks.focusTarget(level);
+    if (ores.isEmpty() && mobs.isEmpty() && target == null) {
       return;
     }
     float partialTick = event.getPartialTick().getGameTimeDeltaPartialTick(false);
@@ -80,10 +82,35 @@ public final class ScanMarkRenderer {
     RenderSystem.applyModelViewMatrix();
     MultiBufferSource.BufferSource buffers = Minecraft.getInstance().renderBuffers().bufferSource();
     drawOres(buffers, event.getCamera().getPosition(), ores, pulse);
-    MobMarker.draw(buffers, event.getCamera(), mobs, partialTick, ticks, MOB_ALPHA * pulse);
+    drawMobs(buffers, event.getCamera(), new Marked(mobs, target), partialTick, ticks, pulse);
     view.popMatrix();
     RenderSystem.applyModelViewMatrix();
   }
+
+  /** The red arrows of the scanner, then the yellow one of the target of Focus. */
+  private static void drawMobs(
+      MultiBufferSource.BufferSource buffers,
+      Camera camera,
+      Marked marked,
+      float partialTick,
+      double ticks,
+      float pulse) {
+    float alpha = MOB_ALPHA * pulse;
+    MobMarker.draw(
+        buffers, camera, marked.mobs(), MobMarker.Style.SCANNED, partialTick, ticks, alpha);
+    if (marked.target() != null) {
+      MobMarker.draw(
+          buffers,
+          camera,
+          List.of(marked.target()),
+          MobMarker.Style.TARGET,
+          partialTick,
+          ticks,
+          alpha);
+    }
+  }
+
+  private record Marked(List<Entity> mobs, Entity target) {}
 
   private static void drawOres(
       MultiBufferSource.BufferSource buffers, Vec3 camera, List<BlockPos> ores, float pulse) {

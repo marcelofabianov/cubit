@@ -58,6 +58,7 @@ As chaves ficam em `snake_case`. As de um tier ficam em `[general_robot.{tier}]`
 | `general` | `repair_health_percent` | Vida ao sair do conserto | 1 a 100 |
 | `general` | `void_rescue_retry_ticks` | Intervalo para tentar de novo o resgate no vazio | 1 a 1200 |
 | `general` | `retaliate_memory_ticks` | Tempo em que o Contra-atacar lembra de quem feriu o Cubit ou o dono | 1 a 72000 |
+| `general` | `focus_forget_distance_blocks` | Distância do dono em que o alvo do Focus deixa de ser alvo | 1 a 128 |
 | `general_robot.base` | `battery_capacity` | Bateria | 1 a 2147483647 |
 | `general_robot.base` | `moving_consumption_per_tick` | Andar | 0 a 2147483647 |
 | `general_robot.base` | `full_inventory_extra_per_tick` | Extra ao andar com o inventário cheio | 0 a 2147483647 |
@@ -80,7 +81,7 @@ As chaves ficam em `snake_case`. As de um tier ficam em `[general_robot.{tier}]`
 | `general_robot.base` | `max_health` | Vida | 1 a 1024 |
 | `general_robot.base` | `call_radius_blocks` | Raio do retorno automático e da chamada pelo Dock | 1 a 128 |
 | `general_robot.base` | `speed_multiplier` | Velocidade | 0,1 a 4 |
-| `general_robot.base` | `defense_modes` | Modos de defesa: `peaceful`, `retaliate` e `aggressive` | Lista com esses nomes |
+| `general_robot.base` | `defense_modes` | Modos de defesa: `peaceful`, `retaliate`, `aggressive` e `focus` | Lista com esses nomes |
 | `general_robot.base` | `shock_damage` | Choque (dano) | 0 a 1024 |
 | `general_robot.base` | `shock_range_blocks` | Choque (alcance) | 0 a 16 |
 | `general_robot.base` | `shock_interval_ticks` | Choque (intervalo) | 1 a 72000 |
@@ -119,6 +120,7 @@ O mod não cai por causa do config (regra 17 do `AGENTS.md`):
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-12 15:10 | Adiciona o modo Focus (pergunta 850). |
 | Marcelo Fabiano | 2026-11-12 10:30 | Adiciona as chaves do choque e dos modos de defesa (pergunta 834). |
 | Marcelo Fabiano | 2026-11-11 22:01 | Adiciona as seções dos tiers Advanced, Elite e Ultimate. |
 | Marcelo Fabiano | 2026-11-07 23:41 | Corrige os raios do Ultimate. |

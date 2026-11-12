@@ -430,6 +430,10 @@ As regras estão em [`combate.md`](../funcionalidades/combate.md), e os números
 | 7 | Deixe um mob morrer pelo choque | Ele solta XP, e, se tiver nome, a mensagem é `X was zapped by Cubit` |
 | 8 | Suba para o Ultimate, com dois mobs hostis no alcance | Os dois levam choque de uma vez, a cada 1 s |
 | 9 | Ponha um bloco entre o Cubit e o mob | Sem choque através do bloco |
+| 9a | Com o Cubit no Advanced, escolha `Focus` e bata num zumbi, com outros zumbis por perto | Aparece `Cubit: Target: Zombie`, o zumbi ganha uma seta amarela maior, e só ele leva choque. As setas vermelhas do scanner continuam nos outros |
+| 9b | Atire uma flecha em outro zumbi | Ele vira o alvo, com o texto e a seta amarela |
+| 9c | Bata numa vaca | Ela não vira alvo, e o alvo continua o mesmo |
+| 9d | Afaste-se mais de 32 blocos do alvo, ou deixe ele morrer | A seta amarela some. Sem alvo, o Cubit volta a defender quem te ferir |
 | 10 | Desligue o Cubit ou deixe ele no Dock, com mobs por perto | Sem choque |
 | 11 | Recolha e coloque o Cubit, e saia e entre no mundo | O modo escolhido continua |
 | 12 | Com o jogo em português, abra a aba | `Defesa`, `Modos`, `Pacífico`, `Contra-atacar`, `Agressivo`, `Libera no Avançado` e a seção `Choque` |
@@ -656,6 +660,7 @@ Na instância só com o mod, tire capturas com F2 do Cubit seguindo, da tela do 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-12 15:50 | Adiciona o modo Focus. |
 | Marcelo Fabiano | 2026-11-12 13:40 | Adiciona a rolagem do inventário ao upgrade de tier. |
 | Marcelo Fabiano | 2026-11-12 11:40 | Adiciona o choque e os modos de defesa. |
 | Marcelo Fabiano | 2026-11-12 08:50 | Adiciona as receitas dos Modules. |

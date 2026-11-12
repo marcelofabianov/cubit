@@ -1,6 +1,7 @@
 package io.github.marcelofabianov.cubit.datagen;
 
 import io.github.marcelofabianov.cubit.domain.robot.DefenseMode;
+import io.github.marcelofabianov.cubit.entity.RobotFocus;
 import io.github.marcelofabianov.cubit.menu.DefenseKeys;
 import io.github.marcelofabianov.cubit.registry.CubitDamageTypes;
 import io.github.marcelofabianov.cubit.registry.CubitSounds;
@@ -17,6 +18,9 @@ final class DefenseTexts {
   private static final String RETALIATE_DETAIL = "Shocks whoever hurts you or the Cubit";
   private static final String AGGRESSIVE = "Aggressive";
   private static final String AGGRESSIVE_DETAIL = "Shocks hostile mobs in range";
+  private static final String FOCUS = "Focus";
+  private static final String FOCUS_DETAIL = "Shocks only the last mob you hit";
+  private static final String FOCUS_TARGET = "Target: %s";
   private static final String UNLOCKS_AT = "Unlocks at %s";
   private static final String SHOCK = "Shock";
   private static final String DAMAGE = "Damage";
@@ -45,6 +49,9 @@ final class DefenseTexts {
     add.accept(DefenseKeys.detail(DefenseMode.RETALIATE), RETALIATE_DETAIL);
     add.accept(DefenseKeys.mode(DefenseMode.AGGRESSIVE), AGGRESSIVE);
     add.accept(DefenseKeys.detail(DefenseMode.AGGRESSIVE), AGGRESSIVE_DETAIL);
+    add.accept(DefenseKeys.mode(DefenseMode.FOCUS), FOCUS);
+    add.accept(DefenseKeys.detail(DefenseMode.FOCUS), FOCUS_DETAIL);
+    add.accept(RobotFocus.TARGET_KEY, FOCUS_TARGET);
     add.accept(DefenseKeys.UNLOCKS_AT, UNLOCKS_AT);
     add.accept(DefenseKeys.SHOCK, SHOCK);
     add.accept(DefenseKeys.DAMAGE, DAMAGE);

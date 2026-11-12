@@ -9,6 +9,7 @@ class DefenseModeTest {
   private static final String PEACEFUL_KEY = "peaceful";
   private static final String RETALIATE_KEY = "retaliate";
   private static final String AGGRESSIVE_KEY = "aggressive";
+  private static final String FOCUS_KEY = "focus";
   private static final String UNKNOWN_KEY = "berserk";
 
   @Test
@@ -16,6 +17,7 @@ class DefenseModeTest {
     assertEquals(PEACEFUL_KEY, DefenseMode.PEACEFUL.key());
     assertEquals(RETALIATE_KEY, DefenseMode.RETALIATE.key());
     assertEquals(AGGRESSIVE_KEY, DefenseMode.AGGRESSIVE.key());
+    assertEquals(FOCUS_KEY, DefenseMode.FOCUS.key());
   }
 
   @Test

@@ -167,7 +167,7 @@ Estes nomes não mudam sem migração (regra 18 do `AGENTS.md`).
 | Estado do bloco do Dock | `facing`, `half` e `status` | Direção, parte de baixo ou de cima e estado da tela: `off`, `idle`, `charging`, `complete` ou `no_energy` |
 | NBT da entidade na base | `DockPosition` | Posição do Dock em que hiberna |
 | NBT da entidade | `LampEnabled` | Chave da lanterna. Sem a chave no save, vale ligada |
-| NBT da entidade | `DefenseMode` | Modo de defesa: `peaceful`, `retaliate` ou `aggressive`. Sem a chave ou com valor inválido, vale `peaceful` |
+| NBT da entidade | `DefenseMode` | Modo de defesa: `peaceful`, `retaliate`, `aggressive` ou `focus`. Sem a chave ou com valor inválido, vale `peaceful` |
 | Tipo de dano | `cubit:shock` | O choque do Cubit, com a mensagem de morte `X was zapped by Cubit` (pergunta 831) |
 | NBT da entidade | `Color` | Cor da carcaça, com o nome do corante, como `light_blue`. Sem a chave ou com valor inválido, vale `white` |
 | NBT da entidade | `ScannersEnabled` e `ChatterEnabled` | Chaves dos scanners e das falas. Sem a chave no save, vale ligada |
@@ -192,6 +192,7 @@ O estado salvo é validado ao entrar no jogo, sem derrubá-lo (regra 17 do `AGEN
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-12 15:10 | Adiciona o modo Focus ao NBT. |
 | Marcelo Fabiano | 2026-11-12 10:30 | Adiciona o modo de defesa e o tipo de dano do choque aos contratos de save. |
 | Marcelo Fabiano | 2026-11-12 08:30 | Adiciona as receitas dos Modules. |
 | Marcelo Fabiano | 2026-11-11 22:01 | Adiciona os Modules. |

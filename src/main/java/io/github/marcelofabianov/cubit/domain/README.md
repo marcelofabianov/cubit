@@ -20,9 +20,11 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 | `RobotState` | O que o robô guarda ao virar item: tier, energia, vida, a chave da lanterna, a cor, a chave dos scanners, o filtro de minérios, a chave das falas e o modo de defesa. `damaged` e `repaired` dão o estado ao morrer e ao consertar |
 | `TierSpec` | Números de um tipo de robô num tier |
 | `ShockSpec` | O choque de um tier: dano, alcance, intervalo, custo, se atinge todos no alcance e os modos de defesa liberados. O Pacífico sempre está liberado. `NONE` é o tier sem choque |
-| `DefenseMode` | Quem o robô ataca: Pacífico, Contra-atacar ou Agressivo. A `key` é o nome usado no config e nos saves, e `INITIAL` é o Pacífico |
+| `DefenseMode` | Quem o robô ataca: Pacífico, Contra-atacar, Agressivo ou Focus. A `key` é o nome usado no config e nos saves, e `INITIAL` é o Pacífico |
 | `ShockCandidate` | O que é um ser vivo perto do robô, para o choque: o dono, um player, um robô, ou um mob pacífico, neutro ou hostil. A camada do jogo classifica |
 | `DefenseRules` | Quem cada modo de defesa ataca |
+| `ShockSignals` | O que o robô sabe de um ser vivo além do que ele é: se está agressivo com o dono, se é o atacante lembrado, se é o alvo do Focus e se o Focus tem alvo |
+| `FocusTarget` | O alvo do Focus: o último mob que o dono feriu, até morrer, mudar de dimensão ou ficar longe do dono |
 | `RetaliationMemory` | O último mob que feriu o robô ou o dono, até quando o Contra-atacar lembra dele |
 | `ShockRules` | Quando o robô dá o choque e em quais alvos |
 | `TierCatalog` | Entrega o `TierSpec` de um tipo de robô num tier. O domínio define a interface, e o config a implementa |
@@ -136,6 +138,7 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 - **Tela com a altura do Base:** o inventário dos tiers altos rola, em vez de a janela crescer, porque no Ultimate ela passaria da altura da tela do jogo (pergunta 838).
 - **Choque só com quem o usa:** o choque e os três modos entram juntos, porque o Pacífico sozinho nunca dispara o choque (pergunta 822).
 - **Pacífico sempre liberado:** o `ShockSpec` acrescenta o Pacífico a qualquer lista de modos, para o dono sempre poder parar os ataques, mesmo com um config que esqueça dele (pergunta 834).
+- **Focus sem alvo defende:** sem alvo, o Focus age como o Contra-atacar, para o dono nunca ficar sem defesa (pergunta 848). Com alvo, só o alvo leva o choque, mesmo um neutro calmo, porque o dono o feriu (pergunta 845).
 - **Nunca atacados:** o dono, outros players, outros robôs e mobs pacíficos, em qualquer modo. Um mob neutro só vira alvo quando fica agressivo contra o dono (perguntas 13 e 68).
 - **Tempo sem relógio:** a `RetaliationMemory` e as `ShockRules` recebem o tick atual de quem chama, como o resto do domínio.
 - **Números por dado:** as regras recebem os números de um `TierSpec`, sem constantes no código (regra 39 do `AGENTS.md`).

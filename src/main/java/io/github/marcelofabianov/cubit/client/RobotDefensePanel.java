@@ -36,9 +36,9 @@ final class RobotDefensePanel {
   private static final int NAME_TOP = 3;
   private static final int DETAIL_TOP = 12;
   private static final int NAME_WIDTH = 132;
-  private static final Box SHOCK_TITLE = new Box(8, 96, 150, LINE);
-  private static final int SHOCK_RULE = 105;
-  private static final int FIRST_ROW = 109;
+  private static final Box SHOCK_TITLE = new Box(8, 116, 150, LINE);
+  private static final int SHOCK_RULE = 125;
+  private static final int FIRST_ROW = 129;
   private static final int ROW_HEIGHT = 14;
   private static final int ROW_TEXT_TOP = 3;
   private static final int ROW_LABEL_X = 10;

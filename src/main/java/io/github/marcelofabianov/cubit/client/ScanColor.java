@@ -10,7 +10,9 @@ import net.minecraft.util.FastColor;
  */
 enum ScanColor {
   ORE(0.55f, 0.8f, 1f),
-  MOB(1f, 0.45f, 0.45f);
+  MOB(1f, 0.45f, 0.45f),
+  /** The yellow of the shock, for the target of Focus (answer 853). */
+  FOCUS(0.96f, 0.77f, 0f);
 
   private static final int MAX = 255;
 
