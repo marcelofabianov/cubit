@@ -4,6 +4,24 @@ All notable changes to Cubit are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.1] - 2026-11-12
+
+Cubit grows up: three new tiers, a shock to defend its owner, four defense modes and new switches on its screen. Robots and items from 0.1.0 load as before, Peaceful and with the solar panel on.
+
+### Added
+
+- **Tiers:** Advanced, Elite and Ultimate, reached one at a time with the Advanced, Elite and Ultimate Modules, crafted from vanilla materials. Upgrading keeps the charge, the current health, the items, the name, the color and the settings, and raises the health, speed, battery, inventory, solar panel, lamp and scanners to the numbers of the new tier. The collar shows the tier on the robot and on its icon.
+- **Shock:** from Advanced on, an active Cubit shocks enemies within the range of its tier, with line of sight, while it keeps following its owner. Each shock costs energy, and Ultimate hits every target in range at once. Sparks and a sound of its own, and a kill counts as the owner's, as with a tamed wolf.
+- **Defense modes:** Peaceful in every tier, Retaliate and Focus from Advanced, and Aggressive from Elite. Focus shocks only the last mob its owner hurt, marked with a bigger yellow arrow, and without a target it defends like Retaliate. The Cubit never attacks its owner, other players, other Cubits or peaceful mobs.
+- **Defense tab:** a third tab on the Cubit screen, with a shield, to choose the mode and see the numbers of the shock.
+- **Settings tab:** a switch for the solar panel and a Power button that switches the Cubit off, freeing the place to follow. A click on the robot turns it on again.
+- **Config:** the shock numbers and the defense modes of each tier, how long Retaliate remembers an attacker and how far a Focus target may get from the owner.
+
+### Changed
+
+- The Cubit screen keeps the height of the Base tier and scrolls the inventory of the bigger tiers, so it never runs past the game window. Shift-click fills the whole inventory, also the rows out of sight.
+- The settings tab no longer shows the footer about future functions, to fit the new switches.
+
 ## [0.1.0] - 2026-11-08
 
 The first release of Cubit, a cute battery-powered robot companion for Minecraft 1.21.1 on NeoForge. It ships with the Base tier only.
