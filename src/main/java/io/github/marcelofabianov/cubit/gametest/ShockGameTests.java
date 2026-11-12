@@ -71,6 +71,9 @@ public final class ShockGameTests {
   private static final BlockPos BEYOND = new BlockPos(ROBOT_X + 3, STAND_Y, MIDDLE_Z + 1);
   private static final BlockPos WALL = new BlockPos(ROBOT_X + 1, STAND_Y, MIDDLE_Z);
 
+  /** Next to the robot, as a mob that just hit it, so the knockback keeps it in range. */
+  private static final BlockPos ADJACENT = WALL;
+
   private ShockGameTests() {}
 
   @GameTest(template = EMPTY)
@@ -168,7 +171,7 @@ public final class ShockGameTests {
     Player owner = ownerBeside(helper);
     RobotEntity robot = GameTestRobots.placeRobot(helper, owner, item(RobotTier.ADVANCED), FLOOR);
     robot.defense().choose(owner, DefenseMode.RETALIATE);
-    Mob attacker = still(helper.spawn(EntityType.HUSK, NEAR));
+    Mob attacker = still(helper.spawn(EntityType.HUSK, ADJACENT));
     Mob bystander = still(helper.spawn(EntityType.HUSK, NEAR.south()));
 
     robot.hurt(robot.damageSources().mobAttack(attacker), RETALIATED_HIT);
