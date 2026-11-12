@@ -12,6 +12,8 @@
 
 | # | Pergunta | Resposta |
 |---|---|---|
+| 839 | Onde entra a correção da tela que corta nos tiers altos? | Dentro do PR #149, como mais commits na branch do choque, ainda aberta. A recomendação era uma issue e um PR próprios |
+| 838 | Como mostrar 36, 45 e 54 slots sem a tela do Cubit passar da altura da tela, se no Ultimate ela chega a 279 px e corta? | Com rolagem: a janela fica sempre do tamanho da do Base, com 3 linhas visíveis e uma barra de rolagem ao lado do inventário do Cubit quando há mais de 27 slots, pela roda do mouse ou arrastando. O servidor acompanha a rolagem, para os itens nunca trocarem de lugar errado |
 | 837 | Como foi o teste manual do choque e dos modos de defesa? | "testes feitos, tudo ok", executados pelo desenvolvedor no `make client`, na branch `feature/148-shock-and-defense-modes`, com o Jade junto, sem detalhar cada passo. Cobre a seção "Choque e modos de defesa" do roteiro manual, com a aba Defense. O teste com o jar numa instância só com o mod continua pendente para antes da `main` (regra 35) |
 | 836 | A estrutura de pacotes do `AGENTS.md` pode citar o que entrou na Fase 4? | Sim, autorizado pelo desenvolvedor: `DefenseMode`, `TierUpgrade`, `ShockSpec`, as regras do choque, `CubitDamageTypes`, `RobotUpgrade`, `RobotDefense`, `RobotShock`, `ModuleItem`, `TierLook`, `DefenseControl`, `DefenseOpening` e as três abas da tela, com a Power Bank na Fase 4.1 |
 | 835 | Como ficam os textos da aba Defense e do choque que a 833 não cobria? | Como propostos: a lista se chama `Modes` / `Modos`; a seção `Shock` / `Choque` tem `Damage` / `Dano`, `Range` / `Alcance` com `5 blocks` / `5 blocos`, `Interval` / `Intervalo` com `Every 2 s` / `A cada 2 s`, `Cost` / `Custo` com `2000 FE per shock` / `2000 FE por choque` e `Targets` / `Alvos` com `The nearest` / `O mais próximo` ou `All in range` / `Todos no alcance`. As legendas de som são `Cubit shocks` / `Cubit dá um choque` e `Cubit turns aggressive` / `Cubit fica agressivo`. Detalha a 833 |
@@ -92,7 +94,7 @@
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
-| Marcelo Fabiano | 2026-11-12 12:40 | Registra a resposta 837. |
+| Marcelo Fabiano | 2026-11-12 12:40 | Registra as respostas 837 a 839. |
 | Marcelo Fabiano | 2026-11-12 11:40 | Registra as respostas 835 e 836. |
 | Marcelo Fabiano | 2026-11-12 09:40 | Registra as respostas 820 a 834. |
 | Marcelo Fabiano | 2026-11-12 08:30 | Responde a pendente 807 e registra as respostas 817 a 819. |

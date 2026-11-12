@@ -404,15 +404,16 @@ Compare os ícones com `modulo-avancado.png`, `modulo-elite.png` e `modulo-ultim
 | 2 | Passe o mouse em cada Module | `Requires a Base Cubit`, `Requires an Advanced Cubit` e `Requires an Elite Cubit`, em cinza |
 | 3 | Em sobrevivência, com um Cubit Base ativo, clique com o Elite Module | Nada muda, o Module fica na mão, e aparece `Cubit: I need to be Advanced first` |
 | 4 | Clique com o Advanced Module | O Module é gasto, ele fica feliz com o bipe, aparece `Cubit: Upgraded to Advanced!`, e o colar e as faixas ficam azuis |
-| 5 | Abra o inventário dele | 36 slots, com os itens nos mesmos lugares, a vida atual igual e a vida máxima de 50, e a bateria com a mesma carga sobre 600 mil FE |
+| 5 | Abra o inventário dele | A janela tem a mesma altura da do Base, com 3 linhas à vista e uma barra de rolagem à direita. Rolando, aparecem os 36 slots, com os itens nos mesmos lugares. A vida atual é a mesma, a vida máxima é 50, e a bateria tem a mesma carga sobre 600 mil FE |
 | 6 | Clique de novo com o Advanced Module | Nada é gasto, e aparece `Cubit: I'm already Advanced` |
 | 7 | Ande com ele | Mais rápido que o Base |
 | 8 | Aplique o Elite Module num Cubit desligado e o Ultimate num Cubit no Dock | Os dois sobem de tier. Com a tela apagada, só o texto aparece, e no Dock ele continua carregando |
-| 9 | Recolha o Cubit Ultimate | O ícone tem o colar dourado, também pintado de outra cor |
-| 10 | Mate esse Cubit | O ícone do `Damaged Cubit` tem o colar dourado, e o conserto mantém o tier |
-| 11 | No criativo, aplique um Module | O Module não é gasto |
-| 12 | Com o jogo em português, repita os passos 2 a 6 | `Módulo Avançado`, `Exige um Cubit Base`, `Cubit: Preciso ser Avançado antes`, `Cubit: Evoluí para Avançado!` e `Cubit: Já sou Avançado` |
-| 13 | Com outro player no servidor, use um Module no Cubit | Nada acontece, sem texto, e o Module não é gasto. Coberto pelas GameTests, sem teste no jogo (pergunta 809) |
+| 9 | Abra o Cubit Ultimate numa janela pequena do jogo, com a escala automática | A tela cabe inteira. A roda do mouse sobre o inventário, um clique na barra e arrastar o marcador passam pelas 6 linhas. Shift + clique de um item do player, com as 3 linhas de cima cheias, guarda o item numa linha de baixo |
+| 10 | Recolha o Cubit Ultimate | O ícone tem o colar dourado, também pintado de outra cor |
+| 11 | Mate esse Cubit | O ícone do `Damaged Cubit` tem o colar dourado, e o conserto mantém o tier |
+| 12 | No criativo, aplique um Module | O Module não é gasto |
+| 13 | Com o jogo em português, repita os passos 2 a 6 | `Módulo Avançado`, `Exige um Cubit Base`, `Cubit: Preciso ser Avançado antes`, `Cubit: Evoluí para Avançado!` e `Cubit: Já sou Avançado` |
+| 14 | Com outro player no servidor, use um Module no Cubit | Nada acontece, sem texto, e o Module não é gasto. Coberto pelas GameTests, sem teste no jogo (pergunta 809) |
 
 ## Choque e modos de defesa
 
@@ -655,6 +656,7 @@ Na instância só com o mod, tire capturas com F2 do Cubit seguindo, da tela do 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-12 13:40 | Adiciona a rolagem do inventário ao upgrade de tier. |
 | Marcelo Fabiano | 2026-11-12 11:40 | Adiciona o choque e os modos de defesa. |
 | Marcelo Fabiano | 2026-11-12 08:50 | Adiciona as receitas dos Modules. |
 | Marcelo Fabiano | 2026-11-11 23:40 | Adiciona o upgrade de tier e atualiza o colar no ícone. |

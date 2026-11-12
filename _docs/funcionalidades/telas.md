@@ -40,6 +40,9 @@ Três abas, à direita da janela: **Inventory**, com o ícone do baú, **Setting
 | Inventário do Cubit | `Cubit's inventory`, ou com o nome dele, como `Bolt's inventory` |
 | Inventário do player | `Inventory` e a hotbar |
 
+- **Rolagem nos tiers altos:** a janela tem sempre a altura da do Base, com 3 linhas do inventário do Cubit à vista, para não passar da altura da tela (perguntas 838 e 839). Com mais de 27 slots, uma barra de rolagem fica à direita do inventário, e a janela ganha a largura dela. A roda do mouse sobre o inventário, um clique na barra ou arrastar o marcador mudam a linha de cima. O servidor recebe a rolagem como botão de menu, confere o limite e manda os itens da parte à vista.
+- **Shift + clique** de um item do player procura espaço no inventário inteiro do Cubit, e não só nas linhas à vista.
+
 ### Estados do topo
 
 | Estado | Quando | Texto | Cor |
@@ -196,6 +199,7 @@ Pergunta 691.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-12 13:10 | Adiciona a rolagem do inventário nos tiers altos. |
 | Marcelo Fabiano | 2026-11-12 11:40 | Detalha os textos da seção do choque. |
 | Marcelo Fabiano | 2026-11-12 10:30 | Adiciona a aba Defense. |
 | Marcelo Fabiano | 2026-11-08 00:11 | Cita a tradução para o português. |
