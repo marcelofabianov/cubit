@@ -88,6 +88,70 @@ public final class RecipeGameTests {
     helper.succeed();
   }
 
+  @GameTest(template = EMPTY_TEMPLATE)
+  public static void theAdvancedModuleRecipeMakesAnAdvancedModule(GameTestHelper helper) {
+    ItemStack result = craft(helper, advancedModuleGrid());
+
+    helper.assertTrue(result.is(CubitItems.ADVANCED_MODULE.get()), WRONG_RESULT);
+    helper.succeed();
+  }
+
+  @GameTest(template = EMPTY_TEMPLATE)
+  public static void theEliteModuleRecipeMakesAnEliteModule(GameTestHelper helper) {
+    ItemStack result = craft(helper, eliteModuleGrid());
+
+    helper.assertTrue(result.is(CubitItems.ELITE_MODULE.get()), WRONG_RESULT);
+    helper.succeed();
+  }
+
+  @GameTest(template = EMPTY_TEMPLATE)
+  public static void theUltimateModuleRecipeMakesAnUltimateModule(GameTestHelper helper) {
+    ItemStack result = craft(helper, ultimateModuleGrid());
+
+    helper.assertTrue(result.is(CubitItems.ULTIMATE_MODULE.get()), WRONG_RESULT);
+    helper.succeed();
+  }
+
+  /** The grids of _docs/itens.md: the main material in the corners and the core in the middle. */
+  private static List<ItemStack> advancedModuleGrid() {
+    return stacks(
+        Items.GOLD_INGOT,
+        Items.QUARTZ,
+        Items.GOLD_INGOT,
+        Items.QUARTZ,
+        Items.COMPARATOR,
+        Items.QUARTZ,
+        Items.GOLD_INGOT,
+        Items.QUARTZ,
+        Items.GOLD_INGOT);
+  }
+
+  private static List<ItemStack> eliteModuleGrid() {
+    return stacks(
+        Items.DIAMOND,
+        Items.PURPLE_DYE,
+        Items.DIAMOND,
+        Items.PURPLE_DYE,
+        Items.REDSTONE_BLOCK,
+        Items.PURPLE_DYE,
+        Items.DIAMOND,
+        Items.PURPLE_DYE,
+        Items.DIAMOND);
+  }
+
+  private static List<ItemStack> ultimateModuleGrid() {
+    return stacks(
+        Items.DIAMOND,
+        Items.REDSTONE_BLOCK,
+        Items.DIAMOND,
+        Items.NETHERITE_INGOT,
+        Items.NETHER_STAR,
+        Items.NETHERITE_INGOT,
+        Items.DIAMOND,
+        Items.AIR,
+        Items.DIAMOND);
+  }
+
   private static List<ItemStack> robotGrid() {
     return stacks(
         Items.REDSTONE,

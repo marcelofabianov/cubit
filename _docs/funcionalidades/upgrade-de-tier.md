@@ -1,6 +1,6 @@
 # Upgrade de tier
 
-O Cubit sobe de tier com um Module, sem pular etapas: Base → Advanced → Elite → Ultimate (perguntas 226, 93 e 797 a 806). Os números de cada tier estão em [`tiers.md`](../tiers.md), e o nome, o ID e a receita de cada Module, em [`itens.md`](../itens.md#modules).
+O Cubit sobe de tier com um Module, sem pular etapas: Base → Advanced → Elite → Ultimate (perguntas 226, 93 e 797 a 806). Os números de cada tier estão em [`tiers.md`](../tiers.md), e o nome, o ID e a receita de cada Module, em [`itens.md`](../itens.md#modules), com a grade de cada um (perguntas 807, 817 e 818).
 
 | Advanced Module | Elite Module | Ultimate Module |
 |---|---|---|
@@ -61,5 +61,6 @@ O colar do ícone do Cubit e do Damaged Cubit ganha a cor do tier por uma segund
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-12 08:30 | Aponta para as receitas dos Modules. |
 | Marcelo Fabiano | 2026-11-11 23:10 | Acrescenta os nomes e os textos em português. |
 | Marcelo Fabiano | 2026-11-11 22:01 | Define o upgrade de tier com os Modules. |

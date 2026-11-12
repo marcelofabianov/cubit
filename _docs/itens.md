@@ -23,9 +23,9 @@
 | Damaged Cubit | `cubit:damaged_general_robot` | Não tem: cai quando o Cubit morre |
 | Toolbox | `cubit:toolbox` | Provisória, abaixo |
 | Cubit Remote | `cubit:remote` | A definir |
-| Advanced Module | `cubit:advanced_module` | A definir |
-| Elite Module | `cubit:elite_module` | A definir |
-| Ultimate Module | `cubit:ultimate_module` | A definir |
+| Advanced Module | `cubit:advanced_module` | [Abaixo](#advanced-module) |
+| Elite Module | `cubit:elite_module` | [Abaixo](#elite-module) |
+| Ultimate Module | `cubit:ultimate_module` | [Abaixo](#ultimate-module) |
 | Induction Dock | `cubit:induction_dock` | Abaixo |
 | Base Power Bank | `cubit:base_power_bank` | A definir |
 | Advanced Power Bank | `cubit:advanced_power_bank` | A definir |
@@ -40,7 +40,7 @@ Receitas provisórias, só com recursos do jogo puro, a ajustar nos testes:
 |---|---|
 | Base | Ferro e redstone |
 | Avançado | Ouro e quartzo |
-| Elite | Diamante e ametista |
+| Elite | Diamante e corante roxo (pergunta 817) |
 | Ultimate | Netherite e estrela do Nether |
 
 ### Cubit
@@ -103,7 +103,31 @@ Levam o Cubit ao tier seguinte, sem pular etapas. As regras estão em [`upgrade-
 
 - **Empilha** até 64, e o nome aparece na cor do colar do tier (pergunta 804).
 - **Criativo:** os três ficam na aba `cubit:main`.
-- **Receitas:** na mesa de craft, independentes, sem o Module anterior, só com materiais do jogo puro (pergunta 799). As três aparecem no livro ao ter um Cubit (pergunta 805). Os materiais estão pendentes na pergunta 807.
+- **Receitas:** na mesa de craft, independentes, sem o Module anterior, só com materiais do jogo puro (pergunta 799). As três aparecem no livro ao ter um Cubit (pergunta 805). Os materiais e a grade vêm das perguntas 807, 817 e 818.
+
+### Advanced Module
+
+| | Coluna 1 | Coluna 2 | Coluna 3 |
+|---|---|---|---|
+| Linha 1 | Lingote de ouro | Quartzo | Lingote de ouro |
+| Linha 2 | Quartzo | Comparador | Quartzo |
+| Linha 3 | Lingote de ouro | Quartzo | Lingote de ouro |
+
+### Elite Module
+
+| | Coluna 1 | Coluna 2 | Coluna 3 |
+|---|---|---|---|
+| Linha 1 | Diamante | Corante roxo | Diamante |
+| Linha 2 | Corante roxo | Bloco de redstone | Corante roxo |
+| Linha 3 | Diamante | Corante roxo | Diamante |
+
+### Ultimate Module
+
+| | Coluna 1 | Coluna 2 | Coluna 3 |
+|---|---|---|---|
+| Linha 1 | Diamante | Bloco de redstone | Diamante |
+| Linha 2 | Lingote de netherite | Estrela do Nether | Lingote de netherite |
+| Linha 3 | Diamante | Vazio | Diamante |
 
 ## Previstos na Fase 5
 
@@ -166,6 +190,7 @@ O estado salvo é validado ao entrar no jogo, sem derrubá-lo (regra 17 do `AGEN
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-12 08:30 | Adiciona as receitas dos Modules. |
 | Marcelo Fabiano | 2026-11-11 22:01 | Adiciona os Modules. |
 | Marcelo Fabiano | 2026-11-07 23:41 | Acrescenta as chaves dos scanners, do filtro e das falas aos contratos de save. |
 | Marcelo Fabiano | 2026-11-07 13:51 | Adiciona a energia negativa e o Dock sem dono à validação do save. |
