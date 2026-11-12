@@ -120,7 +120,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Nome:** com etiqueta, só do dono, ou na bigorna, e sempre visível acima do Cubit.
 - **Tronco central:** a coluna entre as esteiras e a carcaça tem 2 unidades de altura, e a hitbox não muda.
 - **Trabalhos (Fase 5, planejada):** um único Cubit, com um card por vez, age só em área marcada e nunca sai dela. Antena e Servidor mantêm os chunks carregados, de forma opcional. Sem chunk de destino, ele espera. O detalhe está em [`trabalhos.md`](funcionalidades/trabalhos.md).
-- **Modo só o alvo:** ideia aprovada, a refinar na Fase 4: o Cubit só ataca o último mob que o dono feriu ou marcou com o controle (pergunta 578). O último mob atacado entra na Fase 4, e a mira pelo controle, na 4.2, com o Cubit Remote (pergunta 795).
+- **Modo Focus (perguntas 843 a 853):** o modo só o alvo se chama `Focus` e libera no Advanced. Só dá o choque no último mob que o dono feriu, com qualquer dano, sem perseguir, e um neutro ferido também vira alvo. Sem alvo, age como o Contra-atacar. O alvo acaba ao morrer, mudar de dimensão ou ficar a mais de 32 blocos do dono. Ganha uma seta amarela e maior, e o texto `Cubit: Target: Zombie` ao mudar. A mira pelo controle fica na Fase 4.2 (pergunta 795).
 - **Limites:** nunca ataca o dono, outros players, outros Cubits nem mobs pacíficos. Só ataca mobs neutros para defender o player.
 - **Choque e modos de defesa (perguntas 822 a 834):** entram juntos. O Cubit ativo dá o choque sem perseguir, com linha de visão, no alcance e no intervalo do tier, num alvo, ou em todos no Ultimate, com faíscas e o abate do dono. Pacífico no Base, Contra-atacar a partir do Advanced, com 30 s de memória, e Agressivo a partir do Elite, escolhidos numa aba Defense própria, com o escudo. O modo começa Pacífico e fica no item, e os modos e números de cada tier ficam no config.
 - **Scanner:** `c:ores/*` significa a tag-mãe `c:ores` e suas subtags, porque tags não aceitam curinga.
@@ -141,6 +141,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-12 15:10 | Fecha o modo Focus. |
 | Marcelo Fabiano | 2026-11-12 10:30 | Resume o choque e os modos de defesa. |
 | Marcelo Fabiano | 2026-11-12 09:40 | Registra as confirmações feitas depois da `0.1.0`. |
 | Marcelo Fabiano | 2026-11-12 08:30 | Fecha as receitas dos Modules. |

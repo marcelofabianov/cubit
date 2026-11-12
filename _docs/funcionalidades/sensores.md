@@ -46,6 +46,7 @@ Definidos, em entregas próprias depois da detecção:
 - **Halo do corpo:** um brilho translúcido atrás do Cubit, sempre virado para a câmera, maior que ele (pergunta 641).
 - **Tom:** o mesmo azul claro e vermelho claro das caixas (pergunta 642).
 - **Sinal:** o servidor decide e envia a todos por um dado sincronizado, fora do save (pergunta 638).
+- **Seta do alvo do Focus:** no modo Focus, o alvo ganha uma seta amarela, maior, que fica no lugar da vermelha, mesmo fora do raio do scanner ou com os scanners desligados (perguntas 851 e 853). Detalhada em [`combate.md`](combate.md#modo-focus).
 - **Caixas e seta:** em volta do minério, uma caixa de linhas azul. Sobre a cabeça do mob, uma seta vermelha para baixo, ▼, preenchida, virada para a câmera e com um leve balanço. As duas ficam só no cliente do dono, sem mixin e sem mexer no mob, visíveis através dos blocos, num tom claro e translúcido, com um pulso suave (perguntas 555 a 557, 600, 614 e 646 a 649).
 - **Que minério ganha caixa:** todos os minérios novos que a varredura achou dentro da esfera, os raros e os do filtro, mesmo quando o texto espera o intervalo de 25 s. Um minério já visto não ganha caixa de novo (perguntas 593, 597 e 608).
 - **Quanto dura:** a caixa do minério, cerca de 10 s ou até ele deixar de ser minério, e a seta do mob, enquanto ele estiver no raio do Cubit (perguntas 556 e 599).
@@ -69,6 +70,7 @@ Definidos, em entregas próprias depois da detecção:
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-12 15:10 | Cita a seta do alvo do Focus. |
 | Marcelo Fabiano | 2026-11-08 00:11 | Nomeia o minério pelo bloco, no idioma do jogo. |
 | Marcelo Fabiano | 2026-11-07 23:42 | Troca a caixa do mob pela seta nos sinais e no pacote. |
 | Marcelo Fabiano | 2026-11-07 23:11 | Aponta as chaves para a aba Settings. |

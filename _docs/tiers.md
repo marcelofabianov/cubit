@@ -93,6 +93,7 @@ Valem para todos os tiers e ficam no config. Os marcados como planejados entram 
 | Alcance do controle remoto ao mirar num Cubit, planejado para a Fase 4 | 32 blocos |
 | Intervalo mínimo entre repetições de textos e alertas | ~25 s |
 | Tempo em que o Contra-atacar lembra de quem feriu o Cubit ou o dono | ~30 s (pergunta 832) |
+| Distância do dono em que o alvo do Focus deixa de ser alvo | 32 blocos (pergunta 846) |
 | Intervalo mínimo entre falas sobre o tempo | 5 min |
 | Intervalo mínimo entre falas de bioma | 2 min |
 | Intervalo mínimo entre falas de animais | 1 min |
@@ -139,7 +140,7 @@ O raio dos dois scanners é o de uma esfera em volta do Cubit: só conta o que e
 
 | Recurso | Base | Avançado | Elite | Ultimate |
 |---|---|---|---|---|
-| Modos de defesa | Pacífico | + Contra-atacar | + Agressivo | Todos |
+| Modos de defesa | Pacífico | + Contra-atacar e Focus | + Agressivo | Todos |
 | Choque (dano) | Bloqueado | 2 (1 ❤) | 4 (2 ❤) | 6 (3 ❤), em área |
 | Choque (alcance) | — | 3 blocos | 5 blocos | 8 blocos |
 | Choque (intervalo) | — | 3 s | 2 s | 1 s |
@@ -199,6 +200,7 @@ Planejado para a Fase 5. O tier Base não aceita cards.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-12 15:10 | Adiciona o modo Focus e a distância do alvo. |
 | Marcelo Fabiano | 2026-11-12 10:30 | Adiciona os alvos por choque e a memória do Contra-atacar. |
 | Marcelo Fabiano | 2026-11-11 22:01 | Aponta para o upgrade de tier, junta a tabela dos sensores e troca o filtro ilimitado por 64. |
 | Marcelo Fabiano | 2026-11-07 23:41 | Arruma a tabela dos sensores e marca os valores planejados. |

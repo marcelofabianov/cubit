@@ -74,13 +74,14 @@ Os números das descrições vêm do config e do tier, nunca fixos no texto (reg
 Entra com o choque e os modos de defesa, nos itens 5 e 6 da Fase 4 (perguntas 824 e 829). As regras estão em [`combate.md`](combate.md).
 
 - **Cabeçalho:** `Defense`, a etiqueta do tier e `Battery 71%`, como na Settings.
-- **Modos:** uma lista com os três, cada um com o nome, uma descrição curta e o atual marcado. O clique num modo liberado troca o modo, pelo clique de botão de menu do jogo, e o servidor confere o dono e o tier. Os bloqueados ficam apagados, com o tier que os libera (pergunta 833):
+- **Modos:** uma lista com os quatro, Peaceful, Retaliate, Aggressive e Focus, cada um com o nome, uma descrição curta e o atual marcado. O clique num modo liberado troca o modo, pelo clique de botão de menu do jogo, e o servidor confere o dono e o tier. Os bloqueados ficam apagados, com o tier que os libera (pergunta 833):
 
 | Modo | Descrição |
 |---|---|
 | `Peaceful` | `Never attacks` |
 | `Retaliate` | `Shocks whoever hurts you or the Cubit` |
 | `Aggressive` | `Shocks hostile mobs in range` |
+| `Focus` | `Shocks only the last mob you hit` (pergunta 849) |
 | Bloqueado | `Unlocks at Advanced`, com o tier que libera o modo |
 
 - **Choque:** os números do tier, do config, numa seção `Shock`: `Damage`, `Range` em blocos, `Interval`, como `Every 2 s`, `Cost`, como `2000 FE per shock`, e `Targets`, `The nearest` ou `All in range` (pergunta 835). No Base, que só tem o Pacífico, a seção mostra `Unlocks at Advanced`.
@@ -199,6 +200,7 @@ Pergunta 691.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-12 15:10 | Adiciona o modo Focus à aba Defense. |
 | Marcelo Fabiano | 2026-11-12 13:10 | Adiciona a rolagem do inventário nos tiers altos. |
 | Marcelo Fabiano | 2026-11-12 11:40 | Detalha os textos da seção do choque. |
 | Marcelo Fabiano | 2026-11-12 10:30 | Adiciona a aba Defense. |
