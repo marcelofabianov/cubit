@@ -94,7 +94,7 @@ Entra no item 11 da Fase 4.1 (issue #168, perguntas 947 a 959).
 - **Ir:** o player clica com o botão direito no Dock, e o Cubit ligado mais próximo, dentro do raio do retorno automático, vai até ele, esteja seguindo ou em área. Colocar o item do Cubit em cima do Dock também funciona. Num Dock ocupado ou de outro player, nada acontece, e o item continua na mão.
 - **Sem conseguir chegar:** sem rota ou preso, teleporta para o Dock. Se o chunk estiver descarregado ou houver um bloqueio em cima, desiste e volta ao que fazia.
 - **Fechar o jogo:** só a hibernação é salva. A caminho ou aguardando, o Cubit volta ao que fazia ao carregar de novo. Se o Dock sumiu, ele acorda como numa liberação.
-- **Sair:** o Cubit sai sozinho cerca de 3 s depois de encher a bateria, com a tela no estado completa. Antes disso, clicar no Dock o libera. Ao sair, volta ao que fazia: a área ou seguir o player. Se outro assumiu o lugar de seguir, fica parado e desligado.
+- **Sair:** o Cubit sai sozinho cerca de 3 s depois de a bateria e a vida estarem cheias. Com a bateria cheia e a vida ainda subindo, a tela fica no estado completa e mostra quanto falta para a vida encher (pergunta 963, que muda a 55). Antes disso, clicar no Dock o libera. Ao sair, volta ao que fazia: a área ou seguir o player. Se outro assumiu o lugar de seguir, fica parado e desligado.
 - **Dono offline:** o Cubit cheio continua na base e sai quando o dono entra. Se o Dock sumir nesse período, ele acorda desligado, e um clique o liga.
 
 ### Base ocupada
@@ -149,6 +149,7 @@ Se o robô estiver dentro do raio da base e com a bateria baixa, volta sozinho p
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 13:00 | Faz o Cubit sair do Dock só com a bateria e a vida cheias. |
 | Marcelo Fabiano | 2026-11-13 12:50 | Aceita o Cubit e o Damaged Cubit no inventário do Dock. |
 | Marcelo Fabiano | 2026-11-13 11:30 | Troca o slot de carga do Dock pelo inventário, na aba Storage. |
 | Marcelo Fabiano | 2026-11-12 23:10 | Divide o slot do Dock em entrada e carga para a Power Bank. |

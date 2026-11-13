@@ -12,6 +12,8 @@ Não há perguntas pendentes nesta fase.
 | 967 | A automação põe e tira o Cubit e o Damaged Cubit do inventário? | Por qualquer face, os dois entram e saem a qualquer momento, como a Toolbox (resposta 953), um por slot. Confirma a recomendação |
 | 966 | O que o Dock faz com o item do Cubit e o Damaged Cubit guardados no inventário? | Só guarda: os dois ficam como estão, com todo o estado no item, sem recarga nem conserto. Confirma a recomendação |
 | 965 | Quais itens o inventário do Dock aceita além da Toolbox e da Power Bank? | "acrescente neste inventario do dock tambem aceitar 2 itens o cubit e damage cubit": também o item do Cubit e o Damaged Cubit. O Dock os reconhece por uma interface, como na regra 42. Muda a 947 |
+| 964 | Em que tarefa entra a saída do Dock com a bateria e a vida cheias? | Na branch da #168, `feature/168-dock-storage`, num commit próprio, e o roteiro do teste manual ganha os passos da saída. A recomendação, uma issue nova depois da #168, foi recusada |
+| 963 | Como fica a saída do Cubit do Dock? | "cubit quando entra no dock ele somente sai dele quando sua vida e energia estiverem cheia": o Cubit só sai sozinho cerca de 3 s depois de a bateria e a vida estarem cheias, e o clique no Dock continua liberando antes. O estado da tela continua `Complete` com a bateria cheia, mostrando quanto falta para a vida encher, e as Power Banks do inventário começam a carregar quando a bateria enche (resposta 952). Muda a 55. Confirma a recomendação |
 | 962 | O teste manual do inventário do Dock espera os ícones das abas ou é feito agora? | "vou testar agora sem os ícones": o teste é feito agora, com as abas sem ícone, e os ícones são conferidos depois, quando os PNGs chegarem |
 | 960 | De que lado da janela ficam as abas Dock e Storage, se a resposta 956 dizia "à esquerda, como as da tela do Cubit" e as do Cubit ficam à direita? | À direita, como na tela do Cubit, com o mesmo tamanho e desenho, para as duas telas seguirem o mesmo padrão. Corrige a 956 pela regra 48, porque a pergunta do agente descrevia o lado errado. Confirma a recomendação |
 | 959 | Sem o slot de carga, o que faz o clique direito no Dock com uma Power Bank ou uma Toolbox na mão? | Guarda no inventário: a Power Bank ou a pilha de Toolbox na mão vai para o inventário do Dock, juntando nas pilhas e nos slots livres, e o que não couber fica na mão. Só o dono. A redstone continua indo ao slot de entrada. Muda a 924. Confirma a recomendação |
@@ -219,6 +221,7 @@ Não há perguntas pendentes nesta fase.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 13:00 | Registra as respostas 963 e 964. |
 | Marcelo Fabiano | 2026-11-13 12:50 | Registra as respostas 962 e 965 a 968. |
 | Marcelo Fabiano | 2026-11-13 11:50 | Registra a resposta 960. |
 | Marcelo Fabiano | 2026-11-13 11:10 | Registra as respostas 952 a 959. |

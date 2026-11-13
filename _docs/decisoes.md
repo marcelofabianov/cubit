@@ -147,6 +147,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
   - A de religar o Cubit na grade é o tipo `cubit:robot_recharge`.
 - **Slots exclusivos da Fase 4.1 (perguntas 930 e 931):** só as tochas, a partir do Advanced, depois da issue #165. A fornalha vai para o Minerador, na Fase 5, e o carregador de ferramentas sai do mod.
 - **Inventário do Dock (perguntas 947 a 959, issue #168):** 27 slots, na aba Storage da tela do Dock, só para a Toolbox, as Power Banks, o item do Cubit e o Damaged Cubit, que só ficam guardados (perguntas 965 a 968), no lugar do slot de carga. Carrega uma Power Bank por vez, a 500 FE/t, sem Cubit na base ou com o Cubit de bateria cheia. Funis põem os itens por qualquer face e tiram a Toolbox, o Cubit, o Damaged Cubit e a Power Bank cheia. Fica no item ao quebrar o Dock, em `cubit:dock_storage`, e no bloco em `Storage`. A Power Bank de `ChargeSlot` vai para o primeiro slot. O clique com Power Bank, Toolbox ou Damaged Cubit guarda o item, e com o Cubit o põe na base. Entra como item 11 da Fase 4.1, e as tochas passam a ser o 12.
+- **Saída do Dock (pergunta 963):** o Cubit só sai sozinho cerca de 3 s depois de a bateria e a vida estarem cheias, e o clique no Dock continua liberando antes. Muda a 55.
 - **Texturas por prompt (pergunta 900):** o agente não desenha imagens. Ele escreve o prompt em `tmp/arte/{nome}/prompt.md`, e o desenvolvedor devolve os arquivos na mesma pasta.
 - **Chaveamento:** têm chave a chave geral do Cubit, com ligar, desligar e hibernar, o painel solar, a lanterna, os scanners, o ímã, pegar itens dropados, a descarga em baú, o retorno automático e mostrar o local de morte do player. Cada chave entra com o recurso dela.
 
@@ -154,6 +155,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 13:00 | Registra a saída do Dock com a bateria e a vida cheias. |
 | Marcelo Fabiano | 2026-11-13 12:50 | Acrescenta o Cubit e o Damaged Cubit ao inventário do Dock. |
 | Marcelo Fabiano | 2026-11-13 11:30 | Registra o inventário do Dock. |
 | Marcelo Fabiano | 2026-11-13 10:30 | Registra o roteiro do teste manual na conversa. |

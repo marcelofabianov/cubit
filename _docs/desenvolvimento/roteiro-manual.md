@@ -700,6 +700,8 @@ As regras estão em [`energia.md`](../funcionalidades/energia.md#inventário-do-
 | 12 | Guarde um Cubit recolhido e um Damaged Cubit no Storage, pela tela | Os dois entram, um por slot, e continuam com o mesmo estado ao tirá-los |
 | 13 | Clique no Dock com um Damaged Cubit na mão, e depois com um Cubit | O Damaged Cubit vai para o Storage, e o Cubit é posto na base |
 | 14 | Com um funil embaixo do Dock, guarde um Cubit e um Damaged Cubit | Os dois saem pelo funil |
+| 15 | Ponha no Dock um Cubit ferido e de bateria quase cheia | A bateria enche primeiro, a tela fica em `Complete` com o tempo que falta para a vida, e ele só sai cerca de 3 s depois de a vida encher |
+| 16 | Repita o passo 15 e clique no Dock antes de a vida encher | O Cubit sai na hora |
 
 ## Tradução
 
@@ -760,6 +762,7 @@ Na instância só com o mod, tire capturas com F2 do Cubit seguindo, da tela do 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 13:00 | Adiciona a saída do Dock com a bateria e a vida cheias. |
 | Marcelo Fabiano | 2026-11-13 12:50 | Adiciona o Cubit e o Damaged Cubit ao roteiro do inventário do Dock. |
 | Marcelo Fabiano | 2026-11-13 11:30 | Adiciona o inventário do Dock e troca o slot de carga nos passos da Power Bank. |
 | Marcelo Fabiano | 2026-11-13 09:50 | Adiciona a busca dos itens do chão e as dicas das chaves da aba Behavior. |

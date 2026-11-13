@@ -171,10 +171,12 @@ public final class RobotDocking {
     Battery battery = dock.charge(robot.battery(), spec.rechargePerTick());
     robot.setBattery(battery);
     robot.heal(DockStay.healthPerTick(spec.maxHealth(), CubitMod.CONFIG.dockFullHealTicks()));
-    ticksFull = battery.isFull() ? ticksFull + 1 : 0;
+    boolean healthFull = robot.getHealth() >= robot.getMaxHealth();
+    ticksFull = DockStay.complete(battery, healthFull) ? ticksFull + 1 : 0;
     dock.reportRobot(robot.getUUID(), battery.isFull());
     boolean done =
-        DockStay.shouldLeave(battery, ticksFull, CubitMod.CONFIG.dockCompleteHoldTicks());
+        DockStay.shouldLeave(
+            battery, healthFull, ticksFull, CubitMod.CONFIG.dockCompleteHoldTicks());
     if (done && robot.onlineOwner() != null) {
       release();
     }

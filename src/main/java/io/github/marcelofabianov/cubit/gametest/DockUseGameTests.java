@@ -183,6 +183,23 @@ public final class DockUseGameTests {
         });
   }
 
+  /** A full battery is not enough: the robot waits for its health too (answer 963). */
+  @GameTest(template = ARENA, timeoutTicks = TIMEOUT)
+  public static void aHurtRobotWithAFullBatteryStaysInTheBase(GameTestHelper helper) {
+    ServerPlayer owner = DockScene.ownerBeside(helper);
+    DockScene.placeDock(helper, owner, FLOOR, STOCK);
+    RobotEntity robot = DockScene.placeOnDock(helper, owner, ALMOST_FULL);
+    robot.setHealth(LOW_HEALTH);
+
+    helper.runAfterDelay(
+        HOLD_TICKS,
+        () -> {
+          helper.assertValueEqual(robot.powerState(), PowerState.HIBERNATING, WRONG_POWER);
+          helper.assertBlockProperty(DOCK, InductionDockBlock.STATUS, DockStatusProperty.COMPLETE);
+          helper.succeed();
+        });
+  }
+
   @GameTest(template = ARENA, timeoutTicks = TIMEOUT)
   public static void clickingReleasesTheRobotInTheBase(GameTestHelper helper) {
     ServerPlayer owner = DockScene.ownerBeside(helper);
