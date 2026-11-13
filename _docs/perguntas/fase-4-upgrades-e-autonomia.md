@@ -8,6 +8,15 @@ Não há perguntas pendentes nesta fase.
 
 | # | Pergunta | Resposta |
 |---|---|---|
+| 995 | Quando o alvo morre, o Cubit volta a olhar para o dono na hora ou depois de 3 s? | Depois de 3 s, olhando o ponto em que o alvo caiu, como no pedido da resposta 991. Para o alvo que fugiu a mais de 32 blocos ou sumiu, vale o mesmo: 3 s no último ponto em que ele estava. Muda a 993, que contrariava o pedido. Confirma a recomendação |
+| 994 | Como fica a chave de config do tempo do olhar, ainda não publicada? | `shock_look_after_ticks`, de 1 a 1200, com 60 ticks (3 s): o tempo em que ele ainda olha depois de o alvo morrer ou se perder. Substitui a `shock_look_ticks` da resposta 989, que só existiu nesta branch, sem migração. Confirma a recomendação |
+| 993 | Nos 3 s depois de o alvo morrer, para onde o Cubit olha? | "Volta logo para o dono", e os 3 s só valeriam para o alvo que fugiu. Mudada pela 995, porque contrariava o pedido da 991. A recomendação, o ponto em que o alvo caiu, foi recusada aqui e escolhida na 995 |
+| 992 | E se o alvo não morrer, por exemplo fugindo, mudando de dimensão ou sumindo? | O Cubit olha para o alvo enquanto ele vive, está na mesma dimensão e fica a até 32 blocos do dono, a distância de `focus_forget_distance_blocks`. Fora disso, ou se o alvo some, é tratado como eliminado. Confirma a recomendação |
+| 991 | Até quando o Cubit olha para o alvo do choque? | "o cubit durante o ataque olha para seu alvo vamos manter esse olhar constante ate que o alvo seja eliminado. E apos 3 segundos que o alvo morreu ele volte ao estado normal faca os ajustes": o olhar fica no alvo até ele ser eliminado, e 3 s depois volta ao normal. Muda a 987 e a 989, que davam 2 s a partir do choque |
+| 990 | Como fica o olhar para o alvo durante os 2 s, se no jogo o corpo do mob aponta para onde ele anda? | A cabeça vira para o alvo, até o limite de giro dela. Parado perto do dono, o corpo também vira e fica de frente para o alvo. Andando, o corpo segue o caminho até o dono. Muda a 987, pela regra 48, porque o corpo virado para o alvo faria o Cubit andar para o alvo e largar o dono. Confirma a recomendação |
+| 989 | Qual é o padrão de `shock_look_ticks`? | 40 ticks, os 2 s da resposta 987. O pack pode mudar no config. Confirma a recomendação |
+| 988 | Em que tarefa entra o olhar para o alvo do choque? | Na branch das tochas, `feature/170-torches`, num commit próprio, e o roteiro do teste manual ganha os passos do choque. A recomendação, uma issue nova depois das tochas, foi recusada |
+| 987 | Como o Cubit olha para o alvo do choque? | "ponto importante sempre que o cubit for atacar com choque deve estar olhando para seu alvo. Mesmo seguindo player ele deve ter este comportamento no ataque": no choque, a cabeça e o corpo viram para o alvo e ficam nele por 2 s, no config (`shock_look_ticks`). Enquanto isso, ele continua andando atrás do dono, sem olhar para o dono. Num choque em área, olha para o alvo mais próximo. Depois, volta a olhar para o dono. A recomendação, 1 s, mudou para 2 s |
 | 986 | O teste manual das tochas espera o ícone da chave ou é feito agora? | "vou testar agora sem o ícone": o teste é feito agora, com a chave sem ícone, e o ícone é conferido depois, quando o PNG chegar |
 | 984 | Como fica a fileira dos slots exclusivos acima do inventário do Cubit? | Entre o slot de energia e o inventário do Cubit entram o título `Exclusive slots` / `Slots exclusivos` e, abaixo, os slots que já existem, a partir da esquerda: hoje só o de tochas, e o do card na Fase 5. A dica do slot vazio mostra `Torches`, ou `Unlocks at Advanced` no Base, onde ele aparece apagado. A janela cresce cerca de 30 px em todas as abas, e os inventários do Cubit e do player descem. Completa a 980. Confirma a recomendação |
 | 983 | Quais tochas o slot de tochas aceita? | Só a tocha comum, `minecraft:torch`, que dá luz 14, e a análise do espaço conta sempre com essa luz. Confirma a recomendação |
@@ -239,6 +248,8 @@ Não há perguntas pendentes nesta fase.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 15:10 | Registra as respostas 991 a 995. |
+| Marcelo Fabiano | 2026-11-13 14:40 | Registra as respostas 987 a 990. |
 | Marcelo Fabiano | 2026-11-13 14:20 | Registra a resposta 986. |
 | Marcelo Fabiano | 2026-11-13 13:30 | Registra as respostas 971 a 984. |
 | Marcelo Fabiano | 2026-11-13 13:15 | Registra a resposta 970. |

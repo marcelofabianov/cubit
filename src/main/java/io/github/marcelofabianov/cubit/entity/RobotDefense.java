@@ -13,8 +13,10 @@ import io.github.marcelofabianov.cubit.menu.DefenseControl;
 import io.github.marcelofabianov.cubit.registry.CubitSounds;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.phys.Vec3;
 
 /**
  * The defense mode of a robot and its shock. The search only runs when a shock is ready, once per
@@ -26,10 +28,12 @@ public final class RobotDefense implements DefenseControl {
   private RetaliationMemory memory = RetaliationMemory.EMPTY;
   private long lastAttemptTick;
   private long engagedUntilTick;
+  private final RobotShockGaze gaze;
   private final RobotFocus focus;
 
   RobotDefense(RobotEntity robot) {
     this.robot = robot;
+    this.gaze = new RobotShockGaze(robot);
     this.focus = new RobotFocus(robot);
   }
 
@@ -84,6 +88,7 @@ public final class RobotDefense implements DefenseControl {
 
   void tick() {
     focus.tick();
+    gaze.tick();
     long now = robot.level().getGameTime();
     ShockSpec spec = robot.spec().shock();
     if (!ShockRules.ready(robot.powerState(), mode, spec, robot.battery(), lastAttemptTick, now)) {
@@ -94,7 +99,13 @@ public final class RobotDefense implements DefenseControl {
     if (!targets.isEmpty()) {
       RobotShock.strike(robot, targets, spec);
       engagedUntilTick = ShockRules.engagedUntil(now, spec);
+      gaze.struck(targets.getFirst());
     }
+  }
+
+  /** Where the goals turn the head instead of the owner, after a shock (answers 991 to 995). */
+  Optional<Vec3> lookSpot() {
+    return gaze.spot();
   }
 
   /** Between two strikes, the robot stays to defend instead of fetching (answer 939). */

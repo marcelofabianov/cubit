@@ -18,7 +18,6 @@ final class FollowOwnerGoal extends Goal {
 
   private static final int TELEPORT_ATTEMPTS = 10;
   private static final int TELEPORT_HEIGHT_RANGE = 1;
-  private static final float LOOK_YAW_SPEED = 10f;
 
   private final RobotEntity robot;
   private final FollowDecision decision;
@@ -58,7 +57,7 @@ final class FollowOwnerGoal extends Goal {
     if (owner == null) {
       return;
     }
-    robot.getLookControl().setLookAt(owner, LOOK_YAW_SPEED, robot.getMaxHeadXRot());
+    RobotGaze.look(robot, owner);
     repathCountdown--;
     if (repathCountdown > 0) {
       return;

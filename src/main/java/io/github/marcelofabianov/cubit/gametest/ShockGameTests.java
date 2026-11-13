@@ -15,6 +15,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
@@ -50,6 +51,9 @@ public final class ShockGameTests {
   private static final String WRONG_CHARGE = "The shock should cost the energy of one shock";
   private static final String CHOSEN = "The choice should have been refused";
   private static final String NOT_CHOSEN = "The choice should have been accepted";
+  private static final String NOT_LOOKING = "The robot should look at the mob it shocked";
+  private static final float QUARTER_TURN = 90f;
+  private static final float LOOK_TOLERANCE_DEGREES = 20f;
 
   private static final int TIMEOUT = 200;
   private static final int WAIT_TICKS = 60;
@@ -118,6 +122,24 @@ public final class ShockGameTests {
     helper.assertTrue(advanced.defense().choose(owner, DefenseMode.RETALIATE), NOT_CHOSEN);
     helper.assertValueEqual(advanced.defense().mode(), DefenseMode.RETALIATE, WRONG_MODE);
     helper.succeed();
+  }
+
+  /** After a shock, the head turns to the target, even with the owner on the other side (987). */
+  @GameTest(template = ARENA, timeoutTicks = TIMEOUT, batch = SHOCK_AGGRESSIVE_BATCH)
+  public static void theRobotLooksAtTheMobItShocked(GameTestHelper helper) {
+    Player owner = ownerBeside(helper);
+    RobotEntity robot = GameTestRobots.placeRobot(helper, owner, item(RobotTier.ELITE), FLOOR);
+    robot.defense().choose(owner, DefenseMode.AGGRESSIVE);
+    Mob husk = still(helper.spawn(EntityType.HUSK, NEAR));
+
+    helper.succeedWhen(() -> {
+      helper.assertTrue(husk.getHealth() < husk.getMaxHealth(), NOT_SHOCKED);
+      double dx = husk.getX() - robot.getX();
+      double dz = husk.getZ() - robot.getZ();
+      float toHusk = (float) Math.toDegrees(Math.atan2(dz, dx)) - QUARTER_TURN;
+      float off = Math.abs(Mth.wrapDegrees(robot.getYHeadRot() - toHusk));
+      helper.assertTrue(off < LOOK_TOLERANCE_DEGREES, NOT_LOOKING);
+    });
   }
 
   @GameTest(template = ARENA, timeoutTicks = TIMEOUT, batch = SHOCK_AGGRESSIVE_BATCH)

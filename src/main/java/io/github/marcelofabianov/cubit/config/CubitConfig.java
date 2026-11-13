@@ -90,6 +90,10 @@ public final class CubitConfig {
     return defense.retaliateMemory.get();
   }
 
+  public int shockLookAfterTicks() {
+    return defense.shockLook.get();
+  }
+
   public int focusForgetDistanceBlocks() {
     return defense.focusForget.get();
   }

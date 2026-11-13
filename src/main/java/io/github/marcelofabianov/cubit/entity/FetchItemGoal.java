@@ -18,8 +18,6 @@ final class FetchItemGoal extends Goal {
   /** The robot speed is already in its movement attribute, so the route does not change it. */
   private static final double ROUTE_SPEED_MODIFIER = 1;
 
-  private static final float LOOK_YAW_SPEED = 10f;
-
   private final RobotEntity robot;
   private ItemEntity target;
   private long startTick;
@@ -70,7 +68,7 @@ final class FetchItemGoal extends Goal {
 
   @Override
   public void tick() {
-    robot.getLookControl().setLookAt(target, LOOK_YAW_SPEED, robot.getMaxHeadXRot());
+    RobotGaze.look(robot, target);
     repathCountdown--;
     if (repathCountdown > 0) {
       return;

@@ -434,6 +434,9 @@ As regras estão em [`combate.md`](../funcionalidades/combate.md), e os números
 | 9b | Atire uma flecha em outro zumbi | Ele vira o alvo, com o texto e a seta amarela |
 | 9c | Bata numa vaca | Ela não vira alvo, e o alvo continua o mesmo |
 | 9d | Afaste-se mais de 32 blocos do alvo, ou deixe ele morrer | A seta amarela some. Sem alvo, o Cubit volta a defender quem te ferir |
+| 9e | Fique parado com o Cubit no modo Agressivo e um zumbi no alcance | A cabeça e o corpo dele viram para o zumbi e seguem o zumbi enquanto ele vive, mesmo entre os choques. Quando o zumbi morre, ele fica olhando o ponto da morte por cerca de 3 s e depois volta a olhar para você |
+| 9f | Ande com o Cubit seguindo e um zumbi ao lado do caminho | A cabeça acompanha o zumbi, e o corpo continua apontando para onde ele anda, sem largar você |
+| 9g | Leve um zumbi atingido para mais de 32 blocos de você | O Cubit deixa de seguir o zumbi com o olhar e, cerca de 3 s depois, volta a olhar para você |
 | 10 | Desligue o Cubit ou deixe ele no Dock, com mobs por perto | Sem choque |
 | 11 | Recolha e coloque o Cubit, e saia e entre no mundo | O modo escolhido continua |
 | 12 | Com o jogo em português, abra a aba | `Defesa`, `Modos`, `Pacífico`, `Contra-atacar`, `Agressivo`, `Libera no Avançado` e a seção `Choque` |
@@ -782,6 +785,8 @@ Na instância só com o mod, tire capturas com F2 do Cubit seguindo, da tela do 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 15:10 | Mantém o olhar no alvo até ele ser eliminado. |
+| Marcelo Fabiano | 2026-11-13 14:50 | Adiciona o olhar para o alvo do choque. |
 | Marcelo Fabiano | 2026-11-13 13:45 | Adiciona as tochas e as dicas das chaves da aba Settings. |
 | Marcelo Fabiano | 2026-11-13 13:00 | Adiciona a saída do Dock com a bateria e a vida cheias. |
 | Marcelo Fabiano | 2026-11-13 12:50 | Adiciona o Cubit e o Damaged Cubit ao roteiro do inventário do Dock. |

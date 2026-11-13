@@ -28,6 +28,7 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 | `FocusTarget` | O alvo do Focus: o último mob que o dono feriu, até morrer, mudar de dimensão ou ficar longe do dono |
 | `RetaliationMemory` | O último mob que feriu o robô ou o dono, até quando o Contra-atacar lembra dele |
 | `ShockRules` | Quando o robô dá o choque, em quais alvos e até quando fica ocupado com ele |
+| `ShockGaze` | Para onde o robô olha depois do choque: o alvo enquanto ele vive e está perto, e o último ponto dele por um tempo |
 | `PickupRules` | Quando o robô coleta por contato e quando o ímã puxa e cobra |
 | `FetchRules` | Quando o robô que segue busca os itens do chão, qual item, e quando desiste |
 | `TorchSpec` | As tochas de um tier: o custo por tocha e a luz de bloco que o robô garante, com 0 para bloqueado |
