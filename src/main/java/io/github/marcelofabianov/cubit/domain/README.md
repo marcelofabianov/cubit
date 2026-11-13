@@ -28,8 +28,14 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 | `FocusTarget` | O alvo do Focus: o último mob que o dono feriu, até morrer, mudar de dimensão ou ficar longe do dono |
 | `RetaliationMemory` | O último mob que feriu o robô ou o dono, até quando o Contra-atacar lembra dele |
 | `ShockRules` | Quando o robô dá o choque, em quais alvos e até quando fica ocupado com ele |
+| `ShockGaze` | Para onde o robô olha depois do choque: o alvo enquanto ele vive e está perto, e o último ponto dele por um tempo |
 | `PickupRules` | Quando o robô coleta por contato e quando o ímã puxa e cobra |
 | `FetchRules` | Quando o robô que segue busca os itens do chão, qual item, e quando desiste |
+| `TorchSpec` | As tochas de um tier: o custo por tocha e a luz de bloco que o robô garante, com 0 para bloqueado |
+| `TorchRules` | Quando o robô põe uma tocha e quais lugares são perigosos |
+| `TorchGrid` | O espaço em volta do robô, lido uma vez por varredura: o que para a luz, onde mob pode nascer e onde uma tocha cabe |
+| `GridCell` | Um bloco da `TorchGrid`, contado do canto dela |
+| `TorchPlanner` | Escolhe onde a tocha deixa mais lugares perigosos seguros, simulando a luz do jogo |
 | `FetchMemory` | Os itens em que o robô desistiu de buscar, cada um ignorado até um tick |
 | `TierCatalog` | Entrega o `TierSpec` de um tipo de robô num tier. O domínio define a interface, e o config a implementa |
 | `FollowAction` | O que o robô que segue faz: seguir, parar ou teleportar |
@@ -157,6 +163,7 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 - **Nunca atacados:** o dono, outros players, outros robôs e mobs pacíficos, em qualquer modo. Um mob neutro só vira alvo quando fica agressivo contra o dono (perguntas 13 e 68).
 - **Tempo sem relógio:** a `RetaliationMemory`, a `FetchMemory`, as `ShockRules` e as `FetchRules` recebem o tick atual de quem chama, como o resto do domínio.
 - **Coleta e ímã separados:** a coleta por contato vale em todo tier e não gasta. O ímã precisa da coleta ligada, porque puxar sem pegar só amontoaria itens, e só puxa com carga para o custo inteiro de um item (perguntas 876, 877 e 879).
+- **Tochas sem desperdício:** um lugar é perigoso pela luz de bloco, porque a luz do céu não protege à noite, e ao ar livre ele só conta quando a lanterna acenderia. O `TorchPlanner` simula a luz de cada lugar possível, que cai 1 por bloco e não atravessa parede, e escolhe o que deixa mais blocos seguros. Sem bloco a deixar seguro, nenhuma tocha é posta (perguntas 971 a 979).
 - **O Cubit antes das Power Banks:** no Dock, as Power Banks do inventário só carregam sem Cubit na base ou com a bateria dele cheia, uma por vez, para nenhuma encher antes do robô nem dividir a recarga (perguntas 949 e 952).
 - **Busca em volta do dono:** o raio da busca conta do dono, não do robô, porque o item jogado com Q cai à frente dele, fora do alcance do ímã (perguntas 927 e 936). A busca precisa da coleta ligada, como o ímã, não tem custo além do andar e fica abaixo do Dock, do fogo, dos blocos que ferem e do choque (perguntas 937 a 939).
 - **Filtro sem apagar:** as entradas acima do limite do tier e as tags num tier sem tags ficam guardadas sem contar, para um config maior trazê-las de volta (pergunta 892).

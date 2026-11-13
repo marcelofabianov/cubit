@@ -24,7 +24,8 @@ public record TierSpec(
     ScannerSpec scanners,
     ShockSpec shock,
     PickupSpec pickup,
-    Energy powerBankCapacity) {
+    Energy powerBankCapacity,
+    TorchSpec torches) {
 
   /** The largest radius the config accepts, which also limits the search for a robot to call. */
   public static final int MAX_CALL_RADIUS_BLOCKS = 128;
@@ -46,6 +47,40 @@ public record TierSpec(
     if (!(speedMultiplier > 0)) {
       throw new IllegalArgumentException(SPEED_MULTIPLIER + NOT_POSITIVE_MESSAGE + speedMultiplier);
     }
+  }
+
+  /** A tier without torch numbers has its torches locked, which only tests need. */
+  public TierSpec(
+      Energy batteryCapacity,
+      Energy movingConsumptionPerTick,
+      Energy rechargePerTick,
+      int inventorySlots,
+      int maxHealth,
+      int callRadiusBlocks,
+      double speedMultiplier,
+      ConsumptionExtras extras,
+      LightLevel lampLight,
+      SolarOutput solar,
+      ScannerSpec scanners,
+      ShockSpec shock,
+      PickupSpec pickup,
+      Energy powerBankCapacity) {
+    this(
+        batteryCapacity,
+        movingConsumptionPerTick,
+        rechargePerTick,
+        inventorySlots,
+        maxHealth,
+        callRadiusBlocks,
+        speedMultiplier,
+        extras,
+        lampLight,
+        solar,
+        scanners,
+        shock,
+        pickup,
+        powerBankCapacity,
+        TorchSpec.NONE);
   }
 
   /** A tier without a Power Bank number has none, which only tests need. */

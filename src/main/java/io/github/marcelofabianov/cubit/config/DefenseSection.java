@@ -14,7 +14,13 @@ final class DefenseSection {
   private static final int FOCUS_FORGET_MIN = 1;
   private static final int FOCUS_FORGET_MAX = 128;
 
+  private static final String SHOCK_LOOK = "shock_look_after_ticks";
+  private static final int SHOCK_LOOK_DEFAULT = 60;
+  private static final int SHOCK_LOOK_MIN = 1;
+  private static final int SHOCK_LOOK_MAX = 1200;
+
   final ModConfigSpec.IntValue retaliateMemory;
+  final ModConfigSpec.IntValue shockLook;
   final ModConfigSpec.IntValue focusForget;
 
   DefenseSection(ModConfigSpec.Builder builder) {
@@ -24,5 +30,7 @@ final class DefenseSection {
     focusForget =
         builder.defineInRange(
             FOCUS_FORGET, FOCUS_FORGET_DEFAULT, FOCUS_FORGET_MIN, FOCUS_FORGET_MAX);
+    shockLook =
+        builder.defineInRange(SHOCK_LOOK, SHOCK_LOOK_DEFAULT, SHOCK_LOOK_MIN, SHOCK_LOOK_MAX);
   }
 }

@@ -47,6 +47,7 @@ public final class ScreenGameTests {
   private static final int FIRST_PLAYER_ITEM = 9;
   private static final int ROBOT_SLOTS = 27;
   private static final int ENERGY_SLOTS = 1;
+  private static final int TORCH_SLOTS = 1;
   private static final String NOT_CALLED = "The button did not call the robot";
   private static final String CALLED = "A stranger called the robot";
   private static final String WRONG_DOCK = "The dock screen shows the wrong values";
@@ -162,7 +163,7 @@ public final class ScreenGameTests {
     RobotMenu menu = RobotScreenReadout.serverMenu(CONTAINER_ID, owner.getInventory(), robot);
     owner.getInventory().setItem(FIRST_PLAYER_ITEM, new ItemStack(Items.IRON_INGOT, SOME_IRON));
 
-    menu.quickMoveStack(owner, ROBOT_SLOTS + ENERGY_SLOTS);
+    menu.quickMoveStack(owner, ROBOT_SLOTS + ENERGY_SLOTS + TORCH_SLOTS);
 
     helper.assertValueEqual(robot.inventory().countItem(Items.IRON_INGOT), SOME_IRON, DUPLICATED);
     helper.assertValueEqual(owner.getInventory().countItem(Items.IRON_INGOT), 0, DUPLICATED);

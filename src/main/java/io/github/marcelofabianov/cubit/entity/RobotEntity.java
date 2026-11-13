@@ -78,6 +78,7 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
   private final RobotChatter chatter = new RobotChatter(this);
   private final RobotDefense defense = new RobotDefense(this);
   private final RobotPickup pickup = new RobotPickup(this);
+  private final RobotTorches torches = new RobotTorches(this);
 
   public RobotEntity(
       EntityType<? extends RobotEntity> type,
@@ -90,7 +91,7 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
     this.item = item;
     this.damagedItem = damagedItem;
     this.battery = spec().newBattery(CubitMod.CONFIG.initialCharge());
-    this.inventory = new RobotInventory(spec().inventorySlots());
+    this.inventory = new RobotInventory(spec().inventorySlots(), () -> spec().torches().unlocked());
     this.navigation = new RobotNavigation(this, level);
     this.jumpControl =
         new JumpControl(this) {
@@ -173,6 +174,10 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
 
   public RobotSolar solar() {
     return solar;
+  }
+
+  public RobotTorches torches() {
+    return torches;
   }
 
   public RobotPickup pickup() {
@@ -279,6 +284,7 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
     chatter.tick();
     defense.tick();
     pickup.tick();
+    torches.tick();
     RobotLoadSpeed.update(this, inventory.isFull());
     inventory.dropSurplus(
         stack -> Containers.dropItemStack(level(), getX(), getY(), getZ(), stack));

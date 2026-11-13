@@ -10,6 +10,7 @@ Um choque leve, a única forma de o Cubit atacar. O som é o `shock_attack.ogg`,
 
 - **Quando:** só com o Cubit ativo, seguindo ou parado, e nunca desligado nem hibernando (pergunta 825).
 - **Sem perseguir:** ele continua seguindo o dono e dá o choque em quem estiver no alcance do tier, com linha de visão, uma vez a cada intervalo do tier.
+- **Olhar para o alvo:** no choque, a cabeça vira para o alvo, o mais próximo num choque em área, e fica nele enquanto ele vive, está na mesma dimensão e a até 32 blocos do dono (`focus_forget_distance_blocks`), também seguindo o dono. Quando o alvo morre, foge ou some, a cabeça fica no último ponto dele por 3 s, no config (`shock_look_after_ticks`), e depois volta a olhar para o dono. Um choque em outro mob troca o alvo. Parado perto do dono, o corpo também vira para o alvo. Andando, o corpo segue o caminho até o dono, porque no jogo o mob anda para onde o corpo aponta (perguntas 987 a 995).
 - **Energia:** cada choque gasta o custo do tier. Sem carga para o custo, não dá o choque.
 - **Quantos alvos:** um, o mais próximo. No Ultimate, todos os alvos válidos do modo no alcance de uma vez, pelo custo de um choque só (pergunta 826).
 - **Visual:** faíscas elétricas do próprio jogo numa linha do Cubit até cada alvo, por um instante, vistas por todos por perto (pergunta 827).
@@ -59,6 +60,8 @@ O Cubit só ataca um mob neutro para defender o player, quando esse mob fica agr
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 15:10 | Mantém o olhar no alvo até ele ser eliminado e por 3 s depois. |
+| Marcelo Fabiano | 2026-11-13 14:50 | Faz o Cubit olhar para o alvo do choque. |
 | Marcelo Fabiano | 2026-11-12 15:10 | Fecha o modo Focus, que era a proposta do modo só o alvo. |
 | Marcelo Fabiano | 2026-11-12 10:30 | Define o choque e os três modos de defesa, com a aba Defense. |
 | Marcelo Fabiano | 2026-11-10 10:17 | Separa a mira pelo controle do modo só o alvo para a Fase 4.2. |

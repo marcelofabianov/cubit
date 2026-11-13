@@ -1,11 +1,13 @@
 package io.github.marcelofabianov.cubit.menu;
 
 import io.github.marcelofabianov.cubit.item.EnergySlotItems;
+import java.util.function.BooleanSupplier;
 import java.util.function.Consumer;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 
 /**
  * The slots of the robot screen and when each group shows. Only the client hides them, by the open
@@ -47,6 +49,22 @@ final class RobotMenuSlots {
           @Override
           public boolean mayPlace(ItemStack stack) {
             return EnergySlotItems.accepts(stack);
+          }
+
+          @Override
+          public boolean isActive() {
+            return robotShown;
+          }
+        });
+  }
+
+  /** Only plain torches, on a tier with torches, as the server tells (answers 973 and 983). */
+  void addTorchSlot(Consumer<Slot> add, Container torchSlot, BooleanSupplier unlocked) {
+    add.accept(
+        new Slot(torchSlot, 0, RobotMenu.FIRST_SLOT_X, RobotMenu.EXCLUSIVE_SLOT_Y) {
+          @Override
+          public boolean mayPlace(ItemStack stack) {
+            return unlocked.getAsBoolean() && stack.is(Items.TORCH);
           }
 
           @Override

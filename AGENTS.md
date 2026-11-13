@@ -208,17 +208,17 @@ io.github.marcelofabianov.cubit
 ├── CubitMod                // ponto de entrada: só conecta os registros
 ├── domain/                 // Java puro, testado com JUnit
 │   ├── robot/              // RobotType, capacidades que o Cubit combina, OreKind, OreFilter, OreSignals, DefenseMode; PickupFilter, PickupEntry, PickupMode e PickupSettings: o filtro de coleta
-│   ├── tier/               // RobotTier, TierSpec, TierCatalog (interface); TierUpgrade: subir de tier com um Module; ShockSpec: o choque e os modos de cada tier
+│   ├── tier/               // RobotTier, TierSpec, TierCatalog (interface); TierUpgrade: subir de tier com um Module; ShockSpec: o choque e os modos de cada tier; TorchSpec: as tochas de cada tier
 │   ├── energy/             // Battery, PowerState (ativo, inativo, hibernação), regras de consumo e religamento, SolarPanel: quando o painel dá energia; SolarStatus, EnergyUseCause, RechargeSource, EnergyFormat, EnergyHalves: o que as telas mostram; EnergyTransfer, WakeRecharge e PowerBankUpgrade: a Power Bank
-│   ├── behavior/           // FollowDecision: seguir, parar ou teleportar; BurningAction: reagir a fogo e lava; LampPolicy: quando a lanterna acende; ScanRules, ScanArea, FreshFinds, MarkLife, MarkPulse, ScanSignal: scanners, caixas e cores; ChatWatch, BiomeWatch, LeftBehindWatch, ChatRules: falas; RespawnReturn: voltar com o dono; RobotScreenStatus: o estado no topo da tela; DefenseRules, ShockCandidate, RetaliationMemory, ShockRules: o choque e os modos de defesa; FetchRules e FetchMemory: a busca dos itens do chão
+│   ├── behavior/           // FollowDecision: seguir, parar ou teleportar; BurningAction: reagir a fogo e lava; LampPolicy: quando a lanterna acende; ScanRules, ScanArea, FreshFinds, MarkLife, MarkPulse, ScanSignal: scanners, caixas e cores; ChatWatch, BiomeWatch, LeftBehindWatch, ChatRules: falas; RespawnReturn: voltar com o dono; RobotScreenStatus: o estado no topo da tela; DefenseRules, ShockCandidate, RetaliationMemory, ShockRules: o choque e os modos de defesa; FetchRules e FetchMemory: a busca dos itens do chão; TorchRules, TorchGrid, GridCell e TorchPlanner: as tochas; ShockGaze: o olhar para o alvo do choque
 │   ├── dock/               // DockStock, DockStatus, DockStay, DockQueue, DockTrip, DockRemoval, DockInputMeter; DockStorageRules e DockStoredKind: o inventário do Dock
 │   └── ownership/          // FollowingRobotPolicy, Ownership
 ├── config/                 // ModConfigSpec → implementa TierCatalog
 ├── registry/               // DeferredRegisters e CubitDamageTypes, o dano do choque
-├── entity/                 // RobotEntity, goals de IA; RobotUpgrade: o Module aplicado; RobotDefense e RobotShock: o choque; RobotPickup: a coleta e o ímã; FetchItemGoal: a busca dos itens do chão
+├── entity/                 // RobotEntity, goals de IA; RobotUpgrade: o Module aplicado; RobotDefense e RobotShock: o choque; RobotPickup: a coleta e o ímã; FetchItemGoal: a busca dos itens do chão; RobotTorches, TorchScan e RobotTorchSlot: as tochas; RobotGaze e RobotShockGaze: para onde a cabeça olha
 ├── item/                   // RobotItem, RobotStateComponent, ModuleItem e TierLook; PowerBankItem, PowerBankUpgradeRecipe e RobotRechargeRecipe: a Power Bank
 ├── block/                  // InductionDockBlock, BlockEntity; DockStorage e DockItemHandler: o inventário do Dock e a automação; StorableRobotItem: o Cubit e o Damaged Cubit que ele guarda
-├── menu/                   // RobotMenu, InductionDockMenu; DefenseControl e DefenseOpening: a aba Defense; PickupControl e PickupMenuPart: a aba Behavior
+├── menu/                   // RobotMenu, InductionDockMenu; DefenseControl e DefenseOpening: a aba Defense; PickupControl e PickupMenuPart: a aba Behavior; TorchControl: os números das tochas
 ├── network/                // pacotes próprios: NoticePayload, OreMarksPayload, MobMarksPayload e CubitNetwork
 ├── compat/jade/            // plugin do Jade, opcional: só este pacote importa o Jade
 ├── player/                 // attachment com o UUID do robô que segue, robôs mortos com o dono offline, /cubit reset e o que o dono faz: renascer, conquistar, caçar e minerar redstone

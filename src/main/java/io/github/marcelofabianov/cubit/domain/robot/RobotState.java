@@ -21,7 +21,8 @@ public record RobotState(
     boolean chatterOn,
     DefenseMode defenseMode,
     boolean solarOn,
-    PickupSettings pickup) {
+    PickupSettings pickup,
+    boolean torchesOn) {
   private static final String INVALID_HEALTH_MESSAGE = "Invalid robot health: ";
   private static final float MIN_PLACED_HEALTH = 1f;
 
@@ -29,6 +30,34 @@ public record RobotState(
     if (Float.isNaN(health) || health < 0) {
       throw new IllegalArgumentException(INVALID_HEALTH_MESSAGE + health);
     }
+  }
+
+  /** The torches start switched on, also for what was saved before their switch existed. */
+  public RobotState(
+      RobotTier tier,
+      Energy energy,
+      float health,
+      boolean lampOn,
+      RobotColor color,
+      boolean scannersOn,
+      OreFilter oreFilter,
+      boolean chatterOn,
+      DefenseMode defenseMode,
+      boolean solarOn,
+      PickupSettings pickup) {
+    this(
+        tier,
+        energy,
+        health,
+        lampOn,
+        color,
+        scannersOn,
+        oreFilter,
+        chatterOn,
+        defenseMode,
+        solarOn,
+        pickup,
+        true);
   }
 
   /** Pickup starts with its initial settings, also for what was saved before it existed. */
@@ -129,7 +158,8 @@ public record RobotState(
         chatterOn,
         defenseMode,
         solarOn,
-        pickup);
+        pickup,
+        torchesOn);
   }
 
   public RobotState repaired(TierSpec spec, Percentage health) {
@@ -144,7 +174,8 @@ public record RobotState(
         chatterOn,
         defenseMode,
         solarOn,
-        pickup);
+        pickup,
+        torchesOn);
   }
 
   /**
@@ -162,7 +193,8 @@ public record RobotState(
         chatterOn,
         defenseMode,
         solarOn,
-        pickup);
+        pickup,
+        torchesOn);
   }
 
   public RobotState withPickup(PickupSettings next) {
@@ -177,7 +209,24 @@ public record RobotState(
         chatterOn,
         defenseMode,
         solarOn,
-        next);
+        next,
+        torchesOn);
+  }
+
+  public RobotState withTorches(boolean on) {
+    return new RobotState(
+        tier,
+        energy,
+        health,
+        lampOn,
+        color,
+        scannersOn,
+        oreFilter,
+        chatterOn,
+        defenseMode,
+        solarOn,
+        pickup,
+        on);
   }
 
   public Battery batteryFor(TierSpec spec) {

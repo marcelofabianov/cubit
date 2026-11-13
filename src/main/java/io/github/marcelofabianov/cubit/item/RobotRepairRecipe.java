@@ -120,6 +120,8 @@ public final class RobotRepairRecipe extends CustomRecipe {
         damaged.get(CubitDataComponents.ROBOT_INVENTORY.get()));
     repaired.set(
         CubitDataComponents.ENERGY_SLOT.get(), damaged.get(CubitDataComponents.ENERGY_SLOT.get()));
+    repaired.set(
+        CubitDataComponents.TORCH_SLOT.get(), damaged.get(CubitDataComponents.TORCH_SLOT.get()));
     repaired.set(DataComponents.CUSTOM_NAME, damaged.get(DataComponents.CUSTOM_NAME));
     return repaired;
   }

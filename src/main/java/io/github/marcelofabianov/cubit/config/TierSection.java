@@ -59,6 +59,7 @@ final class TierSection {
   private final ShockKeys shock;
   private final PickupKeys pickup;
   private final ModConfigSpec.IntValue powerBankCapacity;
+  private final TorchKeys torches;
 
   TierSection(ModConfigSpec.Builder builder, TierSpec defaults) {
     batteryCapacity = energy(builder, BATTERY_CAPACITY, defaults.batteryCapacity(), MIN_POSITIVE);
@@ -85,6 +86,7 @@ final class TierSection {
     pickup = new PickupKeys(builder, defaults.pickup());
     powerBankCapacity =
         energy(builder, POWER_BANK_CAPACITY, defaults.powerBankCapacity(), MIN_POSITIVE);
+    torches = new TorchKeys(builder, defaults.torches());
   }
 
   TierSpec read() {
@@ -102,7 +104,8 @@ final class TierSection {
         scanners.read(),
         shock.read(),
         pickup.read(),
-        new Energy(powerBankCapacity.get()));
+        new Energy(powerBankCapacity.get()),
+        torches.read());
   }
 
   private static ModConfigSpec.IntValue count(

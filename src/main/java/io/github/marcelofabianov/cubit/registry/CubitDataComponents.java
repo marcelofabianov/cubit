@@ -23,6 +23,7 @@ public final class CubitDataComponents {
   private static final String ROBOT_OWNER_ID = "robot_owner";
   private static final String ROBOT_INVENTORY_ID = "robot_inventory";
   private static final String ENERGY_SLOT_ID = "energy_slot";
+  private static final String TORCH_SLOT_ID = "torch_slot";
   private static final String DOCK_ENERGY_ID = "dock_energy";
   private static final String DOCK_STORAGE_ID = "dock_storage";
   private static final String POWER_BANK_ENERGY_ID = "power_bank_energy";
@@ -63,6 +64,15 @@ public final class CubitDataComponents {
               builder
                   .persistent(EnergySlotContents.CODEC)
                   .networkSynchronized(EnergySlotContents.STREAM_CODEC));
+
+  /** The torches in the torch slot of the robot, a contract with the saves (answer 981). */
+  public static final Supplier<DataComponentType<ItemContainerContents>> TORCH_SLOT =
+      COMPONENTS.registerComponentType(
+          TORCH_SLOT_ID,
+          builder ->
+              builder
+                  .persistent(ItemContainerContents.CODEC)
+                  .networkSynchronized(ItemContainerContents.STREAM_CODEC));
 
   public static final Supplier<DataComponentType<Long>> DOCK_ENERGY =
       COMPONENTS.registerComponentType(

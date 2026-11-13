@@ -98,10 +98,10 @@ Dividida em três partes, na ordem em que dependem uma da outra (perguntas 722 a
 
 ### Fase 4.1: Itens, filtros, carregamento e mais
 
-9. [x] Ímã e coleta, com as chaves deles e o filtro em lista branca e lista negra (perguntas 422 a 424), e o custo do ímã
+9. [x] Ímã e coleta, com as chaves deles e o filtro em lista branca e lista negra (perguntas 422 a 424), e o custo do ímã, e a busca dos itens do chão (#165, PR #167)
 10. [x] Power Bank, inclusive no Dock e na grade de craft (issues #164 e #51, PR #166), com a receita dela
-11. [ ] Inventário do Induction Dock, na aba Storage, para a Toolbox e as Power Banks, sem o slot de carga (issue #168, perguntas 947 a 959)
-12. [ ] Slot de tochas, do Advanced em diante, com o Cubit colocando tochas e o custo delas (perguntas 724, 879, 930 e 948)
+11. [x] Inventário do Induction Dock, na aba Storage, para a Toolbox, as Power Banks, o Cubit e o Damaged Cubit, sem o slot de carga, e a saída do Cubit com a bateria e a vida cheias (issue #168, PR #169, perguntas 947 a 969)
+12. [ ] Slot de tochas, do Advanced em diante, com o Cubit colocando tochas onde mobs podem nascer e o custo delas (issue #170, perguntas 724, 879, 930, 948 e 971 a 984)
 
 ### Fase 4.2: Remote, área e retorno
 

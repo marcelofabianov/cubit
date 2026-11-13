@@ -19,6 +19,7 @@ final class RobotSettings {
     RobotLooks.setColor(robot, state.color());
     robot.defense().setMode(state.defenseMode());
     robot.solar().setSwitchedOn(state.solarOn());
+    robot.torches().setSwitchedOn(state.torchesOn());
     robot
         .pickup()
         .setSettings(
@@ -38,6 +39,7 @@ final class RobotSettings {
         robot.chatter().switchedOn(),
         robot.defense().mode(),
         robot.solar().switchedOn(),
-        robot.pickup().settings());
+        robot.pickup().settings(),
+        robot.torches().switchedOn());
   }
 }

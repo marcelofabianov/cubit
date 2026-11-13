@@ -10,6 +10,7 @@ import io.github.marcelofabianov.cubit.domain.tier.RobotTier;
 import io.github.marcelofabianov.cubit.domain.tier.ScannerSpec;
 import io.github.marcelofabianov.cubit.domain.tier.ShockSpec;
 import io.github.marcelofabianov.cubit.domain.tier.TierSpec;
+import io.github.marcelofabianov.cubit.domain.tier.TorchSpec;
 import java.util.Set;
 
 /**
@@ -157,6 +158,11 @@ final class TierDefaults {
   private static final PickupSpec ADVANCED_PICKUP = new PickupSpec(3, new Energy(20), 9, false, 6);
   private static final PickupSpec ELITE_PICKUP = new PickupSpec(5, new Energy(30), 18, true, 8);
   private static final PickupSpec ULTIMATE_PICKUP = new PickupSpec(8, new Energy(60), 27, true, 12);
+  private static final Energy TORCH_COST = new Energy(20);
+  private static final TorchSpec BASE_TORCHES = new TorchSpec(TORCH_COST, new LightLevel(0));
+  private static final TorchSpec ADVANCED_TORCHES = new TorchSpec(TORCH_COST, new LightLevel(1));
+  private static final TorchSpec ELITE_TORCHES = new TorchSpec(TORCH_COST, new LightLevel(1));
+  private static final TorchSpec ULTIMATE_TORCHES = new TorchSpec(TORCH_COST, new LightLevel(1));
   private static final long BASE_POWER_BANK = 210_000;
   private static final long ADVANCED_POWER_BANK = 420_000;
   private static final long ELITE_POWER_BANK = 2_100_000;
@@ -188,7 +194,8 @@ final class TierDefaults {
               BASE_ORE_FILTER_SLOTS),
           BASE_SHOCK,
           BASE_PICKUP,
-          new Energy(BASE_POWER_BANK));
+          new Energy(BASE_POWER_BANK),
+          BASE_TORCHES);
   private static final TierSpec ADVANCED_SPEC =
       new TierSpec(
           new Energy(ADVANCED_BATTERY),
@@ -216,7 +223,8 @@ final class TierDefaults {
               ADVANCED_ORE_FILTER_SLOTS),
           ADVANCED_SHOCK,
           ADVANCED_PICKUP,
-          new Energy(ADVANCED_POWER_BANK));
+          new Energy(ADVANCED_POWER_BANK),
+          ADVANCED_TORCHES);
   private static final TierSpec ELITE_SPEC =
       new TierSpec(
           new Energy(ELITE_BATTERY),
@@ -244,7 +252,8 @@ final class TierDefaults {
               ELITE_ORE_FILTER_SLOTS),
           ELITE_SHOCK,
           ELITE_PICKUP,
-          new Energy(ELITE_POWER_BANK));
+          new Energy(ELITE_POWER_BANK),
+          ELITE_TORCHES);
   private static final TierSpec ULTIMATE_SPEC =
       new TierSpec(
           new Energy(ULTIMATE_BATTERY),
@@ -272,7 +281,8 @@ final class TierDefaults {
               ULTIMATE_ORE_FILTER_SLOTS),
           ULTIMATE_SHOCK,
           ULTIMATE_PICKUP,
-          new Energy(ULTIMATE_POWER_BANK));
+          new Energy(ULTIMATE_POWER_BANK),
+          ULTIMATE_TORCHES);
 
   private TierDefaults() {}
 

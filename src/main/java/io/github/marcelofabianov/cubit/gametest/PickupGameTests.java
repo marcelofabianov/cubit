@@ -20,7 +20,6 @@ import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.Container;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -194,7 +193,7 @@ public final class PickupGameTests {
     robot.pickup().setSettings(custom);
 
     RobotEntity loaded = GameTestRobots.loadRobot(helper, robot.saveWithoutId(new CompoundTag()));
-    ItemStack collected = collect(owner, robot);
+    ItemStack collected = GameTestRobots.collect(owner, robot);
     RobotState saved = collected.get(CubitDataComponents.ROBOT_STATE.get());
 
     helper.assertValueEqual(loaded.pickup().settings(), custom, WRONG_SETTINGS);
@@ -275,13 +274,5 @@ public final class PickupGameTests {
   private static void assertEmpty(GameTestHelper helper, RobotEntity robot) {
     helper.assertTrue(robot.inventory().isEmpty(), COLLECTED);
     helper.succeed();
-  }
-
-  private static ItemStack collect(Player owner, RobotEntity robot) {
-    owner.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
-    owner.setShiftKeyDown(true);
-    robot.interact(owner, InteractionHand.MAIN_HAND);
-    owner.setShiftKeyDown(false);
-    return owner.getInventory().getItem(0);
   }
 }

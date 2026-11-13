@@ -6,6 +6,7 @@ import io.github.marcelofabianov.cubit.item.EnergySlotContents;
 import io.github.marcelofabianov.cubit.registry.CubitDataComponents;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.BooleanSupplier;
 import java.util.function.Consumer;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -28,10 +29,12 @@ final class RobotInventory {
 
   private final List<ItemStack> surplus = new ArrayList<>();
   private final RobotEnergySlot energySlot = new RobotEnergySlot();
+  private final RobotTorchSlot torchSlot;
   private SimpleContainer container;
 
-  RobotInventory(int slots) {
+  RobotInventory(int slots, BooleanSupplier torchesUnlocked) {
     container = new SimpleContainer(slots);
+    torchSlot = new RobotTorchSlot(torchesUnlocked);
   }
 
   Container container() {
@@ -84,10 +87,15 @@ final class RobotInventory {
     return energySlot;
   }
 
+  RobotTorchSlot torchSlot() {
+    return torchSlot;
+  }
+
   /** Writes everything the robot carries to its item, in any path that turns it into an item. */
   void writeTo(ItemStack stack) {
     stack.set(CubitDataComponents.ROBOT_INVENTORY.get(), contents());
     stack.set(CubitDataComponents.ENERGY_SLOT.get(), energySlot.contents());
+    stack.set(CubitDataComponents.TORCH_SLOT.get(), torchSlot.contents());
   }
 
   void readFrom(ItemStack stack, int slots) {
@@ -99,6 +107,8 @@ final class RobotInventory {
         slots);
     energySlot.fill(
         stack.getOrDefault(CubitDataComponents.ENERGY_SLOT.get(), EnergySlotContents.EMPTY));
+    torchSlot.fill(
+        stack.getOrDefault(CubitDataComponents.TORCH_SLOT.get(), ItemContainerContents.EMPTY));
   }
 
   void dropSurplus(Consumer<ItemStack> drop) {
@@ -115,6 +125,7 @@ final class RobotInventory {
     container.clearContent();
     surplus.clear();
     energySlot.clear();
+    torchSlot.clear();
   }
 
   ListTag save(HolderLookup.Provider registries) {

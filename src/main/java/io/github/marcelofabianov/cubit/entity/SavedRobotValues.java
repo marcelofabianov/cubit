@@ -41,6 +41,8 @@ final class SavedRobotValues {
   private static final String CHATTER_KEY = "ChatterEnabled";
   private static final String DEFENSE_KEY = "DefenseMode";
   private static final String SOLAR_KEY = "SolarEnabled";
+  private static final String TORCHES_KEY = "TorchesEnabled";
+  private static final String TORCH_SLOT_KEY = "TorchSlot";
   private static final String LAST_SAFE_POSITION_KEY = "LastSafePosition";
   private static final String NO_OWNER_MESSAGE = "Robot {} has no owner. Nobody can interact.";
   private static final String INVALID_TIER_MESSAGE = "Robot {} has an invalid tier: {}";
@@ -58,6 +60,7 @@ final class SavedRobotValues {
     RobotInventory inventory = robot.robotInventory();
     tag.put(INVENTORY_KEY, inventory.save(robot.registryAccess()));
     tag.put(ENERGY_SLOT_KEY, inventory.energySlot().save(robot.registryAccess()));
+    tag.put(TORCH_SLOT_KEY, inventory.torchSlot().save(robot.registryAccess()));
     robot.docking().save(tag);
     tag.putBoolean(LAMP_KEY, robot.state().lampOn());
     tag.putString(COLOR_KEY, robot.state().color().key());
@@ -69,6 +72,7 @@ final class SavedRobotValues {
     tag.put(ORE_FILTER_KEY, filter);
     tag.putString(DEFENSE_KEY, robot.state().defenseMode().key());
     tag.putBoolean(SOLAR_KEY, robot.state().solarOn());
+    tag.putBoolean(TORCHES_KEY, robot.state().torchesOn());
     SavedPickup.write(tag, robot.state().pickup());
     robot
         .lastSafePosition()
@@ -91,6 +95,7 @@ final class SavedRobotValues {
       CompoundTag tag, RobotInventory inventory, HolderLookup.Provider registries, int slots) {
     inventory.load(tag.getList(INVENTORY_KEY, Tag.TAG_COMPOUND), registries, slots);
     inventory.energySlot().load(tag.getCompound(ENERGY_SLOT_KEY), registries);
+    inventory.torchSlot().load(tag.getCompound(TORCH_SLOT_KEY), registries);
   }
 
   /** Without the key, the robot was saved before the lamp existed, so the lamp stays on. */
@@ -147,7 +152,8 @@ final class SavedRobotValues {
             chatterOn(tag),
             defenseMode(tag, robot),
             solarOn(tag))
-        .withPickup(SavedPickup.read(tag));
+        .withPickup(SavedPickup.read(tag))
+        .withTorches(!tag.contains(TORCHES_KEY) || tag.getBoolean(TORCHES_KEY));
   }
 
   /** Without the key, the robot was saved before the solar switch existed, so it stays on. */

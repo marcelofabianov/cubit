@@ -59,8 +59,12 @@ As chaves ficam em `snake_case`. As de um tier ficam em `[general_robot.{tier}]`
 | `general` | `void_rescue_retry_ticks` | Intervalo para tentar de novo o resgate no vazio | 1 a 1200 |
 | `general` | `retaliate_memory_ticks` | Tempo em que o Contra-atacar lembra de quem feriu o Cubit ou o dono | 1 a 72000 |
 | `general` | `focus_forget_distance_blocks` | Distância do dono em que o alvo do Focus deixa de ser alvo | 1 a 128 |
+| `general` | `shock_look_after_ticks` | Tempo em que o Cubit ainda olha para o ponto do alvo depois de ele morrer ou se perder | 1 a 1200 |
 | `general` | `pickup_check_ticks` | Intervalo da coleta por contato | 1 a 1200 |
 | `general` | `magnet_check_ticks` | Intervalo do ímã | 1 a 1200 |
+| `general` | `torch_check_ticks` | Intervalo da análise das tochas | 1 a 1200 |
+| `general` | `torch_scan_radius_blocks` | Raio em que o Cubit procura lugares perigosos | 1 a 16 |
+| `general` | `torch_reach_blocks` | Distância até onde o Cubit põe uma tocha | 1 a 8 |
 | `general` | `fetch_check_ticks` | Intervalo da procura de um item para buscar | 1 a 1200 |
 | `general` | `fetch_give_up_ticks` | Tempo até desistir de um item que não alcança | 1 a 1200 |
 | `general` | `fetch_ignore_ticks` | Tempo em que o item desistido é ignorado | 1 a 1200 |
@@ -94,6 +98,8 @@ As chaves ficam em `snake_case`. As de um tier ficam em `[general_robot.{tier}]`
 | `general_robot.base` | `shock_hits_all_in_range` | Alvos por choque: todos no alcance, ou só o mais próximo | `true` ou `false` |
 | `general_robot.base` | `magnet_radius_blocks` | Ímã (raio), com 0 para bloqueado | 0 a 16 |
 | `general_robot.base` | `magnet_cost_per_item` | Ímã, por item puxado | 0 a 2147483647 |
+| `general_robot.base` | `torch_cost` | Colocar tochas, por tocha | 0 a 2147483647 |
+| `general_robot.base` | `torch_light_level` | Tochas: luz de bloco mínima que o Cubit garante, com 0 para bloqueado | 0 a 15 |
 | `general_robot.base` | `fetch_radius_blocks` | Busca (raio em volta do dono), com 0 para bloqueado | 0 a 16 |
 | `general_robot.base` | `pickup_filter_slots` | Filtro de coleta | 1 a 27 |
 | `general_robot.base` | `pickup_filter_tags` | Filtro de coleta com tags | `true` ou `false` |
@@ -133,6 +139,9 @@ O mod não cai por causa do config (regra 17 do `AGENTS.md`):
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 15:10 | Troca o tempo do olhar pelo tempo depois do alvo. |
+| Marcelo Fabiano | 2026-11-13 14:50 | Adiciona o tempo do olhar para o alvo do choque. |
+| Marcelo Fabiano | 2026-11-13 13:45 | Adiciona as chaves das tochas. |
 | Marcelo Fabiano | 2026-11-13 09:50 | Adiciona as chaves da busca dos itens do chão. |
 | Marcelo Fabiano | 2026-11-12 22:30 | Adiciona a capacidade da Power Bank (pergunta 910). |
 | Marcelo Fabiano | 2026-11-12 21:45 | Adiciona as chaves da coleta e do ímã (pergunta 889). |

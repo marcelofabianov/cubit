@@ -41,7 +41,8 @@ public final class InventoryScrollGameTests {
   private static final int TOP_ROW = 2;
   private static final int VIEW_SLOT_OF_HIDDEN = HIDDEN_SLOT - TOP_ROW * RobotMenu.SLOTS_PER_ROW;
   private static final int BEYOND_LAST_ROW = 4;
-  private static final int FIRST_PLAYER_SLOT_IN_MENU = VISIBLE_SLOTS + 1;
+  private static final int ENERGY_AND_TORCH_SLOTS = 2;
+  private static final int FIRST_PLAYER_SLOT_IN_MENU = VISIBLE_SLOTS + ENERGY_AND_TORCH_SLOTS;
   private static final int FIRST_PLAYER_INVENTORY_SLOT = 9;
   private static final int DIAMONDS = 3;
   private static final BlockPos FLOOR = new BlockPos(1, 1, 1);

@@ -37,6 +37,7 @@ Quatro abas, à direita da janela: **Inventory**, com o ícone do baú, **Settin
 | Battery | Barra verde, vermelha só na bateria crítica (pergunta 681), e `214k / 300k FE` |
 | Recarga | Uma linha sob a bateria, como `Solar +5 FE/t`, `Slot +500 FE/t` ou `Dock +500 FE/t`. Veja os [textos sem imagem](#textos-sem-imagem) |
 | Slot de energia | O slot de redstone, com o rótulo `Redstone` |
+| Slots exclusivos | O título `Exclusive slots` / `Slots exclusivos` e, abaixo, a fileira dos slots que já existem, a partir da esquerda: hoje só o de tochas. A dica do slot vazio mostra `Torches` / `Tochas`, ou `Unlocks at Advanced` no Base, onde ele aparece apagado. A janela cresce cerca de 30 px em todas as abas, e os inventários do Cubit e do player descem (perguntas 980 e 984) |
 | Inventário do Cubit | `Cubit's inventory`, ou com o nome dele, como `Bolt's inventory` |
 | Inventário do player | `Inventory` e a hotbar |
 
@@ -55,18 +56,19 @@ Quatro abas, à direita da janela: **Inventory**, com o ícone do baú, **Settin
 ### Aba Settings
 
 - **Cabeçalho:** `Settings`, a etiqueta do tier, `Battery 71%` e, ao lado, o botão `Power`, com o ícone de energia (perguntas 857 e 861). O clique desliga o Cubit e fecha a tela. Ligar de novo continua pelo clique direito nele. Hibernando no Dock, o botão fica desabilitado. A dica do botão é `Power` / `Energia` e `Turns the Cubit off` / `Desliga o Cubit` (pergunta 860).
-- **Functions:** as quatro chaves, com ON e OFF, em linhas de 18 px (pergunta 861).
+- **Functions:** as cinco chaves, com o ícone, o nome e ON e OFF, em linhas de 12 px, com a descrição na dica, como na aba Behavior, para a chave das tochas caber (perguntas 861 e 974).
 
-| Chave | Descrição |
+| Chave | Descrição, na dica |
 |---|---|
 | `Lamp` | `Lights up below level 8 · 1 FE/t`. Desabilitada ao hibernar, mantendo o valor (pergunta 473) |
 | `Scanners` | `Ores 5 blocks · mobs 8 · 50 FE per scan` |
 | `Chatter` | `Weather, biomes and reactions` |
 | `Solar panel` | `Charges in the sun · 5 FE/t`, com o número do tier de dia. Começa ligada e fica no item (perguntas 859 e 860) |
+| `Torches` / `Tochas` | `Lights spots where mobs can spawn · 20 FE per torch` / `Ilumina onde mobs podem nascer · 20 FE por tocha`, com o custo do tier. No Base, apagada, com `Unlocks at Advanced`. Começa ligada e fica no item, com um ícone de tocha feito por prompt (perguntas 974, 981 e 982) |
 
 - **Scanner filter:** só leitura, com o ícone do minério, `Looking for Coal Ore` e `Right-click the Cubit holding an ore to change it.` (pergunta 688).
 - **Status:** `Solar panel`, `Energy use`, `Health` e `Following`.
-- **Sem rodapé:** o `More functions arrive with the next updates.` saiu, para as quatro chaves caberem (pergunta 861).
+- **Sem rodapé:** o `More functions arrive with the next updates.` saiu, para as chaves caberem (pergunta 861).
 
 Os números das descrições vêm do config e do tier, nunca fixos no texto (regras 3 e 39).
 
@@ -242,6 +244,7 @@ Pergunta 691.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 13:45 | Adiciona a fileira dos slots exclusivos e a chave das tochas. |
 | Marcelo Fabiano | 2026-11-13 12:50 | Aceita o Cubit e o Damaged Cubit na aba Storage. |
 | Marcelo Fabiano | 2026-11-13 11:50 | Põe as abas do Dock à direita, como as do Cubit. |
 | Marcelo Fabiano | 2026-11-13 11:30 | Adiciona as abas Dock e Storage à tela do Dock e tira o slot de carga. |
