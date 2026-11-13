@@ -27,6 +27,7 @@ public final class CubitDataComponents {
   private static final String DOCK_ENERGY_ID = "dock_energy";
   private static final String DOCK_STORAGE_ID = "dock_storage";
   private static final String POWER_BANK_ENERGY_ID = "power_bank_energy";
+  private static final String TABLET_APP_ID = "tablet_app";
   private static final DeferredRegister.DataComponents COMPONENTS =
       DeferredRegister.createDataComponents(Registries.DATA_COMPONENT_TYPE, CubitMod.MOD_ID);
 
@@ -89,6 +90,13 @@ public final class CubitDataComponents {
                   .networkSynchronized(ItemContainerContents.STREAM_CODEC));
 
   /** The charge of a Power Bank, a contract with the saves (answer 903). */
+  /** The active app of the Tablet, by its key, a contract with the saves (answer 1026). */
+  public static final Supplier<DataComponentType<String>> TABLET_APP =
+      COMPONENTS.registerComponentType(
+          TABLET_APP_ID,
+          builder ->
+              builder.persistent(Codec.STRING).networkSynchronized(ByteBufCodecs.STRING_UTF8));
+
   public static final Supplier<DataComponentType<Long>> POWER_BANK_ENERGY =
       COMPONENTS.registerComponentType(
           POWER_BANK_ENERGY_ID,

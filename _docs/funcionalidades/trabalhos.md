@@ -22,7 +22,7 @@ O mod funciona numa instância só com ele e suas dependências. Tudo aceita red
 
 ## Como o Cubit começa a trabalhar
 
-1. Com o Cubit Remote, o player marca dois cantos, que definem uma área em 3D.
+1. Com o app Área do [Tablet](tablet.md#apps), o player marca dois cantos, que definem uma área em 3D.
 2. O processo só termina ao selecionar o Cubit no controle. Ele deixa de seguir e passa a trabalhar.
 3. O controle também manda esvaziar o inventário ou voltar à base.
 
@@ -164,6 +164,7 @@ Antes de fechar cada card, testa-se com 20 a 30 robôs.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 16:40 | Troca o Cubit Remote pelo app Área do Tablet. |
 | Marcelo Fabiano | 2026-11-13 09:05 | Recebe a fornalha de minérios no Minerador. |
 | Marcelo Fabiano | 2026-11-06 13:34 | Adiciona a lanterna de cabeça do Minerador. |
 | Marcelo Fabiano | 2026-11-06 11:10 | Troca 'especialidade' por 'trabalho' e 'card de especialidade' por 'card de Aprendizado de Máquina'. |

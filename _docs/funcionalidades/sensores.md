@@ -62,7 +62,7 @@ Definidos, em entregas próprias depois da detecção:
 - **Luz lida:** o maior valor entre a luz de blocos e a do céu, com o céu escurecendo à noite e com chuva, em intervalos. A lanterna não conta, porque só existe no cliente (pergunta 472).
 - **Consumo:** gasta só enquanto acesa, mesmo parado (pergunta 469).
 - **Hibernando ou desligado:** apagada e sem consumo (pergunta 466).
-- **Chave:** a chave `Lamp`, na aba Settings da [tela do Cubit](telas.md#aba-settings), começa ligado e é guardado no item, inclusive ao morrer e consertar. Fica desabilitado na hibernação, mantendo o valor. O Cubit Remote soma a chave na Fase 4 (perguntas 467, 468 e 473).
+- **Chave:** a chave `Lamp`, na aba Settings da [tela do Cubit](telas.md#aba-settings), começa ligado e é guardado no item, inclusive ao morrer e consertar. Fica desabilitado na hibernação, mantendo o valor. O Tablet soma a chave na aba Recursos, na Fase 4.2 (perguntas 467, 468, 473 e 999).
 - **Opção do player:** se ele desligar a luz de entidades nas opções do LambDynamicLights, o Cubit não ilumina o mundo, e o resto continua igual.
 - **Feixe:** é da lanterna de cabeça do Minerador, na Fase 5 (pergunta 463).
 
@@ -70,6 +70,7 @@ Definidos, em entregas próprias depois da detecção:
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 16:40 | Troca o Cubit Remote pelo Tablet. |
 | Marcelo Fabiano | 2026-11-12 15:10 | Cita a seta do alvo do Focus. |
 | Marcelo Fabiano | 2026-11-08 00:11 | Nomeia o minério pelo bloco, no idioma do jogo. |
 | Marcelo Fabiano | 2026-11-07 23:42 | Troca a caixa do mob pela seta nos sinais e no pacote. |

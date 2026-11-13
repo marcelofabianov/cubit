@@ -46,7 +46,7 @@ O modo só o alvo, item 7 da Fase 4 (perguntas 577, 578, 795 e 843 a 853). O Cub
 | Fim do alvo | O alvo morre, muda de dimensão ou fica a mais de 32 blocos do dono, no config (pergunta 846) |
 | Seta | As setas vermelhas do scanner continuam, e o alvo ganha uma seta amarela, do raio do choque, com cerca de 1,5× o tamanho, só para o dono, mesmo fora do raio do scanner ou com os scanners desligados. Sobre o alvo, a amarela fica no lugar da vermelha (perguntas 851 e 853) |
 | Texto | `Cubit: Target: Zombie`, em português `Cubit: Alvo: Zumbi`, quando o alvo muda, com o nome do mob no idioma do jogo (perguntas 847 e 849) |
-| Mira pelo controle | Entra na Fase 4.2, com o Cubit Remote (pergunta 795) |
+| Mira pelo Tablet | Entra na Fase 4.2, com o app Alvo do [Tablet](tablet.md#apps), na entrega 3 (perguntas 795 e 1001) |
 
 ## Quem o Cubit nunca ataca
 
@@ -60,6 +60,7 @@ O Cubit só ataca um mob neutro para defender o player, quando esse mob fica agr
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 16:40 | Troca a mira pelo controle pelo app Alvo do Tablet. |
 | Marcelo Fabiano | 2026-11-13 15:10 | Mantém o olhar no alvo até ele ser eliminado e por 3 s depois. |
 | Marcelo Fabiano | 2026-11-13 14:50 | Faz o Cubit olhar para o alvo do choque. |
 | Marcelo Fabiano | 2026-11-12 15:10 | Fecha o modo Focus, que era a proposta do modo só o alvo. |

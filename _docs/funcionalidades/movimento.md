@@ -4,7 +4,7 @@ Números: [`tiers.md`](../tiers.md#autonomia) e [valores gerais](../tiers.md#val
 
 ## Seguir ou atuar numa área
 
-O player escolhe entre o robô seguir ou atuar numa área. A marcação da área está em [`controle-remoto.md`](controle-remoto.md).
+O player escolhe entre o robô seguir ou atuar numa área. A marcação da área está em [`modo-area.md`](modo-area.md).
 
 ## Movimento
 
@@ -80,6 +80,7 @@ Marca onde o player morreu e o leva até lá, se o tier permitir.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 16:40 | Aponta a marcação da área para o modo área. |
 | Marcelo Fabiano | 2026-11-07 16:20 | Define a altura que o robô desce. |
 | Marcelo Fabiano | 2026-11-07 16:17 | Define a volta do robô com o dono que renasce. |
 | Marcelo Fabiano | 2026-11-05 21:02 | Cita o clique sem redstone para ligar o robô. |

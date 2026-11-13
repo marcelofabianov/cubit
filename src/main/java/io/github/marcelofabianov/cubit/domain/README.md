@@ -65,6 +65,9 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 | `PickupMode` | Lista negra, a inicial, ou lista branca. A `key` é o nome usado nos saves |
 | `PickupEntry` | Um slot do filtro: o ID de um item ou, no Elite e no Ultimate, de uma tag, salva com `#` |
 | `PickupItem` | O que o filtro lê de um item no chão: o ID e as tags |
+| `TabletApp` | Os apps do Tablet, um ativo por vez. A `key` é o nome no componente do item, e uma chave desconhecida vale Open |
+| `RobotListing` | Um Cubit como a tela de seleção do Tablet o ordena: se segue o player, se está na mesma dimensão, se está carregado e a distância |
+| `RobotListings` | A ordem e a busca da tela de seleção do Tablet |
 | `PickupSettings` | As chaves da coleta, do ímã e da busca e o filtro, que o item guarda |
 | `OreSignals` | Quais minérios avisam e qual deles o texto cita, a partir da lista dos raros |
 | `ScannerSpec` | Números dos scanners de um tier: raios, intervalos, custos e vagas do filtro |
@@ -224,4 +227,4 @@ Os documentos definem três estados: ativo, inativo e hibernação. No código, 
 | `INACTIVE_SWITCHED_OFF` | Inativo, desligado com carga | Não | Clique direito, se houver carga |
 | `HIBERNATING` | Hibernação, na base | Sim | Ao sair da base |
 
-O desligamento pelo controle remoto (pergunta 56) entra na Fase 4, junto do controle.
+O desligamento pelo Tablet, que substitui o controle remoto (perguntas 56 e 1021), entra na Fase 4.2, junto do Tablet.

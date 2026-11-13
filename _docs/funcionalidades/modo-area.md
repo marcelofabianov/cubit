@@ -1,41 +1,22 @@
-# Controle remoto e modo área
+# Modo área
 
 Números: [`tiers.md`](../tiers.md#autonomia) e [valores gerais](../tiers.md#valores-gerais).
 
-## Comandos
-
-O controle atende todos os Cubits do player, desde que estejam ligados. Mirando no robô e clicando com o botão direito, dá para:
-
-- ligar e desligar;
-- mandar parar e voltar a seguir;
-- trocar o modo de defesa;
-- ativar ou desativar as tochas;
-- ligar e desligar a chave da lanterna.
-
-Na proposta do [modo só o alvo](combate.md#modo-só-o-alvo-proposta), o controle também marca um mob, mirando nele (perguntas 577 e 578).
-
-O controle é o mesmo em todos os tiers. As opções bloqueadas aparecem desabilitadas.
-
-Parado pelo controle, o Cubit continua ativo e com o vínculo, não anda nem teleporta, e esse estado é salvo. Voltar a seguir retoma. Parado, ele não gasta energia ao andar, mas a lanterna acesa e as varreduras dos scanners continuam gastando (perguntas 469 e 550).
-
-Desligado pelo controle, o Cubit segue as regras do estado inativo, mesmo com bateria, e só volta a ficar ativo pelo controle. Ligar é a única ação do controle sobre um Cubit desligado.
-
-## Localizar
-
-O controle lista todos os Cubits do player, sem limite de distância, com nome, coordenadas, dimensão e estado. Em chunk descarregado, mostra a última posição conhecida, inclusive dos desligados.
+Os comandos e o localizar do antigo controle remoto passaram para o [Tablet](tablet.md), que substitui o Cubit Remote (perguntas 998 a 1002). O modo área entra com o item 13 da Fase 4.2.
 
 ## Modo área
 
-A área é marcada com o controle, clicando com o botão direito em dois blocos, os cantos de um volume em 3D. Os limites de [`tiers.md`](../tiers.md#autonomia), como 16×16, valem para a base, e a altura máxima fica no config.
+A área é marcada com o app Área do [Tablet](tablet.md#apps), clicando com o botão direito em dois blocos, os cantos de um volume em 3D. Os limites de [`tiers.md`](../tiers.md#autonomia), como 16×16, valem para a base, e a altura máxima fica no config.
 
 - **Sem card:** o Cubit coleta os itens do chão dentro da área, respeitando o filtro de coleta, e descarrega no baú marcado.
 - **Com trabalho, na Fase 5:** vale [`trabalhos.md`](trabalhos.md).
-- **Ao recolher:** a área, os baús marcados e a seleção no controle se perdem.
+- **Ao recolher:** a área, os baús marcados e o Dock preferido se perdem (pergunta 1008).
 
 ## Histórico de modificações
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 16:40 | Vira o modo área, e os comandos e o localizar passam para o Tablet. |
 | Marcelo Fabiano | 2026-11-13 09:05 | Deixa só as tochas entre as funções que o controle desativa. |
 | Marcelo Fabiano | 2026-11-07 23:42 | Acrescenta os scanners ao consumo do Cubit parado. |
 | Marcelo Fabiano | 2026-11-07 16:51 | Cita a marcação de um mob no modo só o alvo. |

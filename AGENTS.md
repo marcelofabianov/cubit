@@ -8,7 +8,7 @@ Mod de Minecraft que adiciona um robô companheiro fofo, movido a bateria, de te
 
 - **Etapa atual:** as Fases 1, 2 e 3 foram encerradas, e a primeira versão, `0.1.0`, foi publicada no Modrinth. A Fase 4 "Tier e ataque" também foi encerrada: os tiers, os Modules e as receitas (PRs #145 e #147), o choque e os modos de defesa (#149), o modo Focus (#151) e as chaves da aba Settings (#153). A instância só com o mod e as confirmações que saíram da `0.1.0` foram feitas (resposta 820). A `0.1.1` foi fechada com a Fase 4 "Tier e ataque" (PR #159), e a Fase 4.1 também foi encerrada: a coleta e o ímã (PR #163), a Power Bank (PR #166), a busca dos itens do chão (PR #167), o inventário do Induction Dock com a saída do Cubit de bateria e vida cheias (PR #169) e as tochas automáticas com o olhar para o alvo do choque (PR #171). A fornalha foi para o Minerador, na Fase 5, e o carregador de ferramentas saiu do mod (resposta 930). O trabalho entra por issue, na ordem do `checklist.md`.
 - **Já entrou:** colocar e recolher, seguir o player, vários robôs, fogo, lava, os arquivos de som, a revisão dos `.md`, o novo modelo, a morte com o item danificado, o inventário, a energia em uso, o consumo por situação, a reação a blocos que ferem, o Induction Dock, o `/cubit reset`, as receitas e, na Fase 3, os sons, as expressões, o som de dano, a barra de vida, as animações, o colar e a bateria, os textos curtos, a lanterna, o painel solar, a cor da carcaça, o nome, a detecção dos scanners, com chave e filtro, numa esfera, as caixas dos scanners, a seta sobre o mob, as cores das antenas com o halo do corpo e as falas, inclusive sobre a redstone minerada. Também entraram a volta do Cubit com o dono que renasce, a descida de até 5 blocos, o Jade e as telas próprias do Cubit e do Induction Dock.
-- **Próximos:** um item novo do roadmap, a definir com o desenvolvedor, e depois a Fase 4.2, só com pedido explícito. A publicação da `0.1.1` está em análise na issue #156, e o envio da `0.1.0` ao CurseForge continua pendente (resposta 787).
+- **Próximos:** o Tablet, que substitui o Cubit Remote no item 12 da Fase 4.2, em três entregas (#174 a #176), e depois o resto da Fase 4.2, só com pedido explícito. A publicação da `0.1.1` está em análise na issue #156, e o envio da `0.1.0` ao CurseForge continua pendente (resposta 787).
 - **Comandos:** estão em [`_docs/desenvolvimento/ferramentas-de-build.md`](_docs/desenvolvimento/ferramentas-de-build.md).
 - **Limite:** não avance para as fases seguintes sem pedido explícito.
 
@@ -131,7 +131,7 @@ O Cubit é o único robô do mod. O que muda entre um Cubit e outro é o tier e 
 39. **Números por dado:** regras, números e capacidades vêm do tier e do trabalho, nunca de um `if` ou de uma constante fixa.
 40. **Capacidades por composição:** ímã, choque, scanner, inventário e os trabalhos são peças que o Cubit combina, sem herança.
 41. **Config, IDs e dados:** chaves de config, IDs e data components seguem o padrão atual, com `general_robot`, porque mudá-los depois exige migração (regra 18).
-42. **Itens compartilhados:** Induction Dock, Cubit Remote e Power Bank reconhecem o robô por tag ou interface, nunca por uma classe concreta.
+42. **Itens compartilhados:** Induction Dock, Cubit Tablet e Power Bank reconhecem o robô por tag ou interface, nunca por uma classe concreta.
 43. **Sem antecipar trabalhos:** nada de implementar trabalhos, telas ou capacidades que ainda não entraram (regra 15).
 
 ### Validação
@@ -207,7 +207,7 @@ Aprovada. Vale a partir da Fase 2.
 io.github.marcelofabianov.cubit
 ├── CubitMod                // ponto de entrada: só conecta os registros
 ├── domain/                 // Java puro, testado com JUnit
-│   ├── robot/              // RobotType, capacidades que o Cubit combina, OreKind, OreFilter, OreSignals, DefenseMode; PickupFilter, PickupEntry, PickupMode e PickupSettings: o filtro de coleta
+│   ├── robot/              // RobotType, capacidades que o Cubit combina, OreKind, OreFilter, OreSignals, DefenseMode; PickupFilter, PickupEntry, PickupMode e PickupSettings: o filtro de coleta; TabletApp, RobotListing e RobotListings: os apps e a lista do Tablet
 │   ├── tier/               // RobotTier, TierSpec, TierCatalog (interface); TierUpgrade: subir de tier com um Module; ShockSpec: o choque e os modos de cada tier; TorchSpec: as tochas de cada tier
 │   ├── energy/             // Battery, PowerState (ativo, inativo, hibernação), regras de consumo e religamento, SolarPanel: quando o painel dá energia; SolarStatus, EnergyUseCause, RechargeSource, EnergyFormat, EnergyHalves: o que as telas mostram; EnergyTransfer, WakeRecharge e PowerBankUpgrade: a Power Bank
 │   ├── behavior/           // FollowDecision: seguir, parar ou teleportar; BurningAction: reagir a fogo e lava; LampPolicy: quando a lanterna acende; ScanRules, ScanArea, FreshFinds, MarkLife, MarkPulse, ScanSignal: scanners, caixas e cores; ChatWatch, BiomeWatch, LeftBehindWatch, ChatRules: falas; RespawnReturn: voltar com o dono; RobotScreenStatus: o estado no topo da tela; DefenseRules, ShockCandidate, RetaliationMemory, ShockRules: o choque e os modos de defesa; FetchRules e FetchMemory: a busca dos itens do chão; TorchRules, TorchGrid, GridCell e TorchPlanner: as tochas; ShockGaze: o olhar para o alvo do choque
@@ -215,14 +215,14 @@ io.github.marcelofabianov.cubit
 │   └── ownership/          // FollowingRobotPolicy, Ownership
 ├── config/                 // ModConfigSpec → implementa TierCatalog
 ├── registry/               // DeferredRegisters e CubitDamageTypes, o dano do choque
-├── entity/                 // RobotEntity, goals de IA; RobotUpgrade: o Module aplicado; RobotDefense e RobotShock: o choque; RobotPickup: a coleta e o ímã; FetchItemGoal: a busca dos itens do chão; RobotTorches, TorchScan e RobotTorchSlot: as tochas; RobotGaze e RobotShockGaze: para onde a cabeça olha
-├── item/                   // RobotItem, RobotStateComponent, ModuleItem e TierLook; PowerBankItem, PowerBankUpgradeRecipe e RobotRechargeRecipe: a Power Bank
+├── entity/                 // RobotEntity, goals de IA; RobotUpgrade: o Module aplicado; RobotDefense e RobotShock: o choque; RobotPickup: a coleta e o ímã; FetchItemGoal: a busca dos itens do chão; RobotTorches, TorchScan e RobotTorchSlot: as tochas; RobotGaze e RobotShockGaze: para onde a cabeça olha; RobotSnapshotReader: o Cubit lido para o Tablet
+├── item/                   // RobotItem, RobotStateComponent, ModuleItem e TierLook; PowerBankItem, PowerBankUpgradeRecipe e RobotRechargeRecipe: a Power Bank; TabletItem: o Tablet
 ├── block/                  // InductionDockBlock, BlockEntity; DockStorage e DockItemHandler: o inventário do Dock e a automação; StorableRobotItem: o Cubit e o Damaged Cubit que ele guarda
 ├── menu/                   // RobotMenu, InductionDockMenu; DefenseControl e DefenseOpening: a aba Defense; PickupControl e PickupMenuPart: a aba Behavior; TorchControl: os números das tochas
-├── network/                // pacotes próprios: NoticePayload, OreMarksPayload, MobMarksPayload e CubitNetwork
+├── network/                // pacotes próprios: NoticePayload, OreMarksPayload, MobMarksPayload e CubitNetwork; RobotListPayload, ChooseRobotPayload e ChosenRobotPayload: a lista e a escolha do Tablet
 ├── compat/jade/            // plugin do Jade, opcional: só este pacote importa o Jade
-├── player/                 // attachment com o UUID do robô que segue, robôs mortos com o dono offline, /cubit reset e o que o dono faz: renascer, conquistar, caçar e minerar redstone
-├── client/                 // renderer, modelo GeckoLib, telas, com as abas Inventory, Settings, Defense e Behavior
+├── player/                 // attachment com o UUID do robô que segue, robôs mortos com o dono offline, /cubit reset e o que o dono faz: renascer, conquistar, caçar e minerar redstone; TabletSelection, TabletEvents, RobotSnapshot, RobotSnapshots e ChosenRobotLink: a seleção do Tablet, a foto do Cubit descarregado e o Cubit escolhido
+├── client/                 // renderer, modelo GeckoLib, telas, com as abas Inventory, Settings, Defense e Behavior; TabletSelectionScreen e TabletArrow: a seleção e a seta do Tablet
 └── datagen/                // receitas, loot, traduções
 ```
 
@@ -232,7 +232,7 @@ Os testes ficam em `src/test` (JUnit) e os GameTests em um pacote `gametest`.
 
 - **Limite do domínio:** um teste com ArchUnit deve falhar se `domain` importar `net.minecraft` ou `net.neoforged`. É mais simples que um subprojeto Gradle.
 - **Cliente e comum:** `Menu` roda nos dois lados, e `Screen` só no cliente. Código comum não pode carregar classes de `client`, senão um servidor dedicado quebra.
-- **Rede:** o menu e o `SynchedEntityData` bastam para o estado do robô. Os textos usam um pacote próprio, só do servidor para o cliente, e os pacotes do cliente para o servidor só entram com o controle remoto.
+- **Rede:** o menu e o `SynchedEntityData` bastam para o estado do robô. Os textos usam um pacote próprio, só do servidor para o cliente, e os pacotes do cliente para o servidor só entram com o Tablet, que substitui o controle remoto, sempre conferidos no servidor (regra 20).
 - **Config `COMMON`:** fica em `config/`, onde o packwiz consegue distribuí-lo. O `SERVER` ficaria dentro de cada mundo.
 - **Atributos:** são registrados antes de o config carregar, então vida e velocidade são aplicadas quando a entidade nasce.
 - **Receitas com datagen:** geram JSONs normais em `data/`, que o KubeJS pode sobrescrever.

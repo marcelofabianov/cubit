@@ -5,7 +5,7 @@
 | Cubit | Robô companheiro, colocado no mundo como item |
 | Damaged Cubit | O que cai quando o Cubit morre. Guarda o estado dele e não pode ser colocado no mundo |
 | Toolbox | Conserta o Damaged Cubit e é consumida a cada conserto |
-| Cubit Remote | Envia comandos aos Cubits, marca áreas de trabalho e localiza os Cubits |
+| Cubit Tablet | Abre a tela de gerenciamento dos Cubits do player, de qualquer distância, com apps que marcam o alvo do Focus e o Dock preferido, e na Fase 4.2 a área e os baús ([`tablet.md`](funcionalidades/tablet.md)) |
 | Advanced Module | Leva o Cubit do tier Base para o Advanced |
 | Elite Module | Leva o Cubit do tier Advanced para o Elite |
 | Ultimate Module | Leva o Cubit do tier Elite para o Ultimate |
@@ -22,7 +22,7 @@
 | Cubit | `cubit:general_robot` | Abaixo |
 | Damaged Cubit | `cubit:damaged_general_robot` | Não tem: cai quando o Cubit morre |
 | Toolbox | `cubit:toolbox` | Provisória, abaixo |
-| Cubit Remote | `cubit:remote` | A definir |
+| Cubit Tablet | `cubit:tablet` | A definir, por prompt (pergunta 1025) |
 | Advanced Module | `cubit:advanced_module` | [Abaixo](#advanced-module) |
 | Elite Module | `cubit:elite_module` | [Abaixo](#elite-module) |
 | Ultimate Module | `cubit:ultimate_module` | [Abaixo](#ultimate-module) |
@@ -62,6 +62,16 @@ Na mesa de craft, em forma de L (pergunta 336). O desenho espelhado também vale
 | Linha 1 | Redstone | Vazio | Vazio |
 | Linha 2 | Lingote de ferro | Vazio | Vazio |
 | Linha 3 | Baú | Redstone | Lingote de ferro |
+
+### Cubit Tablet
+
+Na mesa de craft, com forma (perguntas 1025, 1030 e 1031): 2 painéis de vidro e 1 redstone na linha de cima, 4 lingotes de ferro nas laterais das duas linhas de baixo, 1 diamante no centro e 1 lingote de ouro embaixo, no meio. Aparece no livro de receitas quando o player tem um Cubit. Não empilha.
+
+| | Coluna 1 | Coluna 2 | Coluna 3 |
+|---|---|---|---|
+| Linha 1 | Painel de vidro | Redstone | Painel de vidro |
+| Linha 2 | Lingote de ferro | Diamante | Lingote de ferro |
+| Linha 3 | Lingote de ferro | Lingote de ouro | Lingote de ferro |
 
 ### Toolbox
 
@@ -173,6 +183,9 @@ Estes nomes não mudam sem migração (regra 18 do `AGENTS.md`).
 | Componente do item | `cubit:energy_slot` | Item do slot de energia e reserva de FE, também no item danificado |
 | Componente do item | `cubit:torch_slot` | As tochas do slot de tochas, também no item danificado. Sem o componente, o slot fica vazio (pergunta 981) |
 | Componente do item do Dock | `cubit:dock_energy` | Energia do estoque |
+| Componente do Tablet | `cubit:tablet_app` | O app ativo: `open`, `target` ou `dock`. Sem o componente, vale `open` (pergunta 1026) |
+| Attachment do player | `cubit:chosen_robot` | O UUID do Cubit escolhido no Tablet (pergunta 1026) |
+| Dados do mundo | `cubit_robot_snapshots` | A foto de cada Cubit por dono, para o Tablet: posição, dimensão, estado, bateria, vida, tier, cor, nome e a hora (pergunta 1026) |
 | Componente do item do Dock | `cubit:dock_storage` | Conteúdo do inventário do Dock, no formato de conteúdo de container do jogo. Sem o componente, o inventário fica vazio (perguntas 954 e 958) |
 | Componente da Power Bank | `cubit:power_bank_energy` | Energia guardada. Sem o componente, vale zero (pergunta 903) |
 | Tipos de receita | `cubit:power_bank_upgrade` e `cubit:robot_recharge` | A Power Bank encadeada e o religar na grade (pergunta 910) |
@@ -185,6 +198,7 @@ Estes nomes não mudam sem migração (regra 18 do `AGENTS.md`).
 | NBT do bloco do Dock | `Owner`, `Energy`, `Slot` e `Storage` | Dono, estoque, item do slot de entrada e inventário, com `Slot` em cada item (pergunta 958). `ChargeSlot`, de antes, só é lido, e a Power Bank dele vai para o primeiro slot do inventário (pergunta 955) |
 | Estado do bloco do Dock | `facing`, `half` e `status` | Direção, parte de baixo ou de cima e estado da tela: `off`, `idle`, `charging`, `complete` ou `no_energy` |
 | NBT da entidade na base | `DockPosition` | Posição do Dock em que hiberna |
+| NBT da entidade | `PreferredDock` e `Stopped` | O Dock preferido, escolhido pelo app Dock do Tablet, com a posição e a dimensão, e se o Cubit está parado pelo `Stop` (pergunta 1026) |
 | NBT da entidade | `LampEnabled` | Chave da lanterna. Sem a chave no save, vale ligada |
 | NBT da entidade | `SolarEnabled` | Chave do painel solar. Sem a chave no save, vale ligada (pergunta 859) |
 | NBT da entidade | `DefenseMode` | Modo de defesa: `peaceful`, `retaliate`, `aggressive` ou `focus`. Sem a chave ou com valor inválido, vale `peaceful` |
@@ -216,6 +230,8 @@ O estado salvo é validado ao entrar no jogo, sem derrubá-lo (regra 17 do `AGEN
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 18:00 | Muda a receita do Tablet. |
+| Marcelo Fabiano | 2026-11-13 16:40 | Troca o Cubit Remote pelo Tablet e adiciona o contrato dele. |
 | Marcelo Fabiano | 2026-11-13 13:45 | Adiciona o slot e a chave das tochas ao save. |
 | Marcelo Fabiano | 2026-11-13 11:30 | Adiciona o inventário do Dock ao save e ao item. |
 | Marcelo Fabiano | 2026-11-13 10:05 | Adiciona o campo fetch_enabled ao componente do Cubit. |

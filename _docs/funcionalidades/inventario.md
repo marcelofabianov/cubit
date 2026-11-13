@@ -60,7 +60,7 @@ O player marca um baú. Quando o inventário do robô enche, ele vai sozinho des
 
 ## Slots exclusivos
 
-São dois: tochas e energia. Na Fase 5, o card de Aprendizado de Máquina ocupa mais um. O controle remoto ativa ou desativa as tochas, e o slot de energia fica sempre ligado. A fornalha de minérios foi para o [Minerador](trabalhos.md#minerador), na Fase 5, e o carregador de ferramentas saiu do mod (pergunta 930).
+São dois: tochas e energia. Na Fase 5, o card de Aprendizado de Máquina ocupa mais um. O Tablet ativa ou desativa as tochas, na aba Recursos, e o slot de energia fica sempre ligado. A fornalha de minérios foi para o [Minerador](trabalhos.md#minerador), na Fase 5, e o carregador de ferramentas saiu do mod (pergunta 930).
 
 - **Fileira:** os slots exclusivos ficam numa fileira acima do inventário do Cubit, com o título `Exclusive slots` / `Slots exclusivos`. O slot de energia continua ao lado das barras (perguntas 980 e 984).
 - **Tochas automáticas:** do Advanced em diante, com tochas no slot, o Cubit as coloca sozinho onde mobs podem nascer. Veja [Tochas](#tochas).
@@ -85,6 +85,7 @@ Entra no item 12 da Fase 4.1 (issue #170, perguntas 971 a 984).
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 16:40 | Troca o controle remoto pelo Tablet. |
 | Marcelo Fabiano | 2026-11-13 13:45 | Detalha as tochas automáticas e a fileira dos slots exclusivos. |
 | Marcelo Fabiano | 2026-11-13 09:50 | Adiciona a busca dos itens do chão. |
 | Marcelo Fabiano | 2026-11-13 09:05 | Deixa só as tochas e a energia nos slots exclusivos. |

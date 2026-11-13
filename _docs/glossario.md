@@ -7,7 +7,8 @@ O inglês é o idioma base do mod, e o jogo também tem a tradução para o port
 | Termo nos documentos | Nome no jogo |
 |---|---|
 | Mod e robô | Cubit |
-| Controle remoto | Cubit Remote |
+| Tablet, que substitui o controle remoto | Cubit Tablet |
+| App do Tablet | Tablet app |
 | Cubit danificado | Damaged Cubit |
 | Caixa de ferramentas | Toolbox |
 | Base, Dock ou estação de carga | Induction Dock |
@@ -67,6 +68,7 @@ Os IDs estão em [`itens.md`](itens.md).
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 16:40 | Troca o controle remoto pelo Tablet. |
 | Marcelo Fabiano | 2026-11-13 09:50 | Adiciona a busca dos itens do chão. |
 | Marcelo Fabiano | 2026-11-13 09:05 | Tira a fornalha e o carregador do slot exclusivo. |
 | Marcelo Fabiano | 2026-11-12 22:50 | Adiciona a Power Bank. |

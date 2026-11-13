@@ -32,6 +32,11 @@ final class CubitRecipeProvider extends RecipeProvider {
   private static final String ROBOT_MIDDLE_ROW = "IDI";
   private static final String ROBOT_BOTTOM_ROW = "O O";
   private static final String DOCK_TOP_ROW = "R  ";
+  private static final String TABLET_TOP_ROW = "GRG";
+  private static final String TABLET_MIDDLE_ROW = "IDI";
+  private static final String TABLET_BOTTOM_ROW = "IAI";
+  private static final char GLASS = 'G';
+  private static final char GOLD = 'A';
   private static final String DOCK_MIDDLE_ROW = "I  ";
   private static final String DOCK_BOTTOM_ROW = "CRI";
   private static final char IRON = 'I';
@@ -78,6 +83,7 @@ final class CubitRecipeProvider extends RecipeProvider {
         .save(output);
     robot(output);
     dock(output);
+    tablet(output);
     modules(output);
     powerBanks(output);
     recharge(output);
@@ -219,6 +225,23 @@ final class CubitRecipeProvider extends RecipeProvider {
         .define(REDSTONE, Items.REDSTONE)
         .define(IRON, Items.IRON_INGOT)
         .define(CHEST, Items.CHEST)
+        .unlockedBy(HAS_ROBOT, has(CubitItems.GENERAL_ROBOT.get()))
+        .save(output);
+  }
+
+  /**
+   * Glass and redstone on top, iron on the sides, a diamond in the middle and gold below (1031).
+   */
+  private void tablet(RecipeOutput output) {
+    ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, CubitItems.TABLET.get())
+        .pattern(TABLET_TOP_ROW)
+        .pattern(TABLET_MIDDLE_ROW)
+        .pattern(TABLET_BOTTOM_ROW)
+        .define(GLASS, Items.GLASS_PANE)
+        .define(IRON, Items.IRON_INGOT)
+        .define(REDSTONE, Items.REDSTONE)
+        .define(DIAMOND, Items.DIAMOND)
+        .define(GOLD, Items.GOLD_INGOT)
         .unlockedBy(HAS_ROBOT, has(CubitItems.GENERAL_ROBOT.get()))
         .save(output);
   }

@@ -180,13 +180,14 @@ No estilo das imagens de conceito, sem a textura do baú do jogo.
 ## Ainda não entrou
 
 - **Fase 3:** a primeira versão, `0.1.0`.
-- **Fase 4:** tiers Advanced, Elite e Ultimate, Power Bank, ímã e coleta, choque e modos de defesa, Cubit Remote, modo área, descarga em baú, retorno automático e local de morte.
+- **Fase 4:** tiers Advanced, Elite e Ultimate, Power Bank, ímã e coleta, choque e modos de defesa, Tablet, modo área, descarga em baú, retorno automático e local de morte.
 - **Fase 5:** trabalhos com os cards de Aprendizado de Máquina, antenas, Servidor e storage wireless.
 
 ## Histórico de modificações
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 16:40 | Troca o Cubit Remote pelo Tablet. |
 | Marcelo Fabiano | 2026-11-08 00:11 | Cita a tradução para o português. |
 | Marcelo Fabiano | 2026-11-07 23:42 | Atualiza o marco e acrescenta a animação de hibernando. |
 | Marcelo Fabiano | 2026-11-07 23:12 | Adiciona as telas próprias. |
