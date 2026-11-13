@@ -84,6 +84,9 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 | `ContinuousSound` | Som em loop enquanto a condição valer: esteira, curto elétrico e recarga |
 | `RobotSoundRules` | Diz qual som cada situação toca |
 | `SlotRecharge` | Reserva de FE do slot de energia e sua passagem para a bateria |
+| `EnergyTransfer` | Energia movida de uma bateria para outra num passo: o que a taxa, a origem e o espaço permitem, sem criar nem perder FE |
+| `WakeRecharge` | Religar um Cubit guardado com uma Power Bank na grade: só abaixo da carga de religar, só o que falta e só se a Power Bank tiver tudo |
+| `PowerBankUpgrade` | A Power Bank encadeada leva a carga da anterior, e a receita não vale se a carga não couber |
 | `DockStock` | Estoque de energia de um Induction Dock e as transferências dele, sem criar nem perder FE |
 | `DockStatus` | O que a tela de um Dock mostra |
 | `DockStay` | Vida recuperada por tick e quando o robô sai da base |
@@ -150,6 +153,8 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 - **Tempo sem relógio:** a `RetaliationMemory` e as `ShockRules` recebem o tick atual de quem chama, como o resto do domínio.
 - **Coleta e ímã separados:** a coleta por contato vale em todo tier e não gasta. O ímã precisa da coleta ligada, porque puxar sem pegar só amontoaria itens, e só puxa com carga para o custo inteiro de um item (perguntas 876, 877 e 879).
 - **Filtro sem apagar:** as entradas acima do limite do tier e as tags num tier sem tags ficam guardadas sem contar, para um config maior trazê-las de volta (pergunta 892).
+- **Power Bank é uma `Battery`:** a carga dela usa a mesma bateria imutável do Cubit, e toda passagem de energia, no slot, no Dock ou na grade, usa o `EnergyTransfer`, para nunca criar nem perder FE (regra 13 e pergunta 907).
+- **Religar arredonda para cima:** a carga de religar é arredondada para cima, para o Cubit nunca ficar 1 FE abaixo dela depois da receita (pergunta 181).
 - **Comparação pelo ID:** o filtro compara só o ID do item, nunca os componentes, para uma espada encantada valer por todas (pergunta 883).
 - **Números por dado:** as regras recebem os números de um `TierSpec`, sem constantes no código (regra 39 do `AGENTS.md`).
 - **Upgrade sem pular etapas:** um Module só leva ao tier logo depois do atual. O que pula uma etapa ou chega a um tier igual ou menor não é consumido, e o motivo vira o texto da recusa (perguntas 226, 802 e 808). A ordem dos tiers é a do `enum`, então um tier novo entra no lugar certo da lista.
