@@ -13,6 +13,8 @@ public final class BehaviorKeys {
   public static final String PICKUP_DETAIL = PREFIX + "pickup.detail";
   public static final String MAGNET = PREFIX + "magnet";
   public static final String MAGNET_DETAIL = PREFIX + "magnet.detail";
+  public static final String FETCH = PREFIX + "fetch";
+  public static final String FETCH_DETAIL = PREFIX + "fetch.detail";
   public static final String FILTER = PREFIX + "filter";
   public static final String TAG = PREFIX + "tag";
 

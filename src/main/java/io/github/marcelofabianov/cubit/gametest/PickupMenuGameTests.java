@@ -89,6 +89,29 @@ public final class PickupMenuGameTests {
   }
 
   @GameTest(template = EMPTY)
+  public static void theFetchButtonTogglesFetch(GameTestHelper helper) {
+    ServerPlayer owner = GameTestRobots.onlinePlayer(helper);
+    RobotEntity robot = placeNear(helper, owner, RobotTier.BASE);
+    RobotMenu menu = RobotScreenReadout.serverMenu(0, owner.getInventory(), robot);
+
+    helper.assertTrue(menu.clickMenuButton(owner, RobotMenu.FETCH_BUTTON), WRONG_ANSWER);
+    helper.assertFalse(robot.pickup().settings().fetchOn(), WRONG_SETTINGS);
+    helper.succeed();
+  }
+
+  @GameTest(template = EMPTY)
+  public static void withPickupOffFetchCannotChange(GameTestHelper helper) {
+    ServerPlayer owner = GameTestRobots.onlinePlayer(helper);
+    RobotEntity robot = placeNear(helper, owner, RobotTier.BASE);
+    robot.pickup().press(owner, PickupButton.PICKUP);
+
+    helper.assertFalse(robot.pickup().press(owner, PickupButton.FETCH), WRONG_ANSWER);
+    robot.pickup().press(owner, PickupButton.PICKUP);
+    helper.assertTrue(robot.pickup().press(owner, PickupButton.FETCH), WRONG_ANSWER);
+    helper.succeed();
+  }
+
+  @GameTest(template = EMPTY)
   public static void onlyTheOwnerChangesThePickup(GameTestHelper helper) {
     ServerPlayer owner = GameTestRobots.onlinePlayer(helper);
     RobotEntity robot = placeNear(helper, owner, RobotTier.ELITE);

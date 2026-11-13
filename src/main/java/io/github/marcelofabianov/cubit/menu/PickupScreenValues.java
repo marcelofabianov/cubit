@@ -28,7 +28,10 @@ public final class PickupScreenValues implements ContainerData {
   private static final int RADIUS = 6;
   private static final int COST = 7;
   private static final int UNLOCK_TIER = 9;
-  private static final int FIRST_TAG = 10;
+  private static final int FETCH_ON = 10;
+  private static final int FETCH_RADIUS = 11;
+  private static final int FETCH_UNLOCK_TIER = 12;
+  private static final int FIRST_TAG = 13;
   private static final int COUNT = FIRST_TAG + MAX_FILTER_SLOTS;
   private static final int TRUE_VALUE = 1;
   private static final int PLAIN_ITEM = 0;
@@ -47,7 +50,10 @@ public final class PickupScreenValues implements ContainerData {
     values[RADIUS] = spec.magnetRadiusBlocks();
     values[COST] = EnergyHalves.low(spec.magnetCostPerItem());
     values[COST + 1] = EnergyHalves.high(spec.magnetCostPerItem());
-    values[UNLOCK_TIER] = control.magnetUnlockTier().map(tier -> tier.ordinal() + 1).orElse(0);
+    values[UNLOCK_TIER] = tierValue(control.magnetUnlockTier());
+    values[FETCH_ON] = flag(settings.fetchOn());
+    values[FETCH_RADIUS] = spec.fetchRadiusBlocks();
+    values[FETCH_UNLOCK_TIER] = tierValue(control.fetchUnlockTier());
     List<PickupEntry> entries = settings.filter().entries();
     for (int slot = 0; slot < MAX_FILTER_SLOTS; slot++) {
       values[FIRST_TAG + slot] = slot < entries.size() ? tagValue(entries.get(slot)) : PLAIN_ITEM;
@@ -59,6 +65,10 @@ public final class PickupScreenValues implements ContainerData {
       return PLAIN_ITEM;
     }
     return PickupDisplay.sortedTags(PickupDisplay.stackOf(entry)).indexOf(entry.id()) + 1;
+  }
+
+  private static int tierValue(Optional<RobotTier> tier) {
+    return tier.map(value -> value.ordinal() + 1).orElse(0);
   }
 
   private static int flag(boolean value) {
@@ -103,7 +113,27 @@ public final class PickupScreenValues implements ContainerData {
   }
 
   public static Optional<RobotTier> magnetUnlockTier(ContainerData data) {
-    int value = data.get(UNLOCK_TIER);
+    return tierOf(data.get(UNLOCK_TIER));
+  }
+
+  public static boolean fetchOn(ContainerData data) {
+    return data.get(FETCH_ON) == TRUE_VALUE;
+  }
+
+  public static int fetchRadius(ContainerData data) {
+    return data.get(FETCH_RADIUS);
+  }
+
+  /** Fetch can change only on a tier with it and with pickup on, as the magnet (answer 938). */
+  public static boolean fetchAvailable(ContainerData data) {
+    return fetchRadius(data) > 0 && pickupOn(data);
+  }
+
+  public static Optional<RobotTier> fetchUnlockTier(ContainerData data) {
+    return tierOf(data.get(FETCH_UNLOCK_TIER));
+  }
+
+  private static Optional<RobotTier> tierOf(int value) {
     return value == 0
         ? Optional.empty()
         : Optional.of(ScreenEnums.of(RobotTier.values(), value - 1));
