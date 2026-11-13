@@ -100,6 +100,18 @@ public final class CubitConfig {
     return pickup.magnetCheck.get();
   }
 
+  public int fetchCheckTicks() {
+    return pickup.fetchCheck.get();
+  }
+
+  public int fetchGiveUpTicks() {
+    return pickup.fetchGiveUp.get();
+  }
+
+  public int fetchIgnoreTicks() {
+    return pickup.fetchIgnore.get();
+  }
+
   public TierCatalog tierCatalog() {
     return tierCatalog;
   }

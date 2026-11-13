@@ -39,6 +39,7 @@ public final class RobotStateComponent {
   private static final String PICKUP_FIELD = "pickup_enabled";
   private static final String MAGNET_FIELD = "magnet_enabled";
   private static final String PICKUP_FILTER_FIELD = "pickup_filter";
+  private static final String FETCH_FIELD = "fetch_enabled";
   private static final String UNKNOWN_DEFENSE_MESSAGE = "Unknown defense mode {}. Using peaceful.";
   private static final String UNKNOWN_COLOR_MESSAGE = "Unknown robot color {}. Using white.";
   private static final String UNKNOWN_TIER_MESSAGE = "Unknown robot tier {}. Using the base tier.";
@@ -93,7 +94,10 @@ public final class RobotStateComponent {
                       .forGetter(state -> state.pickup().magnetOn()),
                   SavedPickupFilter.CODEC
                       .optionalFieldOf(PICKUP_FILTER_FIELD, PickupFilter.EMPTY)
-                      .forGetter(state -> state.pickup().filter()))
+                      .forGetter(state -> state.pickup().filter()),
+                  Codec.BOOL
+                      .optionalFieldOf(FETCH_FIELD, PickupSettings.INITIAL.fetchOn())
+                      .forGetter(state -> state.pickup().fetchOn()))
               .apply(
                   instance,
                   (tier,
@@ -108,7 +112,8 @@ public final class RobotStateComponent {
                       solar,
                       pickup,
                       magnet,
-                      pickupFilter) ->
+                      pickupFilter,
+                      fetch) ->
                       new RobotState(
                           tier,
                           energy,
@@ -120,7 +125,7 @@ public final class RobotStateComponent {
                           chatter,
                           defense,
                           solar,
-                          new PickupSettings(pickup, magnet, pickupFilter))));
+                          new PickupSettings(pickup, magnet, fetch, pickupFilter))));
 
   public static final StreamCodec<ByteBuf, RobotState> STREAM_CODEC =
       ByteBufCodecs.fromCodec(CODEC);

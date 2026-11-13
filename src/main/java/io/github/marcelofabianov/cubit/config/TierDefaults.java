@@ -153,10 +153,10 @@ final class TierDefaults {
           new Energy(ULTIMATE_SHOCK_COST),
           true,
           Set.of(DefenseMode.RETALIATE, DefenseMode.AGGRESSIVE, DefenseMode.FOCUS));
-  private static final PickupSpec BASE_PICKUP = new PickupSpec(0, Energy.ZERO, 3, false);
-  private static final PickupSpec ADVANCED_PICKUP = new PickupSpec(3, new Energy(20), 9, false);
-  private static final PickupSpec ELITE_PICKUP = new PickupSpec(5, new Energy(30), 18, true);
-  private static final PickupSpec ULTIMATE_PICKUP = new PickupSpec(8, new Energy(60), 27, true);
+  private static final PickupSpec BASE_PICKUP = new PickupSpec(0, Energy.ZERO, 3, false, 4);
+  private static final PickupSpec ADVANCED_PICKUP = new PickupSpec(3, new Energy(20), 9, false, 6);
+  private static final PickupSpec ELITE_PICKUP = new PickupSpec(5, new Energy(30), 18, true, 8);
+  private static final PickupSpec ULTIMATE_PICKUP = new PickupSpec(8, new Energy(60), 27, true, 12);
   private static final long BASE_POWER_BANK = 210_000;
   private static final long ADVANCED_POWER_BANK = 420_000;
   private static final long ELITE_POWER_BANK = 2_100_000;

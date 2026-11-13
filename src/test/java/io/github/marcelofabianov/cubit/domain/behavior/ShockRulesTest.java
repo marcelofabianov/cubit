@@ -90,4 +90,13 @@ class ShockRulesTest {
   void noTargetsGiveNoTargets() {
     assertEquals(List.of(), ShockRules.targets(ONE_TARGET, List.<String>of()));
   }
+
+  @Test
+  void aStrikeKeepsTheRobotEngagedUntilTheNextOneIsDue() {
+    long until = ShockRules.engagedUntil(LAST_SHOCK, ONE_TARGET);
+
+    assertTrue(ShockRules.engaged(until, READY));
+    assertFalse(ShockRules.engaged(until, READY + 1));
+    assertFalse(ShockRules.engaged(0, 0));
+  }
 }

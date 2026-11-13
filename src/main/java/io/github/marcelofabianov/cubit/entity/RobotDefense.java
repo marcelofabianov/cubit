@@ -25,6 +25,7 @@ public final class RobotDefense implements DefenseControl {
   private DefenseMode mode = DefenseMode.INITIAL;
   private RetaliationMemory memory = RetaliationMemory.EMPTY;
   private long lastAttemptTick;
+  private long engagedUntilTick;
   private final RobotFocus focus;
 
   RobotDefense(RobotEntity robot) {
@@ -92,7 +93,13 @@ public final class RobotDefense implements DefenseControl {
     List<LivingEntity> targets = ShockRules.targets(spec, candidates(spec, now));
     if (!targets.isEmpty()) {
       RobotShock.strike(robot, targets, spec);
+      engagedUntilTick = ShockRules.engagedUntil(now, spec);
     }
+  }
+
+  /** Between two strikes, the robot stays to defend instead of fetching (answer 939). */
+  boolean engaged() {
+    return ShockRules.engaged(engagedUntilTick, robot.level().getGameTime());
   }
 
   /** Nearest first, in range, in sight, and only who the mode shocks. */

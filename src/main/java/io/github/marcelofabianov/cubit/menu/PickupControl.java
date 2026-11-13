@@ -28,6 +28,11 @@ public interface PickupControl {
         }
 
         @Override
+        public Optional<RobotTier> fetchUnlockTier() {
+          return Optional.empty();
+        }
+
+        @Override
         public boolean press(Player player, PickupButton button) {
           return false;
         }
@@ -50,6 +55,9 @@ public interface PickupControl {
   /** The first tier with a magnet, read from the config, for the locked switch (answer 881). */
   Optional<RobotTier> magnetUnlockTier();
 
+  /** The first tier that fetches, read from the config, for the locked switch (answer 938). */
+  Optional<RobotTier> fetchUnlockTier();
+
   /** False when the player is not the owner or the button cannot change anything now. */
   boolean press(Player player, PickupButton button);
 
@@ -59,10 +67,11 @@ public interface PickupControl {
   /** From the item through its tags and back, only on a tier with tags (answer 882). */
   boolean cycle(Player player, int slot);
 
-  /** The buttons of the behavior tab. */
+  /** The buttons of the behavior tab, in the order of their menu buttons. */
   enum PickupButton {
     PICKUP,
     MAGNET,
-    MODE
+    MODE,
+    FETCH
   }
 }

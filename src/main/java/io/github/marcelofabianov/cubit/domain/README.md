@@ -21,13 +21,16 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 | `TierSpec` | Números de um tipo de robô num tier |
 | `ShockSpec` | O choque de um tier: dano, alcance, intervalo, custo, se atinge todos no alcance e os modos de defesa liberados. O Pacífico sempre está liberado. `NONE` é o tier sem choque |
 | `DefenseMode` | Quem o robô ataca: Pacífico, Contra-atacar, Agressivo ou Focus. A `key` é o nome usado no config e nos saves, e `INITIAL` é o Pacífico |
-| `PickupSpec` | A coleta de um tier: o raio do ímã, com 0 para bloqueado, o custo por item puxado e os slots e as tags do filtro de coleta. `NONE` é o tier sem esses números |
+| `PickupSpec` | A coleta de um tier: o raio do ímã, com 0 para bloqueado, o custo por item puxado, os slots e as tags do filtro de coleta e o raio da busca em volta do dono, com 0 para bloqueado. `NONE` é o tier sem esses números |
 | `ShockCandidate` | O que é um ser vivo perto do robô, para o choque: o dono, um player, um robô, ou um mob pacífico, neutro ou hostil. A camada do jogo classifica |
 | `DefenseRules` | Quem cada modo de defesa ataca |
 | `ShockSignals` | O que o robô sabe de um ser vivo além do que ele é: se está agressivo com o dono, se é o atacante lembrado, se é o alvo do Focus e se o Focus tem alvo |
 | `FocusTarget` | O alvo do Focus: o último mob que o dono feriu, até morrer, mudar de dimensão ou ficar longe do dono |
 | `RetaliationMemory` | O último mob que feriu o robô ou o dono, até quando o Contra-atacar lembra dele |
-| `ShockRules` | Quando o robô dá o choque e em quais alvos |
+| `ShockRules` | Quando o robô dá o choque, em quais alvos e até quando fica ocupado com ele |
+| `PickupRules` | Quando o robô coleta por contato e quando o ímã puxa e cobra |
+| `FetchRules` | Quando o robô que segue busca os itens do chão, qual item, e quando desiste |
+| `FetchMemory` | Os itens em que o robô desistiu de buscar, cada um ignorado até um tick |
 | `TierCatalog` | Entrega o `TierSpec` de um tipo de robô num tier. O domínio define a interface, e o config a implementa |
 | `FollowAction` | O que o robô que segue faz: seguir, parar ou teleportar |
 | `BurningAction` | O que o robô faz em chamas: nada, sair da lava, buscar água ou andar ao acaso |
@@ -56,7 +59,7 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 | `PickupMode` | Lista negra, a inicial, ou lista branca. A `key` é o nome usado nos saves |
 | `PickupEntry` | Um slot do filtro: o ID de um item ou, no Elite e no Ultimate, de uma tag, salva com `#` |
 | `PickupItem` | O que o filtro lê de um item no chão: o ID e as tags |
-| `PickupSettings` | As chaves da coleta e do ímã e o filtro, que o item guarda |
+| `PickupSettings` | As chaves da coleta, do ímã e da busca e o filtro, que o item guarda |
 | `OreSignals` | Quais minérios avisam e qual deles o texto cita, a partir da lista dos raros |
 | `ScannerSpec` | Números dos scanners de um tier: raios, intervalos, custos e vagas do filtro |
 | `ScanRules` | Quando os scanners funcionam e o que conta como mob hostil |
@@ -150,8 +153,9 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 - **Pacífico sempre liberado:** o `ShockSpec` acrescenta o Pacífico a qualquer lista de modos, para o dono sempre poder parar os ataques, mesmo com um config que esqueça dele (pergunta 834).
 - **Focus sem alvo defende:** sem alvo, o Focus age como o Contra-atacar, para o dono nunca ficar sem defesa (pergunta 848). Com alvo, só o alvo leva o choque, mesmo um neutro calmo, porque o dono o feriu (pergunta 845).
 - **Nunca atacados:** o dono, outros players, outros robôs e mobs pacíficos, em qualquer modo. Um mob neutro só vira alvo quando fica agressivo contra o dono (perguntas 13 e 68).
-- **Tempo sem relógio:** a `RetaliationMemory` e as `ShockRules` recebem o tick atual de quem chama, como o resto do domínio.
+- **Tempo sem relógio:** a `RetaliationMemory`, a `FetchMemory`, as `ShockRules` e as `FetchRules` recebem o tick atual de quem chama, como o resto do domínio.
 - **Coleta e ímã separados:** a coleta por contato vale em todo tier e não gasta. O ímã precisa da coleta ligada, porque puxar sem pegar só amontoaria itens, e só puxa com carga para o custo inteiro de um item (perguntas 876, 877 e 879).
+- **Busca em volta do dono:** o raio da busca conta do dono, não do robô, porque o item jogado com Q cai à frente dele, fora do alcance do ímã (perguntas 927 e 936). A busca precisa da coleta ligada, como o ímã, não tem custo além do andar e fica abaixo do Dock, do fogo, dos blocos que ferem e do choque (perguntas 937 a 939).
 - **Filtro sem apagar:** as entradas acima do limite do tier e as tags num tier sem tags ficam guardadas sem contar, para um config maior trazê-las de volta (pergunta 892).
 - **Power Bank é uma `Battery`:** a carga dela usa a mesma bateria imutável do Cubit, e toda passagem de energia, no slot, no Dock ou na grade, usa o `EnergyTransfer`, para nunca criar nem perder FE (regra 13 e pergunta 907).
 - **Religar arredonda para cima:** a carga de religar é arredondada para cima, para o Cubit nunca ficar 1 FE abaixo dela depois da receita (pergunta 181).
