@@ -52,7 +52,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Histórico de modificações:** só os `.md` de `_docs/` têm a tabela.
 - **Fase 2:** encerrada. Os testes de instância ficaram para o fim da Fase 3.
 - **Documento desatualizado:** o agente sempre pergunta antes de corrigir, mesmo quando a correção parece clara.
-- **Teste manual antes dos commits (perguntas 934 e 935):** na tarefa que muda o jar, o desenvolvedor testa no `make client` depois do plano de commits, e só com a aprovação seguem os commits. A tarefa só de documentos não passa pelo teste.
+- **Teste manual antes dos commits (perguntas 934 e 935):** na tarefa que muda o jar, o desenvolvedor testa no `make client` depois do plano de commits, com o roteiro que o agente dá na conversa (pergunta 945), e só com a aprovação seguem os commits. A tarefa só de documentos não passa pelo teste.
 - **Merge:** é feito somente pelo desenvolvedor.
 - **Depois do merge:** o agente pede autorização para apagar a branch local e a remota, apresenta o próximo trabalho e pergunta se há ajuste no roteiro (regra 52).
 - **Checklist das fases:** fica em [`checklist.md`](../checklist.md). É avaliado ao encerrar cada PR, e a marcação entra num novo commit, no PR seguinte.
@@ -153,6 +153,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 10:30 | Registra o roteiro do teste manual na conversa. |
 | Marcelo Fabiano | 2026-11-13 09:50 | Registra a busca dos itens do chão. |
 | Marcelo Fabiano | 2026-11-13 08:58 | Registra os slots exclusivos da Fase 4.1, corrige os slots do Dock e adiciona o teste manual antes dos commits. |
 | Marcelo Fabiano | 2026-11-12 23:20 | Registra o ímã guiado a cada tick. |

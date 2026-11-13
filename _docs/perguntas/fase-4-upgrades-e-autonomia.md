@@ -8,6 +8,7 @@ Não há perguntas pendentes nesta fase.
 
 | # | Pergunta | Resposta |
 |---|---|---|
+| 945 | Como o agente entrega o roteiro no passo do teste manual? | "dentro do fluxo de trabalho vamos colocar na fase de teste manual do desenvolvedor que o agente deve dar o roteiro de teste": na conversa, passo a passo, com o comando, a preparação e uma tabela `Faça` / `Espere`. Quando a tarefa tem seção no `roteiro-manual.md`, os passos vêm de lá, e o arquivo continua sendo atualizado com a feature. A aprovação continua fora de `perguntas/`. Muda a 935. Confirma a recomendação |
 | 944 | Qual é o nome do campo da chave da busca no componente do item `cubit:robot_state`? | `fetch_enabled`, opcional, ligado quando não está no item, como `pickup_enabled` e `magnet_enabled`, então os itens salvos antes continuam válidos sem migração. Completa a 943. Confirma a recomendação |
 | 943 | Quais são os nomes do contrato da busca? | No config de cada tier, em `general_robot.<tier>`: `fetch_radius_blocks`, de 0 a 16, com 4, 6, 8 e 12. Em `general`: `fetch_check_ticks`, com 20, `fetch_give_up_ticks`, com 100, e `fetch_ignore_ticks`, com 200. No NBT da entidade, `FetchEnabled`, que vale ligada sem a chave no save. Os textos são `Fetch` / `Buscar`, com `Fetches items within 4 blocks of you` / `Busca itens a até 4 blocos de você`, com o número do tier. Confirma a recomendação |
 | 942 | Quais são os limites da busca (regras 21 e 22)? | Procura um item a cada 20 ticks, só em chunks carregados, e vai andando pelo caminho do jogo, sem teleportar até o item. Sem chegar em 100 ticks, ou sem caminho, desiste e ignora aquele item por 200 ticks. Os três valores ficam no config. Confirma a recomendação |
@@ -198,6 +199,7 @@ Não há perguntas pendentes nesta fase.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 10:30 | Registra a resposta 945. |
 | Marcelo Fabiano | 2026-11-13 10:05 | Registra a resposta 944. |
 | Marcelo Fabiano | 2026-11-13 09:40 | Registra as respostas 936 a 943. |
 | Marcelo Fabiano | 2026-11-13 08:58 | Registra as respostas 930 a 935. |
