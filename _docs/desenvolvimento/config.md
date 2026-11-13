@@ -61,6 +61,9 @@ As chaves ficam em `snake_case`. As de um tier ficam em `[general_robot.{tier}]`
 | `general` | `focus_forget_distance_blocks` | Distância do dono em que o alvo do Focus deixa de ser alvo | 1 a 128 |
 | `general` | `pickup_check_ticks` | Intervalo da coleta por contato | 1 a 1200 |
 | `general` | `magnet_check_ticks` | Intervalo do ímã | 1 a 1200 |
+| `general` | `fetch_check_ticks` | Intervalo da procura de um item para buscar | 1 a 1200 |
+| `general` | `fetch_give_up_ticks` | Tempo até desistir de um item que não alcança | 1 a 1200 |
+| `general` | `fetch_ignore_ticks` | Tempo em que o item desistido é ignorado | 1 a 1200 |
 | `general_robot.base` | `battery_capacity` | Bateria | 1 a 2147483647 |
 | `general_robot.base` | `moving_consumption_per_tick` | Andar | 0 a 2147483647 |
 | `general_robot.base` | `full_inventory_extra_per_tick` | Extra ao andar com o inventário cheio | 0 a 2147483647 |
@@ -91,6 +94,7 @@ As chaves ficam em `snake_case`. As de um tier ficam em `[general_robot.{tier}]`
 | `general_robot.base` | `shock_hits_all_in_range` | Alvos por choque: todos no alcance, ou só o mais próximo | `true` ou `false` |
 | `general_robot.base` | `magnet_radius_blocks` | Ímã (raio), com 0 para bloqueado | 0 a 16 |
 | `general_robot.base` | `magnet_cost_per_item` | Ímã, por item puxado | 0 a 2147483647 |
+| `general_robot.base` | `fetch_radius_blocks` | Busca (raio em volta do dono), com 0 para bloqueado | 0 a 16 |
 | `general_robot.base` | `pickup_filter_slots` | Filtro de coleta | 1 a 27 |
 | `general_robot.base` | `pickup_filter_tags` | Filtro de coleta com tags | `true` ou `false` |
 | `general_robot.base` | `power_bank_capacity` | Power Bank (70% da bateria) | 1 a 2147483647 |
@@ -129,6 +133,7 @@ O mod não cai por causa do config (regra 17 do `AGENTS.md`):
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 09:50 | Adiciona as chaves da busca dos itens do chão. |
 | Marcelo Fabiano | 2026-11-12 22:30 | Adiciona a capacidade da Power Bank (pergunta 910). |
 | Marcelo Fabiano | 2026-11-12 21:45 | Adiciona as chaves da coleta e do ímã (pergunta 889). |
 | Marcelo Fabiano | 2026-11-12 15:10 | Adiciona o modo Focus (pergunta 850). |

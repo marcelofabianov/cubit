@@ -21,17 +21,28 @@ Números por tier: [`tiers.md`](../tiers.md#coleta-e-inventário) e [slots exclu
 
 ## Coleta
 
-Entra no item 9 da Fase 4.1 (respostas 422, 423 e 876 a 889). A coleta e o ímã são peças separadas, cada uma com a sua chave na [aba Behavior](telas.md#aba-behavior).
+Entra no item 9 da Fase 4.1 (respostas 422, 423 e 876 a 889). A coleta, o ímã e a busca são peças separadas, cada uma com a sua chave na [aba Behavior](telas.md#aba-behavior).
 
 - **Inventário:** armazena itens.
 - **Coleta:** desde o Base, o Cubit pega o item que encosta nele, com a caixa dele aumentada em 1 bloco, como o player. Não gasta energia.
 - **Ímã:** do Advanced em diante, puxa até o Cubit os itens no raio do tier, com o movimento visível e sem teleportar. O item já pago é guiado a cada tick e coletado assim que encosta, e a 3 blocos chega em cerca de 0,3 s (pergunta 928). Gasta energia por item puxado, uma pilha no chão. No Base, fica bloqueado. Com a coleta desligada, o ímã fica inativo, porque puxar sem pegar só amontoaria itens.
+- **Busca:** desde o Base, o Cubit ativo e seguindo anda até os itens no chão num raio em volta do **dono**, do tier, pega e volta a seguir (issue #165, respostas 927 e 936 a 943). Não tem custo próprio, além do consumo de andar. Com a coleta desligada, a busca fica inativa, como o ímã. Detalhes em [Busca](#busca).
 - **Quando coleta:** só ativo, seguindo ou parado. Hibernando, desligado ou sem bateria, não coleta.
 - **Inventário cheio:** pega o que cabe, juntando nas pilhas e nos slots livres, e o resto fica no chão. O ímã só puxa, e só cobra, os itens que cabem pelo menos em parte. Vale só o inventário principal, nunca os slots exclusivos.
 - **Sem energia para o ímã:** ele não puxa, e a coleta por contato continua.
 - **O que nunca pega:** o item ainda no atraso de coleta do jogo, como o que o player acabou de jogar, o Cubit e o `Damaged Cubit`, para o player não perder o rastro de um robô.
 - **Varredura:** a coleta a cada 5 ticks e o ímã a cada 10 ticks, no config, só em chunks carregados (regras 21 e 22).
 - **Estado inicial:** as duas chaves começam ligadas e ficam no item (pergunta 343).
+
+### Busca
+
+- **Quando busca:** só ativo e seguindo, sem estar indo ao Dock, sem fogo ou bloco que fere e sem alvo do choque. Fica abaixo dessas reações e acima de seguir (resposta 939).
+- **O que busca:** os mesmos itens do ímã: os que o filtro de coleta aceita e que cabem pelo menos em parte no inventário principal, respeitando o atraso de coleta do jogo, e nunca o item de um Cubit nem um `Damaged Cubit`. Com o inventário cheio, não busca nada (resposta 941).
+- **Um item por vez:** o mais próximo do dono, dentro do raio do tier em volta dele.
+- **Como chega:** andando, pelo caminho do jogo, sem teleportar até o item. Pega ao encostar, pela coleta por contato.
+- **Quando desiste:** se o dono sair do raio da busca, larga o item e volta a seguir, e o teleporte de seguir continua valendo. Sem chegar em 5 s, ou sem caminho, desiste e ignora aquele item por 10 s (resposta 942).
+- **Varredura:** a cada 20 ticks, só em chunks carregados. Os três tempos ficam no config (regras 21 e 22).
+- **Estado inicial:** a chave começa ligada, também em saves antigos, e fica no item (resposta 938).
 
 ### Filtro de coleta
 
@@ -59,6 +70,7 @@ São dois: tochas e energia. Na Fase 5, o card de Aprendizado de Máquina ocupa 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 09:50 | Adiciona a busca dos itens do chão. |
 | Marcelo Fabiano | 2026-11-13 09:05 | Deixa só as tochas e a energia nos slots exclusivos. |
 | Marcelo Fabiano | 2026-11-12 23:20 | Acelera o item puxado pelo ímã. |
 | Marcelo Fabiano | 2026-11-12 21:45 | Detalha a coleta, o ímã, o filtro de coleta e o excedente recolhido. |

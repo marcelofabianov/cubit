@@ -50,7 +50,8 @@ Os IDs estão em [`itens.md`](itens.md).
 - **Filtro do scanner:** os minérios que o dono pediu ao Cubit, clicando nele com um minério na mão.
 - **Coleta:** o Cubit pega o item do chão que encosta nele, desde o Base.
 - **Ímã:** do Advanced em diante, puxa até o Cubit os itens no raio do tier, por um custo por item puxado.
-- **Filtro de coleta:** a lista branca ou negra dos itens que a coleta e o ímã pegam, com os slots do tier.
+- **Busca (`Fetch`):** desde o Base, o Cubit que segue anda até os itens no chão no raio do tier em volta do dono, pega e volta a seguir.
+- **Filtro de coleta:** a lista branca ou negra dos itens que a coleta, o ímã e a busca pegam, com os slots do tier.
 - **Power Bank:** bateria portátil de um tier, que recebe energia só no slot do Induction Dock e entrega só ao Cubit, pelo slot de energia ou pela receita de religar na grade.
 - **Slot fantasma:** slot do filtro que guarda uma cópia do item, sem consumi-lo.
 - **Bloco que fere:** bloco que o jogo classifica como perigoso na rota, como magma e cacto.
@@ -66,6 +67,7 @@ Os IDs estão em [`itens.md`](itens.md).
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 09:50 | Adiciona a busca dos itens do chão. |
 | Marcelo Fabiano | 2026-11-13 09:05 | Tira a fornalha e o carregador do slot exclusivo. |
 | Marcelo Fabiano | 2026-11-12 22:50 | Adiciona a Power Bank. |
 | Marcelo Fabiano | 2026-11-12 21:45 | Adiciona a coleta, o ímã, o filtro de coleta e o slot fantasma. |

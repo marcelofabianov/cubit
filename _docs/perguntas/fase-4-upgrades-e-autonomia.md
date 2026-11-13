@@ -8,6 +8,14 @@ Não há perguntas pendentes nesta fase.
 
 | # | Pergunta | Resposta |
 |---|---|---|
+| 943 | Quais são os nomes do contrato da busca? | No config de cada tier, em `general_robot.<tier>`: `fetch_radius_blocks`, de 0 a 16, com 4, 6, 8 e 12. Em `general`: `fetch_check_ticks`, com 20, `fetch_give_up_ticks`, com 100, e `fetch_ignore_ticks`, com 200. No NBT da entidade, `FetchEnabled`, que vale ligada sem a chave no save. Os textos são `Fetch` / `Buscar`, com `Fetches items within 4 blocks of you` / `Busca itens a até 4 blocos de você`, com o número do tier. Confirma a recomendação |
+| 942 | Quais são os limites da busca (regras 21 e 22)? | Procura um item a cada 20 ticks, só em chunks carregados, e vai andando pelo caminho do jogo, sem teleportar até o item. Sem chegar em 100 ticks, ou sem caminho, desiste e ignora aquele item por 200 ticks. Os três valores ficam no config. Confirma a recomendação |
+| 941 | Quais itens a busca persegue? | Os mesmos do ímã: só os que o filtro de coleta aceita e que cabem pelo menos em parte no inventário principal (resposta 885), respeitando o atraso de coleta do jogo e nunca o item de um Cubit nem um Damaged Cubit (resposta 886). Com o inventário cheio, não busca nada. Confirma a recomendação |
+| 940 | Como a terceira chave, `Fetch`, cabe na aba Behavior, se uma linha de 18 px a mais empurra a grade do filtro do Ultimate para cima do inventário do player? | As três chaves ficam em linhas de 12 px, com o ícone, o nome e o ON/OFF, nos mesmos 36 px de hoje. A descrição, com os números do tier e o `Unlocks at`, vai para a dica ao passar o mouse, e a grade não muda. Muda a 898 só na altura das linhas. Confirma a recomendação |
+| 939 | Quando o Cubit busca os itens do chão, e quando desiste e volta a seguir? | Abaixo do Dock e acima de seguir: busca só ativo e seguindo, sem estar indo ao Dock, sem fogo ou bloco que fere e sem alvo do choque. Se o dono sair do raio da busca, larga o item e volta a seguir, e o teleporte de 20 blocos continua valendo. Um item por vez, o mais próximo do dono. Confirma a recomendação |
+| 938 | A busca tem chave própria na aba Behavior? | Sim: `Fetch` / `Buscar`, abaixo de `Pickup` e `Magnet`, que começa ligada, também em saves antigos, e fica no item. Com a coleta desligada, a busca fica inativa, como o ímã (resposta 876). Num tier com o raio 0, aparece apagada com o tier que a libera. Confirma a recomendação |
+| 937 | A busca gasta energia além do andar? | Só o andar, com os extras dele, sem custo próprio nem número novo no config. Confirma a recomendação |
+| 936 | Em que tiers o Cubit busca os itens do chão, e com que raio? | Desde o Base, como a coleta por contato, num raio em volta do dono de 4, 6, 8 e 12 blocos, do Base ao Ultimate, no config de cada tier, com 0 para bloqueado. O ímã continua do Advanced em diante. Completa a 927. Confirma a recomendação |
 | 935 | Como funciona o passo do teste manual? | Só a aprovação: o agente pede o teste no `make client` e espera o ok, sem atualizar o roteiro manual nem registrar o resultado em `perguntas/`, porque a aprovação vale como autorização de uma ação pontual (regra 47). Com um problema, a tarefa volta ao passo Trabalho. A recomendação, com o roteiro e o registro, foi recusada |
 | 934 | O fluxo de trabalho ganha o teste manual do desenvolvedor depois do plano de commits e antes dos commits, e para quais tarefas? | "queria acrescentar no fluxo de trabalho apos o plano de commits antes de fazer os commits o teste manual do desenvolvedor e apos os testes e sua aprovacao que damos sequencia ao fluxo": sim, só nas tarefas que mudam o jar, como código, assets, dados ou config. A tarefa só de documentos segue direto para os commits. Confirma a recomendação |
 | 933 | A linha de `decisoes.md` que dá ao Dock um único slot, desatualizada desde a resposta 919, pode ser corrigida? | Sim: passa a citar os dois slots, entrada e carga, no mesmo commit da revisão dos documentos. Confirma a recomendação |
@@ -189,6 +197,7 @@ Não há perguntas pendentes nesta fase.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 09:40 | Registra as respostas 936 a 943. |
 | Marcelo Fabiano | 2026-11-13 08:58 | Registra as respostas 930 a 935. |
 | Marcelo Fabiano | 2026-11-12 23:20 | Registra as respostas 928 e 929. |
 | Marcelo Fabiano | 2026-11-12 23:00 | Registra as respostas 919 a 927. |
