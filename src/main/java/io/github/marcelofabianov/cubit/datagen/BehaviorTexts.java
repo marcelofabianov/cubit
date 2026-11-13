@@ -4,13 +4,15 @@ import io.github.marcelofabianov.cubit.domain.robot.PickupMode;
 import io.github.marcelofabianov.cubit.menu.BehaviorKeys;
 import java.util.function.BiConsumer;
 
-/** The behavior tab, in English, the base language (answer 888). */
+/** The behavior tab, in English, the base language (answers 888 and 943). */
 final class BehaviorTexts {
   private static final String TAB = "Behavior";
   private static final String PICKUP = "Pickup";
   private static final String PICKUP_DETAIL = "Picks up items it touches";
   private static final String MAGNET = "Magnet";
   private static final String MAGNET_DETAIL = "Pulls items within %s blocks · %s FE per item";
+  private static final String FETCH = "Fetch";
+  private static final String FETCH_DETAIL = "Fetches items within %s blocks of you";
   private static final String FILTER = "Pickup filter";
   private static final String WHITELIST = "Whitelist";
   private static final String BLACKLIST = "Blacklist";
@@ -24,6 +26,8 @@ final class BehaviorTexts {
     add.accept(BehaviorKeys.PICKUP_DETAIL, PICKUP_DETAIL);
     add.accept(BehaviorKeys.MAGNET, MAGNET);
     add.accept(BehaviorKeys.MAGNET_DETAIL, MAGNET_DETAIL);
+    add.accept(BehaviorKeys.FETCH, FETCH);
+    add.accept(BehaviorKeys.FETCH_DETAIL, FETCH_DETAIL);
     add.accept(BehaviorKeys.FILTER, FILTER);
     add.accept(BehaviorKeys.mode(PickupMode.WHITELIST), WHITELIST);
     add.accept(BehaviorKeys.mode(PickupMode.BLACKLIST), BLACKLIST);

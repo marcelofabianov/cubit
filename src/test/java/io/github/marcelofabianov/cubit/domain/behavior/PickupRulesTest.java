@@ -15,8 +15,8 @@ class PickupRulesTest {
   private static final Energy COST = new Energy(20);
   private static final int RADIUS = 3;
   private static final int SLOTS = 9;
-  private static final PickupSpec ADVANCED = new PickupSpec(RADIUS, COST, SLOTS, false);
-  private static final PickupSpec BASE = new PickupSpec(0, Energy.ZERO, SLOTS, false);
+  private static final PickupSpec ADVANCED = new PickupSpec(RADIUS, COST, SLOTS, false, 0);
+  private static final PickupSpec BASE = new PickupSpec(0, Energy.ZERO, SLOTS, false, 0);
   private static final Battery CHARGED = new Battery(CAPACITY, new Energy(1_000));
   private static final Battery SHORT = new Battery(CAPACITY, new Energy(19));
   private static final boolean ON = true;

@@ -46,11 +46,12 @@ public final class RobotMenu extends AbstractContainerMenu {
   /** After the four defense modes (answer 857). */
   public static final int POWER_BUTTON = 8;
 
-  /** The buttons of the behavior tab, after Power: pickup, magnet and the filter mode. */
+  /** The buttons of the behavior tab, after Power: pickup, magnet, the filter mode and fetch. */
   public static final int PICKUP_BUTTON = 9;
 
   public static final int MAGNET_BUTTON = 10;
   public static final int PICKUP_MODE_BUTTON = 11;
+  public static final int FETCH_BUTTON = 12;
 
   /** The top of the ghost slots of the pickup filter, in the behavior tab. */
   public static final int PICKUP_FILTER_Y = PickupMenuPart.FILTER_Y;
@@ -145,7 +146,7 @@ public final class RobotMenu extends AbstractContainerMenu {
     if (button >= FIRST_SCROLL_BUTTON) {
       return scrollFromClient(player, button - FIRST_SCROLL_BUTTON);
     }
-    if (button >= PICKUP_BUTTON && button <= PICKUP_MODE_BUTTON) {
+    if (button >= PICKUP_BUTTON && button <= FETCH_BUTTON) {
       return stillValid(player)
           && pickup.press(player, PickupControl.PickupButton.values()[button - PICKUP_BUTTON]);
     }

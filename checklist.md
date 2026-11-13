@@ -99,8 +99,8 @@ Dividida em três partes, na ordem em que dependem uma da outra (perguntas 722 a
 ### Fase 4.1: Itens, filtros, carregamento e mais
 
 9. [x] Ímã e coleta, com as chaves deles e o filtro em lista branca e lista negra (perguntas 422 a 424), e o custo do ímã
-10. [ ] Power Bank, inclusive no Dock e na grade de craft (issue #51), com a receita dela
-11. [ ] Slots de tochas, fornalha e carregador de ferramentas, com o Cubit colocando tochas e o custo delas (pergunta 724)
+10. [x] Power Bank, inclusive no Dock e na grade de craft (issues #164 e #51, PR #166), com a receita dela
+11. [ ] Slot de tochas, do Advanced em diante, com o Cubit colocando tochas e o custo delas (perguntas 724, 879 e 930)
 
 ### Fase 4.2: Remote, área e retorno
 
@@ -137,11 +137,11 @@ Dividida em três partes (perguntas 722 e 725). "Fase 5" nos documentos vale par
 10. [ ] Organizador, com o modo de abastecer, e fechar os detalhes dele (pergunta 208)
 11. [ ] Cozinheiro
 12. [ ] Defensor
-13. [ ] Minerador, com os modos definidos na entrega e a lanterna de cabeça com feixe (pergunta 463)
+13. [ ] Minerador, com os modos definidos na entrega, a lanterna de cabeça com feixe e a fornalha de minérios (perguntas 463 e 930)
 14. [ ] Construtor
 15. [ ] Pecuarista
 16. [ ] Definir os números "A definir" de `tiers.md`
-17. [ ] Decidir o slot de fornalha (pergunta 339)
+17. [x] Decidir o slot de fornalha: vai para o Minerador (perguntas 339 e 930)
 18. [ ] Testar cada card com 20 a 30 robôs
 
 ## Ainda sem fase

@@ -1,6 +1,8 @@
 package io.github.marcelofabianov.cubit.entity;
 
 import io.github.marcelofabianov.cubit.CubitMod;
+import io.github.marcelofabianov.cubit.domain.behavior.FetchMemory;
+import io.github.marcelofabianov.cubit.domain.behavior.FetchRules;
 import io.github.marcelofabianov.cubit.domain.behavior.PickupRules;
 import io.github.marcelofabianov.cubit.domain.behavior.ScanRules;
 import io.github.marcelofabianov.cubit.domain.ownership.Ownership;
@@ -27,8 +29,9 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
 /**
- * Picks up the items the robot touches and pulls the ones in the magnet radius (answers 876 to
- * 887). The rules live in the domain. Only the settings are saved.
+ * Picks up the items the robot touches, pulls the ones in the magnet radius and chooses the item to
+ * fetch (answers 876 to 887 and 936 to 942). The rules live in the domain. Only the settings are
+ * saved, so the items given up on are forgotten when the world closes.
  */
 public final class RobotPickup implements PickupControl {
   private static final double TOUCH_REACH_BLOCKS = 1;
@@ -37,6 +40,7 @@ public final class RobotPickup implements PickupControl {
   private final RobotEntity robot;
   private final Map<UUID, ItemEntity> pulled = new HashMap<>();
   private PickupSettings settings = PickupSettings.INITIAL;
+  private FetchMemory fetchMemory = FetchMemory.EMPTY;
 
   RobotPickup(RobotEntity robot) {
     this.robot = robot;
@@ -60,6 +64,13 @@ public final class RobotPickup implements PickupControl {
   }
 
   @Override
+  public Optional<RobotTier> fetchUnlockTier() {
+    return Arrays.stream(RobotTier.values())
+        .filter(tier -> robot.specAt(tier).pickup().fetchUnlocked())
+        .findFirst();
+  }
+
+  @Override
   public boolean press(Player player, PickupButton button) {
     if (!Ownership.owns(robot.ownerId(), player.getUUID())) {
       return false;
@@ -70,6 +81,8 @@ public final class RobotPickup implements PickupControl {
           case MAGNET ->
               spec().magnetUnlocked() && settings.pickupOn() ? settings.toggledMagnet() : settings;
           case MODE -> settings.withFilter(settings.filter().toggledMode());
+          case FETCH ->
+              spec().fetchUnlocked() && settings.pickupOn() ? settings.toggledFetch() : settings;
         };
     return change(next);
   }
@@ -188,18 +201,47 @@ public final class RobotPickup implements PickupControl {
     return true;
   }
 
+  /**
+   * The item on the ground nearest to the owner, in the fetch radius around the owner and not given
+   * up on. Only loaded entities are seen, so no chunk is loaded (rule 22).
+   */
+  Optional<ItemEntity> fetchTarget(Player owner) {
+    PickupSpec spec = spec();
+    if (!spec.fetchUnlocked()) {
+      return Optional.empty();
+    }
+    long now = robot.level().getGameTime();
+    List<ItemEntity> candidates =
+        robot
+            .level()
+            .getEntitiesOfClass(
+                ItemEntity.class,
+                owner.getBoundingBox().inflate(spec.fetchRadiusBlocks()),
+                item -> wants(item) && !fetchMemory.ignores(item.getUUID(), now));
+    return FetchRules.target(candidates, owner::distanceTo, spec);
+  }
+
+  /** The target is still worth the walk: still wanted and still in reach of the owner. */
+  boolean stillFetching(ItemEntity item, Player owner) {
+    return wants(item) && FetchRules.inReach(owner.distanceTo(item), spec());
+  }
+
+  /** The robot did not reach the item in time or found no route, so it leaves it for a while. */
+  void giveUp(ItemEntity item) {
+    fetchMemory =
+        fetchMemory.ignore(
+            item.getUUID(), robot.level().getGameTime(), CubitMod.CONFIG.fetchIgnoreTicks());
+  }
+
   /** Alive, past the delay of the game, allowed by the filter and with room (answers 885, 886). */
   private List<ItemEntity> wanted(AABB area) {
-    PickupSpec spec = robot.spec().pickup();
-    return robot
-        .level()
-        .getEntitiesOfClass(
-            ItemEntity.class,
-            area,
-            item ->
-                item.isAlive()
-                    && !item.hasPickUpDelay()
-                    && settings.filter().allows(PickupDisplay.itemOf(item.getItem()), spec)
-                    && RobotStorage.hasRoomFor(robot.inventory(), item.getItem()));
+    return robot.level().getEntitiesOfClass(ItemEntity.class, area, this::wants);
+  }
+
+  private boolean wants(ItemEntity item) {
+    return item.isAlive()
+        && !item.hasPickUpDelay()
+        && settings.filter().allows(PickupDisplay.itemOf(item.getItem()), spec())
+        && RobotStorage.hasRoomFor(robot.inventory(), item.getItem());
   }
 }

@@ -623,14 +623,14 @@ As regras estão em [`inventario.md`](../funcionalidades/inventario.md#coleta) e
 
 | # | Faça | Espere |
 |---|---|---|
-| 1 | Abra a aba Behavior de um Cubit Base ativo | `Pickup` ligada, `Magnet` apagada, com `Unlocks at Advanced`, o botão `Blacklist`, 3 slots fantasma, e o seu inventário e a hotbar visíveis |
+| 1 | Abra a aba Behavior de um Cubit Base ativo e passe o mouse nas chaves | `Pickup` e `Fetch` ligadas, `Magnet` apagada, com `Unlocks at Advanced` na dica, as três chaves em linhas baixas, o botão `Blacklist`, 3 slots fantasma, e o seu inventário e a hotbar visíveis |
 | 2 | Jogue terra no chão e ande até o Cubit passar por ela | Ele pega a terra quando encosta nela, e a bateria não cai pela coleta |
 | 3 | Jogue um item e fique perto do Cubit | Ele não pega o item na hora, pelo atraso de coleta do jogo |
 | 4 | Clique num slot fantasma com terra no cursor | A terra aparece no slot, e a terra do cursor continua com você |
 | 5 | Jogue terra e pedra perto do Cubit | Ele pega a pedra e deixa a terra |
 | 6 | Troque para `Whitelist` | Ele pega a terra e deixa a pedra |
 | 7 | Limpe o slot com o cursor vazio, ainda na `Whitelist` | Ele não pega nada |
-| 8 | Volte para `Blacklist`, aplique o Advanced Module e abra a aba | `Magnet` ligada, com `Pulls items within 3 blocks · 20 FE per item`, e 9 slots |
+| 8 | Volte para `Blacklist`, aplique o Advanced Module e abra a aba | `Magnet` ligada, com `Pulls items within 3 blocks · 20 FE per item` na dica, e 9 slots |
 | 9 | Jogue um item a 3 blocos do Cubit parado | O item desliza até ele em menos de meio segundo, e a bateria cai 20 FE |
 | 10 | Desligue `Pickup` | `Magnet` fica apagada, e ele não pega nem puxa nada |
 | 11 | Encha o inventário do Cubit, deixando espaço para meia pilha de terra, e jogue uma pilha inteira | Ele pega o que cabe, e o resto fica no chão |
@@ -638,7 +638,26 @@ As regras estão em [`inventario.md`](../funcionalidades/inventario.md#coleta) e
 | 13 | No Elite, clique com o botão direito num slot com tora de carvalho | O slot ganha a marca, e a dica mostra `Tag: #minecraft:logs`. Outras toras passam a valer |
 | 14 | Recolha e coloque o Cubit, e saia e entre no mundo | As chaves, o modo e o filtro continuam iguais |
 | 15 | Ponha o Cubit para hibernar no Dock e jogue itens nele | Ele não pega nada |
-| 16 | Com o jogo em português, abra a aba | `Comportamento`, `Coleta`, `Ímã`, `Filtro de coleta` e `Lista negra` |
+| 16 | Com o jogo em português, abra a aba | `Comportamento`, `Coleta`, `Ímã`, `Buscar`, `Filtro de coleta` e `Lista negra` |
+
+### Busca dos itens do chão
+
+As regras estão em [`inventario.md`](../funcionalidades/inventario.md#busca). Use um Cubit Base, seguindo você.
+
+| # | Faça | Espere |
+|---|---|---|
+| 1 | Passe o mouse em `Fetch` | `Fetches items within 4 blocks of you` |
+| 2 | Jogue terra com Q e fique parado | Depois do atraso de coleta, o Cubit anda até a terra, pega e volta a seguir |
+| 3 | Jogue terra e ande para longe, a mais de 4 blocos dela | Ele larga a terra e volta a seguir |
+| 4 | Jogue terra do outro lado de um muro, sem caminho | Em cerca de 5 s ele desiste, volta a seguir e só tenta de novo depois de 10 s |
+| 5 | Desligue `Fetch` e jogue terra | Ele não vai buscar, e a coleta por contato continua |
+| 6 | Ligue `Fetch`, desligue `Pickup` e jogue terra | `Fetch` fica apagada, e ele não busca |
+| 7 | Encha o inventário do Cubit e jogue terra | Ele não vai buscar |
+| 8 | Ponha terra na `Blacklist` e jogue terra | Ele não vai buscar |
+| 9 | Com um zumbi perto, no modo Contra-atacar, deixe o zumbi ferir você e jogue terra | Ele dá o choque primeiro e só depois busca |
+| 10 | Aplique o Ultimate Module e jogue terra a 10 blocos de você | Ele vai buscar, e a dica mostra 12 blocos |
+| 11 | Recolha e coloque o Cubit | A chave `Fetch` continua como estava |
+| 12 | Com o jogo em português, passe o mouse em `Buscar` | `Busca itens a até 4 blocos de você` |
 
 ## Power Bank
 
@@ -720,6 +739,7 @@ Na instância só com o mod, tire capturas com F2 do Cubit seguindo, da tela do 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 09:50 | Adiciona a busca dos itens do chão e as dicas das chaves da aba Behavior. |
 | Marcelo Fabiano | 2026-11-12 23:20 | Atualiza o tempo do ímã no roteiro. |
 | Marcelo Fabiano | 2026-11-12 23:10 | Acrescenta os dois slots do Dock ao roteiro da Power Bank. |
 | Marcelo Fabiano | 2026-11-12 22:50 | Adiciona o roteiro da Power Bank. |

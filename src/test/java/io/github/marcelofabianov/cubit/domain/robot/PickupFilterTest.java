@@ -32,9 +32,9 @@ class PickupFilterTest {
   private static final int FIRST = 0;
   private static final int SECOND = 1;
   private static final int FAR_SLOT = 5;
-  private static final PickupSpec BASE = new PickupSpec(0, Energy.ZERO, THREE_SLOTS, false);
-  private static final PickupSpec ELITE = new PickupSpec(5, new Energy(30), THREE_SLOTS, true);
-  private static final PickupSpec SINGLE = new PickupSpec(0, Energy.ZERO, ONE_SLOT, false);
+  private static final PickupSpec BASE = new PickupSpec(0, Energy.ZERO, THREE_SLOTS, false, 0);
+  private static final PickupSpec ELITE = new PickupSpec(5, new Energy(30), THREE_SLOTS, true, 0);
+  private static final PickupSpec SINGLE = new PickupSpec(0, Energy.ZERO, ONE_SLOT, false, 0);
 
   @Test
   void anEmptyBlacklistTakesAnything() {

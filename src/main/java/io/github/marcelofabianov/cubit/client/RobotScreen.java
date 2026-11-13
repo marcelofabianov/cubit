@@ -143,6 +143,10 @@ final class RobotScreen extends AbstractContainerScreen<RobotMenu> {
           mouseY);
       return;
     }
+    if (tabs.open() == RobotScreenTabs.Tab.BEHAVIOR
+        && behavior.renderDetail(graphics, font, mouseX, mouseY, leftPos, topPos)) {
+      return;
+    }
     tabAt(mouseX, mouseY)
         .ifPresent(under ->
             graphics.renderTooltip(font, Component.translatable(under.title()), mouseX, mouseY));

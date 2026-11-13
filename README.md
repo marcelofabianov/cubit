@@ -18,7 +18,7 @@ O Cubit segue você e ajuda em tarefas simples:
 - **Ilumina o caminho** e coloca tochas sozinho.
 - **Avisa você** sobre mobs hostis e procura os minérios que você escolher.
 - **Protege você** com um choque leve, nos modos pacífico, contra-atacar e agressivo. Nunca ataca o dono nem mobs pacíficos.
-- **Trabalha sozinho**: atua numa área marcada, descarrega em baús marcados, funde minérios, carrega suas ferramentas elétricas e guia você até o local da sua morte.
+- **Trabalha sozinho**: atua numa área marcada, descarrega em baús marcados e guia você até o local da sua morte.
 - **Tem personalidade**: a tela do rosto muda de expressão, e ele se comunica com bipes e textos curtos, comentando o tempo, os biomas e as suas conquistas, com uma chave para desligar.
 
 Você pode ter quantos Cubits quiser trabalhando em áreas marcadas, mas só um segue você por vez.

@@ -8,8 +8,9 @@ final class RobotGoals {
   private static final int BURNING_PRIORITY = 0;
   private static final int DAMAGING_BLOCK_PRIORITY = 1;
   private static final int DOCK_PRIORITY = 2;
-  private static final int FOLLOW_PRIORITY = 3;
-  private static final int LOOK_AT_OWNER_PRIORITY = 4;
+  private static final int FETCH_PRIORITY = 3;
+  private static final int FOLLOW_PRIORITY = 4;
+  private static final int LOOK_AT_OWNER_PRIORITY = 5;
 
   private RobotGoals() {}
 
@@ -17,6 +18,7 @@ final class RobotGoals {
     goals.addGoal(BURNING_PRIORITY, new BurningReactionGoal(robot));
     goals.addGoal(DAMAGING_BLOCK_PRIORITY, new LeaveDamagingBlockGoal(robot));
     goals.addGoal(DOCK_PRIORITY, new GoToDockGoal(robot));
+    goals.addGoal(FETCH_PRIORITY, new FetchItemGoal(robot));
     goals.addGoal(
         FOLLOW_PRIORITY,
         new FollowOwnerGoal(

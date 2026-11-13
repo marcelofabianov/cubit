@@ -187,7 +187,10 @@ public final class PickupGameTests {
     Player owner = helper.makeMockPlayer(GameType.SURVIVAL);
     RobotEntity robot = GameTestRobots.placeRobot(helper, owner, item(RobotTier.BASE), FLOOR);
     PickupSettings custom =
-        PickupSettings.INITIAL.toggledMagnet().withFilter(only(PickupMode.WHITELIST));
+        PickupSettings.INITIAL
+            .toggledMagnet()
+            .toggledFetch()
+            .withFilter(only(PickupMode.WHITELIST));
     robot.pickup().setSettings(custom);
 
     RobotEntity loaded = GameTestRobots.loadRobot(helper, robot.saveWithoutId(new CompoundTag()));

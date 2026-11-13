@@ -42,6 +42,8 @@
   "gui.cubit.redstone": "Redstone",
   "gui.cubit.robot.battery": "Battery",
   "gui.cubit.robot.behavior.blacklist": "Blacklist",
+  "gui.cubit.robot.behavior.fetch": "Fetch",
+  "gui.cubit.robot.behavior.fetch.detail": "Fetches items within %s blocks of you",
   "gui.cubit.robot.behavior.filter": "Pickup filter",
   "gui.cubit.robot.behavior.magnet": "Magnet",
   "gui.cubit.robot.behavior.magnet.detail": "Pulls items within %s blocks · %s FE per item",

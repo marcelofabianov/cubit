@@ -93,12 +93,13 @@ Entra com a coleta e o ímã, no item 9 da Fase 4.1 (perguntas 878 a 888). As re
 
 - **Slots:** o inventário e a hotbar do player continuam visíveis e usáveis, para o player pegar o item do filtro. Só o inventário do Cubit e o slot de energia somem, e o painel ocupa o lugar deles (pergunta 893).
 - **Cabeçalho:** `Behavior` / `Comportamento`, a etiqueta do tier e `Battery 71%`, como na Settings.
-- **Chaves:** as duas, com ON e OFF, nas linhas de 18 px da Settings, logo abaixo do cabeçalho e sem o título Functions, para a grade de 3 linhas caber acima do inventário do player (pergunta 898).
+- **Chaves:** as três, com o ícone, o nome e ON e OFF, em linhas de 12 px, logo abaixo do cabeçalho e sem o título Functions, para a grade de 3 linhas caber acima do inventário do player (perguntas 898 e 940). A descrição de cada chave aparece na dica ao passar o mouse.
 
-| Chave | Descrição |
+| Chave | Descrição, na dica |
 |---|---|
 | `Pickup` / `Coleta` | `Picks up items it touches` / `Pega os itens que toca` |
 | `Magnet` / `Ímã` | `Pulls items within 3 blocks · 20 FE per item` / `Puxa itens a até 3 blocos · 20 FE por item`, com os números do tier. No Base, apagada, com `Unlocks at Advanced`, como os modos bloqueados da Defense (pergunta 881). Com a coleta desligada, fica apagada, mantendo o valor |
+| `Fetch` / `Buscar` | `Fetches items within 4 blocks of you` / `Busca itens a até 4 blocos de você`, com o raio do tier (resposta 943). Num tier com o raio 0, apagada, com o tier que a libera. Com a coleta desligada, fica apagada, mantendo o valor |
 
 - **Pickup filter** / **Filtro de coleta:** o título, com o botão `Blacklist` / `Lista negra` ou `Whitelist` / `Lista branca`, que alterna o modo, e a grade de slots fantasma, com os slots do tier, de 3, 9, 18 ou 27, em linhas de 9 (pergunta 880).
   - **Clique com um item no cursor:** copia o tipo do item para o slot, sem consumi-lo. O item no cursor não muda.
@@ -222,6 +223,7 @@ Pergunta 691.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 09:50 | Adiciona a chave Fetch e passa as chaves da aba Behavior para linhas de 12 px. |
 | Marcelo Fabiano | 2026-11-12 23:10 | Adiciona o slot de carga à tela do Dock. |
 | Marcelo Fabiano | 2026-11-12 21:45 | Adiciona a aba Behavior, com a coleta, o ímã, o filtro de coleta e a sincronia dos slots fantasma. |
 | Marcelo Fabiano | 2026-11-12 17:20 | Adiciona a chave do painel solar e o botão Power à aba Settings. |

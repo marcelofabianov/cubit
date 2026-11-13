@@ -169,7 +169,7 @@ Estes nomes não mudam sem migração (regra 18 do `AGENTS.md`).
 
 | Onde | Nome | Conteúdo |
 |---|---|---|
-| Componente do item | `cubit:robot_state` | `tier`, `energy`, `health`, `lamp_enabled`, opcional, com o padrão ligado, `color`, opcional, com o padrão `white`, `scanners_enabled` e `chatter_enabled`, opcionais, com o padrão ligado, `ore_filter`, opcional, com a lista de tags de minério, vazia por padrão (perguntas 560 e 582), `defense_mode`, opcional, com o padrão `peaceful` (pergunta 830), `solar_enabled`, opcional, com o padrão ligado (pergunta 859), e `pickup_enabled`, `magnet_enabled` e `pickup_filter`, opcionais, com o padrão ligado, ligado e a lista negra vazia, com `mode` e `entries` (pergunta 889), também no item danificado |
+| Componente do item | `cubit:robot_state` | `tier`, `energy`, `health`, `lamp_enabled`, opcional, com o padrão ligado, `color`, opcional, com o padrão `white`, `scanners_enabled` e `chatter_enabled`, opcionais, com o padrão ligado, `ore_filter`, opcional, com a lista de tags de minério, vazia por padrão (perguntas 560 e 582), `defense_mode`, opcional, com o padrão `peaceful` (pergunta 830), `solar_enabled`, opcional, com o padrão ligado (pergunta 859), e `pickup_enabled`, `magnet_enabled` e `pickup_filter`, opcionais, com o padrão ligado, ligado e a lista negra vazia, com `mode` e `entries` (pergunta 889), e `fetch_enabled`, opcional, com o padrão ligado (pergunta 944), também no item danificado |
 | Componente do item | `cubit:energy_slot` | Item do slot de energia e reserva de FE, também no item danificado |
 | Componente do item do Dock | `cubit:dock_energy` | Energia do estoque |
 | Componente da Power Bank | `cubit:power_bank_energy` | Energia guardada. Sem o componente, vale zero (pergunta 903) |
@@ -214,6 +214,7 @@ O estado salvo é validado ao entrar no jogo, sem derrubá-lo (regra 17 do `AGEN
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 10:05 | Adiciona o campo fetch_enabled ao componente do Cubit. |
 | Marcelo Fabiano | 2026-11-12 23:10 | Adiciona o slot de carga do Dock ao save. |
 | Marcelo Fabiano | 2026-11-12 22:30 | Define as receitas e os contratos da Power Bank. |
 | Marcelo Fabiano | 2026-11-12 21:45 | Adiciona a coleta, o ímã e o filtro de coleta aos contratos de save. |

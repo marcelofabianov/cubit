@@ -36,4 +36,16 @@ public final class ShockRules {
     }
     return List.of(nearestFirst.getFirst());
   }
+
+  /**
+   * A strike keeps the robot engaged until the next one is due, so it does not walk off to fetch
+   * between two strikes (answer 939). An end tick of zero means it never struck.
+   */
+  public static long engagedUntil(long strikeTick, ShockSpec spec) {
+    return strikeTick + spec.intervalTicks() + 1;
+  }
+
+  public static boolean engaged(long engagedUntilTick, long nowTick) {
+    return nowTick < engagedUntilTick;
+  }
 }

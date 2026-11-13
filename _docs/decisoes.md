@@ -52,6 +52,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Histórico de modificações:** só os `.md` de `_docs/` têm a tabela.
 - **Fase 2:** encerrada. Os testes de instância ficaram para o fim da Fase 3.
 - **Documento desatualizado:** o agente sempre pergunta antes de corrigir, mesmo quando a correção parece clara.
+- **Teste manual antes dos commits (perguntas 934 e 935):** na tarefa que muda o jar, o desenvolvedor testa no `make client` depois do plano de commits, com o roteiro que o agente dá na conversa (pergunta 945), e só com a aprovação seguem os commits. A tarefa só de documentos não passa pelo teste.
 - **Merge:** é feito somente pelo desenvolvedor.
 - **Depois do merge:** o agente pede autorização para apagar a branch local e a remota, apresenta o próximo trabalho e pergunta se há ajuste no roteiro (regra 52).
 - **Checklist das fases:** fica em [`checklist.md`](../checklist.md). É avaliado ao encerrar cada PR, e a marcação entra num novo commit, no PR seguinte.
@@ -88,7 +89,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Criativo:** aba própria, `cubit:main`, e colocar sempre gasta o item.
 - **Estados:** ativo (ligado), inativo (desligado) e hibernação (na base, com o inventário e os slots acessíveis).
 - **Painel solar:** só funciona com o Cubit ativo, de dia em todos os tiers e à noite só em Elite e Ultimate. Coberto por um bloco opaco, não carrega, e vidro deixa carregar. A célula pulsa de leve enquanto enche a bateria, e a chave entra com a interface de configuração. O clima não tem efeito, e no Nether e no End não funciona. Fica abaixo do consumo.
-- **Induction Dock:** é a base de recarga, com torre e placa em U, 2 blocos de altura e dono, recebe energia por cabos ou redstone, sem saída, e tem um único slot, que também recarrega a Power Bank. A energia fica no item ao quebrar, e só o dono o quebra, além de um operador no modo criativo. Sem conseguir chegar, o Cubit teleporta.
+- **Induction Dock:** é a base de recarga, com torre e placa em U, 2 blocos de altura e dono, recebe energia por cabos ou redstone, sem saída, e tem dois slots: o de entrada, para redstone ou para a Power Bank descarregar no estoque, e o de carga, que recarrega a Power Bank (pergunta 919). A energia fica no item ao quebrar, e só o dono o quebra, além de um operador no modo criativo. Sem conseguir chegar, o Cubit teleporta.
 - **Dock sem dono:** só um operador em criativo o remove, com aviso no log ao carregar (pergunta 524). Entra na issue #106.
 - **Recarga pela grade de craft:** o item do Cubit abaixo da carga de religar, combinado com uma Power Bank, recebe só o que falta para religar, na Fase 4.
 - **Consumo:** gasta ao andar de verdade, sem gastar parado nem empurrado. As exceções são a condição negativa, a lanterna acesa e as varreduras dos scanners, que gastam mesmo parado.
@@ -137,12 +138,14 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Bateria crítica e textos:** a bateria crítica é de 5%, com sono, indicador vermelho e `Critical battery`, que vem só do Cubit ativo que segue, repetindo a cada intervalo mínimo. `Cubit: That hurts!` e `Cubit: Careful!` avisam do dano no robô e no dono, com o mesmo intervalo. Todos os textos vêm só do Cubit que segue. Os textos começam com `Cubit: ` e são desenhados pelo mod, menores e logo acima das barras da hotbar, com um pacote de rede do servidor para o cliente.
 - **Filtro de coleta:** tem lista branca e lista negra, com a lista negra por padrão. A lista negra vazia pega tudo, e a branca vazia não pega nada, com o mesmo limite do tier nos dois modos. Compara só o tipo do item, e no Elite e no Ultimate o clique direito num slot alterna o item para uma tag dele, dentro do mesmo limite (perguntas 423, 882 e 883).
 - **Coleta e ímã (perguntas 876 a 897):** são peças separadas. A coleta pega o item que encosta no Cubit desde o Base, e o ímã, do Advanced em diante, puxa os itens no raio do tier, por 20, 30 e 60 FE por item puxado. Com a coleta desligada, o ímã fica inativo. As duas chaves começam ligadas e ficam no item, e o Cubit só coleta ativo. Ele pega o que cabe no inventário principal, respeita o atraso de coleta do jogo e nunca pega um Cubit nem um Damaged Cubit. A coleta varre a cada 5 ticks e o ímã a cada 10, no config, e o item já pago é guiado a cada tick até encostar (pergunta 928). As chaves e o filtro, em slots fantasma, ficam na aba Behavior, com o ícone de funil, e o inventário do player continua visível nela. Os slots fantasma são slots do menu, sem pacote novo, e o ícone de funil é desenhado pelo agente. Um filtro salvo inválido não apaga nada: o que não existe é ignorado, e o que passa do tier fica guardado sem valer.
+- **Busca dos itens do chão (perguntas 936 a 943, issue #165):** desde o Base, o Cubit ativo e seguindo anda até os itens que o ímã aceitaria, num raio em volta do dono de 4, 6, 8 e 12 blocos, um por vez, e volta a seguir. Sem custo além do andar, com a chave `Fetch` na aba Behavior, abaixo do Dock e acima de seguir. Procura a cada 20 ticks, desiste em 100 e ignora o item por 200. As chaves da aba Behavior passam a linhas de 12 px, com a descrição na dica.
 - **Power Bank (perguntas 900 a 911):**
   - Quatro, uma por tier, com `power_bank_capacity` no config, de 210 mil a 5,6 mi FE, e a carga no componente `cubit:power_bank_energy`.
   - O Dock tem dois slots (perguntas 919 a 923). No de entrada, a Power Bank descarrega no estoque pelo limite dos cabos. No de carga, `ChargeSlot`, que fica abaixo, ela recebe o que sobrar depois do Cubit, na recarga do Base. Não tem capability de FE para outros mods (muda a 42 e a 58).
   - Vazia, fica no slot do Cubit.
   - As receitas são encadeadas, com a carga mantida pelo tipo `cubit:power_bank_upgrade`. Se a carga não couber, a receita não aparece (regra 13).
   - A de religar o Cubit na grade é o tipo `cubit:robot_recharge`.
+- **Slots exclusivos da Fase 4.1 (perguntas 930 e 931):** só as tochas, a partir do Advanced, depois da issue #165. A fornalha vai para o Minerador, na Fase 5, e o carregador de ferramentas sai do mod.
 - **Texturas por prompt (pergunta 900):** o agente não desenha imagens. Ele escreve o prompt em `tmp/arte/{nome}/prompt.md`, e o desenvolvedor devolve os arquivos na mesma pasta.
 - **Chaveamento:** têm chave a chave geral do Cubit, com ligar, desligar e hibernar, o painel solar, a lanterna, os scanners, o ímã, pegar itens dropados, a descarga em baú, o retorno automático e mostrar o local de morte do player. Cada chave entra com o recurso dela.
 
@@ -150,6 +153,9 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 10:30 | Registra o roteiro do teste manual na conversa. |
+| Marcelo Fabiano | 2026-11-13 09:50 | Registra a busca dos itens do chão. |
+| Marcelo Fabiano | 2026-11-13 08:58 | Registra os slots exclusivos da Fase 4.1, corrige os slots do Dock e adiciona o teste manual antes dos commits. |
 | Marcelo Fabiano | 2026-11-12 23:20 | Registra o ímã guiado a cada tick. |
 | Marcelo Fabiano | 2026-11-12 23:10 | Registra os dois slots do Dock. |
 | Marcelo Fabiano | 2026-11-12 22:30 | Registra a Power Bank e as texturas por prompt. |

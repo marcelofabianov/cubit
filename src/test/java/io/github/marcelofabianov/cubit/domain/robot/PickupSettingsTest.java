@@ -16,9 +16,10 @@ class PickupSettingsTest {
   private static final float HEALTH = 20f;
 
   @Test
-  void bothSwitchesStartOnWithAnEmptyBlacklist() {
+  void everySwitchStartsOnWithAnEmptyBlacklist() {
     assertTrue(PickupSettings.INITIAL.pickupOn());
     assertTrue(PickupSettings.INITIAL.magnetOn());
+    assertTrue(PickupSettings.INITIAL.fetchOn());
     assertEquals(PickupFilter.EMPTY, PickupSettings.INITIAL.filter());
   }
 
@@ -26,19 +27,27 @@ class PickupSettingsTest {
   void eachSwitchTogglesOnItsOwn() {
     PickupSettings noPickup = PickupSettings.INITIAL.toggledPickup();
     PickupSettings noMagnet = PickupSettings.INITIAL.toggledMagnet();
+    PickupSettings noFetch = PickupSettings.INITIAL.toggledFetch();
 
     assertFalse(noPickup.pickupOn());
     assertTrue(noPickup.magnetOn());
+    assertTrue(noPickup.fetchOn());
     assertTrue(noMagnet.pickupOn());
     assertFalse(noMagnet.magnetOn());
+    assertTrue(noMagnet.fetchOn());
+    assertTrue(noFetch.pickupOn());
+    assertTrue(noFetch.magnetOn());
+    assertFalse(noFetch.fetchOn());
   }
 
   @Test
   void theFilterIsReplacedKeepingTheSwitches() {
-    PickupSettings changed = PickupSettings.INITIAL.toggledMagnet().withFilter(DIRT_ONLY);
+    PickupSettings changed =
+        PickupSettings.INITIAL.toggledMagnet().toggledFetch().withFilter(DIRT_ONLY);
 
     assertEquals(DIRT_ONLY, changed.filter());
     assertFalse(changed.magnetOn());
+    assertFalse(changed.fetchOn());
   }
 
   @Test
