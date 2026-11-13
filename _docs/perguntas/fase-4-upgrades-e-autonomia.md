@@ -8,6 +8,7 @@ Não há perguntas pendentes nesta fase.
 
 | # | Pergunta | Resposta |
 |---|---|---|
+| 1027 | O `AGENTS.md` e o milestone podem passar a citar o Tablet? | "pode fazer o commit e atualizar o AGENTS.md e o milestone", autorizado pelo desenvolvedor: a regra 42 e a nota de rede citam o Tablet, o estado atual dá o Tablet como próximo (#174 a #176), e o milestone vira "Fase 4.2: Tablet, área e retorno" |
 | 1026 | Quais são os nomes do contrato do Tablet? | Item `cubit:tablet`, com a receita `cubit:tablet`. Componente do item `cubit:tablet_app`, com o app ativo, `open`, `target` ou `dock`, que vale `open` sem o componente. Attachment do player `cubit:chosen_robot`, com o UUID do Cubit escolhido. NBT da entidade: `PreferredDock`, com a posição e a dimensão, e `Stopped`, para o Cubit parado. Dados do mundo `cubit_robot_snapshots`, com a foto de cada Cubit por dono: posição, dimensão, estado, bateria, vida, tier, cor, nome e a hora. Os textos em inglês e português, como `Cubit Tablet` / `Tablet do Cubit`, `Tablet · Open` / `Tablet · Abrir`, `Stop` / `Parar`, `Follow` / `Seguir`, `Go to Dock` / `Ir para o Dock` e `Rename` / `Renomear`, ficam no datagen. Confirma a recomendação |
 | 1025 | Como ficam a receita e a textura do Tablet? | Uma receita com forma, de materiais do jogo puro: 4 lingotes de ferro nos cantos, 3 painéis de vidro em cima, 1 redstone no centro e 1 lingote de ouro embaixo, liberada no livro de receitas quando o player tem um Cubit, como a do Dock. Não empilha. A textura de 16×16 é feita por prompt, em `tmp/arte/tablet/`. Confirma a recomendação |
 | 1024 | O Tablet tem dono? | Não. O item não guarda dono, e qualquer Tablet mostra só os Cubits de quem o segura. O servidor confere o dono, o alcance e o chunk em toda ação, pela regra 20. Confirma a recomendação |
@@ -280,6 +281,7 @@ Não há perguntas pendentes nesta fase.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 16:50 | Registra a resposta 1027. |
 | Marcelo Fabiano | 2026-11-13 16:10 | Registra as respostas 998 a 1026. |
 | Marcelo Fabiano | 2026-11-13 15:40 | Registra a resposta 997. |
 | Marcelo Fabiano | 2026-11-13 15:20 | Registra as respostas 985 e 996. |
