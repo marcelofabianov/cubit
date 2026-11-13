@@ -49,11 +49,9 @@ O player marca um baú. Quando o inventário do robô enche, ele vai sozinho des
 
 ## Slots exclusivos
 
-São quatro: tochas, fornalha, carregador de ferramentas e energia. Na Fase 5, o card de Aprendizado de Máquina ocupa mais um. O controle remoto ativa ou desativa tochas, fornalha e carregador de ferramentas. O slot de energia fica sempre ligado.
+São dois: tochas e energia. Na Fase 5, o card de Aprendizado de Máquina ocupa mais um. O controle remoto ativa ou desativa as tochas, e o slot de energia fica sempre ligado. A fornalha de minérios foi para o [Minerador](trabalhos.md#minerador), na Fase 5, e o carregador de ferramentas saiu do mod (pergunta 930).
 
-- **Tochas automáticas:** com tochas no slot exclusivo, o robô as coloca sozinho no chão.
-- **Fornalha de minérios:** funde minérios usando a bateria em vez de combustível, então fundir gasta autonomia.
-- **Carregador de ferramentas elétricas:** carrega as ferramentas elétricas do player.
+- **Tochas automáticas:** do Advanced em diante, com tochas no slot exclusivo, o robô as coloca sozinho no chão. No Base, o slot fica bloqueado (respostas 879 e 930).
 - **Esvaziar:** o comportamento automático de esvaziar o inventário não coloca nem tira itens dos slots exclusivos.
 - **Energia:** o robô extrai a energia da Power Bank ou da redstone para a bateria interna. Veja [`energia.md`](energia.md#slot-exclusivo-de-energia).
 
@@ -61,6 +59,7 @@ São quatro: tochas, fornalha, carregador de ferramentas e energia. Na Fase 5, o
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 09:05 | Deixa só as tochas e a energia nos slots exclusivos. |
 | Marcelo Fabiano | 2026-11-12 23:20 | Acelera o item puxado pelo ímã. |
 | Marcelo Fabiano | 2026-11-12 21:45 | Detalha a coleta, o ímã, o filtro de coleta e o excedente recolhido. |
 | Marcelo Fabiano | 2026-11-07 23:11 | Aponta a tela do inventário para as telas próprias. |

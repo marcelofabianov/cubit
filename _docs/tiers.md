@@ -46,7 +46,6 @@ Os extras somam ao andar. O consumo só vale com o robô ativo.
 | Extra ao andar na água | +5 FE/t | +6 FE/t | +7 FE/t | +10 FE/t |
 | Extra ao subir, por bloco de altura | +15 FE | +18 FE | +22 FE | +30 FE |
 | Extra com condição negativa, mesmo parado | +25 FE/t | +50 FE/t | +125 FE/t | +250 FE/t |
-| Fundir na fornalha | Bloqueado | ~20 FE/t | ~20 FE/t | ~20 FE/t |
 | Choque, por uso | Bloqueado | 2 mil FE | 2 mil FE | 1,5 mil FE |
 | Extra com a lanterna acesa, mesmo parado | +1 FE/t | +1 FE/t | +2 FE/t | +2 FE/t |
 | Scanner de mobs, por varredura | 50 FE | 100 FE | 150 FE | 300 FE |
@@ -55,7 +54,6 @@ Os extras somam ao andar. O consumo só vale com o robô ativo.
 | Colocar tochas, no item 11 da Fase 4.1 | Bloqueado | A definir | A definir | A definir |
 
 - **Claridade da tela:** não gasta energia.
-- **Carregador de ferramentas:** transfere energia para outro item, então não conta como gasto. A velocidade está em [slots exclusivos](#slots-exclusivos).
 - **Cards:** o custo por ação está em [trabalhos](#trabalhos).
 
 ## Valores gerais
@@ -167,11 +165,9 @@ O raio dos dois scanners é o de uma esfera em volta do Cubit: só conta o que e
 | Recurso | Base | Avançado | Elite | Ultimate |
 |---|---|---|---|---|
 | Tochas (coloca sozinho) | Bloqueado | 1 slot, luz < 7 | 1 slot, luz < 7 | 2 slots, nível configurável |
-| Carregador de ferramentas elétricas | Bloqueado | 1 slot, 250 FE/t | 2 slots, 500 FE/t | 4 slots, 1.000 FE/t |
-| Fornalha de minérios | Bloqueado | 1 slot, 0,5× | 1 slot, 1× | 1 slot, 2× |
 | Energia (Power Bank ou redstone) | 1 slot | 1 slot | 1 slot | 1 slot |
 
-A fornalha gasta cerca de 20 FE por tick enquanto funde.
+A fornalha de minérios foi para o Minerador, na Fase 5, e o carregador de ferramentas saiu do mod (pergunta 930).
 
 ## Trabalhos
 
@@ -185,6 +181,7 @@ Planejado para a Fase 5. O tier Base não aceita cards.
 | Minerador: Fortuna | — | — | II | III |
 | Minerador: Toque Suave | — | — | — | ✔ |
 | Minerador: Inquebrável e Remendo | — | — | — | ✔ |
+| Minerador: fornalha de minérios, em ~20 FE/t enquanto funde (pergunta 930) | — | 0,5× | 1× | 2× |
 | Defensor: modos | — | Contra-atacar | + Agressivo | Todos, sem Pacífico |
 | Storage wireless | — | — | — | ✔ |
 
@@ -206,6 +203,7 @@ Planejado para a Fase 5. O tier Base não aceita cards.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 09:05 | Leva a fornalha para o Minerador e tira o carregador de ferramentas. |
 | Marcelo Fabiano | 2026-11-12 23:10 | Acrescenta a descarga da Power Bank no Dock. |
 | Marcelo Fabiano | 2026-11-12 22:30 | Tira a marca de planejada da Power Bank e acrescenta a recarga dela no Dock. |
 | Marcelo Fabiano | 2026-11-12 21:45 | Define o ímã do Advanced em diante, o custo dele e os intervalos da coleta. |

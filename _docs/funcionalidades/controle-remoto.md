@@ -9,7 +9,7 @@ O controle atende todos os Cubits do player, desde que estejam ligados. Mirando 
 - ligar e desligar;
 - mandar parar e voltar a seguir;
 - trocar o modo de defesa;
-- ativar ou desativar tochas, fornalha e carregador de ferramentas;
+- ativar ou desativar as tochas;
 - ligar e desligar a chave da lanterna.
 
 Na proposta do [modo só o alvo](combate.md#modo-só-o-alvo-proposta), o controle também marca um mob, mirando nele (perguntas 577 e 578).
@@ -36,6 +36,7 @@ A área é marcada com o controle, clicando com o botão direito em dois blocos,
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 09:05 | Deixa só as tochas entre as funções que o controle desativa. |
 | Marcelo Fabiano | 2026-11-07 23:42 | Acrescenta os scanners ao consumo do Cubit parado. |
 | Marcelo Fabiano | 2026-11-07 16:51 | Cita a marcação de um mob no modo só o alvo. |
 | Marcelo Fabiano | 2026-11-06 13:34 | Adiciona a chave e o consumo da lanterna. |

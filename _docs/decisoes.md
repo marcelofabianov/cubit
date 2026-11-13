@@ -88,7 +88,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Criativo:** aba própria, `cubit:main`, e colocar sempre gasta o item.
 - **Estados:** ativo (ligado), inativo (desligado) e hibernação (na base, com o inventário e os slots acessíveis).
 - **Painel solar:** só funciona com o Cubit ativo, de dia em todos os tiers e à noite só em Elite e Ultimate. Coberto por um bloco opaco, não carrega, e vidro deixa carregar. A célula pulsa de leve enquanto enche a bateria, e a chave entra com a interface de configuração. O clima não tem efeito, e no Nether e no End não funciona. Fica abaixo do consumo.
-- **Induction Dock:** é a base de recarga, com torre e placa em U, 2 blocos de altura e dono, recebe energia por cabos ou redstone, sem saída, e tem um único slot, que também recarrega a Power Bank. A energia fica no item ao quebrar, e só o dono o quebra, além de um operador no modo criativo. Sem conseguir chegar, o Cubit teleporta.
+- **Induction Dock:** é a base de recarga, com torre e placa em U, 2 blocos de altura e dono, recebe energia por cabos ou redstone, sem saída, e tem dois slots: o de entrada, para redstone ou para a Power Bank descarregar no estoque, e o de carga, que recarrega a Power Bank (pergunta 919). A energia fica no item ao quebrar, e só o dono o quebra, além de um operador no modo criativo. Sem conseguir chegar, o Cubit teleporta.
 - **Dock sem dono:** só um operador em criativo o remove, com aviso no log ao carregar (pergunta 524). Entra na issue #106.
 - **Recarga pela grade de craft:** o item do Cubit abaixo da carga de religar, combinado com uma Power Bank, recebe só o que falta para religar, na Fase 4.
 - **Consumo:** gasta ao andar de verdade, sem gastar parado nem empurrado. As exceções são a condição negativa, a lanterna acesa e as varreduras dos scanners, que gastam mesmo parado.
@@ -143,6 +143,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
   - Vazia, fica no slot do Cubit.
   - As receitas são encadeadas, com a carga mantida pelo tipo `cubit:power_bank_upgrade`. Se a carga não couber, a receita não aparece (regra 13).
   - A de religar o Cubit na grade é o tipo `cubit:robot_recharge`.
+- **Slots exclusivos da Fase 4.1 (perguntas 930 e 931):** só as tochas, a partir do Advanced, depois da issue #165. A fornalha vai para o Minerador, na Fase 5, e o carregador de ferramentas sai do mod.
 - **Texturas por prompt (pergunta 900):** o agente não desenha imagens. Ele escreve o prompt em `tmp/arte/{nome}/prompt.md`, e o desenvolvedor devolve os arquivos na mesma pasta.
 - **Chaveamento:** têm chave a chave geral do Cubit, com ligar, desligar e hibernar, o painel solar, a lanterna, os scanners, o ímã, pegar itens dropados, a descarga em baú, o retorno automático e mostrar o local de morte do player. Cada chave entra com o recurso dela.
 
@@ -150,6 +151,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 08:58 | Registra os slots exclusivos da Fase 4.1 e corrige os slots do Dock. |
 | Marcelo Fabiano | 2026-11-12 23:20 | Registra o ímã guiado a cada tick. |
 | Marcelo Fabiano | 2026-11-12 23:10 | Registra os dois slots do Dock. |
 | Marcelo Fabiano | 2026-11-12 22:30 | Registra a Power Bank e as texturas por prompt. |

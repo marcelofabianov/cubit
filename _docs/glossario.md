@@ -60,12 +60,13 @@ Os IDs estão em [`itens.md`](itens.md).
 - **Trabalho:** o que um card de Aprendizado de Máquina ensina ao Cubit, na Fase 5. Sem card, ele é generalista.
 - **Cubit com trabalho:** o Cubit com um card no slot. O robô é sempre o mesmo.
 - **Área de trabalho:** volume marcado com o controle, onde o card age.
-- **Slot exclusivo:** slot reservado para tochas, fornalha, carregador de ferramentas ou energia (Power Bank ou redstone) e, na Fase 5, para o card de Aprendizado de Máquina.
+- **Slot exclusivo:** slot reservado para tochas ou energia (Power Bank ou redstone) e, na Fase 5, para o card de Aprendizado de Máquina.
 
 ## Histórico de modificações
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 09:05 | Tira a fornalha e o carregador do slot exclusivo. |
 | Marcelo Fabiano | 2026-11-12 22:50 | Adiciona a Power Bank. |
 | Marcelo Fabiano | 2026-11-12 21:45 | Adiciona a coleta, o ímã, o filtro de coleta e o slot fantasma. |
 | Marcelo Fabiano | 2026-11-12 15:10 | Adiciona o modo Focus. |

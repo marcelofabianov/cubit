@@ -48,7 +48,7 @@ Dividida em três partes, na ordem em que uma depende da outra.
 
 - Ímã e coleta de itens do chão, com o filtro em lista branca e lista negra.
 - Power Bank, também no Dock e na grade de craft.
-- Slots exclusivos de tochas, fornalha e carregador de ferramentas, com o Cubit colocando tochas sozinho.
+- Slot exclusivo de tochas, do Advanced em diante, com o Cubit colocando tochas sozinho.
 
 ### Fase 4.2: Remote, área e retorno
 
