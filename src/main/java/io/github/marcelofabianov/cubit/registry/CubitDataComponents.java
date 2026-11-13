@@ -24,6 +24,7 @@ public final class CubitDataComponents {
   private static final String ROBOT_INVENTORY_ID = "robot_inventory";
   private static final String ENERGY_SLOT_ID = "energy_slot";
   private static final String DOCK_ENERGY_ID = "dock_energy";
+  private static final String POWER_BANK_ENERGY_ID = "power_bank_energy";
   private static final DeferredRegister.DataComponents COMPONENTS =
       DeferredRegister.createDataComponents(Registries.DATA_COMPONENT_TYPE, CubitMod.MOD_ID);
 
@@ -65,6 +66,12 @@ public final class CubitDataComponents {
   public static final Supplier<DataComponentType<Long>> DOCK_ENERGY =
       COMPONENTS.registerComponentType(
           DOCK_ENERGY_ID,
+          builder -> builder.persistent(Codec.LONG).networkSynchronized(ByteBufCodecs.VAR_LONG));
+
+  /** The charge of a Power Bank, a contract with the saves (answer 903). */
+  public static final Supplier<DataComponentType<Long>> POWER_BANK_ENERGY =
+      COMPONENTS.registerComponentType(
+          POWER_BANK_ENERGY_ID,
           builder -> builder.persistent(Codec.LONG).networkSynchronized(ByteBufCodecs.VAR_LONG));
 
   private CubitDataComponents() {}
