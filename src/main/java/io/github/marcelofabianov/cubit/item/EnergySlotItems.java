@@ -6,12 +6,13 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.common.Tags;
 
-/** Which items the energy slot accepts, by tag, so redstone from other mods also counts. */
+/** Which items the energy slots accept: redstone, by tag so other mods count, and Power Banks. */
 public final class EnergySlotItems {
   private EnergySlotItems() {}
 
+  /** Redstone turns into FE, and a Power Bank stays in the slot, giving or taking charge. */
   public static boolean accepts(ItemStack stack) {
-    return !energyOf(stack).isZero();
+    return PowerBankItem.is(stack) || !energyOf(stack).isZero();
   }
 
   public static Energy energyOf(ItemStack stack) {

@@ -2,9 +2,11 @@ package io.github.marcelofabianov.cubit.entity;
 
 import io.github.marcelofabianov.cubit.domain.energy.Battery;
 import io.github.marcelofabianov.cubit.domain.energy.Energy;
+import io.github.marcelofabianov.cubit.domain.energy.EnergyTransfer;
 import io.github.marcelofabianov.cubit.domain.energy.SlotRecharge;
 import io.github.marcelofabianov.cubit.item.EnergySlotContents;
 import io.github.marcelofabianov.cubit.item.EnergySlotItems;
+import io.github.marcelofabianov.cubit.item.PowerBankItem;
 import io.github.marcelofabianov.cubit.item.SavedEnergy;
 import java.util.List;
 import java.util.Optional;
@@ -30,8 +32,16 @@ final class RobotEnergySlot {
     return container;
   }
 
+  /** A Power Bank gives at the rate of the robot and stays in the slot, even empty (answer 904). */
   Battery charge(Battery battery, Energy rate) {
     ItemStack stack = container.getItem(SLOT);
+    if (recharge.reserve().isZero() && PowerBankItem.is(stack)) {
+      EnergyTransfer moved = EnergyTransfer.move(PowerBankItem.batteryOf(stack), battery, rate);
+      if (!moved.moved().isZero()) {
+        PowerBankItem.store(stack, moved.from());
+      }
+      return moved.to();
+    }
     Energy itemEnergy = EnergySlotItems.energyOf(stack);
     if (!itemEnergy.isZero() && recharge.canTake(itemEnergy, battery)) {
       stack.shrink(ONE_ITEM);

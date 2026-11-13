@@ -3,6 +3,7 @@ package io.github.marcelofabianov.cubit.block;
 import com.mojang.authlib.GameProfile;
 import com.mojang.logging.LogUtils;
 import io.github.marcelofabianov.cubit.CubitMod;
+import io.github.marcelofabianov.cubit.config.CubitConfig;
 import io.github.marcelofabianov.cubit.domain.dock.DockInputMeter;
 import io.github.marcelofabianov.cubit.domain.dock.DockQueue;
 import io.github.marcelofabianov.cubit.domain.dock.DockStatus;
@@ -10,7 +11,9 @@ import io.github.marcelofabianov.cubit.domain.dock.DockStock;
 import io.github.marcelofabianov.cubit.domain.energy.Battery;
 import io.github.marcelofabianov.cubit.domain.energy.Energy;
 import io.github.marcelofabianov.cubit.domain.ownership.Ownership;
+import io.github.marcelofabianov.cubit.domain.tier.RobotTier;
 import io.github.marcelofabianov.cubit.item.EnergySlotItems;
+import io.github.marcelofabianov.cubit.item.PowerBankItem;
 import io.github.marcelofabianov.cubit.item.SavedEnergy;
 import io.github.marcelofabianov.cubit.registry.CubitBlockEntities;
 import io.github.marcelofabianov.cubit.registry.CubitDataComponents;
@@ -114,6 +117,7 @@ public final class InductionDockBlockEntity extends BlockEntity {
     dock.inputMeter.record(dock.entered);
     dock.entered = Energy.ZERO;
     dock.useSlot();
+    dock.chargePowerBank();
     dock.showStatus(level, pos, state);
   }
 
@@ -124,6 +128,29 @@ public final class InductionDockBlockEntity extends BlockEntity {
       stack.shrink(ONE_ITEM);
       stock = stock.take(itemEnergy);
       entered = entered.plus(itemEnergy);
+      setChanged();
+    }
+  }
+
+  /**
+   * After the robot: entities tick before block entities, so a docked robot already took its share
+   * this tick, and the bank gets what is left at the rate of the Base (answer 906).
+   */
+  private void chargePowerBank() {
+    ItemStack stack = slot.getItem(SLOT);
+    if (!PowerBankItem.is(stack)) {
+      return;
+    }
+    Energy rate =
+        CubitMod.CONFIG
+            .tierCatalog()
+            .spec(CubitConfig.GENERAL_ROBOT, RobotTier.BASE)
+            .rechargePerTick();
+    Battery before = PowerBankItem.batteryOf(stack);
+    DockStock.Transfer transfer = stock.charge(before, rate);
+    if (!transfer.robot().equals(before)) {
+      stock = transfer.stock();
+      PowerBankItem.store(stack, transfer.robot());
       setChanged();
     }
   }
