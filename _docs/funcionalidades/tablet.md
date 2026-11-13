@@ -150,9 +150,10 @@ Fica fixo em todas as abas. `Voltar` fica no canto superior esquerdo, e os botõ
 | Receita | `cubit:tablet` | A receita com forma |
 | Componente do item | `cubit:tablet_app` | O app ativo: `open`, `target` ou `dock`. Sem o componente, vale `open` |
 | Attachment do player | `cubit:chosen_robot` | O UUID do Cubit escolhido |
-| NBT da entidade | `PreferredDock` | A posição e a dimensão do Dock preferido |
+| NBT da entidade | `PreferredDock` | O Dock preferido: `Block`, a posição num `long`, e `Dimension`. Sem a chave, o Cubit não tem Dock preferido |
 | Menu | `cubit:tablet_robot` | A tela do Cubit no Tablet, com a cor, o lugar e a chave geral nos valores do menu |
-| Pacotes do cliente | `cubit:choose_robot`, `cubit:robot_list_request` e `cubit:rename_robot` | Escolher e abrir, voltar para a seleção e renomear, todos conferidos no servidor |
+| Pacotes do cliente | `cubit:choose_robot`, `cubit:robot_list_request`, `cubit:rename_robot` e `cubit:switch_tablet_app` | Escolher e abrir, voltar para a seleção, renomear e trocar de app, todos conferidos no servidor |
+| Config | `tablet_target_reach_blocks`, em `general` | O alcance da mira do app Alvo, de 1 a 128, com 32 |
 | Dados do mundo | `cubit_robot_snapshots` | A foto de cada Cubit por dono: posição, dimensão, estado, bateria, vida, tier, cor, nome e a hora |
 
 Os textos em inglês e português, como `Cubit Tablet` / `Tablet do Cubit`, `Tablet · Open` / `Tablet · Abrir`, `Go to Dock` / `Ir para o Dock` e `Rename` / `Renomear`, ficam no datagen (pergunta 1026).
@@ -166,6 +167,7 @@ Os textos em inglês e português, como `Cubit Tablet` / `Tablet do Cubit`, `Tab
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 17:35 | Detalha o NBT `PreferredDock`, o pacote da troca de app e o config do app Alvo. |
 | Marcelo Fabiano | 2026-11-13 17:15 | Define os apps Alvo e Dock e o `Ir para o Dock` da entrega 3, com as perguntas 1041 a 1047. |
 | Marcelo Fabiano | 2026-11-13 16:30 | Descreve o botão Power, a janela de Rename sem nome, o menu e os pacotes da entrega 2. |
 | Marcelo Fabiano | 2026-11-13 19:00 | Põe as oito chaves na aba Recursos e só o filtro na aba Filtros. |

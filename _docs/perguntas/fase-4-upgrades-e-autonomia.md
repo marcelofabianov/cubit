@@ -8,6 +8,7 @@ Não há perguntas pendentes nesta fase.
 
 | # | Pergunta | Resposta |
 |---|---|---|
+| 1048 | O `AGENTS.md` pode citar as classes dos apps Alvo e Dock e do `Ir para o Dock`? | "pode atualizar o AGENTS.md", autorizado pelo desenvolvedor: `TabletApps` em `domain/robot`; `DockGoal` e `PreferredDock` em `domain/dock`; `RobotPreferredDock` em `entity`; `DockGoalControl` em `menu`; `SwitchTabletAppPayload` em `network`; `TabletUse`, `TabletTargetApp` e `TabletDockApp` em `player`; e `TabletHeaderButtons` e `TabletScroll` em `client` |
 | 1047 | O que faz o app Alvo sem mob na mira, ou no mob que já é o alvo? | Sem mob avisa, mesmo mob mantém: sem mob na mira, a barra de ação diz que não há mob, e nada abre. No mob que já é o alvo, nada muda, e o alvo só sai pelas regras do Focus. A recomendação, abrir sem mob e limpar no mesmo mob, foi recusada |
 | 1046 | O que faz o app Dock fora de um Dock do player? | Não faz nada: num outro bloco, num Dock de outro player ou numa entidade, a barra de ação diz que o app Dock marca um Dock seu, e nada abre. O Tablet continua com prioridade sobre o bloco (resposta 1007). A recomendação, fazer o que o Open faz, foi recusada |
 | 1045 | O que faz o app Dock no Dock que já é o preferido do Cubit escolhido? | Tira a preferência: o segundo clique apaga o `PreferredDock`, e a barra de ação avisa. Confirma a recomendação |
@@ -301,6 +302,7 @@ Não há perguntas pendentes nesta fase.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 17:40 | Registra a resposta 1048. |
 | Marcelo Fabiano | 2026-11-13 17:15 | Registra as respostas 1045 a 1047. |
 | Marcelo Fabiano | 2026-11-13 17:10 | Registra as respostas 1041 a 1044. |
 | Marcelo Fabiano | 2026-11-13 17:00 | Registra a resposta 1040. |

@@ -36,7 +36,8 @@ public final class TabletSelection {
     return new TabletRequests(
         TabletSelection::chooseAndOpen,
         TabletSelection::open,
-        (player, payload) -> RobotTablet.rename(player, payload.robot(), payload.name()));
+        (player, payload) -> RobotTablet.rename(player, payload.robot(), payload.name()),
+        TabletUse::switchApp);
   }
 
   public static void open(ServerPlayer player) {

@@ -38,6 +38,12 @@ public final class RobotFocus {
     change(target.hurtByOwner(mob.getUUID(), ShockCandidates.of(robot, mob)), mob);
   }
 
+  /** The owner aimed the Tablet at a mob: it becomes the target by the rules of a hurt mob. */
+  boolean markedByOwner(LivingEntity mob) {
+    change(target.hurtByOwner(mob.getUUID(), ShockCandidates.of(robot, mob)), mob);
+    return target.is(mob.getUUID());
+  }
+
   /** A lookup by id, only while there is a target, so it costs nothing most of the time. */
   void tick() {
     if (!target.hasTarget() || !(robot.level() instanceof ServerLevel level)) {

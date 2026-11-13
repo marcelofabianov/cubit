@@ -70,6 +70,14 @@ public final class RobotDefense implements DefenseControl {
     return true;
   }
 
+  /**
+   * The Target app of the Tablet marks the mob, only in Focus, by the rules of a mob the owner hurt
+   * (answer 1043). False when the mob cannot be a target.
+   */
+  public boolean markFocusTarget(LivingEntity mob) {
+    return mode == DefenseMode.FOCUS && focus.markedByOwner(mob);
+  }
+
   /** The robot or its owner was hurt. Retaliate remembers the attacker for a while. */
   void hurtBy(LivingEntity attacker) {
     memory =

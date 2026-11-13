@@ -81,7 +81,14 @@ public final class CubitNetwork {
             RenameRobotPayload.TYPE,
             RenameRobotPayload.STREAM_CODEC,
             (payload, context) ->
-                onServer(context, player -> tabletRequests.rename().accept(player, payload)));
+                onServer(context, player -> tabletRequests.rename().accept(player, payload)))
+        .playToServer(
+            SwitchTabletAppPayload.TYPE,
+            SwitchTabletAppPayload.STREAM_CODEC,
+            (payload, context) ->
+                onServer(
+                    context,
+                    player -> tabletRequests.switchApp().accept(player, payload.direction())));
   }
 
   private static void onServer(IPayloadContext context, Consumer<ServerPlayer> handler) {
@@ -118,6 +125,11 @@ public final class CubitNetwork {
   /** On the client: asks the server for the list of the selection again. */
   public static void requestRobotList() {
     PacketDistributor.sendToServer(RobotListRequestPayload.INSTANCE);
+  }
+
+  /** On the client: Shift and the wheel with the Tablet in hand. */
+  public static void switchTabletApp(int direction) {
+    PacketDistributor.sendToServer(new SwitchTabletAppPayload(direction));
   }
 
   /** On the client: asks the server to name a Cubit. */

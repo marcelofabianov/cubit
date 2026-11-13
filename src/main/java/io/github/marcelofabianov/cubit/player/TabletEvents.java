@@ -1,7 +1,6 @@
 package io.github.marcelofabianov.cubit.player;
 
 import io.github.marcelofabianov.cubit.CubitMod;
-import io.github.marcelofabianov.cubit.domain.ownership.Ownership;
 import io.github.marcelofabianov.cubit.entity.RobotEntity;
 import io.github.marcelofabianov.cubit.entity.RobotSnapshotReader;
 import io.github.marcelofabianov.cubit.registry.CubitItems;
@@ -26,8 +25,9 @@ public final class TabletEvents {
   private TabletEvents() {}
 
   /**
-   * The Tablet comes before the entity: a click on an own Cubit chooses it and opens its screen,
-   * and a click on any other entity, such as a villager, opens the selection (answer 1007).
+   * The Tablet comes before the entity, and its app decides: with Open, a click on an own Cubit
+   * chooses it and opens its screen, and a click on any other entity, such as a villager, opens the
+   * selection (answer 1007).
    */
   @SubscribeEvent
   public static void onEntityInteract(PlayerInteractEvent.EntityInteract event) {
@@ -39,12 +39,7 @@ public final class TabletEvents {
     if (!(event.getEntity() instanceof ServerPlayer player)) {
       return;
     }
-    Entity target = event.getTarget();
-    if (target instanceof RobotEntity robot && Ownership.owns(robot.ownerId(), player.getUUID())) {
-      TabletSelection.chooseAndOpen(player, robot.getUUID());
-    } else {
-      TabletSelection.open(player);
-    }
+    TabletUse.click(player, event.getItemStack(), new TabletUse.Living(event.getTarget()));
   }
 
   /** The entity of an armor stand and a few others answer here, before the event above. */

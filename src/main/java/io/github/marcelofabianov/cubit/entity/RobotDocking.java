@@ -30,6 +30,7 @@ public final class RobotDocking {
   private static final double ROUTE_SPEED_MODIFIER = 1;
 
   private final RobotEntity robot;
+  private final RobotPreferredDock preferred;
   private BlockPos docked;
   private BlockPos trip;
   private DockTrip progress = DockTrip.START;
@@ -39,6 +40,12 @@ public final class RobotDocking {
 
   RobotDocking(RobotEntity robot) {
     this.robot = robot;
+    this.preferred = new RobotPreferredDock(robot);
+  }
+
+  /** The Dock marked with the Tablet, where `Go to Dock` sends the robot (answer 1041). */
+  public RobotPreferredDock preferred() {
+    return preferred;
   }
 
   boolean hasTrip() {
@@ -234,9 +241,11 @@ public final class RobotDocking {
     if (docked != null) {
       tag.putLong(DOCK_POSITION_KEY, docked.asLong());
     }
+    preferred.save(tag);
   }
 
   void load(CompoundTag tag) {
     docked = tag.contains(DOCK_POSITION_KEY) ? BlockPos.of(tag.getLong(DOCK_POSITION_KEY)) : null;
+    preferred.load(tag);
   }
 }

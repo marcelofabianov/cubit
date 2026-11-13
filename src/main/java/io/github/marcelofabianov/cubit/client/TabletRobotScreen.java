@@ -3,15 +3,12 @@ package io.github.marcelofabianov.cubit.client;
 import io.github.marcelofabianov.cubit.domain.robot.RobotName;
 import io.github.marcelofabianov.cubit.menu.RobotMenu;
 import io.github.marcelofabianov.cubit.menu.ScreenKeys;
-import io.github.marcelofabianov.cubit.menu.TabletKeys;
 import io.github.marcelofabianov.cubit.menu.TabletRobotMenu;
 import io.github.marcelofabianov.cubit.network.CubitNetwork;
 import io.github.marcelofabianov.cubit.registry.CubitEntities;
 import java.util.Optional;
 import java.util.OptionalInt;
-import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
@@ -37,26 +34,19 @@ final class TabletRobotScreen extends AbstractContainerScreen<TabletRobotMenu> {
   private static final int ROBOT_LABEL_Y = RobotMenu.FIRST_SLOT_Y - LINE;
   private static final int REDSTONE_CENTER = 160;
   private static final int REDSTONE_Y = 54;
-  private static final int BACK_Y = 5;
-  private static final int BACK_WIDTH = 36;
-  private static final int BACK_HEIGHT = 12;
-  private static final int BUTTON_WIDTH = 64;
-  private static final int BUTTON_GAP = 4;
   private static final String NO_NAME = "";
 
   private final ScreenPainter painter = new ScreenPainter();
   private final ScreenPainter headerPainter = new ScreenPainter();
   private final TabletRobotTabs tabs = new TabletRobotTabs();
   private final TabletRobotHeader header;
+  private final TabletHeaderButtons buttons;
   private final InventoryScrollbar scrollbar;
   private final RobotExclusiveRow exclusive;
   private TabletResourcesPanel resources;
   private RobotDefensePanel defense;
   private RobotBehaviorPanel behavior;
   private TabletRenameDialog dialog;
-  private FlatButton back;
-  private FlatButton power;
-  private FlatButton rename;
   private Component shownName;
   private int windowLeft;
   private int windowTop;
@@ -64,6 +54,7 @@ final class TabletRobotScreen extends AbstractContainerScreen<TabletRobotMenu> {
   TabletRobotScreen(TabletRobotMenu menu, Inventory playerInventory, Component title) {
     super(menu, playerInventory, title);
     header = new TabletRobotHeader(headerPainter, menu);
+    buttons = new TabletHeaderButtons(menu);
     scrollbar = new InventoryScrollbar(menu);
     exclusive = new RobotExclusiveRow(painter, menu);
     shownName = title;
@@ -91,45 +82,14 @@ final class TabletRobotScreen extends AbstractContainerScreen<TabletRobotMenu> {
   }
 
   private void addButtons() {
-    back = addRenderableWidget(backButton(windowLeft, windowTop, this::back));
-    int y = windowTop + TabletRobotHeader.BUTTON_Y;
-    int x = windowLeft + TabletRobotHeader.TEXT_X;
-    power =
-        addRenderableWidget(
-            new FlatButton(
-                x,
-                y,
-                BUTTON_WIDTH,
-                TabletRobotHeader.BUTTON_HEIGHT,
-                Component.empty(),
-                this::power));
-    rename =
-        addRenderableWidget(
-            new FlatButton(
-                x + BUTTON_WIDTH + BUTTON_GAP,
-                y,
-                BUTTON_WIDTH,
-                TabletRobotHeader.BUTTON_HEIGHT,
-                bold(TabletKeys.RENAME),
-                () -> dialog.open(typedName())));
-  }
-
-  /** Back, in the upper left corner of the window, as the offline screen also has it. */
-  static FlatButton backButton(int windowLeft, int windowTop, Runnable action) {
-    FlatButton button =
-        new FlatButton(
-            windowLeft + MARGIN,
-            windowTop + BACK_Y,
-            BACK_WIDTH,
-            BACK_HEIGHT,
-            bold(TabletKeys.BACK),
-            action);
-    button.setMuted(true);
-    return button;
-  }
-
-  static Component bold(String key) {
-    return Component.translatable(key).withStyle(ChatFormatting.BOLD);
+    buttons.add(
+        this::addRenderableWidget,
+        windowLeft,
+        windowTop,
+        new TabletHeaderButtons.Actions(
+            this::back,
+            button -> minecraft.gameMode.handleInventoryButtonClick(menu.containerId, button),
+            () -> dialog.open(typedName())));
   }
 
   /** The part of the screen of the Cubit that the open tab shows starts under the header. */
@@ -144,11 +104,6 @@ final class TabletRobotScreen extends AbstractContainerScreen<TabletRobotMenu> {
   private void back() {
     minecraft.player.closeContainer();
     CubitNetwork.requestRobotList();
-  }
-
-  private void power() {
-    minecraft.gameMode.handleInventoryButtonClick(
-        menu.containerId, TabletRobotMenu.POWER_TOGGLE_BUTTON);
   }
 
   /** The server checks and names. The header follows at once, with the same rule. */
@@ -169,29 +124,11 @@ final class TabletRobotScreen extends AbstractContainerScreen<TabletRobotMenu> {
     return shown.equals(defaultName().getString()) ? NO_NAME : shown;
   }
 
-  /** Switch off an active Cubit, turn on one with charge, or say why neither (answer 1033). */
-  private void updatePower() {
-    boolean off = menu.powerAvailable();
-    boolean on = !off && menu.canTurnOn();
-    power.setMessage(bold(off ? TabletKeys.SWITCH_OFF : TabletKeys.TURN_ON));
-    power.active = off || on;
-    power.setMuted(!power.active);
-    String detail =
-        off
-            ? ScreenKeys.POWER_DETAIL
-            : on ? TabletKeys.TURN_ON_DETAIL : TabletKeys.POWER_UNAVAILABLE;
-    power.setTooltip(Tooltip.create(Component.translatable(detail)));
-    boolean buttons = !dialog.isOpen();
-    back.visible = buttons;
-    power.visible = buttons;
-    rename.visible = buttons;
-  }
-
   @Override
   public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
     painter.begin(font);
     headerPainter.begin(font);
-    updatePower();
+    buttons.update(!dialog.isOpen());
     super.render(graphics, mouseX, mouseY, partialTick);
     if (dialog.isOpen()) {
       dialog.render(graphics, width, height, mouseX, mouseY, partialTick);
