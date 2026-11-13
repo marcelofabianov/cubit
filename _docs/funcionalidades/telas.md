@@ -137,7 +137,7 @@ O enum e o nome de contrato `status` não mudam (pergunta 313). Muda só o texto
 
 ### Abas
 
-A tela tem duas abas, à esquerda da janela, como as da tela do Cubit (perguntas 956 e 957). Cada uma tem um ícone de 16×16, no traço e nas cores das outras abas, feito por prompt (resposta 900).
+A tela tem duas abas, à direita da janela, como as da tela do Cubit (perguntas 956, 957 e 960). Cada uma tem um ícone de 16×16, no traço e nas cores das outras abas, feito por prompt (resposta 900).
 
 | Aba | Ícone | O que mostra |
 |---|---|---|
@@ -242,6 +242,7 @@ Pergunta 691.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 11:50 | Põe as abas do Dock à direita, como as do Cubit. |
 | Marcelo Fabiano | 2026-11-13 11:30 | Adiciona as abas Dock e Storage à tela do Dock e tira o slot de carga. |
 | Marcelo Fabiano | 2026-11-13 09:50 | Adiciona a chave Fetch e passa as chaves da aba Behavior para linhas de 12 px. |
 | Marcelo Fabiano | 2026-11-12 23:10 | Adiciona o slot de carga à tela do Dock. |

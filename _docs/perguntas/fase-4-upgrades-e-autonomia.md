@@ -8,6 +8,7 @@ Não há perguntas pendentes nesta fase.
 
 | # | Pergunta | Resposta |
 |---|---|---|
+| 960 | De que lado da janela ficam as abas Dock e Storage, se a resposta 956 dizia "à esquerda, como as da tela do Cubit" e as do Cubit ficam à direita? | À direita, como na tela do Cubit, com o mesmo tamanho e desenho, para as duas telas seguirem o mesmo padrão. Corrige a 956 pela regra 48, porque a pergunta do agente descrevia o lado errado. Confirma a recomendação |
 | 959 | Sem o slot de carga, o que faz o clique direito no Dock com uma Power Bank ou uma Toolbox na mão? | Guarda no inventário: a Power Bank ou a pilha de Toolbox na mão vai para o inventário do Dock, juntando nas pilhas e nos slots livres, e o que não couber fica na mão. Só o dono. A redstone continua indo ao slot de entrada. Muda a 924. Confirma a recomendação |
 | 958 | Quais são os nomes do contrato do inventário do Dock? | No NBT do bloco, `Storage`, com os itens por slot, como no baú do jogo. No item, o componente `cubit:dock_storage`, no formato de conteúdo de container do jogo, ao lado do `cubit:dock_energy`. Sem os dois, o inventário fica vazio. Um item que não é Toolbox nem Power Bank num save editado cai no chão, com registro no log (regra 17). Completa a 954. Confirma a recomendação |
 | 957 | Quais imagens novas a tela do Dock precisa? | Dois ícones de 16×16, no traço e nas cores do baú, da engrenagem, do escudo e do funil: a torre do Dock na aba Dock e uma caixa com uma Power Bank e uma Toolbox na aba Storage. O agente escreve os prompts em `tmp/arte/dock-tab-dock/` e `tmp/arte/dock-tab-storage/`, e o desenvolvedor devolve os arquivos lá (resposta 900). A janela e os slots continuam desenhados em código. Confirma a recomendação |
@@ -213,6 +214,7 @@ Não há perguntas pendentes nesta fase.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 11:50 | Registra a resposta 960. |
 | Marcelo Fabiano | 2026-11-13 11:10 | Registra as respostas 952 a 959. |
 | Marcelo Fabiano | 2026-11-13 11:00 | Registra as respostas 947 a 951. |
 | Marcelo Fabiano | 2026-11-13 10:45 | Registra a resposta 946. |
