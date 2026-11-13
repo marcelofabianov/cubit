@@ -20,7 +20,8 @@ Este é o mapa dos documentos do projeto. A apresentação do mod e o roadmap fi
 | Scanners, alertas e lanterna | [`funcionalidades/sensores.md`](funcionalidades/sensores.md) |
 | Telas próprias do Cubit e do Induction Dock | [`funcionalidades/telas.md`](funcionalidades/telas.md) |
 | Choque e modos de defesa | [`funcionalidades/combate.md`](funcionalidades/combate.md) |
-| Controle remoto e modo área | [`funcionalidades/controle-remoto.md`](funcionalidades/controle-remoto.md) |
+| Tablet, que substitui o controle remoto | [`funcionalidades/tablet.md`](funcionalidades/tablet.md) |
+| Modo área | [`funcionalidades/modo-area.md`](funcionalidades/modo-area.md) |
 | Trabalhos, antena, Servidor e storage wireless (Fase 5, planejada) | [`funcionalidades/trabalhos.md`](funcionalidades/trabalhos.md) |
 | Itens, blocos, nomes e receitas | [`itens.md`](itens.md) |
 | Números por tier | [`tiers.md`](tiers.md) |
@@ -46,6 +47,7 @@ Os números ficam em [`tiers.md`](tiers.md). As outras páginas apontam para lá
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 16:40 | Troca o controle remoto pelo Tablet e pelo modo área. |
 | Marcelo Fabiano | 2026-11-11 22:01 | Cita o upgrade de tier. |
 | Marcelo Fabiano | 2026-11-08 01:05 | Cita a descrição das plataformas. |
 | Marcelo Fabiano | 2026-11-08 00:33 | Cita o guia de publicação. |

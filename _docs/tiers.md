@@ -91,7 +91,7 @@ Valem para todos os tiers e ficam no config. Os marcados como planejados entram 
 | Tempo para recuperar toda a vida na base | ~1 min |
 | Vida ao sair do conserto | 25% |
 | Intervalo para tentar de novo o resgate no vazio | 20 ticks |
-| Alcance do controle remoto ao mirar num Cubit, planejado para a Fase 4 | 32 blocos |
+| Alcance do Tablet | Qualquer distância com o chunk do Cubit carregado. Descarregado, só leitura (pergunta 1018, que muda a 94) |
 | Intervalo mínimo entre repetições de textos e alertas | ~25 s |
 | Tempo em que o Contra-atacar lembra de quem feriu o Cubit ou o dono | ~30 s (pergunta 832) |
 | Distância do dono em que o alvo do Focus deixa de ser alvo | 32 blocos (pergunta 846) |
@@ -157,7 +157,7 @@ O raio dos dois scanners é o de uma esfera em volta do Cubit: só conta o que e
 | Recurso | Base | Avançado | Elite | Ultimate |
 |---|---|---|---|---|
 | Seguir o player | ✔ | ✔ | ✔ | ✔ |
-| Modo área (controle remoto), na base | Bloqueado | Até 16×16 | Até 32×32 | Até 64×64 |
+| Modo área (app Área do Tablet), na base | Bloqueado | Até 16×16 | Até 32×32 | Até 64×64 |
 | Altura máxima da área | — | A definir | A definir | A definir |
 | Local de morte | Bloqueado | Marca a coordenada | Marca e guia até lá | Marca e guia até lá |
 
@@ -204,6 +204,7 @@ Planejado para a Fase 5. O tier Base não aceita cards.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 16:40 | Troca o alcance do controle remoto pelo do Tablet. |
 | Marcelo Fabiano | 2026-11-13 13:45 | Define o custo, o slot e a luz das tochas. |
 | Marcelo Fabiano | 2026-11-13 11:30 | Passa a recarga da Power Bank para o inventário do Dock e as tochas para o item 12. |
 | Marcelo Fabiano | 2026-11-13 09:50 | Adiciona o raio da busca dos itens do chão. |

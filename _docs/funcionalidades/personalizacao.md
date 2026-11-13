@@ -19,6 +19,7 @@ O dono escolhe a cor da carcaça e o nome de cada Cubit (perguntas 504 a 514).
 
 - **Etiqueta:** só do dono, em qualquer estado, e gasta 1, menos no criativo. Uma etiqueta sem nome não faz nada. A de quem não é dono não faz nada e não é gasta.
 - **Bigorna:** renomeia o Cubit ou o Damaged Cubit como item, e o nome vale ao colocar.
+- **Tablet:** o botão `Rename` da tela do Cubit no [Tablet](tablet.md#cabeçalho) nomeia e renomeia o Cubit, sem gastar etiqueta nem XP, com as regras da etiqueta, e um nome vazio tira o nome (perguntas 1015 a 1017).
 - **Onde aparece:** sempre visível acima do Cubit, dentro do alcance normal do jogo, na tela do Cubit e no Jade.
 
 ## Reação
@@ -33,6 +34,7 @@ Recolher, morrer, consertar e salvar o mundo mantêm a cor e o nome. Saves antig
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 16:40 | Adiciona o nome pelo Tablet. |
 | Marcelo Fabiano | 2026-11-11 22:01 | Atualiza o colar no ícone. |
 | Marcelo Fabiano | 2026-11-07 23:42 | Atualiza onde o nome aparece. |
 | Marcelo Fabiano | 2026-11-06 15:58 | Define a cor da carcaça e o nome. |

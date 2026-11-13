@@ -21,7 +21,7 @@ Números: [`tiers.md`](../tiers.md#energia) e [valores gerais](../tiers.md#valor
 - **Religar:** sem bateria, com a carga mínima ele volta sozinho a ficar ativo.
 - **Sem bateria na base:** entra em hibernação logo, sem esperar a carga mínima.
 - **Desligado pela tela:** o botão `Power` da aba Settings desliga o Cubit, que fica como o desligado com carga, e libera o lugar de quem segue. Ligar de novo é pelo clique direito, e ele volta a seguir se ninguém estiver seguindo (perguntas 857 e 858).
-- **Desligado pelo controle remoto:** segue as regras do inativo, mesmo com bateria, e só volta a ficar ativo pelo controle.
+- **Desligado pelo Tablet:** segue as regras do inativo, mesmo com bateria, e só volta a ficar ativo pelo Tablet, como era com o controle remoto (perguntas 56 e 1021).
 - **Sons:** o Cubit tem um som ao ligar, um ao desligar e um enquanto é recarregado. Eles entram na Fase 3, e os detalhes estão em [`visual.md`](../conceito/visual.md#sons).
 
 ## Consumo
@@ -149,6 +149,7 @@ Se o robô estiver dentro do raio da base e com a bateria baixa, volta sozinho p
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 16:40 | Troca o controle remoto pelo Tablet. |
 | Marcelo Fabiano | 2026-11-13 13:00 | Faz o Cubit sair do Dock só com a bateria e a vida cheias. |
 | Marcelo Fabiano | 2026-11-13 12:50 | Aceita o Cubit e o Damaged Cubit no inventário do Dock. |
 | Marcelo Fabiano | 2026-11-13 11:30 | Troca o slot de carga do Dock pelo inventário, na aba Storage. |

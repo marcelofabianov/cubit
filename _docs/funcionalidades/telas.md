@@ -11,7 +11,7 @@ As telas próprias do Cubit e do Induction Dock, item 19 da Fase 3. Elas substit
 - **Fidelidade:** as telas seguem as imagens ao máximo. Onde uma resposta em [`perguntas/`](../perguntas/fase-3-sentidos.md) diz outra coisa, vale a resposta (pergunta 676).
 - **Estilo:** janelas próprias, com textura que lembra o metal de um robô, sem a textura do baú do jogo (pergunta 371).
 - **Textos:** em inglês, no `en_us.json`, e em português, no `pt_br.json` (pergunta 712). Títulos, rótulos e valores usam 75% da fonte do jogo, e os detalhes, cerca de 56%, numa redução proporcional (pergunta 705, que muda a 437 nas telas). Nada passa da borda, e um tooltip mostra o texto inteiro.
-- **Retratos:** sprites 2D. O retrato do Cubit monta a moldura com a tela do rosto, reaproveitando as texturas de expressão que já existem, com a piscada, e a cor do colar do tier. A torre do Dock é um sprite próprio, com a luz do estado (pergunta 690).
+- **Retratos:** sprites 2D. O retrato do Cubit monta a moldura com a tela do rosto, reaproveitando as texturas de expressão que já existem, com a piscada, a cor do colar do tier e a cor da carcaça (pergunta 1011, que muda a 690). A torre do Dock é um sprite próprio, com a luz do estado (pergunta 690).
 - **Números:** estoques e baterias abreviados, como `214k / 300k FE`, com `M` acima de um milhão. Taxas por tick inteiras, com separador de milhar, como `+2,400 FE/t`. O Jade continua com os números inteiros (pergunta 687).
 
 ## Tela do Cubit
@@ -30,7 +30,7 @@ Quatro abas, à direita da janela: **Inventory**, com o ícone do baú, **Settin
 
 | Parte | O que mostra |
 |---|---|
-| Retrato | A expressão atual, na moldura, com a cor do colar do tier |
+| Retrato | A expressão atual, na moldura, com a cor da carcaça e a cor do colar do tier (pergunta 1011) |
 | Nome | O nome do Cubit, ou `Cubit`, com a etiqueta do tier, como `BASE` |
 | Estado | No canto superior direito, colorido. Veja [Estados do topo](#estados-do-topo) |
 | Health | Barra vermelha e `18 / 25` |
@@ -244,6 +244,7 @@ Pergunta 691.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 16:40 | Põe a cor da carcaça no retrato e cita o Tablet. |
 | Marcelo Fabiano | 2026-11-13 13:45 | Adiciona a fileira dos slots exclusivos e a chave das tochas. |
 | Marcelo Fabiano | 2026-11-13 12:50 | Aceita o Cubit e o Damaged Cubit na aba Storage. |
 | Marcelo Fabiano | 2026-11-13 11:50 | Põe as abas do Dock à direita, como as do Cubit. |

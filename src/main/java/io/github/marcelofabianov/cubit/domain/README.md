@@ -224,4 +224,4 @@ Os documentos definem três estados: ativo, inativo e hibernação. No código, 
 | `INACTIVE_SWITCHED_OFF` | Inativo, desligado com carga | Não | Clique direito, se houver carga |
 | `HIBERNATING` | Hibernação, na base | Sim | Ao sair da base |
 
-O desligamento pelo controle remoto (pergunta 56) entra na Fase 4, junto do controle.
+O desligamento pelo Tablet, que substitui o controle remoto (perguntas 56 e 1021), entra na Fase 4.2, junto do Tablet.

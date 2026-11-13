@@ -57,7 +57,7 @@ Os nomes estão em inglês porque são os que aparecem no jogo.
 | Cubit | Robô companheiro, colocado no mundo como item |
 | Damaged Cubit | O que cai quando o Cubit morre. Guarda o estado dele e não pode ser colocado no mundo |
 | Toolbox | Conserta o Damaged Cubit e é consumida a cada conserto |
-| Cubit Remote | Envia comandos aos Cubits, marca áreas de trabalho e localiza os Cubits |
+| Cubit Tablet | Abre a tela de gerenciamento dos Cubits de qualquer distância e marca o alvo do Focus, o Dock preferido e, depois, as áreas de trabalho |
 | Advanced Module | Leva o Cubit do tier Base para o Advanced |
 | Elite Module | Leva o Cubit do tier Advanced para o Elite |
 | Ultimate Module | Leva o Cubit do tier Elite para o Ultimate |
@@ -74,7 +74,7 @@ As receitas usarão só materiais do jogo puro, podendo combinar itens do própr
 1. **Conceito (encerrada)**
 2. **Versão mínima (encerrada)**
 3. **Sentidos (encerrada),** com a primeira versão, `0.1.0`
-4. **Upgrades e autonomia,** em 4, 4.1 e 4.2: tiers, defesa, ímã, Power Bank, Cubit Remote, modo área e retorno
+4. **Upgrades e autonomia,** em 4, 4.1 e 4.2: tiers, defesa, ímã, Power Bank, inventário do Dock, tochas, Tablet, modo área e retorno
 5. **Trabalhos (planejada),** em 5, 5.1 e 5.2: antenas, Servidor, storage, carregamento de chunks e os cards de Aprendizado de Máquina
 
 O que entra em cada fase está no [`ROADMAP.md`](ROADMAP.md).

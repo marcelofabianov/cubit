@@ -51,11 +51,11 @@ Dividida em três partes, na ordem em que uma depende da outra.
 - Inventário do Induction Dock, numa aba nova, para a Toolbox e as Power Banks, que ele carrega.
 - Slot exclusivo de tochas, do Advanced em diante, com o Cubit colocando tochas sozinho.
 
-### Fase 4.2: Remote, área e retorno
+### Fase 4.2: Tablet, área e retorno
 
-- Cubit Remote: comandos, localizar os Cubits e marcar áreas, com a mira do modo só o alvo.
-- Modo área e descarga em baú marcado.
-- Retorno automático e local de morte.
+- Cubit Tablet, que substitui o Cubit Remote: tela de seleção e tela do Cubit, com os apps Open, Alvo e Dock.
+- Modo área e descarga em baú marcado, com os apps Área e Descarga do Tablet e o botão Descarregar.
+- Retorno automático e local de morte, com as linhas deles na aba Recursos do Tablet.
 
 ## Fase 5: Trabalhos (planejada)
 
