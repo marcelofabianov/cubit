@@ -95,7 +95,7 @@ Entra com a coleta e o ímã, no item 9 da Fase 4.1 (perguntas 878 a 888). As re
 
 - **Slots:** o inventário e a hotbar do player continuam visíveis e usáveis, para o player pegar o item do filtro. Só o inventário do Cubit e o slot de energia somem, e o painel ocupa o lugar deles (pergunta 893).
 - **Cabeçalho:** `Behavior` / `Comportamento`, a etiqueta do tier e `Battery 71%`, como na Settings.
-- **Chaves:** as três, com o ícone, o nome e ON e OFF, em linhas de 12 px, logo abaixo do cabeçalho e sem o título Functions, para a grade de 3 linhas caber acima do inventário do player (perguntas 898 e 940). A descrição de cada chave aparece na dica ao passar o mouse.
+- **Chaves:** as três, com o ícone, o nome e ON e OFF, em linhas de 12 px, logo abaixo do cabeçalho e sem o título Functions, para a grade de 3 linhas caber acima do inventário do player (perguntas 898 e 940). Os ícones são o funil, o ímã em ferradura e a seta até o item, os dois últimos feitos por prompt (resposta 1039). A descrição de cada chave aparece na dica ao passar o mouse.
 
 | Chave | Descrição, na dica |
 |---|---|
@@ -103,7 +103,7 @@ Entra com a coleta e o ímã, no item 9 da Fase 4.1 (perguntas 878 a 888). As re
 | `Magnet` / `Ímã` | `Pulls items within 3 blocks · 20 FE per item` / `Puxa itens a até 3 blocos · 20 FE por item`, com os números do tier. No Base, apagada, com `Unlocks at Advanced`, como os modos bloqueados da Defense (pergunta 881). Com a coleta desligada, fica apagada, mantendo o valor |
 | `Fetch` / `Buscar` | `Fetches items within 4 blocks of you` / `Busca itens a até 4 blocos de você`, com o raio do tier (resposta 943). Num tier com o raio 0, apagada, com o tier que a libera. Com a coleta desligada, fica apagada, mantendo o valor |
 
-- **Pickup filter** / **Filtro de coleta:** o título, com o botão `Blacklist` / `Lista negra` ou `Whitelist` / `Lista branca`, que alterna o modo, e a grade de slots fantasma, com os slots do tier, de 3, 9, 18 ou 27, em linhas de 9 (pergunta 880).
+- **Pickup filter** / **Filtro de coleta:** o título, com o botão azul e plano `Blacklist` / `Lista negra` ou `Whitelist` / `Lista branca`, como o `Rename` do Tablet, que alterna o modo (resposta 1040), e a grade de slots fantasma, com os slots do tier, de 3, 9, 18 ou 27, em linhas de 9 (pergunta 880).
   - **Clique com um item no cursor:** copia o tipo do item para o slot, sem consumi-lo. O item no cursor não muda.
   - **Clique com o cursor vazio:** limpa o slot.
   - **Clique direito num slot preenchido, no Elite e no Ultimate:** alterna do item para cada tag dele e volta ao item. O slot com tag ganha uma marca, e a dica mostra `Tag: #c:ores` (pergunta 882). No Base e no Advanced, não faz nada.
@@ -244,6 +244,8 @@ Pergunta 691.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 17:00 | Faz o botão da lista do filtro azul e plano. |
+| Marcelo Fabiano | 2026-11-13 16:50 | Cita os ícones das chaves Magnet e Fetch. |
 | Marcelo Fabiano | 2026-11-13 16:40 | Põe a cor da carcaça no retrato e cita o Tablet. |
 | Marcelo Fabiano | 2026-11-13 13:45 | Adiciona a fileira dos slots exclusivos e a chave das tochas. |
 | Marcelo Fabiano | 2026-11-13 12:50 | Aceita o Cubit e o Damaged Cubit na aba Storage. |

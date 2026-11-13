@@ -96,8 +96,8 @@ Fica fixo em todas as abas. `Voltar` fica no canto superior esquerdo, e os botõ
 | Ir para o Dock | Manda o Cubit ir para o Dock e hibernar, na entrega 3 (pergunta 1020) |
 
 - **Rename:** nomeia e renomeia o Cubit sem gastar etiqueta nem XP, com as regras da etiqueta do jogo. O nome tem até 50 caracteres, e o servidor confere o dono e o tamanho e corta os espaços nas pontas. Um nome vazio tira o nome. Com o Cubit ativo, ele faz a expressão feliz com o bipe, como ao receber a etiqueta (perguntas 1015 a 1017).
-- **Rename, a janela:** pequena, no centro, com o campo de até 50 caracteres já preenchido com o nome atual, Confirmar e Cancelar. Enter confirma (pergunta 1035).
-- **Power:** desliga como o botão `Power` da aba Settings, e o clique direito no Cubit também o religa, sem estado salvo novo. Também liga um Cubit desligado com carga, como a exceção da pergunta 80 (pergunta 1033, que muda a 1021).
+- **Rename, a janela:** pequena, no centro, com o campo de até 50 caracteres já preenchido com o nome atual, Confirmar e Cancelar. Enter confirma, e Esc cancela. Um Cubit sem nome abre o campo vazio, para Confirmar não chamá-lo de `Cubit` (pergunta 1035).
+- **Power:** o botão mostra `Switch off` com o Cubit ativo e `Turn on` com ele desligado e com carga. Sem carga, fica desabilitado, com a dica do motivo. Desliga como o botão `Power` da aba Settings, e o clique direito no Cubit também o religa, sem estado salvo novo. Também liga um Cubit desligado com carga, como a exceção da pergunta 80 (pergunta 1033, que muda a 1021).
 - **Parar e seguir:** o `Stop` e o `Follow` saíram do Tablet por agora e esperam um refinamento, em "Ainda sem fase" no `ROADMAP.md` (pergunta 1036).
 - **Ir para o Dock:** vai para o Dock preferido. Sem ele, vai para o Dock livre mais próximo, no raio de chamada do tier, como o clique no Dock. Sem Dock ao alcance, desligado, hibernando ou com o chunk descarregado, o botão fica desabilitado, com a dica do motivo. Ao sair do Dock, o Cubit volta ao que fazia.
 
@@ -107,10 +107,10 @@ Fica fixo em todas as abas. `Voltar` fica no canto superior esquerdo, e os botõ
 |---|---|---|
 | Recursos | Engrenagem | A aba inicial: cada recurso numa linha, com o nome, a descrição na dica e a chave ON e OFF |
 | Defesa | Escudo | Os modos de defesa, como na aba Defense da tela do Cubit |
-| Filtros | Funil | O filtro de coleta, como na aba Behavior, com o inventário e a hotbar do player embaixo (pergunta 1022) |
+| Filtros | Funil | Só o filtro de coleta, com o botão da lista e a grade de slots fantasma da aba Behavior, e o inventário e a hotbar do player embaixo (perguntas 1022 e 1037) |
 | Inventário | Baú | O inventário do Cubit, só para consulta |
 
-- **Aba Recursos:** uma linha bloqueada pelo tier fica apagada, com a chave desativada e o tier que libera, como `Unlocks at Advanced`. Entram os recursos que já existem:
+- **Aba Recursos:** um painel próprio, com as oito chaves numa lista só, que usam os mesmos controles do servidor da tela do Cubit (pergunta 1037). Uma linha bloqueada pelo tier fica apagada, com a chave desativada e o tier que libera, como `Unlocks at Advanced`. Entram os recursos que já existem:
 
 | Recurso | Libera |
 |---|---|
@@ -148,6 +148,8 @@ Fica fixo em todas as abas. `Voltar` fica no canto superior esquerdo, e os botõ
 | Componente do item | `cubit:tablet_app` | O app ativo: `open`, `target` ou `dock`. Sem o componente, vale `open` |
 | Attachment do player | `cubit:chosen_robot` | O UUID do Cubit escolhido |
 | NBT da entidade | `PreferredDock` | A posição e a dimensão do Dock preferido |
+| Menu | `cubit:tablet_robot` | A tela do Cubit no Tablet, com a cor, o lugar e a chave geral nos valores do menu |
+| Pacotes do cliente | `cubit:choose_robot`, `cubit:robot_list_request` e `cubit:rename_robot` | Escolher e abrir, voltar para a seleção e renomear, todos conferidos no servidor |
 | Dados do mundo | `cubit_robot_snapshots` | A foto de cada Cubit por dono: posição, dimensão, estado, bateria, vida, tier, cor, nome e a hora |
 
 Os textos em inglês e português, como `Cubit Tablet` / `Tablet do Cubit`, `Tablet · Open` / `Tablet · Abrir`, `Go to Dock` / `Ir para o Dock` e `Rename` / `Renomear`, ficam no datagen (pergunta 1026).
@@ -161,6 +163,8 @@ Os textos em inglês e português, como `Cubit Tablet` / `Tablet do Cubit`, `Tab
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 16:30 | Descreve o botão Power, a janela de Rename sem nome, o menu e os pacotes da entrega 2. |
+| Marcelo Fabiano | 2026-11-13 19:00 | Põe as oito chaves na aba Recursos e só o filtro na aba Filtros. |
 | Marcelo Fabiano | 2026-11-13 18:50 | Tira o Stop e o Follow, faz a chave geral igual ao Power e define a barra de botões e o Cubit descarregado. |
 | Marcelo Fabiano | 2026-11-13 18:00 | Muda a receita, com o diamante no centro. |
 | Marcelo Fabiano | 2026-11-13 17:50 | Corrige a grade da receita. |

@@ -207,7 +207,7 @@ Aprovada. Vale a partir da Fase 2.
 io.github.marcelofabianov.cubit
 ├── CubitMod                // ponto de entrada: só conecta os registros
 ├── domain/                 // Java puro, testado com JUnit
-│   ├── robot/              // RobotType, capacidades que o Cubit combina, OreKind, OreFilter, OreSignals, DefenseMode; PickupFilter, PickupEntry, PickupMode e PickupSettings: o filtro de coleta; TabletApp, RobotListing e RobotListings: os apps e a lista do Tablet
+│   ├── robot/              // RobotType, capacidades que o Cubit combina, OreKind, OreFilter, OreSignals, DefenseMode; PickupFilter, PickupEntry, PickupMode e PickupSettings: o filtro de coleta; TabletApp, RobotListing e RobotListings: os apps e a lista do Tablet; RobotName: o nome que o Tablet dá
 │   ├── tier/               // RobotTier, TierSpec, TierCatalog (interface); TierUpgrade: subir de tier com um Module; ShockSpec: o choque e os modos de cada tier; TorchSpec: as tochas de cada tier
 │   ├── energy/             // Battery, PowerState (ativo, inativo, hibernação), regras de consumo e religamento, SolarPanel: quando o painel dá energia; SolarStatus, EnergyUseCause, RechargeSource, EnergyFormat, EnergyHalves: o que as telas mostram; EnergyTransfer, WakeRecharge e PowerBankUpgrade: a Power Bank
 │   ├── behavior/           // FollowDecision: seguir, parar ou teleportar; BurningAction: reagir a fogo e lava; LampPolicy: quando a lanterna acende; ScanRules, ScanArea, FreshFinds, MarkLife, MarkPulse, ScanSignal: scanners, caixas e cores; ChatWatch, BiomeWatch, LeftBehindWatch, ChatRules: falas; RespawnReturn: voltar com o dono; RobotScreenStatus: o estado no topo da tela; DefenseRules, ShockCandidate, RetaliationMemory, ShockRules: o choque e os modos de defesa; FetchRules e FetchMemory: a busca dos itens do chão; TorchRules, TorchGrid, GridCell e TorchPlanner: as tochas; ShockGaze: o olhar para o alvo do choque
@@ -215,14 +215,14 @@ io.github.marcelofabianov.cubit
 │   └── ownership/          // FollowingRobotPolicy, Ownership
 ├── config/                 // ModConfigSpec → implementa TierCatalog
 ├── registry/               // DeferredRegisters e CubitDamageTypes, o dano do choque
-├── entity/                 // RobotEntity, goals de IA; RobotUpgrade: o Module aplicado; RobotDefense e RobotShock: o choque; RobotPickup: a coleta e o ímã; FetchItemGoal: a busca dos itens do chão; RobotTorches, TorchScan e RobotTorchSlot: as tochas; RobotGaze e RobotShockGaze: para onde a cabeça olha; RobotSnapshotReader: o Cubit lido para o Tablet
+├── entity/                 // RobotEntity, goals de IA; RobotUpgrade: o Module aplicado; RobotDefense e RobotShock: o choque; RobotPickup: a coleta e o ímã; FetchItemGoal: a busca dos itens do chão; RobotTorches, TorchScan e RobotTorchSlot: as tochas; RobotGaze e RobotShockGaze: para onde a cabeça olha; RobotSnapshotReader: o Cubit lido para o Tablet; RobotTablet: abrir a tela e renomear pelo Tablet
 ├── item/                   // RobotItem, RobotStateComponent, ModuleItem e TierLook; PowerBankItem, PowerBankUpgradeRecipe e RobotRechargeRecipe: a Power Bank; TabletItem: o Tablet
 ├── block/                  // InductionDockBlock, BlockEntity; DockStorage e DockItemHandler: o inventário do Dock e a automação; StorableRobotItem: o Cubit e o Damaged Cubit que ele guarda
-├── menu/                   // RobotMenu, InductionDockMenu; DefenseControl e DefenseOpening: a aba Defense; PickupControl e PickupMenuPart: a aba Behavior; TorchControl: os números das tochas
-├── network/                // pacotes próprios: NoticePayload, OreMarksPayload, MobMarksPayload e CubitNetwork; RobotListPayload, ChooseRobotPayload e ChosenRobotPayload: a lista e a escolha do Tablet
+├── menu/                   // RobotMenu, InductionDockMenu; DefenseControl e DefenseOpening: a aba Defense; PickupControl e PickupMenuPart: a aba Behavior; TorchControl: os números das tochas; RobotMenuReading, RobotMenuContents e RobotMenuSource: as peças do menu do Cubit; TabletRobotMenu e TabletOpening: a tela do Cubit no Tablet
+├── network/                // pacotes próprios: NoticePayload, OreMarksPayload, MobMarksPayload e CubitNetwork; RobotListPayload, ChooseRobotPayload e ChosenRobotPayload: a lista e a escolha do Tablet; RenameRobotPayload, RobotListRequestPayload e TabletRequests: o que o Tablet pede ao servidor
 ├── compat/jade/            // plugin do Jade, opcional: só este pacote importa o Jade
 ├── player/                 // attachment com o UUID do robô que segue, robôs mortos com o dono offline, /cubit reset e o que o dono faz: renascer, conquistar, caçar e minerar redstone; TabletSelection, TabletEvents, RobotSnapshot, RobotSnapshots e ChosenRobotLink: a seleção do Tablet, a foto do Cubit descarregado e o Cubit escolhido
-├── client/                 // renderer, modelo GeckoLib, telas, com as abas Inventory, Settings, Defense e Behavior; TabletSelectionScreen e TabletArrow: a seleção e a seta do Tablet
+├── client/                 // renderer, modelo GeckoLib, telas, com as abas Inventory, Settings, Defense e Behavior; TabletSelectionScreen e TabletArrow: a seleção e a seta do Tablet; TabletRobotScreen, TabletRobotHeader, TabletResourcesPanel, TabletRenameDialog e TabletOfflineScreen: a tela do Cubit no Tablet
 └── datagen/                // receitas, loot, traduções
 ```
 

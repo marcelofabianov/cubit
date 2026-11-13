@@ -8,6 +8,10 @@ Não há perguntas pendentes nesta fase.
 
 | # | Pergunta | Resposta |
 |---|---|---|
+| 1040 | Como fica o botão que troca a lista do filtro de coleta? | "poderia atualizar para botao azul como o que temos ja rename do tablet": o botão `Blacklist` / `Whitelist` passa a ser o botão azul e plano das telas, com o texto em negrito, na aba Behavior da tela do Cubit e na aba Filtros do Tablet |
+| 1039 | As chaves `Magnet` e `Fetch` ficam sem ícone na aba Behavior e na aba Recursos do Tablet? | "precisamos criar eles me de um prompt": as duas ganham ícones de 64×64 por prompt, em `tmp/arte/magnet-switch/` e `tmp/arte/fetch-switch/`, no estilo do funil e da tocha. O ímã é uma ferradura com linhas de atração, e a busca é uma seta até um item no chão. Eles entram na folha `screen_sprites.png`, na linha do funil, em `u=256` e `u=320`, e aparecem nas duas telas |
+| 1038 | O `AGENTS.md` pode citar as classes da tela do Cubit no Tablet? | "pode atualizar o AGENTS.md", autorizado pelo desenvolvedor: `RobotName` em `domain/robot`; `RobotTablet` em `entity`; `TabletRobotMenu`, `TabletOpening`, `RobotMenuReading`, `RobotMenuContents` e `RobotMenuSource` em `menu`; `RenameRobotPayload`, `RobotListRequestPayload` e `TabletRequests` em `network`; e `TabletRobotScreen`, `TabletRobotHeader`, `TabletResourcesPanel`, `TabletRenameDialog` e `TabletOfflineScreen` em `client` |
+| 1037 | Onde ficam as chaves de Coleta, Ímã e Busca no Tablet, se a 1023 pede os mesmos painéis e a tela do Cubit as põe na aba Behavior? | Recursos com as oito chaves: um painel novo para a aba Recursos, com Lanterna, Scanners, Falas, Painel solar, Coleta, Ímã, Busca e Tochas numa lista só, e a aba Filtros só com o filtro de coleta e o inventário do player. A tela do Cubit continua como está. As chaves usam os mesmos controles do servidor, como pede a 1023. A recomendação, os painéis como são, foi recusada |
 | 1036 | Como o Cubit parado pelo `Stop` convive com o resto? | "nao vamos ter esta opcao por enquanto precisa refinamento melhor em uma nova fase": o `Stop` e o `Follow` saem do Tablet por agora e vão para "Ainda sem fase" no `ROADMAP.md`, para um refinamento futuro. O NBT `Stopped` não entra. Muda a 1019 e a 1026 |
 | 1035 | Como ficam os botões do cabeçalho e a janela do `Rename`? | `Voltar` no canto superior esquerdo. Sob as barras, uma fileira de botões planos, como o de chamar o Cubit no Dock, com `Power` e `Rename`. O `Rename` abre uma janela pequena no centro, com o campo de até 50 caracteres já preenchido com o nome atual, Confirmar e Cancelar, e Enter confirma. Sem `Stop` e `Follow`, pela 1036. Confirma a recomendação |
 | 1034 | O que acontece ao abrir um Cubit em chunk descarregado, que só tem a foto? | A tela abre só com o cabeçalho da foto, sem abas, e um aviso como `Out of reach · seen 5 min ago`. Os botões ficam desabilitados com a dica do motivo, e `Voltar` continua funcionando. Confirma a recomendação |
@@ -290,6 +294,10 @@ Não há perguntas pendentes nesta fase.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 17:00 | Registra a resposta 1040. |
+| Marcelo Fabiano | 2026-11-13 16:50 | Registra a resposta 1039. |
+| Marcelo Fabiano | 2026-11-13 16:45 | Registra a resposta 1038. |
+| Marcelo Fabiano | 2026-11-13 19:00 | Registra a resposta 1037. |
 | Marcelo Fabiano | 2026-11-13 18:50 | Registra as respostas 1032 a 1036. |
 | Marcelo Fabiano | 2026-11-13 18:05 | Registra a resposta 1028. |
 | Marcelo Fabiano | 2026-11-13 18:00 | Registra as respostas 1029 a 1031. |
