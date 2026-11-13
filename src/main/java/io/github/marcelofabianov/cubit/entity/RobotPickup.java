@@ -13,8 +13,10 @@ import io.github.marcelofabianov.cubit.menu.PickupControl;
 import io.github.marcelofabianov.cubit.menu.PickupDisplay;
 import io.github.marcelofabianov.cubit.menu.RobotStorage;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
@@ -30,10 +32,10 @@ import net.minecraft.world.phys.Vec3;
  */
 public final class RobotPickup implements PickupControl {
   private static final double TOUCH_REACH_BLOCKS = 1;
-  private static final double PULL_SPEED = 0.3;
+  private static final double PULL_SPEED = 0.5;
 
   private final RobotEntity robot;
-  private final Set<UUID> paidPulls = new HashSet<>();
+  private final Map<UUID, ItemEntity> pulled = new HashMap<>();
   private PickupSettings settings = PickupSettings.INITIAL;
 
   RobotPickup(RobotEntity robot) {
@@ -113,9 +115,10 @@ public final class RobotPickup implements PickupControl {
 
   void tick() {
     if (!PickupRules.collects(robot.powerState(), settings.pickupOn())) {
-      paidPulls.clear();
+      pulled.clear();
       return;
     }
+    steerPulled();
     if (ScanRules.isDue(robot.tickCount, CubitMod.CONFIG.pickupCheckTicks())) {
       collectTouching();
     }
@@ -125,17 +128,39 @@ public final class RobotPickup implements PickupControl {
   }
 
   private void collectTouching() {
-    AABB reach = robot.getBoundingBox().inflate(TOUCH_REACH_BLOCKS);
-    for (ItemEntity item : wanted(reach)) {
-      ItemStack stack = item.getItem().copy();
-      if (RobotStorage.insert(robot.inventory(), stack)) {
-        robot.take(item, item.getItem().getCount() - stack.getCount());
-        paidPulls.remove(item.getUUID());
-        if (stack.isEmpty()) {
-          item.discard();
-        } else {
-          item.setItem(stack);
-        }
+    wanted(reach()).forEach(this::collect);
+  }
+
+  private AABB reach() {
+    return robot.getBoundingBox().inflate(TOUCH_REACH_BLOCKS);
+  }
+
+  private void collect(ItemEntity item) {
+    ItemStack stack = item.getItem().copy();
+    if (RobotStorage.insert(robot.inventory(), stack)) {
+      robot.take(item, item.getItem().getCount() - stack.getCount());
+      pulled.remove(item.getUUID());
+      if (stack.isEmpty()) {
+        item.discard();
+      } else {
+        item.setItem(stack);
+      }
+    }
+  }
+
+  /**
+   * A paid item is guided every tick and taken as soon as it touches, without waiting for the next
+   * check, so it arrives in a fraction of a second, still moving (answer 928).
+   */
+  private void steerPulled() {
+    pulled.values().removeIf(item -> !item.isAlive());
+    AABB reach = reach();
+    for (ItemEntity item : List.copyOf(pulled.values())) {
+      if (item.getBoundingBox().intersects(reach)) {
+        collect(item);
+      } else {
+        Vec3 toRobot = robot.position().subtract(item.position());
+        item.setDeltaMovement(toRobot.normalize().scale(Math.min(PULL_SPEED, toRobot.length())));
       }
     }
   }
@@ -144,16 +169,14 @@ public final class RobotPickup implements PickupControl {
   private void pullInRadius(PickupSpec spec) {
     Set<UUID> inRange = new HashSet<>();
     for (ItemEntity item : wanted(robot.getBoundingBox().inflate(spec.magnetRadiusBlocks()))) {
-      boolean paid = paidPulls.contains(item.getUUID());
+      boolean paid = pulled.containsKey(item.getUUID());
       if (!paid && !payForPull(spec)) {
         continue;
       }
       inRange.add(item.getUUID());
-      paidPulls.add(item.getUUID());
-      Vec3 toRobot = robot.position().subtract(item.position()).normalize();
-      item.setDeltaMovement(toRobot.scale(PULL_SPEED));
+      pulled.put(item.getUUID(), item);
     }
-    paidPulls.retainAll(inRange);
+    pulled.keySet().retainAll(inRange);
   }
 
   private boolean payForPull(PickupSpec spec) {
