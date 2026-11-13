@@ -5,6 +5,7 @@ import java.util.function.BooleanSupplier;
 import java.util.function.Consumer;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -16,8 +17,13 @@ import net.minecraft.world.item.Items;
 final class RobotMenuSlots {
   private static final int PLAYER_ROWS = 3;
 
+  private final boolean readOnly;
   private boolean robotShown = true;
   private boolean playerShown = true;
+
+  RobotMenuSlots(boolean readOnly) {
+    this.readOnly = readOnly;
+  }
 
   void show(boolean robot, boolean player) {
     robotShown = robot;
@@ -32,7 +38,12 @@ final class RobotMenuSlots {
           new Slot(view, slot, x, y) {
             @Override
             public boolean mayPlace(ItemStack stack) {
-              return stack.getItem().canFitInsideContainerItems();
+              return !readOnly && stack.getItem().canFitInsideContainerItems();
+            }
+
+            @Override
+            public boolean mayPickup(Player player) {
+              return !readOnly;
             }
 
             @Override
@@ -48,7 +59,12 @@ final class RobotMenuSlots {
         new Slot(energySlot, 0, RobotMenu.ENERGY_SLOT_X, RobotMenu.ENERGY_SLOT_Y) {
           @Override
           public boolean mayPlace(ItemStack stack) {
-            return EnergySlotItems.accepts(stack);
+            return !readOnly && EnergySlotItems.accepts(stack);
+          }
+
+          @Override
+          public boolean mayPickup(Player player) {
+            return !readOnly;
           }
 
           @Override
@@ -64,7 +80,12 @@ final class RobotMenuSlots {
         new Slot(torchSlot, 0, RobotMenu.FIRST_SLOT_X, RobotMenu.EXCLUSIVE_SLOT_Y) {
           @Override
           public boolean mayPlace(ItemStack stack) {
-            return unlocked.getAsBoolean() && stack.is(Items.TORCH);
+            return !readOnly && unlocked.getAsBoolean() && stack.is(Items.TORCH);
+          }
+
+          @Override
+          public boolean mayPickup(Player player) {
+            return !readOnly;
           }
 
           @Override

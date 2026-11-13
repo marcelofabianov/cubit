@@ -68,6 +68,7 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 | `TabletApp` | Os apps do Tablet, um ativo por vez. A `key` é o nome no componente do item, e uma chave desconhecida vale Open |
 | `RobotListing` | Um Cubit como a tela de seleção do Tablet o ordena: se segue o player, se está na mesma dimensão, se está carregado e a distância |
 | `RobotListings` | A ordem e a busca da tela de seleção do Tablet |
+| `RobotName` | O nome que o Tablet dá ao Cubit, com as regras da etiqueta: corta os espaços das pontas, aceita até 50 caracteres e, vazio, tira o nome (perguntas 1015 a 1017) |
 | `PickupSettings` | As chaves da coleta, do ímã e da busca e o filtro, que o item guarda |
 | `OreSignals` | Quais minérios avisam e qual deles o texto cita, a partir da lista dos raros |
 | `ScannerSpec` | Números dos scanners de um tier: raios, intervalos, custos e vagas do filtro |

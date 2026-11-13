@@ -1,10 +1,8 @@
 package io.github.marcelofabianov.cubit.client;
 
 import io.github.marcelofabianov.cubit.client.ScreenPainter.Box;
-import io.github.marcelofabianov.cubit.domain.tier.RobotTier;
-import io.github.marcelofabianov.cubit.item.TierLook;
+import io.github.marcelofabianov.cubit.domain.robot.PickupEntry;
 import io.github.marcelofabianov.cubit.menu.BehaviorKeys;
-import io.github.marcelofabianov.cubit.menu.DefenseKeys;
 import io.github.marcelofabianov.cubit.menu.PickupScreenValues;
 import io.github.marcelofabianov.cubit.menu.RobotMenu;
 import java.util.Optional;
@@ -24,9 +22,8 @@ import net.minecraft.world.inventory.Slot;
  */
 final class RobotBehaviorPanel {
   private static final int LEFT = 7;
-  private static final int RIGHT = 165;
+  private static final int DEFAULT_RIGHT = 165;
   private static final int LINE = 9;
-  private static final int DETAIL_LINE = 7;
   private static final int FIRST_ROW = 18;
   private static final int ROW_HEIGHT = 12;
   private static final int ICON_X = 11;
@@ -36,19 +33,16 @@ final class RobotBehaviorPanel {
   private static final int NAME_WIDTH = 106;
   private static final int TOGGLE_X = 139;
   private static final int TOGGLE_TOP = 0;
-  private static final Box FILTER_TITLE = new Box(8, 57, 100, LINE);
+  private static final int FILTER_TITLE_X = 8;
+  private static final int FILTER_TITLE_Y = 57;
   private static final int FILTER_RULE = 66;
-  private static final int MODE_X = 115;
-  private static final int MODE_Y = 55;
-  private static final int MODE_WIDTH = 50;
-  private static final int MODE_HEIGHT = 10;
-  private static final int MODE_TEXT_INSET = 3;
+  private static final int MODE_Y = 54;
+  private static final int MODE_WIDTH = 56;
+  private static final int MODE_HEIGHT = 11;
+  private static final int FILTER_TITLE_INSET = MODE_WIDTH + 15;
   private static final int MARK_SIZE = 3;
   private static final int MARK_INSET = 14;
   private static final int MARK_COLOR = 0xFFF5C400;
-  private static final int PICKUP_ROW = 0;
-  private static final int MAGNET_ROW = 1;
-  private static final int FETCH_ROW = 2;
   private static final int[] BUTTONS = {
     RobotMenu.PICKUP_BUTTON, RobotMenu.MAGNET_BUTTON, RobotMenu.FETCH_BUTTON
   };
@@ -58,10 +52,23 @@ final class RobotBehaviorPanel {
 
   private final ScreenPainter painter;
   private final RobotMenu menu;
+  private final RobotSwitchLook switches;
+  private final int right;
 
   RobotBehaviorPanel(ScreenPainter painter, RobotMenu menu) {
+    this(painter, menu, DEFAULT_RIGHT);
+  }
+
+  /** The Tablet stretches the filter heading and moves the list button to its right side. */
+  RobotBehaviorPanel(ScreenPainter painter, RobotMenu menu, int right) {
     this.painter = painter;
     this.menu = menu;
+    this.switches = new RobotSwitchLook(menu);
+    this.right = right;
+  }
+
+  private int modeX() {
+    return right - MODE_WIDTH;
   }
 
   private ContainerData values() {
@@ -84,27 +91,35 @@ final class RobotBehaviorPanel {
     for (int row = 0; row < BUTTONS.length; row++) {
       renderRow(graphics, row);
     }
+    renderFilter(graphics);
+  }
+
+  /** Only the filter, as the Filters tab of the Tablet shows it (answer 1037). */
+  void renderFilter(GuiGraphics graphics) {
     Component title = Component.translatable(BehaviorKeys.FILTER).withStyle(ChatFormatting.BOLD);
-    painter.text(graphics, title, FILTER_TITLE, ScreenPainter.TEXT, ScreenPainter.FULL_SCALE);
-    graphics.fill(LEFT, FILTER_RULE, RIGHT, FILTER_RULE + 1, ScreenPainter.SHADE);
-    graphics.fill(LEFT, FILTER_RULE + 1, RIGHT, FILTER_RULE + 2, ScreenPainter.WHITE);
+    painter.text(
+        graphics,
+        title,
+        new Box(FILTER_TITLE_X, FILTER_TITLE_Y, right - FILTER_TITLE_INSET, LINE),
+        ScreenPainter.TEXT,
+        ScreenPainter.FULL_SCALE);
+    graphics.fill(LEFT, FILTER_RULE, right, FILTER_RULE + 1, ScreenPainter.SHADE);
+    graphics.fill(LEFT, FILTER_RULE + 1, right, FILTER_RULE + 2, ScreenPainter.WHITE);
     renderMode(graphics);
     renderTagMarks(graphics);
   }
 
-  /** The funnel shrinks to the height of the row, so the three rows fit (answer 940). */
+  /** The icons shrink to the height of the row, so the three rows fit (answers 940 and 1039). */
   private void renderRow(GuiGraphics graphics, int row) {
     int top = FIRST_ROW + row * ROW_HEIGHT;
     if (row % 2 == 0) {
-      graphics.fill(LEFT, top, RIGHT, top + ROW_HEIGHT, ScreenPainter.ROW);
+      graphics.fill(LEFT, top, right, top + ROW_HEIGHT, ScreenPainter.ROW);
     }
-    if (row == PICKUP_ROW) {
-      graphics.pose().pushPose();
-      graphics.pose().translate(ICON_X, top, 0);
-      graphics.pose().scale(ICON_SCALE, ICON_SCALE, 1);
-      ScreenSprites.funnel(graphics, 0, 0);
-      graphics.pose().popPose();
-    }
+    graphics.pose().pushPose();
+    graphics.pose().translate(ICON_X, top, 0);
+    graphics.pose().scale(ICON_SCALE, ICON_SCALE, 1);
+    ScreenSprites.switchIcon(graphics, 0, 0, BUTTONS[row]);
+    graphics.pose().popPose();
     Box nameBox = new Box(NAME_X, top + NAME_TOP, NAME_WIDTH, LINE);
     painter.text(
         graphics,
@@ -112,23 +127,13 @@ final class RobotBehaviorPanel {
         nameBox,
         ScreenPainter.TEXT,
         ScreenPainter.FULL_SCALE);
-    ScreenToggle.draw(graphics, painter, TOGGLE_X, top + TOGGLE_TOP, on(row), available(row));
-  }
-
-  private boolean on(int row) {
-    return switch (row) {
-      case MAGNET_ROW -> PickupScreenValues.magnetOn(values());
-      case FETCH_ROW -> PickupScreenValues.fetchOn(values());
-      default -> PickupScreenValues.pickupOn(values());
-    };
-  }
-
-  private boolean available(int row) {
-    return switch (row) {
-      case MAGNET_ROW -> PickupScreenValues.magnetAvailable(values());
-      case FETCH_ROW -> PickupScreenValues.fetchAvailable(values());
-      default -> true;
-    };
+    ScreenToggle.draw(
+        graphics,
+        painter,
+        TOGGLE_X,
+        top + TOGGLE_TOP,
+        switches.on(BUTTONS[row]),
+        switches.available(BUTTONS[row]));
   }
 
   /** The detail of the switch under the mouse, as its tooltip, by the mouse (answer 940). */
@@ -139,53 +144,20 @@ final class RobotBehaviorPanel {
   }
 
   private Optional<Component> detailAt(double x, double y) {
-    if (x < LEFT || x >= RIGHT || y < FIRST_ROW) {
+    if (x < LEFT || x >= right || y < FIRST_ROW) {
       return Optional.empty();
     }
     int row = (int) ((y - FIRST_ROW) / ROW_HEIGHT);
-    return switch (row) {
-      case PICKUP_ROW -> Optional.of(Component.translatable(BehaviorKeys.PICKUP_DETAIL));
-      case MAGNET_ROW -> Optional.of(magnetDetail());
-      case FETCH_ROW -> Optional.of(fetchDetail());
-      default -> Optional.empty();
-    };
+    return row < BUTTONS.length ? Optional.of(switches.detail(BUTTONS[row])) : Optional.empty();
   }
 
-  /** The numbers of the tier, or the tier that unlocks the magnet (answers 881 and 888). */
-  private Component magnetDetail() {
-    if (!PickupScreenValues.magnetUnlocked(values())) {
-      return unlocksAt(PickupScreenValues.magnetUnlockTier(values()));
-    }
-    return Component.translatable(
-        BehaviorKeys.MAGNET_DETAIL,
-        PickupScreenValues.radius(values()),
-        PickupScreenValues.cost(values()).amount());
-  }
-
-  /** The radius of the tier around the owner, or the tier that unlocks fetch (answer 943). */
-  private Component fetchDetail() {
-    int radius = PickupScreenValues.fetchRadius(values());
-    if (radius == 0) {
-      return unlocksAt(PickupScreenValues.fetchUnlockTier(values()));
-    }
-    return Component.translatable(BehaviorKeys.FETCH_DETAIL, radius);
-  }
-
-  private static Component unlocksAt(Optional<RobotTier> tier) {
-    return tier.map(unlock ->
-            (Component) Component.translatable(DefenseKeys.UNLOCKS_AT, TierLook.name(unlock)))
-        .orElse(Component.empty());
-  }
-
+  /** The blue flat button of the screens, as Rename on the Tablet. */
   private void renderMode(GuiGraphics graphics) {
-    ScreenPainter.sunken(graphics, MODE_X, MODE_Y, MODE_WIDTH, MODE_HEIGHT, ScreenPainter.WHITE);
-    Component mode = Component.translatable(BehaviorKeys.mode(PickupScreenValues.mode(values())));
-    painter.text(
-        graphics,
-        mode,
-        new Box(MODE_X + MODE_TEXT_INSET, MODE_Y + 2, MODE_WIDTH - MODE_TEXT_INSET, DETAIL_LINE),
-        ScreenPainter.TEXT,
-        ScreenPainter.DETAIL_SCALE);
+    Component mode =
+        Component.translatable(BehaviorKeys.mode(PickupScreenValues.mode(values())))
+            .withStyle(ChatFormatting.BOLD);
+    FlatButton.paint(
+        graphics, new Box(modeX(), MODE_Y, MODE_WIDTH, MODE_HEIGHT), mode, false, false);
   }
 
   private void renderTagMarks(GuiGraphics graphics) {
@@ -197,6 +169,21 @@ final class RobotBehaviorPanel {
             x + MARK_INSET - 1, y, x + MARK_INSET - 1 + MARK_SIZE, y + MARK_SIZE, MARK_COLOR);
       }
     }
+  }
+
+  /** A filter slot that holds a tag shows the tag, not the item it stands for (answer 882). */
+  boolean renderTagTooltip(GuiGraphics graphics, Font font, Slot hovered, int mouseX, int mouseY) {
+    if (hovered == null) {
+      return false;
+    }
+    Optional<String> tag = filterSlotOf(hovered).stream().boxed().findFirst().flatMap(this::tagAt);
+    tag.ifPresent(name ->
+        graphics.renderTooltip(
+            font,
+            Component.translatable(BehaviorKeys.TAG, PickupEntry.TAG_MARK + name),
+            mouseX,
+            mouseY));
+    return tag.isPresent();
   }
 
   /** The tag of a filter slot, from the item the server shows in it. */
@@ -215,16 +202,29 @@ final class RobotBehaviorPanel {
 
   /** The switch or the mode button under the mouse, when it can change. */
   OptionalInt buttonAt(double x, double y) {
-    if (x >= MODE_X && x < MODE_X + MODE_WIDTH && y >= MODE_Y && y < MODE_Y + MODE_HEIGHT) {
-      return OptionalInt.of(RobotMenu.PICKUP_MODE_BUTTON);
+    OptionalInt mode = modeAt(x, y);
+    if (mode.isPresent()) {
+      return mode;
     }
     for (int row = 0; row < BUTTONS.length; row++) {
       int top = FIRST_ROW + row * ROW_HEIGHT + TOGGLE_TOP;
-      if (ScreenToggle.contains(TOGGLE_X, top, x, y) && available(row)) {
+      if (ScreenToggle.contains(TOGGLE_X, top, x, y) && switches.available(BUTTONS[row])) {
         return OptionalInt.of(BUTTONS[row]);
       }
     }
     return OptionalInt.empty();
+  }
+
+  /** The button of the list of the filter, which turns it between allow and deny. */
+  OptionalInt modeAt(double x, double y) {
+    boolean inside =
+        x >= modeX() && x < modeX() + MODE_WIDTH && y >= MODE_Y && y < MODE_Y + MODE_HEIGHT;
+    return inside ? OptionalInt.of(RobotMenu.PICKUP_MODE_BUTTON) : OptionalInt.empty();
+  }
+
+  /** The top of the filter, from the heading, so the Tablet can start its tab there. */
+  static int filterHeadingY() {
+    return MODE_Y;
   }
 
   private static int filterTop() {

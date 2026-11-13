@@ -20,14 +20,19 @@ import io.github.marcelofabianov.cubit.domain.tier.ShockSpec;
 import io.github.marcelofabianov.cubit.domain.tier.TierSpec;
 import io.github.marcelofabianov.cubit.menu.DefenseOpening;
 import io.github.marcelofabianov.cubit.menu.RobotMenu;
+import io.github.marcelofabianov.cubit.menu.RobotMenuContents;
+import io.github.marcelofabianov.cubit.menu.RobotMenuSource;
 import io.github.marcelofabianov.cubit.menu.RobotScreenOpening;
 import io.github.marcelofabianov.cubit.menu.RobotScreenReading;
 import io.github.marcelofabianov.cubit.menu.RobotScreenReading.Vitals;
 import io.github.marcelofabianov.cubit.menu.RobotSwitch;
+import io.github.marcelofabianov.cubit.menu.TabletRobotMenu;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Predicate;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
 
 /** Reads a robot for its screen. Only reads, and the rules come from the domain. */
 public final class RobotScreenReadout {
@@ -37,24 +42,38 @@ public final class RobotScreenReadout {
 
   /** The menu of the robot on the server, for its owner, as the click and the tests open it. */
   public static RobotMenu serverMenu(int containerId, Inventory inventory, RobotEntity robot) {
-    RobotMenu.Contents contents =
-        new RobotMenu.Contents(
-            robot.inventory(), robot.energySlot(), robot.torches().slot(), opening(robot));
+    return RobotMenu.onServer(
+        containerId, inventory, contents(robot), source(robot, robot::canUseInventory));
+  }
+
+  /** The menu of the Tablet: for the owner, while the Cubit lives, at any distance (1018). */
+  public static TabletRobotMenu tabletMenu(
+      int containerId, Inventory inventory, RobotEntity robot) {
+    return TabletRobotMenu.onServer(
+        containerId,
+        inventory,
+        contents(robot),
+        source(robot, player -> RobotTablet.canUse(robot, player)),
+        RobotTablet.opening(robot));
+  }
+
+  private static RobotMenuContents contents(RobotEntity robot) {
+    return new RobotMenuContents(
+        robot.inventory(), robot.energySlot(), robot.torches().slot(), opening(robot));
+  }
+
+  private static RobotMenuSource source(RobotEntity robot, Predicate<Player> stillValid) {
     RobotSwitch[] switches = {
       robot.lampSwitch(), robot.scanners(), robot.chatter(), robot.solar(), robot.torches()
     };
-    return RobotMenu.onServer(
-        containerId,
-        inventory,
-        contents,
-        new RobotMenu.RobotSource(
-            () -> read(robot),
-            switches,
-            robot.defense(),
-            new RobotPower(robot),
-            robot.pickup(),
-            robot.torches(),
-            robot::canUseInventory));
+    return new RobotMenuSource(
+        () -> read(robot),
+        switches,
+        robot.defense(),
+        new RobotPower(robot),
+        robot.pickup(),
+        robot.torches(),
+        stillValid);
   }
 
   static RobotScreenReading read(RobotEntity robot) {
@@ -79,7 +98,13 @@ public final class RobotScreenReadout {
         solarRate(solar, tick.day(), robot.spec().solar()),
         tick.spent(),
         EnergyUseCause.of(tick.activity()),
-        robot.state().tier());
+        robot.state().tier(),
+        new RobotScreenReading.Place(
+            robot.state().color(),
+            robot.getBlockX(),
+            robot.getBlockY(),
+            robot.getBlockZ(),
+            CubitMod.CONFIG.powerRules().turnOn(state, battery) != state));
   }
 
   private static RechargeSource recharge(RobotTickReading tick, PowerState state, Battery battery) {

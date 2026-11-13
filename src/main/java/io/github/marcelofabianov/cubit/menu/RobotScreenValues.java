@@ -36,7 +36,14 @@ final class RobotScreenValues implements ContainerData {
   static final int TORCHES = 29;
   static final int TORCH_COST = 31;
   static final int TORCH_UNLOCK_TIER = 33;
-  static final int COUNT = 34;
+  static final int COLOR = 34;
+  static final int POS_X = 35;
+  static final int POS_Y = 37;
+  static final int POS_Z = 39;
+  static final int TURN_ON = 41;
+  static final int COUNT = 42;
+  private static final int HALF_BITS = 16;
+  private static final int HALF_MASK = 0xFFFF;
   static final int TRUE_VALUE = 1;
   private static final int AVAILABLE = 1;
 
@@ -89,11 +96,27 @@ final class RobotScreenValues implements ContainerData {
     }
     putEnergy(TORCH_COST, torches.cost());
     values[TORCH_UNLOCK_TIER] = torches.unlockTier().map(tier -> tier.ordinal() + 1).orElse(0);
+    RobotScreenReading.Place place = reading.place();
+    values[COLOR] = place.color().ordinal();
+    putInt(POS_X, place.x());
+    putInt(POS_Y, place.y());
+    putInt(POS_Z, place.z());
+    values[TURN_ON] = place.canTurnOn() ? TRUE_VALUE : 0;
   }
 
   private void putSwitch(int index, RobotSwitch robotSwitch) {
     values[index] = robotSwitch.isOn() ? TRUE_VALUE : 0;
     values[index + AVAILABLE] = robotSwitch.isAvailable() ? TRUE_VALUE : 0;
+  }
+
+  /** A value travels in 16 bits, so a whole int takes two, as the energy does. */
+  private void putInt(int index, int value) {
+    values[index] = value & HALF_MASK;
+    values[index + 1] = value >>> HALF_BITS;
+  }
+
+  static int intAt(ContainerData data, int index) {
+    return (data.get(index + 1) << HALF_BITS) | (data.get(index) & HALF_MASK);
   }
 
   private void putEnergy(int index, Energy energy) {

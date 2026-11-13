@@ -1,32 +1,25 @@
 package io.github.marcelofabianov.cubit.menu;
 
-import io.github.marcelofabianov.cubit.domain.behavior.RobotExpression;
-import io.github.marcelofabianov.cubit.domain.behavior.RobotScreenStatus;
 import io.github.marcelofabianov.cubit.domain.energy.Energy;
-import io.github.marcelofabianov.cubit.domain.energy.EnergyUseCause;
-import io.github.marcelofabianov.cubit.domain.energy.RechargeSource;
-import io.github.marcelofabianov.cubit.domain.energy.SolarStatus;
 import io.github.marcelofabianov.cubit.domain.robot.DefenseMode;
 import io.github.marcelofabianov.cubit.domain.robot.InventoryWindow;
 import io.github.marcelofabianov.cubit.domain.tier.RobotTier;
 import io.github.marcelofabianov.cubit.registry.CubitMenus;
-import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
-import java.util.function.Supplier;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ClickType;
 import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 
 /** The screen of a robot. The server decides who may keep it open and what it shows. */
-public final class RobotMenu extends AbstractContainerMenu {
+public class RobotMenu extends RobotMenuReading {
   public static final int SLOTS_PER_ROW = 9;
   public static final int SLOT_SIZE = 18;
   public static final int FIRST_SLOT_X = 8;
@@ -71,36 +64,33 @@ public final class RobotMenu extends AbstractContainerMenu {
 
   private static final int ENERGY_SLOT_SIZE = 1;
   private static final int TORCH_SLOT_SIZE = 1;
-  private static final int TORCH_SWITCH = 4;
-  private static final int[] SWITCH_INDEXES = {
-    RobotScreenValues.LAMP,
-    RobotScreenValues.SCANNERS,
-    RobotScreenValues.CHATTER,
-    RobotScreenValues.SOLAR_SWITCH,
-    RobotScreenValues.TORCHES
-  };
 
   private final Container container;
   private final InventoryWindow window;
   private final ScrolledContainer view;
   private final Predicate<Player> stillValid;
-  private final ContainerData values;
   private final Runnable refresh;
   private final RobotSwitch[] switches;
   private final DefenseControl defense;
   private final PowerControl power;
   private final RobotScreenOpening opening;
-  private final RobotMenuSlots slotGroups = new RobotMenuSlots();
+  private final RobotMenuSlots slotGroups;
   private final PickupMenuPart pickup;
 
-  private RobotMenu(
-      int containerId, Inventory playerInventory, Contents contents, RobotMenuServer server) {
-    super(CubitMenus.ROBOT.get(), containerId);
+  /** The Tablet shows the inventory of the robot only to read it (answer 999). */
+  protected RobotMenu(
+      MenuType<?> type,
+      int containerId,
+      Inventory playerInventory,
+      RobotMenuContents contents,
+      RobotMenuServer server,
+      boolean readOnly) {
+    super(type, containerId, server.values());
+    this.slotGroups = new RobotMenuSlots(readOnly);
     this.container = contents.inventory();
     this.window = new InventoryWindow(container.getContainerSize(), SLOTS_PER_ROW, VISIBLE_ROWS);
     this.view = new ScrolledContainer(container, window);
     this.stillValid = server.stillValid();
-    this.values = server.values();
     this.refresh = server.refresh();
     this.switches = server.switches().clone();
     this.defense = server.defense();
@@ -123,18 +113,32 @@ public final class RobotMenu extends AbstractContainerMenu {
   public static RobotMenu onClient(
       int containerId, Inventory playerInventory, RegistryFriendlyByteBuf data) {
     RobotScreenOpening opening = RobotScreenOpening.read(data);
-    Contents contents =
-        new Contents(
+    RobotMenuContents contents =
+        new RobotMenuContents(
             new SimpleContainer(opening.slots()),
             new SimpleContainer(ENERGY_SLOT_SIZE),
             new SimpleContainer(TORCH_SLOT_SIZE),
             opening);
-    return new RobotMenu(containerId, playerInventory, contents, RobotMenuServer.onClient());
+    return new RobotMenu(
+        CubitMenus.ROBOT.get(),
+        containerId,
+        playerInventory,
+        contents,
+        RobotMenuServer.onClient(),
+        false);
   }
 
   /** On the server, where the values come from the robot itself. */
   public static RobotMenu onServer(
-      int containerId, Inventory playerInventory, Contents contents, RobotSource source) {
+      int containerId,
+      Inventory playerInventory,
+      RobotMenuContents contents,
+      RobotMenuSource source) {
+    return new RobotMenu(
+        CubitMenus.ROBOT.get(), containerId, playerInventory, contents, serverOf(source), false);
+  }
+
+  static RobotMenuServer serverOf(RobotMenuSource source) {
     RobotScreenValues values =
         new RobotScreenValues(
             source.reading(),
@@ -143,16 +147,14 @@ public final class RobotMenu extends AbstractContainerMenu {
             source.torches(),
             source.switches());
     values.refresh();
-    RobotMenuServer server =
-        new RobotMenuServer(
-            source.stillValid(),
-            values,
-            values::refresh,
-            source.switches(),
-            source.defense(),
-            source.power(),
-            source.pickup());
-    return new RobotMenu(containerId, playerInventory, contents, server);
+    return new RobotMenuServer(
+        source.stillValid(),
+        values,
+        values::refresh,
+        source.switches(),
+        source.defense(),
+        source.power(),
+        source.pickup());
   }
 
   @Override
@@ -218,8 +220,12 @@ public final class RobotMenu extends AbstractContainerMenu {
 
   /** Only the client hides the slots. The behavior tab keeps the player's, to copy items. */
   public void showTab(boolean inventory, boolean behavior) {
-    slotGroups.show(inventory, inventory || behavior);
-    pickup.show(behavior);
+    showParts(inventory, inventory || behavior, behavior);
+  }
+
+  protected final void showParts(boolean robot, boolean player, boolean filter) {
+    slotGroups.show(robot, player);
+    pickup.show(filter);
   }
 
   public ContainerData pickupValues() {
@@ -245,86 +251,17 @@ public final class RobotMenu extends AbstractContainerMenu {
     return !pickup.owns(slot.index) && super.canTakeItemForPickAll(stack, slot);
   }
 
+  protected final PowerControl power() {
+    return power;
+  }
+
+  /** The slots of the robot come first: its inventory, the energy slot and the torch slot. */
+  protected final int robotSlots() {
+    return view.getContainerSize() + ENERGY_SLOT_SIZE + TORCH_SLOT_SIZE;
+  }
+
   public RobotScreenOpening opening() {
     return opening;
-  }
-
-  public Energy charge() {
-    return RobotScreenValues.energy(values, RobotScreenValues.CHARGE);
-  }
-
-  public Energy capacity() {
-    return RobotScreenValues.energy(values, RobotScreenValues.CAPACITY);
-  }
-
-  public int health() {
-    return values.get(RobotScreenValues.HEALTH);
-  }
-
-  public int maxHealth() {
-    return values.get(RobotScreenValues.MAX_HEALTH);
-  }
-
-  public RobotScreenStatus status() {
-    return ScreenEnums.of(RobotScreenStatus.values(), values.get(RobotScreenValues.STATUS));
-  }
-
-  public RechargeSource recharge() {
-    return ScreenEnums.of(RechargeSource.values(), values.get(RobotScreenValues.RECHARGE));
-  }
-
-  public Energy rechargeRate() {
-    return RobotScreenValues.energy(values, RobotScreenValues.RECHARGE_RATE);
-  }
-
-  public SolarStatus solar() {
-    return ScreenEnums.of(SolarStatus.values(), values.get(RobotScreenValues.SOLAR));
-  }
-
-  public Energy solarRate() {
-    return RobotScreenValues.energy(values, RobotScreenValues.SOLAR_RATE);
-  }
-
-  public Energy use() {
-    return RobotScreenValues.energy(values, RobotScreenValues.USE);
-  }
-
-  public List<EnergyUseCause> causes() {
-    return RobotScreenValues.causes(values);
-  }
-
-  public boolean following() {
-    return RobotScreenValues.isTrue(values, RobotScreenValues.FOLLOWING);
-  }
-
-  public RobotExpression expression() {
-    return ScreenEnums.of(RobotExpression.values(), values.get(RobotScreenValues.EXPRESSION));
-  }
-
-  public boolean powerAvailable() {
-    return RobotScreenValues.isTrue(values, RobotScreenValues.POWER);
-  }
-
-  public DefenseMode defenseMode() {
-    return ScreenEnums.of(DefenseMode.values(), values.get(RobotScreenValues.DEFENSE));
-  }
-
-  public RobotTier tier() {
-    return ScreenEnums.of(RobotTier.values(), values.get(RobotScreenValues.TIER));
-  }
-
-  /** By the button of the switch: {@link #LAMP_BUTTON}, {@link #SCANNERS_BUTTON} or chatter. */
-  public boolean switchOn(int button) {
-    return RobotScreenValues.isTrue(values, SWITCH_INDEXES[switchIndex(button)]);
-  }
-
-  public boolean switchAvailable(int button) {
-    return RobotScreenValues.isAvailable(values, SWITCH_INDEXES[switchIndex(button)]);
-  }
-
-  /** The first four switches go by their button, and the torches come after them. */
-  private static int switchIndex(int button) {
-    return button == TORCHES_BUTTON ? TORCH_SWITCH : button;
   }
 
   /** The torch slot comes after the visible rows of the robot and the energy slot. */
@@ -360,7 +297,7 @@ public final class RobotMenu extends AbstractContainerMenu {
     ItemStack stack = slot.getItem();
     ItemStack moved = stack.copy();
     int inventorySlots = view.getContainerSize();
-    int robotSlots = inventorySlots + ENERGY_SLOT_SIZE + TORCH_SLOT_SIZE;
+    int robotSlots = robotSlots();
     boolean fits =
         index < robotSlots
             ? moveItemStackTo(
@@ -382,18 +319,4 @@ public final class RobotMenu extends AbstractContainerMenu {
   public boolean stillValid(Player player) {
     return stillValid.test(player);
   }
-
-  /** The containers of the robot and what travels when the screen opens. */
-  public record Contents(
-      Container inventory, Container energySlot, Container torchSlot, RobotScreenOpening opening) {}
-
-  /** What the server reads from the robot: the screen values, the switches and who may use it. */
-  public record RobotSource(
-      Supplier<RobotScreenReading> reading,
-      RobotSwitch[] switches,
-      DefenseControl defense,
-      PowerControl power,
-      PickupControl pickup,
-      TorchControl torches,
-      Predicate<Player> stillValid) {}
 }

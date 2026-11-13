@@ -4,6 +4,7 @@ import io.github.marcelofabianov.cubit.CubitMod;
 import io.github.marcelofabianov.cubit.domain.energy.PowerRules;
 import io.github.marcelofabianov.cubit.domain.ownership.Ownership;
 import io.github.marcelofabianov.cubit.menu.PowerControl;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 
 /**
@@ -30,5 +31,11 @@ final class RobotPower implements PowerControl {
     robot.setPowerState(CubitMod.CONFIG.powerRules().switchOff(robot.powerState()));
     RobotFollowing.release(robot, player);
     return true;
+  }
+
+  @Override
+  public boolean turnOn(Player player) {
+    return Ownership.owns(robot.ownerId(), player.getUUID())
+        && RobotInteractions.turnOn(robot, player) == InteractionResult.CONSUME;
   }
 }

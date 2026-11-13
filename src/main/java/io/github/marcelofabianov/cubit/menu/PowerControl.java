@@ -16,6 +16,11 @@ public interface PowerControl {
         public boolean switchOff(Player player) {
           return false;
         }
+
+        @Override
+        public boolean turnOn(Player player) {
+          return false;
+        }
       };
 
   /** Only an active robot switches off. In the base it hibernates (answer 857). */
@@ -23,4 +28,10 @@ public interface PowerControl {
 
   /** False when the player is not the owner or the robot is not active. */
   boolean switchOff(Player player);
+
+  /**
+   * The Power of the Tablet also turns on a switched-off robot with charge, as the click on it does
+   * (answer 1033). False when the player is not the owner or the robot cannot turn on.
+   */
+  boolean turnOn(Player player);
 }

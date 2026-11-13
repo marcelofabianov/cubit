@@ -5,10 +5,12 @@ import io.github.marcelofabianov.cubit.domain.robot.RobotListing;
 import io.github.marcelofabianov.cubit.domain.robot.RobotListings;
 import io.github.marcelofabianov.cubit.entity.RobotEntity;
 import io.github.marcelofabianov.cubit.entity.RobotSnapshotReader;
+import io.github.marcelofabianov.cubit.entity.RobotTablet;
 import io.github.marcelofabianov.cubit.menu.TabletKeys;
 import io.github.marcelofabianov.cubit.network.ChosenRobotPayload;
 import io.github.marcelofabianov.cubit.network.CubitNetwork;
 import io.github.marcelofabianov.cubit.network.RobotListPayload;
+import io.github.marcelofabianov.cubit.network.TabletRequests;
 import io.github.marcelofabianov.cubit.registry.CubitAttachments;
 import io.github.marcelofabianov.cubit.registry.CubitEntities;
 import java.util.ArrayList;
@@ -28,6 +30,14 @@ import net.minecraft.server.level.ServerPlayer;
 public final class TabletSelection {
 
   private TabletSelection() {}
+
+  /** What the server does with each request of the Tablet, every one checked again here. */
+  public static TabletRequests requests() {
+    return new TabletRequests(
+        TabletSelection::chooseAndOpen,
+        TabletSelection::open,
+        (player, payload) -> RobotTablet.rename(player, payload.robot(), payload.name()));
+  }
 
   public static void open(ServerPlayer player) {
     CubitNetwork.sendRobotList(player, new RobotListPayload(entriesFor(player)));
@@ -70,6 +80,15 @@ public final class TabletSelection {
                   : Component.literal(entry.name());
           player.displayClientMessage(Component.translatable(TabletKeys.CHOSEN, name), true);
         });
+  }
+
+  /**
+   * The choice opens the screen of the Cubit when it is loaded. An unloaded one shows its snapshot,
+   * which the client builds from the list (answer 1034).
+   */
+  public static void chooseAndOpen(ServerPlayer player, UUID robot) {
+    choose(player, robot);
+    RobotTablet.find(player, robot).ifPresent(found -> RobotTablet.open(found, player));
   }
 
   public static void sendChosen(ServerPlayer player) {

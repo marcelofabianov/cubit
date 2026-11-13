@@ -3,8 +3,6 @@ package io.github.marcelofabianov.cubit.client;
 import io.github.marcelofabianov.cubit.client.ScreenPainter.Box;
 import io.github.marcelofabianov.cubit.client.ScreenPainter.Colors;
 import io.github.marcelofabianov.cubit.domain.behavior.RobotScreenStatus;
-import io.github.marcelofabianov.cubit.domain.robot.PickupEntry;
-import io.github.marcelofabianov.cubit.menu.BehaviorKeys;
 import io.github.marcelofabianov.cubit.menu.RobotMenu;
 import io.github.marcelofabianov.cubit.menu.ScreenKeys;
 import java.util.List;
@@ -114,18 +112,8 @@ final class RobotScreen extends AbstractContainerScreen<RobotMenu> {
 
   /** A filter slot that holds a tag shows the tag, not the item it stands for (answer 882). */
   private boolean renderTagTooltip(GuiGraphics graphics, int mouseX, int mouseY) {
-    if (tabs.open() != RobotScreenTabs.Tab.BEHAVIOR || hoveredSlot == null) {
-      return false;
-    }
-    Optional<String> tag =
-        behavior.filterSlotOf(hoveredSlot).stream().boxed().findFirst().flatMap(behavior::tagAt);
-    tag.ifPresent(name ->
-        graphics.renderTooltip(
-            font,
-            Component.translatable(BehaviorKeys.TAG, PickupEntry.TAG_MARK + name),
-            mouseX,
-            mouseY));
-    return tag.isPresent();
+    return tabs.open() == RobotScreenTabs.Tab.BEHAVIOR
+        && behavior.renderTagTooltip(graphics, font, hoveredSlot, mouseX, mouseY);
   }
 
   private void showOpenTab() {
@@ -174,7 +162,11 @@ final class RobotScreen extends AbstractContainerScreen<RobotMenu> {
     scrollbar.render(graphics, leftPos, topPos);
     long tick = minecraft.player == null ? 0 : minecraft.player.tickCount;
     RobotPortrait.draw(
-        graphics, leftPos + MARGIN, topPos + PORTRAIT_Y, menu.expression(), menu.tier(), tick);
+        graphics,
+        leftPos + MARGIN,
+        topPos + PORTRAIT_Y,
+        new RobotPortrait.Look(menu.expression(), menu.tier(), RobotShell.argb(menu.shellColor())),
+        tick);
     ScreenSprites.bolt(graphics, leftPos + BOLT_X, topPos + BOLT_Y);
     renderSlots(graphics);
   }

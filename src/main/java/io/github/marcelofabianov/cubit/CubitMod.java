@@ -36,6 +36,6 @@ public final class CubitMod {
     CubitSounds.register(modBus);
     CubitCreativeTabs.register(modBus);
     modBus.addListener(CubitNetwork::register);
-    CubitNetwork.setRobotChooser(TabletSelection::choose);
+    CubitNetwork.setTabletRequests(TabletSelection.requests());
   }
 }

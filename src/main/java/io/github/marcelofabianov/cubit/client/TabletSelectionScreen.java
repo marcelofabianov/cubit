@@ -20,7 +20,6 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.DyeColor;
 
 /**
  * The selection screen of the Tablet: the Cubits of the player, already ordered by the server, with
@@ -48,7 +47,6 @@ final class TabletSelectionScreen extends Screen {
   private static final int STATUS_WIDTH = 96;
   private static final int MAX_SEARCH = 50;
   private static final long TICKS_PER_MINUTE = 1_200;
-  private static final int OPAQUE = 0xFF000000;
   private static final String SPACE = " ";
   private static final String SEPARATOR = " · ";
 
@@ -197,12 +195,12 @@ final class TabletSelectionScreen extends Screen {
 
   private static RobotPortrait.Look lookOf(RobotListPayload.Entry entry, RobotTier tier) {
     RobotColor color = ScreenEnums.of(RobotColor.values(), entry.look().color());
-    int shell = OPAQUE | DyeColor.byName(color.key(), DyeColor.WHITE).getTextureDiffuseColor();
+    int shell = RobotShell.argb(color);
     RobotExpression face = ScreenEnums.of(RobotExpression.values(), entry.look().expression());
     return new RobotPortrait.Look(face, tier, shell);
   }
 
-  private static Component nameOf(RobotListPayload.Entry entry) {
+  static Component nameOf(RobotListPayload.Entry entry) {
     return entry.name().isEmpty()
         ? Component.translatable(CubitEntities.GENERAL_ROBOT.get().getDescriptionId())
         : Component.literal(entry.name());
@@ -247,11 +245,23 @@ final class TabletSelectionScreen extends Screen {
         && y >= 0
         && row < rows
         && firstRow + row < shown.size()) {
-      CubitNetwork.chooseRobot(shown.get(firstRow + row).robot());
-      onClose();
+      open(shown.get(firstRow + row));
       return true;
     }
     return super.mouseClicked(mouseX, mouseY, button);
+  }
+
+  /**
+   * The server chooses the Cubit and opens its screen when it is loaded. An unloaded one shows its
+   * snapshot, built here from the list (answer 1034).
+   */
+  private void open(RobotListPayload.Entry entry) {
+    CubitNetwork.chooseRobot(entry.robot());
+    if (entry.where().loaded()) {
+      onClose();
+    } else {
+      TabletOfflineScreen.show(entry);
+    }
   }
 
   @Override

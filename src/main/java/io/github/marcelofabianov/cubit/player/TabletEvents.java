@@ -26,8 +26,8 @@ public final class TabletEvents {
   private TabletEvents() {}
 
   /**
-   * The Tablet comes before the entity: a click on an own Cubit chooses it, and a click on any
-   * other entity, such as a villager, opens the selection (answer 1007).
+   * The Tablet comes before the entity: a click on an own Cubit chooses it and opens its screen,
+   * and a click on any other entity, such as a villager, opens the selection (answer 1007).
    */
   @SubscribeEvent
   public static void onEntityInteract(PlayerInteractEvent.EntityInteract event) {
@@ -41,7 +41,7 @@ public final class TabletEvents {
     }
     Entity target = event.getTarget();
     if (target instanceof RobotEntity robot && Ownership.owns(robot.ownerId(), player.getUUID())) {
-      TabletSelection.choose(player, robot.getUUID());
+      TabletSelection.chooseAndOpen(player, robot.getUUID());
     } else {
       TabletSelection.open(player);
     }

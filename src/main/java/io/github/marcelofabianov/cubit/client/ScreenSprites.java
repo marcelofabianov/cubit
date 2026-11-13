@@ -2,6 +2,7 @@ package io.github.marcelofabianov.cubit.client;
 
 import io.github.marcelofabianov.cubit.CubitMod;
 import io.github.marcelofabianov.cubit.domain.dock.DockStatus;
+import io.github.marcelofabianov.cubit.menu.RobotMenu;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 
@@ -65,6 +66,11 @@ final class ScreenSprites {
   /** The torch of the settings tab, after the dock tabs, from a prompt (answer 982). */
   private static final int TORCHES_U = 192;
 
+  /** The magnet and fetch switches, after the torch, from prompts (answer 1039). */
+  private static final int MAGNET_U = 256;
+
+  private static final int FETCH_U = 320;
+
   private ScreenSprites() {}
 
   static void chest(GuiGraphics graphics, int x, int y) {
@@ -115,6 +121,20 @@ final class ScreenSprites {
 
   static void torches(GuiGraphics graphics, int x, int y) {
     rowIcon(graphics, x, y, TORCHES_U);
+  }
+
+  /**
+   * The icon of a switch of the robot, by the button the server knows it by, so every tab that
+   * lists the switches shows the same icon.
+   */
+  static void switchIcon(GuiGraphics graphics, int x, int y, int button) {
+    switch (button) {
+      case RobotMenu.PICKUP_BUTTON -> funnel(graphics, x, y);
+      case RobotMenu.MAGNET_BUTTON -> rowIcon(graphics, x, y, MAGNET_U);
+      case RobotMenu.FETCH_BUTTON -> rowIcon(graphics, x, y, FETCH_U);
+      case RobotMenu.TORCHES_BUTTON -> torches(graphics, x, y);
+      default -> function(graphics, x, y, button);
+    }
   }
 
   /** An icon in the row added below the others, where the funnel is. */

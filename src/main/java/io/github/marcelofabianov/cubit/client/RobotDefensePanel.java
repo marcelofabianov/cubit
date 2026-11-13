@@ -21,10 +21,13 @@ import net.minecraft.network.chat.Component;
  */
 final class RobotDefensePanel {
   private static final int LEFT = 7;
-  private static final int RIGHT = 165;
+  private static final int DEFAULT_RIGHT = 165;
+  private static final int HEADING_INSET = 15;
+  private static final int NAME_INSET = 3;
   private static final int LINE = 9;
   private static final int DETAIL_LINE = 7;
-  private static final Box MODES_TITLE = new Box(8, 18, 150, LINE);
+  private static final int TITLE_X = 8;
+  private static final int MODES_TITLE_Y = 18;
   private static final int MODES_RULE = 27;
   private static final int FIRST_MODE = 31;
   private static final int MODE_HEIGHT = 20;
@@ -35,14 +38,13 @@ final class RobotDefensePanel {
   private static final int NAME_X = 30;
   private static final int NAME_TOP = 3;
   private static final int DETAIL_TOP = 12;
-  private static final int NAME_WIDTH = 132;
-  private static final Box SHOCK_TITLE = new Box(8, 116, 150, LINE);
+  private static final int SHOCK_TITLE_Y = 116;
   private static final int SHOCK_RULE = 125;
   private static final int FIRST_ROW = 129;
   private static final int ROW_HEIGHT = 14;
   private static final int ROW_TEXT_TOP = 3;
   private static final int ROW_LABEL_X = 10;
-  private static final int ROW_WIDTH = 155;
+  private static final int ROW_INSET = 10;
   private static final int CURRENT = 0xFF4CAF50;
   private static final int DISABLED = 0x88C6C6C6;
   private static final double TICKS_PER_SECOND = 20;
@@ -55,19 +57,30 @@ final class RobotDefensePanel {
 
   private final ScreenPainter painter;
   private final RobotMenu menu;
+  private final int right;
 
   RobotDefensePanel(ScreenPainter painter, RobotMenu menu) {
+    this(painter, menu, DEFAULT_RIGHT);
+  }
+
+  /** The Tablet stretches the rows to the right side of its wider window. */
+  RobotDefensePanel(ScreenPainter painter, RobotMenu menu, int right) {
     this.painter = painter;
     this.menu = menu;
+    this.right = right;
+  }
+
+  private Box title(int y) {
+    return new Box(TITLE_X, y, right - HEADING_INSET, LINE);
   }
 
   /** Drawn in the coordinates of the window. */
   void render(GuiGraphics graphics) {
-    heading(graphics, DefenseKeys.MODES, MODES_TITLE, MODES_RULE);
+    heading(graphics, DefenseKeys.MODES, title(MODES_TITLE_Y), MODES_RULE);
     for (DefenseMode mode : DefenseMode.values()) {
       renderMode(graphics, mode, FIRST_MODE + mode.ordinal() * MODE_HEIGHT);
     }
-    heading(graphics, DefenseKeys.SHOCK, SHOCK_TITLE, SHOCK_RULE);
+    heading(graphics, DefenseKeys.SHOCK, title(SHOCK_TITLE_Y), SHOCK_RULE);
     renderShock(graphics);
   }
 
@@ -75,7 +88,7 @@ final class RobotDefensePanel {
   OptionalInt modeAt(double x, double y) {
     for (DefenseMode mode : DefenseMode.values()) {
       int top = FIRST_MODE + mode.ordinal() * MODE_HEIGHT;
-      boolean inside = x >= LEFT && x < RIGHT && y >= top && y < top + MODE_HEIGHT;
+      boolean inside = x >= LEFT && x < right && y >= top && y < top + MODE_HEIGHT;
       if (inside && defense().allows(mode) && mode != menu.defenseMode()) {
         return OptionalInt.of(RobotMenu.FIRST_DEFENSE_BUTTON + mode.ordinal());
       }
@@ -90,13 +103,13 @@ final class RobotDefensePanel {
   private void heading(GuiGraphics graphics, String key, Box box, int rule) {
     Component title = Component.translatable(key).withStyle(ChatFormatting.BOLD);
     painter.text(graphics, title, box, ScreenPainter.TEXT, ScreenPainter.FULL_SCALE);
-    graphics.fill(LEFT, rule, RIGHT, rule + 1, ScreenPainter.SHADE);
-    graphics.fill(LEFT, rule + 1, RIGHT, rule + 2, ScreenPainter.WHITE);
+    graphics.fill(LEFT, rule, right, rule + 1, ScreenPainter.SHADE);
+    graphics.fill(LEFT, rule + 1, right, rule + 2, ScreenPainter.WHITE);
   }
 
   private void renderMode(GuiGraphics graphics, DefenseMode mode, int top) {
     if (mode.ordinal() % 2 == 0) {
-      graphics.fill(LEFT, top, RIGHT, top + MODE_HEIGHT, ScreenPainter.ROW);
+      graphics.fill(LEFT, top, right, top + MODE_HEIGHT, ScreenPainter.ROW);
     }
     boolean current = mode == menu.defenseMode();
     renderMark(graphics, top, current);
@@ -104,17 +117,17 @@ final class RobotDefensePanel {
     painter.text(
         graphics,
         current ? name.copy().withStyle(ChatFormatting.BOLD) : name,
-        new Box(NAME_X, top + NAME_TOP, NAME_WIDTH, LINE),
+        new Box(NAME_X, top + NAME_TOP, right - NAME_X - NAME_INSET, LINE),
         ScreenPainter.TEXT,
         ScreenPainter.FULL_SCALE);
     painter.text(
         graphics,
         detailOf(mode),
-        new Box(NAME_X, top + DETAIL_TOP, NAME_WIDTH, DETAIL_LINE),
+        new Box(NAME_X, top + DETAIL_TOP, right - NAME_X - NAME_INSET, DETAIL_LINE),
         ScreenPainter.DETAIL,
         ScreenPainter.DETAIL_SCALE);
     if (!defense().allows(mode)) {
-      graphics.fill(LEFT, top, RIGHT, top + MODE_HEIGHT, DISABLED);
+      graphics.fill(LEFT, top, right, top + MODE_HEIGHT, DISABLED);
     }
   }
 
@@ -195,9 +208,9 @@ final class RobotDefensePanel {
   private void row(GuiGraphics graphics, int row, String label, Component value) {
     int top = FIRST_ROW + row * ROW_HEIGHT;
     if (row % 2 == 0) {
-      graphics.fill(LEFT, top, RIGHT, top + ROW_HEIGHT, ScreenPainter.ROW);
+      graphics.fill(LEFT, top, right, top + ROW_HEIGHT, ScreenPainter.ROW);
     }
-    Box box = new Box(ROW_LABEL_X, top + ROW_TEXT_TOP, ROW_WIDTH - ROW_LABEL_X, LINE);
+    Box box = new Box(ROW_LABEL_X, top + ROW_TEXT_TOP, right - ROW_INSET - ROW_LABEL_X, LINE);
     painter.pair(
         graphics,
         box,
