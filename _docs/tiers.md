@@ -51,7 +51,7 @@ Os extras somam ao andar. O consumo só vale com o robô ativo.
 | Scanner de mobs, por varredura | 50 FE | 100 FE | 150 FE | 300 FE |
 | Scanner de minérios, por varredura | 50 FE | 100 FE | 150 FE | 300 FE |
 | Ímã, por item puxado (respostas 877 e 879) | Bloqueado | 20 FE | 30 FE | 60 FE |
-| Colocar tochas, no item 12 da Fase 4.1 | Bloqueado | A definir | A definir | A definir |
+| Colocar tochas, por tocha (pergunta 972) | Bloqueado | 20 FE | 20 FE | 20 FE |
 
 - **Claridade da tela:** não gasta energia.
 - **Cards:** o custo por ação está em [trabalhos](#trabalhos).
@@ -165,7 +165,7 @@ O raio dos dois scanners é o de uma esfera em volta do Cubit: só conta o que e
 
 | Recurso | Base | Avançado | Elite | Ultimate |
 |---|---|---|---|---|
-| Tochas (coloca sozinho) | Bloqueado | 1 slot, luz < 7 | 1 slot, luz < 7 | 2 slots, nível configurável |
+| Tochas (coloca sozinho, luz de bloco mínima que garante, perguntas 973 e 975) | Bloqueado | 1 slot, luz 1 | 1 slot, luz 1 | 1 slot, luz 1 |
 | Energia (Power Bank ou redstone) | 1 slot | 1 slot | 1 slot | 1 slot |
 
 A fornalha de minérios foi para o Minerador, na Fase 5, e o carregador de ferramentas saiu do mod (pergunta 930).
@@ -204,6 +204,7 @@ Planejado para a Fase 5. O tier Base não aceita cards.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 13:45 | Define o custo, o slot e a luz das tochas. |
 | Marcelo Fabiano | 2026-11-13 11:30 | Passa a recarga da Power Bank para o inventário do Dock e as tochas para o item 12. |
 | Marcelo Fabiano | 2026-11-13 09:50 | Adiciona o raio da busca dos itens do chão. |
 | Marcelo Fabiano | 2026-11-13 09:05 | Leva a fornalha para o Minerador e tira o carregador de ferramentas. |

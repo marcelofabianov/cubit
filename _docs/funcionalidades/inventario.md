@@ -62,14 +62,30 @@ O player marca um baú. Quando o inventário do robô enche, ele vai sozinho des
 
 São dois: tochas e energia. Na Fase 5, o card de Aprendizado de Máquina ocupa mais um. O controle remoto ativa ou desativa as tochas, e o slot de energia fica sempre ligado. A fornalha de minérios foi para o [Minerador](trabalhos.md#minerador), na Fase 5, e o carregador de ferramentas saiu do mod (pergunta 930).
 
-- **Tochas automáticas:** do Advanced em diante, com tochas no slot exclusivo, o robô as coloca sozinho no chão. No Base, o slot fica bloqueado (respostas 879 e 930).
+- **Fileira:** os slots exclusivos ficam numa fileira acima do inventário do Cubit, com o título `Exclusive slots` / `Slots exclusivos`. O slot de energia continua ao lado das barras (perguntas 980 e 984).
+- **Tochas automáticas:** do Advanced em diante, com tochas no slot, o Cubit as coloca sozinho onde mobs podem nascer. Veja [Tochas](#tochas).
 - **Esvaziar:** o comportamento automático de esvaziar o inventário não coloca nem tira itens dos slots exclusivos.
 - **Energia:** o robô extrai a energia da Power Bank ou da redstone para a bateria interna. Veja [`energia.md`](energia.md#slot-exclusivo-de-energia).
+
+### Tochas
+
+Entra no item 12 da Fase 4.1 (issue #170, perguntas 971 a 984).
+
+- **Slot:** um só, com uma pilha de até 64 tochas comuns, `minecraft:torch`. Não aceita outra tocha. No Base, aparece apagado, com a dica `Unlocks at Advanced`, e não aceita nada (perguntas 973 e 983).
+- **Fora da coleta:** a coleta, o ímã, a busca e o esvaziar automático nunca põem nem tiram tochas desse slot.
+- **Quando analisa:** a cada 2 s, só ativo, seguindo ou parado, com a chave `Torches` ligada e tochas no slot (perguntas 974 e 976).
+- **Lugar perigoso:** um bloco em que um mob hostil pode nascer: o chão aceita mob, há 2 blocos livres acima, e a luz de bloco, a das tochas e das outras fontes, fica abaixo do nível do tier, que é 1 por padrão. Isso é o que impede o nascimento no 1.21, porque a luz do céu não protege à noite (perguntas 971 e 975).
+- **Ao ar livre:** um bloco que vê o céu só conta quando escurece, com a mesma leitura e o mesmo limite da lanterna, a luz do ambiente abaixo de `lamp_on_below_light`. Nas cavernas e construções, conta a qualquer hora (perguntas 978 e 979).
+- **Onde põe:** num raio de 8 blocos em volta do Cubit, só em chunks carregados, ele procura os lugares perigosos. Se achar algum, testa os lugares a até 4 blocos dele em que o jogo deixaria um player pôr uma tocha, no chão ou na parede, num bloco livre, e simula a luz, que começa em 14, cai 1 por bloco e não atravessa parede. A tocha vai no lugar que deixa seguros mais blocos perigosos. É uma tocha por varredura, sem sair do caminho de seguir (perguntas 976 e 977).
+- **Sem desperdício:** sem lugar perigoso no raio, ele não põe nada, e uma tocha que não deixaria nenhum bloco seguro também não é posta.
+- **Custo:** 20 FE por tocha, do Advanced ao Ultimate. Sem carga para o custo, não põe. A tocha do slot é consumida (pergunta 972).
+- **Estado no item:** as tochas do slot e a chave ficam no item ao recolher, morrer e consertar (pergunta 981).
 
 ## Histórico de modificações
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 13:45 | Detalha as tochas automáticas e a fileira dos slots exclusivos. |
 | Marcelo Fabiano | 2026-11-13 09:50 | Adiciona a busca dos itens do chão. |
 | Marcelo Fabiano | 2026-11-13 09:05 | Deixa só as tochas e a energia nos slots exclusivos. |
 | Marcelo Fabiano | 2026-11-12 23:20 | Acelera o item puxado pelo ímã. |

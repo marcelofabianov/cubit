@@ -607,7 +607,7 @@ As regras estão em [`telas.md`](../funcionalidades/telas.md#aba-settings) e em 
 
 | # | Faça | Espere |
 |---|---|---|
-| 1 | Abra a aba Settings de um Cubit ativo | Quatro chaves em Functions, com `Solar panel` na última, `Charges in the sun · 5 FE/t` no Base, e tudo cabe na janela, sem o rodapé antigo. No cabeçalho, o botão `Power` ao lado de `Battery` |
+| 1 | Abra a aba Settings de um Cubit ativo e passe o mouse nas chaves | Cinco chaves em Functions, em linhas baixas, com `Torches` na última, apagada no Base. Na dica de `Solar panel`, `Charges in the sun · 5 FE/t` no Base, e tudo cabe na janela, sem o rodapé antigo. No cabeçalho, o botão `Power` ao lado de `Battery` |
 | 2 | Passe o mouse no `Power` | `Power` e `Turns the Cubit off` |
 | 3 | De dia, ao céu aberto, desligue o `Solar panel` | A célula para de pulsar, a bateria não sobe pelo sol, e o Status mostra `Solar panel` `Off` |
 | 4 | Recolha e coloque o Cubit, e saia e entre no mundo | A chave continua desligada |
@@ -615,7 +615,7 @@ As regras estão em [`telas.md`](../funcionalidades/telas.md#aba-settings) e em 
 | 6 | Coloque outro Cubit | Ele passa a seguir você, porque o primeiro liberou o lugar |
 | 7 | Clique com o botão direito no primeiro | Ele liga, e fica desligado de novo se o outro estiver seguindo, pela regra que já existe |
 | 8 | Abra a tela de um Cubit hibernando no Dock | O `Power` aparece apagado e não faz nada |
-| 9 | Com o jogo em português, abra a aba | `Painel solar`, `Carrega no sol · 5 FE/t`, e no `Power`, `Energia` e `Desliga o Cubit` |
+| 9 | Com o jogo em português, abra a aba e passe o mouse nas chaves | `Painel solar`, com `Carrega no sol · 5 FE/t` na dica, `Tochas`, e no `Power`, `Energia` e `Desliga o Cubit` |
 
 ## Coleta e ímã
 
@@ -679,6 +679,26 @@ As regras estão em [`energia.md`](../funcionalidades/energia.md#power-bank) e a
 | 10 | Recolha um Cubit sem bateria e combine-o com uma Power Bank na grade | Sai o Cubit com a carga de religar, e a Power Bank fica na grade com o resto |
 | 11 | Tente com uma Power Bank quase vazia, ou com um Damaged Cubit | A receita não aparece |
 | 12 | Com o jogo em português | `Power Bank Base`, `Power Bank Avançada`, `Power Bank Elite`, `Power Bank Suprema` e `Carrega no Induction Dock` |
+
+## Tochas
+
+As regras estão em [`inventario.md`](../funcionalidades/inventario.md#tochas). Use `/give` para as tochas, o Advanced Module e os blocos.
+
+| # | Faça | Espere |
+|---|---|---|
+| 1 | Abra a aba Inventory de um Cubit Base | O título `Exclusive slots` e o slot de tochas apagado, com `Unlocks at Advanced` na dica, acima do inventário do Cubit. A janela ficou mais alta |
+| 2 | Tente pôr uma tocha no slot do Base | Não entra |
+| 3 | Aplique o Advanced Module e ponha 64 tochas no slot | Entram, e a dica do slot vazio mostrava `Torches` |
+| 4 | Tente pôr uma tocha de alma ou terra no slot | Não entram |
+| 5 | Entre numa caverna escura com o Cubit seguindo | Ele põe tochas no chão ou na parede, a até 4 blocos dele, uma a cada 2 s no máximo, e a bateria cai 20 FE por tocha |
+| 6 | Pare num corredor já iluminado | Ele não põe nenhuma tocha |
+| 7 | Saia para um campo aberto de dia | Ele não põe tochas |
+| 8 | Fique no campo até anoitecer | Quando a lanterna acende, ele passa a pôr tochas nos lugares escuros |
+| 9 | Use F3 num lugar onde ele pôs tochas e ande em volta | Nenhum bloco de chão no raio tem `Light: 0 (0 sky, 0 block)` na parte de bloco |
+| 10 | Desligue `Torches` na aba Settings | Ele para de pôr tochas |
+| 11 | Recolha e coloque o Cubit | As tochas do slot e a chave continuam iguais |
+| 12 | Encha o inventário do Cubit e jogue tochas no chão | A coleta não põe tochas no slot de tochas |
+| 13 | Com o jogo em português, abra a aba Inventory | `Slots exclusivos` e `Tochas` na dica |
 
 ## Inventário do Dock
 
@@ -762,6 +782,7 @@ Na instância só com o mod, tire capturas com F2 do Cubit seguindo, da tela do 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 13:45 | Adiciona as tochas e as dicas das chaves da aba Settings. |
 | Marcelo Fabiano | 2026-11-13 13:00 | Adiciona a saída do Dock com a bateria e a vida cheias. |
 | Marcelo Fabiano | 2026-11-13 12:50 | Adiciona o Cubit e o Damaged Cubit ao roteiro do inventário do Dock. |
 | Marcelo Fabiano | 2026-11-13 11:30 | Adiciona o inventário do Dock e troca o slot de carga nos passos da Power Bank. |

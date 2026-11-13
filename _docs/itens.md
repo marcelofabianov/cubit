@@ -169,8 +169,9 @@ Estes nomes não mudam sem migração (regra 18 do `AGENTS.md`).
 
 | Onde | Nome | Conteúdo |
 |---|---|---|
-| Componente do item | `cubit:robot_state` | `tier`, `energy`, `health`, `lamp_enabled`, opcional, com o padrão ligado, `color`, opcional, com o padrão `white`, `scanners_enabled` e `chatter_enabled`, opcionais, com o padrão ligado, `ore_filter`, opcional, com a lista de tags de minério, vazia por padrão (perguntas 560 e 582), `defense_mode`, opcional, com o padrão `peaceful` (pergunta 830), `solar_enabled`, opcional, com o padrão ligado (pergunta 859), e `pickup_enabled`, `magnet_enabled` e `pickup_filter`, opcionais, com o padrão ligado, ligado e a lista negra vazia, com `mode` e `entries` (pergunta 889), e `fetch_enabled`, opcional, com o padrão ligado (pergunta 944), também no item danificado |
+| Componente do item | `cubit:robot_state` | `tier`, `energy`, `health`, `lamp_enabled`, opcional, com o padrão ligado, `color`, opcional, com o padrão `white`, `scanners_enabled` e `chatter_enabled`, opcionais, com o padrão ligado, `ore_filter`, opcional, com a lista de tags de minério, vazia por padrão (perguntas 560 e 582), `defense_mode`, opcional, com o padrão `peaceful` (pergunta 830), `solar_enabled`, opcional, com o padrão ligado (pergunta 859), e `pickup_enabled`, `magnet_enabled` e `pickup_filter`, opcionais, com o padrão ligado, ligado e a lista negra vazia, com `mode` e `entries` (pergunta 889), `fetch_enabled`, opcional, com o padrão ligado (pergunta 944), e `torches_enabled`, opcional, com o padrão ligado (pergunta 981), também no item danificado |
 | Componente do item | `cubit:energy_slot` | Item do slot de energia e reserva de FE, também no item danificado |
+| Componente do item | `cubit:torch_slot` | As tochas do slot de tochas, também no item danificado. Sem o componente, o slot fica vazio (pergunta 981) |
 | Componente do item do Dock | `cubit:dock_energy` | Energia do estoque |
 | Componente do item do Dock | `cubit:dock_storage` | Conteúdo do inventário do Dock, no formato de conteúdo de container do jogo. Sem o componente, o inventário fica vazio (perguntas 954 e 958) |
 | Componente da Power Bank | `cubit:power_bank_energy` | Energia guardada. Sem o componente, vale zero (pergunta 903) |
@@ -180,7 +181,7 @@ Estes nomes não mudam sem migração (regra 18 do `AGENTS.md`).
 | Componente do item danificado | `cubit:robot_owner` | UUID do dono |
 | Tipo de receita | `cubit:robot_repair` | Campos `damaged_robot`, `toolbox` e `result` |
 | Dados do mundo | `cubit_dead_robots` | Robôs mortos com o dono offline |
-| NBT da entidade | `Owner`, `Tier`, `Energy`, `PowerState`, `LastSafePosition`, `Inventory` e `EnergySlot` | Dono, tier, carga da bateria, estado, última posição segura, inventário, com `Slot` em cada item, e slot de energia, com `Item` e `Reserve` |
+| NBT da entidade | `Owner`, `Tier`, `Energy`, `PowerState`, `LastSafePosition`, `Inventory`, `EnergySlot`, `TorchSlot` e `TorchesEnabled` | Dono, tier, carga da bateria, estado, última posição segura, inventário, com `Slot` em cada item, slot de energia, com `Item` e `Reserve`, as tochas do slot de tochas e a chave delas, que vale ligada sem a chave no save (pergunta 981) |
 | NBT do bloco do Dock | `Owner`, `Energy`, `Slot` e `Storage` | Dono, estoque, item do slot de entrada e inventário, com `Slot` em cada item (pergunta 958). `ChargeSlot`, de antes, só é lido, e a Power Bank dele vai para o primeiro slot do inventário (pergunta 955) |
 | Estado do bloco do Dock | `facing`, `half` e `status` | Direção, parte de baixo ou de cima e estado da tela: `off`, `idle`, `charging`, `complete` ou `no_energy` |
 | NBT da entidade na base | `DockPosition` | Posição do Dock em que hiberna |
@@ -215,6 +216,7 @@ O estado salvo é validado ao entrar no jogo, sem derrubá-lo (regra 17 do `AGEN
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 13:45 | Adiciona o slot e a chave das tochas ao save. |
 | Marcelo Fabiano | 2026-11-13 11:30 | Adiciona o inventário do Dock ao save e ao item. |
 | Marcelo Fabiano | 2026-11-13 10:05 | Adiciona o campo fetch_enabled ao componente do Cubit. |
 | Marcelo Fabiano | 2026-11-12 23:10 | Adiciona o slot de carga do Dock ao save. |
