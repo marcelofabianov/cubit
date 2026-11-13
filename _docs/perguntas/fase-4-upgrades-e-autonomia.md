@@ -8,6 +8,7 @@ Não há perguntas pendentes nesta fase.
 
 | # | Pergunta | Resposta |
 |---|---|---|
+| 970 | O `checklist.md` marca o item 11, com o texto atualizado, e acrescenta a busca ao item 9, e em que PR? | "pode incluir no PR das tochas": no PR das tochas, o item 11 fica marcado, com a Toolbox, as Power Banks, o Cubit, o Damaged Cubit e a saída com a bateria e a vida cheias (issue #168, PR #169, perguntas 947 a 969), e o item 9 cita a busca dos itens do chão (#165, PR #167) |
 | 969 | O `AGENTS.md` pode citar a `StorableRobotItem` na estrutura de pacotes? | "pode atualizar o AGENTS.md", autorizado pelo desenvolvedor: a linha de `block/` cita a `StorableRobotItem`, o Cubit e o Damaged Cubit que o Dock guarda |
 | 968 | O que faz o clique direito no Dock com o Cubit ou o Damaged Cubit na mão? | O item do Cubit continua pondo o robô na base, como hoje. O Damaged Cubit, que não pode ser colocado no mundo, vai para o inventário, como a Power Bank e a Toolbox (resposta 959). O Cubit só entra no inventário pela tela, pelo Shift + clique ou pela automação. Confirma a recomendação |
 | 967 | A automação põe e tira o Cubit e o Damaged Cubit do inventário? | Por qualquer face, os dois entram e saem a qualquer momento, como a Toolbox (resposta 953), um por slot. Confirma a recomendação |
@@ -223,6 +224,7 @@ Não há perguntas pendentes nesta fase.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 13:15 | Registra a resposta 970. |
 | Marcelo Fabiano | 2026-11-13 13:05 | Registra as respostas 961 e 969. |
 | Marcelo Fabiano | 2026-11-13 13:00 | Registra as respostas 963 e 964. |
 | Marcelo Fabiano | 2026-11-13 12:50 | Registra as respostas 962 e 965 a 968. |
