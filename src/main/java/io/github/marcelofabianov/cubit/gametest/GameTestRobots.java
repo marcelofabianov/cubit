@@ -55,6 +55,15 @@ final class GameTestRobots {
     return helper.makeMockServerPlayerInLevel();
   }
 
+  /** The owner picks the robot up with an empty hand, and the item lands in the first slot. */
+  static ItemStack collect(Player owner, RobotEntity robot) {
+    owner.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
+    owner.setShiftKeyDown(true);
+    robot.interact(owner, InteractionHand.MAIN_HAND);
+    owner.setShiftKeyDown(false);
+    return owner.getInventory().getItem(0);
+  }
+
   static List<RobotEntity> robots(GameTestHelper helper) {
     return helper.getEntities(CubitEntities.GENERAL_ROBOT.get());
   }
