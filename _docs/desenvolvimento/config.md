@@ -59,6 +59,7 @@ As chaves ficam em `snake_case`. As de um tier ficam em `[general_robot.{tier}]`
 | `general` | `void_rescue_retry_ticks` | Intervalo para tentar de novo o resgate no vazio | 1 a 1200 |
 | `general` | `retaliate_memory_ticks` | Tempo em que o Contra-atacar lembra de quem feriu o Cubit ou o dono | 1 a 72000 |
 | `general` | `focus_forget_distance_blocks` | Distância do dono em que o alvo do Focus deixa de ser alvo | 1 a 128 |
+| `general` | `tablet_target_reach_blocks` | Alcance da mira do app Alvo do Tablet | 1 a 128 |
 | `general` | `shock_look_after_ticks` | Tempo em que o Cubit ainda olha para o ponto do alvo depois de ele morrer ou se perder | 1 a 1200 |
 | `general` | `pickup_check_ticks` | Intervalo da coleta por contato | 1 a 1200 |
 | `general` | `magnet_check_ticks` | Intervalo do ímã | 1 a 1200 |
@@ -139,6 +140,7 @@ O mod não cai por causa do config (regra 17 do `AGENTS.md`):
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 17:15 | Adiciona o alcance da mira do app Alvo. |
 | Marcelo Fabiano | 2026-11-13 15:10 | Troca o tempo do olhar pelo tempo depois do alvo. |
 | Marcelo Fabiano | 2026-11-13 14:50 | Adiciona o tempo do olhar para o alvo do choque. |
 | Marcelo Fabiano | 2026-11-13 13:45 | Adiciona as chaves das tochas. |

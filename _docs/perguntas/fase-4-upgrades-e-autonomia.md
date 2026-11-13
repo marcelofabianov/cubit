@@ -8,6 +8,13 @@ Não há perguntas pendentes nesta fase.
 
 | # | Pergunta | Resposta |
 |---|---|---|
+| 1047 | O que faz o app Alvo sem mob na mira, ou no mob que já é o alvo? | Sem mob avisa, mesmo mob mantém: sem mob na mira, a barra de ação diz que não há mob, e nada abre. No mob que já é o alvo, nada muda, e o alvo só sai pelas regras do Focus. A recomendação, abrir sem mob e limpar no mesmo mob, foi recusada |
+| 1046 | O que faz o app Dock fora de um Dock do player? | Não faz nada: num outro bloco, num Dock de outro player ou numa entidade, a barra de ação diz que o app Dock marca um Dock seu, e nada abre. O Tablet continua com prioridade sobre o bloco (resposta 1007). A recomendação, fazer o que o Open faz, foi recusada |
+| 1045 | O que faz o app Dock no Dock que já é o preferido do Cubit escolhido? | Tira a preferência: o segundo clique apaga o `PreferredDock`, e a barra de ação avisa. Confirma a recomendação |
+| 1044 | O que acontece quando o app ativo do Tablet deixa de fazer sentido, como o Alvo com o Cubit escolhido fora do Focus? | Volta ao Open: Shift + roda passa só pelos apps disponíveis e mostra o app na barra de ação, como `Tablet · Alvo`. Se o app ativo deixa de valer, o próximo clique faz o que o Open faz, o item volta a Open e a barra de ação avisa. Confirma a recomendação |
+| 1043 | De que distância o app Alvo marca o mob? | Mira até 32 blocos: o clique direito marca o mob na mira até 32 blocos, a distância do dono em que o alvo do Focus é esquecido, com o número no config, em `tablet_target_reach_blocks`. Valem as regras do Focus: só mob hostil ou neutro, e só com o Cubit escolhido carregado e no Focus. Senão, a barra de ação diz o motivo. Confirma a recomendação |
+| 1042 | O que o Cubit faz no `Go to Dock` com o Dock preferido ocupado ou destruído? | Fila, e destruído limpa: ocupado, vai até ele e espera na fila, como hoje, procurando outro Dock livre enquanto espera. Destruído, o `PreferredDock` é apagado ao ser lido, e vale o Dock livre mais próximo. Confirma a recomendação |
+| 1041 | Até onde o Cubit vai no `Go to Dock`? | Raio do tier: o Dock preferido conta se estiver na mesma dimensão, carregado e dentro do raio de chamada do tier. Senão, vale o Dock livre mais próximo nesse raio. Sem nenhum, o botão fica desabilitado com a dica. Igual ao chamado pelo Dock e ao retorno automático do item 15. Confirma a recomendação |
 | 1040 | Como fica o botão que troca a lista do filtro de coleta? | "poderia atualizar para botao azul como o que temos ja rename do tablet": o botão `Blacklist` / `Whitelist` passa a ser o botão azul e plano das telas, com o texto em negrito, na aba Behavior da tela do Cubit e na aba Filtros do Tablet |
 | 1039 | As chaves `Magnet` e `Fetch` ficam sem ícone na aba Behavior e na aba Recursos do Tablet? | "precisamos criar eles me de um prompt": as duas ganham ícones de 64×64 por prompt, em `tmp/arte/magnet-switch/` e `tmp/arte/fetch-switch/`, no estilo do funil e da tocha. O ímã é uma ferradura com linhas de atração, e a busca é uma seta até um item no chão. Eles entram na folha `screen_sprites.png`, na linha do funil, em `u=256` e `u=320`, e aparecem nas duas telas |
 | 1038 | O `AGENTS.md` pode citar as classes da tela do Cubit no Tablet? | "pode atualizar o AGENTS.md", autorizado pelo desenvolvedor: `RobotName` em `domain/robot`; `RobotTablet` em `entity`; `TabletRobotMenu`, `TabletOpening`, `RobotMenuReading`, `RobotMenuContents` e `RobotMenuSource` em `menu`; `RenameRobotPayload`, `RobotListRequestPayload` e `TabletRequests` em `network`; e `TabletRobotScreen`, `TabletRobotHeader`, `TabletResourcesPanel`, `TabletRenameDialog` e `TabletOfflineScreen` em `client` |
@@ -294,6 +301,8 @@ Não há perguntas pendentes nesta fase.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 17:15 | Registra as respostas 1045 a 1047. |
+| Marcelo Fabiano | 2026-11-13 17:10 | Registra as respostas 1041 a 1044. |
 | Marcelo Fabiano | 2026-11-13 17:00 | Registra a resposta 1040. |
 | Marcelo Fabiano | 2026-11-13 16:50 | Registra a resposta 1039. |
 | Marcelo Fabiano | 2026-11-13 16:45 | Registra a resposta 1038. |
