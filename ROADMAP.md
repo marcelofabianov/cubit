@@ -44,7 +44,7 @@ Dividida em três partes, na ordem em que uma depende da outra.
 - Modo de defesa só o alvo, com o último mob atacado.
 - Interface de configuração na aba Settings, com a chave geral e a do painel solar.
 
-### Fase 4.1: Itens, filtros, carregamento e mais
+### Fase 4.1: Itens, filtros, carregamento e mais (encerrada)
 
 - Ímã e coleta de itens do chão, com o filtro em lista branca e lista negra.
 - Power Bank, também no Dock e na grade de craft.

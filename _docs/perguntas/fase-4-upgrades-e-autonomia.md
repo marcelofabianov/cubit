@@ -8,6 +8,7 @@ Não há perguntas pendentes nesta fase.
 
 | # | Pergunta | Resposta |
 |---|---|---|
+| 997 | A Fase 4.1 pode ser encerrada, com o `AGENTS.md` atualizado? | "pode encerrar a fase 4.1 e atualizar o AGENTS.md": o item 12 do `checklist.md` fica marcado (PR #171), o `ROADMAP.md` dá a Fase 4.1 como encerrada, e o estado atual do `AGENTS.md` passa a citar a Fase 4.1 encerrada. Depois disso, entra um item novo no roadmap |
 | 996 | O `AGENTS.md` pode citar as classes do olhar para o alvo do choque? | "pode atualizar o AGENTS.md", autorizado pelo desenvolvedor: `ShockGaze` em `domain/behavior`, e `RobotGaze` e `RobotShockGaze` em `entity` |
 | 995 | Quando o alvo morre, o Cubit volta a olhar para o dono na hora ou depois de 3 s? | Depois de 3 s, olhando o ponto em que o alvo caiu, como no pedido da resposta 991. Para o alvo que fugiu a mais de 32 blocos ou sumiu, vale o mesmo: 3 s no último ponto em que ele estava. Muda a 993, que contrariava o pedido. Confirma a recomendação |
 | 994 | Como fica a chave de config do tempo do olhar, ainda não publicada? | `shock_look_after_ticks`, de 1 a 1200, com 60 ticks (3 s): o tempo em que ele ainda olha depois de o alvo morrer ou se perder. Substitui a `shock_look_ticks` da resposta 989, que só existiu nesta branch, sem migração. Confirma a recomendação |
@@ -250,6 +251,7 @@ Não há perguntas pendentes nesta fase.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 15:40 | Registra a resposta 997. |
 | Marcelo Fabiano | 2026-11-13 15:20 | Registra as respostas 985 e 996. |
 | Marcelo Fabiano | 2026-11-13 15:10 | Registra as respostas 991 a 995. |
 | Marcelo Fabiano | 2026-11-13 14:40 | Registra as respostas 987 a 990. |
