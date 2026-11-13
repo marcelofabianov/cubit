@@ -211,13 +211,13 @@ io.github.marcelofabianov.cubit
 │   ├── tier/               // RobotTier, TierSpec, TierCatalog (interface); TierUpgrade: subir de tier com um Module; ShockSpec: o choque e os modos de cada tier
 │   ├── energy/             // Battery, PowerState (ativo, inativo, hibernação), regras de consumo e religamento, SolarPanel: quando o painel dá energia; SolarStatus, EnergyUseCause, RechargeSource, EnergyFormat, EnergyHalves: o que as telas mostram; EnergyTransfer, WakeRecharge e PowerBankUpgrade: a Power Bank
 │   ├── behavior/           // FollowDecision: seguir, parar ou teleportar; BurningAction: reagir a fogo e lava; LampPolicy: quando a lanterna acende; ScanRules, ScanArea, FreshFinds, MarkLife, MarkPulse, ScanSignal: scanners, caixas e cores; ChatWatch, BiomeWatch, LeftBehindWatch, ChatRules: falas; RespawnReturn: voltar com o dono; RobotScreenStatus: o estado no topo da tela; DefenseRules, ShockCandidate, RetaliationMemory, ShockRules: o choque e os modos de defesa; FetchRules e FetchMemory: a busca dos itens do chão
-│   ├── dock/               // DockStock, DockStatus, DockStay, DockQueue, DockTrip, DockRemoval, DockInputMeter
+│   ├── dock/               // DockStock, DockStatus, DockStay, DockQueue, DockTrip, DockRemoval, DockInputMeter; DockStorageRules e DockStoredKind: o inventário do Dock
 │   └── ownership/          // FollowingRobotPolicy, Ownership
 ├── config/                 // ModConfigSpec → implementa TierCatalog
 ├── registry/               // DeferredRegisters e CubitDamageTypes, o dano do choque
 ├── entity/                 // RobotEntity, goals de IA; RobotUpgrade: o Module aplicado; RobotDefense e RobotShock: o choque; RobotPickup: a coleta e o ímã; FetchItemGoal: a busca dos itens do chão
 ├── item/                   // RobotItem, RobotStateComponent, ModuleItem e TierLook; PowerBankItem, PowerBankUpgradeRecipe e RobotRechargeRecipe: a Power Bank
-├── block/                  // InductionDockBlock, BlockEntity
+├── block/                  // InductionDockBlock, BlockEntity; DockStorage e DockItemHandler: o inventário do Dock e a automação; StorableRobotItem: o Cubit e o Damaged Cubit que ele guarda
 ├── menu/                   // RobotMenu, InductionDockMenu; DefenseControl e DefenseOpening: a aba Defense; PickupControl e PickupMenuPart: a aba Behavior
 ├── network/                // pacotes próprios: NoticePayload, OreMarksPayload, MobMarksPayload e CubitNetwork
 ├── compat/jade/            // plugin do Jade, opcional: só este pacote importa o Jade
