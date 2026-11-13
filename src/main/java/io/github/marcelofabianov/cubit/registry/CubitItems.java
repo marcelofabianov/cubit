@@ -7,6 +7,7 @@ import io.github.marcelofabianov.cubit.item.DamagedRobotItem;
 import io.github.marcelofabianov.cubit.item.ModuleItem;
 import io.github.marcelofabianov.cubit.item.PowerBankItem;
 import io.github.marcelofabianov.cubit.item.RobotItem;
+import io.github.marcelofabianov.cubit.item.TabletItem;
 import java.util.function.Supplier;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.BlockItem;
@@ -25,6 +26,8 @@ public final class CubitItems {
   private static final int POWER_BANK_STACK_SIZE = 1;
   private static final String DAMAGED_PREFIX = "damaged_";
   private static final String TOOLBOX_ID = "toolbox";
+  private static final String TABLET_ID = "tablet";
+  private static final int TABLET_STACK_SIZE = 1;
   private static final DeferredRegister<Item> ITEMS =
       DeferredRegister.create(Registries.ITEM, CubitMod.MOD_ID);
 
@@ -47,6 +50,11 @@ public final class CubitItems {
   public static final Supplier<Item> TOOLBOX =
       ITEMS.register(
           TOOLBOX_ID, () -> new Item(new Item.Properties().stacksTo(TOOLBOX_STACK_SIZE)));
+
+  /** Replaces the Cubit Remote, which was only planned, so no save holds it (answer 1026). */
+  public static final Supplier<Item> TABLET =
+      ITEMS.register(
+          TABLET_ID, () -> new TabletItem(new Item.Properties().stacksTo(TABLET_STACK_SIZE)));
 
   public static final Supplier<Item> INDUCTION_DOCK =
       ITEMS.register(

@@ -8,6 +8,7 @@ import net.minecraft.client.Camera;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderStateShard;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.util.FastColor;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.phys.Vec3;
 import org.joml.Quaternionf;
@@ -29,6 +30,7 @@ final class MobMarker {
   private static final double BOB_PERIOD_TICKS = 40;
   private static final double FULL_TURN = 2 * Math.PI;
   private static final float TARGET_SCALE = 1.5f;
+  private static final float CHANNEL_MAX = 255f;
 
   /** Filled triangles that ignore depth, so the arrow shows through blocks. */
   static final RenderType THROUGH_BLOCKS =
@@ -47,10 +49,25 @@ final class MobMarker {
 
   private MobMarker() {}
 
-  /** The look of an arrow: red for what the scanner found, and yellow, bigger, for the target. */
-  record Style(ScanColor color, float scale) {
-    static final Style SCANNED = new Style(ScanColor.MOB, 1f);
-    static final Style TARGET = new Style(ScanColor.FOCUS, TARGET_SCALE);
+  /**
+   * The look of an arrow: red for what the scanner found, yellow and bigger for the target, and the
+   * color of the collar for the Cubit chosen in the Tablet (answer 1012).
+   */
+  record Style(float red, float green, float blue, float scale) {
+    static final Style SCANNED = of(ScanColor.MOB, 1f);
+    static final Style TARGET = of(ScanColor.FOCUS, TARGET_SCALE);
+
+    static Style of(ScanColor color, float scale) {
+      return new Style(color.red, color.green, color.blue, scale);
+    }
+
+    static Style of(int rgb, float scale) {
+      return new Style(
+          FastColor.ARGB32.red(rgb) / CHANNEL_MAX,
+          FastColor.ARGB32.green(rgb) / CHANNEL_MAX,
+          FastColor.ARGB32.blue(rgb) / CHANNEL_MAX,
+          scale);
+    }
   }
 
   static void draw(
@@ -79,9 +96,9 @@ final class MobMarker {
     float width = HALF_WIDTH * style.scale();
     float height = HALF_HEIGHT * style.scale();
     Vector3f center = new Vector3f(0, height, 0).rotate(facing).add(point);
-    corner(triangles, facing, center, new Vector3f(-width, height, 0), style.color(), alpha);
-    corner(triangles, facing, center, new Vector3f(width, height, 0), style.color(), alpha);
-    corner(triangles, facing, center, new Vector3f(0, -height, 0), style.color(), alpha);
+    corner(triangles, facing, center, new Vector3f(-width, height, 0), style, alpha);
+    corner(triangles, facing, center, new Vector3f(width, height, 0), style, alpha);
+    corner(triangles, facing, center, new Vector3f(0, -height, 0), style, alpha);
   }
 
   private static void corner(
@@ -89,9 +106,9 @@ final class MobMarker {
       Quaternionf facing,
       Vector3f center,
       Vector3f offset,
-      ScanColor color,
+      Style style,
       float alpha) {
     Vector3f at = offset.rotate(facing).add(center);
-    triangles.addVertex(at.x, at.y, at.z).setColor(color.red, color.green, color.blue, alpha);
+    triangles.addVertex(at.x, at.y, at.z).setColor(style.red(), style.green(), style.blue(), alpha);
   }
 }

@@ -1,11 +1,14 @@
 package io.github.marcelofabianov.cubit.network;
 
+import java.util.UUID;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
+import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 
 /**
  * The packets of the mod. The client registers what shows a notice and the boxes of the scanners,
@@ -19,12 +22,15 @@ public final class CubitNetwork {
   private static Consumer<OreMarksPayload> oreMarksDisplay = marks -> {};
   private static Consumer<MobMarksPayload> mobMarksDisplay = marks -> {};
   private static Consumer<FocusMarkPayload> focusMarkDisplay = mark -> {};
+  private static Consumer<RobotListPayload> robotListDisplay = list -> {};
+  private static Consumer<ChosenRobotPayload> chosenRobotDisplay = chosen -> {};
+  private static BiConsumer<ServerPlayer, UUID> robotChooser = (player, robot) -> {};
 
   private CubitNetwork() {}
 
   public static void register(RegisterPayloadHandlersEvent event) {
-    event
-        .registrar(PROTOCOL_VERSION)
+    PayloadRegistrar registrar = event.registrar(PROTOCOL_VERSION);
+    registrar
         .playToClient(
             NoticePayload.TYPE,
             NoticePayload.STREAM_CODEC,
@@ -41,6 +47,53 @@ public final class CubitNetwork {
             FocusMarkPayload.TYPE,
             FocusMarkPayload.STREAM_CODEC,
             (payload, context) -> focusMarkDisplay.accept(payload));
+    registerTablet(registrar);
+  }
+
+  /** The list and the chosen Cubit go to the client, and only the choice comes back. */
+  private static void registerTablet(PayloadRegistrar registrar) {
+    registrar
+        .playToClient(
+            RobotListPayload.TYPE,
+            RobotListPayload.STREAM_CODEC,
+            (payload, context) -> robotListDisplay.accept(payload))
+        .playToClient(
+            ChosenRobotPayload.TYPE,
+            ChosenRobotPayload.STREAM_CODEC,
+            (payload, context) -> chosenRobotDisplay.accept(payload))
+        .playToServer(
+            ChooseRobotPayload.TYPE,
+            ChooseRobotPayload.STREAM_CODEC,
+            (payload, context) -> {
+              if (context.player() instanceof ServerPlayer player) {
+                robotChooser.accept(player, payload.robot());
+              }
+            });
+  }
+
+  /** On the client only: how the list and the chosen Cubit of the Tablet show. */
+  public static void setTabletDisplays(
+      Consumer<RobotListPayload> list, Consumer<ChosenRobotPayload> chosen) {
+    robotListDisplay = list;
+    chosenRobotDisplay = chosen;
+  }
+
+  /** On the server: who handles the choice, so the network never depends on the player code. */
+  public static void setRobotChooser(BiConsumer<ServerPlayer, UUID> chooser) {
+    robotChooser = chooser;
+  }
+
+  public static void sendRobotList(ServerPlayer player, RobotListPayload list) {
+    send(player, list);
+  }
+
+  public static void sendChosenRobot(ServerPlayer player, ChosenRobotPayload chosen) {
+    send(player, chosen);
+  }
+
+  /** On the client: asks the server to choose a Cubit. */
+  public static void chooseRobot(UUID robot) {
+    PacketDistributor.sendToServer(new ChooseRobotPayload(robot));
   }
 
   public static void setNoticeDisplay(Consumer<Component> display) {

@@ -2,6 +2,7 @@ package io.github.marcelofabianov.cubit;
 
 import io.github.marcelofabianov.cubit.config.CubitConfig;
 import io.github.marcelofabianov.cubit.network.CubitNetwork;
+import io.github.marcelofabianov.cubit.player.TabletSelection;
 import io.github.marcelofabianov.cubit.registry.CubitAttachments;
 import io.github.marcelofabianov.cubit.registry.CubitBlockEntities;
 import io.github.marcelofabianov.cubit.registry.CubitBlocks;
@@ -35,5 +36,6 @@ public final class CubitMod {
     CubitSounds.register(modBus);
     CubitCreativeTabs.register(modBus);
     modBus.addListener(CubitNetwork::register);
+    CubitNetwork.setRobotChooser(TabletSelection::choose);
   }
 }

@@ -20,7 +20,8 @@ enum Language {
           UpgradeTexts::addTo,
           DefenseTexts::addTo,
           BehaviorTexts::addTo,
-          PowerBankTexts::addTo),
+          PowerBankTexts::addTo,
+          TabletTexts::addTo),
       ChatPhrases::of),
   PT_BR(
       Locales.PORTUGUESE,
@@ -31,7 +32,8 @@ enum Language {
           PortugueseUpgradeTexts::addTo,
           PortugueseDefenseTexts::addTo,
           PortugueseBehaviorTexts::addTo,
-          PortuguesePowerBankTexts::addTo),
+          PortuguesePowerBankTexts::addTo,
+          PortugueseTabletTexts::addTo),
       PortugueseChatPhrases::of);
 
   private final String locale;

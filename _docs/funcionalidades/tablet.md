@@ -24,7 +24,7 @@ O Tablet 1 traz só o que já existe no mod (pergunta 999) e se divide em três 
 
 - **Sem dono:** o item não guarda dono, e qualquer Tablet mostra só os Cubits de quem o segura (pergunta 1024).
 - **Não empilha.**
-- **Receita:** com forma, de materiais do jogo puro: 4 lingotes de ferro nos cantos, 3 painéis de vidro em cima, 1 redstone no centro e 1 lingote de ouro embaixo. Aparece no livro de receitas quando o player tem um Cubit, como a do Dock (pergunta 1025).
+- **Receita:** com forma, de materiais do jogo puro: 2 painéis de vidro e 1 redstone na linha de cima, 4 lingotes de ferro nas laterais das duas linhas de baixo, 1 diamante no centro e 1 lingote de ouro embaixo, no meio, como na [tabela de `itens.md`](../itens.md#cubit-tablet). Aparece no livro de receitas quando o player tem um Cubit, como a do Dock (perguntas 1025, 1030 e 1031).
 - **Textura:** 16×16, feita por prompt em `tmp/arte/tablet/` (pergunta 1025).
 - **Troca de ID:** o `cubit:remote` estava só planejado, sem save nem receita, então o `cubit:tablet` não precisa de migração.
 
@@ -57,7 +57,7 @@ O Cubit que o player escolhe na tela de seleção, ou em que clica no app Open, 
 
 ## Tela de seleção
 
-É a tela inicial do Tablet. Lista os Cubits de que o player é dono, sem limite de distância, e substitui a função de localizar do controle (pergunta 82).
+É a tela inicial do Tablet. Lista os Cubits de que o player é dono, sem limite de distância, e substitui a função de localizar do controle (pergunta 82). A janela ocupa quase toda a tela, com até 480 px de largura, e mostra quantas linhas couberem na altura (pergunta 1029).
 
 | Coluna | O que mostra |
 |---|---|
@@ -160,4 +160,7 @@ Os textos em inglês e português, como `Cubit Tablet` / `Tablet do Cubit`, `Tab
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 18:00 | Muda a receita, com o diamante no centro. |
+| Marcelo Fabiano | 2026-11-13 17:50 | Corrige a grade da receita. |
+| Marcelo Fabiano | 2026-11-13 17:45 | Faz a tela de seleção ocupar quase toda a tela. |
 | Marcelo Fabiano | 2026-11-13 16:40 | Cria o Tablet a partir do conceito, com as decisões das perguntas 998 a 1026. |

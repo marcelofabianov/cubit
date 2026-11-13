@@ -65,12 +65,12 @@ Na mesa de craft, em forma de L (pergunta 336). O desenho espelhado também vale
 
 ### Cubit Tablet
 
-Na mesa de craft, com forma (pergunta 1025): 4 lingotes de ferro nos cantos, 3 painéis de vidro na linha de cima, 1 redstone no centro e 1 lingote de ouro embaixo, no meio. Aparece no livro de receitas quando o player tem um Cubit. Não empilha.
+Na mesa de craft, com forma (perguntas 1025, 1030 e 1031): 2 painéis de vidro e 1 redstone na linha de cima, 4 lingotes de ferro nas laterais das duas linhas de baixo, 1 diamante no centro e 1 lingote de ouro embaixo, no meio. Aparece no livro de receitas quando o player tem um Cubit. Não empilha.
 
 | | Coluna 1 | Coluna 2 | Coluna 3 |
 |---|---|---|---|
-| Linha 1 | Painel de vidro | Painel de vidro | Painel de vidro |
-| Linha 2 | Lingote de ferro | Redstone | Lingote de ferro |
+| Linha 1 | Painel de vidro | Redstone | Painel de vidro |
+| Linha 2 | Lingote de ferro | Diamante | Lingote de ferro |
 | Linha 3 | Lingote de ferro | Lingote de ouro | Lingote de ferro |
 
 ### Toolbox
@@ -230,6 +230,7 @@ O estado salvo é validado ao entrar no jogo, sem derrubá-lo (regra 17 do `AGEN
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 18:00 | Muda a receita do Tablet. |
 | Marcelo Fabiano | 2026-11-13 16:40 | Troca o Cubit Remote pelo Tablet e adiciona o contrato dele. |
 | Marcelo Fabiano | 2026-11-13 13:45 | Adiciona o slot e a chave das tochas ao save. |
 | Marcelo Fabiano | 2026-11-13 11:30 | Adiciona o inventário do Dock ao save e ao item. |

@@ -2,6 +2,7 @@ package io.github.marcelofabianov.cubit.registry;
 
 import io.github.marcelofabianov.cubit.CubitMod;
 import io.github.marcelofabianov.cubit.entity.RobotTickReading;
+import io.github.marcelofabianov.cubit.player.ChosenRobotLink;
 import io.github.marcelofabianov.cubit.player.FollowingRobotLink;
 import java.util.function.Supplier;
 import net.neoforged.bus.api.IEventBus;
@@ -16,6 +17,7 @@ import net.neoforged.neoforge.registries.NeoForgeRegistries;
 public final class CubitAttachments {
   private static final String FOLLOWING_ROBOT_ID = "following_robot";
   private static final String ROBOT_TICK_READING_ID = "robot_tick_reading";
+  private static final String CHOSEN_ROBOT_ID = "chosen_robot";
   private static final DeferredRegister<AttachmentType<?>> ATTACHMENTS =
       DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, CubitMod.MOD_ID);
 
@@ -26,6 +28,16 @@ public final class CubitAttachments {
           () ->
               AttachmentType.builder(() -> FollowingRobotLink.NOBODY)
                   .serialize(FollowingRobotLink.CODEC)
+                  .copyOnDeath()
+                  .build());
+
+  // The Cubit chosen in the Tablet, in the player and not the item, so any Tablet uses it (1009).
+  public static final Supplier<AttachmentType<ChosenRobotLink>> CHOSEN_ROBOT =
+      ATTACHMENTS.register(
+          CHOSEN_ROBOT_ID,
+          () ->
+              AttachmentType.builder(() -> ChosenRobotLink.NOBODY)
+                  .serialize(ChosenRobotLink.CODEC)
                   .copyOnDeath()
                   .build());
 

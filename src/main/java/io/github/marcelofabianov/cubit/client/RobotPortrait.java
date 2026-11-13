@@ -44,7 +44,16 @@ final class RobotPortrait {
 
   static void draw(
       GuiGraphics graphics, int x, int y, RobotExpression expression, RobotTier tier, long tick) {
-    ScreenPainter.sunken(graphics, x, y, SIZE, SIZE, ScreenPainter.PORTRAIT);
+    draw(graphics, x, y, new Look(expression, tier, ScreenPainter.PORTRAIT), tick);
+  }
+
+  /** The face, the collar and the shell color behind them (answer 1011). */
+  record Look(RobotExpression expression, RobotTier tier, int shell) {}
+
+  static void draw(GuiGraphics graphics, int x, int y, Look look, long tick) {
+    RobotExpression expression = look.expression();
+    RobotTier tier = look.tier();
+    ScreenPainter.sunken(graphics, x, y, SIZE, SIZE, look.shell());
     graphics.blit(
         face(expression, tick),
         x + SHOWN_FACE_X,

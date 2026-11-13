@@ -28,6 +28,7 @@ public final class CubitCreativeTabs {
                     output.accept(CubitItems.DAMAGED_GENERAL_ROBOT.get());
                     output.accept(CubitItems.TOOLBOX.get());
                     output.accept(CubitItems.INDUCTION_DOCK.get());
+                    output.accept(CubitItems.TABLET.get());
                     output.accept(CubitItems.ADVANCED_MODULE.get());
                     output.accept(CubitItems.ELITE_MODULE.get());
                     output.accept(CubitItems.ULTIMATE_MODULE.get());
