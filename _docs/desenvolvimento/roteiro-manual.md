@@ -648,7 +648,9 @@ As regras estão em [`energia.md`](../funcionalidades/energia.md#power-bank) e a
 |---|---|---|
 | 1 | Pegue um Cubit e abra o livro de receitas | A receita da Base Power Bank aparece |
 | 2 | Faça a Base Power Bank | Sai vazia, não empilha, com o nome cinza, a barra verde vazia e a dica `0 / 210k FE` e `Charges at the Induction Dock` |
-| 3 | Coloque-a no slot de um Induction Dock com energia | A carga da Power Bank sobe e o estoque do Dock desce na mesma quantidade |
+| 3 | Coloque-a no slot `Charge`, abaixo do de redstone, de um Induction Dock com energia | A carga da Power Bank sobe e o estoque do Dock desce na mesma quantidade |
+| 3a | Ponha uma Power Bank carregada no slot `Redstone` de um Dock com pouco estoque | A Power Bank descarrega no estoque, a linha mostra `Input +X FE/t`, e vazia ela fica no slot |
+| 3b | Tente pôr redstone no slot `Charge` | Não entra |
 | 4 | Com um Cubit hibernando no mesmo Dock | O Cubit carrega primeiro, e a Power Bank só recebe o que sobrar |
 | 5 | Tente carregar a Power Bank num carregador de FE de outro mod, se houver | Não carrega (pergunta 905) |
 | 6 | Ponha a Power Bank carregada no slot de energia de um Cubit com pouca bateria | A bateria sobe na recarga do tier, a linha mostra `Slot +500 FE/t` no Base, e a Power Bank desce o mesmo tanto |
@@ -718,6 +720,7 @@ Na instância só com o mod, tire capturas com F2 do Cubit seguindo, da tela do 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-12 23:10 | Acrescenta os dois slots do Dock ao roteiro da Power Bank. |
 | Marcelo Fabiano | 2026-11-12 22:50 | Adiciona o roteiro da Power Bank. |
 | Marcelo Fabiano | 2026-11-12 21:45 | Adiciona o roteiro da coleta e do ímã. |
 | Marcelo Fabiano | 2026-11-12 18:10 | Adiciona as chaves da aba Settings. |

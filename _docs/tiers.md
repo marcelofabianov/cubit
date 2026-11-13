@@ -67,7 +67,8 @@ Valem para todos os tiers e ficam no config. Os marcados como planejados entram 
 | Consumo parado | 0 FE/t |
 | Carga do Cubit ao sair do craft | 25% |
 | Carga da Power Bank ao sair do craft | 0% |
-| Recarga da Power Bank no Dock | A do Base, depois do Cubit que hiberna (pergunta 906) |
+| Recarga da Power Bank no slot de carga do Dock | A do Base, depois do Cubit que hiberna (pergunta 906) |
+| Descarga da Power Bank no slot de entrada do Dock | O limite de entrada do Dock, junto dos cabos (pergunta 920) |
 | Velocidade 1,0× (atributo de movimento) | 0,33 |
 | Intervalo para recalcular a rota | 10 ticks |
 | Distância para parar perto do player | 3 blocos |
@@ -205,6 +206,7 @@ Planejado para a Fase 5. O tier Base não aceita cards.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-12 23:10 | Acrescenta a descarga da Power Bank no Dock. |
 | Marcelo Fabiano | 2026-11-12 22:30 | Tira a marca de planejada da Power Bank e acrescenta a recarga dela no Dock. |
 | Marcelo Fabiano | 2026-11-12 21:45 | Define o ímã do Advanced em diante, o custo dele e os intervalos da coleta. |
 | Marcelo Fabiano | 2026-11-12 15:10 | Adiciona o modo Focus e a distância do alvo. |

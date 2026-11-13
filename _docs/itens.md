@@ -180,7 +180,7 @@ Estes nomes não mudam sem migração (regra 18 do `AGENTS.md`).
 | Tipo de receita | `cubit:robot_repair` | Campos `damaged_robot`, `toolbox` e `result` |
 | Dados do mundo | `cubit_dead_robots` | Robôs mortos com o dono offline |
 | NBT da entidade | `Owner`, `Tier`, `Energy`, `PowerState`, `LastSafePosition`, `Inventory` e `EnergySlot` | Dono, tier, carga da bateria, estado, última posição segura, inventário, com `Slot` em cada item, e slot de energia, com `Item` e `Reserve` |
-| NBT do bloco do Dock | `Owner`, `Energy` e `Slot` | Dono, estoque e item do slot |
+| NBT do bloco do Dock | `Owner`, `Energy`, `Slot` e `ChargeSlot` | Dono, estoque, item do slot de entrada e Power Bank do slot de carga (pergunta 922) |
 | Estado do bloco do Dock | `facing`, `half` e `status` | Direção, parte de baixo ou de cima e estado da tela: `off`, `idle`, `charging`, `complete` ou `no_energy` |
 | NBT da entidade na base | `DockPosition` | Posição do Dock em que hiberna |
 | NBT da entidade | `LampEnabled` | Chave da lanterna. Sem a chave no save, vale ligada |
@@ -214,6 +214,7 @@ O estado salvo é validado ao entrar no jogo, sem derrubá-lo (regra 17 do `AGEN
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-12 23:10 | Adiciona o slot de carga do Dock ao save. |
 | Marcelo Fabiano | 2026-11-12 22:30 | Define as receitas e os contratos da Power Bank. |
 | Marcelo Fabiano | 2026-11-12 21:45 | Adiciona a coleta, o ímã e o filtro de coleta aos contratos de save. |
 | Marcelo Fabiano | 2026-11-12 17:20 | Adiciona a chave do painel solar aos contratos de save. |

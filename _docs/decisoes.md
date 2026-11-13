@@ -139,7 +139,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Coleta e ímã (perguntas 876 a 897):** são peças separadas. A coleta pega o item que encosta no Cubit desde o Base, e o ímã, do Advanced em diante, puxa os itens no raio do tier, por 20, 30 e 60 FE por item puxado. Com a coleta desligada, o ímã fica inativo. As duas chaves começam ligadas e ficam no item, e o Cubit só coleta ativo. Ele pega o que cabe no inventário principal, respeita o atraso de coleta do jogo e nunca pega um Cubit nem um Damaged Cubit. A coleta varre a cada 5 ticks e o ímã a cada 10, no config. As chaves e o filtro, em slots fantasma, ficam na aba Behavior, com o ícone de funil, e o inventário do player continua visível nela. Os slots fantasma são slots do menu, sem pacote novo, e o ícone de funil é desenhado pelo agente. Um filtro salvo inválido não apaga nada: o que não existe é ignorado, e o que passa do tier fica guardado sem valer.
 - **Power Bank (perguntas 900 a 911):**
   - Quatro, uma por tier, com `power_bank_capacity` no config, de 210 mil a 5,6 mi FE, e a carga no componente `cubit:power_bank_energy`.
-  - Recebe energia só no slot do Induction Dock, com o Cubit que hiberna carregando primeiro, e entrega só ao Cubit. Não tem capability de FE para outros mods (muda a 42).
+  - O Dock tem dois slots (perguntas 919 a 923). No de entrada, a Power Bank descarrega no estoque pelo limite dos cabos. No de carga, `ChargeSlot`, que fica abaixo, ela recebe o que sobrar depois do Cubit, na recarga do Base. Não tem capability de FE para outros mods (muda a 42 e a 58).
   - Vazia, fica no slot do Cubit.
   - As receitas são encadeadas, com a carga mantida pelo tipo `cubit:power_bank_upgrade`. Se a carga não couber, a receita não aparece (regra 13).
   - A de religar o Cubit na grade é o tipo `cubit:robot_recharge`.
@@ -150,6 +150,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-12 23:10 | Registra os dois slots do Dock. |
 | Marcelo Fabiano | 2026-11-12 22:30 | Registra a Power Bank e as texturas por prompt. |
 | Marcelo Fabiano | 2026-11-12 21:45 | Registra a sincronia, o ícone e o layout da aba Behavior. |
 | Marcelo Fabiano | 2026-11-12 21:45 | Registra o filtro de coleta, a coleta e o ímã. |
