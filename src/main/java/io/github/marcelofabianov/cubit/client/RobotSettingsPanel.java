@@ -2,8 +2,6 @@ package io.github.marcelofabianov.cubit.client;
 
 import io.github.marcelofabianov.cubit.client.ScreenPainter.Box;
 import io.github.marcelofabianov.cubit.client.ScreenPainter.Colors;
-import io.github.marcelofabianov.cubit.item.TierLook;
-import io.github.marcelofabianov.cubit.menu.DefenseKeys;
 import io.github.marcelofabianov.cubit.menu.RobotMenu;
 import io.github.marcelofabianov.cubit.menu.ScreenKeys;
 import java.util.OptionalInt;
@@ -70,11 +68,13 @@ final class RobotSettingsPanel {
   private final ScreenPainter painter;
   private final RobotMenu menu;
   private final ItemStack oreIcon;
+  private final RobotSwitchLook switches;
 
   RobotSettingsPanel(ScreenPainter painter, RobotMenu menu, ItemStack oreIcon) {
     this.painter = painter;
     this.menu = menu;
     this.oreIcon = oreIcon;
+    this.switches = new RobotSwitchLook(menu);
   }
 
   /** Drawn in the coordinates of the window. */
@@ -133,11 +133,7 @@ final class RobotSettingsPanel {
     graphics.pose().pushPose();
     graphics.pose().translate(ICON_X, top, 0);
     graphics.pose().scale(ICON_SCALE, ICON_SCALE, 1);
-    if (button == RobotMenu.TORCHES_BUTTON) {
-      ScreenSprites.torches(graphics, 0, 0);
-    } else {
-      ScreenSprites.function(graphics, 0, 0, button);
-    }
+    ScreenSprites.switchIcon(graphics, 0, 0, button);
     graphics.pose().popPose();
     Box name = new Box(NAME_X, top + NAME_TOP, NAME_WIDTH, LINE);
     painter.text(
@@ -157,29 +153,8 @@ final class RobotSettingsPanel {
     if (x < LEFT || x >= RIGHT || y < FIRST_FUNCTION || row >= BUTTONS.length) {
       return false;
     }
-    graphics.renderTooltip(font, detailOf(BUTTONS[row]), mouseX, mouseY);
+    graphics.renderTooltip(font, switches.detail(BUTTONS[row]), mouseX, mouseY);
     return true;
-  }
-
-  private Component detailOf(int button) {
-    return switch (button) {
-      case RobotMenu.LAMP_BUTTON -> RobotTexts.lampDetail(menu);
-      case RobotMenu.SCANNERS_BUTTON -> RobotTexts.scannersDetail(menu);
-      case RobotMenu.SOLAR_BUTTON -> RobotTexts.solarDetail(menu);
-      case RobotMenu.TORCHES_BUTTON -> torchesDetail();
-      default -> Component.translatable(ScreenKeys.CHATTER_DETAIL);
-    };
-  }
-
-  /** The cost of the tier, or the tier that unlocks the torches (answers 974 and 981). */
-  private Component torchesDetail() {
-    if (menu.switchAvailable(RobotMenu.TORCHES_BUTTON)) {
-      return Component.translatable(ScreenKeys.TORCHES_DETAIL, menu.torchCost().amount());
-    }
-    return menu.torchUnlockTier()
-        .map(
-            tier -> (Component) Component.translatable(DefenseKeys.UNLOCKS_AT, TierLook.name(tier)))
-        .orElse(Component.empty());
   }
 
   private void renderToggle(GuiGraphics graphics, int button, int top) {

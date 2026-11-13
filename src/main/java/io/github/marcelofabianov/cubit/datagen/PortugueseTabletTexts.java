@@ -23,6 +23,21 @@ final class PortugueseTabletTexts {
   private static final String OVERWORLD = "Superfície";
   private static final String NETHER = "Nether";
   private static final String END = "End";
+  private static final String BACK = "Voltar";
+  private static final String RENAME = "Renomear";
+  private static final String RENAME_TITLE = "Renomear o Cubit";
+  private static final String CONFIRM = "Confirmar";
+  private static final String CANCEL = "Cancelar";
+  private static final String TURN_ON = "Ligar";
+  private static final String SWITCH_OFF = "Desligar";
+  private static final String TURN_ON_DETAIL = "Liga o Cubit, e ele passa a seguir você";
+  private static final String POWER_UNAVAILABLE = "Sem carga para ligar";
+  private static final String PLACE_TITLE = "Lugar";
+  private static final String COORDINATES = "%s, %s, %s";
+  private static final String OUT_OF_REACH = "Fora de alcance · visto há %s min";
+  private static final String OUT_OF_REACH_DETAIL = "O chunk deste Cubit não está carregado";
+  private static final String TAB_RESOURCES = "Recursos";
+  private static final String TAB_FILTERS = "Filtros";
 
   private PortugueseTabletTexts() {}
 
@@ -42,5 +57,25 @@ final class PortugueseTabletTexts {
     add.accept(TabletKeys.OVERWORLD, OVERWORLD);
     add.accept(TabletKeys.NETHER, NETHER);
     add.accept(TabletKeys.END, END);
+    addScreen(add);
+  }
+
+  /** The screen of a Cubit on the Tablet (answers 1033 to 1037). */
+  private static void addScreen(BiConsumer<String, String> add) {
+    add.accept(TabletKeys.BACK, BACK);
+    add.accept(TabletKeys.RENAME, RENAME);
+    add.accept(TabletKeys.RENAME_TITLE, RENAME_TITLE);
+    add.accept(TabletKeys.CONFIRM, CONFIRM);
+    add.accept(TabletKeys.CANCEL, CANCEL);
+    add.accept(TabletKeys.TURN_ON, TURN_ON);
+    add.accept(TabletKeys.SWITCH_OFF, SWITCH_OFF);
+    add.accept(TabletKeys.TURN_ON_DETAIL, TURN_ON_DETAIL);
+    add.accept(TabletKeys.POWER_UNAVAILABLE, POWER_UNAVAILABLE);
+    add.accept(TabletKeys.PLACE_TITLE, PLACE_TITLE);
+    add.accept(TabletKeys.COORDINATES, COORDINATES);
+    add.accept(TabletKeys.OUT_OF_REACH, OUT_OF_REACH);
+    add.accept(TabletKeys.OUT_OF_REACH_DETAIL, OUT_OF_REACH_DETAIL);
+    add.accept(TabletKeys.TAB_RESOURCES, TAB_RESOURCES);
+    add.accept(TabletKeys.TAB_FILTERS, TAB_FILTERS);
   }
 }

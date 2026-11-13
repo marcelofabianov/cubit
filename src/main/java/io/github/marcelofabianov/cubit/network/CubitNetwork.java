@@ -1,13 +1,13 @@
 package io.github.marcelofabianov.cubit.network;
 
 import java.util.UUID;
-import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 
 /**
@@ -24,7 +24,7 @@ public final class CubitNetwork {
   private static Consumer<FocusMarkPayload> focusMarkDisplay = mark -> {};
   private static Consumer<RobotListPayload> robotListDisplay = list -> {};
   private static Consumer<ChosenRobotPayload> chosenRobotDisplay = chosen -> {};
-  private static BiConsumer<ServerPlayer, UUID> robotChooser = (player, robot) -> {};
+  private static TabletRequests tabletRequests = TabletRequests.NONE;
 
   private CubitNetwork() {}
 
@@ -50,7 +50,7 @@ public final class CubitNetwork {
     registerTablet(registrar);
   }
 
-  /** The list and the chosen Cubit go to the client, and only the choice comes back. */
+  /** The list and the chosen Cubit go to the client, and the requests of the player come back. */
   private static void registerTablet(PayloadRegistrar registrar) {
     registrar
         .playToClient(
@@ -60,15 +60,34 @@ public final class CubitNetwork {
         .playToClient(
             ChosenRobotPayload.TYPE,
             ChosenRobotPayload.STREAM_CODEC,
-            (payload, context) -> chosenRobotDisplay.accept(payload))
+            (payload, context) -> chosenRobotDisplay.accept(payload));
+    registerTabletRequests(registrar);
+  }
+
+  /** What the player asks from the Tablet, handled only for a player of the server. */
+  private static void registerTabletRequests(PayloadRegistrar registrar) {
+    registrar
         .playToServer(
             ChooseRobotPayload.TYPE,
             ChooseRobotPayload.STREAM_CODEC,
-            (payload, context) -> {
-              if (context.player() instanceof ServerPlayer player) {
-                robotChooser.accept(player, payload.robot());
-              }
-            });
+            (payload, context) ->
+                onServer(
+                    context, player -> tabletRequests.choose().accept(player, payload.robot())))
+        .playToServer(
+            RobotListRequestPayload.TYPE,
+            RobotListRequestPayload.STREAM_CODEC,
+            (payload, context) -> onServer(context, tabletRequests.list()))
+        .playToServer(
+            RenameRobotPayload.TYPE,
+            RenameRobotPayload.STREAM_CODEC,
+            (payload, context) ->
+                onServer(context, player -> tabletRequests.rename().accept(player, payload)));
+  }
+
+  private static void onServer(IPayloadContext context, Consumer<ServerPlayer> handler) {
+    if (context.player() instanceof ServerPlayer player) {
+      handler.accept(player);
+    }
   }
 
   /** On the client only: how the list and the chosen Cubit of the Tablet show. */
@@ -78,9 +97,9 @@ public final class CubitNetwork {
     chosenRobotDisplay = chosen;
   }
 
-  /** On the server: who handles the choice, so the network never depends on the player code. */
-  public static void setRobotChooser(BiConsumer<ServerPlayer, UUID> chooser) {
-    robotChooser = chooser;
+  /** On the server: who handles the requests, so the network never depends on the player code. */
+  public static void setTabletRequests(TabletRequests requests) {
+    tabletRequests = requests;
   }
 
   public static void sendRobotList(ServerPlayer player, RobotListPayload list) {
@@ -91,9 +110,19 @@ public final class CubitNetwork {
     send(player, chosen);
   }
 
-  /** On the client: asks the server to choose a Cubit. */
+  /** On the client: asks the server to choose a Cubit and to open its screen. */
   public static void chooseRobot(UUID robot) {
     PacketDistributor.sendToServer(new ChooseRobotPayload(robot));
+  }
+
+  /** On the client: asks the server for the list of the selection again. */
+  public static void requestRobotList() {
+    PacketDistributor.sendToServer(RobotListRequestPayload.INSTANCE);
+  }
+
+  /** On the client: asks the server to name a Cubit. */
+  public static void renameRobot(UUID robot, String name) {
+    PacketDistributor.sendToServer(new RenameRobotPayload(robot, name));
   }
 
   public static void setNoticeDisplay(Consumer<Component> display) {

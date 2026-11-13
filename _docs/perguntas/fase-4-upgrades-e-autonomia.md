@@ -8,6 +8,15 @@ Não há perguntas pendentes nesta fase.
 
 | # | Pergunta | Resposta |
 |---|---|---|
+| 1040 | Como fica o botão que troca a lista do filtro de coleta? | "poderia atualizar para botao azul como o que temos ja rename do tablet": o botão `Blacklist` / `Whitelist` passa a ser o botão azul e plano das telas, com o texto em negrito, na aba Behavior da tela do Cubit e na aba Filtros do Tablet |
+| 1039 | As chaves `Magnet` e `Fetch` ficam sem ícone na aba Behavior e na aba Recursos do Tablet? | "precisamos criar eles me de um prompt": as duas ganham ícones de 64×64 por prompt, em `tmp/arte/magnet-switch/` e `tmp/arte/fetch-switch/`, no estilo do funil e da tocha. O ímã é uma ferradura com linhas de atração, e a busca é uma seta até um item no chão. Eles entram na folha `screen_sprites.png`, na linha do funil, em `u=256` e `u=320`, e aparecem nas duas telas |
+| 1038 | O `AGENTS.md` pode citar as classes da tela do Cubit no Tablet? | "pode atualizar o AGENTS.md", autorizado pelo desenvolvedor: `RobotName` em `domain/robot`; `RobotTablet` em `entity`; `TabletRobotMenu`, `TabletOpening`, `RobotMenuReading`, `RobotMenuContents` e `RobotMenuSource` em `menu`; `RenameRobotPayload`, `RobotListRequestPayload` e `TabletRequests` em `network`; e `TabletRobotScreen`, `TabletRobotHeader`, `TabletResourcesPanel`, `TabletRenameDialog` e `TabletOfflineScreen` em `client` |
+| 1037 | Onde ficam as chaves de Coleta, Ímã e Busca no Tablet, se a 1023 pede os mesmos painéis e a tela do Cubit as põe na aba Behavior? | Recursos com as oito chaves: um painel novo para a aba Recursos, com Lanterna, Scanners, Falas, Painel solar, Coleta, Ímã, Busca e Tochas numa lista só, e a aba Filtros só com o filtro de coleta e o inventário do player. A tela do Cubit continua como está. As chaves usam os mesmos controles do servidor, como pede a 1023. A recomendação, os painéis como são, foi recusada |
+| 1036 | Como o Cubit parado pelo `Stop` convive com o resto? | "nao vamos ter esta opcao por enquanto precisa refinamento melhor em uma nova fase": o `Stop` e o `Follow` saem do Tablet por agora e vão para "Ainda sem fase" no `ROADMAP.md`, para um refinamento futuro. O NBT `Stopped` não entra. Muda a 1019 e a 1026 |
+| 1035 | Como ficam os botões do cabeçalho e a janela do `Rename`? | `Voltar` no canto superior esquerdo. Sob as barras, uma fileira de botões planos, como o de chamar o Cubit no Dock, com `Power` e `Rename`. O `Rename` abre uma janela pequena no centro, com o campo de até 50 caracteres já preenchido com o nome atual, Confirmar e Cancelar, e Enter confirma. Sem `Stop` e `Follow`, pela 1036. Confirma a recomendação |
+| 1034 | O que acontece ao abrir um Cubit em chunk descarregado, que só tem a foto? | A tela abre só com o cabeçalho da foto, sem abas, e um aviso como `Out of reach · seen 5 min ago`. Os botões ficam desabilitados com a dica do motivo, e `Voltar` continua funcionando. Confirma a recomendação |
+| 1033 | Como fica o Cubit desligado pela chave geral do Tablet? | Igual ao botão `Power` da aba Settings: a chave do Tablet desliga, e o clique direito no Cubit também o religa, sem estado salvo novo. A chave também liga um Cubit desligado com carga. Muda a 1021. A recomendação, salvar quem desligou, foi recusada |
+| 1032 | O alinhamento da entrega 2 do Tablet, a tela do Cubit, tem algo a acrescentar? | "pode seguir com a rodada de decisões": nada a acrescentar. A tela do Tablet usa o `RobotMenu` e os painéis da tela do Cubit, valendo para o dono com o chunk carregado a qualquer distância. O `Rename` vai por um pacote próprio, o `Stop` é um estado salvo em `Stopped`, a aba Inventário é só para consulta, e a cor da carcaça vai nos valores do menu |
 | 1031 | A receita do Tablet muda? | "quero alterar a receita: Vidro x Redstone x Vidro / Ferro x diamante X Ferro / ferro x ouro x ferro": a linha de cima tem vidro, redstone e vidro, a do meio tem ferro, diamante e ferro, e a de baixo, ferro, ouro e ferro. Muda a 1030 |
 | 1030 | Como foi o teste da entrega 1 do Tablet, depois do ajuste da tela, e a grade da receita fica como foi implementada? | "testes ok, receita aprovada": o teste no `make client` passou, e a receita fica com 3 painéis de vidro em cima, ferro, redstone e ferro no meio, e ferro, ouro e ferro embaixo. Corrige a 1025, que dizia "4 lingotes de ferro nos cantos" junto dos 3 painéis em cima, o que não cabia na grade |
 | 1029 | Como foi o teste da tela de seleção do Tablet? | "a tela que abre com o tablet deve ser grande oculpar grande area o texto que vi esta sobre o rosto do cubit o alinhamento nao esta correto": a tela de seleção passa a ocupar quase toda a tela, com 30 px de folga em cada lado e até 480 px de largura, e o número de linhas segue a altura. As linhas têm 44 px, e o texto começa 10 px depois do retrato. A janela não fica mais escurecida pelo fundo |
@@ -285,6 +294,11 @@ Não há perguntas pendentes nesta fase.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 17:00 | Registra a resposta 1040. |
+| Marcelo Fabiano | 2026-11-13 16:50 | Registra a resposta 1039. |
+| Marcelo Fabiano | 2026-11-13 16:45 | Registra a resposta 1038. |
+| Marcelo Fabiano | 2026-11-13 19:00 | Registra a resposta 1037. |
+| Marcelo Fabiano | 2026-11-13 18:50 | Registra as respostas 1032 a 1036. |
 | Marcelo Fabiano | 2026-11-13 18:05 | Registra a resposta 1028. |
 | Marcelo Fabiano | 2026-11-13 18:00 | Registra as respostas 1029 a 1031. |
 | Marcelo Fabiano | 2026-11-13 16:50 | Registra a resposta 1027. |

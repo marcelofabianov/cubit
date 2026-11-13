@@ -198,7 +198,7 @@ Estes nomes não mudam sem migração (regra 18 do `AGENTS.md`).
 | NBT do bloco do Dock | `Owner`, `Energy`, `Slot` e `Storage` | Dono, estoque, item do slot de entrada e inventário, com `Slot` em cada item (pergunta 958). `ChargeSlot`, de antes, só é lido, e a Power Bank dele vai para o primeiro slot do inventário (pergunta 955) |
 | Estado do bloco do Dock | `facing`, `half` e `status` | Direção, parte de baixo ou de cima e estado da tela: `off`, `idle`, `charging`, `complete` ou `no_energy` |
 | NBT da entidade na base | `DockPosition` | Posição do Dock em que hiberna |
-| NBT da entidade | `PreferredDock` e `Stopped` | O Dock preferido, escolhido pelo app Dock do Tablet, com a posição e a dimensão, e se o Cubit está parado pelo `Stop` (pergunta 1026) |
+| NBT da entidade | `PreferredDock` | O Dock preferido, escolhido pelo app Dock do Tablet, com a posição e a dimensão (perguntas 1026 e 1036) |
 | NBT da entidade | `LampEnabled` | Chave da lanterna. Sem a chave no save, vale ligada |
 | NBT da entidade | `SolarEnabled` | Chave do painel solar. Sem a chave no save, vale ligada (pergunta 859) |
 | NBT da entidade | `DefenseMode` | Modo de defesa: `peaceful`, `retaliate`, `aggressive` ou `focus`. Sem a chave ou com valor inválido, vale `peaceful` |
@@ -230,6 +230,7 @@ O estado salvo é validado ao entrar no jogo, sem derrubá-lo (regra 17 do `AGEN
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 18:50 | Tira o NBT do Cubit parado. |
 | Marcelo Fabiano | 2026-11-13 18:00 | Muda a receita do Tablet. |
 | Marcelo Fabiano | 2026-11-13 16:40 | Troca o Cubit Remote pelo Tablet e adiciona o contrato dele. |
 | Marcelo Fabiano | 2026-11-13 13:45 | Adiciona o slot e a chave das tochas ao save. |

@@ -35,24 +35,41 @@ final class FlatButton extends AbstractButton {
 
   @Override
   protected void renderWidget(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
-    int left = getX();
-    int top = getY();
+    paint(
+        graphics,
+        new ScreenPainter.Box(getX(), getY(), width, height),
+        getMessage(),
+        muted,
+        isHoveredOrFocused());
+  }
+
+  /** The look of the button, also for a panel that draws its own button, as the filter list. */
+  static void paint(
+      GuiGraphics graphics,
+      ScreenPainter.Box box,
+      Component message,
+      boolean muted,
+      boolean hovered) {
+    int left = box.x();
+    int top = box.y();
+    int width = box.width();
+    int height = box.height();
     graphics.fill(left, top, left + width, top + height, ScreenPainter.EDGE);
     graphics.fill(
         left + 1, top + 1, left + width - 1, top + height - 1, muted ? GREY_LOWER : BLUE_LOWER);
     graphics.fill(
         left + 1, top + 1, left + width - 1, top + height - LOWER_HEIGHT, muted ? GREY : BLUE);
-    if (isHoveredOrFocused()) {
+    if (hovered) {
       graphics.fill(left + 1, top + 1, left + width - 1, top + height - 1, HOVER);
     }
     var font = Minecraft.getInstance().font;
     float scale = ScreenPainter.FULL_SCALE;
-    float textX = left + (width - font.width(getMessage()) * scale) / 2;
+    float textX = left + (width - font.width(message) * scale) / 2;
     float textY = top + (height - TEXT_HEIGHT * scale) / 2;
     graphics.pose().pushPose();
     graphics.pose().translate(textX, textY, 0);
     graphics.pose().scale(scale, scale, 1f);
-    graphics.drawString(font, getMessage(), 0, 0, ScreenPainter.WHITE, false);
+    graphics.drawString(font, message, 0, 0, ScreenPainter.WHITE, false);
     graphics.pose().popPose();
   }
 

@@ -150,7 +150,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Saída do Dock (pergunta 963):** o Cubit só sai sozinho cerca de 3 s depois de a bateria e a vida estarem cheias, e o clique no Dock continua liberando antes. Muda a 55.
 - **Tochas (perguntas 971 a 984, issue #170):** do Advanced em diante, um slot de tochas comuns numa fileira nova de slots exclusivos, acima do inventário do Cubit. A cada 2 s, ele procura num raio de 8 blocos os lugares em que mob pode nascer, com luz de bloco abaixo do nível do tier, 1 por padrão, e ao ar livre só quando a lanterna acenderia. Põe a tocha no chão ou na parede, a até 4 blocos, onde ela cobre mais, simulando a luz. Custa 20 FE por tocha, e a chave `Torches` fica na aba Settings, que passa a linhas de 12 px.
 - **Olhar para o alvo do choque (perguntas 987 a 995):** no choque, a cabeça vira para o alvo e fica nele até ele morrer, fugir a mais de 32 blocos do dono ou sumir, e então fica 3 s no último ponto dele antes de voltar ao dono, também seguindo o dono. O corpo vira quando ele está parado. Andando, o corpo segue o caminho, porque o mob anda para onde o corpo aponta.
-- **Tablet (perguntas 998 a 1026):** substitui o Cubit Remote, com o item `cubit:tablet` sem dono, os apps Open, Alvo e Dock, a tela de seleção com a foto do Cubit em chunk descarregado, o Cubit escolhido com a seta e a tela do Cubit, com o cabeçalho, `Stop`, `Follow`, `Rename`, a chave geral, `Ir para o Dock` e as abas Recursos, Defesa, Filtros e Inventário. Lê e muda a qualquer distância com o chunk carregado. Sai em três entregas, e o resto entra com os itens 13 a 16 da Fase 4.2 e com a Fase 5. O retrato passa a mostrar a cor da carcaça em todas as telas.
+- **Tablet (perguntas 998 a 1026):** substitui o Cubit Remote, com o item `cubit:tablet` sem dono, os apps Open, Alvo e Dock, a tela de seleção com a foto do Cubit em chunk descarregado, o Cubit escolhido com a seta e a tela do Cubit, com o cabeçalho, `Rename`, a chave geral, que desliga como o `Power`, `Ir para o Dock` e as abas Recursos, Defesa, Filtros e Inventário. O `Stop` e o `Follow` ficaram sem fase (perguntas 1032 a 1036). Lê e muda a qualquer distância com o chunk carregado. Sai em três entregas, e o resto entra com os itens 13 a 16 da Fase 4.2 e com a Fase 5. O retrato passa a mostrar a cor da carcaça em todas as telas.
 - **Texturas por prompt (pergunta 900):** o agente não desenha imagens. Ele escreve o prompt em `tmp/arte/{nome}/prompt.md`, e o desenvolvedor devolve os arquivos na mesma pasta.
 - **Chaveamento:** têm chave a chave geral do Cubit, com ligar, desligar e hibernar, o painel solar, a lanterna, os scanners, o ímã, pegar itens dropados, a descarga em baú, o retorno automático e mostrar o local de morte do player. Cada chave entra com o recurso dela.
 
@@ -158,6 +158,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 18:50 | Atualiza o Tablet com a entrega 2. |
 | Marcelo Fabiano | 2026-11-13 16:40 | Registra o Tablet. |
 | Marcelo Fabiano | 2026-11-13 15:10 | Mantém o olhar no alvo até ele ser eliminado. |
 | Marcelo Fabiano | 2026-11-13 14:50 | Registra o olhar para o alvo do choque. |
