@@ -80,4 +80,5 @@ Dividida em três partes.
 
 ## Ainda sem fase
 
+- Parar e seguir pelo Tablet (`Stop` e `Follow`), com um refinamento de como o Cubit parado convive com a busca, o choque e o Dock (pergunta 1036).
 - Wiki e livro para o player.
