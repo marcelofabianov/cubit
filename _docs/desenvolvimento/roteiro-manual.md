@@ -631,7 +631,7 @@ As regras estão em [`inventario.md`](../funcionalidades/inventario.md#coleta) e
 | 6 | Troque para `Whitelist` | Ele pega a terra e deixa a pedra |
 | 7 | Limpe o slot com o cursor vazio, ainda na `Whitelist` | Ele não pega nada |
 | 8 | Volte para `Blacklist`, aplique o Advanced Module e abra a aba | `Magnet` ligada, com `Pulls items within 3 blocks · 20 FE per item`, e 9 slots |
-| 9 | Jogue um item a 3 blocos do Cubit parado | O item desliza até ele, e a bateria cai 20 FE |
+| 9 | Jogue um item a 3 blocos do Cubit parado | O item desliza até ele em menos de meio segundo, e a bateria cai 20 FE |
 | 10 | Desligue `Pickup` | `Magnet` fica apagada, e ele não pega nem puxa nada |
 | 11 | Encha o inventário do Cubit, deixando espaço para meia pilha de terra, e jogue uma pilha inteira | Ele pega o que cabe, e o resto fica no chão |
 | 12 | Jogue um Cubit recolhido perto dele | Ele não pega nem puxa o item |
@@ -720,6 +720,7 @@ Na instância só com o mod, tire capturas com F2 do Cubit seguindo, da tela do 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-12 23:20 | Atualiza o tempo do ímã no roteiro. |
 | Marcelo Fabiano | 2026-11-12 23:10 | Acrescenta os dois slots do Dock ao roteiro da Power Bank. |
 | Marcelo Fabiano | 2026-11-12 22:50 | Adiciona o roteiro da Power Bank. |
 | Marcelo Fabiano | 2026-11-12 21:45 | Adiciona o roteiro da coleta e do ímã. |

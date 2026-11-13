@@ -8,6 +8,8 @@ Não há perguntas pendentes nesta fase.
 
 | # | Pergunta | Resposta |
 |---|---|---|
+| 929 | Em qual PR entra a mudança na velocidade do ímã? | No PR da Power Bank, num commit próprio na `feature/164-power-bank`, antes do push. Confirma a recomendação |
+| 928 | Como acelerar o item puxado pelo ímã até o inventário do Cubit, que levava cerca de 1,5 s a 1,75 s a 3 blocos? | Guiar a cada tick: a varredura que acha e cobra o item continua a cada 10 ticks (resposta 887), e o item já pago é guiado até o Cubit a cada tick, a 0,5 bloco por tick, e coletado assim que encosta, sem esperar a verificação de 5 ticks. Um item a 3 blocos chega em cerca de 0,3 s, com o movimento visível e sem teleporte. Completa a 887. Confirma a recomendação |
 | 927 | O ímã e a coleta funcionam, mas no Advanced só alcançam 3 blocos do próprio Cubit, e o item jogado com Q cai à frente do dono, fora desse raio, como provou um teste temporário com o dono online. Como deve ficar? | O Cubit vai buscar: ativo, seguindo e sem nada a fazer, ele anda até os itens que o filtro aceita, num raio em volta do dono configurado por tier, pega e volta a seguir. O ímã continua como está. Entra numa issue própria, depois da Power Bank, com alinhamento e rodada de decisões. Completa a 876 |
 | 926 | Como foi o teste no `make client` da Power Bank, com os dois slots do Dock? | "a power bank funcionou conforme esperado", na branch `feature/164-power-bank`, sem detalhar cada passo. No mesmo teste, o desenvolvedor relatou que o ímã e a coleta dos itens não funcionaram, e isso vira investigação própria |
 | 925 | A automação, como os funis, mexe com a Power Bank no Dock? | "como recomendou": não. A automação continua pondo só redstone no slot de entrada, porque a energia que entra no Dock não volta a sair, e nunca põe nem tira a Power Bank. Confirma a recomendação |
@@ -181,6 +183,7 @@ Não há perguntas pendentes nesta fase.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-12 23:20 | Registra as respostas 928 e 929. |
 | Marcelo Fabiano | 2026-11-12 23:00 | Registra as respostas 919 a 927. |
 | Marcelo Fabiano | 2026-11-12 22:40 | Registra as respostas 915 a 918. |
 | Marcelo Fabiano | 2026-11-12 22:30 | Registra as respostas 900 a 914 e aponta a 42 para a 905. |
