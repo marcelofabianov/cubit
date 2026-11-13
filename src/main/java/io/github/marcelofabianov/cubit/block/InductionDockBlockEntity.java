@@ -7,6 +7,7 @@ import io.github.marcelofabianov.cubit.domain.dock.DockInputMeter;
 import io.github.marcelofabianov.cubit.domain.dock.DockQueue;
 import io.github.marcelofabianov.cubit.domain.dock.DockStatus;
 import io.github.marcelofabianov.cubit.domain.dock.DockStock;
+import io.github.marcelofabianov.cubit.domain.dock.DockStorageRules;
 import io.github.marcelofabianov.cubit.domain.energy.Battery;
 import io.github.marcelofabianov.cubit.domain.energy.Energy;
 import io.github.marcelofabianov.cubit.domain.ownership.Ownership;
@@ -32,6 +33,7 @@ import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -39,10 +41,12 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.energy.IEnergyStorage;
 import net.neoforged.neoforge.items.IItemHandler;
-import net.neoforged.neoforge.items.wrapper.InvWrapper;
 import org.slf4j.Logger;
 
-/** The state of a dock: its owner, its energy and its slot. The rules live in the domain. */
+/**
+ * The state of a dock: its owner, its energy, its input slot and its storage. The rules live in the
+ * domain.
+ */
 public final class InductionDockBlockEntity extends BlockEntity {
   private static final Logger LOGGER = LogUtils.getLogger();
   private static final String NO_OWNER_MESSAGE = "The dock at {} has no owner.";
@@ -50,7 +54,6 @@ public final class InductionDockBlockEntity extends BlockEntity {
   private static final String OWNER_KEY = "Owner";
   private static final String ENERGY_KEY = "Energy";
   private static final String SLOT_KEY = "Slot";
-  private static final String CHARGE_SLOT_KEY = "ChargeSlot";
   private static final int SLOT = 0;
   private static final int SLOT_SIZE = 1;
   private static final int ONE_ITEM = 1;
@@ -74,19 +77,12 @@ public final class InductionDockBlockEntity extends BlockEntity {
         }
       };
 
-  /** Only a Power Bank, which the stock charges after the robot (answers 919 and 923). */
-  private final SimpleContainer chargeSlot = DockPowerBanks.chargeSlot(this::setChanged);
+  /** The Toolbox and the Power Banks, which the stock charges (answers 947 to 959). */
+  private final DockStorage storage = new DockStorage(this::setChanged);
 
   private final IEnergyStorage energyStorage = new DockEnergyStorage(this);
 
-  /** Automation may only put redstone in: the energy it becomes never comes back out. */
-  private final IItemHandler itemHandler =
-      new InvWrapper(slot) {
-        @Override
-        public ItemStack extractItem(int index, int amount, boolean simulate) {
-          return ItemStack.EMPTY;
-        }
-      };
+  private final IItemHandler itemHandler = DockItemHandler.of(slot, storage.handler());
 
   private UUID owner;
   private UUID occupant;
@@ -120,7 +116,9 @@ public final class InductionDockBlockEntity extends BlockEntity {
     dock.inputMeter.record(dock.entered);
     dock.entered = Energy.ZERO;
     dock.useSlot();
-    dock.stock = DockPowerBanks.charge(dock.stock, dock.chargeSlot.getItem(SLOT), dock::setChanged);
+    dock.storage.dropRefused(level, pos);
+    boolean chargesBanks = DockStorageRules.chargesBanks(dock.isOccupied(), dock.robotFull);
+    dock.stock = dock.storage.charge(dock.stock, chargesBanks, dock::setChanged);
     dock.showStatus(level, pos, state);
   }
 
@@ -265,8 +263,8 @@ public final class InductionDockBlockEntity extends BlockEntity {
     return stock.energy().charge();
   }
 
-  public Container chargeSlot() {
-    return chargeSlot;
+  public Container storage() {
+    return storage.container();
   }
 
   public Container slot() {
@@ -285,9 +283,11 @@ public final class InductionDockBlockEntity extends BlockEntity {
     return stock.energy().level(steps);
   }
 
-  /** A Power Bank in the hand goes to be charged, and redstone goes to the input (answer 924). */
+  /** Redstone goes to the input, and the Toolbox and the Power Bank to the storage (959). */
   boolean insert(ItemStack stack) {
-    return EnergySlotItems.insert(PowerBankItem.is(stack) ? chargeSlot : slot, stack);
+    return DockStorageRules.accepts(DockStorage.kindOf(stack))
+        ? storage.insert(stack)
+        : EnergySlotItems.insert(slot, stack);
   }
 
   Energy receive(Energy offered, boolean simulate) {
@@ -316,10 +316,7 @@ public final class InductionDockBlockEntity extends BlockEntity {
     if (!stack.isEmpty()) {
       tag.put(SLOT_KEY, stack.save(registries));
     }
-    ItemStack charging = chargeSlot.getItem(SLOT);
-    if (!charging.isEmpty()) {
-      tag.put(CHARGE_SLOT_KEY, charging.save(registries));
-    }
+    storage.save(tag, registries);
   }
 
   @Override
@@ -331,7 +328,7 @@ public final class InductionDockBlockEntity extends BlockEntity {
     }
     stock = DockStock.of(capacity(), SavedEnergy.of(tag.getLong(ENERGY_KEY)));
     slot.setItem(SLOT, savedStack(tag, SLOT_KEY, registries));
-    chargeSlot.setItem(SLOT, savedStack(tag, CHARGE_SLOT_KEY, registries));
+    storage.load(tag, registries, worldPosition);
   }
 
   private static ItemStack savedStack(
@@ -346,12 +343,16 @@ public final class InductionDockBlockEntity extends BlockEntity {
     super.applyImplicitComponents(input);
     long saved = input.getOrDefault(CubitDataComponents.DOCK_ENERGY.get(), 0L);
     stock = DockStock.of(capacity(), SavedEnergy.of(saved));
+    storage.apply(
+        input.getOrDefault(CubitDataComponents.DOCK_STORAGE.get(), ItemContainerContents.EMPTY),
+        worldPosition);
   }
 
   @Override
   protected void collectImplicitComponents(DataComponentMap.Builder components) {
     super.collectImplicitComponents(components);
     components.set(CubitDataComponents.DOCK_ENERGY.get(), energy().amount());
+    components.set(CubitDataComponents.DOCK_STORAGE.get(), storage.contents());
   }
 
   /** Only the owner travels to the client, because it decides who can break the block. */

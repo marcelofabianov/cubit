@@ -8,6 +8,11 @@ Não há perguntas pendentes nesta fase.
 
 | # | Pergunta | Resposta |
 |---|---|---|
+| 968 | O que faz o clique direito no Dock com o Cubit ou o Damaged Cubit na mão? | O item do Cubit continua pondo o robô na base, como hoje. O Damaged Cubit, que não pode ser colocado no mundo, vai para o inventário, como a Power Bank e a Toolbox (resposta 959). O Cubit só entra no inventário pela tela, pelo Shift + clique ou pela automação. Confirma a recomendação |
+| 967 | A automação põe e tira o Cubit e o Damaged Cubit do inventário? | Por qualquer face, os dois entram e saem a qualquer momento, como a Toolbox (resposta 953), um por slot. Confirma a recomendação |
+| 966 | O que o Dock faz com o item do Cubit e o Damaged Cubit guardados no inventário? | Só guarda: os dois ficam como estão, com todo o estado no item, sem recarga nem conserto. Confirma a recomendação |
+| 965 | Quais itens o inventário do Dock aceita além da Toolbox e da Power Bank? | "acrescente neste inventario do dock tambem aceitar 2 itens o cubit e damage cubit": também o item do Cubit e o Damaged Cubit. O Dock os reconhece por uma interface, como na regra 42. Muda a 947 |
+| 962 | O teste manual do inventário do Dock espera os ícones das abas ou é feito agora? | "vou testar agora sem os ícones": o teste é feito agora, com as abas sem ícone, e os ícones são conferidos depois, quando os PNGs chegarem |
 | 960 | De que lado da janela ficam as abas Dock e Storage, se a resposta 956 dizia "à esquerda, como as da tela do Cubit" e as do Cubit ficam à direita? | À direita, como na tela do Cubit, com o mesmo tamanho e desenho, para as duas telas seguirem o mesmo padrão. Corrige a 956 pela regra 48, porque a pergunta do agente descrevia o lado errado. Confirma a recomendação |
 | 959 | Sem o slot de carga, o que faz o clique direito no Dock com uma Power Bank ou uma Toolbox na mão? | Guarda no inventário: a Power Bank ou a pilha de Toolbox na mão vai para o inventário do Dock, juntando nas pilhas e nos slots livres, e o que não couber fica na mão. Só o dono. A redstone continua indo ao slot de entrada. Muda a 924. Confirma a recomendação |
 | 958 | Quais são os nomes do contrato do inventário do Dock? | No NBT do bloco, `Storage`, com os itens por slot, como no baú do jogo. No item, o componente `cubit:dock_storage`, no formato de conteúdo de container do jogo, ao lado do `cubit:dock_energy`. Sem os dois, o inventário fica vazio. Um item que não é Toolbox nem Power Bank num save editado cai no chão, com registro no log (regra 17). Completa a 954. Confirma a recomendação |
@@ -214,6 +219,7 @@ Não há perguntas pendentes nesta fase.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 12:50 | Registra as respostas 962 e 965 a 968. |
 | Marcelo Fabiano | 2026-11-13 11:50 | Registra a resposta 960. |
 | Marcelo Fabiano | 2026-11-13 11:10 | Registra as respostas 952 a 959. |
 | Marcelo Fabiano | 2026-11-13 11:00 | Registra as respostas 947 a 951. |

@@ -46,7 +46,8 @@ final class CubitBlockLootProvider extends BlockLootSubProvider {
                             .apply(
                                 CopyComponentsFunction.copyComponents(
                                         CopyComponentsFunction.Source.BLOCK_ENTITY)
-                                    .include(CubitDataComponents.DOCK_ENERGY.get())))));
+                                    .include(CubitDataComponents.DOCK_ENERGY.get())
+                                    .include(CubitDataComponents.DOCK_STORAGE.get())))));
   }
 
   @Override

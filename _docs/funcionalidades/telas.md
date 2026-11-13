@@ -120,8 +120,8 @@ Entra com a coleta e o ímã, no item 9 da Fase 4.1 (perguntas 878 a 888). As re
 Entra no item 11 da Fase 4.1. As regras estão em [`energia.md`](energia.md#inventário-do-dock).
 
 - **Topo:** o título `Storage` / `Armazenamento`.
-- **Slots:** 27, em 3 linhas de 9, como um baú simples. Só aceitam a Toolbox e as Power Banks, e a dica de cada Power Bank mostra a carga dela.
-- **Inventário do player:** abaixo, com a hotbar. O Shift + clique de uma Toolbox ou Power Bank do player a leva ao inventário do Dock, e o de um item do Dock o devolve ao player.
+- **Slots:** 27, em 3 linhas de 9, como um baú simples. Só aceitam a Toolbox, as Power Banks, o item do Cubit e o Damaged Cubit (pergunta 965), e a dica de cada Power Bank mostra a carga dela.
+- **Inventário do player:** abaixo, com a hotbar. O Shift + clique de uma Toolbox, Power Bank, Cubit ou Damaged Cubit do player o leva ao inventário do Dock, e o de um item do Dock o devolve ao player.
 
 ### Estados
 
@@ -242,6 +242,7 @@ Pergunta 691.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 12:50 | Aceita o Cubit e o Damaged Cubit na aba Storage. |
 | Marcelo Fabiano | 2026-11-13 11:50 | Põe as abas do Dock à direita, como as do Cubit. |
 | Marcelo Fabiano | 2026-11-13 11:30 | Adiciona as abas Dock e Storage à tela do Dock e tira o slot de carga. |
 | Marcelo Fabiano | 2026-11-13 09:50 | Adiciona a chave Fetch e passa as chaves da aba Behavior para linhas de 12 px. |

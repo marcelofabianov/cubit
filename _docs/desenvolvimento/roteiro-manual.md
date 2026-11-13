@@ -697,6 +697,9 @@ As regras estão em [`energia.md`](../funcionalidades/energia.md#inventário-do-
 | 9 | Quebre o Dock e coloque-o de novo | O inventário volta igual, e o item do slot `Redstone` caiu no chão |
 | 10 | Abra um mundo salvo antes, com uma Power Bank no slot `Charge` | A Power Bank aparece no primeiro slot da aba `Storage` |
 | 11 | Com o jogo em português, abra a tela | As abas `Dock` e `Armazenamento` |
+| 12 | Guarde um Cubit recolhido e um Damaged Cubit no Storage, pela tela | Os dois entram, um por slot, e continuam com o mesmo estado ao tirá-los |
+| 13 | Clique no Dock com um Damaged Cubit na mão, e depois com um Cubit | O Damaged Cubit vai para o Storage, e o Cubit é posto na base |
+| 14 | Com um funil embaixo do Dock, guarde um Cubit e um Damaged Cubit | Os dois saem pelo funil |
 
 ## Tradução
 
@@ -757,6 +760,7 @@ Na instância só com o mod, tire capturas com F2 do Cubit seguindo, da tela do 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 12:50 | Adiciona o Cubit e o Damaged Cubit ao roteiro do inventário do Dock. |
 | Marcelo Fabiano | 2026-11-13 11:30 | Adiciona o inventário do Dock e troca o slot de carga nos passos da Power Bank. |
 | Marcelo Fabiano | 2026-11-13 09:50 | Adiciona a busca dos itens do chão e as dicas das chaves da aba Behavior. |
 | Marcelo Fabiano | 2026-11-12 23:20 | Atualiza o tempo do ímã no roteiro. |

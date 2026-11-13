@@ -78,13 +78,13 @@ public final class PowerBankGameTests {
   }
 
   @GameTest(template = ARENA)
-  public static void theDockChargesTheBankInItsChargeSlot(GameTestHelper helper) {
+  public static void theDockChargesTheBankInItsStorage(GameTestHelper helper) {
     Player owner = helper.makeMockPlayer(GameType.SURVIVAL);
     InductionDockBlockEntity dock = DockScene.placeDock(helper, owner, DockScene.FLOOR, PLENTY);
-    dock.chargeSlot().setItem(SLOT, CubitItems.BASE_POWER_BANK.get().getDefaultInstance());
+    dock.storage().setItem(SLOT, CubitItems.BASE_POWER_BANK.get().getDefaultInstance());
 
     helper.succeedWhen(() -> {
-      Energy inBank = PowerBankItem.batteryOf(dock.chargeSlot().getItem(SLOT)).charge();
+      Energy inBank = PowerBankItem.batteryOf(dock.storage().getItem(SLOT)).charge();
       helper.assertFalse(inBank.isZero(), NOT_CHARGED);
       helper.assertValueEqual(inBank.plus(dock.energy()), PLENTY, LOST);
     });
@@ -106,20 +106,7 @@ public final class PowerBankGameTests {
   }
 
   @GameTest(template = ARENA)
-  public static void theChargeSlotTakesOnlyAPowerBank(GameTestHelper helper) {
-    Player owner = helper.makeMockPlayer(GameType.SURVIVAL);
-    InductionDockBlockEntity dock = DockScene.placeDock(helper, owner, DockScene.FLOOR, PLENTY);
-
-    helper.assertFalse(
-        dock.chargeSlot().canPlaceItem(SLOT, new ItemStack(Items.REDSTONE)), WRONG_RECIPE);
-    helper.assertTrue(
-        dock.chargeSlot().canPlaceItem(SLOT, CubitItems.BASE_POWER_BANK.get().getDefaultInstance()),
-        NOT_IN_SLOT);
-    helper.succeed();
-  }
-
-  @GameTest(template = ARENA)
-  public static void aClickOnTheDockPutsTheBankInTheChargeSlot(GameTestHelper helper) {
+  public static void aClickOnTheDockPutsTheBankInTheStorage(GameTestHelper helper) {
     Player owner = DockScene.ownerBeside(helper);
     InductionDockBlockEntity dock = DockScene.placeDock(helper, owner, DockScene.FLOOR, PLENTY);
 
@@ -127,7 +114,7 @@ public final class PowerBankGameTests {
         InteractionHand.MAIN_HAND, CubitItems.BASE_POWER_BANK.get().getDefaultInstance());
     DockScene.clickWithHeldItem(helper, owner, DockScene.DOCK);
 
-    helper.assertTrue(PowerBankItem.is(dock.chargeSlot().getItem(SLOT)), NOT_IN_SLOT);
+    helper.assertTrue(PowerBankItem.is(dock.storage().getItem(SLOT)), NOT_IN_SLOT);
     helper.assertTrue(dock.slot().isEmpty(), NOT_IN_SLOT);
     helper.succeed();
   }

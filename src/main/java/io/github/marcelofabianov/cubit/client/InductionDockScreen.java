@@ -6,16 +6,20 @@ import io.github.marcelofabianov.cubit.domain.dock.DockStatus;
 import io.github.marcelofabianov.cubit.domain.energy.EnergyFormat;
 import io.github.marcelofabianov.cubit.menu.InductionDockMenu;
 import io.github.marcelofabianov.cubit.menu.ScreenKeys;
+import java.util.Optional;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 
-/** The dock screen of the concept image, in its three states and the two without a picture. */
+/**
+ * The dock screen of the concept image, in its three states and the two without a picture, in the
+ * Dock tab, and the storage in the Storage tab (answers 956 and 960).
+ */
 final class InductionDockScreen extends AbstractContainerScreen<InductionDockMenu> {
   private static final int WIDTH = 176;
-  private static final int HEIGHT = 289;
+  private static final int HEIGHT = 262;
   private static final int MARGIN = 8;
   private static final int LINE = 9;
   private static final int DETAIL_LINE = 7;
@@ -23,7 +27,7 @@ final class InductionDockScreen extends AbstractContainerScreen<InductionDockMen
   private static final Box STATUS = new Box(100, 6, 68, LINE);
   private static final int PICTURE_X = 8;
   private static final int TOWER_Y = 17;
-  private static final int ROBOT_Y = 100;
+  private static final int ROBOT_Y = 73;
   private static final Box STORED = new Box(50, 18, 96, LINE);
   private static final Box STOCK_BAR = new Box(50, 26, 96, 7);
   private static final Box INPUT = new Box(50, 36, 100, DETAIL_LINE);
@@ -34,32 +38,32 @@ final class InductionDockScreen extends AbstractContainerScreen<InductionDockMen
   private static final int SLOT_FRAME_Y = InductionDockMenu.SLOT_Y - 1;
   private static final int REDSTONE_CENTER = 160;
   private static final int REDSTONE_Y = 53;
-  private static final int CHARGE_FRAME_Y = InductionDockMenu.CHARGE_SLOT_Y - 1;
-  private static final int CHARGE_LABEL_Y = 80;
-  private static final Box DOCKED = new Box(8, 87, 160, LINE);
-  private static final int RULE_Y = 96;
-  private static final Box SECTION = new Box(50, 101, 116, LINE);
-  private static final Box BATTERY_BAR = new Box(50, 109, 116, 6);
-  private static final Box HEALTH = new Box(50, 119, 116, LINE);
-  private static final Box HEALTH_BAR = new Box(50, 127, 116, 6);
-  private static final Box ROBOT_LINE = new Box(50, 136, 116, DETAIL_LINE);
-  private static final Box NO_ROBOT = new Box(50, 105, 116, LINE);
-  private static final Box NO_ROBOT_STATE = new Box(50, 116, 116, DETAIL_LINE);
-  private static final Box NO_ROBOT_HINT = new Box(50, 124, 118, DETAIL_LINE);
+  private static final int STORAGE_FRAME_Y = InductionDockMenu.STORAGE_Y - 1;
+  private static final Box DOCKED = new Box(8, 60, 160, LINE);
+  private static final int RULE_Y = 69;
+  private static final Box SECTION = new Box(50, 74, 116, LINE);
+  private static final Box BATTERY_BAR = new Box(50, 82, 116, 6);
+  private static final Box HEALTH = new Box(50, 92, 116, LINE);
+  private static final Box HEALTH_BAR = new Box(50, 100, 116, 6);
+  private static final Box ROBOT_LINE = new Box(50, 109, 116, DETAIL_LINE);
+  private static final Box NO_ROBOT = new Box(50, 78, 116, LINE);
+  private static final Box NO_ROBOT_STATE = new Box(50, 89, 116, DETAIL_LINE);
+  private static final Box NO_ROBOT_HINT = new Box(50, 97, 118, DETAIL_LINE);
   private static final int ROW_LEFT = 7;
   private static final int ROW_RIGHT = 169;
-  private static final int QUEUE_TOP = 146;
+  private static final int QUEUE_TOP = 119;
   private static final int ROW_HEIGHT = 13;
-  private static final Box QUEUE = new Box(11, 149, 154, LINE);
-  private static final Box OWNER = new Box(11, 162, 154, LINE);
-  private static final Box CALL = new Box(7, 176, 162, 16);
-  private static final int INVENTORY_LABEL_Y = 196;
+  private static final Box QUEUE = new Box(11, 122, 154, LINE);
+  private static final Box OWNER = new Box(11, 135, 154, LINE);
+  private static final Box CALL = new Box(7, 149, 162, 16);
+  private static final int INVENTORY_LABEL_Y = 169;
   private static final int ROWS = 3;
   private static final int COLUMNS = 9;
   private static final int SLOTS_FRAME_X = 7;
   private static final int HOTBAR_GAP = 58;
 
   private final ScreenPainter painter = new ScreenPainter();
+  private final DockScreenTabs tabs = new DockScreenTabs();
   private FlatButton callButton;
 
   InductionDockScreen(InductionDockMenu menu, Inventory playerInventory, Component title) {
@@ -80,6 +84,13 @@ final class InductionDockScreen extends AbstractContainerScreen<InductionDockMen
     callButton =
         addRenderableWidget(
             new FlatButton(shown.x(), shown.y(), shown.width(), shown.height(), label, this::call));
+    showOpenTab();
+  }
+
+  private void showOpenTab() {
+    boolean storage = tabs.open() == DockScreenTabs.Tab.STORAGE;
+    menu.showStorage(storage);
+    callButton.visible = !storage;
   }
 
   private void call() {
@@ -96,13 +107,25 @@ final class InductionDockScreen extends AbstractContainerScreen<InductionDockMen
     graphics.pose().translate(leftPos, topPos, 0);
     painter.cutTooltip(graphics, mouseX - leftPos, mouseY - topPos);
     graphics.pose().popPose();
+    tabAt(mouseX, mouseY)
+        .ifPresent(under ->
+            graphics.renderTooltip(font, Component.translatable(under.title()), mouseX, mouseY));
   }
 
   @Override
   protected void renderBg(GuiGraphics graphics, float partialTick, int mouseX, int mouseY) {
+    tabs.renderBehind(graphics, leftPos + tabLeft(), topPos);
     ScreenPainter.window(graphics, leftPos, topPos, imageWidth, imageHeight);
-    int left = leftPos;
-    int top = topPos;
+    tabs.renderFront(graphics, leftPos + tabLeft(), topPos);
+    renderSlots(graphics, leftPos, topPos);
+    if (tabs.open() == DockScreenTabs.Tab.STORAGE) {
+      renderStorageFrames(graphics, leftPos, topPos);
+    } else {
+      renderDockTab(graphics, leftPos, topPos);
+    }
+  }
+
+  private void renderDockTab(GuiGraphics graphics, int left, int top) {
     ScreenPainter.sunken(
         graphics,
         left + PICTURE_X,
@@ -113,7 +136,6 @@ final class InductionDockScreen extends AbstractContainerScreen<InductionDockMen
     ScreenSprites.tower(graphics, left + PICTURE_X + 1, top + TOWER_Y + 1, menu.status());
     ScreenSprites.bolt(graphics, left + BOLT_X, top + BOLT_Y);
     ScreenPainter.slot(graphics, left + SLOT_FRAME_X, top + SLOT_FRAME_Y);
-    ScreenPainter.slot(graphics, left + SLOT_FRAME_X, top + CHARGE_FRAME_Y);
     graphics.fill(
         left + MARGIN, top + RULE_Y, left + ROW_RIGHT - 1, top + RULE_Y + 1, ScreenPainter.SHADE);
     graphics.fill(
@@ -123,7 +145,17 @@ final class InductionDockScreen extends AbstractContainerScreen<InductionDockMen
         top + QUEUE_TOP + ROW_HEIGHT,
         ScreenPainter.ROW);
     renderPicture(graphics, left, top);
-    renderSlots(graphics, left, top);
+  }
+
+  private void renderStorageFrames(GuiGraphics graphics, int left, int top) {
+    for (int row = 0; row < ROWS; row++) {
+      for (int column = 0; column < COLUMNS; column++) {
+        ScreenPainter.slot(
+            graphics,
+            left + SLOTS_FRAME_X + column * ScreenPainter.SLOT_SIZE,
+            top + STORAGE_FRAME_Y + row * ScreenPainter.SLOT_SIZE);
+      }
+    }
   }
 
   private void renderPicture(GuiGraphics graphics, int left, int top) {
@@ -168,6 +200,23 @@ final class InductionDockScreen extends AbstractContainerScreen<InductionDockMen
 
   @Override
   protected void renderLabels(GuiGraphics graphics, int mouseX, int mouseY) {
+    if (tabs.open() == DockScreenTabs.Tab.STORAGE) {
+      Component storage =
+          Component.translatable(ScreenKeys.DOCK_TAB_STORAGE).withStyle(ChatFormatting.BOLD);
+      painter.text(graphics, storage, TITLE, ScreenPainter.TEXT, ScreenPainter.FULL_SCALE);
+    } else {
+      renderDockLabels(graphics);
+    }
+    painter.text(
+        graphics,
+        playerInventoryTitle,
+        inventoryLabelX,
+        inventoryLabelY,
+        ScreenPainter.TEXT,
+        ScreenPainter.FULL_SCALE);
+  }
+
+  private void renderDockLabels(GuiGraphics graphics) {
     Component bold = title.copy().withStyle(ChatFormatting.BOLD);
     painter.text(graphics, bold, TITLE, ScreenPainter.TEXT, ScreenPainter.FULL_SCALE);
     DockStatus status = menu.status();
@@ -187,13 +236,6 @@ final class InductionDockScreen extends AbstractContainerScreen<InductionDockMen
       renderNoRobot(graphics, status);
     }
     renderRows(graphics);
-    painter.text(
-        graphics,
-        playerInventoryTitle,
-        inventoryLabelX,
-        inventoryLabelY,
-        ScreenPainter.TEXT,
-        ScreenPainter.FULL_SCALE);
   }
 
   private void renderStock(GuiGraphics graphics) {
@@ -213,18 +255,13 @@ final class InductionDockScreen extends AbstractContainerScreen<InductionDockMen
   }
 
   private void renderRedstoneLabel(GuiGraphics graphics) {
-    renderSlotLabel(graphics, ScreenKeys.REDSTONE, REDSTONE_Y);
-    renderSlotLabel(graphics, ScreenKeys.DOCK_CHARGE, CHARGE_LABEL_Y);
-  }
-
-  private void renderSlotLabel(GuiGraphics graphics, String key, int y) {
-    Component label = Component.translatable(key);
+    Component label = Component.translatable(ScreenKeys.REDSTONE);
     int width = painter.width(label, ScreenPainter.DETAIL_SCALE);
     painter.text(
         graphics,
         label,
         REDSTONE_CENTER - width / 2,
-        y,
+        REDSTONE_Y,
         ScreenPainter.DETAIL,
         ScreenPainter.DETAIL_SCALE);
   }
@@ -291,6 +328,32 @@ final class InductionDockScreen extends AbstractContainerScreen<InductionDockMen
         Component.translatable(ScreenKeys.DOCK_OWNER),
         DockTexts.owner(menu).withStyle(ChatFormatting.BOLD),
         Colors.VALUE_FIRST);
+  }
+
+  @Override
+  public boolean mouseClicked(double mouseX, double mouseY, int button) {
+    Optional<DockScreenTabs.Tab> clicked = tabAt(mouseX, mouseY);
+    if (clicked.isPresent()) {
+      tabs.open(clicked.get());
+      showOpenTab();
+      return true;
+    }
+    return super.mouseClicked(mouseX, mouseY, button);
+  }
+
+  /** The tabs stand outside the window, and a click there must not throw the item. */
+  @Override
+  protected boolean hasClickedOutside(double mouseX, double mouseY, int left, int top, int button) {
+    return tabAt(mouseX, mouseY).isEmpty()
+        && super.hasClickedOutside(mouseX, mouseY, left, top, button);
+  }
+
+  private Optional<DockScreenTabs.Tab> tabAt(double mouseX, double mouseY) {
+    return tabs.at(mouseX - leftPos - tabLeft(), mouseY - topPos);
+  }
+
+  private int tabLeft() {
+    return imageWidth - ScreenTabStrip.INSET;
   }
 
   private static boolean noPower(DockStatus status) {

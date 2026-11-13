@@ -65,7 +65,7 @@ Funciona como um carregador solar real.
 - **Energia:** recebe por cabos de outros mods, em **FE**, em qualquer face, ou com redstone em um slot próprio, também por funil. Nenhuma energia sai por cabo. Pelos funis, só sai o que a [automação do inventário](#inventário-do-dock) permite.
 - **Estoque:** tem um pequeno estoque de energia. Um item de redstone só vira energia quando couber inteiro no estoque. Sem FE, o Cubit fica hibernando.
 - **Slot de entrada:** aceita redstone, que vira estoque, ou uma Power Bank, que descarrega no estoque pelo mesmo limite de entrada dos cabos e aparece em `Input +X FE/t`. Vazia, ela fica parada no slot (perguntas 919, 920 e 923). O slot de carga saiu, e o inventário assumiu o papel dele (pergunta 950).
-- **Clique:** o clique direito com redstone na mão a põe no slot de entrada. Com uma Power Bank ou uma Toolbox na mão, o item vai para o inventário, juntando nas pilhas e nos slots livres, e o que não couber fica na mão. Só o dono (pergunta 959, que muda a 924).
+- **Clique:** o clique direito com redstone na mão a põe no slot de entrada. Com uma Power Bank, uma Toolbox ou um Damaged Cubit na mão, o item vai para o inventário, juntando nas pilhas e nos slots livres, e o que não couber fica na mão. Com o item do Cubit, o robô vai para a base, como sempre. Só o dono (perguntas 959 e 968, que mudam a 924).
 - **Inventário:** guarda a Toolbox e as Power Banks e carrega as Power Banks. Veja [Inventário do Dock](#inventário-do-dock).
 - **Vida:** recupera a vida do Cubit durante a hibernação, sem gastar FE, mesmo com o estoque zerado.
 - **Retorno automático:** serve de base para ele, na Fase 4.
@@ -83,9 +83,9 @@ Entra no item 11 da Fase 4.1 (issue #168, perguntas 947 a 959).
 
 - **Onde:** na aba `Storage` da tela do Dock, descrita em [`telas.md`](telas.md#aba-storage).
 - **Tamanho:** 27 slots, como um baú simples do jogo.
-- **O que aceita:** só a Toolbox, em pilhas de até 16, e as Power Banks dos 4 tiers, uma por slot. Qualquer outro item fica fora.
+- **O que aceita:** só a Toolbox, em pilhas de até 16, as Power Banks dos 4 tiers, o item do Cubit e o Damaged Cubit, esses três um por slot. Qualquer outro item fica fora (pergunta 965). O Cubit e o Damaged Cubit só ficam guardados, com todo o estado no item, sem recarga nem conserto (pergunta 966).
 - **Recarga:** o estoque carrega uma Power Bank por vez, a primeira não cheia na ordem dos slots, na velocidade de recarga do Base, até ela encher, sem criar nem perder FE (pergunta 949 e regra 13). Só carrega sem Cubit na base ou com o Cubit da base de bateria cheia. Com o Cubit ainda carregando, nenhuma Power Bank recebe (pergunta 952, que muda a 906).
-- **Automação:** por qualquer face, funis e cabos de itens põem a Toolbox e as Power Banks no inventário. A Power Bank só sai cheia, e a Toolbox sai a qualquer momento, também por qualquer face. A redstone continua entrando no slot de entrada, e a automação nunca põe a Power Bank nele (perguntas 925, 951 e 953).
+- **Automação:** por qualquer face, funis e cabos de itens põem a Toolbox e as Power Banks no inventário. A Power Bank só sai cheia, e a Toolbox, o Cubit e o Damaged Cubit saem a qualquer momento, também por qualquer face (pergunta 967). O Cubit e o Damaged Cubit também entram pela automação. A redstone continua entrando no slot de entrada, e a automação nunca põe a Power Bank nele (perguntas 925, 951 e 953).
 - **Quebrar:** o inventário fica no item do Dock e volta ao colocá-lo (pergunta 954).
 - **Saves antigos:** a Power Bank que estava no slot de carga vai para o primeiro slot do inventário ao carregar o mundo, com o registro no log (pergunta 955).
 
@@ -149,6 +149,7 @@ Se o robô estiver dentro do raio da base e com a bateria baixa, volta sozinho p
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 12:50 | Aceita o Cubit e o Damaged Cubit no inventário do Dock. |
 | Marcelo Fabiano | 2026-11-13 11:30 | Troca o slot de carga do Dock pelo inventário, na aba Storage. |
 | Marcelo Fabiano | 2026-11-12 23:10 | Divide o slot do Dock em entrada e carga para a Power Bank. |
 | Marcelo Fabiano | 2026-11-12 22:30 | Define a Power Bank só no Dock e no Cubit, a carga, o slot e a divisão no Dock. |

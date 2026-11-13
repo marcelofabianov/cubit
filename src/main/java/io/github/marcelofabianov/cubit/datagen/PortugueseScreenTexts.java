@@ -48,6 +48,8 @@ final class PortugueseScreenTexts {
   private static final String BATTERY = "Bateria";
   private static final String ROBOT_INVENTORY = "Inventário de %s";
   private static final String TAB_INVENTORY = "Inventário";
+  private static final String DOCK_TAB_DOCK = "Dock";
+  private static final String DOCK_TAB_STORAGE = "Armazenamento";
   private static final String TAB_SETTINGS = "Configurações";
   private static final String SETTINGS_BATTERY = "Bateria %s%%";
   private static final String FUNCTIONS = "Funções";
@@ -162,6 +164,8 @@ final class PortugueseScreenTexts {
     add.accept(ScreenKeys.ROBOT_INVENTORY, ROBOT_INVENTORY);
     add.accept(ScreenKeys.TAB_INVENTORY, TAB_INVENTORY);
     add.accept(ScreenKeys.TAB_SETTINGS, TAB_SETTINGS);
+    add.accept(ScreenKeys.DOCK_TAB_DOCK, DOCK_TAB_DOCK);
+    add.accept(ScreenKeys.DOCK_TAB_STORAGE, DOCK_TAB_STORAGE);
     add.accept(ScreenKeys.SETTINGS, TAB_SETTINGS);
     add.accept(ScreenKeys.SETTINGS_BATTERY, SETTINGS_BATTERY);
     add.accept(ScreenKeys.FUNCTIONS, FUNCTIONS);

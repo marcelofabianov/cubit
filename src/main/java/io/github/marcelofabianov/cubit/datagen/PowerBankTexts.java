@@ -1,7 +1,6 @@
 package io.github.marcelofabianov.cubit.datagen;
 
 import io.github.marcelofabianov.cubit.item.PowerBankItem;
-import io.github.marcelofabianov.cubit.menu.ScreenKeys;
 import io.github.marcelofabianov.cubit.registry.CubitItems;
 import java.util.function.BiConsumer;
 
@@ -12,7 +11,6 @@ final class PowerBankTexts {
   private static final String ELITE = "Elite Power Bank";
   private static final String ULTIMATE = "Ultimate Power Bank";
   private static final String AMOUNT = "%s / %s FE";
-  private static final String DOCK_CHARGE = "Charge";
   private static final String CHARGES_AT_DOCK = "Charges at the Induction Dock";
 
   private PowerBankTexts() {}
@@ -24,6 +22,5 @@ final class PowerBankTexts {
     add.accept(CubitItems.ULTIMATE_POWER_BANK.get().getDescriptionId(), ULTIMATE);
     add.accept(PowerBankItem.AMOUNT_KEY, AMOUNT);
     add.accept(PowerBankItem.CHARGES_AT_DOCK_KEY, CHARGES_AT_DOCK);
-    add.accept(ScreenKeys.DOCK_CHARGE, DOCK_CHARGE);
   }
 }

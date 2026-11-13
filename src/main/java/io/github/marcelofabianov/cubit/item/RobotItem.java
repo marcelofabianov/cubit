@@ -4,6 +4,7 @@ import io.github.marcelofabianov.cubit.CubitMod;
 import io.github.marcelofabianov.cubit.block.DockableRobotItem;
 import io.github.marcelofabianov.cubit.block.InductionDockBlock;
 import io.github.marcelofabianov.cubit.block.InductionDockBlockEntity;
+import io.github.marcelofabianov.cubit.block.StorableRobotItem;
 import io.github.marcelofabianov.cubit.domain.robot.RobotColor;
 import io.github.marcelofabianov.cubit.domain.robot.RobotState;
 import io.github.marcelofabianov.cubit.domain.robot.RobotType;
@@ -25,7 +26,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
 /** A robot stored as an item. It keeps the whole state, so collecting and placing lose nothing. */
-public final class RobotItem extends Item implements DockableRobotItem {
+public final class RobotItem extends Item implements DockableRobotItem, StorableRobotItem {
   private static final String COLOR_PROPERTY_NAME = "color";
 
   /** Tells the item model which icon to show. */
