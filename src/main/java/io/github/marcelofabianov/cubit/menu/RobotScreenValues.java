@@ -33,24 +33,35 @@ final class RobotScreenValues implements ContainerData {
   static final int SOLAR_SWITCH = 25;
   static final int DEFENSE = 27;
   static final int POWER = 28;
-  static final int COUNT = 29;
+  static final int TORCHES = 29;
+  static final int TORCH_COST = 31;
+  static final int TORCH_UNLOCK_TIER = 33;
+  static final int COUNT = 34;
   static final int TRUE_VALUE = 1;
   private static final int AVAILABLE = 1;
+
+  /**
+   * Where each switch goes, in the order of the switches: lamp, scanners, chatter, solar, torches.
+   */
+  private static final int[] SWITCH_VALUES = {LAMP, SCANNERS, CHATTER, SOLAR_SWITCH, TORCHES};
 
   private final Supplier<RobotScreenReading> source;
   private final RobotSwitch[] switches;
   private final DefenseControl defense;
   private final PowerControl power;
+  private final TorchControl torches;
   private final int[] values = new int[COUNT];
 
   RobotScreenValues(
       Supplier<RobotScreenReading> source,
       DefenseControl defense,
       PowerControl power,
+      TorchControl torches,
       RobotSwitch... switches) {
     this.source = source;
     this.defense = defense;
     this.power = power;
+    this.torches = torches;
     this.switches = switches.clone();
   }
 
@@ -74,8 +85,10 @@ final class RobotScreenValues implements ContainerData {
     values[DEFENSE] = defense.mode().ordinal();
     values[POWER] = power.available() ? TRUE_VALUE : 0;
     for (int index = 0; index < switches.length; index++) {
-      putSwitch(LAMP + index * 2, switches[index]);
+      putSwitch(SWITCH_VALUES[index], switches[index]);
     }
+    putEnergy(TORCH_COST, torches.cost());
+    values[TORCH_UNLOCK_TIER] = torches.unlockTier().map(tier -> tier.ordinal() + 1).orElse(0);
   }
 
   private void putSwitch(int index, RobotSwitch robotSwitch) {

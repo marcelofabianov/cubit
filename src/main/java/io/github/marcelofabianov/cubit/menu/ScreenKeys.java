@@ -50,6 +50,9 @@ public final class ScreenKeys {
 
   public static final String BATTERY = ROBOT + "battery";
   public static final String ROBOT_INVENTORY = ROBOT + "inventory";
+  public static final String EXCLUSIVE_SLOTS = ROBOT + "exclusive_slots";
+  public static final String TORCHES = ROBOT + "torches";
+  public static final String TORCHES_DETAIL = ROBOT + "torches.detail";
   public static final String TAB_INVENTORY = ROBOT + "tab_inventory";
   public static final String TAB_SETTINGS = ROBOT + "tab_settings";
   public static final String SETTINGS = ROBOT + "settings";

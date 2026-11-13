@@ -49,6 +49,33 @@ class RobotStateTest {
           new ScannerSpec(1, 1, 1, 1, Energy.ZERO, Energy.ZERO, 1));
 
   @Test
+  void theTorchesStartOnAlsoForOlderSaves() {
+    assertTrue(new RobotState(RobotTier.BASE, SOME_ENERGY, SOME_HEALTH).torchesOn());
+  }
+
+  @Test
+  void dyingAndRepairingKeepTheTorchSwitch() {
+    RobotState off =
+        new RobotState(
+            RobotTier.ADVANCED,
+            SOME_ENERGY,
+            SOME_HEALTH,
+            true,
+            RobotColor.WHITE,
+            true,
+            OreFilter.EMPTY,
+            true,
+            DefenseMode.INITIAL,
+            true,
+            PickupSettings.INITIAL,
+            false);
+
+    assertFalse(off.damaged().torchesOn());
+    assertFalse(off.damaged().repaired(SPEC, new Percentage(INITIAL_PERCENT)).torchesOn());
+    assertFalse(off.withEnergy(SOME_ENERGY).torchesOn());
+  }
+
+  @Test
   void aNewRobotIsWhite() {
     RobotState state = RobotState.initial(RobotTier.BASE, SPEC, new Percentage(INITIAL_PERCENT));
 

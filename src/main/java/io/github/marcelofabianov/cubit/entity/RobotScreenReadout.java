@@ -38,8 +38,11 @@ public final class RobotScreenReadout {
   /** The menu of the robot on the server, for its owner, as the click and the tests open it. */
   public static RobotMenu serverMenu(int containerId, Inventory inventory, RobotEntity robot) {
     RobotMenu.Contents contents =
-        new RobotMenu.Contents(robot.inventory(), robot.energySlot(), opening(robot));
-    RobotSwitch[] switches = {robot.lampSwitch(), robot.scanners(), robot.chatter(), robot.solar()};
+        new RobotMenu.Contents(
+            robot.inventory(), robot.energySlot(), robot.torches().slot(), opening(robot));
+    RobotSwitch[] switches = {
+      robot.lampSwitch(), robot.scanners(), robot.chatter(), robot.solar(), robot.torches()
+    };
     return RobotMenu.onServer(
         containerId,
         inventory,
@@ -50,6 +53,7 @@ public final class RobotScreenReadout {
             robot.defense(),
             new RobotPower(robot),
             robot.pickup(),
+            robot.torches(),
             robot::canUseInventory));
   }
 

@@ -2,17 +2,21 @@ package io.github.marcelofabianov.cubit.client;
 
 import io.github.marcelofabianov.cubit.client.ScreenPainter.Box;
 import io.github.marcelofabianov.cubit.client.ScreenPainter.Colors;
+import io.github.marcelofabianov.cubit.item.TierLook;
+import io.github.marcelofabianov.cubit.menu.DefenseKeys;
 import io.github.marcelofabianov.cubit.menu.RobotMenu;
 import io.github.marcelofabianov.cubit.menu.ScreenKeys;
 import java.util.OptionalInt;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 
 /**
  * The settings tab of the robot screen, as in the concept image: the switches that exist, the
- * scanner filter and the status. Every number comes from the server.
+ * scanner filter and the status. The five switches take rows of 12 px, with the detail in their
+ * tooltip, so the torches fit (answer 974). Every number comes from the server.
  */
 final class RobotSettingsPanel {
   private static final int LEFT = 7;
@@ -22,15 +26,14 @@ final class RobotSettingsPanel {
   private static final Box FUNCTIONS = new Box(8, 18, 150, LINE);
   private static final int FUNCTIONS_RULE = 27;
   private static final int FIRST_FUNCTION = 31;
-  private static final int FUNCTION_HEIGHT = 18;
+  private static final int FUNCTION_HEIGHT = 12;
   private static final int ICON_X = 11;
-  private static final int ICON_TOP = 2;
+  private static final float ICON_SCALE = 0.75f;
   private static final int NAME_X = 30;
-  private static final int NAME_TOP = 3;
-  private static final int DETAIL_TOP = 11;
+  private static final int NAME_TOP = 2;
   private static final int NAME_WIDTH = 106;
   private static final int TOGGLE_X = 139;
-  private static final int TOGGLE_TOP = 4;
+  private static final int TOGGLE_TOP = 0;
   private static final Box FILTER_TITLE = new Box(8, 108, 150, LINE);
   private static final int FILTER_RULE = 117;
   private static final int ORE_FRAME_X = 8;
@@ -44,14 +47,24 @@ final class RobotSettingsPanel {
   private static final int STATUS_TEXT_TOP = 3;
   private static final int STATUS_LABEL_X = 10;
   private static final int STATUS_WIDTH = 155;
-  private static final int SWITCHES = 4;
+  private static final int[] BUTTONS = {
+    RobotMenu.LAMP_BUTTON,
+    RobotMenu.SCANNERS_BUTTON,
+    RobotMenu.CHATTER_BUTTON,
+    RobotMenu.SOLAR_BUTTON,
+    RobotMenu.TORCHES_BUTTON
+  };
   private static final int FOLLOWING_ROW = 3;
   private static final int POWER_X = 154;
   private static final int POWER_Y = 4;
   private static final int POWER_SIZE = 14;
   private static final int POWER_ICON_INSET = 1;
   private static final String[] NAMES = {
-    ScreenKeys.LAMP, ScreenKeys.SCANNERS, ScreenKeys.CHATTER, ScreenKeys.SOLAR_PANEL
+    ScreenKeys.LAMP,
+    ScreenKeys.SCANNERS,
+    ScreenKeys.CHATTER,
+    ScreenKeys.SOLAR_PANEL,
+    ScreenKeys.TORCHES
   };
 
   private final ScreenPainter painter;
@@ -67,8 +80,8 @@ final class RobotSettingsPanel {
   /** Drawn in the coordinates of the window. */
   void render(GuiGraphics graphics) {
     heading(graphics, ScreenKeys.FUNCTIONS, FUNCTIONS, FUNCTIONS_RULE);
-    for (int button = 0; button < SWITCHES; button++) {
-      renderFunction(graphics, button, FIRST_FUNCTION + button * FUNCTION_HEIGHT);
+    for (int row = 0; row < BUTTONS.length; row++) {
+      renderFunction(graphics, row, FIRST_FUNCTION + row * FUNCTION_HEIGHT);
     }
     heading(graphics, ScreenKeys.SCANNER_FILTER, FILTER_TITLE, FILTER_RULE);
     renderFilter(graphics);
@@ -96,10 +109,10 @@ final class RobotSettingsPanel {
     if (overPower(x, y)) {
       return menu.powerAvailable() ? OptionalInt.of(RobotMenu.POWER_BUTTON) : OptionalInt.empty();
     }
-    for (int button = 0; button < SWITCHES; button++) {
-      int top = FIRST_FUNCTION + button * FUNCTION_HEIGHT + TOGGLE_TOP;
-      if (ScreenToggle.contains(TOGGLE_X, top, x, y) && menu.switchAvailable(button)) {
-        return OptionalInt.of(button);
+    for (int row = 0; row < BUTTONS.length; row++) {
+      int top = FIRST_FUNCTION + row * FUNCTION_HEIGHT + TOGGLE_TOP;
+      if (ScreenToggle.contains(TOGGLE_X, top, x, y) && menu.switchAvailable(BUTTONS[row])) {
+        return OptionalInt.of(BUTTONS[row]);
       }
     }
     return OptionalInt.empty();
@@ -112,22 +125,40 @@ final class RobotSettingsPanel {
     graphics.fill(LEFT, rule + 1, RIGHT, rule + 2, ScreenPainter.WHITE);
   }
 
-  private void renderFunction(GuiGraphics graphics, int button, int top) {
-    if (button % 2 == 0) {
+  private void renderFunction(GuiGraphics graphics, int row, int top) {
+    if (row % 2 == 0) {
       graphics.fill(LEFT, top, RIGHT, top + FUNCTION_HEIGHT, ScreenPainter.ROW);
     }
-    ScreenSprites.function(graphics, ICON_X, top + ICON_TOP, button);
+    int button = BUTTONS[row];
+    graphics.pose().pushPose();
+    graphics.pose().translate(ICON_X, top, 0);
+    graphics.pose().scale(ICON_SCALE, ICON_SCALE, 1);
+    if (button == RobotMenu.TORCHES_BUTTON) {
+      ScreenSprites.torches(graphics, 0, 0);
+    } else {
+      ScreenSprites.function(graphics, 0, 0, button);
+    }
+    graphics.pose().popPose();
     Box name = new Box(NAME_X, top + NAME_TOP, NAME_WIDTH, LINE);
     painter.text(
         graphics,
-        Component.translatable(NAMES[button]),
+        Component.translatable(NAMES[row]),
         name,
         ScreenPainter.TEXT,
         ScreenPainter.FULL_SCALE);
-    Box detail = new Box(NAME_X, top + DETAIL_TOP, NAME_WIDTH, DETAIL_LINE);
-    painter.text(
-        graphics, detailOf(button), detail, ScreenPainter.DETAIL, ScreenPainter.DETAIL_SCALE);
     renderToggle(graphics, button, top + TOGGLE_TOP);
+  }
+
+  /** The detail of the switch under the mouse, as its tooltip, by the mouse (answer 974). */
+  boolean renderDetail(GuiGraphics graphics, Font font, int mouseX, int mouseY, int left, int top) {
+    double x = mouseX - left;
+    double y = mouseY - top;
+    int row = (int) Math.floor((y - FIRST_FUNCTION) / FUNCTION_HEIGHT);
+    if (x < LEFT || x >= RIGHT || y < FIRST_FUNCTION || row >= BUTTONS.length) {
+      return false;
+    }
+    graphics.renderTooltip(font, detailOf(BUTTONS[row]), mouseX, mouseY);
+    return true;
   }
 
   private Component detailOf(int button) {
@@ -135,8 +166,20 @@ final class RobotSettingsPanel {
       case RobotMenu.LAMP_BUTTON -> RobotTexts.lampDetail(menu);
       case RobotMenu.SCANNERS_BUTTON -> RobotTexts.scannersDetail(menu);
       case RobotMenu.SOLAR_BUTTON -> RobotTexts.solarDetail(menu);
+      case RobotMenu.TORCHES_BUTTON -> torchesDetail();
       default -> Component.translatable(ScreenKeys.CHATTER_DETAIL);
     };
+  }
+
+  /** The cost of the tier, or the tier that unlocks the torches (answers 974 and 981). */
+  private Component torchesDetail() {
+    if (menu.switchAvailable(RobotMenu.TORCHES_BUTTON)) {
+      return Component.translatable(ScreenKeys.TORCHES_DETAIL, menu.torchCost().amount());
+    }
+    return menu.torchUnlockTier()
+        .map(
+            tier -> (Component) Component.translatable(DefenseKeys.UNLOCKS_AT, TierLook.name(tier)))
+        .orElse(Component.empty());
   }
 
   private void renderToggle(GuiGraphics graphics, int button, int top) {

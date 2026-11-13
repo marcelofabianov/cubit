@@ -50,6 +50,9 @@ final class PortugueseScreenTexts {
   private static final String TAB_INVENTORY = "Inventário";
   private static final String DOCK_TAB_DOCK = "Dock";
   private static final String DOCK_TAB_STORAGE = "Armazenamento";
+  private static final String EXCLUSIVE_SLOTS = "Slots exclusivos";
+  private static final String TORCHES = "Tochas";
+  private static final String TORCH_DETAIL = "Ilumina onde mobs podem nascer · %s FE por tocha";
   private static final String TAB_SETTINGS = "Configurações";
   private static final String SETTINGS_BATTERY = "Bateria %s%%";
   private static final String FUNCTIONS = "Funções";
@@ -164,6 +167,9 @@ final class PortugueseScreenTexts {
     add.accept(ScreenKeys.ROBOT_INVENTORY, ROBOT_INVENTORY);
     add.accept(ScreenKeys.TAB_INVENTORY, TAB_INVENTORY);
     add.accept(ScreenKeys.TAB_SETTINGS, TAB_SETTINGS);
+    add.accept(ScreenKeys.EXCLUSIVE_SLOTS, EXCLUSIVE_SLOTS);
+    add.accept(ScreenKeys.TORCHES, TORCHES);
+    add.accept(ScreenKeys.TORCHES_DETAIL, TORCH_DETAIL);
     add.accept(ScreenKeys.DOCK_TAB_DOCK, DOCK_TAB_DOCK);
     add.accept(ScreenKeys.DOCK_TAB_STORAGE, DOCK_TAB_STORAGE);
     add.accept(ScreenKeys.SETTINGS, TAB_SETTINGS);

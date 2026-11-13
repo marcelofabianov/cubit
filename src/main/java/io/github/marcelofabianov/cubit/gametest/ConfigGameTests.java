@@ -14,6 +14,7 @@ import io.github.marcelofabianov.cubit.domain.tier.RobotTier;
 import io.github.marcelofabianov.cubit.domain.tier.ScannerSpec;
 import io.github.marcelofabianov.cubit.domain.tier.ShockSpec;
 import io.github.marcelofabianov.cubit.domain.tier.TierSpec;
+import io.github.marcelofabianov.cubit.domain.tier.TorchSpec;
 import java.util.Map;
 import java.util.Set;
 import net.minecraft.gametest.framework.GameTest;
@@ -158,6 +159,7 @@ public final class ConfigGameTests {
   private static final int BASE_PICKUP_FILTER_SLOTS = 3;
 
   private static final int BASE_FETCH_RADIUS = 4;
+  private static final int BASE_TORCH_COST = 20;
 
   private static final long BASE_POWER_BANK = 210_000;
 
@@ -188,7 +190,8 @@ public final class ConfigGameTests {
               ORE_FILTER_SLOTS),
           new ShockSpec(0, 0, BASE_SHOCK_TICKS, Energy.ZERO, false, Set.of()),
           new PickupSpec(0, Energy.ZERO, BASE_PICKUP_FILTER_SLOTS, false, BASE_FETCH_RADIUS),
-          new Energy(BASE_POWER_BANK));
+          new Energy(BASE_POWER_BANK),
+          new TorchSpec(new Energy(BASE_TORCH_COST), new LightLevel(0)));
   private static final String WRONG_SPEC = "Wrong tier numbers";
   private static final String ULTIMATE_SPEED_KEY = "general_robot.ultimate.speed_multiplier";
   private static final double ULTIMATE_SPEED_MULTIPLIER = 2.0;

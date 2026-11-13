@@ -8,6 +8,7 @@ Não há perguntas pendentes nesta fase.
 
 | # | Pergunta | Resposta |
 |---|---|---|
+| 986 | O teste manual das tochas espera o ícone da chave ou é feito agora? | "vou testar agora sem o ícone": o teste é feito agora, com a chave sem ícone, e o ícone é conferido depois, quando o PNG chegar |
 | 984 | Como fica a fileira dos slots exclusivos acima do inventário do Cubit? | Entre o slot de energia e o inventário do Cubit entram o título `Exclusive slots` / `Slots exclusivos` e, abaixo, os slots que já existem, a partir da esquerda: hoje só o de tochas, e o do card na Fase 5. A dica do slot vazio mostra `Torches`, ou `Unlocks at Advanced` no Base, onde ele aparece apagado. A janela cresce cerca de 30 px em todas as abas, e os inventários do Cubit e do player descem. Completa a 980. Confirma a recomendação |
 | 983 | Quais tochas o slot de tochas aceita? | Só a tocha comum, `minecraft:torch`, que dá luz 14, e a análise do espaço conta sempre com essa luz. Confirma a recomendação |
 | 982 | Quais imagens novas as tochas precisam? | Só o ícone de 64×64 da tocha para a chave `Torches` da aba Settings, no estilo da lâmpada, dos scanners e do painel solar, por prompt em `tmp/arte/torches-switch/`. O slot não tem imagem própria, e a tocha posta no mundo é a do jogo. Confirma a recomendação |
@@ -238,6 +239,7 @@ Não há perguntas pendentes nesta fase.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 14:20 | Registra a resposta 986. |
 | Marcelo Fabiano | 2026-11-13 13:30 | Registra as respostas 971 a 984. |
 | Marcelo Fabiano | 2026-11-13 13:15 | Registra a resposta 970. |
 | Marcelo Fabiano | 2026-11-13 13:05 | Registra as respostas 961 e 969. |

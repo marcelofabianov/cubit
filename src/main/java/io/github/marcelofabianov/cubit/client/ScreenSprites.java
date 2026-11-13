@@ -62,6 +62,9 @@ final class ScreenSprites {
 
   private static final int STORAGE_TAB_U = 128;
 
+  /** The torch of the settings tab, after the dock tabs, from a prompt (answer 982). */
+  private static final int TORCHES_U = 192;
+
   private ScreenSprites() {}
 
   static void chest(GuiGraphics graphics, int x, int y) {
@@ -108,6 +111,10 @@ final class ScreenSprites {
 
   static void storageTab(GuiGraphics graphics, int x, int y) {
     rowIcon(graphics, x, y, STORAGE_TAB_U);
+  }
+
+  static void torches(GuiGraphics graphics, int x, int y) {
+    rowIcon(graphics, x, y, TORCHES_U);
   }
 
   /** An icon in the row added below the others, where the funnel is. */

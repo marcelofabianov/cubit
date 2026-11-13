@@ -11,6 +11,7 @@ import io.github.marcelofabianov.cubit.domain.robot.InventoryWindow;
 import io.github.marcelofabianov.cubit.domain.tier.RobotTier;
 import io.github.marcelofabianov.cubit.registry.CubitMenus;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -21,7 +22,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ClickType;
 import net.minecraft.world.inventory.ContainerData;
-import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 
@@ -30,7 +30,11 @@ public final class RobotMenu extends AbstractContainerMenu {
   public static final int SLOTS_PER_ROW = 9;
   public static final int SLOT_SIZE = 18;
   public static final int FIRST_SLOT_X = 8;
-  public static final int FIRST_SLOT_Y = 72;
+  public static final int FIRST_SLOT_Y = 102;
+
+  /** The row of the exclusive slots, above the inventory of the robot (answers 980 and 984). */
+  public static final int EXCLUSIVE_SLOT_Y = 72;
+
   public static final int PLAYER_INVENTORY_GAP = 12;
   public static final int HOTBAR_GAP = 58;
   public static final int ENERGY_SLOT_X = 152;
@@ -53,6 +57,9 @@ public final class RobotMenu extends AbstractContainerMenu {
   public static final int PICKUP_MODE_BUTTON = 11;
   public static final int FETCH_BUTTON = 12;
 
+  /** The torch switch of the settings tab, after the behavior tab (answer 974). */
+  public static final int TORCHES_BUTTON = 13;
+
   /** The top of the ghost slots of the pickup filter, in the behavior tab. */
   public static final int PICKUP_FILTER_Y = PickupMenuPart.FILTER_Y;
 
@@ -63,11 +70,14 @@ public final class RobotMenu extends AbstractContainerMenu {
   public static final int VISIBLE_ROWS = 3;
 
   private static final int ENERGY_SLOT_SIZE = 1;
+  private static final int TORCH_SLOT_SIZE = 1;
+  private static final int TORCH_SWITCH = 4;
   private static final int[] SWITCH_INDEXES = {
     RobotScreenValues.LAMP,
     RobotScreenValues.SCANNERS,
     RobotScreenValues.CHATTER,
-    RobotScreenValues.SOLAR_SWITCH
+    RobotScreenValues.SOLAR_SWITCH,
+    RobotScreenValues.TORCHES
   };
 
   private final Container container;
@@ -83,7 +93,8 @@ public final class RobotMenu extends AbstractContainerMenu {
   private final RobotMenuSlots slotGroups = new RobotMenuSlots();
   private final PickupMenuPart pickup;
 
-  private RobotMenu(int containerId, Inventory playerInventory, Contents contents, Server server) {
+  private RobotMenu(
+      int containerId, Inventory playerInventory, Contents contents, RobotMenuServer server) {
     super(CubitMenus.ROBOT.get(), containerId);
     this.container = contents.inventory();
     this.window = new InventoryWindow(container.getContainerSize(), SLOTS_PER_ROW, VISIBLE_ROWS);
@@ -98,6 +109,10 @@ public final class RobotMenu extends AbstractContainerMenu {
     this.pickup = new PickupMenuPart(server.pickup());
     slotGroups.addRobotSlots(this::addSlot, view);
     slotGroups.addEnergySlot(this::addSlot, contents.energySlot());
+    slotGroups.addTorchSlot(
+        this::addSlot,
+        contents.torchSlot(),
+        () -> RobotScreenValues.isAvailable(values, RobotScreenValues.TORCHES));
     addDataSlots(values);
     slotGroups.addPlayerSlots(this::addSlot, playerInventory, playerInventoryY());
     pickup.addSlots(this::addSlot, slots.size());
@@ -110,8 +125,11 @@ public final class RobotMenu extends AbstractContainerMenu {
     RobotScreenOpening opening = RobotScreenOpening.read(data);
     Contents contents =
         new Contents(
-            new SimpleContainer(opening.slots()), new SimpleContainer(ENERGY_SLOT_SIZE), opening);
-    return new RobotMenu(containerId, playerInventory, contents, Server.onClient());
+            new SimpleContainer(opening.slots()),
+            new SimpleContainer(ENERGY_SLOT_SIZE),
+            new SimpleContainer(TORCH_SLOT_SIZE),
+            opening);
+    return new RobotMenu(containerId, playerInventory, contents, RobotMenuServer.onClient());
   }
 
   /** On the server, where the values come from the robot itself. */
@@ -119,10 +137,14 @@ public final class RobotMenu extends AbstractContainerMenu {
       int containerId, Inventory playerInventory, Contents contents, RobotSource source) {
     RobotScreenValues values =
         new RobotScreenValues(
-            source.reading(), source.defense(), source.power(), source.switches());
+            source.reading(),
+            source.defense(),
+            source.power(),
+            source.torches(),
+            source.switches());
     values.refresh();
-    Server server =
-        new Server(
+    RobotMenuServer server =
+        new RobotMenuServer(
             source.stillValid(),
             values,
             values::refresh,
@@ -161,10 +183,11 @@ public final class RobotMenu extends AbstractContainerMenu {
   }
 
   private boolean toggleFromClient(Player player, int button) {
-    if (button < 0 || button >= switches.length || !stillValid(player)) {
+    int index = switchIndex(button);
+    if (index < 0 || index >= switches.length || !stillValid(player)) {
       return false;
     }
-    RobotSwitch pressed = switches[button];
+    RobotSwitch pressed = switches[index];
     if (!pressed.isAvailable()) {
       return false;
     }
@@ -292,11 +315,32 @@ public final class RobotMenu extends AbstractContainerMenu {
 
   /** By the button of the switch: {@link #LAMP_BUTTON}, {@link #SCANNERS_BUTTON} or chatter. */
   public boolean switchOn(int button) {
-    return RobotScreenValues.isTrue(values, SWITCH_INDEXES[button]);
+    return RobotScreenValues.isTrue(values, SWITCH_INDEXES[switchIndex(button)]);
   }
 
   public boolean switchAvailable(int button) {
-    return RobotScreenValues.isAvailable(values, SWITCH_INDEXES[button]);
+    return RobotScreenValues.isAvailable(values, SWITCH_INDEXES[switchIndex(button)]);
+  }
+
+  /** The first four switches go by their button, and the torches come after them. */
+  private static int switchIndex(int button) {
+    return button == TORCHES_BUTTON ? TORCH_SWITCH : button;
+  }
+
+  /** The torch slot comes after the visible rows of the robot and the energy slot. */
+  public int torchSlotIndex() {
+    return view.getContainerSize() + ENERGY_SLOT_SIZE;
+  }
+
+  public Energy torchCost() {
+    return RobotScreenValues.energy(values, RobotScreenValues.TORCH_COST);
+  }
+
+  public Optional<RobotTier> torchUnlockTier() {
+    int value = values.get(RobotScreenValues.TORCH_UNLOCK_TIER);
+    return value == 0
+        ? Optional.empty()
+        : Optional.of(ScreenEnums.of(RobotTier.values(), value - 1));
   }
 
   public int rows() {
@@ -316,7 +360,7 @@ public final class RobotMenu extends AbstractContainerMenu {
     ItemStack stack = slot.getItem();
     ItemStack moved = stack.copy();
     int inventorySlots = view.getContainerSize();
-    int robotSlots = inventorySlots + ENERGY_SLOT_SIZE;
+    int robotSlots = inventorySlots + ENERGY_SLOT_SIZE + TORCH_SLOT_SIZE;
     boolean fits =
         index < robotSlots
             ? moveItemStackTo(
@@ -340,7 +384,8 @@ public final class RobotMenu extends AbstractContainerMenu {
   }
 
   /** The containers of the robot and what travels when the screen opens. */
-  public record Contents(Container inventory, Container energySlot, RobotScreenOpening opening) {}
+  public record Contents(
+      Container inventory, Container energySlot, Container torchSlot, RobotScreenOpening opening) {}
 
   /** What the server reads from the robot: the screen values, the switches and who may use it. */
   public record RobotSource(
@@ -349,29 +394,6 @@ public final class RobotMenu extends AbstractContainerMenu {
       DefenseControl defense,
       PowerControl power,
       PickupControl pickup,
+      TorchControl torches,
       Predicate<Player> stillValid) {}
-
-  private record Server(
-      Predicate<Player> stillValid,
-      ContainerData values,
-      Runnable refresh,
-      RobotSwitch[] switches,
-      DefenseControl defense,
-      PowerControl power,
-      PickupControl pickup) {
-    private static final RobotSwitch[] NO_SWITCHES = {
-      RobotSwitch.NONE, RobotSwitch.NONE, RobotSwitch.NONE, RobotSwitch.NONE
-    };
-
-    static Server onClient() {
-      return new Server(
-          player -> true,
-          new SimpleContainerData(RobotScreenValues.COUNT),
-          () -> {},
-          NO_SWITCHES,
-          DefenseControl.NONE,
-          PowerControl.NONE,
-          PickupControl.NONE);
-    }
-  }
 }

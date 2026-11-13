@@ -50,6 +50,9 @@ final class ScreenTexts {
   private static final String TAB_INVENTORY = "Inventory";
   private static final String DOCK_TAB_DOCK = "Dock";
   private static final String DOCK_TAB_STORAGE = "Storage";
+  private static final String EXCLUSIVE_SLOTS = "Exclusive slots";
+  private static final String TORCHES = "Torches";
+  private static final String TORCH_DETAIL = "Lights spots where mobs can spawn · %s FE per torch";
   private static final String TAB_SETTINGS = "Settings";
   private static final String SETTINGS_BATTERY = "Battery %s%%";
   private static final String FUNCTIONS = "Functions";
@@ -164,6 +167,9 @@ final class ScreenTexts {
     add.accept(ScreenKeys.ROBOT_INVENTORY, ROBOT_INVENTORY);
     add.accept(ScreenKeys.TAB_INVENTORY, TAB_INVENTORY);
     add.accept(ScreenKeys.TAB_SETTINGS, TAB_SETTINGS);
+    add.accept(ScreenKeys.EXCLUSIVE_SLOTS, EXCLUSIVE_SLOTS);
+    add.accept(ScreenKeys.TORCHES, TORCHES);
+    add.accept(ScreenKeys.TORCHES_DETAIL, TORCH_DETAIL);
     add.accept(ScreenKeys.DOCK_TAB_DOCK, DOCK_TAB_DOCK);
     add.accept(ScreenKeys.DOCK_TAB_STORAGE, DOCK_TAB_STORAGE);
     add.accept(ScreenKeys.SETTINGS, TAB_SETTINGS);

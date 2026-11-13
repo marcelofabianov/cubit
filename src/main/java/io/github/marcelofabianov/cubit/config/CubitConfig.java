@@ -42,6 +42,7 @@ public final class CubitConfig {
   private final ChatterSection chatter;
   private final DefenseSection defense;
   private final PickupSection pickup;
+  private final TorchSection torches;
   private final AtomicBoolean warnedRareTags = new AtomicBoolean();
   private final AtomicBoolean warnedLamp = new AtomicBoolean();
   private final TierCatalog tierCatalog;
@@ -63,6 +64,7 @@ public final class CubitConfig {
     chatter = new ChatterSection(builder);
     defense = new DefenseSection(builder);
     pickup = new PickupSection(builder);
+    torches = new TorchSection(builder);
     builder.pop();
 
     tierCatalog = new NeoForgeTierCatalog(Map.of(GENERAL_ROBOT, tierSections(builder)));
@@ -90,6 +92,18 @@ public final class CubitConfig {
 
   public int focusForgetDistanceBlocks() {
     return defense.focusForget.get();
+  }
+
+  public int torchCheckTicks() {
+    return torches.check.get();
+  }
+
+  public int torchScanRadiusBlocks() {
+    return torches.scanRadius.get();
+  }
+
+  public int torchReachBlocks() {
+    return torches.reach.get();
   }
 
   public int pickupCheckTicks() {

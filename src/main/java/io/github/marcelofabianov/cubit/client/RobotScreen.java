@@ -55,9 +55,8 @@ final class RobotScreen extends AbstractContainerScreen<RobotMenu> {
   private static final int BOLT_Y = 20;
   private static final int REDSTONE_CENTER = 160;
   private static final int REDSTONE_Y = 54;
-  private static final int ROBOT_LABEL_Y = 63;
+  private static final int ROBOT_LABEL_Y = RobotMenu.FIRST_SLOT_Y - LINE;
   private static final int PLAYER_LABEL_GAP = 10;
-  private static final int PLAYER_ROWS = 3;
 
   private final ScreenPainter painter = new ScreenPainter();
   private RobotSettingsPanel settings;
@@ -65,10 +64,12 @@ final class RobotScreen extends AbstractContainerScreen<RobotMenu> {
   private RobotBehaviorPanel behavior;
   private final InventoryScrollbar scrollbar;
   private final RobotScreenTabs tabs = new RobotScreenTabs();
+  private final RobotExclusiveRow exclusive;
 
   RobotScreen(RobotMenu menu, Inventory playerInventory, Component title) {
     super(menu, playerInventory, title);
     scrollbar = new InventoryScrollbar(menu);
+    exclusive = new RobotExclusiveRow(painter, menu);
     imageWidth = WIDTH + (scrollbar.shown() ? InventoryScrollbar.EXTRA_WIDTH : 0);
     imageHeight = menu.playerInventoryY() + RobotMenu.HOTBAR_GAP + BELOW_HOTBAR;
   }
@@ -100,7 +101,8 @@ final class RobotScreen extends AbstractContainerScreen<RobotMenu> {
   public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
     painter.begin(font);
     super.render(graphics, mouseX, mouseY, partialTick);
-    if (!renderTagTooltip(graphics, mouseX, mouseY)) {
+    if (!renderTagTooltip(graphics, mouseX, mouseY)
+        && !exclusive.renderTooltip(graphics, font, hoveredSlot, mouseX, mouseY)) {
       renderTooltip(graphics, mouseX, mouseY);
     }
     graphics.pose().pushPose();
@@ -143,8 +145,13 @@ final class RobotScreen extends AbstractContainerScreen<RobotMenu> {
           mouseY);
       return;
     }
-    if (tabs.open() == RobotScreenTabs.Tab.BEHAVIOR
-        && behavior.renderDetail(graphics, font, mouseX, mouseY, leftPos, topPos)) {
+    boolean detail =
+        switch (tabs.open()) {
+          case BEHAVIOR -> behavior.renderDetail(graphics, font, mouseX, mouseY, leftPos, topPos);
+          case SETTINGS -> settings.renderDetail(graphics, font, mouseX, mouseY, leftPos, topPos);
+          default -> false;
+        };
+    if (detail) {
       return;
     }
     tabAt(mouseX, mouseY)
@@ -159,7 +166,7 @@ final class RobotScreen extends AbstractContainerScreen<RobotMenu> {
     tabs.renderFront(graphics, leftPos + tabLeft(), topPos);
     if (tabs.open() == RobotScreenTabs.Tab.BEHAVIOR) {
       behavior.renderFrames(graphics, leftPos, topPos);
-      renderPlayerSlots(graphics);
+      RobotSlotFrames.player(graphics, menu, leftPos, topPos);
     }
     if (tabs.open() != RobotScreenTabs.Tab.INVENTORY) {
       return;
@@ -173,34 +180,9 @@ final class RobotScreen extends AbstractContainerScreen<RobotMenu> {
   }
 
   private void renderSlots(GuiGraphics graphics) {
-    int frameX = leftPos + RobotMenu.FIRST_SLOT_X - 1;
-    for (int slot = 0; slot < menu.window().visibleSlots(); slot++) {
-      ScreenPainter.slot(
-          graphics,
-          frameX + slot % RobotMenu.SLOTS_PER_ROW * RobotMenu.SLOT_SIZE,
-          topPos
-              + RobotMenu.FIRST_SLOT_Y
-              - 1
-              + slot / RobotMenu.SLOTS_PER_ROW * RobotMenu.SLOT_SIZE);
-    }
-    ScreenPainter.slot(
-        graphics, leftPos + RobotMenu.ENERGY_SLOT_X - 1, topPos + RobotMenu.ENERGY_SLOT_Y - 1);
-    renderPlayerSlots(graphics);
-  }
-
-  private void renderPlayerSlots(GuiGraphics graphics) {
-    int frameX = leftPos + RobotMenu.FIRST_SLOT_X - 1;
-    int playerTop = topPos + menu.playerInventoryY() - 1;
-    for (int row = 0; row < PLAYER_ROWS; row++) {
-      for (int column = 0; column < RobotMenu.SLOTS_PER_ROW; column++) {
-        ScreenPainter.slot(
-            graphics, frameX + column * RobotMenu.SLOT_SIZE, playerTop + row * RobotMenu.SLOT_SIZE);
-      }
-    }
-    for (int column = 0; column < RobotMenu.SLOTS_PER_ROW; column++) {
-      ScreenPainter.slot(
-          graphics, frameX + column * RobotMenu.SLOT_SIZE, playerTop + RobotMenu.HOTBAR_GAP);
-    }
+    RobotSlotFrames.robot(graphics, menu, leftPos, topPos);
+    exclusive.renderFrames(graphics, leftPos, topPos);
+    RobotSlotFrames.player(graphics, menu, leftPos, topPos);
   }
 
   @Override
@@ -296,6 +278,7 @@ final class RobotScreen extends AbstractContainerScreen<RobotMenu> {
         REDSTONE_Y,
         ScreenPainter.DETAIL,
         ScreenPainter.DETAIL_SCALE);
+    exclusive.renderLabels(graphics);
     Component robotLabel = Component.translatable(ScreenKeys.ROBOT_INVENTORY, title);
     painter.text(
         graphics, robotLabel, MARGIN, ROBOT_LABEL_Y, ScreenPainter.TEXT, ScreenPainter.FULL_SCALE);
