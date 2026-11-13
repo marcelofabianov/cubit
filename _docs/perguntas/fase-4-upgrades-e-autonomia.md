@@ -8,6 +8,7 @@ Não há perguntas pendentes nesta fase.
 
 | # | Pergunta | Resposta |
 |---|---|---|
+| 996 | O `AGENTS.md` pode citar as classes do olhar para o alvo do choque? | "pode atualizar o AGENTS.md", autorizado pelo desenvolvedor: `ShockGaze` em `domain/behavior`, e `RobotGaze` e `RobotShockGaze` em `entity` |
 | 995 | Quando o alvo morre, o Cubit volta a olhar para o dono na hora ou depois de 3 s? | Depois de 3 s, olhando o ponto em que o alvo caiu, como no pedido da resposta 991. Para o alvo que fugiu a mais de 32 blocos ou sumiu, vale o mesmo: 3 s no último ponto em que ele estava. Muda a 993, que contrariava o pedido. Confirma a recomendação |
 | 994 | Como fica a chave de config do tempo do olhar, ainda não publicada? | `shock_look_after_ticks`, de 1 a 1200, com 60 ticks (3 s): o tempo em que ele ainda olha depois de o alvo morrer ou se perder. Substitui a `shock_look_ticks` da resposta 989, que só existiu nesta branch, sem migração. Confirma a recomendação |
 | 993 | Nos 3 s depois de o alvo morrer, para onde o Cubit olha? | "Volta logo para o dono", e os 3 s só valeriam para o alvo que fugiu. Mudada pela 995, porque contrariava o pedido da 991. A recomendação, o ponto em que o alvo caiu, foi recusada aqui e escolhida na 995 |
@@ -18,6 +19,7 @@ Não há perguntas pendentes nesta fase.
 | 988 | Em que tarefa entra o olhar para o alvo do choque? | Na branch das tochas, `feature/170-torches`, num commit próprio, e o roteiro do teste manual ganha os passos do choque. A recomendação, uma issue nova depois das tochas, foi recusada |
 | 987 | Como o Cubit olha para o alvo do choque? | "ponto importante sempre que o cubit for atacar com choque deve estar olhando para seu alvo. Mesmo seguindo player ele deve ter este comportamento no ataque": no choque, a cabeça e o corpo viram para o alvo e ficam nele por 2 s, no config (`shock_look_ticks`). Enquanto isso, ele continua andando atrás do dono, sem olhar para o dono. Num choque em área, olha para o alvo mais próximo. Depois, volta a olhar para o dono. A recomendação, 1 s, mudou para 2 s |
 | 986 | O teste manual das tochas espera o ícone da chave ou é feito agora? | "vou testar agora sem o ícone": o teste é feito agora, com a chave sem ícone, e o ícone é conferido depois, quando o PNG chegar |
+| 985 | O `AGENTS.md` pode citar as classes das tochas na estrutura de pacotes? | "pode atualizar o AGENTS.md", autorizado pelo desenvolvedor: `TorchRules`, `TorchGrid`, `GridCell` e `TorchPlanner` em `domain/behavior`, `TorchSpec` em `domain/tier`, `RobotTorches`, `TorchScan` e `RobotTorchSlot` em `entity` e `TorchControl` em `menu` |
 | 984 | Como fica a fileira dos slots exclusivos acima do inventário do Cubit? | Entre o slot de energia e o inventário do Cubit entram o título `Exclusive slots` / `Slots exclusivos` e, abaixo, os slots que já existem, a partir da esquerda: hoje só o de tochas, e o do card na Fase 5. A dica do slot vazio mostra `Torches`, ou `Unlocks at Advanced` no Base, onde ele aparece apagado. A janela cresce cerca de 30 px em todas as abas, e os inventários do Cubit e do player descem. Completa a 980. Confirma a recomendação |
 | 983 | Quais tochas o slot de tochas aceita? | Só a tocha comum, `minecraft:torch`, que dá luz 14, e a análise do espaço conta sempre com essa luz. Confirma a recomendação |
 | 982 | Quais imagens novas as tochas precisam? | Só o ícone de 64×64 da tocha para a chave `Torches` da aba Settings, no estilo da lâmpada, dos scanners e do painel solar, por prompt em `tmp/arte/torches-switch/`. O slot não tem imagem própria, e a tocha posta no mundo é a do jogo. Confirma a recomendação |
@@ -248,6 +250,7 @@ Não há perguntas pendentes nesta fase.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 15:20 | Registra as respostas 985 e 996. |
 | Marcelo Fabiano | 2026-11-13 15:10 | Registra as respostas 991 a 995. |
 | Marcelo Fabiano | 2026-11-13 14:40 | Registra as respostas 987 a 990. |
 | Marcelo Fabiano | 2026-11-13 14:20 | Registra a resposta 986. |
