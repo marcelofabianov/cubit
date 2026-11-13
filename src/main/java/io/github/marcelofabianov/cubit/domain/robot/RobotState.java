@@ -147,6 +147,24 @@ public record RobotState(
         pickup);
   }
 
+  /**
+   * The same robot with another charge, as the recharge in the crafting grid gives (answer 181).
+   */
+  public RobotState withEnergy(Energy next) {
+    return new RobotState(
+        tier,
+        next,
+        health,
+        lampOn,
+        color,
+        scannersOn,
+        oreFilter,
+        chatterOn,
+        defenseMode,
+        solarOn,
+        pickup);
+  }
+
   public RobotState withPickup(PickupSettings next) {
     return new RobotState(
         tier,

@@ -219,8 +219,13 @@ public final class CubitConfig {
     return expression.happyTicks.get();
   }
 
+  /** The charge a robot needs to wake, also for the recharge in the crafting grid (answer 181). */
+  public Percentage wakeCharge() {
+    return new Percentage(general.wakeCharge.get());
+  }
+
   public PowerRules powerRules() {
-    return new PowerRules(new Percentage(general.wakeCharge.get()));
+    return new PowerRules(wakeCharge());
   }
 
   /** The limits of the two keys do not overlap, so this is always a valid decision. */
