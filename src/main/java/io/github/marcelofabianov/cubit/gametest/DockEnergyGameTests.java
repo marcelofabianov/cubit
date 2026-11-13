@@ -6,7 +6,6 @@ import io.github.marcelofabianov.cubit.block.InductionDockBlock;
 import io.github.marcelofabianov.cubit.block.InductionDockBlockEntity;
 import io.github.marcelofabianov.cubit.domain.energy.Energy;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.nbt.CompoundTag;
@@ -17,8 +16,6 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.HopperBlockEntity;
-import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.energy.IEnergyStorage;
 import net.neoforged.neoforge.gametest.GameTestHolder;
@@ -122,7 +119,7 @@ public final class DockEnergyGameTests {
     InductionDockBlockEntity dock = place(helper, owner, Energy.ZERO);
     owner.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.REDSTONE));
 
-    click(helper, owner);
+    DockScene.clickWithHeldItem(helper, owner, DOCK);
 
     helper.assertTrue(owner.getItemInHand(InteractionHand.MAIN_HAND).isEmpty(), WRONG_SLOT);
     helper.runAfterDelay(
@@ -141,7 +138,7 @@ public final class DockEnergyGameTests {
     Player stranger = helper.makeMockPlayer(GameType.SURVIVAL);
     stranger.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.REDSTONE));
 
-    click(helper, stranger);
+    DockScene.clickWithHeldItem(helper, stranger, DOCK);
 
     helper.assertFalse(stranger.getItemInHand(InteractionHand.MAIN_HAND).isEmpty(), STRANGER);
     helper.assertTrue(dock.slot().isEmpty(), STRANGER);
@@ -199,19 +196,5 @@ public final class DockEnergyGameTests {
     return helper
         .getLevel()
         .getCapability(Capabilities.EnergyStorage.BLOCK, helper.absolutePos(DOCK), null);
-  }
-
-  private static void click(GameTestHelper helper, Player player) {
-    BlockPos absolute = helper.absolutePos(DOCK);
-    BlockHitResult hit =
-        new BlockHitResult(Vec3.atCenterOf(absolute), Direction.UP, absolute, false);
-    helper
-        .getBlockState(DOCK)
-        .useItemOn(
-            player.getItemInHand(InteractionHand.MAIN_HAND),
-            helper.getLevel(),
-            player,
-            InteractionHand.MAIN_HAND,
-            hit);
   }
 }

@@ -35,6 +35,7 @@
   "gui.cubit.dock.status.idle": "Idle",
   "gui.cubit.dock.status.no_power": "No power",
   "gui.cubit.dock.stored_energy": "Stored energy",
+  "gui.cubit.dock_charge": "Charge",
   "gui.cubit.energy_amount": "%s / %s FE",
   "gui.cubit.health": "Health",
   "gui.cubit.health_amount": "%s / %s",

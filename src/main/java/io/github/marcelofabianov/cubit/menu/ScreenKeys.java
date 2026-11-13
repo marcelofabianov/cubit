@@ -12,6 +12,7 @@ public final class ScreenKeys {
   public static final String HEALTH = PREFIX + "health";
   public static final String HEALTH_AMOUNT = PREFIX + "health_amount";
   public static final String REDSTONE = PREFIX + "redstone";
+  public static final String DOCK_CHARGE = PREFIX + "dock_charge";
 
   public static final String DOCK_STORED_ENERGY = DOCK + "stored_energy";
   public static final String DOCK_INPUT = DOCK + "input";

@@ -15,6 +15,7 @@ import java.util.Optional;
 import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -77,16 +78,58 @@ public final class PowerBankGameTests {
   }
 
   @GameTest(template = ARENA)
-  public static void theDockChargesTheBankFromItsStock(GameTestHelper helper) {
+  public static void theDockChargesTheBankInItsChargeSlot(GameTestHelper helper) {
     Player owner = helper.makeMockPlayer(GameType.SURVIVAL);
     InductionDockBlockEntity dock = DockScene.placeDock(helper, owner, DockScene.FLOOR, PLENTY);
-    dock.slot().setItem(SLOT, CubitItems.BASE_POWER_BANK.get().getDefaultInstance());
+    dock.chargeSlot().setItem(SLOT, CubitItems.BASE_POWER_BANK.get().getDefaultInstance());
 
     helper.succeedWhen(() -> {
-      Energy inBank = PowerBankItem.batteryOf(dock.slot().getItem(SLOT)).charge();
+      Energy inBank = PowerBankItem.batteryOf(dock.chargeSlot().getItem(SLOT)).charge();
       helper.assertFalse(inBank.isZero(), NOT_CHARGED);
       helper.assertValueEqual(inBank.plus(dock.energy()), PLENTY, LOST);
     });
+  }
+
+  @GameTest(template = ARENA)
+  public static void aBankInTheInputSlotEmptiesIntoTheStock(GameTestHelper helper) {
+    Player owner = helper.makeMockPlayer(GameType.SURVIVAL);
+    InductionDockBlockEntity dock =
+        DockScene.placeDock(helper, owner, DockScene.FLOOR, Energy.ZERO);
+    dock.slot().setItem(SLOT, bank(CubitItems.BASE_POWER_BANK.get().getDefaultInstance(), PLENTY));
+
+    helper.succeedWhen(() -> {
+      ItemStack inSlot = dock.slot().getItem(SLOT);
+      helper.assertTrue(PowerBankItem.is(inSlot), NOT_IN_SLOT);
+      helper.assertTrue(PowerBankItem.batteryOf(inSlot).isEmpty(), NOT_CHARGED);
+      helper.assertValueEqual(dock.energy(), PLENTY, LOST);
+    });
+  }
+
+  @GameTest(template = ARENA)
+  public static void theChargeSlotTakesOnlyAPowerBank(GameTestHelper helper) {
+    Player owner = helper.makeMockPlayer(GameType.SURVIVAL);
+    InductionDockBlockEntity dock = DockScene.placeDock(helper, owner, DockScene.FLOOR, PLENTY);
+
+    helper.assertFalse(
+        dock.chargeSlot().canPlaceItem(SLOT, new ItemStack(Items.REDSTONE)), WRONG_RECIPE);
+    helper.assertTrue(
+        dock.chargeSlot().canPlaceItem(SLOT, CubitItems.BASE_POWER_BANK.get().getDefaultInstance()),
+        NOT_IN_SLOT);
+    helper.succeed();
+  }
+
+  @GameTest(template = ARENA)
+  public static void aClickOnTheDockPutsTheBankInTheChargeSlot(GameTestHelper helper) {
+    Player owner = DockScene.ownerBeside(helper);
+    InductionDockBlockEntity dock = DockScene.placeDock(helper, owner, DockScene.FLOOR, PLENTY);
+
+    owner.setItemInHand(
+        InteractionHand.MAIN_HAND, CubitItems.BASE_POWER_BANK.get().getDefaultInstance());
+    DockScene.clickWithHeldItem(helper, owner, DockScene.DOCK);
+
+    helper.assertTrue(PowerBankItem.is(dock.chargeSlot().getItem(SLOT)), NOT_IN_SLOT);
+    helper.assertTrue(dock.slot().isEmpty(), NOT_IN_SLOT);
+    helper.succeed();
   }
 
   @GameTest(template = ARENA)

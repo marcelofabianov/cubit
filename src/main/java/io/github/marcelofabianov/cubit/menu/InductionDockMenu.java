@@ -9,6 +9,7 @@ import io.github.marcelofabianov.cubit.domain.energy.Energy;
 import io.github.marcelofabianov.cubit.domain.robot.HealTime;
 import io.github.marcelofabianov.cubit.domain.tier.RobotTier;
 import io.github.marcelofabianov.cubit.item.EnergySlotItems;
+import io.github.marcelofabianov.cubit.item.PowerBankItem;
 import io.github.marcelofabianov.cubit.registry.CubitMenus;
 import java.util.Optional;
 import java.util.function.Predicate;
@@ -27,14 +28,18 @@ import net.minecraft.world.item.ItemStack;
 public final class InductionDockMenu extends AbstractContainerMenu {
   public static final int SLOT_X = 152;
   public static final int SLOT_Y = 33;
-  public static final int PLAYER_INVENTORY_Y = 179;
+  public static final int PLAYER_INVENTORY_Y = 206;
+
+  /** Under the input slot, where the stock charges a Power Bank (answer 921). */
+  public static final int CHARGE_SLOT_Y = 60;
+
   public static final int CALL_BUTTON = 0;
   private static final int SLOT_SIZE = 18;
   private static final int FIRST_SLOT_X = 8;
   private static final int HOTBAR_GAP = 58;
   private static final int PLAYER_ROWS = 3;
   private static final int SLOTS_PER_ROW = 9;
-  private static final int DOCK_SLOTS = 1;
+  private static final int DOCK_SLOTS = 2;
   private static final String NO_NAME = "";
 
   private final Predicate<Player> stillValid;
@@ -47,6 +52,7 @@ public final class InductionDockMenu extends AbstractContainerMenu {
       int containerId,
       Inventory playerInventory,
       Container slot,
+      Container chargeSlot,
       ContainerData values,
       Server server,
       Opening opening) {
@@ -61,6 +67,13 @@ public final class InductionDockMenu extends AbstractContainerMenu {
           @Override
           public boolean mayPlace(ItemStack stack) {
             return EnergySlotItems.accepts(stack);
+          }
+        });
+    addSlot(
+        new Slot(chargeSlot, 0, SLOT_X, CHARGE_SLOT_Y) {
+          @Override
+          public boolean mayPlace(ItemStack stack) {
+            return PowerBankItem.is(stack);
           }
         });
     addDataSlots(values);
@@ -81,7 +94,7 @@ public final class InductionDockMenu extends AbstractContainerMenu {
             dock::callNearestRobot,
             values::refresh);
     return new InductionDockMenu(
-        containerId, playerInventory, dock.slot(), values, server, Opening.NONE);
+        containerId, playerInventory, dock.slot(), dock.chargeSlot(), values, server, Opening.NONE);
   }
 
   /** On the client. The real item and the numbers come from the server. */
@@ -90,7 +103,8 @@ public final class InductionDockMenu extends AbstractContainerMenu {
     return new InductionDockMenu(
         containerId,
         playerInventory,
-        new SimpleContainer(DOCK_SLOTS),
+        new SimpleContainer(1),
+        new SimpleContainer(1),
         new SimpleContainerData(DockScreenValues.COUNT),
         Server.NONE,
         Opening.read(data));
@@ -220,7 +234,7 @@ public final class InductionDockMenu extends AbstractContainerMenu {
     boolean fits =
         index < DOCK_SLOTS
             ? moveItemStackTo(stack, DOCK_SLOTS, slots.size(), true)
-            : moveItemStackTo(stack, 0, DOCK_SLOTS, false);
+            : moveItemStackTo(stack, 0, DOCK_SLOTS, true);
     if (!fits) {
       return ItemStack.EMPTY;
     }
