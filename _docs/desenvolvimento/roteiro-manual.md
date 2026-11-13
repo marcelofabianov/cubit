@@ -667,10 +667,10 @@ As regras estão em [`energia.md`](../funcionalidades/energia.md#power-bank) e a
 |---|---|---|
 | 1 | Pegue um Cubit e abra o livro de receitas | A receita da Base Power Bank aparece |
 | 2 | Faça a Base Power Bank | Sai vazia, não empilha, com o nome cinza, a barra verde vazia e a dica `0 / 210k FE` e `Charges at the Induction Dock` |
-| 3 | Coloque-a no slot `Charge`, abaixo do de redstone, de um Induction Dock com energia | A carga da Power Bank sobe e o estoque do Dock desce na mesma quantidade |
+| 3 | Coloque-a na aba `Storage` de um Induction Dock com energia e sem Cubit | A carga da Power Bank sobe e o estoque do Dock desce na mesma quantidade |
 | 3a | Ponha uma Power Bank carregada no slot `Redstone` de um Dock com pouco estoque | A Power Bank descarrega no estoque, a linha mostra `Input +X FE/t`, e vazia ela fica no slot |
-| 3b | Tente pôr redstone no slot `Charge` | Não entra |
-| 4 | Com um Cubit hibernando no mesmo Dock | O Cubit carrega primeiro, e a Power Bank só recebe o que sobrar |
+| 3b | Tente pôr redstone na aba `Storage` | Não entra |
+| 4 | Com um Cubit hibernando no mesmo Dock | A Power Bank só volta a receber quando a bateria do Cubit enche |
 | 5 | Tente carregar a Power Bank num carregador de FE de outro mod, se houver | Não carrega (pergunta 905) |
 | 6 | Ponha a Power Bank carregada no slot de energia de um Cubit com pouca bateria | A bateria sobe na recarga do tier, a linha mostra `Slot +500 FE/t` no Base, e a Power Bank desce o mesmo tanto |
 | 7 | Deixe-a esvaziar | Ela continua no slot, e a linha mostra `Not charging` |
@@ -679,6 +679,29 @@ As regras estão em [`energia.md`](../funcionalidades/energia.md#power-bank) e a
 | 10 | Recolha um Cubit sem bateria e combine-o com uma Power Bank na grade | Sai o Cubit com a carga de religar, e a Power Bank fica na grade com o resto |
 | 11 | Tente com uma Power Bank quase vazia, ou com um Damaged Cubit | A receita não aparece |
 | 12 | Com o jogo em português | `Power Bank Base`, `Power Bank Avançada`, `Power Bank Elite`, `Power Bank Suprema` e `Carrega no Induction Dock` |
+
+## Inventário do Dock
+
+As regras estão em [`energia.md`](../funcionalidades/energia.md#inventário-do-dock) e em [`telas.md`](../funcionalidades/telas.md#aba-storage). Use `/give` para as Power Banks, a Toolbox e um funil.
+
+| # | Faça | Espere |
+|---|---|---|
+| 1 | Abra a tela de um Dock com Shift + clique direito | As abas `Dock` e `Storage`, com os ícones novos. A aba `Dock` mostra o slot `Redstone`, sem o slot `Charge` |
+| 2 | Abra a aba `Storage` | `Storage`, 27 slots vazios e o seu inventário abaixo |
+| 3 | Tente pôr terra num slot | Não entra |
+| 4 | Ponha duas Power Banks vazias e uma pilha de Toolbox, com o Dock com energia e sem Cubit | Só a primeira Power Bank carrega, e a segunda começa quando a primeira enche |
+| 5 | Chame um Cubit com pouca bateria para o Dock | As Power Banks param de carregar, e voltam quando a bateria do Cubit enche |
+| 6 | Clique no Dock com uma Power Bank na mão, e depois com uma Toolbox | Os dois vão para o inventário, e o Cubit não é chamado |
+| 7 | Ponha um funil em cima do Dock com uma Power Bank e uma Toolbox | Os dois entram no inventário |
+| 8 | Ponha um funil embaixo do Dock | A Toolbox sai na hora, e a Power Bank só sai cheia |
+| 9 | Quebre o Dock e coloque-o de novo | O inventário volta igual, e o item do slot `Redstone` caiu no chão |
+| 10 | Abra um mundo salvo antes, com uma Power Bank no slot `Charge` | A Power Bank aparece no primeiro slot da aba `Storage` |
+| 11 | Com o jogo em português, abra a tela | As abas `Dock` e `Armazenamento` |
+| 12 | Guarde um Cubit recolhido e um Damaged Cubit no Storage, pela tela | Os dois entram, um por slot, e continuam com o mesmo estado ao tirá-los |
+| 13 | Clique no Dock com um Damaged Cubit na mão, e depois com um Cubit | O Damaged Cubit vai para o Storage, e o Cubit é posto na base |
+| 14 | Com um funil embaixo do Dock, guarde um Cubit e um Damaged Cubit | Os dois saem pelo funil |
+| 15 | Ponha no Dock um Cubit ferido e de bateria quase cheia | A bateria enche primeiro, a tela fica em `Complete` com o tempo que falta para a vida, e ele só sai cerca de 3 s depois de a vida encher |
+| 16 | Repita o passo 15 e clique no Dock antes de a vida encher | O Cubit sai na hora |
 
 ## Tradução
 
@@ -739,6 +762,9 @@ Na instância só com o mod, tire capturas com F2 do Cubit seguindo, da tela do 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 13:00 | Adiciona a saída do Dock com a bateria e a vida cheias. |
+| Marcelo Fabiano | 2026-11-13 12:50 | Adiciona o Cubit e o Damaged Cubit ao roteiro do inventário do Dock. |
+| Marcelo Fabiano | 2026-11-13 11:30 | Adiciona o inventário do Dock e troca o slot de carga nos passos da Power Bank. |
 | Marcelo Fabiano | 2026-11-13 09:50 | Adiciona a busca dos itens do chão e as dicas das chaves da aba Behavior. |
 | Marcelo Fabiano | 2026-11-12 23:20 | Atualiza o tempo do ímã no roteiro. |
 | Marcelo Fabiano | 2026-11-12 23:10 | Acrescenta os dois slots do Dock ao roteiro da Power Bank. |

@@ -5,11 +5,11 @@ import io.github.marcelofabianov.cubit.block.InductionDockBlockEntity;
 import io.github.marcelofabianov.cubit.config.CubitConfig;
 import io.github.marcelofabianov.cubit.domain.behavior.RobotExpression;
 import io.github.marcelofabianov.cubit.domain.dock.DockStatus;
+import io.github.marcelofabianov.cubit.domain.dock.DockStorageRules;
 import io.github.marcelofabianov.cubit.domain.energy.Energy;
 import io.github.marcelofabianov.cubit.domain.robot.HealTime;
 import io.github.marcelofabianov.cubit.domain.tier.RobotTier;
 import io.github.marcelofabianov.cubit.item.EnergySlotItems;
-import io.github.marcelofabianov.cubit.item.PowerBankItem;
 import io.github.marcelofabianov.cubit.registry.CubitMenus;
 import java.util.Optional;
 import java.util.function.Predicate;
@@ -24,14 +24,17 @@ import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 
-/** The screen of a dock. The server decides who may keep it open and what it shows. */
+/**
+ * The screen of a dock, with the Dock and Storage tabs (answers 956 and 960). The server decides
+ * who may keep it open and what it shows. The open tab is only a choice of the client.
+ */
 public final class InductionDockMenu extends AbstractContainerMenu {
   public static final int SLOT_X = 152;
   public static final int SLOT_Y = 33;
-  public static final int PLAYER_INVENTORY_Y = 206;
+  public static final int PLAYER_INVENTORY_Y = 179;
 
-  /** Under the input slot, where the stock charges a Power Bank (answer 921). */
-  public static final int CHARGE_SLOT_Y = 60;
+  /** The top of the storage grid, under the title of the Storage tab. */
+  public static final int STORAGE_Y = 18;
 
   public static final int CALL_BUTTON = 0;
   private static final int SLOT_SIZE = 18;
@@ -39,7 +42,8 @@ public final class InductionDockMenu extends AbstractContainerMenu {
   private static final int HOTBAR_GAP = 58;
   private static final int PLAYER_ROWS = 3;
   private static final int SLOTS_PER_ROW = 9;
-  private static final int DOCK_SLOTS = 2;
+  private static final int STORAGE_FIRST = 1;
+  private static final int DOCK_SLOTS = STORAGE_FIRST + DockStorageRules.SLOTS;
   private static final String NO_NAME = "";
 
   private final Predicate<Player> stillValid;
@@ -47,12 +51,13 @@ public final class InductionDockMenu extends AbstractContainerMenu {
   private final Runnable call;
   private final Runnable refresh;
   private final Opening opening;
+  private boolean storageShown;
 
   private InductionDockMenu(
       int containerId,
       Inventory playerInventory,
       Container slot,
-      Container chargeSlot,
+      Container storage,
       ContainerData values,
       Server server,
       Opening opening) {
@@ -68,14 +73,13 @@ public final class InductionDockMenu extends AbstractContainerMenu {
           public boolean mayPlace(ItemStack stack) {
             return EnergySlotItems.accepts(stack);
           }
-        });
-    addSlot(
-        new Slot(chargeSlot, 0, SLOT_X, CHARGE_SLOT_Y) {
+
           @Override
-          public boolean mayPlace(ItemStack stack) {
-            return PowerBankItem.is(stack);
+          public boolean isActive() {
+            return !storageShown;
           }
         });
+    addStorageSlots(storage);
     addDataSlots(values);
     addPlayerSlots(playerInventory);
   }
@@ -94,7 +98,7 @@ public final class InductionDockMenu extends AbstractContainerMenu {
             dock::callNearestRobot,
             values::refresh);
     return new InductionDockMenu(
-        containerId, playerInventory, dock.slot(), dock.chargeSlot(), values, server, Opening.NONE);
+        containerId, playerInventory, dock.slot(), dock.storage(), values, server, Opening.NONE);
   }
 
   /** On the client. The real item and the numbers come from the server. */
@@ -104,7 +108,7 @@ public final class InductionDockMenu extends AbstractContainerMenu {
         containerId,
         playerInventory,
         new SimpleContainer(1),
-        new SimpleContainer(1),
+        new SimpleContainer(DockStorageRules.SLOTS),
         new SimpleContainerData(DockScreenValues.COUNT),
         Server.NONE,
         Opening.read(data));
@@ -202,6 +206,33 @@ public final class InductionDockMenu extends AbstractContainerMenu {
     return opening.callRadius();
   }
 
+  /** Only on the client: the slots of the closed tab are hidden, so they take no clicks. */
+  public void showStorage(boolean shown) {
+    storageShown = shown;
+  }
+
+  /** The container itself refuses what the storage does not keep, on both sides. */
+  private void addStorageSlots(Container storage) {
+    for (int index = 0; index < DockStorageRules.SLOTS; index++) {
+      addSlot(
+          new Slot(
+              storage,
+              index,
+              FIRST_SLOT_X + index % SLOTS_PER_ROW * SLOT_SIZE,
+              STORAGE_Y + index / SLOTS_PER_ROW * SLOT_SIZE) {
+            @Override
+            public boolean mayPlace(ItemStack stack) {
+              return container.canPlaceItem(getContainerSlot(), stack);
+            }
+
+            @Override
+            public boolean isActive() {
+              return storageShown;
+            }
+          });
+    }
+  }
+
   private void addPlayerSlots(Inventory playerInventory) {
     for (int row = 0; row < PLAYER_ROWS; row++) {
       for (int column = 0; column < SLOTS_PER_ROW; column++) {
@@ -234,7 +265,7 @@ public final class InductionDockMenu extends AbstractContainerMenu {
     boolean fits =
         index < DOCK_SLOTS
             ? moveItemStackTo(stack, DOCK_SLOTS, slots.size(), true)
-            : moveItemStackTo(stack, 0, DOCK_SLOTS, true);
+            : moveToDock(stack);
     if (!fits) {
       return ItemStack.EMPTY;
     }
@@ -244,6 +275,12 @@ public final class InductionDockMenu extends AbstractContainerMenu {
       slot.setChanged();
     }
     return moved;
+  }
+
+  /** The Toolbox and the Power Bank go to the storage, and redstone to the input (959). */
+  private boolean moveToDock(ItemStack stack) {
+    return moveItemStackTo(stack, STORAGE_FIRST, DOCK_SLOTS, false)
+        || moveItemStackTo(stack, 0, STORAGE_FIRST, false);
   }
 
   @Override

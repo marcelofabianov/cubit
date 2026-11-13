@@ -57,6 +57,11 @@ final class ScreenSprites {
 
   private static final int FUNNEL_V = 256;
 
+  /** The icons of the dock tabs, after the funnel, from prompts (answers 900 and 957). */
+  private static final int DOCK_TAB_U = 64;
+
+  private static final int STORAGE_TAB_U = 128;
+
   private ScreenSprites() {}
 
   static void chest(GuiGraphics graphics, int x, int y) {
@@ -95,6 +100,20 @@ final class ScreenSprites {
         ICON,
         SHEET_WIDTH,
         SHEET_HEIGHT);
+  }
+
+  static void dockTab(GuiGraphics graphics, int x, int y) {
+    rowIcon(graphics, x, y, DOCK_TAB_U);
+  }
+
+  static void storageTab(GuiGraphics graphics, int x, int y) {
+    rowIcon(graphics, x, y, STORAGE_TAB_U);
+  }
+
+  /** An icon in the row added below the others, where the funnel is. */
+  private static void rowIcon(GuiGraphics graphics, int x, int y, int u) {
+    graphics.blit(
+        SHEET, x, y, ICON_SHOWN, ICON_SHOWN, u, FUNNEL_V, ICON, ICON, SHEET_WIDTH, SHEET_HEIGHT);
   }
 
   /** The lamp, the scanners, the chatter and the solar panel, in the order of their buttons. */

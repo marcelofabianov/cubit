@@ -1,5 +1,6 @@
 package io.github.marcelofabianov.cubit.item;
 
+import io.github.marcelofabianov.cubit.block.StorableRobotItem;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -11,7 +12,7 @@ import net.minecraft.world.level.Level;
  * What a robot leaves when it dies. It cannot be placed, only repaired, and it survives anything
  * except a command, because it holds what the robot carried.
  */
-public final class DamagedRobotItem extends Item {
+public final class DamagedRobotItem extends Item implements StorableRobotItem {
   public DamagedRobotItem(Properties properties) {
     super(properties);
   }

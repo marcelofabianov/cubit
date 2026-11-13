@@ -100,7 +100,8 @@ Dividida em três partes, na ordem em que dependem uma da outra (perguntas 722 a
 
 9. [x] Ímã e coleta, com as chaves deles e o filtro em lista branca e lista negra (perguntas 422 a 424), e o custo do ímã
 10. [x] Power Bank, inclusive no Dock e na grade de craft (issues #164 e #51, PR #166), com a receita dela
-11. [ ] Slot de tochas, do Advanced em diante, com o Cubit colocando tochas e o custo delas (perguntas 724, 879 e 930)
+11. [ ] Inventário do Induction Dock, na aba Storage, para a Toolbox e as Power Banks, sem o slot de carga (issue #168, perguntas 947 a 959)
+12. [ ] Slot de tochas, do Advanced em diante, com o Cubit colocando tochas e o custo delas (perguntas 724, 879, 930 e 948)
 
 ### Fase 4.2: Remote, área e retorno
 

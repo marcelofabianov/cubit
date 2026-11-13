@@ -12,7 +12,6 @@ public final class ScreenKeys {
   public static final String HEALTH = PREFIX + "health";
   public static final String HEALTH_AMOUNT = PREFIX + "health_amount";
   public static final String REDSTONE = PREFIX + "redstone";
-  public static final String DOCK_CHARGE = PREFIX + "dock_charge";
 
   public static final String DOCK_STORED_ENERGY = DOCK + "stored_energy";
   public static final String DOCK_INPUT = DOCK + "input";
@@ -20,6 +19,8 @@ public final class ScreenKeys {
   public static final String DOCK_NO_INPUT = DOCK + "no_input";
   public static final String DOCK_LIMIT = DOCK + "limit";
   public static final String DOCK_DOCKED = DOCK + "docked";
+  public static final String DOCK_TAB_DOCK = DOCK + "tab_dock";
+  public static final String DOCK_TAB_STORAGE = DOCK + "tab_storage";
   public static final String DOCK_ROBOT_BATTERY = DOCK + "robot_battery";
   public static final String DOCK_CHARGING_LINE = DOCK + "charging_line";
   public static final String DOCK_COMPLETE_LINE = DOCK + "complete_line";

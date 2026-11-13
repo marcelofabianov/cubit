@@ -96,6 +96,8 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 | `DockQueue` | Robôs aguardando um Dock ocupado, por ordem de chegada |
 | `DockTrip` | Um robô a caminho do Dock: o quanto chegou perto, há quanto tempo não avança e o que faz em cada tick |
 | `DockRemoval` | Quem pode quebrar um Dock |
+| `DockStorageRules` | O inventário do Dock: o que ele guarda, quando e qual Power Bank ele carrega, e o que a automação tira |
+| `DockStoredKind` | O que um item é para o inventário do Dock: Toolbox, Power Bank ou outro |
 | `RobotClick` | O que o clique direito faz no robô: ignorar, recolher, subir o tier, pintar, escolher o minério, abrir ou ligar |
 | `InventoryFit` | Separa os itens que cabem nos slots do config dos que sobram |
 | `InventoryWindow` | As linhas do inventário que a tela mostra de uma vez, o limite da rolagem e o slot que cada slot da tela mostra |
@@ -155,6 +157,7 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 - **Nunca atacados:** o dono, outros players, outros robôs e mobs pacíficos, em qualquer modo. Um mob neutro só vira alvo quando fica agressivo contra o dono (perguntas 13 e 68).
 - **Tempo sem relógio:** a `RetaliationMemory`, a `FetchMemory`, as `ShockRules` e as `FetchRules` recebem o tick atual de quem chama, como o resto do domínio.
 - **Coleta e ímã separados:** a coleta por contato vale em todo tier e não gasta. O ímã precisa da coleta ligada, porque puxar sem pegar só amontoaria itens, e só puxa com carga para o custo inteiro de um item (perguntas 876, 877 e 879).
+- **O Cubit antes das Power Banks:** no Dock, as Power Banks do inventário só carregam sem Cubit na base ou com a bateria dele cheia, uma por vez, para nenhuma encher antes do robô nem dividir a recarga (perguntas 949 e 952).
 - **Busca em volta do dono:** o raio da busca conta do dono, não do robô, porque o item jogado com Q cai à frente dele, fora do alcance do ímã (perguntas 927 e 936). A busca precisa da coleta ligada, como o ímã, não tem custo além do andar e fica abaixo do Dock, do fogo, dos blocos que ferem e do choque (perguntas 937 a 939).
 - **Filtro sem apagar:** as entradas acima do limite do tier e as tags num tier sem tags ficam guardadas sem contar, para um config maior trazê-las de volta (pergunta 892).
 - **Power Bank é uma `Battery`:** a carga dela usa a mesma bateria imutável do Cubit, e toda passagem de energia, no slot, no Dock ou na grade, usa o `EnergyTransfer`, para nunca criar nem perder FE (regra 13 e pergunta 907).

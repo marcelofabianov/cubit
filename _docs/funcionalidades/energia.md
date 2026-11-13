@@ -62,12 +62,11 @@ Funciona como um carregador solar real.
 - É a base de recarga do Cubit, inspirada nas bases de robôs aspiradores. Na base, o Cubit fica em hibernação.
 - **Formato:** o da [prancha de conceito](../imagens/conceito/induction-dock-prancha.png): torre atrás, com tela, e placa em U na frente, virada para o player que coloca. O Cubit sobe na placa, de costas para a torre. Ocupa 2 blocos de altura, como uma porta, e precisa do bloco de cima livre para ser colocado. Quebrar uma parte quebra as duas.
 - **Tela:** desligada, sem energia e sem Cubit; ociosa, com energia e sem Cubit; carregando, com o Cubit recebendo; completa, com a bateria dele cheia; sem energia, com o Cubit na base e o estoque zerado.
-- **Energia:** recebe por cabos de outros mods, em **FE**, em qualquer face, ou com redstone em um slot próprio, também por funil. Nada sai por cabo nem por funil.
+- **Energia:** recebe por cabos de outros mods, em **FE**, em qualquer face, ou com redstone em um slot próprio, também por funil. Nenhuma energia sai por cabo. Pelos funis, só sai o que a [automação do inventário](#inventário-do-dock) permite.
 - **Estoque:** tem um pequeno estoque de energia. Um item de redstone só vira energia quando couber inteiro no estoque. Sem FE, o Cubit fica hibernando.
-- **Slots:** tem dois (pergunta 919, que muda a 58 e a 905):
-  - **Entrada:** aceita redstone, que vira estoque, ou uma Power Bank, que descarrega no estoque pelo mesmo limite de entrada dos cabos e aparece em `Input +X FE/t`. Vazia, ela fica parada no slot (perguntas 920 e 923).
-  - **Carga:** aceita só a Power Bank, que o estoque carrega depois do Cubit que hiberna, na recarga do Base (perguntas 906 e 923).
-  - **Clique e automação:** o clique direito com a Power Bank na mão a põe no slot de carga, e com redstone, no de entrada. A automação só põe redstone no de entrada e nunca mexe com a Power Bank (perguntas 924 e 925).
+- **Slot de entrada:** aceita redstone, que vira estoque, ou uma Power Bank, que descarrega no estoque pelo mesmo limite de entrada dos cabos e aparece em `Input +X FE/t`. Vazia, ela fica parada no slot (perguntas 919, 920 e 923). O slot de carga saiu, e o inventário assumiu o papel dele (pergunta 950).
+- **Clique:** o clique direito com redstone na mão a põe no slot de entrada. Com uma Power Bank, uma Toolbox ou um Damaged Cubit na mão, o item vai para o inventário, juntando nas pilhas e nos slots livres, e o que não couber fica na mão. Com o item do Cubit, o robô vai para a base, como sempre. Só o dono (perguntas 959 e 968, que mudam a 924).
+- **Inventário:** guarda a Toolbox e as Power Banks e carrega as Power Banks. Veja [Inventário do Dock](#inventário-do-dock).
 - **Vida:** recupera a vida do Cubit durante a hibernação, sem gastar FE, mesmo com o estoque zerado.
 - **Retorno automático:** serve de base para ele, na Fase 4.
 
@@ -76,14 +75,26 @@ Funciona como um carregador solar real.
 - **Dono:** quem coloca o Dock. Só o dono usa o Dock e abre a tela, e só os Cubits dele entram.
 - **Clique direito:** chama o Cubit ou, com um na base, o libera. Com redstone na mão, a pilha entra no slot.
 - **Shift + clique direito:** abre a tela própria do Dock, descrita em [`telas.md`](telas.md#tela-do-induction-dock), com o botão de chamar o Cubit mais próximo (perguntas 371 e 678).
-- **Quebrar:** só o dono, ou um player no modo criativo com permissão de operador, para remover um Dock abandonado. Sem dono, como num save sem a chave ou colocado por algo que não é um player, só o operador o remove, e o log avisa ao carregar (pergunta 524). Explosões e pistões não o afetam. O item guarda a energia e empilha em 1, o slot cai no chão, e o Cubit sai como numa liberação. O dono do bloco novo é quem o coloca.
+- **Quebrar:** só o dono, ou um player no modo criativo com permissão de operador, para remover um Dock abandonado. Sem dono, como num save sem a chave ou colocado por algo que não é um player, só o operador o remove, e o log avisa ao carregar (pergunta 524). Explosões e pistões não o afetam. O item guarda a energia e o inventário e empilha em 1, o slot de entrada cai no chão, e o Cubit sai como numa liberação (pergunta 954). O dono do bloco novo é quem o coloca.
+
+### Inventário do Dock
+
+Entra no item 11 da Fase 4.1 (issue #168, perguntas 947 a 959).
+
+- **Onde:** na aba `Storage` da tela do Dock, descrita em [`telas.md`](telas.md#aba-storage).
+- **Tamanho:** 27 slots, como um baú simples do jogo.
+- **O que aceita:** só a Toolbox, em pilhas de até 16, as Power Banks dos 4 tiers, o item do Cubit e o Damaged Cubit, esses três um por slot. Qualquer outro item fica fora (pergunta 965). O Cubit e o Damaged Cubit só ficam guardados, com todo o estado no item, sem recarga nem conserto (pergunta 966).
+- **Recarga:** o estoque carrega uma Power Bank por vez, a primeira não cheia na ordem dos slots, na velocidade de recarga do Base, até ela encher, sem criar nem perder FE (pergunta 949 e regra 13). Só carrega sem Cubit na base ou com o Cubit da base de bateria cheia. Com o Cubit ainda carregando, nenhuma Power Bank recebe (pergunta 952, que muda a 906).
+- **Automação:** por qualquer face, funis e cabos de itens põem a Toolbox e as Power Banks no inventário. A Power Bank só sai cheia, e a Toolbox, o Cubit e o Damaged Cubit saem a qualquer momento, também por qualquer face (pergunta 967). O Cubit e o Damaged Cubit também entram pela automação. A redstone continua entrando no slot de entrada, e a automação nunca põe a Power Bank nele (perguntas 925, 951 e 953).
+- **Quebrar:** o inventário fica no item do Dock e volta ao colocá-lo (pergunta 954).
+- **Saves antigos:** a Power Bank que estava no slot de carga vai para o primeiro slot do inventário ao carregar o mundo, com o registro no log (pergunta 955).
 
 ### Ir para a base e sair dela
 
 - **Ir:** o player clica com o botão direito no Dock, e o Cubit ligado mais próximo, dentro do raio do retorno automático, vai até ele, esteja seguindo ou em área. Colocar o item do Cubit em cima do Dock também funciona. Num Dock ocupado ou de outro player, nada acontece, e o item continua na mão.
 - **Sem conseguir chegar:** sem rota ou preso, teleporta para o Dock. Se o chunk estiver descarregado ou houver um bloqueio em cima, desiste e volta ao que fazia.
 - **Fechar o jogo:** só a hibernação é salva. A caminho ou aguardando, o Cubit volta ao que fazia ao carregar de novo. Se o Dock sumiu, ele acorda como numa liberação.
-- **Sair:** o Cubit sai sozinho cerca de 3 s depois de encher a bateria, com a tela no estado completa. Antes disso, clicar no Dock o libera. Ao sair, volta ao que fazia: a área ou seguir o player. Se outro assumiu o lugar de seguir, fica parado e desligado.
+- **Sair:** o Cubit sai sozinho cerca de 3 s depois de a bateria e a vida estarem cheias. Com a bateria cheia e a vida ainda subindo, a tela fica no estado completa e mostra quanto falta para a vida encher (pergunta 963, que muda a 55). Antes disso, clicar no Dock o libera. Ao sair, volta ao que fazia: a área ou seguir o player. Se outro assumiu o lugar de seguir, fica parado e desligado.
 - **Dono offline:** o Cubit cheio continua na base e sai quando o dono entra. Se o Dock sumir nesse período, ele acorda desligado, e um clique o liga.
 
 ### Base ocupada
@@ -105,10 +116,10 @@ O slot fica na tela do Cubit, ao lado das barras ([`telas.md`](telas.md#aba-inve
 - Entra na Fase 4. A redstone no slot já funciona na Fase 2.
 - Funciona em um Cubit de qualquer tier, na velocidade de recarga do tier do Cubit.
 - Não empilha: cada uma ocupa um slot.
-- Sai vazia do craft e recarrega só no slot de carga do Induction Dock. Não tem capability de FE: outros mods não a carregam nem tiram energia dela. Ela entrega energia ao Cubit e, no slot de entrada, ao estoque do Dock (perguntas 905 e 919, que mudam a 42).
+- Sai vazia do craft e recarrega só no inventário do Induction Dock. Não tem capability de FE: outros mods não a carregam nem tiram energia dela. Ela entrega energia ao Cubit e, no slot de entrada, ao estoque do Dock (perguntas 905 e 919, que mudam a 42).
 - **Carga:** fica no componente `cubit:power_bank_energy`, como energia inteira, e aparece na barra verde e na dica do item, como `105k / 210k FE` (perguntas 903 e 909). A capacidade é a `power_bank_capacity` do tier dela.
 - **No slot do Cubit:** entrega na velocidade de recarga do tier do Cubit, até a bateria encher ou ela esvaziar. Vazia, continua no slot (pergunta 904).
-- **No Dock:** no slot de carga, o Cubit que hiberna carrega primeiro, na velocidade do tier dele, e a Power Bank recebe o que sobrar no mesmo tick, até a velocidade de recarga do Base (pergunta 906). No slot de entrada, ela descarrega no estoque (pergunta 920).
+- **No Dock:** no inventário, recebe na velocidade de recarga do Base, uma por vez, sem Cubit na base ou com o Cubit de bateria cheia (perguntas 949 e 952). No slot de entrada, ela descarrega no estoque (pergunta 920).
 
 ### Recarregar um Cubit desligado
 
@@ -138,6 +149,9 @@ Se o robô estiver dentro do raio da base e com a bateria baixa, volta sozinho p
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 13:00 | Faz o Cubit sair do Dock só com a bateria e a vida cheias. |
+| Marcelo Fabiano | 2026-11-13 12:50 | Aceita o Cubit e o Damaged Cubit no inventário do Dock. |
+| Marcelo Fabiano | 2026-11-13 11:30 | Troca o slot de carga do Dock pelo inventário, na aba Storage. |
 | Marcelo Fabiano | 2026-11-12 23:10 | Divide o slot do Dock em entrada e carga para a Power Bank. |
 | Marcelo Fabiano | 2026-11-12 22:30 | Define a Power Bank só no Dock e no Cubit, a carga, o slot e a divisão no Dock. |
 | Marcelo Fabiano | 2026-11-12 21:45 | Adiciona o consumo do ímã. |

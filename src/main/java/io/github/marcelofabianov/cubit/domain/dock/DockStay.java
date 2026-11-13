@@ -11,8 +11,17 @@ public final class DockStay {
     return (float) maxHealth / fullHealTicks;
   }
 
-  /** A full robot waits a moment, so the player sees the complete state, and then leaves. */
-  public static boolean shouldLeave(Battery battery, int ticksFull, int holdTicks) {
-    return battery.isFull() && ticksFull >= holdTicks;
+  /** The robot leaves the base only with its battery and its health full (answer 963). */
+  public static boolean complete(Battery battery, boolean healthFull) {
+    return battery.isFull() && healthFull;
+  }
+
+  /**
+   * A complete robot waits a moment, so the player sees the complete state, and then leaves. The
+   * ticks count while it is complete.
+   */
+  public static boolean shouldLeave(
+      Battery battery, boolean healthFull, int ticksComplete, int holdTicks) {
+    return complete(battery, healthFull) && ticksComplete >= holdTicks;
   }
 }

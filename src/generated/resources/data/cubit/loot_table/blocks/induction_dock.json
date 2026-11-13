@@ -19,7 +19,8 @@
             {
               "function": "minecraft:copy_components",
               "include": [
-                "cubit:dock_energy"
+                "cubit:dock_energy",
+                "cubit:dock_storage"
               ],
               "source": "block_entity"
             }

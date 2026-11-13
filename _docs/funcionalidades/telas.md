@@ -115,6 +115,14 @@ Entra com a coleta e o ímã, no item 9 da Fase 4.1 (perguntas 878 a 888). As re
 - **Shift + clique direito**, como hoje. O clique continua chamando ou liberando o Cubit (pergunta 678).
 - **Só o dono**, validado no servidor (regra 20).
 
+### Aba Storage
+
+Entra no item 11 da Fase 4.1. As regras estão em [`energia.md`](energia.md#inventário-do-dock).
+
+- **Topo:** o título `Storage` / `Armazenamento`.
+- **Slots:** 27, em 3 linhas de 9, como um baú simples. Só aceitam a Toolbox, as Power Banks, o item do Cubit e o Damaged Cubit (pergunta 965), e a dica de cada Power Bank mostra a carga dela.
+- **Inventário do player:** abaixo, com a hotbar. O Shift + clique de uma Toolbox, Power Bank, Cubit ou Damaged Cubit do player o leva ao inventário do Dock, e o de um item do Dock o devolve ao player.
+
 ### Estados
 
 O enum e o nome de contrato `status` não mudam (pergunta 313). Muda só o texto, que o Jade também passa a usar (pergunta 685).
@@ -127,12 +135,23 @@ O enum e o nome de contrato `status` não mudam (pergunta 313). Muda só o texto
 | `COMPLETE` | Cubit na base com a bateria cheia | `● Complete` | Verde |
 | `NO_ENERGY` | Cubit na base e estoque zerado | `● No power` | Laranja |
 
+### Abas
+
+A tela tem duas abas, à direita da janela, como as da tela do Cubit (perguntas 956, 957 e 960). Cada uma tem um ícone de 16×16, no traço e nas cores das outras abas, feito por prompt (resposta 900).
+
+| Aba | Ícone | O que mostra |
+|---|---|---|
+| `Dock` / `Dock` | A torre do Dock | As partes abaixo |
+| `Storage` / `Armazenamento` | Uma caixa com uma Power Bank e uma Toolbox | O [inventário do Dock](#aba-storage) |
+
 ### Partes
+
+São as partes da aba Dock.
 
 | Parte | O que mostra |
 |---|---|
 | Topo | `Induction Dock`, o estado, a torre com a luz do estado, `Stored energy 64k / 100k FE`, com a barra laranja, a linha de entrada e `Cables or redstone · up to 5,000 FE/t` |
-| Slot | O slot de entrada, com o rótulo `Redstone`, e logo abaixo o slot de carga da Power Bank, com o rótulo `Charge` / `Carregar`. Tudo de Docked Cubit para baixo desce 27 px, e a janela passa a 289 px de altura (pergunta 921) |
+| Slot | O slot de entrada, com o rótulo `Redstone`. O slot de carga saiu (pergunta 950), e o espaço dele, de 27 px, sai da aba Dock |
 | Docked Cubit | Com Cubit: o retrato, `Cubit · Battery 165k / 300k FE`, `Health 23 / 25` e a linha de recarga e vida. Sem Cubit: `No Cubit docked` e as frases das imagens |
 | Queue | `Empty`, ou `1 Cubit waiting` |
 | Owner | O nome do dono, ou `Unknown` (pergunta 689) |
@@ -223,6 +242,9 @@ Pergunta 691.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 12:50 | Aceita o Cubit e o Damaged Cubit na aba Storage. |
+| Marcelo Fabiano | 2026-11-13 11:50 | Põe as abas do Dock à direita, como as do Cubit. |
+| Marcelo Fabiano | 2026-11-13 11:30 | Adiciona as abas Dock e Storage à tela do Dock e tira o slot de carga. |
 | Marcelo Fabiano | 2026-11-13 09:50 | Adiciona a chave Fetch e passa as chaves da aba Behavior para linhas de 12 px. |
 | Marcelo Fabiano | 2026-11-12 23:10 | Adiciona o slot de carga à tela do Dock. |
 | Marcelo Fabiano | 2026-11-12 21:45 | Adiciona a aba Behavior, com a coleta, o ímã, o filtro de coleta e a sincronia dos slots fantasma. |
