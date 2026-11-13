@@ -89,7 +89,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Criativo:** aba própria, `cubit:main`, e colocar sempre gasta o item.
 - **Estados:** ativo (ligado), inativo (desligado) e hibernação (na base, com o inventário e os slots acessíveis).
 - **Painel solar:** só funciona com o Cubit ativo, de dia em todos os tiers e à noite só em Elite e Ultimate. Coberto por um bloco opaco, não carrega, e vidro deixa carregar. A célula pulsa de leve enquanto enche a bateria, e a chave entra com a interface de configuração. O clima não tem efeito, e no Nether e no End não funciona. Fica abaixo do consumo.
-- **Induction Dock:** é a base de recarga, com torre e placa em U, 2 blocos de altura e dono, recebe energia por cabos ou redstone, sem saída, e tem dois slots: o de entrada, para redstone ou para a Power Bank descarregar no estoque, e o de carga, que recarrega a Power Bank (pergunta 919). A energia fica no item ao quebrar, e só o dono o quebra, além de um operador no modo criativo. Sem conseguir chegar, o Cubit teleporta.
+- **Induction Dock:** é a base de recarga, com torre e placa em U, 2 blocos de altura e dono, recebe energia por cabos ou redstone, sem saída, e tem o slot de entrada, para redstone ou para a Power Bank descarregar no estoque (pergunta 919), e um inventário de 27 slots, na aba Storage, que guarda a Toolbox e as Power Banks e as recarrega (perguntas 947 a 959). A energia fica no item ao quebrar, e só o dono o quebra, além de um operador no modo criativo. Sem conseguir chegar, o Cubit teleporta.
 - **Dock sem dono:** só um operador em criativo o remove, com aviso no log ao carregar (pergunta 524). Entra na issue #106.
 - **Recarga pela grade de craft:** o item do Cubit abaixo da carga de religar, combinado com uma Power Bank, recebe só o que falta para religar, na Fase 4.
 - **Consumo:** gasta ao andar de verdade, sem gastar parado nem empurrado. As exceções são a condição negativa, a lanterna acesa e as varreduras dos scanners, que gastam mesmo parado.
@@ -141,11 +141,12 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Busca dos itens do chão (perguntas 936 a 943, issue #165):** desde o Base, o Cubit ativo e seguindo anda até os itens que o ímã aceitaria, num raio em volta do dono de 4, 6, 8 e 12 blocos, um por vez, e volta a seguir. Sem custo além do andar, com a chave `Fetch` na aba Behavior, abaixo do Dock e acima de seguir. Procura a cada 20 ticks, desiste em 100 e ignora o item por 200. As chaves da aba Behavior passam a linhas de 12 px, com a descrição na dica.
 - **Power Bank (perguntas 900 a 911):**
   - Quatro, uma por tier, com `power_bank_capacity` no config, de 210 mil a 5,6 mi FE, e a carga no componente `cubit:power_bank_energy`.
-  - O Dock tem dois slots (perguntas 919 a 923). No de entrada, a Power Bank descarrega no estoque pelo limite dos cabos. No de carga, `ChargeSlot`, que fica abaixo, ela recebe o que sobrar depois do Cubit, na recarga do Base. Não tem capability de FE para outros mods (muda a 42 e a 58).
+  - No slot de entrada do Dock, a Power Bank descarrega no estoque pelo limite dos cabos (perguntas 919 a 923). O slot de carga saiu, e o inventário do Dock a recarrega (pergunta 950). Antes, no de carga, `ChargeSlot`, que fica abaixo, ela recebia o que sobrasse depois do Cubit, na recarga do Base. Não tem capability de FE para outros mods (muda a 42 e a 58).
   - Vazia, fica no slot do Cubit.
   - As receitas são encadeadas, com a carga mantida pelo tipo `cubit:power_bank_upgrade`. Se a carga não couber, a receita não aparece (regra 13).
   - A de religar o Cubit na grade é o tipo `cubit:robot_recharge`.
 - **Slots exclusivos da Fase 4.1 (perguntas 930 e 931):** só as tochas, a partir do Advanced, depois da issue #165. A fornalha vai para o Minerador, na Fase 5, e o carregador de ferramentas sai do mod.
+- **Inventário do Dock (perguntas 947 a 959, issue #168):** 27 slots, na aba Storage da tela do Dock, só para a Toolbox e as Power Banks, no lugar do slot de carga. Carrega uma Power Bank por vez, a 500 FE/t, sem Cubit na base ou com o Cubit de bateria cheia. Funis põem os dois itens por qualquer face e tiram a Toolbox e a Power Bank cheia. Fica no item ao quebrar o Dock, em `cubit:dock_storage`, e no bloco em `Storage`. A Power Bank de `ChargeSlot` vai para o primeiro slot. O clique com Power Bank ou Toolbox guarda o item. Entra como item 11 da Fase 4.1, e as tochas passam a ser o 12.
 - **Texturas por prompt (pergunta 900):** o agente não desenha imagens. Ele escreve o prompt em `tmp/arte/{nome}/prompt.md`, e o desenvolvedor devolve os arquivos na mesma pasta.
 - **Chaveamento:** têm chave a chave geral do Cubit, com ligar, desligar e hibernar, o painel solar, a lanterna, os scanners, o ímã, pegar itens dropados, a descarga em baú, o retorno automático e mostrar o local de morte do player. Cada chave entra com o recurso dela.
 
@@ -153,6 +154,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 11:30 | Registra o inventário do Dock. |
 | Marcelo Fabiano | 2026-11-13 10:30 | Registra o roteiro do teste manual na conversa. |
 | Marcelo Fabiano | 2026-11-13 09:50 | Registra a busca dos itens do chão. |
 | Marcelo Fabiano | 2026-11-13 08:58 | Registra os slots exclusivos da Fase 4.1, corrige os slots do Dock e adiciona o teste manual antes dos commits. |

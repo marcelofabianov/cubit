@@ -51,7 +51,7 @@ Os extras somam ao andar. O consumo só vale com o robô ativo.
 | Scanner de mobs, por varredura | 50 FE | 100 FE | 150 FE | 300 FE |
 | Scanner de minérios, por varredura | 50 FE | 100 FE | 150 FE | 300 FE |
 | Ímã, por item puxado (respostas 877 e 879) | Bloqueado | 20 FE | 30 FE | 60 FE |
-| Colocar tochas, no item 11 da Fase 4.1 | Bloqueado | A definir | A definir | A definir |
+| Colocar tochas, no item 12 da Fase 4.1 | Bloqueado | A definir | A definir | A definir |
 
 - **Claridade da tela:** não gasta energia.
 - **Cards:** o custo por ação está em [trabalhos](#trabalhos).
@@ -65,7 +65,7 @@ Valem para todos os tiers e ficam no config. Os marcados como planejados entram 
 | Consumo parado | 0 FE/t |
 | Carga do Cubit ao sair do craft | 25% |
 | Carga da Power Bank ao sair do craft | 0% |
-| Recarga da Power Bank no slot de carga do Dock | A do Base, depois do Cubit que hiberna (pergunta 906) |
+| Recarga da Power Bank no inventário do Dock | A do Base, uma por vez, sem Cubit na base ou com o Cubit da base de bateria cheia (perguntas 949 e 952) |
 | Descarga da Power Bank no slot de entrada do Dock | O limite de entrada do Dock, junto dos cabos (pergunta 920) |
 | Velocidade 1,0× (atributo de movimento) | 0,33 |
 | Intervalo para recalcular a rota | 10 ticks |
@@ -204,6 +204,7 @@ Planejado para a Fase 5. O tier Base não aceita cards.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 11:30 | Passa a recarga da Power Bank para o inventário do Dock e as tochas para o item 12. |
 | Marcelo Fabiano | 2026-11-13 09:50 | Adiciona o raio da busca dos itens do chão. |
 | Marcelo Fabiano | 2026-11-13 09:05 | Leva a fornalha para o Minerador e tira o carregador de ferramentas. |
 | Marcelo Fabiano | 2026-11-12 23:10 | Acrescenta a descarga da Power Bank no Dock. |
