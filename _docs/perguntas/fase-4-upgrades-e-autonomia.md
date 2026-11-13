@@ -8,6 +8,8 @@ Não há perguntas pendentes nesta fase.
 
 | # | Pergunta | Resposta |
 |---|---|---|
+| 935 | Como funciona o passo do teste manual? | Só a aprovação: o agente pede o teste no `make client` e espera o ok, sem atualizar o roteiro manual nem registrar o resultado em `perguntas/`, porque a aprovação vale como autorização de uma ação pontual (regra 47). Com um problema, a tarefa volta ao passo Trabalho. A recomendação, com o roteiro e o registro, foi recusada |
+| 934 | O fluxo de trabalho ganha o teste manual do desenvolvedor depois do plano de commits e antes dos commits, e para quais tarefas? | "queria acrescentar no fluxo de trabalho apos o plano de commits antes de fazer os commits o teste manual do desenvolvedor e apos os testes e sua aprovacao que damos sequencia ao fluxo": sim, só nas tarefas que mudam o jar, como código, assets, dados ou config. A tarefa só de documentos segue direto para os commits. Confirma a recomendação |
 | 933 | A linha de `decisoes.md` que dá ao Dock um único slot, desatualizada desde a resposta 919, pode ser corrigida? | Sim: passa a citar os dois slots, entrada e carga, no mesmo commit da revisão dos documentos. Confirma a recomendação |
 | 932 | Em qual branch entram as respostas 930 e 931 e a revisão dos documentos sem a fornalha e o carregador? | Na branch da #165, `feature/165-fetch-ground-items`, num commit `docs:` próprio, no início, junto da marcação do item 10 do checklist, sem issue nova. Confirma a recomendação |
 | 931 | Em que ordem entram os dois itens que faltam para fechar a Fase 4.1: a issue #165, o Cubit buscar os itens no chão, e as tochas? | A #165 primeiro, que completa o item 9, como a resposta 927 já previa, e depois as tochas, com a rodada de decisões do custo, dos slots e do nível de luz. Confirma a recomendação |
@@ -187,7 +189,7 @@ Não há perguntas pendentes nesta fase.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
-| Marcelo Fabiano | 2026-11-13 08:58 | Registra as respostas 930 a 933. |
+| Marcelo Fabiano | 2026-11-13 08:58 | Registra as respostas 930 a 935. |
 | Marcelo Fabiano | 2026-11-12 23:20 | Registra as respostas 928 e 929. |
 | Marcelo Fabiano | 2026-11-12 23:00 | Registra as respostas 919 a 927. |
 | Marcelo Fabiano | 2026-11-12 22:40 | Registra as respostas 915 a 918. |

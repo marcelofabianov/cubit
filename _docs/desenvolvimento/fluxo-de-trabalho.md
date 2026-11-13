@@ -23,7 +23,7 @@ Se mostrar outra conta, prefixe os comandos com `GH_TOKEN=$(gh auth token --user
 ## Caminho de uma tarefa
 
 ```text
-Alinhamento → Issue → Branch → Trabalho → Validação → Plano de commits → Commits → PR → Merge → Encerramento
+Alinhamento → Issue → Branch → Trabalho → Validação → Plano de commits → Teste manual → Commits → PR → Merge → Encerramento
 ```
 
 ### 1. Alinhamento
@@ -68,7 +68,16 @@ O plano de commits é a relação dos commits a fazer, com os arquivos e a mensa
 
 Cada commit trata de uma mudança lógica e deixa o projeto num estado válido, sem link quebrado nem teste falhando.
 
-### 7. Commits
+### 7. Teste manual
+
+Vale para a tarefa que muda o jar, como código, assets, dados ou config. A tarefa só de documentos segue direto para os commits (perguntas 934 e 935).
+
+1. Com o plano de commits apresentado, o agente pede ao desenvolvedor o teste manual no `make client`.
+2. O desenvolvedor testa e aprova ou aponta o problema.
+3. Com um problema, a tarefa volta ao passo Trabalho e segue de novo até este teste.
+4. Só com a aprovação o fluxo segue para os commits. A aprovação vale como autorização de uma ação pontual e não entra em [`perguntas/`](../perguntas/README.md).
+
+### 8. Commits
 
 ```bash
 git add {arquivos do commit}
@@ -77,7 +86,7 @@ git commit -m "tipo(escopo opcional): descrição em português"
 
 Use `git add` com os arquivos do plano, nunca `git add .`. Se um gate reprovar, corrija a causa conforme [`hooks-do-git.md`](hooks-do-git.md).
 
-### 8. Pull request
+### 9. Pull request
 
 Antes do push, atualize a branch com a de origem. Depois, abra o PR para a `develop`:
 
@@ -96,11 +105,11 @@ A descrição do PR segue o template [`.github/pull_request_template.md`](../../
 - como revisar ou testar;
 - o que ficou fora do escopo, quando houver.
 
-### 9. Merge
+### 10. Merge
 
 O merge é feito no GitHub, somente pelo desenvolvedor.
 
-### 10. Encerramento
+### 11. Encerramento
 
 1. Confira se a issue fechou. Se continuar aberta, feche-a à mão.
 2. Atualize a `develop` local.
@@ -197,6 +206,7 @@ O primeiro passo, separando o que está decidido do que está pendente.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 09:20 | Adiciona o teste manual do desenvolvedor antes dos commits. |
 | Marcelo Fabiano | 2026-11-08 01:41 | Adiciona a release no GitHub depois da tag. |
 | Marcelo Fabiano | 2026-11-08 00:33 | Atualiza o `CHANGELOG.md` na release e aponta para o guia de publicação. |
 | Marcelo Fabiano | 2026-11-07 14:25 | Adiciona a apresentação do próximo trabalho ao encerrar um PR. |
