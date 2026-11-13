@@ -1,0 +1,37 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_power_bank": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "cubit:base_power_bank",
+              "cubit:advanced_power_bank",
+              "cubit:elite_power_bank",
+              "cubit:ultimate_power_bank"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "cubit:recharge_general_robot"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_power_bank"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "cubit:recharge_general_robot"
+    ]
+  }
+}

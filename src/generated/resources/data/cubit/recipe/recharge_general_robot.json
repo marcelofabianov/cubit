@@ -1,0 +1,21 @@
+{
+  "type": "cubit:robot_recharge",
+  "power_bank": [
+    {
+      "item": "cubit:base_power_bank"
+    },
+    {
+      "item": "cubit:advanced_power_bank"
+    },
+    {
+      "item": "cubit:elite_power_bank"
+    },
+    {
+      "item": "cubit:ultimate_power_bank"
+    }
+  ],
+  "result": "cubit:general_robot",
+  "robot": {
+    "item": "cubit:general_robot"
+  }
+}

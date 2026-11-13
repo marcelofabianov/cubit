@@ -25,7 +25,7 @@ Entra no item 9 da Fase 4.1 (respostas 422, 423 e 876 a 889). A coleta e o ímã
 
 - **Inventário:** armazena itens.
 - **Coleta:** desde o Base, o Cubit pega o item que encosta nele, com a caixa dele aumentada em 1 bloco, como o player. Não gasta energia.
-- **Ímã:** do Advanced em diante, puxa até o Cubit os itens no raio do tier, empurrando o item na direção dele, com o movimento visível e sem teleportar. Gasta energia por item puxado, uma pilha no chão. No Base, fica bloqueado. Com a coleta desligada, o ímã fica inativo, porque puxar sem pegar só amontoaria itens.
+- **Ímã:** do Advanced em diante, puxa até o Cubit os itens no raio do tier, com o movimento visível e sem teleportar. O item já pago é guiado a cada tick e coletado assim que encosta, e a 3 blocos chega em cerca de 0,3 s (pergunta 928). Gasta energia por item puxado, uma pilha no chão. No Base, fica bloqueado. Com a coleta desligada, o ímã fica inativo, porque puxar sem pegar só amontoaria itens.
 - **Quando coleta:** só ativo, seguindo ou parado. Hibernando, desligado ou sem bateria, não coleta.
 - **Inventário cheio:** pega o que cabe, juntando nas pilhas e nos slots livres, e o resto fica no chão. O ímã só puxa, e só cobra, os itens que cabem pelo menos em parte. Vale só o inventário principal, nunca os slots exclusivos.
 - **Sem energia para o ímã:** ele não puxa, e a coleta por contato continua.
@@ -61,6 +61,7 @@ São quatro: tochas, fornalha, carregador de ferramentas e energia. Na Fase 5, o
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-12 23:20 | Acelera o item puxado pelo ímã. |
 | Marcelo Fabiano | 2026-11-12 21:45 | Detalha a coleta, o ímã, o filtro de coleta e o excedente recolhido. |
 | Marcelo Fabiano | 2026-11-07 23:11 | Aponta a tela do inventário para as telas próprias. |
 | Marcelo Fabiano | 2026-11-06 11:15 | Limita o texto da descarga ao Cubit que segue. |

@@ -2,10 +2,17 @@ package io.github.marcelofabianov.cubit.datagen;
 
 import io.github.marcelofabianov.cubit.CubitMod;
 import io.github.marcelofabianov.cubit.config.CubitConfig;
+import io.github.marcelofabianov.cubit.item.RobotRechargeRecipe;
 import io.github.marcelofabianov.cubit.item.RobotRepairRecipe;
 import io.github.marcelofabianov.cubit.registry.CubitItems;
 import java.util.concurrent.CompletableFuture;
+import net.minecraft.advancements.AdvancementHolder;
+import net.minecraft.advancements.AdvancementRequirements;
+import net.minecraft.advancements.AdvancementRewards;
+import net.minecraft.advancements.critereon.ItemPredicate;
+import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
@@ -47,7 +54,12 @@ final class CubitRecipeProvider extends RecipeProvider {
   private static final String HAS_IRON = "has_iron";
   private static final String HAS_DIAMOND = "has_diamond";
   private static final String HAS_ROBOT = "has_robot";
+  private static final String HAS_PREFIX = "has_";
   private static final String REPAIR_PREFIX = "repair_";
+  private static final String RECHARGE_PREFIX = "recharge_";
+  private static final String RECIPE_ADVANCEMENT_PREFIX = "recipes/misc/";
+  private static final String HAS_THE_RECIPE = "has_the_recipe";
+  private static final String HAS_POWER_BANK = "has_power_bank";
 
   CubitRecipeProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
     super(output, registries);
@@ -67,6 +79,8 @@ final class CubitRecipeProvider extends RecipeProvider {
     robot(output);
     dock(output);
     modules(output);
+    powerBanks(output);
+    recharge(output);
     String robotId = CubitConfig.GENERAL_ROBOT.id();
     output.accept(
         ResourceLocation.fromNamespaceAndPath(CubitMod.MOD_ID, REPAIR_PREFIX + robotId),
@@ -120,6 +134,81 @@ final class CubitRecipeProvider extends RecipeProvider {
         .define(MAIN, main)
         .define(SIDE, side)
         .unlockedBy(HAS_ROBOT, has(CubitItems.GENERAL_ROBOT.get()));
+  }
+
+  /**
+   * The Base from scratch and each next one around the previous, in the corners and on the sides
+   * like the Modules (answers 902 and 912). The Base unlocks with a Cubit, the others with the
+   * previous bank (answer 908).
+   */
+  private void powerBanks(RecipeOutput output) {
+    module(CubitItems.BASE_POWER_BANK.get(), Items.IRON_INGOT, Items.REDSTONE)
+        .define(CORE, Items.REDSTONE_BLOCK)
+        .save(output);
+    RecipeOutput upgrades = new PowerBankRecipeOutput(output);
+    upgrade(
+            CubitItems.BASE_POWER_BANK.get(),
+            CubitItems.ADVANCED_POWER_BANK.get(),
+            Items.GOLD_INGOT,
+            Items.QUARTZ)
+        .save(upgrades);
+    upgrade(
+            CubitItems.ADVANCED_POWER_BANK.get(),
+            CubitItems.ELITE_POWER_BANK.get(),
+            Items.DIAMOND,
+            Items.PURPLE_DYE)
+        .save(upgrades);
+    upgrade(
+            CubitItems.ELITE_POWER_BANK.get(),
+            CubitItems.ULTIMATE_POWER_BANK.get(),
+            Items.NETHERITE_INGOT,
+            Items.REDSTONE_BLOCK)
+        .save(upgrades);
+  }
+
+  private static ShapedRecipeBuilder upgrade(
+      ItemLike previous, ItemLike next, ItemLike main, ItemLike side) {
+    String criterion = HAS_PREFIX + BuiltInRegistries.ITEM.getKey(previous.asItem()).getPath();
+    return ShapedRecipeBuilder.shaped(RecipeCategory.MISC, next)
+        .pattern(MODULE_TOP_ROW)
+        .pattern(MODULE_MIDDLE_ROW)
+        .pattern(MODULE_BOTTOM_ROW)
+        .define(MAIN, main)
+        .define(SIDE, side)
+        .define(CORE, previous)
+        .unlockedBy(criterion, has(previous));
+  }
+
+  /** Waking a stored Cubit with any Power Bank, which unlocks the recipe (answers 908 and 910). */
+  private void recharge(RecipeOutput output) {
+    ResourceLocation id =
+        ResourceLocation.fromNamespaceAndPath(
+            CubitMod.MOD_ID, RECHARGE_PREFIX + CubitConfig.GENERAL_ROBOT.id());
+    AdvancementHolder unlock =
+        output
+            .advancement()
+            .addCriterion(HAS_THE_RECIPE, RecipeUnlockedTrigger.unlocked(id))
+            .addCriterion(
+                HAS_POWER_BANK, inventoryTrigger(ItemPredicate.Builder.item().of(powerBanks())))
+            .rewards(AdvancementRewards.Builder.recipe(id))
+            .requirements(AdvancementRequirements.Strategy.OR)
+            .build(id.withPrefix(RECIPE_ADVANCEMENT_PREFIX));
+    output.accept(
+        id,
+        new RobotRechargeRecipe(
+            Ingredient.of(CubitItems.GENERAL_ROBOT.get()),
+            Ingredient.of(powerBanks()),
+            CubitItems.GENERAL_ROBOT.get()),
+        unlock);
+  }
+
+  private static ItemLike[] powerBanks() {
+    return new ItemLike[] {
+      CubitItems.BASE_POWER_BANK.get(),
+      CubitItems.ADVANCED_POWER_BANK.get(),
+      CubitItems.ELITE_POWER_BANK.get(),
+      CubitItems.ULTIMATE_POWER_BANK.get()
+    };
   }
 
   private void dock(RecipeOutput output) {

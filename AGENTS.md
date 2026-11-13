@@ -6,9 +6,9 @@ Mod de Minecraft que adiciona um robô companheiro fofo, movido a bateria, de te
 
 ## Estado atual
 
-- **Etapa atual:** as Fases 1, 2 e 3 foram encerradas, e a primeira versão, `0.1.0`, foi publicada no Modrinth. A Fase 4 "Tier e ataque" também foi encerrada: os tiers, os Modules e as receitas (PRs #145 e #147), o choque e os modos de defesa (#149), o modo Focus (#151) e as chaves da aba Settings (#153). A instância só com o mod e as confirmações que saíram da `0.1.0` foram feitas (resposta 820). O trabalho entra por issue, na ordem do `checklist.md`.
+- **Etapa atual:** as Fases 1, 2 e 3 foram encerradas, e a primeira versão, `0.1.0`, foi publicada no Modrinth. A Fase 4 "Tier e ataque" também foi encerrada: os tiers, os Modules e as receitas (PRs #145 e #147), o choque e os modos de defesa (#149), o modo Focus (#151) e as chaves da aba Settings (#153). A instância só com o mod e as confirmações que saíram da `0.1.0` foram feitas (resposta 820). A `0.1.1` foi fechada com a Fase 4 "Tier e ataque" (PR #159), e a Fase 4.1 está em andamento: a coleta e o ímã entraram (PR #163), e a Power Bank está na issue #164. O trabalho entra por issue, na ordem do `checklist.md`.
 - **Já entrou:** colocar e recolher, seguir o player, vários robôs, fogo, lava, os arquivos de som, a revisão dos `.md`, o novo modelo, a morte com o item danificado, o inventário, a energia em uso, o consumo por situação, a reação a blocos que ferem, o Induction Dock, o `/cubit reset`, as receitas e, na Fase 3, os sons, as expressões, o som de dano, a barra de vida, as animações, o colar e a bateria, os textos curtos, a lanterna, o painel solar, a cor da carcaça, o nome, a detecção dos scanners, com chave e filtro, numa esfera, as caixas dos scanners, a seta sobre o mob, as cores das antenas com o halo do corpo e as falas, inclusive sobre a redstone minerada. Também entraram a volta do Cubit com o dono que renasce, a descida de até 5 blocos, o Jade e as telas próprias do Cubit e do Induction Dock.
-- **Próximos:** a release `0.1.1`, com o teste do jar numa instância só com o mod e no Iron Meridian (respostas 864 e 865). Depois, a Fase 4.1, quando o desenvolvedor pedir. O envio da `0.1.0` ao CurseForge continua pendente (resposta 787).
+- **Próximos:** o fim da Power Bank (#164), os slots exclusivos do item 11 e o fechamento da Fase 4.1. A publicação da `0.1.1` está em análise na issue #156, e o envio da `0.1.0` ao CurseForge continua pendente (resposta 787).
 - **Comandos:** estão em [`_docs/desenvolvimento/ferramentas-de-build.md`](_docs/desenvolvimento/ferramentas-de-build.md).
 - **Limite:** não avance para as fases seguintes sem pedido explícito.
 
@@ -207,22 +207,22 @@ Aprovada. Vale a partir da Fase 2.
 io.github.marcelofabianov.cubit
 ├── CubitMod                // ponto de entrada: só conecta os registros
 ├── domain/                 // Java puro, testado com JUnit
-│   ├── robot/              // RobotType, capacidades que o Cubit combina, OreKind, OreFilter, OreSignals, DefenseMode
+│   ├── robot/              // RobotType, capacidades que o Cubit combina, OreKind, OreFilter, OreSignals, DefenseMode; PickupFilter, PickupEntry, PickupMode e PickupSettings: o filtro de coleta
 │   ├── tier/               // RobotTier, TierSpec, TierCatalog (interface); TierUpgrade: subir de tier com um Module; ShockSpec: o choque e os modos de cada tier
-│   ├── energy/             // Battery, PowerState (ativo, inativo, hibernação), regras de consumo e religamento, SolarPanel: quando o painel dá energia; SolarStatus, EnergyUseCause, RechargeSource, EnergyFormat, EnergyHalves: o que as telas mostram
+│   ├── energy/             // Battery, PowerState (ativo, inativo, hibernação), regras de consumo e religamento, SolarPanel: quando o painel dá energia; SolarStatus, EnergyUseCause, RechargeSource, EnergyFormat, EnergyHalves: o que as telas mostram; EnergyTransfer, WakeRecharge e PowerBankUpgrade: a Power Bank
 │   ├── behavior/           // FollowDecision: seguir, parar ou teleportar; BurningAction: reagir a fogo e lava; LampPolicy: quando a lanterna acende; ScanRules, ScanArea, FreshFinds, MarkLife, MarkPulse, ScanSignal: scanners, caixas e cores; ChatWatch, BiomeWatch, LeftBehindWatch, ChatRules: falas; RespawnReturn: voltar com o dono; RobotScreenStatus: o estado no topo da tela; DefenseRules, ShockCandidate, RetaliationMemory, ShockRules: o choque e os modos de defesa
 │   ├── dock/               // DockStock, DockStatus, DockStay, DockQueue, DockTrip, DockRemoval, DockInputMeter
 │   └── ownership/          // FollowingRobotPolicy, Ownership
 ├── config/                 // ModConfigSpec → implementa TierCatalog
 ├── registry/               // DeferredRegisters e CubitDamageTypes, o dano do choque
-├── entity/                 // RobotEntity, goals de IA; RobotUpgrade: o Module aplicado; RobotDefense e RobotShock: o choque
-├── item/                   // RobotItem, RobotStateComponent, ModuleItem e TierLook; PowerBankItem planejado para a Fase 4.1
+├── entity/                 // RobotEntity, goals de IA; RobotUpgrade: o Module aplicado; RobotDefense e RobotShock: o choque; RobotPickup: a coleta e o ímã
+├── item/                   // RobotItem, RobotStateComponent, ModuleItem e TierLook; PowerBankItem, PowerBankUpgradeRecipe e RobotRechargeRecipe: a Power Bank
 ├── block/                  // InductionDockBlock, BlockEntity
-├── menu/                   // RobotMenu, InductionDockMenu; DefenseControl e DefenseOpening: a aba Defense
+├── menu/                   // RobotMenu, InductionDockMenu; DefenseControl e DefenseOpening: a aba Defense; PickupControl e PickupMenuPart: a aba Behavior
 ├── network/                // pacotes próprios: NoticePayload, OreMarksPayload, MobMarksPayload e CubitNetwork
 ├── compat/jade/            // plugin do Jade, opcional: só este pacote importa o Jade
 ├── player/                 // attachment com o UUID do robô que segue, robôs mortos com o dono offline, /cubit reset e o que o dono faz: renascer, conquistar, caçar e minerar redstone
-├── client/                 // renderer, modelo GeckoLib, telas, com as abas Inventory, Settings e Defense
+├── client/                 // renderer, modelo GeckoLib, telas, com as abas Inventory, Settings, Defense e Behavior
 └── datagen/                // receitas, loot, traduções
 ```
 

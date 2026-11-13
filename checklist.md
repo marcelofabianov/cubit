@@ -98,7 +98,7 @@ Dividida em três partes, na ordem em que dependem uma da outra (perguntas 722 a
 
 ### Fase 4.1: Itens, filtros, carregamento e mais
 
-9. [ ] Ímã e coleta, com as chaves deles e o filtro em lista branca e lista negra (perguntas 422 a 424), e o custo do ímã
+9. [x] Ímã e coleta, com as chaves deles e o filtro em lista branca e lista negra (perguntas 422 a 424), e o custo do ímã
 10. [ ] Power Bank, inclusive no Dock e na grade de craft (issue #51), com a receita dela
 11. [ ] Slots de tochas, fornalha e carregador de ferramentas, com o Cubit colocando tochas e o custo delas (pergunta 724)
 

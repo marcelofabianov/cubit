@@ -631,7 +631,7 @@ As regras estão em [`inventario.md`](../funcionalidades/inventario.md#coleta) e
 | 6 | Troque para `Whitelist` | Ele pega a terra e deixa a pedra |
 | 7 | Limpe o slot com o cursor vazio, ainda na `Whitelist` | Ele não pega nada |
 | 8 | Volte para `Blacklist`, aplique o Advanced Module e abra a aba | `Magnet` ligada, com `Pulls items within 3 blocks · 20 FE per item`, e 9 slots |
-| 9 | Jogue um item a 3 blocos do Cubit parado | O item desliza até ele, e a bateria cai 20 FE |
+| 9 | Jogue um item a 3 blocos do Cubit parado | O item desliza até ele em menos de meio segundo, e a bateria cai 20 FE |
 | 10 | Desligue `Pickup` | `Magnet` fica apagada, e ele não pega nem puxa nada |
 | 11 | Encha o inventário do Cubit, deixando espaço para meia pilha de terra, e jogue uma pilha inteira | Ele pega o que cabe, e o resto fica no chão |
 | 12 | Jogue um Cubit recolhido perto dele | Ele não pega nem puxa o item |
@@ -639,6 +639,27 @@ As regras estão em [`inventario.md`](../funcionalidades/inventario.md#coleta) e
 | 14 | Recolha e coloque o Cubit, e saia e entre no mundo | As chaves, o modo e o filtro continuam iguais |
 | 15 | Ponha o Cubit para hibernar no Dock e jogue itens nele | Ele não pega nada |
 | 16 | Com o jogo em português, abra a aba | `Comportamento`, `Coleta`, `Ímã`, `Filtro de coleta` e `Lista negra` |
+
+## Power Bank
+
+As regras estão em [`energia.md`](../funcionalidades/energia.md#power-bank) e as receitas, em [`itens.md`](../itens.md#power-banks). Use `/give` para os materiais.
+
+| # | Faça | Espere |
+|---|---|---|
+| 1 | Pegue um Cubit e abra o livro de receitas | A receita da Base Power Bank aparece |
+| 2 | Faça a Base Power Bank | Sai vazia, não empilha, com o nome cinza, a barra verde vazia e a dica `0 / 210k FE` e `Charges at the Induction Dock` |
+| 3 | Coloque-a no slot `Charge`, abaixo do de redstone, de um Induction Dock com energia | A carga da Power Bank sobe e o estoque do Dock desce na mesma quantidade |
+| 3a | Ponha uma Power Bank carregada no slot `Redstone` de um Dock com pouco estoque | A Power Bank descarrega no estoque, a linha mostra `Input +X FE/t`, e vazia ela fica no slot |
+| 3b | Tente pôr redstone no slot `Charge` | Não entra |
+| 4 | Com um Cubit hibernando no mesmo Dock | O Cubit carrega primeiro, e a Power Bank só recebe o que sobrar |
+| 5 | Tente carregar a Power Bank num carregador de FE de outro mod, se houver | Não carrega (pergunta 905) |
+| 6 | Ponha a Power Bank carregada no slot de energia de um Cubit com pouca bateria | A bateria sobe na recarga do tier, a linha mostra `Slot +500 FE/t` no Base, e a Power Bank desce o mesmo tanto |
+| 7 | Deixe-a esvaziar | Ela continua no slot, e a linha mostra `Not charging` |
+| 8 | Com a Base Power Bank no inventário, abra o livro | A receita da Advanced Power Bank aparece |
+| 9 | Faça a Advanced com uma Base carregada | A nova sai com a mesma carga, o nome azul e 2 LEDs no ícone |
+| 10 | Recolha um Cubit sem bateria e combine-o com uma Power Bank na grade | Sai o Cubit com a carga de religar, e a Power Bank fica na grade com o resto |
+| 11 | Tente com uma Power Bank quase vazia, ou com um Damaged Cubit | A receita não aparece |
+| 12 | Com o jogo em português | `Power Bank Base`, `Power Bank Avançada`, `Power Bank Elite`, `Power Bank Suprema` e `Carrega no Induction Dock` |
 
 ## Tradução
 
@@ -699,6 +720,9 @@ Na instância só com o mod, tire capturas com F2 do Cubit seguindo, da tela do 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-12 23:20 | Atualiza o tempo do ímã no roteiro. |
+| Marcelo Fabiano | 2026-11-12 23:10 | Acrescenta os dois slots do Dock ao roteiro da Power Bank. |
+| Marcelo Fabiano | 2026-11-12 22:50 | Adiciona o roteiro da Power Bank. |
 | Marcelo Fabiano | 2026-11-12 21:45 | Adiciona o roteiro da coleta e do ímã. |
 | Marcelo Fabiano | 2026-11-12 18:10 | Adiciona as chaves da aba Settings. |
 | Marcelo Fabiano | 2026-11-12 15:50 | Adiciona o modo Focus. |

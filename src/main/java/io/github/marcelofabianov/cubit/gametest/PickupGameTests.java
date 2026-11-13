@@ -48,6 +48,7 @@ public final class PickupGameTests {
   private static final float CENTER = 1.5f;
   private static final float THREE_BLOCKS_AWAY = 4.5f;
   private static final int WAIT_TICKS = 30;
+  private static final int QUICK_ARRIVAL_TICKS = 25;
   private static final int LONG_DELAY = 200;
   private static final float HEALTH = 20f;
   private static final Energy CHARGE = new Energy(100_000);
@@ -148,6 +149,20 @@ public final class PickupGameTests {
       helper.assertTrue(holds(robot, Items.DIRT), NOT_COLLECTED);
       helper.assertValueEqual(before - robot.state().energy().amount(), ADVANCED_COST, WRONG_COST);
     });
+  }
+
+  /** The first magnet check runs at tick 10, and the item arrives soon after (answer 928). */
+  @GameTest(template = ARENA)
+  public static void aPulledItemArrivesInAFractionOfASecond(GameTestHelper helper) {
+    RobotEntity robot = place(helper, RobotTier.ADVANCED);
+    dropAway(helper, Items.DIRT);
+
+    helper.runAfterDelay(
+        QUICK_ARRIVAL_TICKS,
+        () -> {
+          helper.assertTrue(holds(robot, Items.DIRT), NOT_COLLECTED);
+          helper.succeed();
+        });
   }
 
   @GameTest(template = ARENA)

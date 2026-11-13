@@ -11,6 +11,7 @@ import io.github.marcelofabianov.cubit.domain.energy.Battery;
 import io.github.marcelofabianov.cubit.domain.energy.Energy;
 import io.github.marcelofabianov.cubit.domain.ownership.Ownership;
 import io.github.marcelofabianov.cubit.item.EnergySlotItems;
+import io.github.marcelofabianov.cubit.item.PowerBankItem;
 import io.github.marcelofabianov.cubit.item.SavedEnergy;
 import io.github.marcelofabianov.cubit.registry.CubitBlockEntities;
 import io.github.marcelofabianov.cubit.registry.CubitDataComponents;
@@ -49,6 +50,7 @@ public final class InductionDockBlockEntity extends BlockEntity {
   private static final String OWNER_KEY = "Owner";
   private static final String ENERGY_KEY = "Energy";
   private static final String SLOT_KEY = "Slot";
+  private static final String CHARGE_SLOT_KEY = "ChargeSlot";
   private static final int SLOT = 0;
   private static final int SLOT_SIZE = 1;
   private static final int ONE_ITEM = 1;
@@ -71,6 +73,10 @@ public final class InductionDockBlockEntity extends BlockEntity {
           InductionDockBlockEntity.this.setChanged();
         }
       };
+
+  /** Only a Power Bank, which the stock charges after the robot (answers 919 and 923). */
+  private final SimpleContainer chargeSlot = DockPowerBanks.chargeSlot(this::setChanged);
+
   private final IEnergyStorage energyStorage = new DockEnergyStorage(this);
 
   /** Automation may only put redstone in: the energy it becomes never comes back out. */
@@ -114,11 +120,20 @@ public final class InductionDockBlockEntity extends BlockEntity {
     dock.inputMeter.record(dock.entered);
     dock.entered = Energy.ZERO;
     dock.useSlot();
+    dock.stock = DockPowerBanks.charge(dock.stock, dock.chargeSlot.getItem(SLOT), dock::setChanged);
     dock.showStatus(level, pos, state);
   }
 
+  /**
+   * Redstone becomes stock whole. A Power Bank empties into the stock like the cables, within the
+   * same input per tick, and stays in the slot when empty (answer 920).
+   */
   private void useSlot() {
     ItemStack stack = slot.getItem(SLOT);
+    if (PowerBankItem.is(stack)) {
+      DockPowerBanks.discharge(stack, offered -> receive(offered, false));
+      return;
+    }
     Energy itemEnergy = EnergySlotItems.energyOf(stack);
     if (stock.canTake(itemEnergy)) {
       stack.shrink(ONE_ITEM);
@@ -250,6 +265,10 @@ public final class InductionDockBlockEntity extends BlockEntity {
     return stock.energy().charge();
   }
 
+  public Container chargeSlot() {
+    return chargeSlot;
+  }
+
   public Container slot() {
     return slot;
   }
@@ -266,8 +285,9 @@ public final class InductionDockBlockEntity extends BlockEntity {
     return stock.energy().level(steps);
   }
 
+  /** A Power Bank in the hand goes to be charged, and redstone goes to the input (answer 924). */
   boolean insert(ItemStack stack) {
-    return EnergySlotItems.insert(slot, stack);
+    return EnergySlotItems.insert(PowerBankItem.is(stack) ? chargeSlot : slot, stack);
   }
 
   Energy receive(Energy offered, boolean simulate) {
@@ -296,6 +316,10 @@ public final class InductionDockBlockEntity extends BlockEntity {
     if (!stack.isEmpty()) {
       tag.put(SLOT_KEY, stack.save(registries));
     }
+    ItemStack charging = chargeSlot.getItem(SLOT);
+    if (!charging.isEmpty()) {
+      tag.put(CHARGE_SLOT_KEY, charging.save(registries));
+    }
   }
 
   @Override
@@ -306,11 +330,15 @@ public final class InductionDockBlockEntity extends BlockEntity {
       LOGGER.warn(NO_OWNER_MESSAGE, worldPosition);
     }
     stock = DockStock.of(capacity(), SavedEnergy.of(tag.getLong(ENERGY_KEY)));
-    slot.setItem(
-        SLOT,
-        tag.contains(SLOT_KEY)
-            ? ItemStack.parse(registries, tag.getCompound(SLOT_KEY)).orElse(ItemStack.EMPTY)
-            : ItemStack.EMPTY);
+    slot.setItem(SLOT, savedStack(tag, SLOT_KEY, registries));
+    chargeSlot.setItem(SLOT, savedStack(tag, CHARGE_SLOT_KEY, registries));
+  }
+
+  private static ItemStack savedStack(
+      CompoundTag tag, String key, HolderLookup.Provider registries) {
+    return tag.contains(key)
+        ? ItemStack.parse(registries, tag.getCompound(key)).orElse(ItemStack.EMPTY)
+        : ItemStack.EMPTY;
   }
 
   @Override

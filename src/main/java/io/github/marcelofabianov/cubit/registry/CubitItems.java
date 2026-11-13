@@ -5,6 +5,7 @@ import io.github.marcelofabianov.cubit.config.CubitConfig;
 import io.github.marcelofabianov.cubit.domain.tier.RobotTier;
 import io.github.marcelofabianov.cubit.item.DamagedRobotItem;
 import io.github.marcelofabianov.cubit.item.ModuleItem;
+import io.github.marcelofabianov.cubit.item.PowerBankItem;
 import io.github.marcelofabianov.cubit.item.RobotItem;
 import java.util.function.Supplier;
 import net.minecraft.core.registries.Registries;
@@ -20,6 +21,8 @@ public final class CubitItems {
   private static final int DOCK_STACK_SIZE = 1;
   private static final int MODULE_STACK_SIZE = 64;
   private static final String MODULE_SUFFIX = "_module";
+  private static final String POWER_BANK_SUFFIX = "_power_bank";
+  private static final int POWER_BANK_STACK_SIZE = 1;
   private static final String DAMAGED_PREFIX = "damaged_";
   private static final String TOOLBOX_ID = "toolbox";
   private static final DeferredRegister<Item> ITEMS =
@@ -57,7 +60,19 @@ public final class CubitItems {
   public static final Supplier<Item> ELITE_MODULE = module(RobotTier.ELITE);
   public static final Supplier<Item> ULTIMATE_MODULE = module(RobotTier.ULTIMATE);
 
+  public static final Supplier<Item> BASE_POWER_BANK = powerBank(RobotTier.BASE);
+  public static final Supplier<Item> ADVANCED_POWER_BANK = powerBank(RobotTier.ADVANCED);
+  public static final Supplier<Item> ELITE_POWER_BANK = powerBank(RobotTier.ELITE);
+  public static final Supplier<Item> ULTIMATE_POWER_BANK = powerBank(RobotTier.ULTIMATE);
+
   private CubitItems() {}
+
+  /** The ID is the tier and the suffix, like base_power_bank, from _docs/itens.md. */
+  private static Supplier<Item> powerBank(RobotTier tier) {
+    return ITEMS.register(
+        tier.key() + POWER_BANK_SUFFIX,
+        () -> new PowerBankItem(new Item.Properties().stacksTo(POWER_BANK_STACK_SIZE), tier));
+  }
 
   /** The ID is the tier and the suffix, like advanced_module, from _docs/itens.md. */
   private static Supplier<Item> module(RobotTier tier) {

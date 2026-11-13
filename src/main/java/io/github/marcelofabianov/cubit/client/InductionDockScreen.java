@@ -15,7 +15,7 @@ import net.minecraft.world.entity.player.Inventory;
 /** The dock screen of the concept image, in its three states and the two without a picture. */
 final class InductionDockScreen extends AbstractContainerScreen<InductionDockMenu> {
   private static final int WIDTH = 176;
-  private static final int HEIGHT = 262;
+  private static final int HEIGHT = 289;
   private static final int MARGIN = 8;
   private static final int LINE = 9;
   private static final int DETAIL_LINE = 7;
@@ -23,7 +23,7 @@ final class InductionDockScreen extends AbstractContainerScreen<InductionDockMen
   private static final Box STATUS = new Box(100, 6, 68, LINE);
   private static final int PICTURE_X = 8;
   private static final int TOWER_Y = 17;
-  private static final int ROBOT_Y = 73;
+  private static final int ROBOT_Y = 100;
   private static final Box STORED = new Box(50, 18, 96, LINE);
   private static final Box STOCK_BAR = new Box(50, 26, 96, 7);
   private static final Box INPUT = new Box(50, 36, 100, DETAIL_LINE);
@@ -34,24 +34,26 @@ final class InductionDockScreen extends AbstractContainerScreen<InductionDockMen
   private static final int SLOT_FRAME_Y = InductionDockMenu.SLOT_Y - 1;
   private static final int REDSTONE_CENTER = 160;
   private static final int REDSTONE_Y = 53;
-  private static final Box DOCKED = new Box(8, 60, 160, LINE);
-  private static final int RULE_Y = 69;
-  private static final Box SECTION = new Box(50, 74, 116, LINE);
-  private static final Box BATTERY_BAR = new Box(50, 82, 116, 6);
-  private static final Box HEALTH = new Box(50, 92, 116, LINE);
-  private static final Box HEALTH_BAR = new Box(50, 100, 116, 6);
-  private static final Box ROBOT_LINE = new Box(50, 109, 116, DETAIL_LINE);
-  private static final Box NO_ROBOT = new Box(50, 78, 116, LINE);
-  private static final Box NO_ROBOT_STATE = new Box(50, 89, 116, DETAIL_LINE);
-  private static final Box NO_ROBOT_HINT = new Box(50, 97, 118, DETAIL_LINE);
+  private static final int CHARGE_FRAME_Y = InductionDockMenu.CHARGE_SLOT_Y - 1;
+  private static final int CHARGE_LABEL_Y = 80;
+  private static final Box DOCKED = new Box(8, 87, 160, LINE);
+  private static final int RULE_Y = 96;
+  private static final Box SECTION = new Box(50, 101, 116, LINE);
+  private static final Box BATTERY_BAR = new Box(50, 109, 116, 6);
+  private static final Box HEALTH = new Box(50, 119, 116, LINE);
+  private static final Box HEALTH_BAR = new Box(50, 127, 116, 6);
+  private static final Box ROBOT_LINE = new Box(50, 136, 116, DETAIL_LINE);
+  private static final Box NO_ROBOT = new Box(50, 105, 116, LINE);
+  private static final Box NO_ROBOT_STATE = new Box(50, 116, 116, DETAIL_LINE);
+  private static final Box NO_ROBOT_HINT = new Box(50, 124, 118, DETAIL_LINE);
   private static final int ROW_LEFT = 7;
   private static final int ROW_RIGHT = 169;
-  private static final int QUEUE_TOP = 119;
+  private static final int QUEUE_TOP = 146;
   private static final int ROW_HEIGHT = 13;
-  private static final Box QUEUE = new Box(11, 122, 154, LINE);
-  private static final Box OWNER = new Box(11, 135, 154, LINE);
-  private static final Box CALL = new Box(7, 149, 162, 16);
-  private static final int INVENTORY_LABEL_Y = 169;
+  private static final Box QUEUE = new Box(11, 149, 154, LINE);
+  private static final Box OWNER = new Box(11, 162, 154, LINE);
+  private static final Box CALL = new Box(7, 176, 162, 16);
+  private static final int INVENTORY_LABEL_Y = 196;
   private static final int ROWS = 3;
   private static final int COLUMNS = 9;
   private static final int SLOTS_FRAME_X = 7;
@@ -111,6 +113,7 @@ final class InductionDockScreen extends AbstractContainerScreen<InductionDockMen
     ScreenSprites.tower(graphics, left + PICTURE_X + 1, top + TOWER_Y + 1, menu.status());
     ScreenSprites.bolt(graphics, left + BOLT_X, top + BOLT_Y);
     ScreenPainter.slot(graphics, left + SLOT_FRAME_X, top + SLOT_FRAME_Y);
+    ScreenPainter.slot(graphics, left + SLOT_FRAME_X, top + CHARGE_FRAME_Y);
     graphics.fill(
         left + MARGIN, top + RULE_Y, left + ROW_RIGHT - 1, top + RULE_Y + 1, ScreenPainter.SHADE);
     graphics.fill(
@@ -210,13 +213,18 @@ final class InductionDockScreen extends AbstractContainerScreen<InductionDockMen
   }
 
   private void renderRedstoneLabel(GuiGraphics graphics) {
-    Component label = Component.translatable(ScreenKeys.REDSTONE);
+    renderSlotLabel(graphics, ScreenKeys.REDSTONE, REDSTONE_Y);
+    renderSlotLabel(graphics, ScreenKeys.DOCK_CHARGE, CHARGE_LABEL_Y);
+  }
+
+  private void renderSlotLabel(GuiGraphics graphics, String key, int y) {
+    Component label = Component.translatable(key);
     int width = painter.width(label, ScreenPainter.DETAIL_SCALE);
     painter.text(
         graphics,
         label,
         REDSTONE_CENTER - width / 2,
-        REDSTONE_Y,
+        y,
         ScreenPainter.DETAIL,
         ScreenPainter.DETAIL_SCALE);
   }

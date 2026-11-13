@@ -271,6 +271,7 @@ public final class InductionDockBlock extends BaseEntityBlock {
         && isLower(state)
         && level.getBlockEntity(pos) instanceof InductionDockBlockEntity dock) {
       Containers.dropContents(level, pos, dock.slot());
+      Containers.dropContents(level, pos, dock.chargeSlot());
     }
     super.onRemove(state, level, pos, newState, movedByPiston);
   }

@@ -27,10 +27,10 @@
 | Elite Module | `cubit:elite_module` | [Abaixo](#elite-module) |
 | Ultimate Module | `cubit:ultimate_module` | [Abaixo](#ultimate-module) |
 | Induction Dock | `cubit:induction_dock` | Abaixo |
-| Base Power Bank | `cubit:base_power_bank` | A definir |
-| Advanced Power Bank | `cubit:advanced_power_bank` | A definir |
-| Elite Power Bank | `cubit:elite_power_bank` | A definir |
-| Ultimate Power Bank | `cubit:ultimate_power_bank` | A definir |
+| Base Power Bank | `cubit:base_power_bank` | [Abaixo](#power-banks) |
+| Advanced Power Bank | `cubit:advanced_power_bank` | [Abaixo](#power-banks) |
+| Elite Power Bank | `cubit:elite_power_bank` | [Abaixo](#power-banks) |
+| Ultimate Power Bank | `cubit:ultimate_power_bank` | [Abaixo](#power-banks) |
 
 ## Progressão das receitas
 
@@ -66,6 +66,21 @@ Na mesa de craft, em forma de L (pergunta 336). O desenho espelhado também vale
 ### Toolbox
 
 7 ferros, 1 redstone e 1 obsidiana, na mesa de craft: colunas laterais com 3 ferros cada, e coluna central com ferro em cima, redstone no meio e obsidiana embaixo.
+
+### Power Banks
+
+Na mesa de craft, encadeadas (pergunta 902). A Base é a receita com forma comum do jogo. As outras usam o tipo `cubit:power_bank_upgrade`, que passa a carga da Power Bank do centro para a nova. Se a carga não couber, a receita não aparece (pergunta 907). A Base aparece no livro com um Cubit, e cada uma das outras, com a anterior (pergunta 908).
+
+| Power Bank | Centro | 4 nos cantos | 4 nas laterais |
+|---|---|---|---|
+| Base | Bloco de redstone | Lingote de ferro | Redstone |
+| Advanced | Base Power Bank | Lingote de ouro | Quartzo |
+| Elite | Advanced Power Bank | Diamante | Corante roxo |
+| Ultimate | Elite Power Bank | Lingote de netherite | Bloco de redstone |
+
+### Religar o Cubit na grade
+
+O tipo `cubit:robot_recharge`, com os campos `robot`, `power_bank` e `result` (pergunta 910). As regras estão em [`energia.md`](funcionalidades/energia.md#recarregar-o-item-pela-grade-de-craft). Aparece no livro com uma Power Bank qualquer (pergunta 908).
 
 ## Virar item
 
@@ -157,13 +172,15 @@ Estes nomes não mudam sem migração (regra 18 do `AGENTS.md`).
 | Componente do item | `cubit:robot_state` | `tier`, `energy`, `health`, `lamp_enabled`, opcional, com o padrão ligado, `color`, opcional, com o padrão `white`, `scanners_enabled` e `chatter_enabled`, opcionais, com o padrão ligado, `ore_filter`, opcional, com a lista de tags de minério, vazia por padrão (perguntas 560 e 582), `defense_mode`, opcional, com o padrão `peaceful` (pergunta 830), `solar_enabled`, opcional, com o padrão ligado (pergunta 859), e `pickup_enabled`, `magnet_enabled` e `pickup_filter`, opcionais, com o padrão ligado, ligado e a lista negra vazia, com `mode` e `entries` (pergunta 889), também no item danificado |
 | Componente do item | `cubit:energy_slot` | Item do slot de energia e reserva de FE, também no item danificado |
 | Componente do item do Dock | `cubit:dock_energy` | Energia do estoque |
+| Componente da Power Bank | `cubit:power_bank_energy` | Energia guardada. Sem o componente, vale zero (pergunta 903) |
+| Tipos de receita | `cubit:power_bank_upgrade` e `cubit:robot_recharge` | A Power Bank encadeada e o religar na grade (pergunta 910) |
 | Componente do item | `cubit:robot_inventory` | Conteúdo do inventário, também no item danificado |
 | Componente do item danificado | `cubit:last_safe_position` | Dimensão e posição seguras do robô |
 | Componente do item danificado | `cubit:robot_owner` | UUID do dono |
 | Tipo de receita | `cubit:robot_repair` | Campos `damaged_robot`, `toolbox` e `result` |
 | Dados do mundo | `cubit_dead_robots` | Robôs mortos com o dono offline |
 | NBT da entidade | `Owner`, `Tier`, `Energy`, `PowerState`, `LastSafePosition`, `Inventory` e `EnergySlot` | Dono, tier, carga da bateria, estado, última posição segura, inventário, com `Slot` em cada item, e slot de energia, com `Item` e `Reserve` |
-| NBT do bloco do Dock | `Owner`, `Energy` e `Slot` | Dono, estoque e item do slot |
+| NBT do bloco do Dock | `Owner`, `Energy`, `Slot` e `ChargeSlot` | Dono, estoque, item do slot de entrada e Power Bank do slot de carga (pergunta 922) |
 | Estado do bloco do Dock | `facing`, `half` e `status` | Direção, parte de baixo ou de cima e estado da tela: `off`, `idle`, `charging`, `complete` ou `no_energy` |
 | NBT da entidade na base | `DockPosition` | Posição do Dock em que hiberna |
 | NBT da entidade | `LampEnabled` | Chave da lanterna. Sem a chave no save, vale ligada |
@@ -190,12 +207,15 @@ O estado salvo é validado ao entrar no jogo, sem derrubá-lo (regra 17 do `AGEN
 | Vida fora dos limites | Fica entre 1 e o máximo do tier. Sem vida salva, o robô colocado morreria na hora |
 | Estado da entidade | Fica desligado (`INACTIVE_SWITCHED_OFF`), o mais restritivo |
 | Dono ausente | Ninguém consegue interagir com o robô |
+| Carga da Power Bank | Negativa vira zero, e acima da capacidade fica na capacidade, com registro no log (pergunta 903) |
 | Entrada do filtro de coleta | Item ou tag que não existe é ignorado e vai para o log. Entradas acima do limite do tier e tags num tier sem tags ficam guardadas, sem valer na coleta (pergunta 892) |
 
 ## Histórico de modificações
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-12 23:10 | Adiciona o slot de carga do Dock ao save. |
+| Marcelo Fabiano | 2026-11-12 22:30 | Define as receitas e os contratos da Power Bank. |
 | Marcelo Fabiano | 2026-11-12 21:45 | Adiciona a coleta, o ímã e o filtro de coleta aos contratos de save. |
 | Marcelo Fabiano | 2026-11-12 17:20 | Adiciona a chave do painel solar aos contratos de save. |
 | Marcelo Fabiano | 2026-11-12 15:10 | Adiciona o modo Focus ao NBT. |

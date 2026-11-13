@@ -31,6 +31,10 @@ final class CubitItemModelProvider extends ItemModelProvider {
     basicItem(CubitItems.ADVANCED_MODULE.get());
     basicItem(CubitItems.ELITE_MODULE.get());
     basicItem(CubitItems.ULTIMATE_MODULE.get());
+    basicItem(CubitItems.BASE_POWER_BANK.get());
+    basicItem(CubitItems.ADVANCED_POWER_BANK.get());
+    basicItem(CubitItems.ELITE_POWER_BANK.get());
+    basicItem(CubitItems.ULTIMATE_POWER_BANK.get());
   }
 
   /** The collar is white, and the client tints it with the color of the tier (answer 803). */

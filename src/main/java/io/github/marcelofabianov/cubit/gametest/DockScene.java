@@ -85,6 +85,21 @@ final class DockScene {
     stack.useOn(new UseOnContext(player, InteractionHand.MAIN_HAND, hit));
   }
 
+  /** The click of the game with the item in the main hand, which the block handles first. */
+  static void clickWithHeldItem(GameTestHelper helper, Player player, BlockPos dock) {
+    BlockPos absolute = helper.absolutePos(dock);
+    BlockHitResult hit =
+        new BlockHitResult(Vec3.atCenterOf(absolute), Direction.UP, absolute, false);
+    helper
+        .getBlockState(dock)
+        .useItemOn(
+            player.getItemInHand(InteractionHand.MAIN_HAND),
+            helper.getLevel(),
+            player,
+            InteractionHand.MAIN_HAND,
+            hit);
+  }
+
   static void click(GameTestHelper helper, Player player, BlockPos position) {
     BlockPos absolute = helper.absolutePos(position);
     BlockHitResult hit =

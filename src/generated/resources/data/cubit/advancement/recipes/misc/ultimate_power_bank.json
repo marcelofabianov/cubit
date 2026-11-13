@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_elite_power_bank": {
+      "conditions": {
+        "items": [
+          {
+            "items": "cubit:elite_power_bank"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "cubit:ultimate_power_bank"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_elite_power_bank"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "cubit:ultimate_power_bank"
+    ]
+  }
+}

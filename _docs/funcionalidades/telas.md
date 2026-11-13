@@ -131,7 +131,7 @@ O enum e o nome de contrato `status` não mudam (pergunta 313). Muda só o texto
 | Parte | O que mostra |
 |---|---|
 | Topo | `Induction Dock`, o estado, a torre com a luz do estado, `Stored energy 64k / 100k FE`, com a barra laranja, a linha de entrada e `Cables or redstone · up to 5,000 FE/t` |
-| Slot | O slot de redstone, com o rótulo `Redstone` |
+| Slot | O slot de entrada, com o rótulo `Redstone`, e logo abaixo o slot de carga da Power Bank, com o rótulo `Charge` / `Carregar`. Tudo de Docked Cubit para baixo desce 27 px, e a janela passa a 289 px de altura (pergunta 921) |
 | Docked Cubit | Com Cubit: o retrato, `Cubit · Battery 165k / 300k FE`, `Health 23 / 25` e a linha de recarga e vida. Sem Cubit: `No Cubit docked` e as frases das imagens |
 | Queue | `Empty`, ou `1 Cubit waiting` |
 | Owner | O nome do dono, ou `Unknown` (pergunta 689) |
@@ -222,6 +222,7 @@ Pergunta 691.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-12 23:10 | Adiciona o slot de carga à tela do Dock. |
 | Marcelo Fabiano | 2026-11-12 21:45 | Adiciona a aba Behavior, com a coleta, o ímã, o filtro de coleta e a sincronia dos slots fantasma. |
 | Marcelo Fabiano | 2026-11-12 17:20 | Adiciona a chave do painel solar e o botão Power à aba Settings. |
 | Marcelo Fabiano | 2026-11-12 15:10 | Adiciona o modo Focus à aba Defense. |

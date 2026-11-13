@@ -1,0 +1,24 @@
+{
+  "type": "cubit:power_bank_upgrade",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "cubit:advanced_power_bank"
+    },
+    "M": {
+      "item": "minecraft:diamond"
+    },
+    "S": {
+      "item": "minecraft:purple_dye"
+    }
+  },
+  "pattern": [
+    "MSM",
+    "SCS",
+    "MSM"
+  ],
+  "result": {
+    "count": 1,
+    "id": "cubit:elite_power_bank"
+  }
+}
