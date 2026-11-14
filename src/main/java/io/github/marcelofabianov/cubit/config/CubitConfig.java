@@ -98,6 +98,10 @@ public final class CubitConfig {
     return defense.focusForget.get();
   }
 
+  public int tabletTargetReachBlocks() {
+    return defense.tabletTargetReach.get();
+  }
+
   public int torchCheckTicks() {
     return torches.check.get();
   }

@@ -30,8 +30,6 @@ final class TabletOfflineScreen extends Screen {
   private static final Box STATUS = new Box(200, 8, 92, LINE);
   private static final Box BATTERY = new Box(TabletRobotHeader.TEXT_X, 22, 150, LINE);
   private static final Box NOTICE = new Box(MARGIN, TabletRobotHeader.HEIGHT + 4, 284, LINE);
-  private static final int BUTTON_WIDTH = 64;
-  private static final int BUTTON_GAP = 4;
   private static final long TICKS_PER_MINUTE = 1_200;
 
   private final ScreenPainter painter = new ScreenPainter();
@@ -52,22 +50,17 @@ final class TabletOfflineScreen extends Screen {
   protected void init() {
     left = (width - WIDTH) / 2;
     top = (height - HEIGHT) / 2;
-    addRenderableWidget(TabletRobotScreen.backButton(left, top, CubitNetwork::requestRobotList));
-    int x = left + TabletRobotHeader.TEXT_X;
-    disabled(x, TabletKeys.TURN_ON);
-    disabled(x + BUTTON_WIDTH + BUTTON_GAP, TabletKeys.RENAME);
+    addRenderableWidget(TabletHeaderButtons.backButton(left, top, CubitNetwork::requestRobotList));
+    disabled(0, TabletKeys.TURN_ON);
+    disabled(1, TabletKeys.RENAME);
+    disabled(2, TabletKeys.GO_TO_DOCK);
   }
 
-  private void disabled(int x, String key) {
+  private void disabled(int place, String key) {
     FlatButton button =
         addRenderableWidget(
-            new FlatButton(
-                x,
-                top + TabletRobotHeader.BUTTON_Y,
-                BUTTON_WIDTH,
-                TabletRobotHeader.BUTTON_HEIGHT,
-                TabletRobotScreen.bold(key),
-                () -> {}));
+            TabletHeaderButtons.rowButton(
+                left, top, place, TabletHeaderButtons.bold(key), () -> {}));
     button.active = false;
     button.setMuted(true);
     button.setTooltip(Tooltip.create(Component.translatable(TabletKeys.OUT_OF_REACH_DETAIL)));

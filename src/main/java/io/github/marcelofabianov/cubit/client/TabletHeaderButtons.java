@@ -1,0 +1,130 @@
+package io.github.marcelofabianov.cubit.client;
+
+import io.github.marcelofabianov.cubit.domain.dock.DockGoal;
+import io.github.marcelofabianov.cubit.menu.ScreenKeys;
+import io.github.marcelofabianov.cubit.menu.TabletKeys;
+import io.github.marcelofabianov.cubit.menu.TabletRobotMenu;
+import java.util.List;
+import java.util.function.IntConsumer;
+import java.util.function.UnaryOperator;
+import net.minecraft.ChatFormatting;
+import net.minecraft.client.gui.components.Tooltip;
+import net.minecraft.network.chat.Component;
+
+/**
+ * The buttons of the header of the Tablet: Back in the corner, and Power, Rename and Go to Dock in
+ * a row under the bars (answers 1020, 1033 and 1035). A button that cannot act now is disabled,
+ * with the reason in its tooltip.
+ */
+final class TabletHeaderButtons {
+  static final int BUTTON_WIDTH = 64;
+  static final int BUTTON_GAP = 4;
+  private static final int MARGIN = TabletRobotHeader.MARGIN;
+  private static final int BACK_Y = 5;
+  private static final int BACK_WIDTH = 36;
+  private static final int BACK_HEIGHT = 12;
+
+  private final TabletRobotMenu menu;
+  private FlatButton back;
+  private FlatButton power;
+  private FlatButton rename;
+  private FlatButton dock;
+
+  TabletHeaderButtons(TabletRobotMenu menu) {
+    this.menu = menu;
+  }
+
+  /** What each button does, given by the screen. */
+  record Actions(Runnable back, IntConsumer press, Runnable rename) {}
+
+  void add(UnaryOperator<FlatButton> add, int windowLeft, int windowTop, Actions actions) {
+    back = add.apply(backButton(windowLeft, windowTop, actions.back()));
+    power =
+        add.apply(
+            rowButton(
+                windowLeft,
+                windowTop,
+                0,
+                Component.empty(),
+                () -> actions.press().accept(TabletRobotMenu.POWER_TOGGLE_BUTTON)));
+    rename =
+        add.apply(rowButton(windowLeft, windowTop, 1, bold(TabletKeys.RENAME), actions.rename()));
+    dock =
+        add.apply(
+            rowButton(
+                windowLeft,
+                windowTop,
+                2,
+                bold(TabletKeys.GO_TO_DOCK),
+                () -> actions.press().accept(TabletRobotMenu.GO_TO_DOCK_BUTTON)));
+  }
+
+  /** A button of the row under the bars, by its place in the row. */
+  static FlatButton rowButton(
+      int windowLeft, int windowTop, int place, Component message, Runnable action) {
+    return new FlatButton(
+        windowLeft + TabletRobotHeader.TEXT_X + place * (BUTTON_WIDTH + BUTTON_GAP),
+        windowTop + TabletRobotHeader.BUTTON_Y,
+        BUTTON_WIDTH,
+        TabletRobotHeader.BUTTON_HEIGHT,
+        message,
+        action);
+  }
+
+  /** Back, in the upper left corner of the window, as the offline screen also has it. */
+  static FlatButton backButton(int windowLeft, int windowTop, Runnable action) {
+    FlatButton button =
+        new FlatButton(
+            windowLeft + MARGIN,
+            windowTop + BACK_Y,
+            BACK_WIDTH,
+            BACK_HEIGHT,
+            bold(TabletKeys.BACK),
+            action);
+    button.setMuted(true);
+    return button;
+  }
+
+  static Component bold(String key) {
+    return Component.translatable(key).withStyle(ChatFormatting.BOLD);
+  }
+
+  /** Read again on every frame, from the values of the server. Hidden behind the Rename dialog. */
+  void update(boolean visible) {
+    updatePower();
+    updateDock();
+    for (FlatButton button : List.of(back, power, rename, dock)) {
+      button.visible = visible;
+    }
+  }
+
+  /** Switch off an active Cubit, turn on one with charge, or say why neither (answer 1033). */
+  private void updatePower() {
+    boolean off = menu.powerAvailable();
+    boolean on = !off && menu.canTurnOn();
+    power.setMessage(bold(off ? TabletKeys.SWITCH_OFF : TabletKeys.TURN_ON));
+    String detail =
+        off
+            ? ScreenKeys.POWER_DETAIL
+            : on ? TabletKeys.TURN_ON_DETAIL : TabletKeys.POWER_UNAVAILABLE;
+    enable(power, off || on, detail);
+  }
+
+  private void updateDock() {
+    DockGoal goal = menu.dockGoal();
+    String detail =
+        switch (goal) {
+          case READY -> TabletKeys.GO_TO_DOCK_DETAIL;
+          case SWITCHED_OFF -> TabletKeys.DOCK_SWITCHED_OFF;
+          case HIBERNATING -> TabletKeys.DOCK_HIBERNATING;
+          case NO_DOCK -> TabletKeys.DOCK_OUT_OF_REACH;
+        };
+    enable(dock, goal.ready(), detail);
+  }
+
+  private static void enable(FlatButton button, boolean active, String detail) {
+    button.active = active;
+    button.setMuted(!active);
+    button.setTooltip(Tooltip.create(Component.translatable(detail)));
+  }
+}

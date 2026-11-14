@@ -1,9 +1,11 @@
 package io.github.marcelofabianov.cubit.item;
 
+import io.github.marcelofabianov.cubit.block.InductionDockBlockEntity;
 import io.github.marcelofabianov.cubit.domain.robot.TabletApp;
 import io.github.marcelofabianov.cubit.menu.TabletKeys;
-import io.github.marcelofabianov.cubit.player.TabletSelection;
+import io.github.marcelofabianov.cubit.player.TabletUse;
 import io.github.marcelofabianov.cubit.registry.CubitDataComponents;
+import java.util.Optional;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
@@ -17,7 +19,7 @@ import net.minecraft.world.level.Level;
 
 /**
  * The Cubit Tablet, which replaces the Cubit Remote (answers 998 to 1026). Its right click does
- * what its active app does. With Open, any click that is not on a Cubit opens the selection.
+ * what its active app does, on the server.
  */
 public final class TabletItem extends Item {
   private static final String APP_PREFIX = "gui.cubit.tablet.app.";
@@ -29,6 +31,10 @@ public final class TabletItem extends Item {
   public static TabletApp appOf(ItemStack stack) {
     return TabletApp.fromKeyOrOpen(
         stack.getOrDefault(CubitDataComponents.TABLET_APP.get(), TabletApp.OPEN.key()));
+  }
+
+  public static void setApp(ItemStack stack, TabletApp app) {
+    stack.set(CubitDataComponents.TABLET_APP.get(), app.key());
   }
 
   public static String appKey(TabletApp app) {
@@ -45,16 +51,21 @@ public final class TabletItem extends Item {
   @Override
   public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
     if (player instanceof ServerPlayer server) {
-      TabletSelection.open(server);
+      TabletUse.click(server, player.getItemInHand(hand), new TabletUse.Air());
     }
     return InteractionResultHolder.sidedSuccess(player.getItemInHand(hand), level.isClientSide());
   }
 
-  /** Before the block, so a click on a chest or a door opens the selection (answer 1007). */
+  /** Before the block, so a click on a chest or a door never uses the block (answer 1007). */
   @Override
   public InteractionResult onItemUseFirst(ItemStack stack, UseOnContext context) {
     if (context.getPlayer() instanceof ServerPlayer server) {
-      TabletSelection.open(server);
+      Optional<InductionDockBlockEntity> dock =
+          context.getLevel().getBlockEntity(context.getClickedPos())
+                  instanceof InductionDockBlockEntity found
+              ? Optional.of(found)
+              : Optional.empty();
+      TabletUse.click(server, stack, new TabletUse.Block(dock));
     }
     return InteractionResult.SUCCESS;
   }

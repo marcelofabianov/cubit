@@ -19,7 +19,15 @@ final class DefenseSection {
   private static final int SHOCK_LOOK_MIN = 1;
   private static final int SHOCK_LOOK_MAX = 1200;
 
+  /** The aim of the Target app of the Tablet, as far as Focus keeps a target (answer 1043). */
+  private static final String TABLET_TARGET_REACH = "tablet_target_reach_blocks";
+
+  private static final int TABLET_TARGET_REACH_DEFAULT = 32;
+  private static final int TABLET_TARGET_REACH_MIN = 1;
+  private static final int TABLET_TARGET_REACH_MAX = 128;
+
   final ModConfigSpec.IntValue retaliateMemory;
+  final ModConfigSpec.IntValue tabletTargetReach;
   final ModConfigSpec.IntValue shockLook;
   final ModConfigSpec.IntValue focusForget;
 
@@ -32,5 +40,11 @@ final class DefenseSection {
             FOCUS_FORGET, FOCUS_FORGET_DEFAULT, FOCUS_FORGET_MIN, FOCUS_FORGET_MAX);
     shockLook =
         builder.defineInRange(SHOCK_LOOK, SHOCK_LOOK_DEFAULT, SHOCK_LOOK_MIN, SHOCK_LOOK_MAX);
+    tabletTargetReach =
+        builder.defineInRange(
+            TABLET_TARGET_REACH,
+            TABLET_TARGET_REACH_DEFAULT,
+            TABLET_TARGET_REACH_MIN,
+            TABLET_TARGET_REACH_MAX);
   }
 }

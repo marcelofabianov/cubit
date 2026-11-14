@@ -35,15 +35,18 @@ O Tablet funciona por apps, um ativo por vez, e o clique direito faz o que o app
 | App | Clique direito | Quando aparece | Entrega |
 |---|---|---|---|
 | Open | Num Cubit, abre a tela dele. Em qualquer outro lugar, abre a tela de seleção | Sempre | 1 |
-| Alvo | Marca o mob alvo do modo Focus do Cubit escolhido | Com o Cubit escolhido no modo Focus | 3 |
-| Dock | Num Dock do player, faz dele o Dock preferido do Cubit escolhido | Sempre | 3 |
+| Alvo | Marca o mob na mira, a até 32 blocos, como alvo do modo Focus do Cubit escolhido | Com o Cubit escolhido carregado e no modo Focus | 3 |
+| Dock | Num Dock do player, faz dele o Dock preferido do Cubit escolhido. No Dock que já é o preferido, tira a preferência | Sempre | 3 |
 | Área | Marca os cantos da área | Com os itens 13 a 16 da Fase 4.2 | Depois |
 | Descarga | Marca os baús de descarga | Com os itens 13 a 16 da Fase 4.2 | Depois |
 | Marcar | Marca os blocos do trabalho do card | Na Fase 5 | Depois |
 
 - **Trocar de app:** com o Tablet na mão, Shift + roda do mouse troca o app. O app atual aparece na barra de ação, como `Tablet · Alvo`, e no nome do item. Só entram na troca os apps que fazem sentido para o Cubit escolhido. O app ativo fica no item, no componente `cubit:tablet_app` (perguntas 1006 e 1026).
 - **Prioridade do Tablet:** no app Open, clicar num bloco ou numa entidade com ação própria, como um baú, uma porta, um aldeão ou um Dock, abre a tela de seleção e não aciona o bloco nem a entidade (pergunta 1007).
-- **Dock preferido:** recolher o Cubit apaga o Dock preferido, como a área e os baús marcados (pergunta 343), e o Cubit volta a usar o Dock livre mais próximo (pergunta 1008).
+- **App inválido:** se o app ativo deixa de fazer sentido, como o Alvo com o Cubit escolhido fora do Focus, o próximo clique faz o que o Open faz, o item volta a Open e a barra de ação avisa (pergunta 1044).
+- **Alvo:** o mob na mira, a até `tablet_target_reach_blocks` blocos, 32 por padrão, a distância em que o Focus esquece o alvo. Valem as regras do Focus: só mob hostil ou neutro. Sem o Cubit escolhido carregado e no Focus, a barra de ação diz o motivo. Sem mob na mira, a barra de ação avisa, e nada abre. No mob que já é o alvo, nada muda (perguntas 1043 e 1047).
+- **Dock, fora de um Dock do player:** num outro bloco, num Dock de outro player ou numa entidade, a barra de ação diz que o app marca um Dock seu, e nada abre (pergunta 1046).
+- **Dock preferido:** o segundo clique no mesmo Dock tira a preferência, com aviso na barra de ação (pergunta 1045). Recolher o Cubit apaga o Dock preferido, como a área e os baús marcados (pergunta 343), e o Cubit volta a usar o Dock livre mais próximo (pergunta 1008).
 
 ## Cubit escolhido
 
@@ -99,7 +102,7 @@ Fica fixo em todas as abas. `Voltar` fica no canto superior esquerdo, e os botõ
 - **Rename, a janela:** pequena, no centro, com o campo de até 50 caracteres já preenchido com o nome atual, Confirmar e Cancelar. Enter confirma, e Esc cancela. Um Cubit sem nome abre o campo vazio, para Confirmar não chamá-lo de `Cubit` (pergunta 1035).
 - **Power:** o botão mostra `Switch off` com o Cubit ativo e `Turn on` com ele desligado e com carga. Sem carga, fica desabilitado, com a dica do motivo. Desliga como o botão `Power` da aba Settings, e o clique direito no Cubit também o religa, sem estado salvo novo. Também liga um Cubit desligado com carga, como a exceção da pergunta 80 (pergunta 1033, que muda a 1021).
 - **Parar e seguir:** o `Stop` e o `Follow` saíram do Tablet por agora e esperam um refinamento, em "Ainda sem fase" no `ROADMAP.md` (pergunta 1036).
-- **Ir para o Dock:** vai para o Dock preferido. Sem ele, vai para o Dock livre mais próximo, no raio de chamada do tier, como o clique no Dock. Sem Dock ao alcance, desligado, hibernando ou com o chunk descarregado, o botão fica desabilitado, com a dica do motivo. Ao sair do Dock, o Cubit volta ao que fazia.
+- **Ir para o Dock:** vai para o Dock preferido, se ele estiver na mesma dimensão, carregado e no raio de chamada do tier. Senão, vai para o Dock livre mais próximo nesse raio, como o clique no Dock (pergunta 1041). Com o preferido ocupado, vai até ele e espera na fila, procurando outro livre enquanto espera. Um preferido destruído é apagado ao ser lido (pergunta 1042). Sem Dock ao alcance, desligado, hibernando ou com o chunk descarregado, o botão fica desabilitado, com a dica do motivo. Ao sair do Dock, o Cubit volta ao que fazia.
 
 ### Abas
 
@@ -147,9 +150,10 @@ Fica fixo em todas as abas. `Voltar` fica no canto superior esquerdo, e os botõ
 | Receita | `cubit:tablet` | A receita com forma |
 | Componente do item | `cubit:tablet_app` | O app ativo: `open`, `target` ou `dock`. Sem o componente, vale `open` |
 | Attachment do player | `cubit:chosen_robot` | O UUID do Cubit escolhido |
-| NBT da entidade | `PreferredDock` | A posição e a dimensão do Dock preferido |
+| NBT da entidade | `PreferredDock` | O Dock preferido: `Block`, a posição num `long`, e `Dimension`. Sem a chave, o Cubit não tem Dock preferido |
 | Menu | `cubit:tablet_robot` | A tela do Cubit no Tablet, com a cor, o lugar e a chave geral nos valores do menu |
-| Pacotes do cliente | `cubit:choose_robot`, `cubit:robot_list_request` e `cubit:rename_robot` | Escolher e abrir, voltar para a seleção e renomear, todos conferidos no servidor |
+| Pacotes do cliente | `cubit:choose_robot`, `cubit:robot_list_request`, `cubit:rename_robot` e `cubit:switch_tablet_app` | Escolher e abrir, voltar para a seleção, renomear e trocar de app, todos conferidos no servidor |
+| Config | `tablet_target_reach_blocks`, em `general` | O alcance da mira do app Alvo, de 1 a 128, com 32 |
 | Dados do mundo | `cubit_robot_snapshots` | A foto de cada Cubit por dono: posição, dimensão, estado, bateria, vida, tier, cor, nome e a hora |
 
 Os textos em inglês e português, como `Cubit Tablet` / `Tablet do Cubit`, `Tablet · Open` / `Tablet · Abrir`, `Go to Dock` / `Ir para o Dock` e `Rename` / `Renomear`, ficam no datagen (pergunta 1026).
@@ -163,6 +167,8 @@ Os textos em inglês e português, como `Cubit Tablet` / `Tablet do Cubit`, `Tab
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 17:35 | Detalha o NBT `PreferredDock`, o pacote da troca de app e o config do app Alvo. |
+| Marcelo Fabiano | 2026-11-13 17:15 | Define os apps Alvo e Dock e o `Ir para o Dock` da entrega 3, com as perguntas 1041 a 1047. |
 | Marcelo Fabiano | 2026-11-13 16:30 | Descreve o botão Power, a janela de Rename sem nome, o menu e os pacotes da entrega 2. |
 | Marcelo Fabiano | 2026-11-13 19:00 | Põe as oito chaves na aba Recursos e só o filtro na aba Filtros. |
 | Marcelo Fabiano | 2026-11-13 18:50 | Tira o Stop e o Follow, faz a chave geral igual ao Power e define a barra de botões e o Cubit descarregado. |

@@ -68,6 +68,7 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 | `TabletApp` | Os apps do Tablet, um ativo por vez. A `key` é o nome no componente do item, e uma chave desconhecida vale Open |
 | `RobotListing` | Um Cubit como a tela de seleção do Tablet o ordena: se segue o player, se está na mesma dimensão, se está carregado e a distância |
 | `RobotListings` | A ordem e a busca da tela de seleção do Tablet |
+| `TabletApps` | Os apps do Tablet que fazem sentido para o Cubit escolhido, a troca com Shift e a roda e a volta ao Open de um app que deixou de valer (perguntas 1006 e 1044) |
 | `RobotName` | O nome que o Tablet dá ao Cubit, com as regras da etiqueta: corta os espaços das pontas, aceita até 50 caracteres e, vazio, tira o nome (perguntas 1015 a 1017) |
 | `PickupSettings` | As chaves da coleta, do ímã e da busca e o filtro, que o item guarda |
 | `OreSignals` | Quais minérios avisam e qual deles o texto cita, a partir da lista dos raros |
@@ -105,6 +106,8 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 | `DockStay` | Vida recuperada por tick e quando o robô sai da base |
 | `DockQueue` | Robôs aguardando um Dock ocupado, por ordem de chegada |
 | `DockTrip` | Um robô a caminho do Dock: o quanto chegou perto, há quanto tempo não avança e o que faz em cada tick |
+| `DockGoal` | Se o `Ir para o Dock` do Tablet pode mandar o Cubit ou por que não: desligado, hibernando ou sem Dock ao alcance (perguntas 1020 e 1041) |
+| `PreferredDock` | O Dock marcado com o app Dock do Tablet, pelo bloco e pela dimensão. Clicar no mesmo Dock tira a marca (perguntas 1008 e 1045) |
 | `DockRemoval` | Quem pode quebrar um Dock |
 | `DockStorageRules` | O inventário do Dock: o que ele guarda, quando e qual Power Bank ele carrega, e o que a automação tira |
 | `DockStoredKind` | O que um item é para o inventário do Dock: Toolbox, Power Bank ou outro |

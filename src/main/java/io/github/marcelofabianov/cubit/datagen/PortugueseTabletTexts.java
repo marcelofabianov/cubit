@@ -23,6 +23,18 @@ final class PortugueseTabletTexts {
   private static final String OVERWORLD = "Superfície";
   private static final String NETHER = "Nether";
   private static final String END = "End";
+  private static final String BACK_TO_OPEN = "Cubit escolhido fora do Focus · de volta ao Abrir";
+  private static final String NO_MOB = "Nenhum mob na mira";
+  private static final String NOT_A_TARGET = "Isto não pode ser alvo do Focus";
+  private static final String DOCK_ONLY_YOURS = "O app Dock marca um Dock seu";
+  private static final String DOCK_NO_CUBIT = "Escolha antes um Cubit ao alcance";
+  private static final String DOCK_MARKED = "Dock preferido de %s";
+  private static final String DOCK_UNMARKED = "%s está sem Dock preferido";
+  private static final String GO_TO_DOCK = "Ir para o Dock";
+  private static final String GO_TO_DOCK_DETAIL = "Manda o Cubit hibernar no Dock";
+  private static final String DOCK_SWITCHED_OFF = "O Cubit está desligado";
+  private static final String DOCK_HIBERNATING = "O Cubit já está num Dock";
+  private static final String DOCK_OUT_OF_REACH = "Nenhum Dock livre ao alcance";
   private static final String BACK = "Voltar";
   private static final String RENAME = "Renomear";
   private static final String RENAME_TITLE = "Renomear o Cubit";
@@ -58,6 +70,7 @@ final class PortugueseTabletTexts {
     add.accept(TabletKeys.NETHER, NETHER);
     add.accept(TabletKeys.END, END);
     addScreen(add);
+    addApps(add);
   }
 
   /** The screen of a Cubit on the Tablet (answers 1033 to 1037). */
@@ -77,5 +90,21 @@ final class PortugueseTabletTexts {
     add.accept(TabletKeys.OUT_OF_REACH_DETAIL, OUT_OF_REACH_DETAIL);
     add.accept(TabletKeys.TAB_RESOURCES, TAB_RESOURCES);
     add.accept(TabletKeys.TAB_FILTERS, TAB_FILTERS);
+  }
+
+  /** The apps Target and Dock and Go to Dock (answers 1041 to 1047). */
+  private static void addApps(BiConsumer<String, String> add) {
+    add.accept(TabletKeys.BACK_TO_OPEN, BACK_TO_OPEN);
+    add.accept(TabletKeys.NO_MOB, NO_MOB);
+    add.accept(TabletKeys.NOT_A_TARGET, NOT_A_TARGET);
+    add.accept(TabletKeys.DOCK_ONLY_YOURS, DOCK_ONLY_YOURS);
+    add.accept(TabletKeys.DOCK_NO_CUBIT, DOCK_NO_CUBIT);
+    add.accept(TabletKeys.DOCK_MARKED, DOCK_MARKED);
+    add.accept(TabletKeys.DOCK_UNMARKED, DOCK_UNMARKED);
+    add.accept(TabletKeys.GO_TO_DOCK, GO_TO_DOCK);
+    add.accept(TabletKeys.GO_TO_DOCK_DETAIL, GO_TO_DOCK_DETAIL);
+    add.accept(TabletKeys.DOCK_SWITCHED_OFF, DOCK_SWITCHED_OFF);
+    add.accept(TabletKeys.DOCK_HIBERNATING, DOCK_HIBERNATING);
+    add.accept(TabletKeys.DOCK_OUT_OF_REACH, DOCK_OUT_OF_REACH);
   }
 }

@@ -95,6 +95,7 @@ Valem para todos os tiers e ficam no config. Os marcados como planejados entram 
 | Intervalo mínimo entre repetições de textos e alertas | ~25 s |
 | Tempo em que o Contra-atacar lembra de quem feriu o Cubit ou o dono | ~30 s (pergunta 832) |
 | Distância do dono em que o alvo do Focus deixa de ser alvo | 32 blocos (pergunta 846) |
+| Alcance da mira do app Alvo do Tablet | 32 blocos (pergunta 1043) |
 | Intervalo mínimo entre falas sobre o tempo | 5 min |
 | Intervalo mínimo entre falas de bioma | 2 min |
 | Intervalo mínimo entre falas de animais | 1 min |
@@ -204,6 +205,7 @@ Planejado para a Fase 5. O tier Base não aceita cards.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-13 17:15 | Adiciona o alcance da mira do app Alvo. |
 | Marcelo Fabiano | 2026-11-13 16:40 | Troca o alcance do controle remoto pelo do Tablet. |
 | Marcelo Fabiano | 2026-11-13 13:45 | Define o custo, o slot e a luz das tochas. |
 | Marcelo Fabiano | 2026-11-13 11:30 | Passa a recarga da Power Bank para o inventário do Dock e as tochas para o item 12. |
