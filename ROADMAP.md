@@ -59,26 +59,19 @@ Dividida em três partes, na ordem em que uma depende da outra.
 
 ## Fase 5: Trabalhos (planejada)
 
-Dividida em três partes.
+Entregue como um kanban, no GitHub Project "Cubit · Fase 5", um card por vez, e cada card é uma issue e um PR (perguntas 1137, 1138 e 1156). A ordem segue a pergunta 251, com a base e os trabalhos primeiro e a infraestrutura no fim.
 
-### Fase 5: Antenas, Servidor e storage
-
-- Antenas, com a ligação ao Servidor, o log e o Dock de referência.
-- Robot Server, com o log dos Cubits e a viagem até o Dock.
-- Storage wireless virtual.
-
-### Fase 5.1: Carregamento de chunks
-
-- Carregamento de chunks pelas antenas e pelo Servidor, com os limites do config.
-
-### Fase 5.2: Cards de Aprendizado de Máquina
-
-- Base comum dos trabalhos: estado de trabalho, card em slot e aba de configuração.
-- Hibernação fora do Dock.
-- Personalização do Cubit de acordo com o card recebido.
-- Os trabalhos: Fazendeiro, Pescador, Organizador, Cozinheiro, Defensor, Minerador, Construtor e Pecuarista.
+1. Consolidar o conceito da Fase 5.
+2. Base do trabalho: slot do card, tier mínimo, estado de trabalho, aba Trabalho e hibernação fora do Dock.
+3. Os trabalhos, um card cada: Pescador, Fazendeiro, Organizador, Cozinheiro, Defensor, Minerador, Construtor e Pecuarista.
+4. Personalização visual do Cubit de acordo com o card.
+5. Trabalhos novos do Ultimate: Mecânico e Alquimista.
+6. Antena e carregamento de chunks.
+7. Robot Server, log e viagem até o Dock.
+8. Storage wireless.
 
 ## Ainda sem fase
 
 - Parar pelo Tablet (`Stop`) e seguir fora do modo área, com um refinamento de como o Cubit parado convive com a busca, o choque e o Dock (pergunta 1036). O `Follow` entra com o retorno automático, no #181, e tira o Cubit da área com o item 13 (perguntas 1055 e 1072). O `Stop` fica para depois de concluir a Fase 4.2 (pergunta 1076).
+- Trabalhos do Arquiteto, que copia uma estrutura de uma área para outra, e do Comerciante, que negocia com aldeões (pergunta 1146).
 - Wiki e livro para o player.

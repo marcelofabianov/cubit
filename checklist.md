@@ -113,37 +113,31 @@ Dividida em três partes, na ordem em que dependem uma da outra (perguntas 722 a
 
 ## Fase 5: Trabalhos (planejada)
 
-Dividida em três partes (perguntas 722 e 725). "Fase 5" nos documentos vale para as três.
+Um card por vez, na ordem do board "Cubit · Fase 5" (perguntas 1137, 1141 e 1156). Os números "A definir" e o teste com 20 a 30 robôs ficam dentro de cada card (pergunta 1144).
 
 ### Já existe
 
 1. [x] Conceito em [`trabalhos.md`](_docs/funcionalidades/trabalhos.md) e perguntas 190 a 256, com a 344
+2. [x] Decidir o slot de fornalha: vai para o Minerador (perguntas 339, 930 e 1149)
 
-### Fase 5: Antenas, Servidor e storage
+### Cards
 
-2. [ ] Antenas: ligação ao Servidor, log e Dock de referência
-3. [ ] Robot Server, log e viagem até o Dock
-4. [ ] Storage wireless virtual
-
-### Fase 5.1: Carregamento de chunks
-
-5. [ ] Carregamento de chunks pelas antenas e pelo Servidor, com os limites do config
-
-### Fase 5.2: Cards de Aprendizado de Máquina
-
-6. [ ] Base comum: estado de trabalho, card em slot e aba de configuração
-7. [ ] Hibernação fora do Dock
-8. [ ] Conceito e entrega da personalização do Cubit de acordo com o card (pergunta 725)
-9. [ ] Fazendeiro e Pescador
-10. [ ] Organizador, com o modo de abastecer, e fechar os detalhes dele (pergunta 208)
-11. [ ] Cozinheiro
-12. [ ] Defensor
-13. [ ] Minerador, com os modos definidos na entrega, a lanterna de cabeça com feixe e a fornalha de minérios (perguntas 463 e 930)
-14. [ ] Construtor
-15. [ ] Pecuarista
-16. [ ] Definir os números "A definir" de `tiers.md`
-17. [x] Decidir o slot de fornalha: vai para o Minerador (perguntas 339 e 930)
-18. [ ] Testar cada card com 20 a 30 robôs
+3. [ ] Consolidar o conceito da Fase 5 (#192)
+4. [ ] Base do trabalho: slot do card, tier mínimo, estado de trabalho, aba Trabalho e hibernação fora do Dock com o `Retomar` (#193)
+5. [ ] Pescador (#194)
+6. [ ] Fazendeiro (#195)
+7. [ ] Organizador, com o modo abastecer (#196)
+8. [ ] Cozinheiro (#197)
+9. [ ] Defensor (#198)
+10. [ ] Minerador, com a fornalha elétrica e a lanterna de cabeça (#199)
+11. [ ] Construtor (#200)
+12. [ ] Pecuarista (#201)
+13. [ ] Personalização visual por card (#202)
+14. [ ] Mecânico (#203)
+15. [ ] Alquimista (#204)
+16. [ ] Antena e carregamento de chunks (#205)
+17. [ ] Robot Server, log e viagem até o Dock (#206)
+18. [ ] Storage wireless (#207)
 
 ## Ainda sem fase
 
