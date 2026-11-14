@@ -41,7 +41,7 @@ O Tablet funciona por apps, um ativo por vez, e o clique direito faz o que o app
 | Descarga | Marca os baús de descarga | Com o item 14 da Fase 4.2 | Depois |
 | Marcar | Marca os blocos do trabalho do card | Na Fase 5 | Depois |
 
-- **Trocar de app:** com o Tablet na mão, Shift + roda do mouse troca o app. O app atual aparece na barra de ação, como `Tablet · Alvo`, e no nome do item. Só entram na troca os apps que fazem sentido para o Cubit escolhido. O app ativo fica no item, no componente `cubit:tablet_app` (perguntas 1006 e 1026).
+- **Trocar de app:** com o Tablet na mão, Shift + roda do mouse troca o app. No macOS, o Shift faz a roda de um mouse rolar para o lado, e essa rolagem também troca o app, como a hotbar do jogo faz. O app atual aparece na barra de ação, como `Tablet · Alvo`, e no nome do item. Só entram na troca os apps que fazem sentido para o Cubit escolhido. O app ativo fica no item, no componente `cubit:tablet_app` (perguntas 1006 e 1026).
 - **Prioridade do Tablet:** no app Open, clicar num bloco ou numa entidade com ação própria, como um baú, uma porta, um aldeão ou um Dock, abre a tela de seleção e não aciona o bloco nem a entidade (pergunta 1007).
 - **App inválido:** se o app ativo deixa de fazer sentido, como o Alvo com o Cubit escolhido fora do Focus, o próximo clique faz o que o Open faz, o item volta a Open e a barra de ação avisa (pergunta 1044).
 - **Alvo:** o mob na mira, a até `tablet_target_reach_blocks` blocos, 32 por padrão, a distância em que o Focus esquece o alvo. Valem as regras do Focus: só mob hostil ou neutro. Sem o Cubit escolhido carregado e no Focus, a barra de ação diz o motivo. Sem mob na mira, a barra de ação avisa, e nada abre. No mob que já é o alvo, nada muda (perguntas 1043 e 1047).
@@ -97,13 +97,13 @@ Fica fixo em todas as abas. `Voltar` fica no canto superior esquerdo, e os botõ
 | Lugar | Coordenadas e dimensão |
 | Power | A chave geral, que liga e desliga o Cubit (perguntas 1021 e 1033) |
 | Ir para o Dock | Manda o Cubit ir para o Dock e hibernar, na entrega 3 (pergunta 1020) |
-| Follow | Tira o Cubit da área e o faz voltar a seguir, com o item 13 (pergunta 1055) |
+| Follow | Faz o Cubit escolhido seguir o player, no lugar do que seguia, e, com o item 13, o tira da área (perguntas 1055 e 1072) |
 
 - **Rename:** nomeia e renomeia o Cubit sem gastar etiqueta nem XP, com as regras da etiqueta do jogo. O nome tem até 50 caracteres, e o servidor confere o dono e o tamanho e corta os espaços nas pontas. Um nome vazio tira o nome. Com o Cubit ativo, ele faz a expressão feliz com o bipe, como ao receber a etiqueta (perguntas 1015 a 1017).
 - **Rename, a janela:** pequena, no centro, com o campo de até 50 caracteres já preenchido com o nome atual, Confirmar e Cancelar. Enter confirma, e Esc cancela. Um Cubit sem nome abre o campo vazio, para Confirmar não chamá-lo de `Cubit` (pergunta 1035).
 - **Power:** o botão mostra `Switch off` com o Cubit ativo e `Turn on` com ele desligado e com carga. Sem carga, fica desabilitado, com a dica do motivo. Desliga como o botão `Power` da aba Settings, e o clique direito no Cubit também o religa, sem estado salvo novo. Também liga um Cubit desligado com carga, como a exceção da pergunta 80 (pergunta 1033, que muda a 1021).
 - **Parar e seguir:** o `Stop` saiu do Tablet por agora e espera um refinamento, em "Ainda sem fase" no `ROADMAP.md` (pergunta 1036).
-- **Follow:** só vale para o Cubit numa área. Apaga a área e faz o Cubit voltar a seguir, de qualquer distância. Fora de uma área, desligado ou com o chunk descarregado, fica desabilitado, com a dica do motivo (pergunta 1055).
+- **Follow:** fica na fileira de botões, depois do `Ir para o Dock`. A fileira começa na margem, sob o retrato, para os quatro botões caberem, e um texto que não cabe no botão encolhe. Faz o Cubit escolhido seguir o player, desligado com carga, hibernando no Dock, que ele deixa na hora, ou numa área, que se apaga com o item 13. O que seguia antes desliga onde está, como no `Turn on`. Vale de qualquer distância, na mesma dimensão, e o Cubit segue pela regra de hoje, andando ou teleportando. Já seguindo, sem carga, em outra dimensão ou com o chunk descarregado, fica desabilitado, com a dica do motivo (perguntas 1055 e 1072 a 1075).
 - **Ir para o Dock:** vai para o Dock preferido, se ele estiver na mesma dimensão, carregado e no raio de chamada do tier. Senão, vai para o Dock livre mais próximo nesse raio, como o clique no Dock (pergunta 1041). Com o preferido ocupado, vai até ele e espera na fila, procurando outro livre enquanto espera. Um preferido destruído é apagado ao ser lido (pergunta 1042). Sem Dock ao alcance, desligado, hibernando ou com o chunk descarregado, o botão fica desabilitado, com a dica do motivo. Ao sair do Dock, o Cubit volta ao que fazia.
 
 ### Abas
@@ -127,8 +127,9 @@ Fica fixo em todas as abas. `Voltar` fica no canto superior esquerdo, e os botõ
 | Ímã | Advanced |
 | Busca | Base |
 | Tochas | Advanced |
+| Retorno automático | Base |
 
-  Com um Cubit numa área, a aba também mostra a área, com os cantos e o tamanho (item 13). A descarga em baú, o retorno automático e o local de morte entram com os itens 14 a 16 da Fase 4.2.
+  Com um Cubit numa área, a aba também mostra a área, com os cantos e o tamanho (item 13). O retorno automático entra com o item 15, antes do modo área (pergunta 1069), e a descarga em baú e o local de morte, com os itens 14 e 16 da Fase 4.2.
 - **Aba Inventário:** mostra o inventário do Cubit com todas as linhas do tier e rolagem nos tiers altos, mas não permite tirar, pôr nem mover itens. A dica de cada item funciona.
 - **Inventário do player:** aparece só na aba Filtros.
 
@@ -171,6 +172,9 @@ Os textos em inglês e português, como `Cubit Tablet` / `Tablet do Cubit`, `Tab
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-14 11:20 | Estende o `Follow` a qualquer Cubit (perguntas 1072 a 1076). |
+| Marcelo Fabiano | 2026-11-14 10:45 | Aceita a rolagem para o lado do macOS na troca de app. |
+| Marcelo Fabiano | 2026-11-14 10:00 | Adiciona o retorno automático à aba Recursos (pergunta 1066). |
 | Marcelo Fabiano | 2026-11-14 09:00 | Define o app Área, o botão `Follow` e a área na aba Recursos (perguntas 1049 a 1064). |
 | Marcelo Fabiano | 2026-11-13 17:35 | Detalha o NBT `PreferredDock`, o pacote da troca de app e o config do app Alvo. |
 | Marcelo Fabiano | 2026-11-13 17:15 | Define os apps Alvo e Dock e o `Ir para o Dock` da entrega 3, com as perguntas 1041 a 1047. |

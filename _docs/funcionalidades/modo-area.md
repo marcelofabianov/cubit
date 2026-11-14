@@ -6,7 +6,7 @@ Os comandos e o localizar do antigo controle remoto passaram para o [Tablet](tab
 
 ## Modo área
 
-O modo área entra com o item 13 da Fase 4.2, numa entrega só (pergunta 1057). A descarga no baú marcado, o app Descarga e o botão `Descarregar` ficam com o item 14.
+O modo área entra com o item 13 da Fase 4.2, numa entrega só, depois do retorno automático do item 15 (perguntas 1057 e 1069). A descarga no baú marcado, o app Descarga e o botão `Descarregar` ficam com o item 14.
 
 ### Marcar a área
 
@@ -29,11 +29,11 @@ A área é marcada com o app Área do [Tablet](tablet.md#apps), em três cliques
 - **Ronda:** sem item para buscar, ele dá voltas contínuas pelos cantos da base da área, no chão, gastando com andar. Um item para buscar interrompe a ronda (perguntas 1059 e 1062).
 - **Defesa, tochas e lanterna:** seguem como hoje (pergunta 1059).
 - **Inventário cheio:** para de coletar e fica na área, e o estado mostra o inventário cheio. Volta a coletar quando houver espaço. Com o item 14, ele passa a descarregar antes (pergunta 1052).
-- **Bateria baixa:** vai ao Dock preferido, ou ao livre mais próximo no raio do tier, e com a carga cheia volta à área. Sem Dock, segue na área até o crítico e desliga, como seguindo (pergunta 1053).
+- **Bateria baixa:** pelo [retorno automático](energia.md#retorno-automático), que entra antes, vai ao Dock preferido, ou ao livre mais próximo no raio do tier, e com a carga cheia volta à área. Sem Dock, segue na área até o crítico e desliga, como seguindo (perguntas 1053, 1065 e 1068).
 - **Dono longe:** o Cubit nunca teleporta até o dono e não é desligado pela perda de vínculo (pergunta 326). Com o chunk descarregado, para como o jogo para tudo e continua quando o chunk carregar, sem forçar o carregamento (pergunta 1061).
 - **Estado:** `In area` (`Na área`), com cor própria, no topo da tela e na lista do Tablet. A bateria crítica e o inventário cheio aparecem antes dele (pergunta 1063).
 - **Tela:** a aba Recursos do Tablet mostra a área, com os cantos e o tamanho.
-- **Voltar a seguir:** o botão `Follow`, no cabeçalho da tela do Cubit no Tablet, apaga a área e faz o Cubit voltar a seguir, de qualquer distância (pergunta 1055).
+- **Voltar a seguir:** o botão `Follow`, no cabeçalho da tela do Cubit no Tablet, que já entra com o retorno automático, também apaga a área e faz o Cubit voltar a seguir (perguntas 1055 e 1072).
 - **Ao recolher:** a área, os baús marcados e o Dock preferido se perdem (perguntas 343 e 1008).
 - **Com trabalho, na Fase 5:** vale [`trabalhos.md`](trabalhos.md).
 
@@ -41,6 +41,8 @@ A área é marcada com o app Área do [Tablet](tablet.md#apps), em três cliques
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-14 11:20 | Liga o `Follow` da área ao botão do #181 (pergunta 1072). |
+| Marcelo Fabiano | 2026-11-14 10:00 | Liga a bateria baixa ao retorno automático (perguntas 1065 e 1069). |
 | Marcelo Fabiano | 2026-11-14 09:00 | Define a marcação, a caixa e o Cubit na área (perguntas 1049 a 1064). |
 | Marcelo Fabiano | 2026-11-13 16:40 | Vira o modo área, e os comandos e o localizar passam para o Tablet. |
 | Marcelo Fabiano | 2026-11-13 09:05 | Deixa só as tochas entre as funções que o controle desativa. |
