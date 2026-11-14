@@ -64,9 +64,9 @@ public final class TabletAppGameTests {
         DockScene.placeDock(helper, owner, DockScene.FLOOR, DOCK_ENERGY);
     ItemStack tablet = tablet(TabletApp.DOCK);
 
-    TabletUse.click(owner, tablet, new TabletUse.Block(Optional.of(dock)));
+    TabletUse.click(owner, tablet, new TabletUse.Block(dock.getBlockPos(), Optional.of(dock)));
     helper.assertTrue(robot.docking().preferred().marked().isPresent(), NOT_MARKED);
-    TabletUse.click(owner, tablet, new TabletUse.Block(Optional.of(dock)));
+    TabletUse.click(owner, tablet, new TabletUse.Block(dock.getBlockPos(), Optional.of(dock)));
 
     helper.assertTrue(robot.docking().preferred().marked().isEmpty(), STILL_MARKED);
     helper.succeed();
@@ -80,7 +80,8 @@ public final class TabletAppGameTests {
     InductionDockBlockEntity dock =
         DockScene.placeDock(helper, stranger, DockScene.FLOOR, DOCK_ENERGY);
 
-    TabletUse.click(owner, tablet(TabletApp.DOCK), new TabletUse.Block(Optional.of(dock)));
+    TabletUse.click(
+        owner, tablet(TabletApp.DOCK), new TabletUse.Block(dock.getBlockPos(), Optional.of(dock)));
 
     helper.assertTrue(robot.docking().preferred().marked().isEmpty(), STILL_MARKED);
     helper.succeed();
@@ -185,6 +186,8 @@ public final class TabletAppGameTests {
     TabletUse.switchApp(owner, FORWARD);
     helper.assertValueEqual(TabletItem.appOf(tablet), TabletApp.DOCK, WRONG_APP);
     robot.defense().choose(owner, DefenseMode.FOCUS);
+    TabletUse.switchApp(owner, FORWARD);
+    helper.assertValueEqual(TabletItem.appOf(tablet), TabletApp.AREA, WRONG_APP);
     TabletUse.switchApp(owner, FORWARD);
     TabletUse.switchApp(owner, FORWARD);
 

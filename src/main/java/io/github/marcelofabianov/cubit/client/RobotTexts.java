@@ -28,6 +28,8 @@ final class RobotTexts {
       case CRITICAL_BATTERY -> ScreenPainter.STATUS_RED;
       case FOLLOWING -> ScreenPainter.STATUS_GREEN;
       case HIBERNATING -> ScreenPainter.STATUS_BLUE;
+      case IN_AREA -> ScreenPainter.STATUS_PURPLE;
+      case INVENTORY_FULL -> ScreenPainter.STATUS_ORANGE;
       case ACTIVE, OFF -> ScreenPainter.STATUS_GRAY;
     };
   }

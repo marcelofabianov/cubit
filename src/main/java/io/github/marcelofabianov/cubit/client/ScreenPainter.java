@@ -33,6 +33,7 @@ final class ScreenPainter {
   static final int STATUS_ORANGE = 0xFFC27A12;
   static final int STATUS_RED = 0xFFC62828;
   static final int STATUS_GRAY = 0xFF757575;
+  static final int STATUS_PURPLE = 0xFF7B4FB0;
 
   /** Every text of the screens shrinks by the same factor, in proportion (answer 705). */
   static final float TEXT_FACTOR = 0.75f;

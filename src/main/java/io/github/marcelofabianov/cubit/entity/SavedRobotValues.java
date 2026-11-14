@@ -63,6 +63,7 @@ final class SavedRobotValues {
     tag.put(ENERGY_SLOT_KEY, inventory.energySlot().save(robot.registryAccess()));
     tag.put(TORCH_SLOT_KEY, inventory.torchSlot().save(robot.registryAccess()));
     robot.docking().save(tag);
+    robot.workArea().save(tag);
     tag.putBoolean(LAMP_KEY, robot.state().lampOn());
     tag.putString(COLOR_KEY, robot.state().color().key());
     tag.putBoolean(SCANNERS_KEY, robot.state().scannersOn());

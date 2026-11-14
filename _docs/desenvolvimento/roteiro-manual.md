@@ -757,6 +757,33 @@ As regras estão em [`tablet.md`](../funcionalidades/tablet.md#cabeçalho). Use 
 | 7 | Escolha um Cubit de chunk descarregado | O botão aparece desabilitado na tela da foto |
 | 8 | Com o jogo em português | `Seguir`, `Segue você · o que seguia antes desliga` e `Já está seguindo você` |
 
+## Modo área
+
+As regras estão em [`modo-area.md`](../funcionalidades/modo-area.md). Use um Cubit Advanced com carga, um Dock com energia, o Tablet e alguns itens para jogar no chão.
+
+| # | Faça | Espere |
+|---|---|---|
+| 1 | Com o Tablet na mão, troque para o app Área com Shift + roda | `Tablet · Area` na barra de ação |
+| 2 | Clique com o botão direito num Cubit Base | `... has no area mode in its tier`, e nada muda |
+| 3 | Clique no Cubit Advanced | Ele vira o Cubit escolhido, e a barra de ação pede o primeiro canto |
+| 4 | Clique num bloco do chão | `First corner x y z · click the other one`. Uma caixa vai do canto até o bloco na mira, e a barra de ação mostra o tamanho, como `10 × 1 × 8` |
+| 5 | Mire num bloco a mais de 16 blocos do primeiro canto | A caixa e o tamanho ficam vermelhos |
+| 6 | Clique nesse bloco | `... is too big`, e o primeiro canto continua marcado |
+| 7 | Clique num bloco dentro do limite | `... works in 10 × 1 × 8`. O Cubit para de seguir e vai andando até a área |
+| 8 | Na área, abra a tela do Cubit pelo Tablet | Estado `In area`, em roxo, e, na aba Recursos, a linha `Area` com o tamanho e os cantos |
+| 9 | Com a área vazia de itens | Ele dá voltas pelas bordas, de canto a canto |
+| 10 | Desligue `Fetch` na aba Behavior e jogue itens dentro da área | Ele vai buscá-los, mesmo com `Fetch` desligada |
+| 11 | Jogue um item fora da área, perto da borda | Ele não sai da área para buscar. O ímã ainda puxa o que estiver no raio |
+| 12 | Encha o inventário dele | Estado `Inventory full`, em laranja, e ele para de buscar |
+| 13 | Afaste-se mais de 20 blocos | Ele fica na área, sem teleportar até você |
+| 14 | Com o Tablet na mão no app Área, sem marcar nada | A caixa roxa mostra a área do Cubit escolhido |
+| 15 | Clique num Cubit, num canto e então Shift + clique direito | `Area marking cancelled`, e a caixa da marcação some |
+| 16 | Use `Follow` na tela do Cubit | Ele sai da área e volta a seguir você, e a linha `Area` mostra `None` |
+| 17 | Marque a área de novo, com um Dock no raio, e deixe a bateria dele cair a 10% | Ele vai ao Dock, carrega e, cheio, volta para a área, sem seguir você |
+| 18 | Saia e entre no mundo | A área continua, e ele volta a trabalhar nela |
+| 19 | Recolha o Cubit e coloque-o de novo | A área se perdeu, e ele segue você |
+| 20 | Com o jogo em português | `Tablet · Área`, `Na área`, `Inventário cheio` e `Área` na aba Recursos |
+
 ## Tradução
 
 | # | Passo | Resultado esperado |
@@ -816,6 +843,7 @@ Na instância só com o mod, tire capturas com F2 do Cubit seguindo, da tela do 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-14 12:40 | Adiciona o modo área. |
 | Marcelo Fabiano | 2026-11-14 11:20 | Adiciona o `Follow` do Tablet. |
 | Marcelo Fabiano | 2026-11-14 10:30 | Adiciona o retorno automático. |
 | Marcelo Fabiano | 2026-11-13 15:10 | Mantém o olhar no alvo até ele ser eliminado. |

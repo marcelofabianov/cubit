@@ -13,6 +13,7 @@ final class PortugueseTabletTexts {
   private static final String APP_OPEN = "Abrir";
   private static final String APP_TARGET = "Alvo";
   private static final String APP_DOCK = "Dock";
+  private static final String APP_AREA = "Área";
   private static final String TITLE = "Cubits";
   private static final String SEARCH = "Buscar";
   private static final String EMPTY = "Nenhum Cubit colocado";
@@ -34,6 +35,23 @@ final class PortugueseTabletTexts {
   private static final String GO_TO_DOCK_DETAIL = "Manda o Cubit hibernar no Dock";
   private static final String DOCK_SWITCHED_OFF = "O Cubit está desligado";
   private static final String DOCK_HIBERNATING = "O Cubit já está num Dock";
+  private static final String AREA_PICK_CUBIT = "Clique com o botão direito num Cubit seu primeiro";
+  private static final String AREA_ONLY_YOURS = "O app Área marca a área de um Cubit seu";
+  private static final String AREA_LOCKED = "%s não tem modo área no tier dele";
+  private static final String AREA_FIRST_CORNER = "Área · %s · clique no primeiro canto";
+  private static final String AREA_FIRST_HINT = "Área · clique no primeiro canto";
+  private static final String AREA_SECOND_CORNER = "Primeiro canto %s %s %s · clique no outro";
+  private static final String AREA_SECOND_HINT = "Área · clique no outro canto";
+  private static final String AREA_TOO_BIG = "%s × %s × %s é grande · até %s de lado e %s de alto";
+  private static final String AREA_OTHER_DIMENSION = "A área precisa estar na dimensão de %s";
+  private static final String AREA_OUT_OF_REACH = "Longe demais de %s · até %s blocos";
+  private static final String AREA_SET = "%s trabalha em %s × %s × %s";
+  private static final String AREA_CANCELLED = "Marcação da área cancelada";
+  private static final String AREA_CUBIT_GONE = "O Cubit sumiu · clique num Cubit de novo";
+  private static final String AREA_SIZE = "%s × %s × %s";
+  private static final String AREA_LINE = "Área";
+  private static final String AREA_NONE = "Nenhuma · marque com o app Área";
+  private static final String AREA_SUMMARY = "%s × %s × %s · de %s %s %s a %s %s %s";
   private static final String FOLLOW = "Seguir";
   private static final String FOLLOW_DETAIL = "Segue você · o que seguia antes desliga";
   private static final String FOLLOW_ALREADY = "Já está seguindo você";
@@ -64,6 +82,7 @@ final class PortugueseTabletTexts {
     add.accept(TabletItem.appKey(TabletApp.OPEN), APP_OPEN);
     add.accept(TabletItem.appKey(TabletApp.TARGET), APP_TARGET);
     add.accept(TabletItem.appKey(TabletApp.DOCK), APP_DOCK);
+    add.accept(TabletItem.appKey(TabletApp.AREA), APP_AREA);
     add.accept(TabletKeys.TITLE, TITLE);
     add.accept(TabletKeys.SEARCH, SEARCH);
     add.accept(TabletKeys.EMPTY, EMPTY);
@@ -112,6 +131,28 @@ final class PortugueseTabletTexts {
     add.accept(TabletKeys.DOCK_HIBERNATING, DOCK_HIBERNATING);
     add.accept(TabletKeys.DOCK_OUT_OF_REACH, DOCK_OUT_OF_REACH);
     addFollow(add);
+    addArea(add);
+  }
+
+  /** The Area app (answers 1051 to 1060). */
+  private static void addArea(BiConsumer<String, String> add) {
+    add.accept(TabletKeys.AREA_PICK_CUBIT, AREA_PICK_CUBIT);
+    add.accept(TabletKeys.AREA_ONLY_YOURS, AREA_ONLY_YOURS);
+    add.accept(TabletKeys.AREA_LOCKED, AREA_LOCKED);
+    add.accept(TabletKeys.AREA_FIRST_CORNER, AREA_FIRST_CORNER);
+    add.accept(TabletKeys.AREA_FIRST_HINT, AREA_FIRST_HINT);
+    add.accept(TabletKeys.AREA_SECOND_CORNER, AREA_SECOND_CORNER);
+    add.accept(TabletKeys.AREA_SECOND_HINT, AREA_SECOND_HINT);
+    add.accept(TabletKeys.AREA_TOO_BIG, AREA_TOO_BIG);
+    add.accept(TabletKeys.AREA_OTHER_DIMENSION, AREA_OTHER_DIMENSION);
+    add.accept(TabletKeys.AREA_OUT_OF_REACH, AREA_OUT_OF_REACH);
+    add.accept(TabletKeys.AREA_SET, AREA_SET);
+    add.accept(TabletKeys.AREA_CANCELLED, AREA_CANCELLED);
+    add.accept(TabletKeys.AREA_CUBIT_GONE, AREA_CUBIT_GONE);
+    add.accept(TabletKeys.AREA_SIZE, AREA_SIZE);
+    add.accept(TabletKeys.AREA_LINE, AREA_LINE);
+    add.accept(TabletKeys.AREA_NONE, AREA_NONE);
+    add.accept(TabletKeys.AREA_SUMMARY, AREA_SUMMARY);
   }
 
   /** `Follow` of the header (answers 1073 to 1075). */

@@ -36,7 +36,6 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.control.JumpControl;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -79,6 +78,7 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
   private final RobotDefense defense = new RobotDefense(this);
   private final RobotPickup pickup = new RobotPickup(this);
   private final RobotTorches torches = new RobotTorches(this);
+  private final RobotWorkArea workArea = new RobotWorkArea(this);
 
   public RobotEntity(
       EntityType<? extends RobotEntity> type,
@@ -93,12 +93,7 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
     this.battery = spec().newBattery(CubitMod.CONFIG.initialCharge());
     this.inventory = new RobotInventory(spec().inventorySlots(), () -> spec().torches().unlocked());
     this.navigation = new RobotNavigation(this, level);
-    this.jumpControl =
-        new JumpControl(this) {
-          // Tracks do not jump: the robot only climbs one block at a time, by its step height.
-          @Override
-          public void jump() {}
-        };
+    this.jumpControl = new TrackJumpControl(this);
     setCanPickUpLoot(false);
     setPathfindingMalus(PathType.WATER, BLOCKED_ROUTE);
   }
@@ -178,6 +173,10 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
 
   public RobotTorches torches() {
     return torches;
+  }
+
+  public RobotWorkArea workArea() {
+    return workArea;
   }
 
   public RobotPickup pickup() {
@@ -349,6 +348,7 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
     powerState = SavedRobotValues.powerState(tag, getUUID());
     SavedRobotValues.readContents(tag, inventory, registryAccess(), spec().inventorySlots());
     docking.load(tag);
+    workArea.load(tag);
     RobotSettings.apply(this, SavedRobotValues.settings(tag, tier, getUUID()));
     safePosition.restore(SavedRobotValues.lastSafePosition(tag));
     RobotInteractions.applyAttributes(this);

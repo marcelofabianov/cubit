@@ -1,7 +1,10 @@
 package io.github.marcelofabianov.cubit.entity;
 
 import io.github.marcelofabianov.cubit.domain.ownership.Ownership;
+import io.github.marcelofabianov.cubit.domain.robot.AreaCheck;
 import io.github.marcelofabianov.cubit.domain.robot.RobotName;
+import io.github.marcelofabianov.cubit.domain.robot.WorkArea;
+import io.github.marcelofabianov.cubit.domain.tier.AreaSpec;
 import io.github.marcelofabianov.cubit.menu.RobotScreenOpening;
 import io.github.marcelofabianov.cubit.menu.TabletOpening;
 import java.util.Optional;
@@ -58,6 +61,22 @@ public final class RobotTablet {
 
   static TabletOpening opening(RobotEntity robot) {
     return new TabletOpening(robot.getUUID(), robot.level().dimension().location().toString());
+  }
+
+  /** The largest area of the tier of the Cubit, from the config (answer 1050). */
+  public static AreaSpec areaOf(RobotEntity robot) {
+    return robot.spec().area();
+  }
+
+  /** Whether the Cubit can take the area: its tier, its dimension and its reach (answer 1058). */
+  public static AreaCheck checkArea(RobotEntity robot, WorkArea area) {
+    AreaCheck.Place place =
+        new AreaCheck.Place(
+            robot.level().dimension().location().toString(),
+            robot.getX(),
+            robot.getZ(),
+            robot.dockCallRadius());
+    return AreaCheck.of(area, areaOf(robot), place);
   }
 
   /**
