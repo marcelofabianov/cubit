@@ -160,6 +160,7 @@ public final class ConfigGameTests {
 
   private static final int BASE_FETCH_RADIUS = 4;
   private static final int BASE_TORCH_COST = 20;
+  private static final int BASE_RETURN_CHARGE = 10;
 
   private static final long BASE_POWER_BANK = 210_000;
 
@@ -191,7 +192,8 @@ public final class ConfigGameTests {
           new ShockSpec(0, 0, BASE_SHOCK_TICKS, Energy.ZERO, false, Set.of()),
           new PickupSpec(0, Energy.ZERO, BASE_PICKUP_FILTER_SLOTS, false, BASE_FETCH_RADIUS),
           new Energy(BASE_POWER_BANK),
-          new TorchSpec(new Energy(BASE_TORCH_COST), new LightLevel(0)));
+          new TorchSpec(new Energy(BASE_TORCH_COST), new LightLevel(0)),
+          new Percentage(BASE_RETURN_CHARGE));
   private static final String WRONG_SPEC = "Wrong tier numbers";
   private static final String ULTIMATE_SPEED_KEY = "general_robot.ultimate.speed_multiplier";
   private static final double ULTIMATE_SPEED_MULTIPLIER = 2.0;

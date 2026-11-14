@@ -3,6 +3,7 @@ package io.github.marcelofabianov.cubit.config;
 import io.github.marcelofabianov.cubit.domain.behavior.LightLevel;
 import io.github.marcelofabianov.cubit.domain.energy.ConsumptionExtras;
 import io.github.marcelofabianov.cubit.domain.energy.Energy;
+import io.github.marcelofabianov.cubit.domain.energy.Percentage;
 import io.github.marcelofabianov.cubit.domain.energy.SolarOutput;
 import io.github.marcelofabianov.cubit.domain.robot.DefenseMode;
 import io.github.marcelofabianov.cubit.domain.tier.PickupSpec;
@@ -159,6 +160,7 @@ final class TierDefaults {
   private static final PickupSpec ELITE_PICKUP = new PickupSpec(5, new Energy(30), 18, true, 8);
   private static final PickupSpec ULTIMATE_PICKUP = new PickupSpec(8, new Energy(60), 27, true, 12);
   private static final Energy TORCH_COST = new Energy(20);
+  private static final Percentage RETURN_CHARGE = new Percentage(10);
   private static final TorchSpec BASE_TORCHES = new TorchSpec(TORCH_COST, new LightLevel(0));
   private static final TorchSpec ADVANCED_TORCHES = new TorchSpec(TORCH_COST, new LightLevel(1));
   private static final TorchSpec ELITE_TORCHES = new TorchSpec(TORCH_COST, new LightLevel(1));
@@ -195,7 +197,8 @@ final class TierDefaults {
           BASE_SHOCK,
           BASE_PICKUP,
           new Energy(BASE_POWER_BANK),
-          BASE_TORCHES);
+          BASE_TORCHES,
+          RETURN_CHARGE);
   private static final TierSpec ADVANCED_SPEC =
       new TierSpec(
           new Energy(ADVANCED_BATTERY),
@@ -224,7 +227,8 @@ final class TierDefaults {
           ADVANCED_SHOCK,
           ADVANCED_PICKUP,
           new Energy(ADVANCED_POWER_BANK),
-          ADVANCED_TORCHES);
+          ADVANCED_TORCHES,
+          RETURN_CHARGE);
   private static final TierSpec ELITE_SPEC =
       new TierSpec(
           new Energy(ELITE_BATTERY),
@@ -253,7 +257,8 @@ final class TierDefaults {
           ELITE_SHOCK,
           ELITE_PICKUP,
           new Energy(ELITE_POWER_BANK),
-          ELITE_TORCHES);
+          ELITE_TORCHES,
+          RETURN_CHARGE);
   private static final TierSpec ULTIMATE_SPEC =
       new TierSpec(
           new Energy(ULTIMATE_BATTERY),
@@ -282,7 +287,8 @@ final class TierDefaults {
           ULTIMATE_SHOCK,
           ULTIMATE_PICKUP,
           new Energy(ULTIMATE_POWER_BANK),
-          ULTIMATE_TORCHES);
+          ULTIMATE_TORCHES,
+          RETURN_CHARGE);
 
   private TierDefaults() {}
 

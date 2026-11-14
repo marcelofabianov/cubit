@@ -3,6 +3,7 @@ package io.github.marcelofabianov.cubit.config;
 import io.github.marcelofabianov.cubit.domain.behavior.LightLevel;
 import io.github.marcelofabianov.cubit.domain.energy.ConsumptionExtras;
 import io.github.marcelofabianov.cubit.domain.energy.Energy;
+import io.github.marcelofabianov.cubit.domain.energy.Percentage;
 import io.github.marcelofabianov.cubit.domain.energy.SolarOutput;
 import io.github.marcelofabianov.cubit.domain.tier.ScannerSpec;
 import io.github.marcelofabianov.cubit.domain.tier.TierSpec;
@@ -27,6 +28,7 @@ final class TierSection {
   private static final String MAX_HEALTH = "max_health";
   private static final String CALL_RADIUS = "call_radius_blocks";
   private static final String SPEED_MULTIPLIER = "speed_multiplier";
+  private static final String RETURN_CHARGE = "return_charge_percent";
   private static final double MIN_SPEED_MULTIPLIER = 0.1;
   private static final double MAX_SPEED_MULTIPLIER = 4;
   private static final int MIN_POSITIVE = 1;
@@ -60,6 +62,7 @@ final class TierSection {
   private final PickupKeys pickup;
   private final ModConfigSpec.IntValue powerBankCapacity;
   private final TorchKeys torches;
+  private final ModConfigSpec.IntValue returnCharge;
 
   TierSection(ModConfigSpec.Builder builder, TierSpec defaults) {
     batteryCapacity = energy(builder, BATTERY_CAPACITY, defaults.batteryCapacity(), MIN_POSITIVE);
@@ -87,6 +90,7 @@ final class TierSection {
     powerBankCapacity =
         energy(builder, POWER_BANK_CAPACITY, defaults.powerBankCapacity(), MIN_POSITIVE);
     torches = new TorchKeys(builder, defaults.torches());
+    returnCharge = percent(builder, RETURN_CHARGE, defaults.returnCharge());
   }
 
   TierSpec read() {
@@ -105,12 +109,18 @@ final class TierSection {
         shock.read(),
         pickup.read(),
         new Energy(powerBankCapacity.get()),
-        torches.read());
+        torches.read(),
+        new Percentage(returnCharge.get()));
   }
 
   private static ModConfigSpec.IntValue count(
       ModConfigSpec.Builder builder, String key, int defaultValue, int max) {
     return builder.defineInRange(key, defaultValue, MIN_POSITIVE, max);
+  }
+
+  private static ModConfigSpec.IntValue percent(
+      ModConfigSpec.Builder builder, String key, Percentage defaultValue) {
+    return builder.defineInRange(key, defaultValue.value(), MIN_CONSUMPTION, Percentage.MAX);
   }
 
   private static ModConfigSpec.IntValue light(

@@ -56,8 +56,14 @@ public class RobotMenu extends RobotMenuReading {
   /** The top of the ghost slots of the pickup filter, in the behavior tab. */
   public static final int PICKUP_FILTER_Y = PickupMenuPart.FILTER_Y;
 
-  /** The rows to scroll to come last, one button per row on top (answer 838). */
-  public static final int FIRST_SCROLL_BUTTON = 16;
+  /** The auto return switch of the settings tab, after the buttons of the Tablet (answer 1066). */
+  public static final int AUTO_RETURN_BUTTON = 16;
+
+  /**
+   * The rows to scroll to come last, one button per row on top (answer 838), with room left for the
+   * buttons still to come.
+   */
+  public static final int FIRST_SCROLL_BUTTON = 32;
 
   /** The rows of the Base, so the screen keeps its height in every tier. */
   public static final int VISIBLE_ROWS = 3;

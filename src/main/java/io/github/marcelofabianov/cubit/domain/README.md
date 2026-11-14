@@ -108,6 +108,7 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 | `DockTrip` | Um robô a caminho do Dock: o quanto chegou perto, há quanto tempo não avança e o que faz em cada tick |
 | `DockGoal` | Se o `Ir para o Dock` do Tablet pode mandar o Cubit ou por que não: desligado, hibernando ou sem Dock ao alcance (perguntas 1020 e 1041) |
 | `PreferredDock` | O Dock marcado com o app Dock do Tablet, pelo bloco e pela dimensão. Clicar no mesmo Dock tira a marca (perguntas 1008 e 1045) |
+| `AutoReturn` | Quando o Cubit volta sozinho a um Dock: com a chave ligada, ativo, seguindo o dono e com a bateria do retorno do tier ou menos, a não ser que já esteja a caminho (perguntas 1065 a 1068) |
 | `DockRemoval` | Quem pode quebrar um Dock |
 | `DockStorageRules` | O inventário do Dock: o que ele guarda, quando e qual Power Bank ele carrega, e o que a automação tira |
 | `DockStoredKind` | O que um item é para o inventário do Dock: Toolbox, Power Bank ou outro |

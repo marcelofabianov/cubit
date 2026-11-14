@@ -20,6 +20,7 @@ final class RobotSettings {
     robot.defense().setMode(state.defenseMode());
     robot.solar().setSwitchedOn(state.solarOn());
     robot.torches().setSwitchedOn(state.torchesOn());
+    robot.docking().autoReturn().setSwitchedOn(state.autoReturnOn());
     robot
         .pickup()
         .setSettings(
@@ -40,6 +41,7 @@ final class RobotSettings {
         robot.defense().mode(),
         robot.solar().switchedOn(),
         robot.pickup().settings(),
-        robot.torches().switchedOn());
+        robot.torches().switchedOn(),
+        robot.docking().autoReturn().switchedOn());
   }
 }

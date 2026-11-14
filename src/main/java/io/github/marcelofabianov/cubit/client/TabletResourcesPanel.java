@@ -14,7 +14,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 
 /**
- * The Features tab of the Tablet: the eight switches of the Cubit in one list, with the same
+ * The Features tab of the Tablet: the nine switches of the Cubit in one list, with the same
  * controls of the server as the screen of the Cubit. A row the tier locks is dimmed, with the tier
  * that unlocks it (answer 1037).
  */
@@ -46,7 +46,8 @@ final class TabletResourcesPanel {
     RobotMenu.PICKUP_BUTTON,
     RobotMenu.MAGNET_BUTTON,
     RobotMenu.FETCH_BUTTON,
-    RobotMenu.TORCHES_BUTTON
+    RobotMenu.TORCHES_BUTTON,
+    RobotMenu.AUTO_RETURN_BUTTON
   };
   private static final String[] NAMES = {
     ScreenKeys.LAMP,
@@ -56,7 +57,8 @@ final class TabletResourcesPanel {
     BehaviorKeys.PICKUP,
     BehaviorKeys.MAGNET,
     BehaviorKeys.FETCH,
-    ScreenKeys.TORCHES
+    ScreenKeys.TORCHES,
+    ScreenKeys.AUTO_RETURN
   };
 
   private final ScreenPainter painter;

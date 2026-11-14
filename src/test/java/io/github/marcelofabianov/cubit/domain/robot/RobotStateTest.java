@@ -76,6 +76,21 @@ class RobotStateTest {
   }
 
   @Test
+  void theAutoReturnStartsOnAlsoForOlderSaves() {
+    assertTrue(new RobotState(RobotTier.BASE, SOME_ENERGY, SOME_HEALTH).autoReturnOn());
+  }
+
+  @Test
+  void dyingRepairingAndOtherSwitchesKeepTheAutoReturn() {
+    RobotState off = new RobotState(RobotTier.BASE, SOME_ENERGY, SOME_HEALTH).withAutoReturn(false);
+
+    assertFalse(off.damaged().autoReturnOn());
+    assertFalse(off.damaged().repaired(SPEC, new Percentage(INITIAL_PERCENT)).autoReturnOn());
+    assertFalse(off.withEnergy(SOME_ENERGY).autoReturnOn());
+    assertFalse(off.withPickup(PickupSettings.INITIAL).withTorches(false).autoReturnOn());
+  }
+
+  @Test
   void aNewRobotIsWhite() {
     RobotState state = RobotState.initial(RobotTier.BASE, SPEC, new Percentage(INITIAL_PERCENT));
 

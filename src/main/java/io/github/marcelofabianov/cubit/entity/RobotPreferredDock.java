@@ -76,7 +76,8 @@ public final class RobotPreferredDock implements DockGoalControl {
     return true;
   }
 
-  private Optional<BlockPos> dockToGo() {
+  /** The Dock the Cubit would go to now, also for the auto return (answer 1067). */
+  Optional<BlockPos> dockToGo() {
     Optional<UUID> owner = robot.ownerId();
     if (owner.isEmpty() || !(robot.level() instanceof ServerLevel level)) {
       return Optional.empty();
