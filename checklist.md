@@ -105,7 +105,7 @@ Dividida em três partes, na ordem em que dependem uma da outra (perguntas 722 a
 
 ### Fase 4.2: Tablet, área e retorno
 
-12. [ ] Cubit Tablet, que substitui o Cubit Remote, em três entregas: o item, a receita, o app Open, a seleção, o Cubit escolhido e a seta; a tela do Cubit; e os apps Alvo e Dock com `Ir para o Dock` (perguntas 726, 795 e 998 a 1026)
+12. [x] Cubit Tablet, que substitui o Cubit Remote, em três entregas: o item, a receita, o app Open, a seleção, o Cubit escolhido e a seta; a tela do Cubit; e os apps Alvo e Dock com `Ir para o Dock` (issues #174 a #176, PRs #177 a #179, perguntas 726, 795 e 998 a 1048)
 13. [ ] Modo área, com a altura máxima a definir e o app Área do Tablet
 14. [ ] Descarga em baú marcado, com a chave dela, o app Descarga e o botão `Descarregar` do Tablet
 15. [ ] Retorno automático, com a chave dele e a linha na aba Recursos do Tablet
