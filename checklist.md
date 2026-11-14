@@ -109,7 +109,7 @@ Dividida em três partes, na ordem em que dependem uma da outra (perguntas 722 a
 13. [x] Modo área, com a altura máxima e o app Área do Tablet, e as cores dos apps (issue #180, PR #183, perguntas 1049 a 1064 e 1079 a 1085)
 14. [x] Descarga em baú marcado, com a chave dela, o app Descarga e o botão `Descarregar` do Tablet (issue #184, PR #185, perguntas 1086 a 1105)
 15. [x] Retorno automático, com a chave dele e a linha na aba Recursos do Tablet, e o `Follow` do Tablet (issue #181, PR #182, perguntas 1065 a 1078)
-16. [ ] Local de morte, com a chave dele e a linha na aba Recursos do Tablet
+16. [x] Local de morte, com a chave dele e a linha na aba Recursos do Tablet, a aba Mortes e a guia do Cubit (issue #188, PR #189, perguntas 1108 a 1132)
 
 ## Fase 5: Trabalhos (planejada)
 
