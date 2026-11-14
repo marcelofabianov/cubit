@@ -116,6 +116,10 @@ Valem para todos os tiers e ficam no config. Os marcados como planejados entram 
 | Energia de 1 pó de redstone | 5.000 FE |
 | Energia de 1 bloco de redstone | 45.000 FE |
 | Intervalo da coleta por contato | 5 ticks (resposta 887) |
+| Mortes no histórico do player, `death_log_size` | 10 (pergunta 1115) |
+| Distância de chegada da guia ao local de morte, `death_guide_arrival_blocks` | 3 blocos (pergunta 1126) |
+| Quanto o Cubit anda à frente do dono na guia, `death_guide_lead_blocks` | 8 blocos (pergunta 1126) |
+| Tempo sem avançar antes de cancelar a guia, `death_guide_stuck_seconds` | 10 s (pergunta 1126) |
 | Intervalo do ímã | 10 ticks (resposta 887) |
 
 ## Coleta e inventário
@@ -160,7 +164,7 @@ O raio dos dois scanners é o de uma esfera em volta do Cubit: só conta o que e
 | Seguir o player | ✔ | ✔ | ✔ | ✔ |
 | Modo área (app Área do Tablet), na base | Bloqueado | Até 16×16 | Até 32×32 | Até 64×64 |
 | Altura máxima da área (pergunta 1050) | — | 8 blocos | 16 blocos | 32 blocos |
-| Local de morte | Bloqueado | Marca a coordenada | Marca e guia até lá | Marca e guia até lá |
+| Local de morte, `death_point`, com `locked`, `mark` ou `guide` (perguntas 1117, 1118 e 1129), com o histórico em todos os tiers | Bloqueado | Marca a coordenada, com o texto ao renascer | Marca e guia até lá, no Overworld | Marca e guia até lá, no Overworld |
 
 ## Slots exclusivos
 
@@ -205,6 +209,8 @@ Planejado para a Fase 5. O tier Base não aceita cards.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-14 18:18 | Cita a chave `death_point` por tier (pergunta 1129). |
+| Marcelo Fabiano | 2026-11-14 18:15 | Define o local de morte por tier e os números do histórico e da guia (perguntas 1115 a 1118 e 1126). |
 | Marcelo Fabiano | 2026-11-14 13:55 | Liga os limites da descarga ao config (pergunta 1094). |
 | Marcelo Fabiano | 2026-11-14 10:00 | Liga a bateria do retorno ao item 15 (pergunta 1066). |
 | Marcelo Fabiano | 2026-11-14 09:00 | Define a altura máxima da área (pergunta 1050). |

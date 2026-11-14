@@ -58,6 +58,8 @@ final class RobotSwitchLook {
               : PickupScreenValues.fetchUnlockTier(pickup());
       case RobotMenu.TORCHES_BUTTON ->
           menu.switchAvailable(button) ? Optional.empty() : menu.torchUnlockTier();
+      case RobotMenu.DEATH_POINT_BUTTON ->
+          menu.switchAvailable(button) ? Optional.empty() : menu.deathPointUnlockTier();
       default -> Optional.empty();
     };
   }
@@ -93,6 +95,7 @@ final class RobotSwitchLook {
       case RobotMenu.AUTO_RETURN_BUTTON ->
           Component.translatable(ScreenKeys.AUTO_RETURN_DETAIL, menu.opening().returnCharge());
       case RobotMenu.UNLOAD_BUTTON -> Component.translatable(ScreenKeys.UNLOAD_DETAIL);
+      case RobotMenu.DEATH_POINT_BUTTON -> Component.translatable(ScreenKeys.DEATH_POINT_DETAIL);
       default -> Component.translatable(ScreenKeys.CHATTER_DETAIL);
     };
   }

@@ -75,7 +75,8 @@ public final class RobotScreenReadout {
       robot.solar(),
       robot.torches(),
       robot.docking().autoReturn(),
-      robot.docking().unload()
+      robot.docking().unload(),
+      robot.docking().deathGuide()
     };
     return new RobotMenuSource(
         () -> read(robot),
@@ -84,6 +85,7 @@ public final class RobotScreenReadout {
         new RobotPower(robot),
         robot.pickup(),
         robot.torches(),
+        robot.docking().deathGuide(),
         stillValid);
   }
 

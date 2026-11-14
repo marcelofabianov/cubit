@@ -13,9 +13,9 @@ import net.minecraft.world.item.ItemStack;
 
 /**
  * The settings tab of the robot screen, as in the concept image: the switches that exist, the
- * scanner filter and the status. The seven switches take rows of 12 px, with the detail in their
- * tooltip, so the torches, the auto return and the unload fit (answers 974, 1066 and 1093). Every
- * number comes from the server.
+ * scanner filter and the status. The eight switches take rows of 12 px, with the detail in their
+ * tooltip, so the torches, the auto return, the unload and the death point fit (answers 974, 1066,
+ * 1093 and 1118). Every number comes from the server.
  */
 final class RobotSettingsPanel {
   private static final int LEFT = 7;
@@ -38,16 +38,16 @@ final class RobotSettingsPanel {
   private static final int NAME_X = 30;
   private static final int NAME_TOP = 2;
   private static final int TOGGLE_TOP = 0;
-  private static final int FILTER_TITLE_Y = 120;
-  private static final int FILTER_RULE = 129;
+  private static final int FILTER_TITLE_Y = 132;
+  private static final int FILTER_RULE = 141;
   private static final int ORE_FRAME_X = 8;
-  private static final int ORE_FRAME_Y = 134;
+  private static final int ORE_FRAME_Y = 146;
   private static final int TEXT_X = 32;
-  private static final int LOOKING_Y = 135;
-  private static final int HINT_Y = 145;
-  private static final int STATUS_TITLE_Y = 160;
-  private static final int STATUS_RULE = 169;
-  private static final int FIRST_STATUS = 173;
+  private static final int LOOKING_Y = 147;
+  private static final int HINT_Y = 157;
+  private static final int STATUS_TITLE_Y = 172;
+  private static final int STATUS_RULE = 181;
+  private static final int FIRST_STATUS = 185;
   private static final int STATUS_HEIGHT = 14;
   private static final int STATUS_TEXT_TOP = 3;
   private static final int STATUS_LABEL_X = 10;
@@ -58,7 +58,8 @@ final class RobotSettingsPanel {
     RobotMenu.SOLAR_BUTTON,
     RobotMenu.TORCHES_BUTTON,
     RobotMenu.AUTO_RETURN_BUTTON,
-    RobotMenu.UNLOAD_BUTTON
+    RobotMenu.UNLOAD_BUTTON,
+    RobotMenu.DEATH_POINT_BUTTON
   };
   private static final int FOLLOWING_ROW = 3;
   private static final int POWER_Y = 4;
@@ -71,7 +72,8 @@ final class RobotSettingsPanel {
     ScreenKeys.SOLAR_PANEL,
     ScreenKeys.TORCHES,
     ScreenKeys.AUTO_RETURN,
-    ScreenKeys.UNLOAD
+    ScreenKeys.UNLOAD,
+    ScreenKeys.DEATH_POINT
   };
 
   private final ScreenPainter painter;

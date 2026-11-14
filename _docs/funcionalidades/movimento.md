@@ -74,12 +74,52 @@ Limpa o vínculo de quem segue, se ele se perder.
 
 ## Local de morte
 
-Marca onde o player morreu e o leva até lá, se o tier permitir.
+Entra com o item 16 da Fase 4.2 (perguntas 1109 a 1126). Marca onde o player morreu e, se o tier permitir, o leva até lá.
+
+### Histórico de mortes
+
+- **O que entra:** toda morte do player, com ou sem Cubit, porque o histórico é dele (perguntas 1118 e 1124).
+- **O que guarda:** o dia e a hora do jogo, como `Day 42, 18:30`, a partir do tempo do mundo, a coordenada, a dimensão e a causa, com o mesmo texto de morte que o jogo mostra no chat (perguntas 1111, 1114 e 1116).
+- **Onde fica:** num dado próprio do mod no player, que sobrevive à morte. O jogo guarda só a última morte, sem a hora e sem a causa, e por isso não basta (pergunta 1114, que muda a 1110).
+- **Limite:** até `death_log_size` mortes, 10 por padrão. Ao passar do limite, a mais antiga sai (pergunta 1115).
+- **Excluir:** só o dono, pelo botão da linha na aba `Deaths` do Tablet, descrita em [`tablet.md`](tablet.md#aba-mortes).
+
+### Por tier
+
+| Tier | O que o Cubit faz |
+|---|---|
+| Base | Nada: a chave fica bloqueada. O histórico continua sendo registrado |
+| Advanced | Marca a coordenada: o texto ao renascer |
+| Elite e Ultimate | Marca e guia até lá, pelo botão do Tablet |
+
+### Texto ao renascer
+
+Do Advanced em diante, com a chave ligada, quando o dono renasce, o Cubit que segue mostra um texto curto com a coordenada e a dimensão da última morte, como `You fell at 120, 64, -340 · Overworld` (pergunta 1111). O Cubit não sai guiando sozinho: ele aguarda a ordem (pergunta 1113).
+
+### Guia
+
+- **Ordem:** pelo botão de guiar da linha da morte na aba `Deaths` do Tablet, que vira o botão de cancelar enquanto a guia dura (perguntas 1111 e 1113).
+- **Quem guia:** só o Cubit escolhido no Tablet que segue o dono e está ativo, do Elite em diante, com a chave ligada (perguntas 1117, 1118 e 1120). Um Cubit desligado continua no vínculo, mas não anda, então não guia (pergunta 1130).
+- **Onde:** só uma morte no Overworld, com o Cubit no Overworld (pergunta 1117).
+- **Como:** o Cubit anda até o local, à frente do dono, até `death_guide_lead_blocks` blocos, 8 por padrão. Além disso, para e espera o dono. Assim ele nunca sai dos chunks carregados em volta do dono (perguntas 1112 e 1126, e regra 22).
+- **Energia:** só o consumo de andar, sem extra (pergunta 1122).
+- **Chegada:** a `death_guide_arrival_blocks` blocos do local, 3 por padrão, o Cubit para, diz `Here is where you fell` e volta a seguir. A linha da morte continua na aba até o dono excluí-la (perguntas 1121 e 1126).
+- **Cancelar:** o botão de cancelar devolve o Cubit ao seguir (pergunta 1121).
+- **Sem caminho:** sem avançar por `death_guide_stuck_seconds` segundos, 10 por padrão, o Cubit diz `I can't find a way there` e volta a seguir (perguntas 1123 e 1126).
+- **Viagem ao Dock:** se a bateria chegar à do retorno automático, o retorno vence, e a guia é cancelada (pergunta 1121). O `Ir para o Dock` do Tablet também cancela a guia, porque é a mesma viagem (pergunta 1130).
+- **Perigo:** fogo, lava ou um bloco que fere só pausam a guia. Ela continua quando o Cubit sai do perigo (pergunta 1130).
+- **Ordem não salva:** recolher o Cubit, o dono sair do mundo ou o Cubit descarregar cancela a guia. O dono pede de novo pela aba (pergunta 1123).
+
+### Chave
+
+`Death point` / `Local de morte`, do Advanced em diante, ligada por padrão e guardada no item, na aba Settings da tela do Cubit e na aba Recursos do Tablet, com um ícone feito por prompt (perguntas 1118 e 1125). Ela liga o texto ao renascer e a guia. O histórico é registrado mesmo com ela desligada.
 
 ## Histórico de modificações
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-14 18:46 | Detalha quem guia, a viagem ao Dock e a pausa por perigo. |
+| Marcelo Fabiano | 2026-11-14 18:14 | Define o local de morte, com o histórico, o texto ao renascer e a guia (perguntas 1109 a 1126). |
 | Marcelo Fabiano | 2026-11-13 16:40 | Aponta a marcação da área para o modo área. |
 | Marcelo Fabiano | 2026-11-07 16:20 | Define a altura que o robô desce. |
 | Marcelo Fabiano | 2026-11-07 16:17 | Define a volta do robô com o dono que renasce. |

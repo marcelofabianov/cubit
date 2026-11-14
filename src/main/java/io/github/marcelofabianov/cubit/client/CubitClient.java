@@ -39,6 +39,7 @@ public final class CubitClient {
     CubitNetwork.setTabletDisplays(TabletSelectionScreen::show, TabletArrow::setChosen);
     CubitNetwork.setAreaDisplay(TabletAreaMarks::show);
     CubitNetwork.setUnloadChestsDisplay(TabletChestMarks::show);
+    CubitNetwork.setDeathLogDisplay(TabletDeathLog::show);
     event.enqueueWork(() ->
         ItemProperties.register(
             CubitItems.GENERAL_ROBOT.get(),

@@ -6,15 +6,23 @@ import java.util.function.Consumer;
 import net.minecraft.server.level.ServerPlayer;
 
 /**
- * Who handles on the server what the Tablet asks: the choice of a Cubit, the list again, the name
- * and the app. The network never depends on the player code, which checks every request (rule 20).
+ * Who handles on the server what the Tablet asks: the choice of a Cubit, the list again, the name,
+ * the app and the buttons of the Deaths tab. The network never depends on the player code, which
+ * checks every request (rule 20).
  */
 public record TabletRequests(
     BiConsumer<ServerPlayer, UUID> choose,
     Consumer<ServerPlayer> list,
     BiConsumer<ServerPlayer, RenameRobotPayload> rename,
-    BiConsumer<ServerPlayer, Integer> switchApp) {
+    BiConsumer<ServerPlayer, Integer> switchApp,
+    BiConsumer<ServerPlayer, DeathGuidePayload> guideDeath,
+    BiConsumer<ServerPlayer, DeleteDeathPayload> deleteDeath) {
   static final TabletRequests NONE =
       new TabletRequests(
-          (player, robot) -> {}, player -> {}, (player, name) -> {}, (player, direction) -> {});
+          (player, robot) -> {},
+          player -> {},
+          (player, name) -> {},
+          (player, direction) -> {},
+          (player, guide) -> {},
+          (player, delete) -> {});
 }

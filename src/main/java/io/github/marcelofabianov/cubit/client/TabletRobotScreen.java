@@ -15,8 +15,9 @@ import net.minecraft.world.entity.player.Inventory;
 
 /**
  * The screen of a Cubit on the Tablet: a big window with the header fixed on top and the tabs
- * Features, Defense, Filters and Inventory below (answers 1022, 1035 and 1037). Each tab shows a
- * part of the screen of the Cubit, so the slots of the menu line up with it under the header.
+ * Features, Defense, Filters, Inventory and Deaths below (answers 1022, 1035, 1037 and 1119). Each
+ * tab shows a part of the screen of the Cubit, so the slots of the menu line up with it under the
+ * header.
  */
 final class TabletRobotScreen extends AbstractContainerScreen<TabletRobotMenu> {
   private static final int WIDTH = TabletRobotHeader.WIDTH;
@@ -44,6 +45,7 @@ final class TabletRobotScreen extends AbstractContainerScreen<TabletRobotMenu> {
   private TabletResourcesPanel resources;
   private RobotDefensePanel defense;
   private RobotBehaviorPanel behavior;
+  private TabletDeathsPanel deaths;
   private TabletRenameDialog dialog;
   private Component shownName;
   private int windowLeft;
@@ -74,6 +76,7 @@ final class TabletRobotScreen extends AbstractContainerScreen<TabletRobotMenu> {
     resources = new TabletResourcesPanel(painter, menu, right);
     defense = new RobotDefensePanel(painter, menu, right);
     behavior = new RobotBehaviorPanel(painter, menu, right);
+    deaths = new TabletDeathsPanel(painter, menu, right, imageHeight - TabletRobotHeader.HEIGHT);
     dialog = new TabletRenameDialog(font, width, height, this::rename);
     addButtons();
     showOpenTab();
@@ -158,6 +161,9 @@ final class TabletRobotScreen extends AbstractContainerScreen<TabletRobotMenu> {
               mouseY >= windowTop + TabletRobotHeader.HEIGHT
                   && resources.renderDetail(graphics, font, mouseX, mouseY, leftPos, topPos);
           case INVENTORY -> exclusive.renderTooltip(graphics, font, hoveredSlot, mouseX, mouseY);
+          case DEATHS ->
+              mouseY >= windowTop + TabletRobotHeader.HEIGHT
+                  && deaths.renderDetail(graphics, font, mouseX, mouseY, leftPos, topPos);
           default -> false;
         };
     if (!shown) {
@@ -201,6 +207,7 @@ final class TabletRobotScreen extends AbstractContainerScreen<TabletRobotMenu> {
         label(graphics, playerInventoryTitle, menu.playerInventoryY() - PLAYER_LABEL_GAP);
       }
       case INVENTORY -> renderInventoryLabels(graphics);
+      case DEATHS -> deaths.render(graphics, mouseX - leftPos, mouseY - topPos);
     }
   }
 
@@ -224,6 +231,11 @@ final class TabletRobotScreen extends AbstractContainerScreen<TabletRobotMenu> {
       showOpenTab();
       return true;
     }
+    if (tabs.open() == TabletRobotTabs.Tab.DEATHS
+        && mouseY >= windowTop + TabletRobotHeader.HEIGHT
+        && deaths.click(mouseX - leftPos, mouseY - topPos)) {
+      return true;
+    }
     OptionalInt pressed = pressedButton(mouseX, mouseY);
     if (pressed.isPresent()) {
       minecraft.gameMode.handleInventoryButtonClick(menu.containerId, pressed.getAsInt());
@@ -243,8 +255,18 @@ final class TabletRobotScreen extends AbstractContainerScreen<TabletRobotMenu> {
       case RESOURCES -> resources.switchAt(x, y);
       case DEFENSE -> defense.modeAt(x, y);
       case FILTERS -> behavior.modeAt(x, y);
-      case INVENTORY -> OptionalInt.empty();
+      case INVENTORY, DEATHS -> OptionalInt.empty();
     };
+  }
+
+  /** The wheel scrolls a death log longer than the window. */
+  @Override
+  public boolean mouseScrolled(double mouseX, double mouseY, double scrollX, double scrollY) {
+    if (!dialog.isOpen() && tabs.open() == TabletRobotTabs.Tab.DEATHS) {
+      deaths.scroll(scrollY);
+      return true;
+    }
+    return super.mouseScrolled(mouseX, mouseY, scrollX, scrollY);
   }
 
   @Override

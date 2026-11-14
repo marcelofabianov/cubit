@@ -43,7 +43,9 @@ final class RobotScreenValues implements ContainerData {
   static final int TURN_ON = 41;
   static final int AUTO_RETURN = 42;
   static final int UNLOAD = 44;
-  static final int COUNT = 46;
+  static final int DEATH_POINT = 46;
+  static final int DEATH_POINT_UNLOCK_TIER = 48;
+  static final int COUNT = 49;
   private static final int HALF_BITS = 16;
   private static final int HALF_MASK = 0xFFFF;
   static final int TRUE_VALUE = 1;
@@ -51,10 +53,10 @@ final class RobotScreenValues implements ContainerData {
 
   /**
    * Where each switch goes, in the order of the switches: lamp, scanners, chatter, solar, torches
-   * the auto return and the unload.
+   * the auto return, the unload and the death point.
    */
   private static final int[] SWITCH_VALUES = {
-    LAMP, SCANNERS, CHATTER, SOLAR_SWITCH, TORCHES, AUTO_RETURN, UNLOAD
+    LAMP, SCANNERS, CHATTER, SOLAR_SWITCH, TORCHES, AUTO_RETURN, UNLOAD, DEATH_POINT
   };
 
   private final Supplier<RobotScreenReading> source;
@@ -62,6 +64,7 @@ final class RobotScreenValues implements ContainerData {
   private final DefenseControl defense;
   private final PowerControl power;
   private final TorchControl torches;
+  private final DeathPointControl deathPoint;
   private final int[] values = new int[COUNT];
 
   RobotScreenValues(
@@ -69,11 +72,13 @@ final class RobotScreenValues implements ContainerData {
       DefenseControl defense,
       PowerControl power,
       TorchControl torches,
+      DeathPointControl deathPoint,
       RobotSwitch... switches) {
     this.source = source;
     this.defense = defense;
     this.power = power;
     this.torches = torches;
+    this.deathPoint = deathPoint;
     this.switches = switches.clone();
   }
 
@@ -100,13 +105,20 @@ final class RobotScreenValues implements ContainerData {
       putSwitch(SWITCH_VALUES[index], switches[index]);
     }
     putEnergy(TORCH_COST, torches.cost());
-    values[TORCH_UNLOCK_TIER] = torches.unlockTier().map(tier -> tier.ordinal() + 1).orElse(0);
+    putUnlockTiers();
     RobotScreenReading.Place place = reading.place();
     values[COLOR] = place.color().ordinal();
     putInt(POS_X, place.x());
     putInt(POS_Y, place.y());
     putInt(POS_Z, place.z());
     values[TURN_ON] = place.canTurnOn() ? TRUE_VALUE : 0;
+  }
+
+  /** The first tier of each locked part, by its order plus one, with zero for none. */
+  private void putUnlockTiers() {
+    values[TORCH_UNLOCK_TIER] = torches.unlockTier().map(tier -> tier.ordinal() + 1).orElse(0);
+    values[DEATH_POINT_UNLOCK_TIER] =
+        deathPoint.unlockTier().map(tier -> tier.ordinal() + 1).orElse(0);
   }
 
   private void putSwitch(int index, RobotSwitch robotSwitch) {

@@ -99,6 +99,16 @@ class RobotStateTest {
     assertFalse(off.withAutoReturn(false).withTorches(false).unloadOn());
   }
 
+  /** The death point switch starts on and is kept, also when the robot dies (answer 1118). */
+  @Test
+  void theDeathPointStartsOnAndIsKept() {
+    RobotState off = new RobotState(RobotTier.BASE, SOME_ENERGY, SOME_HEALTH).withDeathPoint(false);
+
+    assertTrue(new RobotState(RobotTier.BASE, SOME_ENERGY, SOME_HEALTH).deathPointOn());
+    assertFalse(off.damaged().deathPointOn());
+    assertFalse(off.withUnload(false).withAutoReturn(false).withTorches(false).deathPointOn());
+  }
+
   @Test
   void aNewRobotIsWhite() {
     RobotState state = RobotState.initial(RobotTier.BASE, SPEC, new Percentage(INITIAL_PERCENT));

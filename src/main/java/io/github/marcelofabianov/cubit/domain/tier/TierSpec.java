@@ -28,7 +28,8 @@ public record TierSpec(
     TorchSpec torches,
     Percentage returnCharge,
     AreaSpec area,
-    UnloadSpec unload) {
+    UnloadSpec unload,
+    DeathPointLevel deathPoint) {
 
   /** The largest radius the config accepts, which also limits the search for a robot to call. */
   public static final int MAX_CALL_RADIUS_BLOCKS = 128;
@@ -53,217 +54,10 @@ public record TierSpec(
     }
   }
 
-  /** A tier without unload numbers marks no chest, which only tests need. */
-  public TierSpec(
-      Energy batteryCapacity,
-      Energy movingConsumptionPerTick,
-      Energy rechargePerTick,
-      int inventorySlots,
-      int maxHealth,
-      int callRadiusBlocks,
-      double speedMultiplier,
-      ConsumptionExtras extras,
-      LightLevel lampLight,
-      SolarOutput solar,
-      ScannerSpec scanners,
-      ShockSpec shock,
-      PickupSpec pickup,
-      Energy powerBankCapacity,
-      TorchSpec torches,
-      Percentage returnCharge,
-      AreaSpec area) {
-    this(
-        batteryCapacity,
-        movingConsumptionPerTick,
-        rechargePerTick,
-        inventorySlots,
-        maxHealth,
-        callRadiusBlocks,
-        speedMultiplier,
-        extras,
-        lampLight,
-        solar,
-        scanners,
-        shock,
-        pickup,
-        powerBankCapacity,
-        torches,
-        returnCharge,
-        area,
-        UnloadSpec.NONE);
-  }
-
-  /** A tier without area numbers has no area mode, which only tests need. */
-  public TierSpec(
-      Energy batteryCapacity,
-      Energy movingConsumptionPerTick,
-      Energy rechargePerTick,
-      int inventorySlots,
-      int maxHealth,
-      int callRadiusBlocks,
-      double speedMultiplier,
-      ConsumptionExtras extras,
-      LightLevel lampLight,
-      SolarOutput solar,
-      ScannerSpec scanners,
-      ShockSpec shock,
-      PickupSpec pickup,
-      Energy powerBankCapacity,
-      TorchSpec torches,
-      Percentage returnCharge) {
-    this(
-        batteryCapacity,
-        movingConsumptionPerTick,
-        rechargePerTick,
-        inventorySlots,
-        maxHealth,
-        callRadiusBlocks,
-        speedMultiplier,
-        extras,
-        lampLight,
-        solar,
-        scanners,
-        shock,
-        pickup,
-        powerBankCapacity,
-        torches,
-        returnCharge,
-        AreaSpec.NONE);
-  }
-
-  /** A tier without a return charge only goes back to a Dock when empty, which only tests need. */
-  public TierSpec(
-      Energy batteryCapacity,
-      Energy movingConsumptionPerTick,
-      Energy rechargePerTick,
-      int inventorySlots,
-      int maxHealth,
-      int callRadiusBlocks,
-      double speedMultiplier,
-      ConsumptionExtras extras,
-      LightLevel lampLight,
-      SolarOutput solar,
-      ScannerSpec scanners,
-      ShockSpec shock,
-      PickupSpec pickup,
-      Energy powerBankCapacity,
-      TorchSpec torches) {
-    this(
-        batteryCapacity,
-        movingConsumptionPerTick,
-        rechargePerTick,
-        inventorySlots,
-        maxHealth,
-        callRadiusBlocks,
-        speedMultiplier,
-        extras,
-        lampLight,
-        solar,
-        scanners,
-        shock,
-        pickup,
-        powerBankCapacity,
-        torches,
-        NO_RETURN_CHARGE);
-  }
-
-  /** A tier without torch numbers has its torches locked, which only tests need. */
-  public TierSpec(
-      Energy batteryCapacity,
-      Energy movingConsumptionPerTick,
-      Energy rechargePerTick,
-      int inventorySlots,
-      int maxHealth,
-      int callRadiusBlocks,
-      double speedMultiplier,
-      ConsumptionExtras extras,
-      LightLevel lampLight,
-      SolarOutput solar,
-      ScannerSpec scanners,
-      ShockSpec shock,
-      PickupSpec pickup,
-      Energy powerBankCapacity) {
-    this(
-        batteryCapacity,
-        movingConsumptionPerTick,
-        rechargePerTick,
-        inventorySlots,
-        maxHealth,
-        callRadiusBlocks,
-        speedMultiplier,
-        extras,
-        lampLight,
-        solar,
-        scanners,
-        shock,
-        pickup,
-        powerBankCapacity,
-        TorchSpec.NONE);
-  }
-
-  /** A tier without a Power Bank number has none, which only tests need. */
-  public TierSpec(
-      Energy batteryCapacity,
-      Energy movingConsumptionPerTick,
-      Energy rechargePerTick,
-      int inventorySlots,
-      int maxHealth,
-      int callRadiusBlocks,
-      double speedMultiplier,
-      ConsumptionExtras extras,
-      LightLevel lampLight,
-      SolarOutput solar,
-      ScannerSpec scanners,
-      ShockSpec shock,
-      PickupSpec pickup) {
-    this(
-        batteryCapacity,
-        movingConsumptionPerTick,
-        rechargePerTick,
-        inventorySlots,
-        maxHealth,
-        callRadiusBlocks,
-        speedMultiplier,
-        extras,
-        lampLight,
-        solar,
-        scanners,
-        shock,
-        pickup,
-        Energy.ZERO);
-  }
-
-  /** A tier without pickup numbers has no magnet and no filter slots. */
-  public TierSpec(
-      Energy batteryCapacity,
-      Energy movingConsumptionPerTick,
-      Energy rechargePerTick,
-      int inventorySlots,
-      int maxHealth,
-      int callRadiusBlocks,
-      double speedMultiplier,
-      ConsumptionExtras extras,
-      LightLevel lampLight,
-      SolarOutput solar,
-      ScannerSpec scanners,
-      ShockSpec shock) {
-    this(
-        batteryCapacity,
-        movingConsumptionPerTick,
-        rechargePerTick,
-        inventorySlots,
-        maxHealth,
-        callRadiusBlocks,
-        speedMultiplier,
-        extras,
-        lampLight,
-        solar,
-        scanners,
-        shock,
-        PickupSpec.NONE);
-  }
-
-  /** A tier without shock numbers only has Peaceful, like Base. */
+  /**
+   * A tier with only the first numbers: no shock, pickup, Power Bank, torches, return charge, area,
+   * unload or death point, which only tests need.
+   */
   public TierSpec(
       Energy batteryCapacity,
       Energy movingConsumptionPerTick,
@@ -288,7 +82,14 @@ public record TierSpec(
         lampLight,
         solar,
         scanners,
-        ShockSpec.NONE);
+        ShockSpec.NONE,
+        PickupSpec.NONE,
+        Energy.ZERO,
+        TorchSpec.NONE,
+        NO_RETURN_CHARGE,
+        AreaSpec.NONE,
+        UnloadSpec.NONE,
+        DeathPointLevel.LOCKED);
   }
 
   public Battery newBattery(Percentage initialCharge) {

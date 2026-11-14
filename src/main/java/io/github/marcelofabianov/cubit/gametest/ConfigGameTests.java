@@ -10,6 +10,7 @@ import io.github.marcelofabianov.cubit.domain.energy.Percentage;
 import io.github.marcelofabianov.cubit.domain.energy.SolarOutput;
 import io.github.marcelofabianov.cubit.domain.robot.RobotType;
 import io.github.marcelofabianov.cubit.domain.tier.AreaSpec;
+import io.github.marcelofabianov.cubit.domain.tier.DeathPointLevel;
 import io.github.marcelofabianov.cubit.domain.tier.PickupSpec;
 import io.github.marcelofabianov.cubit.domain.tier.RobotTier;
 import io.github.marcelofabianov.cubit.domain.tier.ScannerSpec;
@@ -199,7 +200,8 @@ public final class ConfigGameTests {
           new TorchSpec(new Energy(BASE_TORCH_COST), new LightLevel(0)),
           new Percentage(BASE_RETURN_CHARGE),
           AreaSpec.NONE,
-          new UnloadSpec(BASE_UNLOAD_CHESTS, BASE_UNLOAD_REACH));
+          new UnloadSpec(BASE_UNLOAD_CHESTS, BASE_UNLOAD_REACH),
+          DeathPointLevel.LOCKED);
   private static final String WRONG_SPEC = "Wrong tier numbers";
   private static final String ULTIMATE_SPEED_KEY = "general_robot.ultimate.speed_multiplier";
   private static final double ULTIMATE_SPEED_MULTIPLIER = 2.0;

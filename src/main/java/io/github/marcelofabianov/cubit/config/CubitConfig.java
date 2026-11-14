@@ -1,6 +1,7 @@
 package io.github.marcelofabianov.cubit.config;
 
 import com.mojang.logging.LogUtils;
+import io.github.marcelofabianov.cubit.domain.behavior.DeathGuideSpec;
 import io.github.marcelofabianov.cubit.domain.behavior.FollowDecision;
 import io.github.marcelofabianov.cubit.domain.behavior.LampPolicy;
 import io.github.marcelofabianov.cubit.domain.behavior.LightLevel;
@@ -28,6 +29,7 @@ public final class CubitConfig {
   private static final String INVALID_RARE_TAG = "Ignoring an invalid tag in rare_ore_tags: {}";
   private static final String GENERAL_SECTION = "general";
   private static final int TIER_SECTION_DEPTH = 2;
+  private static final int TICKS_PER_SECOND = 20;
   private final ModConfigSpec spec;
   private final GeneralSection general;
   private final DamagedRobotSection damagedRobot;
@@ -43,6 +45,7 @@ public final class CubitConfig {
   private final DefenseSection defense;
   private final PickupSection pickup;
   private final TorchSection torches;
+  private final DeathPointSection deathPoint;
   private final AtomicBoolean warnedRareTags = new AtomicBoolean();
   private final AtomicBoolean warnedLamp = new AtomicBoolean();
   private final TierCatalog tierCatalog;
@@ -65,6 +68,7 @@ public final class CubitConfig {
     defense = new DefenseSection(builder);
     pickup = new PickupSection(builder);
     torches = new TorchSection(builder);
+    deathPoint = new DeathPointSection(builder);
     builder.pop();
 
     tierCatalog = new NeoForgeTierCatalog(Map.of(GENERAL_ROBOT, tierSections(builder)));
@@ -100,6 +104,17 @@ public final class CubitConfig {
 
   public int tabletTargetReachBlocks() {
     return defense.tabletTargetReach.get();
+  }
+
+  public int deathLogSize() {
+    return deathPoint.logSize.get();
+  }
+
+  public DeathGuideSpec deathGuideSpec() {
+    return new DeathGuideSpec(
+        deathPoint.arrival.get(),
+        deathPoint.lead.get(),
+        deathPoint.stuckSeconds.get() * TICKS_PER_SECOND);
   }
 
   public int torchCheckTicks() {

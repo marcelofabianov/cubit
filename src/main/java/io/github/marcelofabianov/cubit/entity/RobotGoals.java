@@ -13,6 +13,9 @@ final class RobotGoals {
   /** After the dock trip and before fetching, which cannot run with a full inventory anyway. */
   private static final int UNLOAD_PRIORITY = 3;
 
+  /** In place of following, after the dock trip, which wins and cancels it (answer 1121). */
+  private static final int DEATH_GUIDE_PRIORITY = 3;
+
   private static final int FOLLOW_PRIORITY = 4;
 
   /** Never with following, since a Cubit in an area gives up the place (answer 1051). */
@@ -28,6 +31,7 @@ final class RobotGoals {
     goals.addGoal(DOCK_PRIORITY, new GoToDockGoal(robot));
     goals.addGoal(UNLOAD_PRIORITY, new UnloadGoal(robot));
     goals.addGoal(FETCH_PRIORITY, new FetchItemGoal(robot));
+    goals.addGoal(DEATH_GUIDE_PRIORITY, new DeathGuideGoal(robot));
     goals.addGoal(
         FOLLOW_PRIORITY,
         new FollowOwnerGoal(

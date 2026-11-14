@@ -115,6 +115,7 @@ Fica fixo em todas as abas. `Voltar` fica no canto superior esquerdo, e os botõ
 | Defesa | Escudo | Os modos de defesa, como na aba Defense da tela do Cubit |
 | Filtros | Funil | Só o filtro de coleta, com o botão da lista e a grade de slots fantasma da aba Behavior, e o inventário e a hotbar do player embaixo (perguntas 1022 e 1037) |
 | Inventário | Baú | O inventário do Cubit, só para consulta |
+| Mortes | Ícone feito por prompt (pergunta 1125) | O histórico de mortes do player, com os botões de guiar e excluir (perguntas 1111 e 1119) |
 
 - **Aba Recursos:** um painel próprio, com as chaves numa lista só, cada uma com a descrição na linha, entre o nome e a chave, e a largura da janela, também no Ultimate (pergunta 1103), que usam os mesmos controles do servidor da tela do Cubit (pergunta 1037). Uma linha bloqueada pelo tier fica apagada, com a chave desativada e o tier que libera, como `Unlocks at Advanced`. Entram os recursos que já existem:
 
@@ -130,10 +131,22 @@ Fica fixo em todas as abas. `Voltar` fica no canto superior esquerdo, e os botõ
 | Tochas | Advanced |
 | Retorno automático | Base |
 | Descarga | Base |
+| Local de morte | Advanced |
 
   Com um Cubit numa área, a aba também mostra a área, com os cantos e o tamanho (item 13). O retorno automático entra com o item 15, antes do modo área (pergunta 1069), e a descarga em baú e o local de morte, com os itens 14 e 16 da Fase 4.2.
 - **Aba Inventário:** o slot de energia é o primeiro da fileira dos slots exclusivos, antes das tochas, e o slot vazio diz `Redstone` na dica (pergunta 1104). Mostra o inventário inteiro do Cubit, em 3 fileiras com as colunas do tier, como a tela do Cubit, mas não permite tirar, pôr nem mover itens. No Ultimate, a janela do Tablet alarga para caber as 18 colunas (pergunta 1101). A dica de cada item funciona.
 - **Inventário do player:** aparece só na aba Filtros.
+
+#### Aba Mortes
+
+Entra com o item 16 da Fase 4.2 (perguntas 1111 e 1119). As regras do histórico e da guia estão em [`movimento.md`](movimento.md#local-de-morte).
+
+- **Quem vê:** o dono, em todos os tiers, porque o histórico é dele. Só o botão de guiar depende do tier.
+- **Tabela:** uma linha por morte, da mais recente para a mais antiga, com o dia e a hora do jogo, a coordenada, a dimensão e a causa. Sem mortes, a aba diz `No deaths yet` / `Nenhuma morte ainda`.
+- **Botões,** na última coluna de cada linha:
+  - **Guiar:** manda o Cubit escolhido guiar o dono até o local. Enquanto a guia dura, vira o botão de cancelar. Fica desabilitado, com o motivo na dica, no Base e no Advanced, com `Unlocks at Elite`, numa morte fora do Overworld, com o Cubit fora do Overworld, com o Cubit que não segue o dono, com a sugestão de usar o `Follow`, e com a chave `Death point` desligada (perguntas 1117, 1118 e 1120).
+  - **Excluir:** apaga o registro, e a linha some (pergunta 1111). Funciona em qualquer tier.
+- **Tela:** com textura, como as outras abas, e acompanhando a largura da janela (pergunta 1111).
 
 ## Distância
 
@@ -153,7 +166,7 @@ Fica fixo em todas as abas. `Voltar` fica no canto superior esquerdo, e os botõ
 |---|---|---|
 | Item | `cubit:tablet` | O Tablet |
 | Receita | `cubit:tablet` | A receita com forma |
-| Componente do item | `cubit:tablet_app` | O app ativo: `open`, `target`, `dock` ou `area`. Sem o componente, vale `open` |
+| Componente do item | `cubit:tablet_app` | O app ativo: `open`, `target`, `dock`, `area` ou `unload`. Sem o componente, vale `open` (pergunta 1128) |
 | Attachment do player | `cubit:chosen_robot` | O UUID do Cubit escolhido |
 | NBT da entidade | `PreferredDock` | O Dock preferido: `Block`, a posição num `long`, e `Dimension`. Sem a chave, o Cubit não tem Dock preferido |
 | Menu | `cubit:tablet_robot` | A tela do Cubit no Tablet, com a cor, o lugar e a chave geral nos valores do menu |
@@ -165,6 +178,11 @@ Fica fixo em todas as abas. `Voltar` fica no canto superior esquerdo, e os botõ
 | Config | `unload_chests` e `unload_reach_blocks`, por tier | Os baús de descarga e a distância até eles |
 | NBT da entidade | `WorkArea` | A área do Cubit: `Min` e `Max`, os cantos em `long`, e `Dimension`. Sem a chave, o Cubit não tem área |
 | Config | `area_size_blocks` e `area_height_blocks`, por tier | O lado da base e a altura máxima da área, com 0 para bloqueado |
+| Attachment do player | `cubit:death_log` | O histórico de mortes, mantido na morte, com até `death_log_size` registros, cada um com `DayTime`, o tempo do mundo num `long`, `Block`, a posição num `long`, `Dimension` e `Cause`, o texto de morte do jogo. Sem o attachment, o histórico está vazio (pergunta 1114) |
+| Pacote do servidor | `cubit:death_log` | O histórico de mortes do dono, o que o botão de guiar pode fazer em cada linha, a morte que o Cubit escolhido está guiando e o primeiro tier que guia, ao abrir a tela do Cubit no Tablet e a cada mudança |
+| Pacotes do cliente | `cubit:death_guide` e `cubit:delete_death` | Guiar ou cancelar, e excluir um registro, conferidos no servidor (regra 20) |
+| Config | `death_point`, por tier | `locked`, `mark` ou `guide`, com `locked` para um valor inválido (pergunta 1129) |
+| Config | `death_log_size`, `death_guide_arrival_blocks`, `death_guide_lead_blocks` e `death_guide_stuck_seconds`, em `general` | O tamanho do histórico, de 1 a 50, com 10, a chegada, de 1 a 16, com 3, quanto o Cubit anda à frente, de 2 a 16, com 8, e o tempo sem avançar, de 1 a 60 s, com 10 (perguntas 1115 e 1126) |
 | Dados do mundo | `cubit_robot_snapshots` | A foto de cada Cubit por dono: posição, dimensão, estado, bateria, vida, tier, cor, nome e a hora |
 
 Os textos em inglês e português, como `Cubit Tablet` / `Tablet do Cubit`, `Tablet · Open` / `Tablet · Abrir`, `Go to Dock` / `Ir para o Dock` e `Rename` / `Renomear`, ficam no datagen (pergunta 1026).
@@ -178,6 +196,10 @@ Os textos em inglês e português, como `Cubit Tablet` / `Tablet do Cubit`, `Tab
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-14 18:46 | Detalha o pacote `cubit:death_log`. |
+| Marcelo Fabiano | 2026-11-14 18:18 | Acrescenta a chave `death_point` ao contrato (pergunta 1129). |
+| Marcelo Fabiano | 2026-11-14 18:17 | Acrescenta o app `unload` ao contrato de `cubit:tablet_app` (pergunta 1128). |
+| Marcelo Fabiano | 2026-11-14 18:15 | Adiciona a aba Mortes, a linha do local de morte na aba Recursos e o contrato do histórico (perguntas 1111 a 1126). |
 | Marcelo Fabiano | 2026-11-14 16:18 | Põe o slot de energia na fileira dos slots exclusivos (pergunta 1104). |
 | Marcelo Fabiano | 2026-11-14 16:00 | Mostra a descrição das chaves na aba Recursos (pergunta 1103). |
 | Marcelo Fabiano | 2026-11-14 15:36 | Mostra o inventário inteiro na aba Inventário (pergunta 1101). |

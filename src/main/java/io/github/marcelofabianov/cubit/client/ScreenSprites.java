@@ -15,7 +15,7 @@ final class ScreenSprites {
   private static final ResourceLocation SHEET =
       ResourceLocation.fromNamespaceAndPath(CubitMod.MOD_ID, SHEET_PATH);
   private static final int SHEET_WIDTH = 512;
-  private static final int SHEET_HEIGHT = 320;
+  private static final int SHEET_HEIGHT = 384;
   private static final int PICTURE = 136;
   private static final int PICTURE_SHOWN = 34;
   private static final int CHARGING_U = 0;
@@ -76,6 +76,15 @@ final class ScreenSprites {
 
   /** The unload switch, after the auto return, from a prompt (answer 1093). */
   private static final int UNLOAD_U = 448;
+
+  /** The row added below the funnel row, for the death point (answer 1125). */
+  private static final int DEATH_ROW_V = 320;
+
+  /** The Deaths tab of the Tablet, from a prompt. */
+  private static final int DEATHS_TAB_U = 0;
+
+  /** The death point switch, from a prompt. */
+  private static final int DEATH_POINT_U = 64;
 
   private ScreenSprites() {}
 
@@ -141,8 +150,19 @@ final class ScreenSprites {
       case RobotMenu.TORCHES_BUTTON -> torches(graphics, x, y);
       case RobotMenu.AUTO_RETURN_BUTTON -> rowIcon(graphics, x, y, AUTO_RETURN_U);
       case RobotMenu.UNLOAD_BUTTON -> rowIcon(graphics, x, y, UNLOAD_U);
+      case RobotMenu.DEATH_POINT_BUTTON -> deathRowIcon(graphics, x, y, DEATH_POINT_U);
       default -> function(graphics, x, y, button);
     }
+  }
+
+  static void deathsTab(GuiGraphics graphics, int x, int y) {
+    deathRowIcon(graphics, x, y, DEATHS_TAB_U);
+  }
+
+  /** An icon in the row of the death point, below the row of the funnel. */
+  private static void deathRowIcon(GuiGraphics graphics, int x, int y, int u) {
+    graphics.blit(
+        SHEET, x, y, ICON_SHOWN, ICON_SHOWN, u, DEATH_ROW_V, ICON, ICON, SHEET_WIDTH, SHEET_HEIGHT);
   }
 
   /** An icon in the row added below the others, where the funnel is. */

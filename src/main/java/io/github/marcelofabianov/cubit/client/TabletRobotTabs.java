@@ -1,5 +1,6 @@
 package io.github.marcelofabianov.cubit.client;
 
+import io.github.marcelofabianov.cubit.menu.DeathKeys;
 import io.github.marcelofabianov.cubit.menu.DefenseKeys;
 import io.github.marcelofabianov.cubit.menu.ScreenKeys;
 import io.github.marcelofabianov.cubit.menu.TabletKeys;
@@ -9,8 +10,9 @@ import net.minecraft.client.gui.GuiGraphics;
 
 /**
  * The tabs of the screen of a Cubit on the Tablet, on the right of the window, from the top, with
- * the icons of the tabs of the screen of the Cubit (answers 1022 and 1037). Each tab says where its
- * part of the screen of the Cubit starts, so the slots of the menu line up under the header.
+ * the icons of the tabs of the screen of the Cubit and the Deaths tab (answers 1022, 1037 and
+ * 1119). Each tab says where its part of the screen of the Cubit starts, so the slots of the menu
+ * line up under the header.
  */
 final class TabletRobotTabs {
   static final int INSET = ScreenTabStrip.INSET;
@@ -18,12 +20,13 @@ final class TabletRobotTabs {
   private static final int DEFENSE_Y = 37;
   private static final int FILTERS_Y = 65;
   private static final int INVENTORY_Y = 93;
+  private static final int DEATHS_Y = 121;
   private static final int CHEST_X = 6;
   private static final int CHEST_Y = 6;
   private static final int DEFENSE_TOP = 14;
   private static final int FILTERS_TOP = RobotBehaviorPanel.filterHeadingY() - 4;
   private static final int INVENTORY_TOP = 26;
-  private static final int[] TOPS = {RESOURCES_Y, DEFENSE_Y, FILTERS_Y, INVENTORY_Y};
+  private static final int[] TOPS = {RESOURCES_Y, DEFENSE_Y, FILTERS_Y, INVENTORY_Y, DEATHS_Y};
 
   private Tab open = Tab.RESOURCES;
 
@@ -32,7 +35,8 @@ final class TabletRobotTabs {
     RESOURCES(RESOURCES_Y, TabletKeys.TAB_RESOURCES, 0),
     DEFENSE(DEFENSE_Y, DefenseKeys.TAB, DEFENSE_TOP),
     FILTERS(FILTERS_Y, TabletKeys.TAB_FILTERS, FILTERS_TOP),
-    INVENTORY(INVENTORY_Y, ScreenKeys.TAB_INVENTORY, INVENTORY_TOP);
+    INVENTORY(INVENTORY_Y, ScreenKeys.TAB_INVENTORY, INVENTORY_TOP),
+    DEATHS(DEATHS_Y, DeathKeys.TAB_TITLE, 0);
 
     private final int y;
     private final String name;
@@ -73,6 +77,7 @@ final class TabletRobotTabs {
     ScreenSprites.shield(graphics, iconX, top + DEFENSE_Y + ScreenTabStrip.ICON_Y);
     ScreenSprites.funnel(graphics, iconX, top + FILTERS_Y + ScreenTabStrip.ICON_Y);
     ScreenSprites.chest(graphics, left + CHEST_X, top + INVENTORY_Y + CHEST_Y);
+    ScreenSprites.deathsTab(graphics, iconX, top + DEATHS_Y + ScreenTabStrip.ICON_Y);
   }
 
   /** The tab under a point given from the left of the tabs and the top of the window. */

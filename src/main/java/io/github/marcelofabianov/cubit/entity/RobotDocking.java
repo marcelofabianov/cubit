@@ -33,6 +33,7 @@ public final class RobotDocking {
   private final RobotPreferredDock preferred;
   private final RobotAutoReturn autoReturn;
   private final RobotUnload unload;
+  private final RobotDeathGuide deathGuide;
   private BlockPos docked;
   private BlockPos trip;
   private DockTrip progress = DockTrip.START;
@@ -45,6 +46,7 @@ public final class RobotDocking {
     this.preferred = new RobotPreferredDock(robot);
     this.autoReturn = new RobotAutoReturn(robot, preferred);
     this.unload = new RobotUnload(robot);
+    this.deathGuide = new RobotDeathGuide(robot);
   }
 
   /** The Dock marked with the Tablet, where `Go to Dock` sends the robot (answer 1041). */
@@ -62,11 +64,18 @@ public final class RobotDocking {
     return unload;
   }
 
+  /** The death point and the guide to it, which a trip to a Dock cancels (answer 1121). */
+  public RobotDeathGuide deathGuide() {
+    return deathGuide;
+  }
+
   boolean hasTrip() {
     return trip != null;
   }
 
+  /** A trip to a Dock wins over the guide to a death point and cancels it (answer 1121). */
   void callTo(BlockPos dock) {
+    deathGuide.cancel();
     trip = dock;
     progress = DockTrip.START;
     repathCountdown = 0;

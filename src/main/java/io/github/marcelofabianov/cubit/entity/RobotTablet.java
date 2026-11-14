@@ -47,6 +47,7 @@ public final class RobotTablet {
     if (!player.connection.hasChannel(AdvancedOpenScreenPayload.TYPE)) {
       return;
     }
+    DeathLogView.send(player);
     RobotScreenOpening opening = RobotScreenReadout.opening(robot);
     TabletOpening tablet = opening(robot);
     player.openMenu(
