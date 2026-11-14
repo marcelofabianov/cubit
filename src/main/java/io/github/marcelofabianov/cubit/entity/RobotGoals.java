@@ -10,6 +10,10 @@ final class RobotGoals {
   private static final int DOCK_PRIORITY = 2;
   private static final int FETCH_PRIORITY = 3;
   private static final int FOLLOW_PRIORITY = 4;
+
+  /** Never with following, since a Cubit in an area gives up the place (answer 1051). */
+  private static final int AREA_PRIORITY = 4;
+
   private static final int LOOK_AT_OWNER_PRIORITY = 5;
 
   private RobotGoals() {}
@@ -23,6 +27,7 @@ final class RobotGoals {
         FOLLOW_PRIORITY,
         new FollowOwnerGoal(
             robot, CubitMod.CONFIG.followDecision(), CubitMod.CONFIG.followRepathTicks()));
+    goals.addGoal(AREA_PRIORITY, new AreaWorkGoal(robot));
     goals.addGoal(LOOK_AT_OWNER_PRIORITY, new LookAtOwnerGoal(robot));
   }
 }

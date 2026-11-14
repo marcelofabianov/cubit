@@ -24,6 +24,7 @@ public final class CubitNetwork {
   private static Consumer<FocusMarkPayload> focusMarkDisplay = mark -> {};
   private static Consumer<RobotListPayload> robotListDisplay = list -> {};
   private static Consumer<ChosenRobotPayload> chosenRobotDisplay = chosen -> {};
+  private static Consumer<AreaMarkPayload> areaMarkDisplay = mark -> {};
   private static TabletRequests tabletRequests = TabletRequests.NONE;
 
   private CubitNetwork() {}
@@ -60,7 +61,11 @@ public final class CubitNetwork {
         .playToClient(
             ChosenRobotPayload.TYPE,
             ChosenRobotPayload.STREAM_CODEC,
-            (payload, context) -> chosenRobotDisplay.accept(payload));
+            (payload, context) -> chosenRobotDisplay.accept(payload))
+        .playToClient(
+            AreaMarkPayload.TYPE,
+            AreaMarkPayload.STREAM_CODEC,
+            (payload, context) -> areaMarkDisplay.accept(payload));
     registerTabletRequests(registrar);
   }
 
@@ -104,6 +109,11 @@ public final class CubitNetwork {
     chosenRobotDisplay = chosen;
   }
 
+  /** On the client only: how the marking and the area of the Area app show (answer 1056). */
+  public static void setAreaDisplay(Consumer<AreaMarkPayload> area) {
+    areaMarkDisplay = area;
+  }
+
   /** On the server: who handles the requests, so the network never depends on the player code. */
   public static void setTabletRequests(TabletRequests requests) {
     tabletRequests = requests;
@@ -115,6 +125,10 @@ public final class CubitNetwork {
 
   public static void sendChosenRobot(ServerPlayer player, ChosenRobotPayload chosen) {
     send(player, chosen);
+  }
+
+  public static void sendAreaMark(ServerPlayer player, AreaMarkPayload mark) {
+    send(player, mark);
   }
 
   /** On the client: asks the server to choose a Cubit and to open its screen. */

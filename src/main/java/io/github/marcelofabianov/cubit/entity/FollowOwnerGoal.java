@@ -89,7 +89,7 @@ final class FollowOwnerGoal extends Goal {
       BlockPos target =
           center.offset(
               randomOffset(radius), randomOffset(TELEPORT_HEIGHT_RANGE), randomOffset(radius));
-      if (canStandAt(target)) {
+      if (canStandAt(robot, target)) {
         robot.moveTo(
             target.getBottomCenter().x,
             target.getY(),
@@ -107,7 +107,7 @@ final class FollowOwnerGoal extends Goal {
   }
 
   /** Checks the chunk first: reading a block must never load one (AGENTS.md, rule 22). */
-  private boolean canStandAt(BlockPos target) {
+  static boolean canStandAt(RobotEntity robot, BlockPos target) {
     Level level = robot.level();
     return level.hasChunkAt(target)
         && WalkNodeEvaluator.getPathTypeStatic(robot, target) == PathType.WALKABLE

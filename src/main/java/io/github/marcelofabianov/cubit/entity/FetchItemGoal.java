@@ -5,14 +5,17 @@ import io.github.marcelofabianov.cubit.domain.behavior.BurningAction;
 import io.github.marcelofabianov.cubit.domain.behavior.DamagingBlockReaction;
 import io.github.marcelofabianov.cubit.domain.behavior.FetchRules;
 import io.github.marcelofabianov.cubit.domain.behavior.FollowAction;
+import io.github.marcelofabianov.cubit.domain.robot.WorkArea;
 import java.util.EnumSet;
+import java.util.Optional;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 
 /**
  * Walks to the item on the ground nearest to the owner, so the touch pickup takes it, and then lets
- * the robot follow again (answers 927 and 936 to 942). The rules live in {@link FetchRules}.
+ * the robot follow again (answers 927 and 936 to 942). In an area, it walks to the item inside it
+ * nearest to the robot (answers 340 and 1080). The rules live in {@link FetchRules}.
  */
 final class FetchItemGoal extends Goal {
   /** The robot speed is already in its movement attribute, so the route does not change it. */
@@ -41,22 +44,39 @@ final class FetchItemGoal extends Goal {
       return false;
     }
     nextCheckTick = now + CubitMod.CONFIG.fetchCheckTicks();
-    Player owner = RobotInteractions.followedPlayer(robot);
-    if (!fetches(owner)) {
-      return false;
-    }
-    target = robot.pickup().fetchTarget(owner).orElse(null);
+    target = findTarget().orElse(null);
     return target != null;
+  }
+
+  /** In an area, the item inside it; following, the item near the owner (answer 1080). */
+  private Optional<ItemEntity> findTarget() {
+    Optional<WorkArea> area = workingArea();
+    if (area.isPresent()) {
+      return fetchesInArea() ? robot.pickup().areaTarget(area.get()) : Optional.empty();
+    }
+    Player owner = RobotInteractions.followedPlayer(robot);
+    return fetches(owner) ? robot.pickup().fetchTarget(owner) : Optional.empty();
+  }
+
+  private Optional<WorkArea> workingArea() {
+    return robot.workArea().working() ? robot.workArea().here() : Optional.empty();
+  }
+
+  private boolean fetchesInArea() {
+    return FetchRules.fetchesInArea(robot.powerState(), robot.pickup().settings(), busy());
   }
 
   @Override
   public boolean canContinueToUse() {
+    if (target == null || noRoute || gaveUp()) {
+      return false;
+    }
+    Optional<WorkArea> area = workingArea();
+    if (area.isPresent()) {
+      return fetchesInArea() && robot.pickup().stillFetchingIn(target, area.get());
+    }
     Player owner = RobotInteractions.followedPlayer(robot);
-    return target != null
-        && !noRoute
-        && !gaveUp()
-        && fetches(owner)
-        && robot.pickup().stillFetching(target, owner);
+    return fetches(owner) && robot.pickup().stillFetching(target, owner);
   }
 
   @Override

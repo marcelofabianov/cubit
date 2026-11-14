@@ -9,7 +9,8 @@ import java.util.Locale;
 public enum TabletApp {
   OPEN,
   TARGET,
-  DOCK;
+  DOCK,
+  AREA;
 
   public String key() {
     return name().toLowerCase(Locale.ROOT);

@@ -55,7 +55,8 @@ public final class RobotScreenReadout {
         contents(robot),
         source(robot, player -> RobotTablet.canUse(robot, player)),
         RobotTablet.opening(robot),
-        new TabletRobotMenu.Controls(robot.docking().preferred(), new RobotFollowCall(robot)));
+        new TabletRobotMenu.Controls(
+            robot.docking().preferred(), new RobotFollowCall(robot), robot.workArea()::area));
   }
 
   private static RobotMenuContents contents(RobotEntity robot) {
@@ -97,7 +98,7 @@ public final class RobotScreenReadout {
     return new RobotScreenReading(
         battery,
         new Vitals(robot.getHealth(), robot.getMaxHealth(), following, RobotFace.expression(robot)),
-        RobotScreenStatus.of(state, following, battery, CubitMod.CONFIG.criticalCharge()),
+        status(robot, following),
         recharge,
         recharge == RechargeSource.SOLAR ? tick.solarCharged() : robot.spec().rechargePerTick(),
         solar,
@@ -111,6 +112,15 @@ public final class RobotScreenReadout {
             robot.getBlockY(),
             robot.getBlockZ(),
             CubitMod.CONFIG.powerRules().turnOn(state, battery) != state));
+  }
+
+  private static RobotScreenStatus status(RobotEntity robot, boolean following) {
+    return RobotScreenStatus.of(
+        robot.powerState(),
+        following,
+        robot.workArea().work(),
+        robot.battery(),
+        CubitMod.CONFIG.criticalCharge());
   }
 
   private static RechargeSource recharge(RobotTickReading tick, PowerState state, Battery battery) {

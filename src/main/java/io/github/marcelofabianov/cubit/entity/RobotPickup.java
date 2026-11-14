@@ -9,12 +9,14 @@ import io.github.marcelofabianov.cubit.domain.ownership.Ownership;
 import io.github.marcelofabianov.cubit.domain.robot.PickupEntry;
 import io.github.marcelofabianov.cubit.domain.robot.PickupFilter;
 import io.github.marcelofabianov.cubit.domain.robot.PickupSettings;
+import io.github.marcelofabianov.cubit.domain.robot.WorkArea;
 import io.github.marcelofabianov.cubit.domain.tier.PickupSpec;
 import io.github.marcelofabianov.cubit.domain.tier.RobotTier;
 import io.github.marcelofabianov.cubit.menu.PickupControl;
 import io.github.marcelofabianov.cubit.menu.PickupDisplay;
 import io.github.marcelofabianov.cubit.menu.RobotStorage;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -224,6 +226,39 @@ public final class RobotPickup implements PickupControl {
   /** The target is still worth the walk: still wanted and still in reach of the owner. */
   boolean stillFetching(ItemEntity item, Player owner) {
     return wants(item) && FetchRules.inReach(owner.distanceTo(item), spec());
+  }
+
+  /**
+   * The item inside the area nearest to the robot, not given up on (answers 340 and 1064). Only
+   * loaded entities are seen, so no chunk is loaded (rule 22).
+   */
+  public Optional<ItemEntity> areaTarget(WorkArea area) {
+    long now = robot.level().getGameTime();
+    List<ItemEntity> candidates =
+        robot
+            .level()
+            .getEntitiesOfClass(
+                ItemEntity.class,
+                boxOf(area),
+                item ->
+                    wants(item)
+                        && !fetchMemory.ignores(item.getUUID(), now)
+                        && area.contains(item.getX(), item.getY(), item.getZ()));
+    return candidates.stream().min(Comparator.comparingDouble(robot::distanceToSqr));
+  }
+
+  boolean stillFetchingIn(ItemEntity item, WorkArea area) {
+    return wants(item) && area.contains(item.getX(), item.getY(), item.getZ());
+  }
+
+  static AABB boxOf(WorkArea area) {
+    return new AABB(
+        area.min().x(),
+        area.min().y(),
+        area.min().z(),
+        area.max().x() + 1,
+        area.top(),
+        area.max().z() + 1);
   }
 
   /** The robot did not reach the item in time or found no route, so it leaves it for a while. */

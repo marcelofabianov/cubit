@@ -21,6 +21,23 @@ class RobotScreenStatusTest {
     return RobotScreenStatus.of(state, following, battery, CRITICAL);
   }
 
+  /** In an area, the critical battery and then the full inventory come first (answer 1063). */
+  @Test
+  void aCubitInAnAreaShowsInAreaOrItsFullInventory() {
+    RobotScreenStatus.AreaWork working = new RobotScreenStatus.AreaWork(true, false);
+    RobotScreenStatus.AreaWork full = new RobotScreenStatus.AreaWork(true, true);
+
+    assertEquals(
+        RobotScreenStatus.IN_AREA,
+        RobotScreenStatus.of(PowerState.ACTIVE, NOT_FOLLOWING, working, HEALTHY, CRITICAL));
+    assertEquals(
+        RobotScreenStatus.INVENTORY_FULL,
+        RobotScreenStatus.of(PowerState.ACTIVE, NOT_FOLLOWING, full, HEALTHY, CRITICAL));
+    assertEquals(
+        RobotScreenStatus.CRITICAL_BATTERY,
+        RobotScreenStatus.of(PowerState.ACTIVE, NOT_FOLLOWING, full, AT_CRITICAL, CRITICAL));
+  }
+
   @Test
   void anActiveRobotThatFollowsShowsFollowing() {
     assertEquals(RobotScreenStatus.FOLLOWING, status(PowerState.ACTIVE, FOLLOWING, HEALTHY));

@@ -6,6 +6,7 @@ import io.github.marcelofabianov.cubit.menu.BehaviorKeys;
 import io.github.marcelofabianov.cubit.menu.RobotMenu;
 import io.github.marcelofabianov.cubit.menu.ScreenKeys;
 import io.github.marcelofabianov.cubit.menu.TabletKeys;
+import io.github.marcelofabianov.cubit.menu.TabletRobotMenu;
 import java.util.Optional;
 import java.util.OptionalInt;
 import net.minecraft.ChatFormatting;
@@ -14,9 +15,9 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 
 /**
- * The Features tab of the Tablet: the nine switches of the Cubit in one list, with the same
- * controls of the server as the screen of the Cubit. A row the tier locks is dimmed, with the tier
- * that unlocks it (answer 1037).
+ * The Features tab of the Tablet: the nine switches of the Cubit in one list, and its area, with
+ * the same controls of the server as the screen of the Cubit. A row the tier locks is dimmed, with
+ * the tier that unlocks it (answer 1037).
  */
 final class TabletResourcesPanel {
   private static final int LEFT = 7;
@@ -38,6 +39,7 @@ final class TabletResourcesPanel {
   private static final int NOTE_GAP = 3;
   private static final int TOGGLE_INSET = 26;
   private static final int TOGGLE_TOP = 1;
+  private static final int AREA_GAP = 6;
   private static final int[] BUTTONS = {
     RobotMenu.LAMP_BUTTON,
     RobotMenu.SCANNERS_BUTTON,
@@ -62,12 +64,14 @@ final class TabletResourcesPanel {
   };
 
   private final ScreenPainter painter;
+  private final TabletRobotMenu menu;
   private final RobotSwitchLook switches;
   private final int right;
 
   /** The rows run to the right side of the window, with the switch at the end. */
-  TabletResourcesPanel(ScreenPainter painter, RobotMenu menu, int right) {
+  TabletResourcesPanel(ScreenPainter painter, TabletRobotMenu menu, int right) {
     this.painter = painter;
+    this.menu = menu;
     this.switches = new RobotSwitchLook(menu);
     this.right = right;
   }
@@ -95,6 +99,39 @@ final class TabletResourcesPanel {
     for (int row = 0; row < BUTTONS.length; row++) {
       renderRow(graphics, row, FIRST_ROW + row * ROW_HEIGHT);
     }
+    renderArea(graphics, FIRST_ROW + BUTTONS.length * ROW_HEIGHT + AREA_GAP);
+  }
+
+  /** The area of the Cubit, with its size and corners, or none (answer 1051). */
+  private void renderArea(GuiGraphics graphics, int top) {
+    Component label = Component.translatable(TabletKeys.AREA_LINE).withStyle(ChatFormatting.BOLD);
+    painter.text(
+        graphics,
+        label,
+        new Box(LEFT + 1, top, NAME_X, LINE),
+        ScreenPainter.TEXT,
+        ScreenPainter.FULL_SCALE);
+    Component value =
+        menu.area()
+            .map(area ->
+                Component.translatable(
+                    TabletKeys.AREA_SUMMARY,
+                    area.width(),
+                    area.height(),
+                    area.depth(),
+                    area.min().x(),
+                    area.min().y(),
+                    area.min().z(),
+                    area.max().x(),
+                    area.max().y(),
+                    area.max().z()))
+            .orElseGet(() -> Component.translatable(TabletKeys.AREA_NONE));
+    painter.text(
+        graphics,
+        value,
+        new Box(NAME_X + LEFT, top, right - NAME_X - LEFT, LINE),
+        ScreenPainter.DETAIL,
+        ScreenPainter.FULL_SCALE);
   }
 
   private void renderRow(GuiGraphics graphics, int row, int top) {

@@ -28,6 +28,14 @@ public final class FetchRules {
         && !busy;
   }
 
+  /**
+   * In an area, fetching is the work of a Cubit without a card, so only pickup counts, not the
+   * fetch switch of the one that follows (answers 340 and 1080).
+   */
+  public static boolean fetchesInArea(PowerState state, PickupSettings settings, boolean busy) {
+    return PickupRules.collects(state, settings.pickupOn()) && !busy;
+  }
+
   public static boolean inReach(double distanceToOwnerBlocks, PickupSpec spec) {
     return spec.fetchUnlocked() && distanceToOwnerBlocks <= spec.fetchRadiusBlocks();
   }

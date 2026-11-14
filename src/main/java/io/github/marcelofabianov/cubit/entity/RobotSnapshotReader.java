@@ -32,7 +32,11 @@ public final class RobotSnapshotReader {
             robot.hasCustomName() ? robot.getCustomName().getString() : NO_NAME,
             look,
             RobotScreenStatus.of(
-                robot.powerState(), following, battery, CubitMod.CONFIG.criticalCharge()),
+                robot.powerState(),
+                following,
+                robot.workArea().work(),
+                battery,
+                CubitMod.CONFIG.criticalCharge()),
             percentOf(battery),
             robot.blockPosition(),
             robot.level().dimension(),

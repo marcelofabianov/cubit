@@ -41,7 +41,7 @@ O Tablet funciona por apps, um ativo por vez, e o clique direito faz o que o app
 | Descarga | Marca os baús de descarga | Com o item 14 da Fase 4.2 | Depois |
 | Marcar | Marca os blocos do trabalho do card | Na Fase 5 | Depois |
 
-- **Trocar de app:** com o Tablet na mão, Shift + roda do mouse troca o app. No macOS, o Shift faz a roda de um mouse rolar para o lado, e essa rolagem também troca o app, como a hotbar do jogo faz. O app atual aparece na barra de ação, como `Tablet · Alvo`, e no nome do item. Só entram na troca os apps que fazem sentido para o Cubit escolhido. O app ativo fica no item, no componente `cubit:tablet_app` (perguntas 1006 e 1026).
+- **Trocar de app:** com o Tablet na mão, Shift + roda do mouse troca o app. No macOS, o Shift faz a roda de um mouse rolar para o lado, e essa rolagem também troca o app, como a hotbar do jogo faz. O app atual aparece na barra de ação, como `Cubit Tablet · Alvo`, em negrito e com a cor do app: Open em azul, Alvo em verde, Dock em vermelho e Área em roxo. O nome do item fica só `Cubit Tablet`, e uma faixa fina com a cor do app fica na parte de baixo do ícone, na hotbar e nos inventários, como a barra de durabilidade (perguntas 1082 a 1084). Só entram na troca os apps que fazem sentido para o Cubit escolhido. O app ativo fica no item, no componente `cubit:tablet_app` (perguntas 1006 e 1026).
 - **Prioridade do Tablet:** no app Open, clicar num bloco ou numa entidade com ação própria, como um baú, uma porta, um aldeão ou um Dock, abre a tela de seleção e não aciona o bloco nem a entidade (pergunta 1007).
 - **App inválido:** se o app ativo deixa de fazer sentido, como o Alvo com o Cubit escolhido fora do Focus, o próximo clique faz o que o Open faz, o item volta a Open e a barra de ação avisa (pergunta 1044).
 - **Alvo:** o mob na mira, a até `tablet_target_reach_blocks` blocos, 32 por padrão, a distância em que o Focus esquece o alvo. Valem as regras do Focus: só mob hostil ou neutro. Sem o Cubit escolhido carregado e no Focus, a barra de ação diz o motivo. Sem mob na mira, a barra de ação avisa, e nada abre. No mob que já é o alvo, nada muda (perguntas 1043 e 1047).
@@ -66,7 +66,7 @@ O Cubit que o player escolhe na tela de seleção, ou em que clica no app Open, 
 |---|---|
 | Retrato | A expressão atual, ou a última conhecida, com a cor da carcaça e a cor do colar do tier |
 | Nome e tier | O nome do Cubit, ou `Cubit`, com a etiqueta do tier |
-| Estado | Seguindo, ativo, parado, hibernando, desligado ou bateria crítica, com a cor da tela do Cubit |
+| Estado | Seguindo, na área, inventário cheio, ativo, hibernando, desligado ou bateria crítica, com a cor da tela do Cubit |
 | Battery | A porcentagem da bateria |
 | Lugar | Coordenadas, dimensão e distância até o player |
 
@@ -156,6 +156,7 @@ Fica fixo em todas as abas. `Voltar` fica no canto superior esquerdo, e os botõ
 | NBT da entidade | `PreferredDock` | O Dock preferido: `Block`, a posição num `long`, e `Dimension`. Sem a chave, o Cubit não tem Dock preferido |
 | Menu | `cubit:tablet_robot` | A tela do Cubit no Tablet, com a cor, o lugar e a chave geral nos valores do menu |
 | Pacotes do cliente | `cubit:choose_robot`, `cubit:robot_list_request`, `cubit:rename_robot` e `cubit:switch_tablet_app` | Escolher e abrir, voltar para a seleção, renomear e trocar de app, todos conferidos no servidor |
+| Pacote do servidor | `cubit:area_mark` | O primeiro canto da marcação, com os limites do Cubit, e a área do Cubit escolhido, para a caixa do app Área |
 | Config | `tablet_target_reach_blocks`, em `general` | O alcance da mira do app Alvo, de 1 a 128, com 32 |
 | NBT da entidade | `WorkArea` | A área do Cubit: `Min` e `Max`, os cantos em `long`, e `Dimension`. Sem a chave, o Cubit não tem área |
 | Config | `area_size_blocks` e `area_height_blocks`, por tier | O lado da base e a altura máxima da área, com 0 para bloqueado |
@@ -172,6 +173,8 @@ Os textos em inglês e português, como `Cubit Tablet` / `Tablet do Cubit`, `Tab
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-14 13:20 | Dá a cada app uma cor e a faixa no ícone (perguntas 1082 a 1084). |
+| Marcelo Fabiano | 2026-11-14 12:40 | Adiciona o estado na área e o pacote da caixa do app Área. |
 | Marcelo Fabiano | 2026-11-14 11:20 | Estende o `Follow` a qualquer Cubit (perguntas 1072 a 1076). |
 | Marcelo Fabiano | 2026-11-14 10:45 | Aceita a rolagem para o lado do macOS na troca de app. |
 | Marcelo Fabiano | 2026-11-14 10:00 | Adiciona o retorno automático à aba Recursos (pergunta 1066). |

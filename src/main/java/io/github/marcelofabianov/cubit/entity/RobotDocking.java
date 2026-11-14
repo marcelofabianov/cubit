@@ -192,15 +192,20 @@ public final class RobotDocking {
     boolean done =
         DockStay.shouldLeave(
             battery, healthFull, ticksFull, CubitMod.CONFIG.dockCompleteHoldTicks());
-    if (done && robot.onlineOwner() != null) {
+    if (done && (robot.onlineOwner() != null || robot.workArea().here().isPresent())) {
       release();
     }
   }
 
-  /** Leaving follows the rule of placing a robot, and an offline owner cannot be asked. */
+  /**
+   * Leaving follows the rule of placing a robot, and an offline owner cannot be asked. A Cubit with
+   * an area goes back to it, even with its owner away (answers 1061 and 1068).
+   */
   void release() {
     Player owner = robot.onlineOwner();
-    if (owner == null) {
+    if (robot.workArea().here().isPresent()) {
+      robot.setPowerState(CubitMod.CONFIG.powerRules().leaveBase(robot.battery()));
+    } else if (owner == null) {
       robot.setPowerState(PowerState.INACTIVE_SWITCHED_OFF);
     } else {
       FollowingOutcome outcome =

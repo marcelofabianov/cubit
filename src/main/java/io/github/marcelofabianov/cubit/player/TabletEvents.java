@@ -93,6 +93,15 @@ public final class TabletEvents {
   public static void onLogin(PlayerEvent.PlayerLoggedInEvent event) {
     if (event.getEntity() instanceof ServerPlayer player) {
       TabletSelection.sendChosen(player);
+      TabletAreaView.sync(player);
+    }
+  }
+
+  /** A marking halfway lives only while the player plays (answer 1060). */
+  @SubscribeEvent
+  public static void onLogout(PlayerEvent.PlayerLoggedOutEvent event) {
+    if (event.getEntity() instanceof ServerPlayer player) {
+      TabletAreaApp.forget(player);
     }
   }
 }

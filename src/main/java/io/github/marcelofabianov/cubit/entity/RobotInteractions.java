@@ -49,6 +49,7 @@ final class RobotInteractions {
     Player owner = robot.onlineOwner();
     if (robot.powerState() == PowerState.ACTIVE
         && owner != null
+        && robot.workArea().area().isEmpty()
         && !RobotFollowing.policy()
             .holdsThePlace(robot.getUUID(), RobotFollowing.follower(owner))) {
       robot.setPowerState(PowerState.INACTIVE_SWITCHED_OFF);

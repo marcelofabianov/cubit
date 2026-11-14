@@ -9,9 +9,10 @@ import java.util.Optional;
 import net.minecraft.core.BlockPos;
 
 /**
- * The auto return: with a low battery, the Cubit that follows goes to the same Dock as `Go to
- * Dock`, says it once and, without a Dock in reach, tries again on the next interval (answers 1065
- * to 1068). It looks only once per interval of the dock search (rule 21).
+ * The auto return: with a low battery, the Cubit that follows, or works in an area, goes to the
+ * same Dock as `Go to Dock`, says it once and, without a Dock in reach, tries again on the next
+ * interval (answers 1053 and 1065 to 1068). It looks only once per interval of the dock search
+ * (rule 21).
  */
 public final class RobotAutoReturn implements RobotSwitch {
   private final RobotEntity robot;
@@ -55,7 +56,8 @@ public final class RobotAutoReturn implements RobotSwitch {
       return;
     }
     nextCheck = now + CubitMod.CONFIG.followRepathTicks();
-    boolean following = RobotInteractions.followedPlayer(robot) != null;
+    boolean following =
+        RobotInteractions.followedPlayer(robot) != null || robot.workArea().working();
     AutoReturn rule = new AutoReturn(switchedOn, robot.spec().returnCharge());
     if (!rule.returns(robot.powerState(), robot.battery(), following, onTrip)) {
       return;

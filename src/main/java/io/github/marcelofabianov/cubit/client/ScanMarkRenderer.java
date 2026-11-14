@@ -41,7 +41,7 @@ public final class ScanMarkRenderer {
   private static final float MOB_ALPHA = 0.5f;
 
   /** Lines that ignore depth, so the box shows through blocks. */
-  private static final RenderType THROUGH_BLOCKS =
+  static final RenderType THROUGH_BLOCKS =
       RenderType.create(
           TYPE_NAME,
           DefaultVertexFormat.POSITION_COLOR_NORMAL,

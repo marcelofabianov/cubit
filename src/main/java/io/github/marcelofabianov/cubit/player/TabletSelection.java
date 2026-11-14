@@ -75,6 +75,7 @@ public final class TabletSelection {
         .ifPresent(entry -> {
           player.setData(CubitAttachments.CHOSEN_ROBOT, new ChosenRobotLink(Optional.of(robot)));
           sendChosen(player);
+          TabletAreaView.sync(player);
           Component name =
               entry.name().isEmpty()
                   ? Component.translatable(CubitEntities.GENERAL_ROBOT.get().getDescriptionId())

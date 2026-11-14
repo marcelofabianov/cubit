@@ -87,6 +87,8 @@ final class ScreenTexts {
   private static final String SOLAR_SWITCHED_OFF_TEXT = "Off";
   private static final String STATUS_CRITICAL_BATTERY_TEXT = "Critical battery";
   private static final String STATUS_FOLLOWING_TEXT = "Following";
+  private static final String STATUS_IN_AREA_TEXT = "In area";
+  private static final String STATUS_INVENTORY_FULL_TEXT = "Inventory full";
   private static final String STATUS_ACTIVE_TEXT = "Active";
   private static final String STATUS_HIBERNATING_TEXT = "Hibernating · Dock";
   private static final String STATUS_OFF_TEXT = "Off";
@@ -118,7 +120,9 @@ final class ScreenTexts {
           Map.entry(RobotScreenStatus.FOLLOWING, STATUS_FOLLOWING_TEXT),
           Map.entry(RobotScreenStatus.ACTIVE, STATUS_ACTIVE_TEXT),
           Map.entry(RobotScreenStatus.HIBERNATING, STATUS_HIBERNATING_TEXT),
-          Map.entry(RobotScreenStatus.OFF, STATUS_OFF_TEXT));
+          Map.entry(RobotScreenStatus.OFF, STATUS_OFF_TEXT),
+          Map.entry(RobotScreenStatus.IN_AREA, STATUS_IN_AREA_TEXT),
+          Map.entry(RobotScreenStatus.INVENTORY_FULL, STATUS_INVENTORY_FULL_TEXT));
   private static final Map<RechargeSource, String> RECHARGES =
       Map.of(
           RechargeSource.DOCK, RECHARGE_DOCK_TEXT,

@@ -40,6 +40,17 @@ class FetchRulesTest {
     assertTrue(FetchRules.fetches(PowerState.ACTIVE, ON, BASE, FOLLOWING, FREE));
   }
 
+  /** In an area, only pickup counts, even with fetch off (answer 1080). */
+  @Test
+  void inAnAreaOnlyPickupCounts() {
+    PickupSettings fetchOff = ON.toggledFetch();
+
+    assertTrue(FetchRules.fetchesInArea(PowerState.ACTIVE, fetchOff, FREE));
+    assertFalse(FetchRules.fetchesInArea(PowerState.ACTIVE, ON.toggledPickup(), FREE));
+    assertFalse(FetchRules.fetchesInArea(PowerState.ACTIVE, ON, BUSY));
+    assertFalse(FetchRules.fetchesInArea(PowerState.HIBERNATING, ON, FREE));
+  }
+
   @Test
   void onlyAnActiveRobotFetches() {
     for (PowerState state : PowerState.values()) {
