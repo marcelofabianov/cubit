@@ -159,7 +159,7 @@ O raio dos dois scanners é o de uma esfera em volta do Cubit: só conta o que e
 |---|---|---|---|---|
 | Seguir o player | ✔ | ✔ | ✔ | ✔ |
 | Modo área (app Área do Tablet), na base | Bloqueado | Até 16×16 | Até 32×32 | Até 64×64 |
-| Altura máxima da área | — | A definir | A definir | A definir |
+| Altura máxima da área (pergunta 1050) | — | 8 blocos | 16 blocos | 32 blocos |
 | Local de morte | Bloqueado | Marca a coordenada | Marca e guia até lá | Marca e guia até lá |
 
 ## Slots exclusivos
@@ -205,6 +205,7 @@ Planejado para a Fase 5. O tier Base não aceita cards.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-14 09:00 | Define a altura máxima da área (pergunta 1050). |
 | Marcelo Fabiano | 2026-11-13 17:15 | Adiciona o alcance da mira do app Alvo. |
 | Marcelo Fabiano | 2026-11-13 16:40 | Troca o alcance do controle remoto pelo do Tablet. |
 | Marcelo Fabiano | 2026-11-13 13:45 | Define o custo, o slot e a luz das tochas. |

@@ -2,20 +2,46 @@
 
 Números: [`tiers.md`](../tiers.md#autonomia) e [valores gerais](../tiers.md#valores-gerais).
 
-Os comandos e o localizar do antigo controle remoto passaram para o [Tablet](tablet.md), que substitui o Cubit Remote (perguntas 998 a 1002). O modo área entra com o item 13 da Fase 4.2.
+Os comandos e o localizar do antigo controle remoto passaram para o [Tablet](tablet.md), que substitui o Cubit Remote (perguntas 998 a 1002).
 
 ## Modo área
 
-A área é marcada com o app Área do [Tablet](tablet.md#apps), clicando com o botão direito em dois blocos, os cantos de um volume em 3D. Os limites de [`tiers.md`](../tiers.md#autonomia), como 16×16, valem para a base, e a altura máxima fica no config.
+O modo área entra com o item 13 da Fase 4.2, numa entrega só (pergunta 1057). A descarga no baú marcado, o app Descarga e o botão `Descarregar` ficam com o item 14.
 
-- **Sem card:** o Cubit coleta os itens do chão dentro da área, respeitando o filtro de coleta, e descarrega no baú marcado.
+### Marcar a área
+
+A área é marcada com o app Área do [Tablet](tablet.md#apps), em três cliques direitos (perguntas 1051 e 1054):
+
+1. **O Cubit:** o clique num Cubit do player, no mundo, faz dele o Cubit escolhido, e a barra de ação pede o primeiro canto. Com um Cubit Base, que não tem modo área, ou de outro player, a barra de ação diz o motivo. Clicar num bloco antes de escolher o Cubit só avisa.
+2. **O primeiro canto:** o clique num bloco.
+3. **O segundo canto:** o clique em outro bloco fecha um volume em 3D, e o Cubit vai para a área.
+
+- **Limites:** os de [`tiers.md`](../tiers.md#autonomia), 16×16, 32×32 e 64×64, valem para a base, e a altura máxima, 8, 16 e 32 blocos, fica no config, por tier (perguntas 342 e 1050). Um segundo canto que passa do limite é recusado com aviso.
+- **Alcance:** a área fica na mesma dimensão do Cubit, com o centro dentro do raio de chamada do Dock do tier, `call_radius_blocks`. Fora disso, a barra de ação diz o motivo (pergunta 1058).
+- **Caixa:** com o Tablet na mão e o app Área, uma caixa vai do primeiro canto até o bloco na mira, com o tamanho, verde se cabe no tier e vermelha se passa. Depois, a caixa mostra a área do Cubit escolhido (pergunta 1056).
+- **Marcação pela metade:** o Cubit e o primeiro canto ficam só na memória do servidor, por player, e somem ao trocar de app, ao sair do jogo ou com Shift + clique direito, que cancela. Uma nova área completa substitui a anterior do Cubit (pergunta 1060).
+
+### O Cubit na área
+
+- **Chegada:** ele deixa de seguir e vai andando. Preso sem progresso, teleporta para dentro da área, como na volta ao Dock (pergunta 1058).
+- **Limite:** ele nunca sai da área, exceto para ir ao Dock.
+- **Sem card:** busca os itens do chão dentro da área, respeitando o filtro de coleta (pergunta 340). O ímã continua puxando pelo raio do tier, mesmo de fora dela (pergunta 1064).
+- **Ronda:** sem item para buscar, ele dá voltas contínuas pelos cantos da base da área, no chão, gastando com andar. Um item para buscar interrompe a ronda (perguntas 1059 e 1062).
+- **Defesa, tochas e lanterna:** seguem como hoje (pergunta 1059).
+- **Inventário cheio:** para de coletar e fica na área, e o estado mostra o inventário cheio. Volta a coletar quando houver espaço. Com o item 14, ele passa a descarregar antes (pergunta 1052).
+- **Bateria baixa:** vai ao Dock preferido, ou ao livre mais próximo no raio do tier, e com a carga cheia volta à área. Sem Dock, segue na área até o crítico e desliga, como seguindo (pergunta 1053).
+- **Dono longe:** o Cubit nunca teleporta até o dono e não é desligado pela perda de vínculo (pergunta 326). Com o chunk descarregado, para como o jogo para tudo e continua quando o chunk carregar, sem forçar o carregamento (pergunta 1061).
+- **Estado:** `In area` (`Na área`), com cor própria, no topo da tela e na lista do Tablet. A bateria crítica e o inventário cheio aparecem antes dele (pergunta 1063).
+- **Tela:** a aba Recursos do Tablet mostra a área, com os cantos e o tamanho.
+- **Voltar a seguir:** o botão `Follow`, no cabeçalho da tela do Cubit no Tablet, apaga a área e faz o Cubit voltar a seguir, de qualquer distância (pergunta 1055).
+- **Ao recolher:** a área, os baús marcados e o Dock preferido se perdem (perguntas 343 e 1008).
 - **Com trabalho, na Fase 5:** vale [`trabalhos.md`](trabalhos.md).
-- **Ao recolher:** a área, os baús marcados e o Dock preferido se perdem (pergunta 1008).
 
 ## Histórico de modificações
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-14 09:00 | Define a marcação, a caixa e o Cubit na área (perguntas 1049 a 1064). |
 | Marcelo Fabiano | 2026-11-13 16:40 | Vira o modo área, e os comandos e o localizar passam para o Tablet. |
 | Marcelo Fabiano | 2026-11-13 09:05 | Deixa só as tochas entre as funções que o controle desativa. |
 | Marcelo Fabiano | 2026-11-07 23:42 | Acrescenta os scanners ao consumo do Cubit parado. |

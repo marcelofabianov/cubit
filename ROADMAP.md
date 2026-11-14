@@ -80,5 +80,5 @@ Dividida em três partes.
 
 ## Ainda sem fase
 
-- Parar e seguir pelo Tablet (`Stop` e `Follow`), com um refinamento de como o Cubit parado convive com a busca, o choque e o Dock (pergunta 1036).
+- Parar pelo Tablet (`Stop`) e seguir fora do modo área, com um refinamento de como o Cubit parado convive com a busca, o choque e o Dock (pergunta 1036). O `Follow` que tira o Cubit da área entra com o item 13 da Fase 4.2 (pergunta 1055).
 - Wiki e livro para o player.
