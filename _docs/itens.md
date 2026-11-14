@@ -156,7 +156,7 @@ Levam o Cubit ao tier seguinte, sem pular etapas. As regras estão em [`upgrade-
 
 ## Previstos na Fase 5
 
-Nomes aprovados na pergunta 256. Viram contrato só quando implementados.
+Nomes aprovados nas perguntas 256, 1146 e 1147. Viram contrato só quando implementados.
 
 | Nome | ID | Descrição |
 |---|---|---|
@@ -172,6 +172,8 @@ Nomes aprovados na pergunta 256. Viram contrato só quando implementados.
 | Machine Learning: Organizer | `cubit:ml_organizer` | Do trabalho de Organizador |
 | Machine Learning: Cook | `cubit:ml_cook` | Do trabalho de Cozinheiro |
 | Machine Learning: Builder | `cubit:ml_builder` | Do trabalho de Construtor |
+| Machine Learning: Mechanic | `cubit:ml_mechanic` | Do trabalho de Mecânico (perguntas 1146 e 1147) |
+| Machine Learning: Alchemist | `cubit:ml_alchemist` | Do trabalho de Alquimista (pergunta 1146) |
 
 ## Contratos de save
 
@@ -232,6 +234,7 @@ O estado salvo é validado ao entrar no jogo, sem derrubá-lo (regra 17 do `AGEN
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-14 20:27 | Acrescenta os cards do Mecânico e do Alquimista (perguntas 1146 e 1147). |
 | Marcelo Fabiano | 2026-11-14 18:17 | Acrescenta a chave do local de morte e o histórico de mortes ao contrato (perguntas 1114 e 1118). |
 | Marcelo Fabiano | 2026-11-14 18:17 | Acrescenta as chaves do retorno automático e da descarga ao contrato (pergunta 1128). |
 | Marcelo Fabiano | 2026-11-13 18:50 | Tira o NBT do Cubit parado. |

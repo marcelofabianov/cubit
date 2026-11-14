@@ -4,9 +4,8 @@ Conceito para depois da Fase 4. Registrar aqui não autoriza implementar.
 
 ## Pendentes
 
-| # | Pergunta | Recomendação |
-|---|---|---|
-| 339 | O slot de fornalha fica só para o Aprendizado de Máquina: Minerador? | Manter a fornalha como está em `tiers.md` até decidir os cards, porque ela entra na Fase 4, antes deles. Vem da [pergunta 258](fase-2-versao-minima.md) |
+Não há perguntas pendentes nesta fase.
+
 
 ## Respondidas
 
@@ -21,10 +20,10 @@ Conceito para depois da Fase 4. Registrar aqui não autoriza implementar.
 | 196 | O que o Cubit faz com o inventário cheio durante o trabalho? | Descarrega no baú o que conseguir. Quando não conseguir mais, entra em hibernação e só volta quando o player o religar. O termo é detalhado na pergunta 198 |
 | 197 | Com que o Minerador cava? | Sem item de picareta, com a capacidade do tier. Base equivale a picareta de ferro, Avançado a de diamante, e Elite e Ultimate também a de diamante. A pergunta 210 muda isso: o Base não usa card, e o Avançado equivale a picareta de ferro. Os dois primeiros tiers não têm opções. Elite e Ultimate ativam uma ou mais opções equivalentes a encantamentos, como fortuna, eficiência e toque suave. Elite tem lista e nível limitados, e Ultimate abre todos os encantamentos possíveis de picareta, no último nível |
 | 198 | Como fica a hibernação do Cubit parado por falta de onde descarregar? | É um estado semelhante ao desligado, mas com o player podendo usar o inventário e as configurações. O Cubit fica imóvel e sem executar tarefas, como dormindo (ZzzZZz). Fora do Dock, só volta quando o player o religar. Amplia a pergunta 47 |
-| 199 | Quais opções equivalentes a encantamentos entram? | Um meio-termo criativo, sem ser literal: Inquebrável e Remendo, por exemplo, fazem a mineração gastar menos energia. A lista final é detalhada na pergunta 202 |
+| 199 | Quais opções equivalentes a encantamentos entram? | Um meio-termo criativo, sem ser literal: Inquebrável e Remendo, por exemplo, fazem a mineração gastar menos energia. A lista final é detalhada na pergunta 202. Mudada pela 1149, que tira Inquebrável e Remendo |
 | 200 | Quais limites valem no tier Elite? | Eficiência III e Fortuna II. Toque Suave fica só no Ultimate, que tem Eficiência V, Fortuna III e Toque Suave |
 | 201 | O Minerador pode sair da área marcada? | Não, sempre fica na área marcada em 3D. Um conjunto de antenas pode definir áreas maiores que 1 chunk |
-| 202 | Como ficam as opções do Minerador no meio-termo? | Eficiência, Fortuna e Toque Suave agem como no jogo. Inquebrável reduz o custo de FE por bloco, e Remendo dá um desconto extra nos blocos em que encontra minério. Nenhum dos dois cria energia, e os percentuais ficam no config. Inquebrável e Remendo entram no Ultimate. Detalha a pergunta 199 |
+| 202 | Como ficam as opções do Minerador no meio-termo? | Eficiência, Fortuna e Toque Suave agem como no jogo. Inquebrável reduz o custo de FE por bloco, e Remendo dá um desconto extra nos blocos em que encontra minério. Nenhum dos dois cria energia, e os percentuais ficam no config. Inquebrável e Remendo entram no Ultimate. Detalha a pergunta 199. Mudada pela 1149, que tira Inquebrável e Remendo |
 | 203 | Fortuna e Toque Suave podem ficar ativos juntos? | Não. O player alterna entre os dois na tela do Cubit |
 | 204 | O que o Fazendeiro faz na área? | Colhe o que estiver maduro, pelas tags comuns de plantações, e replanta com as sementes do inventário. Não ara terra nova. Sem semente, deixa o bloco vazio e segue |
 | 205 | O que o Pecuarista faz na área? | Alimenta com itens do inventário, tosquia, recolhe ovos e abate só acima de um limite de animais por espécie, no config, poupando filhotes. A regra de nunca atacar mobs pacíficos ganha uma exceção só para este card e só na área |
@@ -32,7 +31,7 @@ Conceito para depois da Fase 4. Registrar aqui não autoriza implementar.
 | 207 | O que o Defensor protege e onde? | É diferente do comportamento de defender o player ao seguir. Defende contra qualquer mob agressivo, ou neutro que esteja agredindo algo dentro da área. Ataca e guarda os drops no inventário, e nunca sai da área. Se um mob ataca de fora da área, como um esqueleto com arco, o Cubit recua e procura proteção. Quando o mob entra na área, ele ataca. Se o mob sair, ele volta a se esconder |
 | 208 | O que o Organizador de storage faz? | Os detalhes ainda não estão fechados. Inicialmente, pega itens das saídas de fornalhas e máquinas, ou do chão, e procura baús que já têm o mesmo item. Com mais de um, a prioridade é o que possui a maior quantidade do item carregado |
 | 209 | Como o player configura baús e filtros dos cards? | O Cubit Remote marca no mundo, e a tela do Cubit tem uma aba Trabalho, com modo e filtros. As opções do Minerador ficam nela |
-| 210 | O tier Base usa cards de Aprendizado de Máquina? | Não, continuam bloqueados no Base. O primeiro tier que aceita cards é o Avançado, e nele o Minerador começa equivalente a picareta de ferro. Muda a pergunta 197 |
+| 210 | O tier Base usa cards de Aprendizado de Máquina? | Não, continuam bloqueados no Base. O primeiro tier que aceita cards é o Avançado, e nele o Minerador começa equivalente a picareta de ferro. Muda a pergunta 197. Mudada pelas 1145 e 1149: cada card tem o seu tier mínimo, e o Minerador começa no Elite, equivalente a diamante |
 | 211 | Como o Defensor ataca nos tiers? | Cada tier que aceita o card ataca com mais dano. O Base não atua como Defensor |
 | 212 | O que o Organizador faz quando nenhum baú tem o mesmo item? | Coloca no primeiro baú com espaço |
 | 213 | O que o Construtor faz? | Inicialmente, é simples: retira blocos de uma área para aplainar, ou preenche espaços vazios ou com líquidos usando os blocos do inventário |
@@ -73,18 +72,51 @@ Conceito para depois da Fase 4. Registrar aqui não autoriza implementar.
 | 248 | O Pescador entra? | Sim. Na área com água aberta, pesca pela tabela de pesca do jogo, em intervalos do config e gastando FE, sem vara e sem boia. Com o inventário cheio, descarrega ou hiberna |
 | 249 | O Fabricador entra? | Só para abastecer, sem craft. Leva uma quantidade fixa de um baú a cada destino, por pedidos. A pergunta 250 o torna um modo do Organizador |
 | 250 | O que acontece com o Aprendizado de Máquina: Fabricador, sem craft? | Não existe card próprio: abastecer é um modo do Organizador |
-| 251 | Em que ordem a Fase 5 seria entregue, com os novos cards? | Base comum; Fazendeiro e Pescador; Organizador, com o modo de abastecer; Cozinheiro; Defensor; Minerador; Construtor; Pecuarista; antena e chunks; Servidor, log e viagem; storage. Muda a pergunta 236 |
+| 251 | Em que ordem a Fase 5 seria entregue, com os novos cards? | Base comum; Fazendeiro e Pescador; Organizador, com o modo de abastecer; Cozinheiro; Defensor; Minerador; Construtor; Pecuarista; antena e chunks; Servidor, log e viagem; storage. Muda a pergunta 236. Detalhada pelas 1138 e 1141, com o board |
 | 252 | Como seguir para consolidar? | Reavaliar se há furos. Se não houver, consolidar |
 | 253 | Como o Cubit volta ao trabalho depois de hibernar fora do Dock? | Por um botão `Retomar` na tela e pelo Cubit Remote. O clique direito continua abrindo a tela, e Shift + clique continua recolhendo. Se o motivo não sumiu, ele hiberna de novo e explica. Detalha a pergunta 198 |
 | 254 | Como um Cubit passa a trabalhar e como volta? | Com o Cubit Remote, o player define a área, e o processo só termina ao selecionar o Cubit no controle. O controle também manda esvaziar o inventário ou voltar à base. Se o player recolher o Cubit e colocá-lo de novo, precisa refazer a configuração. A [pergunta 343](fase-4-upgrades-e-autonomia.md) detalha o que se perde |
 | 255 | A antena gasta bateria com o carregamento desligado? | Um valor menor, no config, só para o log. Sem carga, deixa de enviar log, mas continua valendo como referência de Dock |
+| 339 | O slot de fornalha fica só para o Aprendizado de Máquina: Minerador? | Sim: a fornalha é elétrica e exclusiva do Minerador, ligada por uma chave na seção Functions. Respondida pelas perguntas 930 e 1149. Vem da [pergunta 258](fase-2-versao-minima.md) |
 | 344 | Quais são os modos do Minerador? | Como ideia inicial: escavar a área, abrir túnel reto ou em degraus e buscar minérios do filtro, um modo por vez e sempre dentro da área. Os detalhes ficam para a entrega do card |
-| 256 | Quais são os nomes no jogo? | Robot Server (`cubit:robot_server`), Signal Antenna (`cubit:signal_antenna`), Wireless Chest (`cubit:wireless_chest`), Wireless Storage Upgrade, e os cards Machine Learning: Miner, Farmer, Rancher, Defender, Organizer, Builder, Cook e Fisher. Viram contrato só quando implementados |
+| 256 | Quais são os nomes no jogo? | Robot Server (`cubit:robot_server`), Signal Antenna (`cubit:signal_antenna`), Wireless Chest (`cubit:wireless_chest`), Wireless Storage Upgrade, e os cards Machine Learning: Miner, Farmer, Rancher, Defender, Organizer, Builder, Cook e Fisher. Viram contrato só quando implementados. Completada pelas 1146 e 1147, com Machine Learning: Mechanic e Machine Learning: Alchemist |
+| 1136 | No alinhamento do planejamento da Fase 5, com os conceitos de `tmp/fase5`, o kanban de um card por vez e a base primeiro, há algo a acrescentar? | Nada a acrescentar. A rodada de decisões segue com o board, a ordem, o primeiro card e a composição da base |
+| 1137 | Onde fica o board kanban da Fase 5? | Num GitHub Project "Fase 5", com as colunas Backlog, Refinamento, Pronto, Em andamento, Validação e Concluído. Cada card é uma issue e um PR, um por vez, e o `checklist.md` continua registrando o que fechou |
+| 1138 | Qual ordem de entrega vale na Fase 5: a da pergunta 251 ou a do `ROADMAP.md`? | A da pergunta 251: a base comum e os trabalhos primeiro, e as antenas, os chunks, o Servidor e o storage no fim. O `ROADMAP.md` e o `checklist.md` são reordenados no card de consolidação. Muda a ordem das partes das respostas 722 e 725 |
+| 1139 | O primeiro card da Fase 5 é só de documentos? | Sim: consolidar `tmp/fase5` em `_docs`, com os trabalhos por tier, o Suporte, o Alquimista, os conflitos com a Fase 4 e o board, antes da base (regra 11) |
+| 1140 | O card da base inclui o primeiro trabalho? | Não: a base fica sozinha num card, com o slot do card, o tier mínimo por card, o estado de trabalho, a aba Trabalho e a hibernação fora do Dock com o `Retomar`. O Pescador vem no card seguinte |
+| 1141 | Quais cards entram no board da Fase 5, e em que ordem? | Os 16 cards, na ordem da pergunta 251: consolidar o conceito, base do trabalho, Pescador, Fazendeiro, Organizador, Cozinheiro, Defensor, Minerador, Construtor, Pecuarista, personalização visual, Suporte, Alquimista, antena e chunks, Servidor com log e viagem, e storage wireless. A ordem ainda pode mudar no refinamento do card de consolidação |
+| 1142 | Como os cards do Backlog ficam no GitHub Project? | Como issues desde já, com uma descrição curta, detalhadas no refinamento de cada card |
+| 1143 | O que fazer com os três milestones da Fase 5? | Um milestone só: o 5 passa a se chamar "Fase 5: Trabalhos", e o 5.1 e o 5.2 são fechados. O board faz a divisão em cards |
+| 1144 | Como ficam os números "A definir" de `tiers.md` e o teste com 20 a 30 robôs? | Dentro de cada card: para sair do Refinamento, o card define os seus números, e, para fechar, o card de trabalho passa no teste com 20 a 30 robôs |
+| 1145 | Vale a divisão dos trabalhos por tier proposta nos conceitos? | Sim: o Base não aceita card; o Avançado tem Pescador, Fazendeiro e Pecuarista; o Elite soma Organizador, Cozinheiro, Defensor e Minerador; e o Ultimate soma Construtor, Suporte e Alquimista. Cada card passa a ter o seu tier mínimo, e o como, pela regra 39, fica para o card da Base. Muda a regra de todo card a partir do Avançado, das perguntas 210 e da seção Cards de `trabalhos.md` |
+| 1146 | O Suporte e o Alquimista entram, e o que fazer com as outras ideias? | Entram como trabalhos do Ultimate, nos cards 12 e 13 do board, com os conceitos levados para `_docs`. O Arquiteto, que copia uma estrutura de uma área para outra, e o Comerciante, que negocia com aldeões, vão para "Ainda sem fase" no `ROADMAP.md`. O Artesão, com o Crafter do jogo, e o Logístico, com os canais do storage wireless, ficam descartados |
+| 1147 | Qual é o nome do card do Suporte? | Machine Learning: Mechanic, `cubit:ml_mechanic`, como os outros cards, que usam o nome de quem trabalha. Entra na pergunta 256 e vira contrato só quando implementado |
+| 1148 | Onde ficam os conceitos dos trabalhos em `_docs`? | Numa pasta `_docs/funcionalidades/trabalhos/`, com um arquivo por trabalho, e o `trabalhos.md` fica com a visão geral, as regras de toda área e a infraestrutura |
+| 1149 | Valem as decisões do Minerador de 2026-11-13, que não estavam registradas? | Sim, as três: ele sobe para o Elite, equivalente a picareta de diamante, sem a etapa de ferro do Avançado; perde Inquebrável e Remendo, e a economia de FE sai; e a fornalha é elétrica e exclusiva dele, sem combustível, gastando FE só enquanto ativa, ligada por uma chave na seção Functions. Muda as perguntas 199, 202 e 210 e responde a 339. Os detalhes em aberto da fornalha ficam para o card do Minerador |
+| 1150 | Valem as decisões do Defensor de 2026-11-13, que não estavam registradas? | Sim: ele sobe para o Elite, e a reação passa a ser pelo modo de defesa, Contra-atacar ou Agressivo, e não pelo tier. No ataque de longe, um agressor fora da área, mas no alcance do choque, é atacado de dentro dela; fora do alcance, o Defensor se abriga até o agressor entrar na área ou no alcance. Detalha as perguntas 207, 211 e 214. O modo Focus e os outros itens em aberto ficam para o card do Defensor |
+| 1151 | O Mecânico usa um estoque novo no Dock? | Não: usa o inventário do Dock da Fase 4.1 como ele é, com a automação da resposta 967. Sai do conceito o estoque novo e a migração do save do Dock |
+| 1152 | Como se chama em português o trabalho do card Mechanic? | Mecânico, em todos os documentos, no lugar de Suporte, e o card #203 do board é renomeado. Detalha a 1147 |
+| 1153 | O que fazer com os itens "Em aberto" dos conceitos dos trabalhos? | Ficam em aberto nos documentos, com a recomendação, e são respondidos no refinamento do card de cada trabalho. A consolidação não decide nenhum deles |
+| 1154 | Como entram as tabelas de evolução por tier dos conceitos? | Como proposta, e cada card decide a sua no refinamento, com os números em `tiers.md` (resposta 1144). As já decididas, do Minerador e do Defensor, entram como decididas (respostas 1149 e 1150) |
+| 1155 | Como marcar os blocos do trabalho, se o app Marcar do Tablet não existe? | A consolidação registra que marcar os blocos do trabalho, como fornos, suportes de poções e água, precisa de um app do Tablet. O primeiro card que precisar dele decide o app, que vale para os outros |
+| 1156 | Como o `ROADMAP.md` e o `checklist.md` mostram a Fase 5? | Numa lista só, na ordem do board. O `ROADMAP.md` troca as partes 5, 5.1 e 5.2 por essa lista, e o `checklist.md` troca os itens da Fase 5 pelos 16 cards, cada um com a issue, mantendo o item do conceito já marcado. Muda a divisão das respostas 722 e 725 |
+| 1157 | Quando entram as imagens conceito da aparência de cada trabalho? | Só quando o card daquele trabalho for alocado: o refinamento do card gera a imagem, junto com as outras decisões dele. Os conceitos iniciais de cada trabalho já bastam até lá, e o foco fica no card da vez |
+| 1158 | O `AGENTS.md` pode ser atualizado no PR da consolidação? | Sim: o estado atual passa a citar a Fase 5 em andamento, com o board "Cubit · Fase 5" e o card da vez |
 
 ## Histórico de modificações
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-14 20:31 | Registra a resposta 1158. |
+| Marcelo Fabiano | 2026-11-14 20:30 | Registra a resposta 1157. |
+| Marcelo Fabiano | 2026-11-14 20:28 | Responde a 339 e aponta as respostas mudadas pela consolidação. |
+| Marcelo Fabiano | 2026-11-14 20:25 | Registra as respostas 1153 a 1156. |
+| Marcelo Fabiano | 2026-11-14 20:18 | Registra as respostas 1149 a 1152. |
+| Marcelo Fabiano | 2026-11-14 20:15 | Registra as respostas 1145 a 1148. |
+| Marcelo Fabiano | 2026-11-14 20:08 | Registra as respostas 1141 a 1144. |
+| Marcelo Fabiano | 2026-11-14 20:01 | Registra as respostas 1137 a 1140. |
+| Marcelo Fabiano | 2026-11-14 19:59 | Registra a resposta 1136. |
 | Marcelo Fabiano | 2026-11-06 11:10 | Troca 'especialidade' por 'trabalho' e 'card de especialidade' por 'card de Aprendizado de Máquina'. |
 | Marcelo Fabiano | 2026-11-05 21:36 | Registra a resposta 344. |
 | Marcelo Fabiano | 2026-11-05 21:34 | Aponta as respostas 193, 194 e 254 para a Fase 4. |
