@@ -58,7 +58,7 @@ Entra no item 9 da Fase 4.1 (respostas 422, 423 e 876 a 889). A coleta, o ímã 
 
 Entra com o item 14 da Fase 4.2, numa entrega só (perguntas 1086 a 1095).
 
-- **Marcar:** com o app Descarga do [Tablet](tablet.md#apps), o clique num bloco com inventário (baú, barril, shulker ou de outro mod, pela capability) marca o baú do Cubit escolhido, de qualquer tier, até o limite dele. Um segundo clique desmarca, e fora de um bloco com inventário o app só avisa (pergunta 1086).
+- **Marcar:** com o app Descarga do [Tablet](tablet.md#apps), o clique num bloco com inventário (baú, barril, shulker ou de outro mod, pela capability) marca o baú do Cubit escolhido, de qualquer tier, até o limite dele. O clique num baú já marcado manda o Cubit descarregar ali agora, como o botão `Descarregar`, mas só naquele baú. Shift + clique direito num baú marcado desmarca só ele, e em qualquer outro bloco, ou no ar, desmarca o último marcado, de qualquer distância, para dar lugar a um novo. Sem Shift, fora de um bloco com inventário, o app só avisa (perguntas 1086, 1098 e 1099).
 - **Limites:** `unload_chests` e `unload_reach_blocks`, por tier, com os números de [`tiers.md`](../tiers.md#coleta-e-inventário) (pergunta 1094).
 - **Sozinho, só na área:** com a chave `Unload` ligada e o inventário cheio, o Cubit numa área vai ao baú marcado, descarrega tudo menos os slots exclusivos e volta para a área. O Cubit que segue não descarrega sozinho (pergunta 1087).
 - **Pelo botão:** o botão `Descarregar` do Tablet manda o Cubit escolhido descarregar já, mesmo sem o inventário cheio, e voltar ao que fazia, mesmo com a chave desligada (perguntas 1089 e 1093).
@@ -96,6 +96,8 @@ Entra no item 12 da Fase 4.1 (issue #170, perguntas 971 a 984).
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-14 15:23 | Deixa Shift + clique desmarcar de qualquer lugar (pergunta 1099). |
+| Marcelo Fabiano | 2026-11-14 14:40 | Faz o clique num baú marcado descarregar ali (pergunta 1098). |
 | Marcelo Fabiano | 2026-11-14 13:55 | Define a descarga em baú marcado (perguntas 1086 a 1095). |
 | Marcelo Fabiano | 2026-11-13 16:40 | Troca o controle remoto pelo Tablet. |
 | Marcelo Fabiano | 2026-11-13 13:45 | Detalha as tochas automáticas e a fileira dos slots exclusivos. |

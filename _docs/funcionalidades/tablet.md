@@ -38,10 +38,10 @@ O Tablet funciona por apps, um ativo por vez, e o clique direito faz o que o app
 | Alvo | Marca o mob na mira, a até 32 blocos, como alvo do modo Focus do Cubit escolhido | Com o Cubit escolhido carregado e no modo Focus | 3 |
 | Dock | Num Dock do player, faz dele o Dock preferido do Cubit escolhido. No Dock que já é o preferido, tira a preferência | Sempre | 3 |
 | Área | Num Cubit seu, escolhe o Cubit. Depois, em dois blocos, marca os cantos da área, e o Cubit vai para ela ([`modo-area.md`](modo-area.md#marcar-a-área)) | Sempre | Item 13 |
-| Descarga | Num bloco com inventário, marca ou desmarca um baú de descarga do Cubit escolhido ([`inventario.md`](inventario.md#descarregar-em-baú)) | Sempre | Item 14 |
+| Descarga | Num bloco com inventário, marca um baú de descarga do Cubit escolhido. Num baú já marcado, manda o Cubit descarregar ali. Shift + clique desmarca o baú clicado, ou, em outro lugar, o último marcado (perguntas 1098 e 1099) ([`inventario.md`](inventario.md#descarregar-em-baú)) | Sempre | Item 14 |
 | Marcar | Marca os blocos do trabalho do card | Na Fase 5 | Depois |
 
-- **Trocar de app:** com o Tablet na mão, Shift + roda do mouse troca o app. No macOS, o Shift faz a roda de um mouse rolar para o lado, e essa rolagem também troca o app, como a hotbar do jogo faz. O app atual aparece na barra de ação, como `Cubit Tablet · Alvo`, em negrito e com a cor do app: Open em azul, Alvo em verde, Dock em vermelho e Área em roxo. O nome do item fica só `Cubit Tablet`, e uma faixa fina com a cor do app fica na parte de baixo do ícone, na hotbar e nos inventários, como a barra de durabilidade (perguntas 1082 a 1084). Só entram na troca os apps que fazem sentido para o Cubit escolhido. O app ativo fica no item, no componente `cubit:tablet_app` (perguntas 1006 e 1026).
+- **Trocar de app:** com o Tablet na mão, Shift + roda do mouse troca o app. No macOS, o Shift faz a roda de um mouse rolar para o lado, e essa rolagem também troca o app, como a hotbar do jogo faz. O app atual aparece na barra de ação, como `Cubit Tablet · Alvo`, em negrito e com a cor do app: Open em azul, Alvo em verde, Dock em vermelho, Área em roxo e Descarga em laranja (pergunta 1096). O nome do item fica só `Cubit Tablet`, e uma faixa fina com a cor do app fica na parte de baixo do ícone, na hotbar e nos inventários, como a barra de durabilidade (perguntas 1082 a 1084). Só entram na troca os apps que fazem sentido para o Cubit escolhido. O app ativo fica no item, no componente `cubit:tablet_app` (perguntas 1006 e 1026).
 - **Prioridade do Tablet:** no app Open, clicar num bloco ou numa entidade com ação própria, como um baú, uma porta, um aldeão ou um Dock, abre a tela de seleção e não aciona o bloco nem a entidade (pergunta 1007).
 - **App inválido:** se o app ativo deixa de fazer sentido, como o Alvo com o Cubit escolhido fora do Focus, o próximo clique faz o que o Open faz, o item volta a Open e a barra de ação avisa (pergunta 1044).
 - **Alvo:** o mob na mira, a até `tablet_target_reach_blocks` blocos, 32 por padrão, a distância em que o Focus esquece o alvo. Valem as regras do Focus: só mob hostil ou neutro. Sem o Cubit escolhido carregado e no Focus, a barra de ação diz o motivo. Sem mob na mira, a barra de ação avisa, e nada abre. No mob que já é o alvo, nada muda (perguntas 1043 e 1047).
@@ -116,7 +116,7 @@ Fica fixo em todas as abas. `Voltar` fica no canto superior esquerdo, e os botõ
 | Filtros | Funil | Só o filtro de coleta, com o botão da lista e a grade de slots fantasma da aba Behavior, e o inventário e a hotbar do player embaixo (perguntas 1022 e 1037) |
 | Inventário | Baú | O inventário do Cubit, só para consulta |
 
-- **Aba Recursos:** um painel próprio, com as oito chaves numa lista só, que usam os mesmos controles do servidor da tela do Cubit (pergunta 1037). Uma linha bloqueada pelo tier fica apagada, com a chave desativada e o tier que libera, como `Unlocks at Advanced`. Entram os recursos que já existem:
+- **Aba Recursos:** um painel próprio, com as chaves numa lista só, cada uma com a descrição na linha, entre o nome e a chave, e a largura da janela, também no Ultimate (pergunta 1103), que usam os mesmos controles do servidor da tela do Cubit (pergunta 1037). Uma linha bloqueada pelo tier fica apagada, com a chave desativada e o tier que libera, como `Unlocks at Advanced`. Entram os recursos que já existem:
 
 | Recurso | Libera |
 |---|---|
@@ -132,7 +132,7 @@ Fica fixo em todas as abas. `Voltar` fica no canto superior esquerdo, e os botõ
 | Descarga | Base |
 
   Com um Cubit numa área, a aba também mostra a área, com os cantos e o tamanho (item 13). O retorno automático entra com o item 15, antes do modo área (pergunta 1069), e a descarga em baú e o local de morte, com os itens 14 e 16 da Fase 4.2.
-- **Aba Inventário:** mostra o inventário do Cubit com todas as linhas do tier e rolagem nos tiers altos, mas não permite tirar, pôr nem mover itens. A dica de cada item funciona.
+- **Aba Inventário:** o slot de energia é o primeiro da fileira dos slots exclusivos, antes das tochas, e o slot vazio diz `Redstone` na dica (pergunta 1104). Mostra o inventário inteiro do Cubit, em 3 fileiras com as colunas do tier, como a tela do Cubit, mas não permite tirar, pôr nem mover itens. No Ultimate, a janela do Tablet alarga para caber as 18 colunas (pergunta 1101). A dica de cada item funciona.
 - **Inventário do player:** aparece só na aba Filtros.
 
 ## Distância
@@ -178,6 +178,12 @@ Os textos em inglês e português, como `Cubit Tablet` / `Tablet do Cubit`, `Tab
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-14 16:18 | Põe o slot de energia na fileira dos slots exclusivos (pergunta 1104). |
+| Marcelo Fabiano | 2026-11-14 16:00 | Mostra a descrição das chaves na aba Recursos (pergunta 1103). |
+| Marcelo Fabiano | 2026-11-14 15:36 | Mostra o inventário inteiro na aba Inventário (pergunta 1101). |
+| Marcelo Fabiano | 2026-11-14 15:23 | Deixa Shift + clique desmarcar de qualquer lugar (pergunta 1099). |
+| Marcelo Fabiano | 2026-11-14 14:40 | Faz o clique num baú marcado descarregar ali (pergunta 1098). |
+| Marcelo Fabiano | 2026-11-14 14:00 | Dá a cor laranja ao app Descarga (pergunta 1096). |
 | Marcelo Fabiano | 2026-11-14 13:55 | Adiciona o app Descarga, o botão `Descarregar` e a chave (perguntas 1086 a 1095). |
 | Marcelo Fabiano | 2026-11-14 13:20 | Dá a cada app uma cor e a faixa no ícone (perguntas 1082 a 1084). |
 | Marcelo Fabiano | 2026-11-14 12:40 | Adiciona o estado na área e o pacote da caixa do app Área. |
