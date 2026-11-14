@@ -53,6 +53,8 @@ final class ScreenTexts {
   private static final String EXCLUSIVE_SLOTS = "Exclusive slots";
   private static final String TORCHES = "Torches";
   private static final String TORCH_DETAIL = "Lights spots where mobs can spawn · %s FE per torch";
+  private static final String AUTO_RETURN = "Auto return";
+  private static final String AUTO_RETURN_DETAIL = "Goes to a Dock at %s%% battery";
   private static final String TAB_SETTINGS = "Settings";
   private static final String SETTINGS_BATTERY = "Battery %s%%";
   private static final String FUNCTIONS = "Functions";
@@ -160,6 +162,8 @@ final class ScreenTexts {
     addRobot(add);
     addSettings(add);
     addStates(add);
+    add.accept(ScreenKeys.AUTO_RETURN, AUTO_RETURN);
+    add.accept(ScreenKeys.AUTO_RETURN_DETAIL, AUTO_RETURN_DETAIL);
   }
 
   private static void addRobot(BiConsumer<String, String> add) {

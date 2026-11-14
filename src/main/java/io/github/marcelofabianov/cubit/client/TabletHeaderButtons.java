@@ -1,6 +1,7 @@
 package io.github.marcelofabianov.cubit.client;
 
 import io.github.marcelofabianov.cubit.domain.dock.DockGoal;
+import io.github.marcelofabianov.cubit.domain.robot.FollowCall;
 import io.github.marcelofabianov.cubit.menu.ScreenKeys;
 import io.github.marcelofabianov.cubit.menu.TabletKeys;
 import io.github.marcelofabianov.cubit.menu.TabletRobotMenu;
@@ -12,23 +13,25 @@ import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.network.chat.Component;
 
 /**
- * The buttons of the header of the Tablet: Back in the corner, and Power, Rename and Go to Dock in
- * a row under the bars (answers 1020, 1033 and 1035). A button that cannot act now is disabled,
- * with the reason in its tooltip.
+ * The buttons of the header of the Tablet: Back in the corner, and Power, Rename, Go to Dock and
+ * Follow in a row under the portrait and the bars, from the margin (answers 1020, 1033, 1035 and
+ * 1073). A button that cannot act now is disabled, with the reason in its tooltip.
  */
 final class TabletHeaderButtons {
-  static final int BUTTON_WIDTH = 64;
+  static final int BUTTON_WIDTH = 68;
   static final int BUTTON_GAP = 4;
   private static final int MARGIN = TabletRobotHeader.MARGIN;
   private static final int BACK_Y = 5;
   private static final int BACK_WIDTH = 36;
   private static final int BACK_HEIGHT = 12;
+  private static final int FOLLOW_PLACE = 3;
 
   private final TabletRobotMenu menu;
   private FlatButton back;
   private FlatButton power;
   private FlatButton rename;
   private FlatButton dock;
+  private FlatButton follow;
 
   TabletHeaderButtons(TabletRobotMenu menu) {
     this.menu = menu;
@@ -57,13 +60,24 @@ final class TabletHeaderButtons {
                 2,
                 bold(TabletKeys.GO_TO_DOCK),
                 () -> actions.press().accept(TabletRobotMenu.GO_TO_DOCK_BUTTON)));
+    follow =
+        add.apply(
+            followButton(
+                windowLeft,
+                windowTop,
+                () -> actions.press().accept(TabletRobotMenu.FOLLOW_BUTTON)));
+  }
+
+  /** Follow, the last of the row, as the offline screen also has it. */
+  static FlatButton followButton(int windowLeft, int windowTop, Runnable action) {
+    return rowButton(windowLeft, windowTop, FOLLOW_PLACE, bold(TabletKeys.FOLLOW), action);
   }
 
   /** A button of the row under the bars, by its place in the row. */
   static FlatButton rowButton(
       int windowLeft, int windowTop, int place, Component message, Runnable action) {
     return new FlatButton(
-        windowLeft + TabletRobotHeader.TEXT_X + place * (BUTTON_WIDTH + BUTTON_GAP),
+        windowLeft + MARGIN + place * (BUTTON_WIDTH + BUTTON_GAP),
         windowTop + TabletRobotHeader.BUTTON_Y,
         BUTTON_WIDTH,
         TabletRobotHeader.BUTTON_HEIGHT,
@@ -93,7 +107,8 @@ final class TabletHeaderButtons {
   void update(boolean visible) {
     updatePower();
     updateDock();
-    for (FlatButton button : List.of(back, power, rename, dock)) {
+    updateFollow();
+    for (FlatButton button : List.of(back, power, rename, dock, follow)) {
       button.visible = visible;
     }
   }
@@ -120,6 +135,18 @@ final class TabletHeaderButtons {
           case NO_DOCK -> TabletKeys.DOCK_OUT_OF_REACH;
         };
     enable(dock, goal.ready(), detail);
+  }
+
+  private void updateFollow() {
+    FollowCall call = menu.followCall();
+    String detail =
+        switch (call) {
+          case READY -> TabletKeys.FOLLOW_DETAIL;
+          case FOLLOWING -> TabletKeys.FOLLOW_ALREADY;
+          case NO_CHARGE -> TabletKeys.FOLLOW_NO_CHARGE;
+          case OTHER_DIMENSION -> TabletKeys.FOLLOW_OTHER_DIMENSION;
+        };
+    enable(follow, call.ready(), detail);
   }
 
   private static void enable(FlatButton button, boolean active, String detail) {

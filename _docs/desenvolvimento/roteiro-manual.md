@@ -726,6 +726,37 @@ As regras estão em [`energia.md`](../funcionalidades/energia.md#inventário-do-
 | 15 | Ponha no Dock um Cubit ferido e de bateria quase cheia | A bateria enche primeiro, a tela fica em `Complete` com o tempo que falta para a vida, e ele só sai cerca de 3 s depois de a vida encher |
 | 16 | Repita o passo 15 e clique no Dock antes de a vida encher | O Cubit sai na hora |
 
+## Retorno automático
+
+As regras estão em [`energia.md`](../funcionalidades/energia.md#retorno-automático). Use um Cubit Base com cerca de 8% de bateria, entre o crítico de 5% e o retorno de 10%, e `/give` para os Docks e o Tablet.
+
+| # | Faça | Espere |
+|---|---|---|
+| 1 | Abra a aba Settings de um Cubit | A chave `Auto return`, ligada, com `Goes to a Dock at 10% battery` na dica |
+| 2 | Coloque um Dock com energia e, a até 15 blocos dele, um Cubit com 8% que siga você | Ele mostra `Cubit: I need to recharge` uma vez, vai andando até o Dock e hiberna |
+| 3 | Espere a bateria e a vida encherem | Ele sai do Dock e volta a seguir você |
+| 4 | Desligue `Auto return` e repita o passo 2 | Ele continua seguindo, sem ir ao Dock |
+| 5 | Ligue de novo e repita o passo 2 sem nenhum Dock por perto, e então coloque um Dock a até 15 blocos | Ele segue você até o Dock aparecer e então vai até ele, em poucos segundos |
+| 6 | Com dois Docks no raio, marque o mais longe com o app Dock do Tablet e repita o passo 2 | Ele vai ao Dock marcado |
+| 7 | Desligue `Auto return`, recolha e coloque o Cubit, e saia e entre no mundo | A chave continua desligada |
+| 8 | Abra a aba Recursos do Tablet | A linha `Auto return`, com a mesma chave e a mesma dica |
+| 9 | Com o jogo em português | `Retorno automático`, `Vai a um Dock com 10% de bateria` e `Cubit: Preciso recarregar` |
+
+## Follow do Tablet
+
+As regras estão em [`tablet.md`](../funcionalidades/tablet.md#cabeçalho). Use dois Cubits com carga, um Dock e o Tablet.
+
+| # | Faça | Espere |
+|---|---|---|
+| 1 | Coloque dois Cubits. Abra o Tablet, escolha o que ficou desligado e veja o cabeçalho | Os quatro botões na mesma fileira, alinhados, com `Follow` por último, habilitado, com `Follows you · the one following now switches off` na dica |
+| 2 | Clique em `Follow` | Ele liga e passa a seguir você, e o que seguia desliga onde está |
+| 3 | Abra a tela do Cubit que segue agora | `Follow` desabilitado, com `Already following you` |
+| 4 | Chame um dos Cubits para o Dock e, com ele hibernando, use `Follow` nele pelo Tablet | Ele sai do Dock na hora e segue você, e o outro desliga |
+| 5 | Afaste-se mais de 20 blocos de um Cubit desligado e use `Follow` nele | Ele liga e teleporta para perto de você, como hoje ao ficar para trás |
+| 6 | Escolha um Cubit sem carga | `Follow` desabilitado, com `Without charge to follow you` |
+| 7 | Escolha um Cubit de chunk descarregado | O botão aparece desabilitado na tela da foto |
+| 8 | Com o jogo em português | `Seguir`, `Segue você · o que seguia antes desliga` e `Já está seguindo você` |
+
 ## Tradução
 
 | # | Passo | Resultado esperado |
@@ -785,6 +816,8 @@ Na instância só com o mod, tire capturas com F2 do Cubit seguindo, da tela do 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-14 11:20 | Adiciona o `Follow` do Tablet. |
+| Marcelo Fabiano | 2026-11-14 10:30 | Adiciona o retorno automático. |
 | Marcelo Fabiano | 2026-11-13 15:10 | Mantém o olhar no alvo até ele ser eliminado. |
 | Marcelo Fabiano | 2026-11-13 14:50 | Adiciona o olhar para o alvo do choque. |
 | Marcelo Fabiano | 2026-11-13 13:45 | Adiciona as tochas e as dicas das chaves da aba Settings. |

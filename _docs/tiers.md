@@ -32,7 +32,7 @@ Os tiers são Base, Avançado, Elite e Ultimate (no jogo: Base, Advanced, Elite 
 | Painel solar (de dia) | 5 FE/t | 10 FE/t | 12 FE/t | 16 FE/t |
 | Painel solar (à noite) | — | — | 3 FE/t | 4 FE/t |
 | Recarga na base e pelo slot de energia | 500 FE/t | 1.000 FE/t | 2.500 FE/t | 5.000 FE/t |
-| Raio do retorno automático e da chamada pelo Dock, e bateria do retorno (o retorno é planejado para a Fase 4; a chamada já existe) | 15 blocos, 10% | 24 blocos, 10% | 32 blocos, 10% | 48 blocos, 10% |
+| Raio do retorno automático e da chamada pelo Dock, e bateria do retorno (o retorno entra com o item 15 da Fase 4.2, pergunta 1066) | 15 blocos, 10% | 24 blocos, 10% | 32 blocos, 10% | 48 blocos, 10% |
 
 ## Consumo por atividade
 
@@ -159,7 +159,7 @@ O raio dos dois scanners é o de uma esfera em volta do Cubit: só conta o que e
 |---|---|---|---|---|
 | Seguir o player | ✔ | ✔ | ✔ | ✔ |
 | Modo área (app Área do Tablet), na base | Bloqueado | Até 16×16 | Até 32×32 | Até 64×64 |
-| Altura máxima da área | — | A definir | A definir | A definir |
+| Altura máxima da área (pergunta 1050) | — | 8 blocos | 16 blocos | 32 blocos |
 | Local de morte | Bloqueado | Marca a coordenada | Marca e guia até lá | Marca e guia até lá |
 
 ## Slots exclusivos
@@ -205,6 +205,8 @@ Planejado para a Fase 5. O tier Base não aceita cards.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-14 10:00 | Liga a bateria do retorno ao item 15 (pergunta 1066). |
+| Marcelo Fabiano | 2026-11-14 09:00 | Define a altura máxima da área (pergunta 1050). |
 | Marcelo Fabiano | 2026-11-13 17:15 | Adiciona o alcance da mira do app Alvo. |
 | Marcelo Fabiano | 2026-11-13 16:40 | Troca o alcance do controle remoto pelo do Tablet. |
 | Marcelo Fabiano | 2026-11-13 13:45 | Define o custo, o slot e a luz das tochas. |

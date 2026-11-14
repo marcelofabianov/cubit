@@ -20,12 +20,14 @@ import net.minecraft.world.inventory.MenuType;
  */
 public abstract class RobotMenuReading extends AbstractContainerMenu {
   private static final int TORCH_SWITCH = 4;
+  private static final int AUTO_RETURN_SWITCH = 5;
   private static final int[] SWITCH_INDEXES = {
     RobotScreenValues.LAMP,
     RobotScreenValues.SCANNERS,
     RobotScreenValues.CHATTER,
     RobotScreenValues.SOLAR_SWITCH,
-    RobotScreenValues.TORCHES
+    RobotScreenValues.TORCHES,
+    RobotScreenValues.AUTO_RETURN
   };
 
   protected final ContainerData values;
@@ -130,8 +132,12 @@ public abstract class RobotMenuReading extends AbstractContainerMenu {
     return RobotScreenValues.isAvailable(values, SWITCH_INDEXES[switchIndex(button)]);
   }
 
-  /** The first four switches go by their button, and the torches come after them. */
+  /** The first four switches go by their button, and the torches and the return come after. */
   static int switchIndex(int button) {
-    return button == RobotMenu.TORCHES_BUTTON ? TORCH_SWITCH : button;
+    return switch (button) {
+      case RobotMenu.TORCHES_BUTTON -> TORCH_SWITCH;
+      case RobotMenu.AUTO_RETURN_BUTTON -> AUTO_RETURN_SWITCH;
+      default -> button;
+    };
   }
 }

@@ -1,6 +1,7 @@
 package io.github.marcelofabianov.cubit.menu;
 
 import io.github.marcelofabianov.cubit.domain.dock.DockGoal;
+import io.github.marcelofabianov.cubit.domain.robot.FollowCall;
 import io.github.marcelofabianov.cubit.registry.CubitMenus;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.world.SimpleContainer;
@@ -22,10 +23,17 @@ public final class TabletRobotMenu extends RobotMenu {
   /** Sends the Cubit to its Dock, before the rows to scroll (answers 1020 and 1041). */
   public static final int GO_TO_DOCK_BUTTON = 15;
 
+  /** Makes the chosen Cubit follow its owner, before the rows to scroll (answers 1073 to 1075). */
+  public static final int FOLLOW_BUTTON = 17;
+
   private static final int ONE_SLOT = 1;
+  private static final int DOCK_VALUE = 0;
+  private static final int FOLLOW_VALUE = 1;
+  private static final int VALUES = 2;
 
   private final TabletOpening tablet;
   private final DockGoalControl dock;
+  private final FollowControl follow;
   private final ContainerData dockValues;
 
   private TabletRobotMenu(
@@ -34,11 +42,12 @@ public final class TabletRobotMenu extends RobotMenu {
       RobotMenuContents contents,
       RobotMenuServer server,
       TabletOpening tablet,
-      DockGoalControl dock) {
+      Controls controls) {
     super(CubitMenus.TABLET_ROBOT.get(), containerId, playerInventory, contents, server, true);
     this.tablet = tablet;
-    this.dock = dock;
-    this.dockValues = new SimpleContainerData(1);
+    this.dock = controls.dock();
+    this.follow = controls.follow();
+    this.dockValues = new SimpleContainerData(VALUES);
     addDataSlots(dockValues);
   }
 
@@ -59,8 +68,11 @@ public final class TabletRobotMenu extends RobotMenu {
         contents,
         RobotMenuServer.onClient(),
         tablet,
-        DockGoalControl.NONE);
+        new Controls(DockGoalControl.NONE, FollowControl.NONE));
   }
+
+  /** The buttons of the header that act on the Cubit itself, read on the server. */
+  public record Controls(DockGoalControl dock, FollowControl follow) {}
 
   /** On the server, where the values come from the Cubit itself. */
   public static TabletRobotMenu onServer(
@@ -69,20 +81,25 @@ public final class TabletRobotMenu extends RobotMenu {
       RobotMenuContents contents,
       RobotMenuSource source,
       TabletOpening tablet,
-      DockGoalControl dock) {
+      Controls controls) {
     return new TabletRobotMenu(
-        containerId, playerInventory, contents, serverOf(source), tablet, dock);
+        containerId, playerInventory, contents, serverOf(source), tablet, controls);
   }
 
   /** The server reads the goal at the interval of the dock search, not on every tick. */
   @Override
   public void broadcastChanges() {
-    dockValues.set(0, dock.goal().ordinal());
+    dockValues.set(DOCK_VALUE, dock.goal().ordinal());
+    dockValues.set(FOLLOW_VALUE, follow.goal().ordinal());
     super.broadcastChanges();
   }
 
   public DockGoal dockGoal() {
-    return ScreenEnums.of(DockGoal.values(), dockValues.get(0));
+    return ScreenEnums.of(DockGoal.values(), dockValues.get(DOCK_VALUE));
+  }
+
+  public FollowCall followCall() {
+    return ScreenEnums.of(FollowCall.values(), dockValues.get(FOLLOW_VALUE));
   }
 
   /** Only the client hides the slots: the inventory of the Cubit, or the player and the filter. */
@@ -99,6 +116,9 @@ public final class TabletRobotMenu extends RobotMenu {
   public boolean clickMenuButton(Player player, int button) {
     if (button == GO_TO_DOCK_BUTTON) {
       return stillValid(player) && dock.go(player);
+    }
+    if (button == FOLLOW_BUTTON) {
+      return stillValid(player) && follow.call(player);
     }
     if (button != POWER_TOGGLE_BUTTON) {
       return super.clickMenuButton(player, button);

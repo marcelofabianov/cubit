@@ -11,6 +11,7 @@ import io.github.marcelofabianov.cubit.menu.RobotScreenOpening;
 import io.github.marcelofabianov.cubit.player.FollowingRobotLink;
 import io.github.marcelofabianov.cubit.registry.CubitAttachments;
 import io.github.marcelofabianov.cubit.registry.CubitDataComponents;
+import java.util.Optional;
 import java.util.UUID;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.server.MinecraftServer;
@@ -139,6 +140,15 @@ final class RobotInteractions {
     player.setData(CubitAttachments.FOLLOWING_ROBOT, new FollowingRobotLink(outcome.follower()));
     outcome.robotToSwitchOff().ifPresent(other -> switchOff(robot, other));
     return InteractionResult.CONSUME;
+  }
+
+  /** The robot follows its owner now, and the one that followed switches off where it is. */
+  static void takeThePlace(RobotEntity robot, Player player) {
+    Optional<UUID> previous =
+        RobotFollowing.policy().release(robot.getUUID(), RobotFollowing.follower(player));
+    player.setData(
+        CubitAttachments.FOLLOWING_ROBOT, new FollowingRobotLink(Optional.of(robot.getUUID())));
+    previous.ifPresent(other -> switchOff(robot, other));
   }
 
   private static void switchOff(RobotEntity robot, UUID other) {

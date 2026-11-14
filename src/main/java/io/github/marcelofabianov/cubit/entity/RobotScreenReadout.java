@@ -55,7 +55,7 @@ public final class RobotScreenReadout {
         contents(robot),
         source(robot, player -> RobotTablet.canUse(robot, player)),
         RobotTablet.opening(robot),
-        robot.docking().preferred());
+        new TabletRobotMenu.Controls(robot.docking().preferred(), new RobotFollowCall(robot)));
   }
 
   private static RobotMenuContents contents(RobotEntity robot) {
@@ -65,7 +65,12 @@ public final class RobotScreenReadout {
 
   private static RobotMenuSource source(RobotEntity robot, Predicate<Player> stillValid) {
     RobotSwitch[] switches = {
-      robot.lampSwitch(), robot.scanners(), robot.chatter(), robot.solar(), robot.torches()
+      robot.lampSwitch(),
+      robot.scanners(),
+      robot.chatter(),
+      robot.solar(),
+      robot.torches(),
+      robot.docking().autoReturn()
     };
     return new RobotMenuSource(
         () -> read(robot),
@@ -134,6 +139,7 @@ public final class RobotScreenReadout {
         scanners.mobRadiusBlocks(),
         scanners.oreCost().amount(),
         spec.solar().dayPerTick().amount(),
+        spec.returnCharge().value(),
         filter.kinds().stream().map(OreKind::tag).toList(),
         filter.kinds().stream().findFirst().map(OreKind::tag).orElse(NO_ICON),
         defense(robot));

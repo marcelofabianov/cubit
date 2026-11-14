@@ -17,6 +17,7 @@ public record RobotScreenOpening(
     int mobRadius,
     long scanCost,
     long solarDay,
+    int returnCharge,
     List<String> filterTags,
     String filterIconTag,
     DefenseOpening defense) {
@@ -34,6 +35,7 @@ public record RobotScreenOpening(
     data.writeVarInt(mobRadius);
     data.writeVarLong(scanCost);
     data.writeVarLong(solarDay);
+    data.writeVarInt(returnCharge);
     data.writeCollection(filterTags, FriendlyByteBuf::writeUtf);
     data.writeUtf(filterIconTag);
     defense.write(data);
@@ -48,6 +50,7 @@ public record RobotScreenOpening(
     int mobRadius = data.readVarInt();
     long scanCost = data.readVarLong();
     long solarDay = data.readVarLong();
+    int returnCharge = data.readVarInt();
     List<String> names = data.readList(FriendlyByteBuf::readUtf);
     List<String> kept = names.subList(0, Math.min(names.size(), MAX_FILTER));
     String iconTag = data.readUtf();
@@ -59,6 +62,7 @@ public record RobotScreenOpening(
         mobRadius,
         scanCost,
         solarDay,
+        returnCharge,
         kept,
         iconTag,
         DefenseOpening.read(data));

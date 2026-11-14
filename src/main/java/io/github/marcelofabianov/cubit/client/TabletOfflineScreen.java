@@ -54,13 +54,17 @@ final class TabletOfflineScreen extends Screen {
     disabled(0, TabletKeys.TURN_ON);
     disabled(1, TabletKeys.RENAME);
     disabled(2, TabletKeys.GO_TO_DOCK);
+    mute(addRenderableWidget(TabletHeaderButtons.followButton(left, top, () -> {})));
   }
 
   private void disabled(int place, String key) {
-    FlatButton button =
+    mute(
         addRenderableWidget(
             TabletHeaderButtons.rowButton(
-                left, top, place, TabletHeaderButtons.bold(key), () -> {}));
+                left, top, place, TabletHeaderButtons.bold(key), () -> {})));
+  }
+
+  private static void mute(FlatButton button) {
     button.active = false;
     button.setMuted(true);
     button.setTooltip(Tooltip.create(Component.translatable(TabletKeys.OUT_OF_REACH_DETAIL)));

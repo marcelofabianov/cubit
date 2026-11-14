@@ -4,5 +4,6 @@ package io.github.marcelofabianov.cubit.domain.behavior;
 public enum RobotNotice {
   CRITICAL_BATTERY,
   HURT,
-  OWNER_HURT
+  OWNER_HURT,
+  NEED_RECHARGE
 }

@@ -35,6 +35,7 @@ final class EnglishGameTexts {
   private static final String LOOKING_NOTICE = "Looking for %s";
   private static final String FILTER_CLEARED_NOTICE = "Filter cleared";
   private static final String CRITICAL_BATTERY_NOTICE = "Critical battery";
+  private static final String NEED_RECHARGE_NOTICE = "I need to recharge";
   private static final String HURT_NOTICE = "That hurts!";
   private static final String OWNER_HURT_NOTICE = "Careful!";
 
@@ -66,10 +67,15 @@ final class EnglishGameTexts {
     add.accept(RobotScanners.ORE_FOUND_KEY, ORE_FOUND_NOTICE);
     add.accept(RobotScanners.LOOKING_KEY, LOOKING_NOTICE);
     add.accept(RobotScanners.CLEARED_KEY, FILTER_CLEARED_NOTICE);
+    addNotices(add);
+    addSubtitles(add);
+  }
+
+  private static void addNotices(BiConsumer<String, String> add) {
     add.accept(RobotNotices.keyOf(RobotNotice.CRITICAL_BATTERY), CRITICAL_BATTERY_NOTICE);
     add.accept(RobotNotices.keyOf(RobotNotice.HURT), HURT_NOTICE);
     add.accept(RobotNotices.keyOf(RobotNotice.OWNER_HURT), OWNER_HURT_NOTICE);
-    addSubtitles(add);
+    add.accept(RobotNotices.keyOf(RobotNotice.NEED_RECHARGE), NEED_RECHARGE_NOTICE);
   }
 
   private static void addSubtitles(BiConsumer<String, String> add) {

@@ -41,16 +41,20 @@ final class RobotScreenValues implements ContainerData {
   static final int POS_Y = 37;
   static final int POS_Z = 39;
   static final int TURN_ON = 41;
-  static final int COUNT = 42;
+  static final int AUTO_RETURN = 42;
+  static final int COUNT = 44;
   private static final int HALF_BITS = 16;
   private static final int HALF_MASK = 0xFFFF;
   static final int TRUE_VALUE = 1;
   private static final int AVAILABLE = 1;
 
   /**
-   * Where each switch goes, in the order of the switches: lamp, scanners, chatter, solar, torches.
+   * Where each switch goes, in the order of the switches: lamp, scanners, chatter, solar, torches
+   * and the auto return.
    */
-  private static final int[] SWITCH_VALUES = {LAMP, SCANNERS, CHATTER, SOLAR_SWITCH, TORCHES};
+  private static final int[] SWITCH_VALUES = {
+    LAMP, SCANNERS, CHATTER, SOLAR_SWITCH, TORCHES, AUTO_RETURN
+  };
 
   private final Supplier<RobotScreenReading> source;
   private final RobotSwitch[] switches;

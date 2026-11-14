@@ -13,8 +13,9 @@ import net.minecraft.world.item.ItemStack;
 
 /**
  * The settings tab of the robot screen, as in the concept image: the switches that exist, the
- * scanner filter and the status. The five switches take rows of 12 px, with the detail in their
- * tooltip, so the torches fit (answer 974). Every number comes from the server.
+ * scanner filter and the status. The six switches take rows of 12 px, with the detail in their
+ * tooltip, so the torches and the auto return fit (answers 974 and 1066). Every number comes from
+ * the server.
  */
 final class RobotSettingsPanel {
   private static final int LEFT = 7;
@@ -50,7 +51,8 @@ final class RobotSettingsPanel {
     RobotMenu.SCANNERS_BUTTON,
     RobotMenu.CHATTER_BUTTON,
     RobotMenu.SOLAR_BUTTON,
-    RobotMenu.TORCHES_BUTTON
+    RobotMenu.TORCHES_BUTTON,
+    RobotMenu.AUTO_RETURN_BUTTON
   };
   private static final int FOLLOWING_ROW = 3;
   private static final int POWER_X = 154;
@@ -62,7 +64,8 @@ final class RobotSettingsPanel {
     ScreenKeys.SCANNERS,
     ScreenKeys.CHATTER,
     ScreenKeys.SOLAR_PANEL,
-    ScreenKeys.TORCHES
+    ScreenKeys.TORCHES,
+    ScreenKeys.AUTO_RETURN
   };
 
   private final ScreenPainter painter;

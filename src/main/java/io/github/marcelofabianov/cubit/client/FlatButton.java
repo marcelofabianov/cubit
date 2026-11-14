@@ -8,6 +8,9 @@ import net.minecraft.network.chat.Component;
 
 /** The flat blue button of the concept images. A muted button is grey, but still works. */
 final class FlatButton extends AbstractButton {
+  /** Room left on each side of the text, which shrinks when it would not fit. */
+  private static final int TEXT_PADDING = 6;
+
   private static final int BLUE = 0xFF5B8DEF;
   private static final int BLUE_LOWER = 0xFF4B74C4;
   private static final int GREY = 0xFF9C9C9C;
@@ -63,7 +66,8 @@ final class FlatButton extends AbstractButton {
       graphics.fill(left + 1, top + 1, left + width - 1, top + height - 1, HOVER);
     }
     var font = Minecraft.getInstance().font;
-    float scale = ScreenPainter.FULL_SCALE;
+    float scale =
+        Math.min(ScreenPainter.FULL_SCALE, (float) (width - TEXT_PADDING) / font.width(message));
     float textX = left + (width - font.width(message) * scale) / 2;
     float textY = top + (height - TEXT_HEIGHT * scale) / 2;
     graphics.pose().pushPose();

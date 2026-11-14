@@ -143,12 +143,20 @@ O item com a bateria abaixo da carga de religar, como zerada, e com vida pode se
 
 ## Retorno automático
 
-Se o robô estiver dentro do raio da base e com a bateria baixa, volta sozinho para ela e entra em hibernação. O Cubit que segue também mostra o texto `I need to recharge`.
+Entra com o item 15 da Fase 4.2, antes do modo área (perguntas 1065 a 1069).
+
+- **Quando:** com a chave ligada, o Cubit ativo que segue o player, ou que está numa área, chega à bateria do retorno, `return_charge_percent`, 10% em todos os tiers ([`tiers.md`](../tiers.md#energia)).
+- **Para onde:** como o `Ir para o Dock`: o Dock preferido, se estiver na mesma dimensão, carregado e no raio de chamada do tier, senão o Dock livre mais próximo nesse raio, com a fila de hoje (perguntas 1041, 1042 e 1067).
+- **Sem Dock ao alcance:** o Cubit continua o que fazia e tenta de novo a cada intervalo da busca, até o crítico desligá-lo, como hoje (pergunta 1067).
+- **Texto:** `I need to recharge` sai uma vez, quando o retorno começa, e só do Cubit que segue (perguntas 457 e 1068).
+- **Ao sair do Dock:** com a carga cheia, o que seguia volta a seguir, pela regra de hoje, e o que estava numa área volta para ela (pergunta 1068).
+- **Chave:** `Auto return` / `Retorno automático`, desde o Base, ligada por padrão e guardada no item, na aba Settings da tela do Cubit e na aba Recursos do Tablet (pergunta 1066).
 
 ## Histórico de modificações
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-14 10:00 | Define o retorno automático (perguntas 1065 a 1069). |
 | Marcelo Fabiano | 2026-11-13 18:50 | Faz o desligado pelo Tablet voltar pelo clique, como o Power. |
 | Marcelo Fabiano | 2026-11-13 16:40 | Troca o controle remoto pelo Tablet. |
 | Marcelo Fabiano | 2026-11-13 13:00 | Faz o Cubit sair do Dock só com a bateria e a vida cheias. |

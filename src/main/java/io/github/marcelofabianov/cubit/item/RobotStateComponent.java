@@ -42,6 +42,8 @@ public final class RobotStateComponent {
   private static final String PICKUP_FILTER_FIELD = "pickup_filter";
   private static final String FETCH_FIELD = "fetch_enabled";
   private static final String TORCHES_FIELD = "torches_enabled";
+  private static final String AUTO_RETURN_FIELD = "auto_return_enabled";
+  private static final boolean AUTO_RETURN_DEFAULT = true;
   private static final String UNKNOWN_DEFENSE_MESSAGE = "Unknown defense mode {}. Using peaceful.";
   private static final String UNKNOWN_COLOR_MESSAGE = "Unknown robot color {}. Using white.";
   private static final String UNKNOWN_TIER_MESSAGE = "Unknown robot tier {}. Using the base tier.";
@@ -102,7 +104,10 @@ public final class RobotStateComponent {
                       .forGetter(state -> state.pickup().fetchOn()),
                   Codec.BOOL
                       .optionalFieldOf(TORCHES_FIELD, TORCHES_DEFAULT)
-                      .forGetter(RobotState::torchesOn))
+                      .forGetter(RobotState::torchesOn),
+                  Codec.BOOL
+                      .optionalFieldOf(AUTO_RETURN_FIELD, AUTO_RETURN_DEFAULT)
+                      .forGetter(RobotState::autoReturnOn))
               .apply(
                   instance,
                   (tier,
@@ -119,7 +124,8 @@ public final class RobotStateComponent {
                       magnet,
                       pickupFilter,
                       fetch,
-                      torches) ->
+                      torches,
+                      autoReturn) ->
                       new RobotState(
                           tier,
                           energy,
@@ -132,7 +138,8 @@ public final class RobotStateComponent {
                           defense,
                           solar,
                           new PickupSettings(pickup, magnet, fetch, pickupFilter),
-                          torches)));
+                          torches,
+                          autoReturn)));
 
   public static final StreamCodec<ByteBuf, RobotState> STREAM_CODEC =
       ByteBufCodecs.fromCodec(CODEC);

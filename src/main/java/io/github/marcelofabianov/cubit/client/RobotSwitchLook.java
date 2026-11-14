@@ -74,6 +74,8 @@ final class RobotSwitchLook {
       case RobotMenu.SOLAR_BUTTON -> RobotTexts.solarDetail(menu);
       case RobotMenu.TORCHES_BUTTON ->
           Component.translatable(ScreenKeys.TORCHES_DETAIL, menu.torchCost().amount());
+      case RobotMenu.AUTO_RETURN_BUTTON ->
+          Component.translatable(ScreenKeys.AUTO_RETURN_DETAIL, menu.opening().returnCharge());
       case RobotMenu.PICKUP_BUTTON -> Component.translatable(BehaviorKeys.PICKUP_DETAIL);
       case RobotMenu.MAGNET_BUTTON ->
           Component.translatable(

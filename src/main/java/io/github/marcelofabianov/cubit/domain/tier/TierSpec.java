@@ -25,11 +25,13 @@ public record TierSpec(
     ShockSpec shock,
     PickupSpec pickup,
     Energy powerBankCapacity,
-    TorchSpec torches) {
+    TorchSpec torches,
+    Percentage returnCharge) {
 
   /** The largest radius the config accepts, which also limits the search for a robot to call. */
   public static final int MAX_CALL_RADIUS_BLOCKS = 128;
 
+  private static final Percentage NO_RETURN_CHARGE = new Percentage(0);
   private static final String BATTERY_CAPACITY = "batteryCapacity";
   private static final String RECHARGE_PER_TICK = "rechargePerTick";
   private static final String INVENTORY_SLOTS = "inventorySlots";
@@ -47,6 +49,42 @@ public record TierSpec(
     if (!(speedMultiplier > 0)) {
       throw new IllegalArgumentException(SPEED_MULTIPLIER + NOT_POSITIVE_MESSAGE + speedMultiplier);
     }
+  }
+
+  /** A tier without a return charge only goes back to a Dock when empty, which only tests need. */
+  public TierSpec(
+      Energy batteryCapacity,
+      Energy movingConsumptionPerTick,
+      Energy rechargePerTick,
+      int inventorySlots,
+      int maxHealth,
+      int callRadiusBlocks,
+      double speedMultiplier,
+      ConsumptionExtras extras,
+      LightLevel lampLight,
+      SolarOutput solar,
+      ScannerSpec scanners,
+      ShockSpec shock,
+      PickupSpec pickup,
+      Energy powerBankCapacity,
+      TorchSpec torches) {
+    this(
+        batteryCapacity,
+        movingConsumptionPerTick,
+        rechargePerTick,
+        inventorySlots,
+        maxHealth,
+        callRadiusBlocks,
+        speedMultiplier,
+        extras,
+        lampLight,
+        solar,
+        scanners,
+        shock,
+        pickup,
+        powerBankCapacity,
+        torches,
+        NO_RETURN_CHARGE);
   }
 
   /** A tier without torch numbers has its torches locked, which only tests need. */

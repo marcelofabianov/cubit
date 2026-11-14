@@ -53,6 +53,8 @@ final class PortugueseScreenTexts {
   private static final String EXCLUSIVE_SLOTS = "Slots exclusivos";
   private static final String TORCHES = "Tochas";
   private static final String TORCH_DETAIL = "Ilumina onde mobs podem nascer · %s FE por tocha";
+  private static final String AUTO_RETURN = "Retorno automático";
+  private static final String AUTO_RETURN_DETAIL = "Vai a um Dock com %s%% de bateria";
   private static final String TAB_SETTINGS = "Configurações";
   private static final String SETTINGS_BATTERY = "Bateria %s%%";
   private static final String FUNCTIONS = "Funções";
@@ -160,6 +162,8 @@ final class PortugueseScreenTexts {
     addRobot(add);
     addSettings(add);
     addStates(add);
+    add.accept(ScreenKeys.AUTO_RETURN, AUTO_RETURN);
+    add.accept(ScreenKeys.AUTO_RETURN_DETAIL, AUTO_RETURN_DETAIL);
   }
 
   private static void addRobot(BiConsumer<String, String> add) {

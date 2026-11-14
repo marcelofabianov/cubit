@@ -31,6 +31,7 @@ public final class RobotDocking {
 
   private final RobotEntity robot;
   private final RobotPreferredDock preferred;
+  private final RobotAutoReturn autoReturn;
   private BlockPos docked;
   private BlockPos trip;
   private DockTrip progress = DockTrip.START;
@@ -41,11 +42,17 @@ public final class RobotDocking {
   RobotDocking(RobotEntity robot) {
     this.robot = robot;
     this.preferred = new RobotPreferredDock(robot);
+    this.autoReturn = new RobotAutoReturn(robot, preferred);
   }
 
   /** The Dock marked with the Tablet, where `Go to Dock` sends the robot (answer 1041). */
   public RobotPreferredDock preferred() {
     return preferred;
+  }
+
+  /** The switch of the auto return, which goes to the same Dock as `Go to Dock` (answer 1067). */
+  public RobotAutoReturn autoReturn() {
+    return autoReturn;
   }
 
   boolean hasTrip() {
@@ -159,6 +166,7 @@ public final class RobotDocking {
   /** Called on every tick of the robot, on the server. */
   void tick() {
     if (robot.powerState() == PowerState.ACTIVE) {
+      autoReturn.tick(hasTrip());
       return;
     }
     trip = null;
