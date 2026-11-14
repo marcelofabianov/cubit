@@ -179,7 +179,7 @@ Estes nomes não mudam sem migração (regra 18 do `AGENTS.md`).
 
 | Onde | Nome | Conteúdo |
 |---|---|---|
-| Componente do item | `cubit:robot_state` | `tier`, `energy`, `health`, `lamp_enabled`, opcional, com o padrão ligado, `color`, opcional, com o padrão `white`, `scanners_enabled` e `chatter_enabled`, opcionais, com o padrão ligado, `ore_filter`, opcional, com a lista de tags de minério, vazia por padrão (perguntas 560 e 582), `defense_mode`, opcional, com o padrão `peaceful` (pergunta 830), `solar_enabled`, opcional, com o padrão ligado (pergunta 859), e `pickup_enabled`, `magnet_enabled` e `pickup_filter`, opcionais, com o padrão ligado, ligado e a lista negra vazia, com `mode` e `entries` (pergunta 889), `fetch_enabled`, opcional, com o padrão ligado (pergunta 944), `torches_enabled`, opcional, com o padrão ligado (pergunta 981), e `auto_return_enabled` e `unload_enabled`, opcionais, com o padrão ligado (perguntas 1066, 1093 e 1128), também no item danificado |
+| Componente do item | `cubit:robot_state` | `tier`, `energy`, `health`, `lamp_enabled`, opcional, com o padrão ligado, `color`, opcional, com o padrão `white`, `scanners_enabled` e `chatter_enabled`, opcionais, com o padrão ligado, `ore_filter`, opcional, com a lista de tags de minério, vazia por padrão (perguntas 560 e 582), `defense_mode`, opcional, com o padrão `peaceful` (pergunta 830), `solar_enabled`, opcional, com o padrão ligado (pergunta 859), e `pickup_enabled`, `magnet_enabled` e `pickup_filter`, opcionais, com o padrão ligado, ligado e a lista negra vazia, com `mode` e `entries` (pergunta 889), `fetch_enabled`, opcional, com o padrão ligado (pergunta 944), `torches_enabled`, opcional, com o padrão ligado (pergunta 981), `auto_return_enabled` e `unload_enabled`, opcionais, com o padrão ligado (perguntas 1066 e 1093), e `death_point_enabled`, opcional, com o padrão ligado (pergunta 1118), também no item danificado |
 | Componente do item | `cubit:energy_slot` | Item do slot de energia e reserva de FE, também no item danificado |
 | Componente do item | `cubit:torch_slot` | As tochas do slot de tochas, também no item danificado. Sem o componente, o slot fica vazio (pergunta 981) |
 | Componente do item do Dock | `cubit:dock_energy` | Energia do estoque |
@@ -207,11 +207,12 @@ Estes nomes não mudam sem migração (regra 18 do `AGENTS.md`).
 | NBT da entidade | `ScannersEnabled` e `ChatterEnabled` | Chaves dos scanners e das falas. Sem a chave no save, vale ligada |
 | NBT da entidade | `OreFilter` | Filtro do scanner, com as tags de minério. Uma tag inválida é ignorada e vai para o log |
 | NBT da entidade | `PickupEnabled` e `MagnetEnabled` | Chaves da coleta e do ímã. Sem a chave no save, vale ligada (pergunta 891) |
-| NBT da entidade | `AutoReturnEnabled` e `UnloadEnabled` | Chaves do retorno automático e da descarga. Sem a chave no save, vale ligada (perguntas 1066, 1093 e 1128) |
+| NBT da entidade | `AutoReturnEnabled`, `UnloadEnabled` e `DeathPointEnabled` | Chaves do retorno automático, da descarga e do local de morte. Sem a chave no save, vale ligada (perguntas 1066, 1093 e 1118) |
 | NBT da entidade | `PickupFilter` | Filtro de coleta, com `Mode`, `blacklist` ou `whitelist`, e `Entries`, com o ID do item ou a `#tag`. Sem o modo ou com valor inválido, vale `blacklist` (pergunta 891) |
 | Componente do jogo no item | `minecraft:custom_name` | Nome do Cubit, inclusive no item danificado |
 | NBT do jogo na entidade | `CustomName` | Nome do Cubit |
 | Dados do player | `cubit:following_robot` | `robot`: o UUID do robô que segue, ou nada |
+| Dados do player | `cubit:death_log` | O histórico de mortes do player, descrito em [`tablet.md`](funcionalidades/tablet.md#contrato) (pergunta 1114) |
 
 O estado salvo é validado ao entrar no jogo, sem derrubá-lo (regra 17 do `AGENTS.md`):
 
@@ -231,6 +232,7 @@ O estado salvo é validado ao entrar no jogo, sem derrubá-lo (regra 17 do `AGEN
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-14 18:17 | Acrescenta a chave do local de morte e o histórico de mortes ao contrato (perguntas 1114 e 1118). |
 | Marcelo Fabiano | 2026-11-14 18:17 | Acrescenta as chaves do retorno automático e da descarga ao contrato (pergunta 1128). |
 | Marcelo Fabiano | 2026-11-13 18:50 | Tira o NBT do Cubit parado. |
 | Marcelo Fabiano | 2026-11-13 18:00 | Muda a receita do Tablet. |

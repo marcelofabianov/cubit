@@ -58,7 +58,7 @@ Quatro abas, à direita da janela: **Inventory**, com o ícone do baú, **Settin
 ### Aba Settings
 
 - **Cabeçalho:** `Settings`, a etiqueta do tier, `Battery 71%` e, ao lado, o botão `Power`, com o ícone de energia (perguntas 857 e 861). O clique desliga o Cubit e fecha a tela. Ligar de novo continua pelo clique direito nele. Hibernando no Dock, o botão fica desabilitado. A dica do botão é `Power` / `Energia` e `Turns the Cubit off` / `Desliga o Cubit` (pergunta 860).
-- **Functions:** as sete chaves, com o ícone, o nome e ON e OFF, em linhas de 12 px, com a descrição na dica, como na aba Behavior, para a chave das tochas caber (perguntas 861 e 974).
+- **Functions:** as oito chaves, com o ícone, o nome e ON e OFF, em linhas de 12 px, com a descrição na dica, como na aba Behavior, para a chave das tochas caber (perguntas 861 e 974).
 
 | Chave | Descrição, na dica |
 |---|---|
@@ -69,6 +69,7 @@ Quatro abas, à direita da janela: **Inventory**, com o ícone do baú, **Settin
 | `Torches` / `Tochas` | `Lights spots where mobs can spawn · 20 FE per torch` / `Ilumina onde mobs podem nascer · 20 FE por tocha`, com o custo do tier. No Base, apagada, com `Unlocks at Advanced`. Começa ligada e fica no item, com um ícone de tocha feito por prompt (perguntas 974, 981 e 982) |
 | `Unload` / `Descarga` | `Unloads in the marked chests when full, in an area` / `Descarrega nos baús marcados ao encher, na área`. Começa ligada e fica no item, com um ícone feito por prompt (pergunta 1093) |
 | `Auto return` / `Retorno automático` | `Goes to a Dock at 10% battery` / `Vai a um Dock com 10% de bateria`, com o número do tier. Começa ligada e fica no item, com um ícone feito por prompt (pergunta 1066) |
+| `Death point` / `Local de morte` | `Shows where you fell and guides you there` / `Mostra onde você morreu e guia até lá`. No Base, apagada, com `Unlocks at Advanced`. Começa ligada e fica no item, com um ícone feito por prompt (perguntas 1118 e 1125). As regras estão em [`movimento.md`](movimento.md#local-de-morte) |
 
 - **Scanner filter:** só leitura, com o ícone do minério, `Looking for Coal Ore` e `Right-click the Cubit holding an ore to change it.` (pergunta 688).
 - **Status:** `Solar panel`, `Energy use`, `Health` e `Following`.
@@ -95,7 +96,7 @@ Entra com o choque e os modos de defesa, nos itens 5 e 6 da Fase 4 (perguntas 82
 
 ### Aba Behavior
 
-Entra com a coleta e o ímã, no item 9 da Fase 4.1 (perguntas 878 a 888). As regras estão em [`inventario.md`](inventario.md#coleta). As chaves da descarga e do retorno ficaram na aba Settings (perguntas 1066, 1093 e 1128).
+Entra com a coleta e o ímã, no item 9 da Fase 4.1 (perguntas 878 a 888). As regras estão em [`inventario.md`](inventario.md#coleta). As chaves da descarga, do retorno e do local de morte ficaram na aba Settings (perguntas 1066, 1093, 1118 e 1128).
 
 - **Slots:** o inventário e a hotbar do player continuam visíveis e usáveis, para o player pegar o item do filtro. Só o inventário do Cubit e o slot de energia somem, e o painel ocupa o lugar deles (pergunta 893).
 - **Cabeçalho:** `Behavior` / `Comportamento`, a etiqueta do tier e `Battery 71%`, como na Settings.
@@ -225,7 +226,7 @@ Estes textos não aparecem nas imagens. O agente os propôs (pergunta 692), e o 
 
 ## Fora do escopo
 
-- Tudo das Fases 4.2 e 5: a aba Job e as chaves de descarga e local de morte. A do retorno entra com o item 15 (pergunta 1066).
+- Tudo da Fase 5: a aba Job. As chaves do retorno, da descarga e do local de morte entram com os itens 15, 14 e 16 da Fase 4.2 (perguntas 1066, 1093 e 1118).
 - A chave do painel solar, que entra com a interface de configuração (perguntas 494 e 495).
 - Os tiers acima do Base.
 - O botão para limpar o filtro do scanner (pergunta 688).
@@ -249,6 +250,7 @@ Pergunta 691.
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
 | Marcelo Fabiano | 2026-11-14 18:17 | Corrige a aba Behavior, que não recebe as chaves da Fase 4.2 (pergunta 1128). |
+| Marcelo Fabiano | 2026-11-14 18:15 | Adiciona a chave `Death point` à aba Settings (perguntas 1118 e 1125). |
 | Marcelo Fabiano | 2026-11-14 16:33 | Deixa o filtro e o inventário do player à esquerda, com o filtro responsivo (pergunta 1105). |
 | Marcelo Fabiano | 2026-11-14 16:18 | Alinha o filtro com o inventário do player (pergunta 1104). |
 | Marcelo Fabiano | 2026-11-14 16:00 | Faz as abas acompanharem a janela, com a descrição na linha (pergunta 1102). |
