@@ -41,7 +41,9 @@ Quatro abas, à direita da janela: **Inventory**, com o ícone do baú, **Settin
 | Inventário do Cubit | `Cubit's inventory`, ou com o nome dele, como `Bolt's inventory` |
 | Inventário do player | `Inventory` e a hotbar |
 
-- **Rolagem nos tiers altos:** a janela tem sempre a altura da do Base, com 3 linhas do inventário do Cubit à vista, para não passar da altura da tela (perguntas 838 e 839). Com mais de 27 slots, uma barra de rolagem fica à direita do inventário, e a janela ganha a largura dela. A roda do mouse sobre o inventário, um clique na barra ou arrastar o marcador mudam a linha de cima. O servidor recebe a rolagem como botão de menu, confere o limite e manda os itens da parte à vista.
+- **Inventário inteiro nos tiers altos:** o inventário do Cubit fica sempre em 3 fileiras, com 9, 12, 15 e 18 colunas do Base ao Ultimate, todo à vista, sem rolagem. A janela mantém a altura da do Base e cresce só para os lados, até uns 338 px no Ultimate, e o inventário do player continua com 9 colunas, à esquerda, embaixo (perguntas 1101 e 1105, que mudam as 838 e 839).
+- **Abas que acompanham a janela:** nas abas Settings, Defense e Behavior, as linhas, as fileiras alternadas e as chaves vão até a borda da janela, que cresce com o tier. Com espaço, a descrição de cada chave aparece na própria linha, em texto menor, além da dica, e uma descrição que não cabe é cortada, com o texto inteiro na dica. No Base, a descrição fica só na dica (pergunta 1102).
+- **Filtro responsivo:** na aba Behavior, o filtro de coleta fica à esquerda, com as colunas do inventário do Cubit, 9, 12, 15 e 18, então usa menos fileiras: 1 no Base e no Advanced e 2 no Elite e no Ultimate. O título fica à esquerda, e o botão da lista na borda direita (perguntas 1104 e 1105).
 - **Shift + clique** de um item do player procura espaço no inventário inteiro do Cubit, e não só nas linhas à vista.
 
 ### Estados do topo
@@ -56,7 +58,7 @@ Quatro abas, à direita da janela: **Inventory**, com o ícone do baú, **Settin
 ### Aba Settings
 
 - **Cabeçalho:** `Settings`, a etiqueta do tier, `Battery 71%` e, ao lado, o botão `Power`, com o ícone de energia (perguntas 857 e 861). O clique desliga o Cubit e fecha a tela. Ligar de novo continua pelo clique direito nele. Hibernando no Dock, o botão fica desabilitado. A dica do botão é `Power` / `Energia` e `Turns the Cubit off` / `Desliga o Cubit` (pergunta 860).
-- **Functions:** as seis chaves, com o ícone, o nome e ON e OFF, em linhas de 12 px, com a descrição na dica, como na aba Behavior, para a chave das tochas caber (perguntas 861 e 974).
+- **Functions:** as sete chaves, com o ícone, o nome e ON e OFF, em linhas de 12 px, com a descrição na dica, como na aba Behavior, para a chave das tochas caber (perguntas 861 e 974).
 
 | Chave | Descrição, na dica |
 |---|---|
@@ -65,6 +67,7 @@ Quatro abas, à direita da janela: **Inventory**, com o ícone do baú, **Settin
 | `Chatter` | `Weather, biomes and reactions` |
 | `Solar panel` | `Charges in the sun · 5 FE/t`, com o número do tier de dia. Começa ligada e fica no item (perguntas 859 e 860) |
 | `Torches` / `Tochas` | `Lights spots where mobs can spawn · 20 FE per torch` / `Ilumina onde mobs podem nascer · 20 FE por tocha`, com o custo do tier. No Base, apagada, com `Unlocks at Advanced`. Começa ligada e fica no item, com um ícone de tocha feito por prompt (perguntas 974, 981 e 982) |
+| `Unload` / `Descarga` | `Unloads in the marked chests when full, in an area` / `Descarrega nos baús marcados ao encher, na área`. Começa ligada e fica no item, com um ícone feito por prompt (pergunta 1093) |
 | `Auto return` / `Retorno automático` | `Goes to a Dock at 10% battery` / `Vai a um Dock com 10% de bateria`, com o número do tier. Começa ligada e fica no item, com um ícone feito por prompt (pergunta 1066) |
 
 - **Scanner filter:** só leitura, com o ícone do minério, `Looking for Coal Ore` e `Right-click the Cubit holding an ore to change it.` (pergunta 688).
@@ -245,6 +248,11 @@ Pergunta 691.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-14 16:33 | Deixa o filtro e o inventário do player à esquerda, com o filtro responsivo (pergunta 1105). |
+| Marcelo Fabiano | 2026-11-14 16:18 | Alinha o filtro com o inventário do player (pergunta 1104). |
+| Marcelo Fabiano | 2026-11-14 16:00 | Faz as abas acompanharem a janela, com a descrição na linha (pergunta 1102). |
+| Marcelo Fabiano | 2026-11-14 15:36 | Troca a rolagem do inventário por mais colunas (pergunta 1101). |
+| Marcelo Fabiano | 2026-11-14 13:55 | Adiciona a chave `Unload` à aba Settings (pergunta 1093). |
 | Marcelo Fabiano | 2026-11-14 10:00 | Adiciona a chave `Auto return` à aba Settings (pergunta 1066). |
 | Marcelo Fabiano | 2026-11-13 17:00 | Faz o botão da lista do filtro azul e plano. |
 | Marcelo Fabiano | 2026-11-13 16:50 | Cita os ícones das chaves Magnet e Fetch. |

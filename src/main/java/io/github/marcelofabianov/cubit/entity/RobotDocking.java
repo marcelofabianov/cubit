@@ -32,6 +32,7 @@ public final class RobotDocking {
   private final RobotEntity robot;
   private final RobotPreferredDock preferred;
   private final RobotAutoReturn autoReturn;
+  private final RobotUnload unload;
   private BlockPos docked;
   private BlockPos trip;
   private DockTrip progress = DockTrip.START;
@@ -43,6 +44,7 @@ public final class RobotDocking {
     this.robot = robot;
     this.preferred = new RobotPreferredDock(robot);
     this.autoReturn = new RobotAutoReturn(robot, preferred);
+    this.unload = new RobotUnload(robot);
   }
 
   /** The Dock marked with the Tablet, where `Go to Dock` sends the robot (answer 1041). */
@@ -53,6 +55,11 @@ public final class RobotDocking {
   /** The switch of the auto return, which goes to the same Dock as `Go to Dock` (answer 1067). */
   public RobotAutoReturn autoReturn() {
     return autoReturn;
+  }
+
+  /** The chests of the Cubit and the trips to them (answers 1086 to 1095). */
+  public RobotUnload unload() {
+    return unload;
   }
 
   boolean hasTrip() {
@@ -255,10 +262,12 @@ public final class RobotDocking {
       tag.putLong(DOCK_POSITION_KEY, docked.asLong());
     }
     preferred.save(tag);
+    unload.save(tag);
   }
 
   void load(CompoundTag tag) {
     docked = tag.contains(DOCK_POSITION_KEY) ? BlockPos.of(tag.getLong(DOCK_POSITION_KEY)) : null;
     preferred.load(tag);
+    unload.load(tag);
   }
 }

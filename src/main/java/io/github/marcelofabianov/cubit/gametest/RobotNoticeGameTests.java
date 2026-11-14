@@ -40,6 +40,8 @@ public final class RobotNoticeGameTests {
   private static final String HURT_TEXT = "That hurts!";
   private static final String OWNER_HURT_TEXT = "Careful!";
   private static final String NEED_RECHARGE_TEXT = "I need to recharge";
+  private static final String ITEMS_UNLOADED_TEXT = "Items unloaded";
+  private static final String NO_ROOM_TEXT = "No room in the marked chests";
   private static final Map<RobotNotice, String> TEXTS =
       Map.of(
           RobotNotice.CRITICAL_BATTERY,
@@ -49,7 +51,11 @@ public final class RobotNoticeGameTests {
           RobotNotice.OWNER_HURT,
           OWNER_HURT_TEXT,
           RobotNotice.NEED_RECHARGE,
-          NEED_RECHARGE_TEXT);
+          NEED_RECHARGE_TEXT,
+          RobotNotice.ITEMS_UNLOADED,
+          ITEMS_UNLOADED_TEXT,
+          RobotNotice.NO_ROOM,
+          NO_ROOM_TEXT);
   private static final String NO_LANGUAGE_FILE = "The language file is missing";
   private static final String BAD_LANGUAGE_FILE = "The language file could not be read";
   private static final String WRONG_TEXT = "Wrong text for the notice: ";

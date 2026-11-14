@@ -1,5 +1,6 @@
 package io.github.marcelofabianov.cubit.client;
 
+import io.github.marcelofabianov.cubit.domain.robot.InventoryGrid;
 import io.github.marcelofabianov.cubit.menu.RobotMenu;
 import net.minecraft.client.gui.GuiGraphics;
 
@@ -12,14 +13,15 @@ final class RobotSlotFrames {
   /** The visible rows of the inventory of the robot and its energy slot. */
   static void robot(GuiGraphics graphics, RobotMenu menu, int left, int top) {
     int frameX = left + RobotMenu.FIRST_SLOT_X - 1;
-    for (int slot = 0; slot < menu.window().visibleSlots(); slot++) {
+    InventoryGrid grid = menu.grid();
+    for (int slot = 0; slot < grid.slots(); slot++) {
       ScreenPainter.slot(
           graphics,
-          frameX + slot % RobotMenu.SLOTS_PER_ROW * RobotMenu.SLOT_SIZE,
-          top + RobotMenu.FIRST_SLOT_Y - 1 + slot / RobotMenu.SLOTS_PER_ROW * RobotMenu.SLOT_SIZE);
+          frameX + grid.columnOf(slot) * RobotMenu.SLOT_SIZE,
+          top + RobotMenu.FIRST_SLOT_Y - 1 + grid.rowOf(slot) * RobotMenu.SLOT_SIZE);
     }
     ScreenPainter.slot(
-        graphics, left + RobotMenu.ENERGY_SLOT_X - 1, top + RobotMenu.ENERGY_SLOT_Y - 1);
+        graphics, left + menu.layout().energySlotX() - 1, top + menu.layout().energySlotY() - 1);
   }
 
   static void player(GuiGraphics graphics, RobotMenu menu, int left, int top) {

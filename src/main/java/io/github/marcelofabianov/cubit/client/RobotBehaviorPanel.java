@@ -30,16 +30,16 @@ final class RobotBehaviorPanel {
   private static final float ICON_SCALE = 0.75f;
   private static final int NAME_X = 30;
   private static final int NAME_TOP = 2;
-  private static final int NAME_WIDTH = 106;
-  private static final int TOGGLE_X = 139;
+  private static final int TOGGLE_INSET = 26;
+  private static final int NAME_END_GAP = 3;
   private static final int TOGGLE_TOP = 0;
   private static final int FILTER_TITLE_X = 8;
+  private static final int TITLE_GAP = 4;
   private static final int FILTER_TITLE_Y = 57;
   private static final int FILTER_RULE = 66;
   private static final int MODE_Y = 54;
   private static final int MODE_WIDTH = 56;
   private static final int MODE_HEIGHT = 11;
-  private static final int FILTER_TITLE_INSET = MODE_WIDTH + 15;
   private static final int MARK_SIZE = 3;
   private static final int MARK_INSET = 14;
   private static final int MARK_COLOR = 0xFFF5C400;
@@ -67,8 +67,18 @@ final class RobotBehaviorPanel {
     this.right = right;
   }
 
+  private int toggleX() {
+    return right - TOGGLE_INSET;
+  }
+
+  /** The list button stands at the right side, over the end of the filter. */
   private int modeX() {
     return right - MODE_WIDTH;
+  }
+
+  /** The filter starts at the left side, with as many columns as the window holds (1105). */
+  private int columns() {
+    return menu.filterColumns();
   }
 
   private ContainerData values() {
@@ -81,8 +91,8 @@ final class RobotBehaviorPanel {
     for (int slot = 0; slot < slots; slot++) {
       ScreenPainter.slot(
           graphics,
-          left + RobotMenu.FIRST_SLOT_X - 1 + slot % RobotMenu.SLOTS_PER_ROW * RobotMenu.SLOT_SIZE,
-          top + filterTop() - 1 + slot / RobotMenu.SLOTS_PER_ROW * RobotMenu.SLOT_SIZE);
+          left + RobotMenu.FIRST_SLOT_X - 1 + slot % columns() * RobotMenu.SLOT_SIZE,
+          top + filterTop() - 1 + slot / columns() * RobotMenu.SLOT_SIZE);
     }
   }
 
@@ -100,7 +110,7 @@ final class RobotBehaviorPanel {
     painter.text(
         graphics,
         title,
-        new Box(FILTER_TITLE_X, FILTER_TITLE_Y, right - FILTER_TITLE_INSET, LINE),
+        new Box(FILTER_TITLE_X, FILTER_TITLE_Y, modeX() - FILTER_TITLE_X - TITLE_GAP, LINE),
         ScreenPainter.TEXT,
         ScreenPainter.FULL_SCALE);
     graphics.fill(LEFT, FILTER_RULE, right, FILTER_RULE + 1, ScreenPainter.SHADE);
@@ -120,17 +130,17 @@ final class RobotBehaviorPanel {
     graphics.pose().scale(ICON_SCALE, ICON_SCALE, 1);
     ScreenSprites.switchIcon(graphics, 0, 0, BUTTONS[row]);
     graphics.pose().popPose();
-    Box nameBox = new Box(NAME_X, top + NAME_TOP, NAME_WIDTH, LINE);
-    painter.text(
+    SwitchRowLabel.draw(
+        painter,
         graphics,
-        Component.translatable(NAMES[row]),
-        nameBox,
-        ScreenPainter.TEXT,
-        ScreenPainter.FULL_SCALE);
+        new SwitchRowLabel.Text(Component.translatable(NAMES[row]), switches.detail(BUTTONS[row])),
+        NAME_X,
+        top + NAME_TOP,
+        toggleX() - NAME_END_GAP);
     ScreenToggle.draw(
         graphics,
         painter,
-        TOGGLE_X,
+        toggleX(),
         top + TOGGLE_TOP,
         switches.on(BUTTONS[row]),
         switches.available(BUTTONS[row]));
@@ -163,8 +173,8 @@ final class RobotBehaviorPanel {
   private void renderTagMarks(GuiGraphics graphics) {
     for (int slot = 0; slot < PickupScreenValues.filterSlots(values()); slot++) {
       if (tagAt(slot).isPresent()) {
-        int x = RobotMenu.FIRST_SLOT_X + slot % RobotMenu.SLOTS_PER_ROW * RobotMenu.SLOT_SIZE;
-        int y = filterTop() + slot / RobotMenu.SLOTS_PER_ROW * RobotMenu.SLOT_SIZE;
+        int x = RobotMenu.FIRST_SLOT_X + slot % columns() * RobotMenu.SLOT_SIZE;
+        int y = filterTop() + slot / columns() * RobotMenu.SLOT_SIZE;
         graphics.fill(
             x + MARK_INSET - 1, y, x + MARK_INSET - 1 + MARK_SIZE, y + MARK_SIZE, MARK_COLOR);
       }
@@ -208,7 +218,7 @@ final class RobotBehaviorPanel {
     }
     for (int row = 0; row < BUTTONS.length; row++) {
       int top = FIRST_ROW + row * ROW_HEIGHT + TOGGLE_TOP;
-      if (ScreenToggle.contains(TOGGLE_X, top, x, y) && switches.available(BUTTONS[row])) {
+      if (ScreenToggle.contains(toggleX(), top, x, y) && switches.available(BUTTONS[row])) {
         return OptionalInt.of(BUTTONS[row]);
       }
     }

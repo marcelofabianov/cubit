@@ -25,15 +25,14 @@ final class TabletRobotScreen extends AbstractContainerScreen<TabletRobotMenu> {
   /** The panels draw from x 7, so the content lines up with the margin of the header. */
   private static final int CONTENT_X = 1;
 
-  /** The right side of the panels, at the margin of the window. */
-  private static final int CONTENT_RIGHT = WIDTH - MARGIN - CONTENT_X;
-
   private static final int BOTTOM = 6;
+
+  /** The screen of the Cubit is as wide as the Base one, plus the columns of its tier. */
+  private static final int ROBOT_SCREEN_WIDTH = 176;
+
   private static final int LINE = 9;
   private static final int PLAYER_LABEL_GAP = 10;
   private static final int ROBOT_LABEL_Y = RobotMenu.FIRST_SLOT_Y - LINE;
-  private static final int REDSTONE_CENTER = 160;
-  private static final int REDSTONE_Y = 54;
   private static final String NO_NAME = "";
 
   private final ScreenPainter painter = new ScreenPainter();
@@ -41,7 +40,6 @@ final class TabletRobotScreen extends AbstractContainerScreen<TabletRobotMenu> {
   private final TabletRobotTabs tabs = new TabletRobotTabs();
   private final TabletRobotHeader header;
   private final TabletHeaderButtons buttons;
-  private final InventoryScrollbar scrollbar;
   private final RobotExclusiveRow exclusive;
   private TabletResourcesPanel resources;
   private RobotDefensePanel defense;
@@ -55,10 +53,9 @@ final class TabletRobotScreen extends AbstractContainerScreen<TabletRobotMenu> {
     super(menu, playerInventory, title);
     header = new TabletRobotHeader(headerPainter, menu);
     buttons = new TabletHeaderButtons(menu);
-    scrollbar = new InventoryScrollbar(menu);
     exclusive = new RobotExclusiveRow(painter, menu);
     shownName = title;
-    imageWidth = WIDTH;
+    imageWidth = Math.max(WIDTH, CONTENT_X + ROBOT_SCREEN_WIDTH + menu.extraWidth());
     imageHeight =
         TabletRobotHeader.HEIGHT
             + menu.playerInventoryY()
@@ -73,9 +70,10 @@ final class TabletRobotScreen extends AbstractContainerScreen<TabletRobotMenu> {
     super.init();
     windowLeft = leftPos;
     windowTop = topPos;
-    resources = new TabletResourcesPanel(painter, menu, CONTENT_RIGHT);
-    defense = new RobotDefensePanel(painter, menu, CONTENT_RIGHT);
-    behavior = new RobotBehaviorPanel(painter, menu, CONTENT_RIGHT);
+    int right = imageWidth - MARGIN - CONTENT_X;
+    resources = new TabletResourcesPanel(painter, menu, right);
+    defense = new RobotDefensePanel(painter, menu, right);
+    behavior = new RobotBehaviorPanel(painter, menu, right);
     dialog = new TabletRenameDialog(font, width, height, this::rename);
     addButtons();
     showOpenTab();
@@ -177,7 +175,7 @@ final class TabletRobotScreen extends AbstractContainerScreen<TabletRobotMenu> {
     long tick = minecraft.player == null ? 0 : minecraft.player.tickCount;
     graphics.pose().pushPose();
     graphics.pose().translate(windowLeft, windowTop, 0);
-    header.render(graphics, shownName, tick);
+    header.render(graphics, shownName, tick, imageWidth);
     graphics.pose().popPose();
     switch (tabs.open()) {
       case FILTERS -> {
@@ -185,7 +183,6 @@ final class TabletRobotScreen extends AbstractContainerScreen<TabletRobotMenu> {
         RobotSlotFrames.player(graphics, menu, leftPos, topPos);
       }
       case INVENTORY -> {
-        scrollbar.render(graphics, leftPos, topPos);
         RobotSlotFrames.robot(graphics, menu, leftPos, topPos);
         exclusive.renderFrames(graphics, leftPos, topPos);
       }
@@ -208,15 +205,6 @@ final class TabletRobotScreen extends AbstractContainerScreen<TabletRobotMenu> {
   }
 
   private void renderInventoryLabels(GuiGraphics graphics) {
-    Component redstone = Component.translatable(ScreenKeys.REDSTONE);
-    int width = painter.width(redstone, ScreenPainter.DETAIL_SCALE);
-    painter.text(
-        graphics,
-        redstone,
-        REDSTONE_CENTER - width / 2,
-        REDSTONE_Y,
-        ScreenPainter.DETAIL,
-        ScreenPainter.DETAIL_SCALE);
     exclusive.renderLabels(graphics);
     label(graphics, Component.translatable(ScreenKeys.ROBOT_INVENTORY, shownName), ROBOT_LABEL_Y);
   }
@@ -235,13 +223,6 @@ final class TabletRobotScreen extends AbstractContainerScreen<TabletRobotMenu> {
       tabs.open(clicked.get());
       showOpenTab();
       return true;
-    }
-    if (tabs.open() == TabletRobotTabs.Tab.INVENTORY) {
-      OptionalInt row = scrollbar.press(mouseX - leftPos, mouseY - topPos);
-      if (row.isPresent()) {
-        scrollTo(row.getAsInt());
-        return true;
-      }
     }
     OptionalInt pressed = pressedButton(mouseX, mouseY);
     if (pressed.isPresent()) {
@@ -276,43 +257,6 @@ final class TabletRobotScreen extends AbstractContainerScreen<TabletRobotMenu> {
   @Override
   public boolean charTyped(char typed, int modifiers) {
     return dialog.isOpen() ? dialog.charTyped(typed, modifiers) : super.charTyped(typed, modifiers);
-  }
-
-  @Override
-  public boolean mouseDragged(
-      double mouseX, double mouseY, int button, double dragX, double dragY) {
-    OptionalInt row = scrollbar.drag(mouseY - topPos);
-    if (row.isPresent()) {
-      scrollTo(row.getAsInt());
-      return true;
-    }
-    return super.mouseDragged(mouseX, mouseY, button, dragX, dragY);
-  }
-
-  @Override
-  public boolean mouseReleased(double mouseX, double mouseY, int button) {
-    scrollbar.release();
-    return super.mouseReleased(mouseX, mouseY, button);
-  }
-
-  @Override
-  public boolean mouseScrolled(double mouseX, double mouseY, double scrollX, double scrollY) {
-    if (tabs.open() == TabletRobotTabs.Tab.INVENTORY
-        && scrollbar.overInventory(mouseX - leftPos, mouseY - topPos)) {
-      scrollTo(menu.topRow() - (int) Math.signum(scrollY));
-      return true;
-    }
-    return super.mouseScrolled(mouseX, mouseY, scrollX, scrollY);
-  }
-
-  /** The client shows the rows at once, and the server, which decides, follows by the button. */
-  private void scrollTo(int row) {
-    int clamped = menu.window().clampTopRow(row);
-    if (clamped != menu.topRow()) {
-      menu.scrollTo(clamped);
-      minecraft.gameMode.handleInventoryButtonClick(
-          menu.containerId, RobotMenu.FIRST_SCROLL_BUTTON + clamped);
-    }
   }
 
   private int tabLeft() {

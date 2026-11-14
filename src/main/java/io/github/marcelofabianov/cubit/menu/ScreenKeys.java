@@ -55,6 +55,8 @@ public final class ScreenKeys {
   public static final String TORCHES_DETAIL = ROBOT + "torches.detail";
   public static final String AUTO_RETURN = ROBOT + "auto_return";
   public static final String AUTO_RETURN_DETAIL = ROBOT + "auto_return.detail";
+  public static final String UNLOAD = ROBOT + "unload";
+  public static final String UNLOAD_DETAIL = ROBOT + "unload.detail";
   public static final String TAB_INVENTORY = ROBOT + "tab_inventory";
   public static final String TAB_SETTINGS = ROBOT + "tab_settings";
   public static final String SETTINGS = ROBOT + "settings";

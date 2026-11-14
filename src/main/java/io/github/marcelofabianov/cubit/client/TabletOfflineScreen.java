@@ -54,6 +54,7 @@ final class TabletOfflineScreen extends Screen {
     disabled(0, TabletKeys.TURN_ON);
     disabled(1, TabletKeys.RENAME);
     disabled(2, TabletKeys.GO_TO_DOCK);
+    mute(addRenderableWidget(TabletHeaderButtons.unloadButton(left, top, () -> {})));
     mute(addRenderableWidget(TabletHeaderButtons.followButton(left, top, () -> {})));
   }
 

@@ -15,10 +15,11 @@ class TabletAppsTest {
   @Test
   void targetOnlyShowsWithTheChosenCubitInFocus() {
     assertEquals(
-        List.of(TabletApp.OPEN, TabletApp.TARGET, TabletApp.DOCK, TabletApp.AREA),
+        List.of(TabletApp.OPEN, TabletApp.TARGET, TabletApp.DOCK, TabletApp.AREA, TabletApp.UNLOAD),
         WITH_TARGET.available());
     assertEquals(
-        List.of(TabletApp.OPEN, TabletApp.DOCK, TabletApp.AREA), WITHOUT_TARGET.available());
+        List.of(TabletApp.OPEN, TabletApp.DOCK, TabletApp.AREA, TabletApp.UNLOAD),
+        WITHOUT_TARGET.available());
   }
 
   @Test
@@ -32,8 +33,9 @@ class TabletAppsTest {
   void theWheelGoesAroundTheAvailableApps() {
     assertEquals(TabletApp.TARGET, WITH_TARGET.next(TabletApp.OPEN, FORWARD));
     assertEquals(TabletApp.AREA, WITH_TARGET.next(TabletApp.DOCK, FORWARD));
-    assertEquals(TabletApp.OPEN, WITH_TARGET.next(TabletApp.AREA, FORWARD));
-    assertEquals(TabletApp.AREA, WITH_TARGET.next(TabletApp.OPEN, BACKWARD));
+    assertEquals(TabletApp.UNLOAD, WITH_TARGET.next(TabletApp.AREA, FORWARD));
+    assertEquals(TabletApp.OPEN, WITH_TARGET.next(TabletApp.UNLOAD, FORWARD));
+    assertEquals(TabletApp.UNLOAD, WITH_TARGET.next(TabletApp.OPEN, BACKWARD));
     assertEquals(TabletApp.DOCK, WITHOUT_TARGET.next(TabletApp.OPEN, FORWARD));
   }
 

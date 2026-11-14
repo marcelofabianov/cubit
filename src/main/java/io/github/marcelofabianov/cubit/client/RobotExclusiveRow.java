@@ -11,8 +11,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.inventory.Slot;
 
 /**
- * The row of the exclusive slots, above the inventory of the robot: today only the torch slot,
- * dimmed on a tier without torches (answers 980 and 984).
+ * The row of the exclusive slots, above the inventory of the robot: the torch slot, dimmed on a
+ * tier without torches, after the energy slot on the Tablet (answers 980, 984 and 1104).
  */
 final class RobotExclusiveRow {
   private static final int MARGIN = 8;
@@ -30,7 +30,7 @@ final class RobotExclusiveRow {
 
   /** In the coordinates of the screen, behind the items. */
   void renderFrames(GuiGraphics graphics, int left, int top) {
-    int x = left + RobotMenu.FIRST_SLOT_X - 1;
+    int x = left + menu.layout().torchSlotX() - 1;
     int y = top + RobotMenu.EXCLUSIVE_SLOT_Y - 1;
     ScreenPainter.slot(graphics, x, y);
     if (!unlocked()) {
@@ -45,9 +45,16 @@ final class RobotExclusiveRow {
     painter.text(graphics, title, MARGIN, TITLE_Y, ScreenPainter.TEXT, ScreenPainter.FULL_SCALE);
   }
 
-  /** An empty torch slot names itself, or the tier that unlocks it. */
+  /** An empty torch slot names itself, or the tier that unlocks it, as the energy slot does. */
   boolean renderTooltip(GuiGraphics graphics, Font font, Slot hovered, int mouseX, int mouseY) {
-    if (hovered == null || hovered.index != menu.torchSlotIndex() || hovered.hasItem()) {
+    if (hovered == null || hovered.hasItem()) {
+      return false;
+    }
+    if (hovered.index == menu.energySlotIndex()) {
+      graphics.renderTooltip(font, Component.translatable(ScreenKeys.REDSTONE), mouseX, mouseY);
+      return true;
+    }
+    if (hovered.index != menu.torchSlotIndex()) {
       return false;
     }
     Component text =

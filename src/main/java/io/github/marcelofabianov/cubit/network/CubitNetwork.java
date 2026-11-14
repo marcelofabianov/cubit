@@ -25,6 +25,7 @@ public final class CubitNetwork {
   private static Consumer<RobotListPayload> robotListDisplay = list -> {};
   private static Consumer<ChosenRobotPayload> chosenRobotDisplay = chosen -> {};
   private static Consumer<AreaMarkPayload> areaMarkDisplay = mark -> {};
+  private static Consumer<UnloadChestsPayload> unloadChestsDisplay = chests -> {};
   private static TabletRequests tabletRequests = TabletRequests.NONE;
 
   private CubitNetwork() {}
@@ -65,7 +66,11 @@ public final class CubitNetwork {
         .playToClient(
             AreaMarkPayload.TYPE,
             AreaMarkPayload.STREAM_CODEC,
-            (payload, context) -> areaMarkDisplay.accept(payload));
+            (payload, context) -> areaMarkDisplay.accept(payload))
+        .playToClient(
+            UnloadChestsPayload.TYPE,
+            UnloadChestsPayload.STREAM_CODEC,
+            (payload, context) -> unloadChestsDisplay.accept(payload));
     registerTabletRequests(registrar);
   }
 
@@ -114,6 +119,11 @@ public final class CubitNetwork {
     areaMarkDisplay = area;
   }
 
+  /** On the client only: how the arrows over the marked chests show (answer 1086). */
+  public static void setUnloadChestsDisplay(Consumer<UnloadChestsPayload> chests) {
+    unloadChestsDisplay = chests;
+  }
+
   /** On the server: who handles the requests, so the network never depends on the player code. */
   public static void setTabletRequests(TabletRequests requests) {
     tabletRequests = requests;
@@ -129,6 +139,10 @@ public final class CubitNetwork {
 
   public static void sendAreaMark(ServerPlayer player, AreaMarkPayload mark) {
     send(player, mark);
+  }
+
+  public static void sendUnloadChests(ServerPlayer player, UnloadChestsPayload chests) {
+    send(player, chests);
   }
 
   /** On the client: asks the server to choose a Cubit and to open its screen. */

@@ -56,7 +56,18 @@ Entra no item 9 da Fase 4.1 (respostas 422, 423 e 876 a 889). A coleta, o ímã 
 
 ## Descarregar em baú
 
-O player marca um baú. Quando o inventário do robô enche, ele vai sozinho descarregar os itens que não estão nos slots exclusivos. O Cubit que segue também mostra o texto `Items unloaded`.
+Entra com o item 14 da Fase 4.2, numa entrega só (perguntas 1086 a 1095).
+
+- **Marcar:** com o app Descarga do [Tablet](tablet.md#apps), o clique num bloco com inventário (baú, barril, shulker ou de outro mod, pela capability) marca o baú do Cubit escolhido, de qualquer tier, até o limite dele. O clique num baú já marcado manda o Cubit descarregar ali agora, como o botão `Descarregar`, mas só naquele baú. Shift + clique direito num baú marcado desmarca só ele, e em qualquer outro bloco, ou no ar, desmarca o último marcado, de qualquer distância, para dar lugar a um novo. Sem Shift, fora de um bloco com inventário, o app só avisa (perguntas 1086, 1098 e 1099).
+- **Limites:** `unload_chests` e `unload_reach_blocks`, por tier, com os números de [`tiers.md`](../tiers.md#coleta-e-inventário) (pergunta 1094).
+- **Sozinho, só na área:** com a chave `Unload` ligada e o inventário cheio, o Cubit numa área vai ao baú marcado, descarrega tudo menos os slots exclusivos e volta para a área. O Cubit que segue não descarrega sozinho (pergunta 1087).
+- **Pelo botão:** o botão `Descarregar` do Tablet manda o Cubit escolhido descarregar já, mesmo sem o inventário cheio, e voltar ao que fazia, mesmo com a chave desligada (perguntas 1089 e 1093).
+- **Ordem:** o primeiro baú marcado com espaço, depois o seguinte, até esvaziar ou não caber mais (pergunta 1088).
+- **Sem onde descarregar:** sem espaço, fora do alcance ou com o chunk descarregado, ele não sai do lugar. O que segue avisa `No room in the marked chests`, e o da área fica com `Inventory full` e tenta de novo a cada intervalo (pergunta 1088).
+- **Texto:** `Cubit: Items unloaded` sai depois de descarregar, só do Cubit que segue, ou seja, pelo botão (perguntas 457 e 1094).
+- **Seta:** com o Tablet na mão, em qualquer app, cada baú marcado de um Cubit do player, carregado e na dimensão dele, tem uma seta em cima, como a do Cubit escolhido. Sob a seta, a primeira linha diz o nome do Cubit, e a segunda, os slots usados e o total do baú, como `Inventory 12 / 27`, que o servidor manda a cada segundo enquanto o player segura o Tablet (perguntas 1086 e 1090 a 1092).
+- **Chave:** `Unload` / `Descarga`, desde o Base, ligada por padrão e guardada no item, na aba Settings e na aba Recursos do Tablet. Liga e desliga só a descarga automática da área (pergunta 1093).
+- **Contrato:** os baús ficam no NBT `UnloadChests` e se perdem ao recolher o Cubit (pergunta 343).
 
 ## Slots exclusivos
 
@@ -85,6 +96,9 @@ Entra no item 12 da Fase 4.1 (issue #170, perguntas 971 a 984).
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-14 15:23 | Deixa Shift + clique desmarcar de qualquer lugar (pergunta 1099). |
+| Marcelo Fabiano | 2026-11-14 14:40 | Faz o clique num baú marcado descarregar ali (pergunta 1098). |
+| Marcelo Fabiano | 2026-11-14 13:55 | Define a descarga em baú marcado (perguntas 1086 a 1095). |
 | Marcelo Fabiano | 2026-11-13 16:40 | Troca o controle remoto pelo Tablet. |
 | Marcelo Fabiano | 2026-11-13 13:45 | Detalha as tochas automáticas e a fileira dos slots exclusivos. |
 | Marcelo Fabiano | 2026-11-13 09:50 | Adiciona a busca dos itens do chão. |

@@ -3,6 +3,7 @@ package io.github.marcelofabianov.cubit.menu;
 import io.github.marcelofabianov.cubit.domain.dock.DockGoal;
 import io.github.marcelofabianov.cubit.domain.robot.AreaCorner;
 import io.github.marcelofabianov.cubit.domain.robot.FollowCall;
+import io.github.marcelofabianov.cubit.domain.robot.UnloadCall;
 import io.github.marcelofabianov.cubit.domain.robot.WorkArea;
 import io.github.marcelofabianov.cubit.registry.CubitMenus;
 import java.util.Optional;
@@ -30,10 +31,14 @@ public final class TabletRobotMenu extends RobotMenu {
   /** Makes the chosen Cubit follow its owner, before the rows to scroll (answers 1073 to 1075). */
   public static final int FOLLOW_BUTTON = 17;
 
+  /** Sends the Cubit to unload in its chests, before the rows to scroll (answer 1089). */
+  public static final int UNLOAD_NOW_BUTTON = 19;
+
   private static final int ONE_SLOT = 1;
+  private static final int UNLOAD_VALUE = 2;
   private static final int DOCK_VALUE = 0;
   private static final int FOLLOW_VALUE = 1;
-  private static final int VALUES = 2;
+  private static final int VALUES = 3;
   private static final int HAS_AREA = 0;
   private static final int FIRST_CORNER = 1;
   private static final int CORNER_VALUES = 6;
@@ -49,6 +54,7 @@ public final class TabletRobotMenu extends RobotMenu {
   private final TabletOpening tablet;
   private final DockGoalControl dock;
   private final FollowControl follow;
+  private final UnloadControl unload;
   private final Supplier<Optional<WorkArea>> area;
   private final ContainerData dockValues;
   private final ContainerData areaValues = new SimpleContainerData(AREA_VALUES);
@@ -60,10 +66,17 @@ public final class TabletRobotMenu extends RobotMenu {
       RobotMenuServer server,
       TabletOpening tablet,
       Controls controls) {
-    super(CubitMenus.TABLET_ROBOT.get(), containerId, playerInventory, contents, server, true);
+    super(
+        CubitMenus.TABLET_ROBOT.get(),
+        containerId,
+        playerInventory,
+        contents,
+        server,
+        RobotMenuLayout.TABLET);
     this.tablet = tablet;
     this.dock = controls.dock();
     this.follow = controls.follow();
+    this.unload = controls.unload();
     this.area = controls.area();
     this.dockValues = new SimpleContainerData(VALUES);
     addDataSlots(dockValues);
@@ -87,12 +100,16 @@ public final class TabletRobotMenu extends RobotMenu {
         contents,
         RobotMenuServer.onClient(),
         tablet,
-        new Controls(DockGoalControl.NONE, FollowControl.NONE, Optional::empty));
+        new Controls(
+            DockGoalControl.NONE, FollowControl.NONE, UnloadControl.NONE, Optional::empty));
   }
 
   /** The buttons of the header that act on the Cubit itself, read on the server. */
   public record Controls(
-      DockGoalControl dock, FollowControl follow, Supplier<Optional<WorkArea>> area) {}
+      DockGoalControl dock,
+      FollowControl follow,
+      UnloadControl unload,
+      Supplier<Optional<WorkArea>> area) {}
 
   /** On the server, where the values come from the Cubit itself. */
   public static TabletRobotMenu onServer(
@@ -111,6 +128,7 @@ public final class TabletRobotMenu extends RobotMenu {
   public void broadcastChanges() {
     dockValues.set(DOCK_VALUE, dock.goal().ordinal());
     dockValues.set(FOLLOW_VALUE, follow.goal().ordinal());
+    dockValues.set(UNLOAD_VALUE, unload.goal().ordinal());
     putArea(area.get());
     super.broadcastChanges();
   }
@@ -151,6 +169,10 @@ public final class TabletRobotMenu extends RobotMenu {
     return (areaValues.get(FIRST_CORNER + 2 * index + 1) << HALF_BITS) | low;
   }
 
+  public UnloadCall unloadCall() {
+    return ScreenEnums.of(UnloadCall.values(), dockValues.get(UNLOAD_VALUE));
+  }
+
   public FollowCall followCall() {
     return ScreenEnums.of(FollowCall.values(), dockValues.get(FOLLOW_VALUE));
   }
@@ -172,6 +194,9 @@ public final class TabletRobotMenu extends RobotMenu {
     }
     if (button == FOLLOW_BUTTON) {
       return stillValid(player) && follow.call(player);
+    }
+    if (button == UNLOAD_NOW_BUTTON) {
+      return stillValid(player) && unload.unload(player);
     }
     if (button != POWER_TOGGLE_BUTTON) {
       return super.clickMenuButton(player, button);

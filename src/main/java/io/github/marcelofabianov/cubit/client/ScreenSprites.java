@@ -74,6 +74,9 @@ final class ScreenSprites {
   /** The auto return switch, after fetch, from a prompt (answer 1066). */
   private static final int AUTO_RETURN_U = 384;
 
+  /** The unload switch, after the auto return, from a prompt (answer 1093). */
+  private static final int UNLOAD_U = 448;
+
   private ScreenSprites() {}
 
   static void chest(GuiGraphics graphics, int x, int y) {
@@ -137,6 +140,7 @@ final class ScreenSprites {
       case RobotMenu.FETCH_BUTTON -> rowIcon(graphics, x, y, FETCH_U);
       case RobotMenu.TORCHES_BUTTON -> torches(graphics, x, y);
       case RobotMenu.AUTO_RETURN_BUTTON -> rowIcon(graphics, x, y, AUTO_RETURN_U);
+      case RobotMenu.UNLOAD_BUTTON -> rowIcon(graphics, x, y, UNLOAD_U);
       default -> function(graphics, x, y, button);
     }
   }

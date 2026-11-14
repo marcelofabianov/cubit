@@ -21,6 +21,7 @@ final class RobotSettings {
     robot.solar().setSwitchedOn(state.solarOn());
     robot.torches().setSwitchedOn(state.torchesOn());
     robot.docking().autoReturn().setSwitchedOn(state.autoReturnOn());
+    robot.docking().unload().setSwitchedOn(state.unloadOn());
     robot
         .pickup()
         .setSettings(
@@ -42,6 +43,7 @@ final class RobotSettings {
         robot.solar().switchedOn(),
         robot.pickup().settings(),
         robot.torches().switchedOn(),
-        robot.docking().autoReturn().switchedOn());
+        robot.docking().autoReturn().switchedOn(),
+        robot.docking().unload().switchedOn());
   }
 }

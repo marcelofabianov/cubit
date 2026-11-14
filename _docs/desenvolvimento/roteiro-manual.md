@@ -404,7 +404,7 @@ Compare os ícones com `modulo-avancado.png`, `modulo-elite.png` e `modulo-ultim
 | 2 | Passe o mouse em cada Module | `Requires a Base Cubit`, `Requires an Advanced Cubit` e `Requires an Elite Cubit`, em cinza |
 | 3 | Em sobrevivência, com um Cubit Base ativo, clique com o Elite Module | Nada muda, o Module fica na mão, e aparece `Cubit: I need to be Advanced first` |
 | 4 | Clique com o Advanced Module | O Module é gasto, ele fica feliz com o bipe, aparece `Cubit: Upgraded to Advanced!`, e o colar e as faixas ficam azuis |
-| 5 | Abra o inventário dele | A janela tem a mesma altura da do Base, com 3 linhas à vista e uma barra de rolagem à direita. Rolando, aparecem os 36 slots, com os itens nos mesmos lugares. A vida atual é a mesma, a vida máxima é 50, e a bateria tem a mesma carga sobre 600 mil FE |
+| 5 | Abra o inventário dele | A janela tem a mesma altura da do Base e fica mais larga, com os 36 slots em 3 fileiras de 12, sem rolagem, e os itens nos mesmos lugares. A vida atual é a mesma, a vida máxima é 50, e a bateria tem a mesma carga sobre 600 mil FE |
 | 6 | Clique de novo com o Advanced Module | Nada é gasto, e aparece `Cubit: I'm already Advanced` |
 | 7 | Ande com ele | Mais rápido que o Base |
 | 8 | Aplique o Elite Module num Cubit desligado e o Ultimate num Cubit no Dock | Os dois sobem de tier. Com a tela apagada, só o texto aparece, e no Dock ele continua carregando |
@@ -795,6 +795,56 @@ As regras estão em [`tablet.md`](../funcionalidades/tablet.md#apps).
 | 3 | Olhe o Tablet na hotbar e no inventário | Uma faixa fina com a cor do app ativo, na parte de baixo do ícone |
 | 4 | Passe o mouse sobre o Tablet no inventário | O nome é só `Cubit Tablet` |
 
+## Inventário inteiro
+
+As regras estão em [`telas.md`](../funcionalidades/telas.md#aba-inventory).
+
+| # | Faça | Espere |
+|---|---|---|
+| 1 | Abra a tela de um Cubit Base | 3 fileiras de 9, como antes |
+| 2 | Abra a de um Advanced, um Elite e um Ultimate | 3 fileiras de 12, 15 e 18, sem rolagem, e a janela mais larga, com a mesma altura |
+| 3 | Encha um Ultimate inteiro com o mesmo item | Todos os 54 slots mostram os itens |
+| 4 | Olhe o seu inventário embaixo | Continua com 9 colunas, à esquerda |
+| 5 | Shift + clique num item seu com o Cubit quase cheio | O item vai para o primeiro slot livre, mesmo no fim do inventário |
+| 6 | Abra o Ultimate pela aba Inventário do Tablet | As 18 colunas cabem, e a janela do Tablet fica mais larga |
+| 7 | Abra as abas Settings, Defense e Behavior de um Advanced e de um Ultimate | As linhas e as chaves vão até a borda da janela, e cada chave mostra a descrição na linha, em texto menor |
+| 8 | Abra a aba Settings de um Base | A descrição fica só na dica, como antes |
+| 9 | Abra a aba Recursos do Tablet | Cada chave mostra a descrição na linha. Uma linha bloqueada mostra só `Unlocks at Advanced` |
+| 10 | Abra as abas Defesa e Filtros do Tablet com um Ultimate | Elas vão até a borda da janela mais larga |
+| 11 | Abra a aba Behavior de um Advanced e de um Ultimate | O filtro fica à esquerda, em 1 fileira de 12 no Advanced e em 2 fileiras de 18 no Ultimate, e o botão `Blacklist` na borda direita. O seu inventário embaixo também fica à esquerda |
+| 12 | Abra a aba Filtros do Tablet | O filtro à esquerda, com pelo menos 15 colunas, e o seu inventário à esquerda |
+| 13 | Abra a aba Inventário do Tablet | O slot de energia é o primeiro da fileira `Slots exclusivos`, antes das tochas, sem o rótulo `Redstone`. Vazio, ele diz `Redstone` na dica |
+
+## Descarga em baú
+
+As regras estão em [`inventario.md`](../funcionalidades/inventario.md#descarregar-em-baú). Use um Cubit Base e um Advanced com carga, baús, um barril e o Tablet.
+
+| # | Faça | Espere |
+|---|---|---|
+| 1 | Troque para o app Descarga com Shift + roda | `Cubit Tablet · Unload` em laranja, e a faixa do ícone laranja |
+| 2 | Com o Cubit Base escolhido, clique num bloco de pedra | `Unload marks a block with an inventory` |
+| 3 | Clique num baú | `Chest marked for Cubit · up to 1 · Shift to unmark`. Com o Tablet na mão, uma seta laranja sobre o baú, com `Cubit` e `Inventory 0 / 27` |
+| 4 | Clique num barril | `Cubit has 1 chests · Shift and a click unmarks`, e o barril não é marcado |
+| 4a | Ponha itens no Cubit e clique de novo no baú marcado | `Cubit is unloading in this chest`, e ele vai descarregar só nele |
+| 4b | Segure Shift e clique no baú marcado | `Chest unmarked for Cubit`, e a seta some |
+| 4c | Clique no baú de novo | Ele volta a ser marcado |
+| 4d | Afaste-se do baú e, mirando num bloco qualquer, segure Shift e clique | `Chest unmarked for Cubit`, e a seta do baú some |
+| 4e | Clique no barril | Ele é marcado no lugar do baú |
+| 4f | Shift + clique de novo, sem baú marcado | `Cubit has no marked chest` |
+| 5 | Troque para o app Open | A seta continua sobre o baú. Guarde o Tablet, e a seta some |
+| 6 | Ponha itens no Cubit que segue e abra a tela dele pelo Tablet | O botão `Unload` na fileira, habilitado |
+| 7 | Clique em `Unload` | Ele vai ao baú, descarrega tudo menos as tochas e a Power Bank, mostra `Cubit: Items unloaded` e volta a seguir. A seta mostra os slots usados |
+| 8 | Encha o inventário dele e espere | O Cubit que segue não descarrega sozinho |
+| 9 | Encha o baú e tente `Unload` | O botão fica desabilitado, com `No marked chest with room within reach` |
+| 10 | Com o inventário vazio | `Unload` desabilitado, com `Nothing to unload` |
+| 11 | Com o Cubit Advanced, marque dois baús e uma área a até 32 blocos deles | As duas setas, com o nome dele |
+| 12 | Encha o inventário dele na área | Ele vai ao primeiro baú, depois ao segundo, e volta para a área. Sem `Items unloaded` |
+| 13 | Encha os dois baús e o inventário dele | Ele fica na área com `Inventory full` e não sai do lugar |
+| 14 | Desligue `Unload` na aba Settings e esvazie um baú | Ele continua parado com o inventário cheio. O botão `Unload` ainda funciona |
+| 15 | Saia e entre no mundo | Os baús continuam marcados |
+| 16 | Recolha e coloque o Cubit | Os baús se perderam, e as setas somem |
+| 17 | Com o jogo em português | `Descarga`, `Descarregar`, `Baú marcado para Cubit` e `Inventário 0 / 27` |
+
 ## Tradução
 
 | # | Passo | Resultado esperado |
@@ -854,6 +904,13 @@ Na instância só com o mod, tire capturas com F2 do Cubit seguindo, da tela do 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-14 16:33 | Deixa o filtro e o inventário do player à esquerda. |
+| Marcelo Fabiano | 2026-11-14 16:18 | Adiciona o filtro alinhado e o slot de energia na fileira do Tablet. |
+| Marcelo Fabiano | 2026-11-14 16:00 | Adiciona as abas que acompanham a janela. |
+| Marcelo Fabiano | 2026-11-14 15:36 | Troca a rolagem do inventário pelo inventário inteiro em mais colunas. |
+| Marcelo Fabiano | 2026-11-14 15:23 | Adiciona o Shift + clique de longe na descarga. |
+| Marcelo Fabiano | 2026-11-14 14:40 | Acrescenta o clique no baú marcado e o Shift para desmarcar. |
+| Marcelo Fabiano | 2026-11-14 14:15 | Adiciona a descarga em baú. |
 | Marcelo Fabiano | 2026-11-14 13:20 | Adiciona as cores dos apps do Tablet. |
 | Marcelo Fabiano | 2026-11-14 12:40 | Adiciona o modo área. |
 | Marcelo Fabiano | 2026-11-14 11:20 | Adiciona o `Follow` do Tablet. |

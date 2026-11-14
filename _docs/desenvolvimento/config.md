@@ -91,6 +91,8 @@ As chaves ficam em `snake_case`. As de um tier ficam em `[general_robot.{tier}]`
 | `general_robot.base` | `max_health` | Vida | 1 a 1024 |
 | `general_robot.base` | `call_radius_blocks` | Raio do retorno automático e da chamada pelo Dock | 1 a 128 |
 | `general_robot.base` | `return_charge_percent` | Bateria do retorno automático | 0 a 100 |
+| `general_robot.base` | `unload_chests` | Baús marcados para descarregar | 0 a 16 |
+| `general_robot.base` | `unload_reach_blocks` | Distância máxima até o baú | 1 a 128 |
 | `general_robot.base` | `area_size_blocks` | Modo área, lado da base, com 0 para bloqueado | 0 a 128 |
 | `general_robot.base` | `area_height_blocks` | Altura máxima da área, com 0 para bloqueado | 0 a 64 |
 | `general_robot.base` | `speed_multiplier` | Velocidade | 0,1 a 4 |
@@ -143,6 +145,7 @@ O mod não cai por causa do config (regra 17 do `AGENTS.md`):
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-14 13:55 | Adiciona as chaves da descarga. |
 | Marcelo Fabiano | 2026-11-14 10:00 | Adiciona a bateria do retorno automático. |
 | Marcelo Fabiano | 2026-11-14 09:00 | Adiciona as chaves do modo área. |
 | Marcelo Fabiano | 2026-11-13 17:15 | Adiciona o alcance da mira do app Alvo. |

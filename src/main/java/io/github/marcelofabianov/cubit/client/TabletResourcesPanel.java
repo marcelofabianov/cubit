@@ -15,9 +15,9 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 
 /**
- * The Features tab of the Tablet: the nine switches of the Cubit in one list, and its area, with
- * the same controls of the server as the screen of the Cubit. A row the tier locks is dimmed, with
- * the tier that unlocks it (answer 1037).
+ * The Features tab of the Tablet: the ten switches of the Cubit in one list, and its area, with the
+ * same controls of the server as the screen of the Cubit. A row the tier locks is dimmed, with the
+ * tier that unlocks it (answer 1037).
  */
 final class TabletResourcesPanel {
   private static final int LEFT = 7;
@@ -49,7 +49,8 @@ final class TabletResourcesPanel {
     RobotMenu.MAGNET_BUTTON,
     RobotMenu.FETCH_BUTTON,
     RobotMenu.TORCHES_BUTTON,
-    RobotMenu.AUTO_RETURN_BUTTON
+    RobotMenu.AUTO_RETURN_BUTTON,
+    RobotMenu.UNLOAD_BUTTON
   };
   private static final String[] NAMES = {
     ScreenKeys.LAMP,
@@ -60,7 +61,8 @@ final class TabletResourcesPanel {
     BehaviorKeys.MAGNET,
     BehaviorKeys.FETCH,
     ScreenKeys.TORCHES,
-    ScreenKeys.AUTO_RETURN
+    ScreenKeys.AUTO_RETURN,
+    ScreenKeys.UNLOAD
   };
 
   private final ScreenPainter painter;
@@ -140,12 +142,16 @@ final class TabletResourcesPanel {
     }
     int button = BUTTONS[row];
     renderIcon(graphics, button, top + ICON_TOP);
-    painter.text(
+    Optional<RobotTier> locked = switches.lockedUntil(button);
+    Component detail = locked.isPresent() ? null : switches.detail(button);
+    int end = locked.isPresent() ? noteX() : toggleX() - NOTE_GAP;
+    SwitchRowLabel.draw(
+        painter,
         graphics,
-        Component.translatable(NAMES[row]),
-        new Box(NAME_X, top + NAME_TOP, noteX() - NAME_X, LINE),
-        ScreenPainter.TEXT,
-        ScreenPainter.FULL_SCALE);
+        new SwitchRowLabel.Text(Component.translatable(NAMES[row]), detail),
+        NAME_X,
+        top + NAME_TOP,
+        end);
     ScreenToggle.draw(
         graphics,
         painter,
@@ -153,16 +159,18 @@ final class TabletResourcesPanel {
         top + TOGGLE_TOP,
         switches.on(button),
         switches.available(button));
-    Optional<RobotTier> locked = switches.lockedUntil(button);
-    if (locked.isPresent()) {
-      painter.textRight(
-          graphics,
-          RobotSwitchLook.unlocksAt(locked.get()),
-          new Box(noteX(), top + NOTE_TOP, NOTE_WIDTH, DETAIL_LINE),
-          ScreenPainter.DETAIL,
-          ScreenPainter.DETAIL_SCALE);
-      graphics.fill(LEFT, top, right, top + ROW_HEIGHT, ScreenToggle.DISABLED);
-    }
+    locked.ifPresent(tier -> renderLocked(graphics, tier, top));
+  }
+
+  /** The tier that unlocks the row, by the switch, over a dimmed row. */
+  private void renderLocked(GuiGraphics graphics, RobotTier tier, int top) {
+    painter.textRight(
+        graphics,
+        RobotSwitchLook.unlocksAt(tier),
+        new Box(noteX(), top + NOTE_TOP, NOTE_WIDTH, DETAIL_LINE),
+        ScreenPainter.DETAIL,
+        ScreenPainter.DETAIL_SCALE);
+    graphics.fill(LEFT, top, right, top + ROW_HEIGHT, ScreenToggle.DISABLED);
   }
 
   /** The icons of the switches of the screen of the Cubit. */

@@ -38,6 +38,7 @@ public final class CubitClient {
     CubitNetwork.setFocusMarkDisplay(ScanMarks::showFocus);
     CubitNetwork.setTabletDisplays(TabletSelectionScreen::show, TabletArrow::setChosen);
     CubitNetwork.setAreaDisplay(TabletAreaMarks::show);
+    CubitNetwork.setUnloadChestsDisplay(TabletChestMarks::show);
     event.enqueueWork(() ->
         ItemProperties.register(
             CubitItems.GENERAL_ROBOT.get(),

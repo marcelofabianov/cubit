@@ -5,5 +5,7 @@ public enum RobotNotice {
   CRITICAL_BATTERY,
   HURT,
   OWNER_HURT,
-  NEED_RECHARGE
+  NEED_RECHARGE,
+  ITEMS_UNLOADED,
+  NO_ROOM
 }

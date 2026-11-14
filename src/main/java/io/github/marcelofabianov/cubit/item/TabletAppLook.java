@@ -8,13 +8,15 @@ import net.minecraft.network.chat.Component;
 
 /**
  * The color of each app of the Tablet, in the action bar and in the strip on the item, so the
- * player sees at once which app is active (answers 1082 to 1084). Only visual, so it stays here.
+ * player sees at once which app is active (answers 1082 to 1084 and 1096). Only visual, so it stays
+ * here.
  */
 public final class TabletAppLook {
   private static final int OPEN_BLUE = 0x4FA3FF;
   private static final int TARGET_GREEN = 0x5BD15B;
   private static final int DOCK_RED = 0xE0504A;
   private static final int AREA_PURPLE = 0x9966F2;
+  private static final int UNLOAD_ORANGE = 0xF0912A;
 
   private TabletAppLook() {}
 
@@ -25,6 +27,7 @@ public final class TabletAppLook {
       case TARGET -> TARGET_GREEN;
       case DOCK -> DOCK_RED;
       case AREA -> AREA_PURPLE;
+      case UNLOAD -> UNLOAD_ORANGE;
     };
   }
 
