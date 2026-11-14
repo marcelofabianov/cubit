@@ -742,6 +742,21 @@ As regras estão em [`energia.md`](../funcionalidades/energia.md#retorno-automá
 | 8 | Abra a aba Recursos do Tablet | A linha `Auto return`, com a mesma chave e a mesma dica |
 | 9 | Com o jogo em português | `Retorno automático`, `Vai a um Dock com 10% de bateria` e `Cubit: Preciso recarregar` |
 
+## Follow do Tablet
+
+As regras estão em [`tablet.md`](../funcionalidades/tablet.md#cabeçalho). Use dois Cubits com carga, um Dock e o Tablet.
+
+| # | Faça | Espere |
+|---|---|---|
+| 1 | Coloque dois Cubits. Abra o Tablet, escolha o que ficou desligado e veja o cabeçalho | Os quatro botões na mesma fileira, alinhados, com `Follow` por último, habilitado, com `Follows you · the one following now switches off` na dica |
+| 2 | Clique em `Follow` | Ele liga e passa a seguir você, e o que seguia desliga onde está |
+| 3 | Abra a tela do Cubit que segue agora | `Follow` desabilitado, com `Already following you` |
+| 4 | Chame um dos Cubits para o Dock e, com ele hibernando, use `Follow` nele pelo Tablet | Ele sai do Dock na hora e segue você, e o outro desliga |
+| 5 | Afaste-se mais de 20 blocos de um Cubit desligado e use `Follow` nele | Ele liga e teleporta para perto de você, como hoje ao ficar para trás |
+| 6 | Escolha um Cubit sem carga | `Follow` desabilitado, com `Without charge to follow you` |
+| 7 | Escolha um Cubit de chunk descarregado | O botão aparece desabilitado na tela da foto |
+| 8 | Com o jogo em português | `Seguir`, `Segue você · o que seguia antes desliga` e `Já está seguindo você` |
+
 ## Tradução
 
 | # | Passo | Resultado esperado |
@@ -801,6 +816,7 @@ Na instância só com o mod, tire capturas com F2 do Cubit seguindo, da tela do 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-14 11:20 | Adiciona o `Follow` do Tablet. |
 | Marcelo Fabiano | 2026-11-14 10:30 | Adiciona o retorno automático. |
 | Marcelo Fabiano | 2026-11-13 15:10 | Mantém o olhar no alvo até ele ser eliminado. |
 | Marcelo Fabiano | 2026-11-13 14:50 | Adiciona o olhar para o alvo do choque. |

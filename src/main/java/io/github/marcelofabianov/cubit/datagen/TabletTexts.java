@@ -34,6 +34,11 @@ final class TabletTexts {
   private static final String GO_TO_DOCK_DETAIL = "Sends the Cubit to hibernate at its Dock";
   private static final String DOCK_SWITCHED_OFF = "The Cubit is switched off";
   private static final String DOCK_HIBERNATING = "The Cubit is already at a Dock";
+  private static final String FOLLOW = "Follow";
+  private static final String FOLLOW_DETAIL = "Follows you · the one following now switches off";
+  private static final String FOLLOW_ALREADY = "Already following you";
+  private static final String FOLLOW_NO_CHARGE = "Without charge to follow you";
+  private static final String FOLLOW_OTHER_DIMENSION = "In another dimension";
   private static final String DOCK_OUT_OF_REACH = "No free Dock within reach";
   private static final String BACK = "Back";
   private static final String RENAME = "Rename";
@@ -106,5 +111,15 @@ final class TabletTexts {
     add.accept(TabletKeys.DOCK_SWITCHED_OFF, DOCK_SWITCHED_OFF);
     add.accept(TabletKeys.DOCK_HIBERNATING, DOCK_HIBERNATING);
     add.accept(TabletKeys.DOCK_OUT_OF_REACH, DOCK_OUT_OF_REACH);
+    addFollow(add);
+  }
+
+  /** `Follow` of the header (answers 1073 to 1075). */
+  private static void addFollow(BiConsumer<String, String> add) {
+    add.accept(TabletKeys.FOLLOW, FOLLOW);
+    add.accept(TabletKeys.FOLLOW_DETAIL, FOLLOW_DETAIL);
+    add.accept(TabletKeys.FOLLOW_ALREADY, FOLLOW_ALREADY);
+    add.accept(TabletKeys.FOLLOW_NO_CHARGE, FOLLOW_NO_CHARGE);
+    add.accept(TabletKeys.FOLLOW_OTHER_DIMENSION, FOLLOW_OTHER_DIMENSION);
   }
 }
