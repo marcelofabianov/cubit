@@ -22,6 +22,7 @@ public abstract class RobotMenuReading extends AbstractContainerMenu {
   private static final int TORCH_SWITCH = 4;
   private static final int AUTO_RETURN_SWITCH = 5;
   private static final int UNLOAD_SWITCH = 6;
+  private static final int DEATH_POINT_SWITCH = 7;
   private static final int[] SWITCH_INDEXES = {
     RobotScreenValues.LAMP,
     RobotScreenValues.SCANNERS,
@@ -29,7 +30,8 @@ public abstract class RobotMenuReading extends AbstractContainerMenu {
     RobotScreenValues.SOLAR_SWITCH,
     RobotScreenValues.TORCHES,
     RobotScreenValues.AUTO_RETURN,
-    RobotScreenValues.UNLOAD
+    RobotScreenValues.UNLOAD,
+    RobotScreenValues.DEATH_POINT
   };
 
   protected final ContainerData values;
@@ -140,6 +142,7 @@ public abstract class RobotMenuReading extends AbstractContainerMenu {
       case RobotMenu.TORCHES_BUTTON -> TORCH_SWITCH;
       case RobotMenu.AUTO_RETURN_BUTTON -> AUTO_RETURN_SWITCH;
       case RobotMenu.UNLOAD_BUTTON -> UNLOAD_SWITCH;
+      case RobotMenu.DEATH_POINT_BUTTON -> DEATH_POINT_SWITCH;
       default -> button;
     };
   }

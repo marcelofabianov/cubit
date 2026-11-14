@@ -17,7 +17,7 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 | `RobotType` | Identifica o Cubit nos IDs e no config. O robô é único, e é um dado, identificado por um ID |
 | `RobotTier` | Nível de evolução: Base, Advanced, Elite e Ultimate. A `key` é o nome usado no config e nos saves. `next` é o tier seguinte, e `previous`, o que um Module desse tier exige |
 | `TierUpgrade` | O que um Module faz no robô: sobe o tier, pede o tier anterior primeiro ou encontra o robô já nesse tier ou acima |
-| `RobotState` | O que o robô guarda ao virar item: tier, energia, vida, a chave da lanterna, a cor, a chave dos scanners, o filtro de minérios, a chave das falas, o modo de defesa e a chave do painel solar. `damaged` e `repaired` dão o estado ao morrer e ao consertar |
+| `RobotState` | O que o robô guarda ao virar item: tier, energia, vida, a chave da lanterna, a cor, a chave dos scanners, o filtro de minérios, a chave das falas, o modo de defesa, a chave do painel solar, a coleta e as chaves das tochas, do retorno automático, da descarga e do local de morte. `damaged` e `repaired` dão o estado ao morrer e ao consertar |
 | `TierSpec` | Números de um tipo de robô num tier |
 | `ShockSpec` | O choque de um tier: dano, alcance, intervalo, custo, se atinge todos no alcance e os modos de defesa liberados. O Pacífico sempre está liberado. `NONE` é o tier sem choque |
 | `DefenseMode` | Quem o robô ataca: Pacífico, Contra-atacar, Agressivo ou Focus. A `key` é o nome usado no config e nos saves, e `INITIAL` é o Pacífico |
@@ -77,6 +77,12 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 | `AreaMarking` | A marcação pela metade do app Área: o Cubit e, depois, o primeiro canto, só na memória do servidor (perguntas 1054 e 1060) |
 | `UnloadChest` e `UnloadChests` | Os baús de descarga de um Cubit, pelo bloco e pela dimensão, na ordem da marca. Um segundo clique desmarca, e o tier limita quantos (perguntas 1086 e 1088) |
 | `UnloadCall` | Se o `Descarregar` do Tablet pode mandar o Cubit, ou por que não, e quando ele descarrega sozinho: só cheio, na área e com a chave ligada (perguntas 1087, 1089 e 1093) |
+| `DeathPointLevel` | O que um tier faz com o local de morte: `locked`, `mark`, que só mostra a coordenada ao renascer, ou `guide`, que também guia até lá. A `key` é o nome usado no config (perguntas 1117 e 1129) |
+| `DeathRecord` | Uma morte do player: o tempo do mundo, o bloco, a dimensão e a causa, no texto de morte do jogo (perguntas 1111 e 1114) |
+| `DeathLog` | As mortes do player, da mais recente para a mais antiga, até o limite do config. Uma linha é achada pelo lugar e pelo tempo, para uma tela desatualizada nunca tirar outra morte (perguntas 1111 e 1115) |
+| `GameClock` | O dia e a hora do mundo, como o jogo conta: o mundo começa às 06:00 do primeiro dia (pergunta 1116) |
+| `DeathGuideCall` | Se o botão de guiar da aba Mortes pode mandar o Cubit, ou por que não, e quando o Cubit diz a coordenada ao renascer (perguntas 1111, 1117, 1118 e 1120) |
+| `DeathGuideSpec`, `DeathGuideProgress` e `DeathGuideStep` | Os números da guia, o quanto ela avançou e o próximo passo: andar, esperar o dono, chegar ou desistir (perguntas 1121, 1123 e 1126) |
 | `FollowCall` | Se o `Follow` do Tablet pode fazer o Cubit escolhido seguir o dono agora, ou por que não: já seguindo, sem carga ou em outra dimensão (perguntas 1073 a 1075) |
 | `TabletWheel` | Para que lado Shift + roda troca o app do Tablet. Sem rolagem vertical, como no mouse do macOS com Shift, vale a rolagem para o lado, com o sinal trocado, como na hotbar do jogo |
 | `RobotName` | O nome que o Tablet dá ao Cubit, com as regras da etiqueta: corta os espaços das pontas, aceita até 50 caracteres e, vazio, tira o nome (perguntas 1015 a 1017) |
@@ -146,6 +152,8 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 - **Bioma por grupo:** só uma mudança de grupo conta, e um bioma sem grupo, como um rio, não muda nada, para o robô não repetir o comentário (pergunta 586).
 - **Reclamar uma vez:** ao se afastar, o dono só ouve de novo depois de o robô chegar perto, para não repetir a cada passo. Um salto além do teleporte não conta, porque não é o dono correndo (pergunta 585).
 - **Falas só com a expressão calma:** qualquer outra expressão indica algo mais importante, como um mob ou um dano.
+- **Histórico próprio:** o jogo guarda só a última morte, sem a hora e sem a causa, então o mod guarda o seu, com um limite, para o save não crescer sem fim (perguntas 1114 e 1115).
+- **Guia à frente, sem sair do alcance:** o Cubit espera o dono quando passa do limite à frente dele, e por isso nunca anda por chunks que só ele carregaria (pergunta 1126 e regra 22). Esperar o dono não conta como estar preso (pergunta 1123).
 - **Volta com o dono:** um robô longe, ou em outra dimensão, ficaria para trás ao descarregar o chunk. Perto, ele anda como sempre, e a caminho do Dock continua indo, porque o dono o chamou (pergunta 567).
 - **Só o que é novo avisa:** o mesmo mob ou bloco não avisa de novo enquanto continuar no raio, porque o intervalo mínimo sozinho repetiria o mesmo minério a cada varredura. O que sai do raio é esquecido (pergunta 561).
 - **Perigo primeiro nas cores:** o vermelho de um mob vence o azul de um minério, como o alerta vence a surpresa. O sinal não depende da expressão, para um dano não apagar o vermelho com o mob ainda no raio (perguntas 638 e 639).

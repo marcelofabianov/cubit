@@ -7,6 +7,7 @@ import io.github.marcelofabianov.cubit.domain.energy.Percentage;
 import io.github.marcelofabianov.cubit.domain.energy.SolarOutput;
 import io.github.marcelofabianov.cubit.domain.robot.DefenseMode;
 import io.github.marcelofabianov.cubit.domain.tier.AreaSpec;
+import io.github.marcelofabianov.cubit.domain.tier.DeathPointLevel;
 import io.github.marcelofabianov.cubit.domain.tier.PickupSpec;
 import io.github.marcelofabianov.cubit.domain.tier.RobotTier;
 import io.github.marcelofabianov.cubit.domain.tier.ScannerSpec;
@@ -210,7 +211,8 @@ final class TierDefaults {
           BASE_TORCHES,
           RETURN_CHARGE,
           BASE_AREA,
-          BASE_UNLOAD);
+          BASE_UNLOAD,
+          DeathPointLevel.LOCKED);
   private static final TierSpec ADVANCED_SPEC =
       new TierSpec(
           new Energy(ADVANCED_BATTERY),
@@ -242,7 +244,8 @@ final class TierDefaults {
           ADVANCED_TORCHES,
           RETURN_CHARGE,
           ADVANCED_AREA,
-          ADVANCED_UNLOAD);
+          ADVANCED_UNLOAD,
+          DeathPointLevel.MARK);
   private static final TierSpec ELITE_SPEC =
       new TierSpec(
           new Energy(ELITE_BATTERY),
@@ -274,7 +277,8 @@ final class TierDefaults {
           ELITE_TORCHES,
           RETURN_CHARGE,
           ELITE_AREA,
-          ELITE_UNLOAD);
+          ELITE_UNLOAD,
+          DeathPointLevel.GUIDE);
   private static final TierSpec ULTIMATE_SPEC =
       new TierSpec(
           new Energy(ULTIMATE_BATTERY),
@@ -306,7 +310,8 @@ final class TierDefaults {
           ULTIMATE_TORCHES,
           RETURN_CHARGE,
           ULTIMATE_AREA,
-          ULTIMATE_UNLOAD);
+          ULTIMATE_UNLOAD,
+          DeathPointLevel.GUIDE);
 
   private TierDefaults() {}
 

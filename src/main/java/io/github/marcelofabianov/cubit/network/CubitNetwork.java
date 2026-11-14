@@ -26,6 +26,7 @@ public final class CubitNetwork {
   private static Consumer<ChosenRobotPayload> chosenRobotDisplay = chosen -> {};
   private static Consumer<AreaMarkPayload> areaMarkDisplay = mark -> {};
   private static Consumer<UnloadChestsPayload> unloadChestsDisplay = chests -> {};
+  private static Consumer<DeathLogPayload> deathLogDisplay = log -> {};
   private static TabletRequests tabletRequests = TabletRequests.NONE;
 
   private CubitNetwork() {}
@@ -70,7 +71,11 @@ public final class CubitNetwork {
         .playToClient(
             UnloadChestsPayload.TYPE,
             UnloadChestsPayload.STREAM_CODEC,
-            (payload, context) -> unloadChestsDisplay.accept(payload));
+            (payload, context) -> unloadChestsDisplay.accept(payload))
+        .playToClient(
+            DeathLogPayload.TYPE,
+            DeathLogPayload.STREAM_CODEC,
+            (payload, context) -> deathLogDisplay.accept(payload));
     registerTabletRequests(registrar);
   }
 
@@ -99,6 +104,22 @@ public final class CubitNetwork {
                 onServer(
                     context,
                     player -> tabletRequests.switchApp().accept(player, payload.direction())));
+    registerDeathRequests(registrar);
+  }
+
+  /** The guide and delete buttons of the Deaths tab (answer 1111). */
+  private static void registerDeathRequests(PayloadRegistrar registrar) {
+    registrar
+        .playToServer(
+            DeathGuidePayload.TYPE,
+            DeathGuidePayload.STREAM_CODEC,
+            (payload, context) ->
+                onServer(context, player -> tabletRequests.guideDeath().accept(player, payload)))
+        .playToServer(
+            DeleteDeathPayload.TYPE,
+            DeleteDeathPayload.STREAM_CODEC,
+            (payload, context) ->
+                onServer(context, player -> tabletRequests.deleteDeath().accept(player, payload)));
   }
 
   private static void onServer(IPayloadContext context, Consumer<ServerPlayer> handler) {
@@ -124,6 +145,11 @@ public final class CubitNetwork {
     unloadChestsDisplay = chests;
   }
 
+  /** On the client only: how the Deaths tab shows the log (answer 1111). */
+  public static void setDeathLogDisplay(Consumer<DeathLogPayload> log) {
+    deathLogDisplay = log;
+  }
+
   /** On the server: who handles the requests, so the network never depends on the player code. */
   public static void setTabletRequests(TabletRequests requests) {
     tabletRequests = requests;
@@ -143,6 +169,20 @@ public final class CubitNetwork {
 
   public static void sendUnloadChests(ServerPlayer player, UnloadChestsPayload chests) {
     send(player, chests);
+  }
+
+  public static void sendDeathLog(ServerPlayer player, DeathLogPayload log) {
+    send(player, log);
+  }
+
+  /** On the client: the guide button of a row of the Deaths tab, to guide or to cancel. */
+  public static void guideToDeath(UUID robot, int row, long dayTime, boolean start) {
+    PacketDistributor.sendToServer(new DeathGuidePayload(robot, row, dayTime, start));
+  }
+
+  /** On the client: the delete button of a row of the Deaths tab. */
+  public static void deleteDeath(int row, long dayTime) {
+    PacketDistributor.sendToServer(new DeleteDeathPayload(row, dayTime));
   }
 
   /** On the client: asks the server to choose a Cubit and to open its screen. */

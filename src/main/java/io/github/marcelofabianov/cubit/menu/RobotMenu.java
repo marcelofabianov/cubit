@@ -62,6 +62,9 @@ public class RobotMenu extends RobotMenuReading {
   /** The unload switch of the settings tab, after Follow of the Tablet (answer 1093). */
   public static final int UNLOAD_BUTTON = 18;
 
+  /** The death point switch of the settings tab, after Unload of the Tablet (answer 1118). */
+  public static final int DEATH_POINT_BUTTON = 20;
+
   /** The rows of every tier, so the screen keeps the height of the Base (answer 1101). */
   public static final int VISIBLE_ROWS = InventoryGrid.ROWS;
 
@@ -153,6 +156,7 @@ public class RobotMenu extends RobotMenuReading {
             source.defense(),
             source.power(),
             source.torches(),
+            source.deathPoint(),
             source.switches());
     values.refresh();
     return new RobotMenuServer(
@@ -284,6 +288,14 @@ public class RobotMenu extends RobotMenuReading {
 
   public Optional<RobotTier> torchUnlockTier() {
     int value = values.get(RobotScreenValues.TORCH_UNLOCK_TIER);
+    return value == 0
+        ? Optional.empty()
+        : Optional.of(ScreenEnums.of(RobotTier.values(), value - 1));
+  }
+
+  /** The first tier that marks the death point, for the locked switch (answer 1118). */
+  public Optional<RobotTier> deathPointUnlockTier() {
+    int value = values.get(RobotScreenValues.DEATH_POINT_UNLOCK_TIER);
     return value == 0
         ? Optional.empty()
         : Optional.of(ScreenEnums.of(RobotTier.values(), value - 1));

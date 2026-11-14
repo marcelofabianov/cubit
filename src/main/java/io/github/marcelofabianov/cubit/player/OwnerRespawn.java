@@ -7,7 +7,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
-/** Calls the robot back when its owner respawns. */
+/** Calls the robot back when its owner respawns, and it tells where the owner fell (1111). */
 @EventBusSubscriber(modid = CubitMod.MOD_ID)
 public final class OwnerRespawn {
   private OwnerRespawn() {}
@@ -17,6 +17,7 @@ public final class OwnerRespawn {
   public static void onPlayerRespawn(PlayerEvent.PlayerRespawnEvent event) {
     if (!event.isEndConquered() && event.getEntity() instanceof ServerPlayer owner) {
       RobotRespawn.bringTo(owner);
+      RobotRespawn.tellDeathPoint(owner);
     }
   }
 }

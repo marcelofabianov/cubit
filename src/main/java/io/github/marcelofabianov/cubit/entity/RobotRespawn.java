@@ -2,6 +2,7 @@ package io.github.marcelofabianov.cubit.entity;
 
 import io.github.marcelofabianov.cubit.CubitMod;
 import io.github.marcelofabianov.cubit.domain.behavior.RespawnReturn;
+import io.github.marcelofabianov.cubit.registry.CubitAttachments;
 import java.util.UUID;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
@@ -22,6 +23,22 @@ public final class RobotRespawn {
     if (server != null) {
       RobotFollowing.follower(owner).ifPresent(robot -> bringTo(owner, server, robot));
     }
+  }
+
+  /**
+   * The Cubit that follows, back with the owner, says where the last death was. A Cubit left in
+   * another dimension cannot speak to the owner, as any other text (answer 1111).
+   */
+  public static void tellDeathPoint(ServerPlayer owner) {
+    owner
+        .getData(CubitAttachments.DEATH_LOG)
+        .latest()
+        .ifPresent(death ->
+            RobotFollowing.follower(owner)
+                .map(robot -> owner.serverLevel().getEntity(robot))
+                .filter(RobotEntity.class::isInstance)
+                .map(RobotEntity.class::cast)
+                .ifPresent(robot -> robot.docking().deathGuide().tellOnRespawn(death)));
   }
 
   private static void bringTo(ServerPlayer owner, MinecraftServer server, UUID robotId) {

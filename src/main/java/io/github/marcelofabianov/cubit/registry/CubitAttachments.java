@@ -1,9 +1,11 @@
 package io.github.marcelofabianov.cubit.registry;
 
 import io.github.marcelofabianov.cubit.CubitMod;
+import io.github.marcelofabianov.cubit.domain.behavior.DeathLog;
 import io.github.marcelofabianov.cubit.entity.RobotTickReading;
 import io.github.marcelofabianov.cubit.player.ChosenRobotLink;
 import io.github.marcelofabianov.cubit.player.FollowingRobotLink;
+import io.github.marcelofabianov.cubit.player.SavedDeathLog;
 import java.util.function.Supplier;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.attachment.AttachmentType;
@@ -18,6 +20,7 @@ public final class CubitAttachments {
   private static final String FOLLOWING_ROBOT_ID = "following_robot";
   private static final String ROBOT_TICK_READING_ID = "robot_tick_reading";
   private static final String CHOSEN_ROBOT_ID = "chosen_robot";
+  private static final String DEATH_LOG_ID = "death_log";
   private static final DeferredRegister<AttachmentType<?>> ATTACHMENTS =
       DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, CubitMod.MOD_ID);
 
@@ -38,6 +41,16 @@ public final class CubitAttachments {
           () ->
               AttachmentType.builder(() -> ChosenRobotLink.NOBODY)
                   .serialize(ChosenRobotLink.CODEC)
+                  .copyOnDeath()
+                  .build());
+
+  // The deaths of the player, kept through death, since a death is recorded as it happens (1114).
+  public static final Supplier<AttachmentType<DeathLog>> DEATH_LOG =
+      ATTACHMENTS.register(
+          DEATH_LOG_ID,
+          () ->
+              AttachmentType.builder(() -> DeathLog.EMPTY)
+                  .serialize(SavedDeathLog.CODEC)
                   .copyOnDeath()
                   .build());
 

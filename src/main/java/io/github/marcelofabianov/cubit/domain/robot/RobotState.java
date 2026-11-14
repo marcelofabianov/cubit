@@ -24,7 +24,8 @@ public record RobotState(
     PickupSettings pickup,
     boolean torchesOn,
     boolean autoReturnOn,
-    boolean unloadOn) {
+    boolean unloadOn,
+    boolean deathPointOn) {
   private static final String INVALID_HEALTH_MESSAGE = "Invalid robot health: ";
   private static final float MIN_PLACED_HEALTH = 1f;
 
@@ -34,39 +35,7 @@ public record RobotState(
     }
   }
 
-  /** The unload starts switched on, also for what was saved before its switch existed. */
-  public RobotState(
-      RobotTier tier,
-      Energy energy,
-      float health,
-      boolean lampOn,
-      RobotColor color,
-      boolean scannersOn,
-      OreFilter oreFilter,
-      boolean chatterOn,
-      DefenseMode defenseMode,
-      boolean solarOn,
-      PickupSettings pickup,
-      boolean torchesOn,
-      boolean autoReturnOn) {
-    this(
-        tier,
-        energy,
-        health,
-        lampOn,
-        color,
-        scannersOn,
-        oreFilter,
-        chatterOn,
-        defenseMode,
-        solarOn,
-        pickup,
-        torchesOn,
-        autoReturnOn,
-        true);
-  }
-
-  /** The auto return starts switched on, also for what was saved before its switch existed. */
+  /** The switches that came later start on, also for what was saved before they existed. */
   public RobotState(
       RobotTier tier,
       Energy energy,
@@ -93,34 +62,8 @@ public record RobotState(
         solarOn,
         pickup,
         torchesOn,
-        true);
-  }
-
-  /** The torches start switched on, also for what was saved before their switch existed. */
-  public RobotState(
-      RobotTier tier,
-      Energy energy,
-      float health,
-      boolean lampOn,
-      RobotColor color,
-      boolean scannersOn,
-      OreFilter oreFilter,
-      boolean chatterOn,
-      DefenseMode defenseMode,
-      boolean solarOn,
-      PickupSettings pickup) {
-    this(
-        tier,
-        energy,
-        health,
-        lampOn,
-        color,
-        scannersOn,
-        oreFilter,
-        chatterOn,
-        defenseMode,
-        solarOn,
-        pickup,
+        true,
+        true,
         true);
   }
 
@@ -147,7 +90,11 @@ public record RobotState(
         chatterOn,
         defenseMode,
         solarOn,
-        PickupSettings.INITIAL);
+        PickupSettings.INITIAL,
+        true,
+        true,
+        true,
+        true);
   }
 
   /** The solar panel starts switched on, also for what was saved before its switch existed. */
@@ -225,7 +172,8 @@ public record RobotState(
         pickup,
         torchesOn,
         autoReturnOn,
-        unloadOn);
+        unloadOn,
+        deathPointOn);
   }
 
   public RobotState repaired(TierSpec spec, Percentage health) {
@@ -243,7 +191,8 @@ public record RobotState(
         pickup,
         torchesOn,
         autoReturnOn,
-        unloadOn);
+        unloadOn,
+        deathPointOn);
   }
 
   /**
@@ -264,7 +213,8 @@ public record RobotState(
         pickup,
         torchesOn,
         autoReturnOn,
-        unloadOn);
+        unloadOn,
+        deathPointOn);
   }
 
   public RobotState withPickup(PickupSettings next) {
@@ -282,7 +232,8 @@ public record RobotState(
         next,
         torchesOn,
         autoReturnOn,
-        unloadOn);
+        unloadOn,
+        deathPointOn);
   }
 
   public RobotState withTorches(boolean on) {
@@ -300,7 +251,8 @@ public record RobotState(
         pickup,
         on,
         autoReturnOn,
-        unloadOn);
+        unloadOn,
+        deathPointOn);
   }
 
   public RobotState withAutoReturn(boolean on) {
@@ -318,7 +270,8 @@ public record RobotState(
         pickup,
         torchesOn,
         on,
-        unloadOn);
+        unloadOn,
+        deathPointOn);
   }
 
   public RobotState withUnload(boolean on) {
@@ -336,6 +289,26 @@ public record RobotState(
         pickup,
         torchesOn,
         autoReturnOn,
+        on,
+        deathPointOn);
+  }
+
+  public RobotState withDeathPoint(boolean on) {
+    return new RobotState(
+        tier,
+        energy,
+        health,
+        lampOn,
+        color,
+        scannersOn,
+        oreFilter,
+        chatterOn,
+        defenseMode,
+        solarOn,
+        pickup,
+        torchesOn,
+        autoReturnOn,
+        unloadOn,
         on);
   }
 

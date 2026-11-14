@@ -65,6 +65,7 @@ final class TierSection {
   private final ModConfigSpec.IntValue returnCharge;
   private final AreaKeys area;
   private final UnloadKeys unload;
+  private final DeathPointKey deathPoint;
 
   TierSection(ModConfigSpec.Builder builder, TierSpec defaults) {
     batteryCapacity = energy(builder, BATTERY_CAPACITY, defaults.batteryCapacity(), MIN_POSITIVE);
@@ -81,12 +82,7 @@ final class TierSection {
         builder.defineInRange(MAX_HEALTH, defaults.maxHealth(), MIN_POSITIVE, MAX_HEALTH_LIMIT);
     callRadius =
         count(builder, CALL_RADIUS, defaults.callRadiusBlocks(), TierSpec.MAX_CALL_RADIUS_BLOCKS);
-    speedMultiplier =
-        builder.defineInRange(
-            SPEED_MULTIPLIER,
-            defaults.speedMultiplier(),
-            MIN_SPEED_MULTIPLIER,
-            MAX_SPEED_MULTIPLIER);
+    speedMultiplier = speed(builder, defaults.speedMultiplier());
     shock = new ShockKeys(builder, defaults.shock());
     pickup = new PickupKeys(builder, defaults.pickup());
     powerBankCapacity =
@@ -95,6 +91,7 @@ final class TierSection {
     returnCharge = percent(builder, RETURN_CHARGE, defaults.returnCharge());
     area = new AreaKeys(builder, defaults.area());
     unload = new UnloadKeys(builder, defaults.unload());
+    deathPoint = new DeathPointKey(builder, defaults.deathPoint());
   }
 
   TierSpec read() {
@@ -116,7 +113,14 @@ final class TierSection {
         torches.read(),
         new Percentage(returnCharge.get()),
         area.read(),
-        unload.read());
+        unload.read(),
+        deathPoint.read());
+  }
+
+  private static ModConfigSpec.DoubleValue speed(
+      ModConfigSpec.Builder builder, double defaultValue) {
+    return builder.defineInRange(
+        SPEED_MULTIPLIER, defaultValue, MIN_SPEED_MULTIPLIER, MAX_SPEED_MULTIPLIER);
   }
 
   private static ModConfigSpec.IntValue count(

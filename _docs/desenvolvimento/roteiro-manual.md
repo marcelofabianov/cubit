@@ -845,6 +845,28 @@ As regras estão em [`inventario.md`](../funcionalidades/inventario.md#descarreg
 | 16 | Recolha e coloque o Cubit | Os baús se perderam, e as setas somem |
 | 17 | Com o jogo em português | `Descarga`, `Descarregar`, `Baú marcado para Cubit` e `Inventário 0 / 27` |
 
+## Local de morte
+
+As regras estão em [`movimento.md`](../funcionalidades/movimento.md#local-de-morte) e a aba, em [`tablet.md`](../funcionalidades/tablet.md#aba-mortes). Use um Cubit Base, um Advanced e um Elite com carga, os Modules por `/give` e o Tablet. Para morrer, use `/kill @s` ou caia de um lugar alto, em modo sobrevivência.
+
+| # | Faça | Espere |
+|---|---|---|
+| 1 | Abra a aba Settings de um Cubit Base | A linha `Death point`, apagada, com `Unlocks at Advanced` |
+| 2 | Com um Cubit Advanced seguindo você, morra no Overworld e renasça | O Cubit volta com você e mostra `Cubit: You fell at x, y, z · Overworld`, com a coordenada da morte. Ele não sai guiando |
+| 3 | Abra a tela do Cubit pelo Tablet, na aba Mortes, com o ícone próprio | Uma linha com `Day N, hh:mm`, `Overworld`, a coordenada e a causa, e os botões `Guide` e `Delete` |
+| 4 | Passe o mouse em `Guide` | Botão cinza, com `Unlocks at Elite` na dica |
+| 5 | Morra mais duas vezes e abra a aba | Três linhas, da mais recente para a mais antiga |
+| 6 | Clique em `Delete` na linha do meio | Só ela some |
+| 7 | Troque para um Cubit Elite que siga você e clique em `Guide` numa morte no Overworld | O botão vira `Cancel`, e o Cubit anda na sua frente até o local, esperando quando você fica a mais de 8 blocos |
+| 8 | Fique parado longe e depois ande até o local | O Cubit espera você e segue andando. A 3 blocos do local, mostra `Cubit: Here is where you fell` e volta a seguir. O botão volta a `Guide` |
+| 9 | Peça `Guide` de novo e clique em `Cancel` | O Cubit para de guiar e volta a seguir |
+| 10 | Peça `Guide` e use `Go to Dock` no Tablet | A guia é cancelada, e ele vai ao Dock |
+| 11 | Morra no Nether e abra a aba no Overworld | A linha do Nether com `Guide` cinza e `The Cubit only guides in the Overworld` na dica |
+| 12 | Peça `Guide` para um local cercado, sem caminho | Depois de cerca de 10 s, `Cubit: I can't find a way there`, e ele volta a seguir |
+| 13 | Desligue `Death point` na aba Settings, morra e renasça | Nenhum texto. A morte entra na aba mesmo assim, e `Guide` mostra `The Death point switch is off` |
+| 14 | Recolha e coloque o Cubit, e saia e entre no mundo | A chave continua desligada, e as mortes continuam na aba |
+| 15 | Com o jogo em português | `Local de morte`, `Mortes`, `Dia N, hh:mm`, `Superfície`, `Guiar`, `Cancelar`, `Excluir` e `Cubit: Você morreu em x, y, z · Superfície` |
+
 ## Tradução
 
 | # | Passo | Resultado esperado |
@@ -904,6 +926,7 @@ Na instância só com o mod, tire capturas com F2 do Cubit seguindo, da tela do 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-14 18:47 | Adiciona o roteiro do local de morte. |
 | Marcelo Fabiano | 2026-11-14 16:33 | Deixa o filtro e o inventário do player à esquerda. |
 | Marcelo Fabiano | 2026-11-14 16:18 | Adiciona o filtro alinhado e o slot de energia na fileira do Tablet. |
 | Marcelo Fabiano | 2026-11-14 16:00 | Adiciona as abas que acompanham a janela. |

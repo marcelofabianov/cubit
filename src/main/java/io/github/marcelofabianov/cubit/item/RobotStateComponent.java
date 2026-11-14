@@ -47,6 +47,8 @@ public final class RobotStateComponent {
   private static final boolean AUTO_RETURN_DEFAULT = true;
   private static final String UNLOAD_FIELD = "unload_enabled";
   private static final boolean UNLOAD_DEFAULT = true;
+  private static final String DEATH_POINT_FIELD = "death_point_enabled";
+  private static final boolean DEATH_POINT_DEFAULT = true;
   private static final String UNKNOWN_DEFENSE_MESSAGE = "Unknown defense mode {}. Using peaceful.";
   private static final String UNKNOWN_COLOR_MESSAGE = "Unknown robot color {}. Using white.";
   private static final String UNKNOWN_TIER_MESSAGE = "Unknown robot tier {}. Using the base tier.";
@@ -69,7 +71,8 @@ public final class RobotStateComponent {
    * The switches added last, in one part of the codec, which holds at most 16 fields. They stay
    * flat in the saved component, so the names are the same as before.
    */
-  private record LateSwitches(boolean torches, boolean autoReturn, boolean unload) {}
+  private record LateSwitches(
+      boolean torches, boolean autoReturn, boolean unload, boolean deathPoint) {}
 
   private static final MapCodec<LateSwitches> LATE_SWITCHES =
       RecordCodecBuilder.mapCodec(instance ->
@@ -83,7 +86,10 @@ public final class RobotStateComponent {
                       .forGetter(LateSwitches::autoReturn),
                   Codec.BOOL
                       .optionalFieldOf(UNLOAD_FIELD, UNLOAD_DEFAULT)
-                      .forGetter(LateSwitches::unload))
+                      .forGetter(LateSwitches::unload),
+                  Codec.BOOL
+                      .optionalFieldOf(DEATH_POINT_FIELD, DEATH_POINT_DEFAULT)
+                      .forGetter(LateSwitches::deathPoint))
               .apply(instance, LateSwitches::new));
 
   public static final Codec<RobotState> CODEC =
@@ -127,7 +133,11 @@ public final class RobotStateComponent {
                       .optionalFieldOf(FETCH_FIELD, PickupSettings.INITIAL.fetchOn())
                       .forGetter(state -> state.pickup().fetchOn()),
                   LATE_SWITCHES.forGetter(state ->
-                      new LateSwitches(state.torchesOn(), state.autoReturnOn(), state.unloadOn())))
+                      new LateSwitches(
+                          state.torchesOn(),
+                          state.autoReturnOn(),
+                          state.unloadOn(),
+                          state.deathPointOn())))
               .apply(
                   instance,
                   (tier,
@@ -159,7 +169,8 @@ public final class RobotStateComponent {
                           new PickupSettings(pickup, magnet, fetch, pickupFilter),
                           late.torches(),
                           late.autoReturn(),
-                          late.unload())));
+                          late.unload(),
+                          late.deathPoint())));
 
   public static final StreamCodec<ByteBuf, RobotState> STREAM_CODEC =
       ByteBufCodecs.fromCodec(CODEC);
