@@ -16,8 +16,10 @@ import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.common.CommonHooks;
 import net.neoforged.neoforge.gametest.GameTestHolder;
 import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 
@@ -31,6 +33,7 @@ public final class TabletGameTests {
   private static final String WRONG_LIST = "The Tablet listed the wrong Cubits";
   private static final String WRONG_CHOICE = "The Tablet chose the wrong Cubit";
   private static final String WRONG_APP = "A new Tablet should open";
+  private static final String TOOK_THE_CLICK = "The click at the spot took the click";
 
   private TabletGameTests() {}
 
@@ -79,6 +82,26 @@ public final class TabletGameTests {
     owner.moveTo(robot.getX(), robot.getY(), robot.getZ());
 
     owner.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(CubitItems.TABLET.get()));
+    owner.interactOn(robot, InteractionHand.MAIN_HAND);
+
+    helper.assertValueEqual(chosen(owner), Optional.of(robot.getUUID()), WRONG_CHOICE);
+    helper.succeed();
+  }
+
+  /**
+   * The click of the game has two steps, and the client sends the click on the entity only when the
+   * step at the spot does not take the click. With the Tablet, that step must pass.
+   */
+  @GameTest(template = ARENA)
+  public static void theClickAtTheSpotLetsTheTabletSeeTheCubit(GameTestHelper helper) {
+    ServerPlayer owner = GameTestRobots.onlinePlayer(helper);
+    RobotEntity robot = GameTestRobots.placeNewRobot(helper, owner, FIRST);
+    owner.moveTo(robot.getX(), robot.getY(), robot.getZ());
+    owner.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(CubitItems.TABLET.get()));
+
+    InteractionResult atSpot =
+        CommonHooks.onInteractEntityAt(owner, robot, robot.position(), InteractionHand.MAIN_HAND);
+    helper.assertFalse(atSpot == null || atSpot.consumesAction(), TOOK_THE_CLICK);
     owner.interactOn(robot, InteractionHand.MAIN_HAND);
 
     helper.assertValueEqual(chosen(owner), Optional.of(robot.getUUID()), WRONG_CHOICE);

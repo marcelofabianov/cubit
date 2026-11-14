@@ -42,12 +42,16 @@ public final class TabletEvents {
     TabletUse.click(player, event.getItemStack(), new TabletUse.Living(event.getTarget()));
   }
 
-  /** The entity of an armor stand and a few others answer here, before the event above. */
+  /**
+   * An armor stand and a few others answer here, before the event above, so the entity is kept from
+   * acting. The result is a pass: a success would end the click on the client, which would then
+   * never send the click on the entity, and the Tablet would never see it.
+   */
   @SubscribeEvent
   public static void onEntityInteractSpecific(PlayerInteractEvent.EntityInteractSpecific event) {
     if (event.getItemStack().is(CubitItems.TABLET.get())) {
       event.setCanceled(true);
-      event.setCancellationResult(InteractionResult.SUCCESS);
+      event.setCancellationResult(InteractionResult.PASS);
     }
   }
 
