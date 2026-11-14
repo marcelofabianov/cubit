@@ -784,6 +784,17 @@ As regras estão em [`modo-area.md`](../funcionalidades/modo-area.md). Use um Cu
 | 19 | Recolha o Cubit e coloque-o de novo | A área se perdeu, e ele segue você |
 | 20 | Com o jogo em português | `Tablet · Área`, `Na área`, `Inventário cheio` e `Área` na aba Recursos |
 
+## Cores dos apps do Tablet
+
+As regras estão em [`tablet.md`](../funcionalidades/tablet.md#apps).
+
+| # | Faça | Espere |
+|---|---|---|
+| 1 | Com o Tablet na mão, troque de app com Shift + roda | Uma linha só acima da hotbar, como `Cubit Tablet · Dock`, em negrito e em vermelho |
+| 2 | Passe pelos apps | Open em azul, Alvo em verde, Dock em vermelho e Área em roxo |
+| 3 | Olhe o Tablet na hotbar e no inventário | Uma faixa fina com a cor do app ativo, na parte de baixo do ícone |
+| 4 | Passe o mouse sobre o Tablet no inventário | O nome é só `Cubit Tablet` |
+
 ## Tradução
 
 | # | Passo | Resultado esperado |
@@ -843,6 +854,7 @@ Na instância só com o mod, tire capturas com F2 do Cubit seguindo, da tela do 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-14 13:20 | Adiciona as cores dos apps do Tablet. |
 | Marcelo Fabiano | 2026-11-14 12:40 | Adiciona o modo área. |
 | Marcelo Fabiano | 2026-11-14 11:20 | Adiciona o `Follow` do Tablet. |
 | Marcelo Fabiano | 2026-11-14 10:30 | Adiciona o retorno automático. |

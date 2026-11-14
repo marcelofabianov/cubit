@@ -2,11 +2,9 @@ package io.github.marcelofabianov.cubit.item;
 
 import io.github.marcelofabianov.cubit.block.InductionDockBlockEntity;
 import io.github.marcelofabianov.cubit.domain.robot.TabletApp;
-import io.github.marcelofabianov.cubit.menu.TabletKeys;
 import io.github.marcelofabianov.cubit.player.TabletUse;
 import io.github.marcelofabianov.cubit.registry.CubitDataComponents;
 import java.util.Optional;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -39,13 +37,6 @@ public final class TabletItem extends Item {
 
   public static String appKey(TabletApp app) {
     return APP_PREFIX + app.key();
-  }
-
-  /** The active app shows in the name, as `Cubit Tablet · Open` (answer 1006). */
-  @Override
-  public Component getName(ItemStack stack) {
-    return Component.translatable(
-        TabletKeys.WITH_APP, super.getName(stack), Component.translatable(appKey(appOf(stack))));
   }
 
   @Override

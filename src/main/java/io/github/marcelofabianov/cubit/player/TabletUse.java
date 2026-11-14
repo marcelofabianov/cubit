@@ -7,6 +7,7 @@ import io.github.marcelofabianov.cubit.domain.robot.TabletApp;
 import io.github.marcelofabianov.cubit.domain.robot.TabletApps;
 import io.github.marcelofabianov.cubit.entity.RobotEntity;
 import io.github.marcelofabianov.cubit.entity.RobotTablet;
+import io.github.marcelofabianov.cubit.item.TabletAppLook;
 import io.github.marcelofabianov.cubit.item.TabletItem;
 import io.github.marcelofabianov.cubit.menu.TabletKeys;
 import io.github.marcelofabianov.cubit.registry.CubitAttachments;
@@ -77,8 +78,9 @@ public final class TabletUse {
     for (InteractionHand hand : InteractionHand.values()) {
       ItemStack held = player.getItemInHand(hand);
       if (held.is(CubitItems.TABLET.get())) {
-        TabletItem.setApp(held, appsFor(chosen(player)).next(TabletItem.appOf(held), direction));
-        player.displayClientMessage(held.getHoverName(), true);
+        TabletApp next = appsFor(chosen(player)).next(TabletItem.appOf(held), direction);
+        TabletItem.setApp(held, next);
+        player.displayClientMessage(TabletAppLook.label(next), true);
         TabletAreaApp.forget(player);
         return;
       }

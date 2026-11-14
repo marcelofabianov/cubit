@@ -18,6 +18,7 @@ import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
+import net.neoforged.neoforge.client.event.RegisterItemDecorationsEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 
@@ -63,6 +64,12 @@ public final class CubitClient {
                 : NO_TINT,
         CubitItems.GENERAL_ROBOT.get(),
         CubitItems.DAMAGED_GENERAL_ROBOT.get());
+  }
+
+  /** The strip with the color of the active app of the Tablet (answer 1084). */
+  @SubscribeEvent
+  public static void registerItemDecorations(RegisterItemDecorationsEvent event) {
+    event.register(CubitItems.TABLET.get(), new TabletAppStrip());
   }
 
   @SubscribeEvent
