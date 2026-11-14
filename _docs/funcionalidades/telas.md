@@ -95,7 +95,7 @@ Entra com o choque e os modos de defesa, nos itens 5 e 6 da Fase 4 (perguntas 82
 
 ### Aba Behavior
 
-Entra com a coleta e o ímã, no item 9 da Fase 4.1 (perguntas 878 a 888). As regras estão em [`inventario.md`](inventario.md#coleta). Na Fase 4.2, recebe a descarga, o retorno e o local de morte.
+Entra com a coleta e o ímã, no item 9 da Fase 4.1 (perguntas 878 a 888). As regras estão em [`inventario.md`](inventario.md#coleta). As chaves da descarga e do retorno ficaram na aba Settings (perguntas 1066, 1093 e 1128).
 
 - **Slots:** o inventário e a hotbar do player continuam visíveis e usáveis, para o player pegar o item do filtro. Só o inventário do Cubit e o slot de energia somem, e o painel ocupa o lugar deles (pergunta 893).
 - **Cabeçalho:** `Behavior` / `Comportamento`, a etiqueta do tier e `Battery 71%`, como na Settings.
@@ -248,6 +248,7 @@ Pergunta 691.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-14 18:17 | Corrige a aba Behavior, que não recebe as chaves da Fase 4.2 (pergunta 1128). |
 | Marcelo Fabiano | 2026-11-14 16:33 | Deixa o filtro e o inventário do player à esquerda, com o filtro responsivo (pergunta 1105). |
 | Marcelo Fabiano | 2026-11-14 16:18 | Alinha o filtro com o inventário do player (pergunta 1104). |
 | Marcelo Fabiano | 2026-11-14 16:00 | Faz as abas acompanharem a janela, com a descrição na linha (pergunta 1102). |

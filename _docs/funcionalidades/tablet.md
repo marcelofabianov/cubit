@@ -153,7 +153,7 @@ Fica fixo em todas as abas. `Voltar` fica no canto superior esquerdo, e os botõ
 |---|---|---|
 | Item | `cubit:tablet` | O Tablet |
 | Receita | `cubit:tablet` | A receita com forma |
-| Componente do item | `cubit:tablet_app` | O app ativo: `open`, `target`, `dock` ou `area`. Sem o componente, vale `open` |
+| Componente do item | `cubit:tablet_app` | O app ativo: `open`, `target`, `dock`, `area` ou `unload`. Sem o componente, vale `open` (pergunta 1128) |
 | Attachment do player | `cubit:chosen_robot` | O UUID do Cubit escolhido |
 | NBT da entidade | `PreferredDock` | O Dock preferido: `Block`, a posição num `long`, e `Dimension`. Sem a chave, o Cubit não tem Dock preferido |
 | Menu | `cubit:tablet_robot` | A tela do Cubit no Tablet, com a cor, o lugar e a chave geral nos valores do menu |
@@ -178,6 +178,7 @@ Os textos em inglês e português, como `Cubit Tablet` / `Tablet do Cubit`, `Tab
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-14 18:17 | Acrescenta o app `unload` ao contrato de `cubit:tablet_app` (pergunta 1128). |
 | Marcelo Fabiano | 2026-11-14 16:18 | Põe o slot de energia na fileira dos slots exclusivos (pergunta 1104). |
 | Marcelo Fabiano | 2026-11-14 16:00 | Mostra a descrição das chaves na aba Recursos (pergunta 1103). |
 | Marcelo Fabiano | 2026-11-14 15:36 | Mostra o inventário inteiro na aba Inventário (pergunta 1101). |
