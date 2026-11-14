@@ -1,6 +1,6 @@
 # Trabalhos
 
-Conceito da Fase 5, planejada para depois da Fase 4. Nada aqui está implementado, e o documentado pode mudar se aparecer um impedimento técnico (regra 48 do `AGENTS.md`). As decisões ficam em [`fase-5-trabalhos.md`](../perguntas/fase-5-trabalhos.md), nas perguntas 190 a 256.
+Conceito da Fase 5, planejada para depois da Fase 4. Nada aqui está implementado, e o documentado pode mudar se aparecer um impedimento técnico (regra 48 do `AGENTS.md`). As decisões ficam em [`fase-5-trabalhos.md`](../perguntas/fase-5-trabalhos.md), nas perguntas 190 a 256 e 1136 a 1156. O conceito de cada trabalho fica na pasta [`trabalhos/`](trabalhos/) (pergunta 1148).
 
 Números: [`tiers.md`](../tiers.md#trabalhos). Nomes e IDs previstos: [`itens.md`](../itens.md#previstos-na-fase-5).
 
@@ -14,19 +14,52 @@ O mod funciona numa instância só com ele e suas dependências. Tudo aceita red
 
 - **Slot:** o card fica num slot exclusivo e sai quando o player quiser, sem perda. Sem card, o Cubit é generalista.
 - **Quantidade:** um por Cubit, e o tier melhora o que o card faz.
-- **Tier:** o Base não aceita cards. O primeiro tier que aceita é o Avançado.
+- **Tier:** o Base não aceita cards, e cada card tem o seu tier mínimo, na tabela abaixo (pergunta 1145). Cada tier mantém os trabalhos do anterior e ganha novos.
 - **Estado:** morrer e recolher preservam o card.
 - **Seguindo:** age como generalista. O card só age em área marcada.
 - **Item:** um por trabalho, com receita própria em JSON e materiais do jogo puro. Os cards empilham.
 - **Custo:** gasta o consumo ao andar e mais um valor por ação, por card, sem gastar se não houver ação.
 
+### Trabalhos por tier
+
+| Tier | Trabalhos |
+|---|---|
+| Base | Nenhum. Não aceita cards |
+| Avançado | Pescador, Fazendeiro e Pecuarista |
+| Elite | Os do Avançado, mais Organizador, Cozinheiro, Defensor e Minerador |
+| Ultimate | Os do Elite, mais Construtor, Mecânico e Alquimista |
+
+O tier também melhora o que o card faz, com mais velocidade, alcance ou opções. A evolução de cada card é proposta e é decidida no refinamento dele, com os números em [`tiers.md`](../tiers.md#trabalhos) (perguntas 1144 e 1154). A do Minerador e a do Defensor já estão decididas (perguntas 1149 e 1150).
+
+### Os trabalhos
+
+| Trabalho | Card | Tier mínimo | O que faz | Conceito |
+|---|---|---|---|---|
+| Pescador | `cubit:ml_fisher` | Avançado | Pesca na água aberta da área, sem vara | [`pescador.md`](trabalhos/pescador.md) |
+| Fazendeiro | `cubit:ml_farmer` | Avançado | Colhe o que amadureceu e replanta | [`fazendeiro.md`](trabalhos/fazendeiro.md) |
+| Pecuarista | `cubit:ml_rancher` | Avançado | Alimenta, tosquia, recolhe ovos e controla o rebanho | [`pecuarista.md`](trabalhos/pecuarista.md) |
+| Organizador | `cubit:ml_organizer` | Elite | Recolhe e guarda nos baús certos, ou abastece destinos | [`organizador.md`](trabalhos/organizador.md) |
+| Cozinheiro | `cubit:ml_cook` | Elite | Leva comida crua aos fornos e guarda a pronta | [`cozinheiro.md`](trabalhos/cozinheiro.md) |
+| Defensor | `cubit:ml_defender` | Elite | Protege a área e quem está nela | [`defensor.md`](trabalhos/defensor.md) |
+| Minerador | `cubit:ml_miner` | Elite | Escava, abre túneis ou busca minérios, com a fornalha elétrica | [`minerador.md`](trabalhos/minerador.md) |
+| Construtor | `cubit:ml_builder` | Ultimate | Aplaina e preenche, com os modos novos propostos | [`construtor.md`](trabalhos/construtor.md) |
+| Mecânico | `cubit:ml_mechanic` | Ultimate | Recarrega, conserta, repara a vida e destrava os outros Cubits | [`mecanico.md`](trabalhos/mecanico.md) |
+| Alquimista | `cubit:ml_alchemist` | Ultimate | Prepara poções em cadeia nos suportes de poções | [`alquimista.md`](trabalhos/alquimista.md) |
+
+Os itens "Em aberto" de cada conceito são respondidos no refinamento do card daquele trabalho (pergunta 1153).
+
+### Outras ideias
+
+- **Talvez, ainda sem fase:** o Arquiteto, que copia uma estrutura de uma área para outra, e o Comerciante, que negocia com aldeões (pergunta 1146).
+- **Descartados:** o Artesão, com o Crafter do jogo, e o Logístico, com os canais do storage wireless (pergunta 1146).
+
 ## Como o Cubit começa a trabalhar
 
 1. Com o app Área do [Tablet](tablet.md#apps), o player marca dois cantos, que definem uma área em 3D.
-2. O processo só termina ao selecionar o Cubit no controle. Ele deixa de seguir e passa a trabalhar.
-3. O controle também manda esvaziar o inventário ou voltar à base.
+2. O processo só termina ao escolher o Cubit no Tablet. Ele deixa de seguir e vai para a área, como no [modo área](modo-area.md) da Fase 4.2.
+3. O Tablet também manda descarregar ou ir ao Dock, pelos botões `Descarregar` e `Ir para o Dock`.
 
-Baús são marcados com o controle, e a tela do Cubit tem uma aba Trabalho, com modo e filtros. Se o player recolher o Cubit e colocá-lo de novo, precisa refazer a configuração.
+Os baús são marcados com o app Descarga do Tablet, e a tela do Cubit tem uma aba Trabalho, com modo e filtros. Marcar os outros blocos do trabalho, como fornos, suportes de poções e água, precisa de um app do Tablet, que o primeiro card que precisar dele decide (pergunta 1155). Se o player recolher o Cubit e colocá-lo de novo, precisa refazer a configuração.
 
 ## Regras de toda área
 
@@ -38,62 +71,7 @@ Baús são marcados com o controle, e a tela do Cubit tem uma aba Trabalho, com 
 
 ## Hibernação fora do Dock
 
-Estado semelhante ao desligado, mas com o inventário e as configurações acessíveis. O Cubit fica imóvel e sem tarefas, como dormindo. Ele volta pelo botão `Retomar`, na tela, ou pelo controle. Se o motivo não sumiu, hiberna de novo e explica. A hibernação no Dock continua saindo sozinha (pergunta 55).
-
-## Trabalhos do Cubit
-
-### Minerador
-
-- **Sem ferramenta:** minera sem item de picareta, com a capacidade do tier.
-- **Modos:** escava a área, abre túnel reto ou em degraus, ou busca minérios do filtro. É um modo por vez, sempre dentro da área. É uma ideia inicial, com os detalhes na entrega do card (pergunta 344).
-- **Opções:** Eficiência, Fortuna e Toque Suave agem como no jogo. Fortuna e Toque Suave não ficam ativos juntos, e o player alterna entre eles na tela.
-- **Economia:** Inquebrável reduz o custo de FE por bloco, e Remendo dá um desconto extra nos blocos em que encontra minério. Nenhum dos dois cria energia.
-- **Fornalha de minérios:** funde os minérios com a bateria em vez de combustível, então fundir gasta autonomia. Veio dos slots exclusivos da Fase 4.1, e os detalhes ficam para a entrega do card (pergunta 930).
-- **Lanterna de cabeça:** com um feixe à frente, como na prancha do conceito (pergunta 463). A viabilidade e o alcance ficam para a entrega do card.
-
-### Fazendeiro
-
-Colhe o que estiver maduro, pelas tags comuns de plantações, e replanta com as sementes do inventário. Não ara terra nova. Sem semente, deixa o bloco vazio e segue.
-
-### Pescador
-
-Na área com água aberta, pesca pela tabela de pesca do jogo, em intervalos e gastando FE, sem vara e sem boia.
-
-### Pecuarista
-
-Alimenta com itens do inventário, tosquia, recolhe ovos e abate só acima de um limite de animais por espécie, poupando filhotes. A regra de nunca atacar mobs pacíficos tem exceção só para este card e só na área.
-
-### Defensor
-
-É diferente do comportamento de defender o player ao seguir.
-
-- **Protege:** o dono, outros players, robôs, animais e aldeões dentro da área.
-- **Reação:** atacado, contra-ataca. Um mob hostil que entra na área só é atacado por iniciativa dele se o tier tiver o modo agressivo. Um mob neutro é atacado quando agride algo na área.
-- **Modos:** com este card, a opção Pacífico não fica disponível, e o Cubit é migrado para o modo seguinte.
-- **Dano:** cada tier que aceita o card ataca com mais dano.
-- **Ataque de fora da área:** se um mob ataca de fora, como um esqueleto com arco, o Cubit recua e procura proteção. Quando o mob entra na área, ele ataca. Se o mob sair, volta a se esconder.
-- **Drops:** guarda no inventário enquanto couberem, e o resto cai no chão. Ele não hiberna por inventário cheio e só para sem bateria. Com baú marcado, descarrega quando não houver ameaça.
-
-### Organizador
-
-Os detalhes ainda não estão fechados.
-
-- **Recolher:** pega itens do chão e do que as máquinas e fornalhas oferecem como saída, pela capability do NeoForge, sem tocar em entradas e combustível.
-- **Guardar:** usa só baús marcados. A prioridade é o que tem mais do mesmo item. Se nenhum tiver, usa o primeiro marcado com espaço. A leitura roda em intervalos.
-- **Modo de abastecer:** leva uma quantidade fixa de um baú a cada destino, por pedidos, sem craft.
-
-### Cozinheiro
-
-Na área, leva alimentos crus de baús marcados a fumeiros e fornalhas marcados, abastece combustível do inventário e leva a comida pronta a um baú marcado. Usa blocos do jogo, sem máquina nova.
-
-### Construtor
-
-Inicialmente simples, dentro da área 3D:
-
-- **Aplainar:** retira os blocos permitidos, de cima para baixo.
-- **Preencher:** usa o bloco do filtro em vazios e líquidos, de baixo para cima.
-
-Sem o bloco ou com o inventário cheio, ele hiberna.
+Estado semelhante ao desligado, mas com o inventário e as configurações acessíveis. O Cubit fica imóvel e sem tarefas, como dormindo. Ele volta pelo botão `Retomar`, na tela do Cubit ou na do Tablet. Se o motivo não sumiu, hiberna de novo e explica. A hibernação no Dock continua saindo sozinha (pergunta 55).
 
 ## Robot Server
 
@@ -127,7 +105,7 @@ A tela do Servidor mostra, por antena, robôs, tarefa, bateria, inventário e os
 Com um Cubit com trabalho trabalhando em área, todo Dock precisa estar no chunk do Servidor ou próximo a ele ou a uma antena, mesmo com o carregamento desligado. Um Cubit sem card usa qualquer Dock, como nas Fases 2 a 4.
 
 1. Com bateria baixa, o Cubit prefere um Dock livre na área.
-2. Sem ele, anda até a borda do carregado, rumo ao Dock ligado ao Servidor pelo controle.
+2. Sem ele, anda até a borda do carregado, rumo ao Dock ligado ao Servidor pelo Tablet.
 3. Teleporta para a borda do chunk do Servidor, sem custo de FE, e caminha até o Dock. Preso sem progresso, teleporta também. Sem ponto seguro, aparece na frente do Dock.
 4. Se o chunk de destino estiver descarregado, espera na borda e tenta de novo a cada intervalo. Se a bateria acabar, desliga sem perder nada.
 
@@ -140,30 +118,38 @@ Com um Cubit com trabalho trabalhando em área, todo Dock precisa estar no chunk
 
 ## Ordem de entrega
 
-1. Base comum: estado de trabalho, card em slot e aba de configuração
-2. Fazendeiro e Pescador
-3. Organizador, com o modo de abastecer
-4. Cozinheiro
-5. Defensor
-6. Minerador
-7. Construtor
-8. Pecuarista
-9. Antena e chunks
-10. Servidor, log e viagem
-11. Storage wireless
+A Fase 5 é entregue como um kanban, no GitHub Project "Cubit · Fase 5", um card por vez, e cada card é uma issue e um PR (perguntas 1137 e 1138). Um card só sai do Refinamento com o conceito em `_docs`, as perguntas respondidas, os números em `tiers.md`, o contrato listado e o roteiro manual escrito. Só fecha com os gates, as GameTests e o teste manual aprovados, e, num card de trabalho, com o teste com 20 a 30 robôs (pergunta 1144).
 
-Antes de fechar cada card, testa-se com 20 a 30 robôs.
+1. Consolidar o conceito da Fase 5 (#192)
+2. Base do trabalho: slot do card, tier mínimo, estado de trabalho, aba Trabalho e hibernação fora do Dock com o `Retomar` (#193)
+3. Pescador (#194)
+4. Fazendeiro (#195)
+5. Organizador (#196)
+6. Cozinheiro (#197)
+7. Defensor (#198)
+8. Minerador (#199)
+9. Construtor (#200)
+10. Pecuarista (#201)
+11. Personalização visual por card (#202)
+12. Mecânico (#203)
+13. Alquimista (#204)
+14. Antena e carregamento de chunks (#205)
+15. Robot Server, log e viagem até o Dock (#206)
+16. Storage wireless (#207)
+
+A ordem segue a pergunta 251, com o Mecânico e o Alquimista no fim dos trabalhos (perguntas 1141 e 1146).
 
 ## Pendente
 
-- Os números marcados como "A definir" em [`tiers.md`](../tiers.md#trabalhos).
-- Os detalhes do Organizador (pergunta 208).
-- O formato da tela do Cubit com a aba Trabalho e o botão `Retomar`.
+- Os números marcados como "A definir" em [`tiers.md`](../tiers.md#trabalhos), cada um no card dele (pergunta 1144).
+- Os detalhes do Organizador (pergunta 208), no card dele.
+- O formato da tela do Cubit com a aba Trabalho e o botão `Retomar`, no card da Base.
 
 ## Histórico de modificações
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-14 20:27 | Consolida a Fase 5: os trabalhos por tier, o Mecânico e o Alquimista, os conceitos na pasta `trabalhos/`, o Tablet no lugar do controle e a ordem do board (perguntas 1136 a 1156). |
 | Marcelo Fabiano | 2026-11-13 16:40 | Troca o Cubit Remote pelo app Área do Tablet. |
 | Marcelo Fabiano | 2026-11-13 09:05 | Recebe a fornalha de minérios no Minerador. |
 | Marcelo Fabiano | 2026-11-06 13:34 | Adiciona a lanterna de cabeça do Minerador. |

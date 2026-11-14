@@ -122,6 +122,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Nome:** com etiqueta, só do dono, ou na bigorna, e sempre visível acima do Cubit.
 - **Tronco central:** a coluna entre as esteiras e a carcaça tem 2 unidades de altura, e a hitbox não muda.
 - **Trabalhos (Fase 5, planejada):** um único Cubit, com um card por vez, age só em área marcada e nunca sai dela. Antena e Servidor mantêm os chunks carregados, de forma opcional. Sem chunk de destino, ele espera. O detalhe está em [`trabalhos.md`](funcionalidades/trabalhos.md).
+- **Consolidação da Fase 5 (perguntas 1136 a 1156):** a fase é entregue como um kanban, no GitHub Project "Cubit · Fase 5", um card por vez, cada um numa issue e num PR, na ordem da pergunta 251, com a base e os trabalhos primeiro e a infraestrutura no fim. Cada card tem o seu tier mínimo: Pescador, Fazendeiro e Pecuarista no Avançado; Organizador, Cozinheiro, Defensor e Minerador no Elite; Construtor, Mecânico e Alquimista no Ultimate. O Mecânico (`cubit:ml_mechanic`) e o Alquimista são novos, e o Mecânico usa o inventário do Dock da Fase 4.1. O Minerador perde Inquebrável e Remendo e ganha a fornalha elétrica, e o Defensor reage pelo modo de defesa. Os conceitos ficam em `funcionalidades/trabalhos/`, e os itens em aberto e as evoluções por tier são decididos no refinamento de cada card.
 - **Modo Focus (perguntas 843 a 853):** o modo só o alvo se chama `Focus` e libera no Advanced. Só dá o choque no último mob que o dono feriu, com qualquer dano, sem perseguir, e um neutro ferido também vira alvo. Sem alvo, age como o Contra-atacar. O alvo acaba ao morrer, mudar de dimensão ou ficar a mais de 32 blocos do dono. Ganha uma seta amarela e maior, e o texto `Cubit: Target: Zombie` ao mudar. A mira pelo controle fica na Fase 4.2 (pergunta 795).
 - **Limites:** nunca ataca o dono, outros players, outros Cubits nem mobs pacíficos. Só ataca mobs neutros para defender o player.
 - **Choque e modos de defesa (perguntas 822 a 834):** entram juntos. O Cubit ativo dá o choque sem perseguir, com linha de visão, no alcance e no intervalo do tier, num alvo, ou em todos no Ultimate, com faíscas e o abate do dono. Pacífico no Base, Contra-atacar a partir do Advanced, com 30 s de memória, e Agressivo a partir do Elite, escolhidos numa aba Defense própria, com o escudo. O modo começa Pacífico e fica no item, e os modos e números de cada tier ficam no config.
@@ -164,6 +165,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-14 20:28 | Resume a consolidação da Fase 5 (perguntas 1136 a 1156). |
 | Marcelo Fabiano | 2026-11-14 18:15 | Resume o local de morte (perguntas 1109 a 1126). |
 | Marcelo Fabiano | 2026-11-14 13:55 | Registra a descarga em baú. |
 | Marcelo Fabiano | 2026-11-14 13:20 | Registra as cores dos apps do Tablet. |

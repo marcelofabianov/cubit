@@ -177,18 +177,17 @@ A fornalha de minérios foi para o Minerador, na Fase 5, e o carregador de ferra
 
 ## Trabalhos
 
-Planejado para a Fase 5. O tier Base não aceita cards.
+Planejado para a Fase 5. O tier Base não aceita cards, e cada card tem o seu tier mínimo. Os números de cada card são definidos no refinamento dele (pergunta 1144).
 
 | Recurso | Base | Avançado | Elite | Ultimate |
 |---|---|---|---|---|
-| Card de Aprendizado de Máquina | Bloqueado | ✔ | ✔ | ✔ |
-| Minerador equivale a picareta de | — | Ferro | Diamante | Diamante |
+| Cards de Aprendizado de Máquina (pergunta 1145) | Bloqueado | Pescador, Fazendeiro e Pecuarista | + Organizador, Cozinheiro, Defensor e Minerador | + Construtor, Mecânico e Alquimista |
+| Minerador equivale a picareta de (pergunta 1149) | — | — | Diamante | Diamante |
 | Minerador: Eficiência | — | — | III | V |
 | Minerador: Fortuna | — | — | II | III |
 | Minerador: Toque Suave | — | — | — | ✔ |
-| Minerador: Inquebrável e Remendo | — | — | — | ✔ |
-| Minerador: fornalha de minérios, em ~20 FE/t enquanto funde (pergunta 930) | — | 0,5× | 1× | 2× |
-| Defensor: modos | — | Contra-atacar | + Agressivo | Todos, sem Pacífico |
+| Minerador: fornalha de minérios elétrica, em ~20 FE/t enquanto funde (perguntas 930 e 1149) | — | — | 1× | 2× |
+| Defensor: modos, pela reação escolhida (pergunta 1150) | — | — | Contra-atacar e Agressivo | Contra-atacar e Agressivo. O Focus fica para o card do Defensor |
 | Storage wireless | — | — | — | ✔ |
 
 | Valor geral | Valor |
@@ -200,7 +199,7 @@ Planejado para a Fase 5. O tier Base não aceita cards.
 
 - antenas e chunks por tier do Servidor, área e consumo por tier da antena e teto de chunks no mundo;
 - consumo do Servidor e da antena com o carregamento desligado;
-- custo por ação de cada card, percentuais de Inquebrável e Remendo e dano do Defensor;
+- custo por ação de cada card e dano do Defensor;
 - limites por tick e distância do Dock ao Servidor ou à antena;
 - limite de animais do Pecuarista, intervalo do Pescador e custo do storage e tamanho dos canais;
 - alcance e viabilidade do feixe da lanterna de cabeça do Minerador.
@@ -209,6 +208,7 @@ Planejado para a Fase 5. O tier Base não aceita cards.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-14 20:27 | Atualiza os trabalhos por tier, o Minerador e o Defensor (perguntas 1144, 1145, 1149 e 1150). |
 | Marcelo Fabiano | 2026-11-14 18:18 | Cita a chave `death_point` por tier (pergunta 1129). |
 | Marcelo Fabiano | 2026-11-14 18:15 | Define o local de morte por tier e os números do histórico e da guia (perguntas 1115 a 1118 e 1126). |
 | Marcelo Fabiano | 2026-11-14 13:55 | Liga os limites da descarga ao config (pergunta 1094). |
