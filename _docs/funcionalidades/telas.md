@@ -56,7 +56,7 @@ Quatro abas, à direita da janela: **Inventory**, com o ícone do baú, **Settin
 ### Aba Settings
 
 - **Cabeçalho:** `Settings`, a etiqueta do tier, `Battery 71%` e, ao lado, o botão `Power`, com o ícone de energia (perguntas 857 e 861). O clique desliga o Cubit e fecha a tela. Ligar de novo continua pelo clique direito nele. Hibernando no Dock, o botão fica desabilitado. A dica do botão é `Power` / `Energia` e `Turns the Cubit off` / `Desliga o Cubit` (pergunta 860).
-- **Functions:** as seis chaves, com o ícone, o nome e ON e OFF, em linhas de 12 px, com a descrição na dica, como na aba Behavior, para a chave das tochas caber (perguntas 861 e 974).
+- **Functions:** as sete chaves, com o ícone, o nome e ON e OFF, em linhas de 12 px, com a descrição na dica, como na aba Behavior, para a chave das tochas caber (perguntas 861 e 974).
 
 | Chave | Descrição, na dica |
 |---|---|
@@ -65,6 +65,7 @@ Quatro abas, à direita da janela: **Inventory**, com o ícone do baú, **Settin
 | `Chatter` | `Weather, biomes and reactions` |
 | `Solar panel` | `Charges in the sun · 5 FE/t`, com o número do tier de dia. Começa ligada e fica no item (perguntas 859 e 860) |
 | `Torches` / `Tochas` | `Lights spots where mobs can spawn · 20 FE per torch` / `Ilumina onde mobs podem nascer · 20 FE por tocha`, com o custo do tier. No Base, apagada, com `Unlocks at Advanced`. Começa ligada e fica no item, com um ícone de tocha feito por prompt (perguntas 974, 981 e 982) |
+| `Unload` / `Descarga` | `Unloads in the marked chests when full, in an area` / `Descarrega nos baús marcados quando enche, numa área`. Começa ligada e fica no item, com um ícone feito por prompt (pergunta 1093) |
 | `Auto return` / `Retorno automático` | `Goes to a Dock at 10% battery` / `Vai a um Dock com 10% de bateria`, com o número do tier. Começa ligada e fica no item, com um ícone feito por prompt (pergunta 1066) |
 
 - **Scanner filter:** só leitura, com o ícone do minério, `Looking for Coal Ore` e `Right-click the Cubit holding an ore to change it.` (pergunta 688).
@@ -245,6 +246,7 @@ Pergunta 691.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-14 13:55 | Adiciona a chave `Unload` à aba Settings (pergunta 1093). |
 | Marcelo Fabiano | 2026-11-14 10:00 | Adiciona a chave `Auto return` à aba Settings (pergunta 1066). |
 | Marcelo Fabiano | 2026-11-13 17:00 | Faz o botão da lista do filtro azul e plano. |
 | Marcelo Fabiano | 2026-11-13 16:50 | Cita os ícones das chaves Magnet e Fetch. |

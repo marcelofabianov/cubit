@@ -127,8 +127,8 @@ Valem para todos os tiers e ficam no config. Os marcados como planejados entram 
 | Ímã (raio), do Advanced em diante (resposta 879) | Bloqueado | 3 blocos | 5 blocos | 8 blocos |
 | Busca dos itens do chão (raio em volta do dono, respostas 936 e 937) | 4 blocos | 6 blocos | 8 blocos | 12 blocos |
 | Filtro de coleta, nos dois modos (resposta 423) | 3 itens | 9 itens | 18 itens + tags | 27 itens + tags |
-| Baús marcados para descarregar | 1 | 1 | 2 | 3 |
-| Distância máxima até o baú | 16 blocos | 32 blocos | 48 blocos | 64 blocos |
+| Baús marcados para descarregar (`unload_chests`, pergunta 1094) | 1 | 1 | 2 | 3 |
+| Distância máxima até o baú (`unload_reach_blocks`) | 16 blocos | 32 blocos | 48 blocos | 64 blocos |
 
 ## Sensores
 
@@ -205,6 +205,7 @@ Planejado para a Fase 5. O tier Base não aceita cards.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-14 13:55 | Liga os limites da descarga ao config (pergunta 1094). |
 | Marcelo Fabiano | 2026-11-14 10:00 | Liga a bateria do retorno ao item 15 (pergunta 1066). |
 | Marcelo Fabiano | 2026-11-14 09:00 | Define a altura máxima da área (pergunta 1050). |
 | Marcelo Fabiano | 2026-11-13 17:15 | Adiciona o alcance da mira do app Alvo. |

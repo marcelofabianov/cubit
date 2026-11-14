@@ -38,7 +38,7 @@ O Tablet funciona por apps, um ativo por vez, e o clique direito faz o que o app
 | Alvo | Marca o mob na mira, a até 32 blocos, como alvo do modo Focus do Cubit escolhido | Com o Cubit escolhido carregado e no modo Focus | 3 |
 | Dock | Num Dock do player, faz dele o Dock preferido do Cubit escolhido. No Dock que já é o preferido, tira a preferência | Sempre | 3 |
 | Área | Num Cubit seu, escolhe o Cubit. Depois, em dois blocos, marca os cantos da área, e o Cubit vai para ela ([`modo-area.md`](modo-area.md#marcar-a-área)) | Sempre | Item 13 |
-| Descarga | Marca os baús de descarga | Com o item 14 da Fase 4.2 | Depois |
+| Descarga | Num bloco com inventário, marca ou desmarca um baú de descarga do Cubit escolhido ([`inventario.md`](inventario.md#descarregar-em-baú)) | Sempre | Item 14 |
 | Marcar | Marca os blocos do trabalho do card | Na Fase 5 | Depois |
 
 - **Trocar de app:** com o Tablet na mão, Shift + roda do mouse troca o app. No macOS, o Shift faz a roda de um mouse rolar para o lado, e essa rolagem também troca o app, como a hotbar do jogo faz. O app atual aparece na barra de ação, como `Cubit Tablet · Alvo`, em negrito e com a cor do app: Open em azul, Alvo em verde, Dock em vermelho e Área em roxo. O nome do item fica só `Cubit Tablet`, e uma faixa fina com a cor do app fica na parte de baixo do ícone, na hotbar e nos inventários, como a barra de durabilidade (perguntas 1082 a 1084). Só entram na troca os apps que fazem sentido para o Cubit escolhido. O app ativo fica no item, no componente `cubit:tablet_app` (perguntas 1006 e 1026).
@@ -97,6 +97,7 @@ Fica fixo em todas as abas. `Voltar` fica no canto superior esquerdo, e os botõ
 | Lugar | Coordenadas e dimensão |
 | Power | A chave geral, que liga e desliga o Cubit (perguntas 1021 e 1033) |
 | Ir para o Dock | Manda o Cubit ir para o Dock e hibernar, na entrega 3 (pergunta 1020) |
+| Descarregar | Manda o Cubit descarregar nos baús marcados, mesmo sem o inventário cheio, e voltar ao que fazia (pergunta 1089) |
 | Follow | Faz o Cubit escolhido seguir o player, no lugar do que seguia, e, com o item 13, o tira da área (perguntas 1055 e 1072) |
 
 - **Rename:** nomeia e renomeia o Cubit sem gastar etiqueta nem XP, com as regras da etiqueta do jogo. O nome tem até 50 caracteres, e o servidor confere o dono e o tamanho e corta os espaços nas pontas. Um nome vazio tira o nome. Com o Cubit ativo, ele faz a expressão feliz com o bipe, como ao receber a etiqueta (perguntas 1015 a 1017).
@@ -128,6 +129,7 @@ Fica fixo em todas as abas. `Voltar` fica no canto superior esquerdo, e os botõ
 | Busca | Base |
 | Tochas | Advanced |
 | Retorno automático | Base |
+| Descarga | Base |
 
   Com um Cubit numa área, a aba também mostra a área, com os cantos e o tamanho (item 13). O retorno automático entra com o item 15, antes do modo área (pergunta 1069), e a descarga em baú e o local de morte, com os itens 14 e 16 da Fase 4.2.
 - **Aba Inventário:** mostra o inventário do Cubit com todas as linhas do tier e rolagem nos tiers altos, mas não permite tirar, pôr nem mover itens. A dica de cada item funciona.
@@ -156,8 +158,11 @@ Fica fixo em todas as abas. `Voltar` fica no canto superior esquerdo, e os botõ
 | NBT da entidade | `PreferredDock` | O Dock preferido: `Block`, a posição num `long`, e `Dimension`. Sem a chave, o Cubit não tem Dock preferido |
 | Menu | `cubit:tablet_robot` | A tela do Cubit no Tablet, com a cor, o lugar e a chave geral nos valores do menu |
 | Pacotes do cliente | `cubit:choose_robot`, `cubit:robot_list_request`, `cubit:rename_robot` e `cubit:switch_tablet_app` | Escolher e abrir, voltar para a seleção, renomear e trocar de app, todos conferidos no servidor |
+| Pacote do servidor | `cubit:unload_chests` | Os baús marcados dos Cubits do player, com o nome do Cubit e os slots, a cada segundo com o Tablet na mão |
 | Pacote do servidor | `cubit:area_mark` | O primeiro canto da marcação, com os limites do Cubit, e a área do Cubit escolhido, para a caixa do app Área |
 | Config | `tablet_target_reach_blocks`, em `general` | O alcance da mira do app Alvo, de 1 a 128, com 32 |
+| NBT da entidade | `UnloadChests` | Os baús de descarga, em ordem: `Block`, a posição num `long`, e `Dimension`. Sem a chave, o Cubit não tem baús |
+| Config | `unload_chests` e `unload_reach_blocks`, por tier | Os baús de descarga e a distância até eles |
 | NBT da entidade | `WorkArea` | A área do Cubit: `Min` e `Max`, os cantos em `long`, e `Dimension`. Sem a chave, o Cubit não tem área |
 | Config | `area_size_blocks` e `area_height_blocks`, por tier | O lado da base e a altura máxima da área, com 0 para bloqueado |
 | Dados do mundo | `cubit_robot_snapshots` | A foto de cada Cubit por dono: posição, dimensão, estado, bateria, vida, tier, cor, nome e a hora |
@@ -173,6 +178,7 @@ Os textos em inglês e português, como `Cubit Tablet` / `Tablet do Cubit`, `Tab
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-14 13:55 | Adiciona o app Descarga, o botão `Descarregar` e a chave (perguntas 1086 a 1095). |
 | Marcelo Fabiano | 2026-11-14 13:20 | Dá a cada app uma cor e a faixa no ícone (perguntas 1082 a 1084). |
 | Marcelo Fabiano | 2026-11-14 12:40 | Adiciona o estado na área e o pacote da caixa do app Área. |
 | Marcelo Fabiano | 2026-11-14 11:20 | Estende o `Follow` a qualquer Cubit (perguntas 1072 a 1076). |

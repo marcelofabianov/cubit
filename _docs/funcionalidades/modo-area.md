@@ -6,7 +6,7 @@ Os comandos e o localizar do antigo controle remoto passaram para o [Tablet](tab
 
 ## Modo área
 
-O modo área entra com o item 13 da Fase 4.2, numa entrega só, depois do retorno automático do item 15 (perguntas 1057 e 1069). A descarga no baú marcado, o app Descarga e o botão `Descarregar` ficam com o item 14.
+O modo área entra com o item 13 da Fase 4.2, numa entrega só, depois do retorno automático do item 15 (perguntas 1057 e 1069). A descarga no baú marcado, o app Descarga e o botão `Descarregar` entram com o item 14, em [`inventario.md`](inventario.md#descarregar-em-baú).
 
 ### Marcar a área
 
@@ -29,7 +29,7 @@ A área é marcada com o app Área do [Tablet](tablet.md#apps), em três cliques
 - **Ronda:** sem item para buscar, ele dá voltas contínuas pelas bordas da área, de canto a canto, na altura em que anda, dentro do volume, gastando com andar. Um canto que ele não alcança é pulado. Um item para buscar interrompe a ronda (perguntas 1059 e 1062).
 - **Volume:** a área é um volume em 3D entre os dois cantos marcados. Conta como dentro dela também o bloco acima do topo, onde os itens ficam e o Cubit fica em pé sobre os blocos marcados, então dois cantos no chão já fazem uma área plana que funciona.
 - **Defesa, tochas e lanterna:** seguem como hoje (pergunta 1059).
-- **Inventário cheio:** para de coletar e fica na área, e o estado mostra o inventário cheio. Volta a coletar quando houver espaço. Com o item 14, ele passa a descarregar antes (pergunta 1052).
+- **Inventário cheio:** com a chave `Unload` ligada e um baú marcado com espaço, vai descarregar e volta para a área ([descarga](inventario.md#descarregar-em-baú)). Sem isso, para de coletar e fica na área, e o estado mostra o inventário cheio, tentando descarregar de novo a cada intervalo (perguntas 1052, 1087 e 1088).
 - **Bateria baixa:** pelo [retorno automático](energia.md#retorno-automático), que entra antes, vai ao Dock preferido, ou ao livre mais próximo no raio do tier, e com a carga cheia volta à área. Sem Dock, segue na área até o crítico e desliga, como seguindo (perguntas 1053, 1065 e 1068).
 - **Dono longe:** o Cubit nunca teleporta até o dono e não é desligado pela perda de vínculo (pergunta 326). Com o chunk descarregado, para como o jogo para tudo e continua quando o chunk carregar, sem forçar o carregamento (pergunta 1061).
 - **Estado:** `In area` (`Na área`), com cor própria, no topo da tela e na lista do Tablet. A bateria crítica e o inventário cheio aparecem antes dele (pergunta 1063).
@@ -42,6 +42,7 @@ A área é marcada com o app Área do [Tablet](tablet.md#apps), em três cliques
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-14 13:55 | Liga o inventário cheio à descarga (perguntas 1087 e 1088). |
 | Marcelo Fabiano | 2026-11-14 12:10 | Define as chaves da busca na área (pergunta 1080). |
 | Marcelo Fabiano | 2026-11-14 11:20 | Liga o `Follow` da área ao botão do #181 (pergunta 1072). |
 | Marcelo Fabiano | 2026-11-14 10:00 | Liga a bateria baixa ao retorno automático (perguntas 1065 e 1069). |

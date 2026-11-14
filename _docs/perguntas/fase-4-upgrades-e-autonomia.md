@@ -8,6 +8,16 @@ Não há perguntas pendentes nesta fase.
 
 | # | Pergunta | Resposta |
 |---|---|---|
+| 1095 | Em quantas entregas o item 14 se divide? | Uma: um PR com o app Descarga, a seta dos baús, a descarga automática da área, o botão `Descarregar`, a chave e o contrato. Confirma a recomendação |
+| 1094 | Como ficam os limites no config e o texto `Items unloaded`? | Por tier: `unload_chests` (1, 1, 2 e 3) e `unload_reach_blocks` (16, 32, 48 e 64), com os números de `tiers.md`. Os baús ficam no NBT `UnloadChests` e se perdem ao recolher o Cubit (pergunta 343). `Cubit: Items unloaded` sai depois de descarregar, só do Cubit que segue (pergunta 457), ou seja, pelo botão. Confirma a recomendação |
+| 1093 | Como fica a chave da descarga (resposta 424, item 6)? | `Unload` / `Descarga`, desde o Base, ligada por padrão e guardada no item, na aba Settings e na aba Recursos do Tablet. Ela liga e desliga só a descarga automática da área, e o botão `Descarregar` funciona mesmo com a chave desligada. Confirma a recomendação |
+| 1092 | A segunda linha da seta, com os slots usados e o total, é do baú ou do Cubit? | Do baú, como `Inventory 12 / 27`, para o player ver quando ele está enchendo. O servidor manda a contagem a cada segundo, só enquanto o player segura o Tablet. Confirma a recomendação |
+| 1091 | A seta dos baús aparece em qualquer app do Tablet? | Sim, com o Tablet na mão, em qualquer app, como a seta do Cubit escolhido. Sem o Tablet na mão, nada aparece. Confirma a recomendação |
+| 1090 | Quais baús mostram a seta? | Os baús marcados de qualquer Cubit do player, carregados e na dimensão dele. A primeira linha diz de qual Cubit é o baú. Confirma a recomendação |
+| 1089 | O que o botão `Descarregar` do Tablet faz? | Descarrega agora: manda o Cubit escolhido descarregar já, mesmo sem o inventário cheio, e voltar ao que fazia. Fica na fileira do cabeçalho, como o `Ir para o Dock`. Sem baú marcado ao alcance, com o inventário vazio, desligado ou hibernando, fica desabilitado, com a dica do motivo. Confirma a recomendação |
+| 1088 | Em que ordem o Cubit usa os baús, e o que faz quando não há onde descarregar? | Na ordem da marca: o primeiro baú marcado com espaço, depois o seguinte, até esvaziar ou não caber mais. Sem espaço, fora do alcance ou com o chunk descarregado, ele não sai do lugar: o que segue avisa `No room in the marked chests`, e o da área fica com `Inventory full` e tenta de novo a cada intervalo. Confirma a recomendação |
+| 1087 | Quando o Cubit descarrega sozinho? | Só na área: com a chave ligada e o inventário cheio, o Cubit numa área vai ao baú marcado, descarrega e volta para a área. O que segue descarrega só pelo botão `Descarregar`. Muda a regra de `inventario.md`, que valia para todo Cubit. A recomendação, seguindo ou na área, foi recusada |
+| 1086 | Como o app Descarga marca os baús? | Como o app Dock: vale para o Cubit escolhido, de qualquer tier. O clique num bloco com inventário (baú, barril, shulker ou de outro mod, pela capability) o marca, até o limite do tier, e um segundo clique desmarca. Fora de um bloco com inventário, só avisa. "O realce vem quando o player estiver com o tablet na mao e a indicacao fica uma seta apontando de cima dele como ja temos a indicacao do cubit selecionado so que para o bau. Alem da seta temos o nome do Cubit na primeira linha e na segunda o Inventario o numero de slots usados / slots totais. Quando o tablet nao tiver na mao do player nao é mostrado." As respostas 1090 a 1092 detalham a seta |
 | 1085 | O `AGENTS.md` pode citar as classes das cores dos apps? | "pode atualizar o AGENTS.md", autorizado pelo desenvolvedor: `TabletAppLook` em `item` e `TabletAppStrip` em `client`, na estrutura de pacotes |
 | 1084 | Como o ícone do Tablet mostra a cor do app ativo? | Faixa colorida no item: uma faixa fina com a cor do app, na parte de baixo do ícone, como a barra de durabilidade das ferramentas, na hotbar e nos inventários, desenhada pelo mod, sem textura nova. Confirma a recomendação |
 | 1083 | Qual cor cada app do Tablet tem? | "azul, verde, vermelho, roxo", na ordem dos apps: Open em azul, Alvo em verde, Dock em vermelho e Área em roxo, sempre em negrito. As opções, branco, vermelho, azul e roxo, e verde, amarelo, azul e roxo, foram recusadas |
@@ -339,6 +349,7 @@ Não há perguntas pendentes nesta fase.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-14 13:55 | Registra as respostas 1086 a 1095. |
 | Marcelo Fabiano | 2026-11-14 13:30 | Registra a resposta 1085. |
 | Marcelo Fabiano | 2026-11-14 13:20 | Registra as respostas 1082 a 1084. |
 | Marcelo Fabiano | 2026-11-14 12:50 | Registra a resposta 1081. |
