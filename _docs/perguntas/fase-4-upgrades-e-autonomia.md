@@ -8,6 +8,8 @@ Não há perguntas pendentes nesta fase.
 
 | # | Pergunta | Resposta |
 |---|---|---|
+| 1107 | A resposta 1106 citada no prompt de continuidade da Fase 4.2 ficou de fora? | Não ficou de fora. Era a autorização para desfazer e refazer um commit local antes do push, uma ação pontual que a regra 47 não registra. O número não foi usado, então a próxima pergunta livre era a 1106, que passa a registrar onde entram os ícones |
+| 1106 | Onde entra o commit dos ícones das chaves `Auto return` e `Unload`? | Numa issue e num PR próprios, junto com a marcação do item 14 no `checklist.md`, como recomendado. São dois ajustes que sobraram da Fase 4.2, e nenhum deles espera o item 16. Os ícones entram na folha `screen_sprites.png` em `u=384, v=256` e `u=448, v=256`, copiados por script, sem redesenho |
 | 1105 | Como fica o filtro de coleta nas abas Behavior e Filtros, e o inventário do player embaixo? | Alinhados à esquerda e responsivos, a pedido do desenvolvedor: "a parte de filtros deve estar alinhada a esquerda e de forma responsiva ocupando melhor o espaco se necessario pode aumentar as colunas e diminuir as linhas". O filtro tem as colunas do inventário do Cubit, 9, 12, 15 e 18, e no Tablet pelo menos 15, então usa menos fileiras: 1 no Base e no Advanced e 2 no Elite e no Ultimate. O título fica à esquerda, e o botão da lista na borda direita. O inventário do player volta à esquerda, com 9 colunas. Muda a 1104 e a 1101 na posição do inventário do player |
 | 1104 | Como corrigir o alinhamento das abas Behavior e Filtros e o slot de redstone da aba Inventário do Tablet? | Três ajustes, confirmados pelo desenvolvedor: na aba Behavior da tela do Cubit e na aba Filtros do Tablet, a grade do filtro de coleta começa onde começa o inventário do player, logo abaixo, com o título no início dela e o botão da lista no fim dela; na aba Inventário do Tablet, o slot de energia passa a ser o primeiro da fileira dos slots exclusivos, antes das tochas, sem o rótulo `Redstone`, que vira a dica do slot vazio. Na tela do Cubit, o slot de energia continua ao lado das barras |
 | 1103 | Como as abas do Tablet aproveitam a janela? | Descrição na linha, até a borda: as abas acompanham a largura da janela, também no Ultimate. Na aba Recursos, cada chave mostra a descrição na linha, entre o nome e a chave, e a linha bloqueada continua com o tier que libera. As abas Defesa e Filtros esticam como na tela do Cubit. Confirma a recomendação |
@@ -359,6 +361,7 @@ Não há perguntas pendentes nesta fase.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-14 17:22 | Registra as respostas 1106 e 1107. |
 | Marcelo Fabiano | 2026-11-14 16:33 | Registra a resposta 1105. |
 | Marcelo Fabiano | 2026-11-14 16:18 | Registra a resposta 1104. |
 | Marcelo Fabiano | 2026-11-14 16:00 | Registra as respostas 1102 e 1103. |
