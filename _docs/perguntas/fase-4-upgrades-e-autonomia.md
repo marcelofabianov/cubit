@@ -8,6 +8,13 @@ Não há perguntas pendentes nesta fase.
 
 | # | Pergunta | Resposta |
 |---|---|---|
+| 1085 | O `AGENTS.md` pode citar as classes das cores dos apps? | "pode atualizar o AGENTS.md", autorizado pelo desenvolvedor: `TabletAppLook` em `item` e `TabletAppStrip` em `client`, na estrutura de pacotes |
+| 1084 | Como o ícone do Tablet mostra a cor do app ativo? | Faixa colorida no item: uma faixa fina com a cor do app, na parte de baixo do ícone, como a barra de durabilidade das ferramentas, na hotbar e nos inventários, desenhada pelo mod, sem textura nova. Confirma a recomendação |
+| 1083 | Qual cor cada app do Tablet tem? | "azul, verde, vermelho, roxo", na ordem dos apps: Open em azul, Alvo em verde, Dock em vermelho e Área em roxo, sempre em negrito. As opções, branco, vermelho, azul e roxo, e verde, amarelo, azul e roxo, foram recusadas |
+| 1082 | Como fica o texto do app, que aparecia duas vezes acima da hotbar? | Só a barra de ação: o nome do item volta a ser só `Cubit Tablet`, sem o app, e a barra de ação mostra `Cubit Tablet · Área` em negrito e com a cor do app. A dica do item no inventário deixa de dizer o app. O texto saía duas vezes porque o jogo mostra o nome do item acima da hotbar quando ele muda, e o nome levava o app. Muda a 1006. A recomendação, só o nome do item, foi recusada |
+| 1081 | O `AGENTS.md` pode citar as classes do modo área? | "pode atualizar o AGENTS.md", autorizado pelo desenvolvedor: `WorkArea`, `AreaCorner`, `AreaCheck` e `AreaMarking` em `domain/robot`; `AreaSpec` em `domain/tier`; `RobotWorkArea`, `AreaWorkGoal` e `TrackJumpControl` em `entity`; `AreaMarkPayload` em `network`; `TabletAreaApp` e `TabletAreaView` em `player`; `TabletAreaMarks` e `TabletAreaRenderer` em `client` |
+| 1080 | Na área, a busca dos itens do chão depende de quais chaves da aba Behavior? | Só `Pickup`: coletar é o trabalho do Cubit sem card na área (resposta 340). Com `Pickup` ligada, ele busca os itens dentro da área, com o filtro, e `Fetch` vale só para quem segue o dono. Com `Pickup` desligada, ele só faz a ronda. Confirma a recomendação |
+| 1079 | Há algum ajuste no roteiro depois do retorno automático e do `Follow` (PR #182)? | "sem ajustes": segue o modo área, na `feature/180-area-mode` |
 | 1078 | Onde fica o botão `Follow` no cabeçalho do Tablet? | "o botao de seguir poderia estar na mesma linha alinhados com os outros botoes": na fileira de botões, por último, com a fileira começando na margem, sob o retrato, e os quatro botões com 68 px. Um texto que não cabe no botão encolhe. Conferido no jogo ("fico bom") |
 | 1077 | O `AGENTS.md` pode citar as classes do `Follow` do Tablet? | "sim", autorizado pelo desenvolvedor: `FollowCall` em `domain/robot`, `RobotFollowCall` em `entity` e `FollowControl` em `menu`, na estrutura de pacotes |
 | 1076 | Em qual entrega entra o `Follow` do Tablet? | Junto do retorno automático, no PR do #181, num commit próprio, com o teste manual junto. O modo área só acrescenta a saída da área ao mesmo botão. O `Stop` fica para uma conversa depois de concluir tudo ("depois falamos sobre o stop quando concluir tudo"). Confirma a recomendação |
@@ -332,6 +339,11 @@ Não há perguntas pendentes nesta fase.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-14 13:30 | Registra a resposta 1085. |
+| Marcelo Fabiano | 2026-11-14 13:20 | Registra as respostas 1082 a 1084. |
+| Marcelo Fabiano | 2026-11-14 12:50 | Registra a resposta 1081. |
+| Marcelo Fabiano | 2026-11-14 12:10 | Registra a resposta 1080. |
+| Marcelo Fabiano | 2026-11-14 12:00 | Registra a resposta 1079. |
 | Marcelo Fabiano | 2026-11-14 11:45 | Registra a resposta 1078. |
 | Marcelo Fabiano | 2026-11-14 11:30 | Registra a resposta 1077. |
 | Marcelo Fabiano | 2026-11-14 11:20 | Registra as respostas 1072 a 1076. |

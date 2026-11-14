@@ -136,6 +136,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Modo área:** por dois cantos em 3D, já na Fase 4. Sem card, o robô coleta os itens do chão na área e descarrega no baú marcado.
 - **Modo área no Tablet (perguntas 1049 a 1064):** com o app Área, o clique num Cubit seu, do Advanced em diante, o escolhe, e dois blocos marcam os cantos, com a altura máxima de 8, 16 e 32 blocos e uma caixa verde ou vermelha enquanto marca. O centro fica no raio de chamada do tier, e o Cubit vai andando. Na área, busca os itens do chão com o filtro, o ímã puxa pelo raio, e sem item ele faz a ronda pelas bordas. Cheio, para de coletar; com bateria baixa, vai ao Dock e volta; nunca teleporta até o dono. O estado é `In area`, e o botão `Follow` do Tablet o tira da área, numa entrega só, depois do retorno automático.
 - **Retorno automático (perguntas 1065 a 1070):** entra antes do modo área, numa entrega própria. Com a chave `Auto return`, ligada por padrão e no item, o Cubit que segue ou está numa área vai ao Dock com 10% de bateria, como no `Ir para o Dock`, avisa `I need to recharge` uma vez, só o que segue, e ao sair volta ao que fazia. Sem Dock, tenta de novo a cada intervalo.
+- **Cores dos apps do Tablet (perguntas 1082 a 1084):** Open em azul, Alvo em verde, Dock em vermelho e Área em roxo, em negrito na barra de ação e numa faixa fina no ícone do Tablet. O nome do item não leva mais o app.
 - **`Follow` do Tablet (perguntas 1072 a 1076):** um botão no cabeçalho faz o Cubit escolhido seguir o player, desligado com carga, do Dock ou, depois, de uma área, de qualquer distância na mesma dimensão. O que seguia desliga onde está, como no `Turn on`. Entra no PR do retorno automático, e o `Stop` fica para depois.
 - **Parar pelo controle:** o robô continua ativo e com o vínculo, parado e sem teleportar, e o estado é salvo.
 - **Bateria crítica e textos:** a bateria crítica é de 5%, com sono, indicador vermelho e `Critical battery`, que vem só do Cubit ativo que segue, repetindo a cada intervalo mínimo. `Cubit: That hurts!` e `Cubit: Careful!` avisam do dano no robô e no dono, com o mesmo intervalo. Todos os textos vêm só do Cubit que segue. Os textos começam com `Cubit: ` e são desenhados pelo mod, menores e logo acima das barras da hotbar, com um pacote de rede do servidor para o cliente.
@@ -161,6 +162,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-14 13:20 | Registra as cores dos apps do Tablet. |
 | Marcelo Fabiano | 2026-11-14 11:20 | Registra o `Follow` do Tablet. |
 | Marcelo Fabiano | 2026-11-14 10:00 | Registra o retorno automático. |
 | Marcelo Fabiano | 2026-11-14 09:00 | Registra o modo área no Tablet. |

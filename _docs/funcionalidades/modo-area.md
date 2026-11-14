@@ -25,8 +25,9 @@ A área é marcada com o app Área do [Tablet](tablet.md#apps), em três cliques
 
 - **Chegada:** ele deixa de seguir e vai andando. Preso sem progresso, teleporta para dentro da área, como na volta ao Dock (pergunta 1058).
 - **Limite:** ele nunca sai da área, exceto para ir ao Dock.
-- **Sem card:** busca os itens do chão dentro da área, respeitando o filtro de coleta (pergunta 340). O ímã continua puxando pelo raio do tier, mesmo de fora dela (pergunta 1064).
-- **Ronda:** sem item para buscar, ele dá voltas contínuas pelos cantos da base da área, no chão, gastando com andar. Um item para buscar interrompe a ronda (perguntas 1059 e 1062).
+- **Sem card:** com a chave `Pickup` ligada, busca os itens do chão dentro da área, respeitando o filtro de coleta. A chave `Fetch` vale só para quem segue o dono, e, com `Pickup` desligada, o Cubit só faz a ronda (perguntas 340 e 1080). O ímã continua puxando pelo raio do tier, mesmo de fora dela (pergunta 1064).
+- **Ronda:** sem item para buscar, ele dá voltas contínuas pelas bordas da área, de canto a canto, na altura em que anda, dentro do volume, gastando com andar. Um canto que ele não alcança é pulado. Um item para buscar interrompe a ronda (perguntas 1059 e 1062).
+- **Volume:** a área é um volume em 3D entre os dois cantos marcados. Conta como dentro dela também o bloco acima do topo, onde os itens ficam e o Cubit fica em pé sobre os blocos marcados, então dois cantos no chão já fazem uma área plana que funciona.
 - **Defesa, tochas e lanterna:** seguem como hoje (pergunta 1059).
 - **Inventário cheio:** para de coletar e fica na área, e o estado mostra o inventário cheio. Volta a coletar quando houver espaço. Com o item 14, ele passa a descarregar antes (pergunta 1052).
 - **Bateria baixa:** pelo [retorno automático](energia.md#retorno-automático), que entra antes, vai ao Dock preferido, ou ao livre mais próximo no raio do tier, e com a carga cheia volta à área. Sem Dock, segue na área até o crítico e desliga, como seguindo (perguntas 1053, 1065 e 1068).
@@ -41,6 +42,7 @@ A área é marcada com o app Área do [Tablet](tablet.md#apps), em três cliques
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-14 12:10 | Define as chaves da busca na área (pergunta 1080). |
 | Marcelo Fabiano | 2026-11-14 11:20 | Liga o `Follow` da área ao botão do #181 (pergunta 1072). |
 | Marcelo Fabiano | 2026-11-14 10:00 | Liga a bateria baixa ao retorno automático (perguntas 1065 e 1069). |
 | Marcelo Fabiano | 2026-11-14 09:00 | Define a marcação, a caixa e o Cubit na área (perguntas 1049 a 1064). |
