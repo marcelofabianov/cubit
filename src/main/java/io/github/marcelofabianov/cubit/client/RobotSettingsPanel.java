@@ -13,9 +13,9 @@ import net.minecraft.world.item.ItemStack;
 
 /**
  * The settings tab of the robot screen, as in the concept image: the switches that exist, the
- * scanner filter and the status. The six switches take rows of 12 px, with the detail in their
- * tooltip, so the torches and the auto return fit (answers 974 and 1066). Every number comes from
- * the server.
+ * scanner filter and the status. The seven switches take rows of 12 px, with the detail in their
+ * tooltip, so the torches, the auto return and the unload fit (answers 974, 1066 and 1093). Every
+ * number comes from the server.
  */
 final class RobotSettingsPanel {
   private static final int LEFT = 7;
@@ -33,15 +33,15 @@ final class RobotSettingsPanel {
   private static final int NAME_WIDTH = 106;
   private static final int TOGGLE_X = 139;
   private static final int TOGGLE_TOP = 0;
-  private static final Box FILTER_TITLE = new Box(8, 108, 150, LINE);
-  private static final int FILTER_RULE = 117;
+  private static final Box FILTER_TITLE = new Box(8, 120, 150, LINE);
+  private static final int FILTER_RULE = 129;
   private static final int ORE_FRAME_X = 8;
-  private static final int ORE_FRAME_Y = 122;
-  private static final Box LOOKING = new Box(32, 123, 134, LINE);
-  private static final Box HINT = new Box(32, 133, 134, DETAIL_LINE);
-  private static final Box STATUS_TITLE = new Box(8, 148, 150, LINE);
-  private static final int STATUS_RULE = 157;
-  private static final int FIRST_STATUS = 161;
+  private static final int ORE_FRAME_Y = 134;
+  private static final Box LOOKING = new Box(32, 135, 134, LINE);
+  private static final Box HINT = new Box(32, 145, 134, DETAIL_LINE);
+  private static final Box STATUS_TITLE = new Box(8, 160, 150, LINE);
+  private static final int STATUS_RULE = 169;
+  private static final int FIRST_STATUS = 173;
   private static final int STATUS_HEIGHT = 14;
   private static final int STATUS_TEXT_TOP = 3;
   private static final int STATUS_LABEL_X = 10;
@@ -52,7 +52,8 @@ final class RobotSettingsPanel {
     RobotMenu.CHATTER_BUTTON,
     RobotMenu.SOLAR_BUTTON,
     RobotMenu.TORCHES_BUTTON,
-    RobotMenu.AUTO_RETURN_BUTTON
+    RobotMenu.AUTO_RETURN_BUTTON,
+    RobotMenu.UNLOAD_BUTTON
   };
   private static final int FOLLOWING_ROW = 3;
   private static final int POWER_X = 154;
@@ -65,7 +66,8 @@ final class RobotSettingsPanel {
     ScreenKeys.CHATTER,
     ScreenKeys.SOLAR_PANEL,
     ScreenKeys.TORCHES,
-    ScreenKeys.AUTO_RETURN
+    ScreenKeys.AUTO_RETURN,
+    ScreenKeys.UNLOAD
   };
 
   private final ScreenPainter painter;

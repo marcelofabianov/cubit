@@ -2,6 +2,7 @@ package io.github.marcelofabianov.cubit.item;
 
 import com.mojang.logging.LogUtils;
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import io.github.marcelofabianov.cubit.domain.energy.Energy;
 import io.github.marcelofabianov.cubit.domain.robot.DefenseMode;
@@ -44,6 +45,8 @@ public final class RobotStateComponent {
   private static final String TORCHES_FIELD = "torches_enabled";
   private static final String AUTO_RETURN_FIELD = "auto_return_enabled";
   private static final boolean AUTO_RETURN_DEFAULT = true;
+  private static final String UNLOAD_FIELD = "unload_enabled";
+  private static final boolean UNLOAD_DEFAULT = true;
   private static final String UNKNOWN_DEFENSE_MESSAGE = "Unknown defense mode {}. Using peaceful.";
   private static final String UNKNOWN_COLOR_MESSAGE = "Unknown robot color {}. Using white.";
   private static final String UNKNOWN_TIER_MESSAGE = "Unknown robot tier {}. Using the base tier.";
@@ -61,6 +64,27 @@ public final class RobotStateComponent {
 
   private static final Codec<OreFilter> ORE_FILTER_CODEC =
       Codec.STRING.listOf().xmap(SavedOreFilter::of, SavedOreFilter::tagsOf);
+
+  /**
+   * The switches added last, in one part of the codec, which holds at most 16 fields. They stay
+   * flat in the saved component, so the names are the same as before.
+   */
+  private record LateSwitches(boolean torches, boolean autoReturn, boolean unload) {}
+
+  private static final MapCodec<LateSwitches> LATE_SWITCHES =
+      RecordCodecBuilder.mapCodec(instance ->
+          instance
+              .group(
+                  Codec.BOOL
+                      .optionalFieldOf(TORCHES_FIELD, TORCHES_DEFAULT)
+                      .forGetter(LateSwitches::torches),
+                  Codec.BOOL
+                      .optionalFieldOf(AUTO_RETURN_FIELD, AUTO_RETURN_DEFAULT)
+                      .forGetter(LateSwitches::autoReturn),
+                  Codec.BOOL
+                      .optionalFieldOf(UNLOAD_FIELD, UNLOAD_DEFAULT)
+                      .forGetter(LateSwitches::unload))
+              .apply(instance, LateSwitches::new));
 
   public static final Codec<RobotState> CODEC =
       RecordCodecBuilder.create(instance ->
@@ -102,12 +126,8 @@ public final class RobotStateComponent {
                   Codec.BOOL
                       .optionalFieldOf(FETCH_FIELD, PickupSettings.INITIAL.fetchOn())
                       .forGetter(state -> state.pickup().fetchOn()),
-                  Codec.BOOL
-                      .optionalFieldOf(TORCHES_FIELD, TORCHES_DEFAULT)
-                      .forGetter(RobotState::torchesOn),
-                  Codec.BOOL
-                      .optionalFieldOf(AUTO_RETURN_FIELD, AUTO_RETURN_DEFAULT)
-                      .forGetter(RobotState::autoReturnOn))
+                  LATE_SWITCHES.forGetter(state ->
+                      new LateSwitches(state.torchesOn(), state.autoReturnOn(), state.unloadOn())))
               .apply(
                   instance,
                   (tier,
@@ -124,8 +144,7 @@ public final class RobotStateComponent {
                       magnet,
                       pickupFilter,
                       fetch,
-                      torches,
-                      autoReturn) ->
+                      late) ->
                       new RobotState(
                           tier,
                           energy,
@@ -138,8 +157,9 @@ public final class RobotStateComponent {
                           defense,
                           solar,
                           new PickupSettings(pickup, magnet, fetch, pickupFilter),
-                          torches,
-                          autoReturn)));
+                          late.torches(),
+                          late.autoReturn(),
+                          late.unload())));
 
   public static final StreamCodec<ByteBuf, RobotState> STREAM_CODEC =
       ByteBufCodecs.fromCodec(CODEC);

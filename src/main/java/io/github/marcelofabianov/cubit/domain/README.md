@@ -32,6 +32,7 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 | `PickupRules` | Quando o robô coleta por contato e quando o ímã puxa e cobra |
 | `FetchRules` | Quando o robô que segue busca os itens do chão, qual item, e quando desiste |
 | `TorchSpec` | As tochas de um tier: o custo por tocha e a luz de bloco que o robô garante, com 0 para bloqueado |
+| `UnloadSpec` | Os baús que um tier pode marcar e a distância até eles (pergunta 1094) |
 | `AreaSpec` | A maior área de um tier: o lado da base e a altura, com 0 para o tier sem modo área (perguntas 342 e 1050) |
 | `TorchRules` | Quando o robô põe uma tocha e quais lugares são perigosos |
 | `TorchGrid` | O espaço em volta do robô, lido uma vez por varredura: o que para a luz, onde mob pode nascer e onde uma tocha cabe |
@@ -74,6 +75,8 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 | `AreaCorner` | Um bloco marcado como canto pelo app Área |
 | `AreaCheck` | Se a área pode ser do Cubit, ou por quê não: sem modo área no tier, grande demais, em outra dimensão ou longe demais (perguntas 1050, 1054 e 1058) |
 | `AreaMarking` | A marcação pela metade do app Área: o Cubit e, depois, o primeiro canto, só na memória do servidor (perguntas 1054 e 1060) |
+| `UnloadChest` e `UnloadChests` | Os baús de descarga de um Cubit, pelo bloco e pela dimensão, na ordem da marca. Um segundo clique desmarca, e o tier limita quantos (perguntas 1086 e 1088) |
+| `UnloadCall` | Se o `Descarregar` do Tablet pode mandar o Cubit, ou por que não, e quando ele descarrega sozinho: só cheio, na área e com a chave ligada (perguntas 1087, 1089 e 1093) |
 | `FollowCall` | Se o `Follow` do Tablet pode fazer o Cubit escolhido seguir o dono agora, ou por que não: já seguindo, sem carga ou em outra dimensão (perguntas 1073 a 1075) |
 | `TabletWheel` | Para que lado Shift + roda troca o app do Tablet. Sem rolagem vertical, como no mouse do macOS com Shift, vale a rolagem para o lado, com o sinal trocado, como na hotbar do jogo |
 | `RobotName` | O nome que o Tablet dá ao Cubit, com as regras da etiqueta: corta os espaços das pontas, aceita até 50 caracteres e, vazio, tira o nome (perguntas 1015 a 1017) |

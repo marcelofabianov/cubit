@@ -14,6 +14,7 @@ final class TabletTexts {
   private static final String APP_TARGET = "Target";
   private static final String APP_DOCK = "Dock";
   private static final String APP_AREA = "Area";
+  private static final String APP_UNLOAD = "Unload";
   private static final String TITLE = "Cubits";
   private static final String SEARCH = "Search";
   private static final String EMPTY = "No Cubits placed";
@@ -52,6 +53,17 @@ final class TabletTexts {
   private static final String AREA_LINE = "Area";
   private static final String AREA_NONE = "None · mark one with the Area app";
   private static final String AREA_SUMMARY = "%s × %s × %s · %s %s %s to %s %s %s";
+  private static final String UNLOAD_NOW = "Unload";
+  private static final String UNLOAD_NOW_DETAIL = "Unloads in the marked chests now";
+  private static final String UNLOAD_NO_CHEST = "No marked chest with room within reach";
+  private static final String UNLOAD_EMPTY = "Nothing to unload";
+  private static final String UNLOAD_ONLY_INVENTORY = "Unload marks a block with an inventory";
+  private static final String UNLOAD_MARKED = "Chest marked for %s · up to %s · Shift to unmark";
+  private static final String UNLOAD_UNMARKED = "Chest unmarked for %s";
+  private static final String UNLOAD_GOING = "%s is unloading in this chest";
+  private static final String UNLOAD_NONE = "%s has no marked chest";
+  private static final String UNLOAD_FULL = "%s has %s chests · Shift and a click unmarks";
+  private static final String CHEST_SLOTS = "Inventory %s / %s";
   private static final String FOLLOW = "Follow";
   private static final String FOLLOW_DETAIL = "Follows you · the one following now switches off";
   private static final String FOLLOW_ALREADY = "Already following you";
@@ -83,6 +95,7 @@ final class TabletTexts {
     add.accept(TabletItem.appKey(TabletApp.TARGET), APP_TARGET);
     add.accept(TabletItem.appKey(TabletApp.DOCK), APP_DOCK);
     add.accept(TabletItem.appKey(TabletApp.AREA), APP_AREA);
+    add.accept(TabletItem.appKey(TabletApp.UNLOAD), APP_UNLOAD);
     add.accept(TabletKeys.TITLE, TITLE);
     add.accept(TabletKeys.SEARCH, SEARCH);
     add.accept(TabletKeys.EMPTY, EMPTY);
@@ -132,6 +145,22 @@ final class TabletTexts {
     add.accept(TabletKeys.DOCK_OUT_OF_REACH, DOCK_OUT_OF_REACH);
     addFollow(add);
     addArea(add);
+    addUnload(add);
+  }
+
+  /** The Unload app, the arrows over the chests and `Unload` (answers 1086 to 1095). */
+  private static void addUnload(BiConsumer<String, String> add) {
+    add.accept(TabletKeys.UNLOAD_NOW, UNLOAD_NOW);
+    add.accept(TabletKeys.UNLOAD_NOW_DETAIL, UNLOAD_NOW_DETAIL);
+    add.accept(TabletKeys.UNLOAD_NO_CHEST, UNLOAD_NO_CHEST);
+    add.accept(TabletKeys.UNLOAD_EMPTY, UNLOAD_EMPTY);
+    add.accept(TabletKeys.UNLOAD_ONLY_INVENTORY, UNLOAD_ONLY_INVENTORY);
+    add.accept(TabletKeys.UNLOAD_MARKED, UNLOAD_MARKED);
+    add.accept(TabletKeys.UNLOAD_UNMARKED, UNLOAD_UNMARKED);
+    add.accept(TabletKeys.UNLOAD_GOING, UNLOAD_GOING);
+    add.accept(TabletKeys.UNLOAD_NONE, UNLOAD_NONE);
+    add.accept(TabletKeys.UNLOAD_FULL, UNLOAD_FULL);
+    add.accept(TabletKeys.CHEST_SLOTS, CHEST_SLOTS);
   }
 
   /** The Area app (answers 1051 to 1060). */

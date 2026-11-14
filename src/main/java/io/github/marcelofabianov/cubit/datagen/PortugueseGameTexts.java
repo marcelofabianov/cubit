@@ -36,6 +36,8 @@ final class PortugueseGameTexts {
   private static final String FILTER_CLEARED_NOTICE = "Filtro limpo";
   private static final String CRITICAL_BATTERY_NOTICE = "Bateria crítica";
   private static final String NEED_RECHARGE_NOTICE = "Preciso recarregar";
+  private static final String ITEMS_UNLOADED_NOTICE = "Itens descarregados";
+  private static final String NO_ROOM_NOTICE = "Sem espaço nos baús marcados";
   private static final String HURT_NOTICE = "Isso dói!";
   private static final String OWNER_HURT_NOTICE = "Cuidado!";
 
@@ -75,6 +77,8 @@ final class PortugueseGameTexts {
     add.accept(RobotNotices.keyOf(RobotNotice.HURT), HURT_NOTICE);
     add.accept(RobotNotices.keyOf(RobotNotice.OWNER_HURT), OWNER_HURT_NOTICE);
     add.accept(RobotNotices.keyOf(RobotNotice.NEED_RECHARGE), NEED_RECHARGE_NOTICE);
+    add.accept(RobotNotices.keyOf(RobotNotice.ITEMS_UNLOADED), ITEMS_UNLOADED_NOTICE);
+    add.accept(RobotNotices.keyOf(RobotNotice.NO_ROOM), NO_ROOM_NOTICE);
   }
 
   private static void addSubtitles(BiConsumer<String, String> add) {

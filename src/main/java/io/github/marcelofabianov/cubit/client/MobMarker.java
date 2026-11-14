@@ -3,6 +3,7 @@ package io.github.marcelofabianov.cubit.client;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.blaze3d.vertex.VertexFormat;
+import java.util.ArrayList;
 import java.util.List;
 import net.minecraft.client.Camera;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -78,13 +79,28 @@ final class MobMarker {
       float partialTick,
       double ticks,
       float alpha) {
+    List<Vec3> tops = new ArrayList<>();
+    for (Entity mob : mobs) {
+      tops.add(mob.getPosition(partialTick).add(0, mob.getBbHeight(), 0));
+    }
+    drawOver(buffers, camera, tops, style, ticks, alpha);
+  }
+
+  /** Arrows over points, as over the top of a block, such as the chests of the Unload app. */
+  static void drawOver(
+      MultiBufferSource.BufferSource buffers,
+      Camera camera,
+      List<Vec3> tops,
+      Style style,
+      double ticks,
+      float alpha) {
     VertexConsumer triangles = buffers.getBuffer(THROUGH_BLOCKS);
     Quaternionf facing = camera.rotation();
     float bob = (float) (BOB_BLOCKS * Math.sin(FULL_TURN * ticks / BOB_PERIOD_TICKS));
-    for (Entity mob : mobs) {
-      Vec3 feet = mob.getPosition(partialTick).subtract(camera.getPosition());
-      Vector3f tip = new Vector3f((float) feet.x, (float) feet.y, (float) feet.z);
-      tip.add(0, mob.getBbHeight() + GAP_ABOVE_HEAD + bob, 0);
+    for (Vec3 top : tops) {
+      Vec3 at = top.subtract(camera.getPosition());
+      Vector3f tip = new Vector3f((float) at.x, (float) at.y, (float) at.z);
+      tip.add(0, GAP_ABOVE_HEAD + bob, 0);
       arrow(triangles, facing, tip, style, alpha);
     }
     buffers.endBatch(THROUGH_BLOCKS);

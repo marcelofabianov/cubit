@@ -43,6 +43,7 @@ final class SavedRobotValues {
   private static final String SOLAR_KEY = "SolarEnabled";
   private static final String TORCHES_KEY = "TorchesEnabled";
   private static final String AUTO_RETURN_KEY = "AutoReturnEnabled";
+  private static final String UNLOAD_KEY = "UnloadEnabled";
   private static final String TORCH_SLOT_KEY = "TorchSlot";
   private static final String LAST_SAFE_POSITION_KEY = "LastSafePosition";
   private static final String NO_OWNER_MESSAGE = "Robot {} has no owner. Nobody can interact.";
@@ -76,6 +77,7 @@ final class SavedRobotValues {
     tag.putBoolean(SOLAR_KEY, robot.state().solarOn());
     tag.putBoolean(TORCHES_KEY, robot.state().torchesOn());
     tag.putBoolean(AUTO_RETURN_KEY, robot.state().autoReturnOn());
+    tag.putBoolean(UNLOAD_KEY, robot.state().unloadOn());
     SavedPickup.write(tag, robot.state().pickup());
     robot
         .lastSafePosition()
@@ -157,7 +159,8 @@ final class SavedRobotValues {
             solarOn(tag))
         .withPickup(SavedPickup.read(tag))
         .withTorches(!tag.contains(TORCHES_KEY) || tag.getBoolean(TORCHES_KEY))
-        .withAutoReturn(!tag.contains(AUTO_RETURN_KEY) || tag.getBoolean(AUTO_RETURN_KEY));
+        .withAutoReturn(!tag.contains(AUTO_RETURN_KEY) || tag.getBoolean(AUTO_RETURN_KEY))
+        .withUnload(!tag.contains(UNLOAD_KEY) || tag.getBoolean(UNLOAD_KEY));
   }
 
   /** Without the key, the robot was saved before the solar switch existed, so it stays on. */

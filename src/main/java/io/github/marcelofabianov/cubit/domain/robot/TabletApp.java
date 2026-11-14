@@ -10,7 +10,8 @@ public enum TabletApp {
   OPEN,
   TARGET,
   DOCK,
-  AREA;
+  AREA,
+  UNLOAD;
 
   public String key() {
     return name().toLowerCase(Locale.ROOT);

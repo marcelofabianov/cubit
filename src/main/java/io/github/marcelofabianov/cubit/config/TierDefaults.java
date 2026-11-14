@@ -13,6 +13,7 @@ import io.github.marcelofabianov.cubit.domain.tier.ScannerSpec;
 import io.github.marcelofabianov.cubit.domain.tier.ShockSpec;
 import io.github.marcelofabianov.cubit.domain.tier.TierSpec;
 import io.github.marcelofabianov.cubit.domain.tier.TorchSpec;
+import io.github.marcelofabianov.cubit.domain.tier.UnloadSpec;
 import java.util.Set;
 
 /**
@@ -163,6 +164,10 @@ final class TierDefaults {
   private static final Energy TORCH_COST = new Energy(20);
   private static final Percentage RETURN_CHARGE = new Percentage(10);
   private static final AreaSpec BASE_AREA = AreaSpec.NONE;
+  private static final UnloadSpec BASE_UNLOAD = new UnloadSpec(1, 16);
+  private static final UnloadSpec ADVANCED_UNLOAD = new UnloadSpec(1, 32);
+  private static final UnloadSpec ELITE_UNLOAD = new UnloadSpec(2, 48);
+  private static final UnloadSpec ULTIMATE_UNLOAD = new UnloadSpec(3, 64);
   private static final AreaSpec ADVANCED_AREA = new AreaSpec(16, 8);
   private static final AreaSpec ELITE_AREA = new AreaSpec(32, 16);
   private static final AreaSpec ULTIMATE_AREA = new AreaSpec(64, 32);
@@ -204,7 +209,8 @@ final class TierDefaults {
           new Energy(BASE_POWER_BANK),
           BASE_TORCHES,
           RETURN_CHARGE,
-          BASE_AREA);
+          BASE_AREA,
+          BASE_UNLOAD);
   private static final TierSpec ADVANCED_SPEC =
       new TierSpec(
           new Energy(ADVANCED_BATTERY),
@@ -235,7 +241,8 @@ final class TierDefaults {
           new Energy(ADVANCED_POWER_BANK),
           ADVANCED_TORCHES,
           RETURN_CHARGE,
-          ADVANCED_AREA);
+          ADVANCED_AREA,
+          ADVANCED_UNLOAD);
   private static final TierSpec ELITE_SPEC =
       new TierSpec(
           new Energy(ELITE_BATTERY),
@@ -266,7 +273,8 @@ final class TierDefaults {
           new Energy(ELITE_POWER_BANK),
           ELITE_TORCHES,
           RETURN_CHARGE,
-          ELITE_AREA);
+          ELITE_AREA,
+          ELITE_UNLOAD);
   private static final TierSpec ULTIMATE_SPEC =
       new TierSpec(
           new Energy(ULTIMATE_BATTERY),
@@ -297,7 +305,8 @@ final class TierDefaults {
           new Energy(ULTIMATE_POWER_BANK),
           ULTIMATE_TORCHES,
           RETURN_CHARGE,
-          ULTIMATE_AREA);
+          ULTIMATE_AREA,
+          ULTIMATE_UNLOAD);
 
   private TierDefaults() {}
 

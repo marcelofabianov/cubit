@@ -55,6 +55,17 @@ public final class TabletKeys {
   public static final String AREA_LINE = PREFIX + "area_line";
   public static final String AREA_NONE = PREFIX + "area_none";
   public static final String AREA_SUMMARY = PREFIX + "area_summary";
+  public static final String UNLOAD_NOW = PREFIX + "unload_now";
+  public static final String UNLOAD_NOW_DETAIL = PREFIX + "unload_now_detail";
+  public static final String UNLOAD_NO_CHEST = PREFIX + "unload_no_chest";
+  public static final String UNLOAD_EMPTY = PREFIX + "unload_empty";
+  public static final String UNLOAD_ONLY_INVENTORY = PREFIX + "unload_only_inventory";
+  public static final String UNLOAD_MARKED = PREFIX + "unload_marked";
+  public static final String UNLOAD_UNMARKED = PREFIX + "unload_unmarked";
+  public static final String UNLOAD_GOING = PREFIX + "unload_going";
+  public static final String UNLOAD_NONE = PREFIX + "unload_none";
+  public static final String UNLOAD_FULL = PREFIX + "unload_full";
+  public static final String CHEST_SLOTS = PREFIX + "chest_slots";
   public static final String FOLLOW = PREFIX + "follow";
   public static final String FOLLOW_DETAIL = PREFIX + "follow_detail";
   public static final String FOLLOW_ALREADY = PREFIX + "follow_already";

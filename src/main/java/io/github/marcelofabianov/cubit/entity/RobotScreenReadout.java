@@ -56,7 +56,10 @@ public final class RobotScreenReadout {
         source(robot, player -> RobotTablet.canUse(robot, player)),
         RobotTablet.opening(robot),
         new TabletRobotMenu.Controls(
-            robot.docking().preferred(), new RobotFollowCall(robot), robot.workArea()::area));
+            robot.docking().preferred(),
+            new RobotFollowCall(robot),
+            robot.docking().unload(),
+            robot.workArea()::area));
   }
 
   private static RobotMenuContents contents(RobotEntity robot) {
@@ -71,7 +74,8 @@ public final class RobotScreenReadout {
       robot.chatter(),
       robot.solar(),
       robot.torches(),
-      robot.docking().autoReturn()
+      robot.docking().autoReturn(),
+      robot.docking().unload()
     };
     return new RobotMenuSource(
         () -> read(robot),

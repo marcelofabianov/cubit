@@ -2,6 +2,7 @@ package io.github.marcelofabianov.cubit.client;
 
 import io.github.marcelofabianov.cubit.domain.dock.DockGoal;
 import io.github.marcelofabianov.cubit.domain.robot.FollowCall;
+import io.github.marcelofabianov.cubit.domain.robot.UnloadCall;
 import io.github.marcelofabianov.cubit.menu.ScreenKeys;
 import io.github.marcelofabianov.cubit.menu.TabletKeys;
 import io.github.marcelofabianov.cubit.menu.TabletRobotMenu;
@@ -13,24 +14,26 @@ import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.network.chat.Component;
 
 /**
- * The buttons of the header of the Tablet: Back in the corner, and Power, Rename, Go to Dock and
- * Follow in a row under the portrait and the bars, from the margin (answers 1020, 1033, 1035 and
- * 1073). A button that cannot act now is disabled, with the reason in its tooltip.
+ * The buttons of the header of the Tablet: Back in the corner, and Power, Rename, Go to Dock,
+ * Unload and Follow in a row under the portrait and the bars, from the margin (answers 1020, 1033,
+ * 1035, 1073 and 1089). A button that cannot act now is disabled, with the reason in its tooltip.
  */
 final class TabletHeaderButtons {
-  static final int BUTTON_WIDTH = 68;
+  static final int BUTTON_WIDTH = 53;
   static final int BUTTON_GAP = 4;
   private static final int MARGIN = TabletRobotHeader.MARGIN;
   private static final int BACK_Y = 5;
   private static final int BACK_WIDTH = 36;
   private static final int BACK_HEIGHT = 12;
-  private static final int FOLLOW_PLACE = 3;
+  private static final int UNLOAD_PLACE = 3;
+  private static final int FOLLOW_PLACE = 4;
 
   private final TabletRobotMenu menu;
   private FlatButton back;
   private FlatButton power;
   private FlatButton rename;
   private FlatButton dock;
+  private FlatButton unload;
   private FlatButton follow;
 
   TabletHeaderButtons(TabletRobotMenu menu) {
@@ -42,30 +45,25 @@ final class TabletHeaderButtons {
 
   void add(UnaryOperator<FlatButton> add, int windowLeft, int windowTop, Actions actions) {
     back = add.apply(backButton(windowLeft, windowTop, actions.back()));
-    power =
-        add.apply(
-            rowButton(
-                windowLeft,
-                windowTop,
-                0,
-                Component.empty(),
-                () -> actions.press().accept(TabletRobotMenu.POWER_TOGGLE_BUTTON)));
+    Runnable powerPress = pressing(actions, TabletRobotMenu.POWER_TOGGLE_BUTTON);
+    power = add.apply(rowButton(windowLeft, windowTop, 0, Component.empty(), powerPress));
     rename =
         add.apply(rowButton(windowLeft, windowTop, 1, bold(TabletKeys.RENAME), actions.rename()));
-    dock =
-        add.apply(
-            rowButton(
-                windowLeft,
-                windowTop,
-                2,
-                bold(TabletKeys.GO_TO_DOCK),
-                () -> actions.press().accept(TabletRobotMenu.GO_TO_DOCK_BUTTON)));
-    follow =
-        add.apply(
-            followButton(
-                windowLeft,
-                windowTop,
-                () -> actions.press().accept(TabletRobotMenu.FOLLOW_BUTTON)));
+    Runnable dockPress = pressing(actions, TabletRobotMenu.GO_TO_DOCK_BUTTON);
+    dock = add.apply(rowButton(windowLeft, windowTop, 2, bold(TabletKeys.GO_TO_DOCK), dockPress));
+    Runnable unloadPress = pressing(actions, TabletRobotMenu.UNLOAD_NOW_BUTTON);
+    unload = add.apply(unloadButton(windowLeft, windowTop, unloadPress));
+    Runnable followPress = pressing(actions, TabletRobotMenu.FOLLOW_BUTTON);
+    follow = add.apply(followButton(windowLeft, windowTop, followPress));
+  }
+
+  private static Runnable pressing(Actions actions, int button) {
+    return () -> actions.press().accept(button);
+  }
+
+  /** Unload, before Follow, as the offline screen also has it (answer 1089). */
+  static FlatButton unloadButton(int windowLeft, int windowTop, Runnable action) {
+    return rowButton(windowLeft, windowTop, UNLOAD_PLACE, bold(TabletKeys.UNLOAD_NOW), action);
   }
 
   /** Follow, the last of the row, as the offline screen also has it. */
@@ -108,7 +106,8 @@ final class TabletHeaderButtons {
     updatePower();
     updateDock();
     updateFollow();
-    for (FlatButton button : List.of(back, power, rename, dock, follow)) {
+    updateUnload();
+    for (FlatButton button : List.of(back, power, rename, dock, unload, follow)) {
       button.visible = visible;
     }
   }
@@ -135,6 +134,19 @@ final class TabletHeaderButtons {
           case NO_DOCK -> TabletKeys.DOCK_OUT_OF_REACH;
         };
     enable(dock, goal.ready(), detail);
+  }
+
+  private void updateUnload() {
+    UnloadCall call = menu.unloadCall();
+    String detail =
+        switch (call) {
+          case READY -> TabletKeys.UNLOAD_NOW_DETAIL;
+          case NO_CHEST -> TabletKeys.UNLOAD_NO_CHEST;
+          case EMPTY -> TabletKeys.UNLOAD_EMPTY;
+          case SWITCHED_OFF -> TabletKeys.DOCK_SWITCHED_OFF;
+          case HIBERNATING -> TabletKeys.DOCK_HIBERNATING;
+        };
+    enable(unload, call.ready(), detail);
   }
 
   private void updateFollow() {

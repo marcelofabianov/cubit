@@ -91,6 +91,15 @@ class RobotStateTest {
   }
 
   @Test
+  void theUnloadStartsOnAndIsKept() {
+    RobotState off = new RobotState(RobotTier.BASE, SOME_ENERGY, SOME_HEALTH).withUnload(false);
+
+    assertTrue(new RobotState(RobotTier.BASE, SOME_ENERGY, SOME_HEALTH).unloadOn());
+    assertFalse(off.damaged().unloadOn());
+    assertFalse(off.withAutoReturn(false).withTorches(false).unloadOn());
+  }
+
+  @Test
   void aNewRobotIsWhite() {
     RobotState state = RobotState.initial(RobotTier.BASE, SPEC, new Percentage(INITIAL_PERCENT));
 

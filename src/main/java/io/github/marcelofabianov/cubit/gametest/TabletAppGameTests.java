@@ -190,6 +190,7 @@ public final class TabletAppGameTests {
     helper.assertValueEqual(TabletItem.appOf(tablet), TabletApp.AREA, WRONG_APP);
     TabletUse.switchApp(owner, FORWARD);
     TabletUse.switchApp(owner, FORWARD);
+    TabletUse.switchApp(owner, FORWARD);
 
     helper.assertValueEqual(TabletItem.appOf(tablet), TabletApp.TARGET, WRONG_APP);
     helper.succeed();

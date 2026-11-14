@@ -9,6 +9,10 @@ final class RobotGoals {
   private static final int DAMAGING_BLOCK_PRIORITY = 1;
   private static final int DOCK_PRIORITY = 2;
   private static final int FETCH_PRIORITY = 3;
+
+  /** After the dock trip and before fetching, which cannot run with a full inventory anyway. */
+  private static final int UNLOAD_PRIORITY = 3;
+
   private static final int FOLLOW_PRIORITY = 4;
 
   /** Never with following, since a Cubit in an area gives up the place (answer 1051). */
@@ -22,6 +26,7 @@ final class RobotGoals {
     goals.addGoal(BURNING_PRIORITY, new BurningReactionGoal(robot));
     goals.addGoal(DAMAGING_BLOCK_PRIORITY, new LeaveDamagingBlockGoal(robot));
     goals.addGoal(DOCK_PRIORITY, new GoToDockGoal(robot));
+    goals.addGoal(UNLOAD_PRIORITY, new UnloadGoal(robot));
     goals.addGoal(FETCH_PRIORITY, new FetchItemGoal(robot));
     goals.addGoal(
         FOLLOW_PRIORITY,

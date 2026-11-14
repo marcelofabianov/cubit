@@ -59,6 +59,9 @@ public class RobotMenu extends RobotMenuReading {
   /** The auto return switch of the settings tab, after the buttons of the Tablet (answer 1066). */
   public static final int AUTO_RETURN_BUTTON = 16;
 
+  /** The unload switch of the settings tab, after Follow of the Tablet (answer 1093). */
+  public static final int UNLOAD_BUTTON = 18;
+
   /**
    * The rows to scroll to come last, one button per row on top (answer 838), with room left for the
    * buttons still to come.

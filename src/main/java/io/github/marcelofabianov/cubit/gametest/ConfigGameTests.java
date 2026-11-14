@@ -9,12 +9,14 @@ import io.github.marcelofabianov.cubit.domain.energy.Energy;
 import io.github.marcelofabianov.cubit.domain.energy.Percentage;
 import io.github.marcelofabianov.cubit.domain.energy.SolarOutput;
 import io.github.marcelofabianov.cubit.domain.robot.RobotType;
+import io.github.marcelofabianov.cubit.domain.tier.AreaSpec;
 import io.github.marcelofabianov.cubit.domain.tier.PickupSpec;
 import io.github.marcelofabianov.cubit.domain.tier.RobotTier;
 import io.github.marcelofabianov.cubit.domain.tier.ScannerSpec;
 import io.github.marcelofabianov.cubit.domain.tier.ShockSpec;
 import io.github.marcelofabianov.cubit.domain.tier.TierSpec;
 import io.github.marcelofabianov.cubit.domain.tier.TorchSpec;
+import io.github.marcelofabianov.cubit.domain.tier.UnloadSpec;
 import java.util.Map;
 import java.util.Set;
 import net.minecraft.gametest.framework.GameTest;
@@ -161,6 +163,8 @@ public final class ConfigGameTests {
   private static final int BASE_FETCH_RADIUS = 4;
   private static final int BASE_TORCH_COST = 20;
   private static final int BASE_RETURN_CHARGE = 10;
+  private static final int BASE_UNLOAD_CHESTS = 1;
+  private static final int BASE_UNLOAD_REACH = 16;
 
   private static final long BASE_POWER_BANK = 210_000;
 
@@ -193,7 +197,9 @@ public final class ConfigGameTests {
           new PickupSpec(0, Energy.ZERO, BASE_PICKUP_FILTER_SLOTS, false, BASE_FETCH_RADIUS),
           new Energy(BASE_POWER_BANK),
           new TorchSpec(new Energy(BASE_TORCH_COST), new LightLevel(0)),
-          new Percentage(BASE_RETURN_CHARGE));
+          new Percentage(BASE_RETURN_CHARGE),
+          AreaSpec.NONE,
+          new UnloadSpec(BASE_UNLOAD_CHESTS, BASE_UNLOAD_REACH));
   private static final String WRONG_SPEC = "Wrong tier numbers";
   private static final String ULTIMATE_SPEED_KEY = "general_robot.ultimate.speed_multiplier";
   private static final double ULTIMATE_SPEED_MULTIPLIER = 2.0;

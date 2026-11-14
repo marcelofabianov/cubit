@@ -23,7 +23,8 @@ public record RobotState(
     boolean solarOn,
     PickupSettings pickup,
     boolean torchesOn,
-    boolean autoReturnOn) {
+    boolean autoReturnOn,
+    boolean unloadOn) {
   private static final String INVALID_HEALTH_MESSAGE = "Invalid robot health: ";
   private static final float MIN_PLACED_HEALTH = 1f;
 
@@ -31,6 +32,38 @@ public record RobotState(
     if (Float.isNaN(health) || health < 0) {
       throw new IllegalArgumentException(INVALID_HEALTH_MESSAGE + health);
     }
+  }
+
+  /** The unload starts switched on, also for what was saved before its switch existed. */
+  public RobotState(
+      RobotTier tier,
+      Energy energy,
+      float health,
+      boolean lampOn,
+      RobotColor color,
+      boolean scannersOn,
+      OreFilter oreFilter,
+      boolean chatterOn,
+      DefenseMode defenseMode,
+      boolean solarOn,
+      PickupSettings pickup,
+      boolean torchesOn,
+      boolean autoReturnOn) {
+    this(
+        tier,
+        energy,
+        health,
+        lampOn,
+        color,
+        scannersOn,
+        oreFilter,
+        chatterOn,
+        defenseMode,
+        solarOn,
+        pickup,
+        torchesOn,
+        autoReturnOn,
+        true);
   }
 
   /** The auto return starts switched on, also for what was saved before its switch existed. */
@@ -191,7 +224,8 @@ public record RobotState(
         solarOn,
         pickup,
         torchesOn,
-        autoReturnOn);
+        autoReturnOn,
+        unloadOn);
   }
 
   public RobotState repaired(TierSpec spec, Percentage health) {
@@ -208,7 +242,8 @@ public record RobotState(
         solarOn,
         pickup,
         torchesOn,
-        autoReturnOn);
+        autoReturnOn,
+        unloadOn);
   }
 
   /**
@@ -228,7 +263,8 @@ public record RobotState(
         solarOn,
         pickup,
         torchesOn,
-        autoReturnOn);
+        autoReturnOn,
+        unloadOn);
   }
 
   public RobotState withPickup(PickupSettings next) {
@@ -245,7 +281,8 @@ public record RobotState(
         solarOn,
         next,
         torchesOn,
-        autoReturnOn);
+        autoReturnOn,
+        unloadOn);
   }
 
   public RobotState withTorches(boolean on) {
@@ -262,7 +299,8 @@ public record RobotState(
         solarOn,
         pickup,
         on,
-        autoReturnOn);
+        autoReturnOn,
+        unloadOn);
   }
 
   public RobotState withAutoReturn(boolean on) {
@@ -279,6 +317,25 @@ public record RobotState(
         solarOn,
         pickup,
         torchesOn,
+        on,
+        unloadOn);
+  }
+
+  public RobotState withUnload(boolean on) {
+    return new RobotState(
+        tier,
+        energy,
+        health,
+        lampOn,
+        color,
+        scannersOn,
+        oreFilter,
+        chatterOn,
+        defenseMode,
+        solarOn,
+        pickup,
+        torchesOn,
+        autoReturnOn,
         on);
   }
 

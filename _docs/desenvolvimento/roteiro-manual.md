@@ -795,6 +795,36 @@ As regras estão em [`tablet.md`](../funcionalidades/tablet.md#apps).
 | 3 | Olhe o Tablet na hotbar e no inventário | Uma faixa fina com a cor do app ativo, na parte de baixo do ícone |
 | 4 | Passe o mouse sobre o Tablet no inventário | O nome é só `Cubit Tablet` |
 
+## Descarga em baú
+
+As regras estão em [`inventario.md`](../funcionalidades/inventario.md#descarregar-em-baú). Use um Cubit Base e um Advanced com carga, baús, um barril e o Tablet.
+
+| # | Faça | Espere |
+|---|---|---|
+| 1 | Troque para o app Descarga com Shift + roda | `Cubit Tablet · Unload` em laranja, e a faixa do ícone laranja |
+| 2 | Com o Cubit Base escolhido, clique num bloco de pedra | `Unload marks a block with an inventory` |
+| 3 | Clique num baú | `Chest marked for Cubit · up to 1 · Shift to unmark`. Com o Tablet na mão, uma seta laranja sobre o baú, com `Cubit` e `Inventory 0 / 27` |
+| 4 | Clique num barril | `Cubit has 1 chests · Shift and a click unmarks`, e o barril não é marcado |
+| 4a | Ponha itens no Cubit e clique de novo no baú marcado | `Cubit is unloading in this chest`, e ele vai descarregar só nele |
+| 4b | Segure Shift e clique no baú marcado | `Chest unmarked for Cubit`, e a seta some |
+| 4c | Clique no baú de novo | Ele volta a ser marcado |
+| 4d | Afaste-se do baú e, mirando num bloco qualquer, segure Shift e clique | `Chest unmarked for Cubit`, e a seta do baú some |
+| 4e | Clique no barril | Ele é marcado no lugar do baú |
+| 4f | Shift + clique de novo, sem baú marcado | `Cubit has no marked chest` |
+| 5 | Troque para o app Open | A seta continua sobre o baú. Guarde o Tablet, e a seta some |
+| 6 | Ponha itens no Cubit que segue e abra a tela dele pelo Tablet | O botão `Unload` na fileira, habilitado |
+| 7 | Clique em `Unload` | Ele vai ao baú, descarrega tudo menos as tochas e a Power Bank, mostra `Cubit: Items unloaded` e volta a seguir. A seta mostra os slots usados |
+| 8 | Encha o inventário dele e espere | O Cubit que segue não descarrega sozinho |
+| 9 | Encha o baú e tente `Unload` | O botão fica desabilitado, com `No marked chest with room within reach` |
+| 10 | Com o inventário vazio | `Unload` desabilitado, com `Nothing to unload` |
+| 11 | Com o Cubit Advanced, marque dois baús e uma área a até 32 blocos deles | As duas setas, com o nome dele |
+| 12 | Encha o inventário dele na área | Ele vai ao primeiro baú, depois ao segundo, e volta para a área. Sem `Items unloaded` |
+| 13 | Encha os dois baús e o inventário dele | Ele fica na área com `Inventory full` e não sai do lugar |
+| 14 | Desligue `Unload` na aba Settings e esvazie um baú | Ele continua parado com o inventário cheio. O botão `Unload` ainda funciona |
+| 15 | Saia e entre no mundo | Os baús continuam marcados |
+| 16 | Recolha e coloque o Cubit | Os baús se perderam, e as setas somem |
+| 17 | Com o jogo em português | `Descarga`, `Descarregar`, `Baú marcado para Cubit` e `Inventário 0 / 27` |
+
 ## Tradução
 
 | # | Passo | Resultado esperado |
@@ -854,6 +884,9 @@ Na instância só com o mod, tire capturas com F2 do Cubit seguindo, da tela do 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-14 15:23 | Adiciona o Shift + clique de longe na descarga. |
+| Marcelo Fabiano | 2026-11-14 14:40 | Acrescenta o clique no baú marcado e o Shift para desmarcar. |
+| Marcelo Fabiano | 2026-11-14 14:15 | Adiciona a descarga em baú. |
 | Marcelo Fabiano | 2026-11-14 13:20 | Adiciona as cores dos apps do Tablet. |
 | Marcelo Fabiano | 2026-11-14 12:40 | Adiciona o modo área. |
 | Marcelo Fabiano | 2026-11-14 11:20 | Adiciona o `Follow` do Tablet. |

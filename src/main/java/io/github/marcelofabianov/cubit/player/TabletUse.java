@@ -48,6 +48,7 @@ public final class TabletUse {
       case TARGET -> TabletTargetApp.click(player, chosen.orElseThrow(), click);
       case DOCK -> TabletDockApp.click(player, chosen, click);
       case AREA -> TabletAreaApp.click(player, click);
+      case UNLOAD -> TabletUnloadApp.click(player, chosen, click);
     }
   }
 
