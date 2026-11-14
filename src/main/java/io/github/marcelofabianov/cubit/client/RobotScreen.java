@@ -26,6 +26,10 @@ import net.minecraft.world.level.block.Block;
  */
 final class RobotScreen extends AbstractContainerScreen<RobotMenu> {
   private static final int WIDTH = 176;
+
+  /** The panels end where they did on the Base, at x 165, now from the right side (1102). */
+  private static final int PANEL_INSET = 11;
+
   private static final int BELOW_HOTBAR = 29;
   private static final int LINE = 9;
   private static final int DETAIL_LINE = 7;
@@ -60,24 +64,24 @@ final class RobotScreen extends AbstractContainerScreen<RobotMenu> {
   private RobotSettingsPanel settings;
   private RobotDefensePanel defense;
   private RobotBehaviorPanel behavior;
-  private final InventoryScrollbar scrollbar;
   private final RobotScreenTabs tabs = new RobotScreenTabs();
   private final RobotExclusiveRow exclusive;
 
   RobotScreen(RobotMenu menu, Inventory playerInventory, Component title) {
     super(menu, playerInventory, title);
-    scrollbar = new InventoryScrollbar(menu);
     exclusive = new RobotExclusiveRow(painter, menu);
-    imageWidth = WIDTH + (scrollbar.shown() ? InventoryScrollbar.EXTRA_WIDTH : 0);
+    imageWidth = WIDTH + menu.extraWidth();
     imageHeight = menu.playerInventoryY() + RobotMenu.HOTBAR_GAP + BELOW_HOTBAR;
   }
 
   @Override
   protected void init() {
     super.init();
-    settings = new RobotSettingsPanel(painter, menu, oreIcon(menu.opening().filterIconTag()));
-    defense = new RobotDefensePanel(painter, menu);
-    behavior = new RobotBehaviorPanel(painter, menu);
+    int right = imageWidth - PANEL_INSET;
+    settings =
+        new RobotSettingsPanel(painter, menu, oreIcon(menu.opening().filterIconTag()), right);
+    defense = new RobotDefensePanel(painter, menu, right);
+    behavior = new RobotBehaviorPanel(painter, menu, right);
     showOpenTab();
   }
 
@@ -159,7 +163,6 @@ final class RobotScreen extends AbstractContainerScreen<RobotMenu> {
     if (tabs.open() != RobotScreenTabs.Tab.INVENTORY) {
       return;
     }
-    scrollbar.render(graphics, leftPos, topPos);
     long tick = minecraft.player == null ? 0 : minecraft.player.tickCount;
     RobotPortrait.draw(
         graphics,
@@ -291,56 +294,12 @@ final class RobotScreen extends AbstractContainerScreen<RobotMenu> {
       showOpenTab();
       return true;
     }
-    if (tabs.open() == RobotScreenTabs.Tab.INVENTORY) {
-      OptionalInt row = scrollbar.press(mouseX - leftPos, mouseY - topPos);
-      if (row.isPresent()) {
-        scrollTo(row.getAsInt());
-        return true;
-      }
-    }
     OptionalInt pressed = pressedButton(mouseX - leftPos, mouseY - topPos);
     if (pressed.isPresent()) {
       minecraft.gameMode.handleInventoryButtonClick(menu.containerId, pressed.getAsInt());
       return true;
     }
     return super.mouseClicked(mouseX, mouseY, button);
-  }
-
-  @Override
-  public boolean mouseDragged(
-      double mouseX, double mouseY, int button, double dragX, double dragY) {
-    OptionalInt row = scrollbar.drag(mouseY - topPos);
-    if (row.isPresent()) {
-      scrollTo(row.getAsInt());
-      return true;
-    }
-    return super.mouseDragged(mouseX, mouseY, button, dragX, dragY);
-  }
-
-  @Override
-  public boolean mouseReleased(double mouseX, double mouseY, int button) {
-    scrollbar.release();
-    return super.mouseReleased(mouseX, mouseY, button);
-  }
-
-  @Override
-  public boolean mouseScrolled(double mouseX, double mouseY, double scrollX, double scrollY) {
-    if (tabs.open() == RobotScreenTabs.Tab.INVENTORY
-        && scrollbar.overInventory(mouseX - leftPos, mouseY - topPos)) {
-      scrollTo(menu.topRow() - (int) Math.signum(scrollY));
-      return true;
-    }
-    return super.mouseScrolled(mouseX, mouseY, scrollX, scrollY);
-  }
-
-  /** The client shows the rows at once, and the server, which decides, follows by the button. */
-  private void scrollTo(int row) {
-    int clamped = menu.window().clampTopRow(row);
-    if (clamped != menu.topRow()) {
-      menu.scrollTo(clamped);
-      minecraft.gameMode.handleInventoryButtonClick(
-          menu.containerId, RobotMenu.FIRST_SCROLL_BUTTON + clamped);
-    }
   }
 
   private int tabLeft() {

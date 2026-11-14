@@ -50,8 +50,8 @@ final class TabletRobotHeader {
     this.menu = menu;
   }
 
-  /** Drawn in the coordinates of the window. */
-  void render(GuiGraphics graphics, Component name, long tick) {
+  /** Drawn in the coordinates of the window, with the rule across its whole width. */
+  void render(GuiGraphics graphics, Component name, long tick, int windowWidth) {
     RobotPortrait.draw(
         graphics,
         MARGIN,
@@ -65,7 +65,7 @@ final class TabletRobotHeader {
     Component coordinates =
         Component.translatable(TabletKeys.COORDINATES, menu.blockX(), menu.blockY(), menu.blockZ());
     place(painter, graphics, coordinates, TabletDimensions.name(menu.tablet().dimension()));
-    rule(graphics, WIDTH);
+    rule(graphics, windowWidth);
   }
 
   /** The name in bold and the label of the tier, after the button Back. */

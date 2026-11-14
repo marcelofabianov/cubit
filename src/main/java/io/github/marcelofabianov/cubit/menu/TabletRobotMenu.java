@@ -66,7 +66,13 @@ public final class TabletRobotMenu extends RobotMenu {
       RobotMenuServer server,
       TabletOpening tablet,
       Controls controls) {
-    super(CubitMenus.TABLET_ROBOT.get(), containerId, playerInventory, contents, server, true);
+    super(
+        CubitMenus.TABLET_ROBOT.get(),
+        containerId,
+        playerInventory,
+        contents,
+        server,
+        RobotMenuLayout.TABLET);
     this.tablet = tablet;
     this.dock = controls.dock();
     this.follow = controls.follow();

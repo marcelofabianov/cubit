@@ -16,7 +16,6 @@ import net.minecraft.world.item.ItemStack;
  * filter. The slots only show copies, so nothing goes in or out of them (answers 880 and 895).
  */
 final class PickupMenuPart {
-  static final int FILTER_X = RobotMenu.FIRST_SLOT_X;
   static final int FILTER_Y = 70;
   private static final int LEFT_CLICK = 0;
   private static final int RIGHT_CLICK = 1;
@@ -43,12 +42,15 @@ final class PickupMenuPart {
     visible = shownNow;
   }
 
-  /** Added after every other slot, so the ranges of the robot and the player do not move. */
-  void addSlots(Consumer<Slot> add, int firstIndex) {
+  /**
+   * Added after every other slot, so the ranges of the robot and the player do not move. The filter
+   * starts at the left side and has as many columns as the window holds (answer 1105).
+   */
+  void addSlots(Consumer<Slot> add, int firstIndex, int columns) {
     firstSlot = firstIndex;
     for (int slot = 0; slot < PickupScreenValues.MAX_FILTER_SLOTS; slot++) {
-      int x = FILTER_X + slot % RobotMenu.SLOTS_PER_ROW * RobotMenu.SLOT_SIZE;
-      int y = FILTER_Y + slot / RobotMenu.SLOTS_PER_ROW * RobotMenu.SLOT_SIZE;
+      int x = RobotMenu.FIRST_SLOT_X + slot % columns * RobotMenu.SLOT_SIZE;
+      int y = FILTER_Y + slot / columns * RobotMenu.SLOT_SIZE;
       add.accept(new GhostSlot(slot, x, y));
     }
   }

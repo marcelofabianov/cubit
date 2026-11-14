@@ -11,6 +11,7 @@ import io.github.marcelofabianov.cubit.domain.robot.RobotColor;
 import io.github.marcelofabianov.cubit.domain.robot.RobotState;
 import io.github.marcelofabianov.cubit.domain.tier.RobotTier;
 import io.github.marcelofabianov.cubit.entity.RobotEntity;
+import io.github.marcelofabianov.cubit.menu.RobotMenu;
 import io.github.marcelofabianov.cubit.registry.CubitDataComponents;
 import io.github.marcelofabianov.cubit.registry.CubitItems;
 import java.util.List;
@@ -60,6 +61,19 @@ public final class PickupGameTests {
   @GameTest(template = ARENA)
   public static void theRobotPicksUpWhatItTouches(GameTestHelper helper) {
     RobotEntity robot = place(helper, RobotTier.BASE);
+    dropBeside(helper, Items.DIRT);
+
+    helper.succeedWhen(() -> helper.assertTrue(holds(robot, Items.DIRT), NOT_COLLECTED));
+  }
+
+  /** The rows the screen does not show also take items, as the last row of an Advanced. */
+  @GameTest(template = ARENA)
+  public static void anAdvancedWithOnlyItsLastRowFreeStillPicksUp(GameTestHelper helper) {
+    RobotEntity robot = place(helper, RobotTier.ADVANCED);
+    Container inventory = robot.inventory();
+    for (int slot = 0; slot < inventory.getContainerSize() - RobotMenu.SLOTS_PER_ROW; slot++) {
+      inventory.setItem(slot, new ItemStack(Items.COBBLESTONE, FULL_STACK));
+    }
     dropBeside(helper, Items.DIRT);
 
     helper.succeedWhen(() -> helper.assertTrue(holds(robot, Items.DIRT), NOT_COLLECTED));

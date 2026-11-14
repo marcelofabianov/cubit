@@ -124,7 +124,7 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 | `DockStoredKind` | O que um item é para o inventário do Dock: Toolbox, Power Bank ou outro |
 | `RobotClick` | O que o clique direito faz no robô: ignorar, recolher, subir o tier, pintar, escolher o minério, abrir ou ligar |
 | `InventoryFit` | Separa os itens que cabem nos slots do config dos que sobram |
-| `InventoryWindow` | As linhas do inventário que a tela mostra de uma vez, o limite da rolagem e o slot que cada slot da tela mostra |
+| `InventoryGrid` | Como o inventário aparece na tela: sempre 3 fileiras, com 9, 12, 15 e 18 colunas do Base ao Ultimate, a coluna e a fileira de cada slot e as colunas a mais, que alargam a tela (pergunta 1101) |
 | `Ownership` | Diz quem é dono de um robô ou de um Dock, e se os dois têm o mesmo dono |
 | `OwnerProtection` | Diz se um dano é do dono e, por isso, não fere o robô |
 | `VoidRescueTarget` | Para onde vai o robô danificado que caiu no vazio |

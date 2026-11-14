@@ -2,7 +2,7 @@ package io.github.marcelofabianov.cubit.menu;
 
 import io.github.marcelofabianov.cubit.domain.energy.Energy;
 import io.github.marcelofabianov.cubit.domain.robot.DefenseMode;
-import io.github.marcelofabianov.cubit.domain.robot.InventoryWindow;
+import io.github.marcelofabianov.cubit.domain.robot.InventoryGrid;
 import io.github.marcelofabianov.cubit.domain.tier.RobotTier;
 import io.github.marcelofabianov.cubit.registry.CubitMenus;
 import java.util.Optional;
@@ -62,21 +62,15 @@ public class RobotMenu extends RobotMenuReading {
   /** The unload switch of the settings tab, after Follow of the Tablet (answer 1093). */
   public static final int UNLOAD_BUTTON = 18;
 
-  /**
-   * The rows to scroll to come last, one button per row on top (answer 838), with room left for the
-   * buttons still to come.
-   */
-  public static final int FIRST_SCROLL_BUTTON = 32;
-
-  /** The rows of the Base, so the screen keeps its height in every tier. */
-  public static final int VISIBLE_ROWS = 3;
+  /** The rows of every tier, so the screen keeps the height of the Base (answer 1101). */
+  public static final int VISIBLE_ROWS = InventoryGrid.ROWS;
 
   private static final int ENERGY_SLOT_SIZE = 1;
   private static final int TORCH_SLOT_SIZE = 1;
 
   private final Container container;
-  private final InventoryWindow window;
-  private final ScrolledContainer view;
+  private final InventoryGrid grid;
+  private final RobotMenuLayout layout;
   private final Predicate<Player> stillValid;
   private final Runnable refresh;
   private final RobotSwitch[] switches;
@@ -93,12 +87,12 @@ public class RobotMenu extends RobotMenuReading {
       Inventory playerInventory,
       RobotMenuContents contents,
       RobotMenuServer server,
-      boolean readOnly) {
+      RobotMenuLayout layout) {
     super(type, containerId, server.values());
-    this.slotGroups = new RobotMenuSlots(readOnly);
+    this.slotGroups = new RobotMenuSlots(layout);
+    this.layout = layout;
     this.container = contents.inventory();
-    this.window = new InventoryWindow(container.getContainerSize(), SLOTS_PER_ROW, VISIBLE_ROWS);
-    this.view = new ScrolledContainer(container, window);
+    this.grid = new InventoryGrid(container.getContainerSize());
     this.stillValid = server.stillValid();
     this.refresh = server.refresh();
     this.switches = server.switches().clone();
@@ -106,15 +100,15 @@ public class RobotMenu extends RobotMenuReading {
     this.power = server.power();
     this.opening = contents.opening();
     this.pickup = new PickupMenuPart(server.pickup());
-    slotGroups.addRobotSlots(this::addSlot, view);
+    slotGroups.addRobotSlots(this::addSlot, container, grid);
     slotGroups.addEnergySlot(this::addSlot, contents.energySlot());
     slotGroups.addTorchSlot(
         this::addSlot,
         contents.torchSlot(),
         () -> RobotScreenValues.isAvailable(values, RobotScreenValues.TORCHES));
     addDataSlots(values);
-    slotGroups.addPlayerSlots(this::addSlot, playerInventory, playerInventoryY());
-    pickup.addSlots(this::addSlot, slots.size());
+    slotGroups.addPlayerSlots(this::addSlot, playerInventory, FIRST_SLOT_X, playerInventoryY());
+    pickup.addSlots(this::addSlot, slots.size(), filterColumns());
     addDataSlots(pickup.values());
   }
 
@@ -134,7 +128,7 @@ public class RobotMenu extends RobotMenuReading {
         playerInventory,
         contents,
         RobotMenuServer.onClient(),
-        false);
+        RobotMenuLayout.ROBOT);
   }
 
   /** On the server, where the values come from the robot itself. */
@@ -144,7 +138,12 @@ public class RobotMenu extends RobotMenuReading {
       RobotMenuContents contents,
       RobotMenuSource source) {
     return new RobotMenu(
-        CubitMenus.ROBOT.get(), containerId, playerInventory, contents, serverOf(source), false);
+        CubitMenus.ROBOT.get(),
+        containerId,
+        playerInventory,
+        contents,
+        serverOf(source),
+        RobotMenuLayout.ROBOT);
   }
 
   static RobotMenuServer serverOf(RobotMenuSource source) {
@@ -176,9 +175,6 @@ public class RobotMenu extends RobotMenuReading {
   /** The server checks this menu before calling, and it is checked again for any other caller. */
   @Override
   public boolean clickMenuButton(Player player, int button) {
-    if (button >= FIRST_SCROLL_BUTTON) {
-      return scrollFromClient(player, button - FIRST_SCROLL_BUTTON);
-    }
     if (button >= PICKUP_BUTTON && button <= FETCH_BUTTON) {
       return stillValid(player)
           && pickup.press(player, PickupControl.PickupButton.values()[button - PICKUP_BUTTON]);
@@ -206,25 +202,24 @@ public class RobotMenu extends RobotMenuReading {
     return true;
   }
 
-  private boolean scrollFromClient(Player player, int row) {
-    if (row > window.maxTopRow() || !stillValid(player)) {
-      return false;
-    }
-    view.setTopRow(row);
-    return true;
+  /** The whole inventory in three rows, with more columns in the bigger tiers (answer 1101). */
+  public InventoryGrid grid() {
+    return grid;
   }
 
-  /** On the client, at once, so the screen does not wait for the server to show the rows. */
-  public void scrollTo(int row) {
-    view.setTopRow(row);
+  /** Where this screen puts its slots, as the client draws their frames. */
+  public RobotMenuLayout layout() {
+    return layout;
   }
 
-  public int topRow() {
-    return view.topRow();
+  /** How much wider than the Base screen the inventory of the robot makes it. */
+  public int extraWidth() {
+    return grid.extraColumns() * SLOT_SIZE;
   }
 
-  public InventoryWindow window() {
-    return window;
+  /** The pickup filter grows sideways with the window, so it takes fewer rows (answer 1105). */
+  public int filterColumns() {
+    return layout.filterColumns(grid);
   }
 
   /** Only the client hides the slots. The behavior tab keeps the player's, to copy items. */
@@ -266,16 +261,21 @@ public class RobotMenu extends RobotMenuReading {
 
   /** The slots of the robot come first: its inventory, the energy slot and the torch slot. */
   protected final int robotSlots() {
-    return view.getContainerSize() + ENERGY_SLOT_SIZE + TORCH_SLOT_SIZE;
+    return container.getContainerSize() + ENERGY_SLOT_SIZE + TORCH_SLOT_SIZE;
   }
 
   public RobotScreenOpening opening() {
     return opening;
   }
 
+  /** The energy slot comes right after the inventory of the robot. */
+  public int energySlotIndex() {
+    return container.getContainerSize();
+  }
+
   /** The torch slot comes after the visible rows of the robot and the energy slot. */
   public int torchSlotIndex() {
-    return view.getContainerSize() + ENERGY_SLOT_SIZE;
+    return container.getContainerSize() + ENERGY_SLOT_SIZE;
   }
 
   public Energy torchCost() {
@@ -290,7 +290,7 @@ public class RobotMenu extends RobotMenuReading {
   }
 
   public int rows() {
-    return window.visibleRows();
+    return grid.rows();
   }
 
   public int playerInventoryY() {
@@ -305,7 +305,7 @@ public class RobotMenu extends RobotMenuReading {
     }
     ItemStack stack = slot.getItem();
     ItemStack moved = stack.copy();
-    int inventorySlots = view.getContainerSize();
+    int inventorySlots = container.getContainerSize();
     int robotSlots = robotSlots();
     boolean fits =
         index < robotSlots
