@@ -32,7 +32,7 @@ Todas as funcionalidades entraram:
 
 Saiu ao terminar a Fase 3, no Modrinth, com o mod funcionando só com ele e as dependências: GeckoLib e LambDynamicLights, obrigatórias, e Jade, opcional. O envio ao CurseForge, com a mesma versão, fica para depois.
 
-## Fase 4: Upgrades e autonomia
+## Fase 4: Upgrades e autonomia (encerrada)
 
 Dividida em três partes, na ordem em que uma depende da outra.
 
@@ -51,7 +51,7 @@ Dividida em três partes, na ordem em que uma depende da outra.
 - Inventário do Induction Dock, numa aba nova, para a Toolbox e as Power Banks, que ele carrega.
 - Slot exclusivo de tochas, do Advanced em diante, com o Cubit colocando tochas sozinho.
 
-### Fase 4.2: Tablet, área e retorno
+### Fase 4.2: Tablet, área e retorno (encerrada)
 
 - Cubit Tablet, que substitui o Cubit Remote: tela de seleção e tela do Cubit, com os apps Open, Alvo e Dock.
 - Modo área e descarga em baú marcado, com os apps Área e Descarga do Tablet e o botão Descarregar.

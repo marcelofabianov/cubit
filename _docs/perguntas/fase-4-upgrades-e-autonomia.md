@@ -8,6 +8,9 @@ Não há perguntas pendentes nesta fase.
 
 | # | Pergunta | Resposta |
 |---|---|---|
+| 1135 | O fim da Fase 4.2 gera uma versão nova? | Não agora, como na Fase 4.1. A próxima versão é decidida junto com a publicação da `0.1.1` (issue #156) |
+| 1134 | O que entra no fechamento da Fase 4.2? | Tudo o que foi proposto: o item 16 marcado no `checklist.md`, a Fase 4.2 e a Fase 4 "Upgrades e autonomia" inteira encerradas no `ROADMAP.md` e no `README.md`, o estado atual do `AGENTS.md` e o milestone 7 fechado depois do merge, como no fechamento da Fase 4.1 (resposta 997) |
+| 1133 | Depois do local de morte (PR #189), em que ordem segue o roteiro? | Como recomendado: um PR que marca o item 16 no `checklist.md` e fecha a Fase 4.2, e depois a conversa sobre o `Stop` do Tablet (resposta 1076) |
 | 1132 | O `AGENTS.md` pode ser atualizado no PR do item 16? | Sim, os dois: a estrutura de pacotes ganha as classes do local de morte, e o Estado atual passa a citar a Fase 4.2 até o item 16, num commit próprio de docs |
 | 1131 | Os textos em português do local de morte propostos pelo agente valem? | Sim, como estão: `Você morreu em x, y, z · Superfície`, `Foi aqui que você morreu`, `Não acho um caminho até lá`, os botões `Guiar`, `Cancelar` e `Excluir`, as dicas da aba Mortes e as dimensões `Superfície`, `Nether` e `O End` |
 | 1130 | Valem os três detalhes da guia decididos na implementação? | Sim, os três: só guia com o Cubit ativo, porque um desligado continua no vínculo, mas não anda; o `Ir para o Dock` do Tablet também cancela a guia, como o retorno automático (resposta 1121); e fogo, lava ou bloco que fere só pausam a guia, que continua depois |
@@ -386,6 +389,8 @@ Não há perguntas pendentes nesta fase.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-14 19:32 | Registra as respostas 1134 e 1135. |
+| Marcelo Fabiano | 2026-11-14 19:31 | Registra a resposta 1133. |
 | Marcelo Fabiano | 2026-11-14 19:05 | Registra as respostas 1130 a 1132. |
 | Marcelo Fabiano | 2026-11-14 18:18 | Registra a resposta 1129. |
 | Marcelo Fabiano | 2026-11-14 18:17 | Registra as respostas 1127 e 1128. |
