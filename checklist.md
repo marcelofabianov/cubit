@@ -124,7 +124,7 @@ Um card por vez, na ordem do board "Cubit · Fase 5" (perguntas 1137, 1141 e 115
 
 3. [x] Consolidar o conceito da Fase 5 (issue #192, PR #208, perguntas 1136 a 1158)
 4. [x] Base do trabalho: slot do card, tier mínimo, estado de trabalho, aba Trabalho e hibernação fora do Dock com o `Retomar` (issue #193, PR #209, perguntas 1159 a 1179)
-5. [ ] Pescador (#194)
+5. [x] Pescador (issue #194, PR #210, perguntas 1180 a 1214)
 6. [ ] Fazendeiro (#195)
 7. [ ] Organizador, com o modo abastecer (#196)
 8. [ ] Cozinheiro (#197)
