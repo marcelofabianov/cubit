@@ -49,6 +49,7 @@ public final class CubitConfig {
   private final TorchSection torches;
   private final DeathPointSection deathPoint;
   private final FisherSection fisher;
+  private final UnloadSection unload;
   private final AtomicBoolean warnedRareTags = new AtomicBoolean();
   private final AtomicBoolean warnedLamp = new AtomicBoolean();
   private final AtomicBoolean warnedFishing = new AtomicBoolean();
@@ -74,6 +75,7 @@ public final class CubitConfig {
     torches = new TorchSection(builder);
     deathPoint = new DeathPointSection(builder);
     fisher = new FisherSection(builder);
+    unload = new UnloadSection(builder);
     builder.pop();
 
     tierCatalog = new NeoForgeTierCatalog(Map.of(GENERAL_ROBOT, tierSections(builder)));
@@ -264,6 +266,19 @@ public final class CubitConfig {
 
   public int fisherCastReachBlocks() {
     return fisher.castReach.get();
+  }
+
+  public int unloadIntervalMaxMinutes() {
+    return unload.maxMinutes.get();
+  }
+
+  /** A default over the max would never show in the Work tab, so it is kept under it. */
+  public int unloadIntervalDefaultMinutes() {
+    return Math.min(unload.defaultMinutes.get(), unloadIntervalMaxMinutes());
+  }
+
+  public int farmerScanIntervalTicks() {
+    return fisher.farmerScan.get();
   }
 
   public int noticeRepeatTicks() {

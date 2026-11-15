@@ -124,6 +124,9 @@ public final class RobotRepairRecipe extends CustomRecipe {
         CubitDataComponents.TORCH_SLOT.get(), damaged.get(CubitDataComponents.TORCH_SLOT.get()));
     repaired.set(
         CubitDataComponents.CARD_SLOT.get(), damaged.get(CubitDataComponents.CARD_SLOT.get()));
+    repaired.set(
+        CubitDataComponents.FERTILIZER_SLOT.get(),
+        damaged.get(CubitDataComponents.FERTILIZER_SLOT.get()));
     repaired.set(DataComponents.CUSTOM_NAME, damaged.get(DataComponents.CUSTOM_NAME));
     return repaired;
   }

@@ -74,7 +74,7 @@ public final class RobotFace {
 
   /** Only the server knows where the owner is for every player who sees this robot. */
   private void updateOwnerGaze() {
-    Player owner = robot.onlineOwner();
+    Player owner = RobotInteractions.onlineOwner(robot);
     boolean near =
         owner != null
             && OwnerLook.applies(

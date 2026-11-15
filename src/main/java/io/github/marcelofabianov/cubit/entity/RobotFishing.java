@@ -155,7 +155,7 @@ public final class RobotFishing implements RobotSwitch {
   }
 
   void setFishing(boolean fishing) {
-    robot.getEntityData().set(RobotSyncedData.FISHING, fishing);
+    RobotJobLook.showTool(robot, fishing);
   }
 
   /** Checks the spot again, as the water may have gone, and then takes what the table gives. */

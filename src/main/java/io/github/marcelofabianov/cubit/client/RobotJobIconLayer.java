@@ -10,7 +10,7 @@ import io.github.marcelofabianov.cubit.entity.RobotEntity;
 import io.github.marcelofabianov.cubit.entity.RobotFace;
 import io.github.marcelofabianov.cubit.entity.RobotJobLook;
 import java.util.EnumMap;
-import java.util.Locale;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import net.minecraft.client.renderer.LightTexture;
@@ -23,8 +23,8 @@ import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
 
 /**
  * The small icon of the job in the left corner of the screen, over the face, glowing as the screen
- * does (answer 1202). It goes out with the screen, off or asleep. Each job will have its own, and
- * for now only the Fisher has one.
+ * does (answer 1202). It goes out with the screen, off or asleep. Each job will have its own: for
+ * now the fish of the Fisher and the wheat of the Farmer (answer 1229).
  */
 final class RobotJobIconLayer extends GeoRenderLayer<RobotEntity> {
   private static final String ICON_PATH = "textures/entity/%s_screen/job_%s.png";
@@ -34,12 +34,12 @@ final class RobotJobIconLayer extends GeoRenderLayer<RobotEntity> {
 
   RobotJobIconLayer(GeoRenderer<RobotEntity> renderer, RobotType robotType) {
     super(renderer);
-    RobotJob job = RobotJob.FISHER;
-    icons.put(
-        job,
-        ResourceLocation.fromNamespaceAndPath(
-            CubitMod.MOD_ID,
-            ICON_PATH.formatted(robotType.id(), job.name().toLowerCase(Locale.ROOT))));
+    for (RobotJob job : List.of(RobotJob.FISHER, RobotJob.FARMER)) {
+      icons.put(
+          job,
+          ResourceLocation.fromNamespaceAndPath(
+              CubitMod.MOD_ID, ICON_PATH.formatted(robotType.id(), job.key())));
+    }
   }
 
   @Override

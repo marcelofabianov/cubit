@@ -33,6 +33,7 @@ public final class CubitCreativeTabs {
                     output.accept(CubitItems.ELITE_MODULE.get());
                     output.accept(CubitItems.ULTIMATE_MODULE.get());
                     output.accept(CubitItems.FISHER_CARD.get());
+                    output.accept(CubitItems.FARMER_CARD.get());
                     output.accept(CubitItems.BASE_POWER_BANK.get());
                     output.accept(CubitItems.ADVANCED_POWER_BANK.get());
                     output.accept(CubitItems.ELITE_POWER_BANK.get());

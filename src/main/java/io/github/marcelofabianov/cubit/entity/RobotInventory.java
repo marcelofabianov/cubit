@@ -32,6 +32,7 @@ final class RobotInventory {
   private final RobotEnergySlot energySlot = new RobotEnergySlot();
   private final RobotTorchSlot torchSlot;
   private final RobotCardSlot cardSlot;
+  private final RobotFertilizerSlot fertilizerSlot;
   private SimpleContainer container;
 
   /** The tier is read again on every check, because the config and the tier may change. */
@@ -39,6 +40,7 @@ final class RobotInventory {
     container = new SimpleContainer(slots);
     torchSlot = new RobotTorchSlot(() -> spec.get().torches().unlocked());
     cardSlot = new RobotCardSlot(job -> spec.get().jobs().accepts(job));
+    fertilizerSlot = new RobotFertilizerSlot(() -> spec.get().jobs().farmer().boneMeal());
   }
 
   Container container() {
@@ -99,12 +101,17 @@ final class RobotInventory {
     return cardSlot;
   }
 
+  RobotFertilizerSlot fertilizerSlot() {
+    return fertilizerSlot;
+  }
+
   /** Writes everything the robot carries to its item, in any path that turns it into an item. */
   void writeTo(ItemStack stack) {
     stack.set(CubitDataComponents.ROBOT_INVENTORY.get(), contents());
     stack.set(CubitDataComponents.ENERGY_SLOT.get(), energySlot.contents());
     stack.set(CubitDataComponents.TORCH_SLOT.get(), torchSlot.contents());
     stack.set(CubitDataComponents.CARD_SLOT.get(), cardSlot.contents());
+    stack.set(CubitDataComponents.FERTILIZER_SLOT.get(), fertilizerSlot.contents());
   }
 
   void readFrom(ItemStack stack, int slots) {
@@ -120,6 +127,8 @@ final class RobotInventory {
         stack.getOrDefault(CubitDataComponents.TORCH_SLOT.get(), ItemContainerContents.EMPTY));
     cardSlot.fill(
         stack.getOrDefault(CubitDataComponents.CARD_SLOT.get(), ItemContainerContents.EMPTY));
+    fertilizerSlot.fill(
+        stack.getOrDefault(CubitDataComponents.FERTILIZER_SLOT.get(), ItemContainerContents.EMPTY));
   }
 
   void dropSurplus(Consumer<ItemStack> drop) {
@@ -138,6 +147,7 @@ final class RobotInventory {
     energySlot.clear();
     torchSlot.clear();
     cardSlot.clear();
+    fertilizerSlot.clear();
   }
 
   ListTag save(HolderLookup.Provider registries) {

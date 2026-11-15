@@ -61,6 +61,8 @@ final class CubitRecipeProvider extends RecipeProvider {
   private static final String FISHER_BOTTOM_ROW = "PRP";
   private static final char PAPER = 'P';
   private static final char ROD = 'F';
+  private static final String FARMER_MIDDLE_ROW = "RHR";
+  private static final char HOE = 'H';
   private static final String HAS_IRON = "has_iron";
   private static final String HAS_DIAMOND = "has_diamond";
   private static final String HAS_ROBOT = "has_robot";
@@ -92,6 +94,7 @@ final class CubitRecipeProvider extends RecipeProvider {
     modules(output);
     powerBanks(output);
     fisherCard(output);
+    farmerCard(output);
     recharge(output);
     String robotId = CubitConfig.GENERAL_ROBOT.id();
     output.accept(
@@ -113,6 +116,20 @@ final class CubitRecipeProvider extends RecipeProvider {
         .define(CORE, Items.COMPARATOR)
         .define(REDSTONE, Items.REDSTONE)
         .define(ROD, Items.FISHING_ROD)
+        .unlockedBy(HAS_ROBOT, has(CubitItems.GENERAL_ROBOT.get()))
+        .save(output);
+  }
+
+  /** The card of the Farmer, as the one of the Fisher with an iron hoe (answer 1228). */
+  private void farmerCard(RecipeOutput output) {
+    ShapedRecipeBuilder.shaped(RecipeCategory.MISC, CubitItems.FARMER_CARD.get())
+        .pattern(FISHER_TOP_ROW)
+        .pattern(FARMER_MIDDLE_ROW)
+        .pattern(FISHER_BOTTOM_ROW)
+        .define(PAPER, Items.PAPER)
+        .define(CORE, Items.COMPARATOR)
+        .define(REDSTONE, Items.REDSTONE)
+        .define(HOE, Items.IRON_HOE)
         .unlockedBy(HAS_ROBOT, has(CubitItems.GENERAL_ROBOT.get()))
         .save(output);
   }

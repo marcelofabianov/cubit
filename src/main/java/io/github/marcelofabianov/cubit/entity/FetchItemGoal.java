@@ -64,9 +64,11 @@ final class FetchItemGoal extends Goal {
     return robot.workArea().working() ? robot.workArea().here() : Optional.empty();
   }
 
-  /** The Fisher fishes in place of fetching, as each card replaces the round (answer 1166). */
+  /**
+   * The Fisher and the Farmer work in place of fetching, as each card replaces the round (1166).
+   */
   private boolean fishing() {
-    return robot.workArea().work().fishing().active();
+    return robot.workArea().work().fishing().active() || robot.workArea().work().farming().active();
   }
 
   private boolean fetchesInArea() {

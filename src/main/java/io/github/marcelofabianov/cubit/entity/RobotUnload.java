@@ -7,6 +7,7 @@ import io.github.marcelofabianov.cubit.domain.ownership.Ownership;
 import io.github.marcelofabianov.cubit.domain.robot.UnloadCall;
 import io.github.marcelofabianov.cubit.domain.robot.UnloadChest;
 import io.github.marcelofabianov.cubit.domain.robot.UnloadChests;
+import io.github.marcelofabianov.cubit.domain.robot.UnloadInterval;
 import io.github.marcelofabianov.cubit.menu.RobotSwitch;
 import io.github.marcelofabianov.cubit.menu.UnloadControl;
 import java.util.ArrayList;
@@ -42,6 +43,8 @@ public final class RobotUnload implements RobotSwitch, UnloadControl {
   private Optional<BlockPos> only = Optional.empty();
   private UnloadCall call = UnloadCall.NO_CHEST;
   private long nextCheck = Long.MIN_VALUE;
+  private UnloadInterval interval = UnloadInterval.CONFIG_DEFAULT;
+  private long lastUnload = Long.MIN_VALUE;
 
   RobotUnload(RobotEntity robot) {
     this.robot = robot;
@@ -153,12 +156,14 @@ public final class RobotUnload implements RobotSwitch, UnloadControl {
     return true;
   }
 
-  /** Whether the Cubit should go now: sent by the button, or full in its area (1087). */
+  /**
+   * Whether the Cubit should go now: sent by the button, or full or due in its area (1087, 1250).
+   */
   boolean wantsToGo() {
     if (onTrip) {
       return true;
     }
-    boolean full = robot.robotInventory().isFull();
+    boolean full = robot.robotInventory().isFull() || intervalDue();
     if (UnloadCall.unloadsByItself(switchedOn, robot.workArea().working(), full, false)
         && nextChest().isPresent()) {
       onTrip = true;
@@ -180,6 +185,53 @@ public final class RobotUnload implements RobotSwitch, UnloadControl {
     byButton = false;
     only = Optional.empty();
     nextCheck = Long.MIN_VALUE;
+    lastUnload = robot.level().getGameTime();
+  }
+
+  public UnloadInterval interval() {
+    return interval;
+  }
+
+  public void setInterval(UnloadInterval next) {
+    interval = next;
+  }
+
+  /** The minutes that hold now, with zero for only when full, as the Work tab shows them. */
+  public int intervalMinutes() {
+    return interval.minutesOr(CubitMod.CONFIG.unloadIntervalDefaultMinutes());
+  }
+
+  /** The buttons − and + of the Work tab, only for the owner (answers 1252 and rule 20). */
+  public boolean stepInterval(Player player, int direction) {
+    if (!Ownership.owns(robot.ownerId(), player.getUUID())) {
+      return false;
+    }
+    interval =
+        interval.step(
+            direction,
+            CubitMod.CONFIG.unloadIntervalDefaultMinutes(),
+            CubitMod.CONFIG.unloadIntervalMaxMinutes());
+    return true;
+  }
+
+  /** The time counts from the last unload, or from when the Cubit started to look (1250). */
+  private boolean intervalDue() {
+    long now = robot.level().getGameTime();
+    if (lastUnload == Long.MIN_VALUE) {
+      lastUnload = now;
+    }
+    return interval.due(
+        now - lastUnload, hasItems(), CubitMod.CONFIG.unloadIntervalDefaultMinutes());
+  }
+
+  private boolean hasItems() {
+    Container inventory = robot.inventory();
+    for (int slot = 0; slot < inventory.getContainerSize(); slot++) {
+      if (!inventory.getItem(slot).isEmpty()) {
+        return true;
+      }
+    }
+    return false;
   }
 
   /** The first marked chest with room for something, loaded and in reach (answer 1088). */

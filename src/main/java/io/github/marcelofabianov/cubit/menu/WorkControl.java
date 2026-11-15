@@ -44,6 +44,26 @@ public interface WorkControl {
         public boolean resume(Player player) {
           return false;
         }
+
+        @Override
+        public Optional<RobotTier> fertilizerUnlockTier() {
+          return Optional.empty();
+        }
+
+        @Override
+        public boolean fertilizerUnlocked() {
+          return false;
+        }
+
+        @Override
+        public int unloadIntervalMinutes() {
+          return 0;
+        }
+
+        @Override
+        public boolean stepUnloadInterval(Player player, int direction) {
+          return false;
+        }
       };
 
   Optional<RobotJob> job();
@@ -61,4 +81,16 @@ public interface WorkControl {
 
   /** Wakes a Cubit hibernating away from the Dock, and says whether it did (answer 253). */
   boolean resume(Player player);
+
+  /** The first tier whose Farmer takes fertilizer, read from the config (answer 1244). */
+  Optional<RobotTier> fertilizerUnlockTier();
+
+  /** Whether the tier of this Cubit takes fertilizer in its slot. */
+  boolean fertilizerUnlocked();
+
+  /** The unload interval that holds now, in minutes, with zero for only when full (1252). */
+  int unloadIntervalMinutes();
+
+  /** One step of the buttons − and + of the interval, only for the owner (rule 20). */
+  boolean stepUnloadInterval(Player player, int direction);
 }

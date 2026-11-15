@@ -33,12 +33,14 @@ public final class RobotWork implements WorkControl {
 
   private final RobotEntity robot;
   private final RobotFishing fishing;
+  private final RobotFarming farming;
   private HibernationReason reason = HibernationReason.INVENTORY_FULL;
   private long nextCheck = Long.MIN_VALUE;
 
   RobotWork(RobotEntity robot) {
     this.robot = robot;
     this.fishing = new RobotFishing(robot);
+    this.farming = new RobotFarming(robot);
   }
 
   /** The work of the card of the Fisher, with its Keep junk switch. */
@@ -46,9 +48,41 @@ public final class RobotWork implements WorkControl {
     return fishing;
   }
 
+  /** The work of the card of the Farmer, with its Use bone meal switch. */
+  public RobotFarming farming() {
+    return farming;
+  }
+
   /** The card slot, for the screen. */
   public Container slot() {
     return robot.robotInventory().cardSlot().container();
+  }
+
+  /** The fertilizer slot of the Farmer, for the screen (answer 1244). */
+  public Container fertilizerSlot() {
+    return robot.robotInventory().fertilizerSlot().container();
+  }
+
+  @Override
+  public Optional<RobotTier> fertilizerUnlockTier() {
+    return Arrays.stream(RobotTier.values())
+        .filter(tier -> robot.specAt(tier).jobs().farmer().boneMeal())
+        .findFirst();
+  }
+
+  @Override
+  public int unloadIntervalMinutes() {
+    return robot.docking().unload().intervalMinutes();
+  }
+
+  @Override
+  public boolean stepUnloadInterval(Player player, int direction) {
+    return robot.docking().unload().stepInterval(player, direction);
+  }
+
+  @Override
+  public boolean fertilizerUnlocked() {
+    return robot.spec().jobs().farmer().boneMeal();
   }
 
   @Override
@@ -104,6 +138,7 @@ public final class RobotWork implements WorkControl {
   void tick() {
     showJob();
     fishing.tick();
+    farming.tick();
     if (asleep()) {
       if (job().isEmpty()) {
         wake();
@@ -138,7 +173,7 @@ public final class RobotWork implements WorkControl {
 
   /** In its area the Cubit follows nobody, so the text goes to the owner online (answer 1174). */
   private void tellOwner() {
-    if (robot.onlineOwner() instanceof ServerPlayer owner) {
+    if (RobotInteractions.onlineOwner(robot) instanceof ServerPlayer owner) {
       Component text = Component.translatable(WorkKeys.notice(reason));
       CubitNetwork.sendNotice(owner, Component.translatable(RobotNotices.FORMAT_KEY, text));
     }

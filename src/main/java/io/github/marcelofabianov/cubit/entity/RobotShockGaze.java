@@ -50,7 +50,7 @@ final class RobotShockGaze {
 
   /** The distance counts from the owner, or from the robot while the owner is away (992). */
   private boolean keeps(LivingEntity target) {
-    Player owner = robot.onlineOwner();
+    Player owner = RobotInteractions.onlineOwner(robot);
     Entity from = owner != null && owner.level() == robot.level() ? owner : robot;
     return ShockGaze.keeps(
         target.isAlive(),

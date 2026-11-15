@@ -4,8 +4,8 @@ import io.github.marcelofabianov.cubit.domain.robot.RobotJob;
 import java.util.Optional;
 
 /**
- * What the client knows of the job, only for the looks: the card in the slot and whether the Fisher
- * is fishing at its stand (answers 1197 and 1199). The rules stay on the server.
+ * What the client knows of the job, only for the looks: the card in the slot and whether the tool
+ * of the job is in the claw (answers 1197, 1199 and 1229). The rules stay on the server.
  */
 public final class RobotJobLook {
   private RobotJobLook() {}
@@ -20,7 +20,16 @@ public final class RobotJobLook {
     return job(robot).filter(RobotJob.FISHER::equals).isPresent();
   }
 
-  public static boolean fishing(RobotEntity robot) {
-    return robot.getEntityData().get(RobotSyncedData.FISHING);
+  public static boolean farmer(RobotEntity robot) {
+    return job(robot).filter(RobotJob.FARMER::equals).isPresent();
+  }
+
+  public static boolean toolInClaw(RobotEntity robot) {
+    return robot.getEntityData().get(RobotSyncedData.TOOL_IN_CLAW);
+  }
+
+  /** Set on the server: the rod or the hoe goes to the claw while the Cubit works. */
+  static void showTool(RobotEntity robot, boolean inClaw) {
+    robot.getEntityData().set(RobotSyncedData.TOOL_IN_CLAW, inClaw);
   }
 }

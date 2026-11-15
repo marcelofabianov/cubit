@@ -46,7 +46,7 @@ final class RobotInteractions {
    * Without this, it would stay active and still, and a click only turns on a switched-off robot.
    */
   static void switchOffWithoutThePlace(RobotEntity robot) {
-    Player owner = robot.onlineOwner();
+    Player owner = RobotInteractions.onlineOwner(robot);
     if (robot.powerState() == PowerState.ACTIVE
         && owner != null
         && robot.workArea().area().isEmpty()
@@ -70,8 +70,15 @@ final class RobotInteractions {
   }
 
   /** The player this robot follows right now, when that player is online. */
+  /** The owner, when online on this server, or nobody. */
+  static Player onlineOwner(RobotEntity robot) {
+    MinecraftServer server = robot.getServer();
+    UUID owner = robot.ownerId().orElse(null);
+    return server == null || owner == null ? null : server.getPlayerList().getPlayer(owner);
+  }
+
   static Player followedPlayer(RobotEntity robot) {
-    Player owner = robot.onlineOwner();
+    Player owner = RobotInteractions.onlineOwner(robot);
     if (owner == null
         || !RobotFollowing.follower(owner).filter(robot.getUUID()::equals).isPresent()) {
       return null;

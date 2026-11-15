@@ -23,6 +23,11 @@ public final class WorkKeys {
   public static final String CARD_NEEDS_TIER = PREFIX + "card_needs_tier";
   public static final String KEEP_JUNK = PREFIX + "keep_junk";
   public static final String KEEP_JUNK_DETAIL = PREFIX + "keep_junk_detail";
+  public static final String FERTILIZER_SLOT = PREFIX + "fertilizer_slot";
+  public static final String UNLOAD_INTERVAL = PREFIX + "unload_interval";
+  public static final String UNLOAD_INTERVAL_DETAIL = PREFIX + "unload_interval_detail";
+  public static final String UNLOAD_MINUTES = PREFIX + "unload_minutes";
+  public static final String ONLY_WHEN_FULL = PREFIX + "only_when_full";
   private static final String NOTICE = "notice.cubit.work_%s";
   public static final String NOTICE_FULL = NOTICE.formatted(HibernationReason.INVENTORY_FULL.key());
 

@@ -139,6 +139,23 @@ public abstract class RobotMenuReading extends AbstractContainerMenu {
   }
 
   /** The first tier that takes any card, for the locked slot (answer 1162). */
+  /** The unload interval of the Work tab, in minutes, with zero for only when full (1252). */
+  public int unloadIntervalMinutes() {
+    return values.get(RobotScreenValues.UNLOAD_INTERVAL);
+  }
+
+  /** Whether the tier of this Cubit takes fertilizer in the slot of the Farmer (1244). */
+  public boolean fertilizerUnlocked() {
+    return RobotScreenValues.isTrue(values, RobotScreenValues.FERTILIZER_UNLOCKED);
+  }
+
+  public Optional<RobotTier> fertilizerUnlockTier() {
+    int value = values.get(RobotScreenValues.FERTILIZER_UNLOCK_TIER);
+    return value == 0
+        ? Optional.empty()
+        : Optional.of(ScreenEnums.of(RobotTier.values(), value - 1));
+  }
+
   public Optional<RobotTier> cardUnlockTier() {
     return ofIndex(RobotTier.values(), values.get(RobotScreenValues.CARD_UNLOCK_TIER));
   }

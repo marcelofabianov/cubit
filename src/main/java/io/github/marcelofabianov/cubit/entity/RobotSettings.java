@@ -2,6 +2,7 @@ package io.github.marcelofabianov.cubit.entity;
 
 import io.github.marcelofabianov.cubit.domain.energy.Energy;
 import io.github.marcelofabianov.cubit.domain.robot.RobotState;
+import io.github.marcelofabianov.cubit.domain.robot.WorkSettings;
 import io.github.marcelofabianov.cubit.domain.tier.RobotTier;
 
 /** Applies the settings a robot keeps, the same way when it is placed and when it loads. */
@@ -23,7 +24,8 @@ final class RobotSettings {
     robot.docking().autoReturn().setSwitchedOn(state.autoReturnOn());
     robot.docking().unload().setSwitchedOn(state.unloadOn());
     robot.docking().deathGuide().setSwitchedOn(state.deathPointOn());
-    robot.workArea().work().fishing().setKeepJunk(state.keepJunkOn());
+    robot.workArea().work().fishing().setKeepJunk(state.workSettings().keepJunk());
+    robot.docking().unload().setInterval(state.workSettings().unloadInterval());
     robot
         .pickup()
         .setSettings(
@@ -48,6 +50,7 @@ final class RobotSettings {
         robot.docking().autoReturn().switchedOn(),
         robot.docking().unload().switchedOn(),
         robot.docking().deathGuide().switchedOn(),
-        robot.workArea().work().fishing().keepJunk());
+        new WorkSettings(
+            robot.workArea().work().fishing().keepJunk(), robot.docking().unload().interval()));
   }
 }

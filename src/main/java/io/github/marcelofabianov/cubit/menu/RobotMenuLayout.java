@@ -46,6 +46,11 @@ public enum RobotMenuLayout {
     return torchSlotX() + RobotMenu.SLOT_SIZE;
   }
 
+  /** The fertilizer of the Farmer comes right after the card (answer 1244). */
+  public int fertilizerSlotX() {
+    return cardSlotX() + RobotMenu.SLOT_SIZE;
+  }
+
   /** The torches come first in the row, or right after the energy slot. */
   public int torchSlotX() {
     return RobotMenu.FIRST_SLOT_X + (energyInRow ? RobotMenu.SLOT_SIZE : 0);
