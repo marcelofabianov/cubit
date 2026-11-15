@@ -175,7 +175,7 @@ final class TabletSelectionScreen extends Screen {
     RobotScreenStatus status = ScreenEnums.of(RobotScreenStatus.values(), entry.status());
     painter.status(
         graphics,
-        Component.translatable(ScreenKeys.robotStatus(status)),
+        RobotTexts.status(status, entry.work().jobValue(), entry.work().reasonValue()),
         new Box(statusX(), y + NAME_Y, STATUS_WIDTH, LINE),
         RobotTexts.statusColor(status));
     int textWidth = windowWidth - TEXT_X - MARGIN - PORTRAIT_X;

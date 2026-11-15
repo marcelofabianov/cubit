@@ -29,6 +29,7 @@ final class CubitItemModelProvider extends ItemModelProvider {
     basicItem(CubitItems.DAMAGED_GENERAL_ROBOT.get()).texture(COLLAR_LAYER, collarTexture());
     basicItem(CubitItems.TOOLBOX.get());
     basicItem(CubitItems.TABLET.get());
+    basicItem(CubitItems.FISHER_CARD.get());
     basicItem(CubitItems.ADVANCED_MODULE.get());
     basicItem(CubitItems.ELITE_MODULE.get());
     basicItem(CubitItems.ULTIMATE_MODULE.get());

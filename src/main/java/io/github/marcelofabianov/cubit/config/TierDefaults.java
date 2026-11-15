@@ -6,8 +6,10 @@ import io.github.marcelofabianov.cubit.domain.energy.Energy;
 import io.github.marcelofabianov.cubit.domain.energy.Percentage;
 import io.github.marcelofabianov.cubit.domain.energy.SolarOutput;
 import io.github.marcelofabianov.cubit.domain.robot.DefenseMode;
+import io.github.marcelofabianov.cubit.domain.robot.RobotJob;
 import io.github.marcelofabianov.cubit.domain.tier.AreaSpec;
 import io.github.marcelofabianov.cubit.domain.tier.DeathPointLevel;
+import io.github.marcelofabianov.cubit.domain.tier.JobSpec;
 import io.github.marcelofabianov.cubit.domain.tier.PickupSpec;
 import io.github.marcelofabianov.cubit.domain.tier.RobotTier;
 import io.github.marcelofabianov.cubit.domain.tier.ScannerSpec;
@@ -15,6 +17,7 @@ import io.github.marcelofabianov.cubit.domain.tier.ShockSpec;
 import io.github.marcelofabianov.cubit.domain.tier.TierSpec;
 import io.github.marcelofabianov.cubit.domain.tier.TorchSpec;
 import io.github.marcelofabianov.cubit.domain.tier.UnloadSpec;
+import java.util.EnumSet;
 import java.util.Set;
 
 /**
@@ -165,6 +168,21 @@ final class TierDefaults {
   private static final Energy TORCH_COST = new Energy(20);
   private static final Percentage RETURN_CHARGE = new Percentage(10);
   private static final AreaSpec BASE_AREA = AreaSpec.NONE;
+
+  /** The jobs of each tier, each one adding to the one below (answer 1145). */
+  private static final Set<RobotJob> ADVANCED_JOB_SET =
+      EnumSet.of(RobotJob.FISHER, RobotJob.FARMER, RobotJob.RANCHER);
+
+  private static final Set<RobotJob> ELITE_JOB_SET =
+      union(
+          ADVANCED_JOB_SET,
+          EnumSet.of(RobotJob.ORGANIZER, RobotJob.COOK, RobotJob.DEFENDER, RobotJob.MINER));
+  private static final JobSpec ADVANCED_JOBS = new JobSpec(ADVANCED_JOB_SET);
+  private static final JobSpec ELITE_JOBS = new JobSpec(ELITE_JOB_SET);
+  private static final JobSpec ULTIMATE_JOBS =
+      new JobSpec(
+          union(
+              ELITE_JOB_SET, EnumSet.of(RobotJob.BUILDER, RobotJob.MECHANIC, RobotJob.ALCHEMIST)));
   private static final UnloadSpec BASE_UNLOAD = new UnloadSpec(1, 16);
   private static final UnloadSpec ADVANCED_UNLOAD = new UnloadSpec(1, 32);
   private static final UnloadSpec ELITE_UNLOAD = new UnloadSpec(2, 48);
@@ -212,7 +230,8 @@ final class TierDefaults {
           RETURN_CHARGE,
           BASE_AREA,
           BASE_UNLOAD,
-          DeathPointLevel.LOCKED);
+          DeathPointLevel.LOCKED,
+          JobSpec.NONE);
   private static final TierSpec ADVANCED_SPEC =
       new TierSpec(
           new Energy(ADVANCED_BATTERY),
@@ -245,7 +264,8 @@ final class TierDefaults {
           RETURN_CHARGE,
           ADVANCED_AREA,
           ADVANCED_UNLOAD,
-          DeathPointLevel.MARK);
+          DeathPointLevel.MARK,
+          ADVANCED_JOBS);
   private static final TierSpec ELITE_SPEC =
       new TierSpec(
           new Energy(ELITE_BATTERY),
@@ -278,7 +298,8 @@ final class TierDefaults {
           RETURN_CHARGE,
           ELITE_AREA,
           ELITE_UNLOAD,
-          DeathPointLevel.GUIDE);
+          DeathPointLevel.GUIDE,
+          ELITE_JOBS);
   private static final TierSpec ULTIMATE_SPEC =
       new TierSpec(
           new Energy(ULTIMATE_BATTERY),
@@ -311,7 +332,8 @@ final class TierDefaults {
           RETURN_CHARGE,
           ULTIMATE_AREA,
           ULTIMATE_UNLOAD,
-          DeathPointLevel.GUIDE);
+          DeathPointLevel.GUIDE,
+          ULTIMATE_JOBS);
 
   private TierDefaults() {}
 
@@ -322,5 +344,11 @@ final class TierDefaults {
       case ELITE -> ELITE_SPEC;
       case ULTIMATE -> ULTIMATE_SPEC;
     };
+  }
+
+  private static Set<RobotJob> union(Set<RobotJob> lower, Set<RobotJob> added) {
+    Set<RobotJob> all = EnumSet.copyOf(lower);
+    all.addAll(added);
+    return all;
   }
 }

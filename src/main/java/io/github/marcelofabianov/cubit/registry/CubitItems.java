@@ -2,8 +2,10 @@ package io.github.marcelofabianov.cubit.registry;
 
 import io.github.marcelofabianov.cubit.CubitMod;
 import io.github.marcelofabianov.cubit.config.CubitConfig;
+import io.github.marcelofabianov.cubit.domain.robot.RobotJob;
 import io.github.marcelofabianov.cubit.domain.tier.RobotTier;
 import io.github.marcelofabianov.cubit.item.DamagedRobotItem;
+import io.github.marcelofabianov.cubit.item.JobCardItem;
 import io.github.marcelofabianov.cubit.item.ModuleItem;
 import io.github.marcelofabianov.cubit.item.PowerBankItem;
 import io.github.marcelofabianov.cubit.item.RobotItem;
@@ -28,6 +30,7 @@ public final class CubitItems {
   private static final String TOOLBOX_ID = "toolbox";
   private static final String TABLET_ID = "tablet";
   private static final int TABLET_STACK_SIZE = 1;
+  private static final String FISHER_CARD_ID = "ml_fisher";
   private static final DeferredRegister<Item> ITEMS =
       DeferredRegister.create(Registries.ITEM, CubitMod.MOD_ID);
 
@@ -46,6 +49,10 @@ public final class CubitItems {
           () ->
               new DamagedRobotItem(
                   new Item.Properties().stacksTo(ROBOT_STACK_SIZE).fireResistant()));
+
+  /** The card of the Fisher, only by /give in the base of the jobs (answer 1161). */
+  public static final Supplier<Item> FISHER_CARD =
+      ITEMS.register(FISHER_CARD_ID, () -> new JobCardItem(new Item.Properties(), RobotJob.FISHER));
 
   public static final Supplier<Item> TOOLBOX =
       ITEMS.register(

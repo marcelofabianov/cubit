@@ -1,8 +1,11 @@
 package io.github.marcelofabianov.cubit.network;
 
 import io.github.marcelofabianov.cubit.CubitMod;
+import io.github.marcelofabianov.cubit.domain.behavior.HibernationReason;
+import io.github.marcelofabianov.cubit.domain.robot.RobotJob;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.UUIDUtil;
@@ -34,10 +37,26 @@ public record RobotListPayload(List<Entry> entries) implements CustomPacketPaylo
       String name,
       Look look,
       int status,
+      Work work,
       int batteryPercent,
       BlockPos pos,
       String dimension,
       Where where) {}
+
+  /** The job and the reason the state shows, each by its order plus one, with zero for none. */
+  public record Work(int job, int reason) {
+    public Optional<RobotJob> jobValue() {
+      return ofIndex(RobotJob.values(), job);
+    }
+
+    public Optional<HibernationReason> reasonValue() {
+      return ofIndex(HibernationReason.values(), reason);
+    }
+
+    private static <T> Optional<T> ofIndex(T[] all, int value) {
+      return value <= 0 || value > all.length ? Optional.empty() : Optional.of(all[value - 1]);
+    }
+  }
 
   /** The looks of the portrait, by the order of their enums. */
   public record Look(int tier, int color, int expression) {}
@@ -59,6 +78,8 @@ public record RobotListPayload(List<Entry> entries) implements CustomPacketPaylo
       buffer.writeVarInt(entry.look().color());
       buffer.writeVarInt(entry.look().expression());
       buffer.writeVarInt(entry.status());
+      buffer.writeVarInt(entry.work().job());
+      buffer.writeVarInt(entry.work().reason());
       buffer.writeVarInt(entry.batteryPercent());
       buffer.writeBlockPos(entry.pos());
       buffer.writeUtf(entry.dimension(), MAX_TEXT);
@@ -78,6 +99,7 @@ public record RobotListPayload(List<Entry> entries) implements CustomPacketPaylo
       String name = buffer.readUtf(MAX_TEXT);
       Look look = new Look(buffer.readVarInt(), buffer.readVarInt(), buffer.readVarInt());
       int status = buffer.readVarInt();
+      Work work = new Work(buffer.readVarInt(), buffer.readVarInt());
       int battery = buffer.readVarInt();
       BlockPos pos = buffer.readBlockPos();
       String dimension = buffer.readUtf(MAX_TEXT);
@@ -87,7 +109,7 @@ public record RobotListPayload(List<Entry> entries) implements CustomPacketPaylo
               buffer.readBoolean(),
               buffer.readDouble(),
               buffer.readVarLong());
-      entries.add(new Entry(robot, name, look, status, battery, pos, dimension, where));
+      entries.add(new Entry(robot, name, look, status, work, battery, pos, dimension, where));
     }
     return new RobotListPayload(entries);
   }

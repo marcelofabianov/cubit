@@ -2,12 +2,13 @@ package io.github.marcelofabianov.cubit.entity;
 
 import com.mojang.logging.LogUtils;
 import io.github.marcelofabianov.cubit.domain.robot.InventoryFit;
+import io.github.marcelofabianov.cubit.domain.tier.TierSpec;
 import io.github.marcelofabianov.cubit.item.EnergySlotContents;
 import io.github.marcelofabianov.cubit.registry.CubitDataComponents;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.BooleanSupplier;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -30,11 +31,14 @@ final class RobotInventory {
   private final List<ItemStack> surplus = new ArrayList<>();
   private final RobotEnergySlot energySlot = new RobotEnergySlot();
   private final RobotTorchSlot torchSlot;
+  private final RobotCardSlot cardSlot;
   private SimpleContainer container;
 
-  RobotInventory(int slots, BooleanSupplier torchesUnlocked) {
+  /** The tier is read again on every check, because the config and the tier may change. */
+  RobotInventory(int slots, Supplier<TierSpec> spec) {
     container = new SimpleContainer(slots);
-    torchSlot = new RobotTorchSlot(torchesUnlocked);
+    torchSlot = new RobotTorchSlot(() -> spec.get().torches().unlocked());
+    cardSlot = new RobotCardSlot(job -> spec.get().jobs().accepts(job));
   }
 
   Container container() {
@@ -91,11 +95,16 @@ final class RobotInventory {
     return torchSlot;
   }
 
+  RobotCardSlot cardSlot() {
+    return cardSlot;
+  }
+
   /** Writes everything the robot carries to its item, in any path that turns it into an item. */
   void writeTo(ItemStack stack) {
     stack.set(CubitDataComponents.ROBOT_INVENTORY.get(), contents());
     stack.set(CubitDataComponents.ENERGY_SLOT.get(), energySlot.contents());
     stack.set(CubitDataComponents.TORCH_SLOT.get(), torchSlot.contents());
+    stack.set(CubitDataComponents.CARD_SLOT.get(), cardSlot.contents());
   }
 
   void readFrom(ItemStack stack, int slots) {
@@ -109,6 +118,8 @@ final class RobotInventory {
         stack.getOrDefault(CubitDataComponents.ENERGY_SLOT.get(), EnergySlotContents.EMPTY));
     torchSlot.fill(
         stack.getOrDefault(CubitDataComponents.TORCH_SLOT.get(), ItemContainerContents.EMPTY));
+    cardSlot.fill(
+        stack.getOrDefault(CubitDataComponents.CARD_SLOT.get(), ItemContainerContents.EMPTY));
   }
 
   void dropSurplus(Consumer<ItemStack> drop) {
@@ -126,6 +137,7 @@ final class RobotInventory {
     surplus.clear();
     energySlot.clear();
     torchSlot.clear();
+    cardSlot.clear();
   }
 
   ListTag save(HolderLookup.Provider registries) {

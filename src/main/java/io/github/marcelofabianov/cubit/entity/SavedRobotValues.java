@@ -46,6 +46,7 @@ final class SavedRobotValues {
   private static final String UNLOAD_KEY = "UnloadEnabled";
   private static final String DEATH_POINT_KEY = "DeathPointEnabled";
   private static final String TORCH_SLOT_KEY = "TorchSlot";
+  private static final String CARD_SLOT_KEY = "CardSlot";
   private static final String LAST_SAFE_POSITION_KEY = "LastSafePosition";
   private static final String NO_OWNER_MESSAGE = "Robot {} has no owner. Nobody can interact.";
   private static final String INVALID_TIER_MESSAGE = "Robot {} has an invalid tier: {}";
@@ -60,10 +61,7 @@ final class SavedRobotValues {
     tag.putString(TIER_KEY, robot.state().tier().key());
     tag.putLong(ENERGY_KEY, robot.battery().charge().amount());
     tag.putString(POWER_STATE_KEY, robot.powerState().name());
-    RobotInventory inventory = robot.robotInventory();
-    tag.put(INVENTORY_KEY, inventory.save(robot.registryAccess()));
-    tag.put(ENERGY_SLOT_KEY, inventory.energySlot().save(robot.registryAccess()));
-    tag.put(TORCH_SLOT_KEY, inventory.torchSlot().save(robot.registryAccess()));
+    writeItems(tag, robot);
     robot.docking().save(tag);
     robot.workArea().save(tag);
     tag.putBoolean(LAMP_KEY, robot.state().lampOn());
@@ -86,6 +84,15 @@ final class SavedRobotValues {
         .ifPresent(position -> tag.putLong(LAST_SAFE_POSITION_KEY, position.asLong()));
   }
 
+  /** The inventory and the exclusive slots, each under its own key. */
+  private static void writeItems(CompoundTag tag, RobotEntity robot) {
+    RobotInventory inventory = robot.robotInventory();
+    tag.put(INVENTORY_KEY, inventory.save(robot.registryAccess()));
+    tag.put(ENERGY_SLOT_KEY, inventory.energySlot().save(robot.registryAccess()));
+    tag.put(TORCH_SLOT_KEY, inventory.torchSlot().save(robot.registryAccess()));
+    tag.put(CARD_SLOT_KEY, inventory.cardSlot().save(robot.registryAccess()));
+  }
+
   static UUID owner(CompoundTag tag, UUID robot) {
     if (tag.hasUUID(OWNER_KEY)) {
       return tag.getUUID(OWNER_KEY);
@@ -103,6 +110,7 @@ final class SavedRobotValues {
     inventory.load(tag.getList(INVENTORY_KEY, Tag.TAG_COMPOUND), registries, slots);
     inventory.energySlot().load(tag.getCompound(ENERGY_SLOT_KEY), registries);
     inventory.torchSlot().load(tag.getCompound(TORCH_SLOT_KEY), registries);
+    inventory.cardSlot().load(tag.getCompound(CARD_SLOT_KEY), registries);
   }
 
   /** Without the key, the robot was saved before the lamp existed, so the lamp stays on. */

@@ -6,6 +6,7 @@ import io.github.marcelofabianov.cubit.domain.robot.UnloadCall;
 import io.github.marcelofabianov.cubit.menu.ScreenKeys;
 import io.github.marcelofabianov.cubit.menu.TabletKeys;
 import io.github.marcelofabianov.cubit.menu.TabletRobotMenu;
+import io.github.marcelofabianov.cubit.menu.WorkKeys;
 import java.util.List;
 import java.util.function.IntConsumer;
 import java.util.function.UnaryOperator;
@@ -145,6 +146,7 @@ final class TabletHeaderButtons {
           case EMPTY -> TabletKeys.UNLOAD_EMPTY;
           case SWITCHED_OFF -> TabletKeys.DOCK_SWITCHED_OFF;
           case HIBERNATING -> TabletKeys.DOCK_HIBERNATING;
+          case HIBERNATING_AWAY -> WorkKeys.UNLOAD_RESUME_FIRST;
         };
     enable(unload, call.ready(), detail);
   }

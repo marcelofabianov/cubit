@@ -142,6 +142,9 @@ public final class TabletSelection {
               snapshot.look().color().ordinal(),
               snapshot.look().expression().ordinal()),
           snapshot.status().ordinal(),
+          new RobotListPayload.Work(
+              snapshot.work().job().map(job -> job.ordinal() + 1).orElse(0),
+              snapshot.work().reason().map(reason -> reason.ordinal() + 1).orElse(0)),
           snapshot.batteryPercent(),
           snapshot.pos(),
           snapshot.dimension().location().toString(),

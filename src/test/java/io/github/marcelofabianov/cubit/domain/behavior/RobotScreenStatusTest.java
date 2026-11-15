@@ -70,4 +70,22 @@ class RobotScreenStatusTest {
     assertEquals(
         RobotScreenStatus.OFF, status(PowerState.INACTIVE_SWITCHED_OFF, FOLLOWING, HEALTHY));
   }
+
+  /** With a card, in an area, it is working instead of in an area (answer 1168). */
+  @Test
+  void aCubitWithACardInAnAreaShowsWorking() {
+    RobotScreenStatus.AreaWork working = new RobotScreenStatus.AreaWork(true, false, true);
+
+    assertEquals(
+        RobotScreenStatus.WORKING,
+        RobotScreenStatus.of(PowerState.ACTIVE, NOT_FOLLOWING, working, HEALTHY, CRITICAL));
+  }
+
+  /** Hibernating away from the Dock shows itself, even with a critical battery (answer 1168). */
+  @Test
+  void aCubitHibernatingAwayShowsIt() {
+    assertEquals(
+        RobotScreenStatus.HIBERNATING_AWAY,
+        status(PowerState.HIBERNATING_AWAY, NOT_FOLLOWING, AT_CRITICAL));
+  }
 }

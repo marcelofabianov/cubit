@@ -40,7 +40,7 @@ public final class JadeKeys {
         switch (state) {
           case INACTIVE_EXHAUSTED -> OUT_OF_BATTERY;
           case INACTIVE_SWITCHED_OFF -> SWITCHED_OFF;
-          case ACTIVE, HIBERNATING -> state.name().toLowerCase(Locale.ROOT);
+          case ACTIVE, HIBERNATING, HIBERNATING_AWAY -> state.name().toLowerCase(Locale.ROOT);
         };
     return STATE.formatted(name);
   }

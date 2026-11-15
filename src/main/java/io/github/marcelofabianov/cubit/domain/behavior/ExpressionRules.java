@@ -22,6 +22,9 @@ public final class ExpressionRules {
     if (state == PowerState.HIBERNATING) {
       return RobotExpression.CHARGING;
     }
+    if (state == PowerState.HIBERNATING_AWAY) {
+      return RobotExpression.SLEEPY;
+    }
     if (state != PowerState.ACTIVE) {
       return RobotExpression.OFF;
     }

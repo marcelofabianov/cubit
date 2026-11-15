@@ -91,7 +91,7 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
     this.item = item;
     this.damagedItem = damagedItem;
     this.battery = spec().newBattery(CubitMod.CONFIG.initialCharge());
-    this.inventory = new RobotInventory(spec().inventorySlots(), () -> spec().torches().unlocked());
+    this.inventory = new RobotInventory(spec().inventorySlots(), this::spec);
     this.navigation = new RobotNavigation(this, level);
     this.jumpControl = new TrackJumpControl(this);
     setCanPickUpLoot(false);
@@ -284,6 +284,7 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
     defense.tick();
     pickup.tick();
     torches.tick();
+    workArea.work().tick();
     RobotLoadSpeed.update(this, inventory.isFull());
     inventory.dropSurplus(
         stack -> Containers.dropItemStack(level(), getX(), getY(), getZ(), stack));

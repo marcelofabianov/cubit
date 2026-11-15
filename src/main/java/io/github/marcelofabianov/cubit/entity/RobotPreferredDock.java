@@ -72,6 +72,7 @@ public final class RobotPreferredDock implements DockGoalControl {
     if (!DockGoal.of(robot.powerState(), dock.isPresent()).ready()) {
       return false;
     }
+    robot.workArea().work().wake();
     robot.callToDock(dock.get());
     return true;
   }

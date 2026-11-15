@@ -14,11 +14,19 @@ public enum RobotScreenStatus {
   OFF,
   /** At the end, because snapshots keep the name and the menu the place (answer 1063). */
   IN_AREA,
-  INVENTORY_FULL;
+  INVENTORY_FULL,
+  /** With a card, in the area, instead of in area (answer 1168). */
+  WORKING,
+  HIBERNATING_AWAY;
 
   /** What a Cubit in an area does now: working, or stopped with a full inventory (answer 1052). */
-  public record AreaWork(boolean inArea, boolean inventoryFull) {
-    public static final AreaWork NONE = new AreaWork(false, false);
+  public record AreaWork(boolean inArea, boolean inventoryFull, boolean withCard) {
+    public static final AreaWork NONE = new AreaWork(false, false, false);
+
+    /** A Cubit in an area without a card, as before the jobs. */
+    public AreaWork(boolean inArea, boolean inventoryFull) {
+      this(inArea, inventoryFull, false);
+    }
   }
 
   /** A critical battery comes first only outside the base, where the robot spends energy. */
@@ -33,6 +41,9 @@ public enum RobotScreenStatus {
     if (state == PowerState.HIBERNATING) {
       return HIBERNATING;
     }
+    if (state == PowerState.HIBERNATING_AWAY) {
+      return HIBERNATING_AWAY;
+    }
     if (state != PowerState.ACTIVE) {
       return OFF;
     }
@@ -40,8 +51,15 @@ public enum RobotScreenStatus {
       return CRITICAL_BATTERY;
     }
     if (area.inArea()) {
-      return area.inventoryFull() ? INVENTORY_FULL : IN_AREA;
+      return areaStatus(area);
     }
     return following ? FOLLOWING : ACTIVE;
+  }
+
+  private static RobotScreenStatus areaStatus(AreaWork area) {
+    if (area.inventoryFull()) {
+      return INVENTORY_FULL;
+    }
+    return area.withCard() ? WORKING : IN_AREA;
   }
 }

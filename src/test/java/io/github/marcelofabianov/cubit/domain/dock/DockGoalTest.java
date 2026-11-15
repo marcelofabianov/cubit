@@ -25,4 +25,11 @@ class DockGoalTest {
     assertEquals(DockGoal.SWITCHED_OFF, DockGoal.of(PowerState.INACTIVE_EXHAUSTED, true));
     assertFalse(DockGoal.of(PowerState.HIBERNATING, true).ready());
   }
+
+  /** Go to Dock also wakes a Cubit hibernating away from the Dock (answer 1170). */
+  @Test
+  void aCubitHibernatingAwayGoesToo() {
+    assertTrue(DockGoal.of(PowerState.HIBERNATING_AWAY, true).ready());
+    assertEquals(DockGoal.NO_DOCK, DockGoal.of(PowerState.HIBERNATING_AWAY, false));
+  }
 }

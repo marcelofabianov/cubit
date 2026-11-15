@@ -1,9 +1,12 @@
 package io.github.marcelofabianov.cubit.menu;
 
 import io.github.marcelofabianov.cubit.domain.robot.InventoryGrid;
+import io.github.marcelofabianov.cubit.domain.robot.RobotJob;
 import io.github.marcelofabianov.cubit.item.EnergySlotItems;
+import io.github.marcelofabianov.cubit.item.JobCardItem;
 import java.util.function.BooleanSupplier;
 import java.util.function.Consumer;
+import java.util.function.Predicate;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -90,6 +93,32 @@ final class RobotMenuSlots {
           @Override
           public boolean mayPickup(Player player) {
             return !readOnly;
+          }
+
+          @Override
+          public boolean isActive() {
+            return robotShown;
+          }
+        });
+  }
+
+  /** Only a card of a job the tier takes, as the server tells (answers 1162 and 1163). */
+  void addCardSlot(Consumer<Slot> add, Container cardSlot, Predicate<RobotJob> accepted) {
+    add.accept(
+        new Slot(cardSlot, 0, layout.cardSlotX(), RobotMenu.EXCLUSIVE_SLOT_Y) {
+          @Override
+          public boolean mayPlace(ItemStack stack) {
+            return !readOnly && JobCardItem.jobOf(stack).filter(accepted).isPresent();
+          }
+
+          @Override
+          public boolean mayPickup(Player player) {
+            return !readOnly;
+          }
+
+          @Override
+          public int getMaxStackSize() {
+            return 1;
           }
 
           @Override

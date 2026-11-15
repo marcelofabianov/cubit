@@ -36,10 +36,24 @@ public final class CubitDataGenerators {
         event.includeServer(), new CubitDamageTypeProvider(output, event.getLookupProvider()));
     generator.addProvider(
         event.includeClient(), new CubitBlockStateProvider(output, existingFiles));
+    addTags(event, generator, output, existingFiles);
+    addLoot(event, generator, output);
+  }
+
+  /** The item tags read the block tags, as the game builds them. */
+  private static void addTags(
+      GatherDataEvent event,
+      DataGenerator generator,
+      PackOutput output,
+      ExistingFileHelper existingFiles) {
+    CubitBlockTagsProvider blocks =
+        generator.addProvider(
+            event.includeServer(),
+            new CubitBlockTagsProvider(output, event.getLookupProvider(), existingFiles));
     generator.addProvider(
         event.includeServer(),
-        new CubitBlockTagsProvider(output, event.getLookupProvider(), existingFiles));
-    addLoot(event, generator, output);
+        new CubitItemTagsProvider(
+            output, event.getLookupProvider(), blocks.contentsGetter(), existingFiles));
   }
 
   private static void addLoot(GatherDataEvent event, DataGenerator generator, PackOutput output) {

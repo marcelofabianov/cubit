@@ -43,7 +43,10 @@ public final class InventoryGridGameTests {
   private static final int THREE_ROWS = 3;
   private static final int LAST_SLOT = ULTIMATE_SLOTS - 1;
   private static final int BASE_SLOTS = 27;
-  private static final int ENERGY_AND_TORCH_SLOTS = 2;
+
+  /** The energy, torch and card slots (answer 1162). */
+  private static final int EXCLUSIVE_SLOTS = 3;
+
   private static final int FIRST_PLAYER_INVENTORY_SLOT = 9;
   private static final int DIAMONDS = 3;
   private static final BlockPos FLOOR = new BlockPos(1, 1, 1);
@@ -75,7 +78,7 @@ public final class InventoryGridGameTests {
   @GameTest(template = EMPTY)
   public static void theInventoryOfThePlayerStaysAtTheLeft(GameTestHelper helper) {
     RobotMenu menu = menuFor(helper, RobotTier.ULTIMATE);
-    int firstPlayerSlot = ULTIMATE_SLOTS + ENERGY_AND_TORCH_SLOTS;
+    int firstPlayerSlot = ULTIMATE_SLOTS + EXCLUSIVE_SLOTS;
 
     helper.assertValueEqual(menu.getSlot(firstPlayerSlot).x, RobotMenu.FIRST_SLOT_X, NOT_LEFT);
     helper.succeed();
@@ -122,7 +125,7 @@ public final class InventoryGridGameTests {
         .setItem(FIRST_PLAYER_INVENTORY_SLOT, new ItemStack(Items.DIAMOND, DIAMONDS));
     RobotMenu menu = RobotScreenReadout.serverMenu(0, owner.getInventory(), robot);
 
-    menu.quickMoveStack(owner, ULTIMATE_SLOTS + ENERGY_AND_TORCH_SLOTS);
+    menu.quickMoveStack(owner, ULTIMATE_SLOTS + EXCLUSIVE_SLOTS);
 
     helper.assertTrue(inventory.getItem(BASE_SLOTS).is(Items.DIAMOND), NOT_STORED);
     helper.assertTrue(owner.getInventory().getItem(FIRST_PLAYER_INVENTORY_SLOT).isEmpty(), MOVED);
