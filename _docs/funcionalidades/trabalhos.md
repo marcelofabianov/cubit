@@ -1,6 +1,6 @@
 # Trabalhos
 
-Conceito da Fase 5, planejada para depois da Fase 4. Nada aqui está implementado, e o documentado pode mudar se aparecer um impedimento técnico (regra 48 do `AGENTS.md`). As decisões ficam em [`fase-5-trabalhos.md`](../perguntas/fase-5-trabalhos.md), nas perguntas 190 a 256 e 1136 a 1156. O conceito de cada trabalho fica na pasta [`trabalhos/`](trabalhos/) (pergunta 1148).
+Conceito da Fase 5, planejada para depois da Fase 4. Nada aqui está implementado, e o documentado pode mudar se aparecer um impedimento técnico (regra 48 do `AGENTS.md`). As decisões ficam em [`fase-5-trabalhos.md`](../perguntas/fase-5-trabalhos.md), nas perguntas 190 a 256 e 1136 a 1204. O conceito de cada trabalho fica na pasta [`trabalhos/`](trabalhos/) (pergunta 1148).
 
 Números: [`tiers.md`](../tiers.md#trabalhos). Nomes e IDs previstos: [`itens.md`](../itens.md#previstos-na-fase-5).
 
@@ -29,13 +29,13 @@ O mod funciona numa instância só com ele e suas dependências. Tudo aceita red
 | Elite | Os do Avançado, mais Organizador, Cozinheiro, Defensor e Minerador |
 | Ultimate | Os do Elite, mais Construtor, Mecânico e Alquimista |
 
-O tier também melhora o que o card faz, com mais velocidade, alcance ou opções. A evolução de cada card é proposta e é decidida no refinamento dele, com os números em [`tiers.md`](../tiers.md#trabalhos) (perguntas 1144 e 1154). A do Minerador e a do Defensor já estão decididas (perguntas 1149 e 1150).
+O tier também melhora o que o card faz, com mais velocidade, alcance ou opções. A evolução de cada card é proposta e é decidida no refinamento dele, com os números em [`tiers.md`](../tiers.md#trabalhos) (perguntas 1144 e 1154). A do Minerador e a do Defensor já estão decididas (perguntas 1149 e 1150), e a do Pescador foi decidida no card dele (pergunta 1185).
 
 ### Os trabalhos
 
 | Trabalho | Card | Tier mínimo | O que faz | Conceito |
 |---|---|---|---|---|
-| Pescador | `cubit:ml_fisher` | Avançado | Pesca na água aberta da área, sem vara | [`pescador.md`](trabalhos/pescador.md) |
+| Pescador | `cubit:ml_fisher` | Avançado | Pesca na água da área, sem vara de verdade, pela tabela do jogo | [`pescador.md`](trabalhos/pescador.md) |
 | Fazendeiro | `cubit:ml_farmer` | Avançado | Colhe o que amadureceu e replanta | [`fazendeiro.md`](trabalhos/fazendeiro.md) |
 | Pecuarista | `cubit:ml_rancher` | Avançado | Alimenta, tosquia, recolhe ovos e controla o rebanho | [`pecuarista.md`](trabalhos/pecuarista.md) |
 | Organizador | `cubit:ml_organizer` | Elite | Recolhe e guarda nos baús certos, ou abastece destinos | [`organizador.md`](trabalhos/organizador.md) |
@@ -59,7 +59,7 @@ Os itens "Em aberto" de cada conceito são respondidos no refinamento do card da
 2. O processo só termina ao escolher o Cubit no Tablet. Ele deixa de seguir e vai para a área, como no [modo área](modo-area.md) da Fase 4.2.
 3. O Tablet também manda descarregar ou ir ao Dock, pelos botões `Descarregar` e `Ir para o Dock`.
 
-Os baús são marcados com o app Descarga do Tablet, e a tela do Cubit tem uma aba Trabalho, com modo e filtros. Marcar os outros blocos do trabalho, como fornos, suportes de poções e água, precisa de um app do Tablet, que o primeiro card que precisar dele decide (pergunta 1155). Se o player recolher o Cubit e colocá-lo de novo, precisa refazer a configuração.
+Os baús são marcados com o app Descarga do Tablet, e a tela do Cubit tem uma aba Trabalho, com modo e filtros. Marcar os outros blocos do trabalho, como fornos e suportes de poções, precisa de um app do Tablet, que o primeiro card que precisar dele decide (pergunta 1155). O Pescador não precisa: ele acha sozinho a água da área (pergunta 1186). Se o player recolher o Cubit e colocá-lo de novo, precisa refazer a configuração.
 
 ## Regras de toda área
 
@@ -95,7 +95,7 @@ Uma aba `Work` / `Trabalho` na tela do Cubit e na tela do Cubit no Tablet, com u
 Estado semelhante ao desligado, mas com o inventário e as configurações acessíveis. O Cubit fica imóvel e sem tarefas, como dormindo (perguntas 198 e 1164).
 
 - **Estado:** `HIBERNATING_AWAY`, no NBT `PowerState`, com o motivo no NBT `HibernationReason`. A hibernação no Dock continua como está e sai sozinha (perguntas 55 e 1164).
-- **Motivo, na base:** só o inventário cheio: o Cubit com card, na área, cheio e sem baú marcado com espaço. Sem card, ele segue como nas perguntas 1052 e 1088. Cada trabalho acrescenta os seus motivos (perguntas 196 e 1165).
+- **Motivo, na base:** só o inventário cheio, e o Pescador acrescenta o `Sem água na área` (pergunta 1188): o Cubit com card, na área, cheio e sem baú marcado com espaço. Sem card, ele segue como nas perguntas 1052 e 1088. Cada trabalho acrescenta os seus motivos (perguntas 196 e 1165).
 - **Parado:** sem choque, coleta, ímã, tochas, falas e scanners, com a lanterna apagada e sem consumo. O painel solar continua carregando (pergunta 1170).
 - **Na tela:** `Hibernating · Inventory full` / `Hibernando · Inventário cheio`, em azul, com a expressão de sono (perguntas 1168 e 1173).
 - **Texto curto:** `I'm full and have nowhere to unload` / `Estou cheio e não tenho onde descarregar`, uma vez ao hibernar, e de novo se o `Retomar` não resolver (pergunta 1174).
@@ -181,6 +181,7 @@ A ordem segue a pergunta 251, com o Mecânico e o Alquimista no fim dos trabalho
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-14 23:10 | Liga o conceito do Pescador, que usa o app Área e acrescenta o motivo sem água (perguntas 1181 a 1204). |
 | Marcelo Fabiano | 2026-11-14 20:52 | Define a base do trabalho: o slot do card, o tier, a aba Trabalho e a hibernação fora do Dock (perguntas 1160 a 1172). |
 | Marcelo Fabiano | 2026-11-14 20:27 | Consolida a Fase 5: os trabalhos por tier, o Mecânico e o Alquimista, os conceitos na pasta `trabalhos/`, o Tablet no lugar do controle e a ordem do board (perguntas 1136 a 1156). |
 | Marcelo Fabiano | 2026-11-13 16:40 | Troca o Cubit Remote pelo app Área do Tablet. |

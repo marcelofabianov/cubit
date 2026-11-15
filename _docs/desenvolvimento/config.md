@@ -111,6 +111,13 @@ As chaves ficam em `snake_case`. As de um tier ficam em `[general_robot.{tier}]`
 | `general_robot.base` | `pickup_filter_tags` | Filtro de coleta com tags | `true` ou `false` |
 | `general_robot.base` | `power_bank_capacity` | Power Bank (70% da bateria) | 1 a 2147483647 |
 | `general_robot.base` | `allowed_jobs` | Cards de Aprendizado de Máquina que o tier aceita: `fisher`, `farmer`, `rancher`, `organizer`, `cook`, `defender`, `miner`, `builder`, `mechanic` e `alchemist`. Um nome inválido é ignorado e vai para o log | Lista com esses nomes |
+| `general_robot.base` | `fisher_lure_level` | Pescador: Isca | 0 a 3 |
+| `general_robot.base` | `fisher_luck_level` | Pescador: Sorte do Mar | 0 a 3 |
+| `general_robot.base` | `fisher_catch_cost` | Pescador: custo por peixe pescado | 0 a 2147483647 |
+| `general` | `fisher_wait_min_ticks` e `fisher_wait_max_ticks` | Pescador: espera antes da mordida | 1 a 72000 |
+| `general` | `fisher_bite_min_ticks` e `fisher_bite_max_ticks` | Pescador: mordida | 1 a 72000 |
+| `general` | `fisher_lure_ticks_per_level` | Pescador: espera a menos por nível de Isca | 0 a 72000 |
+| `general` | `fisher_cast_reach_blocks` | Pescador: alcance do lançamento | 1 a 16 |
 
 ## Por que esses limites
 
@@ -147,6 +154,7 @@ O mod não cai por causa do config (regra 17 do `AGENTS.md`):
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
 | Marcelo Fabiano | 2026-11-14 23:20 | Adiciona a chave `allowed_jobs`, da base do trabalho (pergunta 1205). |
+| Marcelo Fabiano | 2026-11-14 23:10 | Adiciona as chaves do Pescador (perguntas 1184, 1185 e 1190). |
 | Marcelo Fabiano | 2026-11-14 13:55 | Adiciona as chaves da descarga. |
 | Marcelo Fabiano | 2026-11-14 10:00 | Adiciona a bateria do retorno automático. |
 | Marcelo Fabiano | 2026-11-14 09:00 | Adiciona as chaves do modo área. |
