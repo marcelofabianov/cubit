@@ -915,6 +915,28 @@ As regras estão em [`pescador.md`](../funcionalidades/trabalhos/pescador.md). U
 | 18 | Tire o card do slot | O chapéu, a mochila e o peixe somem, e ele volta ao comportamento sem card |
 | 19 | Com o jogo em português | `Guardar lixo`, `Hibernando · Sem água na área` e `Não acho água para pescar aqui` |
 
+## Fazendeiro
+
+As regras estão em [`fazendeiro.md`](../funcionalidades/trabalhos/fazendeiro.md). Use um Cubit Advanced, um Elite e um Ultimate com carga, o card feito pela receita, o Tablet, um baú com sementes de trigo e cenouras, e um terreno de grama com água no meio.
+
+| # | Faça | Espere |
+|---|---|---|
+| 1 | Faça o card na bancada: papel, comparador, papel / redstone, enxada de ferro, redstone / papel, redstone, papel | Sai o `Machine Learning: Farmer` |
+| 2 | Ponha o card num Cubit Advanced, seguindo você | Aparecem o chapéu de palha cobrindo o painel solar, a mochila com a enxada e o trigo no canto esquerdo da tela |
+| 3 | Marque com o app Área o terreno de grama com a água, e com o app Descarga o baú dentro dele | Ele ara só a grama a até 4 blocos da água, com a enxada na garra, e não ara longe dela |
+| 4 | Espere | Ele busca as sementes no baú e planta, formando canteiros pela planta vizinha |
+| 5 | Plante trigo maduro e cenoura madura na área, ou espere crescer | Ele colhe o maduro, guarda a colheita e replanta a mesma planta |
+| 6 | Esvazie as sementes do baú e do inventário dele | A terra arada fica vazia, e ele segue sem hibernar |
+| 7 | Ande pela terra arada com ele, pule nela com outro Cubit sem card | O Fazendeiro nunca a desfaz, e o Cubit sem card a desfaz como no jogo |
+| 8 | Ponha uma muda e bambu na área | Ele não os colhe, pela tag `cubit:farmer_ignored` |
+| 9 | Num Elite, ponha cana, cacto, abóbora e melancia na área | Ele colhe acima do bloco de baixo na cana e no cacto, e o fruto da abóbora e da melancia, deixando o caule |
+| 10 | Num Advanced, ponha farinha de osso no slot de fertilizante, depois do slot do card | Ele usa a farinha nas plantas que acabou de plantar e replantar, com as partículas verdes. Sem o card do Fazendeiro, o slot some |
+| 11 | Esvazie o slot e ponha farinha de osso no baú da Descarga dentro da área | Ele busca a farinha no baú e enche o slot |
+| 12 | Encha o inventário dele, sem baú com espaço | Ele hiberna com `Hibernating · Inventory full` |
+| 13 | Ponha 3 Fazendeiros na mesma área | Cada um vai a uma planta diferente |
+| 14 | Recolha o Cubit e coloque de novo | O card e o fertilizante do slot continuam; a área e o baú precisam ser marcados de novo |
+| 15 | Com o jogo em português | `Fertilizante` na dica do slot e `Aprendizado de Máquina: Fazendeiro` |
+
 ## Tradução
 
 | # | Passo | Resultado esperado |
@@ -974,6 +996,7 @@ Na instância só com o mod, tire capturas com F2 do Cubit seguindo, da tela do 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-15 10:40 | Adiciona o roteiro do Fazendeiro. |
 | Marcelo Fabiano | 2026-11-14 23:10 | Adiciona o roteiro do Pescador. |
 | Marcelo Fabiano | 2026-11-14 20:53 | Adiciona o roteiro da base do trabalho. |
 | Marcelo Fabiano | 2026-11-14 18:47 | Adiciona o roteiro do local de morte. |

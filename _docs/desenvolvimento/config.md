@@ -114,6 +114,14 @@ As chaves ficam em `snake_case`. As de um tier ficam em `[general_robot.{tier}]`
 | `general_robot.base` | `fisher_lure_level` | Pescador: Isca | 0 a 3 |
 | `general_robot.base` | `fisher_luck_level` | Pescador: Sorte do Mar | 0 a 3 |
 | `general_robot.base` | `fisher_catch_cost` | Pescador: custo por peixe pescado | 0 a 2147483647 |
+| `general_robot.base` | `farmer_action_cost` | Fazendeiro: custo por planta colhida ou bloco arado | 0 a 2147483647 |
+| `general_robot.base` | `farmer_action_pause_ticks` | Fazendeiro: pausa entre ações | 1 a 72000 |
+| `general_robot.base` | `farmer_special_crops` | Fazendeiro: plantas de colheita especial | `true` ou `false` |
+| `general_robot.base` | `farmer_bone_meal` | Fazendeiro: slot de fertilizante | `true` ou `false` |
+| `general_robot.base` | `farmer_fortune_level` | Fazendeiro: Fortuna | 0 a 3 |
+| `general` | `unload_interval_default_minutes` | Intervalo de descarga na área, padrão de um Cubit novo, com 0 para só quando cheio | 0 a 1440 |
+| `general` | `unload_interval_max_minutes` | Intervalo de descarga na área, o maior que a aba Trabalho oferece | 1 a 1440 |
+| `general` | `farmer_scan_interval_ticks` | Fazendeiro: intervalo da varredura da plantação | 1 a 72000 |
 | `general` | `fisher_wait_min_ticks` e `fisher_wait_max_ticks` | Pescador: espera antes da mordida | 1 a 72000 |
 | `general` | `fisher_bite_min_ticks` e `fisher_bite_max_ticks` | Pescador: mordida | 1 a 72000 |
 | `general` | `fisher_lure_ticks_per_level` | Pescador: espera a menos por nível de Isca | 0 a 72000 |
@@ -153,6 +161,9 @@ O mod não cai por causa do config (regra 17 do `AGENTS.md`):
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-15 14:05 | Adiciona as chaves do intervalo de descarga (perguntas 1252 e 1254). |
+| Marcelo Fabiano | 2026-11-15 13:25 | O `farmer_bone_meal` libera o slot de fertilizante (pergunta 1244). |
+| Marcelo Fabiano | 2026-11-15 10:40 | Adiciona as chaves do Fazendeiro (perguntas 1226 e 1237). |
 | Marcelo Fabiano | 2026-11-14 23:20 | Adiciona a chave `allowed_jobs`, da base do trabalho (pergunta 1205). |
 | Marcelo Fabiano | 2026-11-14 23:10 | Adiciona as chaves do Pescador (perguntas 1184, 1185 e 1190). |
 | Marcelo Fabiano | 2026-11-14 13:55 | Adiciona as chaves da descarga. |

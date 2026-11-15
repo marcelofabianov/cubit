@@ -61,17 +61,20 @@ Entra com o item 14 da Fase 4.2, numa entrega só (perguntas 1086 a 1095).
 - **Marcar:** com o app Descarga do [Tablet](tablet.md#apps), o clique num bloco com inventário (baú, barril, shulker ou de outro mod, pela capability) marca o baú do Cubit escolhido, de qualquer tier, até o limite dele. O clique num baú já marcado manda o Cubit descarregar ali agora, como o botão `Descarregar`, mas só naquele baú. Shift + clique direito num baú marcado desmarca só ele, e em qualquer outro bloco, ou no ar, desmarca o último marcado, de qualquer distância, para dar lugar a um novo. Sem Shift, fora de um bloco com inventário, o app só avisa (perguntas 1086, 1098 e 1099).
 - **Limites:** `unload_chests` e `unload_reach_blocks`, por tier, com os números de [`tiers.md`](../tiers.md#coleta-e-inventário) (pergunta 1094).
 - **Sozinho, só na área:** com a chave `Unload` ligada e o inventário cheio, o Cubit numa área vai ao baú marcado, descarrega tudo menos os slots exclusivos e volta para a área. O Cubit que segue não descarrega sozinho (pergunta 1087).
+- **Por intervalo:** o Cubit numa área, com card ou sem card, também vai ao baú quando passa o intervalo de descarga desde a última, se tiver algo para descarregar, mesmo sem encher. O player escolhe o intervalo na aba Trabalho, na tela do Cubit e na do Tablet, com os botões − e +, de 1 em 1 minuto, de 1 a 30, ou `Only when full` / `Só quando cheio`, o comportamento de antes. O padrão é de 5 minutos, e o padrão e o máximo ficam no config. A escolha fica no item, e a chave `Unload` desligada também desliga o intervalo (perguntas 1250 a 1254).
 - **Pelo botão:** o botão `Descarregar` do Tablet manda o Cubit escolhido descarregar já, mesmo sem o inventário cheio, e voltar ao que fazia, mesmo com a chave desligada (perguntas 1089 e 1093).
 - **Ordem:** o primeiro baú marcado com espaço, depois o seguinte, até esvaziar ou não caber mais (pergunta 1088).
 - **Sem onde descarregar:** sem espaço, fora do alcance ou com o chunk descarregado, ele não sai do lugar. O que segue avisa `No room in the marked chests`, e o da área fica com `Inventory full` e tenta de novo a cada intervalo (pergunta 1088).
 - **Texto:** `Cubit: Items unloaded` sai depois de descarregar, só do Cubit que segue, ou seja, pelo botão (perguntas 457 e 1094).
 - **Seta:** com o Tablet na mão, em qualquer app, cada baú marcado de um Cubit do player, carregado e na dimensão dele, tem uma seta em cima, como a do Cubit escolhido. Sob a seta, a primeira linha diz o nome do Cubit, e a segunda, os slots usados e o total do baú, como `Inventory 12 / 27`, que o servidor manda a cada segundo enquanto o player segura o Tablet (perguntas 1086 e 1090 a 1092).
 - **Chave:** `Unload` / `Descarga`, desde o Base, ligada por padrão e guardada no item, na aba Settings e na aba Recursos do Tablet. Liga e desliga só a descarga automática da área (pergunta 1093).
-- **Contrato:** os baús ficam no NBT `UnloadChests` e se perdem ao recolher o Cubit (pergunta 343).
+- **Contrato:** os baús ficam no NBT `UnloadChests` e se perdem ao recolher o Cubit (pergunta 343). O intervalo fica no NBT `UnloadIntervalMinutes` e no campo `unload_interval_minutes` do `cubit:robot_state`, com 0 para "só quando cheio", e o config tem `unload_interval_default_minutes` e `unload_interval_max_minutes`, em `general` (pergunta 1254).
 
 ## Slots exclusivos
 
-São três: tochas, energia e o card de Aprendizado de Máquina, que entra com a base do trabalho, descrita em [`trabalhos.md`](trabalhos.md#card-no-cubit) (pergunta 1162). O Tablet ativa ou desativa as tochas, na aba Recursos, e o slot de energia fica sempre ligado. A fornalha de minérios foi para o [Minerador](trabalhos.md#minerador), na Fase 5, e o carregador de ferramentas saiu do mod (pergunta 930).
+Vazios, os slots exclusivos mostram uma silhueta cinza do que vai neles, como os slots de armadura do jogo: uma bateria com um raio na energia, uma tocha, o cartão no slot do card e a farinha de osso no de fertilizante (perguntas 1256 e 1257).
+
+São quatro: tochas, energia, o card de Aprendizado de Máquina, que entra com a base do trabalho, descrita em [`trabalhos.md`](trabalhos.md#card-no-cubit) (pergunta 1162), e o fertilizante do Fazendeiro, que só aparece com o card dele, descrito em [`fazendeiro.md`](trabalhos/fazendeiro.md#fertilizante) (perguntas 1243 e 1244). O Tablet ativa ou desativa as tochas, na aba Recursos, e o slot de energia fica sempre ligado. A fornalha de minérios foi para o [Minerador](trabalhos.md#minerador), na Fase 5, e o carregador de ferramentas saiu do mod (pergunta 930).
 
 - **Fileira:** os slots exclusivos ficam numa fileira acima do inventário do Cubit, com o título `Exclusive slots` / `Slots exclusivos`. O slot de energia continua ao lado das barras (perguntas 980 e 984).
 - **Tochas automáticas:** do Advanced em diante, com tochas no slot, o Cubit as coloca sozinho onde mobs podem nascer. Veja [Tochas](#tochas).
@@ -96,6 +99,8 @@ Entra no item 12 da Fase 4.1 (issue #170, perguntas 971 a 984).
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-15 14:20 | Acrescenta os ícones dos slots exclusivos vazios e o slot de fertilizante (perguntas 1244, 1256 e 1257). |
+| Marcelo Fabiano | 2026-11-15 14:05 | Acrescenta a descarga por intervalo, escolhido na aba Trabalho (perguntas 1250 a 1254). |
 | Marcelo Fabiano | 2026-11-14 20:52 | Acrescenta o slot do card aos slots exclusivos (pergunta 1162). |
 | Marcelo Fabiano | 2026-11-14 15:23 | Deixa Shift + clique desmarcar de qualquer lugar (pergunta 1099). |
 | Marcelo Fabiano | 2026-11-14 14:40 | Faz o clique num baú marcado descarregar ali (pergunta 1098). |

@@ -37,7 +37,7 @@ O Cubit mantém os recursos ao evoluir, e cada tier os melhora. Os recursos avan
 |---|---|---|---|---|
 | Cor do colar | Cinza | Azul | Roxo | Dourado |
 | Vida | 25 | 50 | 100 | 200 |
-| Velocidade | 1,0× | 1,25× | 1,5× | 2,0× |
+| Velocidade | 1,0× | 1,25× | 1,5× | 1,75× |
 | Bateria | 300 mil FE | 600 mil FE | 3 mi FE | 8 mi FE |
 | Autonomia em movimento, sem o painel e com a lanterna apagada | ~16,7 min | ~27,8 min | ~1,9 h | ~3,7 h |
 | Capacidade da Power Bank | 210 mil FE | 420 mil FE | 2,1 mi FE | 5,6 mi FE |

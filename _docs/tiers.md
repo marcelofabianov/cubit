@@ -16,7 +16,7 @@ Os tiers são Base, Avançado, Elite e Ultimate (no jogo: Base, Advanced, Elite 
 |---|---|---|---|---|
 | Cor do colar | Cinza | Azul | Roxo | Dourado |
 | Vida | 25 (12,5 ❤) | 50 (25 ❤) | 100 (50 ❤) | 200 (100 ❤) |
-| Velocidade | 1,0× | 1,25× | 1,5× | 2,0× |
+| Velocidade (o Ultimate na pergunta 1258) | 1,0× | 1,25× | 1,5× | 1,75× |
 | Lanterna | Luz 10 | Luz 12 | Luz 14 | Luz 15 |
 | Expressões, nome e cor da carcaça | ✔ | ✔ | ✔ | ✔ |
 
@@ -191,6 +191,11 @@ Planejado para a Fase 5. O tier Base não aceita cards, e cada card tem o seu ti
 | Pescador: Isca, `fisher_lure_level` (pergunta 1185) | — | — | II | III |
 | Pescador: Sorte do Mar, `fisher_luck_level` (pergunta 1185) | — | — | II | III |
 | Pescador: custo por peixe pescado, `fisher_catch_cost` (pergunta 1190) | — | 300 FE | 300 FE | 300 FE |
+| Fazendeiro: custo por planta colhida ou bloco arado, `farmer_action_cost` (perguntas 1226 e 1235) | — | 50 FE | 75 FE | 100 FE |
+| Fazendeiro: pausa entre ações, `farmer_action_pause_ticks` (pergunta 1226) | — | 20 ticks | 12 ticks | 6 ticks |
+| Fazendeiro: plantas de colheita especial, `farmer_special_crops` (pergunta 1219) | — | — | ✔ | ✔ |
+| Fazendeiro: slot de fertilizante, `farmer_bone_meal` (perguntas 1244 e 1248) | — | ✔ | ✔ | ✔ |
+| Fazendeiro: Fortuna, `farmer_fortune_level` (pergunta 1221) | — | — | — | II |
 | Storage wireless | — | — | — | ✔ |
 
 | Valor geral | Valor |
@@ -201,6 +206,9 @@ Planejado para a Fase 5. O tier Base não aceita cards, e cada card tem o seu ti
 | Pescador: mordida, como no jogo | 20 a 80 ticks |
 | Pescador: espera a menos por nível de Isca, como no jogo | 100 ticks |
 | Pescador: alcance do lançamento, da margem ao ponto da água (pergunta 1208) | 6 blocos |
+| Fazendeiro: intervalo da varredura da plantação, `farmer_scan_interval_ticks` (pergunta 1237) | 40 ticks |
+| Intervalo de descarga na área, padrão e máximo, `unload_interval_default_minutes` e `unload_interval_max_minutes` (perguntas 1252 e 1254) | 5 min e 30 min |
+| Fazendeiro: água que mantém a terra arada, como no jogo (pergunta 1232) | Até 4 blocos |
 
 **A definir:**
 
@@ -215,6 +223,11 @@ Planejado para a Fase 5. O tier Base não aceita cards, e cada card tem o seu ti
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-15 14:30 | Reduz a velocidade do Ultimate de 2,0× para 1,75× (pergunta 1258). |
+| Marcelo Fabiano | 2026-11-15 14:05 | Acrescenta o intervalo de descarga (perguntas 1252 e 1254). |
+| Marcelo Fabiano | 2026-11-15 13:45 | Libera o fertilizante desde o Avançado (pergunta 1248). |
+| Marcelo Fabiano | 2026-11-15 13:25 | O `farmer_bone_meal` libera o slot de fertilizante (pergunta 1244). |
+| Marcelo Fabiano | 2026-11-15 10:40 | Adiciona os números do Fazendeiro (perguntas 1219, 1221, 1226, 1232, 1235 e 1237). |
 | Marcelo Fabiano | 2026-11-14 23:10 | Adiciona os números do Pescador (perguntas 1184, 1185, 1190 e 1208). |
 | Marcelo Fabiano | 2026-11-14 20:52 | Liga os cards por tier à chave `allowed_jobs` (pergunta 1163). |
 | Marcelo Fabiano | 2026-11-14 20:27 | Atualiza os trabalhos por tier, o Minerador e o Defensor (perguntas 1144, 1145, 1149 e 1150). |
