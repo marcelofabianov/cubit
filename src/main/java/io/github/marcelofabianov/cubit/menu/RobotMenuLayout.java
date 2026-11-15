@@ -41,6 +41,11 @@ public enum RobotMenuLayout {
     return energyInRow ? Math.max(grid.columns(), TABLET_FILTER_COLUMNS) : grid.columns();
   }
 
+  /** The card comes right after the torches (answer 1162). */
+  public int cardSlotX() {
+    return torchSlotX() + RobotMenu.SLOT_SIZE;
+  }
+
   /** The torches come first in the row, or right after the energy slot. */
   public int torchSlotX() {
     return RobotMenu.FIRST_SLOT_X + (energyInRow ? RobotMenu.SLOT_SIZE : 0);

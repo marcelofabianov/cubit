@@ -36,4 +36,11 @@ class UnloadCallTest {
     assertFalse(UnloadCall.unloadsByItself(true, true, false, false));
     assertFalse(UnloadCall.unloadsByItself(true, true, true, true));
   }
+
+  /** Hibernating away, Unload asks to resume first (answer 1170). */
+  @Test
+  void aCubitHibernatingAwayAsksToResume() {
+    assertEquals(
+        UnloadCall.HIBERNATING_AWAY, UnloadCall.of(PowerState.HIBERNATING_AWAY, ITEMS, ROOM));
+  }
 }

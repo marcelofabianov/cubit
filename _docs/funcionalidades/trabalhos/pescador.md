@@ -8,6 +8,12 @@ Conceito do trabalho de Pescador, da Fase 5.2. Nada aqui está implementado, e o
 
 Um Cubit que pesca sozinho numa área com água aberta, sem vara e sem boia, e guarda o que pegar. É o trabalho mais simples da lista e um dos dois primeiros da ordem de entrega, junto do Fazendeiro.
 
+## Imagem conceito
+
+![O Cubit Pescador](../../imagens/conceito/trabalhos/pescador.png)
+
+Aceita como conceito (pergunta 1177). A vara é só visual: no visual do Pescador, ele a segura, mas a pesca continua sem vara e sem boia, como na pergunta 248. O visual final é decidido no card da personalização.
+
 ## Card
 
 | Nome | ID | Descrição |
@@ -51,5 +57,6 @@ Cada item traz a recomendação atual, ainda sem resposta.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-14 21:37 | Acrescenta a imagem conceito do Pescador (pergunta 1177). |
 | Marcelo Fabiano | 2026-11-14 20:25 | Leva o conceito de `tmp/fase5` para `_docs`, com as decisões da consolidação (perguntas 1145 a 1156). |
 | Marcelo Fabiano | 2026-11-13 11:43 | Cria o conceito do Pescador, com o comportamento da pergunta 248 e a proposta de evolução por tier. |

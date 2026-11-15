@@ -3,6 +3,7 @@ package io.github.marcelofabianov.cubit.menu;
 import io.github.marcelofabianov.cubit.domain.energy.Energy;
 import io.github.marcelofabianov.cubit.domain.energy.EnergyHalves;
 import io.github.marcelofabianov.cubit.domain.energy.EnergyUseCause;
+import io.github.marcelofabianov.cubit.domain.robot.RobotJob;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
@@ -45,7 +46,14 @@ final class RobotScreenValues implements ContainerData {
   static final int UNLOAD = 44;
   static final int DEATH_POINT = 46;
   static final int DEATH_POINT_UNLOCK_TIER = 48;
-  static final int COUNT = 49;
+  static final int JOB = 49;
+  static final int HIBERNATION_REASON = 50;
+  static final int CARD_UNLOCK_TIER = 51;
+  static final int ALLOWED_JOBS = 52;
+  static final int JOB_TIERS = 53;
+  static final int COUNT = 55;
+  private static final int BITS_PER_JOB_TIER = 3;
+  private static final int JOB_TIER_MASK = 0b111;
   private static final int HALF_BITS = 16;
   private static final int HALF_MASK = 0xFFFF;
   static final int TRUE_VALUE = 1;
@@ -65,6 +73,7 @@ final class RobotScreenValues implements ContainerData {
   private final PowerControl power;
   private final TorchControl torches;
   private final DeathPointControl deathPoint;
+  private final WorkControl work;
   private final int[] values = new int[COUNT];
 
   RobotScreenValues(
@@ -73,12 +82,14 @@ final class RobotScreenValues implements ContainerData {
       PowerControl power,
       TorchControl torches,
       DeathPointControl deathPoint,
+      WorkControl work,
       RobotSwitch... switches) {
     this.source = source;
     this.defense = defense;
     this.power = power;
     this.torches = torches;
     this.deathPoint = deathPoint;
+    this.work = work;
     this.switches = switches.clone();
   }
 
@@ -104,8 +115,8 @@ final class RobotScreenValues implements ContainerData {
     for (int index = 0; index < switches.length; index++) {
       putSwitch(SWITCH_VALUES[index], switches[index]);
     }
-    putEnergy(TORCH_COST, torches.cost());
     putUnlockTiers();
+    putWork();
     RobotScreenReading.Place place = reading.place();
     values[COLOR] = place.color().ordinal();
     putInt(POS_X, place.x());
@@ -114,11 +125,33 @@ final class RobotScreenValues implements ContainerData {
     values[TURN_ON] = place.canTurnOn() ? TRUE_VALUE : 0;
   }
 
-  /** The first tier of each locked part, by its order plus one, with zero for none. */
+  /** The torch cost and the first tier of each locked part, by its order plus one, or zero. */
   private void putUnlockTiers() {
+    putEnergy(TORCH_COST, torches.cost());
     values[TORCH_UNLOCK_TIER] = torches.unlockTier().map(tier -> tier.ordinal() + 1).orElse(0);
     values[DEATH_POINT_UNLOCK_TIER] =
         deathPoint.unlockTier().map(tier -> tier.ordinal() + 1).orElse(0);
+    values[CARD_UNLOCK_TIER] = work.cardUnlockTier().map(tier -> tier.ordinal() + 1).orElse(0);
+  }
+
+  /** The job and the reason to hibernate, by their order plus one, with zero for none. */
+  private void putWork() {
+    values[JOB] = work.job().map(job -> job.ordinal() + 1).orElse(0);
+    values[HIBERNATION_REASON] = work.hibernation().map(reason -> reason.ordinal() + 1).orElse(0);
+    int allowed = 0;
+    int tiers = 0;
+    for (RobotJob job : RobotJob.values()) {
+      allowed |= work.allowedJobs().contains(job) ? 1 << job.ordinal() : 0;
+      int tier = work.tierFor(job).map(found -> found.ordinal() + 1).orElse(0);
+      tiers |= tier << (job.ordinal() * BITS_PER_JOB_TIER);
+    }
+    values[ALLOWED_JOBS] = allowed;
+    putInt(JOB_TIERS, tiers);
+  }
+
+  /** The first tier of a job, plus one, with zero for none, as packed by the server. */
+  static int jobTier(ContainerData data, RobotJob job) {
+    return (intAt(data, JOB_TIERS) >>> (job.ordinal() * BITS_PER_JOB_TIER)) & JOB_TIER_MASK;
   }
 
   private void putSwitch(int index, RobotSwitch robotSwitch) {

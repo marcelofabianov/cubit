@@ -78,6 +78,10 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 | `UnloadChest` e `UnloadChests` | Os baús de descarga de um Cubit, pelo bloco e pela dimensão, na ordem da marca. Um segundo clique desmarca, e o tier limita quantos (perguntas 1086 e 1088) |
 | `UnloadCall` | Se o `Descarregar` do Tablet pode mandar o Cubit, ou por que não, e quando ele descarrega sozinho: só cheio, na área e com a chave ligada (perguntas 1087, 1089 e 1093) |
 | `DeathPointLevel` | O que um tier faz com o local de morte: `locked`, `mark`, que só mostra a coordenada ao renascer, ou `guide`, que também guia até lá. A `key` é o nome usado no config (perguntas 1117 e 1129) |
+| `RobotJob` | Os trabalhos que um card dá ao Cubit, um por card. A `key` é o nome usado no `allowed_jobs` do config (perguntas 1145 e 1163) |
+| `JobSpec` | Os trabalhos que um tier aceita. Sem nenhum, o slot do card fica bloqueado, como no Base (perguntas 1145 e 1162) |
+| `HibernationReason` | Por que um Cubit com trabalho hiberna fora do Dock. Na base, só o inventário cheio, e cada trabalho acrescenta os seus. A `key` é a do save (perguntas 1165 e 1172) |
+| `AwayHibernation` | Quando um Cubit hiberna fora do Dock: com card, na área, cheio e sem onde descarregar. O `Retomar` pergunta de novo, então um motivo que não sumiu o põe para dormir outra vez (perguntas 253 e 1165) |
 | `DeathRecord` | Uma morte do player: o tempo do mundo, o bloco, a dimensão e a causa, no texto de morte do jogo (perguntas 1111 e 1114) |
 | `DeathLog` | As mortes do player, da mais recente para a mais antiga, até o limite do config. Uma linha é achada pelo lugar e pelo tempo, para uma tela desatualizada nunca tirar outra morte (perguntas 1111 e 1115) |
 | `GameClock` | O dia e a hora do mundo, como o jogo conta: o mundo começa às 06:00 do primeiro dia (pergunta 1116) |
@@ -152,6 +156,7 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 - **Bioma por grupo:** só uma mudança de grupo conta, e um bioma sem grupo, como um rio, não muda nada, para o robô não repetir o comentário (pergunta 586).
 - **Reclamar uma vez:** ao se afastar, o dono só ouve de novo depois de o robô chegar perto, para não repetir a cada passo. Um salto além do teleporte não conta, porque não é o dono correndo (pergunta 585).
 - **Falas só com a expressão calma:** qualquer outra expressão indica algo mais importante, como um mob ou um dano.
+- **Hibernação fora do Dock como estado próprio:** a do Dock sai sozinha com a carga cheia, e a de fora só sai pelo `Retomar`, pelo `Follow` ou pelo `Ir para o Dock`, então misturar as duas obrigaria toda regra do Dock a conferir onde o Cubit está (pergunta 1164).
 - **Histórico próprio:** o jogo guarda só a última morte, sem a hora e sem a causa, então o mod guarda o seu, com um limite, para o save não crescer sem fim (perguntas 1114 e 1115).
 - **Guia à frente, sem sair do alcance:** o Cubit espera o dono quando passa do limite à frente dele, e por isso nunca anda por chunks que só ele carregaria (pergunta 1126 e regra 22). Esperar o dono não conta como estar preso (pergunta 1123).
 - **Volta com o dono:** um robô longe, ou em outra dimensão, ficaria para trás ao descarregar o chunk. Perto, ele anda como sempre, e a caminho do Dock continua indo, porque o dono o chamou (pergunta 567).

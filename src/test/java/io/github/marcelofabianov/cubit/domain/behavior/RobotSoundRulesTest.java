@@ -99,4 +99,15 @@ class RobotSoundRulesTest {
     assertFalse(RobotSoundRules.isCharging(HIGH, HIGH));
     assertFalse(RobotSoundRules.isCharging(HIGH, LOW));
   }
+
+  /** Falling asleep away from the Dock is silent, and waking turns on, as from the Dock. */
+  @Test
+  void hibernatingAwayIsSilentAndWakingTurnsOn() {
+    assertEquals(
+        Optional.empty(),
+        RobotSoundRules.powerSound(PowerState.ACTIVE, PowerState.HIBERNATING_AWAY));
+    assertEquals(
+        Optional.of(PowerSound.POWER_ON),
+        RobotSoundRules.powerSound(PowerState.HIBERNATING_AWAY, PowerState.ACTIVE));
+  }
 }

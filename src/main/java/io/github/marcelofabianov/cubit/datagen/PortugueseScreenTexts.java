@@ -89,6 +89,8 @@ final class PortugueseScreenTexts {
   private static final String SOLAR_SWITCHED_OFF_TEXT = "Desligado";
   private static final String STATUS_CRITICAL_BATTERY_TEXT = "Bateria crítica";
   private static final String STATUS_FOLLOWING_TEXT = "Seguindo";
+  private static final String STATUS_WORKING_TEXT = "Trabalhando · %s";
+  private static final String STATUS_HIBERNATING_AWAY_TEXT = "Hibernando · %s";
   private static final String STATUS_IN_AREA_TEXT = "Na área";
   private static final String STATUS_INVENTORY_FULL_TEXT = "Inventário cheio";
   private static final String STATUS_ACTIVE_TEXT = "Ativo";
@@ -124,7 +126,9 @@ final class PortugueseScreenTexts {
           Map.entry(RobotScreenStatus.HIBERNATING, STATUS_HIBERNATING_TEXT),
           Map.entry(RobotScreenStatus.OFF, STATUS_OFF_TEXT),
           Map.entry(RobotScreenStatus.IN_AREA, STATUS_IN_AREA_TEXT),
-          Map.entry(RobotScreenStatus.INVENTORY_FULL, STATUS_INVENTORY_FULL_TEXT));
+          Map.entry(RobotScreenStatus.INVENTORY_FULL, STATUS_INVENTORY_FULL_TEXT),
+          Map.entry(RobotScreenStatus.WORKING, STATUS_WORKING_TEXT),
+          Map.entry(RobotScreenStatus.HIBERNATING_AWAY, STATUS_HIBERNATING_AWAY_TEXT));
   private static final Map<RechargeSource, String> RECHARGES =
       Map.of(
           RechargeSource.DOCK, RECHARGE_DOCK_TEXT,

@@ -13,4 +13,5 @@ public record RobotMenuSource(
     PickupControl pickup,
     TorchControl torches,
     DeathPointControl deathPoint,
+    WorkControl work,
     Predicate<Player> stillValid) {}

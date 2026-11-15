@@ -4,4 +4,8 @@ import net.minecraft.world.Container;
 
 /** The containers of the robot and what travels when its screen opens. */
 public record RobotMenuContents(
-    Container inventory, Container energySlot, Container torchSlot, RobotScreenOpening opening) {}
+    Container inventory,
+    Container energySlot,
+    Container torchSlot,
+    Container cardSlot,
+    RobotScreenOpening opening) {}

@@ -65,11 +65,15 @@ public class RobotMenu extends RobotMenuReading {
   /** The death point switch of the settings tab, after Unload of the Tablet (answer 1118). */
   public static final int DEATH_POINT_BUTTON = 20;
 
+  /** Resume, in the Work tab, which wakes a Cubit hibernating away from the Dock (1167). */
+  public static final int RESUME_BUTTON = 21;
+
   /** The rows of every tier, so the screen keeps the height of the Base (answer 1101). */
   public static final int VISIBLE_ROWS = InventoryGrid.ROWS;
 
   private static final int ENERGY_SLOT_SIZE = 1;
   private static final int TORCH_SLOT_SIZE = 1;
+  private static final int CARD_SLOT_SIZE = 1;
 
   private final Container container;
   private final InventoryGrid grid;
@@ -79,6 +83,7 @@ public class RobotMenu extends RobotMenuReading {
   private final RobotSwitch[] switches;
   private final DefenseControl defense;
   private final PowerControl power;
+  private final WorkControl work;
   private final RobotScreenOpening opening;
   private final RobotMenuSlots slotGroups;
   private final PickupMenuPart pickup;
@@ -101,6 +106,7 @@ public class RobotMenu extends RobotMenuReading {
     this.switches = server.switches().clone();
     this.defense = server.defense();
     this.power = server.power();
+    this.work = server.work();
     this.opening = contents.opening();
     this.pickup = new PickupMenuPart(server.pickup());
     slotGroups.addRobotSlots(this::addSlot, container, grid);
@@ -109,6 +115,7 @@ public class RobotMenu extends RobotMenuReading {
         this::addSlot,
         contents.torchSlot(),
         () -> RobotScreenValues.isAvailable(values, RobotScreenValues.TORCHES));
+    slotGroups.addCardSlot(this::addSlot, contents.cardSlot(), this::acceptsJob);
     addDataSlots(values);
     slotGroups.addPlayerSlots(this::addSlot, playerInventory, FIRST_SLOT_X, playerInventoryY());
     pickup.addSlots(this::addSlot, slots.size(), filterColumns());
@@ -124,6 +131,7 @@ public class RobotMenu extends RobotMenuReading {
             new SimpleContainer(opening.slots()),
             new SimpleContainer(ENERGY_SLOT_SIZE),
             new SimpleContainer(TORCH_SLOT_SIZE),
+            new SimpleContainer(CARD_SLOT_SIZE),
             opening);
     return new RobotMenu(
         CubitMenus.ROBOT.get(),
@@ -157,6 +165,7 @@ public class RobotMenu extends RobotMenuReading {
             source.power(),
             source.torches(),
             source.deathPoint(),
+            source.work(),
             source.switches());
     values.refresh();
     return new RobotMenuServer(
@@ -166,7 +175,8 @@ public class RobotMenu extends RobotMenuReading {
         source.switches(),
         source.defense(),
         source.power(),
-        source.pickup());
+        source.pickup(),
+        source.work());
   }
 
   @Override
@@ -183,14 +193,19 @@ public class RobotMenu extends RobotMenuReading {
       return stillValid(player)
           && pickup.press(player, PickupControl.PickupButton.values()[button - PICKUP_BUTTON]);
     }
-    if (button == POWER_BUTTON) {
-      return stillValid(player) && power.switchOff(player);
+    if (button == POWER_BUTTON || button == RESUME_BUTTON) {
+      return stillValid(player) && pressControl(player, button);
     }
     int mode = button - FIRST_DEFENSE_BUTTON;
     if (mode >= 0 && mode < DefenseMode.values().length) {
       return stillValid(player) && defense.choose(player, DefenseMode.values()[mode]);
     }
     return toggleFromClient(player, button);
+  }
+
+  /** Power switches off, and Resume wakes the Cubit hibernating away (answer 1167). */
+  private boolean pressControl(Player player, int button) {
+    return button == POWER_BUTTON ? power.switchOff(player) : work.resume(player);
   }
 
   private boolean toggleFromClient(Player player, int button) {
@@ -265,7 +280,7 @@ public class RobotMenu extends RobotMenuReading {
 
   /** The slots of the robot come first: its inventory, the energy slot and the torch slot. */
   protected final int robotSlots() {
-    return container.getContainerSize() + ENERGY_SLOT_SIZE + TORCH_SLOT_SIZE;
+    return container.getContainerSize() + ENERGY_SLOT_SIZE + TORCH_SLOT_SIZE + CARD_SLOT_SIZE;
   }
 
   public RobotScreenOpening opening() {
@@ -284,6 +299,11 @@ public class RobotMenu extends RobotMenuReading {
 
   public Energy torchCost() {
     return RobotScreenValues.energy(values, RobotScreenValues.TORCH_COST);
+  }
+
+  /** The card slot comes right after the torch slot. */
+  public int cardSlotIndex() {
+    return torchSlotIndex() + 1;
   }
 
   public Optional<RobotTier> torchUnlockTier() {

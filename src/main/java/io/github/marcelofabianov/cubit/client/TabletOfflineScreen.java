@@ -109,7 +109,7 @@ final class TabletOfflineScreen extends Screen {
     RobotScreenStatus status = ScreenEnums.of(RobotScreenStatus.values(), entry.status());
     painter.status(
         graphics,
-        Component.translatable(ScreenKeys.robotStatus(status)),
+        RobotTexts.status(status, entry.work().jobValue(), entry.work().reasonValue()),
         STATUS,
         RobotTexts.statusColor(status));
     painter.text(

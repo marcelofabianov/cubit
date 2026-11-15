@@ -24,7 +24,7 @@ As telas próprias do Cubit e do Induction Dock, item 19 da Fase 3. Elas substit
 
 ### Abas
 
-Quatro abas, à direita da janela: **Inventory**, com o ícone do baú, **Settings**, com a engrenagem, **Defense**, com o escudo (perguntas 824 e 828), e **Behavior**, com o funil (perguntas 878 e 888). A aba é estado só do cliente. Fora da Inventory, os slots ficam desligados e não podem ser usados, exceto os do player na Behavior (pergunta 893).
+Cinco abas, à direita da janela: **Inventory**, com o ícone do baú, **Settings**, com a engrenagem, **Defense**, com o escudo (perguntas 824 e 828), **Behavior**, com o funil (perguntas 878 e 888), e **Work**, com o ícone do card, descrita em [`trabalhos.md`](trabalhos.md#aba-trabalho) (pergunta 1167). A aba é estado só do cliente. Fora da Inventory, os slots ficam desligados e não podem ser usados, exceto os do player na Behavior (pergunta 893).
 
 ### Aba Inventory
 
@@ -54,6 +54,8 @@ Quatro abas, à direita da janela: **Inventory**, com o ícone do baú, **Settin
 | Seguindo | Ativo, seguindo o dono | `● Following` | Verde |
 | Ativo | Ativo, sem seguir ninguém (pergunta 686) | `● Active` | Cinza |
 | Hibernando | Na base | `● Hibernating · Dock` | Azul |
+| Trabalhando | Com card, na área, no lugar de `In area` (pergunta 1168) | `● Working · Fisher` / `● Trabalhando · Pescador` | Roxo, a cor da área |
+| Hibernando fora do Dock | Com card, parado pelo motivo (pergunta 1168) | `● Hibernating · Inventory full` / `● Hibernando · Inventário cheio` | Azul, a cor da hibernação |
 
 ### Aba Settings
 
@@ -249,6 +251,7 @@ Pergunta 691.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-14 20:52 | Acrescenta a aba Work e os estados de trabalho (perguntas 1167 e 1168). |
 | Marcelo Fabiano | 2026-11-14 18:17 | Corrige a aba Behavior, que não recebe as chaves da Fase 4.2 (pergunta 1128). |
 | Marcelo Fabiano | 2026-11-14 18:15 | Adiciona a chave `Death point` à aba Settings (perguntas 1118 e 1125). |
 | Marcelo Fabiano | 2026-11-14 16:33 | Deixa o filtro e o inventário do player à esquerda, com o filtro responsivo (pergunta 1105). |

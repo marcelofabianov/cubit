@@ -3,6 +3,7 @@ package io.github.marcelofabianov.cubit.client;
 import io.github.marcelofabianov.cubit.menu.BehaviorKeys;
 import io.github.marcelofabianov.cubit.menu.DefenseKeys;
 import io.github.marcelofabianov.cubit.menu.ScreenKeys;
+import io.github.marcelofabianov.cubit.menu.WorkKeys;
 import java.util.Arrays;
 import java.util.Optional;
 import net.minecraft.client.gui.GuiGraphics;
@@ -17,9 +18,10 @@ final class RobotScreenTabs {
   private static final int SETTINGS_Y = 37;
   private static final int DEFENSE_Y = 65;
   private static final int BEHAVIOR_Y = 93;
+  private static final int WORK_Y = 121;
   private static final int CHEST_X = 6;
   private static final int CHEST_Y = 6;
-  private static final int[] TOPS = {INVENTORY_Y, SETTINGS_Y, DEFENSE_Y, BEHAVIOR_Y};
+  private static final int[] TOPS = {INVENTORY_Y, SETTINGS_Y, DEFENSE_Y, BEHAVIOR_Y, WORK_Y};
 
   private Tab open = Tab.INVENTORY;
 
@@ -28,7 +30,8 @@ final class RobotScreenTabs {
     INVENTORY(INVENTORY_Y, ScreenKeys.TAB_INVENTORY),
     SETTINGS(SETTINGS_Y, ScreenKeys.TAB_SETTINGS),
     DEFENSE(DEFENSE_Y, DefenseKeys.TAB),
-    BEHAVIOR(BEHAVIOR_Y, BehaviorKeys.TAB);
+    BEHAVIOR(BEHAVIOR_Y, BehaviorKeys.TAB),
+    WORK(WORK_Y, WorkKeys.TAB);
 
     private final int y;
     private final String name;
@@ -64,6 +67,7 @@ final class RobotScreenTabs {
     ScreenSprites.gear(graphics, iconX, top + SETTINGS_Y + ScreenTabStrip.ICON_Y);
     ScreenSprites.shield(graphics, iconX, top + DEFENSE_Y + ScreenTabStrip.ICON_Y);
     ScreenSprites.funnel(graphics, iconX, top + BEHAVIOR_Y + ScreenTabStrip.ICON_Y);
+    ScreenSprites.workTab(graphics, iconX, top + WORK_Y + ScreenTabStrip.ICON_Y);
   }
 
   /** The tab under a point given from the left of the tabs and the top of the window. */

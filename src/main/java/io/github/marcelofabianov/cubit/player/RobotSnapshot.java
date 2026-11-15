@@ -1,8 +1,10 @@
 package io.github.marcelofabianov.cubit.player;
 
+import io.github.marcelofabianov.cubit.domain.behavior.HibernationReason;
 import io.github.marcelofabianov.cubit.domain.behavior.RobotExpression;
 import io.github.marcelofabianov.cubit.domain.behavior.RobotScreenStatus;
 import io.github.marcelofabianov.cubit.domain.robot.RobotColor;
+import io.github.marcelofabianov.cubit.domain.robot.RobotJob;
 import io.github.marcelofabianov.cubit.domain.tier.RobotTier;
 import java.util.Optional;
 import java.util.UUID;
@@ -23,6 +25,7 @@ public record RobotSnapshot(
     String name,
     RobotLook look,
     RobotScreenStatus status,
+    Work work,
     int batteryPercent,
     BlockPos pos,
     ResourceKey<Level> dimension,
@@ -38,6 +41,16 @@ public record RobotSnapshot(
   private static final String POS_KEY = "Pos";
   private static final String DIMENSION_KEY = "Dimension";
   private static final String TIME_KEY = "Time";
+  private static final String JOB_KEY = "Job";
+  private static final String REASON_KEY = "Reason";
+
+  /**
+   * The job while working and the reason while hibernating away, which the state shows. Both are
+   * optional in the save, so older snapshots read as none (answer 1168).
+   */
+  public record Work(Optional<RobotJob> job, Optional<HibernationReason> reason) {
+    public static final Work NONE = new Work(Optional.empty(), Optional.empty());
+  }
 
   /** The looks of the portrait: tier, shell color and face. */
   public record RobotLook(RobotTier tier, RobotColor color, RobotExpression expression) {}
@@ -51,6 +64,8 @@ public record RobotSnapshot(
     tag.putString(COLOR_KEY, look.color().key());
     tag.putString(EXPRESSION_KEY, look.expression().name());
     tag.putString(STATUS_KEY, status.name());
+    work.job().ifPresent(job -> tag.putString(JOB_KEY, job.key()));
+    work.reason().ifPresent(reason -> tag.putString(REASON_KEY, reason.key()));
     tag.putInt(BATTERY_KEY, batteryPercent);
     tag.putLong(POS_KEY, pos.asLong());
     tag.putString(DIMENSION_KEY, dimension.location().toString());
@@ -77,6 +92,9 @@ public record RobotSnapshot(
             tag.getString(NAME_KEY),
             look,
             enumOr(RobotScreenStatus.class, tag.getString(STATUS_KEY), RobotScreenStatus.OFF),
+            new Work(
+                RobotJob.fromKey(tag.getString(JOB_KEY)),
+                HibernationReason.fromKey(tag.getString(REASON_KEY))),
             tag.getInt(BATTERY_KEY),
             BlockPos.of(tag.getLong(POS_KEY)),
             ResourceKey.create(Registries.DIMENSION, dimension),

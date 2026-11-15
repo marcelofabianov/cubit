@@ -1,9 +1,14 @@
 package io.github.marcelofabianov.cubit.client;
 
+import io.github.marcelofabianov.cubit.domain.robot.RobotJob;
+import io.github.marcelofabianov.cubit.domain.tier.RobotTier;
+import io.github.marcelofabianov.cubit.item.JobCardItem;
 import io.github.marcelofabianov.cubit.item.TierLook;
 import io.github.marcelofabianov.cubit.menu.DefenseKeys;
 import io.github.marcelofabianov.cubit.menu.RobotMenu;
 import io.github.marcelofabianov.cubit.menu.ScreenKeys;
+import io.github.marcelofabianov.cubit.menu.WorkKeys;
+import java.util.Optional;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
@@ -36,6 +41,11 @@ final class RobotExclusiveRow {
     if (!unlocked()) {
       graphics.fill(x, y, x + SLOT_SIZE, y + SLOT_SIZE, ScreenToggle.DISABLED);
     }
+    int cardX = left + menu.layout().cardSlotX() - 1;
+    ScreenPainter.slot(graphics, cardX, y);
+    if (!menu.cardsUnlocked()) {
+      graphics.fill(cardX, y, cardX + SLOT_SIZE, y + SLOT_SIZE, ScreenToggle.DISABLED);
+    }
   }
 
   /** In the coordinates of the window. */
@@ -54,6 +64,10 @@ final class RobotExclusiveRow {
       graphics.renderTooltip(font, Component.translatable(ScreenKeys.REDSTONE), mouseX, mouseY);
       return true;
     }
+    if (hovered.index == menu.cardSlotIndex()) {
+      graphics.renderTooltip(font, cardHint(), mouseX, mouseY);
+      return true;
+    }
     if (hovered.index != menu.torchSlotIndex()) {
       return false;
     }
@@ -66,6 +80,26 @@ final class RobotExclusiveRow {
                 .orElse(Component.translatable(ScreenKeys.TORCHES));
     graphics.renderTooltip(font, text, mouseX, mouseY);
     return true;
+  }
+
+  /**
+   * The empty card slot names itself, or the tier that unlocks it. With a card in hand that this
+   * tier does not take, it says the tier the card asks for (answer 1162).
+   */
+  private Component cardHint() {
+    if (!menu.cardsUnlocked()) {
+      return unlocksAt(menu.cardUnlockTier(), DefenseKeys.UNLOCKS_AT);
+    }
+    Optional<RobotJob> held = JobCardItem.jobOf(menu.getCarried());
+    if (held.isPresent() && !menu.acceptsJob(held.get())) {
+      return unlocksAt(menu.tierFor(held.get()), WorkKeys.CARD_NEEDS_TIER);
+    }
+    return Component.translatable(WorkKeys.CARD_SLOT);
+  }
+
+  private static Component unlocksAt(Optional<RobotTier> tier, String key) {
+    return tier.map(found -> (Component) Component.translatable(key, TierLook.name(found)))
+        .orElseGet(() -> Component.translatable(WorkKeys.CARD_SLOT));
   }
 
   private boolean unlocked() {

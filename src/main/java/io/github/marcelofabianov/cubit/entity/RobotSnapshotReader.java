@@ -34,9 +34,11 @@ public final class RobotSnapshotReader {
             RobotScreenStatus.of(
                 robot.powerState(),
                 following,
-                robot.workArea().work(),
+                robot.workArea().areaStatus(),
                 battery,
                 CubitMod.CONFIG.criticalCharge()),
+            new RobotSnapshot.Work(
+                robot.workArea().work().job(), robot.workArea().work().hibernation()),
             percentOf(battery),
             robot.blockPosition(),
             robot.level().dimension(),

@@ -93,6 +93,7 @@ public final class TabletRobotMenu extends RobotMenu {
             new SimpleContainer(opening.slots()),
             new SimpleContainer(ONE_SLOT),
             new SimpleContainer(ONE_SLOT),
+            new SimpleContainer(ONE_SLOT),
             opening);
     return new TabletRobotMenu(
         containerId,

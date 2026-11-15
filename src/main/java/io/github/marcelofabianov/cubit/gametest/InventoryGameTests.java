@@ -49,6 +49,7 @@ public final class InventoryGameTests {
   private static final int PLAYER_SLOTS = 36;
   private static final int ENERGY_SLOTS = 1;
   private static final int TORCH_SLOTS = 1;
+  private static final int CARD_SLOTS = 1;
   private static final int ABOVE_THE_SLOTS = 30;
   private static final int SETTLE_TICKS = 5;
   private static final double FAR_AWAY = 30;
@@ -77,6 +78,7 @@ public final class InventoryGameTests {
         BASE_SLOTS
             + ENERGY_SLOTS
             + TORCH_SLOTS
+            + CARD_SLOTS
             + PLAYER_SLOTS
             + PickupScreenValues.MAX_FILTER_SLOTS,
         NOT_OPENED);

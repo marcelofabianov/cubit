@@ -20,10 +20,17 @@ public final class RobotWorkArea {
   private static final String DIMENSION_KEY = "Dimension";
 
   private final RobotEntity robot;
+  private final RobotWork work;
   private Optional<WorkArea> area = Optional.empty();
 
   RobotWorkArea(RobotEntity robot) {
     this.robot = robot;
+    this.work = new RobotWork(robot);
+  }
+
+  /** The job from the card and the hibernation away from the Dock (answers 1162 and 1164). */
+  public RobotWork work() {
+    return work;
   }
 
   public Optional<WorkArea> area() {
@@ -53,11 +60,13 @@ public final class RobotWorkArea {
     area = Optional.empty();
   }
 
-  RobotScreenStatus.AreaWork work() {
-    return new RobotScreenStatus.AreaWork(working(), robot.robotInventory().isFull());
+  RobotScreenStatus.AreaWork areaStatus() {
+    return new RobotScreenStatus.AreaWork(
+        working(), robot.robotInventory().isFull(), work.job().isPresent());
   }
 
   void save(CompoundTag tag) {
+    work.save(tag);
     area.ifPresent(found -> {
       CompoundTag saved = new CompoundTag();
       saved.putLong(MIN_KEY, asLong(found.min()));
@@ -69,6 +78,7 @@ public final class RobotWorkArea {
 
   /** A save without the key, or with a broken one, has no area (rule 17). */
   void load(CompoundTag tag) {
+    work.load(tag);
     CompoundTag saved = tag.getCompound(KEY);
     String dimension = saved.getString(DIMENSION_KEY);
     area =

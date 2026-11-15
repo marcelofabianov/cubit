@@ -181,7 +181,7 @@ Planejado para a Fase 5. O tier Base não aceita cards, e cada card tem o seu ti
 
 | Recurso | Base | Avançado | Elite | Ultimate |
 |---|---|---|---|---|
-| Cards de Aprendizado de Máquina (pergunta 1145) | Bloqueado | Pescador, Fazendeiro e Pecuarista | + Organizador, Cozinheiro, Defensor e Minerador | + Construtor, Mecânico e Alquimista |
+| Cards de Aprendizado de Máquina, `allowed_jobs` no config (perguntas 1145 e 1163) | Bloqueado | Pescador, Fazendeiro e Pecuarista | + Organizador, Cozinheiro, Defensor e Minerador | + Construtor, Mecânico e Alquimista |
 | Minerador equivale a picareta de (pergunta 1149) | — | — | Diamante | Diamante |
 | Minerador: Eficiência | — | — | III | V |
 | Minerador: Fortuna | — | — | II | III |
@@ -208,6 +208,7 @@ Planejado para a Fase 5. O tier Base não aceita cards, e cada card tem o seu ti
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-14 20:52 | Liga os cards por tier à chave `allowed_jobs` (pergunta 1163). |
 | Marcelo Fabiano | 2026-11-14 20:27 | Atualiza os trabalhos por tier, o Minerador e o Defensor (perguntas 1144, 1145, 1149 e 1150). |
 | Marcelo Fabiano | 2026-11-14 18:18 | Cita a chave `death_point` por tier (pergunta 1129). |
 | Marcelo Fabiano | 2026-11-14 18:15 | Define o local de morte por tier e os números do histórico e da guia (perguntas 1115 a 1118 e 1126). |

@@ -45,6 +45,7 @@ final class PortugueseJadeTexts {
     add.accept(JadeKeys.state(PowerState.INACTIVE_EXHAUSTED), OUT_OF_BATTERY);
     add.accept(JadeKeys.state(PowerState.INACTIVE_SWITCHED_OFF), SWITCHED_OFF);
     add.accept(JadeKeys.state(PowerState.HIBERNATING), HIBERNATING);
+    add.accept(JadeKeys.state(PowerState.HIBERNATING_AWAY), HIBERNATING);
     add.accept(JadeKeys.dockStatus(OFF_NAME), DOCK_OFF);
     add.accept(JadeKeys.dockStatus(IDLE_NAME), DOCK_IDLE);
     add.accept(JadeKeys.dockStatus(CHARGING_NAME), DOCK_CHARGING);

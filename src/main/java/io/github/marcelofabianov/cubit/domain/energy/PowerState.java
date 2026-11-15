@@ -5,7 +5,10 @@ public enum PowerState {
   ACTIVE(true),
   INACTIVE_EXHAUSTED(false),
   INACTIVE_SWITCHED_OFF(false),
-  HIBERNATING(true);
+  HIBERNATING(true),
+
+  /** Hibernating away from the Dock, with a job, until Resume (answers 198 and 1164). */
+  HIBERNATING_AWAY(true);
 
   private final boolean interactive;
 

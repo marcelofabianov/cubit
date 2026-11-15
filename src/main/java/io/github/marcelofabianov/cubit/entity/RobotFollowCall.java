@@ -37,6 +37,7 @@ public final class RobotFollowCall implements FollowControl {
     if (!Ownership.owns(robot.ownerId(), player.getUUID()) || !goal().ready()) {
       return false;
     }
+    robot.workArea().work().wake();
     if (robot.workArea().area().isPresent()) {
       robot.workArea().clear();
       if (player instanceof ServerPlayer server) {

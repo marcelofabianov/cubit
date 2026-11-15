@@ -11,11 +11,15 @@ public enum UnloadCall {
   NO_CHEST,
   EMPTY,
   SWITCHED_OFF,
-  HIBERNATING;
+  HIBERNATING,
+  HIBERNATING_AWAY;
 
   public static UnloadCall of(PowerState state, boolean empty, boolean chestWithRoom) {
     if (state == PowerState.HIBERNATING) {
       return HIBERNATING;
+    }
+    if (state == PowerState.HIBERNATING_AWAY) {
+      return HIBERNATING_AWAY;
     }
     if (state != PowerState.ACTIVE) {
       return SWITCHED_OFF;

@@ -125,4 +125,10 @@ class ExpressionRulesTest {
     assertTrue(new Battery(CAPACITY, AT_LIMIT).hasAtMost(CRITICAL));
     assertFalse(new Battery(CAPACITY, ABOVE_LIMIT).hasAtMost(CRITICAL));
   }
+
+  /** Hibernating away from the Dock, it sleeps, whatever else holds (answer 1168). */
+  @Test
+  void aCubitHibernatingAwaySleeps() {
+    assertEquals(RobotExpression.SLEEPY, ExpressionRules.decide(PowerState.HIBERNATING_AWAY, ALL));
+  }
 }

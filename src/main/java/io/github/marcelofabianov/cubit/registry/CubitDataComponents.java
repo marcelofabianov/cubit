@@ -24,6 +24,7 @@ public final class CubitDataComponents {
   private static final String ROBOT_INVENTORY_ID = "robot_inventory";
   private static final String ENERGY_SLOT_ID = "energy_slot";
   private static final String TORCH_SLOT_ID = "torch_slot";
+  private static final String CARD_SLOT_ID = "card_slot";
   private static final String DOCK_ENERGY_ID = "dock_energy";
   private static final String DOCK_STORAGE_ID = "dock_storage";
   private static final String POWER_BANK_ENERGY_ID = "power_bank_energy";
@@ -70,6 +71,15 @@ public final class CubitDataComponents {
   public static final Supplier<DataComponentType<ItemContainerContents>> TORCH_SLOT =
       COMPONENTS.registerComponentType(
           TORCH_SLOT_ID,
+          builder ->
+              builder
+                  .persistent(ItemContainerContents.CODEC)
+                  .networkSynchronized(ItemContainerContents.STREAM_CODEC));
+
+  /** The card of the card slot, kept like the torches, also in the damaged item (answer 1162). */
+  public static final Supplier<DataComponentType<ItemContainerContents>> CARD_SLOT =
+      COMPONENTS.registerComponentType(
+          CARD_SLOT_ID,
           builder ->
               builder
                   .persistent(ItemContainerContents.CODEC)

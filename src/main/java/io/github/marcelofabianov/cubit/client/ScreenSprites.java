@@ -83,6 +83,9 @@ final class ScreenSprites {
   /** The Deaths tab of the Tablet, from a prompt. */
   private static final int DEATHS_TAB_U = 0;
 
+  /** The Work tab, from a prompt (answer 1169). */
+  private static final int WORK_TAB_U = 128;
+
   /** The death point switch, from a prompt. */
   private static final int DEATH_POINT_U = 64;
 
@@ -153,6 +156,10 @@ final class ScreenSprites {
       case RobotMenu.DEATH_POINT_BUTTON -> deathRowIcon(graphics, x, y, DEATH_POINT_U);
       default -> function(graphics, x, y, button);
     }
+  }
+
+  static void workTab(GuiGraphics graphics, int x, int y) {
+    deathRowIcon(graphics, x, y, WORK_TAB_U);
   }
 
   static void deathsTab(GuiGraphics graphics, int x, int y) {

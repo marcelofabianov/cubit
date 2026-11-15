@@ -46,6 +46,7 @@ final class TabletRobotScreen extends AbstractContainerScreen<TabletRobotMenu> {
   private RobotDefensePanel defense;
   private RobotBehaviorPanel behavior;
   private TabletDeathsPanel deaths;
+  private RobotWorkPanel work;
   private TabletRenameDialog dialog;
   private Component shownName;
   private int windowLeft;
@@ -76,6 +77,7 @@ final class TabletRobotScreen extends AbstractContainerScreen<TabletRobotMenu> {
     resources = new TabletResourcesPanel(painter, menu, right);
     defense = new RobotDefensePanel(painter, menu, right);
     behavior = new RobotBehaviorPanel(painter, menu, right);
+    work = new RobotWorkPanel(painter, menu, right);
     deaths = new TabletDeathsPanel(painter, menu, right, imageHeight - TabletRobotHeader.HEIGHT);
     dialog = new TabletRenameDialog(font, width, height, this::rename);
     addButtons();
@@ -161,6 +163,9 @@ final class TabletRobotScreen extends AbstractContainerScreen<TabletRobotMenu> {
               mouseY >= windowTop + TabletRobotHeader.HEIGHT
                   && resources.renderDetail(graphics, font, mouseX, mouseY, leftPos, topPos);
           case INVENTORY -> exclusive.renderTooltip(graphics, font, hoveredSlot, mouseX, mouseY);
+          case WORK ->
+              mouseY >= windowTop + TabletRobotHeader.HEIGHT
+                  && work.renderDetail(graphics, font, mouseX, mouseY, leftPos, topPos);
           case DEATHS ->
               mouseY >= windowTop + TabletRobotHeader.HEIGHT
                   && deaths.renderDetail(graphics, font, mouseX, mouseY, leftPos, topPos);
@@ -208,6 +213,7 @@ final class TabletRobotScreen extends AbstractContainerScreen<TabletRobotMenu> {
       }
       case INVENTORY -> renderInventoryLabels(graphics);
       case DEATHS -> deaths.render(graphics, mouseX - leftPos, mouseY - topPos);
+      case WORK -> work.render(graphics, mouseX - leftPos, mouseY - topPos);
     }
   }
 
@@ -255,6 +261,7 @@ final class TabletRobotScreen extends AbstractContainerScreen<TabletRobotMenu> {
       case RESOURCES -> resources.switchAt(x, y);
       case DEFENSE -> defense.modeAt(x, y);
       case FILTERS -> behavior.modeAt(x, y);
+      case WORK -> work.buttonAt(x, y);
       case INVENTORY, DEATHS -> OptionalInt.empty();
     };
   }

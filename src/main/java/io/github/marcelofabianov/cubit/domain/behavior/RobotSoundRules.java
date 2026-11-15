@@ -15,7 +15,8 @@ public final class RobotSoundRules {
     if (to == PowerState.ACTIVE && from != PowerState.ACTIVE) {
       return Optional.of(PowerSound.POWER_ON);
     }
-    if (from == PowerState.ACTIVE && to != PowerState.ACTIVE && to != PowerState.HIBERNATING) {
+    if (from == PowerState.ACTIVE && to == PowerState.INACTIVE_EXHAUSTED
+        || from == PowerState.ACTIVE && to == PowerState.INACTIVE_SWITCHED_OFF) {
       return Optional.of(PowerSound.POWER_OFF);
     }
     return Optional.empty();

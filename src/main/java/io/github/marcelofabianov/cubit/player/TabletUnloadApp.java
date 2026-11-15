@@ -5,6 +5,7 @@ import io.github.marcelofabianov.cubit.domain.robot.UnloadChests;
 import io.github.marcelofabianov.cubit.entity.RobotEntity;
 import io.github.marcelofabianov.cubit.entity.RobotTablet;
 import io.github.marcelofabianov.cubit.menu.TabletKeys;
+import io.github.marcelofabianov.cubit.menu.WorkKeys;
 import java.util.Optional;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -56,6 +57,7 @@ final class TabletUnloadApp {
           case EMPTY -> TabletKeys.UNLOAD_EMPTY;
           case SWITCHED_OFF -> TabletKeys.DOCK_SWITCHED_OFF;
           case HIBERNATING -> TabletKeys.DOCK_HIBERNATING;
+          case HIBERNATING_AWAY -> WorkKeys.UNLOAD_RESUME_FIRST;
         };
     say(player, Component.translatable(key, robot.getDisplayName()));
   }

@@ -1,15 +1,19 @@
 package io.github.marcelofabianov.cubit.client;
 
+import io.github.marcelofabianov.cubit.domain.behavior.HibernationReason;
 import io.github.marcelofabianov.cubit.domain.behavior.RobotScreenStatus;
 import io.github.marcelofabianov.cubit.domain.energy.EnergyFormat;
 import io.github.marcelofabianov.cubit.domain.energy.EnergyReading;
 import io.github.marcelofabianov.cubit.domain.energy.EnergyUseCause;
 import io.github.marcelofabianov.cubit.domain.energy.SolarStatus;
 import io.github.marcelofabianov.cubit.domain.robot.OreKind;
+import io.github.marcelofabianov.cubit.domain.robot.RobotJob;
 import io.github.marcelofabianov.cubit.entity.OreNames;
 import io.github.marcelofabianov.cubit.menu.RobotMenu;
 import io.github.marcelofabianov.cubit.menu.ScreenKeys;
+import io.github.marcelofabianov.cubit.menu.WorkKeys;
 import java.util.List;
+import java.util.Optional;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 
@@ -20,15 +24,38 @@ final class RobotTexts {
   private RobotTexts() {}
 
   static Component status(RobotMenu menu) {
-    return Component.translatable(ScreenKeys.robotStatus(menu.status()));
+    return status(menu.status(), menu.job(), menu.hibernationReason());
+  }
+
+  /**
+   * The text of a state, with the job while working and the reason while hibernating away, as the
+   * top of the screens and the list of the Tablet show it (answer 1168).
+   */
+  static Component status(
+      RobotScreenStatus status, Optional<RobotJob> job, Optional<HibernationReason> reason) {
+    String key = ScreenKeys.robotStatus(status);
+    return switch (status) {
+      case WORKING -> Component.translatable(key, jobName(job));
+      case HIBERNATING_AWAY ->
+          Component.translatable(
+              key,
+              Component.translatable(
+                  WorkKeys.reason(reason.orElse(HibernationReason.INVENTORY_FULL))));
+      default -> Component.translatable(key);
+    };
+  }
+
+  static Component jobName(Optional<RobotJob> job) {
+    return job.map(found -> (Component) Component.translatable(WorkKeys.job(found)))
+        .orElseGet(() -> Component.translatable(WorkKeys.NO_JOB));
   }
 
   static int statusColor(RobotScreenStatus status) {
     return switch (status) {
       case CRITICAL_BATTERY -> ScreenPainter.STATUS_RED;
       case FOLLOWING -> ScreenPainter.STATUS_GREEN;
-      case HIBERNATING -> ScreenPainter.STATUS_BLUE;
-      case IN_AREA -> ScreenPainter.STATUS_PURPLE;
+      case HIBERNATING, HIBERNATING_AWAY -> ScreenPainter.STATUS_BLUE;
+      case IN_AREA, WORKING -> ScreenPainter.STATUS_PURPLE;
       case INVENTORY_FULL -> ScreenPainter.STATUS_ORANGE;
       case ACTIVE, OFF -> ScreenPainter.STATUS_GRAY;
     };

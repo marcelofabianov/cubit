@@ -4,6 +4,7 @@ import io.github.marcelofabianov.cubit.menu.DeathKeys;
 import io.github.marcelofabianov.cubit.menu.DefenseKeys;
 import io.github.marcelofabianov.cubit.menu.ScreenKeys;
 import io.github.marcelofabianov.cubit.menu.TabletKeys;
+import io.github.marcelofabianov.cubit.menu.WorkKeys;
 import java.util.Arrays;
 import java.util.Optional;
 import net.minecraft.client.gui.GuiGraphics;
@@ -21,12 +22,15 @@ final class TabletRobotTabs {
   private static final int FILTERS_Y = 65;
   private static final int INVENTORY_Y = 93;
   private static final int DEATHS_Y = 121;
+  private static final int WORK_Y = 149;
   private static final int CHEST_X = 6;
   private static final int CHEST_Y = 6;
   private static final int DEFENSE_TOP = 14;
   private static final int FILTERS_TOP = RobotBehaviorPanel.filterHeadingY() - 4;
   private static final int INVENTORY_TOP = 26;
-  private static final int[] TOPS = {RESOURCES_Y, DEFENSE_Y, FILTERS_Y, INVENTORY_Y, DEATHS_Y};
+  private static final int[] TOPS = {
+    RESOURCES_Y, DEFENSE_Y, FILTERS_Y, INVENTORY_Y, DEATHS_Y, WORK_Y
+  };
 
   private Tab open = Tab.RESOURCES;
 
@@ -36,7 +40,8 @@ final class TabletRobotTabs {
     DEFENSE(DEFENSE_Y, DefenseKeys.TAB, DEFENSE_TOP),
     FILTERS(FILTERS_Y, TabletKeys.TAB_FILTERS, FILTERS_TOP),
     INVENTORY(INVENTORY_Y, ScreenKeys.TAB_INVENTORY, INVENTORY_TOP),
-    DEATHS(DEATHS_Y, DeathKeys.TAB_TITLE, 0);
+    DEATHS(DEATHS_Y, DeathKeys.TAB_TITLE, 0),
+    WORK(WORK_Y, WorkKeys.TAB, 0);
 
     private final int y;
     private final String name;
@@ -78,6 +83,7 @@ final class TabletRobotTabs {
     ScreenSprites.funnel(graphics, iconX, top + FILTERS_Y + ScreenTabStrip.ICON_Y);
     ScreenSprites.chest(graphics, left + CHEST_X, top + INVENTORY_Y + CHEST_Y);
     ScreenSprites.deathsTab(graphics, iconX, top + DEATHS_Y + ScreenTabStrip.ICON_Y);
+    ScreenSprites.workTab(graphics, iconX, top + WORK_Y + ScreenTabStrip.ICON_Y);
   }
 
   /** The tab under a point given from the left of the tabs and the top of the window. */

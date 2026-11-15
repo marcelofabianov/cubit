@@ -64,7 +64,11 @@ public final class RobotScreenReadout {
 
   private static RobotMenuContents contents(RobotEntity robot) {
     return new RobotMenuContents(
-        robot.inventory(), robot.energySlot(), robot.torches().slot(), opening(robot));
+        robot.inventory(),
+        robot.energySlot(),
+        robot.torches().slot(),
+        robot.workArea().work().slot(),
+        opening(robot));
   }
 
   private static RobotMenuSource source(RobotEntity robot, Predicate<Player> stillValid) {
@@ -86,6 +90,7 @@ public final class RobotScreenReadout {
         robot.pickup(),
         robot.torches(),
         robot.docking().deathGuide(),
+        robot.workArea().work(),
         stillValid);
   }
 
@@ -124,7 +129,7 @@ public final class RobotScreenReadout {
     return RobotScreenStatus.of(
         robot.powerState(),
         following,
-        robot.workArea().work(),
+        robot.workArea().areaStatus(),
         robot.battery(),
         CubitMod.CONFIG.criticalCharge());
   }

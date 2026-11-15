@@ -1,5 +1,6 @@
 package io.github.marcelofabianov.cubit.menu;
 
+import io.github.marcelofabianov.cubit.domain.behavior.HibernationReason;
 import io.github.marcelofabianov.cubit.domain.behavior.RobotExpression;
 import io.github.marcelofabianov.cubit.domain.behavior.RobotScreenStatus;
 import io.github.marcelofabianov.cubit.domain.energy.Energy;
@@ -8,8 +9,10 @@ import io.github.marcelofabianov.cubit.domain.energy.RechargeSource;
 import io.github.marcelofabianov.cubit.domain.energy.SolarStatus;
 import io.github.marcelofabianov.cubit.domain.robot.DefenseMode;
 import io.github.marcelofabianov.cubit.domain.robot.RobotColor;
+import io.github.marcelofabianov.cubit.domain.robot.RobotJob;
 import io.github.marcelofabianov.cubit.domain.tier.RobotTier;
 import java.util.List;
+import java.util.Optional;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.MenuType;
@@ -121,6 +124,41 @@ public abstract class RobotMenuReading extends AbstractContainerMenu {
   /** A switched-off robot with charge to wake, which the Power of the Tablet turns on (1033). */
   public boolean canTurnOn() {
     return RobotScreenValues.isTrue(values, RobotScreenValues.TURN_ON);
+  }
+
+  /** The job of the card in the slot, if any (answer 1162). */
+  public Optional<RobotJob> job() {
+    return ofIndex(RobotJob.values(), values.get(RobotScreenValues.JOB));
+  }
+
+  /** Why the Cubit hibernates away from the Dock, if it does (answer 1164). */
+  public Optional<HibernationReason> hibernationReason() {
+    return ofIndex(HibernationReason.values(), values.get(RobotScreenValues.HIBERNATION_REASON));
+  }
+
+  /** The first tier that takes any card, for the locked slot (answer 1162). */
+  public Optional<RobotTier> cardUnlockTier() {
+    return ofIndex(RobotTier.values(), values.get(RobotScreenValues.CARD_UNLOCK_TIER));
+  }
+
+  /** Whether this tier takes any card, so the card slot is not locked (answer 1162). */
+  public boolean cardsUnlocked() {
+    return values.get(RobotScreenValues.ALLOWED_JOBS) != 0;
+  }
+
+  /** Whether the tier of this Cubit takes the job, for the card slot (answer 1163). */
+  public boolean acceptsJob(RobotJob job) {
+    return (values.get(RobotScreenValues.ALLOWED_JOBS) & (1 << job.ordinal())) != 0;
+  }
+
+  /** The first tier that takes the job, for the hint of a card that does not fit (1162). */
+  public Optional<RobotTier> tierFor(RobotJob job) {
+    return ofIndex(RobotTier.values(), RobotScreenValues.jobTier(values, job));
+  }
+
+  /** A value of the server is the order plus one, with zero for none. */
+  private static <T> Optional<T> ofIndex(T[] all, int value) {
+    return value <= 0 || value > all.length ? Optional.empty() : Optional.of(all[value - 1]);
   }
 
   public RobotTier tier() {

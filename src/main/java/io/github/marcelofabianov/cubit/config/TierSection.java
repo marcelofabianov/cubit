@@ -66,6 +66,7 @@ final class TierSection {
   private final AreaKeys area;
   private final UnloadKeys unload;
   private final DeathPointKey deathPoint;
+  private final JobKeys jobs;
 
   TierSection(ModConfigSpec.Builder builder, TierSpec defaults) {
     batteryCapacity = energy(builder, BATTERY_CAPACITY, defaults.batteryCapacity(), MIN_POSITIVE);
@@ -92,6 +93,7 @@ final class TierSection {
     area = new AreaKeys(builder, defaults.area());
     unload = new UnloadKeys(builder, defaults.unload());
     deathPoint = new DeathPointKey(builder, defaults.deathPoint());
+    jobs = new JobKeys(builder, defaults.jobs());
   }
 
   TierSpec read() {
@@ -114,7 +116,8 @@ final class TierSection {
         new Percentage(returnCharge.get()),
         area.read(),
         unload.read(),
-        deathPoint.read());
+        deathPoint.read(),
+        jobs.read());
   }
 
   private static ModConfigSpec.DoubleValue speed(

@@ -214,6 +214,11 @@ Estes nomes não mudam sem migração (regra 18 do `AGENTS.md`).
 | Componente do jogo no item | `minecraft:custom_name` | Nome do Cubit, inclusive no item danificado |
 | NBT do jogo na entidade | `CustomName` | Nome do Cubit |
 | Dados do player | `cubit:following_robot` | `robot`: o UUID do robô que segue, ou nada |
+| Item | `cubit:ml_fisher` | O card do Pescador. Na base, só por `/give`, sem receita (perguntas 1161 e 1172) |
+| Tag de item | `cubit:ml_cards` | Os cards que o slot do card aceita (pergunta 1162) |
+| Componente do item | `cubit:card_slot` | O card no slot do card, opcional, também no item danificado (pergunta 1162) |
+| NBT da entidade | `CardSlot` | O card no slot do card, como o `TorchSlot` (pergunta 1172) |
+| NBT da entidade | `PowerState` com `HIBERNATING_AWAY` e `HibernationReason` | A hibernação fora do Dock e o motivo dela. Um motivo inválido vira o inventário cheio, e o log avisa (perguntas 1164 e 1172) |
 | Dados do player | `cubit:death_log` | O histórico de mortes do player, descrito em [`tablet.md`](funcionalidades/tablet.md#contrato) (pergunta 1114) |
 
 O estado salvo é validado ao entrar no jogo, sem derrubá-lo (regra 17 do `AGENTS.md`):
@@ -234,6 +239,7 @@ O estado salvo é validado ao entrar no jogo, sem derrubá-lo (regra 17 do `AGEN
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-14 20:52 | Acrescenta o contrato da base do trabalho (perguntas 1161 a 1164 e 1172). |
 | Marcelo Fabiano | 2026-11-14 20:27 | Acrescenta os cards do Mecânico e do Alquimista (perguntas 1146 e 1147). |
 | Marcelo Fabiano | 2026-11-14 18:17 | Acrescenta a chave do local de morte e o histórico de mortes ao contrato (perguntas 1114 e 1118). |
 | Marcelo Fabiano | 2026-11-14 18:17 | Acrescenta as chaves do retorno automático e da descarga ao contrato (pergunta 1128). |

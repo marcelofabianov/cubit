@@ -64,6 +64,7 @@ final class RobotScreen extends AbstractContainerScreen<RobotMenu> {
   private RobotSettingsPanel settings;
   private RobotDefensePanel defense;
   private RobotBehaviorPanel behavior;
+  private RobotWorkPanel work;
   private final RobotScreenTabs tabs = new RobotScreenTabs();
   private final RobotExclusiveRow exclusive;
 
@@ -82,6 +83,7 @@ final class RobotScreen extends AbstractContainerScreen<RobotMenu> {
         new RobotSettingsPanel(painter, menu, oreIcon(menu.opening().filterIconTag()), right);
     defense = new RobotDefensePanel(painter, menu, right);
     behavior = new RobotBehaviorPanel(painter, menu, right);
+    work = new RobotWorkPanel(painter, menu, right);
     showOpenTab();
   }
 
@@ -141,6 +143,7 @@ final class RobotScreen extends AbstractContainerScreen<RobotMenu> {
         switch (tabs.open()) {
           case BEHAVIOR -> behavior.renderDetail(graphics, font, mouseX, mouseY, leftPos, topPos);
           case SETTINGS -> settings.renderDetail(graphics, font, mouseX, mouseY, leftPos, topPos);
+          case WORK -> work.renderDetail(graphics, font, mouseX, mouseY, leftPos, topPos);
           default -> false;
         };
     if (detail) {
@@ -198,6 +201,7 @@ final class RobotScreen extends AbstractContainerScreen<RobotMenu> {
       switch (tabs.open()) {
         case SETTINGS -> settings.render(graphics);
         case DEFENSE -> defense.render(graphics);
+        case WORK -> work.render(graphics, mouseX - leftPos, mouseY - topPos);
         default -> renderBehavior(graphics);
       }
       return;
@@ -312,6 +316,7 @@ final class RobotScreen extends AbstractContainerScreen<RobotMenu> {
       case SETTINGS -> settings.switchAt(x, y);
       case DEFENSE -> defense.modeAt(x, y);
       case BEHAVIOR -> behavior.buttonAt(x, y);
+      case WORK -> work.buttonAt(x, y);
       case INVENTORY -> OptionalInt.empty();
     };
   }
