@@ -100,6 +100,18 @@
         }
       }
     },
+    "fishing": {
+      "loop": "hold_on_last_frame",
+      "animation_length": 0.25,
+      "bones": {
+        "right_arm": {
+          "rotation": {
+            "0.0": { "vector": [0, 0, 0], "easing": "easeInOutSine" },
+            "0.25": { "vector": [-70, 0, -10], "easing": "easeInOutSine" }
+          }
+        }
+      }
+    },
     "powered_down": {
       "loop": "hold_on_last_frame",
       "animation_length": 0.5,

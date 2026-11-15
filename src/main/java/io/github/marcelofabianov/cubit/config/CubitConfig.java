@@ -2,6 +2,7 @@ package io.github.marcelofabianov.cubit.config;
 
 import com.mojang.logging.LogUtils;
 import io.github.marcelofabianov.cubit.domain.behavior.DeathGuideSpec;
+import io.github.marcelofabianov.cubit.domain.behavior.FishingTimes;
 import io.github.marcelofabianov.cubit.domain.behavior.FollowDecision;
 import io.github.marcelofabianov.cubit.domain.behavior.LampPolicy;
 import io.github.marcelofabianov.cubit.domain.behavior.LightLevel;
@@ -26,6 +27,7 @@ public final class CubitConfig {
   public static final RobotType GENERAL_ROBOT = new RobotType("general_robot");
   private static final Logger LOGGER = LogUtils.getLogger();
   private static final String REVERSED_LAMP = "The lamp limits are reversed: off {}, on {}";
+  private static final String REVERSED_FISHING = "Fishing limits are reversed; using the minimum";
   private static final String INVALID_RARE_TAG = "Ignoring an invalid tag in rare_ore_tags: {}";
   private static final String GENERAL_SECTION = "general";
   private static final int TIER_SECTION_DEPTH = 2;
@@ -46,8 +48,10 @@ public final class CubitConfig {
   private final PickupSection pickup;
   private final TorchSection torches;
   private final DeathPointSection deathPoint;
+  private final FisherSection fisher;
   private final AtomicBoolean warnedRareTags = new AtomicBoolean();
   private final AtomicBoolean warnedLamp = new AtomicBoolean();
+  private final AtomicBoolean warnedFishing = new AtomicBoolean();
   private final TierCatalog tierCatalog;
 
   public CubitConfig() {
@@ -69,6 +73,7 @@ public final class CubitConfig {
     pickup = new PickupSection(builder);
     torches = new TorchSection(builder);
     deathPoint = new DeathPointSection(builder);
+    fisher = new FisherSection(builder);
     builder.pop();
 
     tierCatalog = new NeoForgeTierCatalog(Map.of(GENERAL_ROBOT, tierSections(builder)));
@@ -238,6 +243,27 @@ public final class CubitConfig {
       LOGGER.warn(REVERSED_LAMP, offFrom, onBelow);
     }
     return LampPolicy.fitting(new LightLevel(onBelow), new LightLevel(offFrom));
+  }
+
+  /** A maximum under its minimum must not break the game: it becomes the minimum, logged once. */
+  public FishingTimes fishingTimes() {
+    int waitMin = fisher.waitMin.get();
+    int biteMin = fisher.biteMin.get();
+    int waitMax = fisher.waitMax.get();
+    int biteMax = fisher.biteMax.get();
+    if ((waitMax < waitMin || biteMax < biteMin) && warnedFishing.compareAndSet(false, true)) {
+      LOGGER.warn(REVERSED_FISHING);
+    }
+    return new FishingTimes(
+        waitMin,
+        Math.max(waitMin, waitMax),
+        biteMin,
+        Math.max(biteMin, biteMax),
+        fisher.lureTicks.get());
+  }
+
+  public int fisherCastReachBlocks() {
+    return fisher.castReach.get();
   }
 
   public int noticeRepeatTicks() {

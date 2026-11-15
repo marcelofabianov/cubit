@@ -48,7 +48,7 @@ public final class JobBaseGameTests {
   private static final int CARD_SLOT = 0;
   private static final String POWER_STATE_KEY = "PowerState";
   private static final String REASON_KEY = "HibernationReason";
-  private static final String UNKNOWN_REASON = "no_water";
+  private static final String UNKNOWN_REASON = "no_lava";
   private static final String WRONG_JOBS = "Wrong jobs for the tier";
   private static final String WRONG_SLOT = "The card slot took the wrong item";
   private static final String NOT_KEPT = "The card was not kept in the item";

@@ -18,6 +18,10 @@ final class WorkTexts {
   private static final String CARD_NEEDS_TIER = "Needs %s";
   private static final String NOTICE_FULL = "I'm full and have nowhere to unload";
   private static final String INVENTORY_FULL = "Inventory full";
+  private static final String NO_WATER = "No water in the area";
+  private static final String NOTICE_NO_WATER = "I can't find water to fish here";
+  private static final String KEEP_JUNK = "Keep junk";
+  private static final String KEEP_JUNK_DETAIL = "Off · junk such as boots is thrown away";
   private static final String FISHER = "Fisher";
   private static final String FISHER_CARD = "Machine Learning: Fisher";
 
@@ -34,6 +38,10 @@ final class WorkTexts {
     add.accept(WorkKeys.CARD_NEEDS_TIER, CARD_NEEDS_TIER);
     add.accept(WorkKeys.NOTICE_FULL, NOTICE_FULL);
     add.accept(WorkKeys.reason(HibernationReason.INVENTORY_FULL), INVENTORY_FULL);
+    add.accept(WorkKeys.reason(HibernationReason.NO_WATER), NO_WATER);
+    add.accept(WorkKeys.notice(HibernationReason.NO_WATER), NOTICE_NO_WATER);
+    add.accept(WorkKeys.KEEP_JUNK, KEEP_JUNK);
+    add.accept(WorkKeys.KEEP_JUNK_DETAIL, KEEP_JUNK_DETAIL);
     add.accept(WorkKeys.job(RobotJob.FISHER), FISHER);
     add.accept(CubitItems.FISHER_CARD.get().getDescriptionId(), FISHER_CARD);
   }

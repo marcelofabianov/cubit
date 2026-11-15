@@ -889,6 +889,32 @@ As regras estão em [`trabalhos.md`](../funcionalidades/trabalhos.md#base-do-tra
 | 14 | Faça ele morrer com o card e conserte o Damaged Cubit | O card continua no slot |
 | 15 | Com o jogo em português | `Trabalho`, `Trabalhando · Pescador`, `Hibernando · Inventário cheio` e `Retomar` |
 
+## Pescador
+
+As regras estão em [`pescador.md`](../funcionalidades/trabalhos/pescador.md). Use um Cubit Advanced e um Ultimate com carga, o card feito pela receita, o Tablet, um baú, um lago com mais de 5×5 blocos de água-fonte e 2 blocos de profundidade, e uma poça de 2×2 blocos.
+
+| # | Faça | Espere |
+|---|---|---|
+| 1 | Faça o card na bancada: papel, comparador, papel / redstone, vara de pesca, redstone / papel, redstone, papel | Sai o `Machine Learning: Fisher` |
+| 2 | Ponha o card num Cubit Advanced, seguindo você | Aparecem o chapéu, cobrindo o painel solar, a mochila com a vara e o peixe pequeno no canto esquerdo da tela. Ele continua seguindo, sem pescar |
+| 3 | Apague a tela dele com o `Power` | O peixe some junto com a tela |
+| 4 | Ligue de novo e marque, com o app Área, uma área com a borda do lago | Ele vai até a borda, fica de frente para a água, a vara passa para a garra e ele ergue o braço |
+| 5 | Espere algumas pescas | A cada peixe, respingo e o som de recolher a linha no ponto da água, sem linha, sem boia e sem orbes de experiência. Os itens vão para o inventário, em cerca de 20 s cada um |
+| 6 | Marque um baú com o app Descarga e encha o inventário dele | Ele descarrega no baú e volta a pescar |
+| 7 | Desligue `Keep junk` na aba Work e espere várias pescas | Nada de lixo entra no inventário nem cai no chão |
+| 8 | Faça a mesma área só com a poça de 2×2 | Ele pesca só peixe e lixo, sem tesouro, porque a água não é aberta |
+| 9 | Marque uma área sem água | Ele hiberna com `Hibernating · No water in the area` e `I can't find water to fish here`, uma vez |
+| 10 | Clique em `Resume`, ainda sem água | Ele volta a hibernar e repete o texto |
+| 11 | Marque de novo a área do lago e clique em `Resume` | Ele acorda e volta a pescar |
+| 12 | Coloque um bloco no ponto onde ele está pescando | Na pesca seguinte, ele procura outro ponto e vai até ele |
+| 13 | Ponha 3 Pescadores na mesma área do lago | Cada um fica num ponto próprio da borda |
+| 14 | Num lago só com espaço para 2, ponha 3 Pescadores | O terceiro hiberna sem água |
+| 15 | Com chuva, compare o tempo das pescas | Elas saem mais rápido |
+| 16 | Num Cubit Ultimate, pesque por alguns minutos | As pescas saem em cerca de 7 s, com mais tesouro e menos lixo |
+| 17 | Recolha o Cubit e coloque de novo | O card e o `Keep junk` desligado continuam; a área e o baú precisam ser marcados de novo |
+| 18 | Tire o card do slot | O chapéu, a mochila e o peixe somem, e ele volta ao comportamento sem card |
+| 19 | Com o jogo em português | `Guardar lixo`, `Hibernando · Sem água na área` e `Não acho água para pescar aqui` |
+
 ## Tradução
 
 | # | Passo | Resultado esperado |
@@ -948,6 +974,7 @@ Na instância só com o mod, tire capturas com F2 do Cubit seguindo, da tela do 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-14 23:10 | Adiciona o roteiro do Pescador. |
 | Marcelo Fabiano | 2026-11-14 20:53 | Adiciona o roteiro da base do trabalho. |
 | Marcelo Fabiano | 2026-11-14 18:47 | Adiciona o roteiro do local de morte. |
 | Marcelo Fabiano | 2026-11-14 16:33 | Deixa o filtro e o inventário do player à esquerda. |

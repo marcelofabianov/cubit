@@ -5,8 +5,8 @@ import io.github.marcelofabianov.cubit.domain.robot.RobotJob;
 
 /**
  * The translation keys of the base of the jobs: the Work tab, the states, Resume and the text of
- * the Cubit when it hibernates away from the Dock (answers 1167, 1168, 1172 and 1174). They are a
- * contract with whoever translates the mod.
+ * the Cubit when it hibernates away from the Dock, and Keep junk of the Fisher (answers 1167, 1168,
+ * 1172, 1174, 1191 and 1195). They are a contract with whoever translates the mod.
  */
 public final class WorkKeys {
   private static final String PREFIX = "gui.cubit.work.";
@@ -21,13 +21,21 @@ public final class WorkKeys {
   public static final String UNLOAD_RESUME_FIRST = PREFIX + "unload_resume_first";
   public static final String CARD_SLOT = PREFIX + "card_slot";
   public static final String CARD_NEEDS_TIER = PREFIX + "card_needs_tier";
-  public static final String NOTICE_FULL = "notice.cubit.work_inventory_full";
+  public static final String KEEP_JUNK = PREFIX + "keep_junk";
+  public static final String KEEP_JUNK_DETAIL = PREFIX + "keep_junk_detail";
+  private static final String NOTICE = "notice.cubit.work_%s";
+  public static final String NOTICE_FULL = NOTICE.formatted(HibernationReason.INVENTORY_FULL.key());
 
   private WorkKeys() {}
 
   /** Why the Cubit hibernates, as `Inventory full` / `Inventário cheio`. */
   public static String reason(HibernationReason reason) {
     return REASON.formatted(reason.key());
+  }
+
+  /** The text of the Cubit when it hibernates for a reason, as the full inventory (1174, 1195). */
+  public static String notice(HibernationReason reason) {
+    return NOTICE.formatted(reason.key());
   }
 
   /** The name of a job, as `Fisher` / `Pescador`. */

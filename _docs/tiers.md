@@ -188,26 +188,34 @@ Planejado para a Fase 5. O tier Base não aceita cards, e cada card tem o seu ti
 | Minerador: Toque Suave | — | — | — | ✔ |
 | Minerador: fornalha de minérios elétrica, em ~20 FE/t enquanto funde (perguntas 930 e 1149) | — | — | 1× | 2× |
 | Defensor: modos, pela reação escolhida (pergunta 1150) | — | — | Contra-atacar e Agressivo | Contra-atacar e Agressivo. O Focus fica para o card do Defensor |
+| Pescador: Isca, `fisher_lure_level` (pergunta 1185) | — | — | II | III |
+| Pescador: Sorte do Mar, `fisher_luck_level` (pergunta 1185) | — | — | II | III |
+| Pescador: custo por peixe pescado, `fisher_catch_cost` (pergunta 1190) | — | 300 FE | 300 FE | 300 FE |
 | Storage wireless | — | — | — | ✔ |
 
 | Valor geral | Valor |
 |---|---|
 | Cubits por área | Até 3 |
 | Teste antes de fechar um card | 20 a 30 robôs |
+| Pescador: espera antes da mordida, como no jogo (pergunta 1184) | 100 a 600 ticks |
+| Pescador: mordida, como no jogo | 20 a 80 ticks |
+| Pescador: espera a menos por nível de Isca, como no jogo | 100 ticks |
+| Pescador: alcance do lançamento, da margem ao ponto da água (pergunta 1208) | 6 blocos |
 
 **A definir:**
 
 - antenas e chunks por tier do Servidor, área e consumo por tier da antena e teto de chunks no mundo;
 - consumo do Servidor e da antena com o carregamento desligado;
-- custo por ação de cada card e dano do Defensor;
+- custo por ação dos outros cards e dano do Defensor;
 - limites por tick e distância do Dock ao Servidor ou à antena;
-- limite de animais do Pecuarista, intervalo do Pescador e custo do storage e tamanho dos canais;
+- limite de animais do Pecuarista e custo do storage e tamanho dos canais;
 - alcance e viabilidade do feixe da lanterna de cabeça do Minerador.
 
 ## Histórico de modificações
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-14 23:10 | Adiciona os números do Pescador (perguntas 1184, 1185, 1190 e 1208). |
 | Marcelo Fabiano | 2026-11-14 20:52 | Liga os cards por tier à chave `allowed_jobs` (pergunta 1163). |
 | Marcelo Fabiano | 2026-11-14 20:27 | Atualiza os trabalhos por tier, o Minerador e o Defensor (perguntas 1144, 1145, 1149 e 1150). |
 | Marcelo Fabiano | 2026-11-14 18:18 | Cita a chave `death_point` por tier (pergunta 1129). |

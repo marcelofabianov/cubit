@@ -270,4 +270,14 @@ class RobotStateTest {
     assertFalse(off.damaged().solarOn());
     assertFalse(off.damaged().repaired(SPEC, new Percentage(REPAIR_PERCENT)).solarOn());
   }
+
+  /** Keep junk starts on, and every other change keeps it (answer 1191). */
+  @Test
+  void keepJunkStartsOnAndSurvivesTheOtherChanges() {
+    RobotState off = new RobotState(RobotTier.BASE, SOME_ENERGY, SOME_HEALTH).withKeepJunk(false);
+    assertTrue(new RobotState(RobotTier.BASE, SOME_ENERGY, SOME_HEALTH).keepJunkOn());
+    assertFalse(off.damaged().keepJunkOn());
+    assertFalse(off.withUnload(false).withAutoReturn(false).withDeathPoint(false).keepJunkOn());
+    assertFalse(off.withTorches(false).withEnergy(SOME_ENERGY).keepJunkOn());
+  }
 }

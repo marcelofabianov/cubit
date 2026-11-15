@@ -4,11 +4,12 @@ import java.util.Locale;
 import java.util.Optional;
 
 /**
- * Why a Cubit with a job hibernates away from the Dock. The base has only the full inventory, and
- * each job adds its own (answers 1165 and 1172). The keys are a save contract.
+ * Why a Cubit with a job hibernates away from the Dock: the full inventory, from the base, and the
+ * Fisher with no water in its area (answers 1165, 1172 and 1188). The keys are a save contract.
  */
 public enum HibernationReason {
-  INVENTORY_FULL;
+  INVENTORY_FULL,
+  NO_WATER;
 
   public String key() {
     return name().toLowerCase(Locale.ROOT);

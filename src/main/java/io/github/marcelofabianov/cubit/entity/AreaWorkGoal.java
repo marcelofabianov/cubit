@@ -35,7 +35,7 @@ final class AreaWorkGoal extends Goal {
 
   @Override
   public boolean canUse() {
-    return robot.workArea().working();
+    return robot.workArea().working() && !robot.workArea().work().fishing().active();
   }
 
   @Override
