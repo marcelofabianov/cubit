@@ -69,9 +69,41 @@ Os baús são marcados com o app Descarga do Tablet, e a tela do Cubit tem uma a
 - **Vários Cubits:** há um número fixo por área, e cada um reserva o alvo antes de ir. Varreduras e ações têm limite por tick, e os robôs esperam a vez.
 - **Inventário cheio:** descarrega no baú marcado o que conseguir. Quando não conseguir mais, hiberna.
 
-## Hibernação fora do Dock
+## Base do trabalho
 
-Estado semelhante ao desligado, mas com o inventário e as configurações acessíveis. O Cubit fica imóvel e sem tarefas, como dormindo. Ele volta pelo botão `Retomar`, na tela do Cubit ou na do Tablet. Se o motivo não sumiu, hiberna de novo e explica. A hibernação no Dock continua saindo sozinha (pergunta 55).
+Entra com o card #193, a base do trabalho, sem trabalho próprio: o Pescador vem no card seguinte (perguntas 1140 e 1161). A base liga o card ao Cubit, mostra o trabalho e cria a hibernação fora do Dock.
+
+### Card no Cubit
+
+- **Slot:** fica na fileira de slots exclusivos, depois das tochas, como elas: apagado no Base, com `Unlocks at Advanced`. Aceita só um item da tag `cubit:ml_cards`, um por vez (pergunta 1162).
+- **Tier:** cada tier aceita os trabalhos da lista `allowed_jobs` do config, com o padrão da [tabela acima](#trabalhos-por-tier). Um card que o tier do Cubit não aceita não entra no slot, e a dica diz o tier que ele pede. Um nome inválido na lista é ignorado e vai para o log (perguntas 1145 e 1163).
+- **Item:** o card fica no item do Cubit, no componente `cubit:card_slot`, também no Damaged Cubit, e no NBT `CardSlot` da entidade, como as tochas (perguntas 191 e 1162).
+- **Na base:** só existe o card do Pescador, `cubit:ml_fisher`, obtido por `/give`, sem receita e sem comportamento. A receita e o trabalho entram no card do Pescador (pergunta 1161).
+
+### Cubit com card
+
+- **Seguindo o player:** age como generalista. O card só age em área marcada (pergunta 193).
+- **Na área:** o Cubit com card está trabalhando. Até o trabalho do card existir, ele faz o mesmo que sem card: coleta, faz a ronda e descarrega (perguntas 340 e 1166). Cada card troca esse comportamento pelo do trabalho.
+- **Estado:** `Working · Fisher` / `Trabalhando · Pescador`, no lugar de `In area`, no topo da tela e na lista do Tablet (pergunta 1168).
+
+### Aba Trabalho
+
+Uma aba `Work` / `Trabalho` na tela do Cubit e na tela do Cubit no Tablet, com um ícone feito por prompt (perguntas 1167 e 1169). Ela mostra o card, o nome do trabalho, o estado e, hibernando, o motivo, com o botão `Resume` / `Retomar`. Sem card, diz que o Cubit não tem trabalho. O modo e os filtros entram com cada trabalho.
+
+### Hibernação fora do Dock
+
+Estado semelhante ao desligado, mas com o inventário e as configurações acessíveis. O Cubit fica imóvel e sem tarefas, como dormindo (perguntas 198 e 1164).
+
+- **Estado:** `HIBERNATING_AWAY`, no NBT `PowerState`, com o motivo no NBT `HibernationReason`. A hibernação no Dock continua como está e sai sozinha (perguntas 55 e 1164).
+- **Motivo, na base:** só o inventário cheio: o Cubit com card, na área, cheio e sem baú marcado com espaço. Sem card, ele segue como nas perguntas 1052 e 1088. Cada trabalho acrescenta os seus motivos (perguntas 196 e 1165).
+- **Parado:** sem choque, coleta, ímã, tochas, falas e scanners, com a lanterna apagada e sem consumo. O painel solar continua carregando (pergunta 1170).
+- **Na tela:** `Hibernating · Inventory full` / `Hibernando · Inventário cheio`, em azul, com a expressão de sono (perguntas 1168 e 1173).
+- **Texto curto:** `I'm full and have nowhere to unload` / `Estou cheio e não tenho onde descarregar`, uma vez ao hibernar, e de novo se o `Retomar` não resolver (pergunta 1174).
+- **Save:** um motivo desconhecido vira o inventário cheio, e o log avisa (pergunta 1175).
+- **Voltar:** pelo `Retomar`, na aba Trabalho da tela do Cubit ou do Tablet. Se o motivo não sumiu, ele hiberna de novo e explica (pergunta 253). O `Follow` e o `Ir para o Dock` do Tablet também o tiram da hibernação, como um `Retomar` seguido da ordem. O `Descarregar` fica desabilitado, com a dica de usar o `Retomar` (pergunta 1170).
+- **Dano:** não o acorda. Ele leva o dano sem reagir, como desligado, e pode morrer, virando o Damaged Cubit com o card e o estado guardados (pergunta 1171).
+- **Sem card:** tirar o card do slot cancela a hibernação, que só existe com trabalho, e ele volta ao comportamento sem card na área (pergunta 1171).
+- **Recolher:** Shift + clique continua recolhendo, e o clique direito continua abrindo a tela (pergunta 253).
 
 ## Robot Server
 
@@ -149,6 +181,7 @@ A ordem segue a pergunta 251, com o Mecânico e o Alquimista no fim dos trabalho
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-14 20:52 | Define a base do trabalho: o slot do card, o tier, a aba Trabalho e a hibernação fora do Dock (perguntas 1160 a 1172). |
 | Marcelo Fabiano | 2026-11-14 20:27 | Consolida a Fase 5: os trabalhos por tier, o Mecânico e o Alquimista, os conceitos na pasta `trabalhos/`, o Tablet no lugar do controle e a ordem do board (perguntas 1136 a 1156). |
 | Marcelo Fabiano | 2026-11-13 16:40 | Troca o Cubit Remote pelo app Área do Tablet. |
 | Marcelo Fabiano | 2026-11-13 09:05 | Recebe a fornalha de minérios no Minerador. |

@@ -116,6 +116,7 @@ Fica fixo em todas as abas. `Voltar` fica no canto superior esquerdo, e os botõ
 | Filtros | Funil | Só o filtro de coleta, com o botão da lista e a grade de slots fantasma da aba Behavior, e o inventário e a hotbar do player embaixo (perguntas 1022 e 1037) |
 | Inventário | Baú | O inventário do Cubit, só para consulta |
 | Mortes | Ícone feito por prompt (pergunta 1125) | O histórico de mortes do player, com os botões de guiar e excluir (perguntas 1111 e 1119) |
+| Trabalho | O ícone do card, feito por prompt (pergunta 1169) | O card, o trabalho, o estado e o botão `Retomar`, como na tela do Cubit, descrita em [`trabalhos.md`](trabalhos.md#aba-trabalho) (pergunta 1167) |
 
 - **Aba Recursos:** um painel próprio, com as chaves numa lista só, cada uma com a descrição na linha, entre o nome e a chave, e a largura da janela, também no Ultimate (pergunta 1103), que usam os mesmos controles do servidor da tela do Cubit (pergunta 1037). Uma linha bloqueada pelo tier fica apagada, com a chave desativada e o tier que libera, como `Unlocks at Advanced`. Entram os recursos que já existem:
 
@@ -181,9 +182,10 @@ Entra com o item 16 da Fase 4.2 (perguntas 1111 e 1119). As regras do histórico
 | Attachment do player | `cubit:death_log` | O histórico de mortes, mantido na morte, com até `death_log_size` registros, cada um com `DayTime`, o tempo do mundo num `long`, `Block`, a posição num `long`, `Dimension` e `Cause`, o texto de morte do jogo. Sem o attachment, o histórico está vazio (pergunta 1114) |
 | Pacote do servidor | `cubit:death_log` | O histórico de mortes do dono, o que o botão de guiar pode fazer em cada linha, a morte que o Cubit escolhido está guiando e o primeiro tier que guia, ao abrir a tela do Cubit no Tablet e a cada mudança |
 | Pacotes do cliente | `cubit:death_guide` e `cubit:delete_death` | Guiar ou cancelar, e excluir um registro, conferidos no servidor (regra 20) |
+| Config | `allowed_jobs`, por tier | Os trabalhos que o tier aceita, com o padrão da pergunta 1145. Um nome inválido é ignorado e vai para o log (perguntas 1163 e 1172) |
 | Config | `death_point`, por tier | `locked`, `mark` ou `guide`, com `locked` para um valor inválido (pergunta 1129) |
 | Config | `death_log_size`, `death_guide_arrival_blocks`, `death_guide_lead_blocks` e `death_guide_stuck_seconds`, em `general` | O tamanho do histórico, de 1 a 50, com 10, a chegada, de 1 a 16, com 3, quanto o Cubit anda à frente, de 2 a 16, com 8, e o tempo sem avançar, de 1 a 60 s, com 10 (perguntas 1115 e 1126) |
-| Dados do mundo | `cubit_robot_snapshots` | A foto de cada Cubit por dono: posição, dimensão, estado, bateria, vida, tier, cor, nome e a hora |
+| Dados do mundo | `cubit_robot_snapshots` | A foto de cada Cubit por dono: posição, dimensão, estado, bateria, vida, tier, cor, nome e a hora, e, opcionais, o trabalho, em `Job`, e o motivo da hibernação, em `Reason`, para a lista mostrar `Working · Fisher` e `Hibernating · Inventory full`. Sem eles, a foto antiga lê como nenhum (pergunta 1168) |
 
 Os textos em inglês e português, como `Cubit Tablet` / `Tablet do Cubit`, `Tablet · Open` / `Tablet · Abrir`, `Go to Dock` / `Ir para o Dock` e `Rename` / `Renomear`, ficam no datagen (pergunta 1026).
 
@@ -196,6 +198,8 @@ Os textos em inglês e português, como `Cubit Tablet` / `Tablet do Cubit`, `Tab
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-14 21:23 | Acrescenta o trabalho e o motivo da hibernação à foto do Cubit (pergunta 1168). |
+| Marcelo Fabiano | 2026-11-14 20:52 | Acrescenta a aba Trabalho e a chave `allowed_jobs` (perguntas 1163, 1167 e 1172). |
 | Marcelo Fabiano | 2026-11-14 18:46 | Detalha o pacote `cubit:death_log`. |
 | Marcelo Fabiano | 2026-11-14 18:18 | Acrescenta a chave `death_point` ao contrato (pergunta 1129). |
 | Marcelo Fabiano | 2026-11-14 18:17 | Acrescenta o app `unload` ao contrato de `cubit:tablet_app` (pergunta 1128). |

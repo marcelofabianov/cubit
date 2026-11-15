@@ -867,6 +867,28 @@ As regras estão em [`movimento.md`](../funcionalidades/movimento.md#local-de-mo
 | 14 | Recolha e coloque o Cubit, e saia e entre no mundo | A chave continua desligada, e as mortes continuam na aba |
 | 15 | Com o jogo em português | `Local de morte`, `Mortes`, `Dia N, hh:mm`, `Superfície`, `Guiar`, `Cancelar`, `Excluir` e `Cubit: Você morreu em x, y, z · Superfície` |
 
+## Base do trabalho
+
+As regras estão em [`trabalhos.md`](../funcionalidades/trabalhos.md#base-do-trabalho). Use um Cubit Base, um Advanced com carga, o card por `/give @s cubit:ml_fisher`, o Tablet e um baú.
+
+| # | Faça | Espere |
+|---|---|---|
+| 1 | Abra a aba Inventory de um Cubit Base | O slot do card, depois do de tochas, apagado, com `Unlocks at Advanced` |
+| 2 | Num Cubit Advanced, ponha o card no slot | Ele entra, e a aba Work mostra o card, `Fisher` / `Pescador` e o estado |
+| 3 | Tente pôr um segundo card | Não entra, porque o slot leva um |
+| 4 | Com o Cubit seguindo você, ande | Ele segue como sempre, porque o card só age na área |
+| 5 | Marque uma área com o app Área do Tablet | Ele vai para a área, com `Working · Fisher` no topo da tela e na lista do Tablet, e coleta e faz a ronda como sem card |
+| 6 | Encha o inventário dele, sem baú marcado | Ele para, com a expressão de sono, `Hibernating · Inventory full` e um texto curto, uma vez |
+| 7 | Bata nele e chegue perto com mobs | Ele não reage, não dá choque e não sai do lugar |
+| 8 | Clique em `Resume` na aba Work, ainda cheio | Ele volta a hibernar e explica |
+| 9 | Marque um baú com o app Descarga e clique em `Resume` | Ele descarrega no baú e volta a trabalhar |
+| 10 | Faça ele hibernar de novo e use `Follow` no Tablet | Ele acorda e volta a seguir você |
+| 11 | Faça ele hibernar e veja o `Unload` do Tablet | Desabilitado, com a dica de usar o `Resume` |
+| 12 | Faça ele hibernar e tire o card do slot | A hibernação acaba, e ele volta ao comportamento sem card na área |
+| 13 | Recolha o Cubit com o card e coloque de novo | O card continua no slot |
+| 14 | Faça ele morrer com o card e conserte o Damaged Cubit | O card continua no slot |
+| 15 | Com o jogo em português | `Trabalho`, `Trabalhando · Pescador`, `Hibernando · Inventário cheio` e `Retomar` |
+
 ## Tradução
 
 | # | Passo | Resultado esperado |
@@ -926,6 +948,7 @@ Na instância só com o mod, tire capturas com F2 do Cubit seguindo, da tela do 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-14 20:53 | Adiciona o roteiro da base do trabalho. |
 | Marcelo Fabiano | 2026-11-14 18:47 | Adiciona o roteiro do local de morte. |
 | Marcelo Fabiano | 2026-11-14 16:33 | Deixa o filtro e o inventário do player à esquerda. |
 | Marcelo Fabiano | 2026-11-14 16:18 | Adiciona o filtro alinhado e o slot de energia na fileira do Tablet. |

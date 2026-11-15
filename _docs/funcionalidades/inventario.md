@@ -71,7 +71,7 @@ Entra com o item 14 da Fase 4.2, numa entrega só (perguntas 1086 a 1095).
 
 ## Slots exclusivos
 
-São dois: tochas e energia. Na Fase 5, o card de Aprendizado de Máquina ocupa mais um. O Tablet ativa ou desativa as tochas, na aba Recursos, e o slot de energia fica sempre ligado. A fornalha de minérios foi para o [Minerador](trabalhos.md#minerador), na Fase 5, e o carregador de ferramentas saiu do mod (pergunta 930).
+São três: tochas, energia e o card de Aprendizado de Máquina, que entra com a base do trabalho, descrita em [`trabalhos.md`](trabalhos.md#card-no-cubit) (pergunta 1162). O Tablet ativa ou desativa as tochas, na aba Recursos, e o slot de energia fica sempre ligado. A fornalha de minérios foi para o [Minerador](trabalhos.md#minerador), na Fase 5, e o carregador de ferramentas saiu do mod (pergunta 930).
 
 - **Fileira:** os slots exclusivos ficam numa fileira acima do inventário do Cubit, com o título `Exclusive slots` / `Slots exclusivos`. O slot de energia continua ao lado das barras (perguntas 980 e 984).
 - **Tochas automáticas:** do Advanced em diante, com tochas no slot, o Cubit as coloca sozinho onde mobs podem nascer. Veja [Tochas](#tochas).
@@ -96,6 +96,7 @@ Entra no item 12 da Fase 4.1 (issue #170, perguntas 971 a 984).
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-14 20:52 | Acrescenta o slot do card aos slots exclusivos (pergunta 1162). |
 | Marcelo Fabiano | 2026-11-14 15:23 | Deixa Shift + clique desmarcar de qualquer lugar (pergunta 1099). |
 | Marcelo Fabiano | 2026-11-14 14:40 | Faz o clique num baú marcado descarregar ali (pergunta 1098). |
 | Marcelo Fabiano | 2026-11-14 13:55 | Define a descarga em baú marcado (perguntas 1086 a 1095). |
