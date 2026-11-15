@@ -12,9 +12,25 @@ public final class AwayHibernation {
 
   public static Optional<HibernationReason> reason(
       boolean withCard, boolean inArea, boolean full, boolean canUnload) {
-    if (withCard && inArea && full && !canUnload) {
+    return reason(withCard, inArea, full, canUnload, Optional.empty());
+  }
+
+  /**
+   * The job may also stop it, as the Fisher with no water (answer 1188). The full inventory comes
+   * first, because it is what Resume asks to fix before the job can go on.
+   */
+  public static Optional<HibernationReason> reason(
+      boolean withCard,
+      boolean inArea,
+      boolean full,
+      boolean canUnload,
+      Optional<HibernationReason> jobReason) {
+    if (!withCard || !inArea) {
+      return Optional.empty();
+    }
+    if (full && !canUnload) {
       return Optional.of(HibernationReason.INVENTORY_FULL);
     }
-    return Optional.empty();
+    return jobReason;
   }
 }

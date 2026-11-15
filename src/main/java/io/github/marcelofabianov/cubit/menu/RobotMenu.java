@@ -68,6 +68,9 @@ public class RobotMenu extends RobotMenuReading {
   /** Resume, in the Work tab, which wakes a Cubit hibernating away from the Dock (1167). */
   public static final int RESUME_BUTTON = 21;
 
+  /** Keep junk of the Fisher, in the Work tab, after Resume (answer 1191). */
+  public static final int KEEP_JUNK_BUTTON = 22;
+
   /** The rows of every tier, so the screen keeps the height of the Base (answer 1101). */
   public static final int VISIBLE_ROWS = InventoryGrid.ROWS;
 

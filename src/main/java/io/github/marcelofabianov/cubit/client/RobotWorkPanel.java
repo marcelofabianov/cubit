@@ -27,6 +27,9 @@ final class RobotWorkPanel {
   private static final int BUTTON_Y = 58;
   private static final int BUTTON_WIDTH = 64;
   private static final int BUTTON_HEIGHT = 14;
+  private static final int KEEP_JUNK_Y = 80;
+  private static final int KEEP_JUNK_TEXT_TOP = 2;
+  private static final int TOGGLE_GAP = 4;
 
   private final ScreenPainter painter;
   private final RobotMenu menu;
@@ -64,10 +67,34 @@ final class RobotWorkPanel {
         Component.translatable(WorkKeys.RESUME).withStyle(ChatFormatting.BOLD),
         !asleep(),
         button.contains((int) mouseX, (int) mouseY));
+    renderKeepJunk(graphics);
+  }
+
+  /** Keep junk of the Fisher, only with its card (answer 1191). */
+  private void renderKeepJunk(GuiGraphics graphics) {
+    if (!keepJunkShown()) {
+      return;
+    }
+    graphics.fill(LEFT, KEEP_JUNK_Y, right, KEEP_JUNK_Y + ROW_HEIGHT, ScreenPainter.ROW);
+    painter.text(
+        graphics,
+        Component.translatable(WorkKeys.KEEP_JUNK),
+        new Box(
+            LEFT + TOGGLE_GAP,
+            KEEP_JUNK_Y + (ROW_HEIGHT - LINE) / 2 + KEEP_JUNK_TEXT_TOP,
+            toggleX() - LEFT - TOGGLE_GAP * 2,
+            LINE),
+        ScreenPainter.TEXT,
+        ScreenPainter.FULL_SCALE);
+    ScreenToggle.draw(
+        graphics, painter, toggleX(), toggleTop(), menu.switchOn(RobotMenu.KEEP_JUNK_BUTTON), true);
   }
 
   /** Resume under the point, only while the Cubit hibernates away from the Dock. */
   OptionalInt buttonAt(double x, double y) {
+    if (keepJunkShown() && ScreenToggle.contains(toggleX(), toggleTop(), x, y)) {
+      return OptionalInt.of(RobotMenu.KEEP_JUNK_BUTTON);
+    }
     return asleep() && button().contains((int) x, (int) y)
         ? OptionalInt.of(RobotMenu.RESUME_BUTTON)
         : OptionalInt.empty();
@@ -75,12 +102,31 @@ final class RobotWorkPanel {
 
   /** What Resume does, or why it waits, as its tooltip. */
   boolean renderDetail(GuiGraphics graphics, Font font, int mouseX, int mouseY, int left, int top) {
-    if (!button().contains(mouseX - left, mouseY - top)) {
+    int x = mouseX - left;
+    int y = mouseY - top;
+    if (keepJunkShown() && y >= KEEP_JUNK_Y && y < KEEP_JUNK_Y + ROW_HEIGHT) {
+      graphics.renderTooltip(
+          font, Component.translatable(WorkKeys.KEEP_JUNK_DETAIL), mouseX, mouseY);
+      return true;
+    }
+    if (!button().contains(x, y)) {
       return false;
     }
     String key = asleep() ? WorkKeys.RESUME_DETAIL : WorkKeys.RESUME_ONLY_ASLEEP;
     graphics.renderTooltip(font, Component.translatable(key), mouseX, mouseY);
     return true;
+  }
+
+  private boolean keepJunkShown() {
+    return menu.switchAvailable(RobotMenu.KEEP_JUNK_BUTTON);
+  }
+
+  private int toggleX() {
+    return right - ScreenToggle.WIDTH - TOGGLE_GAP;
+  }
+
+  private static int toggleTop() {
+    return KEEP_JUNK_Y + (ROW_HEIGHT - ScreenToggle.HEIGHT) / 2;
   }
 
   private boolean asleep() {

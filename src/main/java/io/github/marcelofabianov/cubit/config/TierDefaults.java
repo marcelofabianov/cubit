@@ -9,6 +9,7 @@ import io.github.marcelofabianov.cubit.domain.robot.DefenseMode;
 import io.github.marcelofabianov.cubit.domain.robot.RobotJob;
 import io.github.marcelofabianov.cubit.domain.tier.AreaSpec;
 import io.github.marcelofabianov.cubit.domain.tier.DeathPointLevel;
+import io.github.marcelofabianov.cubit.domain.tier.FisherSpec;
 import io.github.marcelofabianov.cubit.domain.tier.JobSpec;
 import io.github.marcelofabianov.cubit.domain.tier.PickupSpec;
 import io.github.marcelofabianov.cubit.domain.tier.RobotTier;
@@ -177,12 +178,19 @@ final class TierDefaults {
       union(
           ADVANCED_JOB_SET,
           EnumSet.of(RobotJob.ORGANIZER, RobotJob.COOK, RobotJob.DEFENDER, RobotJob.MINER));
-  private static final JobSpec ADVANCED_JOBS = new JobSpec(ADVANCED_JOB_SET);
-  private static final JobSpec ELITE_JOBS = new JobSpec(ELITE_JOB_SET);
+
+  /** Lure and Luck of the Sea from the Elite, and 300 FE a fish on every tier (1185, 1190). */
+  private static final Energy FISHER_CATCH_COST = new Energy(300);
+
+  private static final FisherSpec ADVANCED_FISHER = new FisherSpec(0, 0, FISHER_CATCH_COST);
+  private static final FisherSpec ELITE_FISHER = new FisherSpec(2, 2, FISHER_CATCH_COST);
+  private static final FisherSpec ULTIMATE_FISHER = new FisherSpec(3, 3, FISHER_CATCH_COST);
+  private static final JobSpec ADVANCED_JOBS = new JobSpec(ADVANCED_JOB_SET, ADVANCED_FISHER);
+  private static final JobSpec ELITE_JOBS = new JobSpec(ELITE_JOB_SET, ELITE_FISHER);
   private static final JobSpec ULTIMATE_JOBS =
       new JobSpec(
-          union(
-              ELITE_JOB_SET, EnumSet.of(RobotJob.BUILDER, RobotJob.MECHANIC, RobotJob.ALCHEMIST)));
+          union(ELITE_JOB_SET, EnumSet.of(RobotJob.BUILDER, RobotJob.MECHANIC, RobotJob.ALCHEMIST)),
+          ULTIMATE_FISHER);
   private static final UnloadSpec BASE_UNLOAD = new UnloadSpec(1, 16);
   private static final UnloadSpec ADVANCED_UNLOAD = new UnloadSpec(1, 32);
   private static final UnloadSpec ELITE_UNLOAD = new UnloadSpec(2, 48);

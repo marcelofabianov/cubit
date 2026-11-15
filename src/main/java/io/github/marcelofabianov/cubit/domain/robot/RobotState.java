@@ -25,7 +25,8 @@ public record RobotState(
     boolean torchesOn,
     boolean autoReturnOn,
     boolean unloadOn,
-    boolean deathPointOn) {
+    boolean deathPointOn,
+    boolean keepJunkOn) {
   private static final String INVALID_HEALTH_MESSAGE = "Invalid robot health: ";
   private static final float MIN_PLACED_HEALTH = 1f;
 
@@ -33,6 +34,42 @@ public record RobotState(
     if (Float.isNaN(health) || health < 0) {
       throw new IllegalArgumentException(INVALID_HEALTH_MESSAGE + health);
     }
+  }
+
+  /** Keep junk came with the Fisher and starts on, also for what was saved before (1191). */
+  public RobotState(
+      RobotTier tier,
+      Energy energy,
+      float health,
+      boolean lampOn,
+      RobotColor color,
+      boolean scannersOn,
+      OreFilter oreFilter,
+      boolean chatterOn,
+      DefenseMode defenseMode,
+      boolean solarOn,
+      PickupSettings pickup,
+      boolean torchesOn,
+      boolean autoReturnOn,
+      boolean unloadOn,
+      boolean deathPointOn) {
+    this(
+        tier,
+        energy,
+        health,
+        lampOn,
+        color,
+        scannersOn,
+        oreFilter,
+        chatterOn,
+        defenseMode,
+        solarOn,
+        pickup,
+        torchesOn,
+        autoReturnOn,
+        unloadOn,
+        deathPointOn,
+        true);
   }
 
   /** The switches that came later start on, also for what was saved before they existed. */
@@ -173,7 +210,8 @@ public record RobotState(
         torchesOn,
         autoReturnOn,
         unloadOn,
-        deathPointOn);
+        deathPointOn,
+        keepJunkOn);
   }
 
   public RobotState repaired(TierSpec spec, Percentage health) {
@@ -192,7 +230,8 @@ public record RobotState(
         torchesOn,
         autoReturnOn,
         unloadOn,
-        deathPointOn);
+        deathPointOn,
+        keepJunkOn);
   }
 
   /**
@@ -214,7 +253,8 @@ public record RobotState(
         torchesOn,
         autoReturnOn,
         unloadOn,
-        deathPointOn);
+        deathPointOn,
+        keepJunkOn);
   }
 
   public RobotState withPickup(PickupSettings next) {
@@ -233,7 +273,8 @@ public record RobotState(
         torchesOn,
         autoReturnOn,
         unloadOn,
-        deathPointOn);
+        deathPointOn,
+        keepJunkOn);
   }
 
   public RobotState withTorches(boolean on) {
@@ -252,7 +293,8 @@ public record RobotState(
         on,
         autoReturnOn,
         unloadOn,
-        deathPointOn);
+        deathPointOn,
+        keepJunkOn);
   }
 
   public RobotState withAutoReturn(boolean on) {
@@ -271,7 +313,8 @@ public record RobotState(
         torchesOn,
         on,
         unloadOn,
-        deathPointOn);
+        deathPointOn,
+        keepJunkOn);
   }
 
   public RobotState withUnload(boolean on) {
@@ -290,7 +333,8 @@ public record RobotState(
         torchesOn,
         autoReturnOn,
         on,
-        deathPointOn);
+        deathPointOn,
+        keepJunkOn);
   }
 
   public RobotState withDeathPoint(boolean on) {
@@ -309,6 +353,27 @@ public record RobotState(
         torchesOn,
         autoReturnOn,
         unloadOn,
+        on,
+        keepJunkOn);
+  }
+
+  public RobotState withKeepJunk(boolean on) {
+    return new RobotState(
+        tier,
+        energy,
+        health,
+        lampOn,
+        color,
+        scannersOn,
+        oreFilter,
+        chatterOn,
+        defenseMode,
+        solarOn,
+        pickup,
+        torchesOn,
+        autoReturnOn,
+        unloadOn,
+        deathPointOn,
         on);
   }
 

@@ -52,7 +52,9 @@ final class FetchItemGoal extends Goal {
   private Optional<ItemEntity> findTarget() {
     Optional<WorkArea> area = workingArea();
     if (area.isPresent()) {
-      return fetchesInArea() ? robot.pickup().areaTarget(area.get()) : Optional.empty();
+      return fetchesInArea() && !fishing()
+          ? robot.pickup().areaTarget(area.get())
+          : Optional.empty();
     }
     Player owner = RobotInteractions.followedPlayer(robot);
     return fetches(owner) ? robot.pickup().fetchTarget(owner) : Optional.empty();
@@ -60,6 +62,11 @@ final class FetchItemGoal extends Goal {
 
   private Optional<WorkArea> workingArea() {
     return robot.workArea().working() ? robot.workArea().here() : Optional.empty();
+  }
+
+  /** The Fisher fishes in place of fetching, as each card replaces the round (answer 1166). */
+  private boolean fishing() {
+    return robot.workArea().work().fishing().active();
   }
 
   private boolean fetchesInArea() {

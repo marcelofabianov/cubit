@@ -56,6 +56,11 @@ final class CubitRecipeProvider extends RecipeProvider {
   private static final char CORE = 'C';
   private static final char NETHERITE = 'N';
   private static final char STAR = 'S';
+  private static final String FISHER_TOP_ROW = "PCP";
+  private static final String FISHER_MIDDLE_ROW = "RFR";
+  private static final String FISHER_BOTTOM_ROW = "PRP";
+  private static final char PAPER = 'P';
+  private static final char ROD = 'F';
   private static final String HAS_IRON = "has_iron";
   private static final String HAS_DIAMOND = "has_diamond";
   private static final String HAS_ROBOT = "has_robot";
@@ -86,6 +91,7 @@ final class CubitRecipeProvider extends RecipeProvider {
     tablet(output);
     modules(output);
     powerBanks(output);
+    fisherCard(output);
     recharge(output);
     String robotId = CubitConfig.GENERAL_ROBOT.id();
     output.accept(
@@ -95,6 +101,20 @@ final class CubitRecipeProvider extends RecipeProvider {
             Ingredient.of(CubitItems.TOOLBOX.get()),
             CubitItems.GENERAL_ROBOT.get()),
         null);
+  }
+
+  /** The card of the Fisher: a fishing rod, a comparator, redstone and paper (answer 1192). */
+  private void fisherCard(RecipeOutput output) {
+    ShapedRecipeBuilder.shaped(RecipeCategory.MISC, CubitItems.FISHER_CARD.get())
+        .pattern(FISHER_TOP_ROW)
+        .pattern(FISHER_MIDDLE_ROW)
+        .pattern(FISHER_BOTTOM_ROW)
+        .define(PAPER, Items.PAPER)
+        .define(CORE, Items.COMPARATOR)
+        .define(REDSTONE, Items.REDSTONE)
+        .define(ROD, Items.FISHING_ROD)
+        .unlockedBy(HAS_ROBOT, has(CubitItems.GENERAL_ROBOT.get()))
+        .save(output);
   }
 
   private void robot(RecipeOutput output) {

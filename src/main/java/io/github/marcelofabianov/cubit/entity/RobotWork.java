@@ -32,11 +32,18 @@ public final class RobotWork implements WorkControl {
   private static final String INVALID_REASON = "Robot {} has an invalid hibernation reason: {}";
 
   private final RobotEntity robot;
+  private final RobotFishing fishing;
   private HibernationReason reason = HibernationReason.INVENTORY_FULL;
   private long nextCheck = Long.MIN_VALUE;
 
   RobotWork(RobotEntity robot) {
     this.robot = robot;
+    this.fishing = new RobotFishing(robot);
+  }
+
+  /** The work of the card of the Fisher, with its Keep junk switch. */
+  public RobotFishing fishing() {
+    return fishing;
   }
 
   /** The card slot, for the screen. */
@@ -80,6 +87,7 @@ public final class RobotWork implements WorkControl {
       return false;
     }
     wake();
+    fishing.restart();
     reasonNow().ifPresent(this::hibernate);
     return true;
   }
@@ -94,6 +102,8 @@ public final class RobotWork implements WorkControl {
 
   /** Called on the server on every tick. Without the card, the sleep ends (answer 1171). */
   void tick() {
+    showJob();
+    fishing.tick();
     if (asleep()) {
       if (job().isEmpty()) {
         wake();
@@ -112,7 +122,11 @@ public final class RobotWork implements WorkControl {
     RobotUnload unload = robot.docking().unload();
     boolean canUnload = unload.switchedOn() && (unload.onTrip() || unload.nextChest().isPresent());
     return AwayHibernation.reason(
-        job().isPresent(), robot.workArea().working(), robot.robotInventory().isFull(), canUnload);
+        job().isPresent(),
+        robot.workArea().working(),
+        robot.robotInventory().isFull(),
+        canUnload,
+        fishing.reason());
   }
 
   private void hibernate(HibernationReason why) {
@@ -125,9 +139,15 @@ public final class RobotWork implements WorkControl {
   /** In its area the Cubit follows nobody, so the text goes to the owner online (answer 1174). */
   private void tellOwner() {
     if (robot.onlineOwner() instanceof ServerPlayer owner) {
-      Component text = Component.translatable(WorkKeys.NOTICE_FULL);
+      Component text = Component.translatable(WorkKeys.notice(reason));
       CubitNetwork.sendNotice(owner, Component.translatable(RobotNotices.FORMAT_KEY, text));
     }
+  }
+
+  /** The job of the card for the looks of the client, which only change with it (answer 1197). */
+  private void showJob() {
+    byte shown = job().map(job -> (byte) (job.ordinal() + 1)).orElse(RobotSyncedData.NO_JOB);
+    robot.getEntityData().set(RobotSyncedData.JOB, shown);
   }
 
   private boolean asleep() {

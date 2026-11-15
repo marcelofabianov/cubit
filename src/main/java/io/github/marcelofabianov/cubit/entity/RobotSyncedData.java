@@ -19,6 +19,7 @@ import net.minecraft.network.syncher.SynchedEntityData;
 final class RobotSyncedData {
   private static final byte NOTHING_PLAYING = 0;
   private static final byte NO_LIGHT = 0;
+  static final byte NO_JOB = 0;
 
   static final EntityDataAccessor<Byte> PLAYING_SOUNDS =
       SynchedEntityData.defineId(RobotEntity.class, EntityDataSerializers.BYTE);
@@ -49,6 +50,14 @@ final class RobotSyncedData {
   static final EntityDataAccessor<Byte> SCAN_SIGNAL =
       SynchedEntityData.defineId(RobotEntity.class, EntityDataSerializers.BYTE);
 
+  /** The job of the card, as its order plus one, with zero for no card, only for the looks. */
+  static final EntityDataAccessor<Byte> JOB =
+      SynchedEntityData.defineId(RobotEntity.class, EntityDataSerializers.BYTE);
+
+  /** Whether the Fisher is at its stand, fishing, for the rod in the claw (answer 1199). */
+  static final EntityDataAccessor<Boolean> FISHING =
+      SynchedEntityData.defineId(RobotEntity.class, EntityDataSerializers.BOOLEAN);
+
   private RobotSyncedData() {}
 
   /** Called while the class loads, only to make sure it runs before any robot exists. */
@@ -67,5 +76,7 @@ final class RobotSyncedData {
     builder.define(LIGHT_LEVEL, NO_LIGHT);
     builder.define(COLOR, (byte) RobotColor.WHITE.ordinal());
     builder.define(SCAN_SIGNAL, (byte) ScanSignal.NONE.ordinal());
+    builder.define(JOB, NO_JOB);
+    builder.define(FISHING, false);
   }
 }

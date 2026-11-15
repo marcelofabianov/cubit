@@ -49,6 +49,8 @@ public final class RobotStateComponent {
   private static final boolean UNLOAD_DEFAULT = true;
   private static final String DEATH_POINT_FIELD = "death_point_enabled";
   private static final boolean DEATH_POINT_DEFAULT = true;
+  private static final String KEEP_JUNK_FIELD = "keep_junk_enabled";
+  private static final boolean KEEP_JUNK_DEFAULT = true;
   private static final String UNKNOWN_DEFENSE_MESSAGE = "Unknown defense mode {}. Using peaceful.";
   private static final String UNKNOWN_COLOR_MESSAGE = "Unknown robot color {}. Using white.";
   private static final String UNKNOWN_TIER_MESSAGE = "Unknown robot tier {}. Using the base tier.";
@@ -72,7 +74,7 @@ public final class RobotStateComponent {
    * flat in the saved component, so the names are the same as before.
    */
   private record LateSwitches(
-      boolean torches, boolean autoReturn, boolean unload, boolean deathPoint) {}
+      boolean torches, boolean autoReturn, boolean unload, boolean deathPoint, boolean keepJunk) {}
 
   private static final MapCodec<LateSwitches> LATE_SWITCHES =
       RecordCodecBuilder.mapCodec(instance ->
@@ -89,7 +91,10 @@ public final class RobotStateComponent {
                       .forGetter(LateSwitches::unload),
                   Codec.BOOL
                       .optionalFieldOf(DEATH_POINT_FIELD, DEATH_POINT_DEFAULT)
-                      .forGetter(LateSwitches::deathPoint))
+                      .forGetter(LateSwitches::deathPoint),
+                  Codec.BOOL
+                      .optionalFieldOf(KEEP_JUNK_FIELD, KEEP_JUNK_DEFAULT)
+                      .forGetter(LateSwitches::keepJunk))
               .apply(instance, LateSwitches::new));
 
   public static final Codec<RobotState> CODEC =
@@ -137,7 +142,8 @@ public final class RobotStateComponent {
                           state.torchesOn(),
                           state.autoReturnOn(),
                           state.unloadOn(),
-                          state.deathPointOn())))
+                          state.deathPointOn(),
+                          state.keepJunkOn())))
               .apply(
                   instance,
                   (tier,
@@ -170,7 +176,8 @@ public final class RobotStateComponent {
                           late.torches(),
                           late.autoReturn(),
                           late.unload(),
-                          late.deathPoint())));
+                          late.deathPoint(),
+                          late.keepJunk())));
 
   public static final StreamCodec<ByteBuf, RobotState> STREAM_CODEC =
       ByteBufCodecs.fromCodec(CODEC);

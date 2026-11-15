@@ -45,6 +45,7 @@ final class SavedRobotValues {
   private static final String AUTO_RETURN_KEY = "AutoReturnEnabled";
   private static final String UNLOAD_KEY = "UnloadEnabled";
   private static final String DEATH_POINT_KEY = "DeathPointEnabled";
+  private static final String KEEP_JUNK_KEY = "KeepJunkEnabled";
   private static final String TORCH_SLOT_KEY = "TorchSlot";
   private static final String CARD_SLOT_KEY = "CardSlot";
   private static final String LAST_SAFE_POSITION_KEY = "LastSafePosition";
@@ -78,6 +79,7 @@ final class SavedRobotValues {
     tag.putBoolean(AUTO_RETURN_KEY, robot.state().autoReturnOn());
     tag.putBoolean(UNLOAD_KEY, robot.state().unloadOn());
     tag.putBoolean(DEATH_POINT_KEY, robot.state().deathPointOn());
+    tag.putBoolean(KEEP_JUNK_KEY, robot.state().keepJunkOn());
     SavedPickup.write(tag, robot.state().pickup());
     robot
         .lastSafePosition()
@@ -171,7 +173,8 @@ final class SavedRobotValues {
         .withTorches(!tag.contains(TORCHES_KEY) || tag.getBoolean(TORCHES_KEY))
         .withAutoReturn(!tag.contains(AUTO_RETURN_KEY) || tag.getBoolean(AUTO_RETURN_KEY))
         .withUnload(!tag.contains(UNLOAD_KEY) || tag.getBoolean(UNLOAD_KEY))
-        .withDeathPoint(!tag.contains(DEATH_POINT_KEY) || tag.getBoolean(DEATH_POINT_KEY));
+        .withDeathPoint(!tag.contains(DEATH_POINT_KEY) || tag.getBoolean(DEATH_POINT_KEY))
+        .withKeepJunk(!tag.contains(KEEP_JUNK_KEY) || tag.getBoolean(KEEP_JUNK_KEY));
   }
 
   /** Without the key, the robot was saved before the solar switch existed, so it stays on. */

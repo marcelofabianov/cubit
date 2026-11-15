@@ -4,13 +4,21 @@ import io.github.marcelofabianov.cubit.domain.robot.RobotJob;
 import java.util.EnumSet;
 import java.util.Set;
 
-/** The jobs a tier accepts, read from allowed_jobs in the config (answers 1145 and 1163). */
-public record JobSpec(Set<RobotJob> allowed) {
+/**
+ * The jobs a tier accepts, read from allowed_jobs in the config, and what the tier does with each
+ * card, as the Fisher (answers 1145, 1163 and 1185).
+ */
+public record JobSpec(Set<RobotJob> allowed, FisherSpec fisher) {
   /** No jobs, as the Base and a tier built without job numbers, which only tests need. */
   public static final JobSpec NONE = new JobSpec(Set.of());
 
   public JobSpec {
     allowed = allowed.isEmpty() ? Set.of() : Set.copyOf(EnumSet.copyOf(allowed));
+  }
+
+  /** The jobs alone, with no numbers for the cards, which only tests and the Base need. */
+  public JobSpec(Set<RobotJob> allowed) {
+    this(allowed, FisherSpec.NONE);
   }
 
   public boolean accepts(RobotJob job) {

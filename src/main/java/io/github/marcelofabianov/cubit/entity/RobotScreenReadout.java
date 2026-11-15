@@ -80,7 +80,8 @@ public final class RobotScreenReadout {
       robot.torches(),
       robot.docking().autoReturn(),
       robot.docking().unload(),
-      robot.docking().deathGuide()
+      robot.docking().deathGuide(),
+      robot.workArea().work().fishing()
     };
     return new RobotMenuSource(
         () -> read(robot),

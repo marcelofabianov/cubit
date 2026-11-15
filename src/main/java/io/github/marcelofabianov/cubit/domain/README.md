@@ -79,9 +79,16 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 | `UnloadCall` | Se o `Descarregar` do Tablet pode mandar o Cubit, ou por que não, e quando ele descarrega sozinho: só cheio, na área e com a chave ligada (perguntas 1087, 1089 e 1093) |
 | `DeathPointLevel` | O que um tier faz com o local de morte: `locked`, `mark`, que só mostra a coordenada ao renascer, ou `guide`, que também guia até lá. A `key` é o nome usado no config (perguntas 1117 e 1129) |
 | `RobotJob` | Os trabalhos que um card dá ao Cubit, um por card. A `key` é o nome usado no `allowed_jobs` do config (perguntas 1145 e 1163) |
-| `JobSpec` | Os trabalhos que um tier aceita. Sem nenhum, o slot do card fica bloqueado, como no Base (perguntas 1145 e 1162) |
-| `HibernationReason` | Por que um Cubit com trabalho hiberna fora do Dock. Na base, só o inventário cheio, e cada trabalho acrescenta os seus. A `key` é a do save (perguntas 1165 e 1172) |
-| `AwayHibernation` | Quando um Cubit hiberna fora do Dock: com card, na área, cheio e sem onde descarregar. O `Retomar` pergunta de novo, então um motivo que não sumiu o põe para dormir outra vez (perguntas 253 e 1165) |
+| `JobSpec` | Os trabalhos que um tier aceita e o que ele faz com cada card, como o `FisherSpec`. Sem nenhum, o slot do card fica bloqueado, como no Base (perguntas 1145, 1162 e 1185) |
+| `FisherSpec` | O Pescador num tier: os níveis de Isca e de Sorte do Mar, de 0 a 3, como os encantamentos do jogo, e o custo por peixe pescado (perguntas 1185 e 1190) |
+| `HibernationReason` | Por que um Cubit com trabalho hiberna fora do Dock: o inventário cheio, da base, e o `NO_WATER` do Pescador sem água na área. A `key` é a do save (perguntas 1165, 1172 e 1188) |
+| `AwayHibernation` | Quando um Cubit hiberna fora do Dock: com card, na área, cheio e sem onde descarregar, ou pelo motivo do trabalho. O inventário cheio vem antes. O `Retomar` pergunta de novo, então um motivo que não sumiu o põe para dormir outra vez (perguntas 253, 1165 e 1188) |
+| `WaterCell` e `OpenWater` | A água aberta do jogo, de `FishingHook.calculateOpenWater`: um volume de 5×4×5 em volta do ponto, em camadas de um tipo só, com água embaixo de ar. Só ela dá tesouro (pergunta 1183) |
+| `FishingTimes` | O tempo de uma pesca, como no jogo: a espera sorteada, menos a Isca, e a mordida. Os limites vêm do config, e quem chama sorteia (pergunta 1184) |
+| `FishingPace` | Quantos ticks da espera um tick conta: a chuva pode contar um a mais, e sem céu pode não contar, com as chances do jogo (perguntas 1184 e 1206) |
+| `FishingSpot` e `FishingSpots` | O lugar na margem e o ponto da água a até o alcance do lançamento, e qual o Pescador escolhe: água aberta primeiro, depois o mais perto, sem um lugar que outro Pescador segura (perguntas 1188, 1189 e 1208) |
+| `SpotReservations` | Os lugares que cada Pescador segura, um por Cubit, só na memória do servidor (pergunta 1189) |
+| `JunkFilter` | O que o Pescador guarda: tudo com o `Keep junk` ligado, e, desligado, tudo menos o lixo da tag, que nunca inclui um item encantado (perguntas 1191 e 1207) |
 | `DeathRecord` | Uma morte do player: o tempo do mundo, o bloco, a dimensão e a causa, no texto de morte do jogo (perguntas 1111 e 1114) |
 | `DeathLog` | As mortes do player, da mais recente para a mais antiga, até o limite do config. Uma linha é achada pelo lugar e pelo tempo, para uma tela desatualizada nunca tirar outra morte (perguntas 1111 e 1115) |
 | `GameClock` | O dia e a hora do mundo, como o jogo conta: o mundo começa às 06:00 do primeiro dia (pergunta 1116) |
@@ -156,6 +163,7 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 - **Bioma por grupo:** só uma mudança de grupo conta, e um bioma sem grupo, como um rio, não muda nada, para o robô não repetir o comentário (pergunta 586).
 - **Reclamar uma vez:** ao se afastar, o dono só ouve de novo depois de o robô chegar perto, para não repetir a cada passo. Um salto além do teleporte não conta, porque não é o dono correndo (pergunta 585).
 - **Falas só com a expressão calma:** qualquer outra expressão indica algo mais importante, como um mob ou um dano.
+- **Sorteio fora do domínio:** o tempo da pesca e as chances da chuva e do céu são sorteados por quem chama, e o domínio só recebe os números. Assim ele continua sem dependências ocultas e testável sem relógio nem sorte (pergunta 1184).
 - **Hibernação fora do Dock como estado próprio:** a do Dock sai sozinha com a carga cheia, e a de fora só sai pelo `Retomar`, pelo `Follow` ou pelo `Ir para o Dock`, então misturar as duas obrigaria toda regra do Dock a conferir onde o Cubit está (pergunta 1164).
 - **Histórico próprio:** o jogo guarda só a última morte, sem a hora e sem a causa, então o mod guarda o seu, com um limite, para o save não crescer sem fim (perguntas 1114 e 1115).
 - **Guia à frente, sem sair do alcance:** o Cubit espera o dono quando passa do limite à frente dele, e por isso nunca anda por chunks que só ele carregaria (pergunta 1126 e regra 22). Esperar o dono não conta como estar preso (pergunta 1123).

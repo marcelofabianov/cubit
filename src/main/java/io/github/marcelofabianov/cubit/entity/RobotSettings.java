@@ -23,6 +23,7 @@ final class RobotSettings {
     robot.docking().autoReturn().setSwitchedOn(state.autoReturnOn());
     robot.docking().unload().setSwitchedOn(state.unloadOn());
     robot.docking().deathGuide().setSwitchedOn(state.deathPointOn());
+    robot.workArea().work().fishing().setKeepJunk(state.keepJunkOn());
     robot
         .pickup()
         .setSettings(
@@ -46,6 +47,7 @@ final class RobotSettings {
         robot.torches().switchedOn(),
         robot.docking().autoReturn().switchedOn(),
         robot.docking().unload().switchedOn(),
-        robot.docking().deathGuide().switchedOn());
+        robot.docking().deathGuide().switchedOn(),
+        robot.workArea().work().fishing().keepJunk());
   }
 }

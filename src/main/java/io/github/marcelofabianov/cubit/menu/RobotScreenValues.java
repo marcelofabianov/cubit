@@ -51,7 +51,8 @@ final class RobotScreenValues implements ContainerData {
   static final int CARD_UNLOCK_TIER = 51;
   static final int ALLOWED_JOBS = 52;
   static final int JOB_TIERS = 53;
-  static final int COUNT = 55;
+  static final int KEEP_JUNK = 55;
+  static final int COUNT = 57;
   private static final int BITS_PER_JOB_TIER = 3;
   private static final int JOB_TIER_MASK = 0b111;
   private static final int HALF_BITS = 16;
@@ -61,10 +62,10 @@ final class RobotScreenValues implements ContainerData {
 
   /**
    * Where each switch goes, in the order of the switches: lamp, scanners, chatter, solar, torches
-   * the auto return, the unload and the death point.
+   * the auto return, the unload, the death point and Keep junk.
    */
   private static final int[] SWITCH_VALUES = {
-    LAMP, SCANNERS, CHATTER, SOLAR_SWITCH, TORCHES, AUTO_RETURN, UNLOAD, DEATH_POINT
+    LAMP, SCANNERS, CHATTER, SOLAR_SWITCH, TORCHES, AUTO_RETURN, UNLOAD, DEATH_POINT, KEEP_JUNK
   };
 
   private final Supplier<RobotScreenReading> source;

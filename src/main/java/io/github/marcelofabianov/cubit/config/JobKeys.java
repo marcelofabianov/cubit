@@ -12,8 +12,9 @@ import net.neoforged.neoforge.common.ModConfigSpec;
 import org.slf4j.Logger;
 
 /**
- * The jobs one tier accepts. The key name and the job names are a contract, and an unknown name is
- * skipped and logged once, as in defense_modes (answers 1163 and 1172).
+ * The jobs one tier accepts and the numbers of each card. The key names and the job names are a
+ * contract, and an unknown name is skipped and logged once, as in defense_modes (answers 1163 and
+ * 1172).
  */
 final class JobKeys {
   private static final Logger LOGGER = LogUtils.getLogger();
@@ -22,12 +23,14 @@ final class JobKeys {
   private static final String EMPTY_JOB = "";
 
   private final ModConfigSpec.ConfigValue<List<? extends String>> jobs;
+  private final FisherKeys fisher;
   private final AtomicBoolean warned = new AtomicBoolean();
 
   JobKeys(ModConfigSpec.Builder builder, JobSpec defaults) {
     jobs =
         builder.defineListAllowEmpty(
             KEY, keysOf(defaults.allowed()), () -> EMPTY_JOB, String.class::isInstance);
+    fisher = new FisherKeys(builder, defaults.fisher());
   }
 
   JobSpec read() {
@@ -39,7 +42,7 @@ final class JobKeys {
         LOGGER.warn(INVALID_JOB, key);
       }
     }
-    return new JobSpec(allowed);
+    return new JobSpec(allowed, fisher.read());
   }
 
   /** In the order of the jobs, so the file reads as the table of jobs per tier. */
