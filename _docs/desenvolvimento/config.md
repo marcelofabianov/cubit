@@ -110,6 +110,7 @@ As chaves ficam em `snake_case`. As de um tier ficam em `[general_robot.{tier}]`
 | `general_robot.base` | `pickup_filter_slots` | Filtro de coleta | 1 a 27 |
 | `general_robot.base` | `pickup_filter_tags` | Filtro de coleta com tags | `true` ou `false` |
 | `general_robot.base` | `power_bank_capacity` | Power Bank (70% da bateria) | 1 a 2147483647 |
+| `general_robot.base` | `allowed_jobs` | Cards de Aprendizado de Máquina que o tier aceita: `fisher`, `farmer`, `rancher`, `organizer`, `cook`, `defender`, `miner`, `builder`, `mechanic` e `alchemist`. Um nome inválido é ignorado e vai para o log | Lista com esses nomes |
 
 ## Por que esses limites
 
@@ -145,6 +146,7 @@ O mod não cai por causa do config (regra 17 do `AGENTS.md`):
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-14 23:20 | Adiciona a chave `allowed_jobs`, da base do trabalho (pergunta 1205). |
 | Marcelo Fabiano | 2026-11-14 13:55 | Adiciona as chaves da descarga. |
 | Marcelo Fabiano | 2026-11-14 10:00 | Adiciona a bateria do retorno automático. |
 | Marcelo Fabiano | 2026-11-14 09:00 | Adiciona as chaves do modo área. |
