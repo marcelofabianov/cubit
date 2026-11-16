@@ -271,13 +271,16 @@ class RobotStateTest {
     assertFalse(off.damaged().repaired(SPEC, new Percentage(REPAIR_PERCENT)).solarOn());
   }
 
-  /** Keep junk starts on, and every other change keeps it (answer 1191). */
+  /** Keep junk starts on, the interval follows the config, and every change keeps them. */
   @Test
-  void keepJunkStartsOnAndSurvivesTheOtherChanges() {
-    RobotState off = new RobotState(RobotTier.BASE, SOME_ENERGY, SOME_HEALTH).withKeepJunk(false);
-    assertTrue(new RobotState(RobotTier.BASE, SOME_ENERGY, SOME_HEALTH).keepJunkOn());
-    assertFalse(off.damaged().keepJunkOn());
-    assertFalse(off.withUnload(false).withAutoReturn(false).withDeathPoint(false).keepJunkOn());
-    assertFalse(off.withTorches(false).withEnergy(SOME_ENERGY).keepJunkOn());
+  void theWorkSettingsStartAsAtFirstAndSurviveTheOtherChanges() {
+    RobotState fresh = new RobotState(RobotTier.BASE, SOME_ENERGY, SOME_HEALTH);
+    WorkSettings changed = new WorkSettings(false, new UnloadInterval(1));
+    RobotState off = fresh.withWorkSettings(changed);
+    assertEquals(WorkSettings.INITIAL, fresh.workSettings());
+    assertEquals(changed, off.damaged().workSettings());
+    assertEquals(
+        changed, off.withUnload(false).withAutoReturn(false).withDeathPoint(false).workSettings());
+    assertEquals(changed, off.withTorches(false).withEnergy(SOME_ENERGY).workSettings());
   }
 }

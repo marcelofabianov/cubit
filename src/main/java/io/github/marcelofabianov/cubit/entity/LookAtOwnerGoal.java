@@ -21,7 +21,7 @@ final class LookAtOwnerGoal extends Goal {
 
   @Override
   public boolean canUse() {
-    Player owner = robot.onlineOwner();
+    Player owner = RobotInteractions.onlineOwner(robot);
     boolean atOwner =
         owner != null
             && OwnerLook.applies(
@@ -41,6 +41,6 @@ final class LookAtOwnerGoal extends Goal {
 
   @Override
   public void tick() {
-    RobotGaze.look(robot, robot.onlineOwner());
+    RobotGaze.look(robot, RobotInteractions.onlineOwner(robot));
   }
 }

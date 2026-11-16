@@ -7,6 +7,8 @@ import io.github.marcelofabianov.cubit.domain.robot.DefenseMode;
 import io.github.marcelofabianov.cubit.domain.robot.OreFilter;
 import io.github.marcelofabianov.cubit.domain.robot.RobotColor;
 import io.github.marcelofabianov.cubit.domain.robot.RobotState;
+import io.github.marcelofabianov.cubit.domain.robot.UnloadInterval;
+import io.github.marcelofabianov.cubit.domain.robot.WorkSettings;
 import io.github.marcelofabianov.cubit.domain.tier.RobotTier;
 import io.github.marcelofabianov.cubit.item.SavedEnergy;
 import io.github.marcelofabianov.cubit.item.SavedOreFilter;
@@ -46,8 +48,10 @@ final class SavedRobotValues {
   private static final String UNLOAD_KEY = "UnloadEnabled";
   private static final String DEATH_POINT_KEY = "DeathPointEnabled";
   private static final String KEEP_JUNK_KEY = "KeepJunkEnabled";
+  private static final String UNLOAD_INTERVAL_KEY = "UnloadIntervalMinutes";
   private static final String TORCH_SLOT_KEY = "TorchSlot";
   private static final String CARD_SLOT_KEY = "CardSlot";
+  private static final String FERTILIZER_SLOT_KEY = "FertilizerSlot";
   private static final String LAST_SAFE_POSITION_KEY = "LastSafePosition";
   private static final String NO_OWNER_MESSAGE = "Robot {} has no owner. Nobody can interact.";
   private static final String INVALID_TIER_MESSAGE = "Robot {} has an invalid tier: {}";
@@ -79,11 +83,19 @@ final class SavedRobotValues {
     tag.putBoolean(AUTO_RETURN_KEY, robot.state().autoReturnOn());
     tag.putBoolean(UNLOAD_KEY, robot.state().unloadOn());
     tag.putBoolean(DEATH_POINT_KEY, robot.state().deathPointOn());
-    tag.putBoolean(KEEP_JUNK_KEY, robot.state().keepJunkOn());
+    writeWorkSettings(tag, robot.state().workSettings());
     SavedPickup.write(tag, robot.state().pickup());
     robot
         .lastSafePosition()
         .ifPresent(position -> tag.putLong(LAST_SAFE_POSITION_KEY, position.asLong()));
+  }
+
+  /** Only a chosen interval is saved, so one nobody chose keeps following the config (1254). */
+  private static void writeWorkSettings(CompoundTag tag, WorkSettings settings) {
+    tag.putBoolean(KEEP_JUNK_KEY, settings.keepJunk());
+    if (settings.unloadInterval().chosen()) {
+      tag.putInt(UNLOAD_INTERVAL_KEY, settings.unloadInterval().minutes());
+    }
   }
 
   /** The inventory and the exclusive slots, each under its own key. */
@@ -93,6 +105,7 @@ final class SavedRobotValues {
     tag.put(ENERGY_SLOT_KEY, inventory.energySlot().save(robot.registryAccess()));
     tag.put(TORCH_SLOT_KEY, inventory.torchSlot().save(robot.registryAccess()));
     tag.put(CARD_SLOT_KEY, inventory.cardSlot().save(robot.registryAccess()));
+    tag.put(FERTILIZER_SLOT_KEY, inventory.fertilizerSlot().save(robot.registryAccess()));
   }
 
   static UUID owner(CompoundTag tag, UUID robot) {
@@ -113,6 +126,7 @@ final class SavedRobotValues {
     inventory.energySlot().load(tag.getCompound(ENERGY_SLOT_KEY), registries);
     inventory.torchSlot().load(tag.getCompound(TORCH_SLOT_KEY), registries);
     inventory.cardSlot().load(tag.getCompound(CARD_SLOT_KEY), registries);
+    inventory.fertilizerSlot().load(tag.getCompound(FERTILIZER_SLOT_KEY), registries);
   }
 
   /** Without the key, the robot was saved before the lamp existed, so the lamp stays on. */
@@ -174,7 +188,21 @@ final class SavedRobotValues {
         .withAutoReturn(!tag.contains(AUTO_RETURN_KEY) || tag.getBoolean(AUTO_RETURN_KEY))
         .withUnload(!tag.contains(UNLOAD_KEY) || tag.getBoolean(UNLOAD_KEY))
         .withDeathPoint(!tag.contains(DEATH_POINT_KEY) || tag.getBoolean(DEATH_POINT_KEY))
-        .withKeepJunk(!tag.contains(KEEP_JUNK_KEY) || tag.getBoolean(KEEP_JUNK_KEY));
+        .withWorkSettings(workSettings(tag));
+  }
+
+  /**
+   * Without a key, the setting was saved before it existed, or nobody chose it, so it starts as at
+   * first, and a negative interval is no choice (rule 17).
+   */
+  private static WorkSettings workSettings(CompoundTag tag) {
+    boolean keepJunk =
+        tag.contains(KEEP_JUNK_KEY)
+            ? tag.getBoolean(KEEP_JUNK_KEY)
+            : WorkSettings.INITIAL.keepJunk();
+    int minutes = tag.contains(UNLOAD_INTERVAL_KEY) ? tag.getInt(UNLOAD_INTERVAL_KEY) : -1;
+    return new WorkSettings(
+        keepJunk, minutes >= 0 ? new UnloadInterval(minutes) : UnloadInterval.CONFIG_DEFAULT);
   }
 
   /** Without the key, the robot was saved before the solar switch existed, so it stays on. */

@@ -52,7 +52,10 @@ final class RobotScreenValues implements ContainerData {
   static final int ALLOWED_JOBS = 52;
   static final int JOB_TIERS = 53;
   static final int KEEP_JUNK = 55;
-  static final int COUNT = 57;
+  static final int FERTILIZER_UNLOCKED = 57;
+  static final int FERTILIZER_UNLOCK_TIER = 58;
+  static final int UNLOAD_INTERVAL = 59;
+  static final int COUNT = 60;
   private static final int BITS_PER_JOB_TIER = 3;
   private static final int JOB_TIER_MASK = 0b111;
   private static final int HALF_BITS = 16;
@@ -148,6 +151,10 @@ final class RobotScreenValues implements ContainerData {
     }
     values[ALLOWED_JOBS] = allowed;
     putInt(JOB_TIERS, tiers);
+    values[FERTILIZER_UNLOCKED] = work.fertilizerUnlocked() ? TRUE_VALUE : 0;
+    values[FERTILIZER_UNLOCK_TIER] =
+        work.fertilizerUnlockTier().map(tier -> tier.ordinal() + 1).orElse(0);
+    values[UNLOAD_INTERVAL] = work.unloadIntervalMinutes();
   }
 
   /** The first tier of a job, plus one, with zero for none, as packed by the server. */

@@ -6,6 +6,7 @@ import io.github.marcelofabianov.cubit.domain.robot.InventoryGrid;
 import io.github.marcelofabianov.cubit.domain.tier.RobotTier;
 import io.github.marcelofabianov.cubit.registry.CubitMenus;
 import java.util.Optional;
+import java.util.Set;
 import java.util.function.Predicate;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.world.Container;
@@ -71,12 +72,20 @@ public class RobotMenu extends RobotMenuReading {
   /** Keep junk of the Fisher, in the Work tab, after Resume (answer 1191). */
   public static final int KEEP_JUNK_BUTTON = 22;
 
+  /** The buttons − and + of the unload interval, in the Work tab (answer 1252). */
+  public static final int UNLOAD_INTERVAL_DOWN_BUTTON = 23;
+
+  public static final int UNLOAD_INTERVAL_UP_BUTTON = 24;
+  private static final Set<Integer> CONTROL_BUTTONS =
+      Set.of(POWER_BUTTON, RESUME_BUTTON, UNLOAD_INTERVAL_DOWN_BUTTON, UNLOAD_INTERVAL_UP_BUTTON);
+
   /** The rows of every tier, so the screen keeps the height of the Base (answer 1101). */
   public static final int VISIBLE_ROWS = InventoryGrid.ROWS;
 
   private static final int ENERGY_SLOT_SIZE = 1;
   private static final int TORCH_SLOT_SIZE = 1;
   private static final int CARD_SLOT_SIZE = 1;
+  private static final int FERTILIZER_SLOT_SIZE = 1;
 
   private final Container container;
   private final InventoryGrid grid;
@@ -119,6 +128,8 @@ public class RobotMenu extends RobotMenuReading {
         contents.torchSlot(),
         () -> RobotScreenValues.isAvailable(values, RobotScreenValues.TORCHES));
     slotGroups.addCardSlot(this::addSlot, contents.cardSlot(), this::acceptsJob);
+    slotGroups.addFertilizerSlot(
+        this::addSlot, contents.fertilizerSlot(), contents.cardSlot(), this::fertilizerUnlocked);
     addDataSlots(values);
     slotGroups.addPlayerSlots(this::addSlot, playerInventory, FIRST_SLOT_X, playerInventoryY());
     pickup.addSlots(this::addSlot, slots.size(), filterColumns());
@@ -135,6 +146,7 @@ public class RobotMenu extends RobotMenuReading {
             new SimpleContainer(ENERGY_SLOT_SIZE),
             new SimpleContainer(TORCH_SLOT_SIZE),
             new SimpleContainer(CARD_SLOT_SIZE),
+            new SimpleContainer(FERTILIZER_SLOT_SIZE),
             opening);
     return new RobotMenu(
         CubitMenus.ROBOT.get(),
@@ -196,7 +208,7 @@ public class RobotMenu extends RobotMenuReading {
       return stillValid(player)
           && pickup.press(player, PickupControl.PickupButton.values()[button - PICKUP_BUTTON]);
     }
-    if (button == POWER_BUTTON || button == RESUME_BUTTON) {
+    if (CONTROL_BUTTONS.contains(button)) {
       return stillValid(player) && pressControl(player, button);
     }
     int mode = button - FIRST_DEFENSE_BUTTON;
@@ -206,9 +218,14 @@ public class RobotMenu extends RobotMenuReading {
     return toggleFromClient(player, button);
   }
 
-  /** Power switches off, and Resume wakes the Cubit hibernating away (answer 1167). */
+  /** Power switches off, Resume wakes the Cubit, and − and + step the unload interval. */
   private boolean pressControl(Player player, int button) {
-    return button == POWER_BUTTON ? power.switchOff(player) : work.resume(player);
+    return switch (button) {
+      case POWER_BUTTON -> power.switchOff(player);
+      case UNLOAD_INTERVAL_DOWN_BUTTON -> work.stepUnloadInterval(player, -1);
+      case UNLOAD_INTERVAL_UP_BUTTON -> work.stepUnloadInterval(player, 1);
+      default -> work.resume(player);
+    };
   }
 
   private boolean toggleFromClient(Player player, int button) {
@@ -283,7 +300,11 @@ public class RobotMenu extends RobotMenuReading {
 
   /** The slots of the robot come first: its inventory, the energy slot and the torch slot. */
   protected final int robotSlots() {
-    return container.getContainerSize() + ENERGY_SLOT_SIZE + TORCH_SLOT_SIZE + CARD_SLOT_SIZE;
+    return container.getContainerSize()
+        + ENERGY_SLOT_SIZE
+        + TORCH_SLOT_SIZE
+        + CARD_SLOT_SIZE
+        + FERTILIZER_SLOT_SIZE;
   }
 
   public RobotScreenOpening opening() {
@@ -298,6 +319,11 @@ public class RobotMenu extends RobotMenuReading {
   /** The torch slot comes after the visible rows of the robot and the energy slot. */
   public int torchSlotIndex() {
     return container.getContainerSize() + ENERGY_SLOT_SIZE;
+  }
+
+  /** The fertilizer slot comes right after the card slot (answer 1244). */
+  public int fertilizerSlotIndex() {
+    return cardSlotIndex() + 1;
   }
 
   public Energy torchCost() {

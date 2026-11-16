@@ -2,6 +2,7 @@ package io.github.marcelofabianov.cubit.menu;
 
 import io.github.marcelofabianov.cubit.domain.robot.InventoryGrid;
 import io.github.marcelofabianov.cubit.domain.robot.RobotJob;
+import io.github.marcelofabianov.cubit.entity.RobotFertilizerSlot;
 import io.github.marcelofabianov.cubit.item.EnergySlotItems;
 import io.github.marcelofabianov.cubit.item.JobCardItem;
 import java.util.function.BooleanSupplier;
@@ -98,6 +99,33 @@ final class RobotMenuSlots {
           @Override
           public boolean isActive() {
             return robotShown;
+          }
+        });
+  }
+
+  /**
+   * Only fertilizer, on a tier that takes it, and only with the card of the Farmer, as the server
+   * tells (answers 1243 and 1244).
+   */
+  void addFertilizerSlot(
+      Consumer<Slot> add, Container fertilizerSlot, Container cardSlot, BooleanSupplier unlocked) {
+    BooleanSupplier shown =
+        () -> JobCardItem.jobOf(cardSlot.getItem(0)).filter(RobotJob.FARMER::equals).isPresent();
+    add.accept(
+        new Slot(fertilizerSlot, 0, layout.fertilizerSlotX(), RobotMenu.EXCLUSIVE_SLOT_Y) {
+          @Override
+          public boolean mayPlace(ItemStack stack) {
+            return !readOnly && unlocked.getAsBoolean() && RobotFertilizerSlot.accepts(stack);
+          }
+
+          @Override
+          public boolean mayPickup(Player player) {
+            return !readOnly;
+          }
+
+          @Override
+          public boolean isActive() {
+            return robotShown && shown.getAsBoolean();
           }
         });
   }

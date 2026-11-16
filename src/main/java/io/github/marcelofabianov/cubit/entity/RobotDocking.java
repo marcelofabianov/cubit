@@ -172,7 +172,7 @@ public final class RobotDocking {
     docked = dock.getBlockPos();
     ticksFull = 0;
     robot.setPowerState(PowerState.HIBERNATING);
-    Player owner = robot.onlineOwner();
+    Player owner = RobotInteractions.onlineOwner(robot);
     if (owner != null) {
       RobotFollowing.release(robot, owner);
     }
@@ -208,7 +208,8 @@ public final class RobotDocking {
     boolean done =
         DockStay.shouldLeave(
             battery, healthFull, ticksFull, CubitMod.CONFIG.dockCompleteHoldTicks());
-    if (done && (robot.onlineOwner() != null || robot.workArea().here().isPresent())) {
+    if (done
+        && (RobotInteractions.onlineOwner(robot) != null || robot.workArea().here().isPresent())) {
       release();
     }
   }
@@ -218,7 +219,7 @@ public final class RobotDocking {
    * an area goes back to it, even with its owner away (answers 1061 and 1068).
    */
   void release() {
-    Player owner = robot.onlineOwner();
+    Player owner = RobotInteractions.onlineOwner(robot);
     if (robot.workArea().here().isPresent()) {
       robot.setPowerState(CubitMod.CONFIG.powerRules().leaveBase(robot.battery()));
     } else if (owner == null) {

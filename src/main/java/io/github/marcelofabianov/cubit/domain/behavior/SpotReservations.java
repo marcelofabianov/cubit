@@ -5,8 +5,9 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
- * The stands the Fishers hold, one per Cubit, so two never fish from the same place (answer 1189).
- * It lives only in the memory of the server and never goes to the save.
+ * The blocks the Cubits with a job hold, one per Cubit, so two never go for the same one: the stand
+ * of a Fisher or the plant of a Farmer (answers 1189 and 1224). It lives only in the memory of the
+ * server and never goes to the save.
  */
 public final class SpotReservations {
   private final Map<Stand, UUID> holders = new HashMap<>();

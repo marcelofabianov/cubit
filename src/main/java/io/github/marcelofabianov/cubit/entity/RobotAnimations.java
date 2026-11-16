@@ -49,11 +49,14 @@ final class RobotAnimations {
             robot, ARMS_CONTROLLER, TRANSITION_TICKS, state -> arms(robot, state)));
   }
 
-  /** The raised arms of a feeling come first, and then the arm of the Fisher (answer 1199). */
+  /**
+   * The raised arms of a feeling come first, and then the arm with the tool of the job (answers
+   * 1199 and 1229).
+   */
   private static PlayState arms(RobotEntity robot, AnimationState<RobotEntity> state) {
     if (RobotFace.armsRaised(robot)) {
       return state.setAndContinue(RAISED_ARMS);
     }
-    return RobotJobLook.fishing(robot) ? state.setAndContinue(FISHING_ARM) : PlayState.STOP;
+    return RobotJobLook.toolInClaw(robot) ? state.setAndContinue(FISHING_ARM) : PlayState.STOP;
   }
 }

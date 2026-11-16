@@ -44,8 +44,8 @@ public final class InventoryGridGameTests {
   private static final int LAST_SLOT = ULTIMATE_SLOTS - 1;
   private static final int BASE_SLOTS = 27;
 
-  /** The energy, torch and card slots (answer 1162). */
-  private static final int EXCLUSIVE_SLOTS = 3;
+  /** The energy, torch, card and fertilizer slots (answers 1162 and 1244). */
+  private static final int EXCLUSIVE_SLOTS = 4;
 
   private static final int FIRST_PLAYER_INVENTORY_SLOT = 9;
   private static final int DIAMONDS = 3;

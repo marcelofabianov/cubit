@@ -215,6 +215,11 @@ Estes nomes não mudam sem migração (regra 18 do `AGENTS.md`).
 | NBT do jogo na entidade | `CustomName` | Nome do Cubit |
 | Dados do player | `cubit:following_robot` | `robot`: o UUID do robô que segue, ou nada |
 | Item | `cubit:ml_fisher` | O card do Pescador. Na base, só por `/give`, sem receita (perguntas 1161 e 1172). A receita entra no card do Pescador (pergunta 1192) |
+| Item | `cubit:ml_farmer` | O card do Fazendeiro, na tag `cubit:ml_cards` (pergunta 1228) |
+| Receita | `cubit:ml_farmer` | A receita do card do Fazendeiro, em [`fazendeiro.md`](funcionalidades/trabalhos/fazendeiro.md#receita) (pergunta 1228) |
+| Tag de bloco | `cubit:farmer_crops` e `cubit:farmer_ignored` | As plantas que o Fazendeiro colhe além das que crescem por idade, e as que ele nunca colhe (pergunta 1222) |
+| Componente do item | `cubit:fertilizer_slot` | O fertilizante do slot do Fazendeiro, opcional, também no item danificado (perguntas 1244 e 1247) |
+| NBT da entidade | `FertilizerSlot` | O fertilizante do slot do Fazendeiro, como o `CardSlot` (pergunta 1247) |
 | Tag de item | `cubit:fishing_junk` | O lixo que a chave `Keep junk` do Pescador descarta. Um item encantado nunca é lixo (pergunta 1207) |
 | Receita | `cubit:ml_fisher` | A receita do card do Pescador, em [`pescador.md`](funcionalidades/trabalhos/pescador.md#receita) (pergunta 1192) |
 | NBT da entidade | `KeepJunkEnabled` | A chave `Keep junk` do Pescador. Sem a chave no save, vale ligada (pergunta 1191) |
@@ -243,6 +248,8 @@ O estado salvo é validado ao entrar no jogo, sem derrubá-lo (regra 17 do `AGEN
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-15 13:25 | Troca a chave `Use bone meal` pelo slot de fertilizante (perguntas 1246 e 1247). |
+| Marcelo Fabiano | 2026-11-15 10:40 | Acrescenta o contrato do Fazendeiro (perguntas 1221, 1222, 1228 e 1237). |
 | Marcelo Fabiano | 2026-11-14 23:10 | Acrescenta a receita, a chave `Keep junk` o motivo `no_water` e a tag `cubit:fishing_junk` do Pescador (perguntas 1188, 1191, 1192 e 1207). |
 | Marcelo Fabiano | 2026-11-14 20:52 | Acrescenta o contrato da base do trabalho (perguntas 1161 a 1164 e 1172). |
 | Marcelo Fabiano | 2026-11-14 20:27 | Acrescenta os cards do Mecânico e do Alquimista (perguntas 1146 e 1147). |

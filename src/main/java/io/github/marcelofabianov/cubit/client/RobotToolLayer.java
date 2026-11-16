@@ -13,34 +13,53 @@ import software.bernie.geckolib.renderer.GeoRenderer;
 import software.bernie.geckolib.renderer.layer.BlockAndItemGeoLayer;
 
 /**
- * The fishing rod of the game, only for the looks: in the backpack, and in the right claw while the
- * Fisher fishes at its stand (answers 1196 and 1199). The catch never uses it.
+ * The tool of the job, the one of the game and only for the looks: the fishing rod of the Fisher or
+ * the iron hoe of the Farmer, in the backpack, and in the right claw while the Cubit works (answers
+ * 1196, 1199, 1216 and 1229), and the stick of the game in the straw hat of the Farmer (answer
+ * 1242). The work never uses them.
  */
-final class RobotRodLayer extends BlockAndItemGeoLayer<RobotEntity> {
-  private static final String BACKPACK_BONE = "fisher_backpack_rod";
+final class RobotToolLayer extends BlockAndItemGeoLayer<RobotEntity> {
+  private static final String BACKPACK_BONE = "job_backpack_tool";
   private static final String CLAW_BONE = "right_claw_item";
+  private static final String SPRIG_BONE = "farmer_hat_sprig";
   private static final ItemStack ROD = new ItemStack(Items.FISHING_ROD);
+  private static final ItemStack HOE = new ItemStack(Items.IRON_HOE);
+  private static final ItemStack STICK = new ItemStack(Items.STICK);
 
   /** The rod of the game is a whole block tall, and the Cubit is small. */
   private static final float SCALE = 0.6F;
 
   private static final float CLAW_TURN_DEGREES = -90F;
 
-  RobotRodLayer(GeoRenderer<RobotEntity> renderer) {
+  /** The stick in the straw hat is a small sprig, smaller than a tool. */
+  private static final float SPRIG_SCALE = 0.35F;
+
+  RobotToolLayer(GeoRenderer<RobotEntity> renderer) {
     super(renderer);
   }
 
   @Override
   protected ItemStack getStackForBone(GeoBone bone, RobotEntity robot) {
-    if (!RobotJobLook.fisher(robot)) {
+    if (bone.getName().equals(SPRIG_BONE)) {
+      return RobotJobLook.farmer(robot) ? STICK : null;
+    }
+    ItemStack tool = toolOf(robot);
+    if (tool == null) {
       return null;
     }
-    boolean fishing = RobotJobLook.fishing(robot);
-    if (bone.getName().equals(CLAW_BONE) && fishing
-        || bone.getName().equals(BACKPACK_BONE) && !fishing) {
-      return ROD;
+    boolean inClaw = RobotJobLook.toolInClaw(robot);
+    if (bone.getName().equals(CLAW_BONE) && inClaw
+        || bone.getName().equals(BACKPACK_BONE) && !inClaw) {
+      return tool;
     }
     return null;
+  }
+
+  private static ItemStack toolOf(RobotEntity robot) {
+    if (RobotJobLook.fisher(robot)) {
+      return ROD;
+    }
+    return RobotJobLook.farmer(robot) ? HOE : null;
   }
 
   @Override
@@ -61,7 +80,8 @@ final class RobotRodLayer extends BlockAndItemGeoLayer<RobotEntity> {
       float partialTick,
       int packedLight,
       int packedOverlay) {
-    poseStack.scale(SCALE, SCALE, SCALE);
+    float scale = bone.getName().equals(SPRIG_BONE) ? SPRIG_SCALE : SCALE;
+    poseStack.scale(scale, scale, scale);
     if (bone.getName().equals(CLAW_BONE)) {
       poseStack.mulPose(Axis.XP.rotationDegrees(CLAW_TURN_DEGREES));
     }

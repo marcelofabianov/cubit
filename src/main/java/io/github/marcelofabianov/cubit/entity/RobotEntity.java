@@ -22,7 +22,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.Container;
@@ -40,6 +39,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.PathType;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
@@ -293,11 +293,6 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
     }
   }
 
-  Player onlineOwner() {
-    MinecraftServer server = getServer();
-    return server == null || ownerId == null ? null : server.getPlayerList().getPlayer(ownerId);
-  }
-
   @Override
   public boolean isInvulnerableTo(DamageSource source) {
     Optional<UUID> attacker = Optional.ofNullable(source.getEntity()).map(Entity::getUUID);
@@ -332,6 +327,12 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
   @Override
   public boolean causeFallDamage(float distance, float multiplier, DamageSource source) {
     return false;
+  }
+
+  /** Only the Farmer keeps the farmland it walks on (answer 1223). */
+  @Override
+  public boolean canTrample(BlockState state, BlockPos pos, float fallDistance) {
+    return workArea.work().farming().tramples() && super.canTrample(state, pos, fallDistance);
   }
 
   @Override

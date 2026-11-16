@@ -24,6 +24,13 @@ final class PortugueseWorkTexts {
   private static final String KEEP_JUNK_DETAIL = "Desligada · o lixo, como botas, é descartado";
   private static final String FISHER = "Pescador";
   private static final String FISHER_CARD = "Aprendizado de Máquina: Pescador";
+  private static final String FARMER = "Fazendeiro";
+  private static final String FARMER_CARD = "Aprendizado de Máquina: Fazendeiro";
+  private static final String FERTILIZER_SLOT = "Fertilizante";
+  private static final String UNLOAD_INTERVAL = "Descarregar a cada";
+  private static final String UNLOAD_INTERVAL_DETAIL = "Descarrega depois disso, mesmo sem encher";
+  private static final String UNLOAD_MINUTES = "%s min";
+  private static final String ONLY_WHEN_FULL = "Só quando cheio";
 
   private PortugueseWorkTexts() {}
 
@@ -44,5 +51,12 @@ final class PortugueseWorkTexts {
     add.accept(WorkKeys.KEEP_JUNK_DETAIL, KEEP_JUNK_DETAIL);
     add.accept(WorkKeys.job(RobotJob.FISHER), FISHER);
     add.accept(CubitItems.FISHER_CARD.get().getDescriptionId(), FISHER_CARD);
+    add.accept(WorkKeys.job(RobotJob.FARMER), FARMER);
+    add.accept(CubitItems.FARMER_CARD.get().getDescriptionId(), FARMER_CARD);
+    add.accept(WorkKeys.FERTILIZER_SLOT, FERTILIZER_SLOT);
+    add.accept(WorkKeys.UNLOAD_INTERVAL, UNLOAD_INTERVAL);
+    add.accept(WorkKeys.UNLOAD_INTERVAL_DETAIL, UNLOAD_INTERVAL_DETAIL);
+    add.accept(WorkKeys.UNLOAD_MINUTES, UNLOAD_MINUTES);
+    add.accept(WorkKeys.ONLY_WHEN_FULL, ONLY_WHEN_FULL);
   }
 }

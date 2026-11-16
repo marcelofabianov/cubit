@@ -31,6 +31,7 @@ public final class CubitItems {
   private static final String TABLET_ID = "tablet";
   private static final int TABLET_STACK_SIZE = 1;
   private static final String FISHER_CARD_ID = "ml_fisher";
+  private static final String FARMER_CARD_ID = "ml_farmer";
   private static final DeferredRegister<Item> ITEMS =
       DeferredRegister.create(Registries.ITEM, CubitMod.MOD_ID);
 
@@ -53,6 +54,9 @@ public final class CubitItems {
   /** The card of the Fisher, only by /give in the base of the jobs (answer 1161). */
   public static final Supplier<Item> FISHER_CARD =
       ITEMS.register(FISHER_CARD_ID, () -> new JobCardItem(new Item.Properties(), RobotJob.FISHER));
+
+  public static final Supplier<Item> FARMER_CARD =
+      ITEMS.register(FARMER_CARD_ID, () -> new JobCardItem(new Item.Properties(), RobotJob.FARMER));
 
   public static final Supplier<Item> TOOLBOX =
       ITEMS.register(

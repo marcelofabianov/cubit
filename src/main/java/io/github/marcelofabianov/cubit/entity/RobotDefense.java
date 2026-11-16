@@ -123,7 +123,7 @@ public final class RobotDefense implements DefenseControl {
 
   /** Nearest first, in range, in sight, and only who the mode shocks. */
   private List<LivingEntity> candidates(ShockSpec spec, long now) {
-    Player owner = robot.onlineOwner();
+    Player owner = RobotInteractions.onlineOwner(robot);
     double range = spec.rangeBlocks();
     return robot
         .level()

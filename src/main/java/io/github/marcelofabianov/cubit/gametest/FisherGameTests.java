@@ -123,7 +123,7 @@ public final class FisherGameTests {
     ItemStack item = GameTestRobots.collect(owner, robot);
 
     RobotState kept = item.get(CubitDataComponents.ROBOT_STATE.get());
-    helper.assertTrue(kept != null && !kept.keepJunkOn(), NOT_KEPT);
+    helper.assertTrue(kept != null && !kept.workSettings().keepJunk(), NOT_KEPT);
     helper.succeed();
   }
 

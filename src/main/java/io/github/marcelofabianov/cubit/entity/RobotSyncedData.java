@@ -54,8 +54,8 @@ final class RobotSyncedData {
   static final EntityDataAccessor<Byte> JOB =
       SynchedEntityData.defineId(RobotEntity.class, EntityDataSerializers.BYTE);
 
-  /** Whether the Fisher is at its stand, fishing, for the rod in the claw (answer 1199). */
-  static final EntityDataAccessor<Boolean> FISHING =
+  /** Whether the tool of the job is in the claw: the rod fishing, the hoe working (1199, 1229). */
+  static final EntityDataAccessor<Boolean> TOOL_IN_CLAW =
       SynchedEntityData.defineId(RobotEntity.class, EntityDataSerializers.BOOLEAN);
 
   private RobotSyncedData() {}
@@ -77,6 +77,6 @@ final class RobotSyncedData {
     builder.define(COLOR, (byte) RobotColor.WHITE.ordinal());
     builder.define(SCAN_SIGNAL, (byte) ScanSignal.NONE.ordinal());
     builder.define(JOB, NO_JOB);
-    builder.define(FISHING, false);
+    builder.define(TOOL_IN_CLAW, false);
   }
 }

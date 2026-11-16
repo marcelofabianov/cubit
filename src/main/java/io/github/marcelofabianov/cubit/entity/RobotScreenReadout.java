@@ -68,6 +68,7 @@ public final class RobotScreenReadout {
         robot.energySlot(),
         robot.torches().slot(),
         robot.workArea().work().slot(),
+        robot.workArea().work().fertilizerSlot(),
         opening(robot));
   }
 

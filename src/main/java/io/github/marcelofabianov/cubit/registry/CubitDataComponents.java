@@ -25,6 +25,7 @@ public final class CubitDataComponents {
   private static final String ENERGY_SLOT_ID = "energy_slot";
   private static final String TORCH_SLOT_ID = "torch_slot";
   private static final String CARD_SLOT_ID = "card_slot";
+  private static final String FERTILIZER_SLOT_ID = "fertilizer_slot";
   private static final String DOCK_ENERGY_ID = "dock_energy";
   private static final String DOCK_STORAGE_ID = "dock_storage";
   private static final String POWER_BANK_ENERGY_ID = "power_bank_energy";
@@ -80,6 +81,15 @@ public final class CubitDataComponents {
   public static final Supplier<DataComponentType<ItemContainerContents>> CARD_SLOT =
       COMPONENTS.registerComponentType(
           CARD_SLOT_ID,
+          builder ->
+              builder
+                  .persistent(ItemContainerContents.CODEC)
+                  .networkSynchronized(ItemContainerContents.STREAM_CODEC));
+
+  /** The fertilizer of the Farmer, kept like the card, also in the damaged item (1244, 1247). */
+  public static final Supplier<DataComponentType<ItemContainerContents>> FERTILIZER_SLOT =
+      COMPONENTS.registerComponentType(
+          FERTILIZER_SLOT_ID,
           builder ->
               builder
                   .persistent(ItemContainerContents.CODEC)

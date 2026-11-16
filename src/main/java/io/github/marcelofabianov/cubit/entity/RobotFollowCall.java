@@ -23,7 +23,7 @@ public final class RobotFollowCall implements FollowControl {
 
   @Override
   public FollowCall goal() {
-    Player owner = robot.onlineOwner();
+    Player owner = RobotInteractions.onlineOwner(robot);
     return FollowCall.of(
         robot.powerState(),
         robot.battery(),

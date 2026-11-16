@@ -9,6 +9,7 @@ import io.github.marcelofabianov.cubit.domain.robot.DefenseMode;
 import io.github.marcelofabianov.cubit.domain.robot.RobotJob;
 import io.github.marcelofabianov.cubit.domain.tier.AreaSpec;
 import io.github.marcelofabianov.cubit.domain.tier.DeathPointLevel;
+import io.github.marcelofabianov.cubit.domain.tier.FarmerSpec;
 import io.github.marcelofabianov.cubit.domain.tier.FisherSpec;
 import io.github.marcelofabianov.cubit.domain.tier.JobSpec;
 import io.github.marcelofabianov.cubit.domain.tier.PickupSpec;
@@ -106,7 +107,7 @@ final class TierDefaults {
   private static final int ULTIMATE_SLOTS = 54;
   private static final int ULTIMATE_HEALTH = 200;
   private static final int ULTIMATE_CALL_RADIUS = 48;
-  private static final double ULTIMATE_SPEED_MULTIPLIER = 2.0;
+  private static final double ULTIMATE_SPEED_MULTIPLIER = 1.75;
   private static final int ULTIMATE_ORE_SCAN_RADIUS = 20;
   private static final int ULTIMATE_MOB_SCAN_RADIUS = 25;
   private static final int ULTIMATE_ORE_SCAN_TICKS = 100;
@@ -185,12 +186,22 @@ final class TierDefaults {
   private static final FisherSpec ADVANCED_FISHER = new FisherSpec(0, 0, FISHER_CATCH_COST);
   private static final FisherSpec ELITE_FISHER = new FisherSpec(2, 2, FISHER_CATCH_COST);
   private static final FisherSpec ULTIMATE_FISHER = new FisherSpec(3, 3, FISHER_CATCH_COST);
-  private static final JobSpec ADVANCED_JOBS = new JobSpec(ADVANCED_JOB_SET, ADVANCED_FISHER);
-  private static final JobSpec ELITE_JOBS = new JobSpec(ELITE_JOB_SET, ELITE_FISHER);
+
+  /** 50, 75 and 100 FE an action, faster on each tier; fertilizer on all (1226, 1248). */
+  private static final FarmerSpec ADVANCED_FARMER =
+      new FarmerSpec(new Energy(50), 20, false, true, 0);
+
+  private static final FarmerSpec ELITE_FARMER = new FarmerSpec(new Energy(75), 12, true, true, 0);
+  private static final FarmerSpec ULTIMATE_FARMER =
+      new FarmerSpec(new Energy(100), 6, true, true, 2);
+  private static final JobSpec ADVANCED_JOBS =
+      new JobSpec(ADVANCED_JOB_SET, ADVANCED_FISHER, ADVANCED_FARMER);
+  private static final JobSpec ELITE_JOBS = new JobSpec(ELITE_JOB_SET, ELITE_FISHER, ELITE_FARMER);
   private static final JobSpec ULTIMATE_JOBS =
       new JobSpec(
           union(ELITE_JOB_SET, EnumSet.of(RobotJob.BUILDER, RobotJob.MECHANIC, RobotJob.ALCHEMIST)),
-          ULTIMATE_FISHER);
+          ULTIMATE_FISHER,
+          ULTIMATE_FARMER);
   private static final UnloadSpec BASE_UNLOAD = new UnloadSpec(1, 16);
   private static final UnloadSpec ADVANCED_UNLOAD = new UnloadSpec(1, 32);
   private static final UnloadSpec ELITE_UNLOAD = new UnloadSpec(2, 48);

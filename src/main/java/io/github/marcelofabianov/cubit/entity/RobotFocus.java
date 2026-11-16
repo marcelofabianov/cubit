@@ -50,7 +50,7 @@ public final class RobotFocus {
       return;
     }
     Entity mob = target.target().map(level::getEntity).orElse(null);
-    Player owner = robot.onlineOwner();
+    Player owner = RobotInteractions.onlineOwner(robot);
     Optional<Double> distance =
         mob != null && mob.isAlive() && owner != null && mob.level() == owner.level()
             ? Optional.of((double) mob.distanceTo(owner))
@@ -65,7 +65,7 @@ public final class RobotFocus {
     }
     boolean announce = next.changedFrom(target) && mob != null;
     target = next;
-    if (!(robot.onlineOwner() instanceof ServerPlayer owner)) {
+    if (!(RobotInteractions.onlineOwner(robot) instanceof ServerPlayer owner)) {
       return;
     }
     if (announce) {

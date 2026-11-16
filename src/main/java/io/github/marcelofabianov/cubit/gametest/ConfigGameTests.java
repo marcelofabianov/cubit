@@ -206,7 +206,7 @@ public final class ConfigGameTests {
           JobSpec.NONE);
   private static final String WRONG_SPEC = "Wrong tier numbers";
   private static final String ULTIMATE_SPEED_KEY = "general_robot.ultimate.speed_multiplier";
-  private static final double ULTIMATE_SPEED_MULTIPLIER = 2.0;
+  private static final double ULTIMATE_SPEED_MULTIPLIER = 1.75;
   private static final int ADVANCED_HEALTH = 50;
   private static final int ELITE_SLOTS = 45;
   private static final int ULTIMATE_BATTERY = 8_000_000;

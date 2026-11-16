@@ -24,7 +24,7 @@ final class RobotShock {
   static void strike(RobotEntity robot, List<LivingEntity> targets, ShockSpec spec) {
     robot.setBattery(robot.battery().consume(spec.cost()).battery());
     DamageSource source = CubitDamageTypes.shock(robot);
-    Player owner = robot.onlineOwner();
+    Player owner = RobotInteractions.onlineOwner(robot);
     for (LivingEntity target : targets) {
       // Like a tamed wolf, so the mob drops what only a player's kill gives.
       if (owner != null) {

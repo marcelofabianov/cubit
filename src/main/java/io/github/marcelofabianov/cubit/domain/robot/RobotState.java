@@ -26,7 +26,7 @@ public record RobotState(
     boolean autoReturnOn,
     boolean unloadOn,
     boolean deathPointOn,
-    boolean keepJunkOn) {
+    WorkSettings workSettings) {
   private static final String INVALID_HEALTH_MESSAGE = "Invalid robot health: ";
   private static final float MIN_PLACED_HEALTH = 1f;
 
@@ -36,7 +36,7 @@ public record RobotState(
     }
   }
 
-  /** Keep junk came with the Fisher and starts on, also for what was saved before (1191). */
+  /** The switches of the jobs start as at first, also for what was saved before them (1191). */
   public RobotState(
       RobotTier tier,
       Energy energy,
@@ -69,7 +69,7 @@ public record RobotState(
         autoReturnOn,
         unloadOn,
         deathPointOn,
-        true);
+        WorkSettings.INITIAL);
   }
 
   /** The switches that came later start on, also for what was saved before they existed. */
@@ -211,7 +211,7 @@ public record RobotState(
         autoReturnOn,
         unloadOn,
         deathPointOn,
-        keepJunkOn);
+        workSettings);
   }
 
   public RobotState repaired(TierSpec spec, Percentage health) {
@@ -231,7 +231,7 @@ public record RobotState(
         autoReturnOn,
         unloadOn,
         deathPointOn,
-        keepJunkOn);
+        workSettings);
   }
 
   /**
@@ -254,7 +254,7 @@ public record RobotState(
         autoReturnOn,
         unloadOn,
         deathPointOn,
-        keepJunkOn);
+        workSettings);
   }
 
   public RobotState withPickup(PickupSettings next) {
@@ -274,7 +274,7 @@ public record RobotState(
         autoReturnOn,
         unloadOn,
         deathPointOn,
-        keepJunkOn);
+        workSettings);
   }
 
   public RobotState withTorches(boolean on) {
@@ -294,7 +294,7 @@ public record RobotState(
         autoReturnOn,
         unloadOn,
         deathPointOn,
-        keepJunkOn);
+        workSettings);
   }
 
   public RobotState withAutoReturn(boolean on) {
@@ -314,7 +314,7 @@ public record RobotState(
         on,
         unloadOn,
         deathPointOn,
-        keepJunkOn);
+        workSettings);
   }
 
   public RobotState withUnload(boolean on) {
@@ -334,7 +334,7 @@ public record RobotState(
         autoReturnOn,
         on,
         deathPointOn,
-        keepJunkOn);
+        workSettings);
   }
 
   public RobotState withDeathPoint(boolean on) {
@@ -354,10 +354,10 @@ public record RobotState(
         autoReturnOn,
         unloadOn,
         on,
-        keepJunkOn);
+        workSettings);
   }
 
-  public RobotState withKeepJunk(boolean on) {
+  public RobotState withWorkSettings(WorkSettings on) {
     return new RobotState(
         tier,
         energy,

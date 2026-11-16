@@ -11,8 +11,11 @@ import io.github.marcelofabianov.cubit.domain.robot.PickupFilter;
 import io.github.marcelofabianov.cubit.domain.robot.PickupSettings;
 import io.github.marcelofabianov.cubit.domain.robot.RobotColor;
 import io.github.marcelofabianov.cubit.domain.robot.RobotState;
+import io.github.marcelofabianov.cubit.domain.robot.UnloadInterval;
+import io.github.marcelofabianov.cubit.domain.robot.WorkSettings;
 import io.github.marcelofabianov.cubit.domain.tier.RobotTier;
 import io.netty.buffer.ByteBuf;
+import java.util.Optional;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import org.slf4j.Logger;
@@ -50,7 +53,8 @@ public final class RobotStateComponent {
   private static final String DEATH_POINT_FIELD = "death_point_enabled";
   private static final boolean DEATH_POINT_DEFAULT = true;
   private static final String KEEP_JUNK_FIELD = "keep_junk_enabled";
-  private static final boolean KEEP_JUNK_DEFAULT = true;
+  private static final boolean KEEP_JUNK_DEFAULT = WorkSettings.INITIAL.keepJunk();
+  private static final String UNLOAD_INTERVAL_FIELD = "unload_interval_minutes";
   private static final String UNKNOWN_DEFENSE_MESSAGE = "Unknown defense mode {}. Using peaceful.";
   private static final String UNKNOWN_COLOR_MESSAGE = "Unknown robot color {}. Using white.";
   private static final String UNKNOWN_TIER_MESSAGE = "Unknown robot tier {}. Using the base tier.";
@@ -74,7 +78,12 @@ public final class RobotStateComponent {
    * flat in the saved component, so the names are the same as before.
    */
   private record LateSwitches(
-      boolean torches, boolean autoReturn, boolean unload, boolean deathPoint, boolean keepJunk) {}
+      boolean torches,
+      boolean autoReturn,
+      boolean unload,
+      boolean deathPoint,
+      boolean keepJunk,
+      Optional<Integer> unloadInterval) {}
 
   private static final MapCodec<LateSwitches> LATE_SWITCHES =
       RecordCodecBuilder.mapCodec(instance ->
@@ -94,7 +103,10 @@ public final class RobotStateComponent {
                       .forGetter(LateSwitches::deathPoint),
                   Codec.BOOL
                       .optionalFieldOf(KEEP_JUNK_FIELD, KEEP_JUNK_DEFAULT)
-                      .forGetter(LateSwitches::keepJunk))
+                      .forGetter(LateSwitches::keepJunk),
+                  Codec.INT
+                      .optionalFieldOf(UNLOAD_INTERVAL_FIELD)
+                      .forGetter(LateSwitches::unloadInterval))
               .apply(instance, LateSwitches::new));
 
   public static final Codec<RobotState> CODEC =
@@ -143,7 +155,8 @@ public final class RobotStateComponent {
                           state.autoReturnOn(),
                           state.unloadOn(),
                           state.deathPointOn(),
-                          state.keepJunkOn())))
+                          state.workSettings().keepJunk(),
+                          savedInterval(state.workSettings().unloadInterval()))))
               .apply(
                   instance,
                   (tier,
@@ -177,7 +190,7 @@ public final class RobotStateComponent {
                           late.autoReturn(),
                           late.unload(),
                           late.deathPoint(),
-                          late.keepJunk())));
+                          new WorkSettings(late.keepJunk(), intervalOf(late.unloadInterval())))));
 
   public static final StreamCodec<ByteBuf, RobotState> STREAM_CODEC =
       ByteBufCodecs.fromCodec(CODEC);
@@ -206,6 +219,19 @@ public final class RobotStateComponent {
           LOGGER.warn(UNKNOWN_DEFENSE_MESSAGE, key);
           return DefenseMode.INITIAL;
         });
+  }
+
+  /** Only a chosen interval is saved, so one nobody chose keeps following the config (1254). */
+  private static Optional<Integer> savedInterval(UnloadInterval interval) {
+    return interval.chosen() ? Optional.of(interval.minutes()) : Optional.empty();
+  }
+
+  /** A negative number in the save is no choice at all, and the config holds (rule 17). */
+  private static UnloadInterval intervalOf(Optional<Integer> saved) {
+    return saved
+        .filter(minutes -> minutes >= 0)
+        .map(UnloadInterval::new)
+        .orElse(UnloadInterval.CONFIG_DEFAULT);
   }
 
   private static float safeHealth(float health) {

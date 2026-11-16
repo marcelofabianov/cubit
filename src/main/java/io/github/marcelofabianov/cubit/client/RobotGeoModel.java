@@ -46,7 +46,7 @@ final class RobotGeoModel extends DefaultedEntityGeoModel<RobotEntity> {
   public void setCustomAnimations(
       RobotEntity robot, long instanceId, AnimationState<RobotEntity> state) {
     super.setCustomAnimations(robot, instanceId, state);
-    RobotFisherLayer.hideIn(getAnimationProcessor()::getBone);
+    RobotJobGearLayer.hideIn(getAnimationProcessor()::getBone);
     GeoBone body = getAnimationProcessor().getBone(TURNING_BONE);
     EntityModelData data = state.getData(DataTickets.ENTITY_MODEL_DATA);
     if (body != null && data != null) {

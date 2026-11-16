@@ -8,4 +8,5 @@ public record RobotMenuContents(
     Container energySlot,
     Container torchSlot,
     Container cardSlot,
+    Container fertilizerSlot,
     RobotScreenOpening opening) {}
