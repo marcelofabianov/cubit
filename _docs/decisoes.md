@@ -54,6 +54,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Documento desatualizado:** o agente sempre pergunta antes de corrigir, mesmo quando a correção parece clara.
 - **Teste manual antes dos commits (perguntas 934 e 935):** na tarefa que muda o jar, o desenvolvedor testa no `make client` depois do plano de commits, com o roteiro que o agente dá na conversa (pergunta 945), e só com a aprovação seguem os commits. A tarefa só de documentos não passa pelo teste.
 - **Merge:** é feito somente pelo desenvolvedor.
+- **JEI só para testes (perguntas 1282 a 1284):** o JEI entra só no `make client`, fora do jar, fixado pelo ID da versão no Modrinth. O Jade continua opcional, com o plugin.
 - **Listas numeradas (pergunta 1281):** ao apresentar opções, pendências, passos ou achados, o agente prefere listas ordenadas numericamente, para o desenvolvedor citar cada item pelo número (regra 54).
 - **Depois do merge:** o agente pede autorização para apagar a branch local e a remota, apresenta o próximo trabalho e pergunta se há ajuste no roteiro (regra 52).
 - **Checklist das fases:** fica em [`checklist.md`](../checklist.md). É avaliado ao encerrar cada PR, e a marcação entra num novo commit, no PR seguinte.
@@ -169,6 +170,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-19 20:58 | Adiciona o JEI só para testes (respostas 1282 a 1284). |
 | Marcelo Fabiano | 2026-11-19 20:58 | Adiciona a regra das listas numeradas (resposta 1281). |
 | Marcelo Fabiano | 2026-11-19 20:58 | Troca o pacote e os repositórios para a conta `zenndg` (respostas 1276 a 1280). |
 | Marcelo Fabiano | 2026-11-15 13:25 | Atualiza o Fazendeiro com o slot de fertilizante desde o Avançado e o graveto (perguntas 1242 a 1249). |
