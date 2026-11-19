@@ -26,7 +26,8 @@ public record RobotState(
     boolean autoReturnOn,
     boolean unloadOn,
     boolean deathPointOn,
-    WorkSettings workSettings) {
+    WorkSettings workSettings,
+    SpeedChoice speed) {
   private static final String INVALID_HEALTH_MESSAGE = "Invalid robot health: ";
   private static final float MIN_PLACED_HEALTH = 1f;
 
@@ -36,43 +37,10 @@ public record RobotState(
     }
   }
 
-  /** The switches of the jobs start as at first, also for what was saved before them (1191). */
-  public RobotState(
-      RobotTier tier,
-      Energy energy,
-      float health,
-      boolean lampOn,
-      RobotColor color,
-      boolean scannersOn,
-      OreFilter oreFilter,
-      boolean chatterOn,
-      DefenseMode defenseMode,
-      boolean solarOn,
-      PickupSettings pickup,
-      boolean torchesOn,
-      boolean autoReturnOn,
-      boolean unloadOn,
-      boolean deathPointOn) {
-    this(
-        tier,
-        energy,
-        health,
-        lampOn,
-        color,
-        scannersOn,
-        oreFilter,
-        chatterOn,
-        defenseMode,
-        solarOn,
-        pickup,
-        torchesOn,
-        autoReturnOn,
-        unloadOn,
-        deathPointOn,
-        WorkSettings.INITIAL);
-  }
-
-  /** The switches that came later start on, also for what was saved before they existed. */
+  /**
+   * The switches that came later start on, the ones of the jobs as at first (1191), and the speed
+   * whole (1266), also for what was saved before they existed.
+   */
   public RobotState(
       RobotTier tier,
       Energy energy,
@@ -101,7 +69,9 @@ public record RobotState(
         torchesOn,
         true,
         true,
-        true);
+        true,
+        WorkSettings.INITIAL,
+        SpeedChoice.FULL);
   }
 
   /** Pickup starts with its initial settings, also for what was saved before it existed. */
@@ -128,9 +98,6 @@ public record RobotState(
         defenseMode,
         solarOn,
         PickupSettings.INITIAL,
-        true,
-        true,
-        true,
         true);
   }
 
@@ -211,7 +178,8 @@ public record RobotState(
         autoReturnOn,
         unloadOn,
         deathPointOn,
-        workSettings);
+        workSettings,
+        speed);
   }
 
   public RobotState repaired(TierSpec spec, Percentage health) {
@@ -231,7 +199,8 @@ public record RobotState(
         autoReturnOn,
         unloadOn,
         deathPointOn,
-        workSettings);
+        workSettings,
+        speed);
   }
 
   /**
@@ -254,7 +223,8 @@ public record RobotState(
         autoReturnOn,
         unloadOn,
         deathPointOn,
-        workSettings);
+        workSettings,
+        speed);
   }
 
   public RobotState withPickup(PickupSettings next) {
@@ -274,7 +244,8 @@ public record RobotState(
         autoReturnOn,
         unloadOn,
         deathPointOn,
-        workSettings);
+        workSettings,
+        speed);
   }
 
   public RobotState withTorches(boolean on) {
@@ -294,7 +265,8 @@ public record RobotState(
         autoReturnOn,
         unloadOn,
         deathPointOn,
-        workSettings);
+        workSettings,
+        speed);
   }
 
   public RobotState withAutoReturn(boolean on) {
@@ -314,7 +286,8 @@ public record RobotState(
         on,
         unloadOn,
         deathPointOn,
-        workSettings);
+        workSettings,
+        speed);
   }
 
   public RobotState withUnload(boolean on) {
@@ -334,7 +307,8 @@ public record RobotState(
         autoReturnOn,
         on,
         deathPointOn,
-        workSettings);
+        workSettings,
+        speed);
   }
 
   public RobotState withDeathPoint(boolean on) {
@@ -354,7 +328,8 @@ public record RobotState(
         autoReturnOn,
         unloadOn,
         on,
-        workSettings);
+        workSettings,
+        speed);
   }
 
   public RobotState withWorkSettings(WorkSettings on) {
@@ -374,7 +349,30 @@ public record RobotState(
         autoReturnOn,
         unloadOn,
         deathPointOn,
-        on);
+        on,
+        speed);
+  }
+
+  /** The same robot walking at another percentage of its tier (answer 1266). */
+  public RobotState withSpeed(SpeedChoice next) {
+    return new RobotState(
+        tier,
+        energy,
+        health,
+        lampOn,
+        color,
+        scannersOn,
+        oreFilter,
+        chatterOn,
+        defenseMode,
+        solarOn,
+        pickup,
+        torchesOn,
+        autoReturnOn,
+        unloadOn,
+        deathPointOn,
+        workSettings,
+        next);
   }
 
   public Battery batteryFor(TierSpec spec) {

@@ -55,7 +55,9 @@ final class RobotScreenValues implements ContainerData {
   static final int FERTILIZER_UNLOCKED = 57;
   static final int FERTILIZER_UNLOCK_TIER = 58;
   static final int UNLOAD_INTERVAL = 59;
-  static final int COUNT = 60;
+  static final int SPEED = 60;
+  static final int SPEED_MIN = 61;
+  static final int COUNT = 62;
   private static final int BITS_PER_JOB_TIER = 3;
   private static final int JOB_TIER_MASK = 0b111;
   private static final int HALF_BITS = 16;
@@ -78,6 +80,7 @@ final class RobotScreenValues implements ContainerData {
   private final TorchControl torches;
   private final DeathPointControl deathPoint;
   private final WorkControl work;
+  private final SpeedControl speed;
   private final int[] values = new int[COUNT];
 
   RobotScreenValues(
@@ -87,6 +90,7 @@ final class RobotScreenValues implements ContainerData {
       TorchControl torches,
       DeathPointControl deathPoint,
       WorkControl work,
+      SpeedControl speed,
       RobotSwitch... switches) {
     this.source = source;
     this.defense = defense;
@@ -94,6 +98,7 @@ final class RobotScreenValues implements ContainerData {
     this.torches = torches;
     this.deathPoint = deathPoint;
     this.work = work;
+    this.speed = speed;
     this.switches = switches.clone();
   }
 
@@ -121,7 +126,12 @@ final class RobotScreenValues implements ContainerData {
     }
     putUnlockTiers();
     putWork();
-    RobotScreenReading.Place place = reading.place();
+    putPlace(reading.place());
+    values[SPEED] = speed.percent();
+    values[SPEED_MIN] = speed.minPercent();
+  }
+
+  private void putPlace(RobotScreenReading.Place place) {
     values[COLOR] = place.color().ordinal();
     putInt(POS_X, place.x());
     putInt(POS_Y, place.y());

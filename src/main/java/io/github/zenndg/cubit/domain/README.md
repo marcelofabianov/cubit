@@ -93,6 +93,8 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 | `TillRules` | Se o Fazendeiro ara um bloco: o que a enxada do jogo transforma em terra arada, com ar em cima e água perto, nunca um bloco protegido (pergunta 1232) |
 | `SeedChoice` | Que semente vai na terra arada vazia: a da planta vizinha e, sem ela, a que ele tem em maior quantidade (perguntas 1233 e 1236) |
 | `WorkSettings` | As chaves da aba Trabalho de cada trabalho: por enquanto, o `Keep junk` do Pescador, ligado no começo. O Fazendeiro tem um slot de fertilizante no lugar de uma chave (perguntas 1191 e 1246) |
+| `SpeedChoice` | A velocidade que o player escolhe, em porcentagem da velocidade do tier, de 1 a 100, com 100% no começo. Ajusta um valor salvo aos degraus do config, anda um degrau com − e + e dá o fator, inteiro no perigo (perguntas 1259, 1266 e 1268) |
+| `SpeedSteps` | O mínimo e o passo dos botões da velocidade, lidos do config por quem chama. O máximo é sempre 100% (pergunta 1267) |
 | `JunkFilter` | O que o Pescador guarda: tudo com o `Keep junk` ligado, e, desligado, tudo menos o lixo da tag, que nunca inclui um item encantado (perguntas 1191 e 1207) |
 | `DeathRecord` | Uma morte do player: o tempo do mundo, o bloco, a dimensão e a causa, no texto de morte do jogo (perguntas 1111 e 1114) |
 | `DeathLog` | As mortes do player, da mais recente para a mais antiga, até o limite do config. Uma linha é achada pelo lugar e pelo tempo, para uma tela desatualizada nunca tirar outra morte (perguntas 1111 e 1115) |
@@ -256,6 +258,8 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 - **Slot antes do painel:** na linha de recarga, o slot vence o painel, e na base só o Dock conta (pergunta 693).
 - **Tempo da vida pela parte que falta:** a base enche a vida inteira num tempo fixo, então uma perda menor leva menos tempo. Menos de um minuto aparece como tal (pergunta 693).
 - **Entrada pela média:** cabos entregam energia aos saltos, então a média de um segundo evita um número que pula (pergunta 693).
+- **Velocidade em porcentagem do tier:** o mesmo valor serve em qualquer tier e acompanha o upgrade. Os degraus descem de 100% de passo em passo, e o mínimo é sempre o último, mesmo fora do passo, para um config qualquer do pack continuar válido. Um valor salvo fora dos degraus vai para o mais próximo, sem perder o save (perguntas 1259 e 1266).
+- **Fugir vem primeiro:** em chamas, na lava ou sobre um bloco que fere, a velocidade escolhida não vale, como o redutor do inventário cheio, porque andar devagar no perigo pode matar o Cubit (pergunta 1268).
 
 ## Estados
 

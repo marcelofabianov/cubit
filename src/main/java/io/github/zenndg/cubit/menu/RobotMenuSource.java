@@ -14,4 +14,5 @@ public record RobotMenuSource(
     TorchControl torches,
     DeathPointControl deathPoint,
     WorkControl work,
+    SpeedControl speed,
     Predicate<Player> stillValid) {}

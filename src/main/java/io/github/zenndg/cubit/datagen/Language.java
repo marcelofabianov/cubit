@@ -23,6 +23,7 @@ enum Language {
           PowerBankTexts::addTo,
           TabletTexts::addTo,
           DeathTexts::addTo,
+          SpeedTexts::addTo,
           WorkTexts::addTo),
       ChatPhrases::of),
   PT_BR(
@@ -37,6 +38,7 @@ enum Language {
           PortuguesePowerBankTexts::addTo,
           PortugueseTabletTexts::addTo,
           PortugueseDeathTexts::addTo,
+          PortugueseSpeedTexts::addTo,
           PortugueseWorkTexts::addTo),
       PortugueseChatPhrases::of);
 

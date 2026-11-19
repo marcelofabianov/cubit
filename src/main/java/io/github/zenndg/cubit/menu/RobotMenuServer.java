@@ -14,7 +14,8 @@ record RobotMenuServer(
     DefenseControl defense,
     PowerControl power,
     PickupControl pickup,
-    WorkControl work) {
+    WorkControl work,
+    SpeedControl speed) {
   private static final RobotSwitch[] NO_SWITCHES = {
     RobotSwitch.NONE, RobotSwitch.NONE, RobotSwitch.NONE, RobotSwitch.NONE, RobotSwitch.NONE
   };
@@ -28,6 +29,7 @@ record RobotMenuServer(
         DefenseControl.NONE,
         PowerControl.NONE,
         PickupControl.NONE,
-        WorkControl.NONE);
+        WorkControl.NONE,
+        SpeedControl.NONE);
   }
 }

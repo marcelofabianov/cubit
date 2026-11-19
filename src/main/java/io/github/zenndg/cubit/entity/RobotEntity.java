@@ -76,6 +76,7 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
   private final RobotDefense defense = new RobotDefense(this);
   private final RobotPickup pickup = new RobotPickup(this);
   private final RobotTorches torches = new RobotTorches(this);
+  private final RobotSpeed speed = new RobotSpeed(this);
   private final RobotWorkArea workArea = new RobotWorkArea(this);
 
   public RobotEntity(
@@ -171,6 +172,10 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
 
   public RobotTorches torches() {
     return torches;
+  }
+
+  public RobotSpeed speed() {
+    return speed;
   }
 
   public RobotWorkArea workArea() {
@@ -283,7 +288,7 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
     pickup.tick();
     torches.tick();
     workArea.work().tick();
-    RobotLoadSpeed.update(this, inventory.isFull());
+    speed.tick(inventory.isFull());
     inventory.dropSurplus(
         stack -> Containers.dropItemStack(level(), getX(), getY(), getZ(), stack));
     if (tickCount % CubitMod.CONFIG.followRepathTicks() == 0) {
