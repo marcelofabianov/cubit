@@ -208,11 +208,13 @@ Não há perguntas pendentes nesta fase.
 | 1261 | O controle de velocidade entra no card do Fazendeiro (#195)? | Não: ganha um card próprio, logo depois do Fazendeiro, porque vale para todo Cubit e mexe na tela da Fase 4 |
 | 1262 | Os testes no jogo do Fazendeiro e o teste com 20 a 30 robôs passaram? | Sim: o roteiro manual e o teste com 20 a 30 robôs passaram, com a descarga por intervalo, o fertilizante e os ícones dos slots |
 | 1280 | A troca para `zenndg` espera o merge do #214? | Não: o desenvolvedor pediu "faça a troca primeiro", sem nada a acrescentar ao alinhamento. A troca sai da `develop` na issue #215, entra antes, e o #214 é rebaseado sobre ela, com os arquivos novos movidos para `io.github.zenndg.cubit`. Muda a ordem da resposta 1277 |
+| 1281 | Qual regra nova entra no `AGENTS.md`? | A regra 54, pedida pelo desenvolvedor: "Prefira apresentar listas ordenadas numericas para o desenvolvedor para melhor referencia". Entra numa seção própria, `Apresentação`, no PR da troca para `zenndg` (#215), num commit separado |
 
 ## Histórico de modificações
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-19 20:58 | Registra a resposta 1281. |
 | Marcelo Fabiano | 2026-11-19 20:58 | Registra a resposta 1280. |
 | Marcelo Fabiano | 2026-11-15 09:50 | Registra as respostas 1215 a 1262. |
 | Marcelo Fabiano | 2026-11-14 22:40 | Registra as respostas 1181 a 1214. |

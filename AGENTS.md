@@ -171,6 +171,10 @@ O Cubit é o único robô do mod. O que muda entre um Cubit e outro é o tier e 
 
 53. **Código só com o conceito autorizado:** para atuar no código, primeiro é preciso ter a autorização explícita do desenvolvedor sobre o conceito. Ao fechar o refinamento, o agente apresenta o conceito e espera essa autorização, que entra em `_docs/perguntas/` (regra 47).
 
+### Apresentação
+
+54. **Listas numeradas:** ao apresentar itens ao desenvolvedor, como opções, pendências, passos ou achados, prefira listas ordenadas numericamente, para ele poder citar cada item pelo número.
+
 ## Git
 
 - **Autorização:** nunca faça commit, push, tag, release ou PR sem autorização explícita para aquela ação. Antes, mostre os arquivos, o resumo e a mensagem proposta.
