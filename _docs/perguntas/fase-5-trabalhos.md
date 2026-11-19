@@ -207,6 +207,19 @@ Não há perguntas pendentes nesta fase.
 | 1260 | Onde fica o controle de velocidade, e quando vale? | Na aba Recursos do Tablet e na aba Settings da tela do Cubit, numa linha `Speed` / `Velocidade`. Vale seguindo o player e na área, e fica no item e no NBT. O teleporte quando o Cubit fica para trás continua como está |
 | 1261 | O controle de velocidade entra no card do Fazendeiro (#195)? | Não: ganha um card próprio, logo depois do Fazendeiro, porque vale para todo Cubit e mexe na tela da Fase 4 |
 | 1262 | Os testes no jogo do Fazendeiro e o teste com 20 a 30 robôs passaram? | Sim: o roteiro manual e o teste com 20 a 30 robôs passaram, com a descarga por intervalo, o fertilizante e os ícones dos slots |
+| 1263 | Qual card vem depois do Fazendeiro, já que o `ROADMAP.md` e o `checklist.md` ainda não listam o controle de velocidade? | O controle de velocidade (#212), como diz a resposta 1261, antes do Organizador (#196). O PR dele acrescenta o card ao `ROADMAP.md` e ao `checklist.md` |
+| 1264 | Há algo a acrescentar ao card do controle de velocidade (#212)? | Não: o desenvolvedor disse "pode seguir", e o card segue as respostas 1258 a 1261 |
+| 1265 | O PR do #212 atualiza o "Próximos" do `AGENTS.md`, que ainda cita os cards #192 e #193? | Sim, pelo mesmo "pode seguir" |
+| 1266 | Como o controle de velocidade fica no save? | Como porcentagem inteira, no campo `speed_percent` do `cubit:robot_state` e na chave `SpeedPercent` do NBT. Sem o campo, vale 100%. Um valor fora do mínimo ou do passo do config é ajustado para o degrau válido mais próximo, sem perder o save |
+| 1267 | Quais chaves de config o controle de velocidade tem? | `speed_control_min_percent`, padrão 50, e `speed_control_step_percent`, padrão 10, na seção geral, valendo para todo tier. O máximo é sempre 100%, e o padrão do Cubit continua fixo em 100% (resposta 1259) |
+| 1268 | Quando a velocidade escolhida vale? | Em toda caminhada: seguir, área, Dock, descarga e busca dos itens do chão. Em chamas, na lava ou sobre um bloco que fere, ele volta à velocidade cheia, porque fugir vem primeiro, como com o inventário cheio, e os dois redutores se multiplicam. Detalha a resposta 1260 |
+| 1269 | Onde fica a linha `Speed` / `Velocidade` na aba Settings e na aba Recursos do Tablet? | Na última linha das chaves, depois de `Death point`, com o ícone e o nome de 12 px das outras. No lugar do ON e OFF entram −, o valor, como `80%`, e + |
+| 1270 | Qual ícone a linha `Speed` usa? | Um velocímetro novo, feito por prompt como os de `Torches`, `Unload` e `Death point`: o agente escreve o prompt, e o desenvolvedor gera a imagem |
+| 1271 | Qual é a dica da linha `Speed`? | `Walking speed, 50% to 100% of the tier · slower costs more FE per trip` / `Velocidade ao andar, de 50% a 100% do tier · mais devagar gasta mais FE por caminho`, com o mínimo vindo do config |
+| 1272 | O conceito do controle de velocidade (#212) está autorizado para o código? | Sim: o desenvolvedor disse "autorizo" (regra 53) |
+| 1273 | Como o `RobotEntity` volta a 400 linhas, depois de ganhar a peça da velocidade? | Extraindo o corpo do `die()` para o `DamagedRobotDrop`, que já cuida do Damaged Cubit, sem mudar o comportamento. A entidade só delega |
+| 1274 | O que fazer com as duas GameTests de outras áreas que falharam uma vez e passaram nas duas rodadas seguintes? | Abrir uma issue com o log das falhas e seguir com o #212 |
+| 1275 | O PR do #212 acrescenta as classes novas à estrutura de pacotes do `AGENTS.md`? | Sim, num commit `docs` próprio, como no PR do Fazendeiro |
 | 1280 | A troca para `zenndg` espera o merge do #214? | Não: o desenvolvedor pediu "faça a troca primeiro", sem nada a acrescentar ao alinhamento. A troca sai da `develop` na issue #215, entra antes, e o #214 é rebaseado sobre ela, com os arquivos novos movidos para `io.github.zenndg.cubit`. Muda a ordem da resposta 1277 |
 | 1281 | Qual regra nova entra no `AGENTS.md`? | A regra 54, pedida pelo desenvolvedor: "Prefira apresentar listas ordenadas numericas para o desenvolvedor para melhor referencia". Entra numa seção própria, `Apresentação`, no PR da troca para `zenndg` (#215), num commit separado |
 | 1282 | Como o JEI entra no `make client`? | Só no cliente de teste, por `clientRunRuntimeOnly`, do Maven do Modrinth, na versão do Iron Meridian, a `19.64.0.455`. Não compila contra o JEI, não vai no jar, não entra no `neoforge.mods.toml` e não roda no servidor nem nas GameTests. A versão é fixada pelo ID `iv3KiVkE`, porque o número traz o jar de outro loader, e o SHA-512 confere com o do pack |
@@ -220,6 +233,7 @@ Não há perguntas pendentes nesta fase.
 | Marcelo Fabiano | 2026-11-19 20:58 | Registra as respostas 1282 a 1284. |
 | Marcelo Fabiano | 2026-11-19 20:58 | Registra a resposta 1281. |
 | Marcelo Fabiano | 2026-11-19 20:58 | Registra a resposta 1280. |
+| Marcelo Fabiano | 2026-11-19 19:39 | Registra as respostas 1263 a 1275. |
 | Marcelo Fabiano | 2026-11-15 09:50 | Registra as respostas 1215 a 1262. |
 | Marcelo Fabiano | 2026-11-14 22:40 | Registra as respostas 1181 a 1214. |
 | Marcelo Fabiano | 2026-11-14 22:14 | Registra a resposta 1180. |

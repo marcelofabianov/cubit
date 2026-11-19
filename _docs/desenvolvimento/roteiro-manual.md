@@ -937,6 +937,25 @@ As regras estão em [`fazendeiro.md`](../funcionalidades/trabalhos/fazendeiro.md
 | 14 | Recolha o Cubit e coloque de novo | O card e o fertilizante do slot continuam; a área e o baú precisam ser marcados de novo |
 | 15 | Com o jogo em português | `Fertilizante` na dica do slot e `Aprendizado de Máquina: Fazendeiro` |
 
+## Controle de velocidade
+
+As regras estão em [`movimento.md`](../funcionalidades/movimento.md#controle-de-velocidade). Use um Cubit Advanced com carga, seguindo você, o Tablet e um bloco de magma perto.
+
+| # | Faça | Espere |
+|---|---|---|
+| 1 | Abra a aba Settings da tela do Cubit | A última linha é `Speed`, com o velocímetro, −, `100%` e +, e a dica `Walking speed, 50% to 100% of the tier · slower costs more FE per trip` |
+| 2 | Clique em + | Continua em `100%` |
+| 3 | Clique em − cinco vezes e mais uma | Desce de 10 em 10 até `50%` e para nele |
+| 4 | Ande com ele seguindo você | Ele anda visivelmente mais devagar, e o teleporte, quando fica para trás, continua igual |
+| 5 | Abra a aba Recursos do Tablet com ele escolhido | A última linha mostra `50%`. Mude para `80%` ali, e a aba Settings também mostra `80%` |
+| 6 | Ponha fogo nele, ou deixe-o sobre o magma | Ele foge na velocidade cheia e volta aos 80% ao sair do perigo |
+| 7 | Encha o inventário dele | Ele fica ainda mais lento, com os dois redutores juntos |
+| 8 | Marque uma área e o baú da descarga, e mande-o ao Dock pelo Tablet | Na área, até o baú e até o Dock, ele anda a 80% |
+| 9 | Recolha o Cubit e coloque de novo | Continua em `80%` |
+| 10 | Suba de tier com um Module | Continua em `80%`, agora da velocidade do tier novo |
+| 11 | Com outro player, tente mudar pelo Tablet ou pela tela | Nada muda, porque só o dono muda |
+| 12 | Com o jogo em português | `Velocidade` e `Velocidade ao andar, de 50% a 100% do tier · mais devagar gasta mais FE por caminho` |
+
 ## Tradução
 
 | # | Passo | Resultado esperado |
@@ -996,6 +1015,7 @@ Na instância só com o mod, tire capturas com F2 do Cubit seguindo, da tela do 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-19 20:19 | Adiciona o roteiro do controle de velocidade. |
 | Marcelo Fabiano | 2026-11-15 10:40 | Adiciona o roteiro do Fazendeiro. |
 | Marcelo Fabiano | 2026-11-14 23:10 | Adiciona o roteiro do Pescador. |
 | Marcelo Fabiano | 2026-11-14 20:53 | Adiciona o roteiro da base do trabalho. |
