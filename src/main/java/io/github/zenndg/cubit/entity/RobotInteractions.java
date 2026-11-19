@@ -1,0 +1,174 @@
+package io.github.zenndg.cubit.entity;
+
+import io.github.zenndg.cubit.CubitMod;
+import io.github.zenndg.cubit.domain.energy.PowerState;
+import io.github.zenndg.cubit.domain.ownership.FollowingOutcome;
+import io.github.zenndg.cubit.domain.ownership.Ownership;
+import io.github.zenndg.cubit.domain.robot.RobotClick;
+import io.github.zenndg.cubit.domain.tier.TierSpec;
+import io.github.zenndg.cubit.item.ModuleItem;
+import io.github.zenndg.cubit.menu.RobotScreenOpening;
+import io.github.zenndg.cubit.player.FollowingRobotLink;
+import io.github.zenndg.cubit.registry.CubitAttachments;
+import io.github.zenndg.cubit.registry.CubitDataComponents;
+import java.util.Optional;
+import java.util.UUID;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.world.Container;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.SimpleMenuProvider;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.DyeItem;
+import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.common.Tags;
+
+/** What the owner does to a robot with a click. The rules live in the domain. */
+final class RobotInteractions {
+  private RobotInteractions() {}
+
+  /** Only the numbers in the descriptions and the filter travel once, when it opens. */
+  static InteractionResult openInventory(RobotEntity robot, Player player) {
+    RobotScreenOpening opening = RobotScreenReadout.opening(robot);
+    player.openMenu(
+        new SimpleMenuProvider(
+            (containerId, inventory, opener) ->
+                RobotScreenReadout.serverMenu(containerId, inventory, robot),
+            robot.getDisplayName()),
+        opening::write);
+    return InteractionResult.CONSUME;
+  }
+
+  /**
+   * A robot in an unloaded chunk misses a swap or a reset, so it finds out when it loads again.
+   * Without this, it would stay active and still, and a click only turns on a switched-off robot.
+   */
+  static void switchOffWithoutThePlace(RobotEntity robot) {
+    Player owner = RobotInteractions.onlineOwner(robot);
+    if (robot.powerState() == PowerState.ACTIVE
+        && owner != null
+        && robot.workArea().area().isEmpty()
+        && !RobotFollowing.policy()
+            .holdsThePlace(robot.getUUID(), RobotFollowing.follower(owner))) {
+      robot.setPowerState(PowerState.INACTIVE_SWITCHED_OFF);
+      robot.getNavigation().stop();
+    }
+  }
+
+  /** Applied again on load, so a config change reaches the robots already in the world. */
+  static void applyAttributes(RobotEntity robot) {
+    TierSpec spec = robot.spec();
+    robot.getAttribute(Attributes.MAX_HEALTH).setBaseValue(spec.maxHealth());
+    robot
+        .getAttribute(Attributes.MOVEMENT_SPEED)
+        .setBaseValue(CubitMod.CONFIG.baseMovementSpeed() * spec.speedMultiplier());
+    robot
+        .getAttribute(Attributes.FOLLOW_RANGE)
+        .setBaseValue(CubitMod.CONFIG.followDecision().teleportDistanceBlocks());
+  }
+
+  /** The player this robot follows right now, when that player is online. */
+  /** The owner, when online on this server, or nobody. */
+  static Player onlineOwner(RobotEntity robot) {
+    MinecraftServer server = robot.getServer();
+    UUID owner = robot.ownerId().orElse(null);
+    return server == null || owner == null ? null : server.getPlayerList().getPlayer(owner);
+  }
+
+  static Player followedPlayer(RobotEntity robot) {
+    Player owner = RobotInteractions.onlineOwner(robot);
+    if (owner == null
+        || !RobotFollowing.follower(owner).filter(robot.getUUID()::equals).isPresent()) {
+      return null;
+    }
+    return owner;
+  }
+
+  static boolean canUseInventory(RobotEntity robot, Player player) {
+    return robot.isAlive()
+        && robot.powerState().isInteractive()
+        && Ownership.owns(robot.ownerId(), player.getUUID())
+        && player.canInteractWithEntity(robot, Container.DEFAULT_DISTANCE_BUFFER);
+  }
+
+  static InteractionResult use(RobotEntity robot, Player player, InteractionHand hand) {
+    ItemStack held = player.getItemInHand(hand);
+    RobotClick click =
+        RobotClick.of(
+            Ownership.owns(robot.ownerId(), player.getUUID()),
+            held.getItem() instanceof ModuleItem,
+            player.isShiftKeyDown(),
+            held.getItem() instanceof DyeItem,
+            held.is(Tags.Items.ORES),
+            robot.powerState());
+    return switch (click) {
+      case IGNORE -> InteractionResult.PASS;
+      case UPGRADE -> RobotUpgrade.apply(robot, player, held, (ModuleItem) held.getItem());
+      case COLLECT -> collect(robot, player);
+      case PAINT -> RobotPaint.apply(robot, player, held, (DyeItem) held.getItem());
+      case CHOOSE_ORE -> RobotOreChoice.apply(robot, player, held);
+      case OPEN -> {
+        robot.face().onInteraction();
+        yield openInventory(robot, player);
+      }
+      case CHARGE_OR_TURN_ON ->
+          robot.robotInventory().energySlot().insert(held)
+              ? InteractionResult.CONSUME
+              : turnOn(robot, player);
+    };
+  }
+
+  static InteractionResult collect(RobotEntity robot, Player player) {
+    ItemStack stack = new ItemStack(robot.itemType());
+    stack.set(CubitDataComponents.ROBOT_STATE.get(), robot.state());
+    stack.set(DataComponents.CUSTOM_NAME, robot.getCustomName());
+    robot.robotInventory().writeTo(stack);
+    robot.robotInventory().clear();
+    RobotFollowing.release(robot, player);
+    robot.discard();
+    // Drops the item at the player's feet when the inventory is full, so the robot is never lost.
+    player.getInventory().placeItemBackInInventory(stack);
+    return InteractionResult.CONSUME;
+  }
+
+  static InteractionResult turnOn(RobotEntity robot, Player player) {
+    FollowingOutcome outcome =
+        RobotFollowing.policy()
+            .onTurnOn(
+                robot.getUUID(),
+                RobotFollowing.follower(player),
+                robot.powerState(),
+                robot.battery());
+    if (outcome.state() == robot.powerState()) {
+      return InteractionResult.PASS;
+    }
+    robot.setPowerState(outcome.state());
+    player.setData(CubitAttachments.FOLLOWING_ROBOT, new FollowingRobotLink(outcome.follower()));
+    outcome.robotToSwitchOff().ifPresent(other -> switchOff(robot, other));
+    return InteractionResult.CONSUME;
+  }
+
+  /** The robot follows its owner now, and the one that followed switches off where it is. */
+  static void takeThePlace(RobotEntity robot, Player player) {
+    Optional<UUID> previous =
+        RobotFollowing.policy().release(robot.getUUID(), RobotFollowing.follower(player));
+    player.setData(
+        CubitAttachments.FOLLOWING_ROBOT, new FollowingRobotLink(Optional.of(robot.getUUID())));
+    previous.ifPresent(other -> switchOff(robot, other));
+  }
+
+  private static void switchOff(RobotEntity robot, UUID other) {
+    MinecraftServer server = robot.getServer();
+    if (server != null) {
+      server
+          .getAllLevels()
+          .forEach(loaded -> {
+            if (loaded.getEntity(other) instanceof RobotEntity target) {
+              target.setPowerState(PowerState.INACTIVE_SWITCHED_OFF);
+            }
+          });
+    }
+  }
+}

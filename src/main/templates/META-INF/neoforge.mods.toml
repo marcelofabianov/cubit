@@ -49,4 +49,4 @@ Cubit is a cute battery-powered robot companion that follows you, carries your i
     side="BOTH"
 
 [modproperties."${mod_id}"."yumi:entrypoints"]
-    "lambdynlights:initializer"="io.github.marcelofabianov.cubit.client.CubitDynamicLights"
+    "lambdynlights:initializer"="io.github.zenndg.cubit.client.CubitDynamicLights"

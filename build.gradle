@@ -205,7 +205,7 @@ jacoco {
 
 // Coverage only targets the domain: the rest is validated by GameTests and a manual script.
 def domainClasses = sourceSets.main.output.asFileTree.matching {
-    include 'io/github/marcelofabianov/cubit/domain/**'
+    include 'io/github/zenndg/cubit/domain/**'
 }
 
 tasks.named('jacocoTestReport', JacocoReport) {
