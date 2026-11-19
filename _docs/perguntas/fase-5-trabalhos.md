@@ -220,6 +220,10 @@ Não há perguntas pendentes nesta fase.
 | 1273 | Como o `RobotEntity` volta a 400 linhas, depois de ganhar a peça da velocidade? | Extraindo o corpo do `die()` para o `DamagedRobotDrop`, que já cuida do Damaged Cubit, sem mudar o comportamento. A entidade só delega |
 | 1274 | O que fazer com as duas GameTests de outras áreas que falharam uma vez e passaram nas duas rodadas seguintes? | Abrir uma issue com o log das falhas e seguir com o #212 |
 | 1275 | O PR do #212 acrescenta as classes novas à estrutura de pacotes do `AGENTS.md`? | Sim, num commit `docs` próprio, como no PR do Fazendeiro |
+| 1276 | Por que trocar `marcelofabianov` por `zenndg` no Cubit? | O repositório foi para `zenndg`, a conta secundária do desenvolvedor no GitHub, e não está mais em `marcelofabianov` |
+| 1277 | A troca é feita em uma ou em duas tarefas? | Num PR só, depois do merge do #212: o pacote `io.github.zenndg.cubit`, o `mod_group_id`, o JaCoCo, o ponto de entrada do LambDynamicLights, os links e o `AGENTS.md`. Os saves não mudam, porque o jogo grava os IDs `cubit:` |
+| 1278 | Qual remote e qual conta do `gh` valem? | `zenndg` nos dois: o remote `git@github.com-zenndg:zenndg/cubit.git` e a conta `zenndg` do `gh`, com `GH_TOKEN=$(gh auth token --user zenndg)` quando outra aparecer. Vale também para o push do #212 |
+| 1279 | Os links do Iron Meridian e a `LICENSE` mudam? | Os links do Iron Meridian vão para `zenndg/iron-meridian`, que também mudou de conta. A `LICENSE` continua com o nome da pessoa |
 | 1280 | A troca para `zenndg` espera o merge do #214? | Não: o desenvolvedor pediu "faça a troca primeiro", sem nada a acrescentar ao alinhamento. A troca sai da `develop` na issue #215, entra antes, e o #214 é rebaseado sobre ela, com os arquivos novos movidos para `io.github.zenndg.cubit`. Muda a ordem da resposta 1277 |
 | 1281 | Qual regra nova entra no `AGENTS.md`? | A regra 54, pedida pelo desenvolvedor: "Prefira apresentar listas ordenadas numericas para o desenvolvedor para melhor referencia". Entra numa seção própria, `Apresentação`, no PR da troca para `zenndg` (#215), num commit separado |
 | 1282 | Como o JEI entra no `make client`? | Só no cliente de teste, por `clientRunRuntimeOnly`, do Maven do Modrinth, na versão do Iron Meridian, a `19.64.0.455`. Não compila contra o JEI, não vai no jar, não entra no `neoforge.mods.toml` e não roda no servidor nem nas GameTests. A versão é fixada pelo ID `iv3KiVkE`, porque o número traz o jar de outro loader, e o SHA-512 confere com o do pack |
@@ -233,6 +237,7 @@ Não há perguntas pendentes nesta fase.
 | Marcelo Fabiano | 2026-11-19 20:58 | Registra as respostas 1282 a 1284. |
 | Marcelo Fabiano | 2026-11-19 20:58 | Registra a resposta 1281. |
 | Marcelo Fabiano | 2026-11-19 20:58 | Registra a resposta 1280. |
+| Marcelo Fabiano | 2026-11-19 20:44 | Registra as respostas 1276 a 1279. |
 | Marcelo Fabiano | 2026-11-19 19:39 | Registra as respostas 1263 a 1275. |
 | Marcelo Fabiano | 2026-11-15 09:50 | Registra as respostas 1215 a 1262. |
 | Marcelo Fabiano | 2026-11-14 22:40 | Registra as respostas 1181 a 1214. |
