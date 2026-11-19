@@ -4,7 +4,7 @@
 # hash. Without VERSION, it takes the latest release. Only public APIs, without any login.
 set -euo pipefail
 
-readonly REPOSITORY='marcelofabianov/cubit'
+readonly REPOSITORY='zenndg/cubit'
 readonly GITHUB_API="https://api.github.com/repos/${REPOSITORY}"
 readonly GITHUB_RAW="https://raw.githubusercontent.com/${REPOSITORY}"
 readonly MODRINTH_API='https://api.modrinth.com/v2'

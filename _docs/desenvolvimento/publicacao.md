@@ -32,8 +32,8 @@ Os mesmos dados valem para as duas plataformas.
 | Ícone | O ícone do mod, ampliado sem suavizar, como em [Ícone](#ícone) |
 | Galeria | Só capturas de tela feitas no jogo, no teste de instância. Nada de pranchas de conceito nem de imagem feita com IA (pergunta 747) |
 | Licença | MIT |
-| Código | `https://github.com/marcelofabianov/cubit` |
-| Issues | `https://github.com/marcelofabianov/cubit/issues` |
+| Código | `https://github.com/zenndg/cubit` |
+| Issues | `https://github.com/zenndg/cubit/issues` |
 | Categorias | Escolhidas no site. As que descrevem o Cubit são tecnologia e utilidade, se houver categorias com esses nomes |
 | Lados | Cliente e servidor: o mod precisa estar nos dois |
 | Versão do jogo | `1.21.1` |
@@ -83,7 +83,7 @@ O mesmo arquivo serve ao Modrinth, que aceita PNG.
 ## Depois da aprovação
 
 1. **Conferência:** abra as duas páginas e confira os links, as dependências e o arquivo.
-2. **Iron Meridian:** o pack adiciona o Cubit pelo passo "Adicionar um mod novo" do `docs/MANUTENCAO.md` dele, pelo Modrinth, de onde vêm o GeckoLib, o LambDynamicLights e o Jade. Ali, o comando é `packwiz modrinth add --project-id <id> --version-id <id> -y`, e o `git status` mostra se ele mexeu em outros `.pw.toml`. A exceção do Cubit à regra do pack contra funções repetidas está na issue `marcelofabianov/iron-meridian#2`.
+2. **Iron Meridian:** o pack adiciona o Cubit pelo passo "Adicionar um mod novo" do `docs/MANUTENCAO.md` dele, pelo Modrinth, de onde vêm o GeckoLib, o LambDynamicLights e o Jade. Ali, o comando é `packwiz modrinth add --project-id <id> --version-id <id> -y`, e o `git status` mostra se ele mexeu em outros `.pw.toml`. A exceção do Cubit à regra do pack contra funções repetidas está na issue `zenndg/iron-meridian#2`.
 
 ## Versões seguintes
 
@@ -114,6 +114,7 @@ Conferidas em 2026-11-08:
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-19 20:48 | Aponta o código, as issues e o Iron Meridian para a conta `zenndg` (respostas 1276 e 1279). |
 | Marcelo Fabiano | 2026-11-08 01:41 | Cita a release no GitHub antes do envio aos sites. |
 | Marcelo Fabiano | 2026-11-08 01:05 | Aponta o resumo e a descrição longa para a descrição das plataformas. |
 | Marcelo Fabiano | 2026-11-08 00:33 | Cria o guia de publicação no Modrinth e no CurseForge. |

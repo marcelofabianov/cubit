@@ -53,7 +53,7 @@ Cubit is a cute, battery-powered robot companion. It follows you around, carries
 - **Config:** every balance number is in `config/cubit-common.toml`.
 - **Recipes:** plain datapack JSON with vanilla materials, so modpacks can change them.
 - **Languages:** English and Brazilian Portuguese.
-- **Bugs and ideas:** open an issue on [GitHub](https://github.com/marcelofabianov/cubit/issues).
+- **Bugs and ideas:** open an issue on [GitHub](https://github.com/zenndg/cubit/issues).
 
 Coming next: a Power Bank, an item magnet, a remote control and a work area.
 ```
@@ -62,5 +62,6 @@ Coming next: a Power Bank, an item magnet, a remote control and a work area.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-19 20:48 | Aponta as issues para `zenndg/cubit` (resposta 1276). |
 | Marcelo Fabiano | 2026-11-12 20:50 | Atualiza a descrição longa para a `0.1.1` (pergunta 869). |
 | Marcelo Fabiano | 2026-11-08 00:58 | Cria a descrição curta, o resumo e a descrição longa das plataformas. |

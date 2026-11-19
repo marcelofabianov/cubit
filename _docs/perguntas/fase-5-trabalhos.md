@@ -207,11 +207,13 @@ Não há perguntas pendentes nesta fase.
 | 1260 | Onde fica o controle de velocidade, e quando vale? | Na aba Recursos do Tablet e na aba Settings da tela do Cubit, numa linha `Speed` / `Velocidade`. Vale seguindo o player e na área, e fica no item e no NBT. O teleporte quando o Cubit fica para trás continua como está |
 | 1261 | O controle de velocidade entra no card do Fazendeiro (#195)? | Não: ganha um card próprio, logo depois do Fazendeiro, porque vale para todo Cubit e mexe na tela da Fase 4 |
 | 1262 | Os testes no jogo do Fazendeiro e o teste com 20 a 30 robôs passaram? | Sim: o roteiro manual e o teste com 20 a 30 robôs passaram, com a descarga por intervalo, o fertilizante e os ícones dos slots |
+| 1280 | A troca para `zenndg` espera o merge do #214? | Não: o desenvolvedor pediu "faça a troca primeiro", sem nada a acrescentar ao alinhamento. A troca sai da `develop` na issue #215, entra antes, e o #214 é rebaseado sobre ela, com os arquivos novos movidos para `io.github.zenndg.cubit`. Muda a ordem da resposta 1277 |
 
 ## Histórico de modificações
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-19 20:58 | Registra a resposta 1280. |
 | Marcelo Fabiano | 2026-11-15 09:50 | Registra as respostas 1215 a 1262. |
 | Marcelo Fabiano | 2026-11-14 22:40 | Registra as respostas 1181 a 1214. |
 | Marcelo Fabiano | 2026-11-14 22:14 | Registra a resposta 1180. |
