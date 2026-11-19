@@ -11,7 +11,6 @@ import io.github.zenndg.cubit.domain.robot.RobotState;
 import io.github.zenndg.cubit.domain.robot.RobotType;
 import io.github.zenndg.cubit.domain.tier.RobotTier;
 import io.github.zenndg.cubit.domain.tier.TierSpec;
-import io.github.zenndg.cubit.player.DeadRobotLinks;
 import io.github.zenndg.cubit.player.FollowingRobotLink;
 import io.github.zenndg.cubit.registry.CubitAttachments;
 import io.github.zenndg.cubit.registry.CubitSounds;
@@ -22,7 +21,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.Container;
 import net.minecraft.world.Containers;
@@ -303,12 +301,8 @@ public final class RobotEntity extends PathfinderMob implements GeoEntity, Docka
   public void die(DamageSource source) {
     boolean alreadyDead = dead;
     super.die(source);
-    if (dead && !alreadyDead && level() instanceof ServerLevel serverLevel) {
-      BlockPos safe = safePosition.position().orElse(null);
-      DamagedRobotDrop.leave(serverLevel, this, damagedItem.get(), safe, inventory);
-      if (ownerId != null) {
-        DeadRobotLinks.onRobotDied(serverLevel.getServer(), ownerId, getUUID());
-      }
+    if (dead && !alreadyDead) {
+      DamagedRobotDrop.onDied(this, damagedItem.get());
     }
   }
 

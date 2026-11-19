@@ -204,9 +204,8 @@ public class RobotMenu extends RobotMenuReading {
   /** The server checks this menu before calling, and it is checked again for any other caller. */
   @Override
   public boolean clickMenuButton(Player player, int button) {
-    if (button >= PICKUP_BUTTON && button <= FETCH_BUTTON) {
-      return stillValid(player)
-          && pickup.press(player, PickupControl.PickupButton.values()[button - PICKUP_BUTTON]);
+    if (PickupMenuPart.handles(button)) {
+      return stillValid(player) && pickup.press(player, button);
     }
     if (CONTROL_BUTTONS.contains(button)) {
       return stillValid(player) && pressControl(player, button);
