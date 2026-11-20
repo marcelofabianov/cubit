@@ -72,7 +72,7 @@ Cinco abas, à direita da janela: **Inventory**, com o ícone do baú, **Setting
 | `Unload` / `Descarga` | `Unloads in the marked chests when full, in an area` / `Descarrega nos baús marcados ao encher, na área`. Começa ligada e fica no item, com um ícone feito por prompt (pergunta 1093) |
 | `Auto return` / `Retorno automático` | `Goes to a Dock at 10% battery` / `Vai a um Dock com 10% de bateria`, com o número do tier. Começa ligada e fica no item, com um ícone feito por prompt (pergunta 1066) |
 | `Death point` / `Local de morte` | `Shows where you fell and guides you there` / `Mostra onde você morreu e guia até lá`. No Base, apagada, com `Unlocks at Advanced`. Começa ligada e fica no item, com um ícone feito por prompt (perguntas 1118 e 1125). As regras estão em [`movimento.md`](movimento.md#local-de-morte) |
-| `Speed` / `Velocidade` | `Walking speed, 50% to 100% of the tier · slower costs more FE per trip` / `Velocidade ao andar, de 50% a 100% do tier · mais devagar gasta mais FE por caminho`, com o mínimo do config. A última linha, com um velocímetro feito por prompt e, no lugar do ON e OFF, −, o valor, como `80%`, e +. Como no intervalo de descarga, os botões ficam sempre visíveis, e o servidor para no mínimo e no máximo. Começa em 100%. As regras estão em [`movimento.md`](movimento.md#controle-de-velocidade) (perguntas 1260, 1269 a 1271) |
+| `Speed` / `Velocidade` | `Walking speed, 50% to 100% of the tier · slower costs more FE per trip` / `Velocidade ao andar, de 50% a 100% do tier · mais devagar gasta mais FE por caminho`, com o mínimo do config. A última linha, com um velocímetro feito por prompt e, no lugar do ON e OFF, −, o valor, como `80%`, e +. Como no intervalo de descarga, os botões ficam sempre visíveis, e o servidor para no mínimo e no máximo. Começa em 100%. A dica só aparece sobre o ícone e o nome, para nunca cobrir a porcentagem enquanto o player usa − e +, também na aba Recursos do Tablet (pergunta 1302). As regras estão em [`movimento.md`](movimento.md#controle-de-velocidade) (perguntas 1260, 1269 a 1271) |
 
 - **Scanner filter:** só leitura, com o ícone do minério, `Looking for Coal Ore` e `Right-click the Cubit holding an ore to change it.` (pergunta 688).
 - **Status:** `Solar panel`, `Energy use`, `Health` e `Following`.
@@ -252,6 +252,7 @@ Pergunta 691.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-19 21:45 | Mostra a dica da linha `Speed` só sobre o ícone e o nome (pergunta 1302). |
 | Marcelo Fabiano | 2026-11-19 20:18 | Adiciona a linha `Speed` à aba Settings (perguntas 1269 a 1271). |
 | Marcelo Fabiano | 2026-11-14 20:52 | Acrescenta a aba Work e os estados de trabalho (perguntas 1167 e 1168). |
 | Marcelo Fabiano | 2026-11-14 18:17 | Corrige a aba Behavior, que não recebe as chaves da Fase 4.2 (pergunta 1128). |

@@ -229,11 +229,13 @@ Não há perguntas pendentes nesta fase.
 | 1282 | Como o JEI entra no `make client`? | Só no cliente de teste, por `clientRunRuntimeOnly`, do Maven do Modrinth, na versão do Iron Meridian, a `19.64.0.455`. Não compila contra o JEI, não vai no jar, não entra no `neoforge.mods.toml` e não roda no servidor nem nas GameTests. A versão é fixada pelo ID `iv3KiVkE`, porque o número traz o jar de outro loader, e o SHA-512 confere com o do pack |
 | 1283 | Em qual tarefa o JEI entra? | No PR da troca para `zenndg` (#215), num commit `build` separado, para o desenvolvedor já testar com ele |
 | 1284 | O que quer dizer "JEI e JADE opcional só para testes"? | Os dois só rodam no `make client`, fora do jar. O JEI não tem plugin, e o plugin opcional do Jade continua, porque o mod abre sem ele (regra 24) |
+| 1302 | Como a dica da linha `Speed` deixa de cobrir a porcentagem ao usar − e +? | Ela só aparece com o mouse sobre o ícone e o nome. Sobre −, o valor e +, nada aparece. Vale na aba Settings e na aba Recursos do Tablet. Detalha a pergunta 1271 |
 
 ## Histórico de modificações
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-19 21:47 | Registra a resposta 1302. |
 | Marcelo Fabiano | 2026-11-19 20:58 | Registra as respostas 1282 a 1284. |
 | Marcelo Fabiano | 2026-11-19 20:58 | Registra a resposta 1281. |
 | Marcelo Fabiano | 2026-11-19 20:58 | Registra a resposta 1280. |

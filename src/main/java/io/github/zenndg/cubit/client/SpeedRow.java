@@ -83,6 +83,14 @@ final class SpeedRow {
         : OptionalInt.empty();
   }
 
+  /**
+   * Whether the mouse is over the icon or the name, the only part that shows the detail, so the
+   * tooltip never covers the percentage while − and + are pressed (answer 1302).
+   */
+  boolean overLabel(double x) {
+    return x < downX() - GAP;
+  }
+
   /** The range, with the lowest percentage of the config, and that slower costs more (1271). */
   Component detail() {
     return Component.translatable(ScreenKeys.SPEED_DETAIL, menu.speedMinPercent());
