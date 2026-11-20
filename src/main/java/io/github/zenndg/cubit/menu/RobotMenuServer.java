@@ -15,7 +15,8 @@ record RobotMenuServer(
     PowerControl power,
     PickupControl pickup,
     WorkControl work,
-    SpeedControl speed) {
+    SpeedControl speed,
+    OrganizerControl organizer) {
   private static final RobotSwitch[] NO_SWITCHES = {
     RobotSwitch.NONE, RobotSwitch.NONE, RobotSwitch.NONE, RobotSwitch.NONE, RobotSwitch.NONE
   };
@@ -30,7 +31,8 @@ record RobotMenuServer(
         PowerControl.NONE,
         PickupControl.NONE,
         WorkControl.NONE,
-        SpeedControl.NONE);
+        SpeedControl.NONE,
+        OrganizerControl.NONE);
   }
 
   /** On the server, where the values come from the robot itself. */
@@ -55,6 +57,7 @@ record RobotMenuServer(
         source.power(),
         source.pickup(),
         source.work(),
-        source.speed());
+        source.speed(),
+        source.organizer());
   }
 }

@@ -14,7 +14,7 @@ import net.minecraft.world.item.ItemStack;
  * The Work tab, in the screen of the Cubit and in the one of the Tablet: the card in the slot, the
  * job, the state with the reason to hibernate, and Resume, active only while the Cubit hibernates
  * away from the Dock (answers 1167 and 1168), and the unload interval of any Cubit in its area
- * (answer 1253). The mode and the filters come with each job.
+ * (answer 1253), and the line Mode of the Organizer (answer 1290).
  */
 final class RobotWorkPanel {
   private static final int LEFT = 7;
@@ -37,12 +37,15 @@ final class RobotWorkPanel {
   private final RobotMenu menu;
   private final int right;
   private final UnloadIntervalRow interval;
+  private final OrganizerModeRow mode;
 
   RobotWorkPanel(ScreenPainter painter, RobotMenu menu, int right) {
     this.painter = painter;
     this.menu = menu;
     this.right = right;
     this.interval = new UnloadIntervalRow(painter, menu, right);
+    this.mode =
+        new OrganizerModeRow(painter, menu, new Box(LEFT, SWITCH_Y, right - LEFT, ROW_HEIGHT));
   }
 
   /** Drawn in the coordinates of the panel, with the mouse in the same ones. */
@@ -72,6 +75,7 @@ final class RobotWorkPanel {
         !asleep(),
         button.contains((int) mouseX, (int) mouseY));
     renderJobSwitch(graphics);
+    mode.render(graphics, mouseX, mouseY);
     interval.render(graphics, mouseX, mouseY);
   }
 
@@ -102,7 +106,8 @@ final class RobotWorkPanel {
     if (step.isPresent()) {
       return step;
     }
-    return jobButtonAt(x, y);
+    OptionalInt organizer = mode.buttonAt(x, y);
+    return organizer.isPresent() ? organizer : jobButtonAt(x, y);
   }
 
   private OptionalInt jobButtonAt(double x, double y) {
@@ -119,7 +124,8 @@ final class RobotWorkPanel {
   boolean renderDetail(GuiGraphics graphics, Font font, int mouseX, int mouseY, int left, int top) {
     int x = mouseX - left;
     int y = mouseY - top;
-    if (interval.renderDetail(graphics, font, mouseX, mouseY, y)) {
+    if (interval.renderDetail(graphics, font, mouseX, mouseY, y)
+        || mode.renderDetail(graphics, font, mouseX, mouseY, y)) {
       return true;
     }
     OptionalInt shown = jobSwitch();

@@ -31,6 +31,7 @@ final class CubitItemModelProvider extends ItemModelProvider {
     basicItem(CubitItems.TABLET.get());
     basicItem(CubitItems.FISHER_CARD.get());
     basicItem(CubitItems.FARMER_CARD.get());
+    basicItem(CubitItems.ORGANIZER_CARD.get());
     basicItem(CubitItems.ADVANCED_MODULE.get());
     basicItem(CubitItems.ELITE_MODULE.get());
     basicItem(CubitItems.ULTIMATE_MODULE.get());

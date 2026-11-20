@@ -68,7 +68,8 @@ final class FetchItemGoal extends Goal {
    * The Fisher and the Farmer work in place of fetching, as each card replaces the round (1166).
    */
   private boolean fishing() {
-    return robot.workArea().work().fishing().active() || robot.workArea().work().farming().active();
+    RobotWork work = robot.workArea().work();
+    return work.fishing().active() || work.farming().active() || work.organizing().active();
   }
 
   private boolean fetchesInArea() {

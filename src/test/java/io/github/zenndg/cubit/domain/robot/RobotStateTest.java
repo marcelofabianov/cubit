@@ -285,6 +285,23 @@ class RobotStateTest {
     assertEquals(changed, off.withTorches(false).withEnergy(SOME_ENERGY).workSettings());
   }
 
+  /** The Organizer starts organizing, and its mode survives dying and the other changes (1301). */
+  @Test
+  void theOrganizerModeStartsOrganizingAndSurvives() {
+    RobotState fresh = new RobotState(RobotTier.BASE, SOME_ENERGY, SOME_HEALTH);
+    WorkSettings supplying = WorkSettings.INITIAL.withOrganizerMode(OrganizerMode.SUPPLY);
+    RobotState state = fresh.withWorkSettings(supplying);
+    assertEquals(OrganizerMode.ORGANIZE, fresh.workSettings().organizerMode());
+    assertEquals(OrganizerMode.SUPPLY, state.damaged().workSettings().organizerMode());
+    assertEquals(
+        OrganizerMode.SUPPLY,
+        state
+            .workSettings()
+            .withKeepJunk(false)
+            .withUnloadInterval(UnloadInterval.ONLY_WHEN_FULL)
+            .organizerMode());
+  }
+
   /** The speed starts whole, and dying, repairing and the other changes keep it (1266). */
   @Test
   void theSpeedStartsWholeAndSurvivesTheOtherChanges() {

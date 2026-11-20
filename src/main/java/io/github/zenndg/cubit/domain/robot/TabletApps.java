@@ -4,15 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The apps of the Tablet that make sense for the chosen Cubit: Open, Dock and Area always, and
- * Target only with the chosen Cubit loaded and in Focus. Shift and the wheel go only through these,
- * and an app that stops making sense goes back to Open (answers 1006 and 1044).
+ * The apps of the Tablet that make sense for the chosen Cubit: Open, Dock, Area and Unload always,
+ * Target only with the chosen Cubit loaded and in Focus, and Mark only with the card of the
+ * Organizer. Shift and the wheel go only through these, and an app that stops making sense goes
+ * back to Open (answers 1006, 1044 and 1297).
  */
-public record TabletApps(boolean targetAvailable) {
+public record TabletApps(boolean targetAvailable, boolean markAvailable) {
+  /** Without the Organizer, as before the Mark app existed. */
+  public TabletApps(boolean targetAvailable) {
+    this(targetAvailable, false);
+  }
+
   public List<TabletApp> available() {
     List<TabletApp> apps = new ArrayList<>();
     for (TabletApp app : TabletApp.values()) {
-      if (app != TabletApp.TARGET || targetAvailable) {
+      if ((app != TabletApp.TARGET || targetAvailable)
+          && (app != TabletApp.MARK || markAvailable)) {
         apps.add(app);
       }
     }

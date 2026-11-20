@@ -28,7 +28,11 @@ final class CubitItemTagsProvider extends ItemTagsProvider {
 
   @Override
   protected void addTags(HolderLookup.Provider lookup) {
-    tag(JobCardItem.CARDS).add(CubitItems.FISHER_CARD.get(), CubitItems.FARMER_CARD.get());
+    tag(JobCardItem.CARDS)
+        .add(
+            CubitItems.FISHER_CARD.get(),
+            CubitItems.FARMER_CARD.get(),
+            CubitItems.ORGANIZER_CARD.get());
     tag(FishingCatch.JUNK)
         .add(
             Items.LILY_PAD,

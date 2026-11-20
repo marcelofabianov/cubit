@@ -65,7 +65,9 @@ final class RobotScreen extends AbstractContainerScreen<RobotMenu> {
   private RobotDefensePanel defense;
   private RobotBehaviorPanel behavior;
   private RobotWorkPanel work;
-  private final RobotScreenTabs tabs = new RobotScreenTabs();
+  private SupplyPanel supply;
+  private final RobotScreenTabs tabs =
+      new RobotScreenTabs(() -> menu.organizer().mode().isPresent());
   private final RobotExclusiveRow exclusive;
 
   RobotScreen(RobotMenu menu, Inventory playerInventory, Component title) {
@@ -84,6 +86,7 @@ final class RobotScreen extends AbstractContainerScreen<RobotMenu> {
     defense = new RobotDefensePanel(painter, menu, right);
     behavior = new RobotBehaviorPanel(painter, menu, right);
     work = new RobotWorkPanel(painter, menu, right);
+    supply = new SupplyPanel(painter, menu, right);
     showOpenTab();
   }
 
@@ -124,7 +127,30 @@ final class RobotScreen extends AbstractContainerScreen<RobotMenu> {
 
   private void showOpenTab() {
     menu.showTab(
-        tabs.open() == RobotScreenTabs.Tab.INVENTORY, tabs.open() == RobotScreenTabs.Tab.BEHAVIOR);
+        tabs.open() == RobotScreenTabs.Tab.INVENTORY,
+        tabs.open() == RobotScreenTabs.Tab.BEHAVIOR,
+        tabs.open() == RobotScreenTabs.Tab.SUPPLY);
+  }
+
+  /** The wheel scrolls the rows of the Supply tab (answer 1303). */
+  @Override
+  public boolean mouseScrolled(double mouseX, double mouseY, double scrollX, double scrollY) {
+    if (tabs.open() == RobotScreenTabs.Tab.SUPPLY && scrollY != 0) {
+      minecraft.gameMode.handleInventoryButtonClick(
+          menu.containerId, SupplyPanel.scrollButton(scrollY));
+      return true;
+    }
+    return super.mouseScrolled(mouseX, mouseY, scrollX, scrollY);
+  }
+
+  /** A Supply tab whose card left goes back to the Work tab. */
+  @Override
+  protected void containerTick() {
+    super.containerTick();
+    if (tabs.open() == RobotScreenTabs.Tab.SUPPLY && menu.organizer().mode().isEmpty()) {
+      tabs.open(RobotScreenTabs.Tab.WORK);
+      showOpenTab();
+    }
   }
 
   private void renderTabTooltip(GuiGraphics graphics, int mouseX, int mouseY) {
@@ -144,6 +170,7 @@ final class RobotScreen extends AbstractContainerScreen<RobotMenu> {
           case BEHAVIOR -> behavior.renderDetail(graphics, font, mouseX, mouseY, leftPos, topPos);
           case SETTINGS -> settings.renderDetail(graphics, font, mouseX, mouseY, leftPos, topPos);
           case WORK -> work.renderDetail(graphics, font, mouseX, mouseY, leftPos, topPos);
+          case SUPPLY -> supply.renderDetail(graphics, font, mouseX, mouseY, leftPos, topPos);
           default -> false;
         };
     if (detail) {
@@ -161,6 +188,8 @@ final class RobotScreen extends AbstractContainerScreen<RobotMenu> {
     tabs.renderFront(graphics, leftPos + tabLeft(), topPos);
     if (tabs.open() == RobotScreenTabs.Tab.BEHAVIOR) {
       behavior.renderFrames(graphics, leftPos, topPos);
+    }
+    if (tabs.open() == RobotScreenTabs.Tab.BEHAVIOR || tabs.open() == RobotScreenTabs.Tab.SUPPLY) {
       RobotSlotFrames.player(graphics, menu, leftPos, topPos);
     }
     if (tabs.open() != RobotScreenTabs.Tab.INVENTORY) {
@@ -202,6 +231,7 @@ final class RobotScreen extends AbstractContainerScreen<RobotMenu> {
         case SETTINGS -> settings.render(graphics);
         case DEFENSE -> defense.render(graphics);
         case WORK -> work.render(graphics, mouseX - leftPos, mouseY - topPos);
+        case SUPPLY -> supply.render(graphics, mouseX - leftPos, mouseY - topPos);
         default -> renderBehavior(graphics);
       }
       return;
@@ -317,6 +347,7 @@ final class RobotScreen extends AbstractContainerScreen<RobotMenu> {
       case DEFENSE -> defense.modeAt(x, y);
       case BEHAVIOR -> behavior.buttonAt(x, y);
       case WORK -> work.buttonAt(x, y);
+      case SUPPLY -> supply.buttonAt(x, y, hasShiftDown());
       case INVENTORY -> OptionalInt.empty();
     };
   }

@@ -20,21 +20,23 @@ import software.bernie.geckolib.renderer.GeoRenderer;
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
 
 /**
- * The hat and the backpack of the job, always with its card: the bucket hat of the Fisher and the
- * straw hat of the Farmer, both with the same backpack (answers 1196, 1197, 1200, 1216 and 1229).
- * They stay hidden in the body and in the other layers, and only this layer shows them, with a
- * picture of each job that is transparent everywhere but on them. The hat covers the solar panel,
- * which still charges (answer 1201).
+ * The hat and the backpack of the job, always with its card: the bucket hat of the Fisher, the
+ * straw hat of the Farmer and the warehouse cap of the Organizer, all with the same backpack
+ * (answers 1196, 1197, 1200, 1216, 1229 and 1307). They stay hidden in the body and in the other
+ * layers, and only this layer shows them, with a picture of each job that is transparent everywhere
+ * but on them. The hat covers the solar panel, which still charges (answer 1201).
  */
 final class RobotJobGearLayer extends GeoRenderLayer<RobotEntity> {
   private static final String TEXTURE_PATH = "textures/entity/%s_%s.png";
   private static final String BACKPACK = "job_backpack";
   private static final String FISHER_HAT = "fisher_hat";
   private static final String FARMER_HAT = "farmer_hat";
+  private static final String ORGANIZER_CAP = "organizer_cap";
   private static final Map<RobotJob, List<String>> BONES =
       Map.of(
           RobotJob.FISHER, List.of(FISHER_HAT, BACKPACK),
-          RobotJob.FARMER, List.of(FARMER_HAT, BACKPACK));
+          RobotJob.FARMER, List.of(FARMER_HAT, BACKPACK),
+          RobotJob.ORGANIZER, List.of(ORGANIZER_CAP, BACKPACK));
   private static final int NO_TINT = -1;
 
   private final Map<RobotJob, ResourceLocation> textures = new EnumMap<>(RobotJob.class);

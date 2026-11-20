@@ -4,6 +4,7 @@ import io.github.zenndg.cubit.CubitMod;
 import io.github.zenndg.cubit.domain.energy.PowerState;
 import io.github.zenndg.cubit.entity.RobotEntity;
 import io.github.zenndg.cubit.entity.RobotScreenReadout;
+import io.github.zenndg.cubit.menu.OrganizerMenuPart;
 import io.github.zenndg.cubit.menu.PickupScreenValues;
 import io.github.zenndg.cubit.menu.RobotMenu;
 import io.github.zenndg.cubit.registry.CubitDataComponents;
@@ -82,7 +83,8 @@ public final class InventoryGameTests {
             + CARD_SLOTS
             + FERTILIZER_SLOTS
             + PLAYER_SLOTS
-            + PickupScreenValues.MAX_FILTER_SLOTS,
+            + PickupScreenValues.MAX_FILTER_SLOTS
+            + OrganizerMenuPart.ROWS,
         NOT_OPENED);
     helper.succeed();
   }

@@ -25,6 +25,7 @@ final class JobKeys {
   private final ModConfigSpec.ConfigValue<List<? extends String>> jobs;
   private final FisherKeys fisher;
   private final FarmerKeys farmer;
+  private final OrganizerKeys organizer;
   private final AtomicBoolean warned = new AtomicBoolean();
 
   JobKeys(ModConfigSpec.Builder builder, JobSpec defaults) {
@@ -33,6 +34,7 @@ final class JobKeys {
             KEY, keysOf(defaults.allowed()), () -> EMPTY_JOB, String.class::isInstance);
     fisher = new FisherKeys(builder, defaults.fisher());
     farmer = new FarmerKeys(builder, defaults.farmer());
+    organizer = new OrganizerKeys(builder, defaults.organizer());
   }
 
   JobSpec read() {
@@ -44,7 +46,7 @@ final class JobKeys {
         LOGGER.warn(INVALID_JOB, key);
       }
     }
-    return new JobSpec(allowed, fisher.read(), farmer.read());
+    return new JobSpec(allowed, fisher.read(), farmer.read(), organizer.read());
   }
 
   /** In the order of the jobs, so the file reads as the table of jobs per tier. */

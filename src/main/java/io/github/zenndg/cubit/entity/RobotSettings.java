@@ -26,6 +26,7 @@ final class RobotSettings {
     robot.docking().deathGuide().setSwitchedOn(state.deathPointOn());
     robot.workArea().work().fishing().setKeepJunk(state.workSettings().keepJunk());
     robot.docking().unload().setInterval(state.workSettings().unloadInterval());
+    robot.workArea().work().organizing().setMode(state.workSettings().organizerMode());
     robot.speed().setChoice(state.speed());
     robot
         .pickup()
@@ -52,7 +53,9 @@ final class RobotSettings {
         robot.docking().unload().switchedOn(),
         robot.docking().deathGuide().switchedOn(),
         new WorkSettings(
-            robot.workArea().work().fishing().keepJunk(), robot.docking().unload().interval()),
+            robot.workArea().work().fishing().keepJunk(),
+            robot.docking().unload().interval(),
+            robot.workArea().work().organizing().mode()),
         robot.speed().choice());
   }
 }

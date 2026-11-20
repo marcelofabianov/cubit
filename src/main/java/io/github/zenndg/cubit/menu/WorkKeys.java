@@ -10,6 +10,7 @@ import io.github.zenndg.cubit.domain.robot.RobotJob;
  */
 public final class WorkKeys {
   private static final String PREFIX = "gui.cubit.work.";
+  private static final String MODE_PREFIX = PREFIX + "organizer_mode.";
   private static final String JOB = PREFIX + "job.%s";
   private static final String REASON = PREFIX + "reason.%s";
 
@@ -28,6 +29,14 @@ public final class WorkKeys {
   public static final String UNLOAD_INTERVAL_DETAIL = PREFIX + "unload_interval_detail";
   public static final String UNLOAD_MINUTES = PREFIX + "unload_minutes";
   public static final String ONLY_WHEN_FULL = PREFIX + "only_when_full";
+  public static final String ORGANIZER_NO_ROOM = PREFIX + "organizer_no_room";
+  public static final String ORGANIZER_MODE = PREFIX + "organizer_mode";
+  public static final String ORGANIZER_MODE_DETAIL = PREFIX + "organizer_mode_detail";
+  public static final String SUPPLY_TAB = PREFIX + "supply_tab";
+  public static final String SUPPLY_TITLE = PREFIX + "supply_title";
+  public static final String SUPPLY_EMPTY = PREFIX + "supply_empty";
+  public static final String SUPPLY_ITEM_DETAIL = PREFIX + "supply_item_detail";
+  public static final String SUPPLY_AMOUNT_DETAIL = PREFIX + "supply_amount_detail";
   private static final String NOTICE = "notice.cubit.work_%s";
   public static final String NOTICE_FULL = NOTICE.formatted(HibernationReason.INVENTORY_FULL.key());
 
@@ -44,6 +53,10 @@ public final class WorkKeys {
   }
 
   /** The name of a job, as `Fisher` / `Pescador`. */
+  public static String organizerMode(String key) {
+    return MODE_PREFIX + key;
+  }
+
   public static String job(RobotJob job) {
     return JOB.formatted(job.key());
   }

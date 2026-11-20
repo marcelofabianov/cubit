@@ -44,4 +44,15 @@ class TabletAppsTest {
     assertEquals(TabletApp.DOCK, WITHOUT_TARGET.next(TabletApp.TARGET, FORWARD));
     assertEquals(TabletApp.OPEN, WITHOUT_TARGET.next(TabletApp.TARGET, STILL));
   }
+
+  /** Mark only shows with the card of the Organizer, after Unload (answer 1297). */
+  @Test
+  void markOnlyWithTheOrganizer() {
+    TabletApps organizer = new TabletApps(false, true);
+    assertEquals(
+        List.of(TabletApp.OPEN, TabletApp.DOCK, TabletApp.AREA, TabletApp.UNLOAD, TabletApp.MARK),
+        organizer.available());
+    assertEquals(TabletApp.OPEN, WITHOUT_TARGET.effective(TabletApp.MARK));
+    assertEquals(TabletApp.MARK, organizer.effective(TabletApp.MARK));
+  }
 }
