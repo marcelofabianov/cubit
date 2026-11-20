@@ -122,7 +122,7 @@ public final class TabletRobotMenu extends RobotMenu {
       TabletOpening tablet,
       Controls controls) {
     return new TabletRobotMenu(
-        containerId, playerInventory, contents, serverOf(source), tablet, controls);
+        containerId, playerInventory, contents, RobotMenuServer.of(source), tablet, controls);
   }
 
   /** The server reads the goal at the interval of the dock search, not on every tick. */

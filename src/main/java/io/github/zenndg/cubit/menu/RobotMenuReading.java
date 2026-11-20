@@ -213,4 +213,23 @@ public abstract class RobotMenuReading extends AbstractContainerMenu {
       default -> button;
     };
   }
+
+  public Energy torchCost() {
+    return RobotScreenValues.energy(values, RobotScreenValues.TORCH_COST);
+  }
+
+  public Optional<RobotTier> torchUnlockTier() {
+    int value = values.get(RobotScreenValues.TORCH_UNLOCK_TIER);
+    return value == 0
+        ? Optional.empty()
+        : Optional.of(ScreenEnums.of(RobotTier.values(), value - 1));
+  }
+
+  /** The first tier that marks the death point, for the locked switch (answer 1118). */
+  public Optional<RobotTier> deathPointUnlockTier() {
+    int value = values.get(RobotScreenValues.DEATH_POINT_UNLOCK_TIER);
+    return value == 0
+        ? Optional.empty()
+        : Optional.of(ScreenEnums.of(RobotTier.values(), value - 1));
+  }
 }

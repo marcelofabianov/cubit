@@ -32,4 +32,29 @@ record RobotMenuServer(
         WorkControl.NONE,
         SpeedControl.NONE);
   }
+
+  /** On the server, where the values come from the robot itself. */
+  static RobotMenuServer of(RobotMenuSource source) {
+    RobotScreenValues values =
+        new RobotScreenValues(
+            source.reading(),
+            source.defense(),
+            source.power(),
+            source.torches(),
+            source.deathPoint(),
+            source.work(),
+            source.speed(),
+            source.switches());
+    values.refresh();
+    return new RobotMenuServer(
+        source.stillValid(),
+        values,
+        values::refresh,
+        source.switches(),
+        source.defense(),
+        source.power(),
+        source.pickup(),
+        source.work(),
+        source.speed());
+  }
 }

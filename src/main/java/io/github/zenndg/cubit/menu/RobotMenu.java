@@ -1,11 +1,8 @@
 package io.github.zenndg.cubit.menu;
 
-import io.github.zenndg.cubit.domain.energy.Energy;
 import io.github.zenndg.cubit.domain.robot.DefenseMode;
 import io.github.zenndg.cubit.domain.robot.InventoryGrid;
-import io.github.zenndg.cubit.domain.tier.RobotTier;
 import io.github.zenndg.cubit.registry.CubitMenus;
-import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -170,32 +167,8 @@ public class RobotMenu extends RobotMenuReading {
         containerId,
         playerInventory,
         contents,
-        serverOf(source),
+        RobotMenuServer.of(source),
         RobotMenuLayout.ROBOT);
-  }
-
-  static RobotMenuServer serverOf(RobotMenuSource source) {
-    RobotScreenValues values =
-        new RobotScreenValues(
-            source.reading(),
-            source.defense(),
-            source.power(),
-            source.torches(),
-            source.deathPoint(),
-            source.work(),
-            source.speed(),
-            source.switches());
-    values.refresh();
-    return new RobotMenuServer(
-        source.stillValid(),
-        values,
-        values::refresh,
-        source.switches(),
-        source.defense(),
-        source.power(),
-        source.pickup(),
-        source.work(),
-        source.speed());
   }
 
   @Override
@@ -332,28 +305,9 @@ public class RobotMenu extends RobotMenuReading {
     return cardSlotIndex() + 1;
   }
 
-  public Energy torchCost() {
-    return RobotScreenValues.energy(values, RobotScreenValues.TORCH_COST);
-  }
-
   /** The card slot comes right after the torch slot. */
   public int cardSlotIndex() {
     return torchSlotIndex() + 1;
-  }
-
-  public Optional<RobotTier> torchUnlockTier() {
-    int value = values.get(RobotScreenValues.TORCH_UNLOCK_TIER);
-    return value == 0
-        ? Optional.empty()
-        : Optional.of(ScreenEnums.of(RobotTier.values(), value - 1));
-  }
-
-  /** The first tier that marks the death point, for the locked switch (answer 1118). */
-  public Optional<RobotTier> deathPointUnlockTier() {
-    int value = values.get(RobotScreenValues.DEATH_POINT_UNLOCK_TIER);
-    return value == 0
-        ? Optional.empty()
-        : Optional.of(ScreenEnums.of(RobotTier.values(), value - 1));
   }
 
   public int rows() {

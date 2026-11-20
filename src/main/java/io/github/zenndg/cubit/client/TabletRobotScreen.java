@@ -156,21 +156,22 @@ final class TabletRobotScreen extends AbstractContainerScreen<TabletRobotMenu> {
     graphics.pose().popPose();
   }
 
+  /** The tooltip of the panel of the open tab, under the header. */
+  private boolean panelDetail(GuiGraphics graphics, int mouseX, int mouseY) {
+    return switch (tabs.open()) {
+      case RESOURCES -> resources.renderDetail(graphics, font, mouseX, mouseY, leftPos, topPos);
+      case WORK -> work.renderDetail(graphics, font, mouseX, mouseY, leftPos, topPos);
+      case DEATHS -> deaths.renderDetail(graphics, font, mouseX, mouseY, leftPos, topPos);
+      default -> false;
+    };
+  }
+
   private void renderDetail(GuiGraphics graphics, int mouseX, int mouseY) {
     boolean shown =
-        switch (tabs.open()) {
-          case RESOURCES ->
-              mouseY >= windowTop + TabletRobotHeader.HEIGHT
-                  && resources.renderDetail(graphics, font, mouseX, mouseY, leftPos, topPos);
-          case INVENTORY -> exclusive.renderTooltip(graphics, font, hoveredSlot, mouseX, mouseY);
-          case WORK ->
-              mouseY >= windowTop + TabletRobotHeader.HEIGHT
-                  && work.renderDetail(graphics, font, mouseX, mouseY, leftPos, topPos);
-          case DEATHS ->
-              mouseY >= windowTop + TabletRobotHeader.HEIGHT
-                  && deaths.renderDetail(graphics, font, mouseX, mouseY, leftPos, topPos);
-          default -> false;
-        };
+        tabs.open() == TabletRobotTabs.Tab.INVENTORY
+            ? exclusive.renderTooltip(graphics, font, hoveredSlot, mouseX, mouseY)
+            : mouseY >= windowTop + TabletRobotHeader.HEIGHT
+                && panelDetail(graphics, mouseX, mouseY);
     if (!shown) {
       tabAt(mouseX, mouseY)
           .ifPresent(under ->
