@@ -4,16 +4,17 @@ import io.github.zenndg.cubit.CubitMod;
 import io.github.zenndg.cubit.domain.robot.WorkArea;
 import java.util.EnumSet;
 import java.util.Optional;
+import java.util.function.Supplier;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.phys.Vec3;
 
 /**
- * The Organizer in its area, in place of the round: it walks next to the block or the item of its
- * task and does it with the clipboard raised (answers 1285 to 1304). Its own storing replaces the
- * common unload, and the Unload button of the Tablet still comes first, by its priority.
+ * A job done by errands in its area, in place of the round: the Cubit walks next to the block of
+ * the errand and does it with the tool of the job in the claw, as the Organizer does (answers 1285
+ * to 1304). Unloading comes first, by its priority.
  */
-final class OrganizingGoal extends Goal {
+final class ErrandGoal extends Goal {
   /** The robot speed is already in its movement attribute, so the route does not change it. */
   private static final double ROUTE_SPEED_MODIFIER = 1;
 
@@ -23,18 +24,20 @@ final class OrganizingGoal extends Goal {
   private static final double PROGRESS_BLOCKS = 0.5;
 
   private final RobotEntity robot;
+  private final Supplier<JobErrands> errands;
   private int repathCountdown;
   private double nearest;
   private int stuckTicks;
 
-  OrganizingGoal(RobotEntity robot) {
+  ErrandGoal(RobotEntity robot, Supplier<JobErrands> errands) {
     this.robot = robot;
+    this.errands = errands;
     setFlags(EnumSet.of(Flag.MOVE, Flag.LOOK));
   }
 
   @Override
   public boolean canUse() {
-    return organizing().active();
+    return errands.get().active();
   }
 
   @Override
@@ -61,20 +64,20 @@ final class OrganizingGoal extends Goal {
   @Override
   public void tick() {
     Optional<WorkArea> area = robot.workArea().here();
-    if (area.isEmpty() || organizing().resting()) {
+    if (area.isEmpty() || errands.get().resting()) {
       return;
     }
-    organizing().plan(area.get());
-    Optional<OrganizerTask> task = organizing().task();
-    if (task.isEmpty()) {
+    errands.get().plan(area.get());
+    Optional<BlockPos> target = errands.get().target();
+    if (target.isEmpty()) {
       RobotJobLook.showTool(robot, false);
       return;
     }
-    if (reaches(task.get().pos())) {
-      arrive(task.get().pos());
+    if (reaches(target.get())) {
+      arrive(target.get());
     } else {
       RobotJobLook.showTool(robot, false);
-      walkTo(task.get().pos());
+      walkTo(target.get());
     }
   }
 
@@ -84,7 +87,7 @@ final class OrganizingGoal extends Goal {
     robot.getLookControl().setLookAt(center.x, center.y, center.z);
     resetProgress();
     RobotJobLook.showTool(robot, true);
-    organizing().act();
+    errands.get().act();
   }
 
   private boolean reaches(BlockPos goal) {
@@ -95,7 +98,7 @@ final class OrganizingGoal extends Goal {
     Vec3 center = Vec3.atBottomCenterOf(goal);
     double distance = robot.position().distanceTo(center);
     if (stuck(distance)) {
-      organizing().giveUp();
+      errands.get().giveUp();
       resetProgress();
       return;
     }
@@ -118,9 +121,5 @@ final class OrganizingGoal extends Goal {
     nearest = Double.MAX_VALUE;
     stuckTicks = 0;
     repathCountdown = 0;
-  }
-
-  private RobotOrganizing organizing() {
-    return robot.workArea().work().organizing();
   }
 }

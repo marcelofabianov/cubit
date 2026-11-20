@@ -83,7 +83,7 @@ public final class TabletChestView {
     for (RobotEntity robot : robots) {
       String name = robot.hasCustomName() ? robot.getCustomName().getString() : NO_NAME;
       int number = 0;
-      for (OrganizerTarget target : robot.workArea().work().organizing().marks().targets()) {
+      for (OrganizerTarget target : robot.workArea().work().marks().targets()) {
         number++;
         if (target.mark().isIn(dimension)) {
           marks.add(

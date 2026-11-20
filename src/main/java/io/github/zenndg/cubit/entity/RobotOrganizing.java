@@ -11,8 +11,8 @@ import io.github.zenndg.cubit.menu.OrganizerControl;
 import io.github.zenndg.cubit.menu.SupplyRow;
 import java.util.List;
 import java.util.Optional;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -25,35 +25,32 @@ import net.neoforged.neoforge.items.wrapper.InvWrapper;
  * and what lies on the ground, or supplies the marked destinations, one action at a time, with the
  * pause and the cost of its tier (answers 1285 to 1304).
  */
-public final class RobotOrganizing implements OrganizerControl {
+public final class RobotOrganizing implements OrganizerControl, JobErrands {
   /** The blocks and the items every Organizer holds, only in the memory of the server. */
   static final SpotReservations SPOTS = new SpotReservations();
 
   private final RobotEntity robot;
-  private final RobotOrganizerMarks marks;
+  private final RobotMarks marks;
   private final OrganizerPlanner planner;
   private OrganizerMode mode = OrganizerMode.INITIAL;
   private OrganizerTask task;
   private int pause;
 
-  RobotOrganizing(RobotEntity robot) {
+  RobotOrganizing(RobotEntity robot, RobotMarks marks) {
     this.robot = robot;
-    this.marks = new RobotOrganizerMarks(robot);
+    this.marks = marks;
     this.planner = new OrganizerPlanner(robot, this);
   }
 
   /** The card of the Organizer, active in its area: the work that replaces the round. */
-  boolean active() {
+  @Override
+  public boolean active() {
     return organizer() && robot.workArea().working() && robot.powerState() == PowerState.ACTIVE;
   }
 
   /** Whether its own storing replaces the common unload, which takes no rule (answer 1303). */
   boolean storesItself() {
     return organizer() && robot.workArea().working();
-  }
-
-  public RobotOrganizerMarks marks() {
-    return marks;
   }
 
   public OrganizerMode mode() {
@@ -105,11 +102,13 @@ public final class RobotOrganizing implements OrganizerControl {
     return true;
   }
 
-  Optional<OrganizerTask> task() {
-    return Optional.ofNullable(task);
+  @Override
+  public Optional<BlockPos> target() {
+    return Optional.ofNullable(task).map(OrganizerTask::pos);
   }
 
-  boolean resting() {
+  @Override
+  public boolean resting() {
     return pause > 0;
   }
 
@@ -124,14 +123,16 @@ public final class RobotOrganizing implements OrganizerControl {
   }
 
   /** Takes the next task, when there is none (rule 21: it only looks when it is time). */
-  void plan(WorkArea area) {
+  @Override
+  public void plan(WorkArea area) {
     if (task == null) {
       task = planner.next(area).orElse(null);
     }
   }
 
   /** Does the task, pays for what moved and rests, as the tier says (answer 1300). */
-  void act() {
+  @Override
+  public void act() {
     OrganizerTask done = task;
     drop();
     if (perform(done) > 0) {
@@ -142,7 +143,8 @@ public final class RobotOrganizing implements OrganizerControl {
   }
 
   /** A place it cannot reach is left until the next look. */
-  void giveUp() {
+  @Override
+  public void giveUp() {
     drop();
   }
 
@@ -188,13 +190,5 @@ public final class RobotOrganizing implements OrganizerControl {
 
   private boolean organizer() {
     return robot.workArea().work().job().filter(RobotJob.ORGANIZER::equals).isPresent();
-  }
-
-  void save(CompoundTag tag) {
-    marks.save(tag);
-  }
-
-  void load(CompoundTag tag) {
-    marks.load(tag);
   }
 }

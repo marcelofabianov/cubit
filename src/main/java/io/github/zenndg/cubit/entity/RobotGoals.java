@@ -38,7 +38,7 @@ final class RobotGoals {
             robot, CubitMod.CONFIG.followDecision(), CubitMod.CONFIG.followRepathTicks()));
     goals.addGoal(AREA_PRIORITY, new FishingGoal(robot));
     goals.addGoal(AREA_PRIORITY, new FarmingGoal(robot));
-    goals.addGoal(AREA_PRIORITY, new OrganizingGoal(robot));
+    goals.addGoal(AREA_PRIORITY, new ErrandGoal(robot, () -> robot.workArea().work().organizing()));
     goals.addGoal(AREA_PRIORITY, new AreaWorkGoal(robot));
     goals.addGoal(LOOK_AT_OWNER_PRIORITY, new LookAtOwnerGoal(robot));
   }

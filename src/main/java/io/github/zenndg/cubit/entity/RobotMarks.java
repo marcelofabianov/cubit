@@ -20,24 +20,25 @@ import net.minecraft.world.item.ItemStack;
 import org.slf4j.Logger;
 
 /**
- * The machines and the destinations an Organizer marked with the Mark app, in order, each with its
- * order, which only the owner changes (answers 1294 to 1297 and rule 20). They live only in the
- * save of the entity, so collecting the Cubit erases them (answer 1301).
+ * The blocks marked with the Mark app, in order: the machines and the destinations of the
+ * Organizer, each with its order, which only the owner changes (answers 1294 to 1297 and rule 20).
+ * They live only in the save of the entity, under MarkedBlocks, so collecting the Cubit erases them
+ * (answers 1301 and 1327).
  */
-public final class RobotOrganizerMarks {
+public final class RobotMarks {
   private static final Logger LOGGER = LogUtils.getLogger();
-  private static final String KEY = "OrganizerMarks";
+  private static final String KEY = "MarkedBlocks";
   private static final String BLOCK_KEY = "Block";
   private static final String DIMENSION_KEY = "Dimension";
   private static final String FACE_KEY = "Face";
   private static final String ITEM_KEY = "Item";
   private static final String COUNT_KEY = "Count";
-  private static final String INVALID_MARK = "Robot {} has an invalid Organizer mark: {}";
+  private static final String INVALID_MARK = "Robot {} has an invalid mark: {}";
 
   private final RobotEntity robot;
   private List<OrganizerTarget> targets = List.of();
 
-  RobotOrganizerMarks(RobotEntity robot) {
+  RobotMarks(RobotEntity robot) {
     this.robot = robot;
   }
 

@@ -2,7 +2,7 @@ package io.github.zenndg.cubit.player;
 
 import io.github.zenndg.cubit.domain.robot.UnloadChests;
 import io.github.zenndg.cubit.entity.RobotEntity;
-import io.github.zenndg.cubit.entity.RobotOrganizerMarks;
+import io.github.zenndg.cubit.entity.RobotMarks;
 import io.github.zenndg.cubit.menu.TabletKeys;
 import java.util.Optional;
 import net.minecraft.core.BlockPos;
@@ -22,7 +22,7 @@ final class TabletMarkApp {
       say(player, Component.translatable(TabletKeys.DOCK_NO_CUBIT));
       return;
     }
-    RobotOrganizerMarks marks = chosen.get().workArea().work().organizing().marks();
+    RobotMarks marks = chosen.get().workArea().work().marks();
     Optional<TabletUse.Block> block =
         click instanceof TabletUse.Block found ? Optional.of(found) : Optional.empty();
     if (player.isShiftKeyDown()) {
@@ -39,7 +39,7 @@ final class TabletMarkApp {
   }
 
   private static void mark(
-      ServerPlayer player, RobotEntity robot, RobotOrganizerMarks marks, TabletUse.Block block) {
+      ServerPlayer player, RobotEntity robot, RobotMarks marks, TabletUse.Block block) {
     BlockPos pos = block.pos();
     Optional<UnloadChests.Mark> mark = marks.click(player, pos, block.face());
     if (mark.isEmpty()) {

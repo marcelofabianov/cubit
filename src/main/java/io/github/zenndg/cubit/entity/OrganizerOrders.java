@@ -110,6 +110,6 @@ final class OrganizerOrders {
   }
 
   private static List<OrganizerTarget> targets(RobotEntity robot) {
-    return robot.workArea().work().organizing().marks().targets();
+    return robot.workArea().work().marks().targets();
   }
 }
