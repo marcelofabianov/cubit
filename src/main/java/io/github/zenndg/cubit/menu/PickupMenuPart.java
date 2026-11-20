@@ -87,8 +87,13 @@ final class PickupMenuPart {
     }
   }
 
-  boolean press(Player player, PickupButton button) {
-    return control.press(player, button);
+  /** The buttons of the behavior tab, from pickup to fetch, in the order of the enum. */
+  static boolean handles(int button) {
+    return button >= RobotMenu.PICKUP_BUTTON && button <= RobotMenu.FETCH_BUTTON;
+  }
+
+  boolean press(Player player, int button) {
+    return control.press(player, PickupButton.values()[button - RobotMenu.PICKUP_BUTTON]);
   }
 
   /** A copy of what the filter holds, shown only in the behavior tab and up to the tier. */

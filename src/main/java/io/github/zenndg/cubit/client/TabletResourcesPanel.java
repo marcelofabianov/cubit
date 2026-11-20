@@ -70,6 +70,7 @@ final class TabletResourcesPanel {
   private final ScreenPainter painter;
   private final TabletRobotMenu menu;
   private final RobotSwitchLook switches;
+  private final SpeedRow speed;
   private final int right;
 
   /** The rows run to the right side of the window, with the switch at the end. */
@@ -78,6 +79,17 @@ final class TabletResourcesPanel {
     this.menu = menu;
     this.switches = new RobotSwitchLook(menu);
     this.right = right;
+    this.speed =
+        new SpeedRow(
+            painter,
+            menu,
+            new SpeedRow.Layout(
+                LEFT, right, ROW_HEIGHT, ICON_X, ICON_TOP, ICON_SCALE, NAME_X, NAME_TOP, true));
+  }
+
+  /** The speed row, the last one, right after the switches (answer 1269). */
+  private static int speedTop() {
+    return FIRST_ROW + BUTTONS.length * ROW_HEIGHT;
   }
 
   private int toggleX() {
@@ -103,7 +115,8 @@ final class TabletResourcesPanel {
     for (int row = 0; row < BUTTONS.length; row++) {
       renderRow(graphics, row, FIRST_ROW + row * ROW_HEIGHT);
     }
-    renderArea(graphics, FIRST_ROW + BUTTONS.length * ROW_HEIGHT + AREA_GAP);
+    speed.render(graphics, speedTop(), BUTTONS.length % 2 == 0);
+    renderArea(graphics, speedTop() + ROW_HEIGHT + AREA_GAP);
   }
 
   /** The area of the Cubit, with its size and corners, or none (answer 1051). */
@@ -192,7 +205,7 @@ final class TabletResourcesPanel {
         return OptionalInt.of(BUTTONS[row]);
       }
     }
-    return OptionalInt.empty();
+    return speed.buttonAt(x, y, speedTop());
   }
 
   /** The detail of the switch under the mouse, as its tooltip. */
@@ -200,10 +213,11 @@ final class TabletResourcesPanel {
     double x = mouseX - left;
     double y = mouseY - top;
     int row = (int) Math.floor((y - FIRST_ROW) / ROW_HEIGHT);
-    if (x < LEFT || x >= right || y < FIRST_ROW || row >= BUTTONS.length) {
+    if (x < LEFT || x >= right || y < FIRST_ROW || row > BUTTONS.length) {
       return false;
     }
-    graphics.renderTooltip(font, switches.detail(BUTTONS[row]), mouseX, mouseY);
+    Component detail = row == BUTTONS.length ? speed.detail() : switches.detail(BUTTONS[row]);
+    graphics.renderTooltip(font, detail, mouseX, mouseY);
     return true;
   }
 }

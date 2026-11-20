@@ -144,6 +144,15 @@ public abstract class RobotMenuReading extends AbstractContainerMenu {
     return values.get(RobotScreenValues.UNLOAD_INTERVAL);
   }
 
+  /** The percentage of the speed of the tier, and the lowest one, for the speed row (1269). */
+  public int speedPercent() {
+    return values.get(RobotScreenValues.SPEED);
+  }
+
+  public int speedMinPercent() {
+    return values.get(RobotScreenValues.SPEED_MIN);
+  }
+
   /** Whether the tier of this Cubit takes fertilizer in the slot of the Farmer (1244). */
   public boolean fertilizerUnlocked() {
     return RobotScreenValues.isTrue(values, RobotScreenValues.FERTILIZER_UNLOCKED);

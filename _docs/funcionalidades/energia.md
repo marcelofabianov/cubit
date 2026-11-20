@@ -30,6 +30,7 @@ Os números estão em [`tiers.md`](../tiers.md#consumo-por-atividade), e o consu
 
 - **Andar:** gasta o valor do tier a cada tick com a rota em andamento e deslocamento real, inclusive ao fugir do fogo e da lava. Ser empurrado não gasta, e rota sem avanço também não.
 - **Inventário cheio:** com todos os slots ocupados, mesmo com pilhas incompletas, andar custa um extra, e a velocidade cai. Em chamas ou na lava, a velocidade não cai, porque fugir vem primeiro.
+- **Velocidade escolhida:** com o [controle de velocidade](movimento.md#controle-de-velocidade) abaixo de 100%, o Cubit leva mais ticks no mesmo caminho e, por isso, gasta mais energia nele (pergunta 1259).
 - **Água:** andar em contato com a água custa um extra, inclusive numa poça rasa e ao fugir do fogo.
 - **Subir:** cada bloco de altura subido na própria rota custa um extra, proporcional à altura. Descer não devolve energia.
 - **Condição negativa:** fogo, lava, [blocos que ferem](movimento.md#sobre-um-bloco-que-fere) e efeitos nocivos do jogo ou de outros mods custam um extra a cada tick, mesmo parado. Várias juntas cobram um extra só, e um golpe não conta. O extra pode zerar a bateria. Aí o robô desliga e, em chamas, queima parado.
@@ -156,6 +157,7 @@ Entra com o item 15 da Fase 4.2, antes do modo área (perguntas 1065 a 1069).
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-19 20:18 | Cita o gasto maior com a velocidade escolhida abaixo de 100% (pergunta 1259). |
 | Marcelo Fabiano | 2026-11-14 10:00 | Define o retorno automático (perguntas 1065 a 1069). |
 | Marcelo Fabiano | 2026-11-13 18:50 | Faz o desligado pelo Tablet voltar pelo clique, como o Power. |
 | Marcelo Fabiano | 2026-11-13 16:40 | Troca o controle remoto pelo Tablet. |

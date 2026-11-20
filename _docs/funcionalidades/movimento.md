@@ -19,6 +19,30 @@ O player escolhe entre o robô seguir ou atuar numa área. A marcação da área
 - Só se move no estado ativo. Inativo ou em hibernação, fica parado e não teleporta.
 - Faz barulho de esteira ao andar. O som entra na Fase 3.
 
+## Controle de velocidade
+
+Entra com o card #212 da Fase 5 (perguntas 1258 a 1261 e 1266 a 1271). O player escolhe quão rápido o Cubit anda, sem passar da velocidade do tier.
+
+- **Valor:** uma porcentagem da velocidade do tier, do mínimo ao máximo de [`tiers.md`](../tiers.md#valores-gerais), 50% a 100% por padrão, em passos de 10%. Como é uma porcentagem, o mesmo valor vale em qualquer tier e acompanha o upgrade (pergunta 1259).
+- **Padrão:** 100%, fixo. Um Cubit que já existia, sem o valor salvo, anda a 100% (perguntas 1259 e 1266).
+- **Onde muda:** nos botões − e + da linha `Speed` / `Velocidade`, na aba Settings da tela do Cubit e na aba Recursos do Tablet, descritas em [`telas.md`](telas.md#aba-settings) e [`tablet.md`](tablet.md) (perguntas 1260 e 1269). Só o dono muda, e o servidor confere o dono e o passo (regra 20).
+- **Quando vale:** em toda caminhada: seguir o player, trabalhar na área, ir ao Dock, ir ao baú da descarga e buscar os itens do chão (pergunta 1268).
+- **Perigo:** em chamas, na lava ou sobre um bloco que fere, o Cubit volta à velocidade cheia do tier, porque fugir vem primeiro, como com o inventário cheio (pergunta 1268).
+- **Com o inventário cheio:** os dois redutores se multiplicam. A 80%, com o inventário cheio, ele anda a 80% de 0,75× da velocidade do tier (pergunta 1268).
+- **Teleporte:** o teleporte do Cubit que fica para trás continua como está (pergunta 1260).
+- **Energia:** andar mais devagar gasta mais energia no mesmo caminho, porque o consumo de andar é por tick, descrito em [`energia.md`](energia.md#consumo) (pergunta 1259).
+- **Save:** fica no item e no NBT. Se o pack mudar o mínimo ou o passo, o valor salvo é ajustado para o degrau válido mais próximo, sem perder o save (pergunta 1266).
+
+### Contrato
+
+| Tipo | Nome | O que guarda |
+|---|---|---|
+| Componente do item | campo `speed_percent` do `cubit:robot_state` | A porcentagem escolhida, um inteiro, opcional, com 100 quando falta |
+| NBT da entidade | `SpeedPercent` | A mesma porcentagem |
+| Config, `general` | `speed_control_min_percent` | O menor valor dos botões, com 50, de 10 a 100 |
+| Config, `general` | `speed_control_step_percent` | O passo dos botões, com 10, de 1 a 50 |
+| Tradução | `Speed` / `Velocidade` e a dica | O nome e a descrição da linha (pergunta 1271) |
+
 ## Em chamas
 
 Números: [valores gerais](../tiers.md#valores-gerais).
@@ -118,6 +142,7 @@ Do Advanced em diante, com a chave ligada, quando o dono renasce, o Cubit que se
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-19 20:18 | Define o controle de velocidade (perguntas 1258 a 1261 e 1266 a 1271). |
 | Marcelo Fabiano | 2026-11-14 18:46 | Detalha quem guia, a viagem ao Dock e a pausa por perigo. |
 | Marcelo Fabiano | 2026-11-14 18:14 | Define o local de morte, com o histórico, o texto ao renascer e a guia (perguntas 1109 a 1126). |
 | Marcelo Fabiano | 2026-11-13 16:40 | Aponta a marcação da área para o modo área. |

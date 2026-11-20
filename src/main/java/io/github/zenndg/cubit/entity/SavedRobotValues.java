@@ -7,6 +7,7 @@ import io.github.zenndg.cubit.domain.robot.DefenseMode;
 import io.github.zenndg.cubit.domain.robot.OreFilter;
 import io.github.zenndg.cubit.domain.robot.RobotColor;
 import io.github.zenndg.cubit.domain.robot.RobotState;
+import io.github.zenndg.cubit.domain.robot.SpeedChoice;
 import io.github.zenndg.cubit.domain.robot.UnloadInterval;
 import io.github.zenndg.cubit.domain.robot.WorkSettings;
 import io.github.zenndg.cubit.domain.tier.RobotTier;
@@ -49,6 +50,8 @@ final class SavedRobotValues {
   private static final String DEATH_POINT_KEY = "DeathPointEnabled";
   private static final String KEEP_JUNK_KEY = "KeepJunkEnabled";
   private static final String UNLOAD_INTERVAL_KEY = "UnloadIntervalMinutes";
+  private static final String SPEED_KEY = "SpeedPercent";
+  private static final int LOWEST_SPEED = 1;
   private static final String TORCH_SLOT_KEY = "TorchSlot";
   private static final String CARD_SLOT_KEY = "CardSlot";
   private static final String FERTILIZER_SLOT_KEY = "FertilizerSlot";
@@ -58,6 +61,7 @@ final class SavedRobotValues {
   private static final String INVALID_COLOR_MESSAGE = "Robot {} has an invalid color: {}";
   private static final String INVALID_STATE_MESSAGE = "Robot {} has an invalid power state: {}";
   private static final String INVALID_DEFENSE_MESSAGE = "Robot {} has an invalid defense mode: {}";
+  private static final String INVALID_SPEED_MESSAGE = "Robot {} has an invalid speed: {}";
 
   private SavedRobotValues() {}
 
@@ -84,6 +88,7 @@ final class SavedRobotValues {
     tag.putBoolean(UNLOAD_KEY, robot.state().unloadOn());
     tag.putBoolean(DEATH_POINT_KEY, robot.state().deathPointOn());
     writeWorkSettings(tag, robot.state().workSettings());
+    tag.putInt(SPEED_KEY, robot.state().speed().percent());
     SavedPickup.write(tag, robot.state().pickup());
     robot
         .lastSafePosition()
@@ -188,7 +193,21 @@ final class SavedRobotValues {
         .withAutoReturn(!tag.contains(AUTO_RETURN_KEY) || tag.getBoolean(AUTO_RETURN_KEY))
         .withUnload(!tag.contains(UNLOAD_KEY) || tag.getBoolean(UNLOAD_KEY))
         .withDeathPoint(!tag.contains(DEATH_POINT_KEY) || tag.getBoolean(DEATH_POINT_KEY))
-        .withWorkSettings(workSettings(tag));
+        .withWorkSettings(workSettings(tag))
+        .withSpeed(speed(tag, robot));
+  }
+
+  /** Without the key, the robot was saved before the control existed, so it walks at 100%. */
+  private static SpeedChoice speed(CompoundTag tag, UUID robot) {
+    if (!tag.contains(SPEED_KEY)) {
+      return SpeedChoice.FULL;
+    }
+    int saved = tag.getInt(SPEED_KEY);
+    int safe = Math.clamp(saved, LOWEST_SPEED, SpeedChoice.MAX_PERCENT);
+    if (safe != saved) {
+      LOGGER.warn(INVALID_SPEED_MESSAGE, robot, saved);
+    }
+    return new SpeedChoice(safe);
   }
 
   /**

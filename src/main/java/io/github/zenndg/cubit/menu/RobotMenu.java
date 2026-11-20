@@ -96,6 +96,7 @@ public class RobotMenu extends RobotMenuReading {
   private final DefenseControl defense;
   private final PowerControl power;
   private final WorkControl work;
+  private final SpeedControl speed;
   private final RobotScreenOpening opening;
   private final RobotMenuSlots slotGroups;
   private final PickupMenuPart pickup;
@@ -119,6 +120,7 @@ public class RobotMenu extends RobotMenuReading {
     this.defense = server.defense();
     this.power = server.power();
     this.work = server.work();
+    this.speed = server.speed();
     this.opening = contents.opening();
     this.pickup = new PickupMenuPart(server.pickup());
     slotGroups.addRobotSlots(this::addSlot, container, grid);
@@ -181,6 +183,7 @@ public class RobotMenu extends RobotMenuReading {
             source.torches(),
             source.deathPoint(),
             source.work(),
+            source.speed(),
             source.switches());
     values.refresh();
     return new RobotMenuServer(
@@ -191,7 +194,8 @@ public class RobotMenu extends RobotMenuReading {
         source.defense(),
         source.power(),
         source.pickup(),
-        source.work());
+        source.work(),
+        source.speed());
   }
 
   @Override
@@ -204,9 +208,11 @@ public class RobotMenu extends RobotMenuReading {
   /** The server checks this menu before calling, and it is checked again for any other caller. */
   @Override
   public boolean clickMenuButton(Player player, int button) {
-    if (button >= PICKUP_BUTTON && button <= FETCH_BUTTON) {
-      return stillValid(player)
-          && pickup.press(player, PickupControl.PickupButton.values()[button - PICKUP_BUTTON]);
+    if (PickupMenuPart.handles(button)) {
+      return stillValid(player) && pickup.press(player, button);
+    }
+    if (SpeedButtons.handles(button)) {
+      return stillValid(player) && SpeedButtons.press(speed, player, button);
     }
     if (CONTROL_BUTTONS.contains(button)) {
       return stillValid(player) && pressControl(player, button);

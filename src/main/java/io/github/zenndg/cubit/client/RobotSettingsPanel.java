@@ -15,7 +15,7 @@ import net.minecraft.world.item.ItemStack;
  * The settings tab of the robot screen, as in the concept image: the switches that exist, the
  * scanner filter and the status. The eight switches take rows of 12 px, with the detail in their
  * tooltip, so the torches, the auto return, the unload and the death point fit (answers 974, 1066,
- * 1093 and 1118). Every number comes from the server.
+ * 1093 and 1118), and the speed row comes last (answer 1269). Every number comes from the server.
  */
 final class RobotSettingsPanel {
   private static final int LEFT = 7;
@@ -38,16 +38,16 @@ final class RobotSettingsPanel {
   private static final int NAME_X = 30;
   private static final int NAME_TOP = 2;
   private static final int TOGGLE_TOP = 0;
-  private static final int FILTER_TITLE_Y = 132;
-  private static final int FILTER_RULE = 141;
+  private static final int FILTER_TITLE_Y = 144;
+  private static final int FILTER_RULE = 153;
   private static final int ORE_FRAME_X = 8;
-  private static final int ORE_FRAME_Y = 146;
+  private static final int ORE_FRAME_Y = 158;
   private static final int TEXT_X = 32;
-  private static final int LOOKING_Y = 147;
-  private static final int HINT_Y = 157;
-  private static final int STATUS_TITLE_Y = 172;
-  private static final int STATUS_RULE = 181;
-  private static final int FIRST_STATUS = 185;
+  private static final int LOOKING_Y = 159;
+  private static final int HINT_Y = 169;
+  private static final int STATUS_TITLE_Y = 180;
+  private static final int STATUS_RULE = 189;
+  private static final int FIRST_STATUS = 193;
   private static final int STATUS_HEIGHT = 14;
   private static final int STATUS_TEXT_TOP = 3;
   private static final int STATUS_LABEL_X = 10;
@@ -80,6 +80,7 @@ final class RobotSettingsPanel {
   private final RobotMenu menu;
   private final ItemStack oreIcon;
   private final RobotSwitchLook switches;
+  private final SpeedRow speed;
   private final int right;
 
   RobotSettingsPanel(ScreenPainter painter, RobotMenu menu, ItemStack oreIcon) {
@@ -93,6 +94,12 @@ final class RobotSettingsPanel {
     this.oreIcon = oreIcon;
     this.switches = new RobotSwitchLook(menu);
     this.right = right;
+    this.speed =
+        new SpeedRow(
+            painter,
+            menu,
+            new SpeedRow.Layout(
+                LEFT, right, FUNCTION_HEIGHT, ICON_X, 0, ICON_SCALE, NAME_X, NAME_TOP, false));
   }
 
   private int toggleX() {
@@ -113,6 +120,7 @@ final class RobotSettingsPanel {
     for (int row = 0; row < BUTTONS.length; row++) {
       renderFunction(graphics, row, FIRST_FUNCTION + row * FUNCTION_HEIGHT);
     }
+    speed.render(graphics, speedTop(), BUTTONS.length % 2 == 0);
     heading(graphics, ScreenKeys.SCANNER_FILTER, heading(FILTER_TITLE_Y), FILTER_RULE);
     renderFilter(graphics);
     heading(graphics, ScreenKeys.STATUS, heading(STATUS_TITLE_Y), STATUS_RULE);
@@ -145,7 +153,12 @@ final class RobotSettingsPanel {
         return OptionalInt.of(BUTTONS[row]);
       }
     }
-    return OptionalInt.empty();
+    return speed.buttonAt(x, y, speedTop());
+  }
+
+  /** The speed row, right after the switches. */
+  private static int speedTop() {
+    return FIRST_FUNCTION + BUTTONS.length * FUNCTION_HEIGHT;
   }
 
   private void heading(GuiGraphics graphics, String key, Box box, int rule) {
@@ -180,10 +193,11 @@ final class RobotSettingsPanel {
     double x = mouseX - left;
     double y = mouseY - top;
     int row = (int) Math.floor((y - FIRST_FUNCTION) / FUNCTION_HEIGHT);
-    if (x < LEFT || x >= right || y < FIRST_FUNCTION || row >= BUTTONS.length) {
+    if (x < LEFT || x >= right || y < FIRST_FUNCTION || row > BUTTONS.length) {
       return false;
     }
-    graphics.renderTooltip(font, switches.detail(BUTTONS[row]), mouseX, mouseY);
+    Component detail = row == BUTTONS.length ? speed.detail() : switches.detail(BUTTONS[row]);
+    graphics.renderTooltip(font, detail, mouseX, mouseY);
     return true;
   }
 

@@ -11,6 +11,7 @@ import io.github.zenndg.cubit.domain.energy.PowerRules;
 import io.github.zenndg.cubit.domain.robot.OreKind;
 import io.github.zenndg.cubit.domain.robot.OreSignals;
 import io.github.zenndg.cubit.domain.robot.RobotType;
+import io.github.zenndg.cubit.domain.robot.SpeedSteps;
 import io.github.zenndg.cubit.domain.tier.RobotTier;
 import io.github.zenndg.cubit.domain.tier.TierCatalog;
 import java.util.ArrayList;
@@ -50,6 +51,7 @@ public final class CubitConfig {
   private final DeathPointSection deathPoint;
   private final FisherSection fisher;
   private final UnloadSection unload;
+  private final SpeedControlSection speedControl;
   private final AtomicBoolean warnedRareTags = new AtomicBoolean();
   private final AtomicBoolean warnedLamp = new AtomicBoolean();
   private final AtomicBoolean warnedFishing = new AtomicBoolean();
@@ -76,6 +78,7 @@ public final class CubitConfig {
     deathPoint = new DeathPointSection(builder);
     fisher = new FisherSection(builder);
     unload = new UnloadSection(builder);
+    speedControl = new SpeedControlSection(builder);
     builder.pop();
 
     tierCatalog = new NeoForgeTierCatalog(Map.of(GENERAL_ROBOT, tierSections(builder)));
@@ -275,6 +278,11 @@ public final class CubitConfig {
   /** A default over the max would never show in the Work tab, so it is kept under it. */
   public int unloadIntervalDefaultMinutes() {
     return Math.min(unload.defaultMinutes.get(), unloadIntervalMaxMinutes());
+  }
+
+  /** The steps of the speed buttons, valid by the ranges of the two keys (answer 1267). */
+  public SpeedSteps speedSteps() {
+    return new SpeedSteps(speedControl.minPercent.get(), speedControl.stepPercent.get());
   }
 
   public int farmerScanIntervalTicks() {

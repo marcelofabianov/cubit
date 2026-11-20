@@ -73,6 +73,7 @@ Valem para todos os tiers e ficam no config. Os marcados como planejados entram 
 | Altura máxima que a rota desce | 5 blocos |
 | Velocidade em chamas, sobre a do tier | 1,25× |
 | Velocidade com o inventário cheio, sobre a do tier | 0,75× |
+| Controle de velocidade, sobre a do tier: mínimo, máximo e passo (pergunta 1267) | 50%, 100% e 10%. O padrão do Cubit é 100% |
 | Busca de água em chamas, em qualquer direção | 8 blocos |
 | Alcance ao andar ao acaso em chamas e ao sair da lava ou de um bloco que fere | 5 blocos |
 | Distância para teleportar até o player | ~20 blocos |
@@ -223,6 +224,7 @@ Planejado para a Fase 5. O tier Base não aceita cards, e cada card tem o seu ti
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-19 20:18 | Adiciona os números do controle de velocidade (pergunta 1267). |
 | Marcelo Fabiano | 2026-11-15 14:30 | Reduz a velocidade do Ultimate de 2,0× para 1,75× (pergunta 1258). |
 | Marcelo Fabiano | 2026-11-15 14:05 | Acrescenta o intervalo de descarga (perguntas 1252 e 1254). |
 | Marcelo Fabiano | 2026-11-15 13:45 | Libera o fertilizante desde o Avançado (pergunta 1248). |

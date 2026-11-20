@@ -93,6 +93,7 @@ public final class RobotScreenReadout {
         robot.torches(),
         robot.docking().deathGuide(),
         robot.workArea().work(),
+        robot.speed(),
         stillValid);
   }
 

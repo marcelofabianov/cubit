@@ -133,6 +133,7 @@ Fica fixo em todas as abas. `Voltar` fica no canto superior esquerdo, e os botõ
 | Retorno automático | Base |
 | Descarga | Base |
 | Local de morte | Advanced |
+| Velocidade, com − e + no lugar da chave (perguntas 1260 e 1269) | Base |
 
   Com um Cubit numa área, a aba também mostra a área, com os cantos e o tamanho (item 13). O retorno automático entra com o item 15, antes do modo área (pergunta 1069), e a descarga em baú e o local de morte, com os itens 14 e 16 da Fase 4.2.
 - **Aba Inventário:** o slot de energia é o primeiro da fileira dos slots exclusivos, antes das tochas, e o slot vazio diz `Redstone` na dica (pergunta 1104). Mostra o inventário inteiro do Cubit, em 3 fileiras com as colunas do tier, como a tela do Cubit, mas não permite tirar, pôr nem mover itens. No Ultimate, a janela do Tablet alarga para caber as 18 colunas (pergunta 1101). A dica de cada item funciona.
@@ -198,6 +199,7 @@ Os textos em inglês e português, como `Cubit Tablet` / `Tablet do Cubit`, `Tab
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-19 20:18 | Adiciona a linha da velocidade à aba Recursos (perguntas 1260 e 1269). |
 | Marcelo Fabiano | 2026-11-14 21:23 | Acrescenta o trabalho e o motivo da hibernação à foto do Cubit (pergunta 1168). |
 | Marcelo Fabiano | 2026-11-14 20:52 | Acrescenta a aba Trabalho e a chave `allowed_jobs` (perguntas 1163, 1167 e 1172). |
 | Marcelo Fabiano | 2026-11-14 18:46 | Detalha o pacote `cubit:death_log`. |

@@ -59,6 +59,9 @@ public final class ScreenKeys {
   public static final String UNLOAD_DETAIL = ROBOT + "unload.detail";
   public static final String DEATH_POINT = ROBOT + "death_point";
   public static final String DEATH_POINT_DETAIL = ROBOT + "death_point.detail";
+  public static final String SPEED = ROBOT + "speed";
+  public static final String SPEED_DETAIL = ROBOT + "speed.detail";
+  public static final String SPEED_VALUE = ROBOT + "speed.value";
   public static final String TAB_INVENTORY = ROBOT + "tab_inventory";
   public static final String TAB_SETTINGS = ROBOT + "tab_settings";
   public static final String SETTINGS = ROBOT + "settings";

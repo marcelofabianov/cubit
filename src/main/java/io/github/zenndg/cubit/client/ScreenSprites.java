@@ -89,6 +89,9 @@ final class ScreenSprites {
   /** The death point switch, from a prompt. */
   private static final int DEATH_POINT_U = 64;
 
+  /** The speedometer of the speed row, after the Work tab, from a prompt (answer 1270). */
+  private static final int SPEED_U = 192;
+
   private ScreenSprites() {}
 
   static void chest(GuiGraphics graphics, int x, int y) {
@@ -156,6 +159,10 @@ final class ScreenSprites {
       case RobotMenu.DEATH_POINT_BUTTON -> deathRowIcon(graphics, x, y, DEATH_POINT_U);
       default -> function(graphics, x, y, button);
     }
+  }
+
+  static void speed(GuiGraphics graphics, int x, int y) {
+    deathRowIcon(graphics, x, y, SPEED_U);
   }
 
   static void workTab(GuiGraphics graphics, int x, int y) {

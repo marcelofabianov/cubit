@@ -30,6 +30,7 @@ class RobotStateTest {
   private static final float TOO_MUCH_HEALTH = 99f;
   private static final float MIN_PLACED_HEALTH = 1f;
   private static final int REPAIR_PERCENT = 25;
+  private static final int SLOWER_PERCENT = 70;
   private static final String DIAMOND_TAG = "c:ores/diamond";
   private static final float REPAIRED_HEALTH = 6.25f;
   private static final Energy CONSUMPTION = new Energy(10);
@@ -282,5 +283,24 @@ class RobotStateTest {
     assertEquals(
         changed, off.withUnload(false).withAutoReturn(false).withDeathPoint(false).workSettings());
     assertEquals(changed, off.withTorches(false).withEnergy(SOME_ENERGY).workSettings());
+  }
+
+  /** The speed starts whole, and dying, repairing and the other changes keep it (1266). */
+  @Test
+  void theSpeedStartsWholeAndSurvivesTheOtherChanges() {
+    RobotState fresh = new RobotState(RobotTier.BASE, SOME_ENERGY, SOME_HEALTH);
+    SpeedChoice slower = new SpeedChoice(SLOWER_PERCENT);
+    RobotState slow = fresh.withSpeed(slower);
+    assertEquals(SpeedChoice.FULL, fresh.speed());
+    assertEquals(slower, slow.damaged().repaired(SPEC, new Percentage(REPAIR_PERCENT)).speed());
+    assertEquals(
+        slower, slow.withUnload(false).withAutoReturn(false).withDeathPoint(false).speed());
+    assertEquals(
+        slower,
+        slow.withTorches(false)
+            .withEnergy(SOME_ENERGY)
+            .withPickup(PickupSettings.INITIAL)
+            .withWorkSettings(WorkSettings.INITIAL)
+            .speed());
   }
 }
