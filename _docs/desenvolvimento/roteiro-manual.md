@@ -964,14 +964,14 @@ As regras estão em [`organizador.md`](../funcionalidades/trabalhos/organizador.
 |---|---|---|
 | 1 | Faça o card na bancada: papel, comparador, papel / redstone, funil, redstone / papel, redstone, papel | Sai o `Machine Learning: Organizer` |
 | 2 | Tente pôr o card num Cubit Advanced | Ele não entra, e a dica diz `Elite` |
-| 3 | Ponha o card num Cubit Elite | Aparecem a caixa de papelão nas costas, a prancheta e a caixa no canto da tela |
+| 3 | Ponha o card num Cubit Elite | Aparecem o boné laranja cobrindo o painel solar, a mochila com o livro e pena e a caixa no canto da tela, e o livro e pena vai para a garra quando ele tira ou põe um item |
 | 4 | Marque a área com o app Área e os três baús com o app Descarga, com pedras no segundo baú | O Elite aceita até 9 baús |
 | 5 | Com o app Marcar, marque a fornalha | Aparece a seta sobre ela, e o Elite aceita até 8 marcas |
 | 6 | Espere a fornalha fundir e jogue pedras e terra no chão da área | Ele tira o resultado e o balde vazio por baixo, sem mexer no minério nem no carvão, pega os itens do chão e guarda as pedras no segundo baú e o resto no primeiro com espaço |
 | 7 | Jogue uma picareta encantada e uma comum | As duas não se misturam pela regra do baú com mais do mesmo item |
 | 8 | Encha os três baús | Ele fica com o que não cabe, avisa `Cubit: No room for some items` e, cheio, hiberna com `Hibernating · Inventory full` |
-| 9 | Na aba Trabalho, troque `Mode` para `Supply` e, com o app Marcar, marque a face de cima de uma fornalha vazia e a face do lado de outra | Aparecem duas linhas de pedido, com o slot fantasma e − e + |
-| 10 | Ponha minério de ferro e 16 no primeiro pedido, e carvão e 8 no segundo, com os itens nos baús | Ele completa a entrada com 16 minérios e o combustível com 8 carvões, sem passar disso, e repõe quando a fornalha consome |
+| 9 | Na aba Trabalho, troque `Mode` para `Supply` e, com o app Marcar, marque a face de cima de uma fornalha vazia e a face do lado de outra | Aparece a aba `Supply`, com o card como ícone, o título `Supply · 2 of 8` e duas linhas, com ↑ e →, o slot fantasma, `64` e − e + |
+| 10 | Na aba `Supply`, clique no slot do primeiro pedido com minério de ferro e deixe 16, e no segundo com carvão e deixe 8, com os itens nos baús | Ele completa a entrada com 16 minérios e o combustível com 8 carvões, sem passar disso, e repõe quando a fornalha consome. A mão vazia no slot limpa o pedido |
 | 11 | Use Shift no + | A quantidade anda de 8 em 8, até 64 |
 | 12 | Com outro player, tente marcar ou mudar um pedido | Nada muda, porque só o dono pode |
 | 13 | Recolha o Cubit e coloque de novo | O card e o modo continuam, e a área, os baús e as marcas precisam ser marcados de novo |
@@ -1038,6 +1038,8 @@ Na instância só com o mod, tire capturas com F2 do Cubit seguindo, da tela do 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-19 22:36 | Troca o visual do Organizador no roteiro (perguntas 1307 e 1308). |
+| Marcelo Fabiano | 2026-11-19 22:13 | Leva o roteiro do Organizador à aba `Supply` (perguntas 1303 a 1305). |
 | Marcelo Fabiano | 2026-11-19 21:35 | Adiciona o roteiro do Organizador. |
 | Marcelo Fabiano | 2026-11-19 20:19 | Adiciona o roteiro do controle de velocidade. |
 | Marcelo Fabiano | 2026-11-15 10:40 | Adiciona o roteiro do Fazendeiro. |

@@ -90,6 +90,8 @@ Entra com o card #193, a base do trabalho, sem trabalho próprio: o Pescador vem
 
 Uma aba `Work` / `Trabalho` na tela do Cubit e na tela do Cubit no Tablet, com um ícone feito por prompt (perguntas 1167 e 1169). Ela mostra o card, o nome do trabalho, o estado e, hibernando, o motivo, com o botão `Resume` / `Retomar`. Sem card, diz que o Cubit não tem trabalho. O modo e os filtros entram com cada trabalho. Com card ou sem card, ela também tem o intervalo de descarga, descrito em [`inventario.md`](inventario.md#descarregar-em-baú) (perguntas 1250 a 1254).
 
+Com o card do Organizador, a linha da chave do trabalho dá lugar à linha `Mode` / `Modo`, com um botão que alterna entre `Organize` / `Organizar` e `Supply` / `Abastecer`, e a tela ganha a aba `Supply` / `Abastecer`, com os pedidos, descrita em [`organizador.md`](trabalhos/organizador.md#modo-abastecer) (perguntas 1290 e 1303).
+
 ### Hibernação fora do Dock
 
 Estado semelhante ao desligado, mas com o inventário e as configurações acessíveis. O Cubit fica imóvel e sem tarefas, como dormindo (perguntas 198 e 1164).
@@ -181,6 +183,7 @@ A ordem segue a pergunta 251, com o Mecânico e o Alquimista no fim dos trabalho
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-19 22:13 | Acrescenta a linha `Mode` e a aba `Supply` do Organizador (perguntas 1290 e 1303). |
 | Marcelo Fabiano | 2026-11-19 21:34 | Leva a marcação dos blocos ao app Marcar e abre a exceção do Organizador na proteção (perguntas 1288, 1289 e 1297). |
 | Marcelo Fabiano | 2026-11-15 14:05 | Acrescenta o intervalo de descarga na aba Trabalho (perguntas 1250 a 1254). |
 | Marcelo Fabiano | 2026-11-15 10:40 | Liga o conceito do Fazendeiro, que ara e planta com as sementes do baú (perguntas 1215 a 1237). |

@@ -247,11 +247,21 @@ Não há perguntas pendentes nesta fase.
 | 1300 | Quais são os números do Organizador? | `organizer_chests` 9 no Elite e 18 no Ultimate; `organizer_marks` 8 e 16; `organizer_action_cost` 50 FE por pilha movida nos dois; `organizer_action_pause_ticks` 12 e 6; `organizer_scan_interval_ticks` 100 e 40. A quantidade de um pedido vai de 1 a 64, com − e + de 1 em 1 e, com Shift, de 8 em 8. Cada destino é um pedido, então os pedidos seguem `organizer_marks`. Fecha o item 8 em aberto |
 | 1301 | O conceito do Organizador (#196) está autorizado para o código? | Sim: o desenvolvedor disse "autorizo", com os detalhes completados pelo agente: o aviso `Cubit: No room for some items`, o pedido que espera sem hibernar, só o que está dentro da área, o modo no item e as marcas só no NBT, e a prancheta que sobe ao mover um item (regra 53) |
 | 1302 | Como a dica da linha `Speed` deixa de cobrir a porcentagem ao usar − e +? | Ela só aparece com o mouse sobre o ícone e o nome. Sobre −, o valor e +, nada aparece. Vale na aba Settings e na aba Recursos do Tablet. Detalha a pergunta 1271 |
+| 1303 | Onde ficam as linhas dos pedidos de abastecer, que chegam a 16 no Ultimate? | Numa aba própria, `Supply` / `Abastecer`, que só aparece com o card do Organizador, na tela do Cubit e no Tablet, com 5 linhas por vez, a roda do mouse para rolar e o inventário do player embaixo. A linha `Mode` fica na aba Trabalho, no lugar da chave do trabalho. Muda a pergunta 1295 |
+| 1304 | Com quantos itens começa o pedido de um destino recém-marcado? | 64, uma pilha. Até o player escolher o item, o destino não recebe nada |
+| 1305 | Os detalhes de tela que a implementação do Organizador fechou podem ficar? | Sim, os sete: o app Marcar na cor verde-azulada `#3CC8B4`; o card do Organizador como ícone da aba `Supply`; a textura do card no modelo dos outros, com o topo marrom de papelão e uma caixa com etiqueta, feita pelo agente; o título `Supply · 3 of 8`, com os destinos marcados e o limite do tier; a posição e a face de cada linha, com ↑ em cima, ↓ embaixo e → nos lados; o clique com a mão vazia, que limpa o item do pedido; e as setas das marcas no mundo, com `Mark 2`, pelo número na ordem |
+| 1306 | O PR do Organizador acrescenta as classes novas à estrutura de pacotes do `AGENTS.md`? | Sim, num commit `docs` próprio |
+| 1307 | Qual chapéu o Organizador usa, no padrão dos trabalhos, com chapéu e mochila com ferramenta? | Um boné laranja de almoxarifado, com aba curta para a frente e uma faixa marrom de papelão, cobrindo o painel solar, que continua carregando. Muda a pergunta 1298, que tinha uma caixa nas costas e uma prancheta |
+| 1308 | Qual ferramenta fica na mochila e vai para a garra? | O livro e pena do jogo, na mesma mochila dos outros trabalhos, e na garra quando ele tira ou põe um item. Muda a pergunta 1298 |
+| 1309 | Com qual nome os commits saem? | `Zennd`, o nome configurado no Git deste repositório |
+| 1310 | Onde ficam os prompts de imagem? | Em `tmp/arte/{nome}/`, com as imagens geradas por eles, como regra do `AGENTS.md` |
+| 1311 | A imagem conceito do Organizador está aceita? | Sim: o desenvolvedor disse "autorizo". Ela vai para `_docs/imagens/conceito/trabalhos/organizador.png`, com o boné, a mochila com o livro e pena, o colar roxo do Elite e a caixa na tela |
 
 ## Histórico de modificações
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-19 21:52 | Registra as respostas 1303 a 1311. |
 | Marcelo Fabiano | 2026-11-19 21:47 | Registra a resposta 1302. |
 | Marcelo Fabiano | 2026-11-19 21:26 | Registra as respostas 1285 a 1301. |
 | Marcelo Fabiano | 2026-11-19 20:58 | Registra as respostas 1282 a 1284. |

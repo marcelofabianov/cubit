@@ -117,6 +117,7 @@ Fica fixo em todas as abas. `Voltar` fica no canto superior esquerdo, e os botõ
 | Inventário | Baú | O inventário do Cubit, só para consulta |
 | Mortes | Ícone feito por prompt (pergunta 1125) | O histórico de mortes do player, com os botões de guiar e excluir (perguntas 1111 e 1119) |
 | Trabalho | O ícone do card, feito por prompt (pergunta 1169) | O card, o trabalho, o estado e o botão `Retomar`, como na tela do Cubit, descrita em [`trabalhos.md`](trabalhos.md#aba-trabalho) (pergunta 1167) |
+| Abastecer | O card do Organizador (pergunta 1305) | Só com o card do Organizador: os pedidos de abastecer, com o inventário do player embaixo, como na tela do Cubit, descrita em [`organizador.md`](trabalhos/organizador.md#modo-abastecer) (pergunta 1303) |
 
 - **Aba Recursos:** um painel próprio, com as chaves numa lista só, cada uma com a descrição na linha, entre o nome e a chave, e a largura da janela, também no Ultimate (pergunta 1103), que usam os mesmos controles do servidor da tela do Cubit (pergunta 1037). Uma linha bloqueada pelo tier fica apagada, com a chave desativada e o tier que libera, como `Unlocks at Advanced`. Entram os recursos que já existem:
 
@@ -200,6 +201,7 @@ Os textos em inglês e português, como `Cubit Tablet` / `Tablet do Cubit`, `Tab
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-19 22:13 | Adiciona a aba Abastecer, com o card do Organizador (perguntas 1303 e 1305). |
 | Marcelo Fabiano | 2026-11-19 21:34 | Define o app Marcar, que entra com o Organizador (perguntas 1288, 1296 e 1297). |
 | Marcelo Fabiano | 2026-11-19 20:18 | Adiciona a linha da velocidade à aba Recursos (perguntas 1260 e 1269). |
 | Marcelo Fabiano | 2026-11-14 21:23 | Acrescenta o trabalho e o motivo da hibernação à foto do Cubit (pergunta 1168). |
