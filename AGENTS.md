@@ -1,6 +1,6 @@
 # Cubit
 
-Mod de Minecraft que adiciona um robô companheiro fofo, movido a bateria, de tecnologia e construção. É feito para o player e funciona numa instância só com ele e suas dependências. O modpack [Iron Meridian](https://github.com/marcelofabianov/iron-meridian) é um dos lugares onde ele é testado.
+Mod de Minecraft que adiciona um robô companheiro fofo, movido a bateria, de tecnologia e construção. É feito para o player e funciona numa instância só com ele e suas dependências. O modpack [Iron Meridian](https://github.com/zenndg/iron-meridian) é um dos lugares onde ele é testado.
 
 **Comece por:** [`README.md`](README.md), a visão geral com as fases, e [`_docs/README.md`](_docs/README.md), o mapa da documentação. As respostas em `_docs/perguntas/` são a fonte da verdade e prevalecem sobre os outros documentos.
 
@@ -171,14 +171,18 @@ O Cubit é o único robô do mod. O que muda entre um Cubit e outro é o tier e 
 
 53. **Código só com o conceito autorizado:** para atuar no código, primeiro é preciso ter a autorização explícita do desenvolvedor sobre o conceito. Ao fechar o refinamento, o agente apresenta o conceito e espera essa autorização, que entra em `_docs/perguntas/` (regra 47).
 
+### Apresentação
+
+54. **Listas numeradas:** ao apresentar itens ao desenvolvedor, como opções, pendências, passos ou achados, prefira listas ordenadas numericamente, para ele poder citar cada item pelo número.
+
 ## Git
 
 - **Autorização:** nunca faça commit, push, tag, release ou PR sem autorização explícita para aquela ação. Antes, mostre os arquivos, o resumo e a mensagem proposta.
 - **Merge:** somente o desenvolvedor faz.
 - **Autoria:** nunca atribua autoria ou coautoria a uma IA, nem em commits, PRs, tags, releases ou comentários.
 - **Assinatura:** os commits são assinados com SSH. Não desligue a assinatura.
-- **Remote:** `git@github.com-personal:marcelofabianov/cubit.git`. Não troque por HTTPS nem por `git@github.com:`, que caem na conta profissional.
-- **Conta do `gh`:** esta é a conta pessoal. Se o `gh api user --jq .login` mostrar outra, prefixe o comando com `GH_TOKEN=$(gh auth token --user marcelofabianov)`.
+- **Remote:** `git@github.com-zenndg:zenndg/cubit.git`, da conta `zenndg`, para onde o repositório foi (respostas 1276 e 1278). Não troque por HTTPS nem por `git@github.com:`, que caem em outra conta.
+- **Conta do `gh`:** a conta `zenndg`. Se o `gh api user --jq .login` mostrar outra, prefixe o comando com `GH_TOKEN=$(gh auth token --user zenndg)`.
 
 ### Fluxo de branches
 
@@ -208,7 +212,7 @@ O projeto segue o Gitflow, com Semantic Versioning e Conventional Commits.
 Aprovada. Vale a partir da Fase 2.
 
 ```text
-io.github.marcelofabianov.cubit
+io.github.zenndg.cubit
 ├── CubitMod                // ponto de entrada: só conecta os registros
 ├── domain/                 // Java puro, testado com JUnit
 │   ├── robot/              // RobotType, capacidades que o Cubit combina, OreKind, OreFilter, OreSignals, DefenseMode; PickupFilter, PickupEntry, PickupMode e PickupSettings: o filtro de coleta; TabletApp, RobotListing e RobotListings: os apps e a lista do Tablet; RobotName: o nome que o Tablet dá; TabletApps: os apps que fazem sentido para o Cubit escolhido; TabletWheel: o lado da troca de app, também com a rolagem lateral do macOS; FollowCall: se o `Follow` do Tablet pode chamar o Cubit; WorkArea, AreaCorner, AreaCheck e AreaMarking: a área do modo área e a marcação dela; UnloadChest, UnloadChests e UnloadCall: os baús de descarga e o `Descarregar`; RobotState também guarda a chave do local de morte; RobotJob: os trabalhos dos cards; JobSwitches: as chaves da aba Trabalho de cada trabalho

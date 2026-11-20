@@ -47,4 +47,4 @@ The first release of Cubit, a cute battery-powered robot companion for Minecraft
 - **Config:** every balance number lives in `config/cubit-common.toml`, and an invalid value never crashes the game.
 - **Recipes:** plain datapack JSON with vanilla materials only, so modpacks can override them with KubeJS.
 
-[0.1.0]: https://github.com/marcelofabianov/cubit/releases/tag/v0.1.0
+[0.1.0]: https://github.com/zenndg/cubit/releases/tag/v0.1.0

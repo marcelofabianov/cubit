@@ -6,8 +6,8 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 
 - **Nome do mod e do robô:** Cubit.
 - **Modid:** `cubit`.
-- **Pacote Java:** `io.github.marcelofabianov.cubit`.
-- **Repositório:** `marcelofabianov/cubit`.
+- **Pacote Java:** `io.github.zenndg.cubit`.
+- **Repositório:** `zenndg/cubit`.
 - **Licença:** MIT, para todos os recursos presentes no repositório, inclusive os sons. A exceção é o Gradle Wrapper, de terceiros, que não vai no jar.
 - **Ícone do mod:** o mesmo do item do Cubit.
 - **Primeira versão:** `0.1.0`, publicada só ao terminar todos os itens da Fase 3, com a `1.0.0` só com o mod completo.
@@ -25,7 +25,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Release no GitHub:** cada versão tem a tag anotada e uma release no GitHub, com a seção do `CHANGELOG.md` e o jar, antes do envio aos sites (pergunta 778).
 - **Outro player:** o teste com outro player não é feito no jogo. As GameTests com um player que não é o dono cobrem o Dock, o `/cubit reset`, a cor e o nome (perguntas 770 a 772).
 - **Etapa atual:** as Fases 1, 2 e 3 foram encerradas, com a `0.1.0` publicada (perguntas 785 e 786). A Fase 4 só começa com pedido explícito.
-- **Iron Meridian:** o Cubit entra como exceção à regra do pack contra funções repetidas, por causa do Robit do Mekanism. O registro está na issue `marcelofabianov/iron-meridian#2`.
+- **Iron Meridian:** o Cubit entra como exceção à regra do pack contra funções repetidas, por causa do Robit do Mekanism. O registro está na issue `zenndg/iron-meridian#2`.
 
 ## Idioma
 
@@ -54,6 +54,8 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Documento desatualizado:** o agente sempre pergunta antes de corrigir, mesmo quando a correção parece clara.
 - **Teste manual antes dos commits (perguntas 934 e 935):** na tarefa que muda o jar, o desenvolvedor testa no `make client` depois do plano de commits, com o roteiro que o agente dá na conversa (pergunta 945), e só com a aprovação seguem os commits. A tarefa só de documentos não passa pelo teste.
 - **Merge:** é feito somente pelo desenvolvedor.
+- **JEI só para testes (perguntas 1282 a 1284):** o JEI entra só no `make client`, fora do jar, fixado pelo ID da versão no Modrinth. O Jade continua opcional, com o plugin.
+- **Listas numeradas (pergunta 1281):** ao apresentar opções, pendências, passos ou achados, o agente prefere listas ordenadas numericamente, para o desenvolvedor citar cada item pelo número (regra 54).
 - **Depois do merge:** o agente pede autorização para apagar a branch local e a remota, apresenta o próximo trabalho e pergunta se há ajuste no roteiro (regra 52).
 - **Checklist das fases:** fica em [`checklist.md`](../checklist.md). É avaliado ao encerrar cada PR, e a marcação entra num novo commit, no PR seguinte.
 - **Contratos:** comandos e chaves de tradução entram como quinto contrato, e os nomes só mudam com aviso, sem exigir migração.
@@ -168,6 +170,9 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-19 20:58 | Adiciona o JEI só para testes (respostas 1282 a 1284). |
+| Marcelo Fabiano | 2026-11-19 20:58 | Adiciona a regra das listas numeradas (resposta 1281). |
+| Marcelo Fabiano | 2026-11-19 20:58 | Troca o pacote e os repositórios para a conta `zenndg` (respostas 1276 a 1280). |
 | Marcelo Fabiano | 2026-11-15 13:25 | Atualiza o Fazendeiro com o slot de fertilizante desde o Avançado e o graveto (perguntas 1242 a 1249). |
 | Marcelo Fabiano | 2026-11-15 10:40 | Resume o Fazendeiro (perguntas 1215 a 1237). |
 | Marcelo Fabiano | 2026-11-14 23:20 | Resume a base do trabalho (perguntas 1159 a 1179 e 1205). |

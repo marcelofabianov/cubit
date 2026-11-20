@@ -1,0 +1,189 @@
+package io.github.zenndg.cubit.entity;
+
+import com.mojang.logging.LogUtils;
+import io.github.zenndg.cubit.domain.robot.InventoryFit;
+import io.github.zenndg.cubit.domain.tier.TierSpec;
+import io.github.zenndg.cubit.item.EnergySlotContents;
+import io.github.zenndg.cubit.registry.CubitDataComponents;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.world.Container;
+import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.ItemContainerContents;
+import org.slf4j.Logger;
+
+/**
+ * The items a robot carries. The surplus of a smaller config is kept and saved until it can be
+ * dropped, because dropping it while the entity loads is not safe and nothing can be deleted.
+ */
+final class RobotInventory {
+  private static final Logger LOGGER = LogUtils.getLogger();
+  private static final String SLOT_KEY = "Slot";
+  private static final String SURPLUS_MESSAGE = "A robot holds {} item stacks above its {} slots.";
+  private static final String INVALID_ITEM_MESSAGE = "Skipping an invalid robot item: {}";
+
+  private final List<ItemStack> surplus = new ArrayList<>();
+  private final RobotEnergySlot energySlot = new RobotEnergySlot();
+  private final RobotTorchSlot torchSlot;
+  private final RobotCardSlot cardSlot;
+  private final RobotFertilizerSlot fertilizerSlot;
+  private SimpleContainer container;
+
+  /** The tier is read again on every check, because the config and the tier may change. */
+  RobotInventory(int slots, Supplier<TierSpec> spec) {
+    container = new SimpleContainer(slots);
+    torchSlot = new RobotTorchSlot(() -> spec.get().torches().unlocked());
+    cardSlot = new RobotCardSlot(job -> spec.get().jobs().accepts(job));
+    fertilizerSlot = new RobotFertilizerSlot(() -> spec.get().jobs().farmer().boneMeal());
+  }
+
+  Container container() {
+    return container;
+  }
+
+  /** Every slot counts as taken, even with an incomplete stack. */
+  boolean isFull() {
+    for (int slot = 0; slot < container.getContainerSize(); slot++) {
+      if (container.getItem(slot).isEmpty()) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  void fill(List<ItemStack> saved, int slots) {
+    container = new SimpleContainer(slots);
+    surplus.clear();
+    if (saved.size() <= slots
+        || saved.subList(slots, saved.size()).stream().allMatch(ItemStack::isEmpty)) {
+      for (int slot = 0; slot < Math.min(slots, saved.size()); slot++) {
+        container.setItem(slot, saved.get(slot).copy());
+      }
+      return;
+    }
+    fillCompacted(saved, slots);
+  }
+
+  private void fillCompacted(List<ItemStack> saved, int slots) {
+    List<ItemStack> items = saved.stream().filter(stack -> !stack.isEmpty()).toList();
+    InventoryFit<ItemStack> fit = InventoryFit.of(items, slots);
+    for (int slot = 0; slot < fit.kept().size(); slot++) {
+      container.setItem(slot, fit.kept().get(slot).copy());
+    }
+    fit.surplus().forEach(stack -> surplus.add(stack.copy()));
+    if (!surplus.isEmpty()) {
+      LOGGER.warn(SURPLUS_MESSAGE, surplus.size(), slots);
+    }
+  }
+
+  /** A bigger tier keeps every item in its slot, and a surplus from the config may now fit. */
+  void resize(int slots) {
+    SimpleContainer previous = container;
+    fill(allStacks(), slots);
+    previous.clearContent();
+  }
+
+  RobotEnergySlot energySlot() {
+    return energySlot;
+  }
+
+  RobotTorchSlot torchSlot() {
+    return torchSlot;
+  }
+
+  RobotCardSlot cardSlot() {
+    return cardSlot;
+  }
+
+  RobotFertilizerSlot fertilizerSlot() {
+    return fertilizerSlot;
+  }
+
+  /** Writes everything the robot carries to its item, in any path that turns it into an item. */
+  void writeTo(ItemStack stack) {
+    stack.set(CubitDataComponents.ROBOT_INVENTORY.get(), contents());
+    stack.set(CubitDataComponents.ENERGY_SLOT.get(), energySlot.contents());
+    stack.set(CubitDataComponents.TORCH_SLOT.get(), torchSlot.contents());
+    stack.set(CubitDataComponents.CARD_SLOT.get(), cardSlot.contents());
+    stack.set(CubitDataComponents.FERTILIZER_SLOT.get(), fertilizerSlot.contents());
+  }
+
+  void readFrom(ItemStack stack, int slots) {
+    fill(
+        stack
+            .getOrDefault(CubitDataComponents.ROBOT_INVENTORY.get(), ItemContainerContents.EMPTY)
+            .stream()
+            .toList(),
+        slots);
+    energySlot.fill(
+        stack.getOrDefault(CubitDataComponents.ENERGY_SLOT.get(), EnergySlotContents.EMPTY));
+    torchSlot.fill(
+        stack.getOrDefault(CubitDataComponents.TORCH_SLOT.get(), ItemContainerContents.EMPTY));
+    cardSlot.fill(
+        stack.getOrDefault(CubitDataComponents.CARD_SLOT.get(), ItemContainerContents.EMPTY));
+    fertilizerSlot.fill(
+        stack.getOrDefault(CubitDataComponents.FERTILIZER_SLOT.get(), ItemContainerContents.EMPTY));
+  }
+
+  void dropSurplus(Consumer<ItemStack> drop) {
+    surplus.forEach(drop);
+    surplus.clear();
+  }
+
+  ItemContainerContents contents() {
+    return ItemContainerContents.fromItems(allStacks());
+  }
+
+  /** The screen may still be open, so emptying this is what prevents a duplicate. */
+  void clear() {
+    container.clearContent();
+    surplus.clear();
+    energySlot.clear();
+    torchSlot.clear();
+    cardSlot.clear();
+    fertilizerSlot.clear();
+  }
+
+  ListTag save(HolderLookup.Provider registries) {
+    ListTag items = new ListTag();
+    List<ItemStack> stacks = allStacks();
+    for (int slot = 0; slot < stacks.size(); slot++) {
+      if (!stacks.get(slot).isEmpty()) {
+        CompoundTag entry = new CompoundTag();
+        entry.putInt(SLOT_KEY, slot);
+        items.add(stacks.get(slot).save(registries, entry));
+      }
+    }
+    return items;
+  }
+
+  void load(ListTag items, HolderLookup.Provider registries, int slots) {
+    List<ItemStack> saved = new ArrayList<>();
+    for (int index = 0; index < items.size(); index++) {
+      CompoundTag entry = items.getCompound(index);
+      int slot = Math.max(entry.getInt(SLOT_KEY), 0);
+      ItemStack stack = ItemStack.parse(registries, entry).orElse(ItemStack.EMPTY);
+      if (stack.isEmpty()) {
+        LOGGER.warn(INVALID_ITEM_MESSAGE, entry);
+        continue;
+      }
+      while (saved.size() <= slot) {
+        saved.add(ItemStack.EMPTY);
+      }
+      saved.set(slot, stack);
+    }
+    fill(saved, slots);
+  }
+
+  private List<ItemStack> allStacks() {
+    List<ItemStack> stacks = new ArrayList<>(container.getItems());
+    stacks.addAll(surplus);
+    return stacks;
+  }
+}

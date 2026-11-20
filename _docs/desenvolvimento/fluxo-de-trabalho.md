@@ -12,13 +12,13 @@ make setup
 
 O script ativa os gates de commit e de push, descritos em [`hooks-do-git.md`](hooks-do-git.md).
 
-O `gh` precisa usar a conta pessoal:
+O `gh` precisa usar a conta `zenndg`:
 
 ```bash
 gh api user --jq .login
 ```
 
-Se mostrar outra conta, prefixe os comandos com `GH_TOKEN=$(gh auth token --user marcelofabianov)`.
+Se mostrar outra conta, prefixe os comandos com `GH_TOKEN=$(gh auth token --user zenndg)`.
 
 ## Caminho de uma tarefa
 
@@ -206,6 +206,7 @@ O primeiro passo, separando o que está decidido do que está pendente.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-19 20:48 | Troca a conta do `gh` para `zenndg` (resposta 1278). |
 | Marcelo Fabiano | 2026-11-13 10:30 | Exige que o agente dê o roteiro do teste manual na conversa. |
 | Marcelo Fabiano | 2026-11-13 09:20 | Adiciona o teste manual do desenvolvedor antes dos commits. |
 | Marcelo Fabiano | 2026-11-08 01:41 | Adiciona a release no GitHub depois da tag. |

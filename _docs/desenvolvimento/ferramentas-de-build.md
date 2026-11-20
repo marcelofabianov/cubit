@@ -37,6 +37,8 @@ Os comandos ficam no `Makefile`. Rode `make` para ver a lista.
 
 **Jade:** é dependência opcional, então o `neoforge.mods.toml` declara `jade` com `type = "optional"`, e o mod abre sem ele (regra 24 do `AGENTS.md`). O código compila contra o Jade (`compileOnly`), e o jar não o leva. Ele só entra em `make client` e `make data`, pelo conjunto de fontes `clientRun`. `make server` e `make gametest` não o carregam, e a GameTest `theRobotWorksWithoutJade` reprova se ele estiver presente. Só o pacote `compat.jade` importa o Jade, conferido pelo ArchUnit, e o próprio Jade acha o plugin pela anotação `@WailaPlugin` (perguntas 664, 665 e 667).
 
+**JEI:** é só ferramenta de teste, para achar itens e receitas no `make client` (perguntas 1282 a 1284). O mod nunca o referencia, o `neoforge.mods.toml` não o declara, e o jar não o leva. Ele entra só por `clientRunRuntimeOnly`, então `make server`, `make gametest` e `make data` não o carregam. A versão é fixada pelo ID da versão no Modrinth, `iv3KiVkE`, e não pelo número `19.64.0.455`, porque o JEI publica o mesmo número para NeoForge, Forge e Fabric, e o número traz o jar errado.
+
 Receita com mais de 3 linhas vira um script `.sh` em `scripts/`, e o `Makefile` só o chama (regra 46 do `AGENTS.md`).
 
 O primeiro build leva alguns minutos, porque baixa o JDK e prepara o Minecraft.
@@ -54,6 +56,7 @@ O primeiro build leva alguns minutos, porque baixa o JDK e prepara o Minecraft.
 | Spotless com google-java-format | Formata o código Java, com recuo de 2 espaços | É o padrão mais comum em Java, sem opções para discutir (pergunta 95) |
 | Checkstyle | Confere as regras de forma do código | Reprova no build o que antes dependia da revisão (pergunta 97) |
 | Jade `15.10.6+neoforge` | Mostra o tier, a bateria e o estado do Cubit e o estoque e o estado do Induction Dock ao mirar neles | É o mod de informações do Iron Meridian, na mesma versão, e opcional (pergunta 242). Vem do Maven do Modrinth, limitado ao grupo `maven.modrinth`, e o SHA-512 do jar foi conferido contra o `jade.pw.toml` do pack (pergunta 664) |
+| JEI `19.64.0.455` (`iv3KiVkE`) | Mostra os itens e as receitas no `make client`, para testar | É o mod de receitas do Iron Meridian, na mesma versão, só para testes (pergunta 1282). Vem do Maven do Modrinth, já limitado ao grupo `maven.modrinth`, e o SHA-512 do jar foi conferido contra o `jei.pw.toml` do pack |
 | LambDynamicLights `4.8.11+1.21.1` | Faz o Cubit iluminar o mundo, sem blocos de luz invisíveis | É a dependência obrigatória da regra 6 do `AGENTS.md`, na versão do Iron Meridian. Vem do repositório `maven.gegy.dev`, limitado ao grupo da biblioteca |
 
 ## Pacote de uma release
@@ -106,6 +109,7 @@ As bibliotecas de teste vêm só do Maven Central, para o build não depender do
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-19 20:55 | Adiciona o JEI ao `make client`, só para testes (perguntas 1282 a 1284). |
 | Marcelo Fabiano | 2026-11-12 21:50 | Adiciona o `make bundle`. |
 | Marcelo Fabiano | 2026-11-07 23:41 | Acrescenta a regra do Jade ao ArchUnit. |
 | Marcelo Fabiano | 2026-11-07 21:40 | Adiciona o Jade. |

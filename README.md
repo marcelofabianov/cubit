@@ -4,7 +4,7 @@
   <img src="_docs/imagens/conceito/png/expressao-feliz.png" alt="Cubit com a expressão feliz" width="240">
 </p>
 
-Um robô companheiro fofo, movido a bateria, para Minecraft 1.21.1 com NeoForge. Funciona só com ele e suas dependências, e também é testado no modpack [Iron Meridian](https://github.com/marcelofabianov/iron-meridian). O Cubit é craftado com recursos do jogo puro.
+Um robô companheiro fofo, movido a bateria, para Minecraft 1.21.1 com NeoForge. Funciona só com ele e suas dependências, e também é testado no modpack [Iron Meridian](https://github.com/zenndg/iron-meridian). O Cubit é craftado com recursos do jogo puro.
 
 ## O que o Cubit faz
 

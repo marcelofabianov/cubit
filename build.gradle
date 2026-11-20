@@ -154,6 +154,10 @@ dependencies {
     compileOnly "maven.modrinth:jade:${jade_version}"
     clientRunRuntimeOnly "maven.modrinth:jade:${jade_version}"
 
+    // Test tooling only: JEI helps to look up items and recipes in make client. The mod never
+    // references it, and the jar, the server and the GameTests do not load it (answer 1282).
+    clientRunRuntimeOnly "maven.modrinth:jei:${jei_version}"
+
     testImplementation platform("org.junit:junit-bom:${junit_version}")
     testImplementation 'org.junit.jupiter:junit-jupiter'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
@@ -205,7 +209,7 @@ jacoco {
 
 // Coverage only targets the domain: the rest is validated by GameTests and a manual script.
 def domainClasses = sourceSets.main.output.asFileTree.matching {
-    include 'io/github/marcelofabianov/cubit/domain/**'
+    include 'io/github/zenndg/cubit/domain/**'
 }
 
 tasks.named('jacocoTestReport', JacocoReport) {
