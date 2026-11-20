@@ -95,7 +95,7 @@ Só visual, sempre com o card, no padrão dos trabalhos: um chapéu e a mesma mo
 
 - **Boné:** um boné laranja de almoxarifado, com aba curta para a frente e uma faixa marrom de papelão. Cobre o painel solar, que continua carregando.
 - **Mochila:** a mesma dos outros trabalhos, com o livro e pena do jogo preso nela.
-- **Livro e pena:** na hora de tirar ou pôr um item, passa para a garra direita, como a vara na pesca.
+- **Livro e pena:** na mochila, é parte do modelo, um livro marrom em pé com a pena branca inclinada para fora, como na imagem conceito, porque o item plano do jogo ficava ruim ali. Na hora de tirar ou pôr um item, o item livro e pena do jogo vai para a garra direita, e as duas peças somem da mochila (pergunta 1312).
 - **Ícone na tela:** uma caixa pequena no canto esquerdo da tela, como o trigo do Fazendeiro.
 - **Arte:** a imagem conceito, o ícone da tela e a textura do boné são feitos por prompt, em `tmp/arte/organizador/prompt.md` (pergunta 1310).
 - **Card:** a textura do item segue o modelo dos outros cards, com o topo marrom de papelão e uma caixa com etiqueta (pergunta 1305).
@@ -120,6 +120,7 @@ As marcas não vão para o item: recolher o Cubit as apaga, como a área e os ba
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-19 22:47 | Recria o livro e pena da mochila como parte do modelo (pergunta 1312). |
 | Marcelo Fabiano | 2026-11-19 22:41 | Acrescenta a imagem conceito aceita (pergunta 1311). |
 | Marcelo Fabiano | 2026-11-19 22:36 | Troca o visual para o boné, a mochila e o livro e pena (perguntas 1307 e 1308). |
 | Marcelo Fabiano | 2026-11-19 22:13 | Registra os detalhes de tela, o NBT completo e a arte pendente (pergunta 1305). |

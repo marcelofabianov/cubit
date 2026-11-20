@@ -256,11 +256,13 @@ Não há perguntas pendentes nesta fase.
 | 1309 | Com qual nome os commits saem? | `Zennd`, o nome configurado no Git deste repositório |
 | 1310 | Onde ficam os prompts de imagem? | Em `tmp/arte/{nome}/`, com as imagens geradas por eles, como regra do `AGENTS.md` |
 | 1311 | A imagem conceito do Organizador está aceita? | Sim: o desenvolvedor disse "autorizo". Ela vai para `_docs/imagens/conceito/trabalhos/organizador.png`, com o boné, a mochila com o livro e pena, o colar roxo do Elite e a caixa na tela |
+| 1312 | Como fica o livro e pena na mochila, que ficou péssimo como item do jogo? | Recriado como parte do modelo: um livro marrom em pé, com a borda das páginas em creme e uma etiqueta clara, saindo do topo da mochila, e a pena branca com borda cinza, inclinada para fora, como na imagem conceito. Na garra continua o item do jogo, e as duas peças somem da mochila nessa hora. Detalha a pergunta 1308 |
 
 ## Histórico de modificações
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-19 22:47 | Registra a resposta 1312. |
 | Marcelo Fabiano | 2026-11-19 21:52 | Registra as respostas 1303 a 1311. |
 | Marcelo Fabiano | 2026-11-19 21:47 | Registra a resposta 1302. |
 | Marcelo Fabiano | 2026-11-19 21:26 | Registra as respostas 1285 a 1301. |

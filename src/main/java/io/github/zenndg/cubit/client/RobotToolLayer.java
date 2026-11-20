@@ -16,7 +16,8 @@ import software.bernie.geckolib.renderer.layer.BlockAndItemGeoLayer;
  * The tool of the job, the one of the game and only for the looks: the fishing rod of the Fisher,
  * the iron hoe of the Farmer or the book and quill of the Organizer, in the backpack, and in the
  * right claw while the Cubit works (answers 1196, 1199, 1216, 1229 and 1308), and the stick of the
- * game in the straw hat of the Farmer (answer 1242). The work never uses them.
+ * game in the straw hat of the Farmer (answer 1242). In the backpack of the Organizer, the book is
+ * part of the model instead (answer 1312). The work never uses them.
  */
 final class RobotToolLayer extends BlockAndItemGeoLayer<RobotEntity> {
   private static final String BACKPACK_BONE = "job_backpack_tool";
@@ -49,8 +50,9 @@ final class RobotToolLayer extends BlockAndItemGeoLayer<RobotEntity> {
       return null;
     }
     boolean inClaw = RobotJobLook.toolInClaw(robot);
+    boolean modeled = RobotJobLook.organizer(robot);
     if (bone.getName().equals(CLAW_BONE) && inClaw
-        || bone.getName().equals(BACKPACK_BONE) && !inClaw) {
+        || bone.getName().equals(BACKPACK_BONE) && !inClaw && !modeled) {
       return tool;
     }
     return null;
