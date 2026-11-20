@@ -11,8 +11,8 @@ import net.minecraft.world.phys.Vec3;
 
 /**
  * A job done by errands in its area, in place of the round: the Cubit walks next to the block of
- * the errand and does it with the tool of the job in the claw, as the Organizer does (answers 1285
- * to 1304). Unloading comes first, by its priority.
+ * the errand and does it with the tool of the job in the claw, as the Organizer and the Cook do
+ * (answers 1285 to 1304 and 1316). Unloading comes first, by its priority.
  */
 final class ErrandGoal extends Goal {
   /** The robot speed is already in its movement attribute, so the route does not change it. */

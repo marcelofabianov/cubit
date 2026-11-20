@@ -6,7 +6,7 @@ import net.minecraft.core.BlockPos;
 
 /**
  * A job done by errands, one at a time: it plans the next one, the Cubit walks to its block and
- * does it, then rests, as the Organizer does (answer 1290).
+ * does it, then rests, as the Organizer and the Cook do (answers 1290 and 1316).
  */
 interface JobErrands {
   /** The card of the job, active in its area. */

@@ -32,6 +32,7 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 | `PickupRules` | Quando o robô coleta por contato e quando o ímã puxa e cobra |
 | `FetchRules` | Quando o robô que segue busca os itens do chão, qual item, e quando desiste |
 | `TorchSpec` | As tochas de um tier: o custo por tocha e a luz de bloco que o robô garante, com 0 para bloqueado |
+| `CookSpec` | Os fornos marcados, o custo por pilha movida, a pausa e o intervalo da varredura do Cozinheiro em cada tier (pergunta 1326) |
 | `OrganizerSpec` | Os baús, as marcas, o custo por pilha movida, a pausa e o intervalo da varredura do Organizador em cada tier (pergunta 1300) |
 | `UnloadSpec` | Os baús que um tier pode marcar e a distância até eles (pergunta 1094) |
 | `AreaSpec` | A maior área de um tier: o lado da base e a altura, com 0 para o tier sem modo área (perguntas 342 e 1050) |

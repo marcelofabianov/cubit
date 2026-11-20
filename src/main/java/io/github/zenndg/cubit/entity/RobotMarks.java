@@ -4,6 +4,7 @@ import com.mojang.logging.LogUtils;
 import io.github.zenndg.cubit.domain.ownership.Ownership;
 import io.github.zenndg.cubit.domain.robot.OrganizerMark;
 import io.github.zenndg.cubit.domain.robot.OrganizerMarks;
+import io.github.zenndg.cubit.domain.robot.RobotJob;
 import io.github.zenndg.cubit.domain.robot.SupplyAmount;
 import io.github.zenndg.cubit.domain.robot.UnloadChests;
 import java.util.ArrayList;
@@ -21,9 +22,9 @@ import org.slf4j.Logger;
 
 /**
  * The blocks marked with the Mark app, in order: the machines and the destinations of the
- * Organizer, each with its order, which only the owner changes (answers 1294 to 1297 and rule 20).
- * They live only in the save of the entity, under MarkedBlocks, so collecting the Cubit erases them
- * (answers 1301 and 1327).
+ * Organizer, each with its order, or the ovens of the Cook, which only the owner changes (answers
+ * 1294 to 1297, 1316 and rule 20). They live only in the save of the entity, under MarkedBlocks, so
+ * collecting the Cubit erases them (answers 1301 and 1327).
  */
 public final class RobotMarks {
   private static final Logger LOGGER = LogUtils.getLogger();
@@ -46,9 +47,21 @@ public final class RobotMarks {
     return targets;
   }
 
-  /** The limit of the tier, from the config (answer 1300). */
+  /** The limit of the tier for the job of the card, from the config (answers 1300 and 1326). */
   public int limit() {
-    return robot.spec().jobs().organizer().marks();
+    Optional<RobotJob> job = robot.workArea().work().job();
+    if (job.filter(RobotJob.COOK::equals).isPresent()) {
+      return robot.spec().jobs().cook().ovens();
+    }
+    return job.filter(RobotJob.ORGANIZER::equals).isPresent()
+        ? robot.spec().jobs().organizer().marks()
+        : 0;
+  }
+
+  /** The Cook only marks a smoker or a furnace, which cook food (answers 1316 and 1329). */
+  public boolean accepts(BlockPos pos) {
+    boolean cook = robot.workArea().work().job().filter(RobotJob.COOK::equals).isPresent();
+    return !cook || CookOvens.isOven(robot.level(), pos);
   }
 
   public boolean marks(BlockPos pos) {
@@ -58,7 +71,8 @@ public final class RobotMarks {
   /** A click of the owner on a block with an inventory marks it with the face, or unmarks it. */
   public Optional<UnloadChests.Mark> click(Player player, BlockPos pos, Direction face) {
     if (!Ownership.owns(robot.ownerId(), player.getUUID())
-        || OrganizerStock.at(robot.level(), pos, face).isEmpty()) {
+        || OrganizerStock.at(robot.level(), pos, face).isEmpty()
+        || !accepts(pos)) {
       return Optional.empty();
     }
     OrganizerMark mark =

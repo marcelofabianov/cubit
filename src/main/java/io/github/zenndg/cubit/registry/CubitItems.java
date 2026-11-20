@@ -33,6 +33,7 @@ public final class CubitItems {
   private static final String FISHER_CARD_ID = "ml_fisher";
   private static final String FARMER_CARD_ID = "ml_farmer";
   private static final String ORGANIZER_CARD_ID = "ml_organizer";
+  private static final String COOK_CARD_ID = "ml_cook";
   private static final DeferredRegister<Item> ITEMS =
       DeferredRegister.create(Registries.ITEM, CubitMod.MOD_ID);
 
@@ -62,6 +63,9 @@ public final class CubitItems {
   public static final Supplier<Item> ORGANIZER_CARD =
       ITEMS.register(
           ORGANIZER_CARD_ID, () -> new JobCardItem(new Item.Properties(), RobotJob.ORGANIZER));
+
+  public static final Supplier<Item> COOK_CARD =
+      ITEMS.register(COOK_CARD_ID, () -> new JobCardItem(new Item.Properties(), RobotJob.COOK));
 
   public static final Supplier<Item> TOOLBOX =
       ITEMS.register(

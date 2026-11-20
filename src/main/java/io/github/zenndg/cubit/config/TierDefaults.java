@@ -8,6 +8,7 @@ import io.github.zenndg.cubit.domain.energy.SolarOutput;
 import io.github.zenndg.cubit.domain.robot.DefenseMode;
 import io.github.zenndg.cubit.domain.robot.RobotJob;
 import io.github.zenndg.cubit.domain.tier.AreaSpec;
+import io.github.zenndg.cubit.domain.tier.CookSpec;
 import io.github.zenndg.cubit.domain.tier.DeathPointLevel;
 import io.github.zenndg.cubit.domain.tier.FarmerSpec;
 import io.github.zenndg.cubit.domain.tier.FisherSpec;
@@ -203,16 +204,24 @@ final class TierDefaults {
       new OrganizerSpec(9, 8, ORGANIZER_ACTION_COST, 12, 100);
   private static final OrganizerSpec ULTIMATE_ORGANIZER =
       new OrganizerSpec(18, 16, ORGANIZER_ACTION_COST, 6, 40);
+
+  /** 4 and 8 ovens, 50 FE a stack, faster on the Ultimate (answer 1326). */
+  private static final Energy COOK_ACTION_COST = new Energy(50);
+
+  private static final CookSpec ELITE_COOK = new CookSpec(4, COOK_ACTION_COST, 12, 100);
+  private static final CookSpec ULTIMATE_COOK = new CookSpec(8, COOK_ACTION_COST, 6, 40);
   private static final JobSpec ADVANCED_JOBS =
-      new JobSpec(ADVANCED_JOB_SET, ADVANCED_FISHER, ADVANCED_FARMER, OrganizerSpec.NONE);
+      new JobSpec(
+          ADVANCED_JOB_SET, ADVANCED_FISHER, ADVANCED_FARMER, OrganizerSpec.NONE, CookSpec.NONE);
   private static final JobSpec ELITE_JOBS =
-      new JobSpec(ELITE_JOB_SET, ELITE_FISHER, ELITE_FARMER, ELITE_ORGANIZER);
+      new JobSpec(ELITE_JOB_SET, ELITE_FISHER, ELITE_FARMER, ELITE_ORGANIZER, ELITE_COOK);
   private static final JobSpec ULTIMATE_JOBS =
       new JobSpec(
           union(ELITE_JOB_SET, EnumSet.of(RobotJob.BUILDER, RobotJob.MECHANIC, RobotJob.ALCHEMIST)),
           ULTIMATE_FISHER,
           ULTIMATE_FARMER,
-          ULTIMATE_ORGANIZER);
+          ULTIMATE_ORGANIZER,
+          ULTIMATE_COOK);
   private static final UnloadSpec BASE_UNLOAD = new UnloadSpec(1, 16);
   private static final UnloadSpec ADVANCED_UNLOAD = new UnloadSpec(1, 32);
   private static final UnloadSpec ELITE_UNLOAD = new UnloadSpec(2, 48);

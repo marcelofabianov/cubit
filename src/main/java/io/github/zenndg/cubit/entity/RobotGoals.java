@@ -39,6 +39,7 @@ final class RobotGoals {
     goals.addGoal(AREA_PRIORITY, new FishingGoal(robot));
     goals.addGoal(AREA_PRIORITY, new FarmingGoal(robot));
     goals.addGoal(AREA_PRIORITY, new ErrandGoal(robot, () -> robot.workArea().work().organizing()));
+    goals.addGoal(AREA_PRIORITY, new ErrandGoal(robot, () -> robot.workArea().work().cooking()));
     goals.addGoal(AREA_PRIORITY, new AreaWorkGoal(robot));
     goals.addGoal(LOOK_AT_OWNER_PRIORITY, new LookAtOwnerGoal(robot));
   }

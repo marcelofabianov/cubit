@@ -72,6 +72,7 @@ public final class TabletKeys {
   public static final String MARK_NONE = PREFIX + "mark_none";
   public static final String MARK_FULL = PREFIX + "mark_full";
   public static final String MARK_NUMBER = PREFIX + "mark_number";
+  public static final String MARK_ONLY_OVEN = PREFIX + "mark_only_oven";
   public static final String FOLLOW = PREFIX + "follow";
   public static final String FOLLOW_DETAIL = PREFIX + "follow_detail";
   public static final String FOLLOW_ALREADY = PREFIX + "follow_already";

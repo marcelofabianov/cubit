@@ -36,6 +36,7 @@ public final class RobotWork implements WorkControl {
   private final RobotFarming farming;
   private final RobotMarks marks;
   private final RobotOrganizing organizing;
+  private final RobotCooking cooking;
   private HibernationReason reason = HibernationReason.INVENTORY_FULL;
   private long nextCheck = Long.MIN_VALUE;
 
@@ -45,6 +46,7 @@ public final class RobotWork implements WorkControl {
     this.farming = new RobotFarming(robot);
     this.marks = new RobotMarks(robot);
     this.organizing = new RobotOrganizing(robot, marks);
+    this.cooking = new RobotCooking(robot);
   }
 
   /** The work of the card of the Fisher, with its Keep junk switch. */
@@ -57,7 +59,7 @@ public final class RobotWork implements WorkControl {
     return farming;
   }
 
-  /** The blocks of the Mark app, for the jobs that mark blocks (answer 1297). */
+  /** The blocks of the Mark app, for the Organizer and the Cook (answers 1297 and 1316). */
   public RobotMarks marks() {
     return marks;
   }
@@ -65,6 +67,11 @@ public final class RobotWork implements WorkControl {
   /** The work of the card of the Organizer, with its mode and its orders. */
   public RobotOrganizing organizing() {
     return organizing;
+  }
+
+  /** The work of the card of the Cook, with the ovens of the Mark app. */
+  public RobotCooking cooking() {
+    return cooking;
   }
 
   /** The card slot, for the screen. */
@@ -154,6 +161,7 @@ public final class RobotWork implements WorkControl {
     fishing.tick();
     farming.tick();
     organizing.tick();
+    cooking.tick();
     if (asleep()) {
       if (job().isEmpty()) {
         wake();
