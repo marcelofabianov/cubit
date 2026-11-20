@@ -34,6 +34,7 @@ public final class RobotWork implements WorkControl {
   private final RobotEntity robot;
   private final RobotFishing fishing;
   private final RobotFarming farming;
+  private final RobotOrganizing organizing;
   private HibernationReason reason = HibernationReason.INVENTORY_FULL;
   private long nextCheck = Long.MIN_VALUE;
 
@@ -41,6 +42,7 @@ public final class RobotWork implements WorkControl {
     this.robot = robot;
     this.fishing = new RobotFishing(robot);
     this.farming = new RobotFarming(robot);
+    this.organizing = new RobotOrganizing(robot);
   }
 
   /** The work of the card of the Fisher, with its Keep junk switch. */
@@ -51,6 +53,11 @@ public final class RobotWork implements WorkControl {
   /** The work of the card of the Farmer, with its Use bone meal switch. */
   public RobotFarming farming() {
     return farming;
+  }
+
+  /** The work of the card of the Organizer, with its mode and its marks. */
+  public RobotOrganizing organizing() {
+    return organizing;
   }
 
   /** The card slot, for the screen. */
@@ -139,6 +146,7 @@ public final class RobotWork implements WorkControl {
     showJob();
     fishing.tick();
     farming.tick();
+    organizing.tick();
     if (asleep()) {
       if (job().isEmpty()) {
         wake();
@@ -190,6 +198,7 @@ public final class RobotWork implements WorkControl {
   }
 
   void save(CompoundTag tag) {
+    organizing.save(tag);
     if (asleep()) {
       tag.putString(REASON_KEY, reason.key());
     }
@@ -197,6 +206,7 @@ public final class RobotWork implements WorkControl {
 
   /** An unknown reason is the one of the base, and the log says so (answer 1175). */
   void load(CompoundTag tag) {
+    organizing.load(tag);
     if (!asleep()) {
       return;
     }

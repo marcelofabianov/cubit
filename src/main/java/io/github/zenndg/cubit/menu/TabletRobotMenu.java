@@ -122,7 +122,7 @@ public final class TabletRobotMenu extends RobotMenu {
       TabletOpening tablet,
       Controls controls) {
     return new TabletRobotMenu(
-        containerId, playerInventory, contents, serverOf(source), tablet, controls);
+        containerId, playerInventory, contents, RobotMenuServer.of(source), tablet, controls);
   }
 
   /** The server reads the goal at the interval of the dock search, not on every tick. */
@@ -180,8 +180,9 @@ public final class TabletRobotMenu extends RobotMenu {
   }
 
   /** Only the client hides the slots: the inventory of the Cubit, or the player and the filter. */
-  public void showTabletTab(boolean inventory, boolean filters) {
-    showParts(inventory, filters, filters);
+  public void showTabletTab(boolean inventory, boolean filters, boolean supply) {
+    showParts(inventory, filters || supply, filters);
+    organizer().show(supply);
   }
 
   public TabletOpening tablet() {

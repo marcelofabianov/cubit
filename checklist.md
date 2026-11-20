@@ -126,7 +126,7 @@ Um card por vez, na ordem do board "Cubit · Fase 5" (perguntas 1137, 1141 e 115
 4. [x] Base do trabalho: slot do card, tier mínimo, estado de trabalho, aba Trabalho e hibernação fora do Dock com o `Retomar` (issue #193, PR #209, perguntas 1159 a 1179)
 5. [x] Pescador (issue #194, PR #210, perguntas 1180 a 1214)
 6. [x] Fazendeiro (issue #195, PR #211, perguntas 1215 a 1262)
-7. [ ] Controle de velocidade do Cubit, com − e + (#212, perguntas 1258 a 1261 e 1263 a 1271)
+7. [x] Controle de velocidade do Cubit, com − e + (issue #212, PR #214, perguntas 1258 a 1261 e 1263 a 1275)
 8. [ ] Organizador, com o modo abastecer (#196)
 9. [ ] Cozinheiro (#197)
 10. [ ] Defensor (#198)

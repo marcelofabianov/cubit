@@ -11,7 +11,8 @@ public enum TabletApp {
   TARGET,
   DOCK,
   AREA,
-  UNLOAD;
+  UNLOAD,
+  MARK;
 
   public String key() {
     return name().toLowerCase(Locale.ROOT);

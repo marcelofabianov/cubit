@@ -24,7 +24,7 @@ import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
 /**
  * The small icon of the job in the left corner of the screen, over the face, glowing as the screen
  * does (answer 1202). It goes out with the screen, off or asleep. Each job will have its own: for
- * now the fish of the Fisher and the wheat of the Farmer (answer 1229).
+ * now the fish of the Fisher, the wheat of the Farmer and the box of the Organizer (1229, 1307).
  */
 final class RobotJobIconLayer extends GeoRenderLayer<RobotEntity> {
   private static final String ICON_PATH = "textures/entity/%s_screen/job_%s.png";
@@ -34,7 +34,7 @@ final class RobotJobIconLayer extends GeoRenderLayer<RobotEntity> {
 
   RobotJobIconLayer(GeoRenderer<RobotEntity> renderer, RobotType robotType) {
     super(renderer);
-    for (RobotJob job : List.of(RobotJob.FISHER, RobotJob.FARMER)) {
+    for (RobotJob job : List.of(RobotJob.FISHER, RobotJob.FARMER, RobotJob.ORGANIZER)) {
       icons.put(
           job,
           ResourceLocation.fromNamespaceAndPath(

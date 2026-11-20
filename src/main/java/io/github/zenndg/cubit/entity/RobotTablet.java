@@ -5,7 +5,6 @@ import io.github.zenndg.cubit.domain.robot.AreaCheck;
 import io.github.zenndg.cubit.domain.robot.RobotName;
 import io.github.zenndg.cubit.domain.robot.WorkArea;
 import io.github.zenndg.cubit.domain.tier.AreaSpec;
-import io.github.zenndg.cubit.domain.tier.UnloadSpec;
 import io.github.zenndg.cubit.menu.RobotScreenOpening;
 import io.github.zenndg.cubit.menu.TabletOpening;
 import java.util.Optional;
@@ -63,11 +62,6 @@ public final class RobotTablet {
 
   static TabletOpening opening(RobotEntity robot) {
     return new TabletOpening(robot.getUUID(), robot.level().dimension().location().toString());
-  }
-
-  /** The chests the tier of the Cubit may mark and how far, from the config (answer 1094). */
-  public static UnloadSpec unloadOf(RobotEntity robot) {
-    return robot.spec().unload();
   }
 
   /** The largest area of the tier of the Cubit, from the config (answer 1050). */

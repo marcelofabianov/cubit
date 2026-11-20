@@ -3,6 +3,7 @@ package io.github.zenndg.cubit.player;
 import io.github.zenndg.cubit.block.InductionDockBlockEntity;
 import io.github.zenndg.cubit.domain.ownership.Ownership;
 import io.github.zenndg.cubit.domain.robot.DefenseMode;
+import io.github.zenndg.cubit.domain.robot.RobotJob;
 import io.github.zenndg.cubit.domain.robot.TabletApp;
 import io.github.zenndg.cubit.domain.robot.TabletApps;
 import io.github.zenndg.cubit.entity.RobotEntity;
@@ -14,6 +15,7 @@ import io.github.zenndg.cubit.registry.CubitAttachments;
 import io.github.zenndg.cubit.registry.CubitItems;
 import java.util.Optional;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
@@ -34,8 +36,17 @@ public final class TabletUse {
   /** A click in the air, or on a block that is not a Dock of the player. */
   public record Air() implements Click {}
 
-  /** A click on a block, with the Dock under it when there is one. */
-  public record Block(BlockPos pos, Optional<InductionDockBlockEntity> dock) implements Click {}
+  /**
+   * A click on a block, with the Dock under it when there is one, and the face clicked, which the
+   * Mark app keeps for a destination (answer 1296).
+   */
+  public record Block(BlockPos pos, Optional<InductionDockBlockEntity> dock, Direction face)
+      implements Click {
+    /** A click whose face does not matter, from the top. */
+    public Block(BlockPos pos, Optional<InductionDockBlockEntity> dock) {
+      this(pos, dock, Direction.UP);
+    }
+  }
 
   /** A click on an entity. */
   public record Living(Entity entity) implements Click {}
@@ -49,6 +60,7 @@ public final class TabletUse {
       case DOCK -> TabletDockApp.click(player, chosen, click);
       case AREA -> TabletAreaApp.click(player, click);
       case UNLOAD -> TabletUnloadApp.click(player, chosen, click);
+      case MARK -> TabletMarkApp.click(player, chosen, click);
     }
   }
 
@@ -90,7 +102,11 @@ public final class TabletUse {
 
   private static TabletApps appsFor(Optional<RobotEntity> chosen) {
     return new TabletApps(
-        chosen.filter(robot -> robot.defense().mode() == DefenseMode.FOCUS).isPresent());
+        chosen.filter(robot -> robot.defense().mode() == DefenseMode.FOCUS).isPresent(),
+        chosen
+            .flatMap(robot -> robot.workArea().work().job())
+            .filter(RobotJob.ORGANIZER::equals)
+            .isPresent());
   }
 
   /** The chosen Cubit, only while it is loaded. */

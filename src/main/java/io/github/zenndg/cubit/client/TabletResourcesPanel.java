@@ -216,6 +216,9 @@ final class TabletResourcesPanel {
     if (x < LEFT || x >= right || y < FIRST_ROW || row > BUTTONS.length) {
       return false;
     }
+    if (row == BUTTONS.length && !speed.overLabel(x)) {
+      return false;
+    }
     Component detail = row == BUTTONS.length ? speed.detail() : switches.detail(BUTTONS[row]);
     graphics.renderTooltip(font, detail, mouseX, mouseY);
     return true;

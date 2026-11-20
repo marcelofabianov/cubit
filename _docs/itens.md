@@ -218,6 +218,8 @@ Estes nomes não mudam sem migração (regra 18 do `AGENTS.md`).
 | Item | `cubit:ml_farmer` | O card do Fazendeiro, na tag `cubit:ml_cards` (pergunta 1228) |
 | Receita | `cubit:ml_farmer` | A receita do card do Fazendeiro, em [`fazendeiro.md`](funcionalidades/trabalhos/fazendeiro.md#receita) (pergunta 1228) |
 | Tag de bloco | `cubit:farmer_crops` e `cubit:farmer_ignored` | As plantas que o Fazendeiro colhe além das que crescem por idade, e as que ele nunca colhe (pergunta 1222) |
+| Item | `cubit:ml_organizer` | O card do Organizador, na tag `cubit:ml_cards` (pergunta 1299) |
+| Receita | `cubit:ml_organizer` | A receita do card do Organizador, em [`organizador.md`](funcionalidades/trabalhos/organizador.md#receita) (pergunta 1299) |
 | Componente do item | `cubit:fertilizer_slot` | O fertilizante do slot do Fazendeiro, opcional, também no item danificado (perguntas 1244 e 1247) |
 | NBT da entidade | `FertilizerSlot` | O fertilizante do slot do Fazendeiro, como o `CardSlot` (pergunta 1247) |
 | Tag de item | `cubit:fishing_junk` | O lixo que a chave `Keep junk` do Pescador descarta. Um item encantado nunca é lixo (pergunta 1207) |
@@ -248,6 +250,7 @@ O estado salvo é validado ao entrar no jogo, sem derrubá-lo (regra 17 do `AGEN
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-19 21:34 | Adiciona o card e a receita do Organizador (pergunta 1299). |
 | Marcelo Fabiano | 2026-11-15 13:25 | Troca a chave `Use bone meal` pelo slot de fertilizante (perguntas 1246 e 1247). |
 | Marcelo Fabiano | 2026-11-15 10:40 | Acrescenta o contrato do Fazendeiro (perguntas 1221, 1222, 1228 e 1237). |
 | Marcelo Fabiano | 2026-11-14 23:10 | Acrescenta a receita, a chave `Keep junk` o motivo `no_water` e a tag `cubit:fishing_junk` do Pescador (perguntas 1188, 1191, 1192 e 1207). |

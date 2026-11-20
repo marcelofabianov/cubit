@@ -7,6 +7,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import io.github.zenndg.cubit.domain.energy.Energy;
 import io.github.zenndg.cubit.domain.robot.DefenseMode;
 import io.github.zenndg.cubit.domain.robot.OreFilter;
+import io.github.zenndg.cubit.domain.robot.OrganizerMode;
 import io.github.zenndg.cubit.domain.robot.PickupFilter;
 import io.github.zenndg.cubit.domain.robot.PickupSettings;
 import io.github.zenndg.cubit.domain.robot.RobotColor;
@@ -57,6 +58,8 @@ public final class RobotStateComponent {
   private static final boolean KEEP_JUNK_DEFAULT = WorkSettings.INITIAL.keepJunk();
   private static final String UNLOAD_INTERVAL_FIELD = "unload_interval_minutes";
   private static final String SPEED_FIELD = "speed_percent";
+  private static final String ORGANIZER_MODE_FIELD = "organizer_mode";
+  private static final String UNKNOWN_MODE_MESSAGE = "Unknown Organizer mode {}. Using organize.";
   private static final int LOWEST_SPEED = 1;
   private static final String INVALID_SPEED_MESSAGE = "Invalid speed percentage {}. Using {}.";
   private static final String UNKNOWN_DEFENSE_MESSAGE = "Unknown defense mode {}. Using peaceful.";
@@ -71,6 +74,8 @@ public final class RobotStateComponent {
       Codec.STRING.xmap(RobotStateComponent::defenseFromKey, DefenseMode::key);
   private static final Codec<Energy> ENERGY_CODEC =
       Codec.LONG.xmap(SavedEnergy::of, Energy::amount);
+  private static final Codec<OrganizerMode> MODE_CODEC =
+      Codec.STRING.xmap(RobotStateComponent::modeFromKey, OrganizerMode::key);
   private static final Codec<SpeedChoice> SPEED_CODEC =
       Codec.INT.xmap(RobotStateComponent::safeSpeed, SpeedChoice::percent);
   private static final Codec<Float> HEALTH_CODEC =
@@ -90,7 +95,8 @@ public final class RobotStateComponent {
       boolean deathPoint,
       boolean keepJunk,
       Optional<Integer> unloadInterval,
-      SpeedChoice speed) {}
+      SpeedChoice speed,
+      OrganizerMode organizerMode) {}
 
   private static final MapCodec<LateSwitches> LATE_SWITCHES =
       RecordCodecBuilder.mapCodec(instance ->
@@ -116,7 +122,10 @@ public final class RobotStateComponent {
                       .forGetter(LateSwitches::unloadInterval),
                   SPEED_CODEC
                       .optionalFieldOf(SPEED_FIELD, SpeedChoice.FULL)
-                      .forGetter(LateSwitches::speed))
+                      .forGetter(LateSwitches::speed),
+                  MODE_CODEC
+                      .optionalFieldOf(ORGANIZER_MODE_FIELD, OrganizerMode.INITIAL)
+                      .forGetter(LateSwitches::organizerMode))
               .apply(instance, LateSwitches::new));
 
   public static final Codec<RobotState> CODEC =
@@ -167,7 +176,8 @@ public final class RobotStateComponent {
                           state.deathPointOn(),
                           state.workSettings().keepJunk(),
                           savedInterval(state.workSettings().unloadInterval()),
-                          state.speed())))
+                          state.speed(),
+                          state.workSettings().organizerMode())))
               .apply(
                   instance,
                   (tier,
@@ -201,7 +211,10 @@ public final class RobotStateComponent {
                           late.autoReturn(),
                           late.unload(),
                           late.deathPoint(),
-                          new WorkSettings(late.keepJunk(), intervalOf(late.unloadInterval())),
+                          new WorkSettings(
+                              late.keepJunk(),
+                              intervalOf(late.unloadInterval()),
+                              late.organizerMode()),
                           late.speed())));
 
   public static final StreamCodec<ByteBuf, RobotState> STREAM_CODEC =
@@ -222,6 +235,14 @@ public final class RobotStateComponent {
         .orElseGet(() -> {
           LOGGER.warn(UNKNOWN_COLOR_MESSAGE, key);
           return RobotColor.WHITE;
+        });
+  }
+
+  private static OrganizerMode modeFromKey(String key) {
+    return OrganizerMode.fromKey(key)
+        .orElseGet(() -> {
+          LOGGER.warn(UNKNOWN_MODE_MESSAGE, key);
+          return OrganizerMode.INITIAL;
         });
   }
 

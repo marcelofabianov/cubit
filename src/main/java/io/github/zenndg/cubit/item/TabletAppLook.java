@@ -17,6 +17,7 @@ public final class TabletAppLook {
   private static final int DOCK_RED = 0xE0504A;
   private static final int AREA_PURPLE = 0x9966F2;
   private static final int UNLOAD_ORANGE = 0xF0912A;
+  private static final int MARK_TEAL = 0x3CC8B4;
 
   private TabletAppLook() {}
 
@@ -28,6 +29,7 @@ public final class TabletAppLook {
       case DOCK -> DOCK_RED;
       case AREA -> AREA_PURPLE;
       case UNLOAD -> UNLOAD_ORANGE;
+      case MARK -> MARK_TEAL;
     };
   }
 

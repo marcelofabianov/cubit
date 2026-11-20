@@ -56,7 +56,10 @@ public final class TabletItem extends Item {
                   instanceof InductionDockBlockEntity found
               ? Optional.of(found)
               : Optional.empty();
-      TabletUse.click(server, stack, new TabletUse.Block(context.getClickedPos(), dock));
+      TabletUse.click(
+          server,
+          stack,
+          new TabletUse.Block(context.getClickedPos(), dock, context.getClickedFace()));
     }
     return InteractionResult.SUCCESS;
   }

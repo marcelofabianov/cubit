@@ -38,7 +38,9 @@ final class TabletRobotScreen extends AbstractContainerScreen<TabletRobotMenu> {
 
   private final ScreenPainter painter = new ScreenPainter();
   private final ScreenPainter headerPainter = new ScreenPainter();
-  private final TabletRobotTabs tabs = new TabletRobotTabs();
+  private final TabletRobotTabs tabs =
+      new TabletRobotTabs(() -> menu.organizer().mode().isPresent());
+  private SupplyPanel supply;
   private final TabletRobotHeader header;
   private final TabletHeaderButtons buttons;
   private final RobotExclusiveRow exclusive;
@@ -78,6 +80,7 @@ final class TabletRobotScreen extends AbstractContainerScreen<TabletRobotMenu> {
     defense = new RobotDefensePanel(painter, menu, right);
     behavior = new RobotBehaviorPanel(painter, menu, right);
     work = new RobotWorkPanel(painter, menu, right);
+    supply = new SupplyPanel(painter, menu, right);
     deaths = new TabletDeathsPanel(painter, menu, right, imageHeight - TabletRobotHeader.HEIGHT);
     dialog = new TabletRenameDialog(font, width, height, this::rename);
     addButtons();
@@ -100,7 +103,10 @@ final class TabletRobotScreen extends AbstractContainerScreen<TabletRobotMenu> {
     TabletRobotTabs.Tab open = tabs.open();
     leftPos = windowLeft + CONTENT_X;
     topPos = windowTop + TabletRobotHeader.HEIGHT - open.panelTop();
-    menu.showTabletTab(open == TabletRobotTabs.Tab.INVENTORY, open == TabletRobotTabs.Tab.FILTERS);
+    menu.showTabletTab(
+        open == TabletRobotTabs.Tab.INVENTORY,
+        open == TabletRobotTabs.Tab.FILTERS,
+        open == TabletRobotTabs.Tab.SUPPLY);
   }
 
   /** The menu closes on the server first, then the list comes back. */
@@ -156,21 +162,23 @@ final class TabletRobotScreen extends AbstractContainerScreen<TabletRobotMenu> {
     graphics.pose().popPose();
   }
 
+  /** The tooltip of the panel of the open tab, under the header. */
+  private boolean panelDetail(GuiGraphics graphics, int mouseX, int mouseY) {
+    return switch (tabs.open()) {
+      case RESOURCES -> resources.renderDetail(graphics, font, mouseX, mouseY, leftPos, topPos);
+      case WORK -> work.renderDetail(graphics, font, mouseX, mouseY, leftPos, topPos);
+      case DEATHS -> deaths.renderDetail(graphics, font, mouseX, mouseY, leftPos, topPos);
+      case SUPPLY -> supply.renderDetail(graphics, font, mouseX, mouseY, leftPos, topPos);
+      default -> false;
+    };
+  }
+
   private void renderDetail(GuiGraphics graphics, int mouseX, int mouseY) {
     boolean shown =
-        switch (tabs.open()) {
-          case RESOURCES ->
-              mouseY >= windowTop + TabletRobotHeader.HEIGHT
-                  && resources.renderDetail(graphics, font, mouseX, mouseY, leftPos, topPos);
-          case INVENTORY -> exclusive.renderTooltip(graphics, font, hoveredSlot, mouseX, mouseY);
-          case WORK ->
-              mouseY >= windowTop + TabletRobotHeader.HEIGHT
-                  && work.renderDetail(graphics, font, mouseX, mouseY, leftPos, topPos);
-          case DEATHS ->
-              mouseY >= windowTop + TabletRobotHeader.HEIGHT
-                  && deaths.renderDetail(graphics, font, mouseX, mouseY, leftPos, topPos);
-          default -> false;
-        };
+        tabs.open() == TabletRobotTabs.Tab.INVENTORY
+            ? exclusive.renderTooltip(graphics, font, hoveredSlot, mouseX, mouseY)
+            : mouseY >= windowTop + TabletRobotHeader.HEIGHT
+                && panelDetail(graphics, mouseX, mouseY);
     if (!shown) {
       tabAt(mouseX, mouseY)
           .ifPresent(under ->
@@ -193,6 +201,7 @@ final class TabletRobotScreen extends AbstractContainerScreen<TabletRobotMenu> {
         behavior.renderFrames(graphics, leftPos, topPos);
         RobotSlotFrames.player(graphics, menu, leftPos, topPos);
       }
+      case SUPPLY -> RobotSlotFrames.player(graphics, menu, leftPos, topPos);
       case INVENTORY -> {
         RobotSlotFrames.robot(graphics, menu, leftPos, topPos);
         exclusive.renderFrames(graphics, leftPos, topPos);
@@ -214,6 +223,10 @@ final class TabletRobotScreen extends AbstractContainerScreen<TabletRobotMenu> {
       case INVENTORY -> renderInventoryLabels(graphics);
       case DEATHS -> deaths.render(graphics, mouseX - leftPos, mouseY - topPos);
       case WORK -> work.render(graphics, mouseX - leftPos, mouseY - topPos);
+      case SUPPLY -> {
+        supply.render(graphics, mouseX - leftPos, mouseY - topPos);
+        label(graphics, playerInventoryTitle, menu.playerInventoryY() - PLAYER_LABEL_GAP);
+      }
     }
   }
 
@@ -262,8 +275,19 @@ final class TabletRobotScreen extends AbstractContainerScreen<TabletRobotMenu> {
       case DEFENSE -> defense.modeAt(x, y);
       case FILTERS -> behavior.modeAt(x, y);
       case WORK -> work.buttonAt(x, y);
+      case SUPPLY -> supply.buttonAt(x, y, hasShiftDown());
       case INVENTORY, DEATHS -> OptionalInt.empty();
     };
+  }
+
+  /** A Supply tab whose card left goes back to the Work tab. */
+  @Override
+  protected void containerTick() {
+    super.containerTick();
+    if (tabs.open() == TabletRobotTabs.Tab.SUPPLY && menu.organizer().mode().isEmpty()) {
+      tabs.open(TabletRobotTabs.Tab.WORK);
+      showOpenTab();
+    }
   }
 
   /** The wheel scrolls a death log longer than the window. */
@@ -271,6 +295,11 @@ final class TabletRobotScreen extends AbstractContainerScreen<TabletRobotMenu> {
   public boolean mouseScrolled(double mouseX, double mouseY, double scrollX, double scrollY) {
     if (!dialog.isOpen() && tabs.open() == TabletRobotTabs.Tab.DEATHS) {
       deaths.scroll(scrollY);
+      return true;
+    }
+    if (!dialog.isOpen() && tabs.open() == TabletRobotTabs.Tab.SUPPLY && scrollY != 0) {
+      minecraft.gameMode.handleInventoryButtonClick(
+          menu.containerId, SupplyPanel.scrollButton(scrollY));
       return true;
     }
     return super.mouseScrolled(mouseX, mouseY, scrollX, scrollY);

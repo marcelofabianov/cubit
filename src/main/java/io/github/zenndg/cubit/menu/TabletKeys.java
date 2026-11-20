@@ -66,6 +66,12 @@ public final class TabletKeys {
   public static final String UNLOAD_NONE = PREFIX + "unload_none";
   public static final String UNLOAD_FULL = PREFIX + "unload_full";
   public static final String CHEST_SLOTS = PREFIX + "chest_slots";
+  public static final String MARK_ONLY_INVENTORY = PREFIX + "mark_only_inventory";
+  public static final String MARK_MARKED = PREFIX + "mark_marked";
+  public static final String MARK_UNMARKED = PREFIX + "mark_unmarked";
+  public static final String MARK_NONE = PREFIX + "mark_none";
+  public static final String MARK_FULL = PREFIX + "mark_full";
+  public static final String MARK_NUMBER = PREFIX + "mark_number";
   public static final String FOLLOW = PREFIX + "follow";
   public static final String FOLLOW_DETAIL = PREFIX + "follow_detail";
   public static final String FOLLOW_ALREADY = PREFIX + "follow_already";

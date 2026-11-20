@@ -59,13 +59,13 @@ Os itens "Em aberto" de cada conceito são respondidos no refinamento do card da
 2. O processo só termina ao escolher o Cubit no Tablet. Ele deixa de seguir e vai para a área, como no [modo área](modo-area.md) da Fase 4.2.
 3. O Tablet também manda descarregar ou ir ao Dock, pelos botões `Descarregar` e `Ir para o Dock`.
 
-Os baús são marcados com o app Descarga do Tablet, e a tela do Cubit tem uma aba Trabalho, com modo e filtros. Marcar os outros blocos do trabalho, como fornos e suportes de poções, precisa de um app do Tablet, que o primeiro card que precisar dele decide (pergunta 1155). O Pescador e o Fazendeiro não precisam: um acha sozinho a água da área, e o outro, a plantação e as sementes dos baús da Descarga dentro dela (perguntas 1186 e 1234). Se o player recolher o Cubit e colocá-lo de novo, precisa refazer a configuração.
+Os baús são marcados com o app Descarga do Tablet, e a tela do Cubit tem uma aba Trabalho, com modo e filtros. Marcar os outros blocos do trabalho, como fornos e suportes de poções, usa o app Marcar do Tablet, que entra com o Organizador, o primeiro card que precisa dele (perguntas 1155, 1288 e 1297). O Pescador e o Fazendeiro não precisam: um acha sozinho a água da área, e o outro, a plantação e as sementes dos baús da Descarga dentro dela (perguntas 1186 e 1234). Se o player recolher o Cubit e colocá-lo de novo, precisa refazer a configuração.
 
 ## Regras de toda área
 
 - **Limite:** o Cubit nunca sai da área marcada.
 - **Área carregada:** ela tem prioridade sobre o tier. Se o tier permitir uma área maior que a carregada, ele só atua na parte carregada.
-- **Proteção:** o Cubit nunca mexe em blocos com dados, como baús, máquinas, Dock, antena e Servidor, nem na tag de blocos protegidos, que o pack pode editar. Cada card só mexe no seu tipo de bloco.
+- **Proteção:** o Cubit nunca mexe em blocos com dados, como baús, máquinas, Dock, antena e Servidor, nem na tag de blocos protegidos, que o pack pode editar. Cada card só mexe no seu tipo de bloco. A exceção é o Organizador, que só tira pela face de baixo das máquinas marcadas e põe nos baús e destinos marcados, pela capability do NeoForge, sem quebrar o bloco (pergunta 1289 e [`organizador.md`](trabalhos/organizador.md#proteção)).
 - **Vários Cubits:** há um número fixo por área, e cada um reserva o alvo antes de ir. Varreduras e ações têm limite por tick, e os robôs esperam a vez.
 - **Inventário cheio:** descarrega no baú marcado o que conseguir. Quando não conseguir mais, hiberna.
 
@@ -89,6 +89,8 @@ Entra com o card #193, a base do trabalho, sem trabalho próprio: o Pescador vem
 ### Aba Trabalho
 
 Uma aba `Work` / `Trabalho` na tela do Cubit e na tela do Cubit no Tablet, com um ícone feito por prompt (perguntas 1167 e 1169). Ela mostra o card, o nome do trabalho, o estado e, hibernando, o motivo, com o botão `Resume` / `Retomar`. Sem card, diz que o Cubit não tem trabalho. O modo e os filtros entram com cada trabalho. Com card ou sem card, ela também tem o intervalo de descarga, descrito em [`inventario.md`](inventario.md#descarregar-em-baú) (perguntas 1250 a 1254).
+
+Com o card do Organizador, a linha da chave do trabalho dá lugar à linha `Mode` / `Modo`, com um botão que alterna entre `Organize` / `Organizar` e `Supply` / `Abastecer`, e a tela ganha a aba `Supply` / `Abastecer`, com os pedidos, descrita em [`organizador.md`](trabalhos/organizador.md#modo-abastecer) (perguntas 1290 e 1303).
 
 ### Hibernação fora do Dock
 
@@ -181,6 +183,8 @@ A ordem segue a pergunta 251, com o Mecânico e o Alquimista no fim dos trabalho
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-19 22:13 | Acrescenta a linha `Mode` e a aba `Supply` do Organizador (perguntas 1290 e 1303). |
+| Marcelo Fabiano | 2026-11-19 21:34 | Leva a marcação dos blocos ao app Marcar e abre a exceção do Organizador na proteção (perguntas 1288, 1289 e 1297). |
 | Marcelo Fabiano | 2026-11-15 14:05 | Acrescenta o intervalo de descarga na aba Trabalho (perguntas 1250 a 1254). |
 | Marcelo Fabiano | 2026-11-15 10:40 | Liga o conceito do Fazendeiro, que ara e planta com as sementes do baú (perguntas 1215 a 1237). |
 | Marcelo Fabiano | 2026-11-14 23:10 | Liga o conceito do Pescador, que usa o app Área e acrescenta o motivo sem água (perguntas 1181 a 1204). |

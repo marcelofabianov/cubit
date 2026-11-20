@@ -94,6 +94,7 @@ public final class RobotScreenReadout {
         robot.docking().deathGuide(),
         robot.workArea().work(),
         robot.speed(),
+        robot.workArea().work().organizing(),
         stillValid);
   }
 

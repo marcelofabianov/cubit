@@ -4,6 +4,7 @@ import io.github.zenndg.cubit.CubitMod;
 import io.github.zenndg.cubit.domain.behavior.RobotNotice;
 import io.github.zenndg.cubit.domain.energy.PowerState;
 import io.github.zenndg.cubit.domain.ownership.Ownership;
+import io.github.zenndg.cubit.domain.robot.RobotJob;
 import io.github.zenndg.cubit.domain.robot.UnloadCall;
 import io.github.zenndg.cubit.domain.robot.UnloadChest;
 import io.github.zenndg.cubit.domain.robot.UnloadChests;
@@ -54,6 +55,13 @@ public final class RobotUnload implements RobotSwitch, UnloadControl {
     return chests;
   }
 
+  /** The chests the Cubit may mark: more with the card of the Organizer (answer 1287). */
+  public int chestLimit() {
+    boolean organizer =
+        robot.workArea().work().job().filter(RobotJob.ORGANIZER::equals).isPresent();
+    return organizer ? robot.spec().jobs().organizer().chests() : robot.spec().unload().chests();
+  }
+
   /** Whether this block is one of the chests of the Cubit. */
   public boolean marks(BlockPos pos) {
     return chests.contains(new UnloadChest(pos.asLong(), dimensionOf(robot.level())));
@@ -92,7 +100,7 @@ public final class RobotUnload implements RobotSwitch, UnloadControl {
             .filter(chests::contains);
     chests =
         marked.isPresent()
-            ? chests.clicked(marked.get(), robot.spec().unload().chests()).chests()
+            ? chests.clicked(marked.get(), chestLimit()).chests()
             : chests.withoutLast();
     nextCheck = Long.MIN_VALUE;
     return true;
@@ -104,7 +112,7 @@ public final class RobotUnload implements RobotSwitch, UnloadControl {
       return Optional.empty();
     }
     UnloadChest chest = new UnloadChest(pos.asLong(), dimensionOf(robot.level()));
-    UnloadChests.Clicked clicked = chests.clicked(chest, robot.spec().unload().chests());
+    UnloadChests.Clicked clicked = chests.clicked(chest, chestLimit());
     chests = clicked.chests();
     nextCheck = Long.MIN_VALUE;
     return Optional.of(clicked.mark());
@@ -162,6 +170,9 @@ public final class RobotUnload implements RobotSwitch, UnloadControl {
   boolean wantsToGo() {
     if (onTrip) {
       return true;
+    }
+    if (robot.workArea().work().organizing().storesItself()) {
+      return false;
     }
     boolean full = robot.robotInventory().isFull() || intervalDue();
     if (UnloadCall.unloadsByItself(switchedOn, robot.workArea().working(), full, false)
@@ -341,6 +352,6 @@ public final class RobotUnload implements RobotSwitch, UnloadControl {
         loaded.add(new UnloadChest(saved.getLong(BLOCK_KEY), dimension));
       }
     }
-    chests = new UnloadChests(loaded).fitting(robot.spec().unload().chests());
+    chests = new UnloadChests(loaded).fitting(chestLimit());
   }
 }

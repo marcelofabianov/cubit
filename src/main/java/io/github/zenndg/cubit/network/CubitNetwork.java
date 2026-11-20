@@ -26,6 +26,7 @@ public final class CubitNetwork {
   private static Consumer<ChosenRobotPayload> chosenRobotDisplay = chosen -> {};
   private static Consumer<AreaMarkPayload> areaMarkDisplay = mark -> {};
   private static Consumer<UnloadChestsPayload> unloadChestsDisplay = chests -> {};
+  private static Consumer<OrganizerMarksPayload> organizerMarksDisplay = marks -> {};
   private static Consumer<DeathLogPayload> deathLogDisplay = log -> {};
   private static TabletRequests tabletRequests = TabletRequests.NONE;
 
@@ -72,6 +73,10 @@ public final class CubitNetwork {
             UnloadChestsPayload.TYPE,
             UnloadChestsPayload.STREAM_CODEC,
             (payload, context) -> unloadChestsDisplay.accept(payload))
+        .playToClient(
+            OrganizerMarksPayload.TYPE,
+            OrganizerMarksPayload.STREAM_CODEC,
+            (payload, context) -> organizerMarksDisplay.accept(payload))
         .playToClient(
             DeathLogPayload.TYPE,
             DeathLogPayload.STREAM_CODEC,
@@ -145,6 +150,11 @@ public final class CubitNetwork {
     unloadChestsDisplay = chests;
   }
 
+  /** On the client only: how the arrows over the marks of the Organizers show (answer 1297). */
+  public static void setOrganizerMarksDisplay(Consumer<OrganizerMarksPayload> marks) {
+    organizerMarksDisplay = marks;
+  }
+
   /** On the client only: how the Deaths tab shows the log (answer 1111). */
   public static void setDeathLogDisplay(Consumer<DeathLogPayload> log) {
     deathLogDisplay = log;
@@ -169,6 +179,10 @@ public final class CubitNetwork {
 
   public static void sendUnloadChests(ServerPlayer player, UnloadChestsPayload chests) {
     send(player, chests);
+  }
+
+  public static void sendOrganizerMarks(ServerPlayer player, OrganizerMarksPayload marks) {
+    send(player, marks);
   }
 
   public static void sendDeathLog(ServerPlayer player, DeathLogPayload log) {

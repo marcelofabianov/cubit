@@ -3,7 +3,6 @@ package io.github.zenndg.cubit.player;
 import io.github.zenndg.cubit.domain.robot.UnloadCall;
 import io.github.zenndg.cubit.domain.robot.UnloadChests;
 import io.github.zenndg.cubit.entity.RobotEntity;
-import io.github.zenndg.cubit.entity.RobotTablet;
 import io.github.zenndg.cubit.menu.TabletKeys;
 import io.github.zenndg.cubit.menu.WorkKeys;
 import java.util.Optional;
@@ -76,7 +75,7 @@ final class TabletUnloadApp {
         };
     say(
         player,
-        Component.translatable(key, robot.getDisplayName(), RobotTablet.unloadOf(robot).chests()));
+        Component.translatable(key, robot.getDisplayName(), robot.docking().unload().chestLimit()));
   }
 
   private static void say(ServerPlayer player, Component text) {

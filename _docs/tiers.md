@@ -197,6 +197,11 @@ Planejado para a Fase 5. O tier Base não aceita cards, e cada card tem o seu ti
 | Fazendeiro: plantas de colheita especial, `farmer_special_crops` (pergunta 1219) | — | — | ✔ | ✔ |
 | Fazendeiro: slot de fertilizante, `farmer_bone_meal` (perguntas 1244 e 1248) | — | ✔ | ✔ | ✔ |
 | Fazendeiro: Fortuna, `farmer_fortune_level` (pergunta 1221) | — | — | — | II |
+| Organizador: baús marcados, `organizer_chests` (pergunta 1300) | — | — | 9 | 18 |
+| Organizador: máquinas ou destinos marcados, `organizer_marks` (pergunta 1300) | — | — | 8 | 16 |
+| Organizador: custo por pilha movida, `organizer_action_cost` (pergunta 1300) | — | — | 50 FE | 50 FE |
+| Organizador: pausa entre ações, `organizer_action_pause_ticks` (pergunta 1300) | — | — | 12 ticks | 6 ticks |
+| Organizador: intervalo da varredura, `organizer_scan_interval_ticks` (pergunta 1300) | — | — | 100 ticks | 40 ticks |
 | Storage wireless | — | — | — | ✔ |
 
 | Valor geral | Valor |
@@ -210,6 +215,7 @@ Planejado para a Fase 5. O tier Base não aceita cards, e cada card tem o seu ti
 | Fazendeiro: intervalo da varredura da plantação, `farmer_scan_interval_ticks` (pergunta 1237) | 40 ticks |
 | Intervalo de descarga na área, padrão e máximo, `unload_interval_default_minutes` e `unload_interval_max_minutes` (perguntas 1252 e 1254) | 5 min e 30 min |
 | Fazendeiro: água que mantém a terra arada, como no jogo (pergunta 1232) | Até 4 blocos |
+| Organizador: quantidade de um pedido, com − e + de 1 em 1 e, com Shift, de 8 em 8 (pergunta 1300) | 1 a 64 |
 
 **A definir:**
 
@@ -224,6 +230,7 @@ Planejado para a Fase 5. O tier Base não aceita cards, e cada card tem o seu ti
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-19 21:34 | Adiciona os números do Organizador (pergunta 1300). |
 | Marcelo Fabiano | 2026-11-19 20:18 | Adiciona os números do controle de velocidade (pergunta 1267). |
 | Marcelo Fabiano | 2026-11-15 14:30 | Reduz a velocidade do Ultimate de 2,0× para 1,75× (pergunta 1258). |
 | Marcelo Fabiano | 2026-11-15 14:05 | Acrescenta o intervalo de descarga (perguntas 1252 e 1254). |

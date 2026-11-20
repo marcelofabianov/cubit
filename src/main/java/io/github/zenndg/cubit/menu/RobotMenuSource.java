@@ -15,4 +15,5 @@ public record RobotMenuSource(
     DeathPointControl deathPoint,
     WorkControl work,
     SpeedControl speed,
+    OrganizerControl organizer,
     Predicate<Player> stillValid) {}

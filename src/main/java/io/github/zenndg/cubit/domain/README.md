@@ -32,6 +32,7 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 | `PickupRules` | Quando o robô coleta por contato e quando o ímã puxa e cobra |
 | `FetchRules` | Quando o robô que segue busca os itens do chão, qual item, e quando desiste |
 | `TorchSpec` | As tochas de um tier: o custo por tocha e a luz de bloco que o robô garante, com 0 para bloqueado |
+| `OrganizerSpec` | Os baús, as marcas, o custo por pilha movida, a pausa e o intervalo da varredura do Organizador em cada tier (pergunta 1300) |
 | `UnloadSpec` | Os baús que um tier pode marcar e a distância até eles (pergunta 1094) |
 | `AreaSpec` | A maior área de um tier: o lado da base e a altura, com 0 para o tier sem modo área (perguntas 342 e 1050) |
 | `TorchRules` | Quando o robô põe uma tocha e quais lugares são perigosos |
@@ -93,6 +94,10 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 | `TillRules` | Se o Fazendeiro ara um bloco: o que a enxada do jogo transforma em terra arada, com ar em cima e água perto, nunca um bloco protegido (pergunta 1232) |
 | `SeedChoice` | Que semente vai na terra arada vazia: a da planta vizinha e, sem ela, a que ele tem em maior quantidade (perguntas 1233 e 1236) |
 | `WorkSettings` | As chaves da aba Trabalho de cada trabalho: por enquanto, o `Keep junk` do Pescador, ligado no começo. O Fazendeiro tem um slot de fertilizante no lugar de uma chave (perguntas 1191 e 1246) |
+| `OrganizerMode` | O modo do Organizador, um por vez: organizar, no começo, ou abastecer (perguntas 1290 e 1301) |
+| `OrganizerMark` e `OrganizerMarks` | Uma máquina ou um destino marcado com o app Marcar, pelo bloco, pela dimensão e pela face clicada, e as marcas em ordem, com o limite do tier, como os baús da Descarga (pergunta 1297) |
+| `SupplyAmount` | A quantidade de um pedido de abastecer, de 1 a 64, com − e + de 1 em 1 e, com Shift, de 8 em 8, e o que ainda falta no destino (perguntas 1294 e 1300) |
+| `ChestStock` e `StorageChoice` | O que cada baú guarda do item e se ele cabe, e a escolha do baú: o que tem mais do mesmo item ou, sem ele, o primeiro com espaço, na ordem das marcas (perguntas 208, 212 e 1291) |
 | `SpeedChoice` | A velocidade que o player escolhe, em porcentagem da velocidade do tier, de 1 a 100, com 100% no começo. Ajusta um valor salvo aos degraus do config, anda um degrau com − e + e dá o fator, inteiro no perigo (perguntas 1259, 1266 e 1268) |
 | `SpeedSteps` | O mínimo e o passo dos botões da velocidade, lidos do config por quem chama. O máximo é sempre 100% (pergunta 1267) |
 | `JunkFilter` | O que o Pescador guarda: tudo com o `Keep junk` ligado, e, desligado, tudo menos o lixo da tag, que nunca inclui um item encantado (perguntas 1191 e 1207) |
@@ -260,6 +265,8 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 - **Entrada pela média:** cabos entregam energia aos saltos, então a média de um segundo evita um número que pula (pergunta 693).
 - **Velocidade em porcentagem do tier:** o mesmo valor serve em qualquer tier e acompanha o upgrade. Os degraus descem de 100% de passo em passo, e o mínimo é sempre o último, mesmo fora do passo, para um config qualquer do pack continuar válido. Um valor salvo fora dos degraus vai para o mais próximo, sem perder o save (perguntas 1259 e 1266).
 - **Fugir vem primeiro:** em chamas, na lava ou sobre um bloco que fere, a velocidade escolhida não vale, como o redutor do inventário cheio, porque andar devagar no perigo pode matar o Cubit (pergunta 1268).
+- **Baú com mais do mesmo item:** o Organizador junta o que é igual, com os mesmos dados, para a base ficar arrumada. Sem lugar, ele fica com o item, porque largar no chão poderia perder o item (perguntas 1292 e 1293).
+- **Pedido sem passar da quantidade:** o destino recebe só o que falta, para uma fornalha não ficar cheia de um combustível que o player queria em outro lugar (pergunta 1294).
 
 ## Estados
 

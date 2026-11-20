@@ -12,6 +12,7 @@ import io.github.zenndg.cubit.domain.tier.DeathPointLevel;
 import io.github.zenndg.cubit.domain.tier.FarmerSpec;
 import io.github.zenndg.cubit.domain.tier.FisherSpec;
 import io.github.zenndg.cubit.domain.tier.JobSpec;
+import io.github.zenndg.cubit.domain.tier.OrganizerSpec;
 import io.github.zenndg.cubit.domain.tier.PickupSpec;
 import io.github.zenndg.cubit.domain.tier.RobotTier;
 import io.github.zenndg.cubit.domain.tier.ScannerSpec;
@@ -194,14 +195,24 @@ final class TierDefaults {
   private static final FarmerSpec ELITE_FARMER = new FarmerSpec(new Energy(75), 12, true, true, 0);
   private static final FarmerSpec ULTIMATE_FARMER =
       new FarmerSpec(new Energy(100), 6, true, true, 2);
+
+  /** 9 and 18 chests, 8 and 16 marks, 50 FE a stack, faster on the Ultimate (answer 1300). */
+  private static final Energy ORGANIZER_ACTION_COST = new Energy(50);
+
+  private static final OrganizerSpec ELITE_ORGANIZER =
+      new OrganizerSpec(9, 8, ORGANIZER_ACTION_COST, 12, 100);
+  private static final OrganizerSpec ULTIMATE_ORGANIZER =
+      new OrganizerSpec(18, 16, ORGANIZER_ACTION_COST, 6, 40);
   private static final JobSpec ADVANCED_JOBS =
-      new JobSpec(ADVANCED_JOB_SET, ADVANCED_FISHER, ADVANCED_FARMER);
-  private static final JobSpec ELITE_JOBS = new JobSpec(ELITE_JOB_SET, ELITE_FISHER, ELITE_FARMER);
+      new JobSpec(ADVANCED_JOB_SET, ADVANCED_FISHER, ADVANCED_FARMER, OrganizerSpec.NONE);
+  private static final JobSpec ELITE_JOBS =
+      new JobSpec(ELITE_JOB_SET, ELITE_FISHER, ELITE_FARMER, ELITE_ORGANIZER);
   private static final JobSpec ULTIMATE_JOBS =
       new JobSpec(
           union(ELITE_JOB_SET, EnumSet.of(RobotJob.BUILDER, RobotJob.MECHANIC, RobotJob.ALCHEMIST)),
           ULTIMATE_FISHER,
-          ULTIMATE_FARMER);
+          ULTIMATE_FARMER,
+          ULTIMATE_ORGANIZER);
   private static final UnloadSpec BASE_UNLOAD = new UnloadSpec(1, 16);
   private static final UnloadSpec ADVANCED_UNLOAD = new UnloadSpec(1, 32);
   private static final UnloadSpec ELITE_UNLOAD = new UnloadSpec(2, 48);

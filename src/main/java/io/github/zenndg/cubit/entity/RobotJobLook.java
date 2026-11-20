@@ -24,11 +24,15 @@ public final class RobotJobLook {
     return job(robot).filter(RobotJob.FARMER::equals).isPresent();
   }
 
+  public static boolean organizer(RobotEntity robot) {
+    return job(robot).filter(RobotJob.ORGANIZER::equals).isPresent();
+  }
+
   public static boolean toolInClaw(RobotEntity robot) {
     return robot.getEntityData().get(RobotSyncedData.TOOL_IN_CLAW);
   }
 
-  /** Set on the server: the rod or the hoe goes to the claw while the Cubit works. */
+  /** Set on the server: the tool of the job goes to the claw while the Cubit works. */
   static void showTool(RobotEntity robot, boolean inClaw) {
     robot.getEntityData().set(RobotSyncedData.TOOL_IN_CLAW, inClaw);
   }

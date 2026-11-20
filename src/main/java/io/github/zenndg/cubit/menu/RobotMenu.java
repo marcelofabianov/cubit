@@ -1,11 +1,8 @@
 package io.github.zenndg.cubit.menu;
 
-import io.github.zenndg.cubit.domain.energy.Energy;
 import io.github.zenndg.cubit.domain.robot.DefenseMode;
 import io.github.zenndg.cubit.domain.robot.InventoryGrid;
-import io.github.zenndg.cubit.domain.tier.RobotTier;
 import io.github.zenndg.cubit.registry.CubitMenus;
-import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -100,6 +97,7 @@ public class RobotMenu extends RobotMenuReading {
   private final RobotScreenOpening opening;
   private final RobotMenuSlots slotGroups;
   private final PickupMenuPart pickup;
+  private final OrganizerMenuPart organizer;
 
   /** The Tablet shows the inventory of the robot only to read it (answer 999). */
   protected RobotMenu(
@@ -123,6 +121,7 @@ public class RobotMenu extends RobotMenuReading {
     this.speed = server.speed();
     this.opening = contents.opening();
     this.pickup = new PickupMenuPart(server.pickup());
+    this.organizer = new OrganizerMenuPart(server.organizer());
     slotGroups.addRobotSlots(this::addSlot, container, grid);
     slotGroups.addEnergySlot(this::addSlot, contents.energySlot());
     slotGroups.addTorchSlot(
@@ -134,8 +133,15 @@ public class RobotMenu extends RobotMenuReading {
         this::addSlot, contents.fertilizerSlot(), contents.cardSlot(), this::fertilizerUnlocked);
     addDataSlots(values);
     slotGroups.addPlayerSlots(this::addSlot, playerInventory, FIRST_SLOT_X, playerInventoryY());
+    addGhostParts();
+  }
+
+  /** The ghost slots of the filter and of the Organizer, after every other slot. */
+  private void addGhostParts() {
     pickup.addSlots(this::addSlot, slots.size(), filterColumns());
     addDataSlots(pickup.values());
+    organizer.addSlots(this::addSlot, slots.size());
+    addDataSlots(organizer.values());
   }
 
   /** On the client. The real items and numbers come from the server. */
@@ -170,49 +176,23 @@ public class RobotMenu extends RobotMenuReading {
         containerId,
         playerInventory,
         contents,
-        serverOf(source),
+        RobotMenuServer.of(source),
         RobotMenuLayout.ROBOT);
-  }
-
-  static RobotMenuServer serverOf(RobotMenuSource source) {
-    RobotScreenValues values =
-        new RobotScreenValues(
-            source.reading(),
-            source.defense(),
-            source.power(),
-            source.torches(),
-            source.deathPoint(),
-            source.work(),
-            source.speed(),
-            source.switches());
-    values.refresh();
-    return new RobotMenuServer(
-        source.stillValid(),
-        values,
-        values::refresh,
-        source.switches(),
-        source.defense(),
-        source.power(),
-        source.pickup(),
-        source.work(),
-        source.speed());
   }
 
   @Override
   public void broadcastChanges() {
     refresh.run();
     pickup.refresh();
+    organizer.refresh();
     super.broadcastChanges();
   }
 
   /** The server checks this menu before calling, and it is checked again for any other caller. */
   @Override
   public boolean clickMenuButton(Player player, int button) {
-    if (PickupMenuPart.handles(button)) {
-      return stillValid(player) && pickup.press(player, button);
-    }
-    if (SpeedButtons.handles(button)) {
-      return stillValid(player) && SpeedButtons.press(speed, player, button);
+    if (partButton(button)) {
+      return stillValid(player) && pressPart(player, button);
     }
     if (CONTROL_BUTTONS.contains(button)) {
       return stillValid(player) && pressControl(player, button);
@@ -222,6 +202,22 @@ public class RobotMenu extends RobotMenuReading {
       return stillValid(player) && defense.choose(player, DefenseMode.values()[mode]);
     }
     return toggleFromClient(player, button);
+  }
+
+  private static boolean partButton(int button) {
+    return PickupMenuPart.handles(button)
+        || SpeedButtons.handles(button)
+        || OrganizerMenuPart.handles(button);
+  }
+
+  /** The buttons that belong to a part of the menu: pickup, speed and the Organizer. */
+  private boolean pressPart(Player player, int button) {
+    if (PickupMenuPart.handles(button)) {
+      return pickup.press(player, button);
+    }
+    return SpeedButtons.handles(button)
+        ? SpeedButtons.press(speed, player, button)
+        : organizer.press(player, button);
   }
 
   /** Power switches off, Resume wakes the Cubit, and − and + step the unload interval. */
@@ -267,14 +263,23 @@ public class RobotMenu extends RobotMenuReading {
     return layout.filterColumns(grid);
   }
 
-  /** Only the client hides the slots. The behavior tab keeps the player's, to copy items. */
-  public void showTab(boolean inventory, boolean behavior) {
-    showParts(inventory, inventory || behavior, behavior);
+  /**
+   * Only the client hides the slots. The behavior and the Supply tabs keep the player's, to copy
+   * items (answers 893 and 1303).
+   */
+  public void showTab(boolean inventory, boolean behavior, boolean supply) {
+    showParts(inventory, inventory || behavior || supply, behavior);
+    organizer.show(supply);
   }
 
   protected final void showParts(boolean robot, boolean player, boolean filter) {
     slotGroups.show(robot, player);
     pickup.show(filter);
+  }
+
+  /** The Organizer, for the line Mode and the Supply tab of the screens. */
+  public OrganizerMenuPart organizer() {
+    return organizer;
   }
 
   public ContainerData pickupValues() {
@@ -288,7 +293,11 @@ public class RobotMenu extends RobotMenuReading {
   /** A click on a ghost slot of the filter never moves an item (answer 880). */
   @Override
   public void clicked(int slotId, int button, ClickType type, Player player) {
-    if (!pickup.owns(slotId)) {
+    if (organizer.owns(slotId)) {
+      if (stillValid(player)) {
+        organizer.click(slotId, type, player, getCarried());
+      }
+    } else if (!pickup.owns(slotId)) {
       super.clicked(slotId, button, type, player);
     } else if (stillValid(player)) {
       pickup.click(slotId, button, type, player, getCarried());
@@ -297,7 +306,9 @@ public class RobotMenu extends RobotMenuReading {
 
   @Override
   public boolean canTakeItemForPickAll(ItemStack stack, Slot slot) {
-    return !pickup.owns(slot.index) && super.canTakeItemForPickAll(stack, slot);
+    return !pickup.owns(slot.index)
+        && !organizer.owns(slot.index)
+        && super.canTakeItemForPickAll(stack, slot);
   }
 
   protected final PowerControl power() {
@@ -332,28 +343,9 @@ public class RobotMenu extends RobotMenuReading {
     return cardSlotIndex() + 1;
   }
 
-  public Energy torchCost() {
-    return RobotScreenValues.energy(values, RobotScreenValues.TORCH_COST);
-  }
-
   /** The card slot comes right after the torch slot. */
   public int cardSlotIndex() {
     return torchSlotIndex() + 1;
-  }
-
-  public Optional<RobotTier> torchUnlockTier() {
-    int value = values.get(RobotScreenValues.TORCH_UNLOCK_TIER);
-    return value == 0
-        ? Optional.empty()
-        : Optional.of(ScreenEnums.of(RobotTier.values(), value - 1));
-  }
-
-  /** The first tier that marks the death point, for the locked switch (answer 1118). */
-  public Optional<RobotTier> deathPointUnlockTier() {
-    int value = values.get(RobotScreenValues.DEATH_POINT_UNLOCK_TIER);
-    return value == 0
-        ? Optional.empty()
-        : Optional.of(ScreenEnums.of(RobotTier.values(), value - 1));
   }
 
   public int rows() {
@@ -376,8 +368,7 @@ public class RobotMenu extends RobotMenuReading {
     int robotSlots = robotSlots();
     boolean fits =
         index < robotSlots
-            ? moveItemStackTo(
-                stack, robotSlots, slots.size() - PickupScreenValues.MAX_FILTER_SLOTS, true)
+            ? moveItemStackTo(stack, robotSlots, playerSlotsEnd(), true)
             : moveItemStackTo(stack, inventorySlots, robotSlots, false)
                 || RobotStorage.insert(container, stack);
     if (!fits) {
@@ -389,6 +380,11 @@ public class RobotMenu extends RobotMenuReading {
       slot.setChanged();
     }
     return moved;
+  }
+
+  /** The ghost slots of the filter and of the Organizer come last, after the player's. */
+  private int playerSlotsEnd() {
+    return slots.size() - PickupScreenValues.MAX_FILTER_SLOTS - OrganizerMenuPart.ROWS;
   }
 
   @Override

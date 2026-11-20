@@ -5,6 +5,7 @@ import io.github.zenndg.cubit.domain.energy.Energy;
 import io.github.zenndg.cubit.domain.energy.PowerState;
 import io.github.zenndg.cubit.domain.robot.DefenseMode;
 import io.github.zenndg.cubit.domain.robot.OreFilter;
+import io.github.zenndg.cubit.domain.robot.OrganizerMode;
 import io.github.zenndg.cubit.domain.robot.RobotColor;
 import io.github.zenndg.cubit.domain.robot.RobotState;
 import io.github.zenndg.cubit.domain.robot.SpeedChoice;
@@ -51,6 +52,7 @@ final class SavedRobotValues {
   private static final String KEEP_JUNK_KEY = "KeepJunkEnabled";
   private static final String UNLOAD_INTERVAL_KEY = "UnloadIntervalMinutes";
   private static final String SPEED_KEY = "SpeedPercent";
+  private static final String ORGANIZER_MODE_KEY = "OrganizerMode";
   private static final int LOWEST_SPEED = 1;
   private static final String TORCH_SLOT_KEY = "TorchSlot";
   private static final String CARD_SLOT_KEY = "CardSlot";
@@ -62,6 +64,7 @@ final class SavedRobotValues {
   private static final String INVALID_STATE_MESSAGE = "Robot {} has an invalid power state: {}";
   private static final String INVALID_DEFENSE_MESSAGE = "Robot {} has an invalid defense mode: {}";
   private static final String INVALID_SPEED_MESSAGE = "Robot {} has an invalid speed: {}";
+  private static final String INVALID_MODE_MESSAGE = "Robot {} has an invalid Organizer mode: {}";
 
   private SavedRobotValues() {}
 
@@ -98,6 +101,7 @@ final class SavedRobotValues {
   /** Only a chosen interval is saved, so one nobody chose keeps following the config (1254). */
   private static void writeWorkSettings(CompoundTag tag, WorkSettings settings) {
     tag.putBoolean(KEEP_JUNK_KEY, settings.keepJunk());
+    tag.putString(ORGANIZER_MODE_KEY, settings.organizerMode().key());
     if (settings.unloadInterval().chosen()) {
       tag.putInt(UNLOAD_INTERVAL_KEY, settings.unloadInterval().minutes());
     }
@@ -193,7 +197,7 @@ final class SavedRobotValues {
         .withAutoReturn(!tag.contains(AUTO_RETURN_KEY) || tag.getBoolean(AUTO_RETURN_KEY))
         .withUnload(!tag.contains(UNLOAD_KEY) || tag.getBoolean(UNLOAD_KEY))
         .withDeathPoint(!tag.contains(DEATH_POINT_KEY) || tag.getBoolean(DEATH_POINT_KEY))
-        .withWorkSettings(workSettings(tag))
+        .withWorkSettings(workSettings(tag).withOrganizerMode(organizerMode(tag, robot)))
         .withSpeed(speed(tag, robot));
   }
 
@@ -222,6 +226,19 @@ final class SavedRobotValues {
     int minutes = tag.contains(UNLOAD_INTERVAL_KEY) ? tag.getInt(UNLOAD_INTERVAL_KEY) : -1;
     return new WorkSettings(
         keepJunk, minutes >= 0 ? new UnloadInterval(minutes) : UnloadInterval.CONFIG_DEFAULT);
+  }
+
+  /** Without the key, the robot was saved before the Organizer, so it organizes (1301). */
+  private static OrganizerMode organizerMode(CompoundTag tag, UUID robot) {
+    if (!tag.contains(ORGANIZER_MODE_KEY)) {
+      return OrganizerMode.INITIAL;
+    }
+    String key = tag.getString(ORGANIZER_MODE_KEY);
+    return OrganizerMode.fromKey(key)
+        .orElseGet(() -> {
+          LOGGER.warn(INVALID_MODE_MESSAGE, robot, key);
+          return OrganizerMode.INITIAL;
+        });
   }
 
   /** Without the key, the robot was saved before the solar switch existed, so it stays on. */
