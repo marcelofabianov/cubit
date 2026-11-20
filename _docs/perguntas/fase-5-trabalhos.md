@@ -229,6 +229,23 @@ Não há perguntas pendentes nesta fase.
 | 1282 | Como o JEI entra no `make client`? | Só no cliente de teste, por `clientRunRuntimeOnly`, do Maven do Modrinth, na versão do Iron Meridian, a `19.64.0.455`. Não compila contra o JEI, não vai no jar, não entra no `neoforge.mods.toml` e não roda no servidor nem nas GameTests. A versão é fixada pelo ID `iv3KiVkE`, porque o número traz o jar de outro loader, e o SHA-512 confere com o do pack |
 | 1283 | Em qual tarefa o JEI entra? | No PR da troca para `zenndg` (#215), num commit `build` separado, para o desenvolvedor já testar com ele |
 | 1284 | O que quer dizer "JEI e JADE opcional só para testes"? | Os dois só rodam no `make client`, fora do jar. O JEI não tem plugin, e o plugin opcional do Jade continua, porque o mod abre sem ele (regra 24) |
+| 1285 | Há algo a acrescentar ao alinhamento do Organizador (#196)? | Não: o desenvolvedor disse "siga" |
+| 1286 | O Organizador entra num PR só ou em dois? | Num PR só, com os dois modos, organizar e abastecer |
+| 1287 | Em quais baús o Organizador guarda, no modo organizar? | Nos baús do app Descarga, como o Pescador e o Fazendeiro. Com o card do Organizador, o limite de baús sobe por tier, numa chave nova, `organizer_chests`, com os números na rodada dos números. A descarga por inventário cheio também vai para eles. Detalha a pergunta 215 |
+| 1288 | De quais máquinas o Organizador tira a saída? | Só das marcadas pelo app Marcar do Tablet, que entra com este card e fecha a pergunta 1155 |
+| 1289 | Como fica a exceção à regra de que o Cubit nunca mexe em blocos com dados? | O Organizador só tira pela face de baixo da máquina marcada, pela capability do NeoForge, como um funil embaixo dela, o que no forno do jogo é o resultado e o balde vazio. Só põe nos baús marcados, e nunca quebra o bloco nem mexe na entrada ou no combustível. A regra de toda área ganha essa exceção, só para ele |
+| 1290 | Como o player escolhe entre organizar e abastecer? | Um modo por vez, numa linha `Mode` da aba Trabalho, entre `Organize` e `Supply`. Para os dois, o player usa dois Cubits. Fecha o item 1 em aberto do Organizador |
+| 1291 | Qual é o "primeiro baú com espaço" da pergunta 212? | O primeiro na ordem em que foi marcado no app Descarga. Para mudar a ordem, o player desmarca e marca de novo, sem tela para reordenar. Fecha o item 2 em aberto |
+| 1292 | O que o Organizador faz com um item que não cabe em nenhum baú marcado? | Fica com ele no inventário, avisa uma vez com um texto curto e continua com o que cabe. Com o inventário cheio, hiberna com `Hibernating · Inventory full`. Fecha o item 3 em aberto |
+| 1293 | O que conta como mesmo item na regra do baú que tem mais dele? | O mesmo item com os mesmos dados, a regra que o jogo usa para empilhar: encantados, poções e itens com nome contam como diferentes do item comum. Fecha o item 6 em aberto |
+| 1294 | O que forma um pedido de abastecer? | O item, com os dados, como na pergunta 1293, a quantidade e o destino. O Cubit tira de qualquer baú da Descarga que tenha o item, completa o destino até a quantidade, sem passar dela, e confere de novo a cada intervalo. Fecha o item 5 em aberto e detalha a pergunta 249 |
+| 1295 | Como o player monta o pedido? | O app Marcar marca o destino, e na aba Trabalho cada destino vira uma linha com um slot fantasma para o item e − e + para a quantidade |
+| 1296 | Por qual face o Organizador põe o item no destino? | Pela face clicada ao marcar, como o jogo faz ao apontar um funil: na fornalha, a de cima abastece a entrada, e a do lado, o combustível |
+| 1297 | O que o app Marcar marca, e como desmarca? | Um app só, que marca o que o card pede: as máquinas no modo organizar e os destinos no modo abastecer. Shift + clique desmarca, como no app Descarga, as marcas aparecem com setas, como os baús, e cada tier tem um limite, `organizer_marks`. Recolher o Cubit apaga as marcas, como a área e os baús. Fecha a pergunta 1155 |
+| 1298 | Como fica o visual do Organizador? | Como o Pescador e o Fazendeiro: uma imagem conceito para o desenvolvedor aceitar e, no modelo, uma caixa de papelão nas costas, uma prancheta na garra e um ícone de caixa na tela. O agente escreve o prompt, e o desenvolvedor gera a imagem. Fecha o item 7 em aberto |
+| 1299 | Qual item vai no centro da receita do card? | O funil, na família do Pescador e do Fazendeiro: papel, comparador e redstone em volta |
+| 1300 | Quais são os números do Organizador? | `organizer_chests` 9 no Elite e 18 no Ultimate; `organizer_marks` 8 e 16; `organizer_action_cost` 50 FE por pilha movida nos dois; `organizer_action_pause_ticks` 12 e 6; `organizer_scan_interval_ticks` 100 e 40. A quantidade de um pedido vai de 1 a 64, com − e + de 1 em 1 e, com Shift, de 8 em 8. Cada destino é um pedido, então os pedidos seguem `organizer_marks`. Fecha o item 8 em aberto |
+| 1301 | O conceito do Organizador (#196) está autorizado para o código? | Sim: o desenvolvedor disse "autorizo", com os detalhes completados pelo agente: o aviso `Cubit: No room for some items`, o pedido que espera sem hibernar, só o que está dentro da área, o modo no item e as marcas só no NBT, e a prancheta que sobe ao mover um item (regra 53) |
 | 1302 | Como a dica da linha `Speed` deixa de cobrir a porcentagem ao usar − e +? | Ela só aparece com o mouse sobre o ícone e o nome. Sobre −, o valor e +, nada aparece. Vale na aba Settings e na aba Recursos do Tablet. Detalha a pergunta 1271 |
 
 ## Histórico de modificações
@@ -236,6 +253,7 @@ Não há perguntas pendentes nesta fase.
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
 | Marcelo Fabiano | 2026-11-19 21:47 | Registra a resposta 1302. |
+| Marcelo Fabiano | 2026-11-19 21:26 | Registra as respostas 1285 a 1301. |
 | Marcelo Fabiano | 2026-11-19 20:58 | Registra as respostas 1282 a 1284. |
 | Marcelo Fabiano | 2026-11-19 20:58 | Registra a resposta 1281. |
 | Marcelo Fabiano | 2026-11-19 20:58 | Registra a resposta 1280. |

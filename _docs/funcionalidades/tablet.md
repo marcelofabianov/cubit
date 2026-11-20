@@ -39,7 +39,7 @@ O Tablet funciona por apps, um ativo por vez, e o clique direito faz o que o app
 | Dock | Num Dock do player, faz dele o Dock preferido do Cubit escolhido. No Dock que já é o preferido, tira a preferência | Sempre | 3 |
 | Área | Num Cubit seu, escolhe o Cubit. Depois, em dois blocos, marca os cantos da área, e o Cubit vai para ela ([`modo-area.md`](modo-area.md#marcar-a-área)) | Sempre | Item 13 |
 | Descarga | Num bloco com inventário, marca um baú de descarga do Cubit escolhido. Num baú já marcado, manda o Cubit descarregar ali. Shift + clique desmarca o baú clicado, ou, em outro lugar, o último marcado (perguntas 1098 e 1099) ([`inventario.md`](inventario.md#descarregar-em-baú)) | Sempre | Item 14 |
-| Marcar | Marca os blocos do trabalho do card | Na Fase 5 | Depois |
+| Marcar | Num bloco com inventário dentro do alcance, marca o que o card do Cubit escolhido pede: uma máquina, no modo organizar do Organizador, ou um destino, com a face clicada, no modo abastecer. Shift + clique desmarca o bloco clicado, ou, em outro lugar, o último marcado. As marcas aparecem com setas, como os baús ([`organizador.md`](trabalhos/organizador.md)) (perguntas 1288, 1296 e 1297) | Com o card do Organizador | #196 |
 
 - **Trocar de app:** com o Tablet na mão, Shift + roda do mouse troca o app. No macOS, o Shift faz a roda de um mouse rolar para o lado, e essa rolagem também troca o app, como a hotbar do jogo faz. O app atual aparece na barra de ação, como `Cubit Tablet · Alvo`, em negrito e com a cor do app: Open em azul, Alvo em verde, Dock em vermelho, Área em roxo e Descarga em laranja (pergunta 1096). O nome do item fica só `Cubit Tablet`, e uma faixa fina com a cor do app fica na parte de baixo do ícone, na hotbar e nos inventários, como a barra de durabilidade (perguntas 1082 a 1084). Só entram na troca os apps que fazem sentido para o Cubit escolhido. O app ativo fica no item, no componente `cubit:tablet_app` (perguntas 1006 e 1026).
 - **Prioridade do Tablet:** no app Open, clicar num bloco ou numa entidade com ação própria, como um baú, uma porta, um aldeão ou um Dock, abre a tela de seleção e não aciona o bloco nem a entidade (pergunta 1007).
@@ -168,12 +168,13 @@ Entra com o item 16 da Fase 4.2 (perguntas 1111 e 1119). As regras do histórico
 |---|---|---|
 | Item | `cubit:tablet` | O Tablet |
 | Receita | `cubit:tablet` | A receita com forma |
-| Componente do item | `cubit:tablet_app` | O app ativo: `open`, `target`, `dock`, `area` ou `unload`. Sem o componente, vale `open` (pergunta 1128) |
+| Componente do item | `cubit:tablet_app` | O app ativo: `open`, `target`, `dock`, `area`, `unload` ou `mark`. Sem o componente, vale `open` (pergunta 1128) |
 | Attachment do player | `cubit:chosen_robot` | O UUID do Cubit escolhido |
 | NBT da entidade | `PreferredDock` | O Dock preferido: `Block`, a posição num `long`, e `Dimension`. Sem a chave, o Cubit não tem Dock preferido |
 | Menu | `cubit:tablet_robot` | A tela do Cubit no Tablet, com a cor, o lugar e a chave geral nos valores do menu |
 | Pacotes do cliente | `cubit:choose_robot`, `cubit:robot_list_request`, `cubit:rename_robot` e `cubit:switch_tablet_app` | Escolher e abrir, voltar para a seleção, renomear e trocar de app, todos conferidos no servidor |
 | Pacote do servidor | `cubit:unload_chests` | Os baús marcados dos Cubits do player, com o nome do Cubit e os slots, a cada segundo com o Tablet na mão |
+| Pacote do servidor | `cubit:organizer_marks` | As máquinas e os destinos marcados dos Cubits do player, para as setas do app Marcar, a cada segundo com o Tablet na mão (pergunta 1297) |
 | Pacote do servidor | `cubit:area_mark` | O primeiro canto da marcação, com os limites do Cubit, e a área do Cubit escolhido, para a caixa do app Área |
 | Config | `tablet_target_reach_blocks`, em `general` | O alcance da mira do app Alvo, de 1 a 128, com 32 |
 | NBT da entidade | `UnloadChests` | Os baús de descarga, em ordem: `Block`, a posição num `long`, e `Dimension`. Sem a chave, o Cubit não tem baús |
@@ -199,6 +200,7 @@ Os textos em inglês e português, como `Cubit Tablet` / `Tablet do Cubit`, `Tab
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-19 21:34 | Define o app Marcar, que entra com o Organizador (perguntas 1288, 1296 e 1297). |
 | Marcelo Fabiano | 2026-11-19 20:18 | Adiciona a linha da velocidade à aba Recursos (perguntas 1260 e 1269). |
 | Marcelo Fabiano | 2026-11-14 21:23 | Acrescenta o trabalho e o motivo da hibernação à foto do Cubit (pergunta 1168). |
 | Marcelo Fabiano | 2026-11-14 20:52 | Acrescenta a aba Trabalho e a chave `allowed_jobs` (perguntas 1163, 1167 e 1172). |
