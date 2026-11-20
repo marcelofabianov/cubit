@@ -19,7 +19,7 @@ Mod de Minecraft que adiciona um robô companheiro fofo, movido a bateria, de te
 - **Decisões:** o resumo do que foi decidido fica em `_docs/decisoes.md`.
 - **Histórico:** todo `.md` em `_docs/` termina com uma tabela de histórico de modificações, e quem altera o arquivo adiciona uma linha no topo dela. Fora de `_docs/`, os `.md` não têm essa tabela.
 - **Imagens:** ficam em `_docs/imagens/`.
-- **Rascunhos:** conversas e ideias vão para `tmp/`, que o Git ignora. Rascunhos de PR ficam em `tmp/pr/`, arquivos de issue, em `tmp/issue/`, e logs, em `tmp/log/`.
+- **Rascunhos:** conversas e ideias vão para `tmp/`, que o Git ignora. Rascunhos de PR ficam em `tmp/pr/`, arquivos de issue, em `tmp/issue/`, logs, em `tmp/log/`, e os prompts de imagem e as imagens geradas por eles, em `tmp/arte/{nome}/`.
 - **Fluxo de trabalho:** o passo a passo de uma tarefa, de uma versão e de um hotfix está em [`_docs/desenvolvimento/fluxo-de-trabalho.md`](_docs/desenvolvimento/fluxo-de-trabalho.md).
 
 ## Regras do mod
