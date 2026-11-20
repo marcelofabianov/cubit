@@ -202,6 +202,10 @@ Planejado para a Fase 5. O tier Base não aceita cards, e cada card tem o seu ti
 | Organizador: custo por pilha movida, `organizer_action_cost` (pergunta 1300) | — | — | 50 FE | 50 FE |
 | Organizador: pausa entre ações, `organizer_action_pause_ticks` (pergunta 1300) | — | — | 12 ticks | 6 ticks |
 | Organizador: intervalo da varredura, `organizer_scan_interval_ticks` (pergunta 1300) | — | — | 100 ticks | 40 ticks |
+| Cozinheiro: fornos marcados, `cook_ovens` (pergunta 1326) | — | — | 4 | 8 |
+| Cozinheiro: custo por pilha movida, `cook_action_cost` (pergunta 1326) | — | — | 50 FE | 50 FE |
+| Cozinheiro: pausa entre ações, `cook_action_pause_ticks` (pergunta 1326) | — | — | 12 ticks | 6 ticks |
+| Cozinheiro: intervalo da varredura, `cook_scan_interval_ticks` (pergunta 1326) | — | — | 100 ticks | 40 ticks |
 | Storage wireless | — | — | — | ✔ |
 
 | Valor geral | Valor |
@@ -230,6 +234,7 @@ Planejado para a Fase 5. O tier Base não aceita cards, e cada card tem o seu ti
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-19 23:04 | Adiciona os números do Cozinheiro (pergunta 1326). |
 | Marcelo Fabiano | 2026-11-19 21:34 | Adiciona os números do Organizador (pergunta 1300). |
 | Marcelo Fabiano | 2026-11-19 20:18 | Adiciona os números do controle de velocidade (pergunta 1267). |
 | Marcelo Fabiano | 2026-11-15 14:30 | Reduz a velocidade do Ultimate de 2,0× para 1,75× (pergunta 1258). |

@@ -65,7 +65,7 @@ Os baús são marcados com o app Descarga do Tablet, e a tela do Cubit tem uma a
 
 - **Limite:** o Cubit nunca sai da área marcada.
 - **Área carregada:** ela tem prioridade sobre o tier. Se o tier permitir uma área maior que a carregada, ele só atua na parte carregada.
-- **Proteção:** o Cubit nunca mexe em blocos com dados, como baús, máquinas, Dock, antena e Servidor, nem na tag de blocos protegidos, que o pack pode editar. Cada card só mexe no seu tipo de bloco. A exceção é o Organizador, que só tira pela face de baixo das máquinas marcadas e põe nos baús e destinos marcados, pela capability do NeoForge, sem quebrar o bloco (pergunta 1289 e [`organizador.md`](trabalhos/organizador.md#proteção)).
+- **Proteção:** o Cubit nunca mexe em blocos com dados, como baús, máquinas, Dock, antena e Servidor, nem na tag de blocos protegidos, que o pack pode editar. Cada card só mexe no seu tipo de bloco. As exceções são o Organizador, que só tira pela face de baixo das máquinas marcadas e põe nos baús e destinos marcados, e o Cozinheiro, que só põe e tira nos fornos marcados, os dois pela capability do NeoForge, sem quebrar o bloco (perguntas 1289 e 1316, [`organizador.md`](trabalhos/organizador.md#proteção) e [`cozinheiro.md`](trabalhos/cozinheiro.md#proteção)).
 - **Vários Cubits:** há um número fixo por área, e cada um reserva o alvo antes de ir. Varreduras e ações têm limite por tick, e os robôs esperam a vez.
 - **Inventário cheio:** descarrega no baú marcado o que conseguir. Quando não conseguir mais, hiberna.
 
@@ -183,6 +183,7 @@ A ordem segue a pergunta 251, com o Mecânico e o Alquimista no fim dos trabalho
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-19 23:04 | Abre a exceção do Cozinheiro na proteção (pergunta 1316). |
 | Marcelo Fabiano | 2026-11-19 22:13 | Acrescenta a linha `Mode` e a aba `Supply` do Organizador (perguntas 1290 e 1303). |
 | Marcelo Fabiano | 2026-11-19 21:34 | Leva a marcação dos blocos ao app Marcar e abre a exceção do Organizador na proteção (perguntas 1288, 1289 e 1297). |
 | Marcelo Fabiano | 2026-11-15 14:05 | Acrescenta o intervalo de descarga na aba Trabalho (perguntas 1250 a 1254). |

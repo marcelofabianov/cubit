@@ -108,7 +108,7 @@ Só visual, sempre com o card, no padrão dos trabalhos: um chapéu e a mesma mo
 | Receita | `cubit:ml_organizer` | A receita do card |
 | Componente do item | campo `organizer_mode` do `cubit:robot_state` | O modo, `organize` ou `supply`, com `organize` quando falta |
 | NBT da entidade | `OrganizerMode` | O modo |
-| NBT da entidade | `OrganizerMarks` | As máquinas ou os destinos, em ordem: `Block`, a posição num `long`, `Dimension`, `Face`, o número de 0 a 5 do jogo, `Count`, a quantidade do pedido, e `Item`, o item do pedido, quando há. Sem a chave, o Cubit não tem marcas. Uma marca inválida fica de fora e vai para o log |
+| NBT da entidade | `MarkedBlocks` | As máquinas ou os destinos, em ordem: `Block`, a posição num `long`, `Dimension`, `Face`, o número de 0 a 5 do jogo, `Count`, a quantidade do pedido, e `Item`, o item do pedido, quando há. Sem a chave, o Cubit não tem marcas. Uma marca inválida fica de fora e vai para o log. A chave é a mesma do Cozinheiro (pergunta 1327) |
 | Componente do item | `cubit:tablet_app` com `mark` | O app Marcar ativo no Tablet |
 | Pacote do servidor | `cubit:organizer_marks` | As marcas dos Cubits do player, para as setas, a cada segundo com o Tablet na mão |
 | Config, por tier | `organizer_chests` e `organizer_marks` | Os baús e as marcas do tier |
@@ -120,6 +120,7 @@ As marcas não vão para o item: recolher o Cubit as apaga, como a área e os ba
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-19 23:06 | Troca a chave das marcas para `MarkedBlocks` (pergunta 1327). |
 | Marcelo Fabiano | 2026-11-19 22:47 | Recria o livro e pena da mochila como parte do modelo (pergunta 1312). |
 | Marcelo Fabiano | 2026-11-19 22:41 | Acrescenta a imagem conceito aceita (pergunta 1311). |
 | Marcelo Fabiano | 2026-11-19 22:36 | Troca o visual para o boné, a mochila e o livro e pena (perguntas 1307 e 1308). |

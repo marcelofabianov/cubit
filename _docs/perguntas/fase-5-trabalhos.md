@@ -258,11 +258,28 @@ Não há perguntas pendentes nesta fase.
 | 1311 | A imagem conceito do Organizador está aceita? | Sim: o desenvolvedor disse "autorizo". Ela vai para `_docs/imagens/conceito/trabalhos/organizador.png`, com o boné, a mochila com o livro e pena, o colar roxo do Elite e a caixa na tela |
 | 1312 | Como fica o livro e pena na mochila, que ficou péssimo como item do jogo? | Recriado como parte do modelo: um livro marrom em pé, com a borda das páginas em creme e uma etiqueta clara, saindo do topo da mochila, e a pena branca com borda cinza, inclinada para fora, como na imagem conceito. Na garra continua o item do jogo, e as duas peças somem da mochila nessa hora. Detalha a pergunta 1308 |
 | 1313 | O PR do Organizador atualiza o "Próximos" do `AGENTS.md`? | Sim: o Organizador entra, e o card seguinte é o Cozinheiro (#197) |
+| 1314 | Há algo a acrescentar ao alinhamento do Cozinheiro (#197)? | Não: o desenvolvedor disse "não, siga" |
+| 1315 | De onde o Cozinheiro tira o alimento cru e onde guarda a comida pronta? | Dos baús da Descarga dentro da área, para os dois, como os outros trabalhos: tira o cru de qualquer um e guarda a comida pronta pela descarga comum, no primeiro com espaço. O limite é o da Descarga do tier. Muda os baús de entrada e de saída separados do conceito |
+| 1316 | Como o Cozinheiro sabe quais fornos usar? | Pelo app Marcar, o mesmo do Organizador, que também aparece com o card do Cozinheiro, com um limite de fornos por tier. Fecha a pergunta 1155 para ele |
+| 1317 | O que é alimento cru? | Qualquer item com receita de fumeiro, também de outros mods. Na fornalha, só os mesmos itens, para ele nunca fundir minério. Fecha o item 1 em aberto |
+| 1318 | Qual forno ele usa primeiro? | Os fumeiros marcados, que cozinham na metade do tempo, e só depois as fornalhas. Fecha o item 2 em aberto |
+| 1319 | Qual combustível o Cozinheiro usa, e de onde? | Só os itens da tag `cubit:cook_fuels`, que começa com carvão, carvão vegetal e bloco de carvão e que o pack pode editar, tirados dos baús da Descarga dentro da área. Ele nunca queima madeira, ferramentas ou outros itens do player. Fecha o item 3 em aberto |
+| 1320 | O que ele faz com um forno marcado que tem itens que o player deixou? | Só completa o que é dele: põe cru se a entrada estiver vazia ou com o mesmo item, e combustível se o espaço estiver vazio ou com o mesmo combustível. Nunca tira o que o player deixou na entrada nem no combustível, e da saída só tira comida. Fecha o item 4 em aberto |
+| 1321 | O que acontece com a experiência do forno? | Fica no forno, como no jogo, e o player a recolhe ao tirar um item com a mão. Fecha o item 5 em aberto |
+| 1322 | As fogueiras entram no Ultimate? | Não: a fogueira do jogo não tem inventário pela capability e pediria código próprio. O Ultimate se diferencia pelos números. Fecha o item 6 em aberto |
+| 1323 | Como vários Cozinheiros dividem os fornos? | Cada um reserva o forno antes de ir, como o Fazendeiro reserva a planta e o Organizador reserva a máquina. Fecha o item 7 em aberto |
+| 1324 | Qual é o visual do Cozinheiro? | No padrão dos trabalhos: uma touca branca alta de chef cobrindo o painel solar, a mesma mochila com uma concha de pau modelada saindo do topo, como o livro e pena da pergunta 1312, e a tigela do jogo na garra quando ele mexe num forno. Na tela, uma tigela pequena. Fecha o item 8 em aberto |
+| 1325 | Qual item vai no centro da receita do card? | O fumeiro, na família dos outros cards: papel, comparador e redstone em volta |
+| 1326 | Quais são os números do Cozinheiro? | `cook_ovens` 4 no Elite e 8 no Ultimate; `cook_action_cost` 50 FE por pilha movida nos dois; `cook_action_pause_ticks` 12 e 6; `cook_scan_interval_ticks` 100 e 40. Fecha o item 9 em aberto |
+| 1327 | Em qual chave do NBT ficam as marcas do app Marcar, agora usadas pelo Organizador e pelo Cozinheiro? | `MarkedBlocks`, uma chave neutra para as marcas de qualquer trabalho. Ela troca a `OrganizerMarks`, que ainda não foi publicada, então não precisa de migração (regra 18). A classe `RobotOrganizerMarks` vira `RobotMarks` |
+| 1328 | A imagem conceito do Cozinheiro está aceita? | Sim. Ela vai para `_docs/imagens/conceito/trabalhos/cozinheiro.png`, com a touca de chef, a mochila com a concha de pau, o colar roxo do Elite e a tigela na tela |
+| 1329 | O conceito do Cozinheiro (#197) está autorizado para o código? | Sim: o desenvolvedor disse "autorizo", com os detalhes completados pelo agente: a fornalha de fundição fica de fora, o cru entra por cima, o combustível pelo lado e a comida sai por baixo, e sem nada a fazer ele espera sem hibernar (regra 53) |
 
 ## Histórico de modificações
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-19 22:56 | Registra as respostas 1314 a 1329. |
 | Marcelo Fabiano | 2026-11-19 22:51 | Registra a resposta 1313. |
 | Marcelo Fabiano | 2026-11-19 22:47 | Registra a resposta 1312. |
 | Marcelo Fabiano | 2026-11-19 21:52 | Registra as respostas 1303 a 1311. |
