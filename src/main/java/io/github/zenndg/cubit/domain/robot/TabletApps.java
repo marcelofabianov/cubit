@@ -6,8 +6,8 @@ import java.util.List;
 /**
  * The apps of the Tablet that make sense for the chosen Cubit: Open, Dock, Area and Unload always,
  * Target only with the chosen Cubit loaded and in Focus, and Mark only with the card of the
- * Organizer. Shift and the wheel go only through these, and an app that stops making sense goes
- * back to Open (answers 1006, 1044 and 1297).
+ * Organizer or of the Cook (answer 1316). Shift and the wheel go only through these, and an app
+ * that stops making sense goes back to Open (answers 1006, 1044 and 1297).
  */
 public record TabletApps(boolean targetAvailable, boolean markAvailable) {
   /** Without the Organizer, as before the Mark app existed. */

@@ -65,6 +65,8 @@ final class CubitRecipeProvider extends RecipeProvider {
   private static final char HOE = 'H';
   private static final String ORGANIZER_MIDDLE_ROW = "RFR";
   private static final char HOPPER = 'F';
+  private static final String COOK_MIDDLE_ROW = "RSR";
+  private static final char SMOKER = 'S';
   private static final String HAS_IRON = "has_iron";
   private static final String HAS_DIAMOND = "has_diamond";
   private static final String HAS_ROBOT = "has_robot";
@@ -98,6 +100,7 @@ final class CubitRecipeProvider extends RecipeProvider {
     fisherCard(output);
     farmerCard(output);
     organizerCard(output);
+    cookCard(output);
     recharge(output);
     String robotId = CubitConfig.GENERAL_ROBOT.id();
     output.accept(
@@ -147,6 +150,20 @@ final class CubitRecipeProvider extends RecipeProvider {
         .define(CORE, Items.COMPARATOR)
         .define(REDSTONE, Items.REDSTONE)
         .define(HOPPER, Items.HOPPER)
+        .unlockedBy(HAS_ROBOT, has(CubitItems.GENERAL_ROBOT.get()))
+        .save(output);
+  }
+
+  /** The card of the Cook, as the one of the Farmer with a smoker (answer 1325). */
+  private void cookCard(RecipeOutput output) {
+    ShapedRecipeBuilder.shaped(RecipeCategory.MISC, CubitItems.COOK_CARD.get())
+        .pattern(FISHER_TOP_ROW)
+        .pattern(COOK_MIDDLE_ROW)
+        .pattern(FISHER_BOTTOM_ROW)
+        .define(PAPER, Items.PAPER)
+        .define(CORE, Items.COMPARATOR)
+        .define(REDSTONE, Items.REDSTONE)
+        .define(SMOKER, Items.SMOKER)
         .unlockedBy(HAS_ROBOT, has(CubitItems.GENERAL_ROBOT.get()))
         .save(output);
   }

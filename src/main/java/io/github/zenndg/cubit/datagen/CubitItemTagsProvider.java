@@ -1,6 +1,7 @@
 package io.github.zenndg.cubit.datagen;
 
 import io.github.zenndg.cubit.CubitMod;
+import io.github.zenndg.cubit.entity.CookOvens;
 import io.github.zenndg.cubit.entity.FishingCatch;
 import io.github.zenndg.cubit.item.JobCardItem;
 import io.github.zenndg.cubit.registry.CubitItems;
@@ -32,7 +33,9 @@ final class CubitItemTagsProvider extends ItemTagsProvider {
         .add(
             CubitItems.FISHER_CARD.get(),
             CubitItems.FARMER_CARD.get(),
-            CubitItems.ORGANIZER_CARD.get());
+            CubitItems.ORGANIZER_CARD.get(),
+            CubitItems.COOK_CARD.get());
+    tag(CookOvens.FUELS).add(Items.COAL, Items.CHARCOAL, Items.COAL_BLOCK);
     tag(FishingCatch.JUNK)
         .add(
             Items.LILY_PAD,

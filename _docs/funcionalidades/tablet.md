@@ -39,7 +39,7 @@ O Tablet funciona por apps, um ativo por vez, e o clique direito faz o que o app
 | Dock | Num Dock do player, faz dele o Dock preferido do Cubit escolhido. No Dock que já é o preferido, tira a preferência | Sempre | 3 |
 | Área | Num Cubit seu, escolhe o Cubit. Depois, em dois blocos, marca os cantos da área, e o Cubit vai para ela ([`modo-area.md`](modo-area.md#marcar-a-área)) | Sempre | Item 13 |
 | Descarga | Num bloco com inventário, marca um baú de descarga do Cubit escolhido. Num baú já marcado, manda o Cubit descarregar ali. Shift + clique desmarca o baú clicado, ou, em outro lugar, o último marcado (perguntas 1098 e 1099) ([`inventario.md`](inventario.md#descarregar-em-baú)) | Sempre | Item 14 |
-| Marcar | Num bloco com inventário dentro do alcance, marca o que o card do Cubit escolhido pede: uma máquina, no modo organizar do Organizador, ou um destino, com a face clicada, no modo abastecer. Shift + clique desmarca o bloco clicado, ou, em outro lugar, o último marcado. As marcas aparecem com setas, como os baús ([`organizador.md`](trabalhos/organizador.md)) (perguntas 1288, 1296 e 1297) | Com o card do Organizador | #196 |
+| Marcar | Num bloco com inventário dentro do alcance, marca o que o card do Cubit escolhido pede: uma máquina, no modo organizar do Organizador, ou um destino, com a face clicada, no modo abastecer. Shift + clique desmarca o bloco clicado, ou, em outro lugar, o último marcado. As marcas aparecem com setas, como os baús ([`organizador.md`](trabalhos/organizador.md)) (perguntas 1288, 1296 e 1297) | Com o card do Organizador ou do Cozinheiro, que marca só fumeiros e fornalhas | #196 e #197 |
 
 - **Trocar de app:** com o Tablet na mão, Shift + roda do mouse troca o app. No macOS, o Shift faz a roda de um mouse rolar para o lado, e essa rolagem também troca o app, como a hotbar do jogo faz. O app atual aparece na barra de ação, como `Cubit Tablet · Alvo`, em negrito e com a cor do app: Open em azul, Alvo em verde, Dock em vermelho, Área em roxo e Descarga em laranja (pergunta 1096). O nome do item fica só `Cubit Tablet`, e uma faixa fina com a cor do app fica na parte de baixo do ícone, na hotbar e nos inventários, como a barra de durabilidade (perguntas 1082 a 1084). Só entram na troca os apps que fazem sentido para o Cubit escolhido. O app ativo fica no item, no componente `cubit:tablet_app` (perguntas 1006 e 1026).
 - **Prioridade do Tablet:** no app Open, clicar num bloco ou numa entidade com ação própria, como um baú, uma porta, um aldeão ou um Dock, abre a tela de seleção e não aciona o bloco nem a entidade (pergunta 1007).
@@ -201,6 +201,7 @@ Os textos em inglês e português, como `Cubit Tablet` / `Tablet do Cubit`, `Tab
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-19 23:04 | Leva o app Marcar ao Cozinheiro (pergunta 1316). |
 | Marcelo Fabiano | 2026-11-19 22:13 | Adiciona a aba Abastecer, com o card do Organizador (perguntas 1303 e 1305). |
 | Marcelo Fabiano | 2026-11-19 21:34 | Define o app Marcar, que entra com o Organizador (perguntas 1288, 1296 e 1297). |
 | Marcelo Fabiano | 2026-11-19 20:18 | Adiciona a linha da velocidade à aba Recursos (perguntas 1260 e 1269). |

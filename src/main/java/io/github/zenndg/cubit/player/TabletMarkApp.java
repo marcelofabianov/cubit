@@ -2,7 +2,7 @@ package io.github.zenndg.cubit.player;
 
 import io.github.zenndg.cubit.domain.robot.UnloadChests;
 import io.github.zenndg.cubit.entity.RobotEntity;
-import io.github.zenndg.cubit.entity.RobotOrganizerMarks;
+import io.github.zenndg.cubit.entity.RobotMarks;
 import io.github.zenndg.cubit.menu.TabletKeys;
 import java.util.Optional;
 import net.minecraft.core.BlockPos;
@@ -10,9 +10,10 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 
 /**
- * The Mark app, for the chosen Organizer: a click on a block with an inventory marks it with the
- * face clicked, a click on a marked one unmarks it, and Shift and a click anywhere take out the
- * clicked block, or else the last one marked, as the Unload app (answers 1296 and 1297).
+ * The Mark app, for the chosen Organizer or Cook: a click on a block with an inventory, or on an
+ * oven for the Cook, marks it with the face clicked, a click on a marked one unmarks it, and Shift
+ * and a click anywhere take out the clicked block, or else the last one marked, as the Unload app
+ * (answers 1296 and 1297).
  */
 final class TabletMarkApp {
   private TabletMarkApp() {}
@@ -22,7 +23,7 @@ final class TabletMarkApp {
       say(player, Component.translatable(TabletKeys.DOCK_NO_CUBIT));
       return;
     }
-    RobotOrganizerMarks marks = chosen.get().workArea().work().organizing().marks();
+    RobotMarks marks = chosen.get().workArea().work().marks();
     Optional<TabletUse.Block> block =
         click instanceof TabletUse.Block found ? Optional.of(found) : Optional.empty();
     if (player.isShiftKeyDown()) {
@@ -39,11 +40,12 @@ final class TabletMarkApp {
   }
 
   private static void mark(
-      ServerPlayer player, RobotEntity robot, RobotOrganizerMarks marks, TabletUse.Block block) {
+      ServerPlayer player, RobotEntity robot, RobotMarks marks, TabletUse.Block block) {
     BlockPos pos = block.pos();
     Optional<UnloadChests.Mark> mark = marks.click(player, pos, block.face());
     if (mark.isEmpty()) {
-      say(player, Component.translatable(TabletKeys.MARK_ONLY_INVENTORY));
+      String why = marks.accepts(pos) ? TabletKeys.MARK_ONLY_INVENTORY : TabletKeys.MARK_ONLY_OVEN;
+      say(player, Component.translatable(why));
       return;
     }
     String key =

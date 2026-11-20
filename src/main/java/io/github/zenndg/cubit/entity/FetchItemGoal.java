@@ -69,7 +69,10 @@ final class FetchItemGoal extends Goal {
    */
   private boolean fishing() {
     RobotWork work = robot.workArea().work();
-    return work.fishing().active() || work.farming().active() || work.organizing().active();
+    return work.fishing().active()
+        || work.farming().active()
+        || work.organizing().active()
+        || work.cooking().active();
   }
 
   private boolean fetchesInArea() {

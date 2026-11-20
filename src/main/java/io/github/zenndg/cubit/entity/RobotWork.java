@@ -34,7 +34,9 @@ public final class RobotWork implements WorkControl {
   private final RobotEntity robot;
   private final RobotFishing fishing;
   private final RobotFarming farming;
+  private final RobotMarks marks;
   private final RobotOrganizing organizing;
+  private final RobotCooking cooking;
   private HibernationReason reason = HibernationReason.INVENTORY_FULL;
   private long nextCheck = Long.MIN_VALUE;
 
@@ -42,7 +44,9 @@ public final class RobotWork implements WorkControl {
     this.robot = robot;
     this.fishing = new RobotFishing(robot);
     this.farming = new RobotFarming(robot);
-    this.organizing = new RobotOrganizing(robot);
+    this.marks = new RobotMarks(robot);
+    this.organizing = new RobotOrganizing(robot, marks);
+    this.cooking = new RobotCooking(robot);
   }
 
   /** The work of the card of the Fisher, with its Keep junk switch. */
@@ -55,9 +59,19 @@ public final class RobotWork implements WorkControl {
     return farming;
   }
 
-  /** The work of the card of the Organizer, with its mode and its marks. */
+  /** The blocks of the Mark app, for the Organizer and the Cook (answers 1297 and 1316). */
+  public RobotMarks marks() {
+    return marks;
+  }
+
+  /** The work of the card of the Organizer, with its mode and its orders. */
   public RobotOrganizing organizing() {
     return organizing;
+  }
+
+  /** The work of the card of the Cook, with the ovens of the Mark app. */
+  public RobotCooking cooking() {
+    return cooking;
   }
 
   /** The card slot, for the screen. */
@@ -147,6 +161,7 @@ public final class RobotWork implements WorkControl {
     fishing.tick();
     farming.tick();
     organizing.tick();
+    cooking.tick();
     if (asleep()) {
       if (job().isEmpty()) {
         wake();
@@ -198,7 +213,7 @@ public final class RobotWork implements WorkControl {
   }
 
   void save(CompoundTag tag) {
-    organizing.save(tag);
+    marks.save(tag);
     if (asleep()) {
       tag.putString(REASON_KEY, reason.key());
     }
@@ -206,7 +221,7 @@ public final class RobotWork implements WorkControl {
 
   /** An unknown reason is the one of the base, and the log says so (answer 1175). */
   void load(CompoundTag tag) {
-    organizing.load(tag);
+    marks.load(tag);
     if (!asleep()) {
       return;
     }

@@ -105,7 +105,7 @@ public final class TabletUse {
         chosen.filter(robot -> robot.defense().mode() == DefenseMode.FOCUS).isPresent(),
         chosen
             .flatMap(robot -> robot.workArea().work().job())
-            .filter(RobotJob.ORGANIZER::equals)
+            .filter(job -> job == RobotJob.ORGANIZER || job == RobotJob.COOK)
             .isPresent());
   }
 

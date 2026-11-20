@@ -979,6 +979,26 @@ As regras estão em [`organizador.md`](../funcionalidades/trabalhos/organizador.
 | 15 | Ponha 3 Organizadores na mesma área | Cada um pega um item diferente, sem duplicar nem perder itens |
 | 16 | Com o jogo em português | `Aprendizado de Máquina: Organizador`, `Modo`, `Organizar` e `Abastecer` |
 
+## Cozinheiro
+
+As regras estão em [`cozinheiro.md`](../funcionalidades/trabalhos/cozinheiro.md). Use um Cubit Elite e um Ultimate com carga, o card feito pela receita, o Tablet, dois baús, um fumeiro, uma fornalha, carne crua, carvão, tábuas de madeira e minério de ferro, e uma área com tudo dentro.
+
+| # | Faça | Espere |
+|---|---|---|
+| 1 | Faça o card na bancada: papel, comparador, papel / redstone, fumeiro, redstone / papel, redstone, papel | Sai o `Machine Learning: Cook` |
+| 2 | Ponha o card num Cubit Elite | Aparecem a touca de chef cobrindo o painel solar, a mochila com a concha de pau e a tigela no canto da tela |
+| 3 | Marque a área, os dois baús com o app Descarga e, com o app Marcar, o fumeiro e a fornalha | O app Marcar aceita o fumeiro e a fornalha, e num baú comum avisa que só marca fornos |
+| 4 | Ponha carne crua, carvão, tábuas e minério de ferro nos baús | Ele enche primeiro o fumeiro com a carne e o carvão, pela entrada e pelo combustível, e só depois a fornalha |
+| 5 | Espere | Ele tira a carne assada pela saída e a guarda nos baús, sem nunca levar o minério nem queimar as tábuas |
+| 6 | Deixe uma batata crua na entrada da fornalha | Ele não a tira e só completa com batata |
+| 7 | Tire a carne assada da fornalha com a mão | A experiência do forno vem junto |
+| 8 | Esvazie o carvão dos baús | Os fornos ficam sem combustível novo, e ele espera sem hibernar |
+| 9 | Encha o inventário dele, sem baú com espaço | Ele hiberna com `Hibernating · Inventory full` |
+| 10 | Ponha 3 Cozinheiros na mesma área | Cada um vai a um forno diferente |
+| 11 | Num Ultimate, marque até 8 fornos | Ele aceita 8 e trabalha mais rápido |
+| 12 | Recolha o Cubit e coloque de novo | O card continua, e a área, os baús e os fornos precisam ser marcados de novo |
+| 13 | Com o jogo em português | `Aprendizado de Máquina: Cozinheiro` |
+
 ## Tradução
 
 | # | Passo | Resultado esperado |
@@ -1038,6 +1058,7 @@ Na instância só com o mod, tire capturas com F2 do Cubit seguindo, da tela do 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-19 23:04 | Adiciona o roteiro do Cozinheiro. |
 | Marcelo Fabiano | 2026-11-19 22:36 | Troca o visual do Organizador no roteiro (perguntas 1307 e 1308). |
 | Marcelo Fabiano | 2026-11-19 22:13 | Leva o roteiro do Organizador à aba `Supply` (perguntas 1303 a 1305). |
 | Marcelo Fabiano | 2026-11-19 21:35 | Adiciona o roteiro do Organizador. |

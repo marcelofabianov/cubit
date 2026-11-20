@@ -28,6 +28,10 @@ public final class RobotJobLook {
     return job(robot).filter(RobotJob.ORGANIZER::equals).isPresent();
   }
 
+  public static boolean cook(RobotEntity robot) {
+    return job(robot).filter(RobotJob.COOK::equals).isPresent();
+  }
+
   public static boolean toolInClaw(RobotEntity robot) {
     return robot.getEntityData().get(RobotSyncedData.TOOL_IN_CLAW);
   }

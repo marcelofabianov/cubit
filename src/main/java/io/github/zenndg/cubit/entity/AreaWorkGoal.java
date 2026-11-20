@@ -39,7 +39,8 @@ final class AreaWorkGoal extends Goal {
     return robot.workArea().working()
         && !work.fishing().active()
         && !work.farming().active()
-        && !work.organizing().active();
+        && !work.organizing().active()
+        && !work.cooking().active();
   }
 
   @Override

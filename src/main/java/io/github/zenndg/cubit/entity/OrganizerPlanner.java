@@ -86,7 +86,7 @@ final class OrganizerPlanner {
     }
     String dimension = RobotUnload.dimensionOf(robot.level());
     Optional<OrganizerTask> machine =
-        robot.workArea().work().organizing().marks().targets().stream()
+        robot.workArea().work().marks().targets().stream()
             .map(OrganizerTarget::pos)
             .filter(pos -> area.contains(pos.getX(), pos.getY(), pos.getZ()))
             .filter(pos -> RobotOrganizing.SPOTS.freeFor(dimension, pos.asLong(), robot.getUUID()))

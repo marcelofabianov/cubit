@@ -9,7 +9,7 @@ import io.github.zenndg.cubit.domain.robot.UnloadChests;
 import io.github.zenndg.cubit.domain.robot.WorkArea;
 import io.github.zenndg.cubit.domain.tier.RobotTier;
 import io.github.zenndg.cubit.entity.RobotEntity;
-import io.github.zenndg.cubit.entity.RobotOrganizerMarks;
+import io.github.zenndg.cubit.entity.RobotMarks;
 import io.github.zenndg.cubit.registry.CubitDataComponents;
 import io.github.zenndg.cubit.registry.CubitItems;
 import java.util.Optional;
@@ -221,8 +221,8 @@ public final class OrganizerGameTests {
     helper.getLevel().addFreshEntity(item);
   }
 
-  private static RobotOrganizerMarks marks(RobotEntity robot) {
-    return robot.workArea().work().organizing().marks();
+  private static RobotMarks marks(RobotEntity robot) {
+    return robot.workArea().work().marks();
   }
 
   private static int count(ChestBlockEntity chest, net.minecraft.world.item.Item item) {

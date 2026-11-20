@@ -22,11 +22,12 @@ import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
 /**
  * The hat and the backpack of the job, always with its card: the bucket hat of the Fisher, the
  * straw hat of the Farmer and the warehouse cap of the Organizer, all with the same backpack
- * (answers 1196, 1197, 1200, 1216, 1229 and 1307). The book and quill of the Organizer is part of
- * the model in the backpack, because the flat item of the game looked wrong there (answer 1312).
- * They stay hidden in the body and in the other layers, and only this layer shows them, with a
- * picture of each job that is transparent everywhere but on them. The hat covers the solar panel,
- * which still charges (answer 1201).
+ * (answers 1196, 1197, 1200, 1216, 1229, 1307 and 1324), with the chef's toque of the Cook. The
+ * book and quill of the Organizer and the ladle of the Cook are part of the model in the backpack,
+ * because a flat item of the game looked wrong there (answers 1312 and 1324). They stay hidden in
+ * the body and in the other layers, and only this layer shows them, with a picture of each job that
+ * is transparent everywhere but on them. The hat covers the solar panel, which still charges
+ * (answer 1201).
  */
 final class RobotJobGearLayer extends GeoRenderLayer<RobotEntity> {
   private static final String TEXTURE_PATH = "textures/entity/%s_%s.png";
@@ -37,16 +38,21 @@ final class RobotJobGearLayer extends GeoRenderLayer<RobotEntity> {
   private static final String ORGANIZER_BOOK = "organizer_book";
   private static final String ORGANIZER_QUILL = "organizer_quill";
 
-  /**
-   * The book and quill of the Organizer, part of the model, which leave when it goes to the claw.
-   */
-  private static final List<String> ORGANIZER_TOOL = List.of(ORGANIZER_BOOK, ORGANIZER_QUILL);
+  private static final String COOK_HAT = "cook_hat";
+  private static final String COOK_LADLE = "cook_ladle";
+
+  /** The tools that are part of the model in the backpack, which leave when the claw takes one. */
+  private static final Map<RobotJob, List<String>> MODELED_TOOLS =
+      Map.of(
+          RobotJob.ORGANIZER, List.of(ORGANIZER_BOOK, ORGANIZER_QUILL),
+          RobotJob.COOK, List.of(COOK_LADLE));
 
   private static final Map<RobotJob, List<String>> BONES =
       Map.of(
           RobotJob.FISHER, List.of(FISHER_HAT, BACKPACK),
           RobotJob.FARMER, List.of(FARMER_HAT, BACKPACK),
-          RobotJob.ORGANIZER, List.of(ORGANIZER_CAP, BACKPACK, ORGANIZER_BOOK, ORGANIZER_QUILL));
+          RobotJob.ORGANIZER, List.of(ORGANIZER_CAP, BACKPACK, ORGANIZER_BOOK, ORGANIZER_QUILL),
+          RobotJob.COOK, List.of(COOK_HAT, BACKPACK, COOK_LADLE));
   private static final int NO_TINT = -1;
 
   private final Map<RobotJob, ResourceLocation> textures = new EnumMap<>(RobotJob.class);
@@ -83,8 +89,8 @@ final class RobotJobGearLayer extends GeoRenderLayer<RobotEntity> {
     }
     Function<String, GeoBone> bones = name -> model.getBone(name).orElse(null);
     setHidden(bones, BONES.get(job), false);
-    if (job == RobotJob.ORGANIZER && RobotJobLook.toolInClaw(robot)) {
-      setHidden(bones, ORGANIZER_TOOL, true);
+    if (RobotJobLook.toolInClaw(robot)) {
+      setHidden(bones, MODELED_TOOLS.getOrDefault(job, List.of()), true);
     }
     RenderType type = RenderType.entityCutoutNoCull(textures.get(job));
     getRenderer()
