@@ -186,16 +186,16 @@ Rode num mundo novo, em modo sobrevivência, com `/gamemode survival` e `/give @
 | # | Faça | Espere |
 |---|---|---|
 | 1 | Pegue um diamante, com `/give @s minecraft:diamond` | A receita do `Cubit` aparece no livro. A do `Induction Dock` ainda não |
-| 2 | Dê os materiais: `/give @s minecraft:redstone 8`, `/give @s minecraft:redstone_lamp`, `/give @s minecraft:iron_ingot 8`, `/give @s minecraft:obsidian 2` e `/give @s minecraft:chest 2` | Os itens chegam |
-| 3 | Na mesa, monte redstone, lâmpada e redstone; ferro, diamante e ferro; obsidiana, vazio e obsidiana | Sai um `Cubit` |
+| 2 | Dê os materiais: `/give @s minecraft:redstone 8`, `/give @s minecraft:redstone_lamp`, `/give @s minecraft:iron_ingot 8`, `/give @s minecraft:obsidian 2`, `/give @s minecraft:glass_pane`, `/give @s minecraft:diamond 2` e `/give @s minecraft:chest 2` | Os itens chegam |
+| 3 | Na mesa, monte redstone, lâmpada e redstone; ferro, diamante e ferro; obsidiana, painel de vidro e obsidiana | Sai um `Cubit` |
 | 4 | Olhe o livro, com o `Cubit` no inventário | As receitas do `Induction Dock` e dos três Modules aparecem |
 | 5 | Coloque o `Cubit` | Ele segue você, com a barra de 25% na tela |
-| 6 | Na mesa, monte o L: redstone na coluna 1 da linha 1; ferro na coluna 1 da linha 2; baú, redstone e ferro na linha 3 | Sai um `Induction Dock` |
+| 6 | Na mesa, monte o L: diamante na coluna 1 da linha 1; baú na coluna 1 da linha 2; ferro, redstone e ferro na linha 3 | Sai um `Induction Dock` |
 | 7 | Monte o L espelhado, trocando as colunas 1 e 3 | Também sai um `Induction Dock` |
 | 8 | Coloque o `Dock` e abra a tela, com Shift + botão direito | A barra de energia está vazia, e a tela do bloco, apagada |
-| 9 | Dê `/give @s minecraft:gold_ingot 4`, `/give @s minecraft:quartz 4` e `/give @s minecraft:comparator` e monte ouro nos cantos, quartzo nos lados e o comparador no centro | Sai um `Advanced Module` |
-| 10 | Dê `/give @s minecraft:diamond 4`, `/give @s minecraft:purple_dye 4` e `/give @s minecraft:redstone_block` e monte diamante nos cantos, corante roxo nos lados e o bloco de redstone no centro | Sai um `Elite Module` |
-| 11 | Dê `/give @s minecraft:diamond 4`, `/give @s minecraft:netherite_ingot 2`, `/give @s minecraft:nether_star` e `/give @s minecraft:redstone_block` e monte diamante, bloco de redstone e diamante; netherite, estrela do Nether e netherite; diamante, vazio e diamante | Sai um `Ultimate Module` |
+| 9 | Dê `/give @s minecraft:obsidian 3`, `/give @s minecraft:lapis_lazuli 2`, `/give @s minecraft:diamond` e `/give @s minecraft:gold_ingot 3` e monte obsidiana, obsidiana e obsidiana; lápis, diamante e lápis; ouro, ouro e ouro | Sai um `Advanced Module` |
+| 10 | Dê `/give @s minecraft:obsidian 3`, `/give @s minecraft:purple_dye 2`, `/give @s minecraft:diamond_block` e `/give @s minecraft:gold_block 3` e monte obsidiana, obsidiana e obsidiana; corante roxo, bloco de diamante e corante roxo; bloco de ouro, bloco de ouro e bloco de ouro | Sai um `Elite Module` |
+| 11 | Dê `/give @s minecraft:netherite_ingot 5`, `/give @s minecraft:diamond_block` e `/give @s minecraft:blaze_powder 3` e monte netherite, netherite e netherite; netherite, bloco de diamante e netherite; pó de blaze, pó de blaze e pó de blaze | Sai um `Ultimate Module` |
 
 ## Sons
 
@@ -1058,6 +1058,7 @@ Na instância só com o mod, tire capturas com F2 do Cubit seguindo, da tela do 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-20 23:55 | Troca as receitas do Cubit, do Dock e dos Modules (perguntas 1331 e 1332). |
 | Marcelo Fabiano | 2026-11-19 23:04 | Adiciona o roteiro do Cozinheiro. |
 | Marcelo Fabiano | 2026-11-19 22:36 | Troca o visual do Organizador no roteiro (perguntas 1307 e 1308). |
 | Marcelo Fabiano | 2026-11-19 22:13 | Leva o roteiro do Organizador à aba `Supply` (perguntas 1303 a 1305). |

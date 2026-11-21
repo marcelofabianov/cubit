@@ -274,11 +274,20 @@ Não há perguntas pendentes nesta fase.
 | 1327 | Em qual chave do NBT ficam as marcas do app Marcar, agora usadas pelo Organizador e pelo Cozinheiro? | `MarkedBlocks`, uma chave neutra para as marcas de qualquer trabalho. Ela troca a `OrganizerMarks`, que ainda não foi publicada, então não precisa de migração (regra 18). A classe `RobotOrganizerMarks` vira `RobotMarks` |
 | 1328 | A imagem conceito do Cozinheiro está aceita? | Sim. Ela vai para `_docs/imagens/conceito/trabalhos/cozinheiro.png`, com a touca de chef, a mochila com a concha de pau, o colar roxo do Elite e a tigela na tela |
 | 1329 | O conceito do Cozinheiro (#197) está autorizado para o código? | Sim: o desenvolvedor disse "autorizo", com os detalhes completados pelo agente: a fornalha de fundição fica de fora, o cru entra por cima, o combustível pelo lado e a comida sai por baixo, e sem nada a fazer ele espera sem hibernar (regra 53) |
+| 1330 | O escopo do card das receitas novas está certo? | Sim: trocar as receitas do Cubit, do Induction Dock, do Cubit Tablet, dos três Modules e das quatro Power Banks, com os documentos, e preparar os prompts das texturas 16×16 da Ultimate Power Bank e do Ultimate Module, numa issue prioritária da Fase 5, antes do Defensor (#219) |
+| 1331 | Quais são as receitas novas? | As grades de [`itens.md`](../itens.md#ids-e-receitas), pedidas pelo desenvolvedor. A Toolbox, os cards, o conserto e a recarga não mudam, assim como os IDs, os tipos de receita e o que libera cada uma no livro. Muda as respostas 336, 348, 807, 817, 818, 902, 912 e 1031 |
+| 1332 | Em que coluna ficam o diamante e o baú do Induction Dock? | Na coluna da esquerda, mantendo o L da resposta 336, com o desenho espelhado também valendo |
+| 1333 | Qual é a linha do meio da Base Power Bank, que veio com 5 itens? | Esmeralda, bloco de redstone e esmeralda |
+| 1334 | O "Netherite" da linha de baixo da Ultimate Power Bank é o lingote? | Sim, lingote de netherite, simétrico com a linha de cima |
+| 1335 | O que acontece com os detalhes das texturas escuras do Ultimate? | Só a carcaça branca vira cinza-escuro de netherite. Os detalhes dourados e a tela continuam, combinando com o colar dourado do Ultimate |
+| 1336 | O conceito das receitas novas (#219) está autorizado para o código? | Sim: o desenvolvedor disse "autorizo". As GameTests de receita passam às grades novas e ganham o Tablet e as quatro Power Banks, e o prompt do Ultimate Module leva o tom de ardósia de hoje ao netherite (regra 53) |
+| 1337 | As texturas escuras da Ultimate Power Bank e do Ultimate Module estão aceitas? | Sim, como estão: só a carcaça na paleta de netherite, com a mesma forma, o dourado, os LEDs e a tela da Power Bank no azul-escuro de hoje. Elas trocam as texturas de item e o `modulo-ultimate.png` da imagem conceito |
 
 ## Histórico de modificações
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-20 23:40 | Registra as respostas 1330 a 1337. |
 | Marcelo Fabiano | 2026-11-19 22:56 | Registra as respostas 1314 a 1329. |
 | Marcelo Fabiano | 2026-11-19 22:51 | Registra a resposta 1313. |
 | Marcelo Fabiano | 2026-11-19 22:47 | Registra a resposta 1312. |

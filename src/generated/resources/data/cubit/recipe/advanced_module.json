@@ -2,20 +2,23 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "C": {
-      "item": "minecraft:comparator"
-    },
-    "M": {
+    "B": {
       "item": "minecraft:gold_ingot"
     },
+    "C": {
+      "item": "minecraft:diamond"
+    },
     "S": {
-      "item": "minecraft:quartz"
+      "item": "minecraft:lapis_lazuli"
+    },
+    "T": {
+      "item": "minecraft:obsidian"
     }
   },
   "pattern": [
-    "MSM",
+    "TTT",
     "SCS",
-    "MSM"
+    "BBB"
   ],
   "result": {
     "count": 1,

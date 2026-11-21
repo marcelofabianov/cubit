@@ -5,6 +5,9 @@
     "C": {
       "item": "minecraft:chest"
     },
+    "D": {
+      "item": "minecraft:diamond"
+    },
     "I": {
       "item": "minecraft:iron_ingot"
     },
@@ -13,9 +16,9 @@
     }
   },
   "pattern": [
-    "R  ",
-    "I  ",
-    "CRI"
+    "D  ",
+    "C  ",
+    "IRI"
   ],
   "result": {
     "count": 1,

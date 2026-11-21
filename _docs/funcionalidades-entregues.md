@@ -23,7 +23,7 @@ O que o Cubit já faz, do primeiro commit até o merge do PR #126. As regras com
 
 ## Cubit no mundo
 
-- **Craft:** na mesa, com redstone, lâmpada de redstone, lingotes de ferro, diamante e obsidiana. Sai com 25% de bateria e a vida cheia, e a receita aparece no livro ao ter um diamante.
+- **Craft:** na mesa, com redstone, lâmpada de redstone, lingotes de ferro, diamante, obsidiana e painel de vidro (pergunta 1331). Sai com 25% de bateria e a vida cheia, e a receita aparece no livro ao ter um diamante.
 - **Colocar:** com o item na mão. Toca `placed.ogg` e, ativo, mostra a expressão feliz. O dono é quem coloca.
 - **Recolher:** Shift + clique direito, em qualquer estado.
 - **Estado no item:** tier, energia, vida, inventário, slot de energia, cor, nome e as chaves `Lamp`, `Scanners` e `Chatter`, em data components (`cubit:robot_state` e outros). Recolher, morrer e consertar nunca apagam nem duplicam nada.
@@ -78,7 +78,7 @@ O que o Cubit já faz, do primeiro commit até o merge do PR #126. As regras com
 
 ## Induction Dock
 
-- **Bloco:** 2 de altura, como uma porta, com torre e placa em U. A receita é em L, com redstone, lingotes de ferro e um baú.
+- **Bloco:** 2 de altura, como uma porta, com torre e placa em U. A receita é em L, com diamante, baú, lingotes de ferro e redstone (pergunta 1332).
 - **Dono:** quem o coloca. Só o dono usa e quebra, e explosões e pistões não o afetam. Um operador em criativo pode remover um Dock sem dono.
 - **Energia:** estoque de 100 mil FE, entrada de até 5.000 FE/t por cabos de qualquer mod ou redstone no slot, também por funil.
 - **Chamar:** o clique no Dock chama o Cubit ligado mais próximo, dentro de 15 blocos. Colocar o item do Cubit em cima também funciona.
@@ -187,6 +187,7 @@ No estilo das imagens de conceito, sem a textura do baú do jogo.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-20 23:50 | Troca as receitas do Cubit e do Dock (perguntas 1331 e 1332). |
 | Marcelo Fabiano | 2026-11-13 16:40 | Troca o Cubit Remote pelo Tablet. |
 | Marcelo Fabiano | 2026-11-08 00:11 | Cita a tradução para o português. |
 | Marcelo Fabiano | 2026-11-07 23:42 | Atualiza o marco e acrescenta a animação de hibernando. |

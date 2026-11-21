@@ -30,32 +30,32 @@ final class CubitRecipeProvider extends RecipeProvider {
   private static final String TOOLBOX_BOTTOM_ROW = "IOI";
   private static final String ROBOT_TOP_ROW = "RLR";
   private static final String ROBOT_MIDDLE_ROW = "IDI";
-  private static final String ROBOT_BOTTOM_ROW = "O O";
-  private static final String DOCK_TOP_ROW = "R  ";
+  private static final String ROBOT_BOTTOM_ROW = "OGO";
+  private static final String DOCK_TOP_ROW = "D  ";
   private static final String TABLET_TOP_ROW = "GRG";
-  private static final String TABLET_MIDDLE_ROW = "IDI";
-  private static final String TABLET_BOTTOM_ROW = "IAI";
+  private static final String TABLET_MIDDLE_ROW = "QDQ";
+  private static final String TABLET_BOTTOM_ROW = "QOQ";
   private static final char GLASS = 'G';
-  private static final char GOLD = 'A';
-  private static final String DOCK_MIDDLE_ROW = "I  ";
-  private static final String DOCK_BOTTOM_ROW = "CRI";
+  private static final char QUARTZ = 'Q';
+  private static final String DOCK_MIDDLE_ROW = "C  ";
+  private static final String DOCK_BOTTOM_ROW = "IRI";
   private static final char IRON = 'I';
   private static final char REDSTONE = 'R';
   private static final char OBSIDIAN = 'O';
   private static final char LAMP = 'L';
   private static final char DIAMOND = 'D';
   private static final char CHEST = 'C';
-  private static final String MODULE_TOP_ROW = "MSM";
+  private static final String MODULE_TOP_ROW = "TTT";
   private static final String MODULE_MIDDLE_ROW = "SCS";
-  private static final String MODULE_BOTTOM_ROW = "MSM";
-  private static final String ULTIMATE_TOP_ROW = "DRD";
-  private static final String ULTIMATE_MIDDLE_ROW = "NSN";
-  private static final String ULTIMATE_BOTTOM_ROW = "D D";
-  private static final char MAIN = 'M';
+  private static final String MODULE_BOTTOM_ROW = "BBB";
+  private static final String BANK_TOP_ROW = "KTK";
+  private static final String BANK_MIDDLE_ROW = "SCS";
+  private static final String BANK_BOTTOM_ROW = "KBK";
+  private static final char TOP = 'T';
   private static final char SIDE = 'S';
   private static final char CORE = 'C';
-  private static final char NETHERITE = 'N';
-  private static final char STAR = 'S';
+  private static final char BOTTOM = 'B';
+  private static final char CORNER = 'K';
   private static final String FISHER_TOP_ROW = "PCP";
   private static final String FISHER_MIDDLE_ROW = "RFR";
   private static final String FISHER_BOTTOM_ROW = "PRP";
@@ -178,81 +178,104 @@ final class CubitRecipeProvider extends RecipeProvider {
         .define(IRON, Items.IRON_INGOT)
         .define(DIAMOND, Items.DIAMOND)
         .define(OBSIDIAN, Items.OBSIDIAN)
+        .define(GLASS, Items.GLASS_PANE)
         .unlockedBy(HAS_DIAMOND, has(Items.DIAMOND))
         .save(output);
   }
 
-  /** Each module has its own recipe, without the one before it (answers 799, 807 and 817). */
+  /**
+   * Each module has its own recipe, without the one before it (answer 799): a row on top, the side
+   * material around the core and a row below (answer 1331).
+   */
   private void modules(RecipeOutput output) {
-    module(CubitItems.ADVANCED_MODULE.get(), Items.GOLD_INGOT, Items.QUARTZ)
-        .define(CORE, Items.COMPARATOR)
+    module(
+            CubitItems.ADVANCED_MODULE.get(),
+            Items.OBSIDIAN,
+            Items.LAPIS_LAZULI,
+            Items.DIAMOND,
+            Items.GOLD_INGOT)
         .save(output);
-    module(CubitItems.ELITE_MODULE.get(), Items.DIAMOND, Items.PURPLE_DYE)
-        .define(CORE, Items.REDSTONE_BLOCK)
+    module(
+            CubitItems.ELITE_MODULE.get(),
+            Items.OBSIDIAN,
+            Items.PURPLE_DYE,
+            Items.DIAMOND_BLOCK,
+            Items.GOLD_BLOCK)
         .save(output);
-    ShapedRecipeBuilder.shaped(RecipeCategory.MISC, CubitItems.ULTIMATE_MODULE.get())
-        .pattern(ULTIMATE_TOP_ROW)
-        .pattern(ULTIMATE_MIDDLE_ROW)
-        .pattern(ULTIMATE_BOTTOM_ROW)
-        .define(DIAMOND, Items.DIAMOND)
-        .define(REDSTONE, Items.REDSTONE_BLOCK)
-        .define(NETHERITE, Items.NETHERITE_INGOT)
-        .define(STAR, Items.NETHER_STAR)
-        .unlockedBy(HAS_ROBOT, has(CubitItems.GENERAL_ROBOT.get()))
+    module(
+            CubitItems.ULTIMATE_MODULE.get(),
+            Items.NETHERITE_INGOT,
+            Items.NETHERITE_INGOT,
+            Items.DIAMOND_BLOCK,
+            Items.BLAZE_POWDER)
         .save(output);
   }
 
-  /** The main material in the corners and the second one on the sides (answer 818). */
-  private static ShapedRecipeBuilder module(ItemLike result, ItemLike main, ItemLike side) {
+  private static ShapedRecipeBuilder module(
+      ItemLike result, ItemLike top, ItemLike side, ItemLike core, ItemLike bottom) {
     return ShapedRecipeBuilder.shaped(RecipeCategory.MISC, result)
         .pattern(MODULE_TOP_ROW)
         .pattern(MODULE_MIDDLE_ROW)
         .pattern(MODULE_BOTTOM_ROW)
-        .define(MAIN, main)
+        .define(TOP, top)
         .define(SIDE, side)
+        .define(CORE, core)
+        .define(BOTTOM, bottom)
         .unlockedBy(HAS_ROBOT, has(CubitItems.GENERAL_ROBOT.get()));
   }
 
   /**
-   * The Base from scratch and each next one around the previous, in the corners and on the sides
-   * like the Modules (answers 902 and 912). The Base unlocks with a Cubit, the others with the
-   * previous bank (answer 908).
+   * The Base from scratch and each next one around the previous (answers 902 and 1331 to 1334):
+   * gold on top between the corners, the core between the sides and the tier material below. The
+   * Base unlocks with a Cubit, the others with the previous bank (answer 908).
    */
   private void powerBanks(RecipeOutput output) {
-    module(CubitItems.BASE_POWER_BANK.get(), Items.IRON_INGOT, Items.REDSTONE)
-        .define(CORE, Items.REDSTONE_BLOCK)
+    bank(
+            CubitItems.BASE_POWER_BANK.get(),
+            Items.QUARTZ,
+            Items.EMERALD,
+            Items.REDSTONE_BLOCK,
+            Items.OBSIDIAN)
+        .unlockedBy(HAS_ROBOT, has(CubitItems.GENERAL_ROBOT.get()))
         .save(output);
     RecipeOutput upgrades = new PowerBankRecipeOutput(output);
     upgrade(
             CubitItems.BASE_POWER_BANK.get(),
             CubitItems.ADVANCED_POWER_BANK.get(),
-            Items.GOLD_INGOT,
-            Items.QUARTZ)
+            Items.QUARTZ,
+            Items.LAPIS_LAZULI)
         .save(upgrades);
     upgrade(
             CubitItems.ADVANCED_POWER_BANK.get(),
             CubitItems.ELITE_POWER_BANK.get(),
-            Items.DIAMOND,
+            Items.QUARTZ,
             Items.PURPLE_DYE)
         .save(upgrades);
     upgrade(
             CubitItems.ELITE_POWER_BANK.get(),
             CubitItems.ULTIMATE_POWER_BANK.get(),
             Items.NETHERITE_INGOT,
-            Items.REDSTONE_BLOCK)
+            Items.BLAZE_ROD)
         .save(upgrades);
   }
 
-  private static ShapedRecipeBuilder upgrade(
-      ItemLike previous, ItemLike next, ItemLike main, ItemLike side) {
-    String criterion = HAS_PREFIX + BuiltInRegistries.ITEM.getKey(previous.asItem()).getPath();
-    return ShapedRecipeBuilder.shaped(RecipeCategory.MISC, next)
-        .pattern(MODULE_TOP_ROW)
-        .pattern(MODULE_MIDDLE_ROW)
-        .pattern(MODULE_BOTTOM_ROW)
-        .define(MAIN, main)
+  private static ShapedRecipeBuilder bank(
+      ItemLike result, ItemLike corner, ItemLike side, ItemLike core, ItemLike bottom) {
+    return ShapedRecipeBuilder.shaped(RecipeCategory.MISC, result)
+        .pattern(BANK_TOP_ROW)
+        .pattern(BANK_MIDDLE_ROW)
+        .pattern(BANK_BOTTOM_ROW)
+        .define(CORNER, corner)
+        .define(TOP, Items.GOLD_INGOT)
         .define(SIDE, side)
-        .define(CORE, previous)
+        .define(CORE, core)
+        .define(BOTTOM, bottom);
+  }
+
+  private static ShapedRecipeBuilder upgrade(
+      ItemLike previous, ItemLike next, ItemLike corner, ItemLike bottom) {
+    String criterion = HAS_PREFIX + BuiltInRegistries.ITEM.getKey(previous.asItem()).getPath();
+    return bank(next, corner, Items.REDSTONE_BLOCK, previous, bottom)
         .unlockedBy(criterion, has(previous));
   }
 
@@ -293,15 +316,17 @@ final class CubitRecipeProvider extends RecipeProvider {
         .pattern(DOCK_TOP_ROW)
         .pattern(DOCK_MIDDLE_ROW)
         .pattern(DOCK_BOTTOM_ROW)
-        .define(REDSTONE, Items.REDSTONE)
-        .define(IRON, Items.IRON_INGOT)
+        .define(DIAMOND, Items.DIAMOND)
         .define(CHEST, Items.CHEST)
+        .define(IRON, Items.IRON_INGOT)
+        .define(REDSTONE, Items.REDSTONE)
         .unlockedBy(HAS_ROBOT, has(CubitItems.GENERAL_ROBOT.get()))
         .save(output);
   }
 
   /**
-   * Glass and redstone on top, iron on the sides, a diamond in the middle and gold below (1031).
+   * Glass and redstone on top, quartz on the sides, a diamond in the middle and obsidian below
+   * (answer 1331).
    */
   private void tablet(RecipeOutput output) {
     ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, CubitItems.TABLET.get())
@@ -309,10 +334,10 @@ final class CubitRecipeProvider extends RecipeProvider {
         .pattern(TABLET_MIDDLE_ROW)
         .pattern(TABLET_BOTTOM_ROW)
         .define(GLASS, Items.GLASS_PANE)
-        .define(IRON, Items.IRON_INGOT)
+        .define(QUARTZ, Items.QUARTZ)
         .define(REDSTONE, Items.REDSTONE)
         .define(DIAMOND, Items.DIAMOND)
-        .define(GOLD, Items.GOLD_INGOT)
+        .define(OBSIDIAN, Items.OBSIDIAN)
         .unlockedBy(HAS_ROBOT, has(CubitItems.GENERAL_ROBOT.get()))
         .save(output);
   }

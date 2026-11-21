@@ -2,20 +2,26 @@
   "type": "cubit:power_bank_upgrade",
   "category": "misc",
   "key": {
+    "B": {
+      "item": "minecraft:blaze_rod"
+    },
     "C": {
       "item": "cubit:elite_power_bank"
     },
-    "M": {
+    "K": {
       "item": "minecraft:netherite_ingot"
     },
     "S": {
       "item": "minecraft:redstone_block"
+    },
+    "T": {
+      "item": "minecraft:gold_ingot"
     }
   },
   "pattern": [
-    "MSM",
+    "KTK",
     "SCS",
-    "MSM"
+    "KBK"
   ],
   "result": {
     "count": 1,

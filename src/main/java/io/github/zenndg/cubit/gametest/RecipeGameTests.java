@@ -112,44 +112,134 @@ public final class RecipeGameTests {
     helper.succeed();
   }
 
-  /** The grids of _docs/itens.md: the main material in the corners and the core in the middle. */
+  @GameTest(template = EMPTY_TEMPLATE)
+  public static void theTabletRecipeMakesATablet(GameTestHelper helper) {
+    ItemStack result = craft(helper, tabletGrid());
+
+    helper.assertTrue(result.is(CubitItems.TABLET.get()), WRONG_RESULT);
+    helper.succeed();
+  }
+
+  @GameTest(template = EMPTY_TEMPLATE)
+  public static void theBasePowerBankRecipeMakesABasePowerBank(GameTestHelper helper) {
+    ItemStack result = craft(helper, basePowerBankGrid());
+
+    helper.assertTrue(result.is(CubitItems.BASE_POWER_BANK.get()), WRONG_RESULT);
+    helper.succeed();
+  }
+
+  @GameTest(template = EMPTY_TEMPLATE)
+  public static void theAdvancedPowerBankRecipeTakesTheBaseOne(GameTestHelper helper) {
+    ItemStack result =
+        craft(
+            helper,
+            nextBankGrid(Items.QUARTZ, CubitItems.BASE_POWER_BANK.get(), Items.LAPIS_LAZULI));
+
+    helper.assertTrue(result.is(CubitItems.ADVANCED_POWER_BANK.get()), WRONG_RESULT);
+    helper.succeed();
+  }
+
+  @GameTest(template = EMPTY_TEMPLATE)
+  public static void theElitePowerBankRecipeTakesTheAdvancedOne(GameTestHelper helper) {
+    ItemStack result =
+        craft(
+            helper,
+            nextBankGrid(Items.QUARTZ, CubitItems.ADVANCED_POWER_BANK.get(), Items.PURPLE_DYE));
+
+    helper.assertTrue(result.is(CubitItems.ELITE_POWER_BANK.get()), WRONG_RESULT);
+    helper.succeed();
+  }
+
+  @GameTest(template = EMPTY_TEMPLATE)
+  public static void theUltimatePowerBankRecipeTakesTheEliteOne(GameTestHelper helper) {
+    ItemStack result =
+        craft(
+            helper,
+            nextBankGrid(
+                Items.NETHERITE_INGOT, CubitItems.ELITE_POWER_BANK.get(), Items.BLAZE_ROD));
+
+    helper.assertTrue(result.is(CubitItems.ULTIMATE_POWER_BANK.get()), WRONG_RESULT);
+    helper.succeed();
+  }
+
+  /** The grids of _docs/itens.md (answer 1331). */
   private static List<ItemStack> advancedModuleGrid() {
     return stacks(
+        Items.OBSIDIAN,
+        Items.OBSIDIAN,
+        Items.OBSIDIAN,
+        Items.LAPIS_LAZULI,
+        Items.DIAMOND,
+        Items.LAPIS_LAZULI,
         Items.GOLD_INGOT,
-        Items.QUARTZ,
         Items.GOLD_INGOT,
-        Items.QUARTZ,
-        Items.COMPARATOR,
-        Items.QUARTZ,
-        Items.GOLD_INGOT,
-        Items.QUARTZ,
         Items.GOLD_INGOT);
   }
 
   private static List<ItemStack> eliteModuleGrid() {
     return stacks(
-        Items.DIAMOND,
+        Items.OBSIDIAN,
+        Items.OBSIDIAN,
+        Items.OBSIDIAN,
         Items.PURPLE_DYE,
-        Items.DIAMOND,
+        Items.DIAMOND_BLOCK,
         Items.PURPLE_DYE,
-        Items.REDSTONE_BLOCK,
-        Items.PURPLE_DYE,
-        Items.DIAMOND,
-        Items.PURPLE_DYE,
-        Items.DIAMOND);
+        Items.GOLD_BLOCK,
+        Items.GOLD_BLOCK,
+        Items.GOLD_BLOCK);
   }
 
   private static List<ItemStack> ultimateModuleGrid() {
     return stacks(
+        Items.NETHERITE_INGOT,
+        Items.NETHERITE_INGOT,
+        Items.NETHERITE_INGOT,
+        Items.NETHERITE_INGOT,
+        Items.DIAMOND_BLOCK,
+        Items.NETHERITE_INGOT,
+        Items.BLAZE_POWDER,
+        Items.BLAZE_POWDER,
+        Items.BLAZE_POWDER);
+  }
+
+  private static List<ItemStack> tabletGrid() {
+    return stacks(
+        Items.GLASS_PANE,
+        Items.REDSTONE,
+        Items.GLASS_PANE,
+        Items.QUARTZ,
         Items.DIAMOND,
+        Items.QUARTZ,
+        Items.QUARTZ,
+        Items.OBSIDIAN,
+        Items.QUARTZ);
+  }
+
+  private static List<ItemStack> basePowerBankGrid() {
+    return stacks(
+        Items.QUARTZ,
+        Items.GOLD_INGOT,
+        Items.QUARTZ,
+        Items.EMERALD,
         Items.REDSTONE_BLOCK,
-        Items.DIAMOND,
-        Items.NETHERITE_INGOT,
-        Items.NETHER_STAR,
-        Items.NETHERITE_INGOT,
-        Items.DIAMOND,
-        Items.AIR,
-        Items.DIAMOND);
+        Items.EMERALD,
+        Items.QUARTZ,
+        Items.OBSIDIAN,
+        Items.QUARTZ);
+  }
+
+  /** Gold on top, the previous bank between redstone blocks and the tier material below. */
+  private static List<ItemStack> nextBankGrid(Item corner, Item previous, Item bottom) {
+    return stacks(
+        corner,
+        Items.GOLD_INGOT,
+        corner,
+        Items.REDSTONE_BLOCK,
+        previous,
+        Items.REDSTONE_BLOCK,
+        corner,
+        bottom,
+        corner);
   }
 
   private static List<ItemStack> robotGrid() {
@@ -161,19 +251,19 @@ public final class RecipeGameTests {
         Items.DIAMOND,
         Items.IRON_INGOT,
         Items.OBSIDIAN,
-        Items.AIR,
+        Items.GLASS_PANE,
         Items.OBSIDIAN);
   }
 
   private static List<ItemStack> dockGrid() {
     return stacks(
-        Items.REDSTONE,
-        Items.AIR,
-        Items.AIR,
-        Items.IRON_INGOT,
+        Items.DIAMOND,
         Items.AIR,
         Items.AIR,
         Items.CHEST,
+        Items.AIR,
+        Items.AIR,
+        Items.IRON_INGOT,
         Items.REDSTONE,
         Items.IRON_INGOT);
   }
@@ -182,13 +272,13 @@ public final class RecipeGameTests {
     return stacks(
         Items.AIR,
         Items.AIR,
-        Items.REDSTONE,
+        Items.DIAMOND,
         Items.AIR,
         Items.AIR,
-        Items.IRON_INGOT,
+        Items.CHEST,
         Items.IRON_INGOT,
         Items.REDSTONE,
-        Items.CHEST);
+        Items.IRON_INGOT);
   }
 
   private static List<ItemStack> stacks(Item... items) {
