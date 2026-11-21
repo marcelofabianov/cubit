@@ -196,36 +196,9 @@ public final class CubitConfig {
     return new OreSignals(kinds);
   }
 
-  public int chatterRepeatTicks() {
-    return chatter.repeatTicks.get();
-  }
-
-  public int chatterLeftBehindBlocks() {
-    return chatter.leftBehindBlocks.get();
-  }
-
-  public int chatterLeftBehindRepeatTicks() {
-    return chatter.leftBehindRepeatTicks.get();
-  }
-
-  public int chatterBiomeRepeatTicks() {
-    return chatter.biomeRepeatTicks.get();
-  }
-
-  public int chatterAnimalRepeatTicks() {
-    return chatter.animalRepeatTicks.get();
-  }
-
-  public int chatterRedstoneRepeatTicks() {
-    return chatter.redstoneRepeatTicks.get();
-  }
-
-  public int chatterAnimalChancePercent() {
-    return chatter.animalChancePercent.get();
-  }
-
-  public int chatterCheckTicks() {
-    return chatter.checkTicks.get();
+  /** The keys of the chatter. */
+  public ChatterSection chatter() {
+    return chatter;
   }
 
   public int surprisedExpressionTicks() {
