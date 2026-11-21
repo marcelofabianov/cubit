@@ -72,6 +72,7 @@ As chaves ficam em `snake_case`. As de um tier ficam em `[general_robot.{tier}]`
 | `general_robot.base` | `dock_energy_capacity` | Estoque do Induction Dock desse tier. Troca a chave geral de mesmo nome (pergunta 1381) | 1 a 2147483647 |
 | `general_robot.base` | `dock_recharge_per_tick` | Recarga do Cubit e da Power Bank guardada no Dock desse tier | 1 a 2147483647 |
 | `general_robot.base` | `dock_storage_slots` | Slots do inventário do Dock desse tier | 9 a 54, em múltiplos de 9 |
+| `general_robot.base` | `dock_solar_per_tick` | Geração do painel do Dock Solar desse tier (pergunta 1385) | 0 a 2147483647 |
 | `general_robot.base` | `moving_consumption_per_tick` | Andar | 0 a 2147483647 |
 | `general_robot.base` | `full_inventory_extra_per_tick` | Extra ao andar com o inventário cheio | 0 a 2147483647 |
 | `general_robot.base` | `water_extra_per_tick` | Extra ao andar na água | 0 a 2147483647 |
@@ -163,6 +164,7 @@ O mod não cai por causa do config (regra 17 do `AGENTS.md`):
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-21 08:20 | Adiciona a geração do Dock Solar (pergunta 1385). |
 | Marcelo Fabiano | 2026-11-21 06:30 | Leva o estoque do Dock para as seções de tier e adiciona a recarga e os slots (pergunta 1381). |
 | Marcelo Fabiano | 2026-11-15 14:05 | Adiciona as chaves do intervalo de descarga (perguntas 1252 e 1254). |
 | Marcelo Fabiano | 2026-11-15 13:25 | O `farmer_bone_meal` libera o slot de fertilizante (pergunta 1244). |

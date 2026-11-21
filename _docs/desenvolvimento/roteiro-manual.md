@@ -707,7 +707,7 @@ As regras estão em [`energia.md`](../funcionalidades/energia.md#tiers-do-dock),
 
 | # | Faça | Espere |
 |---|---|---|
-| 1 | Coloque o Dock e olhe a torre | Uma faixa cinza ao redor da torre, logo acima da base. O Jade mostra `Tier: Base` |
+| 1 | Coloque o Dock e olhe a torre | O topo da torre fica cinza. O Jade mostra `Tier: Base` |
 | 2 | Shift + clique direito e abra a aba `Storage` | O título mostra `Induction Dock · Base`, e o inventário tem 3 linhas |
 | 3 | Clique no Dock com o `Elite Module` | `The Induction Dock needs to be Advanced first`, e o Module fica na mão |
 | 4 | Clique com o `Advanced Module` | `Induction Dock upgraded to Advanced!`, o Module é gasto, a faixa fica azul, o inventário passa a 4 linhas e o estoque, a 1,2 mi FE |
@@ -719,6 +719,25 @@ As regras estão em [`energia.md`](../funcionalidades/energia.md#tiers-do-dock),
 | 10 | Quebre o Dock Ultimate e olhe o item | O ícone mostra a faixa dourada e o corpo de netherite. Colocado de novo, ele volta Ultimate, com a energia e o inventário |
 | 11 | Com outro player, clique com um Module num Dock seu | Nada acontece |
 | 12 | Com o jogo em português | `Induction Dock evoluiu para Avançado!` e os outros avisos em português |
+
+## Dock Solar
+
+As regras estão em [`energia.md`](../funcionalidades/energia.md#dock-solar). Use um Induction Dock com algum tier, energia e itens no inventário, e os materiais do painel: vidro, 2 sensores de luz do dia, 1 bloco de redstone e 3 lingotes de ferro.
+
+| # | Faça | Espere |
+|---|---|---|
+| 1 | Com um Induction Dock no inventário, abra o livro | A receita do `Dock Solar Panel` aparece |
+| 2 | Faça o painel: vidro, vidro, vidro / sensor, bloco de redstone, sensor / ferro, ferro, ferro | Sai o `Dock Solar Panel`, com a textura dele |
+| 3 | Junte o painel e o Dock na grade | Sai o `Solar Induction Dock`, com o painel no ícone, e a energia, o tier e o inventário do Dock |
+| 4 | Coloque-o ao ar livre, de dia e sem chuva | O painel fica num mastro sobre a torre, com o topo na cor do tier, e a face do painel pulsa devagar |
+| 5 | Abra a tela, vá à aba `Solar`, com o ícone do painel, e olhe o Jade | `Status: Generating`, `Now 25 FE/t` e `Tier max 25 FE/t` no Base. A aba principal fica igual à do Dock comum. O Jade mostra `Solar +25 FE/t`, e o estoque sobe sem cabos |
+| 6 | Ponha um bloco de pedra sobre o painel | Na aba `Solar`, `Stopped` e `Why: Sky covered`, o pulso para e o estoque não sobe mais. Com vidro no lugar da pedra, ele volta a gerar |
+| 7 | Use `/time set night`, e depois `/time set day` com `/weather rain` | `Why: Night` e depois `Why: Rain`, sem geração e sem pulso |
+| 8 | Suba o tier com um Module | A geração passa a 100, 500 e 1.400 FE/t |
+| 9 | Ponha um Cubit para carregar nele | Ele carrega como em qualquer Dock |
+| 10 | Quebre o Dock Solar | Volta o `Solar Induction Dock`, com tudo, sem separar o painel |
+| 11 | Olhe um Induction Dock comum | O topo da torre na cor do tier, e a faixa de antes, acima da base, sumiu |
+| 12 | Com o jogo em português | `Induction Dock Solar`, `Painel Solar do Dock` e `Solar: sem sol` |
 
 ## Tochas
 
@@ -1095,6 +1114,7 @@ Na instância só com o mod, tire capturas com F2 do Cubit seguindo, da tela do 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-21 09:10 | Adiciona o roteiro do Dock Solar e leva a faixa para o topo (perguntas 1384 a 1392). |
 | Marcelo Fabiano | 2026-11-21 07:30 | Adiciona o roteiro dos tiers do Dock (perguntas 1373 a 1382). |
 | Marcelo Fabiano | 2026-11-21 04:30 | Adiciona o roteiro das portas (perguntas 1359 a 1371). |
 | Marcelo Fabiano | 2026-11-21 02:35 | Troca as receitas dos Modules pela cruz encadeada (perguntas 1357 e 1358). |

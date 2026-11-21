@@ -44,7 +44,8 @@ O Dock sobe de tier com os mesmos Modules do Cubit (perguntas 1373 a 1380). Os n
 | Recarga do Cubit e da Power Bank guardada | 500 FE/t | 1.000 FE/t | 2.500 FE/t | 5.000 FE/t |
 | Slots do inventário | 27 | 36 | 45 | 54 |
 | Entrada, por cabos e redstone | 5.000 FE/t | 5.000 FE/t | 5.000 FE/t | 5.000 FE/t |
-| Faixa | Cinza | Azul | Roxa | Dourada, com o corpo em netherite |
+| Geração do painel do Dock Solar, de dia, a céu aberto e sem chuva, em `dock_solar_per_tick` (pergunta 1385) | 25 FE/t | 100 FE/t | 500 FE/t | 1.400 FE/t |
+| Faixa, no topo da torre (pergunta 1389) | Cinza | Azul | Roxa | Dourada, com o corpo em netherite |
 
 ## Consumo por atividade
 
@@ -247,6 +248,7 @@ Planejado para a Fase 5. O tier Base não aceita cards, e cada card tem o seu ti
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-21 08:20 | Adiciona a geração do Dock Solar (pergunta 1385). |
 | Marcelo Fabiano | 2026-11-21 06:20 | Adiciona os tiers do Dock (perguntas 1373 a 1380). |
 | Marcelo Fabiano | 2026-11-21 03:25 | Adiciona o custo e o limite das portas (perguntas 1368 e 1369). |
 | Marcelo Fabiano | 2026-11-19 23:04 | Adiciona os números do Cozinheiro (pergunta 1326). |
