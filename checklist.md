@@ -134,7 +134,7 @@ Um card por vez, na ordem do board "Cubit · Fase 5" (perguntas 1137, 1141 e 115
 12. [x] Portas marcadas que o Cubit abre (issue #223, PR #224, perguntas 1359 a 1372)
 13. [x] Dock com tiers e inventário (issue #225, PR #226, perguntas 1373 a 1382)
 14. [x] Dock Solar (issue #227, PR #228, perguntas 1383 a 1398)
-15. [ ] Recharge Splash, uma mistura de arremesso que aumenta aos poucos a vida e a energia dos Cubits de quem a arremessou. Só faz efeito no Cubit, que continua recebendo os efeitos do jogo (#229, perguntas 1393 a 1421)
+15. [x] Recharge Splash, uma mistura de arremesso que aumenta aos poucos a vida e a energia dos Cubits de quem a arremessou. Só faz efeito no Cubit, que continua recebendo os efeitos do jogo (issue #229, PR #230, perguntas 1393 a 1423)
 16. [ ] Revisar o tier mínimo de cada trabalho, antes do Defensor (pergunta 1390)
 17. [ ] Defensor (#198)
 18. [ ] Minerador, com a fornalha elétrica e a lanterna de cabeça (#199)
