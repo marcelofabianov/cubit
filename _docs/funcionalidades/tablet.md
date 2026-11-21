@@ -24,7 +24,7 @@ O Tablet 1 traz só o que já existe no mod (pergunta 999) e se divide em três 
 
 - **Sem dono:** o item não guarda dono, e qualquer Tablet mostra só os Cubits de quem o segura (pergunta 1024).
 - **Não empilha.**
-- **Receita:** com forma, de materiais do jogo puro: 2 painéis de vidro e 1 redstone na linha de cima, 4 lingotes de ferro nas laterais das duas linhas de baixo, 1 diamante no centro e 1 lingote de ouro embaixo, no meio, como na [tabela de `itens.md`](../itens.md#cubit-tablet). Aparece no livro de receitas quando o player tem um Cubit, como a do Dock (perguntas 1025, 1030 e 1031).
+- **Receita:** com forma, de materiais do jogo puro: 2 painéis de vidro e 1 redstone na linha de cima, 4 quartzos nas laterais das duas linhas de baixo, 1 diamante no centro e 1 obsidiana embaixo, no meio, como na [tabela de `itens.md`](../itens.md#cubit-tablet). Aparece no livro de receitas quando o player tem um Cubit, como a do Dock (perguntas 1025, 1030 e 1331).
 - **Textura:** 16×16, feita por prompt em `tmp/arte/tablet/` (pergunta 1025).
 - **Troca de ID:** o `cubit:remote` estava só planejado, sem save nem receita, então o `cubit:tablet` não precisa de migração.
 
@@ -201,6 +201,7 @@ Os textos em inglês e português, como `Cubit Tablet` / `Tablet do Cubit`, `Tab
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-20 23:50 | Troca a receita do Tablet (pergunta 1331). |
 | Marcelo Fabiano | 2026-11-19 23:04 | Leva o app Marcar ao Cozinheiro (pergunta 1316). |
 | Marcelo Fabiano | 2026-11-19 22:13 | Adiciona a aba Abastecer, com o card do Organizador (perguntas 1303 e 1305). |
 | Marcelo Fabiano | 2026-11-19 21:34 | Define o app Marcar, que entra com o Organizador (perguntas 1288, 1296 e 1297). |

@@ -22,7 +22,7 @@
 | Cubit | `cubit:general_robot` | Abaixo |
 | Damaged Cubit | `cubit:damaged_general_robot` | Não tem: cai quando o Cubit morre |
 | Toolbox | `cubit:toolbox` | Provisória, abaixo |
-| Cubit Tablet | `cubit:tablet` | A definir, por prompt (pergunta 1025) |
+| Cubit Tablet | `cubit:tablet` | [Abaixo](#cubit-tablet) |
 | Advanced Module | `cubit:advanced_module` | [Abaixo](#advanced-module) |
 | Elite Module | `cubit:elite_module` | [Abaixo](#elite-module) |
 | Ultimate Module | `cubit:ultimate_module` | [Abaixo](#ultimate-module) |
@@ -34,44 +34,44 @@
 
 ## Progressão das receitas
 
-Receitas provisórias, só com recursos do jogo puro, a ajustar nos testes:
+Só com recursos do jogo puro. Os materiais que marcam cada tier, nos Modules e nas Power Banks (pergunta 1331):
 
 | Item | Materiais |
 |---|---|
-| Base | Ferro e redstone |
-| Avançado | Ouro e quartzo |
-| Elite | Diamante e corante roxo (pergunta 817) |
-| Ultimate | Netherite e estrela do Nether |
+| Base | Quartzo, ouro, esmeralda, bloco de redstone e obsidiana |
+| Avançado | Lápis-lazúli, ouro, diamante e obsidiana |
+| Elite | Corante roxo, bloco de diamante, bloco de ouro e obsidiana |
+| Ultimate | Netherite, bloco de diamante e blaze |
 
 ### Cubit
 
-Na mesa de craft, com uma forma que lembra o item. Vai além da progressão provisória acima (pergunta 348). A receita aparece no livro ao ter diamante.
+Na mesa de craft, com uma forma que lembra o item. Vai além da progressão acima (perguntas 348 e 1331). A receita aparece no livro ao ter diamante.
 
 | | Coluna 1 | Coluna 2 | Coluna 3 |
 |---|---|---|---|
 | Linha 1 | Redstone | Lâmpada de redstone | Redstone |
 | Linha 2 | Lingote de ferro | Diamante | Lingote de ferro |
-| Linha 3 | Obsidiana | Vazio | Obsidiana |
+| Linha 3 | Obsidiana | Painel de vidro | Obsidiana |
 
 ### Induction Dock
 
-Na mesa de craft, em forma de L (pergunta 336). O desenho espelhado também vale, e a receita aparece no livro ao ter um Cubit.
+Na mesa de craft, em forma de L (perguntas 336, 1331 e 1332). O desenho espelhado também vale, e a receita aparece no livro ao ter um Cubit.
 
 | | Coluna 1 | Coluna 2 | Coluna 3 |
 |---|---|---|---|
-| Linha 1 | Redstone | Vazio | Vazio |
-| Linha 2 | Lingote de ferro | Vazio | Vazio |
-| Linha 3 | Baú | Redstone | Lingote de ferro |
+| Linha 1 | Diamante | Vazio | Vazio |
+| Linha 2 | Baú | Vazio | Vazio |
+| Linha 3 | Lingote de ferro | Redstone | Lingote de ferro |
 
 ### Cubit Tablet
 
-Na mesa de craft, com forma (perguntas 1025, 1030 e 1031): 2 painéis de vidro e 1 redstone na linha de cima, 4 lingotes de ferro nas laterais das duas linhas de baixo, 1 diamante no centro e 1 lingote de ouro embaixo, no meio. Aparece no livro de receitas quando o player tem um Cubit. Não empilha.
+Na mesa de craft, com forma (perguntas 1025, 1030 e 1331): 2 painéis de vidro e 1 redstone na linha de cima, 4 quartzos nas laterais das duas linhas de baixo, 1 diamante no centro e 1 obsidiana embaixo, no meio. Aparece no livro de receitas quando o player tem um Cubit. Não empilha.
 
 | | Coluna 1 | Coluna 2 | Coluna 3 |
 |---|---|---|---|
 | Linha 1 | Painel de vidro | Redstone | Painel de vidro |
-| Linha 2 | Lingote de ferro | Diamante | Lingote de ferro |
-| Linha 3 | Lingote de ferro | Lingote de ouro | Lingote de ferro |
+| Linha 2 | Quartzo | Diamante | Quartzo |
+| Linha 3 | Quartzo | Obsidiana | Quartzo |
 
 ### Toolbox
 
@@ -79,14 +79,14 @@ Na mesa de craft, com forma (perguntas 1025, 1030 e 1031): 2 painéis de vidro e
 
 ### Power Banks
 
-Na mesa de craft, encadeadas (pergunta 902). A Base é a receita com forma comum do jogo. As outras usam o tipo `cubit:power_bank_upgrade`, que passa a carga da Power Bank do centro para a nova. Se a carga não couber, a receita não aparece (pergunta 907). A Base aparece no livro com um Cubit, e cada uma das outras, com a anterior (pergunta 908).
+Na mesa de craft, encadeadas (perguntas 902, 1331, 1333 e 1334). A Base é a receita com forma comum do jogo. As outras usam o tipo `cubit:power_bank_upgrade`, que passa a carga da Power Bank do centro para a nova. Se a carga não couber, a receita não aparece (pergunta 907). A Base aparece no livro com um Cubit, e cada uma das outras, com a anterior (pergunta 908).
 
-| Power Bank | Centro | 4 nos cantos | 4 nas laterais |
+| Power Bank | Linha 1 | Linha 2 | Linha 3 |
 |---|---|---|---|
-| Base | Bloco de redstone | Lingote de ferro | Redstone |
-| Advanced | Base Power Bank | Lingote de ouro | Quartzo |
-| Elite | Advanced Power Bank | Diamante | Corante roxo |
-| Ultimate | Elite Power Bank | Lingote de netherite | Bloco de redstone |
+| Base | Quartzo, lingote de ouro, quartzo | Esmeralda, bloco de redstone, esmeralda | Quartzo, obsidiana, quartzo |
+| Advanced | Quartzo, lingote de ouro, quartzo | Bloco de redstone, Base Power Bank, bloco de redstone | Quartzo, lápis-lazúli, quartzo |
+| Elite | Quartzo, lingote de ouro, quartzo | Bloco de redstone, Advanced Power Bank, bloco de redstone | Quartzo, corante roxo, quartzo |
+| Ultimate | Lingote de netherite, lingote de ouro, lingote de netherite | Bloco de redstone, Elite Power Bank, bloco de redstone | Lingote de netherite, vara de blaze, lingote de netherite |
 
 ### Religar o Cubit na grade
 
@@ -128,31 +128,31 @@ Levam o Cubit ao tier seguinte, sem pular etapas. As regras estão em [`upgrade-
 
 - **Empilha** até 64, e o nome aparece na cor do colar do tier (pergunta 804).
 - **Criativo:** os três ficam na aba `cubit:main`.
-- **Receitas:** na mesa de craft, independentes, sem o Module anterior, só com materiais do jogo puro (pergunta 799). As três aparecem no livro ao ter um Cubit (pergunta 805). Os materiais e a grade vêm das perguntas 807, 817 e 818.
+- **Receitas:** na mesa de craft, independentes, sem o Module anterior, só com materiais do jogo puro (pergunta 799). As três aparecem no livro ao ter um Cubit (pergunta 805). Os materiais e a grade vêm da pergunta 1331, que troca as 807, 817 e 818.
 
 ### Advanced Module
 
 | | Coluna 1 | Coluna 2 | Coluna 3 |
 |---|---|---|---|
-| Linha 1 | Lingote de ouro | Quartzo | Lingote de ouro |
-| Linha 2 | Quartzo | Comparador | Quartzo |
-| Linha 3 | Lingote de ouro | Quartzo | Lingote de ouro |
+| Linha 1 | Obsidiana | Obsidiana | Obsidiana |
+| Linha 2 | Lápis-lazúli | Diamante | Lápis-lazúli |
+| Linha 3 | Lingote de ouro | Lingote de ouro | Lingote de ouro |
 
 ### Elite Module
 
 | | Coluna 1 | Coluna 2 | Coluna 3 |
 |---|---|---|---|
-| Linha 1 | Diamante | Corante roxo | Diamante |
-| Linha 2 | Corante roxo | Bloco de redstone | Corante roxo |
-| Linha 3 | Diamante | Corante roxo | Diamante |
+| Linha 1 | Obsidiana | Obsidiana | Obsidiana |
+| Linha 2 | Corante roxo | Bloco de diamante | Corante roxo |
+| Linha 3 | Bloco de ouro | Bloco de ouro | Bloco de ouro |
 
 ### Ultimate Module
 
 | | Coluna 1 | Coluna 2 | Coluna 3 |
 |---|---|---|---|
-| Linha 1 | Diamante | Bloco de redstone | Diamante |
-| Linha 2 | Lingote de netherite | Estrela do Nether | Lingote de netherite |
-| Linha 3 | Diamante | Vazio | Diamante |
+| Linha 1 | Lingote de netherite | Lingote de netherite | Lingote de netherite |
+| Linha 2 | Lingote de netherite | Bloco de diamante | Lingote de netherite |
+| Linha 3 | Pó de blaze | Pó de blaze | Pó de blaze |
 
 ## Previstos na Fase 5
 
@@ -253,6 +253,7 @@ O estado salvo é validado ao entrar no jogo, sem derrubá-lo (regra 17 do `AGEN
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-20 23:45 | Troca as receitas do Cubit, do Dock, do Tablet, dos Modules e das Power Banks (perguntas 1331 a 1334). |
 | Marcelo Fabiano | 2026-11-19 23:04 | Adiciona o card, a receita e a tag de combustível do Cozinheiro (perguntas 1319 e 1325). |
 | Marcelo Fabiano | 2026-11-19 21:34 | Adiciona o card e a receita do Organizador (pergunta 1299). |
 | Marcelo Fabiano | 2026-11-15 13:25 | Troca a chave `Use bone meal` pelo slot de fertilizante (perguntas 1246 e 1247). |
