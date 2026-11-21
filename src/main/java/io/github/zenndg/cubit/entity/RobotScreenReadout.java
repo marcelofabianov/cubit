@@ -115,7 +115,7 @@ public final class RobotScreenReadout {
         new Vitals(robot.getHealth(), robot.getMaxHealth(), following, RobotFace.expression(robot)),
         status(robot, following),
         recharge,
-        recharge == RechargeSource.SOLAR ? tick.solarCharged() : robot.spec().rechargePerTick(),
+        rechargeRate(robot, recharge, tick),
         solar,
         solarRate(solar, tick.day(), robot.spec().solar()),
         tick.spent(),
@@ -142,6 +142,15 @@ public final class RobotScreenReadout {
     RechargeView view =
         new RechargeView(tick.dockCharged(), tick.slotCharged(), !tick.solarCharged().isZero());
     return RechargeSource.of(state, view, battery);
+  }
+
+  /** The sun gives what it gave, the dock its own rate, and the slot the rate of the tier. */
+  private static Energy rechargeRate(
+      RobotEntity robot, RechargeSource recharge, RobotTickReading tick) {
+    if (recharge == RechargeSource.SOLAR) {
+      return tick.solarCharged();
+    }
+    return robot.docking().dockRechargePerTick().orElse(robot.spec().rechargePerTick());
   }
 
   /** The rate the panel gives now, by day or by night, as the screen says "Charging · 5 FE/t". */

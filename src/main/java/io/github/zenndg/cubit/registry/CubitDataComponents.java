@@ -3,6 +3,7 @@ package io.github.zenndg.cubit.registry;
 import com.mojang.serialization.Codec;
 import io.github.zenndg.cubit.CubitMod;
 import io.github.zenndg.cubit.domain.robot.RobotState;
+import io.github.zenndg.cubit.domain.tier.RobotTier;
 import io.github.zenndg.cubit.item.EnergySlotContents;
 import io.github.zenndg.cubit.item.RobotStateComponent;
 import java.util.UUID;
@@ -28,6 +29,7 @@ public final class CubitDataComponents {
   private static final String FERTILIZER_SLOT_ID = "fertilizer_slot";
   private static final String DOCK_ENERGY_ID = "dock_energy";
   private static final String DOCK_STORAGE_ID = "dock_storage";
+  private static final String DOCK_TIER_ID = "dock_tier";
   private static final String POWER_BANK_ENERGY_ID = "power_bank_energy";
   private static final String TABLET_APP_ID = "tablet_app";
   private static final DeferredRegister.DataComponents COMPONENTS =
@@ -99,6 +101,15 @@ public final class CubitDataComponents {
       COMPONENTS.registerComponentType(
           DOCK_ENERGY_ID,
           builder -> builder.persistent(Codec.LONG).networkSynchronized(ByteBufCodecs.VAR_LONG));
+
+  /** The tier of a dock, kept in its item when it breaks (answer 1373). */
+  public static final Supplier<DataComponentType<RobotTier>> DOCK_TIER =
+      COMPONENTS.registerComponentType(
+          DOCK_TIER_ID,
+          builder ->
+              builder
+                  .persistent(DockTierCodec.CODEC)
+                  .networkSynchronized(DockTierCodec.STREAM_CODEC));
 
   /** The storage of a dock, kept in its item when it breaks (answers 954 and 958). */
   public static final Supplier<DataComponentType<ItemContainerContents>> DOCK_STORAGE =

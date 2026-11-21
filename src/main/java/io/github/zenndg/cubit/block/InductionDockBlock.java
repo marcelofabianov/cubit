@@ -1,14 +1,19 @@
 package io.github.zenndg.cubit.block;
 
 import com.mojang.serialization.MapCodec;
+import io.github.zenndg.cubit.CubitMod;
 import io.github.zenndg.cubit.domain.dock.DockRemoval;
+import io.github.zenndg.cubit.domain.tier.RobotTier;
+import io.github.zenndg.cubit.item.ModuleItem;
 import io.github.zenndg.cubit.menu.InductionDockMenu;
 import io.github.zenndg.cubit.registry.CubitBlockEntities;
+import io.github.zenndg.cubit.registry.CubitDataComponents;
 import java.util.Optional;
 import java.util.UUID;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
@@ -49,10 +54,19 @@ import net.minecraft.world.phys.shapes.VoxelShape;
  */
 public final class InductionDockBlock extends BaseEntityBlock {
   private static final String STATUS_NAME = "status";
+  private static final String TIER_NAME = "tier";
+  private static final String ULTIMATE_NAME = "ultimate";
   public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
   public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
   public static final EnumProperty<DockStatusProperty> STATUS =
       EnumProperty.create(STATUS_NAME, DockStatusProperty.class);
+  public static final EnumProperty<DockTierProperty> TIER =
+      EnumProperty.create(TIER_NAME, DockTierProperty.class);
+
+  /** The item picks the netherite body by this, from its tier (answer 1380). */
+  public static final ResourceLocation ULTIMATE_PROPERTY =
+      ResourceLocation.fromNamespaceAndPath(CubitMod.MOD_ID, ULTIMATE_NAME);
+
   private static final MapCodec<InductionDockBlock> CODEC = simpleCodec(InductionDockBlock::new);
   private static final float CANNOT_BREAK = 0f;
   private static final int OPERATOR_LEVEL = 2;
@@ -65,7 +79,8 @@ public final class InductionDockBlock extends BaseEntityBlock {
             .any()
             .setValue(FACING, Direction.NORTH)
             .setValue(HALF, DoubleBlockHalf.LOWER)
-            .setValue(STATUS, DockStatusProperty.OFF));
+            .setValue(STATUS, DockStatusProperty.OFF)
+            .setValue(TIER, DockTierProperty.BASE));
   }
 
   @Override
@@ -75,7 +90,7 @@ public final class InductionDockBlock extends BaseEntityBlock {
 
   @Override
   protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-    builder.add(FACING, HALF, STATUS);
+    builder.add(FACING, HALF, STATUS, TIER);
   }
 
   private static boolean isLower(BlockState state) {
@@ -128,7 +143,10 @@ public final class InductionDockBlock extends BaseEntityBlock {
   @Override
   public void setPlacedBy(
       Level level, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
-    level.setBlock(pos.above(), state.setValue(HALF, DoubleBlockHalf.UPPER), UPDATE_ALL);
+    RobotTier tier = stack.getOrDefault(CubitDataComponents.DOCK_TIER.get(), RobotTier.BASE);
+    BlockState placed = state.setValue(TIER, DockTierProperty.of(tier));
+    level.setBlock(pos, placed, UPDATE_ALL);
+    level.setBlock(pos.above(), placed.setValue(HALF, DoubleBlockHalf.UPPER), UPDATE_ALL);
     if (placer instanceof Player player
         && level.getBlockEntity(pos) instanceof InductionDockBlockEntity dock) {
       dock.setOwner(player);
@@ -168,7 +186,14 @@ public final class InductionDockBlock extends BaseEntityBlock {
     if (level.isClientSide() || dock == null) {
       return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     }
-    if (dock.isOwner(player) && dock.insert(stack)) {
+    if (!dock.isOwner(player)) {
+      return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+    }
+    if (stack.getItem() instanceof ModuleItem) {
+      DockUpgrade.apply(dock, player, stack);
+      return ItemInteractionResult.CONSUME;
+    }
+    if (dock.insert(stack)) {
       return ItemInteractionResult.CONSUME;
     }
     return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;

@@ -1,6 +1,7 @@
 package io.github.zenndg.cubit.config;
 
 import io.github.zenndg.cubit.domain.behavior.LightLevel;
+import io.github.zenndg.cubit.domain.dock.DockSpec;
 import io.github.zenndg.cubit.domain.energy.ConsumptionExtras;
 import io.github.zenndg.cubit.domain.energy.Energy;
 import io.github.zenndg.cubit.domain.energy.Percentage;
@@ -67,8 +68,9 @@ final class TierSection {
   private final UnloadKeys unload;
   private final DeathPointKey deathPoint;
   private final JobKeys jobs;
+  private final DockKeys dock;
 
-  TierSection(ModConfigSpec.Builder builder, TierSpec defaults) {
+  TierSection(ModConfigSpec.Builder builder, TierSpec defaults, DockSpec dockDefaults) {
     batteryCapacity = energy(builder, BATTERY_CAPACITY, defaults.batteryCapacity(), MIN_POSITIVE);
     movingConsumption =
         energy(builder, MOVING_CONSUMPTION, defaults.movingConsumptionPerTick(), MIN_CONSUMPTION);
@@ -94,6 +96,12 @@ final class TierSection {
     unload = new UnloadKeys(builder, defaults.unload());
     deathPoint = new DeathPointKey(builder, defaults.deathPoint());
     jobs = new JobKeys(builder, defaults.jobs());
+    dock = new DockKeys(builder, dockDefaults);
+  }
+
+  /** The Induction Dock of this tier (answers 1374 and 1381). */
+  DockSpec readDock() {
+    return dock.read();
   }
 
   TierSpec read() {

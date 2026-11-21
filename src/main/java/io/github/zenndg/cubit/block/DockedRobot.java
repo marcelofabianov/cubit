@@ -2,7 +2,6 @@ package io.github.zenndg.cubit.block;
 
 import io.github.zenndg.cubit.domain.behavior.RobotExpression;
 import io.github.zenndg.cubit.domain.energy.Battery;
-import io.github.zenndg.cubit.domain.energy.Energy;
 import io.github.zenndg.cubit.domain.tier.RobotTier;
 
 /**
@@ -15,8 +14,6 @@ public interface DockedRobot {
   float health();
 
   float maxHealth();
-
-  Energy rechargePerTick();
 
   RobotExpression expression();
 

@@ -63,13 +63,21 @@ public final class ConfigGameTests {
           LAMP_CHECK_KEY, LAMP_CHECK,
           LAMP_CONSUMPTION_KEY, LAMP_COST,
           LAMP_LIGHT_KEY, LAMP_LIGHT);
-  private static final String DOCK_CAPACITY_KEY = "general.dock_energy_capacity";
+
+  /** In the section of each tier since the dock has tiers (answer 1381). */
+  private static final String DOCK_CAPACITY_KEY = "general_robot.base.dock_energy_capacity";
+
+  private static final String DOCK_RECHARGE_KEY = "general_robot.base.dock_recharge_per_tick";
+  private static final String DOCK_SLOTS_KEY = "general_robot.base.dock_storage_slots";
+  private static final String OLD_DOCK_CAPACITY_KEY = "general.dock_energy_capacity";
+  private static final int DOCK_RECHARGE = 500;
+  private static final int DOCK_SLOTS = 27;
   private static final String DOCK_INPUT_KEY = "general.dock_input_per_tick";
   private static final String DOCK_HEAL_KEY = "general.dock_full_heal_ticks";
   private static final String DOCK_STUCK_KEY = "general.dock_stuck_ticks";
   private static final String DOCK_HOLD_KEY = "general.dock_complete_hold_ticks";
   private static final int DOCK_HOLD = 60;
-  private static final int DOCK_CAPACITY = 100_000;
+  private static final int DOCK_CAPACITY = 300_000;
   private static final int DOCK_INPUT = 5_000;
   private static final int DOCK_HEAL = 1_200;
   private static final int DOCK_STUCK = 100;
@@ -276,6 +284,9 @@ public final class ConfigGameTests {
     helper.assertValueEqual(file.<Double>get(BURNING_SPEED_KEY), BURNING_SPEED, WRONG_KEY);
     helper.assertValueEqual(file.<Double>get(SPEED_KEY), SPEED, WRONG_KEY);
     helper.assertValueEqual(file.<Integer>get(DOCK_CAPACITY_KEY), DOCK_CAPACITY, WRONG_KEY);
+    helper.assertValueEqual(file.<Integer>get(DOCK_RECHARGE_KEY), DOCK_RECHARGE, WRONG_KEY);
+    helper.assertValueEqual(file.<Integer>get(DOCK_SLOTS_KEY), DOCK_SLOTS, WRONG_KEY);
+    helper.assertFalse(file.contains(OLD_DOCK_CAPACITY_KEY), WRONG_KEY);
     helper.assertValueEqual(file.<Integer>get(DOCK_INPUT_KEY), DOCK_INPUT, WRONG_KEY);
     helper.assertValueEqual(file.<Integer>get(DOCK_HEAL_KEY), DOCK_HEAL, WRONG_KEY);
     helper.assertValueEqual(file.<Integer>get(DOCK_STUCK_KEY), DOCK_STUCK, WRONG_KEY);

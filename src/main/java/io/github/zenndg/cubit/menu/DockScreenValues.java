@@ -41,7 +41,7 @@ final class DockScreenValues implements ContainerData {
   /** Reads the dock and the robot in it once, so the data slots do not read them each. */
   void refresh() {
     putEnergy(STOCK, dock.energy());
-    putEnergy(CAPACITY, new Energy(CubitMod.CONFIG.dock().energyCapacity()));
+    putEnergy(CAPACITY, dock.capacity());
     putEnergy(INPUT, dock.inputShown());
     values[STATUS] = dock.status().ordinal();
     values[WAITING] = dock.waitingCount();
@@ -55,7 +55,7 @@ final class DockScreenValues implements ContainerData {
     putEnergy(ROBOT_CAPACITY, robot.battery().capacity());
     values[ROBOT_HEALTH] = (int) Math.ceil(robot.health());
     values[ROBOT_MAX_HEALTH] = (int) Math.ceil(robot.maxHealth());
-    putEnergy(ROBOT_RECHARGE, robot.rechargePerTick());
+    putEnergy(ROBOT_RECHARGE, dock.rechargePerTick());
     HealTime heal =
         HealTime.of(robot.health(), robot.maxHealth(), CubitMod.CONFIG.dock().fullHealTicks());
     values[HEAL_KIND] = heal.kind().ordinal();

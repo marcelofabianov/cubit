@@ -1,0 +1,6 @@
+{
+  "parent": "cubit:block/induction_dock_upper",
+  "textures": {
+    "particle": "cubit:block/induction_dock_body_ultimate"
+  }
+}

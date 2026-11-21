@@ -1,19 +1,24 @@
 package io.github.zenndg.cubit.block;
 
+import static io.github.zenndg.cubit.CubitMod.MOD_ID;
+
 import com.mojang.logging.LogUtils;
 import io.github.zenndg.cubit.domain.dock.DockStock;
 import io.github.zenndg.cubit.domain.dock.DockStorageRules;
 import io.github.zenndg.cubit.domain.dock.DockStoredKind;
 import io.github.zenndg.cubit.domain.energy.Battery;
+import io.github.zenndg.cubit.domain.energy.Energy;
 import io.github.zenndg.cubit.item.PowerBankItem;
 import io.github.zenndg.cubit.registry.CubitItems;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.OptionalInt;
+import java.util.function.IntSupplier;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
@@ -23,13 +28,18 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.IItemHandlerModifiable;
+import net.neoforged.neoforge.items.ItemHandlerHelper;
 import net.neoforged.neoforge.items.wrapper.InvWrapper;
+import net.neoforged.neoforge.items.wrapper.RangedWrapper;
 import org.slf4j.Logger;
 
 /**
- * The storage of a dock: 27 slots for the Toolbox, the Power Banks, which the stock charges, and
- * the items of the robot (answers 947 to 968). The rules live in {@link DockStorageRules}.
+ * The storage of a dock: the slots of its tier, from 27 to 54, for every item of the mod, with the
+ * Power Banks the stock charges (answers 947 to 968, 1361 and 1374). The container always has the
+ * slots of the Ultimate, and only the first ones of the tier work. The rules live in {@link
+ * DockStorageRules}.
  */
 final class DockStorage {
   private static final Logger LOGGER = LogUtils.getLogger();
@@ -41,14 +51,17 @@ final class DockStorage {
   private static final String REFUSED_MESSAGE = "The dock at {} cannot store {}, so it drops.";
 
   private final SimpleContainer items;
+  private final IntSupplier tierSlots;
   private final List<ItemStack> refused = new ArrayList<>();
 
-  DockStorage(Runnable changed) {
+  DockStorage(Runnable changed, IntSupplier tierSlots) {
+    this.tierSlots = tierSlots;
     items =
-        new SimpleContainer(DockStorageRules.SLOTS) {
+        new SimpleContainer(DockStorageRules.MAX_SLOTS) {
           @Override
           public boolean canPlaceItem(int index, ItemStack stack) {
-            return DockStorageRules.accepts(kindOf(stack));
+            return DockStorageRules.opens(index, tierSlots.getAsInt())
+                && DockStorageRules.accepts(kindOf(stack));
           }
 
           @Override
@@ -65,7 +78,11 @@ final class DockStorage {
     if (stack.getItem() instanceof StorableRobotItem) {
       return DockStoredKind.ROBOT;
     }
-    return stack.is(CubitItems.TOOLBOX.get()) ? DockStoredKind.TOOLBOX : DockStoredKind.OTHER;
+    if (stack.is(CubitItems.TOOLBOX.get())) {
+      return DockStoredKind.TOOLBOX;
+    }
+    boolean ofTheMod = BuiltInRegistries.ITEM.getKey(stack.getItem()).getNamespace().equals(MOD_ID);
+    return ofTheMod ? DockStoredKind.MOD_ITEM : DockStoredKind.OTHER;
   }
 
   Container container() {
@@ -86,24 +103,29 @@ final class DockStorage {
     };
   }
 
-  /** The item in the hand of the owner, joining the stacks and the free slots (answer 959). */
+  /**
+   * The item in the hand of the owner, joining the stacks and then the free slots of the tier
+   * (answer 959). False when nothing fits.
+   */
   boolean insert(ItemStack hand) {
-    if (!DockStorageRules.accepts(kindOf(hand)) || !items.canAddItem(hand)) {
+    if (!DockStorageRules.accepts(kindOf(hand))) {
       return false;
     }
-    ItemStack rest = items.addItem(hand.copy());
+    int before = hand.getCount();
+    IItemHandler open = new RangedWrapper(new InvWrapper(items), 0, tierSlots.getAsInt());
+    ItemStack rest = ItemHandlerHelper.insertItemStacked(open, hand.copy(), false);
     hand.setCount(rest.getCount());
-    return true;
+    return rest.getCount() < before;
   }
 
   /** One bank at a time, and only while no robot in the base still charges (949 and 952). */
-  DockStock charge(DockStock stock, boolean chargesBanks, Runnable changed) {
+  DockStock charge(DockStock stock, boolean chargesBanks, Energy rate, Runnable changed) {
     if (!chargesBanks) {
       return stock;
     }
     OptionalInt index = DockStorageRules.bankToCharge(banks());
     return index.isPresent()
-        ? DockPowerBanks.charge(stock, items.getItem(index.getAsInt()), changed)
+        ? DockPowerBanks.charge(stock, items.getItem(index.getAsInt()), rate, changed)
         : stock;
   }
 
@@ -179,7 +201,8 @@ final class DockStorage {
     if (stack.isEmpty()) {
       return;
     }
-    if (DockStorageRules.accepts(kindOf(stack))) {
+    if (DockStorageRules.opens(index, tierSlots.getAsInt())
+        && DockStorageRules.accepts(kindOf(stack))) {
       items.setItem(index, stack);
       return;
     }

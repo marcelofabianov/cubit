@@ -43,7 +43,7 @@ public final class InductionDockMenu extends AbstractContainerMenu {
   private static final int PLAYER_ROWS = 3;
   private static final int SLOTS_PER_ROW = 9;
   private static final int STORAGE_FIRST = 1;
-  private static final int DOCK_SLOTS = STORAGE_FIRST + DockStorageRules.SLOTS;
+  private static final int DOCK_SLOTS = STORAGE_FIRST + DockStorageRules.MAX_SLOTS;
   private static final String NO_NAME = "";
 
   private final Predicate<Player> stillValid;
@@ -108,7 +108,7 @@ public final class InductionDockMenu extends AbstractContainerMenu {
         containerId,
         playerInventory,
         new SimpleContainer(1),
-        new SimpleContainer(DockStorageRules.SLOTS),
+        new SimpleContainer(DockStorageRules.MAX_SLOTS),
         new SimpleContainerData(DockScreenValues.COUNT),
         Server.NONE,
         Opening.read(data));
@@ -206,6 +206,15 @@ public final class InductionDockMenu extends AbstractContainerMenu {
     return opening.callRadius();
   }
 
+  /** The slots of the tier of the dock, which do not change while the screen is open (1374). */
+  public int storageSlots() {
+    return opening.storageSlots();
+  }
+
+  public RobotTier dockTier() {
+    return ScreenEnums.of(RobotTier.values(), opening.tier());
+  }
+
   /** Only on the client: the slots of the closed tab are hidden, so they take no clicks. */
   public void showStorage(boolean shown) {
     storageShown = shown;
@@ -213,7 +222,7 @@ public final class InductionDockMenu extends AbstractContainerMenu {
 
   /** The container itself refuses what the storage does not keep, on both sides. */
   private void addStorageSlots(Container storage) {
-    for (int index = 0; index < DockStorageRules.SLOTS; index++) {
+    for (int index = 0; index < DockStorageRules.MAX_SLOTS; index++) {
       addSlot(
           new Slot(
               storage,
@@ -227,7 +236,7 @@ public final class InductionDockMenu extends AbstractContainerMenu {
 
             @Override
             public boolean isActive() {
-              return storageShown;
+              return storageShown && DockStorageRules.opens(getContainerSlot(), storageSlots());
             }
           });
     }
@@ -294,9 +303,10 @@ public final class InductionDockMenu extends AbstractContainerMenu {
   }
 
   /** The values that travel when the screen opens. */
-  private record Opening(String ownerName, long inputLimit, int callRadius) {
+  private record Opening(
+      String ownerName, long inputLimit, int callRadius, int storageSlots, int tier) {
     /** Only the client reads it, so the menu on the server keeps nothing. */
-    private static final Opening NONE = new Opening(NO_NAME, 0, 0);
+    private static final Opening NONE = new Opening(NO_NAME, 0, 0, DockStorageRules.MAX_SLOTS, 0);
 
     /** The button names the radius of the tier Base, the only one in this phase (answer 693). */
     static Opening of(InductionDockBlockEntity dock) {
@@ -306,17 +316,26 @@ public final class InductionDockMenu extends AbstractContainerMenu {
           CubitMod.CONFIG
               .tierCatalog()
               .spec(CubitConfig.GENERAL_ROBOT, RobotTier.BASE)
-              .callRadiusBlocks());
+              .callRadiusBlocks(),
+          dock.storageSlots(),
+          dock.tier().ordinal());
     }
 
     static Opening read(RegistryFriendlyByteBuf data) {
-      return new Opening(data.readUtf(), data.readVarLong(), data.readVarInt());
+      return new Opening(
+          data.readUtf(),
+          data.readVarLong(),
+          data.readVarInt(),
+          data.readVarInt(),
+          data.readVarInt());
     }
 
     void write(RegistryFriendlyByteBuf data) {
       data.writeUtf(ownerName);
       data.writeVarLong(inputLimit);
       data.writeVarInt(callRadius);
+      data.writeVarInt(storageSlots);
+      data.writeVarInt(tier);
     }
   }
 }

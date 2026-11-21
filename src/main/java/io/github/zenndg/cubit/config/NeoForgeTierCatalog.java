@@ -1,6 +1,8 @@
 package io.github.zenndg.cubit.config;
 
 import com.mojang.logging.LogUtils;
+import io.github.zenndg.cubit.domain.dock.DockCatalog;
+import io.github.zenndg.cubit.domain.dock.DockSpec;
 import io.github.zenndg.cubit.domain.robot.RobotType;
 import io.github.zenndg.cubit.domain.tier.RobotTier;
 import io.github.zenndg.cubit.domain.tier.TierCatalog;
@@ -10,8 +12,8 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import org.slf4j.Logger;
 
-/** Reads the robot numbers from the config. */
-public final class NeoForgeTierCatalog implements TierCatalog {
+/** Reads the robot numbers, and the ones of the Induction Dock of each tier, from the config. */
+public final class NeoForgeTierCatalog implements TierCatalog, DockCatalog {
   private static final Logger LOGGER = LogUtils.getLogger();
   private static final String UNKNOWN_TYPE_MESSAGE = "Robot type without config: ";
   private static final String MISSING_TIER_MESSAGE = "No config for {} at {}. Using the base tier.";
@@ -38,5 +40,13 @@ public final class NeoForgeTierCatalog implements TierCatalog {
       LOGGER.warn(MISSING_TIER_MESSAGE, type.id(), tier);
     }
     return tiers.get(RobotTier.BASE).read();
+  }
+
+  /** The dock keys live in the sections of the Cubit, so a dock follows the tiers of the robot. */
+  @Override
+  public DockSpec dock(RobotTier tier) {
+    Map<RobotTier, TierSection> tiers = sections.get(CubitConfig.GENERAL_ROBOT);
+    TierSection section = tiers.getOrDefault(tier, tiers.get(RobotTier.BASE));
+    return section.readDock();
   }
 }

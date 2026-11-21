@@ -7,6 +7,7 @@ import io.github.zenndg.cubit.block.InductionDockBlockEntity;
 import io.github.zenndg.cubit.domain.dock.DockStay;
 import io.github.zenndg.cubit.domain.dock.DockTrip;
 import io.github.zenndg.cubit.domain.energy.Battery;
+import io.github.zenndg.cubit.domain.energy.Energy;
 import io.github.zenndg.cubit.domain.energy.PowerState;
 import io.github.zenndg.cubit.domain.ownership.FollowingOutcome;
 import io.github.zenndg.cubit.domain.ownership.Ownership;
@@ -199,7 +200,7 @@ public final class RobotDocking {
 
   private void hibernate(InductionDockBlockEntity dock) {
     TierSpec spec = robot.spec();
-    Battery battery = dock.charge(robot.battery(), spec.rechargePerTick());
+    Battery battery = dock.charge(robot.battery(), dock.rechargePerTick());
     robot.setBattery(battery);
     robot.heal(DockStay.healthPerTick(spec.maxHealth(), CubitMod.CONFIG.dock().fullHealTicks()));
     boolean healthFull = robot.getHealth() >= robot.getMaxHealth();
@@ -261,6 +262,13 @@ public final class RobotDocking {
       return Optional.empty();
     }
     return Optional.of(dock);
+  }
+
+  /** The recharge of the dock it hibernates in, which decides it now (answer 1375). */
+  Optional<Energy> dockRechargePerTick() {
+    return Optional.ofNullable(docked)
+        .flatMap(this::ownedDock)
+        .map(InductionDockBlockEntity::rechargePerTick);
   }
 
   public boolean isDockedAt(BlockPos position) {

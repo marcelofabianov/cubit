@@ -4,7 +4,8 @@
   "render_type": "minecraft:cutout",
   "textures": {
     "particle": "cubit:block/induction_dock_body",
-    "body": "cubit:block/induction_dock_body"
+    "body": "cubit:block/induction_dock_body",
+    "band": "cubit:block/induction_dock_band"
   },
   "elements": [
     {
@@ -499,6 +500,71 @@
             14.5625,
             8.0
           ]
+        }
+      }
+    },
+    {
+      "name": "tier_band",
+      "from": [
+        3.4,
+        3.5,
+        11.9
+      ],
+      "to": [
+        12.6,
+        5.0,
+        16.1
+      ],
+      "faces": {
+        "north": {
+          "texture": "#band",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "tintindex": 0
+        },
+        "east": {
+          "texture": "#band",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "tintindex": 0
+        },
+        "south": {
+          "texture": "#band",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "tintindex": 0
+        },
+        "west": {
+          "texture": "#band",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "tintindex": 0
+        },
+        "up": {
+          "texture": "#band",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "tintindex": 0
         }
       }
     }
