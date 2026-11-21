@@ -405,7 +405,7 @@ Não há perguntas pendentes nesta fase.
 | 1458 | Qual é o nome da Engineering Desk no `pt_br.json`? | Mesa de Engenharia, e o documento fica em `_docs/funcionalidades/mesa-de-engenharia.md` |
 | 1459 | Como ficam os tipos de receita no JSON ao passar para a Engineering Desk? | Um tipo novo, `cubit:engineering`, com forma ou sem forma, como as receitas do jogo, e com o desenho espelhado valendo. Os tipos especiais de hoje, como `cubit:power_bank_upgrade`, `cubit:solar_dock_assembly`, `cubit:robot_recharge` e o do conserto, mantêm o nome e passam a rodar só na mesa |
 | 1460 | O custo de 2.500 FE por craft vale para todas as receitas? | Sim: um valor só, no config, para todas, inclusive o conserto e religar o Cubit |
-| 1461 | Fazemos uma integração opcional com o JEI, que deixa de mostrar as receitas do mod com o tipo próprio? | Sim: um plugin do JEI, isolado em `compat/jei`, como o do Jade, e o mod abre sem ele. Entra junto com a mesa (regra 24) |
+| 1461 | Fazemos uma integração opcional com o JEI, que deixa de mostrar as receitas do mod com o tipo próprio? | Sim: um plugin do JEI, isolado em `compat/jei`, como o do Jade, e o mod abre sem ele. Entra junto com a mesa (regra 24). Muda a 1284 |
 | 1462 | O clique direito na Engineering Desk com um Module na mão sobe o tier ou abre a tela? | Sobe o tier, como no Dock (pergunta 1377): o Module do tier seguinte é consumido, e o que não serve não é consumido, com um texto que explica. Para usar um Module como material, o player o põe pela tela |
 | 1463 | Qual é a prioridade do visual da Engineering Desk? | A mais alta: é o primeiro contato do player com o mod, e o item precisa causar a melhor impressão possível, com grande qualidade no modelo, na textura, nas animações, nos sons e na tela |
 | 1464 | Como é feito o modelo da Engineering Desk? | No GeckoLib, que já é dependência obrigatória e anima o Cubit, com o modelo e as animações feitos no Blockbench |
@@ -429,11 +429,14 @@ Não há perguntas pendentes nesta fase.
 | 1482 | Em nome de quem ficam os commits e o histórico de modificações? | Os commits são feitos sempre pela conta `zenndg`, com o nome `Zennd` e o e-mail da conta secundária, no Git e no GitHub. Toda linha nova do histórico de modificações fica em nome de `Zennd` |
 | 1483 | O conceito da Engineering Desk está autorizado para o código? | Sim: o desenvolvedor disse "autorizo o conceito", com as respostas 1424 a 1482 e os detalhes completados pelo agente: os materiais e o FE só saem no fim do craft; trocar a receita zera o pedido e o progresso; a mesa usa o primeiro item que serve nas receitas com estado; o upgrade da Power Bank cuja carga não cabe não roda; a Power Bank volta à saída ao religar o Cubit; a mesa só fabrica receitas do mod e só trabalha com o chunk carregado; a receita bloqueada mostra o ícone, o nome e `Locked`, sem os materiais, e não pode ser marcada à mão; e a entrada de energia é de 5.000 FE/t (regra 53) |
 | 1484 | As linhas antigas do histórico de modificações, em nome de "Marcelo Fabiano", mudam para `Zennd`? | Não: as antigas ficam como estão, e só as mudanças novas usam `Zennd`. Detalha a 1482 |
+| 1485 | Onde fica o board "Cubit · Fase 5", que estava na conta principal do desenvolvedor? | Na conta `zenndg`, como tudo do projeto, ignorando a conta principal. O board novo, o projeto 2 da `zenndg`, ligado ao repositório, tem as colunas da 1137 e as issues do milestone da Fase 5: as fechadas em Concluído, a #231 em Pronto e as abertas em Backlog. Muda a 1137 só no lugar do board |
+| 1486 | A mudança do JEI na resposta 1461 está confirmada? | Sim: o Cubit passa a ter um plugin opcional do JEI, e o Jade continua com as informações próprias do mod, agora também as da Engineering Desk (perguntas 1468 e 1472). O JEI deixa de ser só do cliente de teste. Muda a 1284 |
 
 ## Histórico de modificações
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Zennd | 2026-11-21 13:30 | Registra as respostas 1485 e 1486 e aponta a mudança da 1284 na 1461. |
 | Zennd | 2026-11-21 11:45 | Registra as respostas 1424 a 1484. |
 | Marcelo Fabiano | 2026-11-21 10:30 | Registra as respostas 1399 a 1423. |
 | Marcelo Fabiano | 2026-11-21 08:00 | Registra as respostas 1383 a 1398. |

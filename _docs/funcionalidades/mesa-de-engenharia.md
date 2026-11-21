@@ -122,7 +122,7 @@ O gráfico do progresso do craft, o item que será entregue, quanto falta do ped
 
 ## JEI
 
-Um plugin opcional do JEI, isolado em `compat/jei`, como o do Jade, que mostra as receitas da mesa. O mod abre sem o JEI (pergunta 1461 e regra 24). A versão é a do Iron Meridian, `19.64.0.455`.
+Um plugin opcional do JEI, isolado em `compat/jei`, como o do Jade, que mostra as receitas da mesa. O mod abre sem o JEI (perguntas 1461 e 1486 e regra 24). A versão é a do Iron Meridian, `19.64.0.455`. Muda a 1284: o JEI deixa de ser só do cliente de teste, e o mod passa a ter o plugin.
 
 ## Segurança e defesa
 
@@ -156,4 +156,5 @@ Uma issue mãe e quatro PRs, em ordem, cada um testável no jogo (pergunta 1478)
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Zennd | 2026-11-21 13:30 | Aponta a mudança da resposta 1284 no JEI (pergunta 1486). |
 | Zennd | 2026-11-21 12:30 | Descreve a Engineering Desk (perguntas 1424 a 1484). |
