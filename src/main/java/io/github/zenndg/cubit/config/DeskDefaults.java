@@ -17,7 +17,7 @@ final class DeskDefaults {
   private static final int ADVANCED_TICKS = 80;
   private static final int ELITE_TICKS = 50;
   private static final int ULTIMATE_TICKS = 30;
-  private static final int BASE_SLOTS = 9;
+  private static final int BASE_SLOTS = 12;
   private static final int ADVANCED_SLOTS = 18;
   private static final int ELITE_SLOTS = 27;
   private static final int ULTIMATE_SLOTS = 36;

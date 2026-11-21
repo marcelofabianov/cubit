@@ -56,7 +56,7 @@ A mesa sobe de tier com os mesmos Modules do Cubit e do Dock (perguntas 1433 a 1
 | Tempo por craft | 5 s | 4 s | 2,5 s | 1,5 s |
 | Maior pedido | 8 | 32 | 64 | 256 |
 | Bateria | 100 mil FE | 400 mil FE | 2 mi FE | 8 mi FE |
-| Slots do inventário de entrada e do de saída, cada um | 9 | 18 | 27 | 36 |
+| Slots do inventário de entrada e do de saída, cada um (pergunta 1505) | 12 | 18 | 27 | 36 |
 | Custo por craft | 2.500 FE | 2.500 FE | 2.500 FE | 2.500 FE |
 | Entrada, por cabos e redstone | 5.000 FE/t | 5.000 FE/t | 5.000 FE/t | 5.000 FE/t |
 | Luz da luminária, enquanto cria | 7 | 7 | 7 | 7 |
@@ -266,6 +266,7 @@ Planejado para a Fase 5. O tier Base não aceita cards, e cada card tem o seu ti
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Zennd | 2026-11-21 14:10 | Passa a mesa Base a 12 slots (pergunta 1505). |
 | Zennd | 2026-11-21 12:30 | Adiciona os números da Engineering Desk (perguntas 1433 a 1435). |
 | Marcelo Fabiano | 2026-11-21 11:30 | Adiciona os números da Recharge Splash (perguntas 1405, 1412 e 1414). |
 | Marcelo Fabiano | 2026-11-21 08:20 | Adiciona a geração do Dock Solar (pergunta 1385). |

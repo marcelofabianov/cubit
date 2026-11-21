@@ -10,7 +10,7 @@ class DeskSpecTest {
   private static final Energy CAPACITY = new Energy(100_000);
   private static final int CRAFT_TICKS = 100;
   private static final int SLOTS = 9;
-  private static final int NOT_A_ROW = 10;
+  private static final int BASE_SLOTS = 12;
   private static final int TOO_MANY = 63;
   private static final int MAX_ORDER = 8;
 
@@ -32,10 +32,14 @@ class DeskSpecTest {
   }
 
   @Test
-  void rejectsSlotsThatAreNotWholeRows() {
+  void acceptsSlotsOutOfWholeRows() {
+    assertDoesNotThrow(() -> new DeskSpec(CAPACITY, CRAFT_TICKS, BASE_SLOTS, MAX_ORDER));
+  }
+
+  @Test
+  void rejectsNoSlotsAndTooMany() {
     assertThrows(
-        IllegalArgumentException.class,
-        () -> new DeskSpec(CAPACITY, CRAFT_TICKS, NOT_A_ROW, MAX_ORDER));
+        IllegalArgumentException.class, () -> new DeskSpec(CAPACITY, CRAFT_TICKS, 0, MAX_ORDER));
     assertThrows(
         IllegalArgumentException.class,
         () -> new DeskSpec(CAPACITY, CRAFT_TICKS, TOO_MANY, MAX_ORDER));
