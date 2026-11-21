@@ -1,15 +1,8 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_core": {
-      "conditions": {
-        "items": [
-          {
-            "items": "cubit:general_robot_core"
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
+    "from_start": {
+      "trigger": "minecraft:tick"
     },
     "has_the_recipe": {
       "conditions": {
@@ -21,7 +14,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_core"
+      "from_start"
     ]
   ],
   "rewards": {

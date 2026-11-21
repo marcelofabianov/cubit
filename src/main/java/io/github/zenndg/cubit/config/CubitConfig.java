@@ -6,6 +6,7 @@ import io.github.zenndg.cubit.domain.behavior.FishingTimes;
 import io.github.zenndg.cubit.domain.behavior.FollowDecision;
 import io.github.zenndg.cubit.domain.behavior.LampPolicy;
 import io.github.zenndg.cubit.domain.behavior.LightLevel;
+import io.github.zenndg.cubit.domain.desk.DeskCatalog;
 import io.github.zenndg.cubit.domain.dock.DockCatalog;
 import io.github.zenndg.cubit.domain.energy.Percentage;
 import io.github.zenndg.cubit.domain.energy.PowerRules;
@@ -42,6 +43,7 @@ public final class CubitConfig {
   private final ExpressionSection expression;
   private final NoticeSection notice;
   private final DockSection dock;
+  private final EngineeringDeskSection engineeringDesk;
   private final LampSection lamp;
   private final SolarSection solar;
   private final ScannerSection scanner;
@@ -84,6 +86,7 @@ public final class CubitConfig {
     speedControl = new SpeedControlSection(builder);
     doors = new DoorSection(builder);
     rechargeSplash = new RechargeSplashSection(builder);
+    engineeringDesk = new EngineeringDeskSection(builder);
     builder.pop();
 
     tierCatalog = new NeoForgeTierCatalog(Map.of(GENERAL_ROBOT, tierSections(builder)));
@@ -95,7 +98,10 @@ public final class CubitConfig {
     Map<RobotTier, TierSection> sections = new EnumMap<>(RobotTier.class);
     for (RobotTier tier : RobotTier.values()) {
       builder.push(List.of(GENERAL_ROBOT.id(), tier.key()));
-      sections.put(tier, new TierSection(builder, TierDefaults.of(tier), DockDefaults.of(tier)));
+      sections.put(
+          tier,
+          new TierSection(
+              builder, TierDefaults.of(tier), DockDefaults.of(tier), DeskDefaults.of(tier)));
       builder.pop(TIER_SECTION_DEPTH);
     }
     return sections;
@@ -166,6 +172,16 @@ public final class CubitConfig {
 
   public TierCatalog tierCatalog() {
     return tierCatalog;
+  }
+
+  /** The numbers of the Engineering Desk at each tier (answers 1433 and 1434). */
+  public DeskCatalog deskCatalog() {
+    return tierCatalog;
+  }
+
+  /** The keys of the Engineering Desk valid for every tier. */
+  public EngineeringDeskSection engineeringDesk() {
+    return engineeringDesk;
   }
 
   /** The numbers of the Induction Dock at each tier (answer 1374). */

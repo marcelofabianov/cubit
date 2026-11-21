@@ -14,6 +14,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.CraftingInput;
 import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.item.crafting.ShapedRecipePattern;
 import net.minecraft.world.level.Level;
@@ -98,5 +99,11 @@ public final class PowerBankUpgradeRecipe extends ShapedRecipe {
         buffer.readEnum(CraftingBookCategory.class),
         ShapedRecipePattern.STREAM_CODEC.decode(buffer),
         ItemStack.STREAM_CODEC.decode(buffer));
+  }
+
+  /** Runs only in the Engineering Desk, never in the crafting table (answer 1459). */
+  @Override
+  public RecipeType<?> getType() {
+    return CubitRecipes.ENGINEERING_TYPE.get();
   }
 }

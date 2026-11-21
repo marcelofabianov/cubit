@@ -83,7 +83,10 @@ final class DockStorage {
       return DockStoredKind.TOOLBOX;
     }
     boolean ofTheMod = BuiltInRegistries.ITEM.getKey(stack.getItem()).getNamespace().equals(MOD_ID);
-    return ofTheMod ? DockStoredKind.MOD_ITEM : DockStoredKind.OTHER;
+    // A desk that keeps items never nests in the dock (answer 1481).
+    return ofTheMod && stack.canFitInsideContainerItems()
+        ? DockStoredKind.MOD_ITEM
+        : DockStoredKind.OTHER;
   }
 
   Container container() {

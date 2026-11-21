@@ -162,13 +162,13 @@ O slot fica na tela do Cubit, ao lado das barras ([`telas.md`](telas.md#aba-inve
 
 Com redstone na mão, o clique num Cubit desligado põe a pilha no slot, mesmo com carga. Para ligá-lo, basta clicar sem redstone na mão.
 
-### Recarregar o item pela grade de craft
+### Recarregar o item pela Engineering Desk
 
 Entra na Fase 4, junto da Power Bank.
 
 O item com a bateria abaixo da carga de religar, como zerada, e com vida pode ser colocado no mundo, mas o robô fica desligado, com a interação limitada. Depois de recolhê-lo, o player pode usar esta receita.
 
-- **Como:** combine o item do Cubit com uma Power Bank, em qualquer posição da grade do inventário ou da mesa de craft.
+- **Como:** combine o item do Cubit com uma Power Bank, em qualquer posição da grade da [Engineering Desk](mesa-de-engenharia.md) (pergunta 1427). A Power Bank volta ao inventário de saída da mesa com a carga restante.
 - **Quando:** só com a bateria do Cubit abaixo da carga de religar, e a Power Bank precisa ter o que falta. Sem isso, a receita não aparece. O `Damaged Cubit` não vale.
 - **Quanto:** só o que falta para a carga de religar, sobre a bateria do Cubit. Assim, ele volta a funcionar ao ser colocado. A Power Bank perde exatamente essa quantidade, sem criar nem perder FE.
 - **O que se mantém:** o Cubit não perde mais nada do estado, e a Power Bank continua na grade, com a carga restante.
@@ -206,6 +206,7 @@ Entra com o item 15 da Fase 4.2, antes do modo área (perguntas 1065 a 1069).
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Zennd | 2026-11-21 12:50 | Passa a recarga do item para a Engineering Desk (pergunta 1427). |
 | Marcelo Fabiano | 2026-11-21 11:30 | Adiciona a Recharge Splash e a imagem dela (perguntas 1399 a 1423). |
 | Marcelo Fabiano | 2026-11-21 09:50 | Adiciona a aba Solar e o vidro sobre o painel (perguntas 1395 a 1398). |
 | Marcelo Fabiano | 2026-11-21 09:10 | Adiciona o pulso e o visual do painel do Dock Solar (pergunta 1392). |

@@ -92,7 +92,7 @@ Limpa o vínculo de quem segue, se ele se perder.
 ## Vida e morte
 
 - Ao morrer, o robô vira um `Damaged Cubit`, com o inventário preservado e a bateria zerada. Nenhum dano destrói o item, que não queima, mesmo na lava, e não some com o tempo. Se cair no vazio, ele é resgatado. As regras do item e o resgate estão em [`itens.md`](../itens.md#morrer-e-consertar).
-- **Conserto:** com a `Toolbox`, na grade do inventário ou na mesa de craft. O robô sai com parte da vida, conforme [`tiers.md`](../tiers.md#valores-gerais), e a bateria zerada.
+- **Conserto:** com a `Toolbox`, na [Engineering Desk](mesa-de-engenharia.md) (pergunta 1427). O robô sai com parte da vida, conforme [`tiers.md`](../tiers.md#valores-gerais), e a bateria zerada.
 - **Vida:** se recupera na base, que também recupera o resto depois do conserto.
 - **Dono:** nenhum dano que o jogo atribua ao dono fere o robô. O fogo de um isqueiro continua ferindo, porque o jogo não guarda quem o acendeu.
 
@@ -142,6 +142,7 @@ Do Advanced em diante, com a chave ligada, quando o dono renasce, o Cubit que se
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Zennd | 2026-11-21 12:50 | Passa o conserto para a Engineering Desk (pergunta 1427). |
 | Marcelo Fabiano | 2026-11-19 20:18 | Define o controle de velocidade (perguntas 1258 a 1261 e 1266 a 1271). |
 | Marcelo Fabiano | 2026-11-14 18:46 | Detalha quem guia, a viagem ao Dock e a pausa por perigo. |
 | Marcelo Fabiano | 2026-11-14 18:14 | Define o local de morte, com o histórico, o texto ao renascer e a guia (perguntas 1109 a 1126). |

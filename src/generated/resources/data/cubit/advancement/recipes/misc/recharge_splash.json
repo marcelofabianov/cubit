@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_redstone_block": {
+    "has_robot": {
       "conditions": {
         "items": [
           {
-            "items": "minecraft:redstone_block"
+            "items": "cubit:general_robot"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_redstone_block"
+      "has_robot"
     ]
   ],
   "rewards": {

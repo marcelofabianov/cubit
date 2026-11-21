@@ -10,6 +10,7 @@ import io.github.zenndg.cubit.menu.RobotMenu;
 import io.github.zenndg.cubit.registry.CubitDataComponents;
 import io.github.zenndg.cubit.registry.CubitEntities;
 import io.github.zenndg.cubit.registry.CubitItems;
+import io.github.zenndg.cubit.registry.CubitRecipes;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -27,7 +28,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.item.crafting.CraftingInput;
-import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.gametest.GameTestHolder;
@@ -201,7 +201,7 @@ public final class InventoryGameTests {
         helper
             .getLevel()
             .getRecipeManager()
-            .getRecipeFor(RecipeType.CRAFTING, input, helper.getLevel())
+            .getRecipeFor(CubitRecipes.ENGINEERING_TYPE.get(), input, helper.getLevel())
             .map(holder -> holder.value().assemble(input, helper.getLevel().registryAccess()))
             .orElseThrow(() -> new IllegalStateException(NO_REPAIR));
 

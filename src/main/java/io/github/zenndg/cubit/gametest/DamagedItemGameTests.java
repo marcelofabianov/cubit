@@ -6,6 +6,7 @@ import io.github.zenndg.cubit.domain.robot.RobotState;
 import io.github.zenndg.cubit.domain.tier.RobotTier;
 import io.github.zenndg.cubit.registry.CubitDataComponents;
 import io.github.zenndg.cubit.registry.CubitItems;
+import io.github.zenndg.cubit.registry.CubitRecipes;
 import java.util.List;
 import java.util.Optional;
 import net.minecraft.core.BlockPos;
@@ -22,7 +23,6 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.CraftingInput;
 import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
-import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.gametest.GameTestHolder;
@@ -274,7 +274,7 @@ public final class DamagedItemGameTests {
   private static Optional<RecipeHolder<CraftingRecipe>> recipe(
       GameTestHelper helper, CraftingInput input) {
     ServerLevel level = helper.getLevel();
-    return level.getRecipeManager().getRecipeFor(RecipeType.CRAFTING, input, level);
+    return level.getRecipeManager().getRecipeFor(CubitRecipes.ENGINEERING_TYPE.get(), input, level);
   }
 
   private static ItemStack damagedStack() {

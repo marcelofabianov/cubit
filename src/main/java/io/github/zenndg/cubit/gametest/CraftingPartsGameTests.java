@@ -2,6 +2,7 @@ package io.github.zenndg.cubit.gametest;
 
 import io.github.zenndg.cubit.CubitMod;
 import io.github.zenndg.cubit.registry.CubitItems;
+import io.github.zenndg.cubit.registry.CubitRecipes;
 import java.util.List;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
@@ -10,7 +11,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.CraftingInput;
-import net.minecraft.world.item.crafting.RecipeType;
 import net.neoforged.neoforge.gametest.GameTestHolder;
 import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 
@@ -184,7 +184,7 @@ public final class CraftingPartsGameTests {
     ItemStack result =
         level
             .getRecipeManager()
-            .getRecipeFor(RecipeType.CRAFTING, input, level)
+            .getRecipeFor(CubitRecipes.ENGINEERING_TYPE.get(), input, level)
             .map(recipe -> recipe.value().assemble(input, level.registryAccess()))
             .orElse(ItemStack.EMPTY);
     helper.assertTrue(result.is(expected), WRONG_RESULT);

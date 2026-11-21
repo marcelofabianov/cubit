@@ -20,6 +20,7 @@
 | Dock Solar Panel | O painel solar que, com um Induction Dock, faz o Solar Induction Dock |
 | Solar Induction Dock | O Induction Dock com o painel solar acoplado, que gera FE ao ar livre ([`energia.md`](funcionalidades/energia.md#dock-solar)) |
 | Recharge Splash | Mistura de arremesso que recupera parte da vida e da energia dos Cubits do dono ([`energia.md`](funcionalidades/energia.md#recharge-splash)) |
+| Engineering Desk | A mesa de criação do mod, de onde saem todos os itens dele ([`mesa-de-engenharia.md`](funcionalidades/mesa-de-engenharia.md)) |
 
 ## IDs e receitas
 
@@ -49,10 +50,31 @@
 | Dock Solar Panel | `cubit:dock_solar_panel` | [Abaixo](#dock-solar) |
 | Solar Induction Dock | `cubit:solar_induction_dock` | [Abaixo](#dock-solar) |
 | Recharge Splash | `cubit:recharge_splash` | [Abaixo](#recharge-splash) |
+| Engineering Desk | `cubit:engineering_desk` | [Abaixo](#engineering-desk) |
 
 ## Progressão das receitas
 
-Só com recursos do jogo puro. Os materiais que marcam cada tier, nas células das Power Banks e nos Modules (perguntas 1354 e 1358):
+Só com recursos do jogo puro. Todas as receitas do mod saem da [Engineering Desk](funcionalidades/mesa-de-engenharia.md), no tipo `cubit:engineering` ou nos tipos especiais, com os mesmos IDs. A única que fica na mesa de craft do jogo é a da própria mesa (perguntas 1427, 1430, 1438 e 1459). A liberação de cada receita no catálogo da mesa segue a tabela abaixo (pergunta 1498), e as bloqueadas aparecem escurecidas e acinzentadas (perguntas 1441 e 1495).
+
+| Etapa | Quando libera | Receitas |
+|---|---|---|
+| 1 | Desde o início | Cubit, Cubit Casing, Cubit Visor, Cubit Treads, Cubit Neural Core e Toolbox |
+| 2 | Ao ter um Cubit | Induction Dock, Cubit Tablet, Power Bank Casing, Base Power Cell, Advanced Module, os cards e a Recharge Splash |
+| 3 | Ao ter o Module anterior | Elite Module, com o Advanced, e Ultimate Module, com o Elite |
+| 4 | Ao ter o item anterior da cadeia | Base Power Bank, com a Base Power Cell; cada célula e cada Power Bank seguinte, com a Power Bank anterior; as Power Banks do zero, com a célula do tier; o Dock Solar Panel, com o Dock; o Solar Induction Dock, com o painel |
+| 5 | Ao precisar | Religar o Cubit, com uma Power Bank; o conserto, com um Damaged Cubit ou uma Toolbox |
+
+### Engineering Desk
+
+Na mesa de craft do jogo, com forma, e aparece no livro de receitas desde o início (pergunta 1430).
+
+| | Coluna 1 | Coluna 2 | Coluna 3 |
+|---|---|---|---|
+| Linha 1 | Painel de vidro | Redstone | Painel de vidro |
+| Linha 2 | Baú | Mesa de craft | Baú |
+| Linha 3 | Lingote de ferro | Lingote de ferro | Lingote de ferro |
+
+Os materiais que marcam cada tier, nas células das Power Banks e nos Modules (perguntas 1354 e 1358):
 
 | Item | Materiais |
 |---|---|
@@ -63,11 +85,11 @@ Só com recursos do jogo puro. Os materiais que marcam cada tier, nas células d
 
 ### Cubit
 
-Na mesa de craft, sem forma: Cubit Casing, Cubit Visor, Cubit Treads e Cubit Neural Core, em qualquer posição (perguntas 1343 e 1346). Só com materiais do Overworld, nas [peças de montagem](#peças-de-montagem). A receita aparece no livro ao ter o Neural Core (pergunta 1350).
+Na Engineering Desk, sem forma: Cubit Casing, Cubit Visor, Cubit Treads e Cubit Neural Core, em qualquer posição (perguntas 1343 e 1346). Só com materiais do Overworld, nas [peças de montagem](#peças-de-montagem). A receita fica liberada desde o início (pergunta 1496).
 
 ### Induction Dock
 
-Na mesa de craft, em forma de L (perguntas 336, 1331 e 1332). O desenho espelhado também vale, e a receita aparece no livro ao ter um Cubit.
+Na Engineering Desk, em forma de L (perguntas 336, 1331 e 1332). O desenho espelhado também vale, e a receita aparece no livro ao ter um Cubit.
 
 | | Coluna 1 | Coluna 2 | Coluna 3 |
 |---|---|---|---|
@@ -77,7 +99,7 @@ Na mesa de craft, em forma de L (perguntas 336, 1331 e 1332). O desenho espelhad
 
 ### Cubit Tablet
 
-Na mesa de craft, com forma (perguntas 1025, 1030 e 1331): 2 painéis de vidro e 1 redstone na linha de cima, 4 quartzos nas laterais das duas linhas de baixo, 1 diamante no centro e 1 obsidiana embaixo, no meio. Aparece no livro de receitas quando o player tem um Cubit. Não empilha.
+Na Engineering Desk, com forma (perguntas 1025, 1030 e 1331): 2 painéis de vidro e 1 redstone na linha de cima, 4 quartzos nas laterais das duas linhas de baixo, 1 diamante no centro e 1 obsidiana embaixo, no meio. Aparece no livro de receitas quando o player tem um Cubit. Não empilha.
 
 | | Coluna 1 | Coluna 2 | Coluna 3 |
 |---|---|---|---|
@@ -87,7 +109,7 @@ Na mesa de craft, com forma (perguntas 1025, 1030 e 1331): 2 painéis de vidro e
 
 ### Dock Solar
 
-Na mesa de craft (perguntas 1384 e 1387). O Dock Solar Panel aparece no livro com um Induction Dock, e o Solar Induction Dock, com o painel.
+Na Engineering Desk (perguntas 1384 e 1387). O Dock Solar Panel aparece no livro com um Induction Dock, e o Solar Induction Dock, com o painel.
 
 | Item | Receita |
 |---|---|
@@ -96,15 +118,15 @@ Na mesa de craft (perguntas 1384 e 1387). O Dock Solar Panel aparece no livro co
 
 ### Recharge Splash
 
-Na mesa de craft, sem forma: garrafa de vidro, bloco de redstone, lingote de ferro, pólvora e lápis-lazúli. A receita dá 1, e a pilha é de 16, como as bolas de neve e os ovos (perguntas 1406 e 1410).
+Na Engineering Desk, sem forma: garrafa de vidro, bloco de redstone, lingote de ferro, pólvora e lápis-lazúli. A receita dá 1, e a pilha é de 16, como as bolas de neve e os ovos (perguntas 1406 e 1410).
 
 ### Toolbox
 
-7 ferros, 1 redstone e 1 obsidiana, na mesa de craft: colunas laterais com 3 ferros cada, e coluna central com ferro em cima, redstone no meio e obsidiana embaixo.
+7 ferros, 1 redstone e 1 obsidiana, na Engineering Desk: colunas laterais com 3 ferros cada, e coluna central com ferro em cima, redstone no meio e obsidiana embaixo.
 
 ### Power Banks
 
-Na mesa de craft, a partir das [peças de montagem](#peças-de-montagem) (perguntas 902, 1347 e 1355). Cada uma sai do zero, com a Power Bank Casing e a célula do tier, sem forma e vazia. A Advanced, a Elite e a Ultimate também saem da anterior, pelo upgrade: a mesma cruz da célula do tier, com a Power Bank anterior no centro, no tipo `cubit:power_bank_upgrade`, que passa a carga. Se a carga não couber, a receita não aparece (pergunta 907). O upgrade aparece no livro com a Power Bank anterior (pergunta 908), e a do zero, com a célula do tier.
+Na Engineering Desk, a partir das [peças de montagem](#peças-de-montagem) (perguntas 902, 1347 e 1355). Cada uma sai do zero, com a Power Bank Casing e a célula do tier, sem forma e vazia. A Advanced, a Elite e a Ultimate também saem da anterior, pelo upgrade: a mesma cruz da célula do tier, com a Power Bank anterior no centro, no tipo `cubit:power_bank_upgrade`, que passa a carga. Se a carga não couber, a receita não aparece (pergunta 907). O upgrade aparece no livro com a Power Bank anterior (pergunta 908), e a do zero, com a célula do tier.
 
 | Power Bank | Do zero, sem forma | Upgrade, em cruz |
 |---|---|---|
@@ -115,7 +137,7 @@ Na mesa de craft, a partir das [peças de montagem](#peças-de-montagem) (pergun
 
 ### Peças de montagem
 
-As regras estão em [`pecas.md`](funcionalidades/pecas.md). As quatro peças do Cubit aparecem no livro com um diamante. A Power Bank Casing e a Base Power Cell aparecem com um Cubit, e cada célula seguinte, com a Power Bank anterior (pergunta 1350).
+As regras estão em [`pecas.md`](funcionalidades/pecas.md). As quatro peças do Cubit ficam liberadas desde o início (pergunta 1496). A Power Bank Casing e a Base Power Cell aparecem com um Cubit, e cada célula seguinte, com a Power Bank anterior (pergunta 1350).
 
 | Peça | Linha 1 | Linha 2 | Linha 3 |
 |---|---|---|---|
@@ -131,9 +153,9 @@ As regras estão em [`pecas.md`](funcionalidades/pecas.md). As quatro peças do 
 
 O Visor ocupa uma linha só, em qualquer linha da grade, e as Esteiras, duas (perguntas 1353 e 1356). As tochas da Carcaça são as antenas. As células são encadeadas, numa cruz com a anterior no centro (pergunta 1354).
 
-### Religar o Cubit na grade
+### Religar o Cubit na Engineering Desk
 
-O tipo `cubit:robot_recharge`, com os campos `robot`, `power_bank` e `result` (pergunta 910). As regras estão em [`energia.md`](funcionalidades/energia.md#recarregar-o-item-pela-grade-de-craft). Aparece no livro com uma Power Bank qualquer (pergunta 908).
+O tipo `cubit:robot_recharge`, com os campos `robot`, `power_bank` e `result` (pergunta 910). As regras estão em [`energia.md`](funcionalidades/energia.md#recarregar-o-item-pela-engineering-desk). Aparece no livro com uma Power Bank qualquer (pergunta 908).
 
 ## Virar item
 
@@ -155,7 +177,7 @@ O tipo `cubit:robot_recharge`, com os campos `robot`, `power_bank` e `result` (p
   4. nenhum destino possível: fica parado logo abaixo do mundo e tenta de novo depois de um intervalo, sem carregar chunk à força.
 - **Vínculo:** a morte libera o vínculo de quem segue. Com o dono offline, o mundo anota o robô morto, e o vínculo é limpo quando o dono entra.
 - **Criativo:** o `Damaged Cubit` e a `Toolbox` ficam na aba `cubit:main`.
-- **Conserto:** combine o `Damaged Cubit` com a `Toolbox`, na grade do inventário ou na mesa de craft. O robô sai com parte da vida, conforme [`tiers.md`](tiers.md#valores-gerais), e a bateria zerada. O Induction Dock recupera o resto.
+- **Conserto:** combine o `Damaged Cubit` com a `Toolbox`, na Engineering Desk (pergunta 1427). O robô sai com parte da vida, conforme [`tiers.md`](tiers.md#valores-gerais), e a bateria zerada. O Induction Dock recupera o resto.
 - **Toolbox:** consumida a cada conserto. Empilha até 16.
 
 ## Colocar
@@ -171,7 +193,7 @@ Levam o Cubit ao tier seguinte, sem pular etapas. As regras estão em [`upgrade-
 
 - **Empilha** até 64, e o nome aparece na cor do colar do tier (pergunta 804).
 - **Criativo:** os três ficam na aba `cubit:main`.
-- **Receitas:** na mesa de craft, encadeadas como as células, numa cruz: um material em cima e embaixo, outro nas laterais e, no centro, o Module anterior. O Advanced tem o Cubit Neural Core no centro (perguntas 1357 e 1358, que mudam a 799 e a 1331). As três aparecem no livro ao ter um Cubit (pergunta 805).
+- **Receitas:** na Engineering Desk, encadeadas como as células, numa cruz: um material em cima e embaixo, outro nas laterais e, no centro, o Module anterior. O Advanced tem o Cubit Neural Core no centro (perguntas 1357 e 1358, que mudam a 799 e a 1331). O Advanced aparece ao ter um Cubit, e cada seguinte, ao ter o Module anterior (pergunta 1498).
 
 ### Advanced Module
 
@@ -300,6 +322,8 @@ O estado salvo é validado ao entrar no jogo, sem derrubá-lo (regra 17 do `AGEN
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Zennd | 2026-11-21 13:40 | Adiciona a ordem de liberação no catálogo da mesa (perguntas 1495 a 1498). |
+| Zennd | 2026-11-21 12:50 | Passa as receitas do mod para a Engineering Desk e adiciona a receita dela (perguntas 1427, 1430 e 1441). |
 | Marcelo Fabiano | 2026-11-21 11:30 | Adiciona a Recharge Splash (perguntas 1400, 1406 e 1410). |
 | Marcelo Fabiano | 2026-11-21 08:20 | Adiciona o Dock Solar Panel e o Solar Induction Dock (perguntas 1384 a 1388). |
 | Marcelo Fabiano | 2026-11-21 06:30 | Adiciona o tier do Dock aos contratos (perguntas 1373 e 1379). |

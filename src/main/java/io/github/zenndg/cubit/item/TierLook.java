@@ -39,4 +39,9 @@ public final class TierLook {
     RobotState saved = stack.get(CubitDataComponents.ROBOT_STATE.get());
     return saved == null ? RobotTier.BASE : saved.tier();
   }
+
+  /** The tier kept in the item of an Engineering Desk (answer 1492). */
+  public static RobotTier deskTierOf(ItemStack stack) {
+    return stack.getOrDefault(CubitDataComponents.DESK_TIER.get(), RobotTier.BASE);
+  }
 }

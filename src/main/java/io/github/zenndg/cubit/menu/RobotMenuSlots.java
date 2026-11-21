@@ -46,7 +46,7 @@ final class RobotMenuSlots {
           new Slot(inventory, slot, x, y) {
             @Override
             public boolean mayPlace(ItemStack stack) {
-              return !readOnly && stack.getItem().canFitInsideContainerItems();
+              return !readOnly && stack.canFitInsideContainerItems();
             }
 
             @Override

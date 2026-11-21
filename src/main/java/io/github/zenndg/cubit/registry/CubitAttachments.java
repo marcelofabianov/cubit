@@ -1,5 +1,6 @@
 package io.github.zenndg.cubit.registry;
 
+import com.mojang.serialization.Codec;
 import io.github.zenndg.cubit.CubitMod;
 import io.github.zenndg.cubit.domain.behavior.DeathLog;
 import io.github.zenndg.cubit.domain.energy.RechargeSplashDose;
@@ -23,6 +24,7 @@ public final class CubitAttachments {
   private static final String CHOSEN_ROBOT_ID = "chosen_robot";
   private static final String DEATH_LOG_ID = "death_log";
   private static final String RECHARGE_SPLASH_ID = "recharge_splash";
+  private static final String DESK_SEEN_ID = "engineering_desk_seen";
   private static final DeferredRegister<AttachmentType<?>> ATTACHMENTS =
       DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, CubitMod.MOD_ID);
 
@@ -65,6 +67,12 @@ public final class CubitAttachments {
   public static final Supplier<AttachmentType<RechargeSplashDose>> RECHARGE_SPLASH =
       ATTACHMENTS.register(
           RECHARGE_SPLASH_ID, () -> AttachmentType.builder(() -> RechargeSplashDose.NONE).build());
+
+  // Whether the player already placed a desk, so its first text shows once (answer 1492).
+  public static final Supplier<AttachmentType<Boolean>> DESK_SEEN =
+      ATTACHMENTS.register(
+          DESK_SEEN_ID,
+          () -> AttachmentType.builder(() -> false).serialize(Codec.BOOL).copyOnDeath().build());
 
   private CubitAttachments() {}
 

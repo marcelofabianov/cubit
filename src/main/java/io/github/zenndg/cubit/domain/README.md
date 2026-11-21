@@ -174,6 +174,13 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 | `RechargeSource` | De onde a bateria recebeu energia no último tick: Dock, slot, painel ou nada |
 | `HealTime` | Quanto tempo a base leva para encher a vida, em minutos |
 | `DockInputMeter` | A média do que entrou num Dock por tick, no último segundo |
+| `DeskSpec` | Os números da Engineering Desk num tier: bateria, ticks de um craft, slots de cada inventário e maior pedido |
+| `DeskCatalog` | Interface que dá o `DeskSpec` de um tier, servida pelo config |
+| `DeskOrder` | O pedido da mesa: quantos itens foram pedidos e quantos estão prontos, com o sinal do comparador |
+| `DeskProgress` | Os ticks do craft em andamento, mantidos na pausa |
+| `DeskCheck` | O que a mesa encontrou no tick: pedido, sinal de redstone, materiais, receita aceita, energia e espaço na saída |
+| `DeskStatus` | O que a mesa está fazendo: parada, criando ou pausada, com o motivo |
+| `DeskStock` | A energia guardada na mesa, recebida pela entrada e paga por craft |
 
 ## Regras e porquês
 
@@ -278,6 +285,10 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 - **Pedido sem passar da quantidade:** o destino recebe só o que falta, para uma fornalha não ficar cheia de um combustível que o player queria em outro lugar (pergunta 1294).
 - **Portas do dono:** o Cubit só abre a porta que o dono marcou, porque num servidor a porta de outro player não é dele. As marcas são do dono, e não de um Cubit, para valerem para todos os Cubits dele. Ele só fecha a porta que abriu, para não fechar a que o dono deixou aberta (perguntas 1360, 1364 e 1371).
 - **O Dock decide a recarga na base:** um Cubit na base carrega na taxa do tier do Dock, e não na do tier dele, para o upgrade do Dock valer para qualquer Cubit. O contêiner do inventário tem sempre os 54 slots do Ultimate, e o tier abre os primeiros, para nada mudar de lugar ao subir (perguntas 1374 e 1375).
+- **A mesa paga no fim:** os materiais e a energia de um craft só saem quando ele termina, e de uma vez, para uma pausa no meio nunca perder nada (regra 13 e pergunta 1435).
+- **A primeira causa é a mostrada:** a mesa olha o pedido, o sinal de redstone, os materiais, a receita, a energia e a saída, nessa ordem, e mostra a primeira que falta. A pausa guarda o progresso, e a mesa volta sozinha (perguntas 1443 e 1448).
+- **Pedido de zero ao maior do tier:** escolher uma receita só a marca, com o pedido em zero, para nada ser feito por acidente, e − e + andam de 1 em 1, ou de 8 em 8 com Shift. Baixar até o que já está pronto encerra o pedido, e um tier ou um config menor corta o total (perguntas 1429, 1444 e 1506).
+- **Comparador arredonda para cima:** o sinal vai de 15 no início do pedido a 0 no fim, e o último item ainda acende 1 (pergunta 1453).
 
 ## Estados
 

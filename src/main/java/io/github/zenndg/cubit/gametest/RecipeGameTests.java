@@ -8,6 +8,7 @@ import io.github.zenndg.cubit.domain.robot.RobotState;
 import io.github.zenndg.cubit.domain.tier.RobotTier;
 import io.github.zenndg.cubit.entity.RobotEntity;
 import io.github.zenndg.cubit.registry.CubitItems;
+import io.github.zenndg.cubit.registry.CubitRecipes;
 import java.util.List;
 import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTest;
@@ -18,7 +19,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.CraftingInput;
-import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.GameType;
 import net.neoforged.neoforge.gametest.GameTestHolder;
 import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
@@ -291,7 +291,7 @@ public final class RecipeGameTests {
     CraftingInput input = CraftingInput.of(GRID_SIZE, GRID_SIZE, grid);
     return level
         .getRecipeManager()
-        .getRecipeFor(RecipeType.CRAFTING, input, level)
+        .getRecipeFor(CubitRecipes.ENGINEERING_TYPE.get(), input, level)
         .map(recipe -> recipe.value().assemble(input, level.registryAccess()))
         .orElse(ItemStack.EMPTY);
   }

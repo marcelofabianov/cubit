@@ -10,6 +10,7 @@ import io.github.zenndg.cubit.entity.RobotEntity;
 import io.github.zenndg.cubit.item.PowerBankItem;
 import io.github.zenndg.cubit.registry.CubitDataComponents;
 import io.github.zenndg.cubit.registry.CubitItems;
+import io.github.zenndg.cubit.registry.CubitRecipes;
 import java.util.List;
 import java.util.Optional;
 import net.minecraft.core.BlockPos;
@@ -22,7 +23,6 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.CraftingInput;
 import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
-import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.GameType;
 import net.neoforged.neoforge.gametest.GameTestHolder;
 import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
@@ -201,6 +201,6 @@ public final class PowerBankGameTests {
     return helper
         .getLevel()
         .getRecipeManager()
-        .getRecipeFor(RecipeType.CRAFTING, grid, helper.getLevel());
+        .getRecipeFor(CubitRecipes.ENGINEERING_TYPE.get(), grid, helper.getLevel());
   }
 }

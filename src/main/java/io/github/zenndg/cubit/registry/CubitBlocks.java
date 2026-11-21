@@ -1,6 +1,7 @@
 package io.github.zenndg.cubit.registry;
 
 import io.github.zenndg.cubit.CubitMod;
+import io.github.zenndg.cubit.block.EngineeringDeskBlock;
 import io.github.zenndg.cubit.block.InductionDockBlock;
 import java.util.function.Supplier;
 import net.minecraft.core.registries.Registries;
@@ -15,6 +16,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public final class CubitBlocks {
   public static final String INDUCTION_DOCK_ID = "induction_dock";
   public static final String SOLAR_INDUCTION_DOCK_ID = "solar_induction_dock";
+  public static final String ENGINEERING_DESK_ID = "engineering_desk";
   private static final float DOCK_HARDNESS = 3.5f;
 
   /** As strong as bedrock: no explosion breaks a block that only its owner may break. */
@@ -31,7 +33,20 @@ public final class CubitBlocks {
       BLOCKS.register(
           SOLAR_INDUCTION_DOCK_ID, () -> new InductionDockBlock(dockProperties(), true));
 
+  /** The crafting desk of the mod, two blocks wide (answers 1428 and 1456). */
+  public static final Supplier<Block> ENGINEERING_DESK =
+      BLOCKS.register(ENGINEERING_DESK_ID, () -> new EngineeringDeskBlock(deskProperties()));
+
   private CubitBlocks() {}
+
+  /** Like the dock: it resists explosions, and only its owner breaks it (answer 1445). */
+  private static BlockBehaviour.Properties deskProperties() {
+    return BlockBehaviour.Properties.of()
+        .mapColor(MapColor.METAL)
+        .strength(DOCK_HARDNESS, DOCK_EXPLOSION_RESISTANCE)
+        .sound(SoundType.METAL)
+        .noOcclusion();
+  }
 
   private static BlockBehaviour.Properties dockProperties() {
     return BlockBehaviour.Properties.of()

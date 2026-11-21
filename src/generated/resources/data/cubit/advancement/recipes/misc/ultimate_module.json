@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_robot": {
+    "has_elite_module": {
       "conditions": {
         "items": [
           {
-            "items": "cubit:general_robot"
+            "items": "cubit:elite_module"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_robot"
+      "has_elite_module"
     ]
   ],
   "rewards": {

@@ -63,7 +63,7 @@ Entregue como um kanban, no GitHub Project "Cubit · Fase 5", um card por vez, e
 
 1. Consolidar o conceito da Fase 5.
 2. Base do trabalho: slot do card, tier mínimo, estado de trabalho, aba Trabalho e hibernação fora do Dock.
-3. Os trabalhos, um card cada: Pescador, Fazendeiro, Organizador, Cozinheiro, Defensor, Minerador, Construtor e Pecuarista. Antes do Defensor entram as receitas novas, as peças de montagem, as portas, os tiers do Dock e o Dock Solar, uma mistura química de arremesso que aumenta a vida e a energia do Cubit, e uma revisão do tier mínimo de cada trabalho (perguntas 1338, 1359, 1383, 1390 e 1393). Entre o Fazendeiro e o Organizador entra o controle de velocidade do Cubit, com − e +, que vale para todo Cubit (perguntas 1261 e 1263).
+3. Os trabalhos, um card cada: Pescador, Fazendeiro, Organizador, Cozinheiro, Defensor, Minerador, Construtor e Pecuarista. Antes do Defensor entram as receitas novas, as peças de montagem, as portas, os tiers do Dock, o Dock Solar e a Recharge Splash (perguntas 1338, 1359, 1383 e 1393) e, com prioridade sobre o resto do roadmap, a Engineering Desk, a mesa de criação própria do mod, de onde passam a sair todos os itens dele, a revisão dos trabalhos por tier e a revisão das receitas dos cards. O Defensor passa a se chamar Patrulheiro Galático (perguntas 1390 e 1424). Entre o Fazendeiro e o Organizador entra o controle de velocidade do Cubit, com − e +, que vale para todo Cubit (perguntas 1261 e 1263).
 4. Personalização visual do Cubit de acordo com o card.
 5. Trabalhos novos do Ultimate: Mecânico e Alquimista.
 6. Antena e carregamento de chunks.

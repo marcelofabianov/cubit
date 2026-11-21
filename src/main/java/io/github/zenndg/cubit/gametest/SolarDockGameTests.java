@@ -6,6 +6,7 @@ import io.github.zenndg.cubit.domain.energy.Energy;
 import io.github.zenndg.cubit.domain.tier.RobotTier;
 import io.github.zenndg.cubit.registry.CubitDataComponents;
 import io.github.zenndg.cubit.registry.CubitItems;
+import io.github.zenndg.cubit.registry.CubitRecipes;
 import java.util.List;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
@@ -14,7 +15,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CraftingInput;
-import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.gametest.GameTestHolder;
 import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
@@ -138,7 +138,7 @@ public final class SolarDockGameTests {
     CraftingInput input = CraftingInput.of(GRID, GRID, grid);
     return level
         .getRecipeManager()
-        .getRecipeFor(RecipeType.CRAFTING, input, level)
+        .getRecipeFor(CubitRecipes.ENGINEERING_TYPE.get(), input, level)
         .map(recipe -> recipe.value().assemble(input, level.registryAccess()))
         .orElse(ItemStack.EMPTY);
   }

@@ -1,6 +1,7 @@
 package io.github.zenndg.cubit.registry;
 
 import io.github.zenndg.cubit.CubitMod;
+import io.github.zenndg.cubit.menu.EngineeringDeskMenu;
 import io.github.zenndg.cubit.menu.InductionDockMenu;
 import io.github.zenndg.cubit.menu.RobotMenu;
 import io.github.zenndg.cubit.menu.TabletRobotMenu;
@@ -29,6 +30,12 @@ public final class CubitMenus {
       MENUS.register(
           CubitBlocks.INDUCTION_DOCK_ID,
           () -> IMenuTypeExtension.create(InductionDockMenu::onClient));
+
+  /** The screen of the Engineering Desk (answer 1473). */
+  public static final Supplier<MenuType<EngineeringDeskMenu>> ENGINEERING_DESK =
+      MENUS.register(
+          CubitBlocks.ENGINEERING_DESK_ID,
+          () -> IMenuTypeExtension.create(EngineeringDeskMenu::onClient));
 
   private CubitMenus() {}
 

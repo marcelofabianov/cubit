@@ -1,6 +1,7 @@
 package io.github.zenndg.cubit.config;
 
 import io.github.zenndg.cubit.domain.behavior.LightLevel;
+import io.github.zenndg.cubit.domain.desk.DeskSpec;
 import io.github.zenndg.cubit.domain.dock.DockSpec;
 import io.github.zenndg.cubit.domain.energy.ConsumptionExtras;
 import io.github.zenndg.cubit.domain.energy.Energy;
@@ -69,8 +70,13 @@ final class TierSection {
   private final DeathPointKey deathPoint;
   private final JobKeys jobs;
   private final DockKeys dock;
+  private final DeskKeys desk;
 
-  TierSection(ModConfigSpec.Builder builder, TierSpec defaults, DockSpec dockDefaults) {
+  TierSection(
+      ModConfigSpec.Builder builder,
+      TierSpec defaults,
+      DockSpec dockDefaults,
+      DeskSpec deskDefaults) {
     batteryCapacity = energy(builder, BATTERY_CAPACITY, defaults.batteryCapacity(), MIN_POSITIVE);
     movingConsumption =
         energy(builder, MOVING_CONSUMPTION, defaults.movingConsumptionPerTick(), MIN_CONSUMPTION);
@@ -97,6 +103,12 @@ final class TierSection {
     deathPoint = new DeathPointKey(builder, defaults.deathPoint());
     jobs = new JobKeys(builder, defaults.jobs());
     dock = new DockKeys(builder, dockDefaults);
+    desk = new DeskKeys(builder, deskDefaults);
+  }
+
+  /** The Engineering Desk of this tier (answer 1475). */
+  DeskSpec readDesk() {
+    return desk.read();
   }
 
   /** The Induction Dock of this tier (answers 1374 and 1381). */
