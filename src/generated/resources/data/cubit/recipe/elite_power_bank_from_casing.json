@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "cubit:power_bank_casing"
+    },
+    {
+      "item": "cubit:elite_power_cell"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "cubit:elite_power_bank"
+  }
+}

@@ -129,11 +129,28 @@ public final class RecipeGameTests {
   }
 
   @GameTest(template = EMPTY_TEMPLATE)
+  public static void eachBankAlsoComesFromTheCasingAndItsCell(GameTestHelper helper) {
+    helper.assertTrue(
+        craft(helper, fromCasing(CubitItems.ADVANCED_POWER_CELL.get()))
+            .is(CubitItems.ADVANCED_POWER_BANK.get()),
+        WRONG_RESULT);
+    helper.assertTrue(
+        craft(helper, fromCasing(CubitItems.ELITE_POWER_CELL.get()))
+            .is(CubitItems.ELITE_POWER_BANK.get()),
+        WRONG_RESULT);
+    helper.assertTrue(
+        craft(helper, fromCasing(CubitItems.ULTIMATE_POWER_CELL.get()))
+            .is(CubitItems.ULTIMATE_POWER_BANK.get()),
+        WRONG_RESULT);
+    helper.succeed();
+  }
+
+  @GameTest(template = EMPTY_TEMPLATE)
   public static void theAdvancedPowerBankRecipeTakesTheBaseOne(GameTestHelper helper) {
     ItemStack result =
         craft(
             helper,
-            nextBankGrid(Items.QUARTZ, CubitItems.BASE_POWER_BANK.get(), Items.LAPIS_LAZULI));
+            nextBankGrid(Items.LAPIS_LAZULI, Items.GOLD_INGOT, CubitItems.BASE_POWER_BANK.get()));
 
     helper.assertTrue(result.is(CubitItems.ADVANCED_POWER_BANK.get()), WRONG_RESULT);
     helper.succeed();
@@ -144,7 +161,7 @@ public final class RecipeGameTests {
     ItemStack result =
         craft(
             helper,
-            nextBankGrid(Items.QUARTZ, CubitItems.ADVANCED_POWER_BANK.get(), Items.PURPLE_DYE));
+            nextBankGrid(Items.PURPLE_DYE, Items.DIAMOND, CubitItems.ADVANCED_POWER_BANK.get()));
 
     helper.assertTrue(result.is(CubitItems.ELITE_POWER_BANK.get()), WRONG_RESULT);
     helper.succeed();
@@ -156,7 +173,7 @@ public final class RecipeGameTests {
         craft(
             helper,
             nextBankGrid(
-                Items.NETHERITE_INGOT, CubitItems.ELITE_POWER_BANK.get(), Items.BLAZE_ROD));
+                Items.NETHERITE_INGOT, Items.BLAZE_ROD, CubitItems.ELITE_POWER_BANK.get()));
 
     helper.assertTrue(result.is(CubitItems.ULTIMATE_POWER_BANK.get()), WRONG_RESULT);
     helper.succeed();
@@ -215,44 +232,51 @@ public final class RecipeGameTests {
         Items.QUARTZ);
   }
 
+  /** The casing and the Base cell, without a shape (answers 1347 and 1355). */
   private static List<ItemStack> basePowerBankGrid() {
-    return stacks(
-        Items.QUARTZ,
-        Items.GOLD_INGOT,
-        Items.QUARTZ,
-        Items.EMERALD,
-        Items.REDSTONE_BLOCK,
-        Items.EMERALD,
-        Items.QUARTZ,
-        Items.OBSIDIAN,
-        Items.QUARTZ);
+    return fromCasing(CubitItems.BASE_POWER_CELL.get());
   }
 
-  /** Gold on top, the previous bank between redstone blocks and the tier material below. */
-  private static List<ItemStack> nextBankGrid(Item corner, Item previous, Item bottom) {
+  /** Any bank from scratch: the casing and the cell of its tier, without a shape (answer 1355). */
+  private static List<ItemStack> fromCasing(Item cell) {
     return stacks(
-        corner,
-        Items.GOLD_INGOT,
-        corner,
-        Items.REDSTONE_BLOCK,
+        Items.AIR,
+        Items.AIR,
+        Items.AIR,
+        cell,
+        Items.AIR,
+        CubitItems.POWER_BANK_CASING.get(),
+        Items.AIR,
+        Items.AIR,
+        Items.AIR);
+  }
+
+  /** The cross of the cell of the tier, with the previous bank in the center (answer 1355). */
+  private static List<ItemStack> nextBankGrid(Item topAndBottom, Item sides, Item previous) {
+    return stacks(
+        Items.AIR,
+        topAndBottom,
+        Items.AIR,
+        sides,
         previous,
-        Items.REDSTONE_BLOCK,
-        corner,
-        bottom,
-        corner);
+        sides,
+        Items.AIR,
+        topAndBottom,
+        Items.AIR);
   }
 
+  /** The four parts, without a shape, in scattered slots (answer 1346). */
   private static List<ItemStack> robotGrid() {
     return stacks(
-        Items.REDSTONE,
-        Items.REDSTONE_LAMP,
-        Items.REDSTONE,
-        Items.IRON_INGOT,
-        Items.DIAMOND,
-        Items.IRON_INGOT,
-        Items.OBSIDIAN,
-        Items.GLASS_PANE,
-        Items.OBSIDIAN);
+        CubitItems.GENERAL_ROBOT_TREADS.get(),
+        Items.AIR,
+        Items.AIR,
+        Items.AIR,
+        CubitItems.GENERAL_ROBOT_CORE.get(),
+        Items.AIR,
+        CubitItems.GENERAL_ROBOT_VISOR.get(),
+        Items.AIR,
+        CubitItems.GENERAL_ROBOT_CASING.get());
   }
 
   private static List<ItemStack> dockGrid() {

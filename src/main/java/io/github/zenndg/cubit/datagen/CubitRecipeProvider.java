@@ -18,6 +18,7 @@ import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -28,9 +29,6 @@ final class CubitRecipeProvider extends RecipeProvider {
   private static final String TOOLBOX_TOP_ROW = "III";
   private static final String TOOLBOX_MIDDLE_ROW = "IRI";
   private static final String TOOLBOX_BOTTOM_ROW = "IOI";
-  private static final String ROBOT_TOP_ROW = "RLR";
-  private static final String ROBOT_MIDDLE_ROW = "IDI";
-  private static final String ROBOT_BOTTOM_ROW = "OGO";
   private static final String DOCK_TOP_ROW = "D  ";
   private static final String TABLET_TOP_ROW = "GRG";
   private static final String TABLET_MIDDLE_ROW = "QDQ";
@@ -42,20 +40,16 @@ final class CubitRecipeProvider extends RecipeProvider {
   private static final char IRON = 'I';
   private static final char REDSTONE = 'R';
   private static final char OBSIDIAN = 'O';
-  private static final char LAMP = 'L';
   private static final char DIAMOND = 'D';
   private static final char CHEST = 'C';
   private static final String MODULE_TOP_ROW = "TTT";
   private static final String MODULE_MIDDLE_ROW = "SCS";
   private static final String MODULE_BOTTOM_ROW = "BBB";
-  private static final String BANK_TOP_ROW = "KTK";
-  private static final String BANK_MIDDLE_ROW = "SCS";
-  private static final String BANK_BOTTOM_ROW = "KBK";
+  private static final String FROM_CASING_SUFFIX = "_from_casing";
   private static final char TOP = 'T';
   private static final char SIDE = 'S';
   private static final char CORE = 'C';
   private static final char BOTTOM = 'B';
-  private static final char CORNER = 'K';
   private static final String FISHER_TOP_ROW = "PCP";
   private static final String FISHER_MIDDLE_ROW = "RFR";
   private static final String FISHER_BOTTOM_ROW = "PRP";
@@ -68,7 +62,7 @@ final class CubitRecipeProvider extends RecipeProvider {
   private static final String COOK_MIDDLE_ROW = "RSR";
   private static final char SMOKER = 'S';
   private static final String HAS_IRON = "has_iron";
-  private static final String HAS_DIAMOND = "has_diamond";
+  private static final String HAS_CORE = "has_core";
   private static final String HAS_ROBOT = "has_robot";
   private static final String HAS_PREFIX = "has_";
   private static final String REPAIR_PREFIX = "repair_";
@@ -92,6 +86,7 @@ final class CubitRecipeProvider extends RecipeProvider {
         .define(OBSIDIAN, Items.OBSIDIAN)
         .unlockedBy(HAS_IRON, has(Items.IRON_INGOT))
         .save(output);
+    CubitPartRecipes.save(output);
     robot(output);
     dock(output);
     tablet(output);
@@ -168,18 +163,14 @@ final class CubitRecipeProvider extends RecipeProvider {
         .save(output);
   }
 
+  /** The four parts, without a shape, unlocked by the Neural Core (answers 1346 and 1350). */
   private void robot(RecipeOutput output) {
-    ShapedRecipeBuilder.shaped(RecipeCategory.MISC, CubitItems.GENERAL_ROBOT.get())
-        .pattern(ROBOT_TOP_ROW)
-        .pattern(ROBOT_MIDDLE_ROW)
-        .pattern(ROBOT_BOTTOM_ROW)
-        .define(REDSTONE, Items.REDSTONE)
-        .define(LAMP, Items.REDSTONE_LAMP)
-        .define(IRON, Items.IRON_INGOT)
-        .define(DIAMOND, Items.DIAMOND)
-        .define(OBSIDIAN, Items.OBSIDIAN)
-        .define(GLASS, Items.GLASS_PANE)
-        .unlockedBy(HAS_DIAMOND, has(Items.DIAMOND))
+    ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, CubitItems.GENERAL_ROBOT.get())
+        .requires(CubitItems.GENERAL_ROBOT_CASING.get())
+        .requires(CubitItems.GENERAL_ROBOT_VISOR.get())
+        .requires(CubitItems.GENERAL_ROBOT_TREADS.get())
+        .requires(CubitItems.GENERAL_ROBOT_CORE.get())
+        .unlockedBy(HAS_CORE, has(CubitItems.GENERAL_ROBOT_CORE.get()))
         .save(output);
   }
 
@@ -225,31 +216,29 @@ final class CubitRecipeProvider extends RecipeProvider {
   }
 
   /**
-   * The Base from scratch and each next one around the previous (answers 902 and 1331 to 1334):
-   * gold on top between the corners, the core between the sides and the tier material below. The
-   * Base unlocks with a Cubit, the others with the previous bank (answer 908).
+   * Each bank from scratch, with the casing and the cell of its tier, empty, and each next one from
+   * the previous, in the cross of its cell, carrying the charge (answers 902 and 1355).
    */
   private void powerBanks(RecipeOutput output) {
-    bank(
-            CubitItems.BASE_POWER_BANK.get(),
-            Items.QUARTZ,
-            Items.EMERALD,
-            Items.REDSTONE_BLOCK,
-            Items.OBSIDIAN)
-        .unlockedBy(HAS_ROBOT, has(CubitItems.GENERAL_ROBOT.get()))
-        .save(output);
+    fromCasing(CubitItems.BASE_POWER_BANK.get(), CubitItems.BASE_POWER_CELL.get()).save(output);
+    fromCasing(CubitItems.ADVANCED_POWER_BANK.get(), CubitItems.ADVANCED_POWER_CELL.get())
+        .save(output, fromCasingId(CubitItems.ADVANCED_POWER_BANK.get()));
+    fromCasing(CubitItems.ELITE_POWER_BANK.get(), CubitItems.ELITE_POWER_CELL.get())
+        .save(output, fromCasingId(CubitItems.ELITE_POWER_BANK.get()));
+    fromCasing(CubitItems.ULTIMATE_POWER_BANK.get(), CubitItems.ULTIMATE_POWER_CELL.get())
+        .save(output, fromCasingId(CubitItems.ULTIMATE_POWER_BANK.get()));
     RecipeOutput upgrades = new PowerBankRecipeOutput(output);
     upgrade(
             CubitItems.BASE_POWER_BANK.get(),
             CubitItems.ADVANCED_POWER_BANK.get(),
-            Items.QUARTZ,
-            Items.LAPIS_LAZULI)
+            Items.LAPIS_LAZULI,
+            Items.GOLD_INGOT)
         .save(upgrades);
     upgrade(
             CubitItems.ADVANCED_POWER_BANK.get(),
             CubitItems.ELITE_POWER_BANK.get(),
-            Items.QUARTZ,
-            Items.PURPLE_DYE)
+            Items.PURPLE_DYE,
+            Items.DIAMOND)
         .save(upgrades);
     upgrade(
             CubitItems.ELITE_POWER_BANK.get(),
@@ -259,23 +248,24 @@ final class CubitRecipeProvider extends RecipeProvider {
         .save(upgrades);
   }
 
-  private static ShapedRecipeBuilder bank(
-      ItemLike result, ItemLike corner, ItemLike side, ItemLike core, ItemLike bottom) {
-    return ShapedRecipeBuilder.shaped(RecipeCategory.MISC, result)
-        .pattern(BANK_TOP_ROW)
-        .pattern(BANK_MIDDLE_ROW)
-        .pattern(BANK_BOTTOM_ROW)
-        .define(CORNER, corner)
-        .define(TOP, Items.GOLD_INGOT)
-        .define(SIDE, side)
-        .define(CORE, core)
-        .define(BOTTOM, bottom);
+  /** The casing and the cell, without a shape, unlocked by the cell (answer 1355). */
+  private static ShapelessRecipeBuilder fromCasing(ItemLike bank, ItemLike cell) {
+    String criterion = HAS_PREFIX + BuiltInRegistries.ITEM.getKey(cell.asItem()).getPath();
+    return ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, bank)
+        .requires(CubitItems.POWER_BANK_CASING.get())
+        .requires(cell)
+        .unlockedBy(criterion, has(cell));
+  }
+
+  private static ResourceLocation fromCasingId(ItemLike bank) {
+    return BuiltInRegistries.ITEM.getKey(bank.asItem()).withSuffix(FROM_CASING_SUFFIX);
   }
 
   private static ShapedRecipeBuilder upgrade(
-      ItemLike previous, ItemLike next, ItemLike corner, ItemLike bottom) {
+      ItemLike previous, ItemLike next, ItemLike edge, ItemLike side) {
     String criterion = HAS_PREFIX + BuiltInRegistries.ITEM.getKey(previous.asItem()).getPath();
-    return bank(next, corner, Items.REDSTONE_BLOCK, previous, bottom)
+    return CubitPartRecipes.cross(
+            ShapedRecipeBuilder.shaped(RecipeCategory.MISC, next), edge, side, previous)
         .unlockedBy(criterion, has(previous));
   }
 

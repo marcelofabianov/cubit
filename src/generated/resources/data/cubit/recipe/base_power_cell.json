@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "minecraft:redstone_block"
+    },
+    "E": {
+      "item": "minecraft:copper_ingot"
+    },
+    "S": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "pattern": [
+    " E ",
+    "SCS",
+    " E "
+  ],
+  "result": {
+    "count": 1,
+    "id": "cubit:base_power_cell"
+  }
+}

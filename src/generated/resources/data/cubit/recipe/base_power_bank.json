@@ -1,27 +1,13 @@
 {
-  "type": "minecraft:crafting_shaped",
+  "type": "minecraft:crafting_shapeless",
   "category": "misc",
-  "key": {
-    "B": {
-      "item": "minecraft:obsidian"
+  "ingredients": [
+    {
+      "item": "cubit:power_bank_casing"
     },
-    "C": {
-      "item": "minecraft:redstone_block"
-    },
-    "K": {
-      "item": "minecraft:quartz"
-    },
-    "S": {
-      "item": "minecraft:emerald"
-    },
-    "T": {
-      "item": "minecraft:gold_ingot"
+    {
+      "item": "cubit:base_power_cell"
     }
-  },
-  "pattern": [
-    "KTK",
-    "SCS",
-    "KBK"
   ],
   "result": {
     "count": 1,
