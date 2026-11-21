@@ -97,7 +97,7 @@ public final class RobotDocking {
     Vec3 spot = dock.robotSpot();
     double distance = robot.position().distanceTo(spot);
     DockTrip.Step step =
-        progress.advance(distance, CubitMod.CONFIG.dockStuckTicks(), dock.isOccupied());
+        progress.advance(distance, CubitMod.CONFIG.dock().stuckTicks(), dock.isOccupied());
     progress = step.trip();
     switch (step.action()) {
       case WALK -> routeTo(trip, dock);
@@ -201,13 +201,13 @@ public final class RobotDocking {
     TierSpec spec = robot.spec();
     Battery battery = dock.charge(robot.battery(), spec.rechargePerTick());
     robot.setBattery(battery);
-    robot.heal(DockStay.healthPerTick(spec.maxHealth(), CubitMod.CONFIG.dockFullHealTicks()));
+    robot.heal(DockStay.healthPerTick(spec.maxHealth(), CubitMod.CONFIG.dock().fullHealTicks()));
     boolean healthFull = robot.getHealth() >= robot.getMaxHealth();
     ticksFull = DockStay.complete(battery, healthFull) ? ticksFull + 1 : 0;
     dock.reportRobot(robot.getUUID(), battery.isFull());
     boolean done =
         DockStay.shouldLeave(
-            battery, healthFull, ticksFull, CubitMod.CONFIG.dockCompleteHoldTicks());
+            battery, healthFull, ticksFull, CubitMod.CONFIG.dock().completeHoldTicks());
     if (done
         && (RobotInteractions.onlineOwner(robot) != null || robot.workArea().here().isPresent())) {
       release();

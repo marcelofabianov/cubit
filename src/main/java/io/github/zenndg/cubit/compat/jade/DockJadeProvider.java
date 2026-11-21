@@ -28,7 +28,7 @@ enum DockJadeProvider implements IBlockComponentProvider, IServerDataProvider<Bl
   public void appendServerData(CompoundTag data, BlockAccessor accessor) {
     if (accessor.getBlockEntity() instanceof InductionDockBlockEntity dock) {
       data.putLong(STOCK, dock.energy().amount());
-      data.putLong(CAPACITY, CubitMod.CONFIG.dockEnergyCapacity());
+      data.putLong(CAPACITY, CubitMod.CONFIG.dock().energyCapacity());
     }
   }
 

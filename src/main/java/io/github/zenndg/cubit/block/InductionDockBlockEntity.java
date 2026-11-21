@@ -103,11 +103,11 @@ public final class InductionDockBlockEntity extends BlockEntity {
   }
 
   private static Energy capacity() {
-    return new Energy(CubitMod.CONFIG.dockEnergyCapacity());
+    return new Energy(CubitMod.CONFIG.dock().energyCapacity());
   }
 
   private static Energy inputPerTick() {
-    return new Energy(CubitMod.CONFIG.dockInputPerTick());
+    return new Energy(CubitMod.CONFIG.dock().inputPerTick());
   }
 
   static void serverTick(

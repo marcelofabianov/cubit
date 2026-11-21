@@ -367,24 +367,9 @@ public final class CubitConfig {
     return energySlot.blockEnergy.get();
   }
 
-  public int dockEnergyCapacity() {
-    return dock.capacity.get();
-  }
-
-  public int dockInputPerTick() {
-    return dock.input.get();
-  }
-
-  public int dockFullHealTicks() {
-    return dock.fullHealTicks.get();
-  }
-
-  public int dockCompleteHoldTicks() {
-    return dock.completeHoldTicks.get();
-  }
-
-  public int dockStuckTicks() {
-    return dock.stuckTicks.get();
+  /** The keys of the Induction Dock. */
+  public DockSection dock() {
+    return dock;
   }
 
   public Percentage repairHealth() {
