@@ -444,11 +444,19 @@ Não há perguntas pendentes nesta fase.
 | 1497 | E o resto da ordem de liberação? | Revisar tudo agora: o agente monta a tabela com a liberação de cada receita e uma proposta de ordem, e o desenvolvedor aprova antes do commit do PR 1 |
 | 1498 | Qual é a nova ordem de liberação das receitas no catálogo? | Etapa 1, desde o início: o Cubit, as quatro peças dele e a Toolbox. Etapa 2, ao ter um Cubit: o Induction Dock, o Tablet, a Power Bank Casing, a Base Power Cell, o Advanced Module, os quatro cards e a Recharge Splash. Etapa 3: o Elite Module ao ter o Advanced, e o Ultimate ao ter o Elite. As cadeias das Power Banks, do Dock Solar, do religar e do conserto continuam como estão. Muda a 805, a 1350 e a 1406 na liberação |
 | 1499 | Em que ordem o catálogo da Engineering Desk mostra as receitas? | Na ordem de liberação da 1498: as peças e o Cubit, a Toolbox, depois o que libera com um Cubit, os Modules, as cadeias das Power Banks e do Dock Solar, e por fim religar e consertar. Uma receita fora da lista, como a de um pack, vem no fim. O som e as animações não estão no PR 1: entram no PR 2, como na 1494 |
+| 1500 | O que a Engineering Desk faz com uma receita em cascata, como o Cubit, cujas peças já estão na saída? | Puxa os materiais da saída para a entrada e começa a receita, em todos os tiers |
+| 1501 | Quando a mesa puxa da saída? | Ao escolher a receita no catálogo e, durante o pedido, sempre que faltar material na entrada, para um pedido de vários itens puxar a cada unidade |
+| 1502 | O que conta como ter todos os itens para puxar? | Os materiais de uma unidade somando a entrada e a saída. A mesa puxa da saída só o que falta na entrada |
+| 1503 | E se o que vem da saída não couber na entrada? | A mesa move o que couber, e o resto fica na saída, sem nada criado nem perdido |
+| 1504 | Em qual entrega entra a cascata? | No PR 1, num commit próprio, antes de abrir o PR |
+| 1505 | Quantos slots tem a Engineering Desk Base? | 12 em cada inventário, a entrada e a saída, 3 a mais, para trabalhar melhor com a cascata. Os outros tiers continuam com 18, 27 e 36. O config passa a aceitar de 1 a 36 slots, sem a regra das linhas de 9, porque a tela da mesa tem 6 colunas. Muda a 1434 no Base |
+| 1506 | O que acontece ao escolher uma receita no catálogo? | A receita fica marcada com o pedido em zero, e nada é fabricado. O player pede a quantidade no + antes de a mesa começar, para evitar craft acidental e desperdício de material. Muda o pedido de um da 1442 e da 1444 |
 
 ## Histórico de modificações
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Zennd | 2026-11-21 14:00 | Registra as respostas 1500 a 1506. |
 | Zennd | 2026-11-21 15:00 | Registra as respostas 1492 a 1499. |
 | Zennd | 2026-11-21 14:10 | Registra as respostas 1487 a 1491. |
 | Zennd | 2026-11-21 13:30 | Registra as respostas 1485 e 1486 e aponta a mudança da 1284 na 1461. |

@@ -53,6 +53,9 @@ public final class EngineeringDeskGameTests {
   private static final String TOOLBOX_PATH = "toolbox";
   private static final ResourceLocation TOOLBOX =
       ResourceLocation.fromNamespaceAndPath(CubitMod.MOD_ID, TOOLBOX_PATH);
+  private static final String ROBOT_PATH = "general_robot";
+  private static final ResourceLocation ROBOT =
+      ResourceLocation.fromNamespaceAndPath(CubitMod.MOD_ID, ROBOT_PATH);
   private static final String NO_RIGHT_HALF = "The right half is missing";
   private static final String WRONG_OUTPUT = "Wrong items in the output";
   private static final String WRONG_ENERGY = "Wrong energy after the crafts";
@@ -62,6 +65,7 @@ public final class EngineeringDeskGameTests {
   private static final String TOP_OPEN = "The top of the desk is open";
   private static final String TABLE_CRAFTS = "The crafting table still makes items of the mod";
   private static final String WRONG_SIGNAL = "Wrong comparator signal";
+  private static final String NOT_PULLED = "The desk did not pull the parts from the output";
   private static final String NESTS = "A desk with items fits in a container";
   private static final String EMPTY_REFUSED = "An empty desk does not fit in a container";
 
@@ -225,5 +229,44 @@ public final class EngineeringDeskGameTests {
     full.applyComponents(desk.collectComponents());
     helper.assertFalse(full.canFitInsideContainerItems(), NESTS);
     helper.succeed();
+  }
+
+  /**
+   * The parts of a Cubit, one in the input and three in the output, make a Cubit (1500 to 1502).
+   */
+  @GameTest(template = ARENA, timeoutTicks = TIMEOUT)
+  public static void aCascadePullsTheMissingPartsFromTheOutput(GameTestHelper helper) {
+    EngineeringDeskBlockEntity desk = place(helper, ENERGY);
+    desk.input().setItem(0, new ItemStack(CubitItems.GENERAL_ROBOT_CASING.get()));
+    desk.output().setItem(0, new ItemStack(CubitItems.GENERAL_ROBOT_VISOR.get()));
+    desk.output().setItem(1, new ItemStack(CubitItems.GENERAL_ROBOT_TREADS.get()));
+    desk.output().setItem(2, new ItemStack(CubitItems.GENERAL_ROBOT_CORE.get()));
+    desk.choose(ROBOT);
+    helper.runAfterDelay(
+        NEXT_TICK,
+        () -> {
+          helper.assertTrue(desk.status() == DeskStatus.CRAFTING, WRONG_STATUS);
+          helper.assertTrue(
+              desk.input().countItem(CubitItems.GENERAL_ROBOT_CORE.get()) == 1, NOT_PULLED);
+          helper.assertTrue(
+              desk.output().countItem(CubitItems.GENERAL_ROBOT_VISOR.get()) == 0, NOT_PULLED);
+          helper.succeed();
+        });
+  }
+
+  /** Without every part, between the input and the output, nothing moves (answer 1502). */
+  @GameTest(template = ARENA, timeoutTicks = TIMEOUT)
+  public static void anIncompleteCascadeMovesNothing(GameTestHelper helper) {
+    EngineeringDeskBlockEntity desk = place(helper, ENERGY);
+    desk.output().setItem(0, new ItemStack(CubitItems.GENERAL_ROBOT_VISOR.get()));
+    desk.choose(ROBOT);
+    helper.runAfterDelay(
+        NEXT_TICK,
+        () -> {
+          helper.assertTrue(desk.status() == DeskStatus.MISSING_MATERIALS, WRONG_STATUS);
+          helper.assertTrue(
+              desk.output().countItem(CubitItems.GENERAL_ROBOT_VISOR.get()) == 1, NOT_PULLED);
+          helper.succeed();
+        });
   }
 }

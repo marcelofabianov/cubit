@@ -1104,7 +1104,9 @@ As regras estão em [`mesa-de-engenharia.md`](../funcionalidades/mesa-de-engenha
 | 21 | Tente pôr essa mesa num shulker box e no Dock | Não entra. Vazia, entra |
 | 22 | Coloque a mesa de novo | Volta com o tier, a energia, os inventários e o pedido |
 | 23 | Conserte um Damaged Cubit e religue um Cubit com uma Power Bank na mesa | Saem como antes, e a Power Bank volta para a saída com a carga que sobrou |
-| 24 | Com o jogo em português | `Mesa de Engenharia`, `Projeto`, `Estoque` e os estados em português |
+| 24 | Faça as 4 peças do Cubit, deixe-as na saída, ponha o Casing na entrada e escolha o Cubit | A mesa puxa o Visor, o Treads e o Neural Core da saída para a entrada e começa o Cubit |
+| 25 | Peça 2 Cubits, com as peças de só um na saída | Ela faz um Cubit, puxa as peças e pausa em `Missing materials` até as peças do segundo chegarem |
+| 26 | Com o jogo em português | `Mesa de Engenharia`, `Projeto`, `Estoque` e os estados em português |
 
 ## Tradução
 
@@ -1165,6 +1167,7 @@ Na instância só com o mod, tire capturas com F2 do Cubit seguindo, da tela do 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Zennd | 2026-11-21 14:00 | Adiciona a cascata ao roteiro da Engineering Desk (perguntas 1500 a 1503). |
 | Zennd | 2026-11-21 13:30 | Adiciona o roteiro da Engineering Desk, PR 1 (perguntas 1424 a 1494). |
 | Marcelo Fabiano | 2026-11-21 12:00 | Adiciona o roteiro da Recharge Splash (perguntas 1399 a 1423). |
 | Marcelo Fabiano | 2026-11-21 09:10 | Adiciona o roteiro do Dock Solar e leva a faixa para o topo (perguntas 1384 a 1392). |

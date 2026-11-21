@@ -68,6 +68,16 @@ A redstone que entra pelos lados ou por trás vai para o inventário de entrada,
 - **Pausa:** sem material, sem energia, com a saída cheia ou com sinal de redstone, a mesa pausa sem perder o progresso, mostra o motivo na tela e no Jade e volta sozinha quando a causa some (perguntas 1443 e 1448).
 - **Chunk:** a mesa só trabalha com o chunk carregado (regra 22).
 
+### Cascata
+
+Uma receita feita de itens que a própria mesa fabrica, como o Cubit, feito das quatro peças, continua sozinha (perguntas 1500 a 1503), em todos os tiers:
+
+- **Quando:** ao escolher a receita no catálogo e, durante o pedido, sempre que faltar material na entrada.
+- **Condição:** a entrada e a saída juntas têm os materiais de uma unidade. A mesa puxa da saída só o que falta na entrada.
+- **Sem espaço:** a mesa move o que couber na entrada, e o resto fica na saída.
+- **Nada se perde:** os itens só passam de um inventário da mesa para o outro, e um item só sai da saída depois de entrar na entrada (regra 13).
+- **Sinal de redstone:** com a mesa pausada pelo sinal, nada se move.
+
 ### Receitas com estado
 
 - **Item real:** a mesa usa o primeiro item do inventário de entrada que serve, na ordem dos slots, e passa o estado como hoje (pergunta 1427).
@@ -173,6 +183,7 @@ Uma issue mãe e quatro PRs, em ordem, cada um testável no jogo (pergunta 1478)
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Zennd | 2026-11-21 14:00 | Adiciona a cascata (perguntas 1500 a 1503). |
 | Zennd | 2026-11-21 13:50 | Ordena o catálogo pela liberação (pergunta 1499). |
 | Zennd | 2026-11-21 13:40 | Escurece as receitas bloqueadas e aponta a ordem de liberação (perguntas 1495 a 1498). |
 | Zennd | 2026-11-21 15:00 | Adiciona os componentes e o attachment e ajusta a divisão dos PRs (perguntas 1492 a 1494). |

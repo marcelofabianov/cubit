@@ -29,6 +29,10 @@ final class DeskWork {
     }
     List<Ingredient> grid = DeskGrid.of(recipe.get().value());
     Optional<DeskMaterials.Pick> pick = DeskMaterials.pick(grid, desk.input(), desk.slots());
+    if (pick.isEmpty() && !redstone) {
+      DeskCascade.pull(grid, desk.input(), desk.output(), desk.slots());
+      pick = DeskMaterials.pick(grid, desk.input(), desk.slots());
+    }
     Optional<Plan> plan = pick.flatMap(found -> plan(recipe.get().value(), found, level));
     boolean fits =
         plan.map(found -> DeskOutput.fits(desk.output(), desk.slots(), found.outputs()))
