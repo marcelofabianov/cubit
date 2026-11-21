@@ -47,6 +47,21 @@ O Dock sobe de tier com os mesmos Modules do Cubit (perguntas 1373 a 1380). Os n
 | Geração do painel do Dock Solar, de dia, a céu aberto e sem chuva, em `dock_solar_per_tick` (pergunta 1385) | 25 FE/t | 100 FE/t | 500 FE/t | 1.400 FE/t |
 | Faixa, no topo da torre (pergunta 1389) | Cinza | Azul | Roxa | Dourada, com o corpo em netherite |
 
+## Engineering Desk
+
+A mesa sobe de tier com os mesmos Modules do Cubit e do Dock (perguntas 1433 a 1435 e 1462). As regras estão em [`mesa-de-engenharia.md`](funcionalidades/mesa-de-engenharia.md). Os números ficam no config, em `engineering_desk_energy_capacity`, `engineering_desk_craft_ticks`, `engineering_desk_storage_slots` e `engineering_desk_max_order`, por tier, e `engineering_desk_craft_energy` e `engineering_desk_input_per_tick`, gerais (pergunta 1475).
+
+| Engineering Desk | Base | Avançado | Elite | Ultimate |
+|---|---|---|---|---|
+| Tempo por craft | 5 s | 4 s | 2,5 s | 1,5 s |
+| Maior pedido | 8 | 32 | 64 | 256 |
+| Bateria | 100 mil FE | 400 mil FE | 2 mi FE | 8 mi FE |
+| Slots do inventário de entrada e do de saída, cada um | 9 | 18 | 27 | 36 |
+| Custo por craft | 2.500 FE | 2.500 FE | 2.500 FE | 2.500 FE |
+| Entrada, por cabos e redstone | 5.000 FE/t | 5.000 FE/t | 5.000 FE/t | 5.000 FE/t |
+| Luz da luminária, enquanto cria | 7 | 7 | 7 | 7 |
+| Faixa, na borda do tampo (pergunta 1439) | Cinza | Azul | Roxa | Dourada, com o corpo em netherite |
+
 ## Consumo por atividade
 
 Os extras somam ao andar. O consumo só vale com o robô ativo.
@@ -251,6 +266,7 @@ Planejado para a Fase 5. O tier Base não aceita cards, e cada card tem o seu ti
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Zennd | 2026-11-21 12:30 | Adiciona os números da Engineering Desk (perguntas 1433 a 1435). |
 | Marcelo Fabiano | 2026-11-21 11:30 | Adiciona os números da Recharge Splash (perguntas 1405, 1412 e 1414). |
 | Marcelo Fabiano | 2026-11-21 08:20 | Adiciona a geração do Dock Solar (pergunta 1385). |
 | Marcelo Fabiano | 2026-11-21 06:20 | Adiciona os tiers do Dock (perguntas 1373 a 1380). |

@@ -11,6 +11,7 @@ O inglês é o idioma base do mod, e o jogo também tem a tradução para o port
 | App do Tablet | Tablet app |
 | Cubit danificado | Damaged Cubit |
 | Caixa de ferramentas | Toolbox |
+| Mesa de Engenharia | Engineering Desk |
 | Base, Dock ou estação de carga | Induction Dock |
 | Tiers: Base, Avançado, Elite e Ultimate | Base, Advanced, Elite e Ultimate |
 | Upgrades | Advanced, Elite e Ultimate Module |
@@ -55,6 +56,8 @@ Os IDs estão em [`itens.md`](itens.md).
 - **Filtro de coleta:** a lista branca ou negra dos itens que a coleta, o ímã e a busca pegam, com os slots do tier.
 - **Power Bank:** bateria portátil de um tier, que recebe energia só no slot do Induction Dock e entrega só ao Cubit, pelo slot de energia ou pela receita de religar na grade.
 - **Recharge Splash:** mistura de arremesso que recupera, aos poucos, parte da vida e da energia dos Cubits do dono que a arremessou.
+- **Pedido:** a receita e a quantidade que a Engineering Desk fabrica sozinha, uma unidade por vez.
+- **Marcação:** a marca de um item na grade da Engineering Desk, que mostra a receita sem ser um item real.
 - **Slot fantasma:** slot do filtro que guarda uma cópia do item, sem consumi-lo.
 - **Bloco que fere:** bloco que o jogo classifica como perigoso na rota, como magma e cacto.
 - **Ativo:** Cubit ligado, fora da base.
@@ -69,6 +72,7 @@ Os IDs estão em [`itens.md`](itens.md).
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Zennd | 2026-11-21 12:45 | Adiciona a Mesa de Engenharia, o pedido e a marcação (perguntas 1424 a 1484). |
 | Marcelo Fabiano | 2026-11-21 11:30 | Adiciona a Recharge Splash. |
 | Marcelo Fabiano | 2026-11-13 16:40 | Troca o controle remoto pelo Tablet. |
 | Marcelo Fabiano | 2026-11-13 09:50 | Adiciona a busca dos itens do chão. |
