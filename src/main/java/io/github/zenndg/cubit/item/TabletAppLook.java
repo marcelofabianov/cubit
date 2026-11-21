@@ -18,6 +18,7 @@ public final class TabletAppLook {
   private static final int AREA_PURPLE = 0x9966F2;
   private static final int UNLOAD_ORANGE = 0xF0912A;
   private static final int MARK_TEAL = 0x3CC8B4;
+  private static final int DOORS_AMBER = 0xD9A441;
 
   private TabletAppLook() {}
 
@@ -30,6 +31,7 @@ public final class TabletAppLook {
       case AREA -> AREA_PURPLE;
       case UNLOAD -> UNLOAD_ORANGE;
       case MARK -> MARK_TEAL;
+      case DOORS -> DOORS_AMBER;
     };
   }
 

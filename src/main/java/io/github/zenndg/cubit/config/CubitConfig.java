@@ -52,6 +52,7 @@ public final class CubitConfig {
   private final FisherSection fisher;
   private final UnloadSection unload;
   private final SpeedControlSection speedControl;
+  private final DoorSection doors;
   private final AtomicBoolean warnedRareTags = new AtomicBoolean();
   private final AtomicBoolean warnedLamp = new AtomicBoolean();
   private final AtomicBoolean warnedFishing = new AtomicBoolean();
@@ -79,6 +80,7 @@ public final class CubitConfig {
     fisher = new FisherSection(builder);
     unload = new UnloadSection(builder);
     speedControl = new SpeedControlSection(builder);
+    doors = new DoorSection(builder);
     builder.pop();
 
     tierCatalog = new NeoForgeTierCatalog(Map.of(GENERAL_ROBOT, tierSections(builder)));
@@ -370,6 +372,11 @@ public final class CubitConfig {
   /** The keys of the Induction Dock. */
   public DockSection dock() {
     return dock;
+  }
+
+  /** The keys of the marked doors (answers 1368 and 1369). */
+  public DoorSection doors() {
+    return doors;
   }
 
   public Percentage repairHealth() {

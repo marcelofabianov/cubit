@@ -3,8 +3,8 @@ package io.github.zenndg.cubit.domain.robot;
 import java.util.Locale;
 
 /**
- * The apps of the Tablet, one active at a time (answers 999 and 1006). The key is the name in the
- * component of the item, a contract with the saves (answer 1026).
+ * The apps of the Tablet, one active at a time (answers 999, 1006 and 1364). The key is the name in
+ * the component of the item, a contract with the saves (answer 1026).
  */
 public enum TabletApp {
   OPEN,
@@ -12,7 +12,8 @@ public enum TabletApp {
   DOCK,
   AREA,
   UNLOAD,
-  MARK;
+  MARK,
+  DOORS;
 
   public String key() {
     return name().toLowerCase(Locale.ROOT);

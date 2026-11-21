@@ -61,6 +61,7 @@ public final class TabletUse {
       case AREA -> TabletAreaApp.click(player, click);
       case UNLOAD -> TabletUnloadApp.click(player, chosen, click);
       case MARK -> TabletMarkApp.click(player, chosen, click);
+      case DOORS -> TabletDoorApp.click(player, click);
     }
   }
 

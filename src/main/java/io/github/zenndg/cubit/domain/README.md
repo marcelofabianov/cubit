@@ -37,6 +37,7 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 | `UnloadSpec` | Os baús que um tier pode marcar e a distância até eles (pergunta 1094) |
 | `AreaSpec` | A maior área de um tier: o lado da base e a altura, com 0 para o tier sem modo área (perguntas 342 e 1050) |
 | `TorchRules` | Quando o robô põe uma tocha e quais lugares são perigosos |
+| `DoorRules` | Quando o Cubit abre uma porta marcada, com o custo dela, e quando a fecha de novo (perguntas 1366 a 1370) |
 | `TorchGrid` | O espaço em volta do robô, lido uma vez por varredura: o que para a luz, onde mob pode nascer e onde uma tocha cabe |
 | `GridCell` | Um bloco da `TorchGrid`, contado do canto dela |
 | `TorchPlanner` | Escolhe onde a tocha deixa mais lugares perigosos seguros, simulando a luz do jogo |
@@ -78,6 +79,7 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 | `AreaCheck` | Se a área pode ser do Cubit, ou por quê não: sem modo área no tier, grande demais, em outra dimensão ou longe demais (perguntas 1050, 1054 e 1058) |
 | `AreaMarking` | A marcação pela metade do app Área: o Cubit e, depois, o primeiro canto, só na memória do servidor (perguntas 1054 e 1060) |
 | `UnloadChest` e `UnloadChests` | Os baús de descarga de um Cubit, pelo bloco e pela dimensão, na ordem da marca. Um segundo clique desmarca, e o tier limita quantos (perguntas 1086 e 1088) |
+| `MarkedDoor` e `DoorMarks` | As portas, os alçapões e os portões de cerca que o dono marcou com o app Portas, pelo bloco e pela dimensão, para todos os Cubits dele. Um segundo clique desmarca, e o config limita quantas (perguntas 1364 e 1369) |
 | `UnloadCall` | Se o `Descarregar` do Tablet pode mandar o Cubit, ou por que não, e quando ele descarrega sozinho: só cheio, na área e com a chave ligada (perguntas 1087, 1089 e 1093) |
 | `DeathPointLevel` | O que um tier faz com o local de morte: `locked`, `mark`, que só mostra a coordenada ao renascer, ou `guide`, que também guia até lá. A `key` é o nome usado no config (perguntas 1117 e 1129) |
 | `RobotJob` | Os trabalhos que um card dá ao Cubit, um por card. A `key` é o nome usado no `allowed_jobs` do config (perguntas 1145 e 1163) |
@@ -268,6 +270,7 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 - **Fugir vem primeiro:** em chamas, na lava ou sobre um bloco que fere, a velocidade escolhida não vale, como o redutor do inventário cheio, porque andar devagar no perigo pode matar o Cubit (pergunta 1268).
 - **Baú com mais do mesmo item:** o Organizador junta o que é igual, com os mesmos dados, para a base ficar arrumada. Sem lugar, ele fica com o item, porque largar no chão poderia perder o item (perguntas 1292 e 1293).
 - **Pedido sem passar da quantidade:** o destino recebe só o que falta, para uma fornalha não ficar cheia de um combustível que o player queria em outro lugar (pergunta 1294).
+- **Portas do dono:** o Cubit só abre a porta que o dono marcou, porque num servidor a porta de outro player não é dele. As marcas são do dono, e não de um Cubit, para valerem para todos os Cubits dele. Ele só fecha a porta que abriu, para não fechar a que o dono deixou aberta (perguntas 1360, 1364 e 1371).
 
 ## Estados
 
