@@ -343,11 +343,37 @@ Não há perguntas pendentes nesta fase.
 | 1396 | O que a aba Solar mostra? | O status, gerando ou parado; quando parado, o motivo: noite, chuva, céu coberto ou sem sol na dimensão; e a taxa de agora, com a geração máxima do tier |
 | 1397 | A linha do solar continua na aba principal da tela do Dock? | Não: o solar fica só na aba nova, e a aba principal volta a ser igual à do Dock comum. O Jade continua mostrando a geração. Muda a 1391 nesse ponto |
 | 1398 | Um bloco sobre o painel do Dock Solar impede o carregamento? | Sim, um bloco que não deixa passar a luz, como no painel do Cubit: o vidro deixa carregar. O Dock usa a mesma leitura do céu do Cubit, no mesmo intervalo, e a mesma regra do dia |
+| 1399 | O alinhamento do card 15, a mistura química de arremesso, está certo? | Sim, sem nada a acrescentar: o item só faz efeito no Cubit, que deixa de receber os outros efeitos, e a rodada de decisões trata o nome, a receita, a vida e a energia, o raio, o Cubit desligado ou hibernando, os efeitos que ele já tem com o gasto por efeito nocivo e o visual (regra 50) |
+| 1400 | Qual é o nome e o ID da mistura química de arremesso? | Recharge Splash, com o ID `cubit:recharge_splash` |
+| 1401 | Como se calcula a vida e a energia que a Recharge Splash dá? | Por uma porcentagem da vida máxima e da bateria do tier do Cubit atingido, no config. Uma mistura só vale para todos os tiers, e a energia é arredondada para baixo, para um número inteiro (regra 13) |
+| 1402 | Em que área a Recharge Splash faz efeito? | Num raio do config, como a poção de arremesso, e todo Cubit dentro dele recebe o efeito inteiro |
+| 1403 | O que acontece com o gasto por efeito nocivo, agora que o Cubit deixa de receber efeitos? | Por enquanto, o Cubit fica imune aos efeitos. O desenvolvedor tem ideias para os efeitos no futuro, que ficam para outro dia. Detalha a 1394 |
+| 1404 | O que fazer com a regra do gasto por efeito nocivo e com os efeitos que um Cubit já tem? | A ideia do Cubit imune aos efeitos sai: o Cubit continua recebendo os efeitos do jogo e de outros mods, como hoje, e a regra do gasto por efeito nocivo continua. Muda a 1394 nesse ponto e a 1403 |
+| 1405 | Quanto a Recharge Splash dá e qual é o raio? | 20% da vida máxima e 15% da bateria do tier do Cubit atingido, num raio de 4 blocos. No Base, são 5 de vida e 45 mil FE; no Ultimate, 40 de vida e 1,2 mi FE. Detalha a 1401 e a 1402 |
+| 1406 | Qual é a receita da Recharge Splash? | Sem forma, na bancada: garrafa de vidro, bloco de redstone, lingote de ferro, pólvora e lápis-lazúli |
+| 1407 | Em qual estado do Cubit a Recharge Splash funciona? | Em todos: ativo, sem carga, desligado pelo player ou hibernando. A energia segue as regras de hoje: sem carga, ele religa ao passar de 5%, e o desligado pelo player continua desligado. Não vale para o Damaged Cubit, que é um item |
+| 1408 | A Recharge Splash faz efeito em outras entidades? | Não: só no Cubit. Players, mobs e outras entidades só veem o respingo. Mantém a 1394 nesse ponto |
+| 1409 | De quem são os Cubits que a Recharge Splash recupera? | Só os do player que arremessou (regra 20). Os de outros players, no raio, não recebem nada, e o dispenser não arremessa a mistura |
+| 1410 | Quantas Recharge Splash a receita dá, e quantas cabem numa pilha? | A receita dá 1, e a pilha é de 16, como as bolas de neve e os ovos |
+| 1411 | Como é o visual da Recharge Splash? | Um frasco de vidro com alça, tampa de ferro e líquido vermelho de redstone com brilho azul de lápis-lazúli, no visual do Cubit. O respingo solta partículas vermelhas e faíscas azuis, e o Cubit que recebe solta faíscas e o bipe de recarga. Os prompts ficam em `tmp/arte/recharge-splash/prompt.md` (regra 55) |
+| 1412 | Há uma espera entre duas Recharge Splash no mesmo Cubit? | Sim: depois de receber a vida e a energia de uma mistura, o Cubit aguarda 3 s até a próxima fazer efeito nele. Uma mistura que o atinge nesse tempo não lhe dá nada |
+| 1413 | O conceito da Recharge Splash (card 15) está autorizado para o código? | Sim: o desenvolvedor disse "comece criando o prompt e depois inicie", com a espera de 3 s e os detalhes completados pelo agente: as chaves `recharge_splash_health_percent`, `recharge_splash_energy_percent`, `recharge_splash_radius` e `recharge_splash_cooldown_ticks` em `[general]`; o arredondamento para baixo, sem passar da vida máxima nem da bateria; o raio numa esfera a partir do impacto; o frasco gasto mesmo sem Cubit no raio; o Cubit no Dock que recebe e continua lá; a espera que começa mesmo com o Cubit cheio e não é salva; e tudo conferido no servidor (regra 53) |
+| 1414 | O efeito da Recharge Splash é imediato? | Não: a vida e a energia entram aos poucos, ao longo dos 3 s da espera. Muda a 1412 nesse ponto |
+| 1415 | Como a vida e a energia da Recharge Splash se distribuem nos 3 s? | Em partes iguais a cada tick, nos 60 ticks. O resto da divisão entra no último tick, para a energia somar exatamente o total (regra 13). Detalha a 1414 |
+| 1416 | O que faz uma segunda Recharge Splash que atinge o Cubit enquanto a primeira ainda age? | Nenhum efeito no Cubit, e o player é avisado da espera e do efeito gradual. Mantém a 1412 nesse ponto |
+| 1417 | O que acontece com o que ainda falta entrar se o Cubit for recolhido, morrer ou o mundo fechar no meio dos 3 s? | Se perde: nada é salvo, e o Cubit fica com o que já recebeu, sem campo novo no NBT (regra 18) |
+| 1418 | O Cubit que se afasta do ponto de impacto durante os 3 s continua recebendo? | Sim, até o fim: o raio só conta no impacto |
+| 1419 | Como o player fica sabendo da espera e do efeito gradual da Recharge Splash? | Pela barra de ação e pelo tooltip. Quando uma mistura atinge um Cubit que ainda recebe a anterior, o player que arremessou vê um aviso como `Cubit is still recharging: wait 3 s`. O tooltip do item explica que a vida e a energia entram em 3 s, com uma mistura por vez em cada Cubit. Detalha a 1416 |
+| 1420 | As imagens da Recharge Splash, a textura do item e o conceito, estão aceitas? | Sim: a textura vai para `textures/item/recharge_splash.png`, e o conceito, para `_docs/imagens/conceito/recharge-splash.png`, na seção da mistura em `energia.md` |
+| 1421 | O rosto do Cubit muda quando ele recebe a Recharge Splash? | Sim: ao começar a receber, a tela do rosto troca para a expressão feliz padrão |
+| 1422 | O clique direito com a mira no Cubit arremessa a Recharge Splash? | Não: o clique no Cubit continua abrindo a tela, como hoje, e o player arremessa a mistura mirando fora dele, no chão ou no ar, ao lado. O desenvolvedor testou assim e seguiu com a entrega |
+| 1423 | Ficam como foram entregues as chaves `recharge_splash_radius_blocks` e `recharge_splash_duration_ticks`, o nome `Mistura de Recarga` no `pt_br.json` e a linha de fonte de recarga da tela, que não cita a mistura? | Sim: o desenvolvedor aprovou o teste e seguiu com a entrega como está. Os nomes das chaves mudam os da 1413, porque, depois da 1414, o tempo é a duração do efeito |
 
 ## Histórico de modificações
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-21 10:30 | Registra as respostas 1399 a 1423. |
 | Marcelo Fabiano | 2026-11-21 08:00 | Registra as respostas 1383 a 1398. |
 | Marcelo Fabiano | 2026-11-21 06:00 | Registra as respostas 1373 a 1382. |
 | Marcelo Fabiano | 2026-11-21 03:10 | Registra as respostas 1359 a 1372. |

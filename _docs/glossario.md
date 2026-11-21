@@ -54,6 +54,7 @@ Os IDs estão em [`itens.md`](itens.md).
 - **Busca (`Fetch`):** desde o Base, o Cubit que segue anda até os itens no chão no raio do tier em volta do dono, pega e volta a seguir.
 - **Filtro de coleta:** a lista branca ou negra dos itens que a coleta, o ímã e a busca pegam, com os slots do tier.
 - **Power Bank:** bateria portátil de um tier, que recebe energia só no slot do Induction Dock e entrega só ao Cubit, pelo slot de energia ou pela receita de religar na grade.
+- **Recharge Splash:** mistura de arremesso que recupera, aos poucos, parte da vida e da energia dos Cubits do dono que a arremessou.
 - **Slot fantasma:** slot do filtro que guarda uma cópia do item, sem consumi-lo.
 - **Bloco que fere:** bloco que o jogo classifica como perigoso na rota, como magma e cacto.
 - **Ativo:** Cubit ligado, fora da base.
@@ -68,6 +69,7 @@ Os IDs estão em [`itens.md`](itens.md).
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-21 11:30 | Adiciona a Recharge Splash. |
 | Marcelo Fabiano | 2026-11-13 16:40 | Troca o controle remoto pelo Tablet. |
 | Marcelo Fabiano | 2026-11-13 09:50 | Adiciona a busca dos itens do chão. |
 | Marcelo Fabiano | 2026-11-13 09:05 | Tira a fornalha e o carregador do slot exclusivo. |

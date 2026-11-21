@@ -54,6 +54,10 @@ As chaves ficam em `snake_case`. As de um tier ficam em `[general_robot.{tier}]`
 | `general` | `dock_complete_hold_ticks` | Tempo com a tela completa antes de sair da base | 1 a 1200 |
 | `general` | `redstone_dust_energy` | Energia de 1 pó de redstone | 1 a 2147483647 |
 | `general` | `redstone_block_energy` | Energia de 1 bloco de redstone | 1 a 2147483647 |
+| `general` | `recharge_splash_health_percent` | Recharge Splash: vida e energia que dá, a parte da vida | 0 a 100 |
+| `general` | `recharge_splash_energy_percent` | Recharge Splash: vida e energia que dá, a parte da energia | 0 a 100 |
+| `general` | `recharge_splash_radius_blocks` | Recharge Splash: raio a partir do impacto | 1 a 16 |
+| `general` | `recharge_splash_duration_ticks` | Recharge Splash: tempo em que a vida e a energia entram, e a espera até a próxima | 1 a 1200 |
 | `general` | `repair_health_percent` | Vida ao sair do conserto | 1 a 100 |
 | `general` | `void_rescue_retry_ticks` | Intervalo para tentar de novo o resgate no vazio | 1 a 1200 |
 | `general` | `retaliate_memory_ticks` | Tempo em que o Contra-atacar lembra de quem feriu o Cubit ou o dono | 1 a 72000 |
@@ -164,6 +168,7 @@ O mod não cai por causa do config (regra 17 do `AGENTS.md`):
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-21 11:30 | Adiciona as chaves da Recharge Splash (perguntas 1413 e 1423). |
 | Marcelo Fabiano | 2026-11-21 08:20 | Adiciona a geração do Dock Solar (pergunta 1385). |
 | Marcelo Fabiano | 2026-11-21 06:30 | Leva o estoque do Dock para as seções de tier e adiciona a recarga e os slots (pergunta 1381). |
 | Marcelo Fabiano | 2026-11-15 14:05 | Adiciona as chaves do intervalo de descarga (perguntas 1252 e 1254). |

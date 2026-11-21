@@ -19,6 +19,7 @@
 | Base, Advanced, Elite e Ultimate Power Cell | A célula de cada tier, que vai dentro da Power Bank |
 | Dock Solar Panel | O painel solar que, com um Induction Dock, faz o Solar Induction Dock |
 | Solar Induction Dock | O Induction Dock com o painel solar acoplado, que gera FE ao ar livre ([`energia.md`](funcionalidades/energia.md#dock-solar)) |
+| Recharge Splash | Mistura de arremesso que recupera parte da vida e da energia dos Cubits do dono ([`energia.md`](funcionalidades/energia.md#recharge-splash)) |
 
 ## IDs e receitas
 
@@ -47,6 +48,7 @@
 | Ultimate Power Cell | `cubit:ultimate_power_cell` | [Abaixo](#peças-de-montagem) |
 | Dock Solar Panel | `cubit:dock_solar_panel` | [Abaixo](#dock-solar) |
 | Solar Induction Dock | `cubit:solar_induction_dock` | [Abaixo](#dock-solar) |
+| Recharge Splash | `cubit:recharge_splash` | [Abaixo](#recharge-splash) |
 
 ## Progressão das receitas
 
@@ -91,6 +93,10 @@ Na mesa de craft (perguntas 1384 e 1387). O Dock Solar Panel aparece no livro co
 |---|---|
 | Dock Solar Panel | Vidro, vidro, vidro / sensor de luz do dia, bloco de redstone, sensor de luz do dia / lingote de ferro, lingote de ferro, lingote de ferro |
 | Solar Induction Dock | O Dock Solar Panel e um Induction Dock, sem forma, no tipo `cubit:solar_dock_assembly`, que passa o tier, a energia e o inventário do Dock |
+
+### Recharge Splash
+
+Na mesa de craft, sem forma: garrafa de vidro, bloco de redstone, lingote de ferro, pólvora e lápis-lazúli. A receita dá 1, e a pilha é de 16, como as bolas de neve e os ovos (perguntas 1406 e 1410).
 
 ### Toolbox
 
@@ -294,6 +300,7 @@ O estado salvo é validado ao entrar no jogo, sem derrubá-lo (regra 17 do `AGEN
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-21 11:30 | Adiciona a Recharge Splash (perguntas 1400, 1406 e 1410). |
 | Marcelo Fabiano | 2026-11-21 08:20 | Adiciona o Dock Solar Panel e o Solar Induction Dock (perguntas 1384 a 1388). |
 | Marcelo Fabiano | 2026-11-21 06:30 | Adiciona o tier do Dock aos contratos (perguntas 1373 e 1379). |
 | Marcelo Fabiano | 2026-11-21 02:35 | Atualiza a progressão das receitas (perguntas 1354 e 1358). |

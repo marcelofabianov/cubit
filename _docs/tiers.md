@@ -91,6 +91,9 @@ Valem para todos os tiers e ficam no config. Os marcados como planejados entram 
 | Alcance ao andar ao acaso em chamas e ao sair da lava ou de um bloco que fere | 5 blocos |
 | Distância para teleportar até o player | ~20 blocos |
 | Religar | 5% de bateria |
+| Recharge Splash: vida e energia que dá, sobre a vida máxima e a bateria do tier do Cubit (pergunta 1405) | 20% de vida e 15% de bateria |
+| Recharge Splash: raio a partir do impacto (pergunta 1405) | 4 blocos |
+| Recharge Splash: tempo em que a vida e a energia entram, e a espera até a próxima (perguntas 1412 e 1414) | 3 s (60 ticks) |
 | Bateria crítica, com expressão de sono, indicador vermelho e texto | 5% |
 | Tempo com a expressão feliz | ~3 s |
 | Tempo com a expressão triste, depois de um dano | ~5 s |
@@ -248,6 +251,7 @@ Planejado para a Fase 5. O tier Base não aceita cards, e cada card tem o seu ti
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-21 11:30 | Adiciona os números da Recharge Splash (perguntas 1405, 1412 e 1414). |
 | Marcelo Fabiano | 2026-11-21 08:20 | Adiciona a geração do Dock Solar (pergunta 1385). |
 | Marcelo Fabiano | 2026-11-21 06:20 | Adiciona os tiers do Dock (perguntas 1373 a 1380). |
 | Marcelo Fabiano | 2026-11-21 03:25 | Adiciona o custo e o limite das portas (perguntas 1368 e 1369). |
