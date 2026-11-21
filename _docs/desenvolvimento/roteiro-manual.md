@@ -185,9 +185,9 @@ Rode num mundo novo, em modo sobrevivência, com `/gamemode survival` e `/give @
 
 | # | Faça | Espere |
 |---|---|---|
-| 1 | Pegue um diamante, com `/give @s minecraft:diamond` | A receita do `Cubit` aparece no livro. A do `Induction Dock` ainda não |
-| 2 | Dê os materiais: `/give @s minecraft:redstone 8`, `/give @s minecraft:redstone_lamp`, `/give @s minecraft:iron_ingot 8`, `/give @s minecraft:obsidian 2`, `/give @s minecraft:glass_pane`, `/give @s minecraft:diamond 2` e `/give @s minecraft:chest 2` | Os itens chegam |
-| 3 | Na mesa, monte redstone, lâmpada e redstone; ferro, diamante e ferro; obsidiana, painel de vidro e obsidiana | Sai um `Cubit` |
+| 1 | Pegue um diamante, com `/give @s minecraft:diamond` | As receitas do `Cubit Casing`, do `Cubit Visor`, das `Cubit Treads` e do `Cubit Neural Core` aparecem no livro. A do `Cubit` e a do `Induction Dock` ainda não |
+| 2 | Dê os materiais: `/give @s minecraft:iron_ingot 16`, `/give @s minecraft:obsidian 3`, `/give @s minecraft:redstone_torch 2`, `/give @s minecraft:piston 2`, `/give @s minecraft:redstone 8`, `/give @s minecraft:diamond 5` e `/give @s minecraft:chest 2` | Os itens chegam |
+| 3 | Faça as peças: tocha de redstone, ferro, tocha de redstone / ferro, vazio, ferro / obsidiana, ferro, obsidiana; diamante, obsidiana, diamante; ferro, ferro, ferro / pistão, vazio, pistão; vazio, redstone, vazio / redstone, diamante, redstone / vazio, redstone, vazio. Com o Neural Core, abra o livro, e depois junte as quatro peças em qualquer posição | Saem as quatro peças, a receita do `Cubit` aparece com o Neural Core, e sai um `Cubit` |
 | 4 | Olhe o livro, com o `Cubit` no inventário | As receitas do `Induction Dock` e dos três Modules aparecem |
 | 5 | Coloque o `Cubit` | Ele segue você, com a barra de 25% na tela |
 | 6 | Na mesa, monte o L: diamante na coluna 1 da linha 1; baú na coluna 1 da linha 2; ferro, redstone e ferro na linha 3 | Sai um `Induction Dock` |
@@ -668,8 +668,8 @@ As regras estão em [`energia.md`](../funcionalidades/energia.md#power-bank) e a
 
 | # | Faça | Espere |
 |---|---|---|
-| 1 | Pegue um Cubit e abra o livro de receitas | A receita da Base Power Bank aparece |
-| 2 | Faça a Base Power Bank | Sai vazia, não empilha, com o nome cinza, a barra verde vazia e a dica `0 / 210k FE` e `Charges at the Induction Dock` |
+| 1 | Pegue um Cubit e abra o livro de receitas | As receitas da `Power Bank Casing`, da `Base Power Cell` e da Base Power Bank aparecem |
+| 2 | Faça a carcaça (quartzo, ouro, quartzo / quartzo, vazio, quartzo / quartzo, obsidiana, quartzo), a célula Base (vazio, cobre, vazio / redstone, bloco de redstone, redstone / vazio, cobre, vazio) e junte as duas em qualquer posição | Sai a Base Power Bank vazia, não empilha, com o nome cinza, a barra verde vazia e a dica `0 / 210k FE` e `Charges at the Induction Dock` |
 | 3 | Coloque-a na aba `Storage` de um Induction Dock com energia e sem Cubit | A carga da Power Bank sobe e o estoque do Dock desce na mesma quantidade |
 | 3a | Ponha uma Power Bank carregada no slot `Redstone` de um Dock com pouco estoque | A Power Bank descarrega no estoque, a linha mostra `Input +X FE/t`, e vazia ela fica no slot |
 | 3b | Tente pôr redstone na aba `Storage` | Não entra |
@@ -677,8 +677,8 @@ As regras estão em [`energia.md`](../funcionalidades/energia.md#power-bank) e a
 | 5 | Tente carregar a Power Bank num carregador de FE de outro mod, se houver | Não carrega (pergunta 905) |
 | 6 | Ponha a Power Bank carregada no slot de energia de um Cubit com pouca bateria | A bateria sobe na recarga do tier, a linha mostra `Slot +500 FE/t` no Base, e a Power Bank desce o mesmo tanto |
 | 7 | Deixe-a esvaziar | Ela continua no slot, e a linha mostra `Not charging` |
-| 8 | Com a Base Power Bank no inventário, abra o livro | A receita da Advanced Power Bank aparece |
-| 9 | Faça a Advanced com uma Base carregada | A nova sai com a mesma carga, o nome azul e 2 LEDs no ícone |
+| 8 | Com a Base Power Bank no inventário, abra o livro | As receitas da `Advanced Power Cell` e da Advanced Power Bank aparecem |
+| 9 | Monte lápis-lazúli em cima e embaixo, ouro nas laterais e uma Base carregada no centro | A nova sai com a mesma carga, o nome azul e 2 LEDs no ícone |
 | 10 | Recolha um Cubit sem bateria e combine-o com uma Power Bank na grade | Sai o Cubit com a carga de religar, e a Power Bank fica na grade com o resto |
 | 11 | Tente com uma Power Bank quase vazia, ou com um Damaged Cubit | A receita não aparece |
 | 12 | Com o jogo em português | `Power Bank Base`, `Power Bank Avançada`, `Power Bank Elite`, `Power Bank Suprema` e `Carrega no Induction Dock` |
@@ -1058,6 +1058,10 @@ Na instância só com o mod, tire capturas com F2 do Cubit seguindo, da tela do 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-21 02:05 | Troca o Visor para diamante, obsidiana, diamante (pergunta 1356). |
+| Marcelo Fabiano | 2026-11-21 01:45 | Troca a célula Base e o upgrade pela cruz (perguntas 1354 e 1355). |
+| Marcelo Fabiano | 2026-11-21 01:30 | Troca as grades da Carcaça e do Visor (pergunta 1353). |
+| Marcelo Fabiano | 2026-11-21 01:05 | Troca as receitas do Cubit e das Power Banks pelas peças de montagem (perguntas 1343 a 1350). |
 | Marcelo Fabiano | 2026-11-20 23:55 | Troca as receitas do Cubit, do Dock e dos Modules (perguntas 1331 e 1332). |
 | Marcelo Fabiano | 2026-11-19 23:04 | Adiciona o roteiro do Cozinheiro. |
 | Marcelo Fabiano | 2026-11-19 22:36 | Troca o visual do Organizador no roteiro (perguntas 1307 e 1308). |

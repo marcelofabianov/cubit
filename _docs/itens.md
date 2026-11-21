@@ -14,6 +14,9 @@
 | Advanced Power Bank | Bateria portátil com a capacidade do tier Advanced |
 | Elite Power Bank | Bateria portátil com a capacidade do tier Elite |
 | Ultimate Power Bank | Bateria portátil com a capacidade do tier Ultimate |
+| Cubit Casing, Cubit Visor, Cubit Treads e Cubit Neural Core | As peças que montam o Cubit ([`pecas.md`](funcionalidades/pecas.md)) |
+| Power Bank Casing | A carcaça das Power Banks |
+| Base, Advanced, Elite e Ultimate Power Cell | A célula de cada tier, que vai dentro da Power Bank |
 
 ## IDs e receitas
 
@@ -31,10 +34,19 @@
 | Advanced Power Bank | `cubit:advanced_power_bank` | [Abaixo](#power-banks) |
 | Elite Power Bank | `cubit:elite_power_bank` | [Abaixo](#power-banks) |
 | Ultimate Power Bank | `cubit:ultimate_power_bank` | [Abaixo](#power-banks) |
+| Cubit Casing | `cubit:general_robot_casing` | [Abaixo](#peças-de-montagem) |
+| Cubit Visor | `cubit:general_robot_visor` | [Abaixo](#peças-de-montagem) |
+| Cubit Treads | `cubit:general_robot_treads` | [Abaixo](#peças-de-montagem) |
+| Cubit Neural Core | `cubit:general_robot_core` | [Abaixo](#peças-de-montagem) |
+| Power Bank Casing | `cubit:power_bank_casing` | [Abaixo](#peças-de-montagem) |
+| Base Power Cell | `cubit:base_power_cell` | [Abaixo](#peças-de-montagem) |
+| Advanced Power Cell | `cubit:advanced_power_cell` | [Abaixo](#peças-de-montagem) |
+| Elite Power Cell | `cubit:elite_power_cell` | [Abaixo](#peças-de-montagem) |
+| Ultimate Power Cell | `cubit:ultimate_power_cell` | [Abaixo](#peças-de-montagem) |
 
 ## Progressão das receitas
 
-Só com recursos do jogo puro. Os materiais que marcam cada tier, nos Modules e nas Power Banks (pergunta 1331):
+Só com recursos do jogo puro. Os materiais que marcam cada tier, nos Modules e nas células das Power Banks (perguntas 1331 e 1347):
 
 | Item | Materiais |
 |---|---|
@@ -45,13 +57,7 @@ Só com recursos do jogo puro. Os materiais que marcam cada tier, nos Modules e 
 
 ### Cubit
 
-Na mesa de craft, com uma forma que lembra o item. Vai além da progressão acima (perguntas 348 e 1331). A receita aparece no livro ao ter diamante.
-
-| | Coluna 1 | Coluna 2 | Coluna 3 |
-|---|---|---|---|
-| Linha 1 | Redstone | Lâmpada de redstone | Redstone |
-| Linha 2 | Lingote de ferro | Diamante | Lingote de ferro |
-| Linha 3 | Obsidiana | Painel de vidro | Obsidiana |
+Na mesa de craft, sem forma: Cubit Casing, Cubit Visor, Cubit Treads e Cubit Neural Core, em qualquer posição (perguntas 1343 e 1346). Só com materiais do Overworld, nas [peças de montagem](#peças-de-montagem). A receita aparece no livro ao ter o Neural Core (pergunta 1350).
 
 ### Induction Dock
 
@@ -79,14 +85,32 @@ Na mesa de craft, com forma (perguntas 1025, 1030 e 1331): 2 painéis de vidro e
 
 ### Power Banks
 
-Na mesa de craft, encadeadas (perguntas 902, 1331, 1333 e 1334). A Base é a receita com forma comum do jogo. As outras usam o tipo `cubit:power_bank_upgrade`, que passa a carga da Power Bank do centro para a nova. Se a carga não couber, a receita não aparece (pergunta 907). A Base aparece no livro com um Cubit, e cada uma das outras, com a anterior (pergunta 908).
+Na mesa de craft, a partir das [peças de montagem](#peças-de-montagem) (perguntas 902, 1347 e 1355). Cada uma sai do zero, com a Power Bank Casing e a célula do tier, sem forma e vazia. A Advanced, a Elite e a Ultimate também saem da anterior, pelo upgrade: a mesma cruz da célula do tier, com a Power Bank anterior no centro, no tipo `cubit:power_bank_upgrade`, que passa a carga. Se a carga não couber, a receita não aparece (pergunta 907). O upgrade aparece no livro com a Power Bank anterior (pergunta 908), e a do zero, com a célula do tier.
 
-| Power Bank | Linha 1 | Linha 2 | Linha 3 |
+| Power Bank | Do zero, sem forma | Upgrade, em cruz |
+|---|---|---|
+| Base | Power Bank Casing e Base Power Cell | — |
+| Advanced | Power Bank Casing e Advanced Power Cell | Lápis-lazúli em cima e embaixo, lingote de ouro nas laterais e a Base Power Bank no centro |
+| Elite | Power Bank Casing e Elite Power Cell | Corante roxo em cima e embaixo, diamante nas laterais e a Advanced Power Bank no centro |
+| Ultimate | Power Bank Casing e Ultimate Power Cell | Lingote de netherite em cima e embaixo, vara de blaze nas laterais e a Elite Power Bank no centro |
+
+### Peças de montagem
+
+As regras estão em [`pecas.md`](funcionalidades/pecas.md). As quatro peças do Cubit aparecem no livro com um diamante. A Power Bank Casing e a Base Power Cell aparecem com um Cubit, e cada célula seguinte, com a Power Bank anterior (pergunta 1350).
+
+| Peça | Linha 1 | Linha 2 | Linha 3 |
 |---|---|---|---|
-| Base | Quartzo, lingote de ouro, quartzo | Esmeralda, bloco de redstone, esmeralda | Quartzo, obsidiana, quartzo |
-| Advanced | Quartzo, lingote de ouro, quartzo | Bloco de redstone, Base Power Bank, bloco de redstone | Quartzo, lápis-lazúli, quartzo |
-| Elite | Quartzo, lingote de ouro, quartzo | Bloco de redstone, Advanced Power Bank, bloco de redstone | Quartzo, corante roxo, quartzo |
-| Ultimate | Lingote de netherite, lingote de ouro, lingote de netherite | Bloco de redstone, Elite Power Bank, bloco de redstone | Lingote de netherite, vara de blaze, lingote de netherite |
+| Cubit Casing | Tocha de redstone, ferro, tocha de redstone | Ferro, vazio, ferro | Obsidiana, ferro, obsidiana |
+| Cubit Visor | Diamante, obsidiana, diamante | — | — |
+| Cubit Treads | Ferro, ferro, ferro | Pistão, vazio, pistão | — |
+| Cubit Neural Core | Vazio, redstone, vazio | Redstone, diamante, redstone | Vazio, redstone, vazio |
+| Power Bank Casing | Quartzo, lingote de ouro, quartzo | Quartzo, vazio, quartzo | Quartzo, obsidiana, quartzo |
+| Base Power Cell | Vazio, lingote de cobre, vazio | Redstone, bloco de redstone, redstone | Vazio, lingote de cobre, vazio |
+| Advanced Power Cell | Vazio, lápis-lazúli, vazio | Lingote de ouro, Base Power Cell, lingote de ouro | Vazio, lápis-lazúli, vazio |
+| Elite Power Cell | Vazio, corante roxo, vazio | Diamante, Advanced Power Cell, diamante | Vazio, corante roxo, vazio |
+| Ultimate Power Cell | Vazio, lingote de netherite, vazio | Vara de blaze, Elite Power Cell, vara de blaze | Vazio, lingote de netherite, vazio |
+
+O Visor ocupa uma linha só, em qualquer linha da grade, e as Esteiras, duas (perguntas 1353 e 1356). As tochas da Carcaça são as antenas. As células são encadeadas, numa cruz com a anterior no centro (pergunta 1354).
 
 ### Religar o Cubit na grade
 
@@ -214,6 +238,7 @@ Estes nomes não mudam sem migração (regra 18 do `AGENTS.md`).
 | Componente do jogo no item | `minecraft:custom_name` | Nome do Cubit, inclusive no item danificado |
 | NBT do jogo na entidade | `CustomName` | Nome do Cubit |
 | Dados do player | `cubit:following_robot` | `robot`: o UUID do robô que segue, ou nada |
+| Item | `cubit:general_robot_casing`, `cubit:general_robot_visor`, `cubit:general_robot_treads`, `cubit:general_robot_core`, `cubit:power_bank_casing` e `cubit:{tier}_power_cell` | As peças de montagem, sem data components (pergunta 1349) |
 | Item | `cubit:ml_fisher` | O card do Pescador. Na base, só por `/give`, sem receita (perguntas 1161 e 1172). A receita entra no card do Pescador (pergunta 1192) |
 | Item | `cubit:ml_farmer` | O card do Fazendeiro, na tag `cubit:ml_cards` (pergunta 1228) |
 | Receita | `cubit:ml_farmer` | A receita do card do Fazendeiro, em [`fazendeiro.md`](funcionalidades/trabalhos/fazendeiro.md#receita) (pergunta 1228) |
@@ -253,6 +278,10 @@ O estado salvo é validado ao entrar no jogo, sem derrubá-lo (regra 17 do `AGEN
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-21 02:05 | Troca o Visor para diamante, obsidiana, diamante (pergunta 1356). |
+| Marcelo Fabiano | 2026-11-21 01:45 | Encadeia as células e troca o upgrade pela cruz (perguntas 1354 e 1355). |
+| Marcelo Fabiano | 2026-11-21 01:30 | Troca as tochas para a Carcaça e a obsidiana para o Visor (pergunta 1353). |
+| Marcelo Fabiano | 2026-11-21 01:00 | Adiciona as peças de montagem e as receitas do Cubit e das Power Banks a partir delas (perguntas 1343 a 1350). |
 | Marcelo Fabiano | 2026-11-20 23:45 | Troca as receitas do Cubit, do Dock, do Tablet, dos Modules e das Power Banks (perguntas 1331 a 1334). |
 | Marcelo Fabiano | 2026-11-19 23:04 | Adiciona o card, a receita e a tag de combustível do Cozinheiro (perguntas 1319 e 1325). |
 | Marcelo Fabiano | 2026-11-19 21:34 | Adiciona o card e a receita do Organizador (pergunta 1299). |
