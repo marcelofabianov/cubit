@@ -175,6 +175,10 @@ O Cubit é o único robô do mod. O que muda entre um Cubit e outro é o tier e 
 
 54. **Listas numeradas:** ao apresentar itens ao desenvolvedor, como opções, pendências, passos ou achados, prefira listas ordenadas numericamente, para ele poder citar cada item pelo número.
 
+### Prompts de imagem
+
+55. **Prompt em arquivo:** todo prompt de imagem fica em `tmp/arte/{nome}/prompt.md`, em que `{nome}` é o item ou o assunto, como `cascata`, com vários itens. Cada prompt traz o caminho completo da imagem que ele gera, na mesma pasta do `prompt.md`, como `tmp/arte/cascata/robot_core.png`, e o destino dela depois de aceita.
+
 ## Git
 
 - **Autorização:** nunca faça commit, push, tag, release ou PR sem autorização explícita para aquela ação. Antes, mostre os arquivos, o resumo e a mensagem proposta.

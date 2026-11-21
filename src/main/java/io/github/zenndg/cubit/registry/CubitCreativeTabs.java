@@ -40,6 +40,15 @@ public final class CubitCreativeTabs {
                     output.accept(CubitItems.ADVANCED_POWER_BANK.get());
                     output.accept(CubitItems.ELITE_POWER_BANK.get());
                     output.accept(CubitItems.ULTIMATE_POWER_BANK.get());
+                    output.accept(CubitItems.GENERAL_ROBOT_CASING.get());
+                    output.accept(CubitItems.GENERAL_ROBOT_VISOR.get());
+                    output.accept(CubitItems.GENERAL_ROBOT_TREADS.get());
+                    output.accept(CubitItems.GENERAL_ROBOT_CORE.get());
+                    output.accept(CubitItems.POWER_BANK_CASING.get());
+                    output.accept(CubitItems.BASE_POWER_CELL.get());
+                    output.accept(CubitItems.ADVANCED_POWER_CELL.get());
+                    output.accept(CubitItems.ELITE_POWER_CELL.get());
+                    output.accept(CubitItems.ULTIMATE_POWER_CELL.get());
                   })
                   .build());
 

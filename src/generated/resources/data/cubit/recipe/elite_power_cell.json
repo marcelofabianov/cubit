@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "cubit:advanced_power_cell"
+    },
+    "E": {
+      "item": "minecraft:purple_dye"
+    },
+    "S": {
+      "item": "minecraft:diamond"
+    }
+  },
+  "pattern": [
+    " E ",
+    "SCS",
+    " E "
+  ],
+  "result": {
+    "count": 1,
+    "id": "cubit:elite_power_cell"
+  }
+}

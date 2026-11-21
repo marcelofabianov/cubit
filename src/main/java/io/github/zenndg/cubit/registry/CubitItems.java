@@ -34,6 +34,13 @@ public final class CubitItems {
   private static final String FARMER_CARD_ID = "ml_farmer";
   private static final String ORGANIZER_CARD_ID = "ml_organizer";
   private static final String COOK_CARD_ID = "ml_cook";
+  private static final String CASING_SUFFIX = "_casing";
+  private static final String VISOR_SUFFIX = "_visor";
+  private static final String TREADS_SUFFIX = "_treads";
+  private static final String CORE_SUFFIX = "_core";
+  private static final String POWER_BANK_CASING_ID = "power_bank_casing";
+  private static final String POWER_CELL_SUFFIX = "_power_cell";
+  private static final int PART_STACK_SIZE = 64;
   private static final DeferredRegister<Item> ITEMS =
       DeferredRegister.create(Registries.ITEM, CubitMod.MOD_ID);
 
@@ -93,6 +100,25 @@ public final class CubitItems {
   public static final Supplier<Item> ELITE_POWER_BANK = powerBank(RobotTier.ELITE);
   public static final Supplier<Item> ULTIMATE_POWER_BANK = powerBank(RobotTier.ULTIMATE);
 
+  /** The parts the Cubit is made of, only for the crafting grid (answers 1340 and 1349). */
+  public static final Supplier<Item> GENERAL_ROBOT_CASING =
+      part(CubitConfig.GENERAL_ROBOT.id() + CASING_SUFFIX);
+
+  public static final Supplier<Item> GENERAL_ROBOT_VISOR =
+      part(CubitConfig.GENERAL_ROBOT.id() + VISOR_SUFFIX);
+  public static final Supplier<Item> GENERAL_ROBOT_TREADS =
+      part(CubitConfig.GENERAL_ROBOT.id() + TREADS_SUFFIX);
+  public static final Supplier<Item> GENERAL_ROBOT_CORE =
+      part(CubitConfig.GENERAL_ROBOT.id() + CORE_SUFFIX);
+
+  /** The parts the Power Banks are made of: one casing and a cell per tier (answer 1347). */
+  public static final Supplier<Item> POWER_BANK_CASING = part(POWER_BANK_CASING_ID);
+
+  public static final Supplier<Item> BASE_POWER_CELL = powerCell(RobotTier.BASE);
+  public static final Supplier<Item> ADVANCED_POWER_CELL = powerCell(RobotTier.ADVANCED);
+  public static final Supplier<Item> ELITE_POWER_CELL = powerCell(RobotTier.ELITE);
+  public static final Supplier<Item> ULTIMATE_POWER_CELL = powerCell(RobotTier.ULTIMATE);
+
   private CubitItems() {}
 
   /** The ID is the tier and the suffix, like base_power_bank, from _docs/itens.md. */
@@ -100,6 +126,16 @@ public final class CubitItems {
     return ITEMS.register(
         tier.key() + POWER_BANK_SUFFIX,
         () -> new PowerBankItem(new Item.Properties().stacksTo(POWER_BANK_STACK_SIZE), tier));
+  }
+
+  /** The ID is the tier and the suffix, like base_power_cell, from _docs/itens.md. */
+  private static Supplier<Item> powerCell(RobotTier tier) {
+    return part(tier.key() + POWER_CELL_SUFFIX);
+  }
+
+  /** A part has no use outside the crafting grid and stacks like a Module (answer 1352). */
+  private static Supplier<Item> part(String id) {
+    return ITEMS.register(id, () -> new Item(new Item.Properties().stacksTo(PART_STACK_SIZE)));
   }
 
   /** The ID is the tier and the suffix, like advanced_module, from _docs/itens.md. */

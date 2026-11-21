@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_robot": {
+    "has_base_power_cell": {
       "conditions": {
         "items": [
           {
-            "items": "cubit:general_robot"
+            "items": "cubit:base_power_cell"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_robot"
+      "has_base_power_cell"
     ]
   ],
   "rewards": {

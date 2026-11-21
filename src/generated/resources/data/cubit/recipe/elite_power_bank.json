@@ -2,26 +2,20 @@
   "type": "cubit:power_bank_upgrade",
   "category": "misc",
   "key": {
-    "B": {
-      "item": "minecraft:purple_dye"
-    },
     "C": {
       "item": "cubit:advanced_power_bank"
     },
-    "K": {
-      "item": "minecraft:quartz"
+    "E": {
+      "item": "minecraft:purple_dye"
     },
     "S": {
-      "item": "minecraft:redstone_block"
-    },
-    "T": {
-      "item": "minecraft:gold_ingot"
+      "item": "minecraft:diamond"
     }
   },
   "pattern": [
-    "KTK",
+    " E ",
     "SCS",
-    "KBK"
+    " E "
   ],
   "result": {
     "count": 1,

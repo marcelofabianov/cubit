@@ -23,7 +23,7 @@ O que o Cubit já faz, do primeiro commit até o merge do PR #126. As regras com
 
 ## Cubit no mundo
 
-- **Craft:** na mesa, com redstone, lâmpada de redstone, lingotes de ferro, diamante, obsidiana e painel de vidro (pergunta 1331). Sai com 25% de bateria e a vida cheia, e a receita aparece no livro ao ter um diamante.
+- **Craft:** na mesa, sem forma, com as quatro peças de montagem, só com materiais do Overworld (perguntas 1343 e 1346). Sai com 25% de bateria e a vida cheia, e a receita aparece no livro ao ter um diamante.
 - **Colocar:** com o item na mão. Toca `placed.ogg` e, ativo, mostra a expressão feliz. O dono é quem coloca.
 - **Recolher:** Shift + clique direito, em qualquer estado.
 - **Estado no item:** tier, energia, vida, inventário, slot de energia, cor, nome e as chaves `Lamp`, `Scanners` e `Chatter`, em data components (`cubit:robot_state` e outros). Recolher, morrer e consertar nunca apagam nem duplicam nada.
@@ -187,6 +187,7 @@ No estilo das imagens de conceito, sem a textura do baú do jogo.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-21 01:05 | Troca o craft do Cubit pelas peças de montagem. |
 | Marcelo Fabiano | 2026-11-20 23:50 | Troca as receitas do Cubit e do Dock (perguntas 1331 e 1332). |
 | Marcelo Fabiano | 2026-11-13 16:40 | Troca o Cubit Remote pelo Tablet. |
 | Marcelo Fabiano | 2026-11-08 00:11 | Cita a tradução para o português. |

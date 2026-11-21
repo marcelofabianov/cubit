@@ -2,23 +2,20 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "B": {
-      "item": "minecraft:gold_block"
-    },
     "C": {
-      "item": "minecraft:diamond_block"
+      "item": "cubit:advanced_module"
     },
-    "S": {
+    "E": {
       "item": "minecraft:purple_dye"
     },
-    "T": {
-      "item": "minecraft:obsidian"
+    "S": {
+      "item": "minecraft:diamond"
     }
   },
   "pattern": [
-    "TTT",
+    " E ",
     "SCS",
-    "BBB"
+    " E "
   ],
   "result": {
     "count": 1,

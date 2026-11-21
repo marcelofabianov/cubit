@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:gold_ingot"
+    },
+    "O": {
+      "item": "minecraft:obsidian"
+    },
+    "Q": {
+      "item": "minecraft:quartz"
+    }
+  },
+  "pattern": [
+    "QAQ",
+    "Q Q",
+    "QOQ"
+  ],
+  "result": {
+    "count": 1,
+    "id": "cubit:power_bank_casing"
+  }
+}

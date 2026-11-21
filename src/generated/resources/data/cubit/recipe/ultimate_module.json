@@ -2,23 +2,20 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "B": {
-      "item": "minecraft:blaze_powder"
-    },
     "C": {
-      "item": "minecraft:diamond_block"
+      "item": "cubit:elite_module"
+    },
+    "E": {
+      "item": "minecraft:netherite_ingot"
     },
     "S": {
-      "item": "minecraft:netherite_ingot"
-    },
-    "T": {
-      "item": "minecraft:netherite_ingot"
+      "item": "minecraft:blaze_rod"
     }
   },
   "pattern": [
-    "TTT",
+    " E ",
     "SCS",
-    "BBB"
+    " E "
   ],
   "result": {
     "count": 1,

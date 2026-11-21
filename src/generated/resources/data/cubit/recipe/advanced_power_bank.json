@@ -2,26 +2,20 @@
   "type": "cubit:power_bank_upgrade",
   "category": "misc",
   "key": {
-    "B": {
-      "item": "minecraft:lapis_lazuli"
-    },
     "C": {
       "item": "cubit:base_power_bank"
     },
-    "K": {
-      "item": "minecraft:quartz"
+    "E": {
+      "item": "minecraft:lapis_lazuli"
     },
     "S": {
-      "item": "minecraft:redstone_block"
-    },
-    "T": {
       "item": "minecraft:gold_ingot"
     }
   },
   "pattern": [
-    "KTK",
+    " E ",
     "SCS",
-    "KBK"
+    " E "
   ],
   "result": {
     "count": 1,
