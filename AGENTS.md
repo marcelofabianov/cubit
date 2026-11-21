@@ -17,7 +17,7 @@ Mod de Minecraft que adiciona um robô companheiro fofo, movido a bateria, de te
 - **Números:** ficam em `_docs/tiers.md`. As outras páginas apontam para lá. O `README.md` traz só um resumo, e o roteiro manual cita os valores padrão como resultado esperado.
 - **Perguntas:** ficam em `_docs/perguntas/`, com um arquivo por fase. Recomendação de pergunta pendente não vale como decidida.
 - **Decisões:** o resumo do que foi decidido fica em `_docs/decisoes.md`.
-- **Histórico:** todo `.md` em `_docs/` termina com uma tabela de histórico de modificações, e quem altera o arquivo adiciona uma linha no topo dela. Fora de `_docs/`, os `.md` não têm essa tabela.
+- **Histórico:** todo `.md` em `_docs/` termina com uma tabela de histórico de modificações, e quem altera o arquivo adiciona uma linha no topo dela, em nome de `Zennd`. As linhas antigas, em outro nome, continuam como estão (respostas 1482 e 1484). Fora de `_docs/`, os `.md` não têm essa tabela.
 - **Imagens:** ficam em `_docs/imagens/`.
 - **Rascunhos:** conversas e ideias vão para `tmp/`, que o Git ignora. Rascunhos de PR ficam em `tmp/pr/`, arquivos de issue, em `tmp/issue/`, logs, em `tmp/log/`, e os prompts de imagem e as imagens geradas por eles, em `tmp/arte/{nome}/`.
 - **Fluxo de trabalho:** o passo a passo de uma tarefa, de uma versão e de um hotfix está em [`_docs/desenvolvimento/fluxo-de-trabalho.md`](_docs/desenvolvimento/fluxo-de-trabalho.md).
@@ -184,6 +184,7 @@ O Cubit é o único robô do mod. O que muda entre um Cubit e outro é o tier e 
 - **Autorização:** nunca faça commit, push, tag, release ou PR sem autorização explícita para aquela ação. Antes, mostre os arquivos, o resumo e a mensagem proposta.
 - **Merge:** somente o desenvolvedor faz.
 - **Autoria:** nunca atribua autoria ou coautoria a uma IA, nem em commits, PRs, tags, releases ou comentários.
+- **Identidade:** os commits saem sempre pela conta `zenndg`, com o nome `Zennd` e o e-mail dela, no Git e no GitHub. Confira o `git config user.name` e o `user.email` antes de commitar (resposta 1482).
 - **Assinatura:** os commits são assinados com SSH. Não desligue a assinatura.
 - **Remote:** `git@github.com-zenndg:zenndg/cubit.git`, da conta `zenndg`, para onde o repositório foi (respostas 1276 e 1278). Não troque por HTTPS nem por `git@github.com:`, que caem em outra conta.
 - **Conta do `gh`:** a conta `zenndg`. Se o `gh api user --jq .login` mostrar outra, prefixe o comando com `GH_TOKEN=$(gh auth token --user zenndg)`.
