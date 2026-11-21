@@ -12,7 +12,7 @@ public final class RobotStorage {
 
   /** True when anything moved. The stack keeps what did not fit. */
   public static boolean insert(Container inventory, ItemStack stack) {
-    if (!stack.getItem().canFitInsideContainerItems()) {
+    if (!stack.canFitInsideContainerItems()) {
       return false;
     }
     int before = stack.getCount();
@@ -26,7 +26,7 @@ public final class RobotStorage {
 
   /** True when at least part of the stack fits, without moving anything. */
   public static boolean hasRoomFor(Container inventory, ItemStack stack) {
-    if (!stack.getItem().canFitInsideContainerItems()) {
+    if (!stack.canFitInsideContainerItems()) {
       return false;
     }
     for (int slot = 0; slot < inventory.getContainerSize(); slot++) {

@@ -3,7 +3,6 @@ package io.github.zenndg.cubit.datagen;
 import io.github.zenndg.cubit.CubitMod;
 import io.github.zenndg.cubit.config.CubitConfig;
 import io.github.zenndg.cubit.item.RobotRechargeRecipe;
-import io.github.zenndg.cubit.item.RobotRepairRecipe;
 import io.github.zenndg.cubit.item.SolarDockRecipe;
 import io.github.zenndg.cubit.registry.CubitBlocks;
 import io.github.zenndg.cubit.registry.CubitItems;
@@ -57,8 +56,6 @@ final class CubitRecipeProvider extends RecipeProvider {
   private static final char HOPPER = 'F';
   private static final String COOK_MIDDLE_ROW = "RSR";
   private static final char SMOKER = 'S';
-  private static final String HAS_IRON = "has_iron";
-  private static final String HAS_CORE = "has_core";
   private static final String HAS_DOCK = "has_dock";
   private static final String HAS_PANEL = "has_panel";
   private static final String PANEL_TOP_ROW = "GGG";
@@ -77,30 +74,29 @@ final class CubitRecipeProvider extends RecipeProvider {
     super(output, registries);
   }
 
+  /**
+   * Every recipe of the mod runs in the Engineering Desk, and only the desk itself stays in the
+   * crafting table (answers 1427 and 1430).
+   */
   @Override
   protected void buildRecipes(RecipeOutput output) {
-    toolbox(output);
-    CubitPartRecipes.save(output);
-    robot(output);
-    dock(output);
-    tablet(output);
-    modules(output);
-    powerBanks(output);
-    fisherCard(output);
-    farmerCard(output);
-    organizerCard(output);
-    cookCard(output);
-    recharge(output);
-    solarDock(output);
-    RechargeSplashRecipe.save(output);
-    String robotId = CubitConfig.GENERAL_ROBOT.id();
-    output.accept(
-        ResourceLocation.fromNamespaceAndPath(CubitMod.MOD_ID, REPAIR_PREFIX + robotId),
-        new RobotRepairRecipe(
-            Ingredient.of(CubitItems.DAMAGED_GENERAL_ROBOT.get()),
-            Ingredient.of(CubitItems.TOOLBOX.get()),
-            CubitItems.GENERAL_ROBOT.get()),
-        null);
+    DeskRecipeData.desk(output);
+    RecipeOutput desk = new EngineeringRecipeOutput(output);
+    toolbox(desk);
+    CubitPartRecipes.save(desk);
+    robot(desk);
+    dock(desk);
+    tablet(desk);
+    modules(desk);
+    powerBanks(desk);
+    fisherCard(desk);
+    farmerCard(desk);
+    organizerCard(desk);
+    cookCard(desk);
+    recharge(desk);
+    solarDock(desk);
+    RechargeSplashRecipe.save(desk);
+    DeskRecipeData.repair(desk);
   }
 
   private void toolbox(RecipeOutput output) {
@@ -111,7 +107,7 @@ final class CubitRecipeProvider extends RecipeProvider {
         .define(IRON, Items.IRON_INGOT)
         .define(REDSTONE, Items.REDSTONE)
         .define(OBSIDIAN, Items.OBSIDIAN)
-        .unlockedBy(HAS_IRON, has(Items.IRON_INGOT))
+        .unlockedBy(DeskRecipeData.FROM_START, DeskRecipeData.fromStart())
         .save(output);
   }
 
@@ -171,14 +167,14 @@ final class CubitRecipeProvider extends RecipeProvider {
         .save(output);
   }
 
-  /** The four parts, without a shape, unlocked by the Neural Core (answers 1346 and 1350). */
+  /** The four parts, without a shape, open from the start (answers 1346 and 1496). */
   private void robot(RecipeOutput output) {
     ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, CubitItems.GENERAL_ROBOT.get())
         .requires(CubitItems.GENERAL_ROBOT_CASING.get())
         .requires(CubitItems.GENERAL_ROBOT_VISOR.get())
         .requires(CubitItems.GENERAL_ROBOT_TREADS.get())
         .requires(CubitItems.GENERAL_ROBOT_CORE.get())
-        .unlockedBy(HAS_CORE, has(CubitItems.GENERAL_ROBOT_CORE.get()))
+        .unlockedBy(DeskRecipeData.FROM_START, DeskRecipeData.fromStart())
         .save(output);
   }
 
@@ -207,12 +203,18 @@ final class CubitRecipeProvider extends RecipeProvider {
         .save(output);
   }
 
-  /** Every module unlocks with a Cubit (answer 805). */
+  /**
+   * The Advanced Module unlocks with a Cubit, and each next one with the Module in its center
+   * (answer 1498).
+   */
   private static ShapedRecipeBuilder module(
       ItemLike result, ItemLike edge, ItemLike side, ItemLike center) {
+    ItemLike unlock =
+        center == CubitItems.GENERAL_ROBOT_CORE.get() ? CubitItems.GENERAL_ROBOT.get() : center;
+    String criterion = HAS_PREFIX + BuiltInRegistries.ITEM.getKey(unlock.asItem()).getPath();
     return CubitPartRecipes.cross(
             ShapedRecipeBuilder.shaped(RecipeCategory.MISC, result), edge, side, center)
-        .unlockedBy(HAS_ROBOT, has(CubitItems.GENERAL_ROBOT.get()));
+        .unlockedBy(criterion, has(unlock));
   }
 
   /**

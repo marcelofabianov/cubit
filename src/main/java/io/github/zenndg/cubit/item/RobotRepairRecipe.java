@@ -9,6 +9,7 @@ import io.github.zenndg.cubit.registry.CubitDataComponents;
 import io.github.zenndg.cubit.registry.CubitRecipes;
 import java.util.List;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.NonNullList;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -22,6 +23,7 @@ import net.minecraft.world.item.crafting.CraftingInput;
 import net.minecraft.world.item.crafting.CustomRecipe;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 
 /**
@@ -101,6 +103,17 @@ public final class RobotRepairRecipe extends CustomRecipe {
     return new ItemStack(result);
   }
 
+  /** The marks of the desk, which show the repair like any other recipe. */
+  @Override
+  public NonNullList<Ingredient> getIngredients() {
+    return NonNullList.of(Ingredient.EMPTY, damagedRobot, toolbox);
+  }
+
+  @Override
+  public boolean isSpecial() {
+    return false;
+  }
+
   @Override
   public boolean canCraftInDimensions(int width, int height) {
     return width * height >= INGREDIENTS;
@@ -133,5 +146,11 @@ public final class RobotRepairRecipe extends CustomRecipe {
 
   private static List<ItemStack> stacksIn(CraftingInput input) {
     return input.items().stream().filter(stack -> !stack.isEmpty()).toList();
+  }
+
+  /** Runs only in the Engineering Desk, never in the crafting table (answer 1459). */
+  @Override
+  public RecipeType<?> getType() {
+    return CubitRecipes.ENGINEERING_TYPE.get();
   }
 }

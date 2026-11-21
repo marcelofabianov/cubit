@@ -24,6 +24,7 @@ public final class CubitCreativeTabs {
                   .title(Component.translatable(MAIN_TITLE_KEY))
                   .icon(() -> new ItemStack(CubitItems.GENERAL_ROBOT.get()))
                   .displayItems((parameters, output) -> {
+                    output.accept(CubitItems.ENGINEERING_DESK.get());
                     output.accept(CubitItems.GENERAL_ROBOT.get());
                     output.accept(CubitItems.DAMAGED_GENERAL_ROBOT.get());
                     output.accept(CubitItems.TOOLBOX.get());

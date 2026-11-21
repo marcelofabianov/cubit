@@ -1,5 +1,7 @@
 package io.github.zenndg.cubit.datagen;
 
+import io.github.zenndg.cubit.block.DeskPart;
+import io.github.zenndg.cubit.block.EngineeringDeskBlock;
 import io.github.zenndg.cubit.block.InductionDockBlock;
 import io.github.zenndg.cubit.registry.CubitBlocks;
 import io.github.zenndg.cubit.registry.CubitDataComponents;
@@ -18,7 +20,7 @@ import net.minecraft.world.level.storage.loot.functions.CopyComponentsFunction;
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 
-/** The dock keeps its energy as an item, so breaking it never loses FE. */
+/** The dock and the desk keep their energy and items as an item, so breaking never loses any. */
 final class CubitBlockLootProvider extends BlockLootSubProvider {
   private static final float ONE_ROLL = 1f;
 
@@ -30,6 +32,7 @@ final class CubitBlockLootProvider extends BlockLootSubProvider {
   protected void generate() {
     dockLoot(CubitBlocks.INDUCTION_DOCK.get());
     dockLoot(CubitBlocks.SOLAR_INDUCTION_DOCK.get());
+    deskLoot(CubitBlocks.ENGINEERING_DESK.get());
   }
 
   /** Only the lower half drops the dock, with its energy, storage and tier (answer 1373). */
@@ -56,8 +59,36 @@ final class CubitBlockLootProvider extends BlockLootSubProvider {
                                     .include(CubitDataComponents.DOCK_TIER.get())))));
   }
 
+  /** Only the left half drops the desk, with its tier, energy, inventories and order (1432). */
+  private void deskLoot(Block desk) {
+    add(
+        desk,
+        LootTable.lootTable()
+            .withPool(
+                LootPool.lootPool()
+                    .setRolls(ConstantValue.exactly(ONE_ROLL))
+                    .add(
+                        LootItem.lootTableItem(desk)
+                            .when(
+                                LootItemBlockStatePropertyCondition.hasBlockStateProperties(desk)
+                                    .setProperties(
+                                        StatePropertiesPredicate.Builder.properties()
+                                            .hasProperty(EngineeringDeskBlock.PART, DeskPart.LEFT)))
+                            .apply(
+                                CopyComponentsFunction.copyComponents(
+                                        CopyComponentsFunction.Source.BLOCK_ENTITY)
+                                    .include(CubitDataComponents.DESK_TIER.get())
+                                    .include(CubitDataComponents.DESK_ENERGY.get())
+                                    .include(CubitDataComponents.DESK_INPUT.get())
+                                    .include(CubitDataComponents.DESK_OUTPUT.get())
+                                    .include(CubitDataComponents.DESK_ORDER.get())))));
+  }
+
   @Override
   protected Iterable<Block> getKnownBlocks() {
-    return List.of(CubitBlocks.INDUCTION_DOCK.get(), CubitBlocks.SOLAR_INDUCTION_DOCK.get());
+    return List.of(
+        CubitBlocks.INDUCTION_DOCK.get(),
+        CubitBlocks.SOLAR_INDUCTION_DOCK.get(),
+        CubitBlocks.ENGINEERING_DESK.get());
   }
 }

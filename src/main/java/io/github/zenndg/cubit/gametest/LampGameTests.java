@@ -13,6 +13,7 @@ import io.github.zenndg.cubit.menu.RobotMenu;
 import io.github.zenndg.cubit.registry.CubitDataComponents;
 import io.github.zenndg.cubit.registry.CubitEntities;
 import io.github.zenndg.cubit.registry.CubitItems;
+import io.github.zenndg.cubit.registry.CubitRecipes;
 import java.util.List;
 import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTest;
@@ -25,7 +26,6 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CraftingInput;
-import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.Vec3;
@@ -257,7 +257,7 @@ public final class LampGameTests {
         helper
             .getLevel()
             .getRecipeManager()
-            .getRecipeFor(RecipeType.CRAFTING, input, helper.getLevel())
+            .getRecipeFor(CubitRecipes.ENGINEERING_TYPE.get(), input, helper.getLevel())
             .map(holder -> holder.value().assemble(input, helper.getLevel().registryAccess()))
             .orElseThrow(() -> new IllegalStateException(NO_REPAIR));
     helper.assertTrue(!stateOf(repaired).lampOn(), SWITCH_LOST);

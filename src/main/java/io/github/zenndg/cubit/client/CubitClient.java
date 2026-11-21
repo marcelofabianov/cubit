@@ -9,6 +9,8 @@ import io.github.zenndg.cubit.registry.CubitBlockEntities;
 import io.github.zenndg.cubit.registry.CubitEntities;
 import io.github.zenndg.cubit.registry.CubitItems;
 import io.github.zenndg.cubit.registry.CubitMenus;
+import io.github.zenndg.cubit.registry.CubitRecipes;
+import net.minecraft.client.RecipeBookCategories;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
@@ -22,6 +24,8 @@ import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 import net.neoforged.neoforge.client.event.RegisterItemDecorationsEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
+import net.neoforged.neoforge.client.event.RegisterRecipeBookCategoriesEvent;
+import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 
 /** Client-only setup. Common code never references this package, or a dedicated server breaks. */
@@ -86,6 +90,20 @@ public final class CubitClient {
     event.registerEntityRenderer(CubitEntities.RECHARGE_SPLASH.get(), ThrownItemRenderer::new);
     event.registerBlockEntityRenderer(
         CubitBlockEntities.INDUCTION_DOCK.get(), SolarDockRenderer::new);
+    event.registerBlockEntityRenderer(CubitBlockEntities.ENGINEERING_DESK.get(), DeskRenderer::new);
+  }
+
+  /** The item of the desk is drawn by its GeckoLib model (answer 1494). */
+  @SubscribeEvent
+  public static void registerClientExtensions(RegisterClientExtensionsEvent event) {
+    event.registerItem(DeskItemExtensions.INSTANCE, CubitItems.ENGINEERING_DESK.get());
+  }
+
+  /** The recipes of the desk have no place in the recipe book of the game (answer 1459). */
+  @SubscribeEvent
+  public static void registerRecipeBook(RegisterRecipeBookCategoriesEvent event) {
+    event.registerRecipeCategoryFinder(
+        CubitRecipes.ENGINEERING_TYPE.get(), recipe -> RecipeBookCategories.UNKNOWN);
   }
 
   @SubscribeEvent
@@ -93,5 +111,6 @@ public final class CubitClient {
     event.register(CubitMenus.ROBOT.get(), RobotScreen::new);
     event.register(CubitMenus.INDUCTION_DOCK.get(), InductionDockScreen::new);
     event.register(CubitMenus.TABLET_ROBOT.get(), TabletRobotScreen::new);
+    event.register(CubitMenus.ENGINEERING_DESK.get(), EngineeringDeskScreen::new);
   }
 }

@@ -25,6 +25,7 @@ import net.minecraft.world.item.crafting.CraftingInput;
 import net.minecraft.world.item.crafting.CustomRecipe;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 
 /**
@@ -156,4 +157,10 @@ public final class RobotRechargeRecipe extends CustomRecipe {
   }
 
   private record Outcome(ItemStack robot, ItemStack bank, int bankSlot) {}
+
+  /** Runs only in the Engineering Desk, never in the crafting table (answer 1459). */
+  @Override
+  public RecipeType<?> getType() {
+    return CubitRecipes.ENGINEERING_TYPE.get();
+  }
 }

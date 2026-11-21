@@ -2,6 +2,7 @@ package io.github.zenndg.cubit.registry;
 
 import com.mojang.serialization.MapCodec;
 import io.github.zenndg.cubit.CubitMod;
+import io.github.zenndg.cubit.item.EngineeringRecipe;
 import io.github.zenndg.cubit.item.PowerBankUpgradeRecipe;
 import io.github.zenndg.cubit.item.RobotRechargeRecipe;
 import io.github.zenndg.cubit.item.RobotRepairRecipe;
@@ -10,21 +11,42 @@ import java.util.function.Supplier;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 /**
- * Recipe types. The IDs are a contract with the pack, so they cannot change without a migration.
+ * Recipe types and serializers. The IDs are a contract with the pack, so they cannot change without
+ * a migration. Every recipe of the mod runs in the Engineering Desk (answers 1427 and 1459).
  */
 public final class CubitRecipes {
   private static final String ROBOT_REPAIR_ID = "robot_repair";
   private static final String ROBOT_RECHARGE_ID = "robot_recharge";
   private static final String POWER_BANK_UPGRADE_ID = "power_bank_upgrade";
   private static final String SOLAR_DOCK_ASSEMBLY_ID = "solar_dock_assembly";
+  public static final String ENGINEERING_ID = "engineering";
   private static final DeferredRegister<RecipeSerializer<?>> SERIALIZERS =
       DeferredRegister.create(Registries.RECIPE_SERIALIZER, CubitMod.MOD_ID);
+  private static final DeferredRegister<RecipeType<?>> TYPES =
+      DeferredRegister.create(Registries.RECIPE_TYPE, CubitMod.MOD_ID);
+
+  /** The type of every recipe of the Engineering Desk, so the crafting table never sees them. */
+  public static final Supplier<RecipeType<CraftingRecipe>> ENGINEERING_TYPE =
+      TYPES.register(
+          ENGINEERING_ID,
+          () ->
+              RecipeType.simple(
+                  ResourceLocation.fromNamespaceAndPath(CubitMod.MOD_ID, ENGINEERING_ID)));
+
+  /** The recipes of the desk, with or without a shape, in the JSON of the game (answer 1459). */
+  public static final Supplier<RecipeSerializer<EngineeringRecipe>> ENGINEERING =
+      SERIALIZERS.register(
+          ENGINEERING_ID,
+          () -> serializer(EngineeringRecipe.CODEC, EngineeringRecipe.STREAM_CODEC));
 
   public static final Supplier<RecipeSerializer<RobotRepairRecipe>> ROBOT_REPAIR =
       SERIALIZERS.register(
@@ -79,5 +101,6 @@ public final class CubitRecipes {
 
   public static void register(IEventBus modBus) {
     SERIALIZERS.register(modBus);
+    TYPES.register(modBus);
   }
 }

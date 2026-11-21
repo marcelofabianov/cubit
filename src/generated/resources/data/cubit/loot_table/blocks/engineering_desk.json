@@ -1,0 +1,38 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "block": "cubit:engineering_desk",
+              "condition": "minecraft:block_state_property",
+              "properties": {
+                "part": "left"
+              }
+            }
+          ],
+          "functions": [
+            {
+              "function": "minecraft:copy_components",
+              "include": [
+                "cubit:engineering_desk_tier",
+                "cubit:engineering_desk_energy",
+                "cubit:engineering_desk_input",
+                "cubit:engineering_desk_output",
+                "cubit:engineering_desk_order"
+              ],
+              "source": "block_entity"
+            }
+          ],
+          "name": "cubit:engineering_desk"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "cubit:blocks/engineering_desk"
+}

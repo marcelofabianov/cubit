@@ -10,6 +10,7 @@ import io.github.zenndg.cubit.entity.RobotLooks;
 import io.github.zenndg.cubit.item.RobotItem;
 import io.github.zenndg.cubit.registry.CubitDataComponents;
 import io.github.zenndg.cubit.registry.CubitItems;
+import io.github.zenndg.cubit.registry.CubitRecipes;
 import java.util.List;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
@@ -24,7 +25,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.CraftingInput;
-import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.GameType;
 import net.neoforged.neoforge.gametest.GameTestHolder;
 import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
@@ -196,7 +196,7 @@ public final class CustomizationGameTests {
     return helper
         .getLevel()
         .getRecipeManager()
-        .getRecipeFor(RecipeType.CRAFTING, grid, helper.getLevel())
+        .getRecipeFor(CubitRecipes.ENGINEERING_TYPE.get(), grid, helper.getLevel())
         .map(holder -> holder.value().assemble(grid, helper.getLevel().registryAccess()))
         .orElseThrow(() -> new IllegalStateException(NO_ITEM));
   }

@@ -11,6 +11,7 @@ import io.github.zenndg.cubit.registry.CubitAttachments;
 import io.github.zenndg.cubit.registry.CubitDataComponents;
 import io.github.zenndg.cubit.registry.CubitEntities;
 import io.github.zenndg.cubit.registry.CubitItems;
+import io.github.zenndg.cubit.registry.CubitRecipes;
 import java.util.List;
 import java.util.Optional;
 import net.minecraft.core.BlockPos;
@@ -24,7 +25,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.CraftingInput;
-import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.Vec3;
@@ -276,7 +276,7 @@ public final class EnergyGameTests {
         helper
             .getLevel()
             .getRecipeManager()
-            .getRecipeFor(RecipeType.CRAFTING, input, helper.getLevel())
+            .getRecipeFor(CubitRecipes.ENGINEERING_TYPE.get(), input, helper.getLevel())
             .map(holder -> holder.value().assemble(input, helper.getLevel().registryAccess()))
             .orElseThrow(() -> new IllegalStateException(NO_REPAIR));
     EnergySlotContents saved = repaired.get(CubitDataComponents.ENERGY_SLOT.get());

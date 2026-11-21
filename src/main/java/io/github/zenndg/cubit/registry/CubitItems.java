@@ -5,6 +5,7 @@ import io.github.zenndg.cubit.config.CubitConfig;
 import io.github.zenndg.cubit.domain.robot.RobotJob;
 import io.github.zenndg.cubit.domain.tier.RobotTier;
 import io.github.zenndg.cubit.item.DamagedRobotItem;
+import io.github.zenndg.cubit.item.EngineeringDeskItem;
 import io.github.zenndg.cubit.item.JobCardItem;
 import io.github.zenndg.cubit.item.ModuleItem;
 import io.github.zenndg.cubit.item.PowerBankItem;
@@ -98,6 +99,15 @@ public final class CubitItems {
           () ->
               new BlockItem(
                   CubitBlocks.INDUCTION_DOCK.get(),
+                  new Item.Properties().stacksTo(DOCK_STACK_SIZE)));
+
+  /** The crafting desk of the mod, which keeps its state in the item (answers 1432 and 1481). */
+  public static final Supplier<Item> ENGINEERING_DESK =
+      ITEMS.register(
+          CubitBlocks.ENGINEERING_DESK_ID,
+          () ->
+              new EngineeringDeskItem(
+                  CubitBlocks.ENGINEERING_DESK.get(),
                   new Item.Properties().stacksTo(DOCK_STACK_SIZE)));
 
   /** The dock with the solar panel, from the panel and a dock (answers 1384 and 1386). */

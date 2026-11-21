@@ -1,6 +1,8 @@
 package io.github.zenndg.cubit.registry;
 
 import io.github.zenndg.cubit.CubitMod;
+import io.github.zenndg.cubit.block.DeskFaces;
+import io.github.zenndg.cubit.block.EngineeringDeskBlockEntity;
 import io.github.zenndg.cubit.block.InductionDockBlock;
 import io.github.zenndg.cubit.block.InductionDockBlockEntity;
 import java.util.function.Supplier;
@@ -24,6 +26,14 @@ public final class CubitBlockEntities {
                       InductionDockBlockEntity::new,
                       CubitBlocks.INDUCTION_DOCK.get(),
                       CubitBlocks.SOLAR_INDUCTION_DOCK.get())
+                  .build(null));
+
+  public static final Supplier<BlockEntityType<EngineeringDeskBlockEntity>> ENGINEERING_DESK =
+      BLOCK_ENTITIES.register(
+          CubitBlocks.ENGINEERING_DESK_ID,
+          () ->
+              BlockEntityType.Builder.of(
+                      EngineeringDeskBlockEntity::new, CubitBlocks.ENGINEERING_DESK.get())
                   .build(null));
 
   private CubitBlockEntities() {}
@@ -51,5 +61,6 @@ public final class CubitBlockEntities {
         },
         CubitBlocks.INDUCTION_DOCK.get(),
         CubitBlocks.SOLAR_INDUCTION_DOCK.get());
+    DeskFaces.register(event, CubitBlocks.ENGINEERING_DESK.get());
   }
 }

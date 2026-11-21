@@ -2,6 +2,7 @@ package io.github.zenndg.cubit.registry;
 
 import com.mojang.serialization.Codec;
 import io.github.zenndg.cubit.CubitMod;
+import io.github.zenndg.cubit.block.SavedDeskOrder;
 import io.github.zenndg.cubit.domain.robot.RobotState;
 import io.github.zenndg.cubit.domain.tier.RobotTier;
 import io.github.zenndg.cubit.item.EnergySlotContents;
@@ -30,6 +31,11 @@ public final class CubitDataComponents {
   private static final String DOCK_ENERGY_ID = "dock_energy";
   private static final String DOCK_STORAGE_ID = "dock_storage";
   private static final String DOCK_TIER_ID = "dock_tier";
+  private static final String DESK_TIER_ID = "engineering_desk_tier";
+  private static final String DESK_ENERGY_ID = "engineering_desk_energy";
+  private static final String DESK_INPUT_ID = "engineering_desk_input";
+  private static final String DESK_OUTPUT_ID = "engineering_desk_output";
+  private static final String DESK_ORDER_ID = "engineering_desk_order";
   private static final String POWER_BANK_ENERGY_ID = "power_bank_energy";
   private static final String TABLET_APP_ID = "tablet_app";
   private static final DeferredRegister.DataComponents COMPONENTS =
@@ -119,6 +125,48 @@ public final class CubitDataComponents {
               builder
                   .persistent(ItemContainerContents.CODEC)
                   .networkSynchronized(ItemContainerContents.STREAM_CODEC));
+
+  /** The tier of an Engineering Desk, kept in its item when it breaks (answer 1492). */
+  public static final Supplier<DataComponentType<RobotTier>> DESK_TIER =
+      COMPONENTS.registerComponentType(
+          DESK_TIER_ID,
+          builder ->
+              builder
+                  .persistent(DockTierCodec.CODEC)
+                  .networkSynchronized(DockTierCodec.STREAM_CODEC));
+
+  /** The energy of an Engineering Desk (answer 1492). */
+  public static final Supplier<DataComponentType<Long>> DESK_ENERGY =
+      COMPONENTS.registerComponentType(
+          DESK_ENERGY_ID,
+          builder -> builder.persistent(Codec.LONG).networkSynchronized(ByteBufCodecs.VAR_LONG));
+
+  /** The input inventory of an Engineering Desk (answer 1492). */
+  public static final Supplier<DataComponentType<ItemContainerContents>> DESK_INPUT =
+      COMPONENTS.registerComponentType(
+          DESK_INPUT_ID,
+          builder ->
+              builder
+                  .persistent(ItemContainerContents.CODEC)
+                  .networkSynchronized(ItemContainerContents.STREAM_CODEC));
+
+  /** The output inventory of an Engineering Desk (answer 1492). */
+  public static final Supplier<DataComponentType<ItemContainerContents>> DESK_OUTPUT =
+      COMPONENTS.registerComponentType(
+          DESK_OUTPUT_ID,
+          builder ->
+              builder
+                  .persistent(ItemContainerContents.CODEC)
+                  .networkSynchronized(ItemContainerContents.STREAM_CODEC));
+
+  /** The recipe and the order of an Engineering Desk (answer 1492). */
+  public static final Supplier<DataComponentType<SavedDeskOrder>> DESK_ORDER =
+      COMPONENTS.registerComponentType(
+          DESK_ORDER_ID,
+          builder ->
+              builder
+                  .persistent(SavedDeskOrder.CODEC)
+                  .networkSynchronized(SavedDeskOrder.STREAM_CODEC));
 
   /** The charge of a Power Bank, a contract with the saves (answer 903). */
   /** The active app of the Tablet, by its key, a contract with the saves (answer 1026). */

@@ -31,7 +31,8 @@ enum Language {
           SpeedTexts::addTo,
           OrganizerTexts::addTo,
           CookTexts::addTo,
-          WorkTexts::addTo),
+          WorkTexts::addTo,
+          DeskTexts::addTo),
       ChatPhrases::of),
   PT_BR(
       Locales.PORTUGUESE,
@@ -53,7 +54,8 @@ enum Language {
           PortugueseSpeedTexts::addTo,
           PortugueseOrganizerTexts::addTo,
           PortugueseCookTexts::addTo,
-          PortugueseWorkTexts::addTo),
+          PortugueseWorkTexts::addTo,
+          PortugueseDeskTexts::addTo),
       PortugueseChatPhrases::of);
 
   private final String locale;

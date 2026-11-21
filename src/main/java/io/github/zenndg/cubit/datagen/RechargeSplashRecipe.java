@@ -7,9 +7,12 @@ import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.world.item.Items;
 
-/** The Recharge Splash, shapeless, only from the game, as in _docs/itens.md (answer 1406). */
+/**
+ * The Recharge Splash, shapeless, only from the game, as in _docs/itens.md (answer 1406). It
+ * unlocks with a Cubit, the only one it serves (answer 1498).
+ */
 final class RechargeSplashRecipe {
-  private static final String HAS_REDSTONE_BLOCK = "has_redstone_block";
+  private static final String HAS_ROBOT = "has_robot";
 
   private RechargeSplashRecipe() {}
 
@@ -21,8 +24,8 @@ final class RechargeSplashRecipe {
         .requires(Items.GUNPOWDER)
         .requires(Items.LAPIS_LAZULI)
         .unlockedBy(
-            HAS_REDSTONE_BLOCK,
-            InventoryChangeTrigger.TriggerInstance.hasItems(Items.REDSTONE_BLOCK))
+            HAS_ROBOT,
+            InventoryChangeTrigger.TriggerInstance.hasItems(CubitItems.GENERAL_ROBOT.get()))
         .save(output);
   }
 }

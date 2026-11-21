@@ -40,7 +40,6 @@ final class CubitPartRecipes {
   private static final char EDGE = 'E';
   private static final char SIDE = 'S';
   private static final char CENTER = 'C';
-  private static final String HAS_DIAMOND = "has_diamond";
   private static final String HAS_ROBOT = "has_robot";
   private static final String HAS_PREFIX = "has_";
 
@@ -51,9 +50,9 @@ final class CubitPartRecipes {
     powerBankParts(output);
   }
 
-  /** The four parts of the Cubit unlock with a diamond (answer 1350). */
+  /** The four parts of the Cubit are open from the start, the first thing to make (answer 1496). */
   private static void robotParts(RecipeOutput output) {
-    shaped(CubitItems.GENERAL_ROBOT_CASING.get(), HAS_DIAMOND, Items.DIAMOND)
+    fromStart(CubitItems.GENERAL_ROBOT_CASING.get())
         .pattern(CASING_TOP_ROW)
         .pattern(CASING_MIDDLE_ROW)
         .pattern(CASING_BOTTOM_ROW)
@@ -61,18 +60,18 @@ final class CubitPartRecipes {
         .define(IRON, Items.IRON_INGOT)
         .define(OBSIDIAN, Items.OBSIDIAN)
         .save(output);
-    shaped(CubitItems.GENERAL_ROBOT_VISOR.get(), HAS_DIAMOND, Items.DIAMOND)
+    fromStart(CubitItems.GENERAL_ROBOT_VISOR.get())
         .pattern(VISOR_ROW)
         .define(DIAMOND, Items.DIAMOND)
         .define(OBSIDIAN, Items.OBSIDIAN)
         .save(output);
-    shaped(CubitItems.GENERAL_ROBOT_TREADS.get(), HAS_DIAMOND, Items.DIAMOND)
+    fromStart(CubitItems.GENERAL_ROBOT_TREADS.get())
         .pattern(TREADS_TOP_ROW)
         .pattern(TREADS_BOTTOM_ROW)
         .define(IRON, Items.IRON_INGOT)
         .define(PISTON, Items.PISTON)
         .save(output);
-    shaped(CubitItems.GENERAL_ROBOT_CORE.get(), HAS_DIAMOND, Items.DIAMOND)
+    fromStart(CubitItems.GENERAL_ROBOT_CORE.get())
         .pattern(CORE_TOP_ROW)
         .pattern(CORE_MIDDLE_ROW)
         .pattern(CORE_BOTTOM_ROW)
@@ -146,6 +145,11 @@ final class CubitPartRecipes {
         .define(EDGE, edge)
         .define(SIDE, side)
         .define(CENTER, center);
+  }
+
+  private static ShapedRecipeBuilder fromStart(ItemLike result) {
+    return ShapedRecipeBuilder.shaped(RecipeCategory.MISC, result)
+        .unlockedBy(DeskRecipeData.FROM_START, DeskRecipeData.fromStart());
   }
 
   private static ShapedRecipeBuilder shaped(ItemLike result, String criterion, ItemLike unlock) {
