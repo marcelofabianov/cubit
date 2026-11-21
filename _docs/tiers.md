@@ -31,8 +31,20 @@ Os tiers são Base, Avançado, Elite e Ultimate (no jogo: Base, Advanced, Elite 
 | Autonomia na água e com inventário cheio | ~10 min | ~16,7 min | ~1,2 h | ~2,2 h |
 | Painel solar (de dia) | 5 FE/t | 10 FE/t | 12 FE/t | 16 FE/t |
 | Painel solar (à noite) | — | — | 3 FE/t | 4 FE/t |
-| Recarga na base e pelo slot de energia | 500 FE/t | 1.000 FE/t | 2.500 FE/t | 5.000 FE/t |
+| Recarga pelo slot de energia, no tier do Cubit. Na base, vale a do tier do Dock, em [Induction Dock](#induction-dock) (pergunta 1375) | 500 FE/t | 1.000 FE/t | 2.500 FE/t | 5.000 FE/t |
 | Raio do retorno automático e da chamada pelo Dock, e bateria do retorno (o retorno entra com o item 15 da Fase 4.2, pergunta 1066) | 15 blocos, 10% | 24 blocos, 10% | 32 blocos, 10% | 48 blocos, 10% |
+
+## Induction Dock
+
+O Dock sobe de tier com os mesmos Modules do Cubit (perguntas 1373 a 1380). Os números ficam no config, em `dock_energy_capacity` e `dock_recharge_per_tick`, por tier, e `dock_storage_slots`, por tier.
+
+| Dock | Base | Avançado | Elite | Ultimate |
+|---|---|---|---|---|
+| Estoque | 300 mil FE | 1,2 mi FE | 6 mi FE | 16 mi FE |
+| Recarga do Cubit e da Power Bank guardada | 500 FE/t | 1.000 FE/t | 2.500 FE/t | 5.000 FE/t |
+| Slots do inventário | 27 | 36 | 45 | 54 |
+| Entrada, por cabos e redstone | 5.000 FE/t | 5.000 FE/t | 5.000 FE/t | 5.000 FE/t |
+| Faixa | Cinza | Azul | Roxa | Dourada, com o corpo em netherite |
 
 ## Consumo por atividade
 
@@ -65,7 +77,7 @@ Valem para todos os tiers e ficam no config. Os marcados como planejados entram 
 | Consumo parado | 0 FE/t |
 | Carga do Cubit ao sair do craft | 25% |
 | Carga da Power Bank ao sair do craft | 0% |
-| Recarga da Power Bank no inventário do Dock | A do Base, uma por vez, sem Cubit na base ou com o Cubit da base de bateria cheia (perguntas 949 e 952) |
+| Recarga da Power Bank no inventário do Dock | A do tier do Dock, uma por vez, sem Cubit na base ou com o Cubit da base de bateria cheia (perguntas 952 e 1376) |
 | Descarga da Power Bank no slot de entrada do Dock | O limite de entrada do Dock, junto dos cabos (pergunta 920) |
 | Velocidade 1,0× (atributo de movimento) | 0,33 |
 | Intervalo para recalcular a rota | 10 ticks |
@@ -85,7 +97,6 @@ Valem para todos os tiers e ficam no config. Os marcados como planejados entram 
 | Tempo com a expressão de quase morto, depois de um dano | ~3 s |
 | Tempo com a expressão de preocupado | ~3 s |
 | Distância para ficar preocupado com o dono | 16 blocos |
-| Estoque do Induction Dock | 100 mil FE |
 | Entrada do Induction Dock | 5.000 FE/t |
 | Tempo sem avançar antes de teleportar ao Dock | 5 s |
 | Tempo com a tela completa antes de sair da base | 3 s |
@@ -236,6 +247,7 @@ Planejado para a Fase 5. O tier Base não aceita cards, e cada card tem o seu ti
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-21 06:20 | Adiciona os tiers do Dock (perguntas 1373 a 1380). |
 | Marcelo Fabiano | 2026-11-21 03:25 | Adiciona o custo e o limite das portas (perguntas 1368 e 1369). |
 | Marcelo Fabiano | 2026-11-19 23:04 | Adiciona os números do Cozinheiro (pergunta 1326). |
 | Marcelo Fabiano | 2026-11-19 21:34 | Adiciona os números do Organizador (pergunta 1300). |
