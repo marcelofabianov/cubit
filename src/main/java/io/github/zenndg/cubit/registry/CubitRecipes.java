@@ -5,6 +5,7 @@ import io.github.zenndg.cubit.CubitMod;
 import io.github.zenndg.cubit.item.PowerBankUpgradeRecipe;
 import io.github.zenndg.cubit.item.RobotRechargeRecipe;
 import io.github.zenndg.cubit.item.RobotRepairRecipe;
+import io.github.zenndg.cubit.item.SolarDockRecipe;
 import java.util.function.Supplier;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -21,6 +22,7 @@ public final class CubitRecipes {
   private static final String ROBOT_REPAIR_ID = "robot_repair";
   private static final String ROBOT_RECHARGE_ID = "robot_recharge";
   private static final String POWER_BANK_UPGRADE_ID = "power_bank_upgrade";
+  private static final String SOLAR_DOCK_ASSEMBLY_ID = "solar_dock_assembly";
   private static final DeferredRegister<RecipeSerializer<?>> SERIALIZERS =
       DeferredRegister.create(Registries.RECIPE_SERIALIZER, CubitMod.MOD_ID);
 
@@ -51,6 +53,12 @@ public final class CubitRecipes {
       SERIALIZERS.register(
           POWER_BANK_UPGRADE_ID,
           () -> serializer(PowerBankUpgradeRecipe.CODEC, PowerBankUpgradeRecipe.STREAM_CODEC));
+
+  /** The Dock Solar Panel on an Induction Dock, which keeps its state (answer 1386). */
+  public static final Supplier<RecipeSerializer<SolarDockRecipe>> SOLAR_DOCK_ASSEMBLY =
+      SERIALIZERS.register(
+          SOLAR_DOCK_ASSEMBLY_ID,
+          () -> serializer(SolarDockRecipe.CODEC, SolarDockRecipe.STREAM_CODEC));
 
   private CubitRecipes() {}
 

@@ -28,7 +28,12 @@ final class CubitBlockLootProvider extends BlockLootSubProvider {
 
   @Override
   protected void generate() {
-    Block dock = CubitBlocks.INDUCTION_DOCK.get();
+    dockLoot(CubitBlocks.INDUCTION_DOCK.get());
+    dockLoot(CubitBlocks.SOLAR_INDUCTION_DOCK.get());
+  }
+
+  /** Only the lower half drops the dock, with its energy, storage and tier (answer 1373). */
+  private void dockLoot(Block dock) {
     add(
         dock,
         LootTable.lootTable()
@@ -53,6 +58,6 @@ final class CubitBlockLootProvider extends BlockLootSubProvider {
 
   @Override
   protected Iterable<Block> getKnownBlocks() {
-    return List.of(CubitBlocks.INDUCTION_DOCK.get());
+    return List.of(CubitBlocks.INDUCTION_DOCK.get(), CubitBlocks.SOLAR_INDUCTION_DOCK.get());
   }
 }

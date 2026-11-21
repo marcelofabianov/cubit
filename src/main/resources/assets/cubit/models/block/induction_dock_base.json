@@ -504,16 +504,81 @@
       }
     },
     {
-      "name": "tier_band",
+      "name": "tier_band_rim",
       "from": [
-        3.4,
-        3.5,
-        11.9
+        3.45,
+        26.45,
+        11.95
       ],
       "to": [
-        12.6,
-        5.0,
-        16.1
+        12.55,
+        27.05,
+        16.05
+      ],
+      "faces": {
+        "north": {
+          "texture": "#band",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "tintindex": 0
+        },
+        "east": {
+          "texture": "#band",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "tintindex": 0
+        },
+        "south": {
+          "texture": "#band",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "tintindex": 0
+        },
+        "west": {
+          "texture": "#band",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "tintindex": 0
+        },
+        "up": {
+          "texture": "#band",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "tintindex": 0
+        }
+      }
+    },
+    {
+      "name": "tier_band_cap",
+      "from": [
+        3.95,
+        26.95,
+        12.45
+      ],
+      "to": [
+        12.05,
+        28.05,
+        15.55
       ],
       "faces": {
         "north": {

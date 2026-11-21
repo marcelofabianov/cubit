@@ -16,6 +16,8 @@ final class DockKeys {
   private static final String CAPACITY = "dock_energy_capacity";
   private static final String RECHARGE = "dock_recharge_per_tick";
   private static final String SLOTS = "dock_storage_slots";
+  private static final String SOLAR = "dock_solar_per_tick";
+  private static final int MIN_ZERO = 0;
   private static final int MIN_POSITIVE = 1;
   private static final int MAX_ENERGY = Integer.MAX_VALUE;
   private static final String NOT_A_ROW = "dock_storage_slots {} is not whole rows of 9, using {}.";
@@ -23,6 +25,7 @@ final class DockKeys {
   private final ModConfigSpec.IntValue capacity;
   private final ModConfigSpec.IntValue recharge;
   private final ModConfigSpec.IntValue slots;
+  private final ModConfigSpec.IntValue solar;
 
   DockKeys(ModConfigSpec.Builder builder, DockSpec defaults) {
     capacity =
@@ -34,6 +37,8 @@ final class DockKeys {
     slots =
         builder.defineInRange(
             SLOTS, defaults.storageSlots(), DockSpec.ROW, DockStorageRules.MAX_SLOTS);
+    solar =
+        builder.defineInRange(SOLAR, (int) defaults.solarPerTick().amount(), MIN_ZERO, MAX_ENERGY);
   }
 
   /** Slots that are not whole rows fall to the row below, with a warning (rule 17). */
@@ -43,6 +48,7 @@ final class DockKeys {
     if (rows != configured) {
       LOGGER.warn(NOT_A_ROW, configured, rows);
     }
-    return new DockSpec(new Energy(capacity.get()), new Energy(recharge.get()), rows);
+    return new DockSpec(
+        new Energy(capacity.get()), new Energy(recharge.get()), rows, new Energy(solar.get()));
   }
 }

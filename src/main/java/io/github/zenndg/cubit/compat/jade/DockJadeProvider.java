@@ -2,9 +2,12 @@ package io.github.zenndg.cubit.compat.jade;
 
 import io.github.zenndg.cubit.block.InductionDockBlock;
 import io.github.zenndg.cubit.block.InductionDockBlockEntity;
+import io.github.zenndg.cubit.domain.energy.Energy;
+import io.github.zenndg.cubit.domain.energy.EnergyFormat;
 import io.github.zenndg.cubit.domain.energy.EnergyReading;
 import io.github.zenndg.cubit.domain.tier.RobotTier;
 import io.github.zenndg.cubit.item.TierLook;
+import io.github.zenndg.cubit.menu.ScreenKeys;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -24,12 +27,16 @@ enum DockJadeProvider implements IBlockComponentProvider, IServerDataProvider<Bl
 
   private static final String STOCK = "Stock";
   private static final String CAPACITY = "Capacity";
+  private static final String SOLAR = "Solar";
 
   @Override
   public void appendServerData(CompoundTag data, BlockAccessor accessor) {
     if (accessor.getBlockEntity() instanceof InductionDockBlockEntity dock) {
       data.putLong(STOCK, dock.energy().amount());
       data.putLong(CAPACITY, dock.capacity().amount());
+      if (dock.isSolar()) {
+        data.putLong(SOLAR, dock.solar().given().amount());
+      }
     }
   }
 
@@ -39,6 +46,14 @@ enum DockJadeProvider implements IBlockComponentProvider, IServerDataProvider<Bl
     if (data.contains(STOCK) && data.contains(CAPACITY)) {
       tooltip.add(
           JadeEnergyText.stock(EnergyReading.capped(data.getLong(STOCK), data.getLong(CAPACITY))));
+    }
+    if (data.contains(SOLAR)) {
+      long solar = data.getLong(SOLAR);
+      tooltip.add(
+          solar == 0
+              ? Component.translatable(ScreenKeys.DOCK_NO_SUN)
+              : Component.translatable(
+                  ScreenKeys.DOCK_SOLAR, EnergyFormat.rate(new Energy(solar))));
     }
     BlockState state = accessor.getBlockState();
     if (state.hasProperty(InductionDockBlock.TIER)) {

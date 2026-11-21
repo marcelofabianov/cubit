@@ -7,7 +7,6 @@ import io.github.zenndg.cubit.domain.dock.DockQueue;
 import io.github.zenndg.cubit.domain.dock.DockStatus;
 import io.github.zenndg.cubit.domain.dock.DockStock;
 import io.github.zenndg.cubit.domain.dock.DockStorageRules;
-import io.github.zenndg.cubit.domain.dock.DockStoredKind;
 import io.github.zenndg.cubit.domain.energy.Battery;
 import io.github.zenndg.cubit.domain.energy.Energy;
 import io.github.zenndg.cubit.domain.ownership.Ownership;
@@ -20,7 +19,6 @@ import io.github.zenndg.cubit.registry.CubitDataComponents;
 import java.util.Optional;
 import java.util.UUID;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.nbt.CompoundTag;
@@ -55,10 +53,6 @@ public final class InductionDockBlockEntity extends BlockEntity {
   private static final int SLOT = 0;
   private static final int SLOT_SIZE = 1;
   private static final int ONE_ITEM = 1;
-  private static final double PLATE_HEIGHT = 3.0 / 16;
-
-  /** 12 units away from the tower: exactly the width of a robot, and a little margin. */
-  private static final double TOWARD_FRONT = 2.05 / 16;
 
   private static final long ROBOT_LOST_TICKS = 3;
 
@@ -77,6 +71,8 @@ public final class InductionDockBlockEntity extends BlockEntity {
 
   /** The Toolbox and the Power Banks, which the stock charges (answers 947 to 959). */
   private final DockTier tier = new DockTier();
+
+  private final DockSolarPanel panel = new DockSolarPanel();
 
   private final DockStorage storage =
       new DockStorage(this::setChanged, () -> tier.spec().storageSlots());
@@ -116,6 +112,15 @@ public final class InductionDockBlockEntity extends BlockEntity {
     return tier.spec().rechargePerTick();
   }
 
+  public boolean isSolar() {
+    return getBlockState().getBlock() instanceof InductionDockBlock block && block.isSolar();
+  }
+
+  public DockSolarReading solar() {
+    return new DockSolarReading(
+        panel.given(), tier.spec().solarPerTick(), panel.state(), panel.sunlit());
+  }
+
   public int storageSlots() {
     return tier.spec().storageSlots();
   }
@@ -144,6 +149,13 @@ public final class InductionDockBlockEntity extends BlockEntity {
     boolean chargesBanks = DockStorageRules.chargesBanks(dock.isOccupied(), dock.robotFull);
     dock.stock =
         dock.storage.charge(dock.stock, chargesBanks, dock.rechargePerTick(), dock::setChanged);
+    if (dock.isSolar()) {
+      Energy rate = dock.tier.spec().solarPerTick();
+      dock.stock = dock.panel.generate(level, pos, dock.stock, rate, dock::setChanged);
+      if (dock.panel.switched()) {
+        level.sendBlockUpdated(pos, state, state, Block.UPDATE_CLIENTS);
+      }
+    }
     dock.showStatus(level, pos, state);
   }
 
@@ -264,11 +276,8 @@ public final class InductionDockBlockEntity extends BlockEntity {
     return transfer.robot();
   }
 
-  /** Where a robot stands, between the front of the plate and the tower. */
   public Vec3 robotSpot() {
-    Direction front = getBlockState().getValue(InductionDockBlock.FACING);
-    return Vec3.atBottomCenterOf(worldPosition)
-        .add(front.getStepX() * TOWARD_FRONT, PLATE_HEIGHT, front.getStepZ() * TOWARD_FRONT);
+    return DockShapes.robotSpot(getBlockState().getValue(InductionDockBlock.FACING), worldPosition);
   }
 
   public Energy energy() {
@@ -295,18 +304,8 @@ public final class InductionDockBlockEntity extends BlockEntity {
     return stock.energy().level(steps);
   }
 
-  /**
-   * The click keeps only the Toolbox, the Power Bank and the Damaged Cubit, and redstone goes to
-   * the input (959). Other items of the mod go in by the screen or a hopper (answer 1382).
-   */
   boolean insert(ItemStack stack) {
-    DockStoredKind kind = DockStorage.kindOf(stack);
-    if (kind == DockStoredKind.MOD_ITEM) {
-      return false;
-    }
-    return DockStorageRules.accepts(kind)
-        ? storage.insert(stack)
-        : EnergySlotItems.insert(slot, stack);
+    return storage.insertByClick(stack, slot);
   }
 
   Energy receive(Energy offered, boolean simulate) {
@@ -347,16 +346,10 @@ public final class InductionDockBlockEntity extends BlockEntity {
       LOGGER.warn(NO_OWNER_MESSAGE, worldPosition);
     }
     tier.load(tag, worldPosition);
+    panel.readSun(tag);
     stock = DockStock.of(capacity(), SavedEnergy.of(tag.getLong(ENERGY_KEY)));
-    slot.setItem(SLOT, savedStack(tag, SLOT_KEY, registries));
+    slot.setItem(SLOT, DockShapes.savedStack(tag, SLOT_KEY, registries));
     storage.load(tag, registries, worldPosition);
-  }
-
-  private static ItemStack savedStack(
-      CompoundTag tag, String key, HolderLookup.Provider registries) {
-    return tag.contains(key)
-        ? ItemStack.parse(registries, tag.getCompound(key)).orElse(ItemStack.EMPTY)
-        : ItemStack.EMPTY;
   }
 
   @Override
@@ -385,6 +378,7 @@ public final class InductionDockBlockEntity extends BlockEntity {
     if (owner != null) {
       tag.putUUID(OWNER_KEY, owner);
     }
+    panel.writeSun(tag);
     return tag;
   }
 

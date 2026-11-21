@@ -1,6 +1,7 @@
 package io.github.zenndg.cubit.menu;
 
 import io.github.zenndg.cubit.CubitMod;
+import io.github.zenndg.cubit.block.DockSolarReading;
 import io.github.zenndg.cubit.block.DockedRobot;
 import io.github.zenndg.cubit.block.InductionDockBlockEntity;
 import io.github.zenndg.cubit.domain.energy.Energy;
@@ -28,7 +29,10 @@ final class DockScreenValues implements ContainerData {
   static final int HEAL_MINUTES = 18;
   static final int EXPRESSION = 19;
   static final int TIER = 20;
-  static final int COUNT = 21;
+  static final int SOLAR = 21;
+  static final int SUN_STATE = 23;
+  static final int SOLAR_MAX = 24;
+  static final int COUNT = 26;
   private static final int TRUE_VALUE = 1;
 
   private final InductionDockBlockEntity dock;
@@ -43,6 +47,10 @@ final class DockScreenValues implements ContainerData {
     putEnergy(STOCK, dock.energy());
     putEnergy(CAPACITY, dock.capacity());
     putEnergy(INPUT, dock.inputShown());
+    DockSolarReading solar = dock.solar();
+    putEnergy(SOLAR, solar.given());
+    values[SUN_STATE] = solar.state().ordinal();
+    putEnergy(SOLAR_MAX, solar.max());
     values[STATUS] = dock.status().ordinal();
     values[WAITING] = dock.waitingCount();
     values[ROBOT_PRESENT] = 0;

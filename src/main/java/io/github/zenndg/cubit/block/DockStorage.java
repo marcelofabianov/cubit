@@ -8,6 +8,7 @@ import io.github.zenndg.cubit.domain.dock.DockStorageRules;
 import io.github.zenndg.cubit.domain.dock.DockStoredKind;
 import io.github.zenndg.cubit.domain.energy.Battery;
 import io.github.zenndg.cubit.domain.energy.Energy;
+import io.github.zenndg.cubit.item.EnergySlotItems;
 import io.github.zenndg.cubit.item.PowerBankItem;
 import io.github.zenndg.cubit.registry.CubitItems;
 import java.util.ArrayList;
@@ -101,6 +102,18 @@ final class DockStorage {
             : ItemStack.EMPTY;
       }
     };
+  }
+
+  /**
+   * The click keeps only the Toolbox, the Power Bank and the Damaged Cubit, and redstone goes to
+   * the input slot (959). Other items of the mod go in by the screen or a hopper (answer 1382).
+   */
+  boolean insertByClick(ItemStack stack, SimpleContainer input) {
+    DockStoredKind kind = kindOf(stack);
+    if (kind == DockStoredKind.MOD_ITEM) {
+      return false;
+    }
+    return DockStorageRules.accepts(kind) ? insert(stack) : EnergySlotItems.insert(input, stack);
   }
 
   /**

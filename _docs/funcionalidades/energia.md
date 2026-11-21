@@ -100,10 +100,25 @@ O Induction Dock sobe de tier com os mesmos Modules do Cubit (issue #225, pergun
 - **O que muda com o tier:** o estoque, os slots do inventário e a recarga do Cubit e da Power Bank guardada. A entrada, por cabos e redstone, fica em 5.000 FE/t em todos (pergunta 1374).
 - **Slots novos:** ao subir, os slots a mais aparecem vazios, e os itens continuam onde estavam.
 - **Recolher:** o item do Dock guarda o tier, com a energia e o inventário, e o Dock volta no mesmo tier ao ser colocado (pergunta 1373).
-- **Faixa:** uma faixa ao redor da torre, logo acima da placa da base, na cor do tier, como o colar do Cubit: cinza, azul, roxo e dourado (pergunta 1379).
+- **Faixa:** a tampa do topo da torre fica na cor do tier, para ser fácil de ver: cinza, azul, roxo e dourado (perguntas 1379 e 1389).
 - **Ultimate:** o corpo do Dock fica em netherite, como a Ultimate Power Bank e o Ultimate Module (pergunta 1380).
 - **Tela e Jade:** a tela do Dock e o Jade mostram o tier, na cor dele.
 - **Saves antigos:** um Dock sem o tier, colocado antes, vale como Base, e o estoque dele passa a caber 300 mil FE.
+
+### Dock Solar
+
+O Solar Induction Dock é o Induction Dock com um painel solar acoplado no topo da torre (issue #227, perguntas 1362 e 1384 a 1388). Os números estão em [`tiers.md`](../tiers.md#induction-dock).
+
+- **Craft:** o Dock Solar Panel e um Induction Dock, em qualquer posição da grade. O Dock passa o tier, a energia e o inventário para o Dock Solar, como a Power Bank passa a carga.
+- **Gera:** de dia, a céu aberto e sem chuva, o painel põe no estoque 25, 100, 500 ou 1.400 FE/t, pelo tier, o que enche o estoque em cerca de um dia de sol. A geração soma à entrada dos cabos e da redstone, sem passar do estoque.
+- **Sem sol:** dentro de casa, com um bloco opaco sobre o painel, com chuva ou tempestade, à noite, no Nether e no End, ele se comporta como um Dock normal, sem gerar. O vidro deixa passar a luz, como no painel do Cubit, que usa a mesma leitura do céu e o mesmo intervalo (pergunta 1398).
+- **O resto:** faz tudo o que o Dock faz: recebe o Cubit, hiberna, fila, inventário, cabos e os tiers pelos Modules.
+- **Aba Solar:** só no Dock Solar, com o ícone do Dock Solar Panel. Mostra o status, gerando ou parado; quando parado, o motivo: noite, chuva, céu coberto ou sem sol na dimensão; a geração de agora; e a máxima do tier. A aba principal fica igual à do Dock comum (perguntas 1395 a 1397).
+- **Jade:** mostra a geração, como `Solar +25 FE/t`, ou `Solar: no sun` sem sol.
+- **Sinal:** enquanto gera, a face do painel clareia e escurece devagar, com o mesmo pulso do painel do Cubit (pergunta 1392).
+- **Visual:** o painel fica num mastro curto sobre a torre, inclinado para a frente, como na [imagem conceito](../imagens/conceito/induction-dock-solar.png).
+- **Quebrar:** o item é o Solar Induction Dock, com o tier, a energia e o inventário, sem separar o painel.
+- **Onde colocar:** ao ar livre, para o painel ver o céu.
 
 ### Ir para a base e sair dela
 
@@ -172,6 +187,9 @@ Entra com o item 15 da Fase 4.2, antes do modo área (perguntas 1065 a 1069).
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-21 09:50 | Adiciona a aba Solar e o vidro sobre o painel (perguntas 1395 a 1398). |
+| Marcelo Fabiano | 2026-11-21 09:10 | Adiciona o pulso e o visual do painel do Dock Solar (pergunta 1392). |
+| Marcelo Fabiano | 2026-11-21 08:20 | Adiciona o Dock Solar e leva a faixa do tier para o topo da torre (perguntas 1384 a 1389). |
 | Marcelo Fabiano | 2026-11-21 06:15 | Adiciona os tiers do Dock e o inventário com todos os itens do mod (perguntas 1373 a 1380). |
 | Marcelo Fabiano | 2026-11-19 20:18 | Cita o gasto maior com a velocidade escolhida abaixo de 100% (pergunta 1259). |
 | Marcelo Fabiano | 2026-11-14 10:00 | Define o retorno automático (perguntas 1065 a 1069). |

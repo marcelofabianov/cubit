@@ -17,6 +17,8 @@
 | Cubit Casing, Cubit Visor, Cubit Treads e Cubit Neural Core | As peças que montam o Cubit ([`pecas.md`](funcionalidades/pecas.md)) |
 | Power Bank Casing | A carcaça das Power Banks |
 | Base, Advanced, Elite e Ultimate Power Cell | A célula de cada tier, que vai dentro da Power Bank |
+| Dock Solar Panel | O painel solar que, com um Induction Dock, faz o Solar Induction Dock |
+| Solar Induction Dock | O Induction Dock com o painel solar acoplado, que gera FE ao ar livre ([`energia.md`](funcionalidades/energia.md#dock-solar)) |
 
 ## IDs e receitas
 
@@ -43,6 +45,8 @@
 | Advanced Power Cell | `cubit:advanced_power_cell` | [Abaixo](#peças-de-montagem) |
 | Elite Power Cell | `cubit:elite_power_cell` | [Abaixo](#peças-de-montagem) |
 | Ultimate Power Cell | `cubit:ultimate_power_cell` | [Abaixo](#peças-de-montagem) |
+| Dock Solar Panel | `cubit:dock_solar_panel` | [Abaixo](#dock-solar) |
+| Solar Induction Dock | `cubit:solar_induction_dock` | [Abaixo](#dock-solar) |
 
 ## Progressão das receitas
 
@@ -78,6 +82,15 @@ Na mesa de craft, com forma (perguntas 1025, 1030 e 1331): 2 painéis de vidro e
 | Linha 1 | Painel de vidro | Redstone | Painel de vidro |
 | Linha 2 | Quartzo | Diamante | Quartzo |
 | Linha 3 | Quartzo | Obsidiana | Quartzo |
+
+### Dock Solar
+
+Na mesa de craft (perguntas 1384 e 1387). O Dock Solar Panel aparece no livro com um Induction Dock, e o Solar Induction Dock, com o painel.
+
+| Item | Receita |
+|---|---|
+| Dock Solar Panel | Vidro, vidro, vidro / sensor de luz do dia, bloco de redstone, sensor de luz do dia / lingote de ferro, lingote de ferro, lingote de ferro |
+| Solar Induction Dock | O Dock Solar Panel e um Induction Dock, sem forma, no tipo `cubit:solar_dock_assembly`, que passa o tier, a energia e o inventário do Dock |
 
 ### Toolbox
 
@@ -209,6 +222,8 @@ Estes nomes não mudam sem migração (regra 18 do `AGENTS.md`).
 | Componente do item | `cubit:energy_slot` | Item do slot de energia e reserva de FE, também no item danificado |
 | Componente do item | `cubit:torch_slot` | As tochas do slot de tochas, também no item danificado. Sem o componente, o slot fica vazio (pergunta 981) |
 | Componente do item do Dock | `cubit:dock_energy` | Energia do estoque |
+| Bloco e item | `cubit:solar_induction_dock` | O Dock Solar, com os mesmos componentes, NBT e estados do Induction Dock (pergunta 1386) |
+| Tipo de receita | `cubit:solar_dock_assembly` | O Dock Solar Panel e um Induction Dock, que passa os componentes do Dock para o Dock Solar |
 | Componente do item do Dock | `cubit:dock_tier` | O tier do Dock: `base`, `advanced`, `elite` ou `ultimate`. Sem o componente, vale `base` (pergunta 1373) |
 | Componente do Tablet | `cubit:tablet_app` | O app ativo: `open`, `target` ou `dock`. Sem o componente, vale `open` (pergunta 1026) |
 | Attachment do player | `cubit:chosen_robot` | O UUID do Cubit escolhido no Tablet (pergunta 1026) |
@@ -279,6 +294,7 @@ O estado salvo é validado ao entrar no jogo, sem derrubá-lo (regra 17 do `AGEN
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-21 08:20 | Adiciona o Dock Solar Panel e o Solar Induction Dock (perguntas 1384 a 1388). |
 | Marcelo Fabiano | 2026-11-21 06:30 | Adiciona o tier do Dock aos contratos (perguntas 1373 e 1379). |
 | Marcelo Fabiano | 2026-11-21 02:35 | Atualiza a progressão das receitas (perguntas 1354 e 1358). |
 | Marcelo Fabiano | 2026-11-21 02:30 | Encadeia os Modules em cruz, como as células (perguntas 1357 e 1358). |

@@ -327,11 +327,28 @@ Não há perguntas pendentes nesta fase.
 | 1380 | Como fazer a textura de netherite do Dock Ultimate? | Recolorindo a textura atual do corpo por script, com o branco e o cinza na paleta de netherite e o laranja, a tela e as luzes mantidos. O desenvolvedor aprova a imagem antes |
 | 1381 | Como ficam as chaves de config do Dock por tier, já que `dock_energy_capacity` é contrato e os arquivos existentes guardam 100000? | Chaves novas em cada seção de tier, `[general_robot.{tier}]`: `dock_energy_capacity`, `dock_recharge_per_tick` e `dock_storage_slots`. A chave geral `general.dock_energy_capacity` sai, o NeoForge corrige o arquivo, e o Base passa a 300 mil FE. Um valor mudado à mão na chave antiga se perde, com o aviso no CHANGELOG, porque o mod não chega a ler a chave removida |
 | 1382 | O conceito do Dock com tiers (#225) está autorizado para o código? | Sim: o desenvolvedor disse "autorizo", com a textura de netherite recolorida por script e os detalhes completados pelo agente: o clique de guardar continua só com a Power Bank, a Toolbox e o Damaged Cubit, os slots novos aparecem vazios, a tela e o Jade mostram o tier, o ícone do item mostra o tier e a automação tira qualquer item do mod, menos a Power Bank vazia (regra 53) |
+| 1383 | O agente pode fazer as pendências: marcar no `checklist.md` os cards que entraram fora do plano, atualizar a seção "Próximos" do `AGENTS.md` e registrar as GameTests intermitentes? | Sim. Os cards #219, #221, #223 e #225 entram marcados no `checklist.md`, a seção "Próximos" do `AGENTS.md` é atualizada, e a GameTest intermitente das tochas foi comentada na issue #213, que já existia para as outras duas |
+| 1384 | Como é o Dock Solar? | Um Dock Solar Panel, combinado com o Dock anterior na grade, vira o Dock com o painel solar acoplado, que deve ser colocado ao ar livre. Dentro de casa, com chuva ou à noite, ele se comporta como um Dock normal. Detalha a 1362 |
+| 1385 | Quanto o painel do Dock Solar gera por tier? | 25, 100, 500 e 1.400 FE/t, de dia, a céu aberto e sem chuva, o que enche o estoque do tier em cerca de um dia de sol |
+| 1386 | Quais são os nomes e os IDs da peça e do bloco? | `cubit:dock_solar_panel` (Dock Solar Panel) e `cubit:solar_induction_dock` (Solar Induction Dock) |
+| 1387 | Qual é a receita do Dock Solar Panel? | Vidro, vidro, vidro / sensor de luz do dia, bloco de redstone, sensor de luz do dia / ferro, ferro, ferro |
+| 1388 | Como fazer o visual do painel no Dock e a textura da peça? | Por prompts de imagem, em `tmp/arte/dock-solar/prompt.md` (regra 55) |
+| 1389 | Onde fica a faixa do tier do Dock? | No topo da torre, para ser mais fácil de ver, em todos os Docks: a tampa do topo ganha a cor do tier. Muda a 1379 |
+| 1390 | O que entra antes do Defensor, depois do Dock Solar? | Um lembrete no roadmap: revisar o tier mínimo de cada trabalho, antes do Defensor |
+| 1391 | O conceito do Dock Solar (#227) está autorizado para o código? | Sim: o desenvolvedor disse "autorizo", com a faixa no topo da torre e os detalhes completados pelo agente: a tela e o Jade mostram a geração, quebrar devolve o Dock Solar inteiro, o livro mostra o painel com um Dock e o Dock Solar com o painel, e o Cubit, o Tablet e o retorno tratam o Dock Solar como qualquer Dock (regra 53) |
+| 1392 | O painel do Dock Solar tem o efeito visual do painel do Cubit? | Sim: enquanto gera, a face do painel clareia e escurece devagar, com o mesmo pulso do Cubit (`SolarPulse`) |
+| 1393 | Qual ideia entra antes da revisão dos tiers dos trabalhos e do Defensor? | Uma mistura química parecida com uma poção de arremesso: o player a cria e a arremessa no Cubit, e o contato aumenta a vida e a energia dele. Os detalhes ficam para o refinamento do card |
+| 1394 | Em quem a mistura química de arremesso faz efeito? | Só no Cubit: ela não faz efeito em outras entidades, e o Cubit só recebe efeito dela, sem o efeito das outras poções. Detalha a 1393 e fica para o refinamento do card |
+| 1395 | O Dock Solar ganha uma aba própria na tela? | Sim: a aba Solar, só no Dock Solar, com o ícone do Dock Solar Panel, que mostra as informações do carregamento |
+| 1396 | O que a aba Solar mostra? | O status, gerando ou parado; quando parado, o motivo: noite, chuva, céu coberto ou sem sol na dimensão; e a taxa de agora, com a geração máxima do tier |
+| 1397 | A linha do solar continua na aba principal da tela do Dock? | Não: o solar fica só na aba nova, e a aba principal volta a ser igual à do Dock comum. O Jade continua mostrando a geração. Muda a 1391 nesse ponto |
+| 1398 | Um bloco sobre o painel do Dock Solar impede o carregamento? | Sim, um bloco que não deixa passar a luz, como no painel do Cubit: o vidro deixa carregar. O Dock usa a mesma leitura do céu do Cubit, no mesmo intervalo, e a mesma regra do dia |
 
 ## Histórico de modificações
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-21 08:00 | Registra as respostas 1383 a 1398. |
 | Marcelo Fabiano | 2026-11-21 06:00 | Registra as respostas 1373 a 1382. |
 | Marcelo Fabiano | 2026-11-21 03:10 | Registra as respostas 1359 a 1372. |
 | Marcelo Fabiano | 2026-11-21 00:40 | Registra as respostas 1338 a 1358. |

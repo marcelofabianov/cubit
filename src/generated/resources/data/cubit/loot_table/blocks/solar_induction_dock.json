@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "block": "cubit:solar_induction_dock",
+              "condition": "minecraft:block_state_property",
+              "properties": {
+                "half": "lower"
+              }
+            }
+          ],
+          "functions": [
+            {
+              "function": "minecraft:copy_components",
+              "include": [
+                "cubit:dock_energy",
+                "cubit:dock_storage",
+                "cubit:dock_tier"
+              ],
+              "source": "block_entity"
+            }
+          ],
+          "name": "cubit:solar_induction_dock"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "cubit:blocks/solar_induction_dock"
+}
