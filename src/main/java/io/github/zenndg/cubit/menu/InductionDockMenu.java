@@ -6,6 +6,7 @@ import io.github.zenndg.cubit.config.CubitConfig;
 import io.github.zenndg.cubit.domain.behavior.RobotExpression;
 import io.github.zenndg.cubit.domain.dock.DockStatus;
 import io.github.zenndg.cubit.domain.dock.DockStorageRules;
+import io.github.zenndg.cubit.domain.dock.DockSunState;
 import io.github.zenndg.cubit.domain.energy.Energy;
 import io.github.zenndg.cubit.domain.robot.HealTime;
 import io.github.zenndg.cubit.domain.tier.RobotTier;
@@ -211,6 +212,24 @@ public final class InductionDockMenu extends AbstractContainerMenu {
     return opening.storageSlots();
   }
 
+  /** What the panel of a Solar Dock gives now, zero without the sun (answer 1391). */
+  public Energy solar() {
+    return DockScreenValues.energy(values, DockScreenValues.SOLAR);
+  }
+
+  public boolean isSolar() {
+    return opening.solar();
+  }
+
+  public DockSunState sunState() {
+    return ScreenEnums.of(DockSunState.values(), values.get(DockScreenValues.SUN_STATE));
+  }
+
+  /** What the panel gives at most, at the tier of the dock (answer 1396). */
+  public Energy solarMax() {
+    return DockScreenValues.energy(values, DockScreenValues.SOLAR_MAX);
+  }
+
   public RobotTier dockTier() {
     return ScreenEnums.of(RobotTier.values(), opening.tier());
   }
@@ -304,9 +323,15 @@ public final class InductionDockMenu extends AbstractContainerMenu {
 
   /** The values that travel when the screen opens. */
   private record Opening(
-      String ownerName, long inputLimit, int callRadius, int storageSlots, int tier) {
+      String ownerName,
+      long inputLimit,
+      int callRadius,
+      int storageSlots,
+      int tier,
+      boolean solar) {
     /** Only the client reads it, so the menu on the server keeps nothing. */
-    private static final Opening NONE = new Opening(NO_NAME, 0, 0, DockStorageRules.MAX_SLOTS, 0);
+    private static final Opening NONE =
+        new Opening(NO_NAME, 0, 0, DockStorageRules.MAX_SLOTS, 0, false);
 
     /** The button names the radius of the tier Base, the only one in this phase (answer 693). */
     static Opening of(InductionDockBlockEntity dock) {
@@ -318,7 +343,8 @@ public final class InductionDockMenu extends AbstractContainerMenu {
               .spec(CubitConfig.GENERAL_ROBOT, RobotTier.BASE)
               .callRadiusBlocks(),
           dock.storageSlots(),
-          dock.tier().ordinal());
+          dock.tier().ordinal(),
+          dock.isSolar());
     }
 
     static Opening read(RegistryFriendlyByteBuf data) {
@@ -327,7 +353,8 @@ public final class InductionDockMenu extends AbstractContainerMenu {
           data.readVarLong(),
           data.readVarInt(),
           data.readVarInt(),
-          data.readVarInt());
+          data.readVarInt(),
+          data.readBoolean());
     }
 
     void write(RegistryFriendlyByteBuf data) {
@@ -336,6 +363,7 @@ public final class InductionDockMenu extends AbstractContainerMenu {
       data.writeVarInt(callRadius);
       data.writeVarInt(storageSlots);
       data.writeVarInt(tier);
+      data.writeBoolean(solar);
     }
   }
 }

@@ -64,11 +64,12 @@ final class InductionDockScreen extends AbstractContainerScreen<InductionDockMen
   private static final int HOTBAR_GAP = 58;
 
   private final ScreenPainter painter = new ScreenPainter();
-  private final DockScreenTabs tabs = new DockScreenTabs();
+  private final DockScreenTabs tabs;
   private FlatButton callButton;
 
   InductionDockScreen(InductionDockMenu menu, Inventory playerInventory, Component title) {
     super(menu, playerInventory, title);
+    this.tabs = new DockScreenTabs(menu.isSolar());
     imageWidth = WIDTH;
     imageHeight = HEIGHT;
     inventoryLabelX = MARGIN;
@@ -89,9 +90,8 @@ final class InductionDockScreen extends AbstractContainerScreen<InductionDockMen
   }
 
   private void showOpenTab() {
-    boolean storage = tabs.open() == DockScreenTabs.Tab.STORAGE;
-    menu.showStorage(storage);
-    callButton.visible = !storage;
+    menu.showStorage(tabs.open() == DockScreenTabs.Tab.STORAGE);
+    callButton.visible = tabs.open() == DockScreenTabs.Tab.DOCK;
   }
 
   private void call() {
@@ -121,7 +121,7 @@ final class InductionDockScreen extends AbstractContainerScreen<InductionDockMen
     renderSlots(graphics, leftPos, topPos);
     if (tabs.open() == DockScreenTabs.Tab.STORAGE) {
       renderStorageFrames(graphics, leftPos, topPos);
-    } else {
+    } else if (tabs.open() == DockScreenTabs.Tab.DOCK) {
       renderDockTab(graphics, leftPos, topPos);
     }
   }
@@ -207,6 +207,8 @@ final class InductionDockScreen extends AbstractContainerScreen<InductionDockMen
       Component storage =
           Component.translatable(ScreenKeys.DOCK_TAB_STORAGE).withStyle(ChatFormatting.BOLD);
       painter.text(graphics, storage, TITLE, ScreenPainter.TEXT, ScreenPainter.FULL_SCALE);
+    } else if (tabs.open() == DockScreenTabs.Tab.SOLAR) {
+      DockSolarTab.render(painter, graphics, menu);
     } else {
       renderDockLabels(graphics);
     }

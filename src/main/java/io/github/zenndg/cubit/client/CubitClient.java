@@ -5,6 +5,7 @@ import io.github.zenndg.cubit.config.CubitConfig;
 import io.github.zenndg.cubit.item.RobotItem;
 import io.github.zenndg.cubit.item.TierLook;
 import io.github.zenndg.cubit.network.CubitNetwork;
+import io.github.zenndg.cubit.registry.CubitBlockEntities;
 import io.github.zenndg.cubit.registry.CubitEntities;
 import io.github.zenndg.cubit.registry.CubitItems;
 import io.github.zenndg.cubit.registry.CubitMenus;
@@ -81,6 +82,8 @@ public final class CubitClient {
     event.registerEntityRenderer(
         CubitEntities.GENERAL_ROBOT.get(),
         context -> new RobotRenderer(context, CubitConfig.GENERAL_ROBOT));
+    event.registerBlockEntityRenderer(
+        CubitBlockEntities.INDUCTION_DOCK.get(), SolarDockRenderer::new);
   }
 
   @SubscribeEvent

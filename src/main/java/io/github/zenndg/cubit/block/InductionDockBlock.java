@@ -55,6 +55,8 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 public final class InductionDockBlock extends BaseEntityBlock {
   private static final String STATUS_NAME = "status";
   private static final String TIER_NAME = "tier";
+  private static final int HALF_TURN_DEGREES = 180;
+  private static final int FULL_TURN_DEGREES = 360;
   private static final String ULTIMATE_NAME = "ultimate";
   public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
   public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
@@ -68,12 +70,22 @@ public final class InductionDockBlock extends BaseEntityBlock {
       ResourceLocation.fromNamespaceAndPath(CubitMod.MOD_ID, ULTIMATE_NAME);
 
   private static final MapCodec<InductionDockBlock> CODEC = simpleCodec(InductionDockBlock::new);
+  private static final MapCodec<InductionDockBlock> SOLAR_CODEC =
+      simpleCodec(properties -> new InductionDockBlock(properties, true));
   private static final float CANNOT_BREAK = 0f;
   private static final int OPERATOR_LEVEL = 2;
   private static final int REMOVE_WITHOUT_DROPS = 35;
 
+  private final boolean solar;
+
   public InductionDockBlock(Properties properties) {
+    this(properties, false);
+  }
+
+  /** The Solar Dock is the same dock with a panel on the tower (answer 1384). */
+  public InductionDockBlock(Properties properties, boolean solar) {
     super(properties);
+    this.solar = solar;
     registerDefaultState(
         stateDefinition
             .any()
@@ -85,7 +97,16 @@ public final class InductionDockBlock extends BaseEntityBlock {
 
   @Override
   protected MapCodec<? extends BaseEntityBlock> codec() {
-    return CODEC;
+    return solar ? SOLAR_CODEC : CODEC;
+  }
+
+  public boolean isSolar() {
+    return solar;
+  }
+
+  /** How much the models turn for a facing, as in the block state: the front faces the player. */
+  public static int turnOf(Direction facing) {
+    return ((int) facing.toYRot() + HALF_TURN_DEGREES) % FULL_TURN_DEGREES;
   }
 
   @Override

@@ -1,0 +1,10 @@
+{
+  "type": "cubit:solar_dock_assembly",
+  "dock": {
+    "item": "cubit:induction_dock"
+  },
+  "panel": {
+    "item": "cubit:dock_solar_panel"
+  },
+  "result": "cubit:solar_induction_dock"
+}

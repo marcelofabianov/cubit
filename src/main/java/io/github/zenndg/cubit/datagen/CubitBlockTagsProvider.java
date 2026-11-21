@@ -25,7 +25,8 @@ final class CubitBlockTagsProvider extends BlockTagsProvider {
 
   @Override
   protected void addTags(HolderLookup.Provider lookup) {
-    tag(BlockTags.MINEABLE_WITH_PICKAXE).add(CubitBlocks.INDUCTION_DOCK.get());
+    tag(BlockTags.MINEABLE_WITH_PICKAXE)
+        .add(CubitBlocks.INDUCTION_DOCK.get(), CubitBlocks.SOLAR_INDUCTION_DOCK.get());
     tag(FarmPlants.CROPS);
     tag(FarmPlants.IGNORED)
         .addTag(BlockTags.SAPLINGS)

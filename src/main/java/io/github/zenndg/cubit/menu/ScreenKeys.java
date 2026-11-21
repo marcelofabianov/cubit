@@ -1,12 +1,15 @@
 package io.github.zenndg.cubit.menu;
 
 import io.github.zenndg.cubit.domain.dock.DockStatus;
+import io.github.zenndg.cubit.domain.dock.DockSunState;
 import java.util.Locale;
 
 /** The translation keys of the screens, shared by the screens and the language file. */
 public final class ScreenKeys {
   private static final String PREFIX = "gui.cubit.";
   private static final String DOCK = PREFIX + "dock.";
+  private static final String SUN_PREFIX = "sun.";
+  private static final String SUN_REASON_PREFIX = "sun_reason.";
 
   public static final String ENERGY_AMOUNT = PREFIX + "energy_amount";
   public static final String HEALTH = PREFIX + "health";
@@ -22,6 +25,14 @@ public final class ScreenKeys {
   public static final String DOCK_TAB_DOCK = DOCK + "tab_dock";
   public static final String DOCK_TAB_STORAGE = DOCK + "tab_storage";
   public static final String DOCK_TITLE_TIER = DOCK + "title_tier";
+  public static final String DOCK_TAB_SOLAR = DOCK + "tab_solar";
+  public static final String DOCK_SOLAR_STATUS = DOCK + "solar_status";
+  public static final String DOCK_SOLAR_REASON = DOCK + "solar_reason";
+  public static final String DOCK_SOLAR_NOW = DOCK + "solar_now";
+  public static final String DOCK_SOLAR_MAX = DOCK + "solar_max";
+  public static final String DOCK_SOLAR_HINT = DOCK + "solar_hint";
+  public static final String DOCK_SOLAR = DOCK + "solar";
+  public static final String DOCK_NO_SUN = DOCK + "no_sun";
   public static final String DOCK_ROBOT_BATTERY = DOCK + "robot_battery";
   public static final String DOCK_CHARGING_LINE = DOCK + "charging_line";
   public static final String DOCK_COMPLETE_LINE = DOCK + "complete_line";
@@ -94,6 +105,16 @@ public final class ScreenKeys {
   public static final String FOLLOWING = ROBOT + "following";
   public static final String FOLLOWING_YOU = ROBOT + "following_you";
   public static final String FOLLOWING_NOBODY = ROBOT + "following_nobody";
+
+  /** The state of the panel of a Solar Dock, as `gui.cubit.dock.sun.night` (answer 1396). */
+  public static String dockSun(DockSunState state) {
+    return DOCK + SUN_PREFIX + state.name().toLowerCase(Locale.ROOT);
+  }
+
+  /** Why the panel stops, as `gui.cubit.dock.sun_reason.night` (answer 1396). */
+  public static String dockSunReason(DockSunState state) {
+    return DOCK + SUN_REASON_PREFIX + state.name().toLowerCase(Locale.ROOT);
+  }
 
   private ScreenKeys() {}
 

@@ -1,5 +1,6 @@
 {
   "values": [
-    "cubit:induction_dock"
+    "cubit:induction_dock",
+    "cubit:solar_induction_dock"
   ]
 }

@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "minecraft:redstone_block"
+    },
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "S": {
+      "item": "minecraft:daylight_detector"
+    }
+  },
+  "pattern": [
+    "GGG",
+    "SCS",
+    "III"
+  ],
+  "result": {
+    "count": 1,
+    "id": "cubit:dock_solar_panel"
+  }
+}

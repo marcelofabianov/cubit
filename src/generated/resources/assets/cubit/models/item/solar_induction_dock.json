@@ -1,0 +1,11 @@
+{
+  "parent": "cubit:block/solar_induction_dock_item",
+  "overrides": [
+    {
+      "model": "cubit:block/solar_induction_dock_item_ultimate",
+      "predicate": {
+        "cubit:ultimate": 1.0
+      }
+    }
+  ]
+}

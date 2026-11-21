@@ -45,6 +45,7 @@ final class CubitItemModelProvider extends ItemModelProvider {
     basicItem(CubitItems.GENERAL_ROBOT_TREADS.get());
     basicItem(CubitItems.GENERAL_ROBOT_CORE.get());
     basicItem(CubitItems.POWER_BANK_CASING.get());
+    basicItem(CubitItems.DOCK_SOLAR_PANEL.get());
     basicItem(CubitItems.BASE_POWER_CELL.get());
     basicItem(CubitItems.ADVANCED_POWER_CELL.get());
     basicItem(CubitItems.ELITE_POWER_CELL.get());

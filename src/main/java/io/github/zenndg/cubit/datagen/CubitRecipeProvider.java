@@ -4,6 +4,8 @@ import io.github.zenndg.cubit.CubitMod;
 import io.github.zenndg.cubit.config.CubitConfig;
 import io.github.zenndg.cubit.item.RobotRechargeRecipe;
 import io.github.zenndg.cubit.item.RobotRepairRecipe;
+import io.github.zenndg.cubit.item.SolarDockRecipe;
+import io.github.zenndg.cubit.registry.CubitBlocks;
 import io.github.zenndg.cubit.registry.CubitItems;
 import java.util.concurrent.CompletableFuture;
 import net.minecraft.advancements.AdvancementHolder;
@@ -57,6 +59,12 @@ final class CubitRecipeProvider extends RecipeProvider {
   private static final char SMOKER = 'S';
   private static final String HAS_IRON = "has_iron";
   private static final String HAS_CORE = "has_core";
+  private static final String HAS_DOCK = "has_dock";
+  private static final String HAS_PANEL = "has_panel";
+  private static final String PANEL_TOP_ROW = "GGG";
+  private static final String PANEL_MIDDLE_ROW = "SCS";
+  private static final String PANEL_BOTTOM_ROW = "III";
+  private static final char SENSOR = 'S';
   private static final String HAS_ROBOT = "has_robot";
   private static final String HAS_PREFIX = "has_";
   private static final String REPAIR_PREFIX = "repair_";
@@ -71,15 +79,7 @@ final class CubitRecipeProvider extends RecipeProvider {
 
   @Override
   protected void buildRecipes(RecipeOutput output) {
-    ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, CubitItems.TOOLBOX.get())
-        .pattern(TOOLBOX_TOP_ROW)
-        .pattern(TOOLBOX_MIDDLE_ROW)
-        .pattern(TOOLBOX_BOTTOM_ROW)
-        .define(IRON, Items.IRON_INGOT)
-        .define(REDSTONE, Items.REDSTONE)
-        .define(OBSIDIAN, Items.OBSIDIAN)
-        .unlockedBy(HAS_IRON, has(Items.IRON_INGOT))
-        .save(output);
+    toolbox(output);
     CubitPartRecipes.save(output);
     robot(output);
     dock(output);
@@ -91,6 +91,7 @@ final class CubitRecipeProvider extends RecipeProvider {
     organizerCard(output);
     cookCard(output);
     recharge(output);
+    solarDock(output);
     String robotId = CubitConfig.GENERAL_ROBOT.id();
     output.accept(
         ResourceLocation.fromNamespaceAndPath(CubitMod.MOD_ID, REPAIR_PREFIX + robotId),
@@ -99,6 +100,18 @@ final class CubitRecipeProvider extends RecipeProvider {
             Ingredient.of(CubitItems.TOOLBOX.get()),
             CubitItems.GENERAL_ROBOT.get()),
         null);
+  }
+
+  private void toolbox(RecipeOutput output) {
+    ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, CubitItems.TOOLBOX.get())
+        .pattern(TOOLBOX_TOP_ROW)
+        .pattern(TOOLBOX_MIDDLE_ROW)
+        .pattern(TOOLBOX_BOTTOM_ROW)
+        .define(IRON, Items.IRON_INGOT)
+        .define(REDSTONE, Items.REDSTONE)
+        .define(OBSIDIAN, Items.OBSIDIAN)
+        .unlockedBy(HAS_IRON, has(Items.IRON_INGOT))
+        .save(output);
   }
 
   /** The card of the Fisher: a fishing rod, a comparator, redstone and paper (answer 1192). */
@@ -253,6 +266,40 @@ final class CubitRecipeProvider extends RecipeProvider {
     return CubitPartRecipes.cross(
             ShapedRecipeBuilder.shaped(RecipeCategory.MISC, next), edge, side, previous)
         .unlockedBy(criterion, has(previous));
+  }
+
+  /**
+   * The panel on a dock makes the Solar Dock, which keeps the state of the dock (answers 1386 and
+   * 1387). The panel shows in the book with a dock, and the Solar Dock with the panel.
+   */
+  private void solarDock(RecipeOutput output) {
+    ShapedRecipeBuilder.shaped(RecipeCategory.MISC, CubitItems.DOCK_SOLAR_PANEL.get())
+        .pattern(PANEL_TOP_ROW)
+        .pattern(PANEL_MIDDLE_ROW)
+        .pattern(PANEL_BOTTOM_ROW)
+        .define(GLASS, Items.GLASS)
+        .define(SENSOR, Items.DAYLIGHT_DETECTOR)
+        .define(CORE, Items.REDSTONE_BLOCK)
+        .define(IRON, Items.IRON_INGOT)
+        .unlockedBy(HAS_DOCK, has(CubitItems.INDUCTION_DOCK.get()))
+        .save(output);
+    ResourceLocation id =
+        ResourceLocation.fromNamespaceAndPath(CubitMod.MOD_ID, CubitBlocks.SOLAR_INDUCTION_DOCK_ID);
+    AdvancementHolder unlock =
+        output
+            .advancement()
+            .addCriterion(HAS_THE_RECIPE, RecipeUnlockedTrigger.unlocked(id))
+            .addCriterion(HAS_PANEL, has(CubitItems.DOCK_SOLAR_PANEL.get()))
+            .rewards(AdvancementRewards.Builder.recipe(id))
+            .requirements(AdvancementRequirements.Strategy.OR)
+            .build(id.withPrefix(RECIPE_ADVANCEMENT_PREFIX));
+    output.accept(
+        id,
+        new SolarDockRecipe(
+            Ingredient.of(CubitItems.DOCK_SOLAR_PANEL.get()),
+            Ingredient.of(CubitItems.INDUCTION_DOCK.get()),
+            CubitItems.SOLAR_INDUCTION_DOCK.get()),
+        unlock);
   }
 
   /** Waking a stored Cubit with any Power Bank, which unlocks the recipe (answers 908 and 910). */
