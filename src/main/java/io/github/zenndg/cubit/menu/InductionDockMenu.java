@@ -302,7 +302,7 @@ public final class InductionDockMenu extends AbstractContainerMenu {
     static Opening of(InductionDockBlockEntity dock) {
       return new Opening(
           dock.ownerName().orElse(NO_NAME),
-          CubitMod.CONFIG.dockInputPerTick(),
+          CubitMod.CONFIG.dock().inputPerTick(),
           CubitMod.CONFIG
               .tierCatalog()
               .spec(CubitConfig.GENERAL_ROBOT, RobotTier.BASE)

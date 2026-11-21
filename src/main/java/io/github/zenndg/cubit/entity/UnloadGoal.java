@@ -113,6 +113,6 @@ final class UnloadGoal extends Goal {
       stuckTicks = 0;
       return false;
     }
-    return ++stuckTicks >= CubitMod.CONFIG.dockStuckTicks();
+    return ++stuckTicks >= CubitMod.CONFIG.dock().stuckTicks();
   }
 }

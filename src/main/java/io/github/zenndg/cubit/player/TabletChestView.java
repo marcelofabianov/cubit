@@ -7,6 +7,7 @@ import io.github.zenndg.cubit.entity.OrganizerTarget;
 import io.github.zenndg.cubit.entity.RobotEntity;
 import io.github.zenndg.cubit.entity.RobotUnload;
 import io.github.zenndg.cubit.network.CubitNetwork;
+import io.github.zenndg.cubit.network.DoorMarksPayload;
 import io.github.zenndg.cubit.network.OrganizerMarksPayload;
 import io.github.zenndg.cubit.network.UnloadChestsPayload;
 import io.github.zenndg.cubit.registry.CubitEntities;
@@ -49,6 +50,7 @@ public final class TabletChestView {
     } else if (SHOWING.remove(player.getUUID())) {
       CubitNetwork.sendUnloadChests(player, UnloadChestsPayload.NONE);
       CubitNetwork.sendOrganizerMarks(player, OrganizerMarksPayload.NONE);
+      CubitNetwork.sendDoorMarks(player, DoorMarksPayload.NONE);
     }
   }
 
@@ -74,6 +76,16 @@ public final class TabletChestView {
     }
     CubitNetwork.sendUnloadChests(player, new UnloadChestsPayload(chests));
     CubitNetwork.sendOrganizerMarks(player, new OrganizerMarksPayload(marks(robots, dimension)));
+    sendDoors(player, dimension);
+  }
+
+  /** The doors the player marked, in its dimension, for the arrows of the Doors app. */
+  private static void sendDoors(ServerPlayer player, String dimension) {
+    List<BlockPos> doors =
+        SavedDoorMarks.of(player.server).marksOf(player.getUUID()).blocksIn(dimension).stream()
+            .map(BlockPos::of)
+            .toList();
+    CubitNetwork.sendDoorMarks(player, new DoorMarksPayload(doors));
   }
 
   /** The marks of the Organizers in the dimension of the player, numbered in their order. */

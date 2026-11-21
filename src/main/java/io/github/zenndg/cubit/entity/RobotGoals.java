@@ -23,6 +23,9 @@ final class RobotGoals {
 
   private static final int LOOK_AT_OWNER_PRIORITY = 5;
 
+  /** Without flags, along with any other goal (answer 1366). */
+  private static final int DOOR_PRIORITY = 5;
+
   private RobotGoals() {}
 
   static void register(RobotEntity robot, GoalSelector goals) {
@@ -42,5 +45,6 @@ final class RobotGoals {
     goals.addGoal(AREA_PRIORITY, new ErrandGoal(robot, () -> robot.workArea().work().cooking()));
     goals.addGoal(AREA_PRIORITY, new AreaWorkGoal(robot));
     goals.addGoal(LOOK_AT_OWNER_PRIORITY, new LookAtOwnerGoal(robot));
+    goals.addGoal(DOOR_PRIORITY, new DoorGoal(robot));
   }
 }

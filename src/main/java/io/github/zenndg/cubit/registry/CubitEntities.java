@@ -16,7 +16,9 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 /** Entity types. The IDs are part of the saves, so they cannot change without a migration. */
 public final class CubitEntities {
-  private static final float ROBOT_WIDTH = 0.75f;
+  /** As the mobs of the game, so it passes an open door, which leaves 13/16 free (1372). */
+  private static final float ROBOT_WIDTH = 0.6f;
+
   private static final float ROBOT_HEIGHT = 1f;
   private static final DeferredRegister<EntityType<?>> ENTITIES =
       DeferredRegister.create(Registries.ENTITY_TYPE, CubitMod.MOD_ID);

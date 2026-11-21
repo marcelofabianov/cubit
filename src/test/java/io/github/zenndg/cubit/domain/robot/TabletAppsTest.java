@@ -15,10 +15,16 @@ class TabletAppsTest {
   @Test
   void targetOnlyShowsWithTheChosenCubitInFocus() {
     assertEquals(
-        List.of(TabletApp.OPEN, TabletApp.TARGET, TabletApp.DOCK, TabletApp.AREA, TabletApp.UNLOAD),
+        List.of(
+            TabletApp.OPEN,
+            TabletApp.TARGET,
+            TabletApp.DOCK,
+            TabletApp.AREA,
+            TabletApp.UNLOAD,
+            TabletApp.DOORS),
         WITH_TARGET.available());
     assertEquals(
-        List.of(TabletApp.OPEN, TabletApp.DOCK, TabletApp.AREA, TabletApp.UNLOAD),
+        List.of(TabletApp.OPEN, TabletApp.DOCK, TabletApp.AREA, TabletApp.UNLOAD, TabletApp.DOORS),
         WITHOUT_TARGET.available());
   }
 
@@ -34,8 +40,9 @@ class TabletAppsTest {
     assertEquals(TabletApp.TARGET, WITH_TARGET.next(TabletApp.OPEN, FORWARD));
     assertEquals(TabletApp.AREA, WITH_TARGET.next(TabletApp.DOCK, FORWARD));
     assertEquals(TabletApp.UNLOAD, WITH_TARGET.next(TabletApp.AREA, FORWARD));
-    assertEquals(TabletApp.OPEN, WITH_TARGET.next(TabletApp.UNLOAD, FORWARD));
-    assertEquals(TabletApp.UNLOAD, WITH_TARGET.next(TabletApp.OPEN, BACKWARD));
+    assertEquals(TabletApp.DOORS, WITH_TARGET.next(TabletApp.UNLOAD, FORWARD));
+    assertEquals(TabletApp.OPEN, WITH_TARGET.next(TabletApp.DOORS, FORWARD));
+    assertEquals(TabletApp.DOORS, WITH_TARGET.next(TabletApp.OPEN, BACKWARD));
     assertEquals(TabletApp.DOCK, WITHOUT_TARGET.next(TabletApp.OPEN, FORWARD));
   }
 
@@ -50,7 +57,13 @@ class TabletAppsTest {
   void markOnlyWithTheOrganizer() {
     TabletApps organizer = new TabletApps(false, true);
     assertEquals(
-        List.of(TabletApp.OPEN, TabletApp.DOCK, TabletApp.AREA, TabletApp.UNLOAD, TabletApp.MARK),
+        List.of(
+            TabletApp.OPEN,
+            TabletApp.DOCK,
+            TabletApp.AREA,
+            TabletApp.UNLOAD,
+            TabletApp.MARK,
+            TabletApp.DOORS),
         organizer.available());
     assertEquals(TabletApp.OPEN, WITHOUT_TARGET.effective(TabletApp.MARK));
     assertEquals(TabletApp.MARK, organizer.effective(TabletApp.MARK));

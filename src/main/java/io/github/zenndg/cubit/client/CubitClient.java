@@ -40,6 +40,7 @@ public final class CubitClient {
     CubitNetwork.setAreaDisplay(TabletAreaMarks::show);
     CubitNetwork.setUnloadChestsDisplay(TabletChestMarks::show);
     CubitNetwork.setOrganizerMarksDisplay(TabletChestMarks::showMarks);
+    CubitNetwork.setDoorMarksDisplay(TabletDoorMarks::show);
     CubitNetwork.setDeathLogDisplay(TabletDeathLog::show);
     event.enqueueWork(() ->
         ItemProperties.register(

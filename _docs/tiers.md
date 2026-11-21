@@ -122,6 +122,8 @@ Valem para todos os tiers e ficam no config. Os marcados como planejados entram 
 | Quanto o Cubit anda à frente do dono na guia, `death_guide_lead_blocks` | 8 blocos (pergunta 1126) |
 | Tempo sem avançar antes de cancelar a guia, `death_guide_stuck_seconds` | 10 s (pergunta 1126) |
 | Intervalo do ímã | 10 ticks (resposta 887) |
+| Custo de abrir uma porta marcada, `door_open_cost` | 50 FE (pergunta 1368) |
+| Portas marcadas por dono, `door_marks_limit` | 64 (pergunta 1369) |
 
 ## Coleta e inventário
 
@@ -234,6 +236,7 @@ Planejado para a Fase 5. O tier Base não aceita cards, e cada card tem o seu ti
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-21 03:25 | Adiciona o custo e o limite das portas (perguntas 1368 e 1369). |
 | Marcelo Fabiano | 2026-11-19 23:04 | Adiciona os números do Cozinheiro (pergunta 1326). |
 | Marcelo Fabiano | 2026-11-19 21:34 | Adiciona os números do Organizador (pergunta 1300). |
 | Marcelo Fabiano | 2026-11-19 20:18 | Adiciona os números do controle de velocidade (pergunta 1267). |
