@@ -133,7 +133,7 @@ Um card por vez, na ordem do board "Cubit · Fase 5" (perguntas 1137, 1141 e 115
 11. [x] Peças de montagem do Cubit, das Power Banks e dos Modules (issue #221, PR #222, perguntas 1338 a 1358)
 12. [x] Portas marcadas que o Cubit abre (issue #223, PR #224, perguntas 1359 a 1372)
 13. [x] Dock com tiers e inventário (issue #225, PR #226, perguntas 1373 a 1382)
-14. [ ] Dock Solar (#227)
+14. [x] Dock Solar (issue #227, PR #228, perguntas 1383 a 1398)
 15. [ ] Mistura química de arremesso, como uma poção de arremesso, que aumenta a vida e a energia do Cubit que ela atinge, feita e arremessada pelo player. Só faz efeito no Cubit, e o Cubit só recebe efeito dela, sem o das outras poções (perguntas 1393 e 1394)
 16. [ ] Revisar o tier mínimo de cada trabalho, antes do Defensor (pergunta 1390)
 17. [ ] Defensor (#198)
