@@ -431,11 +431,17 @@ Não há perguntas pendentes nesta fase.
 | 1484 | As linhas antigas do histórico de modificações, em nome de "Marcelo Fabiano", mudam para `Zennd`? | Não: as antigas ficam como estão, e só as mudanças novas usam `Zennd`. Detalha a 1482 |
 | 1485 | Onde fica o board "Cubit · Fase 5", que estava na conta principal do desenvolvedor? | Na conta `zenndg`, como tudo do projeto, ignorando a conta principal. O board novo, o projeto 2 da `zenndg`, ligado ao repositório, tem as colunas da 1137 e as issues do milestone da Fase 5: as fechadas em Concluído, a #231 em Pronto e as abertas em Backlog. Muda a 1137 só no lugar do board |
 | 1486 | A mudança do JEI na resposta 1461 está confirmada? | Sim: o Cubit passa a ter um plugin opcional do JEI, e o Jade continua com as informações próprias do mod, agora também as da Engineering Desk (perguntas 1468 e 1472). O JEI deixa de ser só do cliente de teste. Muda a 1284 |
+| 1487 | Como tratar os ajustes das imagens conceito da Engineering Desk? | As três imagens são aprovadas como referência, e os ajustes são aplicados direto no modelo, na textura e na tela: a tomada de energia fica embaixo, e não nas costas (pergunta 1425); as miniaturas ficam maiores, para não virarem 2 ou 3 pixels no jogo; a faixa do Base fica num cinza mais escuro; as miniaturas aparecem em todos os estados (pergunta 1455); a luminária fica em meia luz na pausa (pergunta 1470); e a grade mostra as marcações da receita escolhida (pergunta 1426) |
+| 1488 | O que fazer com o `crafting.wav`, que tem 0,78 s de cliques fortes com silêncio nas pontas? | O agente trata o arquivo atual: tira o silêncio das pontas, baixa o volume e faz o loop sem emenda. O som continua sendo de cliques, sem o zumbido descrito em `sons.md` |
+| 1489 | O que fazer com o `startup.wav`, que tem 22,6 s? | Cortar o primeiro 1,6 s, com os dois bipes do início, com um fade curto no fim e o volume normalizado. O desenvolvedor ouve o resultado antes de ele entrar |
+| 1490 | Como converter os sons para Ogg Vorbis, mono e 48 kHz? | Com o `ffmpeg`, instalado pelo Homebrew no Mac. Ele só converte e corta os sons e não entra no projeto nem no build |
+| 1491 | Com qual codificador os sons viram Ogg Vorbis, já que o `ffmpeg` do Homebrew só tem o codificador interno, experimental? | Com o `oggenc`, do `vorbis-tools`, instalado pelo Homebrew, com qualidade 6. O `ffmpeg` corta, normaliza e passa para mono e 48 kHz. Detalha a 1490 |
 
 ## Histórico de modificações
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Zennd | 2026-11-21 14:10 | Registra as respostas 1487 a 1491. |
 | Zennd | 2026-11-21 13:30 | Registra as respostas 1485 e 1486 e aponta a mudança da 1284 na 1461. |
 | Zennd | 2026-11-21 11:45 | Registra as respostas 1424 a 1484. |
 | Marcelo Fabiano | 2026-11-21 10:30 | Registra as respostas 1399 a 1423. |

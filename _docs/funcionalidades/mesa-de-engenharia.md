@@ -91,6 +91,19 @@ A redstone que entra pelos lados ou por trás vai para o inventário de entrada,
 
 O modelo e as animações são feitos no GeckoLib, no Blockbench (pergunta 1464), a partir das imagens conceito aprovadas pelo desenvolvedor (perguntas 1440 e 1480).
 
+![Prancha da Engineering Desk](../imagens/conceito/engineering-desk-prancha.png)
+
+![A Engineering Desk ligando, criando, em pausa e com o item pronto](../imagens/conceito/engineering-desk-trabalhando.png)
+
+As imagens são a referência, com seis ajustes aplicados no modelo, na textura e na tela (pergunta 1487):
+
+1. A tomada de energia fica embaixo, e não nas costas.
+2. As miniaturas ficam maiores, para não virarem 2 ou 3 pixels no jogo.
+3. A faixa do Base fica num cinza mais escuro, para aparecer no tampo branco.
+4. As miniaturas aparecem em todos os estados, também criando, na pausa e com o item pronto.
+5. A luminária fica em meia luz na pausa.
+6. A grade da tela mostra as marcações da receita escolhida.
+
 - **A mesa:** uma mesa de projetista com um laptop em cima, miniaturas do Cubit e das peças sobre um forro azul com linhas quadriculadas, um gaveteiro de cada lado, um braço mecânico articulado e uma luminária de LED num suporte articulado (perguntas 1455 e 1465).
 - **Ligação:** ao ser colocada, toda vez, o laptop abre, a tela liga com o logo do Cubit e toca o bipe de ligação, e depois a mesa fica no estado parado (pergunta 1466).
 - **Laptop:** a tampa abre quando o player abre a tela e fecha quando ele sai. A tela fica acesa, com um leve pulso, enquanto cria, apagada parada e com outra cor na pausa (perguntas 1454 e 1465).
@@ -111,6 +124,8 @@ Três arquivos `.ogg` próprios, em `sounds/engineering_desk/`, registrados como
 ## Tela
 
 Uma prancheta de projetista: fundo azul quadriculado, como o forro, a grade de marcações em linhas brancas de planta técnica e o catálogo de receitas (pergunta 1467).
+
+![As abas Projeto e Estoque da Engineering Desk](../imagens/conceito/tela-engineering-desk.png)
 
 - **Aba Projeto:** o catálogo, a grade com a quantidade, os botões − e + e o de cancelar, a seta de progresso, o slot de saída da receita, a barra de energia, o slot de redstone e o tier na cor dele (pergunta 1473).
 - **Aba Estoque:** os dois inventários lado a lado, a entrada à esquerda e a saída à direita, como na mesa.
@@ -156,5 +171,6 @@ Uma issue mãe e quatro PRs, em ordem, cada um testável no jogo (pergunta 1478)
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Zennd | 2026-11-21 14:10 | Adiciona as imagens conceito aprovadas e os ajustes (pergunta 1487). |
 | Zennd | 2026-11-21 13:30 | Aponta a mudança da resposta 1284 no JEI (pergunta 1486). |
 | Zennd | 2026-11-21 12:30 | Descreve a Engineering Desk (perguntas 1424 a 1484). |
