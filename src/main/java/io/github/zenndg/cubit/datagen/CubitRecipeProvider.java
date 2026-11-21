@@ -42,14 +42,8 @@ final class CubitRecipeProvider extends RecipeProvider {
   private static final char OBSIDIAN = 'O';
   private static final char DIAMOND = 'D';
   private static final char CHEST = 'C';
-  private static final String MODULE_TOP_ROW = "TTT";
-  private static final String MODULE_MIDDLE_ROW = "SCS";
-  private static final String MODULE_BOTTOM_ROW = "BBB";
   private static final String FROM_CASING_SUFFIX = "_from_casing";
-  private static final char TOP = 'T';
-  private static final char SIDE = 'S';
   private static final char CORE = 'C';
-  private static final char BOTTOM = 'B';
   private static final String FISHER_TOP_ROW = "PCP";
   private static final String FISHER_MIDDLE_ROW = "RFR";
   private static final String FISHER_BOTTOM_ROW = "PRP";
@@ -175,43 +169,35 @@ final class CubitRecipeProvider extends RecipeProvider {
   }
 
   /**
-   * Each module has its own recipe, without the one before it (answer 799): a row on top, the side
-   * material around the core and a row below (answer 1331).
+   * The modules, chained like the cells, in a cross with the previous one in the center and the
+   * Neural Core in the one of the Advanced (answers 1357 and 1358).
    */
   private void modules(RecipeOutput output) {
     module(
             CubitItems.ADVANCED_MODULE.get(),
-            Items.OBSIDIAN,
             Items.LAPIS_LAZULI,
-            Items.DIAMOND,
-            Items.GOLD_INGOT)
+            Items.GOLD_INGOT,
+            CubitItems.GENERAL_ROBOT_CORE.get())
         .save(output);
     module(
             CubitItems.ELITE_MODULE.get(),
-            Items.OBSIDIAN,
             Items.PURPLE_DYE,
-            Items.DIAMOND_BLOCK,
-            Items.GOLD_BLOCK)
+            Items.DIAMOND,
+            CubitItems.ADVANCED_MODULE.get())
         .save(output);
     module(
             CubitItems.ULTIMATE_MODULE.get(),
             Items.NETHERITE_INGOT,
-            Items.NETHERITE_INGOT,
-            Items.DIAMOND_BLOCK,
-            Items.BLAZE_POWDER)
+            Items.BLAZE_ROD,
+            CubitItems.ELITE_MODULE.get())
         .save(output);
   }
 
+  /** Every module unlocks with a Cubit (answer 805). */
   private static ShapedRecipeBuilder module(
-      ItemLike result, ItemLike top, ItemLike side, ItemLike core, ItemLike bottom) {
-    return ShapedRecipeBuilder.shaped(RecipeCategory.MISC, result)
-        .pattern(MODULE_TOP_ROW)
-        .pattern(MODULE_MIDDLE_ROW)
-        .pattern(MODULE_BOTTOM_ROW)
-        .define(TOP, top)
-        .define(SIDE, side)
-        .define(CORE, core)
-        .define(BOTTOM, bottom)
+      ItemLike result, ItemLike edge, ItemLike side, ItemLike center) {
+    return CubitPartRecipes.cross(
+            ShapedRecipeBuilder.shaped(RecipeCategory.MISC, result), edge, side, center)
         .unlockedBy(HAS_ROBOT, has(CubitItems.GENERAL_ROBOT.get()));
   }
 

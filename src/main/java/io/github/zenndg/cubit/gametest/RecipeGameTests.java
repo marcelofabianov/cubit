@@ -179,44 +179,30 @@ public final class RecipeGameTests {
     helper.succeed();
   }
 
-  /** The grids of _docs/itens.md (answer 1331). */
+  /** The modules, chained in a cross like the cells (answers 1357 and 1358). */
   private static List<ItemStack> advancedModuleGrid() {
-    return stacks(
-        Items.OBSIDIAN,
-        Items.OBSIDIAN,
-        Items.OBSIDIAN,
-        Items.LAPIS_LAZULI,
-        Items.DIAMOND,
-        Items.LAPIS_LAZULI,
-        Items.GOLD_INGOT,
-        Items.GOLD_INGOT,
-        Items.GOLD_INGOT);
+    return cross(Items.LAPIS_LAZULI, Items.GOLD_INGOT, CubitItems.GENERAL_ROBOT_CORE.get());
   }
 
   private static List<ItemStack> eliteModuleGrid() {
-    return stacks(
-        Items.OBSIDIAN,
-        Items.OBSIDIAN,
-        Items.OBSIDIAN,
-        Items.PURPLE_DYE,
-        Items.DIAMOND_BLOCK,
-        Items.PURPLE_DYE,
-        Items.GOLD_BLOCK,
-        Items.GOLD_BLOCK,
-        Items.GOLD_BLOCK);
+    return cross(Items.PURPLE_DYE, Items.DIAMOND, CubitItems.ADVANCED_MODULE.get());
   }
 
   private static List<ItemStack> ultimateModuleGrid() {
+    return cross(Items.NETHERITE_INGOT, Items.BLAZE_ROD, CubitItems.ELITE_MODULE.get());
+  }
+
+  private static List<ItemStack> cross(Item topAndBottom, Item sides, Item center) {
     return stacks(
-        Items.NETHERITE_INGOT,
-        Items.NETHERITE_INGOT,
-        Items.NETHERITE_INGOT,
-        Items.NETHERITE_INGOT,
-        Items.DIAMOND_BLOCK,
-        Items.NETHERITE_INGOT,
-        Items.BLAZE_POWDER,
-        Items.BLAZE_POWDER,
-        Items.BLAZE_POWDER);
+        Items.AIR,
+        topAndBottom,
+        Items.AIR,
+        sides,
+        center,
+        sides,
+        Items.AIR,
+        topAndBottom,
+        Items.AIR);
   }
 
   private static List<ItemStack> tabletGrid() {
@@ -253,16 +239,7 @@ public final class RecipeGameTests {
 
   /** The cross of the cell of the tier, with the previous bank in the center (answer 1355). */
   private static List<ItemStack> nextBankGrid(Item topAndBottom, Item sides, Item previous) {
-    return stacks(
-        Items.AIR,
-        topAndBottom,
-        Items.AIR,
-        sides,
-        previous,
-        sides,
-        Items.AIR,
-        topAndBottom,
-        Items.AIR);
+    return cross(topAndBottom, sides, previous);
   }
 
   /** The four parts, without a shape, in scattered slots (answer 1346). */

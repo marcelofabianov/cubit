@@ -2,23 +2,20 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "B": {
-      "item": "minecraft:gold_ingot"
-    },
     "C": {
-      "item": "minecraft:diamond"
+      "item": "cubit:general_robot_core"
     },
-    "S": {
+    "E": {
       "item": "minecraft:lapis_lazuli"
     },
-    "T": {
-      "item": "minecraft:obsidian"
+    "S": {
+      "item": "minecraft:gold_ingot"
     }
   },
   "pattern": [
-    "TTT",
+    " E ",
     "SCS",
-    "BBB"
+    " E "
   ],
   "result": {
     "count": 1,

@@ -46,14 +46,14 @@
 
 ## Progressão das receitas
 
-Só com recursos do jogo puro. Os materiais que marcam cada tier, nos Modules e nas células das Power Banks (perguntas 1331 e 1347):
+Só com recursos do jogo puro. Os materiais que marcam cada tier, nas células das Power Banks e nos Modules (perguntas 1354 e 1358):
 
 | Item | Materiais |
 |---|---|
-| Base | Quartzo, ouro, esmeralda, bloco de redstone e obsidiana |
-| Avançado | Lápis-lazúli, ouro, diamante e obsidiana |
-| Elite | Corante roxo, bloco de diamante, bloco de ouro e obsidiana |
-| Ultimate | Netherite, bloco de diamante e blaze |
+| Base | Cobre, redstone e bloco de redstone, só na célula |
+| Avançado | Lápis-lazúli e ouro |
+| Elite | Corante roxo e diamante |
+| Ultimate | Netherite e vara de blaze |
 
 ### Cubit
 
@@ -152,31 +152,31 @@ Levam o Cubit ao tier seguinte, sem pular etapas. As regras estão em [`upgrade-
 
 - **Empilha** até 64, e o nome aparece na cor do colar do tier (pergunta 804).
 - **Criativo:** os três ficam na aba `cubit:main`.
-- **Receitas:** na mesa de craft, independentes, sem o Module anterior, só com materiais do jogo puro (pergunta 799). As três aparecem no livro ao ter um Cubit (pergunta 805). Os materiais e a grade vêm da pergunta 1331, que troca as 807, 817 e 818.
+- **Receitas:** na mesa de craft, encadeadas como as células, numa cruz: um material em cima e embaixo, outro nas laterais e, no centro, o Module anterior. O Advanced tem o Cubit Neural Core no centro (perguntas 1357 e 1358, que mudam a 799 e a 1331). As três aparecem no livro ao ter um Cubit (pergunta 805).
 
 ### Advanced Module
 
 | | Coluna 1 | Coluna 2 | Coluna 3 |
 |---|---|---|---|
-| Linha 1 | Obsidiana | Obsidiana | Obsidiana |
-| Linha 2 | Lápis-lazúli | Diamante | Lápis-lazúli |
-| Linha 3 | Lingote de ouro | Lingote de ouro | Lingote de ouro |
+| Linha 1 | Vazio | Lápis-lazúli | Vazio |
+| Linha 2 | Lingote de ouro | Cubit Neural Core | Lingote de ouro |
+| Linha 3 | Vazio | Lápis-lazúli | Vazio |
 
 ### Elite Module
 
 | | Coluna 1 | Coluna 2 | Coluna 3 |
 |---|---|---|---|
-| Linha 1 | Obsidiana | Obsidiana | Obsidiana |
-| Linha 2 | Corante roxo | Bloco de diamante | Corante roxo |
-| Linha 3 | Bloco de ouro | Bloco de ouro | Bloco de ouro |
+| Linha 1 | Vazio | Corante roxo | Vazio |
+| Linha 2 | Diamante | Advanced Module | Diamante |
+| Linha 3 | Vazio | Corante roxo | Vazio |
 
 ### Ultimate Module
 
 | | Coluna 1 | Coluna 2 | Coluna 3 |
 |---|---|---|---|
-| Linha 1 | Lingote de netherite | Lingote de netherite | Lingote de netherite |
-| Linha 2 | Lingote de netherite | Bloco de diamante | Lingote de netherite |
-| Linha 3 | Pó de blaze | Pó de blaze | Pó de blaze |
+| Linha 1 | Vazio | Lingote de netherite | Vazio |
+| Linha 2 | Vara de blaze | Elite Module | Vara de blaze |
+| Linha 3 | Vazio | Lingote de netherite | Vazio |
 
 ## Previstos na Fase 5
 
@@ -278,6 +278,8 @@ O estado salvo é validado ao entrar no jogo, sem derrubá-lo (regra 17 do `AGEN
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-21 02:35 | Atualiza a progressão das receitas (perguntas 1354 e 1358). |
+| Marcelo Fabiano | 2026-11-21 02:30 | Encadeia os Modules em cruz, como as células (perguntas 1357 e 1358). |
 | Marcelo Fabiano | 2026-11-21 02:05 | Troca o Visor para diamante, obsidiana, diamante (pergunta 1356). |
 | Marcelo Fabiano | 2026-11-21 01:45 | Encadeia as células e troca o upgrade pela cruz (perguntas 1354 e 1355). |
 | Marcelo Fabiano | 2026-11-21 01:30 | Troca as tochas para a Carcaça e a obsidiana para o Visor (pergunta 1353). |

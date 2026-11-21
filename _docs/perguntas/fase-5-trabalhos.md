@@ -301,12 +301,14 @@ Não há perguntas pendentes nesta fase.
 | 1354 | Como ficam as células, se a Base ficou mais difícil que as seguintes? | Encadeadas, com a anterior como base da próxima, numa cruz: um material em cima e embaixo, outro nas laterais e o centro. Base: cobre, redstone e bloco de redstone no centro. Advanced: lápis-lazúli, lingote de ouro e a Base Power Cell. Elite: corante roxo, diamante e a Advanced Power Cell. Ultimate: lingote de netherite, vara de blaze e a Elite Power Cell. Muda as células da 1347 |
 | 1355 | Como a Power Bank sobe de tier, se cada célula leva a anterior? | Pela mesma cruz da célula do tier, com a Power Bank anterior no centro e o tipo `cubit:power_bank_upgrade`, que passa a carga. A célula de dentro sobe junto, e nada é pago duas vezes. A célula do tier serve para montar a Power Bank do zero, com a Power Bank Casing, sem forma e vazia, em todos os tiers. Muda a 1348 |
 | 1356 | Como fica a receita do Visor? | Diamante, obsidiana, diamante, numa linha, em qualquer linha da grade. A obsidiana no meio é a tela escura, e a bolsa de tinta brilhante sai. O Cubit passa a pedir 3 diamantes, 2 no Visor e 1 no Núcleo, escolha do desenvolvedor contra a recomendação de manter o Visor da 1353. Muda a 1344 e o Visor da 1353 |
+| 1357 | Os Modules seguem a linha das células? | Sim: encadeados, numa cruz com o anterior no centro. O Advanced tem o Cubit Neural Core no centro, o Elite tem o Advanced, e o Ultimate tem o Elite. Para fazer o Elite, é preciso um Advanced novo. Muda a 799 |
+| 1358 | Quais materiais os Modules usam na cruz? | Os das células: lápis-lazúli em cima e embaixo e lingote de ouro nas laterais (Advanced), corante roxo e diamante (Elite), e lingote de netherite e vara de blaze (Ultimate). O custo do Elite e do Ultimate cai em relação à 1331, que esta resposta muda para os Modules |
 
 ## Histórico de modificações
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
-| Marcelo Fabiano | 2026-11-21 00:40 | Registra as respostas 1338 a 1356. |
+| Marcelo Fabiano | 2026-11-21 00:40 | Registra as respostas 1338 a 1358. |
 | Marcelo Fabiano | 2026-11-20 23:40 | Registra as respostas 1330 a 1337. |
 | Marcelo Fabiano | 2026-11-19 22:56 | Registra as respostas 1314 a 1329. |
 | Marcelo Fabiano | 2026-11-19 22:51 | Registra a resposta 1313. |

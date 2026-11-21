@@ -186,16 +186,16 @@ Rode num mundo novo, em modo sobrevivência, com `/gamemode survival` e `/give @
 | # | Faça | Espere |
 |---|---|---|
 | 1 | Pegue um diamante, com `/give @s minecraft:diamond` | As receitas do `Cubit Casing`, do `Cubit Visor`, das `Cubit Treads` e do `Cubit Neural Core` aparecem no livro. A do `Cubit` e a do `Induction Dock` ainda não |
-| 2 | Dê os materiais: `/give @s minecraft:iron_ingot 16`, `/give @s minecraft:obsidian 3`, `/give @s minecraft:redstone_torch 2`, `/give @s minecraft:piston 2`, `/give @s minecraft:redstone 8`, `/give @s minecraft:diamond 5` e `/give @s minecraft:chest 2` | Os itens chegam |
+| 2 | Dê os materiais: `/give @s minecraft:iron_ingot 16`, `/give @s minecraft:obsidian 3`, `/give @s minecraft:redstone_torch 2`, `/give @s minecraft:piston 2`, `/give @s minecraft:redstone 12`, `/give @s minecraft:diamond 5` e `/give @s minecraft:chest 2` | Os itens chegam |
 | 3 | Faça as peças: tocha de redstone, ferro, tocha de redstone / ferro, vazio, ferro / obsidiana, ferro, obsidiana; diamante, obsidiana, diamante; ferro, ferro, ferro / pistão, vazio, pistão; vazio, redstone, vazio / redstone, diamante, redstone / vazio, redstone, vazio. Com o Neural Core, abra o livro, e depois junte as quatro peças em qualquer posição | Saem as quatro peças, a receita do `Cubit` aparece com o Neural Core, e sai um `Cubit` |
 | 4 | Olhe o livro, com o `Cubit` no inventário | As receitas do `Induction Dock` e dos três Modules aparecem |
 | 5 | Coloque o `Cubit` | Ele segue você, com a barra de 25% na tela |
 | 6 | Na mesa, monte o L: diamante na coluna 1 da linha 1; baú na coluna 1 da linha 2; ferro, redstone e ferro na linha 3 | Sai um `Induction Dock` |
 | 7 | Monte o L espelhado, trocando as colunas 1 e 3 | Também sai um `Induction Dock` |
 | 8 | Coloque o `Dock` e abra a tela, com Shift + botão direito | A barra de energia está vazia, e a tela do bloco, apagada |
-| 9 | Dê `/give @s minecraft:obsidian 3`, `/give @s minecraft:lapis_lazuli 2`, `/give @s minecraft:diamond` e `/give @s minecraft:gold_ingot 3` e monte obsidiana, obsidiana e obsidiana; lápis, diamante e lápis; ouro, ouro e ouro | Sai um `Advanced Module` |
-| 10 | Dê `/give @s minecraft:obsidian 3`, `/give @s minecraft:purple_dye 2`, `/give @s minecraft:diamond_block` e `/give @s minecraft:gold_block 3` e monte obsidiana, obsidiana e obsidiana; corante roxo, bloco de diamante e corante roxo; bloco de ouro, bloco de ouro e bloco de ouro | Sai um `Elite Module` |
-| 11 | Dê `/give @s minecraft:netherite_ingot 5`, `/give @s minecraft:diamond_block` e `/give @s minecraft:blaze_powder 3` e monte netherite, netherite e netherite; netherite, bloco de diamante e netherite; pó de blaze, pó de blaze e pó de blaze | Sai um `Ultimate Module` |
+| 9 | Faça outro `Cubit Neural Core`, dê `/give @s minecraft:lapis_lazuli 2` e `/give @s minecraft:gold_ingot 2` e monte lápis em cima e embaixo, ouro nas laterais e o Neural Core no centro | Sai um `Advanced Module` |
+| 10 | Dê `/give @s minecraft:purple_dye 2` e `/give @s minecraft:diamond 2` e monte corante roxo em cima e embaixo, diamante nas laterais e o Advanced Module no centro | Sai um `Elite Module` |
+| 11 | Dê `/give @s minecraft:netherite_ingot 2` e `/give @s minecraft:blaze_rod 2` e monte netherite em cima e embaixo, vara de blaze nas laterais e o Elite Module no centro | Sai um `Ultimate Module` |
 
 ## Sons
 
@@ -1058,6 +1058,7 @@ Na instância só com o mod, tire capturas com F2 do Cubit seguindo, da tela do 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-21 02:35 | Troca as receitas dos Modules pela cruz encadeada (perguntas 1357 e 1358). |
 | Marcelo Fabiano | 2026-11-21 02:05 | Troca o Visor para diamante, obsidiana, diamante (pergunta 1356). |
 | Marcelo Fabiano | 2026-11-21 01:45 | Troca a célula Base e o upgrade pela cruz (perguntas 1354 e 1355). |
 | Marcelo Fabiano | 2026-11-21 01:30 | Troca as grades da Carcaça e do Visor (pergunta 1353). |
