@@ -201,10 +201,13 @@ public final class EngineeringDeskBlockEntity extends BlockEntity implements Geo
     setChanged();
   }
 
-  /** A new recipe starts an order of one, and none clears it (answers 1442 and 1444). */
+  /**
+   * Choosing a recipe only marks it, with an order of zero: the player asks the amount with plus
+   * before anything is made, so nothing is crafted by accident (answer 1506).
+   */
   public void choose(ResourceLocation chosen) {
     recipe = chosen;
-    order = chosen == null ? DeskOrder.NONE : DeskOrder.start();
+    order = DeskOrder.NONE;
     progress = DeskProgress.NONE;
     setChanged();
   }

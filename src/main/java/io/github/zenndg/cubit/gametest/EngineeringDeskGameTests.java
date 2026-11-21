@@ -51,11 +51,11 @@ public final class EngineeringDeskGameTests {
   private static final BlockPos FLOOR = new BlockPos(START_X, FLOOR_Y, MIDDLE_Z);
   private static final BlockPos DESK = FLOOR.above();
   private static final String TOOLBOX_PATH = "toolbox";
-  private static final ResourceLocation TOOLBOX =
-      ResourceLocation.fromNamespaceAndPath(CubitMod.MOD_ID, TOOLBOX_PATH);
   private static final String ROBOT_PATH = "general_robot";
   private static final ResourceLocation ROBOT =
       ResourceLocation.fromNamespaceAndPath(CubitMod.MOD_ID, ROBOT_PATH);
+  private static final ResourceLocation TOOLBOX =
+      ResourceLocation.fromNamespaceAndPath(CubitMod.MOD_ID, TOOLBOX_PATH);
   private static final String NO_RIGHT_HALF = "The right half is missing";
   private static final String WRONG_OUTPUT = "Wrong items in the output";
   private static final String WRONG_ENERGY = "Wrong energy after the crafts";
@@ -106,7 +106,7 @@ public final class EngineeringDeskGameTests {
     EngineeringDeskBlockEntity desk = place(helper, ENERGY);
     fillToolbox(desk, TWO);
     desk.choose(TOOLBOX);
-    desk.adjustOrder(1);
+    desk.adjustOrder(TWO);
     helper.runAfterDelay(
         TWO_CRAFTS,
         () -> {
@@ -123,6 +123,7 @@ public final class EngineeringDeskGameTests {
     EngineeringDeskBlockEntity desk = place(helper, 0);
     fillToolbox(desk, 1);
     desk.choose(TOOLBOX);
+    desk.adjustOrder(1);
     helper.runAfterDelay(
         SOME_TICKS,
         () -> {
@@ -136,6 +137,7 @@ public final class EngineeringDeskGameTests {
   public static void missingMaterialsPause(GameTestHelper helper) {
     EngineeringDeskBlockEntity desk = place(helper, ENERGY);
     desk.choose(TOOLBOX);
+    desk.adjustOrder(1);
     helper.runAfterDelay(
         NEXT_TICK,
         () -> {
@@ -149,6 +151,7 @@ public final class EngineeringDeskGameTests {
     EngineeringDeskBlockEntity desk = place(helper, ENERGY);
     fillToolbox(desk, 1);
     desk.choose(TOOLBOX);
+    desk.adjustOrder(1);
     helper.setBlock(DESK.above(), Blocks.REDSTONE_BLOCK);
     helper.runAfterDelay(
         NEXT_TICK,
@@ -158,10 +161,27 @@ public final class EngineeringDeskGameTests {
         });
   }
 
+  /** Choosing a recipe makes nothing until plus asks for an amount (answer 1506). */
+  @GameTest(template = ARENA, timeoutTicks = TIMEOUT)
+  public static void choosingARecipeStartsNoOrder(GameTestHelper helper) {
+    EngineeringDeskBlockEntity desk = place(helper, ENERGY);
+    fillToolbox(desk, 1);
+    desk.choose(TOOLBOX);
+    helper.runAfterDelay(
+        SOME_TICKS,
+        () -> {
+          helper.assertTrue(desk.status() == DeskStatus.IDLE, WRONG_STATUS);
+          helper.assertTrue(desk.order().total() == 0, WRONG_STATUS);
+          helper.assertTrue(desk.input().countItem(Items.IRON_INGOT) == IRON_FOR_ONE, WRONG_OUTPUT);
+          helper.succeed();
+        });
+  }
+
   @GameTest(template = ARENA, timeoutTicks = TIMEOUT)
   public static void theComparatorReadsTheOrder(GameTestHelper helper) {
     EngineeringDeskBlockEntity desk = place(helper, 0);
     desk.choose(TOOLBOX);
+    desk.adjustOrder(1);
     helper.runAfterDelay(
         NEXT_TICK,
         () -> {
@@ -242,6 +262,7 @@ public final class EngineeringDeskGameTests {
     desk.output().setItem(1, new ItemStack(CubitItems.GENERAL_ROBOT_TREADS.get()));
     desk.output().setItem(2, new ItemStack(CubitItems.GENERAL_ROBOT_CORE.get()));
     desk.choose(ROBOT);
+    desk.adjustOrder(1);
     helper.runAfterDelay(
         NEXT_TICK,
         () -> {
@@ -260,6 +281,7 @@ public final class EngineeringDeskGameTests {
     EngineeringDeskBlockEntity desk = place(helper, ENERGY);
     desk.output().setItem(0, new ItemStack(CubitItems.GENERAL_ROBOT_VISOR.get()));
     desk.choose(ROBOT);
+    desk.adjustOrder(1);
     helper.runAfterDelay(
         NEXT_TICK,
         () -> {

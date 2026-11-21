@@ -1088,8 +1088,8 @@ As regras estão em [`mesa-de-engenharia.md`](../funcionalidades/mesa-de-engenha
 | 5 | Tente colocar com um bloco à direita | Nada é colocado, e o item continua na mão |
 | 6 | Tente fazer a `Toolbox` na mesa de craft do jogo | Nenhuma receita do mod aparece nem sai na mesa de craft |
 | 7 | Abra a mesa | Abas Projeto e Estoque, catálogo com todas as receitas do mod: o Cubit, as 4 peças e a Toolbox liberados; as outras escurecidas e acinzentadas, com `Locked` e sem os materiais no tooltip |
-| 8 | Clique na `Toolbox` no catálogo | A grade mostra as marcações e o pedido fica `0 / 1` |
-| 9 | Use + e, com Shift, + de novo | O pedido sobe de 1 e depois de 8, até 8 no Base |
+| 8 | Clique na `Toolbox` no catálogo | A grade mostra as marcações, o pedido fica `0 / 0` e nada é fabricado |
+| 9 | Use + e, com Shift, + de novo | O pedido sobe para `0 / 1` e depois de 8 em 8, até 8 no Base, e só então a mesa começa |
 | 10 | Na aba Estoque, ponha 7 ferros, 1 redstone e 1 obsidiana na entrada; ponha terra | Os materiais entram, e a terra não |
 | 11 | Sem energia | `No energy`, e nada sai da entrada |
 | 12 | Ponha redstone no slot de energia | A barra sobe 5k por pó, e começa `Crafting` |
@@ -1167,6 +1167,7 @@ Na instância só com o mod, tire capturas com F2 do Cubit seguindo, da tela do 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Zennd | 2026-11-21 14:20 | Começa o pedido em zero (pergunta 1506). |
 | Zennd | 2026-11-21 14:00 | Adiciona a cascata ao roteiro da Engineering Desk (perguntas 1500 a 1503). |
 | Zennd | 2026-11-21 13:30 | Adiciona o roteiro da Engineering Desk, PR 1 (perguntas 1424 a 1494). |
 | Marcelo Fabiano | 2026-11-21 12:00 | Adiciona o roteiro da Recharge Splash (perguntas 1399 a 1423). |

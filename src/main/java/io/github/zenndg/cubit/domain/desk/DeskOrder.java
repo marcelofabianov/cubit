@@ -2,7 +2,8 @@ package io.github.zenndg.cubit.domain.desk;
 
 /**
  * An order of the Engineering Desk: how many items were asked and how many are done. The desk
- * crafts one at a time and stops when the order ends (answers 1429, 1442 and 1444).
+ * crafts one at a time and stops when the order ends. A chosen recipe starts with no order, and
+ * plus asks the first items (answers 1429, 1442, 1444 and 1506).
  */
 public record DeskOrder(int total, int done) {
   public static final DeskOrder NONE = new DeskOrder(0, 0);
@@ -22,11 +23,6 @@ public record DeskOrder(int total, int done) {
     if (total < 0 || done < 0 || done > total) {
       throw new IllegalArgumentException(INVALID + done + OF + total);
     }
-  }
-
-  /** Choosing a recipe starts an order of one, which the player raises. */
-  public static DeskOrder start() {
-    return new DeskOrder(STEP, 0);
   }
 
   public boolean isActive() {

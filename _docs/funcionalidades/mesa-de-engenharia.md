@@ -57,6 +57,7 @@ A redstone que entra pelos lados ou por trás vai para o inventário de entrada,
 - **Catálogo:** mostra todas as receitas do mod, na ordem em que são liberadas (pergunta 1499), em categorias com ícones (Cubit e peças, Energia, Dock, Modules, Cards e Ferramentas) e com um campo de busca pelo nome (pergunta 1474).
 - **Bloqueadas:** aparecem com o item escurecido e acinzentado, com o nome e `Locked`, sem os materiais, e não podem ser escolhidas nem marcadas à mão. Desbloqueiam na ordem de [`itens.md`](../itens.md#progressão-das-receitas), com o Cubit e as peças desde o início (perguntas 1441 e 1495 a 1498). Assim o player vê tudo o que o mod tem e o que já abriu.
 - **Um pedido por vez:** uma receita e uma quantidade. Para fabricar outra coisa, o player troca a receita (pergunta 1442).
+- **Começa em zero:** escolher a receita só a marca, com o pedido em zero. A mesa só fabrica depois que o player pede a quantidade no +, para nada ser feito por acidente nem gastar material (pergunta 1506).
 - **Quantidade:** botões − e +, como no controle de velocidade. O clique muda 1, e com Shift muda 8, entre 1 e o maior pedido do tier. Um botão cancela o pedido (pergunta 1444).
 - **Trocar a receita:** zera o pedido e o progresso, e os materiais continuam no inventário de entrada.
 - **Só do mod:** a mesa não fabrica receitas do jogo.
@@ -183,6 +184,7 @@ Uma issue mãe e quatro PRs, em ordem, cada um testável no jogo (pergunta 1478)
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Zennd | 2026-11-21 14:20 | Começa o pedido em zero (pergunta 1506). |
 | Zennd | 2026-11-21 14:00 | Adiciona a cascata (perguntas 1500 a 1503). |
 | Zennd | 2026-11-21 13:50 | Ordena o catálogo pela liberação (pergunta 1499). |
 | Zennd | 2026-11-21 13:40 | Escurece as receitas bloqueadas e aponta a ordem de liberação (perguntas 1495 a 1498). |
