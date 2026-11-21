@@ -28,7 +28,7 @@ O Cubit e as Power Banks são montados a partir de peças, numa cascata de recei
 - **Pilha:** todas empilham até 64, como os Modules.
 - **Criativo:** ficam na aba `cubit:main`.
 - **Uso:** nenhuma peça tem uso fora da [Engineering Desk](mesa-de-engenharia.md). O clique direito com elas não faz nada.
-- **Catálogo:** as receitas saem da Engineering Desk e desbloqueiam nas condições do livro de hoje (pergunta 1441): as quatro peças do Cubit aparecem com um diamante, e o Cubit, com o Neural Core. A Power Bank Casing e a Base Power Cell aparecem com um Cubit, e cada célula seguinte, com a Power Bank anterior (pergunta 1350). A Power Bank do zero aparece com a célula do tier.
+- **Catálogo:** as receitas saem da Engineering Desk. O Cubit e as quatro peças ficam liberados desde o início, e o resto segue a ordem de [`itens.md`](../itens.md#progressão-das-receitas) (perguntas 1496 e 1498).
 - **Modules:** seguem a mesma linha das células, numa cruz com o Module anterior no centro. O Advanced nasce do Cubit Neural Core (perguntas 1357 e 1358). As grades estão em [`itens.md`](../itens.md#modules).
 - **O que não muda:** a Toolbox, o conserto do Damaged Cubit, a recarga pela grade, o Dock e o Tablet.
 
@@ -65,6 +65,7 @@ Nenhum save muda: as peças não têm data components nem NBT.
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Zennd | 2026-11-21 13:40 | Libera o Cubit e as peças desde o início (pergunta 1496). |
 | Zennd | 2026-11-21 12:50 | Passa as peças para a Engineering Desk (perguntas 1427 e 1441). |
 | Marcelo Fabiano | 2026-11-21 02:40 | Leva os Modules para a linha das células (perguntas 1357 e 1358). |
 | Marcelo Fabiano | 2026-11-21 01:45 | Encadeia as células e troca o upgrade pela cruz (perguntas 1354 e 1355). |

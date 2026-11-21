@@ -436,11 +436,20 @@ Não há perguntas pendentes nesta fase.
 | 1489 | O que fazer com o `startup.wav`, que tem 22,6 s? | Cortar o primeiro 1,6 s, com os dois bipes do início, com um fade curto no fim e o volume normalizado. O desenvolvedor ouve o resultado antes de ele entrar |
 | 1490 | Como converter os sons para Ogg Vorbis, mono e 48 kHz? | Com o `ffmpeg`, instalado pelo Homebrew no Mac. Ele só converte e corta os sons e não entra no projeto nem no build |
 | 1491 | Com qual codificador os sons viram Ogg Vorbis, já que o `ffmpeg` do Homebrew só tem o codificador interno, experimental? | Com o `oggenc`, do `vorbis-tools`, instalado pelo Homebrew, com qualidade 6. O `ffmpeg` corta, normaliza e passa para mono e 48 kHz. Detalha a 1490 |
+| 1492 | Quais são os IDs de contrato da Engineering Desk? | Seguem o padrão do Dock. Componentes do item: `cubit:engineering_desk_tier`, `cubit:engineering_desk_energy`, `cubit:engineering_desk_input`, `cubit:engineering_desk_output` e `cubit:engineering_desk_order`, com a receita e a quantidade. O aviso da primeira mesa fica num attachment do player, `cubit:engineering_desk_seen` |
+| 1493 | Como fica a tela da Engineering Desk no PR 1? | Funcional e já com a estrutura final: as abas Projeto e Estoque, o catálogo com as bloqueadas desativadas, a grade com as marcações, − e +, Cancel, a seta, a energia e o slot de redstone, com o visual simples das telas atuais. O PR 3 traz a arte de prancheta, as categorias, a busca e o Jade |
+| 1494 | Qual modelo a Engineering Desk usa no PR 1? | O modelo final no GeckoLib, já no PR 1, sem as animações. O PR 2 fica com as animações, a luz e os sons. Muda a divisão da 1478 |
+| 1495 | Como o catálogo da Engineering Desk mostra a receita bloqueada? | Com o item escurecido e acinzentado, com cara de desativado, e só as liberadas aparecem normais. Detalha a 1441 |
+| 1496 | Quando o Cubit e as quatro peças dele ficam liberados no catálogo? | Desde o início, porque são a primeira coisa a fazer na mesa. O custo continua nas receitas. Muda a 1350 para o Cubit e as peças |
+| 1497 | E o resto da ordem de liberação? | Revisar tudo agora: o agente monta a tabela com a liberação de cada receita e uma proposta de ordem, e o desenvolvedor aprova antes do commit do PR 1 |
+| 1498 | Qual é a nova ordem de liberação das receitas no catálogo? | Etapa 1, desde o início: o Cubit, as quatro peças dele e a Toolbox. Etapa 2, ao ter um Cubit: o Induction Dock, o Tablet, a Power Bank Casing, a Base Power Cell, o Advanced Module, os quatro cards e a Recharge Splash. Etapa 3: o Elite Module ao ter o Advanced, e o Ultimate ao ter o Elite. As cadeias das Power Banks, do Dock Solar, do religar e do conserto continuam como estão. Muda a 805, a 1350 e a 1406 na liberação |
+| 1499 | Em que ordem o catálogo da Engineering Desk mostra as receitas? | Na ordem de liberação da 1498: as peças e o Cubit, a Toolbox, depois o que libera com um Cubit, os Modules, as cadeias das Power Banks e do Dock Solar, e por fim religar e consertar. Uma receita fora da lista, como a de um pack, vem no fim. O som e as animações não estão no PR 1: entram no PR 2, como na 1494 |
 
 ## Histórico de modificações
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Zennd | 2026-11-21 15:00 | Registra as respostas 1492 a 1499. |
 | Zennd | 2026-11-21 14:10 | Registra as respostas 1487 a 1491. |
 | Zennd | 2026-11-21 13:30 | Registra as respostas 1485 e 1486 e aponta a mudança da 1284 na 1461. |
 | Zennd | 2026-11-21 11:45 | Registra as respostas 1424 a 1484. |

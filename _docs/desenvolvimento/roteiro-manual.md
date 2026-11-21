@@ -1075,6 +1075,37 @@ As regras estão em [`cozinheiro.md`](../funcionalidades/trabalhos/cozinheiro.md
 | 12 | Recolha o Cubit e coloque de novo | O card continua, e a área, os baús e os fornos precisam ser marcados de novo |
 | 13 | Com o jogo em português | `Aprendizado de Máquina: Cozinheiro` |
 
+## Engineering Desk
+
+As regras estão em [`mesa-de-engenharia.md`](../funcionalidades/mesa-de-engenharia.md). Esta seção cobre o PR 1: o bloco, a energia, os inventários, o pedido, as receitas na mesa, os lados, o modelo sem animações e a tela funcional. Use um mundo novo em sobrevivência, ferro, vidro, baús, uma mesa de craft, redstone, obsidiana, um funil, um baú, um comparador e um Advanced Module, e, para o passo 17, um segundo player.
+
+| # | Faça | Espere |
+|---|---|---|
+| 1 | Abra o livro de receitas da mesa de craft | Aparece a `Engineering Desk`, desde o início |
+| 2 | Faça a mesa: painel de vidro, redstone, painel de vidro / baú, mesa de craft, baú / três ferros | Sai a `Engineering Desk`, com o modelo 3D no inventário |
+| 3 | Coloque a mesa | Ocupa 2 blocos, com a outra metade à sua direita, o laptop de frente para você e o texto da primeira mesa na barra de ação |
+| 4 | Coloque uma segunda mesa | O texto não aparece de novo |
+| 5 | Tente colocar com um bloco à direita | Nada é colocado, e o item continua na mão |
+| 6 | Tente fazer a `Toolbox` na mesa de craft do jogo | Nenhuma receita do mod aparece nem sai na mesa de craft |
+| 7 | Abra a mesa | Abas Projeto e Estoque, catálogo com todas as receitas do mod: o Cubit, as 4 peças e a Toolbox liberados; as outras escurecidas e acinzentadas, com `Locked` e sem os materiais no tooltip |
+| 8 | Clique na `Toolbox` no catálogo | A grade mostra as marcações e o pedido fica `0 / 1` |
+| 9 | Use + e, com Shift, + de novo | O pedido sobe de 1 e depois de 8, até 8 no Base |
+| 10 | Na aba Estoque, ponha 7 ferros, 1 redstone e 1 obsidiana na entrada; ponha terra | Os materiais entram, e a terra não |
+| 11 | Sem energia | `No energy`, e nada sai da entrada |
+| 12 | Ponha redstone no slot de energia | A barra sobe 5k por pó, e começa `Crafting` |
+| 13 | Espere 5 s | Sai uma `Toolbox` na saída, e a energia cai 2.500 FE |
+| 14 | Esvazie a entrada no meio do pedido | `Missing materials`, e o progresso continua quando os materiais voltam |
+| 15 | Ponha um bloco de redstone ao lado | `Redstone signal`, e a mesa pausa |
+| 16 | Ligue um comparador | O sinal acompanha o que falta do pedido, de 15 a 0 |
+| 17 | Com o segundo player, use a mesa, aplique um Module e tente quebrá-la | Ele usa a mesa, mas não sobe o tier nem a quebra |
+| 18 | Clique com o Advanced Module | Sobe para Advanced, a faixa do tampo fica azul e os inventários passam a 18 slots |
+| 19 | Ponha um funil à esquerda, um à direita, um em cima e um baú embaixo | O da esquerda põe na entrada, o da direita tira da saída, o de cima não faz nada |
+| 20 | Quebre a metade direita | Cai uma mesa só, com o tooltip do tier, da energia, do pedido e dos itens guardados |
+| 21 | Tente pôr essa mesa num shulker box e no Dock | Não entra. Vazia, entra |
+| 22 | Coloque a mesa de novo | Volta com o tier, a energia, os inventários e o pedido |
+| 23 | Conserte um Damaged Cubit e religue um Cubit com uma Power Bank na mesa | Saem como antes, e a Power Bank volta para a saída com a carga que sobrou |
+| 24 | Com o jogo em português | `Mesa de Engenharia`, `Projeto`, `Estoque` e os estados em português |
+
 ## Tradução
 
 | # | Passo | Resultado esperado |
@@ -1134,6 +1165,7 @@ Na instância só com o mod, tire capturas com F2 do Cubit seguindo, da tela do 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Zennd | 2026-11-21 13:30 | Adiciona o roteiro da Engineering Desk, PR 1 (perguntas 1424 a 1494). |
 | Marcelo Fabiano | 2026-11-21 12:00 | Adiciona o roteiro da Recharge Splash (perguntas 1399 a 1423). |
 | Marcelo Fabiano | 2026-11-21 09:10 | Adiciona o roteiro do Dock Solar e leva a faixa para o topo (perguntas 1384 a 1392). |
 | Marcelo Fabiano | 2026-11-21 07:30 | Adiciona o roteiro dos tiers do Dock (perguntas 1373 a 1382). |

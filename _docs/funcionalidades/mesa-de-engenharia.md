@@ -54,8 +54,8 @@ A redstone que entra pelos lados ou por trás vai para o inventário de entrada,
 ## Receita e pedido
 
 - **Grade de 9 slots:** mostra marcações dos itens, não itens reais. O player escolhe a receita no catálogo, e a grade se preenche, ou marca à mão, arrastando um item para a grade, e a mesa reconhece a receita (pergunta 1426).
-- **Catálogo:** mostra todas as receitas do mod, em categorias com ícones (Cubit e peças, Energia, Dock, Modules, Cards e Ferramentas) e com um campo de busca pelo nome (pergunta 1474).
-- **Bloqueadas:** aparecem desativadas no fim de cada categoria, com o ícone, o nome e `Locked`, sem os materiais, e não podem ser escolhidas nem marcadas à mão. Desbloqueiam nas mesmas condições do livro de receitas de hoje (perguntas 805, 908, 1350 e 1441). Assim o player vê tudo o que o mod tem e o que já abriu.
+- **Catálogo:** mostra todas as receitas do mod, na ordem em que são liberadas (pergunta 1499), em categorias com ícones (Cubit e peças, Energia, Dock, Modules, Cards e Ferramentas) e com um campo de busca pelo nome (pergunta 1474).
+- **Bloqueadas:** aparecem com o item escurecido e acinzentado, com o nome e `Locked`, sem os materiais, e não podem ser escolhidas nem marcadas à mão. Desbloqueiam na ordem de [`itens.md`](../itens.md#progressão-das-receitas), com o Cubit e as peças desde o início (perguntas 1441 e 1495 a 1498). Assim o player vê tudo o que o mod tem e o que já abriu.
 - **Um pedido por vez:** uma receita e uma quantidade. Para fabricar outra coisa, o player troca a receita (pergunta 1442).
 - **Quantidade:** botões − e +, como no controle de velocidade. O clique muda 1, e com Shift muda 8, entre 1 e o maior pedido do tier. Um botão cancela o pedido (pergunta 1444).
 - **Trocar a receita:** zera o pedido e o progresso, e os materiais continuam no inventário de entrada.
@@ -155,6 +155,8 @@ Um plugin opcional do JEI, isolado em `compat/jei`, como o do Jade, que mostra a
 | Receitas | Os IDs de hoje, como `cubit:general_robot` | Mantêm o ID e passam ao tipo da mesa. Os tipos especiais, como `cubit:power_bank_upgrade`, `cubit:solar_dock_assembly`, `cubit:robot_recharge` e `cubit:robot_repair`, mantêm o nome e rodam só na mesa (pergunta 1438) |
 | Config, por tier, em `[general_robot.{tier}]` | `engineering_desk_energy_capacity`, `engineering_desk_craft_ticks`, `engineering_desk_storage_slots` e `engineering_desk_max_order` | A bateria, o tempo por craft, os slots de cada inventário e o maior pedido (pergunta 1475) |
 | Config, em `general` | `engineering_desk_craft_energy` e `engineering_desk_input_per_tick` | O custo por craft, com 2.500 FE, e a entrada de energia, com 5.000 FE/t |
+| Componentes do item | `cubit:engineering_desk_tier`, `cubit:engineering_desk_energy`, `cubit:engineering_desk_input`, `cubit:engineering_desk_output` e `cubit:engineering_desk_order` | O tier, a energia, os dois inventários e o pedido, com a receita e a quantidade, que voltam ao colocar a mesa (pergunta 1492) |
+| Attachment do player | `cubit:engineering_desk_seen` | Se o player já colocou uma mesa, para o texto da primeira mesa aparecer uma vez só (pergunta 1492) |
 | Sons | `cubit:engineering_desk.crafting`, `cubit:engineering_desk.done` e `cubit:engineering_desk.startup` | O loop de criando, o som de pronto e o bipe de ligação |
 | Changelog | Aviso | As receitas do mod saem da mesa de craft do jogo e passam ao tipo da mesa |
 
@@ -162,15 +164,18 @@ Um plugin opcional do JEI, isolado em `compat/jei`, como o do Jade, que mostra a
 
 Uma issue mãe e quatro PRs, em ordem, cada um testável no jogo (pergunta 1478):
 
-1. Bloco, energia, inventários, pedido, receitas na mesa e lados.
-2. Modelo no GeckoLib, animações, luz e sons.
-3. Tela de prancheta e Jade.
+1. Bloco, energia, inventários, pedido, receitas na mesa e lados, com o modelo final no GeckoLib, ainda sem animações, e a tela funcional, já com as abas e o catálogo, no visual simples das telas atuais (perguntas 1493 e 1494).
+2. Animações, luz e sons.
+3. Tela de prancheta, com as categorias e a busca, e Jade.
 4. JEI.
 
 ## Histórico de modificações
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Zennd | 2026-11-21 13:50 | Ordena o catálogo pela liberação (pergunta 1499). |
+| Zennd | 2026-11-21 13:40 | Escurece as receitas bloqueadas e aponta a ordem de liberação (perguntas 1495 a 1498). |
+| Zennd | 2026-11-21 15:00 | Adiciona os componentes e o attachment e ajusta a divisão dos PRs (perguntas 1492 a 1494). |
 | Zennd | 2026-11-21 14:10 | Adiciona as imagens conceito aprovadas e os ajustes (pergunta 1487). |
 | Zennd | 2026-11-21 13:30 | Aponta a mudança da resposta 1284 no JEI (pergunta 1486). |
 | Zennd | 2026-11-21 12:30 | Descreve a Engineering Desk (perguntas 1424 a 1484). |

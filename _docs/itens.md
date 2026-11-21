@@ -54,7 +54,15 @@
 
 ## Progressão das receitas
 
-Só com recursos do jogo puro. Todas as receitas do mod saem da [Engineering Desk](funcionalidades/mesa-de-engenharia.md), no tipo `cubit:engineering` ou nos tipos especiais, com os mesmos IDs. A única que fica na mesa de craft do jogo é a da própria mesa (perguntas 1427, 1430, 1438 e 1459). Onde esta página diz que a receita aparece no livro, a receita passa a ser desbloqueada no catálogo da mesa, nas mesmas condições (pergunta 1441).
+Só com recursos do jogo puro. Todas as receitas do mod saem da [Engineering Desk](funcionalidades/mesa-de-engenharia.md), no tipo `cubit:engineering` ou nos tipos especiais, com os mesmos IDs. A única que fica na mesa de craft do jogo é a da própria mesa (perguntas 1427, 1430, 1438 e 1459). A liberação de cada receita no catálogo da mesa segue a tabela abaixo (pergunta 1498), e as bloqueadas aparecem escurecidas e acinzentadas (perguntas 1441 e 1495).
+
+| Etapa | Quando libera | Receitas |
+|---|---|---|
+| 1 | Desde o início | Cubit, Cubit Casing, Cubit Visor, Cubit Treads, Cubit Neural Core e Toolbox |
+| 2 | Ao ter um Cubit | Induction Dock, Cubit Tablet, Power Bank Casing, Base Power Cell, Advanced Module, os cards e a Recharge Splash |
+| 3 | Ao ter o Module anterior | Elite Module, com o Advanced, e Ultimate Module, com o Elite |
+| 4 | Ao ter o item anterior da cadeia | Base Power Bank, com a Base Power Cell; cada célula e cada Power Bank seguinte, com a Power Bank anterior; as Power Banks do zero, com a célula do tier; o Dock Solar Panel, com o Dock; o Solar Induction Dock, com o painel |
+| 5 | Ao precisar | Religar o Cubit, com uma Power Bank; o conserto, com um Damaged Cubit ou uma Toolbox |
 
 ### Engineering Desk
 
@@ -77,7 +85,7 @@ Os materiais que marcam cada tier, nas células das Power Banks e nos Modules (p
 
 ### Cubit
 
-Na Engineering Desk, sem forma: Cubit Casing, Cubit Visor, Cubit Treads e Cubit Neural Core, em qualquer posição (perguntas 1343 e 1346). Só com materiais do Overworld, nas [peças de montagem](#peças-de-montagem). A receita aparece no livro ao ter o Neural Core (pergunta 1350).
+Na Engineering Desk, sem forma: Cubit Casing, Cubit Visor, Cubit Treads e Cubit Neural Core, em qualquer posição (perguntas 1343 e 1346). Só com materiais do Overworld, nas [peças de montagem](#peças-de-montagem). A receita fica liberada desde o início (pergunta 1496).
 
 ### Induction Dock
 
@@ -129,7 +137,7 @@ Na Engineering Desk, a partir das [peças de montagem](#peças-de-montagem) (per
 
 ### Peças de montagem
 
-As regras estão em [`pecas.md`](funcionalidades/pecas.md). As quatro peças do Cubit aparecem no livro com um diamante. A Power Bank Casing e a Base Power Cell aparecem com um Cubit, e cada célula seguinte, com a Power Bank anterior (pergunta 1350).
+As regras estão em [`pecas.md`](funcionalidades/pecas.md). As quatro peças do Cubit ficam liberadas desde o início (pergunta 1496). A Power Bank Casing e a Base Power Cell aparecem com um Cubit, e cada célula seguinte, com a Power Bank anterior (pergunta 1350).
 
 | Peça | Linha 1 | Linha 2 | Linha 3 |
 |---|---|---|---|
@@ -185,7 +193,7 @@ Levam o Cubit ao tier seguinte, sem pular etapas. As regras estão em [`upgrade-
 
 - **Empilha** até 64, e o nome aparece na cor do colar do tier (pergunta 804).
 - **Criativo:** os três ficam na aba `cubit:main`.
-- **Receitas:** na Engineering Desk, encadeadas como as células, numa cruz: um material em cima e embaixo, outro nas laterais e, no centro, o Module anterior. O Advanced tem o Cubit Neural Core no centro (perguntas 1357 e 1358, que mudam a 799 e a 1331). As três aparecem no livro ao ter um Cubit (pergunta 805).
+- **Receitas:** na Engineering Desk, encadeadas como as células, numa cruz: um material em cima e embaixo, outro nas laterais e, no centro, o Module anterior. O Advanced tem o Cubit Neural Core no centro (perguntas 1357 e 1358, que mudam a 799 e a 1331). O Advanced aparece ao ter um Cubit, e cada seguinte, ao ter o Module anterior (pergunta 1498).
 
 ### Advanced Module
 
@@ -314,6 +322,7 @@ O estado salvo é validado ao entrar no jogo, sem derrubá-lo (regra 17 do `AGEN
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Zennd | 2026-11-21 13:40 | Adiciona a ordem de liberação no catálogo da mesa (perguntas 1495 a 1498). |
 | Zennd | 2026-11-21 12:50 | Passa as receitas do mod para a Engineering Desk e adiciona a receita dela (perguntas 1427, 1430 e 1441). |
 | Marcelo Fabiano | 2026-11-21 11:30 | Adiciona a Recharge Splash (perguntas 1400, 1406 e 1410). |
 | Marcelo Fabiano | 2026-11-21 08:20 | Adiciona o Dock Solar Panel e o Solar Induction Dock (perguntas 1384 a 1388). |
