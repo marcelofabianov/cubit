@@ -303,11 +303,26 @@ Não há perguntas pendentes nesta fase.
 | 1356 | Como fica a receita do Visor? | Diamante, obsidiana, diamante, numa linha, em qualquer linha da grade. A obsidiana no meio é a tela escura, e a bolsa de tinta brilhante sai. O Cubit passa a pedir 3 diamantes, 2 no Visor e 1 no Núcleo, escolha do desenvolvedor contra a recomendação de manter o Visor da 1353. Muda a 1344 e o Visor da 1353 |
 | 1357 | Os Modules seguem a linha das células? | Sim: encadeados, numa cruz com o anterior no centro. O Advanced tem o Cubit Neural Core no centro, o Elite tem o Advanced, e o Ultimate tem o Elite. Para fazer o Elite, é preciso um Advanced novo. Muda a 799 |
 | 1358 | Quais materiais os Modules usam na cruz? | Os das células: lápis-lazúli em cima e embaixo e lingote de ouro nas laterais (Advanced), corante roxo e diamante (Elite), e lingote de netherite e vara de blaze (Ultimate). O custo do Elite e do Ultimate cai em relação à 1331, que esta resposta muda para os Modules |
+| 1359 | Onde entram as ideias das portas e dos Docks? | Antes do Defensor (#198), em três cards: portas (#223), Dock com tiers e inventário, e Dock Solar |
+| 1360 | O que é uma porta do dono, já que a porta do jogo não guarda quem a colocou? | A porta marcada pelo dono com o Tablet |
+| 1361 | O que o inventário do Dock aceita? | Todos os itens do mod, mantendo o Cubit e o Damaged Cubit, que já entram hoje. Muda a 965 |
+| 1362 | O que o Dock Solar faz? | Tudo o que o Dock faz (receber o Cubit, hibernar, fila, inventário e cabos), mais o painel solar, que gera e guarda FE de forma passiva |
+| 1363 | O alinhamento do card das portas está certo? | Sim: o dono marca as portas no Tablet, o Cubit abre só a porta marcada, gastando energia, e fecha depois de passar, e o resto continua fechado para ele |
+| 1364 | As marcas das portas valem para qual Cubit, e em qual app? | São do dono e valem para todos os Cubits dele, num app novo do Tablet, o Portas, que aparece para qualquer Cubit, sem card. O app Marcar continua só dos trabalhos |
+| 1365 | Quais blocos contam como porta? | Portas, alçapões e portões de cerca, de madeira e de ferro, pelas tags do jogo, que também pegam os de outros mods |
+| 1366 | Para quem o Cubit abre a porta marcada? | Só para ele passar. O dono abre a própria porta como sempre |
+| 1367 | Em quais tiers o Cubit abre as portas? | Em todos, desde o Base |
+| 1368 | Quanto custa abrir uma porta? | 50 FE por abertura, igual em todos os tiers, no config. Sem carga, a porta fica fechada, e ele não passa por ela |
+| 1369 | Quantas portas cada dono pode marcar? | 64, em todas as dimensões, no config |
+| 1370 | Quando o Cubit fecha a porta? | Depois de sair do bloco dela, como os aldeões. Se o dono ou outra entidade estiver na porta, ele espera |
+| 1371 | O conceito das portas (#223) está autorizado para o código? | Sim: o desenvolvedor disse "autorizo", com os detalhes completados pelo agente: marcar uma metade marca a porta inteira, setas nas portas marcadas, o Cubit só fecha a porta que abriu, sem sinal de redstone, com faísca e o som da porta, e as marcas no mundo, em `cubit_door_marks` (regra 53) |
+| 1372 | O Cubit trava no bloco da porta de ferro aberta e não sai, mesmo com o dono longe. Como resolver? | Com a largura do Cubit em 0,6 bloco, como os mobs do jogo, no lugar de 0,75. A porta aberta deixa 0,8125 livre, e ele passa folgado, sem o empurrão lateral. A altura continua 1. Muda a 161 só na largura |
 
 ## Histórico de modificações
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-21 03:10 | Registra as respostas 1359 a 1372. |
 | Marcelo Fabiano | 2026-11-21 00:40 | Registra as respostas 1338 a 1358. |
 | Marcelo Fabiano | 2026-11-20 23:40 | Registra as respostas 1330 a 1337. |
 | Marcelo Fabiano | 2026-11-19 22:56 | Registra as respostas 1314 a 1329. |

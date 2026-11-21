@@ -18,6 +18,7 @@ Este é o mapa dos documentos do projeto. A apresentação do mod e o roadmap fi
 | Cor da carcaça e nome | [`funcionalidades/personalizacao.md`](funcionalidades/personalizacao.md) |
 | Upgrade de tier com os Modules | [`funcionalidades/upgrade-de-tier.md`](funcionalidades/upgrade-de-tier.md) |
 | Peças de montagem do Cubit e das Power Banks | [`funcionalidades/pecas.md`](funcionalidades/pecas.md) |
+| Portas marcadas que o Cubit abre | [`funcionalidades/portas.md`](funcionalidades/portas.md) |
 | Scanners, alertas e lanterna | [`funcionalidades/sensores.md`](funcionalidades/sensores.md) |
 | Telas próprias do Cubit e do Induction Dock | [`funcionalidades/telas.md`](funcionalidades/telas.md) |
 | Choque e modos de defesa | [`funcionalidades/combate.md`](funcionalidades/combate.md) |
@@ -49,6 +50,7 @@ Os números ficam em [`tiers.md`](tiers.md). As outras páginas apontam para lá
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-21 03:25 | Cita as portas. |
 | Marcelo Fabiano | 2026-11-21 01:00 | Cita as peças de montagem. |
 | Marcelo Fabiano | 2026-11-14 20:27 | Acrescenta a pasta dos conceitos dos trabalhos (pergunta 1148). |
 | Marcelo Fabiano | 2026-11-13 16:40 | Troca o controle remoto pelo Tablet e pelo modo área. |

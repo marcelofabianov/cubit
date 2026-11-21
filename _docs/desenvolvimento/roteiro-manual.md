@@ -683,6 +683,24 @@ As regras estão em [`energia.md`](../funcionalidades/energia.md#power-bank) e a
 | 11 | Tente com uma Power Bank quase vazia, ou com um Damaged Cubit | A receita não aparece |
 | 12 | Com o jogo em português | `Power Bank Base`, `Power Bank Avançada`, `Power Bank Elite`, `Power Bank Suprema` e `Carrega no Induction Dock` |
 
+## Portas
+
+As regras estão em [`portas.md`](../funcionalidades/portas.md). Use um Cubit Base com carga, o Tablet e uma parede de pedra com uma porta de ferro, uma porta de madeira, um alçapão de madeira na parede e um portão de cerca.
+
+| # | Faça | Espere |
+|---|---|---|
+| 1 | Com o Tablet na mão, troque de app com Shift e a roda até `Portas` | A faixa do Tablet fica âmbar, e a barra mostra `Cubit Tablet · Doors` |
+| 2 | Clique na metade de cima da porta de ferro | `Door marked for your Cubits · up to 64`, e uma seta âmbar aparece sobre a porta |
+| 3 | Clique numa pedra | `Doors marks a door, a trapdoor or a fence gate`, e nada é marcado |
+| 4 | Fique do outro lado da parede, com o Cubit seguindo você | O Cubit chega à porta, abre com uma faísca e o som da porta, passa e fecha depois de sair do bloco |
+| 5 | Veja a bateria na tela do Cubit antes e depois | Cai 50 FE a mais na passagem |
+| 6 | Repita com a porta de madeira sem marca | A porta fica fechada, e o Cubit não passa |
+| 7 | Marque o portão de cerca e o alçapão e passe por eles | O Cubit abre e fecha os dois |
+| 8 | Fique parado na porta aberta enquanto o Cubit passa | Ele espera você sair do bloco para fechar |
+| 9 | Marque a porta de madeira, abra-a com a mão e deixe o Cubit passar | Ele não fecha a porta que você abriu |
+| 10 | Shift + clique na porta marcada | `Door unmarked`, e a seta some |
+| 11 | Com o jogo em português | O app se chama `Portas`, e os avisos aparecem em português |
+
 ## Tochas
 
 As regras estão em [`inventario.md`](../funcionalidades/inventario.md#tochas). Use `/give` para as tochas, o Advanced Module e os blocos.
@@ -1058,6 +1076,7 @@ Na instância só com o mod, tire capturas com F2 do Cubit seguindo, da tela do 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-21 04:30 | Adiciona o roteiro das portas (perguntas 1359 a 1371). |
 | Marcelo Fabiano | 2026-11-21 02:35 | Troca as receitas dos Modules pela cruz encadeada (perguntas 1357 e 1358). |
 | Marcelo Fabiano | 2026-11-21 02:05 | Troca o Visor para diamante, obsidiana, diamante (pergunta 1356). |
 | Marcelo Fabiano | 2026-11-21 01:45 | Troca a célula Base e o upgrade pela cruz (perguntas 1354 e 1355). |
