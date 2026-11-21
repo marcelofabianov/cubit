@@ -2,20 +2,23 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "C": {
-      "item": "minecraft:redstone_block"
+    "B": {
+      "item": "minecraft:gold_block"
     },
-    "M": {
-      "item": "minecraft:diamond"
+    "C": {
+      "item": "minecraft:diamond_block"
     },
     "S": {
       "item": "minecraft:purple_dye"
+    },
+    "T": {
+      "item": "minecraft:obsidian"
     }
   },
   "pattern": [
-    "MSM",
+    "TTT",
     "SCS",
-    "MSM"
+    "BBB"
   ],
   "result": {
     "count": 1,

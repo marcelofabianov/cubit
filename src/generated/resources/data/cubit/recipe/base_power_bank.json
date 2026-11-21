@@ -2,20 +2,26 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
+    "B": {
+      "item": "minecraft:obsidian"
+    },
     "C": {
       "item": "minecraft:redstone_block"
     },
-    "M": {
-      "item": "minecraft:iron_ingot"
+    "K": {
+      "item": "minecraft:quartz"
     },
     "S": {
-      "item": "minecraft:redstone"
+      "item": "minecraft:emerald"
+    },
+    "T": {
+      "item": "minecraft:gold_ingot"
     }
   },
   "pattern": [
-    "MSM",
+    "KTK",
     "SCS",
-    "MSM"
+    "KBK"
   ],
   "result": {
     "count": 1,

@@ -5,6 +5,9 @@
     "D": {
       "item": "minecraft:diamond"
     },
+    "G": {
+      "item": "minecraft:glass_pane"
+    },
     "I": {
       "item": "minecraft:iron_ingot"
     },
@@ -21,7 +24,7 @@
   "pattern": [
     "RLR",
     "IDI",
-    "O O"
+    "OGO"
   ],
   "result": {
     "count": 1,

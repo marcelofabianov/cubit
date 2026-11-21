@@ -170,9 +170,11 @@ public final class PowerBankGameTests {
     ItemStack base = bank(CubitItems.BASE_POWER_BANK.get().getDefaultInstance(), CARRIED);
     ItemStack gold = new ItemStack(Items.GOLD_INGOT);
     ItemStack quartz = new ItemStack(Items.QUARTZ);
+    ItemStack block = new ItemStack(Items.REDSTONE_BLOCK);
+    ItemStack lapis = new ItemStack(Items.LAPIS_LAZULI);
     CraftingInput grid =
         CraftingInput.of(
-            THREE, THREE, List.of(gold, quartz, gold, quartz, base, quartz, gold, quartz, gold));
+            THREE, THREE, List.of(quartz, gold, quartz, block, base, block, quartz, lapis, quartz));
 
     ItemStack next =
         recipeFor(helper, grid)
