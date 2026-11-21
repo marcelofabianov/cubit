@@ -54,6 +54,7 @@ public final class CubitConfig {
   private final UnloadSection unload;
   private final SpeedControlSection speedControl;
   private final DoorSection doors;
+  private final RechargeSplashSection rechargeSplash;
   private final AtomicBoolean warnedRareTags = new AtomicBoolean();
   private final AtomicBoolean warnedLamp = new AtomicBoolean();
   private final AtomicBoolean warnedFishing = new AtomicBoolean();
@@ -82,6 +83,7 @@ public final class CubitConfig {
     unload = new UnloadSection(builder);
     speedControl = new SpeedControlSection(builder);
     doors = new DoorSection(builder);
+    rechargeSplash = new RechargeSplashSection(builder);
     builder.pop();
 
     tierCatalog = new NeoForgeTierCatalog(Map.of(GENERAL_ROBOT, tierSections(builder)));
@@ -196,36 +198,9 @@ public final class CubitConfig {
     return new OreSignals(kinds);
   }
 
-  public int chatterRepeatTicks() {
-    return chatter.repeatTicks.get();
-  }
-
-  public int chatterLeftBehindBlocks() {
-    return chatter.leftBehindBlocks.get();
-  }
-
-  public int chatterLeftBehindRepeatTicks() {
-    return chatter.leftBehindRepeatTicks.get();
-  }
-
-  public int chatterBiomeRepeatTicks() {
-    return chatter.biomeRepeatTicks.get();
-  }
-
-  public int chatterAnimalRepeatTicks() {
-    return chatter.animalRepeatTicks.get();
-  }
-
-  public int chatterRedstoneRepeatTicks() {
-    return chatter.redstoneRepeatTicks.get();
-  }
-
-  public int chatterAnimalChancePercent() {
-    return chatter.animalChancePercent.get();
-  }
-
-  public int chatterCheckTicks() {
-    return chatter.checkTicks.get();
+  /** The keys of the chatter. */
+  public ChatterSection chatter() {
+    return chatter;
   }
 
   public int surprisedExpressionTicks() {
@@ -383,6 +358,11 @@ public final class CubitConfig {
   /** The keys of the marked doors (answers 1368 and 1369). */
   public DoorSection doors() {
     return doors;
+  }
+
+  /** The keys of the Recharge Splash (answer 1413). */
+  public RechargeSplashSection rechargeSplash() {
+    return rechargeSplash;
   }
 
   public Percentage repairHealth() {

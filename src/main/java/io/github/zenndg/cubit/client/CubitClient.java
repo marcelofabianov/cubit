@@ -9,6 +9,7 @@ import io.github.zenndg.cubit.registry.CubitBlockEntities;
 import io.github.zenndg.cubit.registry.CubitEntities;
 import io.github.zenndg.cubit.registry.CubitItems;
 import io.github.zenndg.cubit.registry.CubitMenus;
+import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FastColor;
@@ -82,6 +83,7 @@ public final class CubitClient {
     event.registerEntityRenderer(
         CubitEntities.GENERAL_ROBOT.get(),
         context -> new RobotRenderer(context, CubitConfig.GENERAL_ROBOT));
+    event.registerEntityRenderer(CubitEntities.RECHARGE_SPLASH.get(), ThrownItemRenderer::new);
     event.registerBlockEntityRenderer(
         CubitBlockEntities.INDUCTION_DOCK.get(), SolarDockRenderer::new);
   }

@@ -114,7 +114,7 @@ public final class RobotChatter implements RobotSwitch {
       return;
     }
     checkLeftBehind();
-    if (ScanRules.isDue(robot.tickCount, CubitMod.CONFIG.chatterCheckTicks())) {
+    if (ScanRules.isDue(robot.tickCount, CubitMod.CONFIG.chatter().checkTicks())) {
       readTheWorld();
     }
   }
@@ -133,12 +133,12 @@ public final class RobotChatter implements RobotSwitch {
         leftBehind.next(
             robot.distanceTo(RobotInteractions.followedPlayer(robot)),
             follow.stopDistanceBlocks(),
-            CubitMod.CONFIG.chatterLeftBehindBlocks(),
+            CubitMod.CONFIG.chatter().leftBehindBlocks(),
             follow.teleportDistanceBlocks());
     leftBehind = step.watch();
     if (step.speaks() && mayComplain() && say(ChatTopic.LEFT_BEHIND)) {
       robot.playSound(CubitSounds.EXPRESSION_BEEP.get());
-      leftBehindRepeat = leftBehindRepeat.shown(CubitMod.CONFIG.chatterLeftBehindRepeatTicks());
+      leftBehindRepeat = leftBehindRepeat.shown(CubitMod.CONFIG.chatter().leftBehindRepeatTicks());
     }
   }
 
@@ -173,7 +173,7 @@ public final class RobotChatter implements RobotSwitch {
   private void commentOnTheBiome(ChatTopic topic) {
     if (say(topic)) {
       robot.playSound(CubitSounds.EXPRESSION_BEEP.get());
-      biomeRepeat = biomeRepeat.shown(CubitMod.CONFIG.chatterBiomeRepeatTicks());
+      biomeRepeat = biomeRepeat.shown(CubitMod.CONFIG.chatter().biomeRepeatTicks());
     }
   }
 
@@ -193,21 +193,21 @@ public final class RobotChatter implements RobotSwitch {
   private void commentOnTheWeather(ChatTopic topic) {
     if (say(topic)) {
       robot.playSound(CubitSounds.EXPRESSION_BEEP.get());
-      repeat = repeat.shown(CubitMod.CONFIG.chatterRepeatTicks());
+      repeat = repeat.shown(CubitMod.CONFIG.chatter().repeatTicks());
     }
   }
 
   public void remarkOn(Animal animal, int roll) {
     boolean pet = animal instanceof OwnableEntity ownable && ownable.getOwnerUUID() != null;
     boolean remarks =
-        ChatRules.remarksOnAnimal(pet, roll, CubitMod.CONFIG.chatterAnimalChancePercent());
+        ChatRules.remarksOnAnimal(pet, roll, CubitMod.CONFIG.chatter().animalChancePercent());
     if (remarks
         && runs()
         && animalRepeat.canShow()
         && ChatRules.isCalm(RobotFace.expression(robot))
         && say(RobotAnimals.topicOf(animal))) {
       robot.playSound(CubitSounds.EXPRESSION_BEEP.get());
-      animalRepeat = animalRepeat.shown(CubitMod.CONFIG.chatterAnimalRepeatTicks());
+      animalRepeat = animalRepeat.shown(CubitMod.CONFIG.chatter().animalRepeatTicks());
     }
   }
 
@@ -218,7 +218,7 @@ public final class RobotChatter implements RobotSwitch {
         && ChatRules.isCalm(RobotFace.expression(robot))
         && say(ChatTopic.REDSTONE)) {
       robot.playSound(CubitSounds.EXPRESSION_BEEP.get());
-      redstoneRepeat = redstoneRepeat.shown(CubitMod.CONFIG.chatterRedstoneRepeatTicks());
+      redstoneRepeat = redstoneRepeat.shown(CubitMod.CONFIG.chatter().redstoneRepeatTicks());
     }
   }
 

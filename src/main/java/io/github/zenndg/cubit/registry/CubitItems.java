@@ -8,6 +8,7 @@ import io.github.zenndg.cubit.item.DamagedRobotItem;
 import io.github.zenndg.cubit.item.JobCardItem;
 import io.github.zenndg.cubit.item.ModuleItem;
 import io.github.zenndg.cubit.item.PowerBankItem;
+import io.github.zenndg.cubit.item.RechargeSplashItem;
 import io.github.zenndg.cubit.item.RobotItem;
 import io.github.zenndg.cubit.item.TabletItem;
 import java.util.function.Supplier;
@@ -42,6 +43,13 @@ public final class CubitItems {
   private static final String DOCK_SOLAR_PANEL_ID = "dock_solar_panel";
   private static final String POWER_CELL_SUFFIX = "_power_cell";
   private static final int PART_STACK_SIZE = 64;
+
+  /** The item and the thrown flask share the ID (answer 1400). */
+  public static final String RECHARGE_SPLASH_ID = "recharge_splash";
+
+  /** As the snowballs and the eggs, also thrown (answer 1410). */
+  private static final int RECHARGE_SPLASH_STACK_SIZE = 16;
+
   private static final DeferredRegister<Item> ITEMS =
       DeferredRegister.create(Registries.ITEM, CubitMod.MOD_ID);
 
@@ -103,6 +111,11 @@ public final class CubitItems {
 
   /** The panel that goes on a dock, only for the crafting grid (answer 1386). */
   public static final Supplier<Item> DOCK_SOLAR_PANEL = part(DOCK_SOLAR_PANEL_ID);
+
+  public static final Supplier<Item> RECHARGE_SPLASH =
+      ITEMS.register(
+          RECHARGE_SPLASH_ID,
+          () -> new RechargeSplashItem(new Item.Properties().stacksTo(RECHARGE_SPLASH_STACK_SIZE)));
 
   public static final Supplier<Item> ADVANCED_MODULE = module(RobotTier.ADVANCED);
   public static final Supplier<Item> ELITE_MODULE = module(RobotTier.ELITE);

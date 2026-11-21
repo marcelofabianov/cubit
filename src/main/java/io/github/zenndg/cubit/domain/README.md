@@ -141,6 +141,9 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 | `RobotSoundRules` | Diz qual som cada situação toca |
 | `SlotRecharge` | Reserva de FE do slot de energia e sua passagem para a bateria |
 | `EnergyTransfer` | Energia movida de uma bateria para outra num passo: o que a taxa, a origem e o espaço permitem, sem criar nem perder FE |
+| `RechargeSplashSpec` | Os números da Recharge Splash, iguais em todos os tiers: a parte da vida e da bateria que ela dá, o raio a partir do impacto e os ticks em que ela age. Calcula a dose do tier, com a energia arredondada para baixo |
+| `RechargeSplashDose` | O que uma Recharge Splash ainda tem a dar a um Cubit: partes iguais a cada tick, com o resto da energia no último, para a soma dar o total exato. `NONE` é o Cubit sem mistura |
+| `RechargeSplashReception` | O que uma mistura faz com um Cubit: começa, se ele for de quem arremessou e estiver no raio; não dá nada e avisa, se ele ainda recebe a anterior; ou ignora |
 | `WakeRecharge` | Religar um Cubit guardado com uma Power Bank na grade: só abaixo da carga de religar, só o que falta e só se a Power Bank tiver tudo |
 | `PowerBankUpgrade` | A Power Bank encadeada leva a carga da anterior, e a receita não vale se a carga não couber |
 | `DockStock` | Estoque de energia de um Induction Dock e as transferências dele, sem criar nem perder FE |
@@ -181,6 +184,7 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 - **Reclamar uma vez:** ao se afastar, o dono só ouve de novo depois de o robô chegar perto, para não repetir a cada passo. Um salto além do teleporte não conta, porque não é o dono correndo (pergunta 585).
 - **Falas só com a expressão calma:** qualquer outra expressão indica algo mais importante, como um mob ou um dano.
 - **Sorteio fora do domínio:** o tempo da pesca e as chances da chuva e do céu são sorteados por quem chama, e o domínio só recebe os números. Assim ele continua sem dependências ocultas e testável sem relógio nem sorte (pergunta 1184).
+- **Recharge Splash aos poucos:** a dose é dividida a cada tick, e o último tick leva o que sobra, porque a energia é inteira e a soma precisa dar o total exato (regra 13 e pergunta 1415). O que não cabe na bateria cheia se perde, porque a mistura é uma fonte, como o painel, e não uma transferência entre duas baterias.
 - **Hibernação fora do Dock como estado próprio:** a do Dock sai sozinha com a carga cheia, e a de fora só sai pelo `Retomar`, pelo `Follow` ou pelo `Ir para o Dock`, então misturar as duas obrigaria toda regra do Dock a conferir onde o Cubit está (pergunta 1164).
 - **Histórico próprio:** o jogo guarda só a última morte, sem a hora e sem a causa, então o mod guarda o seu, com um limite, para o save não crescer sem fim (perguntas 1114 e 1115).
 - **Guia à frente, sem sair do alcance:** o Cubit espera o dono quando passa do limite à frente dele, e por isso nunca anda por chunks que só ele carregaria (pergunta 1126 e regra 22). Esperar o dono não conta como estar preso (pergunta 1123).

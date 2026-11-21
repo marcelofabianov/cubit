@@ -92,6 +92,7 @@ final class CubitRecipeProvider extends RecipeProvider {
     cookCard(output);
     recharge(output);
     solarDock(output);
+    RechargeSplashRecipe.save(output);
     String robotId = CubitConfig.GENERAL_ROBOT.id();
     output.accept(
         ResourceLocation.fromNamespaceAndPath(CubitMod.MOD_ID, REPAIR_PREFIX + robotId),

@@ -739,6 +739,26 @@ As regras estão em [`energia.md`](../funcionalidades/energia.md#dock-solar). Us
 | 11 | Olhe um Induction Dock comum | O topo da torre na cor do tier, e a faixa de antes, acima da base, sumiu |
 | 12 | Com o jogo em português | `Induction Dock Solar`, `Painel Solar do Dock` e `Solar: sem sol` |
 
+## Recharge Splash
+
+As regras estão em [`energia.md`](../funcionalidades/energia.md#recharge-splash). Use dois Cubits Base seus, com metade da bateria e com vida perdida, um Cubit de outro player, se houver, e os materiais: garrafa de vidro, bloco de redstone, lingote de ferro, pólvora e lápis-lazúli.
+
+| # | Faça | Espere |
+|---|---|---|
+| 1 | Faça a mistura na bancada, sem forma, com os cinco materiais | Sai 1 `Recharge Splash`, com a textura do frasco, e a pilha vai até 16 |
+| 2 | Passe o mouse sobre o item | `Heals and recharges your Cubits over 3 s, one at a time` |
+| 3 | Arremesse a mistura mirando no chão ao lado de um Cubit seu, fora dele | O frasco quebra com o respingo vermelho e as faíscas azuis, o Cubit solta faíscas, toca o som de recarga e fica com o rosto feliz |
+| 4 | Olhe a tela do Cubit enquanto ele recebe | A bateria sobe aos poucos, por 3 s, até 45 mil FE a mais, e a vida sobe 5 |
+| 5 | Arremesse outra antes dos 3 s acabarem | Ele não recebe nada, e a barra de ação mostra `Cubit is still recharging: wait 2 s`, ou os segundos que faltam |
+| 6 | Arremesse com os dois Cubits a até 4 blocos do impacto | Os dois recebem |
+| 7 | Arremesse a mais de 4 blocos de um Cubit, perto de um mob ou do Cubit de outro player | Nenhum deles recebe nada |
+| 8 | Arremesse num Cubit sem carga | Ele religa ao passar de 5% |
+| 9 | Desligue um Cubit pelo `Power` e arremesse nele | Ele recebe e continua desligado |
+| 10 | Arremesse num Cubit hibernando no Dock | Ele recebe e continua no Dock |
+| 11 | Recolha um Cubit no meio dos 3 s e coloque de novo | Ele fica só com o que já tinha recebido |
+| 12 | Ponha a mistura num dispenser e ative | O dispenser só solta o item, sem arremessar |
+| 13 | Com o jogo em português | `Mistura de Recarga` e `O Cubit ainda está recarregando: aguarde 2 s` |
+
 ## Tochas
 
 As regras estão em [`inventario.md`](../funcionalidades/inventario.md#tochas). Use `/give` para as tochas, o Advanced Module e os blocos.
@@ -1114,6 +1134,7 @@ Na instância só com o mod, tire capturas com F2 do Cubit seguindo, da tela do 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-21 12:00 | Adiciona o roteiro da Recharge Splash (perguntas 1399 a 1423). |
 | Marcelo Fabiano | 2026-11-21 09:10 | Adiciona o roteiro do Dock Solar e leva a faixa para o topo (perguntas 1384 a 1392). |
 | Marcelo Fabiano | 2026-11-21 07:30 | Adiciona o roteiro dos tiers do Dock (perguntas 1373 a 1382). |
 | Marcelo Fabiano | 2026-11-21 04:30 | Adiciona o roteiro das portas (perguntas 1359 a 1371). |

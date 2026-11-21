@@ -2,6 +2,7 @@ package io.github.zenndg.cubit.registry;
 
 import io.github.zenndg.cubit.CubitMod;
 import io.github.zenndg.cubit.domain.behavior.DeathLog;
+import io.github.zenndg.cubit.domain.energy.RechargeSplashDose;
 import io.github.zenndg.cubit.entity.RobotTickReading;
 import io.github.zenndg.cubit.player.ChosenRobotLink;
 import io.github.zenndg.cubit.player.FollowingRobotLink;
@@ -21,6 +22,7 @@ public final class CubitAttachments {
   private static final String ROBOT_TICK_READING_ID = "robot_tick_reading";
   private static final String CHOSEN_ROBOT_ID = "chosen_robot";
   private static final String DEATH_LOG_ID = "death_log";
+  private static final String RECHARGE_SPLASH_ID = "recharge_splash";
   private static final DeferredRegister<AttachmentType<?>> ATTACHMENTS =
       DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, CubitMod.MOD_ID);
 
@@ -58,6 +60,11 @@ public final class CubitAttachments {
   public static final Supplier<AttachmentType<RobotTickReading>> ROBOT_TICK_READING =
       ATTACHMENTS.register(
           ROBOT_TICK_READING_ID, () -> AttachmentType.builder(RobotTickReading::new).build());
+
+  // Without a serializer: what a Recharge Splash still has to give is lost on unload (1417).
+  public static final Supplier<AttachmentType<RechargeSplashDose>> RECHARGE_SPLASH =
+      ATTACHMENTS.register(
+          RECHARGE_SPLASH_ID, () -> AttachmentType.builder(() -> RechargeSplashDose.NONE).build());
 
   private CubitAttachments() {}
 

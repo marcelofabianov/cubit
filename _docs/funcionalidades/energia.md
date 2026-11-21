@@ -39,12 +39,13 @@ Os números estão em [`tiers.md`](../tiers.md#consumo-por-atividade), e o consu
 
 ## Como o Cubit carrega
 
-Só existem quatro formas, e nenhuma outra:
+Só existem cinco formas, e nenhuma outra:
 
 1. **Induction Dock**
 2. **Power Bank** no slot exclusivo
 3. **Redstone** no slot exclusivo
 4. **Painel solar**
+5. **[Recharge Splash](#recharge-splash)**, arremessada pelo dono
 
 ## Painel solar
 
@@ -172,6 +173,24 @@ O item com a bateria abaixo da carga de religar, como zerada, e com vida pode se
 - **Quanto:** só o que falta para a carga de religar, sobre a bateria do Cubit. Assim, ele volta a funcionar ao ser colocado. A Power Bank perde exatamente essa quantidade, sem criar nem perder FE.
 - **O que se mantém:** o Cubit não perde mais nada do estado, e a Power Bank continua na grade, com a carga restante.
 
+## Recharge Splash
+
+![Recharge Splash quebrando ao lado do Cubit](../imagens/conceito/recharge-splash.png)
+
+Uma mistura de arremesso, `cubit:recharge_splash`, que o dono arremessa nos próprios Cubits para recuperar parte da vida e da energia deles (perguntas 1393 a 1419). A receita está em [`itens.md`](../itens.md#recharge-splash), e os números, em [`tiers.md`](../tiers.md#valores-gerais).
+
+- **Arremesso:** como a poção de arremesso do jogo, com o clique direito mirando no chão ou no ar ao lado do Cubit. Com a mira no Cubit, o clique abre a tela dele, como hoje (pergunta 1422). O frasco se quebra no primeiro bloco ou entidade que atinge, com o respingo, e se gasta mesmo sem nenhum Cubit perto. O dispenser não a arremessa: só solta o item (pergunta 1409).
+- **Quem recebe:** todo Cubit do player que arremessou, a até 4 blocos do ponto de impacto, numa esfera. O raio só conta no impacto: o Cubit que se afasta depois continua recebendo até o fim (perguntas 1402 e 1418).
+- **Só no Cubit:** a mistura não dá vida nem efeito a players, mobs e outras entidades, nem aos Cubits de outros donos, que só veem o respingo (perguntas 1408 e 1409).
+- **Quanto:** 20% da vida máxima e 15% da bateria do tier do Cubit atingido, com a energia arredondada para baixo. No Base, são 5 de vida e 45 mil FE; no Ultimate, 40 de vida e 1,2 mi FE. O Cubit nunca passa da vida máxima nem da bateria cheia, e o que não cabe se perde (perguntas 1401 e 1405).
+- **Aos poucos:** a vida e a energia entram em partes iguais a cada tick, ao longo de 3 s, 60 ticks. O resto da divisão da energia entra no último tick, e a soma dá exatamente o total (perguntas 1414 e 1415).
+- **Uma por vez:** enquanto recebe uma mistura, o Cubit não recebe outra. A segunda não lhe dá nada, e o player que arremessou vê na barra de ação `Cubit is still recharging: wait 2 s`, com os segundos que faltam. Os outros Cubits dele no raio, que não estejam recebendo, recebem normalmente (perguntas 1412, 1416 e 1419).
+- **Estados:** vale para o Cubit ativo, sem carga, desligado pelo player e hibernando no Dock. Sem carga, ele religa ao passar de 5%. Desligado pelo player, continua desligado. No Dock, recebe e continua lá. O Damaged Cubit é um item e não recebe (pergunta 1407).
+- **Interrupção:** o que falta entrar não é salvo. Se o Cubit for recolhido, morrer ou o mundo fechar no meio dos 3 s, ele fica com o que já recebeu (pergunta 1417).
+- **Efeitos do jogo:** a mistura não é um efeito de poção e não mexe nos efeitos que o Cubit já tem. Ele continua recebendo os efeitos do jogo e de outros mods, com o gasto da [condição negativa](#consumo) (perguntas 1403 e 1404).
+- **Visual e som:** o respingo solta partículas vermelhas e faíscas azuis. O Cubit que começa a receber solta faíscas, toca uma vez o som de recarga e troca o rosto para a expressão feliz padrão (pergunta 1421).
+- **Tooltip:** o item explica que a vida e a energia entram em 3 s e que cada Cubit recebe uma mistura por vez (pergunta 1419).
+
 ## Retorno automático
 
 Entra com o item 15 da Fase 4.2, antes do modo área (perguntas 1065 a 1069).
@@ -187,6 +206,7 @@ Entra com o item 15 da Fase 4.2, antes do modo área (perguntas 1065 a 1069).
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-21 11:30 | Adiciona a Recharge Splash e a imagem dela (perguntas 1399 a 1423). |
 | Marcelo Fabiano | 2026-11-21 09:50 | Adiciona a aba Solar e o vidro sobre o painel (perguntas 1395 a 1398). |
 | Marcelo Fabiano | 2026-11-21 09:10 | Adiciona o pulso e o visual do painel do Dock Solar (pergunta 1392). |
 | Marcelo Fabiano | 2026-11-21 08:20 | Adiciona o Dock Solar e leva a faixa do tier para o topo da torre (perguntas 1384 a 1389). |
