@@ -3,6 +3,7 @@ package io.github.zenndg.cubit.registry;
 import io.github.zenndg.cubit.CubitMod;
 import io.github.zenndg.cubit.block.DockCapabilities;
 import io.github.zenndg.cubit.config.CubitConfig;
+import io.github.zenndg.cubit.entity.RechargeSplashProjectile;
 import io.github.zenndg.cubit.entity.RobotDockedView;
 import io.github.zenndg.cubit.entity.RobotEntity;
 import java.util.function.Supplier;
@@ -20,6 +21,12 @@ public final class CubitEntities {
   private static final float ROBOT_WIDTH = 0.6f;
 
   private static final float ROBOT_HEIGHT = 1f;
+
+  /** The size, range and update interval of the splash potion of the game. */
+  private static final float FLASK_SIZE = 0.25f;
+
+  private static final int FLASK_TRACKING_RANGE = 4;
+  private static final int FLASK_UPDATE_INTERVAL = 10;
   private static final DeferredRegister<EntityType<?>> ENTITIES =
       DeferredRegister.create(Registries.ENTITY_TYPE, CubitMod.MOD_ID);
 
@@ -39,6 +46,17 @@ public final class CubitEntities {
                       MobCategory.MISC)
                   .sized(ROBOT_WIDTH, ROBOT_HEIGHT)
                   .build(CubitConfig.GENERAL_ROBOT.id()));
+
+  public static final Supplier<EntityType<RechargeSplashProjectile>> RECHARGE_SPLASH =
+      ENTITIES.register(
+          CubitItems.RECHARGE_SPLASH_ID,
+          () ->
+              EntityType.Builder.<RechargeSplashProjectile>of(
+                      RechargeSplashProjectile::new, MobCategory.MISC)
+                  .sized(FLASK_SIZE, FLASK_SIZE)
+                  .clientTrackingRange(FLASK_TRACKING_RANGE)
+                  .updateInterval(FLASK_UPDATE_INTERVAL)
+                  .build(CubitItems.RECHARGE_SPLASH_ID));
 
   private CubitEntities() {}
 

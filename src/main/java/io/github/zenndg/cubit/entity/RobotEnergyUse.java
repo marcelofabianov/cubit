@@ -7,7 +7,10 @@ import io.github.zenndg.cubit.domain.energy.PowerState;
 import io.github.zenndg.cubit.domain.energy.RobotActivity;
 import io.github.zenndg.cubit.domain.tier.TierSpec;
 
-/** Spends the battery on what the robot did in the tick and charges it from the energy slot. */
+/**
+ * Spends the battery on what the robot did in the tick and charges it from the energy slot and from
+ * a Recharge Splash, before the power rules, so a robot without charge can wake from either.
+ */
 final class RobotEnergyUse {
   private final RobotEntity robot;
   private final RobotStepMeter stepMeter = new RobotStepMeter();
@@ -26,14 +29,15 @@ final class RobotEnergyUse {
     TierSpec spec = robot.spec();
     Battery before = robot.battery();
     Battery spent = spec.spendOneTick(before, robot.powerState(), activity);
-    Battery charged = inventory.energySlot().charge(spent, spec.rechargePerTick());
+    Battery fromSlot = inventory.energySlot().charge(spent, spec.rechargePerTick());
+    Battery charged = RobotRechargeSplash.tick(robot, fromSlot);
     robot.setBattery(charged);
     RobotTickReading.of(robot)
         .recordUse(
             before.charge().minus(spent.charge()),
             activity,
             before.charge().amount() > chargeBefore.amount(),
-            charged.charge().amount() > spent.charge().amount());
+            fromSlot.charge().amount() > spent.charge().amount());
     PowerState next = CubitMod.CONFIG.powerRules().afterEnergyChange(robot.powerState(), charged);
     if (next != robot.powerState()) {
       robot.setPowerState(next);

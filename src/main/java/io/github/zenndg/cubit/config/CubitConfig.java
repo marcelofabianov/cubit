@@ -54,6 +54,7 @@ public final class CubitConfig {
   private final UnloadSection unload;
   private final SpeedControlSection speedControl;
   private final DoorSection doors;
+  private final RechargeSplashSection rechargeSplash;
   private final AtomicBoolean warnedRareTags = new AtomicBoolean();
   private final AtomicBoolean warnedLamp = new AtomicBoolean();
   private final AtomicBoolean warnedFishing = new AtomicBoolean();
@@ -82,6 +83,7 @@ public final class CubitConfig {
     unload = new UnloadSection(builder);
     speedControl = new SpeedControlSection(builder);
     doors = new DoorSection(builder);
+    rechargeSplash = new RechargeSplashSection(builder);
     builder.pop();
 
     tierCatalog = new NeoForgeTierCatalog(Map.of(GENERAL_ROBOT, tierSections(builder)));
@@ -356,6 +358,11 @@ public final class CubitConfig {
   /** The keys of the marked doors (answers 1368 and 1369). */
   public DoorSection doors() {
     return doors;
+  }
+
+  /** The keys of the Recharge Splash (answer 1413). */
+  public RechargeSplashSection rechargeSplash() {
+    return rechargeSplash;
   }
 
   public Percentage repairHealth() {
