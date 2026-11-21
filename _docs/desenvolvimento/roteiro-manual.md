@@ -701,6 +701,25 @@ As regras estão em [`portas.md`](../funcionalidades/portas.md). Use um Cubit Ba
 | 10 | Shift + clique na porta marcada | `Door unmarked`, e a seta some |
 | 11 | Com o jogo em português | O app se chama `Portas`, e os avisos aparecem em português |
 
+## Tiers do Dock
+
+As regras estão em [`energia.md`](../funcionalidades/energia.md#tiers-do-dock), e os números, em [`tiers.md`](../tiers.md#induction-dock). Use um Induction Dock novo, um Cubit Base com pouca carga e os três Modules.
+
+| # | Faça | Espere |
+|---|---|---|
+| 1 | Coloque o Dock e olhe a torre | Uma faixa cinza ao redor da torre, logo acima da base. O Jade mostra `Tier: Base` |
+| 2 | Shift + clique direito e abra a aba `Storage` | O título mostra `Induction Dock · Base`, e o inventário tem 3 linhas |
+| 3 | Clique no Dock com o `Elite Module` | `The Induction Dock needs to be Advanced first`, e o Module fica na mão |
+| 4 | Clique com o `Advanced Module` | `Induction Dock upgraded to Advanced!`, o Module é gasto, a faixa fica azul, o inventário passa a 4 linhas e o estoque, a 1,2 mi FE |
+| 5 | Repita com o Elite e o Ultimate | Faixa roxa e depois dourada. No Ultimate, o corpo fica em netherite, o inventário tem 6 linhas e o estoque, 16 mi FE |
+| 6 | Clique de novo com um Module do mesmo tier | `The Induction Dock is already Ultimate`, e nada é gasto |
+| 7 | Ponha o Cubit Base com pouca carga no Dock Ultimate e olhe a linha de recarga na tela do Cubit | `+5.000 FE/t`, a taxa do Dock, e não a do Cubit |
+| 8 | Guarde uma Power Bank vazia no inventário do Dock, sem Cubit na base | Ela carrega na taxa do Dock |
+| 9 | Pela tela, ponha um card, uma peça e um Module no inventário | Os três entram. Um item de fora do mod não entra |
+| 10 | Quebre o Dock Ultimate e olhe o item | O ícone mostra a faixa dourada e o corpo de netherite. Colocado de novo, ele volta Ultimate, com a energia e o inventário |
+| 11 | Com outro player, clique com um Module num Dock seu | Nada acontece |
+| 12 | Com o jogo em português | `Induction Dock evoluiu para Avançado!` e os outros avisos em português |
+
 ## Tochas
 
 As regras estão em [`inventario.md`](../funcionalidades/inventario.md#tochas). Use `/give` para as tochas, o Advanced Module e os blocos.
@@ -1076,6 +1095,7 @@ Na instância só com o mod, tire capturas com F2 do Cubit seguindo, da tela do 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-21 07:30 | Adiciona o roteiro dos tiers do Dock (perguntas 1373 a 1382). |
 | Marcelo Fabiano | 2026-11-21 04:30 | Adiciona o roteiro das portas (perguntas 1359 a 1371). |
 | Marcelo Fabiano | 2026-11-21 02:35 | Troca as receitas dos Modules pela cruz encadeada (perguntas 1357 e 1358). |
 | Marcelo Fabiano | 2026-11-21 02:05 | Troca o Visor para diamante, obsidiana, diamante (pergunta 1356). |

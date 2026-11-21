@@ -4,6 +4,7 @@ import io.github.zenndg.cubit.client.ScreenPainter.Box;
 import io.github.zenndg.cubit.client.ScreenPainter.Colors;
 import io.github.zenndg.cubit.domain.dock.DockStatus;
 import io.github.zenndg.cubit.domain.energy.EnergyFormat;
+import io.github.zenndg.cubit.item.TierLook;
 import io.github.zenndg.cubit.menu.InductionDockMenu;
 import io.github.zenndg.cubit.menu.ScreenKeys;
 import java.util.Optional;
@@ -147,8 +148,10 @@ final class InductionDockScreen extends AbstractContainerScreen<InductionDockMen
     renderPicture(graphics, left, top);
   }
 
+  /** The rows of the tier of the dock, from three to six (answer 1374). */
   private void renderStorageFrames(GuiGraphics graphics, int left, int top) {
-    for (int row = 0; row < ROWS; row++) {
+    int rows = menu.storageSlots() / COLUMNS;
+    for (int row = 0; row < rows; row++) {
       for (int column = 0; column < COLUMNS; column++) {
         ScreenPainter.slot(
             graphics,
@@ -217,7 +220,9 @@ final class InductionDockScreen extends AbstractContainerScreen<InductionDockMen
   }
 
   private void renderDockLabels(GuiGraphics graphics) {
-    Component bold = title.copy().withStyle(ChatFormatting.BOLD);
+    Component bold =
+        Component.translatable(ScreenKeys.DOCK_TITLE_TIER, title, TierLook.name(menu.dockTier()))
+            .withStyle(ChatFormatting.BOLD);
     painter.text(graphics, bold, TITLE, ScreenPainter.TEXT, ScreenPainter.FULL_SCALE);
     DockStatus status = menu.status();
     painter.status(

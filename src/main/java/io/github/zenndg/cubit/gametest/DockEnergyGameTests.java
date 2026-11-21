@@ -35,7 +35,10 @@ public final class DockEnergyGameTests {
   private static final int SOME_DUSTS = 3;
   private static final int MANY = 1_000_000;
   private static final int INPUT = 5_000;
-  private static final int CAPACITY = 100_000;
+
+  /** The stock of a Base dock (answer 1374). */
+  private static final int CAPACITY = 300_000;
+
   private static final long ONE_DUST = 5_000;
   private static final long SAVED = 12_345;
   private static final long NEGATIVE = -1;

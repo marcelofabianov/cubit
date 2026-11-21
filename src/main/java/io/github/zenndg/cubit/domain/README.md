@@ -152,8 +152,9 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 | `PreferredDock` | O Dock marcado com o app Dock do Tablet, pelo bloco e pela dimensão. Clicar no mesmo Dock tira a marca (perguntas 1008 e 1045) |
 | `AutoReturn` | Quando o Cubit volta sozinho a um Dock: com a chave ligada, ativo, seguindo o dono e com a bateria do retorno do tier ou menos, a não ser que já esteja a caminho (perguntas 1065 a 1068) |
 | `DockRemoval` | Quem pode quebrar um Dock |
-| `DockStorageRules` | O inventário do Dock: o que ele guarda, quando e qual Power Bank ele carrega, e o que a automação tira |
-| `DockStoredKind` | O que um item é para o inventário do Dock: Toolbox, Power Bank ou outro |
+| `DockStorageRules` | O inventário do Dock: o que ele guarda, quais slots o tier abre, quando e qual Power Bank ele carrega, e o que a automação tira (perguntas 1361 e 1374) |
+| `DockStoredKind` | O que um item é para o inventário do Dock: Toolbox, Power Bank, Cubit, outro item do mod ou um item de fora |
+| `DockSpec` e `DockCatalog` | Os números do Dock em cada tier: o estoque, a recarga do Cubit e da Power Bank guardada e os slots, em linhas inteiras de 9. O config os serve (perguntas 1374 e 1381) |
 | `RobotClick` | O que o clique direito faz no robô: ignorar, recolher, subir o tier, pintar, escolher o minério, abrir ou ligar |
 | `InventoryFit` | Separa os itens que cabem nos slots do config dos que sobram |
 | `InventoryGrid` | Como o inventário aparece na tela: sempre 3 fileiras, com 9, 12, 15 e 18 colunas do Base ao Ultimate, a coluna e a fileira de cada slot e as colunas a mais, que alargam a tela (pergunta 1101) |
@@ -271,6 +272,7 @@ Regras do Cubit em Java puro, sem depender do jogo (regra 12 do `AGENTS.md`). Qu
 - **Baú com mais do mesmo item:** o Organizador junta o que é igual, com os mesmos dados, para a base ficar arrumada. Sem lugar, ele fica com o item, porque largar no chão poderia perder o item (perguntas 1292 e 1293).
 - **Pedido sem passar da quantidade:** o destino recebe só o que falta, para uma fornalha não ficar cheia de um combustível que o player queria em outro lugar (pergunta 1294).
 - **Portas do dono:** o Cubit só abre a porta que o dono marcou, porque num servidor a porta de outro player não é dele. As marcas são do dono, e não de um Cubit, para valerem para todos os Cubits dele. Ele só fecha a porta que abriu, para não fechar a que o dono deixou aberta (perguntas 1360, 1364 e 1371).
+- **O Dock decide a recarga na base:** um Cubit na base carrega na taxa do tier do Dock, e não na do tier dele, para o upgrade do Dock valer para qualquer Cubit. O contêiner do inventário tem sempre os 54 slots do Ultimate, e o tier abre os primeiros, para nada mudar de lugar ao subir (perguntas 1374 e 1375).
 
 ## Estados
 

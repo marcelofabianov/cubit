@@ -85,6 +85,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 - **Receita do Cubit:** as quatro peças de montagem, sem forma, só com materiais do Overworld, conforme [`itens.md`](itens.md#cubit) (perguntas 1343 e 1346).
 - **Peças de montagem (perguntas 1338 a 1351, issue #221):** o Cubit sai do Casing, do Visor, das Treads e do Neural Core, e cada Power Bank, da Power Bank Casing e de uma Power Cell do tier. As células são encadeadas, cada uma com a anterior no centro, e a Power Bank sobe de tier pela mesma cruz, com a anterior no centro, que passa a carga (perguntas 1354 e 1355). As regras estão em [`pecas.md`](funcionalidades/pecas.md).
 - **Portas (perguntas 1359 a 1370, issue #223):** o dono marca portas, alçapões e portões de cerca, de madeira e de ferro, no app Portas do Tablet, e todos os Cubits dele abrem as marcadas para passar, desde o Base, por 50 FE cada, e fecham depois de passar. Até 64 portas por dono. As regras estão em [`portas.md`](funcionalidades/portas.md).
+- **Tiers do Dock (perguntas 1373 a 1381, issue #225):** o Induction Dock sobe de tier com os mesmos Modules do Cubit, só pelo dono, e o item guarda o tier. Cada tier tem estoque, slots e recarga próprios, de 300 mil a 16 mi FE, de 27 a 54 slots e de 500 a 5.000 FE/t, e a recarga do Cubit e da Power Bank guardada passa a ser a do Dock. O inventário aceita todos os itens do mod. Uma faixa na cor do tier fica ao redor da torre, e o Ultimate é de netherite. As chaves vão para as seções de tier do config. As regras estão em [`energia.md`](funcionalidades/energia.md#tiers-do-dock).
 - **Receita do Induction Dock:** em forma de L, com diamante, baú, ferro e redstone, conforme [`itens.md`](itens.md#induction-dock) (pergunta 1332).
 - **Receitas novas (perguntas 1330 a 1335, issue #219):** o Cubit, o Dock, o Tablet, os Modules e as Power Banks ganham as grades de [`itens.md`](itens.md#ids-e-receitas), com os mesmos IDs, tipos de receita e desbloqueios no livro. As do Cubit e das Power Banks mudam de novo com as peças de montagem (perguntas 1338 a 1351). A Ultimate Power Bank e o Ultimate Module ganham a carcaça escura de netherite, com os detalhes dourados mantidos.
 - **Conserto:** usa a `Toolbox` (`cubit:toolbox`), na grade do inventário ou na mesa de craft, num tipo de receita do mod, `cubit:robot_repair`, com os itens no JSON. Ela é consumida a cada conserto e empilha até 16. O robô sai com parte da vida, conforme [`tiers.md`](tiers.md#valores-gerais), e a bateria zerada.
@@ -176,6 +177,7 @@ Resumo do que já foi decidido no projeto. As perguntas, abertas e respondidas, 
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-21 06:35 | Resume os tiers do Dock (perguntas 1373 a 1381). |
 | Marcelo Fabiano | 2026-11-21 05:10 | Registra a largura nova da hitbox (pergunta 1372). |
 | Marcelo Fabiano | 2026-11-21 03:25 | Resume as portas (perguntas 1359 a 1370). |
 | Marcelo Fabiano | 2026-11-21 02:35 | Encadeia os Modules (perguntas 1357 e 1358). |

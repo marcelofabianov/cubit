@@ -1,11 +1,8 @@
 package io.github.zenndg.cubit.block;
 
-import io.github.zenndg.cubit.CubitMod;
-import io.github.zenndg.cubit.config.CubitConfig;
 import io.github.zenndg.cubit.domain.dock.DockStock;
 import io.github.zenndg.cubit.domain.energy.Battery;
 import io.github.zenndg.cubit.domain.energy.Energy;
-import io.github.zenndg.cubit.domain.tier.RobotTier;
 import io.github.zenndg.cubit.item.PowerBankItem;
 import java.util.function.UnaryOperator;
 import net.minecraft.world.item.ItemStack;
@@ -24,18 +21,14 @@ final class DockPowerBanks {
   }
 
   /**
-   * At the rate of the Base. Entities tick before block entities, so a docked robot already took
-   * its share this tick, and the bank only charges once it is full (answers 949 and 952).
+   * At the rate of the tier of the dock (answer 1376). Entities tick before block entities, so a
+   * docked robot already took its share this tick, and the bank only charges once it is full
+   * (answer 952).
    */
-  static DockStock charge(DockStock stock, ItemStack stack, Runnable changed) {
+  static DockStock charge(DockStock stock, ItemStack stack, Energy rate, Runnable changed) {
     if (!PowerBankItem.is(stack)) {
       return stock;
     }
-    Energy rate =
-        CubitMod.CONFIG
-            .tierCatalog()
-            .spec(CubitConfig.GENERAL_ROBOT, RobotTier.BASE)
-            .rechargePerTick();
     Battery before = PowerBankItem.batteryOf(stack);
     DockStock.Transfer transfer = stock.charge(before, rate);
     if (transfer.robot().equals(before)) {

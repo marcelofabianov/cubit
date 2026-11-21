@@ -317,11 +317,22 @@ Não há perguntas pendentes nesta fase.
 | 1370 | Quando o Cubit fecha a porta? | Depois de sair do bloco dela, como os aldeões. Se o dono ou outra entidade estiver na porta, ele espera |
 | 1371 | O conceito das portas (#223) está autorizado para o código? | Sim: o desenvolvedor disse "autorizo", com os detalhes completados pelo agente: marcar uma metade marca a porta inteira, setas nas portas marcadas, o Cubit só fecha a porta que abriu, sem sinal de redstone, com faísca e o som da porta, e as marcas no mundo, em `cubit_door_marks` (regra 53) |
 | 1372 | O Cubit trava no bloco da porta de ferro aberta e não sai, mesmo com o dono longe. Como resolver? | Com a largura do Cubit em 0,6 bloco, como os mobs do jogo, no lugar de 0,75. A porta aberta deixa 0,8125 livre, e ele passa folgado, sem o empurrão lateral. A altura continua 1. Muda a 161 só na largura |
+| 1373 | O escopo do card do Dock com tiers (#225) está certo? | Sim, com quatro respostas do desenvolvedor: os números são escolhidos juntos, e o Dock atual pode mudar; a taxa por tier é a da energia que o Dock passa ao Cubit, e o Dock só passa energia ao Cubit; o Module é aplicado como no Cubit; e o Dock recolhido guarda o upgrade no item |
+| 1374 | Quais são os números do Dock por tier? | Estoque de 300 mil, 1,2 mi, 6 mi e 16 mi FE; recarga de 500, 1.000, 2.500 e 5.000 FE/t; 27, 36, 45 e 54 slots; e a entrada fixa de 5.000 FE/t em todos. O Dock Base sobe de 100 mil para 300 mil FE, uma bateria do Cubit Base |
+| 1375 | Qual recarga vale na base, quando o Dock e o Cubit têm tiers diferentes? | Só a do tier do Dock. O tier do Cubit deixa de contar na base: um Cubit Base num Dock Ultimate recarrega a 5.000 FE/t |
+| 1376 | A Power Bank guardada no Dock continua carregando? | Sim, na taxa do tier do Dock, uma por vez. Muda a 949, que usava a do Base |
+| 1377 | O clique no Dock com um Module na mão guarda ou aplica? | Aplica, como no Cubit: o Module do tier seguinte sobe o Dock e é consumido, e o que não serve não é consumido, com um texto que explica. Para guardar um Module, o player o põe pela tela do Dock |
+| 1378 | Quem pode subir o tier do Dock? | Só o dono do Dock, como no Cubit (regra 20). Para outro player, nada acontece |
+| 1379 | Onde fica a faixa na cor do tier no Dock? | Ao redor da torre, logo acima da placa da base, como o colar do Cubit, numa peça do modelo tingida pela cor do tier |
+| 1380 | Como fazer a textura de netherite do Dock Ultimate? | Recolorindo a textura atual do corpo por script, com o branco e o cinza na paleta de netherite e o laranja, a tela e as luzes mantidos. O desenvolvedor aprova a imagem antes |
+| 1381 | Como ficam as chaves de config do Dock por tier, já que `dock_energy_capacity` é contrato e os arquivos existentes guardam 100000? | Chaves novas em cada seção de tier, `[general_robot.{tier}]`: `dock_energy_capacity`, `dock_recharge_per_tick` e `dock_storage_slots`. A chave geral `general.dock_energy_capacity` sai, o NeoForge corrige o arquivo, e o Base passa a 300 mil FE. Um valor mudado à mão na chave antiga se perde, com o aviso no CHANGELOG, porque o mod não chega a ler a chave removida |
+| 1382 | O conceito do Dock com tiers (#225) está autorizado para o código? | Sim: o desenvolvedor disse "autorizo", com a textura de netherite recolorida por script e os detalhes completados pelo agente: o clique de guardar continua só com a Power Bank, a Toolbox e o Damaged Cubit, os slots novos aparecem vazios, a tela e o Jade mostram o tier, o ícone do item mostra o tier e a automação tira qualquer item do mod, menos a Power Bank vazia (regra 53) |
 
 ## Histórico de modificações
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-21 06:00 | Registra as respostas 1373 a 1382. |
 | Marcelo Fabiano | 2026-11-21 03:10 | Registra as respostas 1359 a 1372. |
 | Marcelo Fabiano | 2026-11-21 00:40 | Registra as respostas 1338 a 1358. |
 | Marcelo Fabiano | 2026-11-20 23:40 | Registra as respostas 1330 a 1337. |

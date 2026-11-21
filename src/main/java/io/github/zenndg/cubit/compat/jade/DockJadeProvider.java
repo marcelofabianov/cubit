@@ -1,9 +1,10 @@
 package io.github.zenndg.cubit.compat.jade;
 
-import io.github.zenndg.cubit.CubitMod;
 import io.github.zenndg.cubit.block.InductionDockBlock;
 import io.github.zenndg.cubit.block.InductionDockBlockEntity;
 import io.github.zenndg.cubit.domain.energy.EnergyReading;
+import io.github.zenndg.cubit.domain.tier.RobotTier;
+import io.github.zenndg.cubit.item.TierLook;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -28,7 +29,7 @@ enum DockJadeProvider implements IBlockComponentProvider, IServerDataProvider<Bl
   public void appendServerData(CompoundTag data, BlockAccessor accessor) {
     if (accessor.getBlockEntity() instanceof InductionDockBlockEntity dock) {
       data.putLong(STOCK, dock.energy().amount());
-      data.putLong(CAPACITY, CubitMod.CONFIG.dock().energyCapacity());
+      data.putLong(CAPACITY, dock.capacity().amount());
     }
   }
 
@@ -40,6 +41,10 @@ enum DockJadeProvider implements IBlockComponentProvider, IServerDataProvider<Bl
           JadeEnergyText.stock(EnergyReading.capped(data.getLong(STOCK), data.getLong(CAPACITY))));
     }
     BlockState state = accessor.getBlockState();
+    if (state.hasProperty(InductionDockBlock.TIER)) {
+      RobotTier tier = state.getValue(InductionDockBlock.TIER).tier();
+      tooltip.add(Component.translatable(JadeKeys.TIER, TierLook.name(tier)));
+    }
     if (state.hasProperty(InductionDockBlock.STATUS)) {
       String status = state.getValue(InductionDockBlock.STATUS).getSerializedName();
       tooltip.add(Component.translatable(JadeKeys.dockStatus(status)));

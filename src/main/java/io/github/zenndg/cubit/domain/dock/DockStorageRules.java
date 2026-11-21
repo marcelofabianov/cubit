@@ -8,11 +8,14 @@ import java.util.stream.IntStream;
 
 /**
  * The storage of the dock: what it keeps, when and which Power Bank it charges, and what the
- * automation may take out (answers 947 to 959 and 965 to 968).
+ * automation may take out (answers 947 to 959, 965 to 968 and 1361).
  */
 public final class DockStorageRules {
-  /** The size of a single chest of the game (answer 947). */
-  public static final int SLOTS = 27;
+  /**
+   * The container always has the slots of the largest tier, so nothing moves when the dock goes up,
+   * and the tier opens the first ones (answer 1374).
+   */
+  public static final int MAX_SLOTS = 54;
 
   private DockStorageRules() {}
 
@@ -35,10 +38,15 @@ public final class DockStorageRules {
         .findFirst();
   }
 
-  /** The toolbox and the robot items leave at any time, and a bank only when full (953, 967). */
+  /** A slot works only below the slots of the tier of the dock. */
+  public static boolean opens(int slot, int tierSlots) {
+    return slot < tierSlots;
+  }
+
+  /** Every item of the mod leaves at any time, and a bank only when full (953, 967 and 1361). */
   public static boolean releases(DockStoredKind kind, boolean bankFull) {
     return switch (kind) {
-      case TOOLBOX, ROBOT -> true;
+      case TOOLBOX, ROBOT, MOD_ITEM -> true;
       case POWER_BANK -> bankFull;
       case OTHER -> false;
     };

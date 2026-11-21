@@ -1,6 +1,5 @@
 package io.github.zenndg.cubit.block;
 
-import com.mojang.authlib.GameProfile;
 import com.mojang.logging.LogUtils;
 import io.github.zenndg.cubit.CubitMod;
 import io.github.zenndg.cubit.domain.dock.DockInputMeter;
@@ -8,9 +7,11 @@ import io.github.zenndg.cubit.domain.dock.DockQueue;
 import io.github.zenndg.cubit.domain.dock.DockStatus;
 import io.github.zenndg.cubit.domain.dock.DockStock;
 import io.github.zenndg.cubit.domain.dock.DockStorageRules;
+import io.github.zenndg.cubit.domain.dock.DockStoredKind;
 import io.github.zenndg.cubit.domain.energy.Battery;
 import io.github.zenndg.cubit.domain.energy.Energy;
 import io.github.zenndg.cubit.domain.ownership.Ownership;
+import io.github.zenndg.cubit.domain.tier.RobotTier;
 import io.github.zenndg.cubit.item.EnergySlotItems;
 import io.github.zenndg.cubit.item.PowerBankItem;
 import io.github.zenndg.cubit.item.SavedEnergy;
@@ -26,9 +27,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.players.GameProfileCache;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Player;
@@ -50,7 +49,6 @@ import org.slf4j.Logger;
 public final class InductionDockBlockEntity extends BlockEntity {
   private static final Logger LOGGER = LogUtils.getLogger();
   private static final String NO_OWNER_MESSAGE = "The dock at {} has no owner.";
-  private static final String UNKNOWN_OWNER_MESSAGE = "The dock owner at {} has no known name.";
   private static final String OWNER_KEY = "Owner";
   private static final String ENERGY_KEY = "Energy";
   private static final String SLOT_KEY = "Slot";
@@ -78,7 +76,10 @@ public final class InductionDockBlockEntity extends BlockEntity {
       };
 
   /** The Toolbox and the Power Banks, which the stock charges (answers 947 to 959). */
-  private final DockStorage storage = new DockStorage(this::setChanged);
+  private final DockTier tier = new DockTier();
+
+  private final DockStorage storage =
+      new DockStorage(this::setChanged, () -> tier.spec().storageSlots());
 
   private final IEnergyStorage energyStorage = new DockEnergyStorage(this);
 
@@ -99,11 +100,34 @@ public final class InductionDockBlockEntity extends BlockEntity {
   }
 
   private static DockStock emptyStock() {
-    return DockStock.of(capacity(), Energy.ZERO);
+    return DockStock.of(CubitMod.CONFIG.dockCatalog().dock(RobotTier.BASE).capacity(), Energy.ZERO);
   }
 
-  private static Energy capacity() {
-    return new Energy(CubitMod.CONFIG.dock().energyCapacity());
+  public Energy capacity() {
+    return tier.spec().capacity();
+  }
+
+  public RobotTier tier() {
+    return tier.tier();
+  }
+
+  /** The recharge of the Cubit and of the stored Power Bank: the one of the dock (1375, 1376). */
+  public Energy rechargePerTick() {
+    return tier.spec().rechargePerTick();
+  }
+
+  public int storageSlots() {
+    return tier.spec().storageSlots();
+  }
+
+  /** The stock keeps its energy and grows to the new tier, and both halves show it (1373). */
+  void upgradeTo(RobotTier next) {
+    tier.set(next);
+    stock = DockStock.of(capacity(), energy());
+    setChanged();
+    if (level != null) {
+      DockTierStates.show(level, worldPosition, next);
+    }
   }
 
   private static Energy inputPerTick() {
@@ -118,7 +142,8 @@ public final class InductionDockBlockEntity extends BlockEntity {
     dock.useSlot();
     dock.storage.dropRefused(level, pos);
     boolean chargesBanks = DockStorageRules.chargesBanks(dock.isOccupied(), dock.robotFull);
-    dock.stock = dock.storage.charge(dock.stock, chargesBanks, dock::setChanged);
+    dock.stock =
+        dock.storage.charge(dock.stock, chargesBanks, dock.rechargePerTick(), dock::setChanged);
     dock.showStatus(level, pos, state);
   }
 
@@ -172,20 +197,7 @@ public final class InductionDockBlockEntity extends BlockEntity {
     if (owner == null || level == null || level.getServer() == null) {
       return Optional.empty();
     }
-    MinecraftServer server = level.getServer();
-    Optional<String> name =
-        Optional.ofNullable(server.getPlayerList().getPlayer(owner))
-            .map(player -> player.getGameProfile().getName())
-            .or(() -> cachedName(server));
-    if (name.isEmpty()) {
-      LOGGER.warn(UNKNOWN_OWNER_MESSAGE, worldPosition);
-    }
-    return name;
-  }
-
-  private Optional<String> cachedName(MinecraftServer server) {
-    GameProfileCache cache = server.getProfileCache();
-    return cache == null ? Optional.empty() : cache.get(owner).map(GameProfile::getName);
+    return DockOwnerName.of(level.getServer(), owner, worldPosition);
   }
 
   /** The click on the dock and the button on its screen call the same way. */
@@ -283,9 +295,16 @@ public final class InductionDockBlockEntity extends BlockEntity {
     return stock.energy().level(steps);
   }
 
-  /** Redstone goes to the input, and the Toolbox and the Power Bank to the storage (959). */
+  /**
+   * The click keeps only the Toolbox, the Power Bank and the Damaged Cubit, and redstone goes to
+   * the input (959). Other items of the mod go in by the screen or a hopper (answer 1382).
+   */
   boolean insert(ItemStack stack) {
-    return DockStorageRules.accepts(DockStorage.kindOf(stack))
+    DockStoredKind kind = DockStorage.kindOf(stack);
+    if (kind == DockStoredKind.MOD_ITEM) {
+      return false;
+    }
+    return DockStorageRules.accepts(kind)
         ? storage.insert(stack)
         : EnergySlotItems.insert(slot, stack);
   }
@@ -312,6 +331,7 @@ public final class InductionDockBlockEntity extends BlockEntity {
       tag.putUUID(OWNER_KEY, owner);
     }
     tag.putLong(ENERGY_KEY, energy().amount());
+    tier.save(tag);
     ItemStack stack = slot.getItem(SLOT);
     if (!stack.isEmpty()) {
       tag.put(SLOT_KEY, stack.save(registries));
@@ -326,6 +346,7 @@ public final class InductionDockBlockEntity extends BlockEntity {
     if (owner == null && (level == null || !level.isClientSide())) {
       LOGGER.warn(NO_OWNER_MESSAGE, worldPosition);
     }
+    tier.load(tag, worldPosition);
     stock = DockStock.of(capacity(), SavedEnergy.of(tag.getLong(ENERGY_KEY)));
     slot.setItem(SLOT, savedStack(tag, SLOT_KEY, registries));
     storage.load(tag, registries, worldPosition);
@@ -341,6 +362,7 @@ public final class InductionDockBlockEntity extends BlockEntity {
   @Override
   protected void applyImplicitComponents(DataComponentInput input) {
     super.applyImplicitComponents(input);
+    tier.set(input.getOrDefault(CubitDataComponents.DOCK_TIER.get(), RobotTier.BASE));
     long saved = input.getOrDefault(CubitDataComponents.DOCK_ENERGY.get(), 0L);
     stock = DockStock.of(capacity(), SavedEnergy.of(saved));
     storage.apply(
@@ -352,6 +374,7 @@ public final class InductionDockBlockEntity extends BlockEntity {
   protected void collectImplicitComponents(DataComponentMap.Builder components) {
     super.collectImplicitComponents(components);
     components.set(CubitDataComponents.DOCK_ENERGY.get(), energy().amount());
+    tier.collect(components);
     components.set(CubitDataComponents.DOCK_STORAGE.get(), storage.contents());
   }
 

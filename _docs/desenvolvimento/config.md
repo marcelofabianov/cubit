@@ -48,7 +48,6 @@ As chaves ficam em `snake_case`. As de um tier ficam em `[general_robot.{tier}]`
 | `general` | `full_inventory_speed_multiplier` | Velocidade com o inventário cheio, sobre a do tier | 0,1 a 1 |
 | `general` | `water_search_radius_blocks` | Busca de água em chamas | 1 a 16 |
 | `general` | `burning_wander_radius_blocks` | Alcance ao andar ao acaso em chamas e ao sair da lava ou de um bloco que fere | 1 a 16 |
-| `general` | `dock_energy_capacity` | Estoque do Induction Dock | 1 a 2147483647 |
 | `general` | `dock_input_per_tick` | Entrada do Induction Dock | 1 a 2147483647 |
 | `general` | `dock_full_heal_ticks` | Tempo para recuperar toda a vida na base | 1 a 72000 |
 | `general` | `dock_stuck_ticks` | Tempo sem avançar antes de teleportar ao Dock | 1 a 1200 |
@@ -70,6 +69,9 @@ As chaves ficam em `snake_case`. As de um tier ficam em `[general_robot.{tier}]`
 | `general` | `fetch_give_up_ticks` | Tempo até desistir de um item que não alcança | 1 a 1200 |
 | `general` | `fetch_ignore_ticks` | Tempo em que o item desistido é ignorado | 1 a 1200 |
 | `general_robot.base` | `battery_capacity` | Bateria | 1 a 2147483647 |
+| `general_robot.base` | `dock_energy_capacity` | Estoque do Induction Dock desse tier. Troca a chave geral de mesmo nome (pergunta 1381) | 1 a 2147483647 |
+| `general_robot.base` | `dock_recharge_per_tick` | Recarga do Cubit e da Power Bank guardada no Dock desse tier | 1 a 2147483647 |
+| `general_robot.base` | `dock_storage_slots` | Slots do inventário do Dock desse tier | 9 a 54, em múltiplos de 9 |
 | `general_robot.base` | `moving_consumption_per_tick` | Andar | 0 a 2147483647 |
 | `general_robot.base` | `full_inventory_extra_per_tick` | Extra ao andar com o inventário cheio | 0 a 2147483647 |
 | `general_robot.base` | `water_extra_per_tick` | Extra ao andar na água | 0 a 2147483647 |
@@ -161,6 +163,7 @@ O mod não cai por causa do config (regra 17 do `AGENTS.md`):
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-21 06:30 | Leva o estoque do Dock para as seções de tier e adiciona a recarga e os slots (pergunta 1381). |
 | Marcelo Fabiano | 2026-11-15 14:05 | Adiciona as chaves do intervalo de descarga (perguntas 1252 e 1254). |
 | Marcelo Fabiano | 2026-11-15 13:25 | O `farmer_bone_meal` libera o slot de fertilizante (pergunta 1244). |
 | Marcelo Fabiano | 2026-11-15 10:40 | Adiciona as chaves do Fazendeiro (perguntas 1226 e 1237). |

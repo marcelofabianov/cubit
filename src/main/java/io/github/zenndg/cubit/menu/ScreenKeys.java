@@ -21,6 +21,7 @@ public final class ScreenKeys {
   public static final String DOCK_DOCKED = DOCK + "docked";
   public static final String DOCK_TAB_DOCK = DOCK + "tab_dock";
   public static final String DOCK_TAB_STORAGE = DOCK + "tab_storage";
+  public static final String DOCK_TITLE_TIER = DOCK + "title_tier";
   public static final String DOCK_ROBOT_BATTERY = DOCK + "robot_battery";
   public static final String DOCK_CHARGING_LINE = DOCK + "charging_line";
   public static final String DOCK_COMPLETE_LINE = DOCK + "complete_line";

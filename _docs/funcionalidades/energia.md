@@ -64,10 +64,11 @@ Funciona como um carregador solar real.
 - **Formato:** o da [prancha de conceito](../imagens/conceito/induction-dock-prancha.png): torre atrás, com tela, e placa em U na frente, virada para o player que coloca. O Cubit sobe na placa, de costas para a torre. Ocupa 2 blocos de altura, como uma porta, e precisa do bloco de cima livre para ser colocado. Quebrar uma parte quebra as duas.
 - **Tela:** desligada, sem energia e sem Cubit; ociosa, com energia e sem Cubit; carregando, com o Cubit recebendo; completa, com a bateria dele cheia; sem energia, com o Cubit na base e o estoque zerado.
 - **Energia:** recebe por cabos de outros mods, em **FE**, em qualquer face, ou com redstone em um slot próprio, também por funil. Nenhuma energia sai por cabo. Pelos funis, só sai o que a [automação do inventário](#inventário-do-dock) permite.
-- **Estoque:** tem um pequeno estoque de energia. Um item de redstone só vira energia quando couber inteiro no estoque. Sem FE, o Cubit fica hibernando.
+- **Estoque:** guarda a energia do tier do Dock, de 300 mil a 16 mi FE (pergunta 1374). Um item de redstone só vira energia quando couber inteiro no estoque. Sem FE, o Cubit fica hibernando.
 - **Slot de entrada:** aceita redstone, que vira estoque, ou uma Power Bank, que descarrega no estoque pelo mesmo limite de entrada dos cabos e aparece em `Input +X FE/t`. Vazia, ela fica parada no slot (perguntas 919, 920 e 923). O slot de carga saiu, e o inventário assumiu o papel dele (pergunta 950).
 - **Clique:** o clique direito com redstone na mão a põe no slot de entrada. Com uma Power Bank, uma Toolbox ou um Damaged Cubit na mão, o item vai para o inventário, juntando nas pilhas e nos slots livres, e o que não couber fica na mão. Com o item do Cubit, o robô vai para a base, como sempre. Só o dono (perguntas 959 e 968, que mudam a 924).
-- **Inventário:** guarda a Toolbox e as Power Banks e carrega as Power Banks. Veja [Inventário do Dock](#inventário-do-dock).
+- **Inventário:** guarda os itens do mod e carrega as Power Banks. Veja [Inventário do Dock](#inventário-do-dock).
+- **Recarga do Cubit:** na taxa do tier do Dock, de 500 a 5.000 FE/t, sem contar o tier do Cubit (pergunta 1375). Veja [Tiers do Dock](#tiers-do-dock).
 - **Vida:** recupera a vida do Cubit durante a hibernação, sem gastar FE, mesmo com o estoque zerado.
 - **Retorno automático:** serve de base para ele, na Fase 4.
 
@@ -76,19 +77,33 @@ Funciona como um carregador solar real.
 - **Dono:** quem coloca o Dock. Só o dono usa o Dock e abre a tela, e só os Cubits dele entram.
 - **Clique direito:** chama o Cubit ou, com um na base, o libera. Com redstone na mão, a pilha entra no slot.
 - **Shift + clique direito:** abre a tela própria do Dock, descrita em [`telas.md`](telas.md#tela-do-induction-dock), com o botão de chamar o Cubit mais próximo (perguntas 371 e 678).
-- **Quebrar:** só o dono, ou um player no modo criativo com permissão de operador, para remover um Dock abandonado. Sem dono, como num save sem a chave ou colocado por algo que não é um player, só o operador o remove, e o log avisa ao carregar (pergunta 524). Explosões e pistões não o afetam. O item guarda a energia e o inventário e empilha em 1, o slot de entrada cai no chão, e o Cubit sai como numa liberação (pergunta 954). O dono do bloco novo é quem o coloca.
+- **Quebrar:** só o dono, ou um player no modo criativo com permissão de operador, para remover um Dock abandonado. Sem dono, como num save sem a chave ou colocado por algo que não é um player, só o operador o remove, e o log avisa ao carregar (pergunta 524). Explosões e pistões não o afetam. O item guarda a energia, o tier e o inventário e empilha em 1 (pergunta 1373), o slot de entrada cai no chão, e o Cubit sai como numa liberação (pergunta 954). O dono do bloco novo é quem o coloca.
 
 ### Inventário do Dock
 
 Entra no item 11 da Fase 4.1 (issue #168, perguntas 947 a 959).
 
 - **Onde:** na aba `Storage` da tela do Dock, descrita em [`telas.md`](telas.md#aba-storage).
-- **Tamanho:** 27 slots, como um baú simples do jogo.
-- **O que aceita:** só a Toolbox, em pilhas de até 16, as Power Banks dos 4 tiers, o item do Cubit e o Damaged Cubit, esses três um por slot. Qualquer outro item fica fora (pergunta 965). O Cubit e o Damaged Cubit só ficam guardados, com todo o estado no item, sem recarga nem conserto (pergunta 966).
-- **Recarga:** o estoque carrega uma Power Bank por vez, a primeira não cheia na ordem dos slots, na velocidade de recarga do Base, até ela encher, sem criar nem perder FE (pergunta 949 e regra 13). Só carrega sem Cubit na base ou com o Cubit da base de bateria cheia. Com o Cubit ainda carregando, nenhuma Power Bank recebe (pergunta 952, que muda a 906).
-- **Automação:** por qualquer face, funis e cabos de itens põem a Toolbox e as Power Banks no inventário. A Power Bank só sai cheia, e a Toolbox, o Cubit e o Damaged Cubit saem a qualquer momento, também por qualquer face (pergunta 967). O Cubit e o Damaged Cubit também entram pela automação. A redstone continua entrando no slot de entrada, e a automação nunca põe a Power Bank nele (perguntas 925, 951 e 953).
+- **Tamanho:** o do tier do Dock: 27 slots no Base, como um baú simples do jogo, 36 no Advanced, 45 no Elite e 54 no Ultimate (pergunta 1374).
+- **O que aceita:** todos os itens do mod, cada um na pilha dele, inclusive o item do Cubit e o Damaged Cubit. Os itens de fora do mod ficam fora (pergunta 1361, que muda a 965). O Cubit e o Damaged Cubit só ficam guardados, com todo o estado no item, sem recarga nem conserto (pergunta 966).
+- **Recarga:** o estoque carrega uma Power Bank por vez, a primeira não cheia na ordem dos slots, na taxa do tier do Dock, até ela encher (pergunta 1376, que muda a 949), sem criar nem perder FE (pergunta 949 e regra 13). Só carrega sem Cubit na base ou com o Cubit da base de bateria cheia. Com o Cubit ainda carregando, nenhuma Power Bank recebe (pergunta 952, que muda a 906).
+- **Automação:** por qualquer face, funis e cabos de itens põem os itens do mod no inventário. A Power Bank só sai cheia, e os outros itens saem a qualquer momento, também por qualquer face (pergunta 967). O Cubit e o Damaged Cubit também entram pela automação. A redstone continua entrando no slot de entrada, e a automação nunca põe a Power Bank nele (perguntas 925, 951 e 953).
 - **Quebrar:** o inventário fica no item do Dock e volta ao colocá-lo (pergunta 954).
 - **Saves antigos:** a Power Bank que estava no slot de carga vai para o primeiro slot do inventário ao carregar o mundo, com o registro no log (pergunta 955).
+
+### Tiers do Dock
+
+O Induction Dock sobe de tier com os mesmos Modules do Cubit (issue #225, perguntas 1373 a 1380). Os números estão em [`tiers.md`](../tiers.md#induction-dock).
+
+- **Subir:** o clique direito no Dock com o Module do tier seguinte sobe o Dock, sem pular etapas, e consome o Module, como no Cubit. O Module que não serve não é consumido, e um texto explica o motivo (pergunta 1377).
+- **Dono:** só o dono sobe o Dock. Para outro player, nada acontece (pergunta 1378).
+- **O que muda com o tier:** o estoque, os slots do inventário e a recarga do Cubit e da Power Bank guardada. A entrada, por cabos e redstone, fica em 5.000 FE/t em todos (pergunta 1374).
+- **Slots novos:** ao subir, os slots a mais aparecem vazios, e os itens continuam onde estavam.
+- **Recolher:** o item do Dock guarda o tier, com a energia e o inventário, e o Dock volta no mesmo tier ao ser colocado (pergunta 1373).
+- **Faixa:** uma faixa ao redor da torre, logo acima da placa da base, na cor do tier, como o colar do Cubit: cinza, azul, roxo e dourado (pergunta 1379).
+- **Ultimate:** o corpo do Dock fica em netherite, como a Ultimate Power Bank e o Ultimate Module (pergunta 1380).
+- **Tela e Jade:** a tela do Dock e o Jade mostram o tier, na cor dele.
+- **Saves antigos:** um Dock sem o tier, colocado antes, vale como Base, e o estoque dele passa a caber 300 mil FE.
 
 ### Ir para a base e sair dela
 
@@ -157,6 +172,7 @@ Entra com o item 15 da Fase 4.2, antes do modo área (perguntas 1065 a 1069).
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-21 06:15 | Adiciona os tiers do Dock e o inventário com todos os itens do mod (perguntas 1373 a 1380). |
 | Marcelo Fabiano | 2026-11-19 20:18 | Cita o gasto maior com a velocidade escolhida abaixo de 100% (pergunta 1259). |
 | Marcelo Fabiano | 2026-11-14 10:00 | Define o retorno automático (perguntas 1065 a 1069). |
 | Marcelo Fabiano | 2026-11-13 18:50 | Faz o desligado pelo Tablet voltar pelo clique, como o Power. |

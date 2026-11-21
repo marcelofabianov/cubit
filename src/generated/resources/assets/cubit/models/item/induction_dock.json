@@ -1,3 +1,11 @@
 {
-  "parent": "cubit:block/induction_dock_idle"
+  "parent": "cubit:block/induction_dock_idle",
+  "overrides": [
+    {
+      "model": "cubit:block/induction_dock_idle_ultimate",
+      "predicate": {
+        "cubit:ultimate": 1.0
+      }
+    }
+  ]
 }

@@ -209,6 +209,7 @@ Estes nomes não mudam sem migração (regra 18 do `AGENTS.md`).
 | Componente do item | `cubit:energy_slot` | Item do slot de energia e reserva de FE, também no item danificado |
 | Componente do item | `cubit:torch_slot` | As tochas do slot de tochas, também no item danificado. Sem o componente, o slot fica vazio (pergunta 981) |
 | Componente do item do Dock | `cubit:dock_energy` | Energia do estoque |
+| Componente do item do Dock | `cubit:dock_tier` | O tier do Dock: `base`, `advanced`, `elite` ou `ultimate`. Sem o componente, vale `base` (pergunta 1373) |
 | Componente do Tablet | `cubit:tablet_app` | O app ativo: `open`, `target` ou `dock`. Sem o componente, vale `open` (pergunta 1026) |
 | Attachment do player | `cubit:chosen_robot` | O UUID do Cubit escolhido no Tablet (pergunta 1026) |
 | Dados do mundo | `cubit_robot_snapshots` | A foto de cada Cubit por dono, para o Tablet: posição, dimensão, estado, bateria, vida, tier, cor, nome e a hora (pergunta 1026) |
@@ -221,8 +222,8 @@ Estes nomes não mudam sem migração (regra 18 do `AGENTS.md`).
 | Tipo de receita | `cubit:robot_repair` | Campos `damaged_robot`, `toolbox` e `result` |
 | Dados do mundo | `cubit_dead_robots` | Robôs mortos com o dono offline |
 | NBT da entidade | `Owner`, `Tier`, `Energy`, `PowerState`, `LastSafePosition`, `Inventory`, `EnergySlot`, `TorchSlot` e `TorchesEnabled` | Dono, tier, carga da bateria, estado, última posição segura, inventário, com `Slot` em cada item, slot de energia, com `Item` e `Reserve`, as tochas do slot de tochas e a chave delas, que vale ligada sem a chave no save (pergunta 981) |
-| NBT do bloco do Dock | `Owner`, `Energy`, `Slot` e `Storage` | Dono, estoque, item do slot de entrada e inventário, com `Slot` em cada item (pergunta 958). `ChargeSlot`, de antes, só é lido, e a Power Bank dele vai para o primeiro slot do inventário (pergunta 955) |
-| Estado do bloco do Dock | `facing`, `half` e `status` | Direção, parte de baixo ou de cima e estado da tela: `off`, `idle`, `charging`, `complete` ou `no_energy` |
+| NBT do bloco do Dock | `Owner`, `Energy`, `Slot`, `Storage` e `Tier` | Dono, estoque, item do slot de entrada, inventário e tier, que sem a chave vale `base` (pergunta 1373), com `Slot` em cada item (pergunta 958). `ChargeSlot`, de antes, só é lido, e a Power Bank dele vai para o primeiro slot do inventário (pergunta 955) |
+| Estado do bloco do Dock | `facing`, `half`, `status` e `tier` | Direção, parte de baixo ou de cima e estado da tela: `off`, `idle`, `charging`, `complete` ou `no_energy`. O `tier` escolhe a faixa e o corpo: `base`, `advanced`, `elite` ou `ultimate` (pergunta 1379) |
 | NBT da entidade na base | `DockPosition` | Posição do Dock em que hiberna |
 | NBT da entidade | `PreferredDock` | O Dock preferido, escolhido pelo app Dock do Tablet, com a posição e a dimensão (perguntas 1026 e 1036) |
 | NBT da entidade | `LampEnabled` | Chave da lanterna. Sem a chave no save, vale ligada |
@@ -278,6 +279,7 @@ O estado salvo é validado ao entrar no jogo, sem derrubá-lo (regra 17 do `AGEN
 
 | Pessoa | Data e hora | Modificação |
 |---|---|---|
+| Marcelo Fabiano | 2026-11-21 06:30 | Adiciona o tier do Dock aos contratos (perguntas 1373 e 1379). |
 | Marcelo Fabiano | 2026-11-21 02:35 | Atualiza a progressão das receitas (perguntas 1354 e 1358). |
 | Marcelo Fabiano | 2026-11-21 02:30 | Encadeia os Modules em cruz, como as células (perguntas 1357 e 1358). |
 | Marcelo Fabiano | 2026-11-21 02:05 | Troca o Visor para diamante, obsidiana, diamante (pergunta 1356). |

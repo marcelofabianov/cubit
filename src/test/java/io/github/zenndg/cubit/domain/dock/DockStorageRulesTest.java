@@ -12,6 +12,10 @@ import java.util.OptionalInt;
 import org.junit.jupiter.api.Test;
 
 class DockStorageRulesTest {
+  private static final int BASE_SLOTS = 27;
+  private static final int SLOT_26 = 26;
+  private static final int SLOT_27 = 27;
+  private static final int SLOT_53 = 53;
   private static final Energy CAPACITY = new Energy(210_000);
   private static final Battery FULL = new Battery(CAPACITY, CAPACITY);
   private static final Battery HALF = new Battery(CAPACITY, new Energy(105_000));
@@ -29,6 +33,7 @@ class DockStorageRulesTest {
     assertTrue(DockStorageRules.accepts(DockStoredKind.TOOLBOX));
     assertTrue(DockStorageRules.accepts(DockStoredKind.POWER_BANK));
     assertTrue(DockStorageRules.accepts(DockStoredKind.ROBOT));
+    assertTrue(DockStorageRules.accepts(DockStoredKind.MOD_ITEM));
     assertFalse(DockStorageRules.accepts(DockStoredKind.OTHER));
   }
 
@@ -66,6 +71,15 @@ class DockStorageRulesTest {
     assertTrue(DockStorageRules.releases(DockStoredKind.ROBOT, false));
     assertTrue(DockStorageRules.releases(DockStoredKind.POWER_BANK, true));
     assertFalse(DockStorageRules.releases(DockStoredKind.POWER_BANK, false));
+    assertTrue(DockStorageRules.releases(DockStoredKind.MOD_ITEM, false));
     assertFalse(DockStorageRules.releases(DockStoredKind.OTHER, true));
+  }
+
+  /** The container always has the slots of the Ultimate, and the tier opens the first ones. */
+  @Test
+  void theTierOpensOnlyItsFirstSlots() {
+    assertTrue(DockStorageRules.opens(SLOT_26, BASE_SLOTS));
+    assertFalse(DockStorageRules.opens(SLOT_27, BASE_SLOTS));
+    assertTrue(DockStorageRules.opens(SLOT_53, DockStorageRules.MAX_SLOTS));
   }
 }
